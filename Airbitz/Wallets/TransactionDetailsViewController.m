@@ -16,7 +16,6 @@
 #import "InfoView.h"
 #import "CalculatorView.h"
 #import "PickerTextView.h"
-#import "DL_URLServer.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
@@ -62,7 +61,7 @@ typedef enum eRequestType
 } tRequestType;
 
 @interface TransactionDetailsViewController () <UITextFieldDelegate, UITextViewDelegate, InfoViewDelegate, CalculatorViewDelegate,
-                                                DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,PopupPickerViewDelegate,
+                                                UITableViewDataSource, UITableViewDelegate, PickerTextViewDelegate,PopupPickerViewDelegate,
                                                 UIGestureRecognizerDelegate, UIAlertViewDelegate,
                                                 LocationDelegate, BusinessDetailsViewControllerDelegate>
 {
@@ -122,9 +121,11 @@ typedef enum eRequestType
 @property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSMutableArray         *arrayOtherBusinesses;    // businesses found using auto complete
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete; // array displayed in the drop-down table when user is entering a name
+@property (nonatomic, strong)        NSArray                *arrayAutoCompleteBizId; // array displayed in the drop-down table when user is entering a name
 @property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsToRetrieve; // array of names of businesses for which images need to be retrieved
 @property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsRetrieving; // array of names of businesses for which images are currently being retrieved
 @property (nonatomic, strong)        NSMutableArray         *arrayAutoCompleteQueries; // array of names for which autocomplete queries have been made
+@property (nonatomic, strong)        AFHTTPRequestOperationManager *afmanager;
 
 @end
 
@@ -145,10 +146,13 @@ typedef enum eRequestType
 
     // initialize arrays
     self.arrayAutoComplete = @[];
+    self.arrayAutoCompleteBizId = @[];
     self.arrayOtherBusinesses = [[NSMutableArray alloc] init];
     self.arrayThumbnailsToRetrieve = [[NSMutableArray alloc] init];
     self.arrayThumbnailsRetrieving = [[NSMutableArray alloc] init];
     self.arrayAutoCompleteQueries = [[NSMutableArray alloc] init];
+    
+    self.afmanager = [MainViewController createAFManager];
 
     [self.spinnerView startAnimating];
 
@@ -381,8 +385,8 @@ typedef enum eRequestType
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -398,7 +402,6 @@ typedef enum eRequestType
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -478,9 +481,6 @@ typedef enum eRequestType
 {
     BOOL bSomethingChanged = false;
     self.spinnerView.hidden = NO;
-
-    ABLog(1, @"Calling [DL_URLServer.controller cancelAllRequestsForDelegate]");
-    [DL_URLServer.controller cancelAllRequestsForDelegate:self];
 
     [self resignAllResponders];
 
@@ -710,9 +710,28 @@ typedef enum eRequestType
         self.imagePhoto.layer.masksToBounds = YES;
         bHavePhoto = YES;
     }
+    else
+    {
+        if (_bizId)
+        {
+            NSString *imageURL = [MainViewController Singleton].dictImageURLFromBizName[[self.nameTextField.text lowercaseString]];
+            
+            if (imageURL)
+            {
+                NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                                              cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                          timeoutInterval:60];
+                
+                [self.imagePhoto setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+                self.photoUrl = requestURL;
+            }
+            bHavePhoto = YES;
+        }
+    }
 
     self.imagePhoto.hidden = !bHavePhoto;
-    self.photo = imageForPhoto;
+    self.photo = self.imagePhoto.image;
 }
 
 - (void)updateBizId
@@ -759,7 +778,6 @@ typedef enum eRequestType
          self.contentView.frame = _originalContentFrame;
          self.scrollableContentBottom.constant = 0;
          [self.view layoutIfNeeded];
-//         self.scrollableContentView.frame = _originalScrollableContentFrame;
      }
      completion:^(BOOL finished)
      {
@@ -965,9 +983,6 @@ typedef enum eRequestType
                 {
                     // add this business to the auto complete array
                     [arrayAutoComplete addObject:strBusiness];
-
-                    // make sure we have the thumbnail
-                    [self ifNeededResolveThumbnailForBusiness:strBusiness];
                 }
             }
 
@@ -995,9 +1010,6 @@ typedef enum eRequestType
                         {
                             // add this business to the auto complete array
                             [arrayAutoComplete addObject:strBusiness];
-
-                            // make sure we have the thumbnail
-                            [self ifNeededResolveThumbnailForBusiness:strBusiness];
                         }
                     }
                 }
@@ -1022,16 +1034,8 @@ typedef enum eRequestType
                 // since nothing in payee yet, just populate with businesses (already sorted by distance)
                 self.arrayAutoComplete = [MainViewController Singleton].arrayNearBusinesses;
 
-                // make sure we have the thumbnails for all of these businesses
-                for (NSString *strName in [MainViewController Singleton].arrayNearBusinesses)
-                {
-                    [self ifNeededResolveThumbnailForBusiness:strName];
-                }
             }
         }
-
-        // initiate any thumbnail resolves
-        [self resolveOutstandingThumbnails];
 
         // force the table to reload itself
         [self reloadAutoCompleteTable];
@@ -1041,44 +1045,6 @@ typedef enum eRequestType
 - (void)reloadAutoCompleteTable
 {
     [_autoCompleteTable reloadData];
-}
-
-- (void)resolveOutstandingThumbnails
-{
-    for (int i = (int) [self.arrayThumbnailsToRetrieve count] - 1; i >= 0; i--)
-    {
-        NSString *strName = [self.arrayThumbnailsToRetrieve objectAtIndex:i];
-        [self getThumbnailForBusiness:strName];
-        [self.arrayThumbnailsToRetrieve removeObjectAtIndex:i];
-    }
-}
-
-- (void)ifNeededResolveThumbnailForBusiness:(NSString *)strName
-{
-    // if we don't already have it, it isn't being resolved and it isn't queued to be resolved
-    if ((nil == [MainViewController Singleton].dictImages[[strName lowercaseString]]) &&
-        (NO == [self.arrayThumbnailsRetrieving containsObject:[strName lowercaseString]]) &&
-        (NO == [self.arrayThumbnailsToRetrieve containsObject:[strName lowercaseString]]))
-    {
-        // add it to those to retrieve
-        [self.arrayThumbnailsToRetrieve addObject:[strName lowercaseString]];
-    }
-}
-
-- (void)getThumbnailForBusiness:(NSString *)strName
-{
-    NSString *strThumbnailURL = [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]];
-
-    if (strThumbnailURL)
-    {
-        [self.arrayThumbnailsRetrieving addObject:strName];
-
-        // create the search query
-        NSString *strURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, strThumbnailURL];
-
-        // run the query - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
-        [self performSelector:@selector(issueRequests:) withObject:@{ strURL : strName } afterDelay:0.0];
-    }
 }
 
 - (void)addLocationToQuery:(NSMutableString *)query
@@ -1105,39 +1071,63 @@ typedef enum eRequestType
     {
         [self.arrayAutoCompleteQueries addObject:strName];
 
-        NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, strName];
+        NSString *searchTerm = [strName stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+        
+        if (searchTerm == nil)
+            searchTerm = @" ";
+
+        NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm];
         // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
-        [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesAuto]} afterDelay:0.0];
-    }
-}
+        
+        ABLog(1, @"serverQuery: %@", strURL);
+        [self.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSDictionary *results = (NSDictionary *)responseObject;
+            
+            NSArray *searchResultsArray = [results objectForKey:@"results"];
+            if (searchResultsArray && searchResultsArray != (id)[NSNull null])
+            {
+                for (NSDictionary *dict in searchResultsArray)
+                {
+                    NSString *strName = [dict objectForKey:@"text"];
+                    if (strName && strName != (id)[NSNull null])
+                    {
+                        // if it doesn't exist in the other, add it
+                        if (NO == [self.arrayOtherBusinesses containsObject:strName])
+                        {
+                            [self.arrayOtherBusinesses addObject:strName];
+                        }
+                        
+                        // set the biz id if available
+                        NSNumber *numBizId = [dict objectForKey:@"bizId"];
+                        if (numBizId && numBizId != (id)[NSNull null])
+                        {
+                            [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
+                        }
+                        
+                        NSString *strThumbnail = [dict objectForKey:@"square_image"];
+                        NSString *urlString = [NSString stringWithFormat: @"%@%@", SERVER_URL, strThumbnail];
+                        if (strThumbnail && strThumbnail != (id)[NSNull null]) {
+                            [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
+                            [MainViewController Singleton].dictImageURLFromBizID[numBizId] = urlString;
+                        }
+                    }
+                }
+                
+                // update the auto complete array because we just added new businesses
+                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
+                
+                // update the biz id (in case we found one for our business)
+                [self performSelector:@selector(updateBizId) withObject:nil afterDelay:0.0];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSInteger statusCode = operation.response.statusCode;
+            
+            ABLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
 
-- (void)getBizDetailsForBizId:(unsigned int)bizId
-{
-    // create the search query
-    NSString *strURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
-
-    // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
-    [self performSelector:@selector(issueRequests:) withObject:@{strURL : [NSNumber numberWithInt:RequestType_BusinessDetails]} afterDelay:0.0];
-}
-
-- (void)issueRequests:(NSDictionary *)dictRequest
-{
-    if (dictRequest)
-    {
-        // the requests are stored in a dictionary where the key is the URL and the value for the key is the object for callback
-        for (NSString *strKey in dictRequest)
-        {
-            id value = [dictRequest objectForKey:strKey];
-
-            // run the search
-            NSString *strURL = [strKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [[DL_URLServer controller] issueRequestURL:strURL
-                                            withParams:nil
-                                            withObject:value
-                                          withDelegate:self
-                                    acceptableCacheAge:CACHE_AGE_SECS
-                                           cacheResult:YES];
-        }
+        }];
+        
     }
 }
 
@@ -1157,6 +1147,7 @@ typedef enum eRequestType
 - (void)exit:(BOOL)bNotifyExit
 {
     // if we haven't closed already
+    
     if (!_bDoneSentToDelegate)
     {
         _bDoneSentToDelegate = YES;
@@ -1291,13 +1282,32 @@ typedef enum eRequestType
 
     // image
     UIImage *imageForCell = [MainViewController Singleton].dictImages[[cell.textLabel.text lowercaseString]];
-    if (imageForCell == nil)
+    
+    if (imageForCell)
     {
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), NO, 0.0);
-        imageForCell = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        cell.imageView.image = imageForCell;
     }
-    cell.imageView.image = imageForCell;
+    else
+    {
+        NSString *imageURL = [MainViewController Singleton].dictImageURLFromBizName[[cell.textLabel.text lowercaseString]];
+
+        if (imageURL)
+        {
+            NSString *requestURL = [NSString stringWithFormat:@"%@%@", SERVER_URL, imageURL];
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                      timeoutInterval:60];
+            
+            [cell.imageView setImageWithURLRequest:imageRequest placeholderImage:nil success:nil failure:nil];
+        }
+        else
+        {
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), NO, 0.0);
+            imageForCell = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            cell.imageView.image = imageForCell;
+        }
+    }
 
     return cell;
 }
@@ -1324,91 +1334,6 @@ typedef enum eRequestType
 -(void)InfoViewFinished:(InfoView *)infoView
 {
     [infoView removeFromSuperview];
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-    if (DL_URLRequestStatus_Success == status)
-    {
-        // if this is a business listing query
-        if ([object isKindOfClass:[NSNumber class]])
-        {
-            NSNumber *numRequestType = (NSNumber *)object;
-            tRequestType requestType = (tRequestType) [numRequestType intValue];
-
-            NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-
-            //ABLog(2,@"Results download returned: %@", jsonString );
-
-            NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-            NSError *myError;
-            NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-
-            NSArray *searchResultsArray = [dictFromServer objectForKey:@"results"];
-            if (searchResultsArray && searchResultsArray != (id)[NSNull null])
-            {
-                if (requestType == RequestType_BusinessesAuto)
-                {
-                    for (NSDictionary *dict in searchResultsArray)
-                    {
-                        NSString *strName = [dict objectForKey:@"text"];
-                        if (strName && strName != (id)[NSNull null])
-                        {
-                            // if it doesn't exist in the other, add it
-                            if (NO == [self.arrayOtherBusinesses containsObject:strName])
-                            {
-                                [self.arrayOtherBusinesses addObject:strName];
-                            }
-
-                            // set the biz id if available
-                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
-                            if (numBizId && numBizId != (id)[NSNull null])
-                            {
-                                [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
-                            }
-
-                            NSString *strThumbnail = [dict objectForKey:@"square_image"];
-                            if (strThumbnail && strThumbnail != (id)[NSNull null]) {
-                                [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
-                            }
-                        }
-                    }
-                }
-
-                // update the auto complete array because we just added new businesses
-                [self performSelector:@selector(updateAutoCompleteArray) withObject:nil afterDelay:0.0];
-
-                // update the biz id (in case we found one for our business)
-                [self performSelector:@selector(updateBizId) withObject:nil afterDelay:0.0];
-            }
-        }
-        else if ([object isKindOfClass:[NSString class]])
-        {
-            NSString *strNameForImage = (NSString *) object;
-
-            // remove it from our array of thumbnails we are currently retrieving
-            [self.arrayThumbnailsRetrieving removeObject:strNameForImage];
-
-            // if we don't have an image for this yet
-            if (nil == [MainViewController Singleton].dictImages[[strNameForImage lowercaseString]])
-            {
-                UIImage *srcImage = [UIImage imageWithData:data];
-                [MainViewController Singleton].dictImages[[strNameForImage lowercaseString]] = srcImage;
-
-                // reload the table so it can get at the image if it needs it
-                [self performSelector:@selector(reloadAutoCompleteTable) withObject:nil afterDelay:0.0];
-
-                // if this matches our name
-                if ([self.nameTextField.text isEqualToString:strNameForImage])
-                {
-                    // update the photo
-                    [self performSelector:@selector(updatePhoto) withObject:nil afterDelay:0.0];
-                }
-            }
-        }
-    }
 }
 
 #pragma mark - UITextView delegates

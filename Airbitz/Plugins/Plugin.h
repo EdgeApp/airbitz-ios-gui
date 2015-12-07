@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Plugin : NSObject
 
@@ -13,6 +14,9 @@
 @property (nonatomic, copy)     NSString        *name;
 @property (nonatomic, copy)     NSString        *sourceFile;
 @property (nonatomic, copy)     NSString        *sourceExtension;
+@property (nonatomic, copy)     NSString        *imageFile;
+@property (nonatomic, strong)   UIColor         *backgroundColor;
+@property (nonatomic, strong)   UIColor         *textColor;
 @property (nonatomic, copy)     NSDictionary    *env;
 
 + (void)initAll;

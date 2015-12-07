@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -53,6 +54,7 @@
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-ZH-bDm" userLabel="Username" customClass="MinCharTextField">
                                         <rect key="frame" x="20" y="49" width="280" height="30"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Zqz-SU-9Ia"/>
@@ -63,6 +65,7 @@
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsW-1b-1cv">
                                         <rect key="frame" x="20" y="87" width="280" height="114"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="114" id="AKX-pK-uWI"/>
                                         </constraints>
@@ -77,6 +80,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wk-5R-JOh">
                                         <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="pKl-r2-vrX"/>
                                         </constraints>
@@ -85,6 +89,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="0wk-5R-JOh" firstAttribute="top" secondItem="lZN-Fj-bKz" secondAttribute="top" constant="20" symbolic="YES" id="7eB-Cx-ndD"/>
@@ -101,6 +106,7 @@ Your username and password are known only to you and never stored unencrypted.</
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-Gm-7l2" customClass="StylizedButton">
                                 <rect key="frame" x="181" y="276" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="d51-yS-jxm"/>
@@ -117,6 +123,7 @@ Your username and password are known only to you and never stored unencrypted.</
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="wVA-Xf-B2I">
                                 <rect key="frame" x="270" y="287" width="20" height="20"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="S1W-OS-vdq"/>
                                     <constraint firstAttribute="width" constant="20" id="eMf-ye-Ygp"/>
@@ -124,6 +131,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wVA-Xf-B2I" firstAttribute="trailing" secondItem="DgW-Gm-7l2" secondAttribute="trailing" constant="-10" id="0Gk-jZ-Mtu"/>
@@ -161,6 +169,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set a Password and PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgQ-ju-YiX">
                                         <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Og0-DH-5He"/>
                                         </constraints>
@@ -171,6 +180,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-Bh-x2F" userLabel="Reenter Password" customClass="MinCharTextField">
                                         <rect key="frame" x="20" y="111" width="280" height="30"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
@@ -178,6 +188,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choose a Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fnL-7h-MQL" customClass="MinCharTextField">
                                         <rect key="frame" x="20" y="77" width="280" height="30"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
@@ -185,6 +196,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fV9-pz-Wfn" customClass="MinCharTextField">
                                         <rect key="frame" x="190" y="149" width="110" height="30"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="L6N-H4-suy"/>
@@ -195,12 +207,14 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password is used to authenticate your account and to change sensitive settings." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3d-xe-eUq">
                                         <rect key="frame" x="20" y="41" width="280" height="32"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your PIN is a 4 digit code used to do quick re-logins into your account." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqs-NN-dWt">
                                         <rect key="frame" x="20" y="145" width="162" height="53"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" id="m5b-Pq-Ibc"/>
                                         </constraints>
@@ -210,6 +224,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -236,6 +251,7 @@ Your username and password are known only to you and never stored unencrypted.</
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHD-NP-fM6" customClass="StylizedButton">
                                 <rect key="frame" x="185" y="293" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="RAi-Zu-Su1"/>
@@ -251,6 +267,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hHD-NP-fM6" firstAttribute="top" secondItem="Cx6-mG-7Op" secondAttribute="bottom" constant="8" symbolic="YES" id="CAX-3f-IIm"/>
@@ -286,15 +303,18 @@ Your username and password are known only to you and never stored unencrypted.</
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="wo2-Qk-0we">
                                 <rect key="frame" x="0.0" y="-44" width="320" height="656"/>
+                                <animations/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vwC-us-I1Z">
                                 <rect key="frame" x="0.0" y="-2" width="320" height="62"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bkg_dark_header.png" translatesAutoresizingMaskIntoConstraints="NO" id="sSO-qb-tpk">
                                         <rect key="frame" x="0.0" y="-2" width="320" height="64"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkL-r2-NLT" customClass="LatoLabel">
                                         <rect key="frame" x="50" y="31" width="219" height="21"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -302,6 +322,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXf-3q-Thy" userLabel="Button - back">
                                         <rect key="frame" x="8" y="17" width="90" height="37"/>
+                                        <animations/>
                                         <inset key="imageEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="back_arrow.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -311,6 +332,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqn-6W-TEe">
@@ -318,10 +340,12 @@ Your username and password are known only to you and never stored unencrypted.</
                                 <subviews>
                                     <view alpha="0.25" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pax-KY-1tx">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nickname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-W4-OJJ" userLabel="Username" customClass="StylizedTextField">
                                         <rect key="frame" x="16" y="38" width="288" height="30"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
@@ -329,6 +353,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f05-aJ-dgr">
                                         <rect key="frame" x="16" y="8" width="288" height="21"/>
+                                        <animations/>
                                         <attributedString key="attributedText">
                                             <fragment content="Set a Public Handle (Optional)">
                                                 <attributes>
@@ -342,6 +367,7 @@ Your username and password are known only to you and never stored unencrypted.</
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehm-ti-qdD">
                                         <rect key="frame" x="16" y="69" width="288" height="195"/>
+                                        <animations/>
                                         <string key="text">Specify your name or arbitrary nickname ie "Coinmaster".
 
 This is used ONLY when sending payments or requests to others to help them identify you.
@@ -352,10 +378,12 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5S-Vu-MC1" customClass="StylizedButton">
                                 <rect key="frame" x="185" y="345" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="NEXT">
@@ -368,6 +396,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6r-A5-Cxg" customClass="StylizedButton">
                                 <rect key="frame" x="16" y="344" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="Back">
@@ -379,6 +408,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -407,6 +437,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Camera Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJZ-dK-bwv">
                                         <rect key="frame" x="20" y="20" width="240" height="21"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Pxd-wQ-T9f"/>
                                         </constraints>
@@ -416,6 +447,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAn-0y-asT">
                                         <rect key="frame" x="20" y="203" width="240" height="75"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="BuB-Go-fjV"/>
                                         </constraints>
@@ -428,6 +460,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enable-camera.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Mp-nC-F2Z">
                                         <rect key="frame" x="20" y="49" width="155" height="146"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="155" id="cKf-zf-elw"/>
@@ -436,6 +469,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gq-ds-DJC" customClass="StylizedButton">
                                         <rect key="frame" x="141" y="286" width="119" height="41"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="119" id="LbW-PU-eBc"/>
@@ -452,6 +486,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -469,6 +504,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zpC-Ha-otG" secondAttribute="trailing" constant="20" symbolic="YES" id="AWU-LQ-M6R"/>
@@ -500,6 +536,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enable-contacts.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kzh-ZS-bcq">
                                         <rect key="frame" x="16" y="49" width="119" height="97"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="97" id="0uY-uA-oEh"/>
@@ -508,6 +545,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will next see a popup requesting access to your Contacts." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyh-gB-nOv">
                                         <rect key="frame" x="143" y="49" width="117" height="97"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="97" id="eXY-wl-rQ2"/>
                                         </constraints>
@@ -517,6 +555,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Contact Access" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cng-Cv-ULC">
                                         <rect key="frame" x="20" y="20" width="169" height="21"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="KP6-ct-mGf"/>
                                         </constraints>
@@ -526,6 +565,7 @@ Airbitz needs this to scan QR codes to pay people and merchants.</string>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSv-b6-auz">
                                         <rect key="frame" x="20" y="154" width="240" height="180"/>
+                                        <animations/>
                                         <string key="text">Airbitz uses contacts to help tag information regarding your transactions.
 
 All tagged information is kept 100% private and encrypted by your password.
@@ -536,6 +576,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KSv-b6-auz" firstAttribute="leading" secondItem="g4H-Hm-IKW" secondAttribute="leading" constant="20" symbolic="YES" id="0lA-Q4-k6m"/>
@@ -553,6 +594,7 @@ No one, including Airbitz, has any access to this information.</string>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-Oh-ifI" customClass="StylizedButton">
                                 <rect key="frame" x="181" y="432" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="2Tx-dz-1pX"/>
@@ -568,6 +610,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="AAt-Oh-ifI" secondAttribute="trailing" constant="20" symbolic="YES" id="Mne-aq-rBf"/>
@@ -598,6 +641,7 @@ No one, including Airbitz, has any access to this information.</string>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
                                 <rect key="frame" x="181" y="414" width="119" height="41"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="Ety-b4-KRH"/>
@@ -617,6 +661,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
                                         <rect key="frame" x="20" y="20" width="240" height="21"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="RCK-Ad-JKl"/>
                                         </constraints>
@@ -626,6 +671,7 @@ No one, including Airbitz, has any access to this information.</string>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="write-it-down.png" translatesAutoresizingMaskIntoConstraints="NO" id="qwh-Mw-sul">
                                         <rect key="frame" x="20" y="49" width="146" height="132"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="146" id="81q-Ks-rpq"/>
@@ -637,12 +683,14 @@ No one, including Airbitz, has any access to this information.</string>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your username and password are known only to you and never transmitted or stored unencrypted." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eB-ff-Ebh">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="51"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                                 <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write down and store securely" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcU-OX-5Hj">
                                                 <rect key="frame" x="0.0" y="81" width="240" height="25"/>
+                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="n5a-5E-38h"/>
                                                 </constraints>
@@ -655,6 +703,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJ6-mQ-mSV">
                                                         <rect key="frame" x="20" y="20" width="76" height="20"/>
+                                                        <animations/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="9vm-7c-hqP"/>
                                                             <constraint firstAttribute="width" constant="76" id="R3W-PS-wY3"/>
@@ -665,38 +714,44 @@ No one, including Airbitz, has any access to this information.</string>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-i8-gfC">
                                                         <rect key="frame" x="20" y="48" width="76" height="20"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPi-8w-xQ4">
                                                         <rect key="frame" x="20" y="76" width="76" height="20"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="myname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="DUg-At-veb">
                                                         <rect key="frame" x="104" y="20" width="116" height="20"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mypassword12345" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="tOB-4i-OVm">
                                                         <rect key="frame" x="104" y="48" width="116" height="20"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-pH-bAR">
                                                         <rect key="frame" x="104" y="76" width="116" height="20"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
                                                 </accessibility>
                                                 <constraints>
                                                     <constraint firstItem="DUg-At-veb" firstAttribute="width" secondItem="Gzw-pH-bAR" secondAttribute="width" id="1gW-MW-2gH"/>
@@ -728,6 +783,7 @@ No one, including Airbitz, has any access to this information.</string>
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="4eB-ff-Ebh" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="22D-Cc-ilX"/>
@@ -744,6 +800,7 @@ No one, including Airbitz, has any access to this information.</string>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-q2-Sa7" customClass="StylizedButtonOutline">
                                         <rect key="frame" x="20" y="316" width="85" height="34"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="cUc-X7-GJg"/>
                                             <constraint firstAttribute="height" constant="34" id="e8C-5d-OXX"/>
@@ -757,6 +814,7 @@ No one, including Airbitz, has any access to this information.</string>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="W8f-q2-Sa7" secondAttribute="leading" id="0oS-ve-4tH"/>
@@ -774,6 +832,7 @@ No one, including Airbitz, has any access to this information.</string>
                                 </constraints>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KK6-aH-ad6" firstAttribute="top" secondItem="alR-Kk-2t9" secondAttribute="bottom" constant="50" id="MbG-yb-ilx"/>
@@ -802,15 +861,10 @@ No one, including Airbitz, has any access to this information.</string>
     </scenes>
     <resources>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background.jpg" width="30" height="30"/>
+        <image name="background.jpg" width="960" height="600"/>
         <image name="bkg_dark_header.png" width="320" height="64"/>
-        <image name="enable-camera.png" width="277" height="205"/>
+        <image name="enable-camera.png" width="273" height="200"/>
         <image name="enable-contacts.png" width="190" height="209"/>
-        <image name="write-it-down.png" width="282" height="260"/>
+        <image name="write-it-down.png" width="278" height="255"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

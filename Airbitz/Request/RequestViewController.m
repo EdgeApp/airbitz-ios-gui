@@ -240,12 +240,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
             [FadingAlertView create:self.view
-                            message:[Theme Singleton].walletHasBeenArchivedText
+                            message:walletHasBeenArchivedText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
 }
 
@@ -1042,7 +1042,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 
 
 }
@@ -1470,11 +1470,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", [Theme Singleton].appTitle, [User Singleton].fullName];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, [User Singleton].fullName];
         }
         else
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request", [Theme Singleton].appTitle];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request", appTitle];
         }
 
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
@@ -1491,7 +1491,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         [self presentViewController:mailComposer animated:YES completion:nil];
 
-        _requestType = [Theme Singleton].emailText;
+        _requestType = emailText;
     }
     else
     {
@@ -1546,7 +1546,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         [self presentViewController:controller animated:YES completion:nil];
 
-        _requestType = [Theme Singleton].smsText;
+        _requestType = smsText;
     }
 }
 
@@ -1663,7 +1663,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         case MessageComposeResultCancelled:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
                                                             message:@"SMS cancelled"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1674,7 +1674,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MessageComposeResultFailed:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
                                                             message:@"Error sending SMS"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1685,7 +1685,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MessageComposeResultSent:
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
                                                             message:@"SMS sent"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
@@ -1772,7 +1772,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Theme Singleton].appTitle
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
                                                         message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"OK", nil)

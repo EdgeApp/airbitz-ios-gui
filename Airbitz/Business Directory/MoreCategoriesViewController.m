@@ -7,24 +7,25 @@
 //
 
 #import "MoreCategoriesViewController.h"
-#import "DL_URLServer.h"
 #import "categoryCell.h"
 #import "CJSONDeserializer.h"
 #import "Server.h"
 #import "Theme.h"
 #import "MainViewController.h"
+#import "Util.h"
 
 #define MODE_NAME	0
 #define MODE_LEVEL	1
 
-@interface MoreCategoriesViewController () <UITableViewDataSource, UITableViewDelegate, DL_URLRequestDelegate>
+@interface MoreCategoriesViewController () <UITableViewDataSource, UITableViewDelegate>
 {
 	BOOL mode;
 	NSMutableArray *categoriesArray;
 }
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityView;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIButton *modeButton;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView                *activityView;
+@property (nonatomic, weak) IBOutlet UITableView                            *tableView;
+@property (nonatomic, weak) IBOutlet UIButton                               *modeButton;
+@property (strong, nonatomic)        AFHTTPRequestOperationManager          *afmanager;
 
 @end
 
@@ -47,6 +48,8 @@
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	categoriesArray = [[NSMutableArray alloc] init];
+    self.afmanager = [MainViewController createAFManager];
+
 	[self assignNameCategoryButtonText];
 	[self loadCategories];
 }
@@ -55,8 +58,8 @@
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"More Categories", @"")];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 
 }
 - (void)didReceiveMemoryWarning
@@ -78,14 +81,36 @@
 	{
 		serverQuery = [NSString stringWithFormat:@"%@/categories/?sort=level", SERVER_API];
 	}
-	 
-	[[DL_URLServer controller] issueRequestURL:serverQuery
-									withParams:nil
-									withObject:nil
-								  withDelegate:self
-							acceptableCacheAge:60 * 60
-								   cacheResult:YES];
+
+    [self doNetworkQuery:serverQuery];
 }
+
+-(void)doNetworkQuery:(NSString *)query
+{
+    [self.afmanager GET:query parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        [categoriesArray addObjectsFromArray:[results objectForKey:@"results"]];
+        
+        NSString *nextQuery = [results objectForKey:@"next"];
+        if(nextQuery && (nextQuery != (id)[NSNull null]))
+        {
+            [self doNetworkQuery:nextQuery];
+        }
+        else
+        {
+            [self pruneFirstThreeLevelsFromCategories];
+            [self.activityView stopAnimating];
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABLog(1, @"*** ERROR Connecting to Network: MoreCategories:doNetworkQuery");
+    }];
+
+}
+
 
 -(void)pruneFirstThreeLevelsFromCategories
 {
@@ -116,7 +141,7 @@
 
 -(IBAction)back
 {
-	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
+//	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 	
 	[self.delegate moreCategoriesViewControllerDone:self withCategory:nil];
 }
@@ -185,41 +210,6 @@
 {
 	NSDictionary *dict = [categoriesArray objectAtIndex:indexPath.row];
 	[self.delegate moreCategoriesViewControllerDone:self withCategory:[dict objectForKey:@"name"]];
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-	NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-	NSError *myError;
-	NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-	
-	
-	[categoriesArray addObjectsFromArray:[dictFromServer objectForKey:@"results"]];
-	
-	NSString *nextQuery = [dictFromServer objectForKey:@"next"];
-	if(nextQuery && (nextQuery != (id)[NSNull null]))
-	{
-		//ABLog(2,@"Loading next: %@", nextQuery);
-		//NSString *serverQuery = [NSString stringWithFormat:@"%@/categories/?sort=level", SERVER_API];
-	
-		[[DL_URLServer controller] issueRequestURL:nextQuery
-										withParams:nil
-										withObject:nil
-									  withDelegate:self
-								acceptableCacheAge:60 * 60
-									   cacheResult:YES];
-				
-	}
-	else
-	{
-		//ABLog(2,@"Results: %@", categoriesArray);
-		[self pruneFirstThreeLevelsFromCategories];
-		[self.activityView stopAnimating];
-		[self.tableView reloadData];
-	}
 }
 
 @end

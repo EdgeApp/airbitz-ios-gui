@@ -118,8 +118,8 @@
 
     [MainViewController changeNavBarOwner:self];
 
-    [MainViewController changeNavBar:self title:[Theme Singleton].cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 
     [self updateDisplayForMode:_mode];
 }
@@ -270,7 +270,7 @@
     if (mode == SignUpMode_ChangePasswordNoVerify
             || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
     {
-        self.title = [Theme Singleton].changePasswordText;
+        self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
@@ -291,7 +291,7 @@
     else if (mode == SignUpMode_ChangePassword)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.title = [Theme Singleton].changePasswordText;
+        self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
@@ -312,7 +312,7 @@
     }
     else if (mode == SignUpMode_ChangePasswordUsingAnswers)
     {
-        self.title = [Theme Singleton].changePasswordText;
+        self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
@@ -334,7 +334,7 @@
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
-        self.title = [Theme Singleton].changePINText;
+        self.title = changePINText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");

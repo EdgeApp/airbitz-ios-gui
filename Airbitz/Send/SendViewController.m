@@ -49,7 +49,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "SpendTarget.h"
-#import "DL_URLServer.h"
 #import "Server.h"
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
@@ -72,7 +71,7 @@ typedef enum eImportState
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
- ,ZBarReaderDelegate, ZBarReaderViewDelegate, DL_URLRequestDelegate, AddressRequestControllerDelegate
+ ,ZBarReaderDelegate, ZBarReaderViewDelegate, AddressRequestControllerDelegate
 >
 {
 	ZBarReaderView                  *_readerView;
@@ -115,6 +114,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic)   NSMutableData                   *data;
 @property (strong, nonatomic)   NSMutableArray		            *peripheralContainers;
 @property (nonatomic, copy)	    NSString				        *advertisedPartialBitcoinAddress;
+@property (strong, nonatomic)   AFHTTPRequestOperationManager   *afmanager;
+
 @end
 
 @implementation PeripheralContainer
@@ -152,6 +153,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self updateDisplay];
 
     _dataModel = kWIF;
+    
+    self.afmanager = [MainViewController createAFManager];
 }
 
 - (void)dealloc
@@ -231,7 +234,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else if (self.loopbackState == LoopbackState_Invalid_Address)
     {
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:[Theme Singleton].invalidAddressPopupText
+                initWithTitle:invalidAddressPopupText
                       message:NSLocalizedString(@"", nil)
                      delegate:self
             cancelButtonTitle:@"OK"
@@ -246,14 +249,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if (_bImportMode)
     {
-        self.topTextLabel.text = [Theme Singleton].scanQrToImportPrivateKeyOrGiftCard;
+        self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
     }
     else
     {
-        self.topTextLabel.text = [Theme Singleton].scanQrToSendFundsText;
+        self.topTextLabel.text = scanQrToSendFundsText;
         if ([[User Singleton] offerSendHelp])
         {
-            [MainViewController fadingAlertHelpPopup:[Theme Singleton].sendScreenHelpText];
+            [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
         }
     }
 
@@ -278,8 +281,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)setupNavBar
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -301,7 +304,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
 
 }
 
@@ -488,7 +491,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                                    relativePosition:PopupPicker2Position_Full_Rising
                                                         withStrings:arrayChoices
                                                       withAccessory:nil
-                                                         headerText:[Theme Singleton].selectWalletTransferPopupHeaderText
+                                                         headerText:selectWalletTransferPopupHeaderText
             ];
             self.popupPickerSendTo.delegate = self;
             // Do Transfer
@@ -496,13 +499,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         case 1:
             if (_bImportMode)
             {
-                title = [Theme Singleton].enterPrivateKeyPopupText;
-                placeholderText = [Theme Singleton].enterPrivateKeyPlaceholder;
+                title = enterPrivateKeyPopupText;
+                placeholderText = enterPrivateKeyPlaceholder;
             }
             else
             {
-                title = [Theme Singleton].enterBitcoinAddressPopupText;
-                placeholderText = [Theme Singleton].enterBitcoinAddressPlaceholder;
+                title = enterBitcoinAddressPopupText;
+                placeholderText = enterBitcoinAddressPlaceholder;
             }
             if ([clipboard length] >= 10)
             {
@@ -516,9 +519,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             typeAddressAlertView =[[UIAlertView alloc ] initWithTitle:title
                                                               message:nil
                                                              delegate:self
-                                                    cancelButtonTitle:[Theme Singleton].cancelButtonText
-//                                                    otherButtonTitles:[Theme Singleton].doneButtonText, nil];
-                                                    otherButtonTitles:[Theme Singleton].doneButtonText, pasteString, nil];
+                                                    cancelButtonTitle:cancelButtonText
+//                                                    otherButtonTitles:doneButtonText, nil];
+                                                    otherButtonTitles:doneButtonText, pasteString, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
             textField.placeholder = placeholderText;
@@ -1316,7 +1319,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
             [FadingAlertView create:self.view
-                            message:[Theme Singleton].walletHasBeenArchivedText
+                            message:walletHasBeenArchivedText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
 
@@ -1887,12 +1890,51 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
             NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-            [[DL_URLServer controller] issueRequestURL:hiddenBitzURI
-                                            withParams:nil
-                                            withObject:self
-                                          withDelegate:self
-                                    acceptableCacheAge:CACHE_24_HOURS
-                                           cacheResult:YES];
+
+            [self.afmanager GET:hiddenBitzURI parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                NSDictionary *results = (NSDictionary *)responseObject;
+                
+                if (results)
+                {
+                    NSString *token = [results objectForKey:@"token"];
+                    _tweet = [results objectForKey:@"tweet"];
+                    if (token && _tweet)
+                    {
+                        if (0 == _sweptAmount)
+                        {
+                            NSString *zmessage = [results objectForKey:@"zero_message"];
+                            if (zmessage)
+                            {
+                                _tweetAlert = [[UIAlertView alloc]
+                                               initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                               message:zmessage
+                                               delegate:self
+                                               cancelButtonTitle:@"No"
+                                               otherButtonTitles:@"OK", nil];
+                                [_tweetAlert show];
+                            }
+                        }
+                        else
+                        {
+                            NSString *message = [results objectForKey:@"message"];
+                            if (message)
+                            {
+                                _tweetAlert = [[UIAlertView alloc]
+                                               initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                               message:message
+                                               delegate:self
+                                               cancelButtonTitle:@"No"
+                                               otherButtonTitles:@"OK", nil];
+                                [_tweetAlert show];
+                            }
+                        }
+                    }
+                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                ABLog(1, @"*** ERROR Connecting to Network: showSweepResults");
+            }];
         }
     }
 }
@@ -1975,60 +2017,5 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 #pragma mark - AlertView delegate
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-    bool bSuccess = NO;
-    [self cancelImportExpirationTimer];
-
-    if (nil == _tweetAlert)
-    {
-        NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-
-        NSError *myError;
-        NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-        if (dict)
-        {
-            NSString *token = [dict objectForKey:@"token"];
-            _tweet = [dict objectForKey:@"tweet"];
-            if (token && _tweet)
-            {
-                if (0 == _sweptAmount)
-                {
-                    NSString *zmessage = [dict objectForKey:@"zero_message"];
-                    if (zmessage)
-                    {
-                        _tweetAlert = [[UIAlertView alloc]
-                                       initWithTitle:NSLocalizedString(@"Sorry", nil)
-                                       message:zmessage
-                                       delegate:self
-                                       cancelButtonTitle:@"No"
-                                       otherButtonTitles:@"OK", nil];
-                        [_tweetAlert show];
-                        bSuccess = YES;
-                    }
-                }
-                else
-                {
-                    NSString *message = [dict objectForKey:@"message"];
-                    if (message)
-                    {
-                        _tweetAlert = [[UIAlertView alloc]
-                                       initWithTitle:NSLocalizedString(@"Congratulations", nil)
-                                       message:message
-                                       delegate:self
-                                       cancelButtonTitle:@"No"
-                                       otherButtonTitles:@"OK", nil];
-                        [_tweetAlert show];
-                        bSuccess = YES;
-                    }
-                }
-            }
-        }
-    }
-}
 
 @end

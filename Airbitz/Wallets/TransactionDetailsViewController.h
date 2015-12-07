@@ -28,6 +28,7 @@ typedef enum eTDMode
 @property (nonatomic, assign) BOOL                                          bOldTransaction;
 @property (nonatomic, strong) UIImage                                       *photo;
 @property (nonatomic, strong) NSString                                      *returnUrl;
+@property (nonatomic, strong) NSString                                      *photoUrl;
 
 @end
 

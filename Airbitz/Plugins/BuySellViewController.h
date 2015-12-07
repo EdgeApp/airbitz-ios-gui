@@ -11,7 +11,7 @@
 @interface BuySellViewController : AirbitzViewController
 
 @property (assign) id<BuySellViewControllerDelegate> delegate;
-- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider;
+- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri;
 
 @end
 

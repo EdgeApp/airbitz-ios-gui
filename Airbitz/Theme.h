@@ -9,6 +9,27 @@
 #import <Foundation/Foundation.h>
 #import "CommonTypes.h"
 #import <UIKit/UIKit.h>
+#import "Strings.h"
+#import "BrandStrings.h"
+
+#define AppFont                                         @"Lato-Regular"
+
+#define ColorOffBright                                  UIColorFromARGB(0xffeeeeee)
+#define ColorDarkGrey                                   UIColorFromARGB(0xff383838)
+#define ColorWhiteFrost                                 UIColorFromARGB(0xaaffffff)
+
+#define ColorPinUserNameSelectorShadow                  UIColorFromARGB(0xff3756B8)
+#define ColorPinEntryText                               ColorOffBright
+#define ColorPinEntryUsernameText                       UIColorFromARGB(0xffCAE3FF)
+
+#define ColorLoginTitleText                             ColorOffBright
+#define ColorLoginTitleTextShadow                       UIColorFromARGB(0xff1C3294)
+
+#define DirectoryCategoryButtonsBackgroundColor         ColorWhiteFrost
+
+#define LoginTitleTextShadowRadius                      0.0f
+#define PinEntryTextShadowRadius                        1.0f
+
 
 @interface Theme : NSObject
 
@@ -39,79 +60,6 @@
 @property (nonatomic) BOOL    bTranslucencyEnable;
 
 @property (nonatomic) NSString *appFont;
-
-@property (nonatomic) NSString *appTitle;
-@property (nonatomic) NSString *appLogoWhiteLink;
-@property (nonatomic) NSString *appHomepage;
-@property (nonatomic) NSString *appDesignedBy;
-@property (nonatomic) NSString *appCompanyLocation;
-@property (nonatomic) NSString *supportEmail;
-@property (nonatomic) NSString *appStoreLink;
-@property (nonatomic) NSString *playStoreLink;
-
-@property (nonatomic) NSString *backButtonText;
-@property (nonatomic) NSString *exitButtonText;
-@property (nonatomic) NSString *helpButtonText;
-@property (nonatomic) NSString *infoButtonText;
-@property (nonatomic) NSString *doneButtonText;
-@property (nonatomic) NSString *cancelButtonText;
-@property (nonatomic) NSString *closeButtonText;
-@property (nonatomic) NSString *exportButtonText;
-@property (nonatomic) NSString *renameButtonText;
-@property (nonatomic) NSString *deleteAccountWarning;
-@property (nonatomic) NSString *renameWalletWarningText;
-@property (nonatomic) NSString *walletBalanceHeaderText;
-@property (nonatomic) NSString *walletNameHeaderText;
-@property (nonatomic) NSString *transactionCellNoTransactionsText;
-@property (nonatomic) NSString *transactionCellNoTransactionsFoundText;
-@property (nonatomic) NSString *walletHeaderButtonHelpText;
-@property (nonatomic) NSString *walletHasBeenArchivedText;
-@property (nonatomic) NSString *fiatText;
-@property (nonatomic) NSString *walletsPopupHelpText;
-@property (nonatomic) NSString *selectWalletTransferPopupHeaderText;
-@property (nonatomic) NSString *invalidAddressPopupText;
-@property (nonatomic) NSString *enterBitcoinAddressPopupText;
-@property (nonatomic) NSString *enterBitcoinAddressPlaceholder;
-@property (nonatomic) NSString *enterPrivateKeyPopupText;
-@property (nonatomic) NSString *enterPrivateKeyPlaceholder;
-@property (nonatomic) NSString *smsText;
-@property (nonatomic) NSString *emailText;
-@property (nonatomic) NSString *sendScreenHelpText;
-@property (nonatomic) NSString *creatingWalletText;
-@property (nonatomic) NSString *createAccountAndTransferFundsText;
-@property (nonatomic) NSString *createPasswordForAccountText;
-@property (nonatomic) NSString *settingsText;
-@property (nonatomic) NSString *categoriesText;
-@property (nonatomic) NSString *signupText;
-@property (nonatomic) NSString *changePasswordText;
-@property (nonatomic) NSString *changePINText;
-@property (nonatomic) NSString *twoFactorText;
-@property (nonatomic) NSString *importText;
-@property (nonatomic) NSString *buySellText;
-@property (nonatomic) NSString *passwordRecoveryText;
-@property (nonatomic) NSString *passwordMismatchText;
-@property (nonatomic) NSString *defaultCurrencyInfoText;
-@property (nonatomic) NSString *touchIDPromptText;
-@property (nonatomic) NSString *usePINText;
-@property (nonatomic) NSString *usePasswordText;
-@property (nonatomic) NSString *twofactorWarningText;
-@property (nonatomic) NSString *loadingWalletsText;
-@property (nonatomic) NSString *loadingWalletsNewDeviceText;
-@property (nonatomic) NSString *loadingTransactionsText;
-@property (nonatomic) NSString *synchronizingText;
-@property (nonatomic) NSString *doubleSpendText;
-@property (nonatomic) NSString *pendingText;
-@property (nonatomic) NSString *confirmedText;
-@property (nonatomic) NSString *confirmationText;
-@property (nonatomic) NSString *confirmationsText;
-@property (nonatomic) NSString *loadingText;
-@property (nonatomic) NSString *uploadingLogText;
-@property (nonatomic) NSString *uploadSuccessfulText;
-@property (nonatomic) NSString *uploadFailedText;
-@property (nonatomic) NSString *watcherClearedText;
-@property (nonatomic) NSString *PINOnlyNumbersText;
-@property (nonatomic) NSString *scanQrToSendFundsText;
-@property (nonatomic) NSString *scanQrToImportPrivateKeyOrGiftCard;
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
 @property (nonatomic) CGFloat buttonFontSize;

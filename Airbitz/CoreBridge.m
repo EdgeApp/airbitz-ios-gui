@@ -437,7 +437,7 @@ static BOOL bOtpError = NO;
     tABC_Error error;
     Wallet *wallet = [[Wallet alloc] init];
     wallet.strUUID = uuid;
-    wallet.strName = [Theme Singleton].loadingText;
+    wallet.strName = loadingText;
     wallet.currencyNum = -1;
     wallet.balance = 0;
     wallet.loaded = NO;
@@ -462,7 +462,7 @@ static BOOL bOtpError = NO;
         } else {
             wallet.loaded = NO;
             wallet.currencyNum = -1;
-            wallet.strName = [Theme Singleton].loadingText;
+            wallet.strName = loadingText;
         }
 
         int64_t balance;

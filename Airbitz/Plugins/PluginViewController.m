@@ -21,7 +21,7 @@
 
 static const NSString *PROTOCOL = @"bridge://";
 
-@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate>
+@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UIImagePickerControllerDelegate>
 {
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
@@ -29,6 +29,9 @@ static const NSString *PROTOCOL = @"bridge://";
     Wallet                         *_sendWallet;
     NSMutableArray                 *_navStack;
     NSDictionary                   *_functions;
+    NSString                       *_tempCbidForImagePicker;
+    NSDictionary                   *_tempArgsForImagePicker;
+
     BOOL                           bWalletListDropped;
 }
 
@@ -56,12 +59,14 @@ static const NSString *PROTOCOL = @"bridge://";
     bWalletListDropped = false;
     _navStack = [[NSMutableArray alloc] init];
     _functions = @{
+                     @"debugLevel":NSStringFromSelector(@selector(debugLevel:)),
                      @"bitidAddress":NSStringFromSelector(@selector(bitidAddress:)),
                      @"bitidSignature":NSStringFromSelector(@selector(bitidSignature:)),
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
+                @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
              @"finalizeRequest":NSStringFromSelector(@selector(finalizeRequest:)),
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
@@ -73,6 +78,7 @@ static const NSString *PROTOCOL = @"bridge://";
               @"formatCurrency":NSStringFromSelector(@selector(formatCurrency:)),
                    @"getConfig":NSStringFromSelector(@selector(getConfig:)),
                    @"showAlert":NSStringFromSelector(@selector(showAlert:)),
+                   @"hideAlert":NSStringFromSelector(@selector(hideAlert:)),
                        @"title":NSStringFromSelector(@selector(title:)),
                   @"showNavBar":NSStringFromSelector(@selector(showNavBar:)),
                   @"hideNavBar":NSStringFromSelector(@selector(hideNavBar:)),
@@ -83,11 +89,18 @@ static const NSString *PROTOCOL = @"bridge://";
     };
 
     [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
-    NSString *localFilePath = [[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension];
-    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:localFilePath]];
     _webView.delegate = self;
     _webView.backgroundColor = [UIColor clearColor];
     _webView.opaque = NO;
+
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:_plugin.sourceFile ofType:_plugin.sourceExtension]];
+    NSString *localFilePath = [url absoluteString];  
+
+    if (_uri != nil) {
+        localFilePath = [NSString stringWithFormat:@"%@?%@", localFilePath, _uri.query];
+    }
+
+    NSURLRequest *localRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:localFilePath]];
     [_webView loadRequest:localRequest];
 }
 
@@ -124,11 +137,11 @@ static const NSString *PROTOCOL = @"bridge://";
         }
     }
     if (bWalletListDropped) {
-        [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+        [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
     } else {
-        [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+        [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
     }
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 #pragma mark - ButtonSelectorView2 delegates
@@ -140,7 +153,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [CoreBridge makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -155,13 +168,13 @@ static const NSString *PROTOCOL = @"bridge://";
     {
         [self.buttonSelector close];
         bWalletListDropped = false;
-        [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+        [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
     }
     else
     {
         [self.buttonSelector open];
         bWalletListDropped = true;
-        [MainViewController changeNavBar:self title:[Theme Singleton].closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
+        [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
     }
 }
 
@@ -194,7 +207,8 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = [request URL].absoluteString;
-    NSLog(@("url: %@"), url);
+    if (![url containsString:@"debugLevel"])
+        NSLog(@("url: %@"), url);
     if ([[url lowercaseString] hasPrefix:PROTOCOL]) {
         url = [url substringFromIndex:PROTOCOL.length];
         url = [url stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -446,6 +460,9 @@ static const NSString *PROTOCOL = @"bridge://";
                                 notes:[args objectForKey:@"notes"] 
                         amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
                                 error:&error]) {
+        if (0 < [[args objectForKey:@"bizId"] longValue]) {
+            spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
+        }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
@@ -456,6 +473,48 @@ static const NSString *PROTOCOL = @"bridge://";
         _sendConfirmationViewController.bAdvanceToTx = NO;
         [Util animateController:_sendConfirmationViewController parentController:self];
     }
+}
+
+- (void)launchFilePicker:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    _tempArgsForImagePicker = args;
+    _tempCbidForImagePicker = cbid;
+
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.75)];
+    NSString *encodedString = [imgData base64Encoding];
+    
+    int SLICE_SIZE = 500;
+    size_t len = [encodedString length];
+    [_webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Airbitz.bufferClear();"]];
+    for (int i = 0; i < len / SLICE_SIZE; ++i) {
+        size_t start = i * SLICE_SIZE;
+        size_t size = start + SLICE_SIZE > len ? len - start : SLICE_SIZE;
+
+        NSString *chunk = [encodedString substringWithRange:NSMakeRange(start, size)];
+        [_webView stringByEvaluatingJavaScriptFromString:
+            [NSString stringWithFormat:@"Airbitz.bufferAdd('%s');", chunk]];
+    }
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // NSDictionary *results = [self jsonResult:@"useBuffer"];
+    NSDictionary *results = [self jsonResult:encodedString];
+    [self callJsFunction:_tempCbidForImagePicker withArgs:results];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createReceiveRequest:(NSDictionary *)params
@@ -478,7 +537,9 @@ static const NSString *PROTOCOL = @"bridge://";
     details.szNotes = (char *)[[args objectForKey:@"notes"] UTF8String];
     details.szCategory = (char *)[[args objectForKey:@"category"] UTF8String];
 	details.attributes = 0x0;
-    details.bizId = 0;
+    if (0 < [[args objectForKey:@"bizId"] longValue]) {
+        details.bizId = [[args objectForKey:@"bizId"] longValue];
+    }
 
 	char *pRequestID = NULL;
 
@@ -656,12 +717,33 @@ static const NSString *PROTOCOL = @"bridge://";
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 
+- (void)hideAlert:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    [MainViewController fadingAlertDismiss];
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
 - (void)title:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
     _titleLabel.text = [args objectForKey:@"title"];
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
+- (void)debugLevel:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    
+    NSString *text = [args objectForKey:@"text"];
+    NSString *level = [args objectForKey:@"level"];
+    
+    ABLog((int) [level integerValue], @"%@", text);
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 

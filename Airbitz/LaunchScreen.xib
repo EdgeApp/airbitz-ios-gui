@@ -32,6 +32,6 @@
     </objects>
     <resources>
         <image name="background_launch" width="640" height="640"/>
-        <image name="logo_icon" width="22" height="22"/>
+        <image name="logo_icon" width="640" height="640"/>
     </resources>
 </document>

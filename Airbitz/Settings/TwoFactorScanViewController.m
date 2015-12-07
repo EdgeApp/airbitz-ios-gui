@@ -48,9 +48,9 @@
 {
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].twoFactorText];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:twoFactorText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [_scanView startQRReader];
 }
 

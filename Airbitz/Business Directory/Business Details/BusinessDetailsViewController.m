@@ -7,7 +7,6 @@
 //
 
 #import "BusinessDetailsViewController.h"
-#import "DL_URLServer.h"
 #import "Server.h"
 #import "Util.h"
 #import "BD_Social_Cell.h"
@@ -43,7 +42,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 #define CLOSED_STRING	@"closed"
 
-@interface BusinessDetailsViewController () <DL_URLRequestDelegate, UITableViewDataSource, UITableViewDelegate,
+@interface BusinessDetailsViewController () <UITableViewDataSource, UITableViewDelegate,
                                              UIAlertViewDelegate, UIPhotoGalleryDataSource, UIPhotoGalleryDelegate>
 {
 	CGFloat hoursCellHeight;
@@ -69,6 +68,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 @property (nonatomic, weak) IBOutlet UILabel *BTC_DiscountLabel;
 
 @property (nonatomic, strong) NSDictionary *businessDetails;
+@property (strong, nonatomic) AFHTTPRequestOperationManager         *afmanager;
 
 @end
 
@@ -98,8 +98,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
 	detailsCellHeight = SINGLE_ROW_CELL_HEIGHT;
     detailsLabelWidth = LABEL_WIDTH_WILD_GUESS;
-
-
+    
     self.darkenImageView.hidden = YES; //hide until business image gets loaded
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -112,12 +111,97 @@ typedef NS_ENUM(NSUInteger, CellType) {
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
 	//ABLog(2,@"Requesting: %@", requestURL);
-	[[DL_URLServer controller] issueRequestURL:requestURL
-									withParams:nil
-									withObject:nil
-								  withDelegate:self
-							acceptableCacheAge:CACHE_24_HOURS
-								   cacheResult:YES];
+    
+    self.afmanager = [MainViewController createAFManager];
+    
+    [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //
+        // Query business details
+        //
+        
+        [self.activityView stopAnimating];
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+
+        self.businessDetails = results;
+        
+        [self determineVisibleRows];
+        
+        [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
+        
+        NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
+        
+        if(daysOfOperation.count)
+        {
+            hoursCellHeight = SINGLE_ROW_CELL_HEIGHT + 16 * [daysOfOperation count] - 16;
+        }
+        else
+        {
+            hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
+        }
+        
+        BD_CommonCell *commonCell = [self getCommonCellForTableView:self.tableView];
+        
+        //calculate height of details cell
+        CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:commonCell.leftLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+        detailsCellHeight = size.height + 28.0;
+        
+        [self.tableView reloadData];
+        
+        //Get image URLs
+        NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
+
+        [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            //
+            // Query business image URLs for the gallery
+            //
+
+            NSDictionary *results = (NSDictionary *)responseObject;
+
+            details = [results objectForKey:@"results"];
+            
+            self.galleryView.galleryMode = UIPhotoGalleryModeImageRemote;
+            self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
+            [self.galleryView layoutSubviews];
+            
+            self.darkenImageView.hidden = NO;
+            [gallerySpinner stopAnimating];
+            
+            //create the distance ribbon
+            NSNumber *distance = [self.businessDetails objectForKey:@"distance"];
+            if(distance && distance != (id)[NSNull null])
+            {
+                [self setRibbon:[RibbonView metersToDistance:[distance floatValue]]];
+            }
+            
+            NSString *bitCoinDiscount = [self.businessDetails objectForKey:@"has_bitcoin_discount"];
+            if(bitCoinDiscount)
+            {
+                float discount = [bitCoinDiscount floatValue] * 100.0;
+                if(discount)
+                {
+                    self.BTC_DiscountLabel.text = [NSString stringWithFormat:@"BTC Discount: %.0f%%", [bitCoinDiscount floatValue] * 100.0];
+                }
+                else
+                {
+                    [self hideDiscountLabel];
+                }
+            }
+            else
+            {
+                [self hideDiscountLabel];
+            }
+            [self setCategoriesAndName];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ABLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: get image URLs");
+        }];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: getting business details");
+    }];
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	[self.activityView startAnimating];
@@ -130,8 +214,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:@selector(Back:) fromObject:self];
 
     if (self.businessDetails)
         [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
@@ -157,7 +241,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 -(void)dealloc
 {
-	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
+//	[[DL_URLServer controller] cancelAllRequestsForDelegate:self];
 }
 
 -(void)setCategoriesAndName
@@ -421,144 +505,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 }
 
 #pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-	if(data)
-	{
-        if (DL_URLRequestStatus_Success == status)
-        {
-			if(object == imageURLs)
-			{
-				NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-				
-				//ABLog(2,@"Results download returned: %@", jsonString );
-				
-				NSError *myError;
-				NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-				NSDictionary *dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-				
-				details = [dict objectForKey:@"results"];
-                self.galleryView.galleryMode = UIPhotoGalleryModeImageRemote;
-                self.galleryView.photoItemContentMode = UIViewContentModeScaleAspectFill;
-                [self.galleryView layoutSubviews];
-
-				self.darkenImageView.hidden = NO;
-                [gallerySpinner stopAnimating];
-				
-				//create the distance ribbon
-				NSNumber *distance = [self.businessDetails objectForKey:@"distance"];
-				if(distance && distance != (id)[NSNull null])
-				{
-					[self setRibbon:[RibbonView metersToDistance:[distance floatValue]]];
-				}
-				
-				NSString *bitCoinDiscount = [self.businessDetails objectForKey:@"has_bitcoin_discount"];
-				if(bitCoinDiscount)
-				{
-					float discount = [bitCoinDiscount floatValue] * 100.0;
-					if(discount)
-					{
-						self.BTC_DiscountLabel.text = [NSString stringWithFormat:@"BTC Discount: %.0f%%", [bitCoinDiscount floatValue] * 100.0];
-					}
-					else
-					{
-						[self hideDiscountLabel];
-					}
-				}
-				else
-				{
-					[self hideDiscountLabel];
-				}
-                [self setCategoriesAndName];
-			}
-			else
-			{
-				if(object)
-				{
-				
-					if([object isKindOfClass:[UIImageView class]])
-					{
-						((UIImageView *)object).image = [UIImage imageWithData:data];
-						self.darkenImageView.hidden = NO;
-					}
-                    [gallerySpinner stopAnimating];
-					
-					//create the distance ribbon
-					NSString *distance = [self.businessDetails objectForKey:@"distance"];
-					if(distance && (distance != (id)[NSNull null]))
-					{
-						[self setRibbon:[RibbonView metersToDistance:[distance floatValue]]];
-					}
-					
-					NSString *bitCoinDiscount = [self.businessDetails objectForKey:@"has_bitcoin_discount"];
-					if(bitCoinDiscount)
-					{
-						float discount = [bitCoinDiscount floatValue] * 100.0;
-						if(discount)
-						{
-							self.BTC_DiscountLabel.text = [NSString stringWithFormat:@"BTC Discount: %.0f%%", [bitCoinDiscount floatValue] * 100.0];
-						}
-						else
-						{
-							[self hideDiscountLabel];
-						}
-					}
-					else
-					{
-						[self hideDiscountLabel];
-					}
-                    [self setCategoriesAndName];
-				}
-				else
-				{
-					NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-					
-					//ABLog(2,@"Results download returned: %@", jsonString );
-					
-					NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-					NSError *myError;
-					self.businessDetails = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-					
-					[self determineVisibleRows];
-					
-                    [MainViewController changeNavBarTitle:self title:[self.businessDetails objectForKey:@"name"]];
-					
-					NSArray *daysOfOperation = [self.businessDetails objectForKey:@"hours"];
-					
-					if(daysOfOperation.count)
-					{
-						hoursCellHeight = SINGLE_ROW_CELL_HEIGHT + 16 * [daysOfOperation count] - 16;
-					}
-					else
-					{
-						hoursCellHeight = SINGLE_ROW_CELL_HEIGHT;
-					}
-
-                    BD_CommonCell *commonCell = [self getCommonCellForTableView:self.tableView];
-
-                    //calculate height of details cell
-                    CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:commonCell.leftLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-                    detailsCellHeight = size.height + 28.0;
-
-                    [self.tableView reloadData];
-					
-					//Get image URLs
-					NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/photos/", SERVER_API, self.bizId];
-					//ABLog(2,@"Requesting: %@ for row: %i", requestURL, row);
-					[[DL_URLServer controller] issueRequestURL:requestURL
-													withParams:nil
-													withObject:imageURLs
-												  withDelegate:self
-											acceptableCacheAge:CACHE_24_HOURS
-												   cacheResult:YES];
-					
-				}
-			}
-		}
-    }
-	[self.activityView stopAnimating];
-}
 
 #pragma mark Table View delegates
 

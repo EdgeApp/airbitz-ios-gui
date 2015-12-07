@@ -199,7 +199,7 @@
 {
     UIAlertView *alert = [[UIAlertView alloc]
             initWithTitle:self.labelString
-                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelString, [Theme Singleton].passwordMismatchText]
+                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelString, passwordMismatchText]
                     delegate:nil
         cancelButtonTitle:@"OK"
         otherButtonTitles:nil];
@@ -306,7 +306,7 @@
                                componentsJoinedByString:@""];
         if (![newString isEqualToString:string])
         {
-            [MainViewController fadingAlert:[Theme Singleton].PINOnlyNumbersText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+            [MainViewController fadingAlert:PINOnlyNumbersText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
             return NO;
         }
     }

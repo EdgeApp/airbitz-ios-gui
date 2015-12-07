@@ -2879,7 +2879,7 @@
                                             <constraint firstAttribute="width" constant="186" id="8zF-39-Abo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
-                                        <color key="textColor" red="0.10501662890000001" green="0.4366606636" blue="0.69411670920000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.10588235294117647" green="0.43529411764705883" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="2" height="2"/>
@@ -3114,7 +3114,7 @@
                                     <action selector="Back" destination="zLx-xG-j1m" eventType="touchUpInside" id="Dko-mN-FWJ"/>
                                 </connections>
                             </button>
-                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZe-mr-te9" userLabel="Spinner View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZe-mr-te9" userLabel="Spinner View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jxB-Sf-1qJ">
@@ -3124,10 +3124,11 @@
                                             <constraint firstAttribute="height" constant="37" id="JSR-NO-KwI"/>
                                             <constraint firstAttribute="width" constant="37" id="TU2-kk-RMt"/>
                                         </constraints>
+                                        <color key="color" red="0.054901960784313725" green="0.2627450980392157" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="jxB-Sf-1qJ" secondAttribute="centerX" id="hVD-UI-kGy"/>
                                     <constraint firstAttribute="centerY" secondItem="jxB-Sf-1qJ" secondAttribute="centerY" id="lFU-4c-V7P"/>
@@ -3918,8 +3919,8 @@
         <image name="BLE_Logo.png" width="21" height="29"/>
         <image name="UIButtonBarRefresh.png" width="18" height="22"/>
         <image name="back_arrow.png" width="30" height="30"/>
-        <image name="background-fade.jpg" width="843" height="568"/>
-        <image name="background.jpg" width="843" height="568"/>
+        <image name="background-fade.jpg" width="826" height="550"/>
+        <image name="background.jpg" width="826" height="550"/>
         <image name="bd_cell_bottom.png" width="12" height="12"/>
         <image name="bd_cell_middle.png" width="6" height="6"/>
         <image name="bd_cell_top.png" width="12" height="12"/>

@@ -114,10 +114,10 @@
     _offsetTableOriginal = self.tableView.contentOffset;
 
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].categoriesText];
+    [MainViewController changeNavBarTitle:self title:categoriesText];
 
-    [MainViewController changeNavBar:self title:[Theme Singleton].cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Cancel) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:cancelButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Cancel) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 
 
 }

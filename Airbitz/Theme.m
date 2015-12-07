@@ -45,21 +45,11 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 {
     self = [super init];
 
-    self.appTitle = @"Airbitz";
-    self.appHomepage = @"https://airbitz.co";
-    self.supportEmail = @"support@airbitz.co";
-    self.appStoreLink = @"https://itunes.apple.com/us/app/airbitz/id843536046";
-    self.playStoreLink = @"https://play.google.com/store/apps/details?id=com.airbitz";
-    self.appLogoWhiteLink = @"https://airbitz.co/static/img/logo-nav.png";
-    self.appDesignedBy = NSLocalizedString(@"Designed and Built by Airbitz in",nil);
-    self.appCompanyLocation = NSLocalizedString(@"San Diego, California, USA", nil);
-
     //    self.denomination = 100000000;
     self.colorTextBright = [UIColor whiteColor];
-    self.colorTextDark = UIColorFromARGB(0xff0C578C);;
+    self.colorTextDark = UIColorFromARGB(0xff0C578C);
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
-    self.deleteAccountWarning = NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning");
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
     self.colorSendButton = self.colorButtonBlue;
@@ -86,71 +76,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     [self.colorsProfileIcons addObject:UIColorFromRGB(0x777777)];
 
     self.appFont = @"Lato-Regular";
-
-    self.backButtonText = NSLocalizedString(@"Back", @"Back button text on top left");
-    self.exitButtonText = NSLocalizedString(@"Exit", @"Exit button text on top left");
-    self.helpButtonText = NSLocalizedString(@"Help", @"Help button text on top right");
-    self.infoButtonText = NSLocalizedString(@"Info", @"Info button text on top right");
-    self.doneButtonText = NSLocalizedString(@"Done", @"Generic DONE button text");
-    self.cancelButtonText = NSLocalizedString(@"CANCEL", @"Generic CANCEL button text");
-    self.closeButtonText = NSLocalizedString(@"Close", @"Generic CLOSE button text");
-    self.exportButtonText = NSLocalizedString(@"Export", @"EXPORT button text for wallet export");
-    self.renameButtonText = NSLocalizedString(@"Rename", @"RENAME button text for wallet rename");
-    self.walletBalanceHeaderText = NSLocalizedString(@"TOTAL: ", @"Prefix of wallet balance dropdown header");
-    self.walletNameHeaderText = NSLocalizedString(@"Wallet: ", @"Prefix of wallet name on rename popup");
-    self.renameWalletWarningText = NSLocalizedString(@"Wallet name must have at least one character", nil);
-    self.transactionCellNoTransactionsText = NSLocalizedString(@"No Transactions", @"what to display when wallet has no transactions");
-    self.transactionCellNoTransactionsFoundText = NSLocalizedString(@"No Transactions Found", @"what to display when no transactions are found in search");
-    self.fiatText = NSLocalizedString(@"Fiat", @"Fiat");
-    self.walletHeaderButtonHelpText = NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test");
-    self.walletHasBeenArchivedText = NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived");
-    self.walletsPopupHelpText = NSLocalizedString(@"Tap and hold a wallet for additional options", nil);
-    self.selectWalletTransferPopupHeaderText = NSLocalizedString(@"▼ Choose a wallet to transfer funds to ▼", @"Header of popup in SendView from wallet to wallet transfer");
-    self.invalidAddressPopupText = NSLocalizedString(@"Invalid Bitcoin Address", nil);
-    self.enterBitcoinAddressPopupText= NSLocalizedString(@"Send to Bitcoin Address", nil);
-    self.enterBitcoinAddressPlaceholder                     = NSLocalizedString(@"Bitcoin Address or URI", nil);
-    self.enterPrivateKeyPopupText                           = NSLocalizedString(@"Sweep Funds From Private Key", nil);
-    self.enterPrivateKeyPlaceholder                         = NSLocalizedString(@"Bitcoin Private Key", nil);
-    self.smsText                                            = NSLocalizedString(@"SMS", @"text for textmessage/SMS");
-    self.emailText                                          = NSLocalizedString(@"Email", @"text for Email");
-    self.sendScreenHelpText                                 = NSLocalizedString(@"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below", nil);
-    self.creatingWalletText                                 = NSLocalizedString(@"Creating and securing wallet", nil);
-    self.createAccountAndTransferFundsText                  = NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil);
-    self.createPasswordForAccountText                       = NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil);
-    self.settingsText                                       = NSLocalizedString(@"Settings", nil);
-    self.categoriesText                                     = NSLocalizedString(@"Categories", nil);
-    self.signupText                                         = NSLocalizedString(@"Sign Up", nil);
-    self.changePasswordText                                 = NSLocalizedString(@"Change Password", nil);
-    self.changePINText                                      = NSLocalizedString(@"Change PIN", nil);
-    self.twoFactorText                                      = NSLocalizedString(@"Two Factor", nil);
-    self.importText                                         = NSLocalizedString(@"Import", nil);
-    self.buySellText                                        = NSLocalizedString(@"Buy/Sell Bitcoin", nil);
-    self.passwordRecoveryText                               = NSLocalizedString(@"Password Recovery", nil);
-    self.passwordMismatchText                               = NSLocalizedString(@"Password does not match re-entered password", @"");
-    self.defaultCurrencyInfoText                            = NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil);
-    self.touchIDPromptText                                  = NSLocalizedString(@"Touch to login user", @"Touch ID prompt text");
-    self.usePINText                                         = NSLocalizedString(@"Use PIN", @"Touch ID [Use PIN] button");
-    self.usePasswordText                                    = NSLocalizedString(@"Use Password", @"Touch ID [Use Password] button");
-    self.twofactorWarningText                               = NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable");
-    self.loadingWalletsText                                 = NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text");
-    self.loadingWalletsNewDeviceText                        = NSLocalizedString(@"This may take a few minutes as it is the first time logging into this device.", @"Loading Wallets alert text");
-    self.loadingTransactionsText                            = NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text");
-    self.synchronizingText                                  = NSLocalizedString(@"Synchronizing", @"Synchronizing text in confirmation textfield");
-    self.pendingText                                        = NSLocalizedString(@"Pending", @"Pending status in transaction list");
-    self.doubleSpendText                                    = NSLocalizedString(@"Warning: Double Spend", @"Double spend status in transaction list");
-    self.confirmationText                                   = NSLocalizedString(@"Confirmation", @"Num of confirmations in transaction list");
-    self.confirmationsText                                  = NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list");
-    self.confirmedText                                      = NSLocalizedString(@"Confirmed", @"Confirmed status in transaction list");
-    self.loadingText                                        = NSLocalizedString(@"Loading", @"Loading...");
-    self.uploadingLogText                                   = NSLocalizedString(@"Uploading logfile. Please wait...", @"Uploading logfile fading popup");
-    self.uploadSuccessfulText                               = NSLocalizedString(@"Upload Successful", @"Upload Successful fading popup");
-    self.uploadFailedText                                   = NSLocalizedString(@"Upload Failed", @"Upload Failed");
-    self.watcherClearedText                                 = NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text");
-    self.PINOnlyNumbersText                                 = NSLocalizedString(@"Only numbers allowed in PIN", @"");
-    self.scanQrToSendFundsText                              = NSLocalizedString(@"Scan QR to Send or Login with BitID", @"Text at top of Send screen");
-    self.scanQrToImportPrivateKeyOrGiftCard                 = NSLocalizedString(@"Scan QR to Import Private Key/Gift Card", @"Text at top of Import screen");
-
-//    self.                         = NSLocalizedString(@"", @"");
 
     self.sendRequestButtonDisabled = 0.4f;
 

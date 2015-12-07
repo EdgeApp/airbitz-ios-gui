@@ -51,9 +51,9 @@
 {
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:buySellText];
     _pluginTable.editing = NO;
 }
 
@@ -107,13 +107,17 @@
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
+    cell.text.textColor = plugin.textColor;
+    cell.imageView.image = [UIImage imageNamed:plugin.imageFile];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
  
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
     bgColorView.layer.masksToBounds = YES;
     cell.selectedBackgroundView = bgColorView;
+    cell.backgroundColor = plugin.backgroundColor;
     
     return cell;
 }
@@ -122,11 +126,11 @@
 {
     NSInteger row = [indexPath row];
     Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
-    [self launchPlugin:plugin];
+    [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider
+- (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri
 {
     Plugin *plugin = nil;
     for (Plugin *p in [Plugin getPlugins]) {
@@ -136,13 +140,13 @@
         }
     }
     if (plugin != nil) {
-        [self launchPlugin:plugin];
+        [self launchPlugin:plugin uri:uri];
         return YES;
     }
     return NO;
 }
 
-- (void)launchPlugin:(Plugin *)plugin
+- (void)launchPlugin:(Plugin *)plugin uri:(NSURL *)uri
 {
     if (_pluginViewController != nil) {
         [_pluginViewController.view removeFromSuperview];
@@ -153,6 +157,7 @@
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;
     _pluginViewController.plugin = plugin;
+    _pluginViewController.uri = uri;
     [Util animateController:_pluginViewController parentController:self];
 }
 
@@ -161,9 +166,9 @@
 - (void)PluginViewControllerDone:(PluginViewController *)controller
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:[Theme Singleton].buySellText];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBarTitle:self title:buySellText];
 ;
     [Util animateOut:controller parentController:self complete:^(void) {
         _pluginViewController = nil;
