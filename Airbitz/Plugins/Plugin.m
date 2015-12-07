@@ -33,9 +33,10 @@ static NSMutableArray *plugins;
         plugin.sourceFile = @"foldapp";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_coffee";
-        plugin.name = @"20% Off Starbucks";
+        plugin.name = @"Up to 20% Off on Starbucks";
         plugin.env = @{
                        @"API-TOKEN": FOLD_API_KEY,
+                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Starbucks",
                        };
         [plugins addObject:plugin];
@@ -47,9 +48,10 @@ static NSMutableArray *plugins;
         plugin.sourceFile = @"foldapp";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_target";
-        plugin.name = @"~15% Off on Target";
+        plugin.name = @"Up to 10% Off on Target";
         plugin.env = @{
                        @"API-TOKEN": FOLD_API_KEY,
+                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Target",
                        };
         [plugins addObject:plugin];
@@ -85,7 +87,7 @@ static NSMutableArray *plugins;
                         @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
                         @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
                         @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
-                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                         };
             [plugins addObject:plugin];
             
