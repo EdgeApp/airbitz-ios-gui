@@ -403,6 +403,10 @@ MainViewController *singleton;
         [_settingsViewController resetViews];
         _settingsViewController = nil;
     }
+    if (_buySellViewController) {
+        [_buySellViewController resetViews];
+        _buySellViewController = nil;
+    }
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
     _settingsViewController.delegate = self;

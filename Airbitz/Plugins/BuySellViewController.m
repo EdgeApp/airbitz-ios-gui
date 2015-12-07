@@ -161,6 +161,16 @@
     [Util animateController:_pluginViewController parentController:self];
 }
 
+- (void)resetViews
+{
+    if (_pluginViewController)
+    {
+        [_pluginViewController.view removeFromSuperview];
+        [_pluginViewController removeFromParentViewController];
+        _pluginViewController = nil;
+    }
+}
+
 #pragma mark - PluginViewControllerDelegate
 
 - (void)PluginViewControllerDone:(PluginViewController *)controller
