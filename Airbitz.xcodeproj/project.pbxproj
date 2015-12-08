@@ -1416,6 +1416,7 @@
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
+		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoDisclaimer.html; sourceTree = "<group>"; };
 		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -3252,6 +3253,7 @@
 				DA9ED7841BC61E670063DA07 /* BlurView.h */,
 				DA9ED7851BC61E670063DA07 /* BlurView.m */,
 				34644A774ED9B0786711E100 /* BrandStrings.h */,
+				DA1EB8241C168F2B0059734C /* BrandTheme.h */,
 				DA9ED7861BC61E670063DA07 /* ButtonSelectorView.h */,
 				DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */,
 				DA9ED7881BC61E670063DA07 /* ButtonSelectorView~iphone.xib */,
