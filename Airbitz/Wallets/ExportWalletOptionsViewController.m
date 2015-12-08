@@ -127,8 +127,8 @@ typedef enum eExportOption
 -(void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:[Theme Singleton].helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
     [self updateViews];
 }
@@ -159,7 +159,7 @@ typedef enum eExportOption
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
         {
             [FadingAlertView create:self.view
-                            message:[Theme Singleton].walletHasBeenArchivedText
+                            message:walletHasBeenArchivedText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
         }
     }

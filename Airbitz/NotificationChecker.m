@@ -8,7 +8,6 @@
 
 #import "NotificationChecker.h"
 #import "Server.h"
-#import "DL_URLServer.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
@@ -16,6 +15,7 @@
 #import "ABC.h"
 #import "CoreBridge.h"
 #import "Util.h"
+#import "MainViewController.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
 #define OTP_TIME                  @"otp_time"
@@ -26,10 +26,13 @@
 static BOOL bInitialized = NO;
 static NotificationChecker *singleton = nil;
 
-@interface NotificationChecker () <DL_URLRequestDelegate>
+@interface NotificationChecker ()
 {
     NSTimer *_notificationTimer;
 }
+
+@property (strong, nonatomic) AFHTTPRequestOperationManager         *afmanager;
+
 @end
 
 @implementation NotificationChecker
@@ -40,6 +43,8 @@ static NotificationChecker *singleton = nil;
     if (NO == bInitialized)
     {
         singleton = [[NotificationChecker alloc] init];
+        singleton.afmanager = [MainViewController createAFManager];
+
         bInitialized = YES;
         [singleton start];
     }
@@ -49,7 +54,7 @@ static NotificationChecker *singleton = nil;
 {
     if (YES == bInitialized)
     {
-        [[DL_URLServer controller] cancelAllRequestsForDelegate:singleton];
+//        [[DL_URLServer controller] cancelAllRequestsForDelegate:singleton];
         singleton = nil;
         bInitialized = NO;
     }
@@ -318,46 +323,35 @@ exit:
     build = [build stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%ld&ios_build=%@",
                              SERVER_API, (long)prevNotifID, build];
-    [[DL_URLServer controller] issueRequestURL:serverQuery
-                                    withParams:nil
-                                    withObject:nil
-                                  withDelegate:self
-                            acceptableCacheAge:60
-                                   cacheResult:YES];
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus: (tDL_URLRequestStatus)status resultData: (NSData *)data resultObj: (id)object
-{
-    NSString *jsonString = [[NSString alloc] initWithBytes: [data bytes] length: [data length] encoding: NSUTF8StringEncoding];
     
-    //    ABLog(2,@"Results download returned: %@", jsonString );
-    
-    NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
-    NSError *myError;
-    NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary: jsonData error: &myError];
-    
-    if ([dictFromServer objectForKey: @"results"] != (id)[NSNull null])
-    {
-        NSArray *notifsArray;
-        notifsArray = [[dictFromServer objectForKey:@"results"] copy];
+    [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSInteger highestNotifID = [LocalSettings controller].previousNotificationID;
-        for(NSDictionary *dict in notifsArray)
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        if ([results objectForKey: @"results"] != (id)[NSNull null])
         {
-            NSInteger notifID = [[dict objectForKey:@"id"] intValue];
-            if (highestNotifID < notifID)
+            NSArray *notifsArray;
+            notifsArray = [[results objectForKey:@"results"] copy];
+            
+            NSInteger highestNotifID = [LocalSettings controller].previousNotificationID;
+            for(NSDictionary *dict in notifsArray)
             {
-                highestNotifID = notifID;
+                NSInteger notifID = [[dict objectForKey:@"id"] intValue];
+                if (highestNotifID < notifID)
+                {
+                    highestNotifID = notifID;
+                }
+                [[LocalSettings controller].notifications addObject:dict];
             }
-            [[LocalSettings controller].notifications addObject:dict];
+            
+            [LocalSettings controller].previousNotificationID = highestNotifID;
+            [LocalSettings saveAll];
+            
         }
-        
-        [LocalSettings controller].previousNotificationID = highestNotifID;
-        [LocalSettings saveAll];
-        
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABLog(1, @"*** ERROR Connecting to Network: checkDirectoryNotifications");
+    }];
+    
 }
 
 @end

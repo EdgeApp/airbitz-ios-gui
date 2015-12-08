@@ -9,5 +9,6 @@
 @interface BuySellCell : CommonCell
 
 @property (nonatomic, weak) IBOutlet UILabel *text;
+@property (weak, nonatomic) IBOutlet UIImageView *buySellImage;
 
 @end

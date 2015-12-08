@@ -40,7 +40,7 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) bool reviewNotified;
-@property (nonatomic) bool disclaimerViewed;
+@property (nonatomic) bool bDisclaimerViewed;
 @property (nonatomic) NSDate *firstLoginTime;
 @property (nonatomic) NSInteger loginCount;
 @property (nonatomic) NSInteger pinLoginCount;
@@ -80,6 +80,7 @@
 - (void)resetPINLoginInvalidEntryCount;
 - (void)incPINorTouchIDLogin;
 - (void)loadLocalSettings:(tABC_AccountSettings *)pSettings;
+- (void)saveDisclaimerViewed;
 
 
 @end

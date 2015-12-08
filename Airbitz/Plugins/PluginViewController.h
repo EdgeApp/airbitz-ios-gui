@@ -12,6 +12,7 @@
 
 @property (assign) id<PluginViewControllerDelegate> delegate;
 @property (assign) Plugin *plugin;
+@property (assign) NSURL *uri;
 
 @end
 

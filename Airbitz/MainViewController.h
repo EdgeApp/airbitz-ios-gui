@@ -10,6 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AirbitzViewController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+
 
 typedef enum eNavBarSide
 {
@@ -24,10 +27,9 @@ typedef enum eNavBarSide
 
 @property (nonatomic, strong)        NSMutableDictionary    *dictImages; // images for the contacts and businesses
 @property (nonatomic, strong)        NSMutableDictionary    *dictAddresses; // addresses for the contacts and businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictThumbnailURLs; // urls for business thumbnails
+@property (nonatomic, strong)        NSMutableDictionary    *dictImageURLFromBizName; // urls for business thumbnails
 @property (nonatomic, strong)        NSMutableDictionary    *dictBizIds; // bizIds for the businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictBizImages; // images for businesses
-@property (nonatomic, strong)        NSMutableDictionary    *dictImageRequests;
+@property (nonatomic, strong)        NSMutableDictionary    *dictImageURLFromBizID;
 @property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
 
 + (MainViewController *)Singleton;
@@ -73,8 +75,7 @@ typedef enum eNavBarSide
 + (void)generateListOfContactNames;
 + (void)generateListOfNearBusinesses;
 
-
-
++ (AFHTTPRequestOperationManager *) createAFManager;
 
 + (void)fadingAlertHelpPopup:(NSString *)message;
 + (void)fadingAlert:(NSString *)message;

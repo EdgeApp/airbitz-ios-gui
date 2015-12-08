@@ -11,6 +11,7 @@
 @property (nonatomic)               tABC_SpendTarget        *pSpend;
 @property (nonatomic, strong)       Wallet                  *srcWallet;
 @property (nonatomic, strong)       Wallet                  *destWallet;
+@property (nonatomic)               long                    bizId;
 
 - (id)init;
 - (BOOL)newSpend:(NSString *)text error:(tABC_Error *)pError;

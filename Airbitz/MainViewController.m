@@ -34,7 +34,6 @@
 #import "AudioController.h"
 #import "FadingAlertView.h"
 #import "InfoView.h"
-#import "DL_URLServer.h"
 #import "NotificationChecker.h"
 #import "LocalSettings.h"
 #import "AirbitzViewController.h"
@@ -69,7 +68,7 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,DL_URLRequestDelegate,
+                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
@@ -104,6 +103,7 @@ typedef enum eAppMode
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
+
 }
 
 @property (weak, nonatomic) IBOutlet UIView *blurViewContainer;
@@ -117,6 +117,8 @@ typedef enum eAppMode
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundViewBlue;
 @property AirbitzViewController                  *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
+@property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
+
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -156,13 +158,11 @@ MainViewController *singleton;
     self.arrayContacts = nil;
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
-    self.dictThumbnailURLs = [[NSMutableDictionary alloc] init];
+    self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
-    self.dictBizImages = [[NSMutableDictionary alloc] init];
-    self.dictImageRequests = [[NSMutableDictionary alloc] init];
+    self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
-
-
+    
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 
     // resgister for transaction details screen complete notification
@@ -183,13 +183,19 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
-    [DL_URLServer initAll];
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
-    [[DL_URLServer controller] setHeaderRequestValue:token forKey: @"Authorization"];
-    [[DL_URLServer controller] setHeaderRequestValue:[LocalSettings controller].clientID forKey:@"X-Client-ID"];
-    [[DL_URLServer controller] verbose: SERVER_MESSAGES_TO_SHOW];
+
+    self.afmanager = [AFHTTPRequestOperationManager manager];
+    [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
+    [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
+    [self.afmanager.requestSerializer setTimeoutInterval:10];
     
     [NotificationChecker initAll];
+}
+
++ (AFHTTPRequestOperationManager *) createAFManager;
+{
+    return singleton.afmanager;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -214,29 +220,77 @@ MainViewController *singleton;
     // add our location
     [MainViewController addLocationToQuery:strURL];
     
-    // run the search
-    [MainViewController issueRequests:@{strURL : [NSNumber numberWithInt:RequestType_BusinessesNear]} ];
-}
+    [singleton.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        NSMutableArray *arrayBusinesses = singleton.arrayNearBusinesses;
+        NSArray *searchResultsArray = [results objectForKey:@"results"];
 
-+ (void)issueRequests:(NSDictionary *)dictRequest
-{
-    if (dictRequest)
-    {
-        // the requests are stored in a dictionary where the key is the URL and the value for the key is the object for callback
-        for (NSString *strKey in dictRequest)
+        if (searchResultsArray && searchResultsArray != (id)[NSNull null])
         {
-            id value = [dictRequest objectForKey:strKey];
-            
-            // run the search
-            NSString *strURL = [strKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            [[DL_URLServer controller] issueRequestURL:strURL
-                                            withParams:nil
-                                            withObject:value
-                                          withDelegate:singleton
-                                    acceptableCacheAge:CACHE_AGE_SECS
-                                           cacheResult:YES];
+            for (NSDictionary *dict in searchResultsArray)
+            {
+                NSString *strName = [dict objectForKey:@"name"];
+                if (strName && strName != (id)[NSNull null])
+                {
+                    [arrayBusinesses addObject:strName];
+                    
+                    // create the address
+                    NSMutableString *strAddress = [[NSMutableString alloc] init];
+                    NSString *strField = nil;
+                    if (nil != (strField = [dict objectForKey:@"address"]))
+                    {
+                        [strAddress appendString:strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"city"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"state"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
+                    }
+                    if (nil != (strField = [dict objectForKey:@"postalcode"]))
+                    {
+                        [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
+                    }
+                    if ([strAddress length])
+                    {
+                        [MainViewController Singleton].dictAddresses[[strName lowercaseString]] = strAddress;
+                    }
+                    
+                    // set the biz id if available
+                    NSNumber *numBizId = [dict objectForKey:@"bizId"];
+                    if (numBizId && numBizId != (id)[NSNull null])
+                    {
+                        [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
+                    }
+                    
+                    // check if we can get a thumbnail
+                    NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
+                    if (dictProfileImage && dictProfileImage != (id)[NSNull null])
+                    {
+                        NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
+                        if (strThumbnail && strThumbnail != (id)[NSNull null])
+                        {
+                            //ABLog(2,@"thumbnail path: %@", strThumbnail);
+                            [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
+                        }
+                    }
+                }
+            }
+            // Send Notification of updated contacts
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CONTACTS_CHANGED
+                                                                object:nil
+                                                              userInfo:nil];
         }
-    }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSInteger statusCode = operation.response.statusCode;
+        
+        ABLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
+    }];
+    
 }
 
 + (void)addLocationToQuery:(NSMutableString *)query
@@ -253,94 +307,6 @@ MainViewController *singleton;
     else
     {
         //ABLog(2,@"string already contains ll");
-    }
-}
-
-#pragma mark - DLURLServer Callbacks
-
-- (void)onDL_URLRequestCompleteWithStatus:(tDL_URLRequestStatus)status resultData:(NSData *)data resultObj:(id)object
-{
-    if (DL_URLRequestStatus_Success == status)
-    {
-        // if this is a business listing query
-        if ([object isKindOfClass:[NSNumber class]])
-        {
-            NSNumber *numRequestType = (NSNumber *)object;
-            tRequestType requestType = (tRequestType) [numRequestType intValue];
-
-            NSString *jsonString = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
-
-            //ABLog(2,@"Results download returned: %@", jsonString );
-
-            NSData *jsonData = [jsonString dataUsingEncoding:NSUTF32BigEndianStringEncoding];
-            NSError *myError;
-            NSDictionary *dictFromServer = [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&myError];
-
-            NSArray *searchResultsArray = [dictFromServer objectForKey:@"results"];
-            if (searchResultsArray && searchResultsArray != (id)[NSNull null])
-            {
-                if (requestType == RequestType_BusinessesNear)
-                {
-                    NSMutableArray *arrayBusinesses = self.arrayNearBusinesses;
-
-                    for (NSDictionary *dict in searchResultsArray)
-                    {
-                        NSString *strName = [dict objectForKey:@"name"];
-                        if (strName && strName != (id)[NSNull null])
-                        {
-                            [arrayBusinesses addObject:strName];
-
-                            // create the address
-                            NSMutableString *strAddress = [[NSMutableString alloc] init];
-                            NSString *strField = nil;
-                            if (nil != (strField = [dict objectForKey:@"address"]))
-                            {
-                                [strAddress appendString:strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"city"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"state"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @", " : @""), strField];
-                            }
-                            if (nil != (strField = [dict objectForKey:@"postalcode"]))
-                            {
-                                [strAddress appendFormat:@"%@%@", ([strAddress length] ? @" " : @""), strField];
-                            }
-                            if ([strAddress length])
-                            {
-                                [MainViewController Singleton].dictAddresses[[strName lowercaseString]] = strAddress;
-                            }
-
-                            // set the biz id if available
-                            NSNumber *numBizId = [dict objectForKey:@"bizId"];
-                            if (numBizId && numBizId != (id)[NSNull null])
-                            {
-                                [MainViewController Singleton].dictBizIds[[strName lowercaseString]] = @([numBizId intValue]);
-                            }
-
-                            // check if we can get a thumbnail
-                            NSDictionary *dictProfileImage = [dict objectForKey:@"square_image"];
-                            if (dictProfileImage && dictProfileImage != (id)[NSNull null])
-                            {
-                                NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
-                                if (strThumbnail && strThumbnail != (id)[NSNull null])
-                                {
-                                    //ABLog(2,@"thumbnail path: %@", strThumbnail);
-                                    [MainViewController Singleton].dictThumbnailURLs[[strName lowercaseString]] = strThumbnail;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Send Notification of updated contacts
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CONTACTS_CHANGED
-                                                                    object:nil userInfo:nil];
-            }
-        }
     }
 }
 
@@ -436,6 +402,10 @@ MainViewController *singleton;
     if (_settingsViewController) {
         [_settingsViewController resetViews];
         _settingsViewController = nil;
+    }
+    if (_buySellViewController) {
+        [_buySellViewController resetViews];
+        _buySellViewController = nil;
     }
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
@@ -1059,7 +1029,7 @@ MainViewController *singleton;
 
     if (bNewAccount) {
         [FadingAlertView create:self.view
-                        message:[Theme Singleton].creatingWalletText
+                        message:creatingWalletText
                        holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         [CoreBridge setupNewAccount];
     }
@@ -1119,7 +1089,7 @@ MainViewController *singleton;
     if ([CoreBridge passwordExists]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
-
+    
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
@@ -1179,13 +1149,13 @@ MainViewController *singleton;
 
 - (void)showPasswordCheckSkip
 {
-    [MainViewController fadingAlertHelpPopup:[Theme Singleton].createAccountAndTransferFundsText];
+    [MainViewController fadingAlertHelpPopup:createAccountAndTransferFundsText];
 }
 
 - (void)showPasswordSetAlert
 {
     NSString *title = NSLocalizedString(@"No password set", nil);
-    NSString *message = [Theme Singleton].createPasswordForAccountText;
+    NSString *message = createPasswordForAccountText;
     // show password reminder test
     _passwordSetAlert = [[UIAlertView alloc]
             initWithTitle:title
@@ -1217,13 +1187,13 @@ MainViewController *singleton;
 
 
     NSString *str = NSLocalizedString(@"How are you liking %@?", @"Like Airbitz popup");
-    NSString *str2 = [NSString stringWithFormat:str, [Theme Singleton].appTitle];
+    NSString *str2 = [NSString stringWithFormat:str, appTitle];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if([User offerUserReview]) {
             _userReviewAlert = [[UIAlertView alloc]
-                                    initWithTitle:[Theme Singleton].appTitle
+                                    initWithTitle:appTitle
                                     message:str2
                                     delegate:self
                                     cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
@@ -1489,8 +1459,8 @@ MainViewController *singleton;
     if ([MFMailComposeViewController canSendMail])
     {
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
-        [mailComposer setToRecipients:[NSArray arrayWithObjects:[Theme Singleton].supportEmail, nil]];
-        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", [Theme Singleton].appTitle];
+        [mailComposer setToRecipients:[NSArray arrayWithObjects:supportEmail, nil]];
+        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", appTitle];
         [mailComposer setSubject:NSLocalizedString(subject, nil)];
         mailComposer.mailComposeDelegate = self;
         [self presentViewController:mailComposer animated:YES completion:nil];
@@ -1510,7 +1480,7 @@ MainViewController *singleton;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = [Theme Singleton].appTitle;
+    NSString *strTitle = appTitle;
     NSString *strMsg = nil;
     
     switch (result)
@@ -1642,7 +1612,7 @@ MainViewController *singleton;
 
 - (void)switchToSettingsView:(UIViewController *)controller
 {
-    [MainViewController animateSwapViewControllers:_settingsViewController out:_selectedViewController];
+    [MainViewController animateSwapViewControllers:controller out:_selectedViewController];
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
 }
@@ -1661,9 +1631,9 @@ MainViewController *singleton;
     [_settingsViewController bringUpRecoveryQuestionsView];
 }
 
-- (void)launchBuySell:(NSString *)country provider:(NSString *)provider
+- (void)launchBuySell:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri
 {
-    if ([_buySellViewController launchPluginByCountry:country provider:provider]) {
+    if ([_buySellViewController launchPluginByCountry:country provider:provider uri:uri]) {
         [self switchToSettingsView:_buySellViewController];
     } else {
         // Notify user no match!
@@ -1697,7 +1667,7 @@ MainViewController *singleton;
     if ([uri.scheme isEqualToString:@"airbitz"] && [uri.host isEqualToString:@"plugin"]) {
         NSArray *cs = [uri.path pathComponents];
         if ([cs count] == 3) {
-            [self launchBuySell:cs[2] provider:cs[1]];
+            [self launchBuySell:cs[2] provider:cs[1] uri:uri];
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:@"airbitz"] || [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {
@@ -1871,7 +1841,7 @@ MainViewController *singleton;
 
     [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
-                    message:[NSString stringWithFormat:str, [Theme Singleton].appTitle]
+                    message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
                 [[User Singleton] clear];

@@ -27,11 +27,13 @@
 @property (nonatomic, strong) NSArray                   *arrayCurrencyCodes;
 @property (nonatomic, strong) NSArray                   *arrayCurrencyNums;
 @property (nonatomic, strong) NSArray                   *arrayCurrencyStrings;
+@property (nonatomic, strong) NSArray                   *arrayCategories;
 @property (nonatomic)         int                       currentWalletID;
 @property (nonatomic)         BOOL                      bAllWalletsLoaded;
 @property (nonatomic)         int                       numWalletsLoaded;
 @property (nonatomic)         int                       numTotalWallets;
 @property (nonatomic)         int                       currencyCount;
+@property (nonatomic)         int                       numCategories;
 
 
 + (CoreBridge *)Singleton;
@@ -59,6 +61,10 @@
 + (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
 + (long) saveLogoutDate;
 + (BOOL)didLoginExpire:(NSString *)username;
++ (void)addCategory:(NSString *)strCategory;
++ (void)loadCategories;
++ (void)saveCategories:(NSMutableArray *)saveArrayCategories;
+
 
 + (void)updateWidgetQRCode;
 

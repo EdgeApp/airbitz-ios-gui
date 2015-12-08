@@ -120,13 +120,13 @@ void abDebugLog(int level, NSString *statement) {
                     nil];
 
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
-            [Theme Singleton].appTitle,
-            [Theme Singleton].appStoreLink,
-            [Theme Singleton].playStoreLink,
-            [Theme Singleton].appHomepage,
-            [Theme Singleton].appLogoWhiteLink,
-            [Theme Singleton].appDesignedBy,
-            [Theme Singleton].appCompanyLocation,
+            appTitle,
+            appStoreLink,
+            playStoreLink,
+            appHomepage,
+            appLogoWhiteLink,
+            appDesignedBy,
+            appCompanyLocation,
             versionbuild,
                     nil];
 

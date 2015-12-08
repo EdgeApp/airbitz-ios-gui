@@ -93,10 +93,11 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
-@property (nonatomic, weak) IBOutlet PickerTextView   *usernameSelector;
-@property (nonatomic, strong) NSArray   *arrayAccounts;
-@property (nonatomic, strong) NSArray   *otherAccounts;
-@property (weak, nonatomic) IBOutlet UIButton *buttonOutsideTap;
+@property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
+@property (nonatomic, strong)           NSArray             *arrayAccounts;
+@property (nonatomic, strong)           NSArray             *otherAccounts;
+@property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
+@property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
 
 @end
 
@@ -146,16 +147,10 @@ static BOOL bInitialized = false;
         }
     }
 
-    #if HARD_CODED_LOGIN
-    
-    self.usernameSelection.textField.text = HARD_CODED_LOGIN_NAME;
-    self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
-    #endif
-
     // set up the specifics on our picker text view
     self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
     self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
-    self.usernameSelector.textField.font = [UIFont systemFontOfSize:16];
+    self.usernameSelector.textField.font = [UIFont fontWithName:AppFont size:16.0];
     self.usernameSelector.textField.clearButtonMode = UITextFieldViewModeNever;
     self.usernameSelector.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.usernameSelector.textField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -169,7 +164,7 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.textLabel.layer.shadowRadius = 3.0f;
     self.PINusernameSelector.textLabel.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.textLabel.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.textLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
     self.PINusernameSelector.textLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.swipeText.layer.shadowRadius = 3.0f;
@@ -178,22 +173,23 @@ static BOOL bInitialized = false;
     self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
     self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    self.titleText.layer.shadowRadius = 3.0f;
+    self.titleText.layer.shadowRadius = LoginTitleTextShadowRadius;
     self.titleText.layer.shadowOpacity = 1.0f;
     self.titleText.layer.masksToBounds = NO;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.titleText.textColor = ColorLoginTitleText;
 
-    self.PINusernameSelector.button.layer.shadowRadius = 3.0f;
+    self.PINusernameSelector.button.layer.shadowRadius = PinEntryTextShadowRadius;
     self.PINusernameSelector.button.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.button.layer.masksToBounds = NO;
-    self.PINusernameSelector.button.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.PINusernameSelector.button.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
     self.PINusernameSelector.button.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
     self.forgotPassworddButton.layer.masksToBounds = NO;
-    self.forgotPassworddButton.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
     self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", @"Username");
@@ -331,7 +327,7 @@ typedef enum eReloginState
         [self.usernameSelector.textField resignFirstResponder];
         [self.PINCodeView resignFirstResponder];
 
-        [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
+        self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
     else
     {
@@ -344,6 +340,10 @@ typedef enum eReloginState
 - (void) InfoViewFinished:(InfoView *)infoView
 {
     [infoView removeFromSuperview];
+    if (infoView == self.disclaimerInfoView)
+    {
+        [[User Singleton] saveDisclaimerViewed];
+    }
     if (bPINModeEnabled)
         [self.PINCodeView becomeFirstResponder];
     else
@@ -355,6 +355,14 @@ typedef enum eReloginState
 - (void)autoReloginOrTouchIDIfPossible
 {
     _bUsedTouchIDToLogin = NO;
+    
+    if (HARD_CODED_LOGIN) {
+        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
+        self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
+        [self showSpinner:YES];
+        [self SignIn];
+        return;
+    }
     
     if (! [Keychain bHasSecureEnclave] ) return;
 
@@ -394,11 +402,11 @@ typedef enum eReloginState
     {
         if (bUseTouchID && !bRelogin)
         {
-            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",[Theme Singleton].touchIDPromptText, username];
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
             NSString *fallbackString;
 
             if (reloginState == RELOGIN_USE_PASSWORD)
-                fallbackString = [Theme Singleton].usePasswordText;
+                fallbackString = usePasswordText;
 
             if ([Keychain authenticateTouchID:prompt fallbackString:fallbackString]) {
                 bRelogin = YES;
@@ -508,7 +516,6 @@ typedef enum eReloginState
 - (void)setUsernameText:(NSString *)username
 {
     // Update non-PIN username
-#if !HARD_CODED_LOGIN
     if (username && 0 < username.length)
     {
         //
@@ -517,18 +524,17 @@ typedef enum eReloginState
         UIFont *boldFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIColor *boldColor = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
-        UIColor *regularColor = [UIColor grayColor];
         NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
                            username];
         // Define general attributes like color and fonts for the entire text
-        NSDictionary *attr = @{NSForegroundColorAttributeName:regularColor,
+        NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
                                NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
         NSRange usernameTextRange = [title rangeOfString:username];
-        [attributedText setAttributes:@{NSForegroundColorAttributeName:boldColor,
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
         [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
@@ -539,7 +545,6 @@ typedef enum eReloginState
         self.usernameSelector.textField.text = username;
     }
     self.passwordTextField.text = [User Singleton].password;
-#endif
 
 }
 
@@ -1315,8 +1320,7 @@ typedef enum eReloginState
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
-                       string];
+    NSString *message = [NSString stringWithFormat:deleteAccountWarning, string];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:NSLocalizedString(@"Delete Account", nil)
                           message:NSLocalizedString(message, nil)
@@ -1526,7 +1530,7 @@ typedef enum eReloginState
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
     _account = string;
-    NSString *message = [NSString stringWithFormat:[Theme Singleton].deleteAccountWarning,
+    NSString *message = [NSString stringWithFormat:deleteAccountWarning,
                                                    string];
     UIAlertView *alert = [[UIAlertView alloc]
             initWithTitle:NSLocalizedString(@"Delete Account", @"Delete Account")
