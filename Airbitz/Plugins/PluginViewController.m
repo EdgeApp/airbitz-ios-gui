@@ -85,7 +85,8 @@ static const NSString *PROTOCOL = @"bridge://";
                         @"exit":NSStringFromSelector(@selector(uiExit:)),
                @"navStackClear":NSStringFromSelector(@selector(navStackClear:)),
                 @"navStackPush":NSStringFromSelector(@selector(navStackPush:)),
-                 @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
+                 @"navStackPop":NSStringFromSelector(@selector(navStackPop:)),
+              @"launchExternal":NSStringFromSelector(@selector(launchExternal:))
     };
 
     [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
@@ -799,6 +800,17 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
 
     [_navStack removeLastObject];
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
+- (void)launchExternal:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    NSURL* url = [[NSURL alloc] initWithString:[args objectForKey:@"uri"]];
+    [[UIApplication sharedApplication] openURL:url];
+
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 
