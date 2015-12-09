@@ -943,7 +943,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
+    // [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
