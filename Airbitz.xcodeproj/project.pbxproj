@@ -493,6 +493,8 @@
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA42F1071C03D63800CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA42F1081C03D63900CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
+		DA4B6AFE1C236E8A00BC51DA /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
+		DA4B6B031C236E8D00BC51DA /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
@@ -4363,6 +4365,7 @@
 				DA10BDAE1BFFA8770086AD8B /* logo@2x.png in Resources */,
 				DA10BCEB1BFF9E330086AD8B /* icon_directory@2x.png in Resources */,
 				DA10BCEC1BFF9E330086AD8B /* BLE_photo@2x.png in Resources */,
+				DA4B6B031C236E8D00BC51DA /* clevercoin.html in Resources */,
 				DA10BCED1BFF9E330086AD8B /* swipe-arrow@2x.png in Resources */,
 				DA10BCEE1BFF9E330086AD8B /* bd_icon_share@2x.png in Resources */,
 				DA10BCF01BFF9E330086AD8B /* BalanceView~iphone.xib in Resources */,
@@ -4413,6 +4416,7 @@
 				DA10BD1F1BFF9E330086AD8B /* btn_add@2x.png in Resources */,
 				DA10BD201BFF9E330086AD8B /* icon_logout.png in Resources */,
 				DA10BD211BFF9E330086AD8B /* Plugins.storyboard in Resources */,
+				DA4B6AFE1C236E8A00BC51DA /* foldapp.html in Resources */,
 				DA10BD221BFF9E330086AD8B /* Images.xcassets in Resources */,
 				DA10BD231BFF9E330086AD8B /* transactionDetails.html in Resources */,
 				DA10BD241BFF9E330086AD8B /* icon_settings@3x.png in Resources */,
