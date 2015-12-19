@@ -495,6 +495,10 @@
 		DA42F1081C03D63900CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA4B6AFE1C236E8A00BC51DA /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA4B6B031C236E8D00BC51DA /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
+		DA5D69701C24E3AA0090D5FA /* plugin_icon_coffee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */; };
+		DA5D69711C24E3AA0090D5FA /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
+		DA5D69721C24E3AA0090D5FA /* plugin_icon_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */; };
+		DA5D69731C24E3AA0090D5FA /* plugin_icon_usd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01231C111950008702AB /* plugin_icon_usd@2x.png */; };
 		DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
@@ -4248,6 +4252,7 @@
 				DA10BC781BFF9E330086AD8B /* icon_settings_dark@2x.png in Resources */,
 				DA10BC791BFF9E330086AD8B /* (null) in Resources */,
 				DA10BC7A1BFF9E330086AD8B /* bd_sliderbubble@2x.png in Resources */,
+				DA5D69731C24E3AA0090D5FA /* plugin_icon_usd@2x.png in Resources */,
 				DA10BC7B1BFF9E330086AD8B /* (null) in Resources */,
 				DA10BC7C1BFF9E330086AD8B /* (null) in Resources */,
 				DA10BC7D1BFF9E330086AD8B /* icon_category_restaurants@3x.png in Resources */,
@@ -4292,6 +4297,7 @@
 				DA10BCA51BFF9E330086AD8B /* PopupPickerView.xib in Resources */,
 				DA10BCA61BFF9E330086AD8B /* icon_wallet.png in Resources */,
 				DA10BCA71BFF9E330086AD8B /* icon_request.png in Resources */,
+				DA5D69721C24E3AA0090D5FA /* plugin_icon_target@2x.png in Resources */,
 				DA10BCA81BFF9E330086AD8B /* (null) in Resources */,
 				DA10BCA91BFF9E330086AD8B /* icon_category_atm.png in Resources */,
 				DA10BCAA1BFF9E330086AD8B /* icon_transactions@3x.png in Resources */,
@@ -4372,6 +4378,7 @@
 				DA10BCF11BFF9E330086AD8B /* icon_more.png in Resources */,
 				DA10BCF21BFF9E330086AD8B /* btn_close@2x.png in Resources */,
 				DA10BCF41BFF9E330086AD8B /* icon_directory.png in Resources */,
+				DA5D69711C24E3AA0090D5FA /* plugin_icon_euro@2x.png in Resources */,
 				DA10BCF51BFF9E330086AD8B /* icon_category_restaurants.png in Resources */,
 				DA10BCF61BFF9E330086AD8B /* icon_wallet_dark.png in Resources */,
 				DA10BCF71BFF9E330086AD8B /* WalletHeaderView~iphone.xib in Resources */,
@@ -4459,6 +4466,7 @@
 				DA10BD481BFF9E330086AD8B /* WalletExportQuicken.QIF in Resources */,
 				DA10BD491BFF9E330086AD8B /* (null) in Resources */,
 				DA10BD4A1BFF9E330086AD8B /* FadingAlertViewNew.xib in Resources */,
+				DA5D69701C24E3AA0090D5FA /* plugin_icon_coffee@2x.png in Resources */,
 				DA10BD4B1BFF9E330086AD8B /* BitcoinSent.mp3 in Resources */,
 				DA10BD4C1BFF9E330086AD8B /* QR-bracket.png in Resources */,
 				DA10BD4D1BFF9E330086AD8B /* bitCoinAnnotation@2x.png in Resources */,
