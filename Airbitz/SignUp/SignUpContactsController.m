@@ -5,8 +5,17 @@
 
 #import <AddressBookUI/AddressBookUI.h>
 #import "SignUpContactsController.h"
+#import "Util.h"
+
+@interface SignUpContactsController ()
+{
+}
+@property (weak, nonatomic) IBOutlet UILabel *infoText;
+
+@end
 
 @implementation SignUpContactsController
+
 
 
 - (IBAction)next
@@ -22,5 +31,13 @@
 
     [self.manager next];
 }
+
+- (void)viewDidLoad
+{
+    NSString *tempText = signupContactsText;
+    [Util replaceHtmlTags:&tempText];
+    self.infoText.text = tempText;
+}
+
 
 @end
