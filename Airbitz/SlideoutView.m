@@ -23,6 +23,7 @@
 {
 //    CGRect                      _originalSlideoutFrame;
     BOOL                        _open;
+    BOOL                        _initialized;
     NSString                    *_account;
     FadingAlertView             *_fadingAlert;
     UIButton                    *_blockingButton;
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
+@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
 
 @end
 
@@ -57,6 +59,7 @@
 
     v->_parentView = parentView;
     v->_open = NO;
+    v->_initialized = NO;
 
     UIColor *back = [Theme Singleton].colorBackgroundHighlight;
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
@@ -64,6 +67,7 @@
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_walletsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+
     return v;
 }
 
@@ -99,6 +103,14 @@
 
 - (void)showSlideout:(BOOL)show
 {
+    if (!_initialized)
+    {
+        NSString *tempText = importPrivateKeyText;
+        [Util replaceHtmlTags:&tempText];
+        self.importPrivateKeyLabel.text = tempText;
+        _initialized = YES;
+    }
+    
     if ([User isLoggedIn])
     {
         if (show)
