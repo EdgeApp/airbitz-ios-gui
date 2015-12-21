@@ -72,3 +72,7 @@
 #define PINOnlyNumbersText                          NSLocalizedString(@"Only numbers allowed in PIN", @"")
 #define scanQrToSendFundsText                       NSLocalizedString(@"Scan QR to Send or Login with BitID", @"Text at top of Send screen")
 #define scanQrToImportPrivateKeyOrGiftCard          NSLocalizedString(@"Scan QR to Import Private Key/Gift Card", @"Text at top of Scan Screen")
+#define signupUsernameText                          NSLocalizedString(@"This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.", "Username Signup screen info text")
+#define signupCameraText                            NSLocalizedString(@"You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.",@"Camera signup screen")
+#define signupContactsText                          NSLocalizedString(@"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.",@"Contacts signup screen")
+
