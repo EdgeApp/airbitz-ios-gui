@@ -76,4 +76,5 @@
 #define signupCameraText                            NSLocalizedString(@"You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.",@"Camera signup screen")
 #define signupContactsText                          NSLocalizedString(@"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.",@"Contacts signup screen")
 #define importPrivateKeyText                        NSLocalizedString(@"IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)", @"Slideout menu import private key text")
+#define bitcoinWalletTransactionsText               NSLocalizedString(@"Bitcoin Wallet Transactions", @"Export wallet transactions email subject line")
 

@@ -1708,7 +1708,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = NSLocalizedString(@"Airbitz", nil);
+    NSString *strTitle = NSLocalizedString(appTitle, nil);
     NSString *strMsg = nil;
 
     switch (result)
