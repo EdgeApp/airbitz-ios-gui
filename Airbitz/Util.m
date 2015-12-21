@@ -112,10 +112,12 @@ void abDebugLog(int level, NSString *statement) {
             @"[[abtag APP_TITLE]]",
             @"[[abtag APP_STORE_LINK]]",
             @"[[abtag PLAY_STORE_LINK]]",
+            @"[[abtag APP_DOWNLOAD_LINK]]",
             @"[[abtag APP_HOMEPAGE]]",
             @"[[abtag APP_LOGO_WHITE_LINK]]",
             @"[[abtag APP_DESIGNED_BY]]",
             @"[[abtag APP_COMPANY_LOCATION]]",
+            @"[[abtag APP_SUPPORT_EMAIL]]",
             @"[[abtag APP_VERSION]]",
                     nil];
 
@@ -123,10 +125,12 @@ void abDebugLog(int level, NSString *statement) {
             appTitle,
             appStoreLink,
             playStoreLink,
+            appDownloadLink,
             appHomepage,
             appLogoWhiteLink,
             appDesignedBy,
             appCompanyLocation,
+            supportEmail,
             versionbuild,
                     nil];
 
