@@ -1408,7 +1408,7 @@ MainViewController *singleton;
         if(buttonIndex == 0) // No, send an email to support
         {
             _userReviewNOAlert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                  initWithTitle:appTitle
                                   message:NSLocalizedString(@"Would you like to send us some feedback?", nil)
                                   delegate:self
                                   cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
@@ -1418,7 +1418,7 @@ MainViewController *singleton;
         else if (buttonIndex == 1) // Yes, launch userReviewOKAlert
         {
             _userReviewOKAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Airbitz", nil)
+                                initWithTitle:appTitle
                                 message:NSLocalizedString(@"Would you like to write a review in the App store?", nil)
                                 delegate:self
                                 cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
@@ -1437,7 +1437,7 @@ MainViewController *singleton;
     {
         if(buttonIndex == 1)
         {
-            NSString *iTunesLink = @"https://itunes.apple.com/us/app/bitcoin-wallet-map-directory/id843536046?mt=8";
+            NSString *iTunesLink = appStoreLink;
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
         }
     }
