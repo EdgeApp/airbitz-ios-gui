@@ -25,6 +25,17 @@
 #define IS_MIN_IPHONE6_PLUS ([[UIScreen mainScreen] bounds].size.height >= 736)
 #define IS_MIN_IPAD_MINI ([[UIScreen mainScreen] bounds].size.height > 737)
 
+#ifdef AIRBITZ_DEVELOP
+#define AIRBITZ_URI_PREFIX @"airbitz-develop"
+#endif
+
+#ifdef AIRBITZ_TESTNET
+#define AIRBITZ_URI_PREFIX @"airbitz-testnet"
+#endif
+
+#ifndef AIRBITZ_URI_PREFIX
+#define AIRBITZ_URI_PREFIX @"airbitz"
+#endif
 
 typedef NS_ENUM(NSUInteger, ImportDataModel) {
     kWIF,

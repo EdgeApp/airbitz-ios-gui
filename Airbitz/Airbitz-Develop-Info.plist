@@ -20,6 +20,19 @@
 	<string>99.99.99</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.airbitz.airbitz</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>airbitz-develop</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>99999999-99</string>
 	<key>LSRequiresIPhoneOS</key>

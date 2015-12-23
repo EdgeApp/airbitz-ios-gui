@@ -6,6 +6,7 @@
 #import "Plugin.h"
 #import "Config.h"
 #import "ABC.h"
+#import "CommonTypes.h"
 
 @interface Plugin ()
 @end
@@ -67,7 +68,7 @@ static NSMutableArray *plugins;
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-                       @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/glidera/%@/", plugin.country],
+                       @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", AIRBITZ_URI_PREFIX, plugin.country],
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        };
         [plugins addObject:plugin];
@@ -82,7 +83,7 @@ static NSMutableArray *plugins;
         plugin.name = @"Buy Bitcoin (Euro)";
         plugin.env = @{
                     @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                    @"REDIRECT_URI": [NSString stringWithFormat:@"airbitz://plugin/clevercoin/%@/", plugin.country],
+                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
                     @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
                     @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
                     @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
