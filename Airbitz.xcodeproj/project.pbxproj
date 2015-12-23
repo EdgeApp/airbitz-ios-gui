@@ -5061,7 +5061,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
-				PROVISIONING_PROFILE = "0da6bd46-b3d2-4558-92ce-d2fe4832878a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -5145,7 +5145,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
-				PROVISIONING_PROFILE = "36c63d35-c64f-416b-8e7e-1cecd1571370";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
