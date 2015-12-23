@@ -21,8 +21,10 @@ void abDebugLog(int level, NSString *statement) {
             [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
         }
 
-        printf("%s\n",[[NSString stringWithFormat:@"<%@> %@",
-                                                  [timeStampFormat stringFromDate:[NSDate date]],statement] UTF8String]);
+        NSString *tempStr = [NSString stringWithFormat:@"<%@> %@",
+                              [timeStampFormat stringFromDate:[NSDate date]],statement];
+        
+        ABC_Log([tempStr UTF8String]);
     }
 }
 
