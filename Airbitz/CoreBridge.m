@@ -2717,6 +2717,35 @@ static BOOL bOtpError = NO;
     return bitid;
 }
 
++ (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
+{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
+    
+    
+    NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+    ABC_Log([[NSString stringWithFormat:@"User Comment:%@", userText] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform:%@", [[Theme Singleton] platform]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform String:%@", [[Theme Singleton] platformString]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"OS Version:%d.%d.%d", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Airbitz Version:%@", versionbuild] UTF8String]);
+    
+    [CoreBridge postToMiscQueue:^{
+        tABC_Error error;
+        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABC_CC_Ok == error.code) {
+                if (cb) cb();
+            } else {
+                if (cberror) cberror();
+            }
+        });
+    }];
+}
+
+
+
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;

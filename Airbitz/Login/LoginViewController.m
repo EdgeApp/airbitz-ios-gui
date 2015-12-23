@@ -66,6 +66,7 @@ typedef enum eLoginMode
     UIAlertView                     *_enableTouchIDAlertView;
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
+    UIAlertView                     *_uploadLogAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
 
@@ -280,31 +281,16 @@ static BOOL bInitialized = false;
 }
 
 - (void)uploadLog {
-    _spinnerView.hidden = NO;
-    [_logoImage setUserInteractionEnabled:NO];
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error error;
-        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            if (ABC_CC_Ok == error.code) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Succeeded"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            }
-            [_logoImage setUserInteractionEnabled:YES];
-            _spinnerView.hidden = YES;
-        });
-    }];
+    NSString *title = NSLocalizedString(@"Upload Log File", nil);
+    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    // show password reminder test
+    _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"Upload Log", nil];
+    _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [_uploadLogAlert show];
 }
 
 typedef enum eReloginState
@@ -1445,6 +1431,36 @@ typedef enum eReloginState
         else if (buttonIndex == 1)
         {
             [self showPasswordCheckAlertForTouchID];
+        }
+    }
+    else if (_uploadLogAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            [_logoImage setUserInteractionEnabled:NO];
+            _spinnerView.hidden = NO;
+            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Succeeded"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [_logoImage setUserInteractionEnabled:YES];
+                _spinnerView.hidden = YES;
+            }
+            error:^
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [_logoImage setUserInteractionEnabled:YES];
+                _spinnerView.hidden = YES;
+            }];
         }
     }
 

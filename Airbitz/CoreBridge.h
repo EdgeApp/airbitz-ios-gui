@@ -64,6 +64,7 @@
 + (void)addCategory:(NSString *)strCategory;
 + (void)loadCategories;
 + (void)saveCategories:(NSMutableArray *)saveArrayCategories;
++ (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 
 
 + (void)updateWidgetQRCode;

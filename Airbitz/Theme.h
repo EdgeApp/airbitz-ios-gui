@@ -98,5 +98,8 @@
 + (void)freeAll;
 + (Theme *)Singleton;
 - (id)init;
+- (NSString *)platform;
+- (NSString *)platformString;
+
 
 @end
