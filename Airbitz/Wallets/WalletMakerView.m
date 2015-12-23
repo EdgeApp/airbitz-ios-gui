@@ -18,6 +18,8 @@
 #import "MainViewController.h"
 #import "Theme.h"
 
+#define DEFAULT_CURRENCY_NUM 141 // USD
+
 @interface WalletMakerView () <PopupPickerViewDelegate, UITextFieldDelegate>
 {
     BOOL                        _bCurrencyPopup;
@@ -204,13 +206,21 @@
     [self blockUser:YES];
     _bCreatingWallet = YES;
     [CoreBridge clearSyncQueue];
+
+    int currencyNum;
+
+    if ((nil == arrayCurrencyNums) || [arrayCurrencyNums count] <= _currencyChoice)
+        currencyNum = DEFAULT_CURRENCY_NUM;
+    else
+        currencyNum = [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
+    
     [CoreBridge postToSyncQueue:^{
         tABC_Error error;
         char *szUUID = NULL;
         ABC_CreateWallet([[User Singleton].name UTF8String],
                                 [[User Singleton].password UTF8String],
                                 [self.textField.text UTF8String],
-                                [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue],
+                                currencyNum,
                                 &szUUID,
                                 &error);
         _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
