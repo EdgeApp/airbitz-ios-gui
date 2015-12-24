@@ -1665,9 +1665,13 @@ MainViewController *singleton;
 - (void)processBitcoinURI:(NSURL *)uri
 {
     if ([uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] && [uri.host isEqualToString:@"plugin"]) {
-        NSArray *cs = [uri.path pathComponents];
-        if ([cs count] == 3) {
-            [self launchBuySell:cs[2] provider:cs[1] uri:uri];
+        if ([User isLoggedIn]) {
+            NSArray *cs = [uri.path pathComponents];
+            if ([cs count] == 3) {
+                [self launchBuySell:cs[2] provider:cs[1] uri:uri];
+            }
+        } else {
+            _uri = uri;
         }
     } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] || [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {
