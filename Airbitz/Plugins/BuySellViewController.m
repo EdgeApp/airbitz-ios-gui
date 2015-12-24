@@ -148,11 +148,8 @@
 
 - (void)launchPlugin:(Plugin *)plugin uri:(NSURL *)uri
 {
-    if (_pluginViewController != nil) {
-        [_pluginViewController.view removeFromSuperview];
-        [_pluginViewController removeFromParentViewController];
+    [self resetViews];
 
-    }
     UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
     _pluginViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginViewController"];
     _pluginViewController.delegate = self;
@@ -179,8 +176,8 @@
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBarTitle:self title:buySellText];
-;
     [Util animateOut:controller parentController:self complete:^(void) {
+        [self resetViews];
         _pluginViewController = nil;
     }];
 }
