@@ -1612,7 +1612,9 @@ MainViewController *singleton;
 
 - (void)switchToSettingsView:(UIViewController *)controller
 {
-    [MainViewController animateSwapViewControllers:controller out:_selectedViewController];
+    if (controller != _selectedViewController) {
+        [MainViewController animateSwapViewControllers:controller out:_selectedViewController];
+    }
     self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
     _appMode = APP_MODE_MORE;
 }
