@@ -5135,7 +5135,7 @@
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
-					"AIRBITZ_TESNET=1",
+					"AIRBITZ_TESTNET=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
