@@ -77,4 +77,6 @@
 #define signupContactsText                          NSLocalizedString(@"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.",@"Contacts signup screen")
 #define importPrivateKeyText                        NSLocalizedString(@"IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)", @"Slideout menu import private key text")
 #define bitcoinWalletTransactionsText               NSLocalizedString(@"Bitcoin Wallet Transactions", @"Export wallet transactions email subject line")
+#define accountsNeedsPasswordNotificationTitle      NSLocalizedString(@"WARNING: missing password", @"Title of missing password notification")
+#define accountsNeedsPasswordNotificationMessage    NSLocalizedString(@"Account '%@' needs a password. Account is not accessible on a new device without a password.", nil) 
 

@@ -1681,9 +1681,14 @@ static BOOL bOtpError = NO;
 
 + (BOOL)passwordExists
 {
+    return [CoreBridge passwordExists:[User Singleton].name];
+}
+
++ (BOOL)passwordExists:(NSString *)username;
+{
     tABC_Error error;
     bool exists = false;
-    ABC_PasswordExists([[User Singleton].name UTF8String], &exists, &error);
+    ABC_PasswordExists([username UTF8String], &exists, &error);
     if (error.code == ABC_CC_Ok) {
         return exists == true ? YES : NO;
     }
@@ -2716,6 +2721,41 @@ static BOOL bOtpError = NO;
     }
     return bitid;
 }
+
++ (NSArray *)getLocalAccounts:(NSString **)strError;
+{
+    char * pszUserNames;
+    NSArray *arrayAccounts = nil;
+    tABC_Error error;
+    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
+    switch (result)
+    {
+        case ABC_CC_Ok:
+        {
+            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
+            arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+            for(NSString *str in arrayAccounts)
+            {
+                if(str && str.length!=0)
+                {
+                    [stringArray addObject:str];
+                }
+            }
+            arrayAccounts = [stringArray copy];
+            if (strError) *strError = nil;
+            return arrayAccounts;
+            break;
+        }
+        default:
+        {
+            if (strError) *strError = [Util errorMap:&error];
+            return nil;
+            break;
+        }
+    }
+}
+
 
 + (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {

@@ -484,33 +484,12 @@
 
 - (void)getAllAccounts
 {
-    char * pszUserNames;
-    tABC_Error error;
-    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
-    switch (result)
+    NSString *strError;
+    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
+    if (nil == self.arrayAccounts)
     {
-        case ABC_CC_Ok:
-        {
-            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
-            NSArray *arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
-            for(NSString *str in arrayAccounts)
-            {
-                if(str && str.length!=0)
-                {
-                    [stringArray addObject:str];
-                }
-            }
-            self.arrayAccounts = [stringArray copy];
-            break;
-        }
-        default:
-        {
-            tABC_Error temp;
-            temp.code = result;
-            [MainViewController fadingAlert:[Util errorMap:&temp]];
-            break;
-        }
+        if (strError)
+            [MainViewController fadingAlert:strError];
     }
 }
 

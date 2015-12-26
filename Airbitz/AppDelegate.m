@@ -45,8 +45,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-//    [Plugin initAll];
-
     [CoreBridge initAll];
 
     // Reset badges to 0
@@ -292,6 +290,34 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
             bDidNotification = true;
         };
+        
+        //
+        // Popup notification if user has accounts with no passwords
+        //
+        NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
+        
+        if (arrayAccounts)
+        {
+            for (NSString *acct in arrayAccounts)
+            {
+                if (![CoreBridge passwordExists:acct])
+                {
+                    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+                    
+                    NSString *title = accountsNeedsPasswordNotificationTitle;
+                    [localNotif setAlertAction:title];
+                    
+                    NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
+                    [localNotif setAlertBody:message];
+                    
+                    // fire the notification now
+                    [localNotif setFireDate:[NSDate date]];
+                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+
+                }
+            }
+        }
+        
     }
 
     ABLog(2,@"EXIT showNotifications\n");
