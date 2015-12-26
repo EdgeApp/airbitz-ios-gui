@@ -46,7 +46,7 @@ static NSMutableArray *giftCardPlugins;
                            @"BRAND": @"Starbucks",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/green-coffee-mug-128px.png",
                            @"BIZID": @"11131",
-                           @"CATEGORY": @"Expense:Coffee Shops",
+                           @"CATEGORY": @"Expense%3ACoffee Shops",
                            };
             [giftCardPlugins addObject:plugin];
         }
@@ -66,7 +66,7 @@ static NSMutableArray *giftCardPlugins;
                            @"BRAND": @"Target",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
                            @"BIZID": @"11132",
-                           @"CATEGORY": @"Expense:Shopping",
+                           @"CATEGORY": @"Expense%3AShopping",
                            };
             [giftCardPlugins addObject:plugin];
         }
@@ -87,7 +87,7 @@ static NSMutableArray *giftCardPlugins;
                            @"BRAND": @"Whole Foods",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Whole-Foods-Market-128px.png",
                            @"BIZID": @"11139",
-                           @"CATEGORY": @"Expense:Groceries",
+                           @"CATEGORY": @"Expense%3AGroceries",
                            };
             [giftCardPlugins addObject:plugin];
         }
@@ -108,7 +108,7 @@ static NSMutableArray *giftCardPlugins;
                            @"BRAND": @"Walmart",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/WalMart-128px.png",
                            @"BIZID": @"11140",
-                           @"CATEGORY": @"Expense:Shopping",
+                           @"CATEGORY": @"Expense%3AShopping",
                            };
             [giftCardPlugins addObject:plugin];
         }
@@ -129,7 +129,7 @@ static NSMutableArray *giftCardPlugins;
                            @"BRAND": @"Home Depot",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Home-Depot-square-128px.png",
                            @"BIZID": @"11141",
-                           @"CATEGORY": @"Expense:Home Improvement",
+                           @"CATEGORY": @"Expense%3AHome Improvement",
                            };
             [giftCardPlugins addObject:plugin];
         }
