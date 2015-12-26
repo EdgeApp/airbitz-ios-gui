@@ -1804,6 +1804,7 @@ MainViewController *singleton;
         if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            [_buySellViewController resetViews];
         }
     }
     [slideoutView showSlideout:NO];
