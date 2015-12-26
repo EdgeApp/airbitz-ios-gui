@@ -14,7 +14,8 @@
 @implementation Plugin
 
 static BOOL bInitialized = NO;
-static NSMutableArray *plugins;
+static NSMutableArray *buySellPlugins;
+static NSMutableArray *giftCardPlugins;
 
 + (void)initAll
 {
@@ -24,7 +25,8 @@ static NSMutableArray *plugins;
         bool isTestnet = false;
         ABC_IsTestNet(&isTestnet, &error);
 
-        plugins = [[NSMutableArray alloc] init];
+        buySellPlugins = [[NSMutableArray alloc] init];
+        giftCardPlugins = [[NSMutableArray alloc] init];
 
         Plugin *plugin;
         plugin = [[Plugin alloc] init];
@@ -40,7 +42,7 @@ static NSMutableArray *plugins;
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Starbucks",
                        };
-        [plugins addObject:plugin];
+        [giftCardPlugins addObject:plugin];
 
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.foldapp";
@@ -55,7 +57,7 @@ static NSMutableArray *plugins;
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Target",
                        };
-        [plugins addObject:plugin];
+        [giftCardPlugins addObject:plugin];
 
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
@@ -64,14 +66,14 @@ static NSMutableArray *plugins;
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_usd";
-        plugin.name = @"Buy/Sell Bitcoin (US/Canada)";
+        plugin.name = @"USA and Canada";
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
                        @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", AIRBITZ_URI_PREFIX, plugin.country],
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        };
-        [plugins addObject:plugin];
+        [buySellPlugins addObject:plugin];
 
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.clevercoin";
@@ -80,7 +82,7 @@ static NSMutableArray *plugins;
         plugin.sourceFile = @"clevercoin";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_euro";
-        plugin.name = @"Buy Bitcoin (Euro)";
+        plugin.name = @"Europe (EUR)";
         plugin.env = @{
                     @"SANDBOX": (isTestnet ? @"true" : @"false"),
                     @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
@@ -89,7 +91,7 @@ static NSMutableArray *plugins;
                     @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
                     @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                     };
-        [plugins addObject:plugin];
+        [buySellPlugins addObject:plugin];
         
         bInitialized = YES;
     }
@@ -99,14 +101,14 @@ static NSMutableArray *plugins;
 {
 }
 
-+ (Plugin *)getPlugins
++ (NSArray *)getGiftCardPlugins
 {
-    return plugins;
+    return giftCardPlugins;
 }
 
-+ (NSArray *)getPlugin:(NSString *)pluginId
++ (NSArray *)getBuySellPlugins
 {
-    return nil;
+    return buySellPlugins;
 }
 
 - (id)init

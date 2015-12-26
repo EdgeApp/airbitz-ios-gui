@@ -12,12 +12,17 @@
 #import "Plugin.h"
 #import "Util.h"
 
+#define SECTION_GIFT_CARDS      0
+#define SECTION_BUY_SELL        1
+#define SECTIONS_TOTAL          2
+
 @interface BuySellViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
     PluginViewController *_pluginViewController;
 }
 
-@property (nonatomic, strong) WalletHeaderView    *activePluginsView;
+@property (nonatomic, strong) WalletHeaderView    *buySellHeaderView;
+@property (nonatomic, strong) WalletHeaderView    *giftCardHeaderView;
 @property (nonatomic, weak) IBOutlet UILabel      *titleLabel;
 @property (nonatomic, weak) IBOutlet UIButton     *backButton;
 @property (nonatomic, weak) IBOutlet UITableView  *pluginTable;
@@ -41,10 +46,16 @@
     _pluginTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     _backButton.hidden = YES;
 
-    _activePluginsView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"", nil) collapse:NO];
-    _activePluginsView.btn_expandCollapse.hidden = YES;
-    _activePluginsView.btn_addWallet.hidden = YES;
-
+    _buySellHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Buy / Sell Bitcoin", nil) collapse:NO];
+    _buySellHeaderView.btn_expandCollapse.hidden = YES;
+    _buySellHeaderView.btn_addWallet.hidden = YES;
+    _buySellHeaderView.btn_exportWallet.hidden = YES;
+    _buySellHeaderView.btn_header.hidden = YES;
+    _giftCardHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Discounted Gift Cards", nil) collapse:NO];
+    _giftCardHeaderView.btn_expandCollapse.hidden = YES;
+    _giftCardHeaderView.btn_addWallet.hidden = YES;
+    _giftCardHeaderView.btn_exportWallet.hidden = YES;
+    _giftCardHeaderView.btn_header.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,22 +77,28 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.0;
+    return [Theme Singleton].heightBLETableCells;
 }
 
 -(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return _activePluginsView;
+    if (SECTION_BUY_SELL == section)
+        return  _buySellHeaderView;
+    else
+        return  _giftCardHeaderView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return SECTIONS_TOTAL;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[Plugin getPlugins] count];
+    if (SECTION_BUY_SELL)
+        return [[Plugin getBuySellPlugins] count];
+    else
+        return [[Plugin getGiftCardPlugins] count];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,13 +115,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BuySellCell";
+    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
+    Plugin *plugin;
  
     BuySellCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[BuySellCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
+    if (SECTION_BUY_SELL == section)
+        plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
+    else if (SECTION_GIFT_CARDS == section)
+        plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
+
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
     cell.text.textColor = plugin.textColor;
@@ -124,8 +147,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
-    Plugin *plugin = [[Plugin getPlugins] objectAtIndex:row];
+    Plugin *plugin;
+    
+    if (SECTION_BUY_SELL == section)
+        plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
+    else if (SECTION_GIFT_CARDS == section)
+        plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
+    
     [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -133,10 +163,19 @@
 - (BOOL)launchPluginByCountry:(NSString *)country provider:(NSString *)provider uri:(NSURL *)uri
 {
     Plugin *plugin = nil;
-    for (Plugin *p in [Plugin getPlugins]) {
+    for (Plugin *p in [Plugin getBuySellPlugins]) {
         if ([provider isEqualToString:p.provider]
           && [country isEqualToString:p.country]) {
             plugin = p;
+        }
+    }
+    if (nil == plugin)
+    {
+        for (Plugin *p in [Plugin getGiftCardPlugins]) {
+            if ([provider isEqualToString:p.provider]
+                && [country isEqualToString:p.country]) {
+                plugin = p;
+            }
         }
     }
     if (plugin != nil) {
