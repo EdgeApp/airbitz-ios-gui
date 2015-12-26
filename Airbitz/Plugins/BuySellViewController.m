@@ -95,7 +95,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (SECTION_BUY_SELL)
+    if (SECTION_BUY_SELL == section)
         return [[Plugin getBuySellPlugins] count];
     else
         return [[Plugin getGiftCardPlugins] count];

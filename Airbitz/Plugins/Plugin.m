@@ -36,11 +36,14 @@ static NSMutableArray *giftCardPlugins;
         plugin.sourceFile = @"foldapp";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_coffee";
-        plugin.name = @"Up to 20% Off on Starbucks";
+        plugin.name = @"Starbucks (Up to 20% Off)";
         plugin.env = @{
                        @"API-TOKEN": FOLD_API_KEY,
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Starbucks",
+                       @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/green-coffee-mug-128px.png",
+                       @"BIZID": @"11131",
+                       @"CATEGORY": @"Expense:Coffee Shops",
                        };
         [giftCardPlugins addObject:plugin];
 
@@ -51,14 +54,71 @@ static NSMutableArray *giftCardPlugins;
         plugin.sourceFile = @"foldapp";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_target";
-        plugin.name = @"Up to 10% Off on Target";
+        plugin.name = @"Target (Up to 10% Off)";
         plugin.env = @{
                        @"API-TOKEN": FOLD_API_KEY,
                        @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                        @"BRAND": @"Target",
+                       @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
+                       @"BIZID": @"11132",
+                       @"CATEGORY": @"Expense:Shopping",
                        };
         [giftCardPlugins addObject:plugin];
 
+//        plugin = [[Plugin alloc] init];
+//        plugin.pluginId = @"com.foldapp";
+//        plugin.provider = @"foldapp";
+//        plugin.country = @"US";
+//        plugin.sourceFile = @"foldapp";
+//        plugin.sourceExtension = @"html";
+//        plugin.imageFile = @"plugin_icon_coffee";
+//        plugin.name = @"Whole Foods (Up to 10% Off)";
+//        plugin.env = @{
+//                       @"API-TOKEN": FOLD_API_KEY,
+//                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+//                       @"BRAND": @"Whole Foods",
+//                       @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
+//                       @"BIZID": @"11132",
+//                       @"CATEGORY": @"Expense:Groceries",
+//                       };
+//        [giftCardPlugins addObject:plugin];
+//        
+//        plugin = [[Plugin alloc] init];
+//        plugin.pluginId = @"com.foldapp";
+//        plugin.provider = @"foldapp";
+//        plugin.country = @"US";
+//        plugin.sourceFile = @"foldapp";
+//        plugin.sourceExtension = @"html";
+//        plugin.imageFile = @"plugin_icon_coffee";
+//        plugin.name = @"Walmart (Up to 10% Off)";
+//        plugin.env = @{
+//                       @"API-TOKEN": FOLD_API_KEY,
+//                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+//                       @"BRAND": @"Walmart",
+//                       @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
+//                       @"BIZID": @"11132",
+//                       @"CATEGORY": @"Expense:Shopping",
+//                       };
+//        [giftCardPlugins addObject:plugin];
+//        
+//        plugin = [[Plugin alloc] init];
+//        plugin.pluginId = @"com.foldapp";
+//        plugin.provider = @"foldapp";
+//        plugin.country = @"US";
+//        plugin.sourceFile = @"foldapp";
+//        plugin.sourceExtension = @"html";
+//        plugin.imageFile = @"plugin_icon_coffee";
+//        plugin.name = @"Home Depot (Up to 15% Off)";
+//        plugin.env = @{
+//                       @"API-TOKEN": FOLD_API_KEY,
+//                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+//                       @"BRAND": @"Home Depot",
+//                       @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
+//                       @"BIZID": @"11132",
+//                       @"CATEGORY": @"Expense:Home Improvement",
+//                       };
+//        [giftCardPlugins addObject:plugin];
+        
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"glidera";
