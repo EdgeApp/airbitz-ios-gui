@@ -56,6 +56,8 @@
     _giftCardHeaderView.btn_addWallet.hidden = YES;
     _giftCardHeaderView.btn_exportWallet.hidden = YES;
     _giftCardHeaderView.btn_header.hidden = YES;
+    
+    [Plugin initAll];
 }
 
 - (void)viewWillAppear:(BOOL)animated

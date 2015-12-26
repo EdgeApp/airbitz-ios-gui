@@ -45,7 +45,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    [Plugin initAll];
+//    [Plugin initAll];
 
     [CoreBridge initAll];
 

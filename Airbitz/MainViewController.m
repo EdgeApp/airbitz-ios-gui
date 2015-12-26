@@ -161,6 +161,7 @@ MainViewController *singleton;
     self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
+    self.arrayPluginBizIDs = [[NSMutableArray alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -189,6 +190,8 @@ MainViewController *singleton;
     [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
+    
+    [self checkEnabledPlugins];
     
     [NotificationChecker initAll];
 }
@@ -510,10 +513,39 @@ MainViewController *singleton;
 
     ABLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
+    
 
     [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
+}
+
+- (void)checkEnabledPlugins
+{
+    //get business details
+    int arrayPluginBizIds[] = {11139, 11140, 11141};
+    
+    for (int i = 0; i < sizeof(arrayPluginBizIds); i++ )
+    {
+        int bizId = arrayPluginBizIds[i];
+        NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizId];
+        
+        [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSDictionary *results = (NSDictionary *)responseObject;
+            
+            NSNumber *numBizId = [results objectForKey:@"bizId"];
+            NSString *desc = [results objectForKey:@"description"];
+            if ([desc containsString:@"enabled"])
+            {
+                ABLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
+                [self.arrayPluginBizIDs addObject:numBizId];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ABLog(1, @"Plugin Bizid Disabled");
+        }];
+
+    }
 }
 
 - (void)dealloc
