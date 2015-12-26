@@ -44,6 +44,9 @@
     _pluginTable.dataSource = self;
     _pluginTable.delegate = self;
     _pluginTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_pluginTable setContentInset:UIEdgeInsetsMake(0,0,
+                                                   [MainViewController getFooterHeight],0)];
+
     _backButton.hidden = YES;
 
     _buySellHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Buy / Sell Bitcoin", nil) collapse:NO];
