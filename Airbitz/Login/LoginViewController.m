@@ -585,8 +585,10 @@ typedef enum eReloginState
 
         _signupManager = [[SignUpManager alloc] initWithController:self];
         _signupManager.delegate = self;
+        _signupManager.strInUserName = nil;
         if (self.usernameSelector.textField.text) {
-            _signupManager.strInUserName = self.usernameSelector.textField.text;
+            if (![self.arrayAccounts containsObject:self.usernameSelector.textField.text])
+                _signupManager.strInUserName = self.usernameSelector.textField.text;
         }
         [MainViewController animateFadeOut:self.view];
 
