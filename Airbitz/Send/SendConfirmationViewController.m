@@ -615,7 +615,7 @@
             self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
     }
-    else if (_selectedTextField == self.amountFiatTextField)
+    else if (_selectedTextField == self.amountFiatTextField && [self.spendTarget isMutable])
     {
         currency = [self.amountFiatTextField.text doubleValue];
         if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
