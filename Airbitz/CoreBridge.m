@@ -197,12 +197,6 @@ static BOOL bOtpError = NO;
 {
     NSMutableString *strSeed = [[NSMutableString alloc] init];
 
-    // add the advertiser identifier
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
-    {
-        [strSeed appendString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    }
-
     // add the UUID
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
     CFStringRef string = CFUUIDCreateString(NULL, theUUID);
