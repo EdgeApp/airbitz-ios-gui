@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
+
+
 #define appTitle                @"Airbitz"
 #define appHomepage             @"https://airbitz.co"
 #define supportEmail            @"support@airbitz.co"
@@ -18,4 +21,6 @@
 #define appLogoWhiteLink        @"https://airbitz.co/static/img/logo-nav.png"
 #define appDesignedBy           NSLocalizedString(@"Designed and Built by Airbitz in",nil)
 #define appCompanyLocation      NSLocalizedString(@"San Diego, California, USA", nil)
+
+
 
