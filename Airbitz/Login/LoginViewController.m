@@ -1445,15 +1445,15 @@ typedef enum eReloginState
                 _spinnerView.hidden = YES;
             }];
         }
-    }
-
-    [self.usernameSelector.textField resignFirstResponder];
-    // if they said they wanted to delete the account
-    if (buttonIndex == 1)
-    {
-        [self removeAccount:_account];
-        self.usernameSelector.textField.text = @"";
-        [self.usernameSelector dismissPopupPicker];
+    } else {
+        [self.usernameSelector.textField resignFirstResponder];
+        // if they said they wanted to delete the account
+        if (buttonIndex == 1)
+        {
+            [self removeAccount:_account];
+            self.usernameSelector.textField.text = @"";
+            [self.usernameSelector dismissPopupPicker];
+        }
     }
 }
 
