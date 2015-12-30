@@ -2785,16 +2785,20 @@ static BOOL bOtpError = NO;
 
 + (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
-    // Find a non-archived wallet that isn't the wallet we're going to delete
-    // and make it the current wallet
-    for (Wallet *wallet in singleton.arrayWallets)
+    // Check if we are trying to delete the current wallet
+    if ([singleton.currentWallet.strUUID isEqualToString:uuid])
     {
-        if (![wallet.strUUID isEqualToString:uuid])
+        // Find a non-archived wallet that isn't the wallet we're going to delete
+        // and make it the current wallet
+        for (Wallet *wallet in singleton.arrayWallets)
         {
-            if (!wallet.archived)
+            if (![wallet.strUUID isEqualToString:uuid])
             {
-                [CoreBridge makeCurrentWallet:wallet];
-                break;
+                if (!wallet.archived)
+                {
+                    [CoreBridge makeCurrentWallet:wallet];
+                    break;
+                }
             }
         }
     }
