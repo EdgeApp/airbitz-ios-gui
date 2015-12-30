@@ -1288,7 +1288,7 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [CoreBridge deleteWallet:longTapWallet.strUUID notify:^{
+            [CoreBridge walletRemove:longTapWallet.strUUID notify:^{
                 [MainViewController fadingAlert:deleteWalletDeletedText];
             } error:^{
                 [MainViewController fadingAlert:deleteWalletErrorText];
@@ -1366,9 +1366,6 @@
             deleteText = deleteWalletText;
         }
         
-        // XXX until we have an ABC API call for wallet delete, disable this option
-        deleteText = nil;
-
         longTapAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@%@",walletNameHeaderText, longTapWallet.strName]
                                                   message:@""
                                                  delegate:self

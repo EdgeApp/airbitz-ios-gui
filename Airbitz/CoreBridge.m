@@ -2778,13 +2778,28 @@ static BOOL bOtpError = NO;
     }];
 }
 
-+ (void)deleteWallet:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
++ (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
+    // Find a non-archived wallet that isn't the wallet we're going to delete
+    // and make it the current wallet
+    for (Wallet *wallet in singleton.arrayWallets)
+    {
+        if (![wallet.strUUID isEqualToString:uuid])
+        {
+            if (!wallet.archived)
+            {
+                [CoreBridge makeCurrentWallet:wallet];
+                break;
+            }
+        }
+    }
+
     [CoreBridge postToMiscQueue:^
     {
         ABLog(1,@"Deleting wallet [%@]", uuid);
         tABC_Error error;
-        error.code = ABC_CC_Ok;
+
+        ABC_WalletRemove([[User Singleton].name UTF8String], [uuid UTF8String], &error);
 
         [Util printABC_Error:&error];
         [CoreBridge refreshWallets];
