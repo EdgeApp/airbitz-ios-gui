@@ -55,6 +55,8 @@
     Wallet                              *longTapWallet;
     UIAlertView                         *longTapAlert;
     UIAlertView                         *renameAlert;
+    UIAlertView                         *deleteAlert;
+    UIAlertView                         *deleteAlertWarning;
 
     BOOL                                _archiveCollapsed;
 
@@ -1235,7 +1237,7 @@
         if (buttonIndex == 1)
         {
             // Do Rename popup
-            renameAlert =[[UIAlertView alloc ] initWithTitle:NSLocalizedString(@"Rename Wallet", nil)
+            renameAlert =[[UIAlertView alloc ] initWithTitle:renameWalletText
                                                      message:longTapWallet.strName
                                                     delegate:self
                                            cancelButtonTitle:cancelButtonText
@@ -1247,11 +1249,55 @@
 
             [renameAlert show];
         }
+        else if (buttonIndex == 2)
+        {
+            if (longTapWallet.balance > 0)
+            {
+                [MainViewController fadingAlert:deleteWalletHasFunds];
+            }
+            else
+            {
+                // Do Delete popup
+                deleteAlert =[[UIAlertView alloc ] initWithTitle:deleteWalletText
+                                                         message:longTapWallet.strName
+                                                        delegate:self
+                                               cancelButtonTitle:cancelButtonText
+                                               otherButtonTitles:okButtonText, nil];
+                deleteAlert.alertViewStyle = UIAlertViewStyleDefault;
 
+                [deleteAlert show];
+            }
+        }
+    }
+    else if (alertView == deleteAlert)
+    {
+        if (buttonIndex == 1) {
+            // Do Delete popup
+            deleteAlertWarning =[[UIAlertView alloc ] initWithTitle:[NSString stringWithFormat:@"%@: %@", deleteWalletText, longTapWallet.strName]
+                                                     message:deleteWalletWarningText
+                                                    delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:okButtonText, nil];
+            deleteAlertWarning.alertViewStyle = UIAlertViewStyleDefault;
+
+            [deleteAlertWarning show];
+        }
+    }
+    else if (alertView == deleteAlertWarning)
+    {
+        if (buttonIndex == 1) {
+            [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+
+            [CoreBridge deleteWallet:longTapWallet.strUUID notify:^{
+                [MainViewController fadingAlert:deleteWalletDeletedText];
+            } error:^{
+                [MainViewController fadingAlert:deleteWalletErrorText];
+            }];
+        }
     }
     else if (alertView == renameAlert)
     {
-        if (buttonIndex == 1) {  //Login
+        if (buttonIndex == 1) {
             UITextField *textField = [alertView textFieldAtIndex:0];
             //        // need at least one character in a wallet name
             if ([textField.text length])
@@ -1311,11 +1357,23 @@
         {
             longTapWallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:indexPath.row];
         }
+        NSString *deleteText = nil;
+
+        // Only allow wallet delete if this wallet is archived or if there is another non-archived wallet
+        if ([[CoreBridge Singleton].arrayWallets count] > 1 ||
+                longTapWallet.archived)
+        {
+            deleteText = deleteWalletText;
+        }
+        
+        // XXX until we have an ABC API call for wallet delete, disable this option
+        deleteText = nil;
+
         longTapAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@%@",walletNameHeaderText, longTapWallet.strName]
                                                   message:@""
                                                  delegate:self
                                         cancelButtonTitle:cancelButtonText
-                                        otherButtonTitles:renameButtonText,nil];
+                                        otherButtonTitles:renameButtonText,deleteText,nil];
         [longTapAlert show];
     } else {
         ABLog(2,@"gestureRecognizer.state = %d", (int)gestureRecognizer.state);

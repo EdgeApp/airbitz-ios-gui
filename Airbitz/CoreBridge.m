@@ -2778,7 +2778,26 @@ static BOOL bOtpError = NO;
     }];
 }
 
++ (void)deleteWallet:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
+{
+    [CoreBridge postToMiscQueue:^
+    {
+        ABLog(1,@"Deleting wallet [%@]", uuid);
+        tABC_Error error;
+        error.code = ABC_CC_Ok;
 
+        [Util printABC_Error:&error];
+        [CoreBridge refreshWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABC_CC_Ok == error.code) {
+                if (cb) cb();
+            } else {
+                if (cberror) cberror();
+            }
+        });
+    }];
+}
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
