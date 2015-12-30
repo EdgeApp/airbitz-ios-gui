@@ -499,10 +499,15 @@ static BOOL bOtpError = NO;
 
 + (void)makeCurrentWallet:(Wallet *)wallet
 {
-    if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
+    if ([[CoreBridge Singleton].arrayWallets containsObject:wallet])
     {
         singleton.currentWallet = wallet;
         singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+    }
+    else if ([[CoreBridge Singleton].arrayArchivedWallets containsObject:wallet])
+    {
+        singleton.currentWallet = wallet;
+        singleton.currentWalletID = (int) [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
     }
 
     [CoreBridge postNotificationWalletsChanged];
