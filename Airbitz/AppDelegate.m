@@ -294,29 +294,29 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         //
         // Popup notification if user has accounts with no passwords
         //
-        NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
-        
-        if (arrayAccounts)
-        {
-            for (NSString *acct in arrayAccounts)
-            {
-                if (![CoreBridge passwordExists:acct])
-                {
-                    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-                    
-                    NSString *title = accountsNeedsPasswordNotificationTitle;
-                    [localNotif setAlertAction:title];
-                    
-                    NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
-                    [localNotif setAlertBody:message];
-                    
-                    // fire the notification now
-                    [localNotif setFireDate:[NSDate date]];
-                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-
-                }
-            }
-        }
+//        NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
+//        
+//        if (arrayAccounts)
+//        {
+//            for (NSString *acct in arrayAccounts)
+//            {
+//                if (![CoreBridge passwordExists:acct])
+//                {
+//                    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+//                    
+//                    NSString *title = accountsNeedsPasswordNotificationTitle;
+//                    [localNotif setAlertAction:title];
+//                    
+//                    NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
+//                    [localNotif setAlertBody:message];
+//                    
+//                    // fire the notification now
+//                    [localNotif setFireDate:[NSDate date]];
+//                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+//
+//                }
+//            }
+//        }
         
     }
 
