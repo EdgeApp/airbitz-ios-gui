@@ -79,9 +79,9 @@ extern void QRcode_free(QRcode *qrcode);
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    // TODO: call ABC to generate keys - for now just used hard coded examples
-    self.strPrivate = PRIVATE_KEY;
-    self.strPublic = PUBLIC_ADDRESS;
+//    // TODO: call ABC to generate keys - for now just used hard coded examples
+//    self.strPrivate = PRIVATE_KEY;
+//    self.strPublic = PUBLIC_ADDRESS;
 
     self.labelPrivateKey.text = self.strPrivate;
     self.labelPublicAddress.text = self.strPublic;
