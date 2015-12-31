@@ -66,6 +66,7 @@ typedef enum eLoginMode
     UIAlertView                     *_enableTouchIDAlertView;
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
+    UIAlertView                     *_uploadLogAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
 
@@ -280,31 +281,16 @@ static BOOL bInitialized = false;
 }
 
 - (void)uploadLog {
-    _spinnerView.hidden = NO;
-    [_logoImage setUserInteractionEnabled:NO];
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error error;
-        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            if (ABC_CC_Ok == error.code) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Succeeded"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            }
-            [_logoImage setUserInteractionEnabled:YES];
-            _spinnerView.hidden = YES;
-        });
-    }];
+    NSString *title = NSLocalizedString(@"Upload Log File", nil);
+    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    // show password reminder test
+    _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"Upload Log", nil];
+    _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [_uploadLogAlert show];
 }
 
 typedef enum eReloginState
@@ -599,8 +585,10 @@ typedef enum eReloginState
 
         _signupManager = [[SignUpManager alloc] initWithController:self];
         _signupManager.delegate = self;
+        _signupManager.strInUserName = nil;
         if (self.usernameSelector.textField.text) {
-            _signupManager.strInUserName = self.usernameSelector.textField.text;
+            if (![self.arrayAccounts containsObject:self.usernameSelector.textField.text])
+                _signupManager.strInUserName = self.usernameSelector.textField.text;
         }
         [MainViewController animateFadeOut:self.view];
 
@@ -1256,31 +1244,12 @@ typedef enum eReloginState
 
 - (void)getAllAccounts
 {
-    char * pszUserNames;
-    tABC_Error error;
-    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
-    switch (result)
+    NSString *strError;
+    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
+    if (nil == self.arrayAccounts)
     {
-        case ABC_CC_Ok:
-        {
-            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
-            NSArray *arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
-            for(NSString *str in arrayAccounts)
-            {
-                if(str && str.length!=0)
-                {
-                    [stringArray addObject:str];
-                }
-            }
-            self.arrayAccounts = [stringArray copy];
-            break;
-        }
-        default:
-        {
-            [MainViewController fadingAlert:[Util errorMap:&error]];
-            break;
-        }
+        if (strError)
+            [MainViewController fadingAlert:strError];
     }
 }
 
@@ -1447,14 +1416,44 @@ typedef enum eReloginState
             [self showPasswordCheckAlertForTouchID];
         }
     }
-
-    [self.usernameSelector.textField resignFirstResponder];
-    // if they said they wanted to delete the account
-    if (buttonIndex == 1)
+    else if (_uploadLogAlert == alertView)
     {
-        [self removeAccount:_account];
-        self.usernameSelector.textField.text = @"";
-        [self.usernameSelector dismissPopupPicker];
+        if (1 == buttonIndex)
+        {
+            [_logoImage setUserInteractionEnabled:NO];
+            _spinnerView.hidden = NO;
+            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Succeeded"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [_logoImage setUserInteractionEnabled:YES];
+                _spinnerView.hidden = YES;
+            }
+            error:^
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
+                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                [_logoImage setUserInteractionEnabled:YES];
+                _spinnerView.hidden = YES;
+            }];
+        }
+    } else {
+        [self.usernameSelector.textField resignFirstResponder];
+        // if they said they wanted to delete the account
+        if (buttonIndex == 1)
+        {
+            [self removeAccount:_account];
+            self.usernameSelector.textField.text = @"";
+            [self.usernameSelector dismissPopupPicker];
+        }
     }
 }
 

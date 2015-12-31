@@ -4,6 +4,7 @@
 #import "Transaction.h"
 #import "TxOutput.h"
 #import "ABC.h"
+#import "Config.h"
 #import "User.h"
 #import "Util.h"
 #import "LocalSettings.h"
@@ -149,6 +150,9 @@ static BOOL bOtpError = NO;
         Error.code = ABC_CC_Ok;
         ABC_Initialize([docs_dir UTF8String],
                 [ca_path UTF8String],
+                API_KEY_HEADER,
+                CHAIN_API_USERPWD,
+                HIDDENBITZ_KEY,
                 (unsigned char *)[seedData bytes],
                 (unsigned int)[seedData length],
                 &Error);
@@ -192,12 +196,6 @@ static BOOL bOtpError = NO;
 + (void)fillSeedData:(NSMutableData *)data
 {
     NSMutableString *strSeed = [[NSMutableString alloc] init];
-
-    // add the advertiser identifier
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
-    {
-        [strSeed appendString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-    }
 
     // add the UUID
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
@@ -501,10 +499,15 @@ static BOOL bOtpError = NO;
 
 + (void)makeCurrentWallet:(Wallet *)wallet
 {
-    if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
+    if ([[CoreBridge Singleton].arrayWallets containsObject:wallet])
     {
         singleton.currentWallet = wallet;
         singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+    }
+    else if ([[CoreBridge Singleton].arrayArchivedWallets containsObject:wallet])
+    {
+        singleton.currentWallet = wallet;
+        singleton.currentWalletID = (int) [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
     }
 
     [CoreBridge postNotificationWalletsChanged];
@@ -1677,9 +1680,14 @@ static BOOL bOtpError = NO;
 
 + (BOOL)passwordExists
 {
+    return [CoreBridge passwordExists:[User Singleton].name];
+}
+
++ (BOOL)passwordExists:(NSString *)username;
+{
     tABC_Error error;
     bool exists = false;
-    ABC_PasswordExists([[User Singleton].name UTF8String], &exists, &error);
+    ABC_PasswordExists([username UTF8String], &exists, &error);
     if (error.code == ABC_CC_Ok) {
         return exists == true ? YES : NO;
     }
@@ -2711,6 +2719,108 @@ static BOOL bOtpError = NO;
         free(szSignature);
     }
     return bitid;
+}
+
++ (NSArray *)getLocalAccounts:(NSString **)strError;
+{
+    char * pszUserNames;
+    NSArray *arrayAccounts = nil;
+    tABC_Error error;
+    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
+    switch (result)
+    {
+        case ABC_CC_Ok:
+        {
+            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
+            arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+            for(NSString *str in arrayAccounts)
+            {
+                if(str && str.length!=0)
+                {
+                    [stringArray addObject:str];
+                }
+            }
+            arrayAccounts = [stringArray copy];
+            if (strError) *strError = nil;
+            return arrayAccounts;
+            break;
+        }
+        default:
+        {
+            if (strError) *strError = [Util errorMap:&error];
+            return nil;
+            break;
+        }
+    }
+}
+
+
++ (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
+{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
+    
+    
+    NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+    ABC_Log([[NSString stringWithFormat:@"User Comment:%@", userText] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform:%@", [[Theme Singleton] platform]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform String:%@", [[Theme Singleton] platformString]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"OS Version:%d.%d.%d", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Airbitz Version:%@", versionbuild] UTF8String]);
+    
+    [CoreBridge postToMiscQueue:^{
+        tABC_Error error;
+        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABC_CC_Ok == error.code) {
+                if (cb) cb();
+            } else {
+                if (cberror) cberror();
+            }
+        });
+    }];
+}
+
++ (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
+{
+    // Check if we are trying to delete the current wallet
+    if ([singleton.currentWallet.strUUID isEqualToString:uuid])
+    {
+        // Find a non-archived wallet that isn't the wallet we're going to delete
+        // and make it the current wallet
+        for (Wallet *wallet in singleton.arrayWallets)
+        {
+            if (![wallet.strUUID isEqualToString:uuid])
+            {
+                if (!wallet.archived)
+                {
+                    [CoreBridge makeCurrentWallet:wallet];
+                    break;
+                }
+            }
+        }
+    }
+
+    [CoreBridge postToMiscQueue:^
+    {
+        ABLog(1,@"Deleting wallet [%@]", uuid);
+        tABC_Error error;
+
+        ABC_WalletRemove([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+
+        [Util printABC_Error:&error];
+        [CoreBridge refreshWallets];
+
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABC_CC_Ok == error.code) {
+                if (cb) cb();
+            } else {
+                if (cberror) cberror();
+            }
+        });
+    }];
 }
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)

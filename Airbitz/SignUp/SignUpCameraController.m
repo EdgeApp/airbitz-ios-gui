@@ -14,6 +14,7 @@
 {
     BOOL *_requestedCamera;
 }
+@property (weak, nonatomic) IBOutlet UILabel *infoText;
 
 @end
 
@@ -31,6 +32,13 @@
         }];
     }
     [self.manager next];
+}
+
+- (void)viewDidLoad
+{
+    NSString *tempText = signupCameraText;
+    [Util replaceHtmlTags:&tempText];
+    self.infoText.text = tempText;
 }
 
 @end

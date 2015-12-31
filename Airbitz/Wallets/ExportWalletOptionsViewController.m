@@ -371,7 +371,9 @@ typedef enum eExportOption
 
         _mailComposer = [[MFMailComposeViewController alloc] init];
 
-        [_mailComposer setSubject:NSLocalizedString(@"AirBitz Bitcoin Wallet Transactions", nil)];
+        NSString *tempText = [NSString stringWithFormat:@"%@ %@", appTitle, bitcoinWalletTransactionsText];
+        
+        [_mailComposer setSubject:tempText];
 
         [_mailComposer setMessageBody:strBody isHTML:YES];
 

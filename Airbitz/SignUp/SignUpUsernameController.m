@@ -22,6 +22,7 @@
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (nonatomic, copy)     NSString                        *labelString;
+@property (weak, nonatomic) IBOutlet UILabel                    *infoText;
 
 
 @end
@@ -51,6 +52,9 @@
     [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
     self.buttonBlocker.frame = self.view.bounds;
     self.buttonBlocker.hidden = YES;
+    NSString *tempText = signupUsernameText;
+    [Util replaceHtmlTags:&tempText];
+    self.infoText.text = tempText;
     [self.view addSubview:self.buttonBlocker];
 
 }

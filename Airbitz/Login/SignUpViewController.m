@@ -21,6 +21,8 @@
 #import "FadingAlertView.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "LocalSettings.h"
+#import "Keychain.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -733,6 +735,15 @@
         if (self.mode == SignUpMode_ChangePasswordUsingAnswers)
         {
             [self changePIN];
+        }
+        if ([[LocalSettings controller].touchIDUsersEnabled containsObject:[User Singleton].name] ||
+            ![User Singleton].bDisablePINLogin)
+        {
+            [[LocalSettings controller].touchIDUsersDisabled removeObject:[User Singleton].name];
+            [LocalSettings saveAll];
+            [Keychain updateLoginKeychainInfo:[User Singleton].name
+                                     password:[User Singleton].password
+                                   useTouchID:YES];
         }
     }
     else

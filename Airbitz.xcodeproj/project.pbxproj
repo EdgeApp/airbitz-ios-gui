@@ -20,6 +20,15 @@
 		DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
+		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
+		DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
+		DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
+		DA3C7A8C1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */; };
+		DA3C7A8D1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */; };
+		DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */; };
+		DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
+		DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
+		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA42F1071C03D63800CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA42F1081C03D63900CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
@@ -1416,6 +1425,9 @@
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
+		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
+		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
+		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoDisclaimer.html; sourceTree = "<group>"; };
 		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2711,8 +2723,11 @@
 				DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */,
 				DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */,
 				DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */,
+				DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */,
 				DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */,
 				DABA01231C111950008702AB /* plugin_icon_usd@2x.png */,
+				DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */,
+				DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */,
 				DA9EEFB71BC724B00063DA07 /* QR-bracket.png */,
 				DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */,
 				DA9EDFBA1BC61F920063DA07 /* ribbon@2x.png */,
@@ -3631,6 +3646,7 @@
 				DA9EF42F1BC7285D0063DA07 /* icon_category_atm@3x.png in Resources */,
 				DA9EF4301BC7285D0063DA07 /* flash-off@2x.png in Resources */,
 				DA9EF4311BC7285D0063DA07 /* icon_category_electronics@3x.png in Resources */,
+				DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF4321BC7285D0063DA07 /* btn_export_white@2x.png in Resources */,
 				DA9EF4331BC7285D0063DA07 /* BusinessDirectory.storyboard in Resources */,
 				DA9EF4341BC7285D0063DA07 /* icon_logout@3x.png in Resources */,
@@ -3749,6 +3765,8 @@
 				DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA9EF4AF1BC7285D0063DA07 /* infoWallets.html in Resources */,
 				DA9EF4B01BC7285D0063DA07 /* thumb@2x.png in Resources */,
+				DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
+				DA3C7A8D1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EF6E11BC730400063DA07 /* Airbitz-Develop-Info.plist in Resources */,
 				DA9EF4B11BC7285D0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF4B21BC7285D0063DA07 /* enable-contacts.png in Resources */,
@@ -3885,6 +3903,7 @@
 				DA9EF5F61BC729FA0063DA07 /* icon_category_atm@3x.png in Resources */,
 				DA9EF5F71BC729FA0063DA07 /* flash-off@2x.png in Resources */,
 				DA9EF5F81BC729FA0063DA07 /* icon_category_electronics@3x.png in Resources */,
+				DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF5F91BC729FA0063DA07 /* btn_export_white@2x.png in Resources */,
 				DA9EF5FA1BC729FA0063DA07 /* BusinessDirectory.storyboard in Resources */,
 				DA9EF5FB1BC729FA0063DA07 /* icon_logout@3x.png in Resources */,
@@ -4003,6 +4022,8 @@
 				DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */,
 				DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA9EF6761BC729FA0063DA07 /* infoWallets.html in Resources */,
+				DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
+				DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EF6771BC729FA0063DA07 /* thumb@2x.png in Resources */,
 				DA9EF6781BC729FA0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF6791BC729FA0063DA07 /* enable-contacts.png in Resources */,
@@ -4127,6 +4148,7 @@
 				DA9EE4691BC61F920063DA07 /* drag_bar@2x.png in Resources */,
 				DA9EE4821BC61F920063DA07 /* icon_arrow.png in Resources */,
 				DA10BB981BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
+				DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA9EE4ED1BC61F920063DA07 /* Lato-Italic.ttf in Resources */,
 				DA9EE46B1BC61F920063DA07 /* enable-camera.png in Resources */,
 				DA9EE4811BC61F920063DA07 /* icon_approved@2x.png in Resources */,
@@ -4170,6 +4192,7 @@
 				DA9EE5001BC61F920063DA07 /* infoTransactionDetails.html in Resources */,
 				DA9EE4301BC61F920063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA9EE4631BC61F920063DA07 /* btn_unselected@2x.png in Resources */,
+				DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EE4C21BC61F920063DA07 /* icon_transactions.png in Resources */,
 				DA9EE44F1BC61F920063DA07 /* btn_collapse_expand@3x.png in Resources */,
 				DA9EE4781BC61F920063DA07 /* ico_nav_directory_dark.png in Resources */,
@@ -4295,6 +4318,7 @@
 				DA9EE4351BC61F920063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA9EE51E1BC61F930063DA07 /* Settings.storyboard in Resources */,
 				DA9EE4DE1BC61F920063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
+				DA3C7A8C1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EE4CC1BC61F920063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EE4AF1BC61F920063DA07 /* icon_request@2x.png in Resources */,
 				DA9EE4D61BC61F920063DA07 /* password_dot@2x.png in Resources */,
@@ -4997,6 +5021,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"AIRBITZ_DEVELOP=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -5039,6 +5067,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"AIRBITZ_DEVELOP=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -5063,7 +5095,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
-				PROVISIONING_PROFILE = "0da6bd46-b3d2-4558-92ce-d2fe4832878a";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -5080,6 +5112,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"AIRBITZ_TESTNET=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5123,6 +5159,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"AIRBITZ_TESTNET=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -5147,7 +5187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
-				PROVISIONING_PROFILE = "36c63d35-c64f-416b-8e7e-1cecd1571370";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

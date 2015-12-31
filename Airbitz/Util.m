@@ -21,8 +21,10 @@ void abDebugLog(int level, NSString *statement) {
             [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
         }
 
-        printf("%s\n",[[NSString stringWithFormat:@"<%@> %@",
-                                                  [timeStampFormat stringFromDate:[NSDate date]],statement] UTF8String]);
+        NSString *tempStr = [NSString stringWithFormat:@"<%@> %@",
+                              [timeStampFormat stringFromDate:[NSDate date]],statement];
+        
+        ABC_Log([tempStr UTF8String]);
     }
 }
 
@@ -112,10 +114,12 @@ void abDebugLog(int level, NSString *statement) {
             @"[[abtag APP_TITLE]]",
             @"[[abtag APP_STORE_LINK]]",
             @"[[abtag PLAY_STORE_LINK]]",
+            @"[[abtag APP_DOWNLOAD_LINK]]",
             @"[[abtag APP_HOMEPAGE]]",
             @"[[abtag APP_LOGO_WHITE_LINK]]",
             @"[[abtag APP_DESIGNED_BY]]",
             @"[[abtag APP_COMPANY_LOCATION]]",
+            @"[[abtag APP_SUPPORT_EMAIL]]",
             @"[[abtag APP_VERSION]]",
                     nil];
 
@@ -123,10 +127,12 @@ void abDebugLog(int level, NSString *statement) {
             appTitle,
             appStoreLink,
             playStoreLink,
+            appDownloadLink,
             appHomepage,
             appLogoWhiteLink,
             appDesignedBy,
             appCompanyLocation,
+            supportEmail,
             versionbuild,
                     nil];
 
@@ -145,13 +151,13 @@ void abDebugLog(int level, NSString *statement) {
     {
         if (pError->code != ABC_CC_Ok)
         {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
+            NSString *err = [NSString stringWithFormat:@"Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
                    pError->code,
                    pError->szDescription,
                    pError->szSourceFunc,
                    pError->szSourceFile,
-                   pError->nSourceLine
-                   );
+                   pError->nSourceLine];
+            abDebugLog(1, err);
         }
         if (pError->code == ABC_CC_DecryptError
                     || pError->code == ABC_CC_DecryptFailure)

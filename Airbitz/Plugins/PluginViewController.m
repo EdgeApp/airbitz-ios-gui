@@ -85,7 +85,8 @@ static const NSString *PROTOCOL = @"bridge://";
                         @"exit":NSStringFromSelector(@selector(uiExit:)),
                @"navStackClear":NSStringFromSelector(@selector(navStackClear:)),
                 @"navStackPush":NSStringFromSelector(@selector(navStackPush:)),
-                 @"navStackPop":NSStringFromSelector(@selector(navStackPop:))
+                 @"navStackPop":NSStringFromSelector(@selector(navStackPop:)),
+              @"launchExternal":NSStringFromSelector(@selector(launchExternal:))
     };
 
     [NSHTTPCookieStorage sharedHTTPCookieStorage].cookieAcceptPolicy = NSHTTPCookieAcceptPolicyAlways;
@@ -802,6 +803,17 @@ static const NSString *PROTOCOL = @"bridge://";
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
 }
 
+- (void)launchExternal:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+
+    NSURL* url = [[NSURL alloc] initWithString:[args objectForKey:@"uri"]];
+    [[UIApplication sharedApplication] openURL:url];
+
+    [self setJsResults:cbid withArgs:[self jsonSuccess]];
+}
+
 #pragma - Helper Functions
 
 - (NSString *)getRawTransaction:(NSString *)walletUUID withTxId:(NSString *)txId
@@ -931,7 +943,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
+    // [self performSelector:@selector(stylizeKeyboard) withObject:nil afterDelay:0];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

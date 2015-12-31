@@ -16,8 +16,9 @@
 #import "Util.h"
 #import "Strings.h"
 
-@interface DebugViewController ()  <UIGestureRecognizerDelegate>
+@interface DebugViewController ()  <UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
+    UIAlertView                     *_uploadLogAlert;
 }
 
 @property (nonatomic, weak) IBOutlet UIButton *clearWatcherButton;
@@ -25,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *coreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *networkLabel;
+
 
 @end
 
@@ -92,6 +94,26 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (_uploadLogAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            ABLog(2,@"Uploading Logs\n");
+            [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            {
+                [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            error:^
+            {
+                [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }];
+        }
+    }
+}
+
 #pragma mark - Actions Methods
 
 - (void)back
@@ -101,26 +123,16 @@
 
 - (IBAction)uploadLogs:(id)sender
 {
-    ABLog(2,@"Uploading Logs\n");
-    [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error Error;
-        ABC_UploadLogs([[User Singleton].name UTF8String],
-                       [[User Singleton].password UTF8String],
-                       &Error);
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            if (ABC_CC_Ok == Error.code)
-            {
-                [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-            }
-            else
-            {
-                [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-            }
-
-        });
-    }];
+    NSString *title = NSLocalizedString(@"Upload Log File", nil);
+    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    // show password reminder test
+    _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
+                                                 message:message
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"Upload Log", nil];
+    _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [_uploadLogAlert show];
 }
 
 - (IBAction)clearWatcher:(id)sender
