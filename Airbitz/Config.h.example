@@ -19,9 +19,6 @@
 
 #define HOCKEY_MANAGER_ID               @"00000000000000000000000000000000"
 
-#define PRIVATE_KEY                     @"000000000000000000000000000000000000000000000000000"
-#define PUBLIC_ADDRESS                  @"0000000000000000000000000000000000"
-
 /* These should be 0 for deployment */
 #define AIRBITZ_IOS_DEBUG               0   /* set to 1 while debugging */
 #define DIRECTORY_ONLY                  0   /* set to 0 for wallet and directory, set to 1 for just directory */
