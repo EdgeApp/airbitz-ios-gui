@@ -1139,14 +1139,14 @@ MainViewController *singleton;
 
 - (void)showPasswordCheckAlert
 {
-    NSString *title = NSLocalizedString(@"Remember your password?", nil);
-    NSString *message = NSLocalizedString(@"Do you still remember your password? You will need your password if your device gets lost or if your PIN is incorrectly entered 3 times.\nEnter it below to make sure:", nil);
+    NSString *title = rememberYourPasswordText;
+    NSString *message = rememberYourPasswordWarningText;
     // show password reminder test
     _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
                                                      message:message
                                                     delegate:self
-                                           cancelButtonTitle:@"Later"
-                                           otherButtonTitles:@"Check Password", nil];
+                                           cancelButtonTitle:laterButtonText
+                                           otherButtonTitles:checkPasswordButtonText, nil];
     _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
     [_passwordCheckAlert show];
     [User Singleton].needsPasswordCheck = NO;
@@ -1193,8 +1193,8 @@ MainViewController *singleton;
             initWithTitle:title
                   message:message
                  delegate:self
-        cancelButtonTitle:NSLocalizedString(@"Skip", nil)
-        otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        cancelButtonTitle:skipButtonText
+        otherButtonTitles:okButtonText, nil];
     [_passwordSetAlert show];
 }
 
@@ -1202,14 +1202,14 @@ MainViewController *singleton;
 {
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
-        [MainViewController fadingAlert:NSLocalizedString(@"Great job remembering your password.", nil)];
+        [MainViewController fadingAlert:greatJobRememberingPasswordText];
     } else {
         _passwordIncorrectAlert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                      message:NSLocalizedString(@"Incorrect Password. Try again, or change it now?", nil)
+                initWithTitle:incorrectPasswordText
+                      message:incorrectPasswordTryAgainText
                      delegate:self
-            cancelButtonTitle:@"NO"
-            otherButtonTitles:@"YES", @"CHANGE", nil];
+            cancelButtonTitle:noButtonText
+            otherButtonTitles:yesButtonText, changeButtonText, nil];
         [_passwordIncorrectAlert show];
     }
 }
@@ -1218,8 +1218,7 @@ MainViewController *singleton;
 {
 
 
-    NSString *str = NSLocalizedString(@"How are you liking %@?", @"Like Airbitz popup");
-    NSString *str2 = [NSString stringWithFormat:str, appTitle];
+    NSString *str2 = [NSString stringWithFormat:howAreYouLikingAirbitzText, appTitle];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
@@ -1228,8 +1227,8 @@ MainViewController *singleton;
                                     initWithTitle:appTitle
                                     message:str2
                                     delegate:self
-                                    cancelButtonTitle:NSLocalizedString(@"Not so good", nil)
-                                    otherButtonTitles:NSLocalizedString(@"It's great", nil), nil];
+                                    cancelButtonTitle:notSoGoodText
+                                    otherButtonTitles:itsGreatText, nil];
             [_userReviewAlert show];
         }
     });
@@ -1270,15 +1269,15 @@ MainViewController *singleton;
     else if (_receivedAlert == nil)
     {
         if (transaction && transaction.amountSatoshi >= 0) {
-            NSString *title = NSLocalizedString(@"Received Funds", nil);
-            NSString *msg = NSLocalizedString(@"Bitcoin received. Tap for details.", nil);
+            NSString *title = receivedFundsText;
+            NSString *msg = bitcoinReceivedTapText;
             [[AudioController controller] playReceived];
             _receivedAlert = [[UIAlertView alloc]
                               initWithTitle:title
                               message:msg
                               delegate:self
-                              cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                              cancelButtonTitle:cancelButtonText
+                              otherButtonTitles:okButtonText, nil];
             [_receivedAlert show];
             // Wait 5 seconds and dimiss
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC);
@@ -1329,11 +1328,11 @@ MainViewController *singleton;
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {
-        message = [NSString stringWithFormat:@"You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", coin, fiat];
+        message = [NSString stringWithFormat:youReceivedBitcoinUsePayeeText, coin, fiat];
     }
     else
     {
-        message = [NSString stringWithFormat:@"You Received Bitcoin!\n%@ (~%@)", coin, fiat];
+        message = [NSString stringWithFormat:youReceivedBitcoinText, coin, fiat];
     }
 
     if([LocalSettings controller].bMerchantMode)
@@ -1441,20 +1440,20 @@ MainViewController *singleton;
         {
             _userReviewNOAlert = [[UIAlertView alloc]
                                   initWithTitle:appTitle
-                                  message:NSLocalizedString(@"Would you like to send us some feedback?", nil)
+                                  message:wouldYouLikeToSendFeedbackText
                                   delegate:self
-                                  cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
-                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                  cancelButtonTitle:noThanksText
+                                  otherButtonTitles:okButtonText, nil];
             [_userReviewNOAlert show];
         }
         else if (buttonIndex == 1) // Yes, launch userReviewOKAlert
         {
             _userReviewOKAlert = [[UIAlertView alloc]
                                 initWithTitle:appTitle
-                                message:NSLocalizedString(@"Would you like to write a review in the App store?", nil)
+                                message:wouldYouLikeToWriteReviewText
                                 delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
-                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                cancelButtonTitle:noThanksText
+                                otherButtonTitles:okButtonText, nil];
             [_userReviewOKAlert show];
         }
     }
@@ -1500,9 +1499,9 @@ MainViewController *singleton;
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"Can't send e-mail",nil)
+                                                        message:cantSendEmailText
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                              cancelButtonTitle:okButtonText
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -1542,7 +1541,7 @@ MainViewController *singleton;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
                                                     message:strMsg
                                                    delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          cancelButtonTitle:okButtonText
                                           otherButtonTitles:nil];
     [alert show];
     
@@ -1563,7 +1562,7 @@ MainViewController *singleton;
                                 message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
                                 delegate:self
                     cancelButtonTitle:nil
-                    otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                    otherButtonTitles:okButtonText, nil];
         [_passwordChangeAlert show];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
@@ -1589,7 +1588,7 @@ MainViewController *singleton;
             initWithTitle:NSLocalizedString(@"Two Factor Invalid", nil)
             message:NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
             delegate:self
-            cancelButtonTitle:NSLocalizedString(@"OK", nil)
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil, nil];
         [_otpSkewAlert show];
     }
