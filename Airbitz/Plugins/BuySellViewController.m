@@ -12,8 +12,8 @@
 #import "Plugin.h"
 #import "Util.h"
 
-#define SECTION_GIFT_CARDS      0
-#define SECTION_BUY_SELL        1
+#define SECTION_BUY_SELL        0
+#define SECTION_GIFT_CARDS      1
 #define SECTIONS_TOTAL          2
 
 @interface BuySellViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>

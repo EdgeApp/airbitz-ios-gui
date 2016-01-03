@@ -1119,7 +1119,7 @@ div.card.card-content.card-info-main {
 .card-balance-amt {font-size:20pt; color: #555555; padding-bottom: 10px}
 .card-value       {font-size:18pt; color: #555555; height: 50px}
 .card-info        {font-size:10pt; color: #007aFF; height: 20px}
-.card-number      {font-family: Courier, monospace, serif; font-size:11pt; color: #555555}
+.card-number      {font-family: Courier, monospace, serif; font-size:13pt; color: #555555}
 .partner-logo     {height: 35px; align-content: center}
 .collapsible-header {vert-align: middle}
 .reset-account    {
@@ -10188,6 +10188,7 @@ var Glidera = (function () {
 (function() {
   angular.module('app.filters', [])
     .filter('statusFilter', statusFilter)
+    .filter('stateFilter', stateFilter)
     .filter('titlecase', titleCase)
     .filter('roundFiat', roundFiat)
     .filter('formatBtc', ['$filter', formatBtc])
@@ -10198,6 +10199,22 @@ var Glidera = (function () {
   function statusFilter() {
     return function(status) {
       return (status) ? 'Verified' : 'Unverified';
+    };
+  }
+
+  function stateFilter() {
+    return function(state) {
+      if (state == 'UNSUBMITTED') {
+        return 'Unsubmitted';
+      } else if (state == 'SUBMITTED') {
+        return 'Submitted';
+      } else if (state == 'VERIFIED') {
+        return 'Verified';
+      } else if (state == 'FAILED') {
+        return 'Failed';
+      } else {
+        return state;
+      }
     };
   }
 
@@ -11870,7 +11887,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <span class="list-group-item-heading">Identity Verification</span>\n' +
     '        <p class="list-group-item-text text-primary">Tap to edit</p>\n' +
     '        <label class="status label pull-right"\n' +
-    '               ng-class="(userPictureIsSetup) ? \'label-success\' : \'label-danger\'">{{ userPictureIsSetup | statusFilter }}</label>\n' +
+    '               ng-class="(userPictureIsSetup) ? \'label-success\' : \'label-danger\'">{{ userStatus.userPictureIdState | stateFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" ui-sref="bankAccount" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Bank Account</span>\n' +
@@ -12220,7 +12237,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputLastName" class="sr-only">Last</label>\n' +
     '      <input ng-model="account.lastName" ng-required="true"\n' +
     '      type="text" id="inputLastName" class="form-control large"\n' +
-    '      placeholder="Last name" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="Last name" autocomplete="off" autocorrect="off"\n' +
     '      name="lastName"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.lastName.$touched">\n' +
@@ -12232,7 +12249,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputAddress" class="">Address</label>\n' +
     '      <input ng-model="account.address1"\n' +
     '      type="text" id="inputAddressStreet" class="form-control large"\n' +
-    '      placeholder="Address" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="Address"  autocomplete="off" autocorrect="off"\n' +
     '      name="address"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.address.$touched">\n' +
@@ -12244,14 +12261,14 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputAddress2" class="sr-only">Address 2</label>\n' +
     '      <input ng-model="account.address2"\n' +
     '      type="text" id="inputAddressStreet2" class="form-control large"\n' +
-    '      placeholder="Address 2" autofocus="" autocomplete="off" autocorrect="off" />\n' +
+    '      placeholder="Address 2" autocomplete="off" autocorrect="off" />\n' +
     '    </div>\n' +
     '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputAddressCity" class="sr-only">City</label>\n' +
     '      <input ng-model="account.city"\n' +
     '      type="text" id="inputAddressCity" class="form-control large"\n' +
-    '      placeholder="City" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="City" autocomplete="off" autocorrect="off"\n' +
     '      name="city"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.city.$touched">\n' +
@@ -12264,7 +12281,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label for="inputAddressZip" class="sr-only">Postal Code</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
     '        type="text" id="inputAddressZip" class="form-control large"\n' +
-    '        placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '        placeholder="Postal Code" autocomplete="off" autocorrect="off"\n' +
     '        name="zip"\n' +
     '        required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.zip.$touched">\n' +
@@ -12286,7 +12303,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputDob" class="">Date of Birth</label>\n' +
     '      <input ng-model="account.birthDate"\n' +
-    '        type="date" id="inputDob" class="form-control large" placeholder="YYYY-MM-DD" autofocus=""\n' +
+    '        type="date" id="inputDob" class="form-control large" placeholder="YYYY-MM-DD"\n' +
     '        autocomplete="off"\n' +
     '        name="dob"\n' +
     '        required="" />\n' +
@@ -12313,7 +12330,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputEmployerName" class="">Employer Name</label>\n' +
     '      <input ng-model="account.employerName" ng-required="true"\n' +
     '             type="text" id="inputEmployerName" class="form-control large"\n' +
-    '             placeholder="Employer name" autofocus="true" autocomplete="off" autocorrect="off"\n' +
+    '             placeholder="Employer name" autocomplete="off" autocorrect="off"\n' +
     '             name="employerName" \n' +
     '             ng-required="account.occupation.id == OTHER"/>\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.employerName.$touched">\n' +
@@ -12337,8 +12354,8 @@ module.run(['$templateCache', function($templateCache) {
     '      <div class="no-pad-left form-group col-xs-12">\n' +
     '        <label for="last4Ssn">Last 4 of SSN</label>\n' +
     '        <input ng-model="account.last4Ssn"\n' +
-    '        type="text" id="last4Ssn" class="form-control large"\n' +
-    '        placeholder="Last 4 SSN" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '        type="number" id="last4Ssn" class="form-control large"\n' +
+    '        placeholder="Last 4 SSN" autocomplete="off" autocorrect="off"\n' +
     '        name="last4Ssn"\n' +
     '        required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.last4Ssn.$touched">\n' +
@@ -12377,7 +12394,9 @@ module.run(['$templateCache', function($templateCache) {
     '</div>\n' +
     '\n' +
     '<div class="row" style="margin: 20px 0">\n' +
-    '  <p><label class="label label-warning">Note</label> Email will contain a link which must be clicked on phone to proceed past this screen.</p>\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <p><label class="label label-warning">Note</label> Email will contain a link which must be clicked on phone to proceed past this screen.</p>\n' +
+    '  </div>\n' +
     '</div>\n' +
     '\n' +
     '<div class="row" style="margin-top: 40px;">\n' +
@@ -12399,7 +12418,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="col-xs-12 no-pad">\n' +
     '      <button type="button" ui-sref="dashboard" class="btn btn-block btn-lg btn-info">Dashboard</button>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 

@@ -1116,7 +1116,7 @@ div.card.card-content.card-info-main {
 .card-balance-amt {font-size:20pt; color: #555555; padding-bottom: 10px}
 .card-value       {font-size:18pt; color: #555555; height: 50px}
 .card-info        {font-size:10pt; color: #007aFF; height: 20px}
-.card-number      {font-family: Courier, monospace, serif; font-size:11pt; color: #555555}
+.card-number      {font-family: Courier, monospace, serif; font-size:13pt; color: #555555}
 .partner-logo     {height: 35px; align-content: center}
 .collapsible-header {vert-align: middle}
 .reset-account    {
@@ -9535,15 +9535,19 @@ var CleverCoin = (function () {
       $scope.order.orderFiatInput = d.orderFiatInput;
     };
     $scope.next = function() {
-      Airbitz.ui.showAlert('', 'Requesting quote...', { 'showSpinner': true });
-      $scope.order.orderBtcInput = parseFloat($scope.order.orderBtcInput).toFixed(8);
-      DataFactory.requestBuy($scope.order.orderBtcInput, $scope.order.paymentMethod.name).then(function(data) {
-        Airbitz.ui.hideAlert();
-        $scope.order.quote = data;
-        $state.go("reviewOrder");
-      }, function(b) {
-        Airbitz.ui.showAlert('', 'Unable to receive quote. ' + Error.errorMap(b));
-      });
+      if ($scope.order.orderFiatInput < 1.0) {
+        Airbitz.ui.showAlert('', 'Orders must be greater than 1 Euro.');
+      } else {
+        Airbitz.ui.showAlert('', 'Requesting quote...', { 'showSpinner': true });
+        $scope.order.orderBtcInput = parseFloat($scope.order.orderBtcInput).toFixed(8);
+        DataFactory.requestBuy($scope.order.orderBtcInput, $scope.order.paymentMethod.name).then(function(data) {
+          Airbitz.ui.hideAlert();
+          $scope.order.quote = data;
+          $state.go("reviewOrder");
+        }, function(b) {
+          Airbitz.ui.showAlert('', 'Unable to receive quote. ' + Error.errorMap(b));
+        });
+      }
     };
   }
   function reviewOrderController($scope, $state, Error, DataFactory, UserFactory, Prices) {
@@ -9663,7 +9667,9 @@ var CleverCoin = (function () {
         Airbitz.ui.showAlert('', 'Account created...');
         $state.go('pendingActivation');
       }, function(e) {
-        Airbitz.ui.showAlert('Error', 'Error signing up');
+        console.log(e);
+        var msg = 'Unable to signup at this time.\n' + Error.errorMap(e);
+        Airbitz.ui.showAlert('Error', msg);
       });
     };
   }
@@ -9783,7 +9789,11 @@ var CleverCoin = (function () {
         msg += '<h5><strong>' + counter + "</strong>. Address verification pending review.</h5>";
       } else if (!$scope.userStatus.userAddressSetup) {
         counter++;
-        msg += '<h5><strong>' + counter + "</strong>. Please verify your address</h5>";
+        msg += '<h5><strong>' + counter + "</strong>. Please verify your address.</h5>";
+      }
+      if ($scope.banks.length == 0) {
+        counter++;
+        msg += '<h5><strong>' + counter + "</strong>. Please add a bank account.</h5>";
       }
       if (msg !== '') {
         msg = '<h4 style="margin-top: 0;">To Buy or Sell Bitcoin:</h4>' + msg;
@@ -9801,7 +9811,7 @@ var CleverCoin = (function () {
 
     $scope.identity = function() {
       if (["Rejected"].indexOf($scope.userStatus.userIdentityState) > -1) {
-        Airbitz.ui.showAlert('', 'Identity documents have been rejected. Unable to resubmit at this time.');
+        $state.go("identityVerification");
       } else if (["Verified"].indexOf($scope.userStatus.userIdentityState) > -1) {
         Airbitz.ui.showAlert('', 'Verification documents have already been verified, and cannot be resubmitted.');
       } else if (["Exported"].indexOf($scope.userStatus.userIdentityState) > -1) {
@@ -9812,7 +9822,7 @@ var CleverCoin = (function () {
     };
     $scope.address = function() {
       if (["Rejected"].indexOf($scope.userStatus.userAddressState) > -1) {
-        Airbitz.ui.showAlert('', 'Address documents have been rejected. Unable to resubmit at this time.');
+        $state.go("addressVerification");
       } else if (["Verified"].indexOf($scope.userStatus.userAddressState) > -1) {
         Airbitz.ui.showAlert('', 'Address documents have already been verified, and cannot be resubmitted.');
       } else if (["Exported"].indexOf($scope.userStatus.userAddressState) > -1) {
@@ -9916,10 +9926,7 @@ var CleverCoin = (function () {
         $state.go('dashboard');
       }, function(e) {
         console.log(e);
-        var msg = 'Unable to submit identity information at this time. ';
-        if (e.error) {
-          msg += e.error;
-        }
+        var msg = 'Unable to submit identity information at this time.\n' + Error.errorMap(e);
         Airbitz.ui.showAlert('', msg);
       });
     };
@@ -10238,7 +10245,17 @@ var CleverCoin = (function () {
 
     function errorMap(res) {
       if (res.error) {
-        return res.error;
+        if (typeof res.error == 'string') {
+          return res.error;
+        } else if (typeof res.error == 'object') { 
+          var s = '';
+          for (var i in res.error) {
+            s += res.error[i] + '\n';
+          }
+          return s.trim();
+        } else {
+          return '';
+        }
       } else {
         return '';
       }
@@ -11552,6 +11569,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <li data-ng-if="banks.length == 0 && showOptions" data-ng-click="editBank()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Bank Account</span>\n' +
     '        <p class="list-group-item-text">Tap to Add</p>\n' +
+    '        <label class="status label label-outline pull-right">{{ false | statusFilter }}</label>\n' +
     '      </li>\n' +
     '    </ul>\n' +
     '  </div>\n' +
@@ -11976,7 +11994,7 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '</div>\n' +
     '\n' +
-    '<div class="row" ng-if="wallets.length > 0">\n' +
+    '<div ng-if="userStatus.userCanTransact" class="row" ng-if="wallets.length > 0">\n' +
     '  <table class="table table-bordered table-striped col-xs-12 no-pad">\n' +
     '    <tr>\n' +
     '      <th>CleverCoin Balance</th>\n' +
@@ -11987,11 +12005,11 @@ module.run(['$templateCache', function($templateCache) {
     '  </table>\n' +
     '</div>\n' +
     '\n' +
-    '<div class="ng-trans ng-trans-fade-up easeOutSine">\n' +
+    '<div ng-if="userStatus.userCanTransact" class="ng-trans ng-trans-fade-up easeOutSine">\n' +
     '  <hr />\n' +
     '  <div class="row">\n' +
     '    <div class="col-xs-12 no-pad">\n' +
-    '      <button type="button" ui-sref="userFunds" class="btn btn-block btn-lg btn-info">Funds</button>\n' +
+    '      <button type="button" ui-sref="userFunds" class="btn btn-block btn-lg btn-info">Transactions</button>\n' +
     '    </div>\n' +
     '  </div>\n' +
     '</div>\n' +
@@ -12044,10 +12062,6 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/funds.html',
-    '<div class="row">\n' +
-    '  <div class="col-xs-12 no-pad">\n' +
-    '    <button type="button" ng-click="clearAccount()" class="btn btn-block btn-danger">Logout</button>\n' +
-    '</div>\n' +
     '<div class="transactions row">\n' +
     '  <table ng-model="transactions" class="table table-bordered table-striped col-xs-12 no-pad">\n' +
     '    <tr ng-repeat="t in funds">\n' +
@@ -12511,7 +12525,7 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="row">\n' +
     '    <div class="form-group col-xs-12">\n' +
     '      <label for="inputPhoneNumber" class="">Phone Number</label>\n' +
-    '      <input ng-model="account.phonenumber" name="phonenumber" type="text" id="inputPhoneNumber" class="form-control"\n' +
+    '      <input ng-model="account.phonenumber" name="phonenumber" type="tel" id="inputPhoneNumber" class="form-control"\n' +
     '            placeholder="Phone number"\n' +
     '            autocorrect="off"\n' +
     '            autocomplete="off"\n' +
