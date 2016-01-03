@@ -79,7 +79,7 @@
         [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
         self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
         
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, [CoreBridge Singleton].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         
         if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))

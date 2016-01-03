@@ -110,6 +110,7 @@
 #define noThanksText                                NSLocalizedString(@"No thanks", nil)
 #define wouldYouLikeToWriteReviewText               NSLocalizedString(@"Would you like to write a review in the App store?", nil)
 #define cantSendEmailText                           NSLocalizedString(@"Can't send e-mail",nil)
+#define navbarToWalletPrefixText                    NSLocalizedString(@"To: %@ ▼", "Top of screen wallet dropdown prefix text")
 
 
 
