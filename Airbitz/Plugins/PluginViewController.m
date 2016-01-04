@@ -494,9 +494,50 @@ static const NSString *PROTOCOL = @"bridge://";
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#define MAX_WIDTH_HEIGHT 1024
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.75)];
+    
+    float oldWidth = image.size.width;
+    float oldHeight = image.size.height;
+    float newWidth;
+    float newHeight;
+    
+    if (oldWidth > MAX_WIDTH_HEIGHT ||
+        oldHeight > MAX_WIDTH_HEIGHT)
+    {
+        if (oldHeight > oldWidth)
+        {
+            newHeight = MAX_WIDTH_HEIGHT;
+            newWidth = MAX_WIDTH_HEIGHT * (oldWidth / oldHeight);
+        }
+        else
+        {
+            newWidth = MAX_WIDTH_HEIGHT;
+            newHeight = MAX_WIDTH_HEIGHT * (oldHeight / oldWidth);
+        }
+    }
+    else
+    {
+        newWidth = oldWidth;
+        newHeight = oldHeight;
+    }
+    
+    UIImage *scaledImage = [self imageWithImage:image scaledToSize:CGSizeMake(newWidth, newHeight)];
+    
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(scaledImage, 0.5)];
     NSString *encodedString = [imgData base64Encoding];
     
     int SLICE_SIZE = 500;
@@ -508,7 +549,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
         NSString *chunk = [encodedString substringWithRange:NSMakeRange(start, size)];
         [_webView stringByEvaluatingJavaScriptFromString:
-            [NSString stringWithFormat:@"Airbitz.bufferAdd('%s');", chunk]];
+            [NSString stringWithFormat:@"Airbitz.bufferAdd('%@');", chunk]];
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
