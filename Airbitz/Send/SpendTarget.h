@@ -12,6 +12,7 @@
 @property (nonatomic, strong)       Wallet                  *srcWallet;
 @property (nonatomic, strong)       Wallet                  *destWallet;
 @property (nonatomic)               long                    bizId;
+@property (nonatomic)               double                  amountFiat;
 
 - (id)init;
 - (BOOL)newSpend:(NSString *)text error:(tABC_Error *)pError;
@@ -22,8 +23,10 @@
                    notes:(NSString *)notes
            amountSatoshi:(uint64_t)amountSatoshi
                    error:(tABC_Error *)pError;
-- (NSString *)approve:(double)fiatAmount
-                error:(tABC_Error *)pError;
+- (NSString *)signTx:(tABC_Error *)pError;
+- (BOOL)broadcastTx:(NSString *)rawTx error:(tABC_Error *)pError;
+- (NSString *)saveTx:(NSString *)rawTx error:(tABC_Error *)pError;
+- (NSString *)approve:(tABC_Error *)pError;
 
 - (BOOL)isMutable;
 - (uint64_t)maxSpendable:(NSString *)walletUUID;
