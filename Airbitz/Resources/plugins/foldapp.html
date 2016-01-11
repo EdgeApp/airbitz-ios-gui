@@ -4,7 +4,6 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="FoldApp Interface for Airbitz">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <style>
 /*!
  * Bootstrap v3.3.2 (http://getbootstrap.com)
@@ -1116,7 +1115,7 @@ div.card.card-content.card-info-main {
 .card-balance-amt {font-size:20pt; color: #555555; padding-bottom: 10px}
 .card-value       {font-size:18pt; color: #555555; height: 50px}
 .card-info        {font-size:10pt; color: #007aFF; height: 20px}
-.card-number      {font-family: Courier, monospace, serif; font-size:11pt; color: #555555}
+.card-number      {font-family: Courier, monospace, serif; font-size:13pt; color: #555555}
 .partner-logo     {height: 35px; align-content: center}
 .collapsible-header {vert-align: middle}
 .reset-account    {
@@ -1309,7 +1308,6 @@ div.card.card-content.card-info-main {
 	background: url(AjaxLoader.gif) no-repeat center center
 }
 </style> <!-- Default Theme -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
 /*!
  * Materialize v0.97.3 (http://materializecss.com)
@@ -9739,7 +9737,6 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em; } }
 
 </style>
-    <!-- https://airbitz.co/go/wp-content/uploads/2015/12/download.png -->
 </head>
 <body>
 <div class="container-fluid">
@@ -9757,7 +9754,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
                         <div class="collapsible-header active">
-                            <div class="add-funds-header">Add Funds</div>
+                            <div class="add-funds-header">Buy Gift Card</div>
                         </div>
                         <div class="collapsible-body">
                             <ul class="collection add-buttons">
@@ -9804,27 +9801,15 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 </script>
 <script id="add-funds" type="text/x-handlebars-template">
 <li class="collection-item avatar card-list">
-    <span class="title">{{{cardValue}}}</span>
-    <div class="secondary-content">
-        <button type="button" class="buy-card">Buy</button>
+    <div style="position:relative">
+        <div style="position:absolute; top:50%; height:100%; margin-top:1.3em;">
+            <span class="title">{{{cardValue}}}</span>
+        </div>
+        <div style="position:absolute; top:50%; height:100%; margin-top:1.1em; right:0;">
+            <button type="button" style="float: right;" class="buy-card">Buy</button>
+        </div>
     </div>
 </li>
-</script>
-<script id="how" type="text/x-handlebars-template">
-<div class="how-it-works">
-    <div class="step-1">
-        <h5>Load</h5>
-        <p>Visit your local <span class="brand-name">{{brand name}}</span>. Select the card amount you want and confirm your payment.</p>
-    </div>
-    <div class="step-2">
-        <h5>Pay</h5>
-        <p>Place your order with the barista. Pay for your order by scanning the barcode on your phone.</p>
-    </div>
-    <div class="step-3">
-        <h5>Enjoy</h5>
-        <p>You’re done! Enjoy your coffee! If you have any trouble, please email <a href="mailto:support@airbitz.co?Subject=Need help with Fold">support@airbitz.co</a></p>
-    </div>
-</div>
 </script>
 <script type="text/javascript">
 
@@ -16411,11 +16396,13 @@ var api_token = Airbitz.config.get("API-TOKEN");
 var bizId = Airbitz.config.get("BIZID");
 var logo_url = Airbitz.config.get("LOGO_URL");
 var category = Airbitz.config.get("CATEGORY");
+var statsKey = Airbitz.config.get('AIRBITZ_STATS_KEY');
 var server_json_error = false;
 var first_load = 1;
 var force_refresh = 1;
 var min_price_rate = 1;
 var refund_enabled = 0;
+var new_account = false;
 
 // Purchases over this amount are given a popup warning as 1 confirmation is required
 // before card is available
@@ -16428,9 +16415,13 @@ function resetAccount() {
     if (confirm("Reset Account? This will delete all cards and create a new account with Fold") == true) {
         if (confirm("Reset Account? ARE YOU SURE. All cards from all vendors will be lost?") == true) {
             if (confirm("Reset Account? ARE YOU REALLY SURE?") == true) {
-                Account.create();
-                Airbitz.ui.showAlert("New Account Created", "New Account Created. Please re-enter to use new account");
-                Airbitz.ui.exit();
+                Account.createWithHandler(function(){
+                    Airbitz.ui.debugLevel(1,"New account creation for reset succeeded.");
+                    Airbitz.ui.exit();
+                }, function(){
+                    Airbitz.ui.showAlert("New Account Creation Failed", "New Account Creation Failed. Please check network or try again later");
+                    Airbitz.ui.debugLevel(1,"New account creation for reset failed.");
+                });
             }
         }
     }
@@ -16440,9 +16431,22 @@ function toggleUi() {
     $(".fold-loading").css("display", "none");
     $(".main").css("display", "inline");
     setInterval( function() {
-        Account.pingCard(Account.current_card_id);
-        user.resetCards(function() {});
+        updateAllCards();
     }, 3000); // Refresh UI every 3 seconds
+}
+
+function updateAllCards() {
+    user.updateUsersCards(function() {
+        user.updateCardsForSale(function() {
+            Account.pingCard(Account.current_card_id);
+            if (server_json_error) {
+                Airbitz.ui.showAlert("Server Response Error", "Error in Server response. Please contact support");
+                Airbitz.ui.debugLevel(1,"Error in Server response. Please contact support");
+                server_json_error = false;
+                first_load = 0;
+            }
+        }); // Start getting avaliable cards for sale.
+    });
 }
 
 function supportsTemplate() {
@@ -16474,7 +16478,7 @@ var createAddress = function(wallet, label, amountSatoshi, amountFiat,
         notes: notes,
         amountSatoshi: amountSatoshi,
         amountFiat: amountFiat,
-        bizId: bizId,
+        bizId: parseInt(bizId),
         success: function(data) {
             Airbitz.core.finalizeRequest(wallet, data["requestId"]);
             resolve(data);
@@ -16488,11 +16492,11 @@ function updateWallet(wallet) {
 }
 
 function logStats(event, brand, amount) {
-    var statsKey = Airbitz.config.get('AIRBITZ_STATS_KEY');
     var s = {};
     s['btc'] = 0;
-    s['partner'] = 'Fold:';
+    s['partner'] = 'Fold';
     s['country'] = 'USA';
+    s['user'] = Account.username.substr(Account.username.length - 8);
     s['brand'] = brand;
     s['usd'] = amount;
     $.ajax({
@@ -16546,6 +16550,14 @@ var Account = {
     numUpdates: 0,
     current_card_id: "", // The currently visible card id. used to ping Fold servers for balance update
     create: function() {
+        Account.createWithHandler(function(){
+            Airbitz.ui.debugLevel(1,"Account created successfully");
+        },function(){
+            Airbitz.ui.showAlert("Account creation error", "Error creating account. Please try again later");
+        });
+    },
+
+    createWithHandler: function(handleReponse, handleError) {
         Airbitz.ui.debugLevel(1,"Creating user.");
         var url = fold_api + "users";
         var newAcc = {"users": [{
@@ -16564,9 +16576,9 @@ var Account = {
             Airbitz.core.writeData("fold-username", Account.username);
             Airbitz.core.writeData("fold-pass", Account.pass);
             Account.exists.resolve();
+            handleReponse();
         }, function(error) {
-            Airbitz.ui.showAlert("Account creation error", "Error creating account. Please try again later");
-            Airbitz.ui.exit();
+            handleError();
         });
     },
 
@@ -16578,7 +16590,6 @@ var Account = {
             Account.logged_in.resolve(r);
         }, function(error) {
             Airbitz.ui.showAlert("Login error", "Error logging into account. Please try again later");
-            Airbitz.ui.exit();
         });
     },
     updateBalance: function() {
@@ -16602,7 +16613,7 @@ var Account = {
         });
     },
 
-    updateWAddr: function(addr, updated) { // Set the default BTC address
+    updateWAddr: function(addr, handleResponse, handleError) { // Set the default BTC address
         var withdraw_url = fold_api + "my/default_withdraw_addresses";
         Airbitz.ui.debugLevel(1,"Setting default address to: " + addr.toString());
         var newAddr = {"default_withdraw_addresses": [{
@@ -16616,15 +16627,16 @@ var Account = {
         Airbitz.ui.debugLevel(1,newAddr);
         sRequestHandler(withdraw_url, newAddr, function(response) {
             Airbitz.ui.debugLevel(1,"Updated default_withdraw_address");
-            updated();
+            handleResponse();
         }, function(error) {
-            Airbitz.ui.showAlert("Card Not Refunded", "Error refunding card. Please try again later. Error:updateWAddr");
+            handleError();
         });
     },
-    resetCards: function(doneUpdating) {
+    // Updates list of user's cards
+    updateUsersCards: function(doneUpdating) {
         Airbitz.ui.debugLevel(1,"Resetting cards.");
         Account.getCards(function(cards) {
-            Account.updateCards(cards, doneUpdating);
+            Account.updateUsersCardsUI(cards, doneUpdating);
         });
     },
     clearOwl: function() {
@@ -16688,8 +16700,8 @@ var Account = {
         });
     },
 
-    updateCards: function(cards, doneUpdating) { // Updates the UI with cards the user has purchased
-        Airbitz.ui.debugLevel(1,"updateCards: " + cards.length + " cards from all brands.");
+    updateUsersCardsUI: function(cards, doneUpdating) { // Updates the UI with cards the user has purchased
+        Airbitz.ui.debugLevel(1,"updateUsersCardsUI: " + cards.length + " cards from all brands.");
 
         for (var c = 0; c < cards.length; c++) {
             // Check arrays values are defined
@@ -16709,25 +16721,25 @@ var Account = {
             }
         }
 
-        Airbitz.ui.debugLevel(1,"updateCards: brand: "+ brand + ": " + cards.length);
+        Airbitz.ui.debugLevel(1,"updateUsersCardsUI: brand: "+ brand + ": " + cards.length);
         if(!cards.length > 0) {
             var changed = Account.haveCardsChanged(cards);
             if(changed || (!Account.owlSet)) {
                 Account.all_cards = [];
                 Airbitz.ui.debugLevel(1,"No cards. New acc!");
                 if(typeof Account.owl.data("owlCarousel").owl === 'undefined') {
-                    Account.setDummyC();
+                    Account.setDummyCard();
                 } else if(Account.owl.data("owlCarousel").owl.owlItems.length > 0) {
-                    Account.setDummyC();
+                    Account.setDummyCard();
                 }
             }
         } else { // There's at least one card
             var changed = Account.haveCardsChanged(cards);
 
             if(changed == CardsChanged.YES) {
-                Airbitz.ui.debugLevel(1,"updateCards: brand: "+ brand + ": " + cards.length + " CARDS CHANGED");
-                Account.clearOwl();
+                Airbitz.ui.debugLevel(1,"updateUsersCardsUI: brand: "+ brand + ": " + cards.length + " CARDS CHANGED");
                 Account.all_cards = [];
+                var needToClearOwl = true;
 
                 var c = 0;
                 for (c in cards) {
@@ -16760,6 +16772,11 @@ var Account = {
                         }
                         var thisCardHTML = cardTemplate(thisCard);
                         Airbitz.ui.debugLevel(1, "Adding card: " + c + " card info: " + cards[c]);
+                        if (needToClearOwl) {
+                            Account.clearOwl();
+                            needToClearOwl = false;
+                        }
+
                         Account.owl.data('owlCarousel').addItem(thisCardHTML);
                         //document.querySelector("#user-cards").appendChild( document.importNode(card_html, true) );
                     }
@@ -16836,7 +16853,21 @@ var Account = {
             return CardsChanged.NO;
         }
     },
-    setDummyC: function() {
+    setLoadingCard: function() {
+        var tSource = $("#card-template").html();
+        var cardTemplate = Handlebars.compile(tSource);
+
+        var thisCard = {
+            cardNumber: "<div class=\"card-number\">" + "Loading..." + "</div>",
+            cardAmount: "<div class=\"card-balance-amt\">" + "$0.00" + "</div>",
+            cardBarcode: "",
+            refundText: ""
+        }
+        var thisCardHTML = cardTemplate(thisCard);
+        Account.clearOwl(); // Make sure there's only ever ONE grey card and no other cards at the same time.
+        Account.owl.data('owlCarousel').addItem(thisCardHTML);
+    },
+    setDummyCard: function() {
         var tSource = $("#card-template").html();
         var cardTemplate = Handlebars.compile(tSource);
 
@@ -16856,7 +16887,8 @@ var Account = {
         });
         return cardFromId[0];
     },
-    listCards: function(doneListing) { // Updates the UI with cards avaliable to purchase from Fold.
+
+    updateCardsForSale: function(doneListing) { // Updates the UI with cards avaliable to purchase from Fold.
         var numCardsToBuy = 0;
         this.getInfo("brands", function(cards_avil) {
             Airbitz.ui.debugLevel(1,JSON.stringify(cards_avil) );
@@ -16903,25 +16935,25 @@ var Account = {
                     $(".add-buttons").html(""); // Wipe out any cards that are currently there.
                     var addTemplateHtml = "";
 
-                    // Sort cards from lowest to highest
-                    card_vals.sort(function(a, b){
-                        if (a["amount"] < b["amount"]) return -1;
-                        if (b["amount"] < a["amount"]) return 1;
-                        else return 0;
-                    });
+                    if (card_vals) {
+                      // Sort cards from lowest to highest
+                      card_vals.sort(function(a, b){
+                          return a["amount"] - b["amount"];
+                      });
 
-                    for(ic in card_vals) {
-                        numCardsToBuy++;
-                        var price_rate = parseFloat(card_vals[ic]["price_rate"]);
+                      for(ic in card_vals) {
+                          numCardsToBuy++;
+                          var price_rate = parseFloat(card_vals[ic]["price_rate"]);
 
-                        Airbitz.ui.debugLevel(1,"Listing card " + ic);
-                        var source = $("#add-funds").html();
-                        var addTemplate = Handlebars.compile(source);
+                          Airbitz.ui.debugLevel(1,"Listing card " + ic);
+                          var source = $("#add-funds").html();
+                          var addTemplate = Handlebars.compile(source);
 
-                        var thisCard = {
-                            cardValue: "<h4 class=\"card-value\" value=\"" + card_vals[ic]["amount"] + "\">" + card_vals[ic]["formatted"]["all_decimal_places"] + "</h4>"
-                        }
-                        var addTemplateHtml = addTemplateHtml + addTemplate(thisCard);
+                          var thisCard = {
+                              cardValue: "<span class=\"card-value\" value=\"" + card_vals[ic]["amount"] + "\">" + card_vals[ic]["formatted"]["all_decimal_places"] + "</span>"
+                          }
+                          var addTemplateHtml = addTemplateHtml + addTemplate(thisCard);
+                      }
                     }
                     $(".add-buttons").html(addTemplateHtml);
                     $(".buy-card").off().on('click', function() {
@@ -16929,7 +16961,7 @@ var Account = {
                     });
                 }
                 if (numCardsToBuy) {
-                    $(".add-funds-header").text("Add Funds");
+                    $(".add-funds-header").text("Buy Gift Card");
                 } else {
                     $(".add-funds-header").text("Sorry, no cards available");
                 }
@@ -16972,12 +17004,14 @@ var Account = {
         }
         var url = fold_api + "my/orders";
         Airbitz.ui.debugLevel(1,"Getting new order");
+        Airbitz.ui.showAlert('', 'Creating Order', {'showSpinner': true});
         sRequestHandler(url, newOrder, function(r) {
             Airbitz.ui.debugLevel(1,"Order: " + JSON.stringify(r));
             var amt = (r["orders"][0]["price"]["amount"] * 100000000);
             var toAddr = r["orders"][0]["payment"][0]["address"];
             Airbitz.ui.debugLevel(1,"Spending " + amt + " from wallet: " + user.abWallet + " to: " + toAddr);
             Airbitz.ui.debugLevel(1,"Fiat amt: " + denomination)
+            Airbitz.ui.hideAlert();
             if (large_value_threshold < denomination) {
                 Airbitz.ui.showAlert("High Value Card", "You are purchasing a card over $50 in value. This requires one bitcoin network confirmation before your card will be available and may take over 10 minutes.");
             }
@@ -16986,7 +17020,7 @@ var Account = {
                         label: brand,
                         category: category,
                         notes: brand + " $" + String(denomination) + " gift card.",
-                        bizId: bizId,
+                        bizId: parseInt(bizId),
                         success: function(res) {
                             if (res && res.back) {
                                 // User pressed backed button
@@ -17032,7 +17066,7 @@ Card.prototype.refund = function() {
                     Account.updateWAddr(data["address"], function() {
                         sRequestHandler(url, refund, function(response) {
                             Account.clearOwl();
-                            Airbitz.ui.showAlert("Card Refunded", "Card Refunded. Please allow several minutes for refund.");
+                            Airbitz.ui.showAlert("Card Refunded", "Card Refunded. Please allow 8-15 minutes for refund.");
                             Airbitz.ui.debugLevel(1,response);
                             Airbitz.ui.debugLevel(1,"Done refunding!");
                             logStats("refund",brand,balance);
@@ -17040,6 +17074,8 @@ Card.prototype.refund = function() {
                         }, function(error) {
                             Airbitz.ui.showAlert("Card Not Refunded", "Error refunding card. Please try again later. Error:sRequestHandler:refund");
                         });
+                    }, function() {
+                        Airbitz.ui.showAlert("Card Not Refunded", "Error refunding card. Please try again later. Error:updateWAddr");
                     });
                 }, function(data) {
                     Airbitz.ui.showAlert("Card Not Refunded", "Error refunding card. Please try again later. Error:createAddress");
@@ -17090,6 +17126,7 @@ if(!(typeof Account.username === 'undefined' || Account.username == null)) {
     user.exists.resolve();
 } else {
     user.create();
+    new_account = true;
 }
 $.when(user.exists).done(function(data) {
     user.login();
@@ -17117,34 +17154,36 @@ $(function() {
             // itemsTablet: false,
             // itemsMobile : false
         });
+        Account.setLoadingCard();
+
 //      Account.logRefunds();
         Airbitz.core.selectedWallet({
             success: updateWallet,
             error: function() {
                 Airbitz.ui.debugLevel(1,"Could not get selected wallet");
+                Airbitz.ui.showAlert("Wallet Error", "Error could not select wallet.");
             }
         });
-        Airbitz.ui.debugLevel(1,"Updating UI");
-        user.listCards(function() { // Start getting avaliable cards for sale.
-            user.getCards(function(cards) {
-                user.updateCards(cards,function() {
-                    toggleUi();
 
-                    if (server_json_error) {
-                        Airbitz.ui.showAlert("Server Response Error", "Error in Server response. Please contact support");
-                        Airbitz.ui.debugLevel(1,"Error in Server response. Please contact support");
-                        server_json_error = false;
-                        first_load = 0;
-                    } else if (first_load) {
-                        Airbitz.ui.hideAlert();
-                        first_load = 0;
-                    }
-
-
+        // If this is a new account. Set an initial refund address in case any purchases get botched
+        if (new_account) {
+            createAddress(Account.abWallet, brand, 0, 0, category, "Refunded " + brand + " gift card.",
+                function(data) {
+                    Account.updateWAddr(data["address"], function() {
+                    }, function() {
+                    });
+                }, function(data) {
+                    Airbitz.ui.debugLevel(1,data);
                 });
-            });
-            // user.updateBalance();
-        });
+        }
+
+
+        Airbitz.ui.debugLevel(1,"Updating UI");
+        Airbitz.ui.hideAlert();
+
+        updateAllCards();
+        toggleUi();
+
         user.getInfo("profile", function(response) {
             //Airbitz.ui.debugLevel(1,response);
             //Airbitz.ui.debugLevel(1,response["logged_in"]);

@@ -31,6 +31,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary                   *_functions;
     NSString                       *_tempCbidForImagePicker;
     NSDictionary                   *_tempArgsForImagePicker;
+    SpendTarget                    *_spendTarget;
 
     BOOL                           bWalletListDropped;
 }
@@ -66,7 +67,10 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
-                @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
+                 @"requestSign":NSStringFromSelector(@selector(requestSign:)),
+                 @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
+                      @"saveTx":NSStringFromSelector(@selector(saveTx:)),
+                 @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
              @"finalizeRequest":NSStringFromSelector(@selector(finalizeRequest:)),
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
@@ -446,7 +450,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:results]];
 }
 
-- (void)launchSpendConfirmation:(NSDictionary *)params
+- (void)launchSpendConfirmation:(NSDictionary *)params signOnly:(BOOL)signOnly
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
@@ -458,25 +462,65 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendWallet = [CoreBridge getWallet:[args objectForKey:@"id"]];
 
     tABC_Error error;
-    SpendTarget *spendTarget = [[SpendTarget alloc] init];
-    if ([spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
+    _spendTarget = [[SpendTarget alloc] init];
+    if ([_spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
                                 label:[args objectForKey:@"label"]
                              category:[args objectForKey:@"category"]
                                 notes:[args objectForKey:@"notes"] 
                         amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
                                 error:&error]) {
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
-            spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
+            _spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
         }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
-        _sendConfirmationViewController.spendTarget = spendTarget;
+        _sendConfirmationViewController.spendTarget = _spendTarget;
 
         [CoreBridge makeCurrentWallet:_sendWallet];
+        _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
+        _sendConfirmationViewController.bSignOnly = signOnly;
         [Util animateController:_sendConfirmationViewController parentController:self];
+    }
+}
+
+- (void)requestSpend:(NSDictionary *)params
+{
+    [self launchSpendConfirmation:params signOnly:NO];
+}
+
+- (void)requestSign:(NSDictionary *)params
+{
+    [self launchSpendConfirmation:params signOnly:YES];
+}
+
+- (void)broadcastTx:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    tABC_Error error;
+
+    if (_spendTarget != nil && [_spendTarget broadcastTx:[args objectForKey:@"rawTx"] error:&error]) {
+        [self setJsResults:cbid withArgs:[self jsonSuccess]];
+    } else {
+        [self setJsResults:cbid withArgs:[self jsonError]];
+    }
+}
+
+- (void)saveTx:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    tABC_Error error;
+
+    if (_spendTarget != nil) {
+        NSString *txid =  [_spendTarget saveTx:[args objectForKey:@"rawTx"] error:&error];
+        _spendTarget = nil;
+        [self setJsResults:_sendCbid withArgs:[self jsonResult:txid]];
+    } else {
+        [self setJsResults:cbid withArgs:[self jsonError]];
     }
 }
 
@@ -494,9 +538,50 @@ static const NSString *PROTOCOL = @"bridge://";
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#define MAX_WIDTH_HEIGHT 1024
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(image, 0.75)];
+    
+    float oldWidth = image.size.width;
+    float oldHeight = image.size.height;
+    float newWidth;
+    float newHeight;
+    
+    if (oldWidth > MAX_WIDTH_HEIGHT ||
+        oldHeight > MAX_WIDTH_HEIGHT)
+    {
+        if (oldHeight > oldWidth)
+        {
+            newHeight = MAX_WIDTH_HEIGHT;
+            newWidth = MAX_WIDTH_HEIGHT * (oldWidth / oldHeight);
+        }
+        else
+        {
+            newWidth = MAX_WIDTH_HEIGHT;
+            newHeight = MAX_WIDTH_HEIGHT * (oldHeight / oldWidth);
+        }
+    }
+    else
+    {
+        newWidth = oldWidth;
+        newHeight = oldHeight;
+    }
+    
+    UIImage *scaledImage = [self imageWithImage:image scaledToSize:CGSizeMake(newWidth, newHeight)];
+    
+    NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(scaledImage, 0.5)];
     NSString *encodedString = [imgData base64Encoding];
     
     int SLICE_SIZE = 500;
@@ -508,7 +593,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
         NSString *chunk = [encodedString substringWithRange:NSMakeRange(start, size)];
         [_webView stringByEvaluatingJavaScriptFromString:
-            [NSString stringWithFormat:@"Airbitz.bufferAdd('%s');", chunk]];
+            [NSString stringWithFormat:@"Airbitz.bufferAdd('%@');", chunk]];
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -902,7 +987,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                        withBack:(BOOL)bBack
                                       withError:(BOOL)bError
-                                       withTxId:(NSString *)txId
+                                       withTxId:(NSString *)data
 {
     [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
@@ -912,9 +997,8 @@ static const NSString *PROTOCOL = @"bridge://";
         } else if (bError) {
             [self callJsFunction:_sendCbid withArgs:[self jsonError]];
         } else {
-            if (txId) {
-                NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
-                [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            if (data) {
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:data]];
             } else {
                 [self callJsFunction:_sendCbid withArgs:[self jsonError]];
             }

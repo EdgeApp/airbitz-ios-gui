@@ -54,26 +54,53 @@
     return pError->code == ABC_CC_Ok ? YES : NO;
 }
 
-- (NSString *)approve:(double)fiatAmount
-                error:(tABC_Error *)pError
+- (NSString *)signTx:(tABC_Error *)pError
 {
-    char *szTxId = NULL;
-    NSString *txId = nil;
+    NSString *rawTx = nil;
+    char *szRawTx = NULL;
 
-    ABC_SpendApprove([[User Singleton].name UTF8String], [self.srcWallet.strUUID UTF8String],
-            _pSpend, &szTxId, pError);
+    ABC_SpendSignTx([[User Singleton].name UTF8String],
+            [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, pError);
     if (pError->code == ABC_CC_Ok) {
-        txId = [NSString stringWithUTF8String:szTxId];
-        [self updateTransaction:txId fiatAmount:fiatAmount];
+        rawTx = [NSString stringWithUTF8String:szRawTx];
+        free(szRawTx);
     }
-    if (NULL != szTxId) {
+    return rawTx;
+}
+
+- (BOOL)broadcastTx:(NSString *)rawTx error:(tABC_Error *)pError
+{
+    ABC_SpendBroadcastTx([[User Singleton].name UTF8String],
+        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], pError);
+    return pError->code == ABC_CC_Ok;
+}
+
+- (NSString *)saveTx:(NSString *)rawTx error:(tABC_Error *)pError
+{
+    NSString *txid = nil;
+    char *szTxId = NULL;
+
+    ABC_SpendSaveTx([[User Singleton].name UTF8String],
+        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, pError);
+    if (pError->code == ABC_CC_Ok) {
+        txid = [NSString stringWithUTF8String:szTxId];
         free(szTxId);
+        [self updateTransaction:txid];
+    }
+    return txid;
+}
+
+- (NSString *)approve:(tABC_Error *)pError
+{
+    NSString *txId = nil;
+    NSString *rawTx = [self signTx:pError];
+    if (nil != rawTx && [self broadcastTx:rawTx error:pError]) {
+        txId = [self saveTx:rawTx error:pError];
     }
     return txId;
 }
 
 - (void)updateTransaction:(NSString *)txId
-               fiatAmount:(double)fiatAmount
 {
     NSString *transferCategory = NSLocalizedString(@"Transfer:Wallet:", nil);
     NSString *spendCategory = NSLocalizedString(@"Expense:", nil);
@@ -94,8 +121,8 @@
                 pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@", spendCategory] UTF8String]);
             }
         }
-        if (fiatAmount > 0) {
-            pTrans->pDetails->amountCurrency = fiatAmount;
+        if (_amountFiat > 0) {
+            pTrans->pDetails->amountCurrency = _amountFiat;
         }
         if (0 < _bizId) {
             pTrans->pDetails->bizId = _bizId;

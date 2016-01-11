@@ -92,7 +92,7 @@
 #define deleteWalletErrorText                       NSLocalizedString(@"Error Deleting Wallet",nil)
 #define deleteWalletDeletedText                     NSLocalizedString(@"Wallet Deleted",nil)
 #define rememberYourPasswordText                    NSLocalizedString(@"Remember your password?", nil)
-#define rememberYourPasswordWarningText             NSLocalizedString(@"Do you still remember your password? You will need your password if your device gets lost or if your PIN is incorrectly entered 3 times.\nEnter it below to make sure:", nil)
+#define rememberYourPasswordWarningText             NSLocalizedString(@"Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:", nil)
 #define greatJobRememberingPasswordText             NSLocalizedString(@"Great job remembering your password.", nil)
 #define incorrectPasswordText                       NSLocalizedString(@"Incorrect Password", nil)
 #define incorrectPasswordTryAgainText               NSLocalizedString(@"Incorrect Password. Try again, or change it now?", nil)
