@@ -21,8 +21,10 @@ void abDebugLog(int level, NSString *statement) {
             [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
         }
 
-        printf("%s\n",[[NSString stringWithFormat:@"<%@> %@",
-                                                  [timeStampFormat stringFromDate:[NSDate date]],statement] UTF8String]);
+        NSString *tempStr = [NSString stringWithFormat:@"<%@> %@",
+                              [timeStampFormat stringFromDate:[NSDate date]],statement];
+        
+        ABC_Log([tempStr UTF8String]);
     }
 }
 
@@ -149,13 +151,13 @@ void abDebugLog(int level, NSString *statement) {
     {
         if (pError->code != ABC_CC_Ok)
         {
-            printf("Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
+            NSString *err = [NSString stringWithFormat:@"Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
                    pError->code,
                    pError->szDescription,
                    pError->szSourceFunc,
                    pError->szSourceFile,
-                   pError->nSourceLine
-                   );
+                   pError->nSourceLine];
+            abDebugLog(1, err);
         }
         if (pError->code == ABC_CC_DecryptError
                     || pError->code == ABC_CC_DecryptFailure)

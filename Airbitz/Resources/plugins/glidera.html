@@ -1062,7 +1062,6 @@ button.btn-add.btn {
   width: 90%;
 }
 .brand-logo {
-  width: 64px;
   height: 64px;
 }
 .card-barcode {
@@ -1113,6 +1112,34 @@ div.card.card-content.card-info-main {
   top: 5px;
   right: 5px;
 }
+.add-funds-header {font-size:16pt; color: #007aFF; height: 70px}
+.title-header     {font-size:16pt; color: #555555; padding-top: 10px; padding-bottom: 0px}
+.title-header-2   {font-size:16pt; color: #555555; padding-bottom: 5px}
+.card-balance     {font-size:11pt; color: #555555; padding-top: 5px}
+.card-balance-amt {font-size:20pt; color: #555555; padding-bottom: 10px}
+.card-value       {font-size:18pt; color: #555555; height: 50px}
+.card-info        {font-size:10pt; color: #007aFF; height: 20px}
+.card-number      {font-family: Courier, monospace, serif; font-size:13pt; color: #555555}
+.partner-logo     {height: 35px; align-content: center}
+.collapsible-header {vert-align: middle}
+.reset-account    {
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+  border: 0px;
+}
+.buy-card         {
+  background-color: #FFFFFF;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border: 1px solid #007aFF;
+  color: #007aFF;
+  padding-top: 3.5px;
+  padding-bottom: 3.5px;
+  padding-left: 9px;
+  padding-right: 9px;
+  font-size:12pt;
+}
+
 /* Fixes flicker issues seen in Safari */
 .ng-trans-fade.ng-enter {
   display: none;
@@ -1120,6 +1147,14 @@ div.card.card-content.card-info-main {
 .ng-trans-fade.ng-enter.ng-enter-active {
   display: block;
 }
+.add-funds-header {font-family:Helvetica, Arial, sans-serif;}
+.title-header     {font-family:Helvetica, Arial, sans-serif;}
+.title-header-2   {font-family:Helvetica, Arial, sans-serif;}
+.card-balance     {font-family:Helvetica, Arial, sans-serif;}
+.card-balance-amt {font-family:Helvetica, Arial, sans-serif;}
+.card-value       {font-family:Helvetica, Arial, sans-serif;}
+.card-info        {font-family:Helvetica, Arial, sans-serif;}
+.buy-card         {font-family:Helvetica, Arial, sans-serif;}
 
 </style>
 </head>
@@ -1350,6 +1385,10 @@ function _bridge() {
 
     navStackPop: function() {
       return _handleBlocking(_native('navStackPop', newId(), {}, true));
+    },
+
+    launchExternal: function(uri) {
+      _handleBlocking(_native('launchExternal', newId(), {'uri': uri}, true));
     }
   }
 };
@@ -1547,6 +1586,10 @@ function _bridge() {
 
   Airbitz.ui.navStackPop = function() {
     Airbitz._bridge.navStackPop();
+  };
+
+  Airbitz.ui.launchExternal = function(uri) {
+    Airbitz._bridge.launchExternal(uri);
   };
 
 })(this);
@@ -9042,6 +9085,18 @@ var Glidera = (function () {
       return url;
     },
 
+    idVerifyRedirect: function(next, state) {
+      var nonce = new Date().getTime();
+      var url = [this.GLIDERA_URL, '/user/idverify',
+        '?redirect_uri=', encodeURIComponent(next),
+        '&state=', encodeURIComponent(state),
+        '&X-CLIENT-ID=', this.clientId,
+        '&X-ACCESS-KEY=', this.accessKey,
+        '&X-ACCESS-NONCE=', nonce].join('');
+      url += '&X-ACCESS-SIGNATURE=' + Glidera.hmacsha256(url, this.secret);
+      return url;
+    },
+
     isAuthorized: function() {
       return this.accessKey ? true : false;
     },
@@ -9062,6 +9117,14 @@ var Glidera = (function () {
       return this._request(true, '/user/personalinfo', {
         'method': 'POST',
         'data': data,
+        'callback': callback
+      });
+    },
+
+    userIdVerify: function(imageData, callback) {
+      return this._request(true, '/user/idverify', {
+        'method': 'POST',
+        'data': { "data": imageData },
         'callback': callback
       });
     },
@@ -9122,10 +9185,16 @@ var Glidera = (function () {
       });
     },
 
-    buyPrices: function(qty, callback) {
+    buyPrices: function(qty, mode, callback) {
+      var data = {};
+      if (mode == 'fiat') {
+        data['fiat'] = qty;
+      } else {
+        data['qty'] = qty;
+      }
       return this._request(true, '/prices/buy', {
         'method': 'POST',
-        'data': { 'qty': qty },
+        'data': data,
         'callback': callback
       });
     },
@@ -9155,12 +9224,16 @@ var Glidera = (function () {
       });
     },
 
-    sellPrices: function(qty, callback) {
+    sellPrices: function(qty, mode, callback) {
+      var data = {};
+      if (mode == 'fiat') {
+        data['fiat'] = qty;
+      } else {
+        data['qty'] = qty;
+      }
       return this._request(true, '/prices/sell', {
         'method': 'POST',
-        'data': {
-          'qty': qty
-        },
+        'data': data,
         'callback': callback
       });
     },
@@ -9378,6 +9451,9 @@ var Glidera = (function () {
     $scope.limits = Limits.getLimits();
     $scope.order = DataFactory.getOrder(false); // initialize new order and clear existing order
     $scope.order.orderAction = $stateParams.orderAction; // set order action
+    if (!$scope.order.orderMode) {
+      $scope.order.orderMode = 'btc'; // default to btc
+    }
 
     if ($scope.order.orderAction == 'buy') {
       Airbitz.ui.title('Buy Bitcoin');
@@ -9388,8 +9464,8 @@ var Glidera = (function () {
     Limits.fetchLimits().then(function(limits) {
       $scope.limits = limits;
     }).then(function() {
-      return Prices.setBuyQty(1).then(function() {
-        Prices.setSellQty(1);
+      return Prices.setBuyQty(scope.order.orderBtcInput || 1, $scope.order.orderFiatInput, $scope.order.orderMode).then(function() {
+        Prices.setSellQty(scope.order.orderBtcInput || 1, $scope.order.orderFiatInput, $scope.order.orderMode);
       });
     });
 
@@ -9410,6 +9486,7 @@ var Glidera = (function () {
       $scope.order.orderValueSatoshi = btcValue * 100000000;
       $scope.order.orderValueInput = parseFloat($filter('roundBtc')(btcValue));
       $scope.order.orderBtcInput = btcValue;
+      $scope.order.orderMode = 'fiat';
     };
 
     $scope.convertBtcValue = function(input) {
@@ -9422,6 +9499,7 @@ var Glidera = (function () {
       $scope.order.orderBtcInput = btc;
       $scope.order.orderValueSatoshi = btc * 100000000;
       $scope.order.orderFiatInput = parseFloat($filter('roundFiat')(parseFloat(output)));
+      $scope.order.orderMode = 'btc';
     };
     $scope.next = function() {
       // Trim extra decimals off BTC amount
@@ -9438,8 +9516,16 @@ var Glidera = (function () {
         Airbitz.ui.showAlert('Error', 'The sell limit will be exceeded. Please reduce your sell amount.');
         return;
       }
-      var d = $scope.order.orderAction == 'buy' ? Prices.setBuyQty($scope.order.orderBtcInput) : Prices.setSellQty($scope.order.orderBtcInput);
-      d.then(function() {
+      Airbitz.ui.showAlert('', 'Locking price...', {'showSpinner': true});
+      var d = $scope.order.orderAction == 'buy'
+          ? Prices.setBuyQty($scope.order.orderBtcInput, $scope.order.orderFiatInput, $scope.order.orderMode)
+          : Prices.setSellQty($scope.order.orderBtcInput, $scope.order.orderFiatInput, $scope.order.orderMode);
+      d.then(function(data) {
+        Airbitz.ui.hideAlert();
+        // If we are in fiat mode, update the BTC amount with the value Glidera returned
+        if ($scope.order.orderMode == 'fiat') {
+          $scope.order.orderBtcInput = data.qty;
+        }
         TwoFactor.showTwoFactor(function() {
           $state.go("reviewOrder");
         });
@@ -9455,6 +9541,7 @@ var Glidera = (function () {
       $scope.priceObj = ($scope.order.orderAction == 'buy')
                       ? Prices.currentBuy : Prices.currentSell;
     };
+
     update();
     $scope.$on('PriceUpdate', function(events, args){
       update();
@@ -9644,13 +9731,17 @@ var Glidera = (function () {
     factory.buyQty = 1;
     factory.sellQty = 1;
 
-    factory.setBuyQty = function(qty) {
+    factory.setBuyQty = function(qty, fiat, mode) {
       factory.buyQty = qty;
+      factory.buyFiatQty = fiat;
+      factory.buyMode = mode;
       factory.currentBuy = {};
       return factory.updateBuy();
     }
-    factory.setSellQty = function(qty) {
+    factory.setSellQty = function(qty, fiat, mode) {
       factory.sellQty = qty;
+      factory.sellFiatQty = fiat;
+      factory.sellMode = mode;
       factory.currentSell = {};
       return factory.updateSell();
     }
@@ -9663,7 +9754,8 @@ var Glidera = (function () {
       if (cached(factory.currentBuy)) {
         deferred.resolve(cached(factory.currentBuy));
       } else {
-        glideraFactory.buyPrices(factory.buyQty, function(e, r, b) {
+        var qty = factory.buyMode == 'fiat' ? factory.buyFiatQty : factory.buyQty;
+        glideraFactory.buyPrices(qty, factory.buyMode, function(e, r, b) {
           factory.currentBuy = b;
           if (r == 200) {
             deferred.resolve(b);
@@ -9684,7 +9776,8 @@ var Glidera = (function () {
       if (cached(factory.currentSell)) {
         deferred.resolve(cached(factory.currentSell));
       } else {
-        glideraFactory.sellPrices(factory.sellQty, function(e, r, b) {
+        var qty = factory.sellMode == 'fiat' ? factory.sellFiatQty : factory.sellQty;
+        glideraFactory.sellPrices(qty, factory.sellMode, function(e, r, b) {
           factory.currentSell = b;
           if (r == 200) {
             deferred.resolve(b);
@@ -9736,6 +9829,7 @@ var Glidera = (function () {
     .controller('userAccountController', ['$scope', '$state', 'Error', 'States', 'Occupations', 'UserFactory', 'ExchangeFactory', userAccountController])
     .controller('bankAccountController', ['$scope', '$sce', '$state', 'UserFactory', bankAccountController])
     .controller('increaseLimitsController', ['$scope', '$sce', '$state', 'UserFactory', increaseLimitsController])
+    .controller('idVerifyController', ['$scope', '$sce', '$state', 'UserFactory', 'Error', idVerifyController])
     .controller('disclaimerController', ['$scope', '$state', 'Error', 'States', 'UserFactory', disclaimerController])
     .controller('authController', ['$scope', '$state', '$location', 'UserFactory', authController])
     .controller('verifyEmailController', ['$scope', '$state', 'Error', 'UserFactory', verifyEmailController])
@@ -9833,6 +9927,7 @@ var Glidera = (function () {
       showOptionStatus();
       $scope.userStatus = b;
       $scope.extraComplete = b.userSsnIsSetup && b.userOowIsSetup;
+      $scope.userPictureIsSetup = b.userPictureIdState == 'VERIFIED' || b.userPictureIdState == 'PASSED';
     }).then(function() {
       return UserFactory.getEmailAddress();
     }).then(function() {
@@ -9875,6 +9970,10 @@ var Glidera = (function () {
       if (!$scope.userStatus.userPhoneIsSetup) {
         counter++;
         msg += '<h5><strong class="step">' + counter + "</strong> Verify mobile phone</h5>";
+      }
+      if (!$scope.userStatus.userPictureIsSetup) {
+        counter++;
+        msg += '<h5><strong class="step">' + counter + "</strong> Provide a photo for verification</h5>";
       }
       if (!$scope.userStatus.userBankAccountIsSetup) {
         counter++;
@@ -9935,6 +10034,38 @@ var Glidera = (function () {
     url = UserFactory.userSetupRedirect();
 
     $scope.iframeUrl = $sce.trustAsResourceUrl(url);
+  }
+
+  function idVerifyController($scope, $sce, $state, UserFactory, Error) {
+    $scope.userStatus = UserFactory.getUserAccountStatus();
+    var url = '';
+    Airbitz.ui.title('Photo Identification');
+
+    $scope.photo = '';
+    $scope.loadPhoto = function() {
+      Airbitz.core.requestFile({
+        success: function(data) {
+          $scope.$apply(function() {
+            $scope.photo = 'data:image/jpeg;base64,' + data;
+          });
+        },
+        error: function() { }
+      });
+    };
+
+    $scope.cancel = function(){
+      $state.go('dashboard');
+    };
+
+    $scope.save = function() {
+      Airbitz.ui.showAlert('Saved', 'Uploading identification...', {'showSpinner': true});
+      UserFactory.userIdVerify($scope.photo).then(function() {
+        Airbitz.ui.hideAlert();
+        $state.go('dashboard');
+      }, function(e) {
+        Error.reject(e);
+      });
+    };
   }
 
   function userAccountController($scope, $state, Error, States, Occupations, UserFactory, ExchangeFactory) {
@@ -10057,6 +10188,7 @@ var Glidera = (function () {
 (function() {
   angular.module('app.filters', [])
     .filter('statusFilter', statusFilter)
+    .filter('stateFilter', stateFilter)
     .filter('titlecase', titleCase)
     .filter('roundFiat', roundFiat)
     .filter('formatBtc', ['$filter', formatBtc])
@@ -10067,6 +10199,22 @@ var Glidera = (function () {
   function statusFilter() {
     return function(status) {
       return (status) ? 'Verified' : 'Unverified';
+    };
+  }
+
+  function stateFilter() {
+    return function(state) {
+      if (state == 'UNSUBMITTED') {
+        return 'Unsubmitted';
+      } else if (state == 'SUBMITTED') {
+        return 'Submitted';
+      } else if (state == 'VERIFIED') {
+        return 'Verified';
+      } else if (state == 'FAILED') {
+        return 'Failed';
+      } else {
+        return state;
+      }
     };
   }
 
@@ -10301,6 +10449,8 @@ var Glidera = (function () {
       return details;
     } else if (3125 == code) {
       return "Cannot update because no information has changed";
+    } else if (3144 == code) {
+      return "Cannot upload any more files. Picture id is already verified.";
     } else if (9999 == code) {
       return message;
     } else {
@@ -10371,6 +10521,9 @@ var app = angular.module('app.core', [
     factory.userSetupRedirect = function() {
       return glideraFactory.userSetupRedirect(redirectUri, 'usersetup');
     };
+    factory.idVerifyRedirect = function() {
+      return glideraFactory.idVerifyRedirect(redirectUri, 'idverify');
+    };
     factory.createBankAccountUrl = function() {
       return glideraFactory.createBankAccountRedirect(redirectUri, 'bankaccount');
     };
@@ -10410,6 +10563,14 @@ var app = angular.module('app.core', [
     };
     factory.getUserAccountStatus = function() {
       return userStatus;
+    };
+
+    factory.userIdVerify = function(imageData) {
+      var d = $q.defer();
+      glideraFactory.userIdVerify(imageData, function(e, s, b) {
+        s >= 200 && s < 300?  d.resolve(b) : d.reject(b);
+      });
+      return d.promise;
     };
     factory.resendEmailVerification = function() {
       var d = $q.defer();
@@ -10461,6 +10622,9 @@ var app = angular.module('app.core', [
             account.occupation = Occupations.find(b.occupation);
             account.employerName = b.employerName;
             account.employerDescription = b.employerDescription;
+            if (!account.last4Ssn) {
+              account.last4Ssn = b.last4Ssn;
+            }
             ExchangeFactory.updateCurrency(account.country);
 
             if (b.birthDate) {
@@ -10496,6 +10660,7 @@ var app = angular.module('app.core', [
           'occupation': account.occupation ? account.occupation.id : null,
           'employerName': account.employerName,
           'employerDescription': account.employerDescription,
+          'last4Ssn': account.last4Ssn,
           'ip': '127.0.0.1'
         };
         console.log(d);
@@ -11126,6 +11291,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', func
       templateUrl: "app/user/partials/increaseLimits.html",
       controller: "increaseLimitsController",
     })
+
+    .state("idVerify", {
+      url: "/idVerify/",
+      templateUrl: "app/user/partials/idVerify.html",
+      controller: "idVerifyController",
+    })
     // route for errors
     .state("error", {
       url: "/error/",
@@ -11712,6 +11883,12 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label pull-right"\n' +
     '               ng-class="(userStatus.personalInfoState == \'VERIFIED\') ? \'label-success\' : \'label-danger\'">{{ userStatus.personalInfoState == \'VERIFIED\' | statusFilter }}</label>\n' +
     '      </li>\n' +
+    '      <li ng-if="showOptions" ui-sref="idVerify" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '        <span class="list-group-item-heading">Identity Verification</span>\n' +
+    '        <p class="list-group-item-text text-primary">Tap to edit</p>\n' +
+    '        <label class="status label pull-right"\n' +
+    '               ng-class="(userPictureIsSetup) ? \'label-success\' : \'label-danger\'">{{ userStatus.userPictureIdState | stateFilter }}</label>\n' +
+    '      </li>\n' +
     '      <li ng-if="showOptions" ui-sref="bankAccount" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Bank Account</span>\n' +
     '        <p class="list-group-item-text text-primary">{{ bankMessage }}</p>\n' +
@@ -11875,6 +12052,49 @@ try {
   module = angular.module('app', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('app/user/partials/idVerify.html',
+    '<form name="form" novalidate style="margin: 20px 0">\n' +
+    '  <div class="row">\n' +
+    '    <div class="form-group col-xs-12">\n' +
+    '      Please upload photo of a government issued identity document: <br />\n' +
+    '      - Driver’s license <br />\n' +
+    '      - State ID <br />\n' +
+    '      - Passport <br />\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '\n' +
+    '  <div class="row">\n' +
+    '    <div class="form-group col-xs-12">\n' +
+    '      <button type="button" ng-click="loadPhoto()" class="btn btn-lg"\n' +
+    '        ng-class="{\'btn-success\': photo.length > 0, \'btn-info\': photo.length == 0}">Attach Photo Verification</button>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '\n' +
+    '  <div class="row no-pad">\n' +
+    '    <div class="col-xs-6 no-pad">\n' +
+    '      <button type="button"\n' +
+    '        ng-click="cancel()"\n' +
+    '        class="btn btn-lg btn-block btn-danger">Cancel</button>\n' +
+    '    </div>\n' +
+    '    <div class="col-xs-6 no-pad">\n' +
+    '      <button type="button"\n' +
+    '        ng-click="save()" \n' +
+    '        ng-disabled="form.$invalid || photo.length == 0"\n' +
+    '        class="btn btn-lg btn-block btn-success">Upload</button>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '</form>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app');
+} catch (e) {
+  module = angular.module('app', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/increaseLimits.html',
     '<iframe id="glidera-iframe" ng-src="{{ iframeUrl }}" frameBorder="0"></iframe>\n' +
     '\n' +
@@ -12017,7 +12237,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputLastName" class="sr-only">Last</label>\n' +
     '      <input ng-model="account.lastName" ng-required="true"\n' +
     '      type="text" id="inputLastName" class="form-control large"\n' +
-    '      placeholder="Last name" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="Last name" autocomplete="off" autocorrect="off"\n' +
     '      name="lastName"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.lastName.$touched">\n' +
@@ -12029,7 +12249,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputAddress" class="">Address</label>\n' +
     '      <input ng-model="account.address1"\n' +
     '      type="text" id="inputAddressStreet" class="form-control large"\n' +
-    '      placeholder="Address" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="Address"  autocomplete="off" autocorrect="off"\n' +
     '      name="address"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.address.$touched">\n' +
@@ -12041,14 +12261,14 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputAddress2" class="sr-only">Address 2</label>\n' +
     '      <input ng-model="account.address2"\n' +
     '      type="text" id="inputAddressStreet2" class="form-control large"\n' +
-    '      placeholder="Address 2" autofocus="" autocomplete="off" autocorrect="off" />\n' +
+    '      placeholder="Address 2" autocomplete="off" autocorrect="off" />\n' +
     '    </div>\n' +
     '\n' +
     '    <div class="form-group">\n' +
     '      <label for="inputAddressCity" class="sr-only">City</label>\n' +
     '      <input ng-model="account.city"\n' +
     '      type="text" id="inputAddressCity" class="form-control large"\n' +
-    '      placeholder="City" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '      placeholder="City" autocomplete="off" autocorrect="off"\n' +
     '      name="city"\n' +
     '      required="" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.city.$touched">\n' +
@@ -12061,7 +12281,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label for="inputAddressZip" class="sr-only">Postal Code</label>\n' +
     '        <input ng-model="account.zipCode"\n' +
     '        type="text" id="inputAddressZip" class="form-control large"\n' +
-    '        placeholder="Postal Code" autofocus="" autocomplete="off" autocorrect="off"\n' +
+    '        placeholder="Postal Code" autocomplete="off" autocorrect="off"\n' +
     '        name="zip"\n' +
     '        required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.zip.$touched">\n' +
@@ -12083,7 +12303,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group">\n' +
     '      <label for="inputDob" class="">Date of Birth</label>\n' +
     '      <input ng-model="account.birthDate"\n' +
-    '        type="date" id="inputDob" class="form-control large" placeholder="YYYY-MM-DD" autofocus=""\n' +
+    '        type="date" id="inputDob" class="form-control large" placeholder="YYYY-MM-DD"\n' +
     '        autocomplete="off"\n' +
     '        name="dob"\n' +
     '        required="" />\n' +
@@ -12110,7 +12330,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <label for="inputEmployerName" class="">Employer Name</label>\n' +
     '      <input ng-model="account.employerName" ng-required="true"\n' +
     '             type="text" id="inputEmployerName" class="form-control large"\n' +
-    '             placeholder="Employer name" autofocus="true" autocomplete="off" autocorrect="off"\n' +
+    '             placeholder="Employer name" autocomplete="off" autocorrect="off"\n' +
     '             name="employerName" \n' +
     '             ng-required="account.occupation.id == OTHER"/>\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.employerName.$touched">\n' +
@@ -12127,6 +12347,21 @@ module.run(['$templateCache', function($templateCache) {
     '             ng-required="account.occupation.id == OTHER" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.employerDescription.$touched">\n' +
     '        <span ng-show="form.employerDescription.$error.required" class="label label-danger">Required</span>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="row">\n' +
+    '      <div class="no-pad-left form-group col-xs-12">\n' +
+    '        <label for="last4Ssn">Last 4 of SSN</label>\n' +
+    '        <input ng-model="account.last4Ssn"\n' +
+    '        type="number" id="last4Ssn" class="form-control large"\n' +
+    '        placeholder="Last 4 SSN" autocomplete="off" autocorrect="off"\n' +
+    '        name="last4Ssn"\n' +
+    '        required="" />\n' +
+    '        <div class="input-error" ng-show="form.$submitted || form.last4Ssn.$touched">\n' +
+    '          <span ng-show="form.last4Ssn.$error.required" class="label label-danger">Required</span>\n' +
+    '          <span ng-show="form.last4Ssn.$error.number" class="label label-danger">Number Required</span>\n' +
+    '        </div>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '\n' +
@@ -12159,7 +12394,9 @@ module.run(['$templateCache', function($templateCache) {
     '</div>\n' +
     '\n' +
     '<div class="row" style="margin: 20px 0">\n' +
-    '  <p><label class="label label-warning">Note</label> Email will contain a link which must be clicked on phone to proceed past this screen.</p>\n' +
+    '  <div class="col-xs-12">\n' +
+    '    <p><label class="label label-warning">Note</label> Email will contain a link which must be clicked on phone to proceed past this screen.</p>\n' +
+    '  </div>\n' +
     '</div>\n' +
     '\n' +
     '<div class="row" style="margin-top: 40px;">\n' +
@@ -12181,7 +12418,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="col-xs-12 no-pad">\n' +
     '      <button type="button" ui-sref="dashboard" class="btn btn-block btn-lg btn-info">Dashboard</button>\n' +
     '  </div>\n' +
-    '</div>');
+    '</div>\n' +
+    '');
 }]);
 })();
 

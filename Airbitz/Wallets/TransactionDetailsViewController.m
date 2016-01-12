@@ -1514,6 +1514,10 @@ typedef enum eRequestType
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
 {
+    if (nil == pickerTextView) return;
+    if ([pickerTextView.arrayChoices count] <= row)
+        return;
+    
     // set the text field to the choice
     pickerTextView.textField.text = [pickerTextView.arrayChoices objectAtIndex:row];
     

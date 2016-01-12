@@ -21,7 +21,7 @@
 
 + (void)initAll;
 + (void)freeAll;
-+ (NSArray *)getPlugins;
-+ (Plugin *)getPlugin:(NSString *)pluginId;
++ (NSArray *)getBuySellPlugins;
++ (NSArray *)getGiftCardPlugins;
 
 @end

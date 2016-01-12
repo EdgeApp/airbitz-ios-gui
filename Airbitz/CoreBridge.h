@@ -64,6 +64,9 @@
 + (void)addCategory:(NSString *)strCategory;
 + (void)loadCategories;
 + (void)saveCategories:(NSMutableArray *)saveArrayCategories;
++ (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
++ (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
++ (NSArray *)getLocalAccounts:(NSString **)strError;
 
 
 + (void)updateWidgetQRCode;
@@ -106,6 +109,7 @@
 + (void)logout;
 + (BOOL)passwordOk:(NSString *)password;
 + (BOOL)passwordExists;
++ (BOOL)passwordExists:(NSString *)username;
 + (BOOL)allWatchersReady;
 + (BOOL)watcherIsReady:(NSString *)UUID;
 + (void)connectWatchers;

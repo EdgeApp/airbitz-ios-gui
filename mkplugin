@@ -4,6 +4,9 @@ set -u
 set -e
 
 CURRENT_DIR=$( /bin/pwd )
+SIM_DEVICES="${HOME}/Library/Developer/CoreSimulator/Devices/"
+SIM_APPS="/data/Containers/Bundle/Application/"
+CP_XCODE_SIM=0
 
 cd ../airbitz-plugins
 gulp glidera-ios
@@ -12,3 +15,20 @@ gulp clevercoin-ios
 cp build/ios/glidera/index.html ${CURRENT_DIR}/Airbitz/Resources/plugins/glidera.html
 cp build/ios/foldapp/index.html ${CURRENT_DIR}/Airbitz/Resources/plugins/foldapp.html
 cp build/ios/clevercoin/index.html ${CURRENT_DIR}/Airbitz/Resources/plugins/clevercoin.html
+
+if [ ${CP_XCODE_SIM} == 1 ]
+then
+
+cd ${SIM_DEVICES}
+CURRENT_DEVICE=$( ls -1dt ./* | head -n 1 )
+cd ${CURRENT_DEVICE}${SIM_APPS}
+CURRENT_APP=$( ls -1dt ./* | head -n 1 )
+cd ${CURRENT_APP}
+APP_NAME=$( ls -1dt *.app )
+
+echo "Copying plugins to most recently active simulator"
+cp ${CURRENT_DIR}/Airbitz/Resources/plugins/foldapp.html ${SIM_DEVICES}${CURRENT_DEVICE}${SIM_APPS}${CURRENT_APP}/${APP_NAME}/
+cp ${CURRENT_DIR}/Airbitz/Resources/plugins/glidera.html ${SIM_DEVICES}${CURRENT_DEVICE}${SIM_APPS}${CURRENT_APP}/${APP_NAME}/
+cp ${CURRENT_DIR}/Airbitz/Resources/plugins/clevercoin.html ${SIM_DEVICES}${CURRENT_DEVICE}${SIM_APPS}${CURRENT_APP}/${APP_NAME}/
+
+fi
