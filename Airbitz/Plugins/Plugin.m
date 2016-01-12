@@ -150,6 +150,7 @@ static NSMutableArray *giftCardPlugins;
                        };
         [buySellPlugins addObject:plugin];
 
+        /*
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.clevercoin";
         plugin.provider = @"clevercoin";
@@ -167,6 +168,7 @@ static NSMutableArray *giftCardPlugins;
                     @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                     };
         [buySellPlugins addObject:plugin];
+        */
         
         bInitialized = YES;
     }
