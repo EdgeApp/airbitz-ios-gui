@@ -6223,7 +6223,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinbtm.rackwallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41a4eddf-15dc-4537-bdcc-24c319ce903e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
