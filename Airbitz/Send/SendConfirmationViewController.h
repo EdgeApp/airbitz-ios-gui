@@ -22,6 +22,7 @@
 @property (nonatomic, strong)   SpendTarget                                 *spendTarget;
 //@property (nonatomic, strong)   Wallet                                      *wallet;
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
+@property (nonatomic, assign)   BOOL                                        bSignOnly;
 
 @end
 

@@ -87,6 +87,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _bAdvanceToTx = YES;
+        _bSignOnly = NO;
     }
     return self;
 }
@@ -96,6 +97,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _bAdvanceToTx = YES;
+        _bSignOnly = NO;
     }
     return self;
 }
@@ -509,10 +511,15 @@
         _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
         [CoreBridge postToMiscQueue:^{
             tABC_Error error;
-            NSString *txId = [_spendTarget approve:_overrideCurrency
-                                             error:&error];
+            _spendTarget.amountFiat = _overrideCurrency;
+            NSString *data = nil;
+            if (_bSignOnly) {
+                data = [_spendTarget signTx:&error];
+            } else {
+                data = [_spendTarget approve:&error];
+            }
             if (error.code == ABC_CC_Ok) {
-                [self txSendSuccess:_spendTarget.srcWallet withTx:txId];
+                [self txSendSuccess:_spendTarget.srcWallet withTx:data];
             } else {
                 [self txSendFailed:error];
             }
