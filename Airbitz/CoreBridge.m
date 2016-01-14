@@ -151,7 +151,6 @@ static BOOL bOtpError = NO;
         ABC_Initialize([docs_dir UTF8String],
                 [ca_path UTF8String],
                 API_KEY_HEADER,
-                CHAIN_API_USERPWD,
                 HIDDENBITZ_KEY,
                 (unsigned char *)[seedData bytes],
                 (unsigned int)[seedData length],

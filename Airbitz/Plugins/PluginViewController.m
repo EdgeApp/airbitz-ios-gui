@@ -31,6 +31,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary                   *_functions;
     NSString                       *_tempCbidForImagePicker;
     NSDictionary                   *_tempArgsForImagePicker;
+    SpendTarget                    *_spendTarget;
 
     BOOL                           bWalletListDropped;
 }
@@ -66,7 +67,10 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
-                @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
+                 @"requestSign":NSStringFromSelector(@selector(requestSign:)),
+                 @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
+                      @"saveTx":NSStringFromSelector(@selector(saveTx:)),
+                 @"requestFile":NSStringFromSelector(@selector(launchFilePicker:)),
              @"finalizeRequest":NSStringFromSelector(@selector(finalizeRequest:)),
                    @"writeData":NSStringFromSelector(@selector(writeData:)),
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
@@ -446,7 +450,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:results]];
 }
 
-- (void)launchSpendConfirmation:(NSDictionary *)params
+- (void)launchSpendConfirmation:(NSDictionary *)params signOnly:(BOOL)signOnly
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
@@ -458,25 +462,65 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendWallet = [CoreBridge getWallet:[args objectForKey:@"id"]];
 
     tABC_Error error;
-    SpendTarget *spendTarget = [[SpendTarget alloc] init];
-    if ([spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
+    _spendTarget = [[SpendTarget alloc] init];
+    if ([_spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
                                 label:[args objectForKey:@"label"]
                              category:[args objectForKey:@"category"]
                                 notes:[args objectForKey:@"notes"] 
                         amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
                                 error:&error]) {
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
-            spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
+            _spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
         }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
-        _sendConfirmationViewController.spendTarget = spendTarget;
+        _sendConfirmationViewController.spendTarget = _spendTarget;
 
         [CoreBridge makeCurrentWallet:_sendWallet];
+        _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
+        _sendConfirmationViewController.bSignOnly = signOnly;
         [Util animateController:_sendConfirmationViewController parentController:self];
+    }
+}
+
+- (void)requestSpend:(NSDictionary *)params
+{
+    [self launchSpendConfirmation:params signOnly:NO];
+}
+
+- (void)requestSign:(NSDictionary *)params
+{
+    [self launchSpendConfirmation:params signOnly:YES];
+}
+
+- (void)broadcastTx:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    tABC_Error error;
+
+    if (_spendTarget != nil && [_spendTarget broadcastTx:[args objectForKey:@"rawTx"] error:&error]) {
+        [self setJsResults:cbid withArgs:[self jsonSuccess]];
+    } else {
+        [self setJsResults:cbid withArgs:[self jsonError]];
+    }
+}
+
+- (void)saveTx:(NSDictionary *)params
+{
+    NSString *cbid = [params objectForKey:@"cbid"];
+    NSDictionary *args = [params objectForKey:@"args"];
+    tABC_Error error;
+
+    if (_spendTarget != nil) {
+        NSString *txid =  [_spendTarget saveTx:[args objectForKey:@"rawTx"] error:&error];
+        _spendTarget = nil;
+        [self setJsResults:_sendCbid withArgs:[self jsonResult:txid]];
+    } else {
+        [self setJsResults:cbid withArgs:[self jsonError]];
     }
 }
 
@@ -943,7 +987,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                        withBack:(BOOL)bBack
                                       withError:(BOOL)bError
-                                       withTxId:(NSString *)txId
+                                       withTxId:(NSString *)data
 {
     [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
@@ -953,9 +997,8 @@ static const NSString *PROTOCOL = @"bridge://";
         } else if (bError) {
             [self callJsFunction:_sendCbid withArgs:[self jsonError]];
         } else {
-            if (txId) {
-                NSString *hex = [self getRawTransaction:_sendWallet.strUUID withTxId:txId];
-                [self callJsFunction:_sendCbid withArgs:[self jsonResult:hex]];
+            if (data) {
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:data]];
             } else {
                 [self callJsFunction:_sendCbid withArgs:[self jsonError]];
             }
