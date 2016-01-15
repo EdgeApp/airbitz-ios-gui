@@ -42,6 +42,8 @@
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
 @property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
+@property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
+@property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
@@ -67,6 +69,7 @@
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_walletsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_giftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
 
     return v;
 }
@@ -108,6 +111,7 @@
         NSString *tempText = importPrivateKeyText;
         [Util replaceHtmlTags:&tempText];
         self.importPrivateKeyLabel.text = tempText;
+        self.giftCardTextLabel.text = giftCardText;
         _initialized = YES;
     }
     
@@ -248,6 +252,12 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
         [self.delegate slideoutImport];
+    }
+}
+
+- (IBAction)giftCardTouched:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutGiftCard)]) {
+        [self.delegate slideoutGiftCard];
     }
 }
 
