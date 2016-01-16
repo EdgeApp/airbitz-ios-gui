@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
+		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1427,6 +1430,8 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
+		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
@@ -2965,6 +2970,8 @@
 				DA9EE0371BC61F920063DA07 /* SignUpUsernameController.m */,
 				DA9EE0381BC61F920063DA07 /* SignUpWriteItController.h */,
 				DA9EE0391BC61F920063DA07 /* SignUpWriteItController.m */,
+				346442B19C664D7BA4B070CF /* SignUpPINController.m */,
+				3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -4685,6 +4692,7 @@
 				DA9EF3D81BC7285D0063DA07 /* DebugViewController.m in Sources */,
 				DA9EF3D91BC7285D0063DA07 /* GDrive.m in Sources */,
 				346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */,
+				3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4827,6 +4835,7 @@
 				DA9EF59F1BC729FA0063DA07 /* DebugViewController.m in Sources */,
 				DA9EF5A01BC729FA0063DA07 /* GDrive.m in Sources */,
 				34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */,
+				346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4969,6 +4978,7 @@
 				DA9ED7DE1BC61E680063DA07 /* DebugViewController.m in Sources */,
 				DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */,
 				346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */,
+				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

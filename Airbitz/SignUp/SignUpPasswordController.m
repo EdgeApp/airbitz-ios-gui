@@ -11,6 +11,7 @@
 #import "User.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "LocalSettings.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -18,6 +19,7 @@
 {
     UITextField                     *_activeTextField;
     PasswordVerifyView              *_passwordVerifyView;
+    BOOL                            _bBlankFields;
 }
 
 @property (nonatomic, weak) IBOutlet MinCharTextField *passwordTextField;
@@ -32,6 +34,10 @@
 @property (nonatomic, copy)     NSString                        *labelString;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, copy)     NSString                        *strReason;
+@property (weak, nonatomic) IBOutlet UILabel                    *pinTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
+@property (weak, nonatomic) IBOutlet UIButton                   *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton                   *skipButton;
 
 @end
 
@@ -63,7 +69,22 @@
 {
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-    
+    [self.reenterPasswordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+
+    if (self.manager.bAllowPINOnly)
+    {
+        self.pinTextField.text = [NSString stringWithFormat:@"%@",self.manager.strPIN];
+        self.pinTextField.hidden = YES;
+        self.pinTextLabel.hidden = YES;
+        self.setPasswordLabel.text = setPasswordText;
+    }
+    else
+    {
+        self.pinTextField.hidden = NO;
+        self.pinTextLabel.hidden = NO;
+        self.setPasswordLabel.text = setPasswordAndPinText;
+    }
+    [self setNextSkipButtonSettings];
 //    [self.passwordTextField becomeFirstResponder];
 }
 
@@ -129,6 +150,13 @@
     }
 }
 
+- (IBAction)skipTouched:(id)sender {
+    self.passwordTextField.text = nil;
+    self.reenterPasswordTextField.text = nil;
+    _bBlankFields = YES;
+    [self next];
+}
+
 
 // checks the password against the password rules
 // returns YES if new password fields are good, NO if the new password fields failed the checks
@@ -136,14 +164,12 @@
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
 - (BOOL)newPasswordFieldsAreValid
 {
-    // Allow accounts with an empty password
-    if ([self.passwordTextField.text length] == 0) {
-        if ([self.reenterPasswordTextField.text length] == 0) {
-            return YES;
-        } else {
-            [self showPasswordMismatch];
-            return false;
-        }
+    // Allow accounts with an empty password ONLY IF background fetch and notifications are allowed
+    // We will use background fetch and notifications to remind the user to set a password
+    
+    if (self.manager.bAllowPINOnly && _bBlankFields)
+    {
+        return YES;
     }
 
     BOOL bNewPasswordFieldsAreValid = YES;
@@ -285,7 +311,7 @@
     if(textField == self.passwordTextField) {
         [_reenterPasswordTextField becomeFirstResponder];
     }
-    else if (textField == self.reenterPasswordTextField)
+    else if ((textField == self.reenterPasswordTextField) && !self.manager.bAllowPINOnly)
     {
         [_pinTextField becomeFirstResponder];
     }
@@ -323,11 +349,36 @@
 
 - (void)passwordTextFieldChanged:(UITextField *)textField
 {
-    if (_passwordVerifyView == nil)
+    if (_passwordTextField == textField)
     {
-        _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
+        if (_passwordVerifyView == nil)
+        {
+            _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
+        }
+        _passwordVerifyView.password = textField.text;
     }
-    _passwordVerifyView.password = textField.text;
+    [self setNextSkipButtonSettings];
+}
+
+- (void)setNextSkipButtonSettings
+{
+    _bBlankFields = NO;
+    [self.nextButton setTitle:nextButtonText forState:UIControlStateNormal];
+    self.skipButton.hidden = YES;
+
+    if (self.manager.bAllowPINOnly)
+    {
+        if (([self.passwordTextField.text length] == 0) && ([self.reenterPasswordTextField.text length] == 0))
+        {
+            [self.nextButton setTitle:skipButtonText forState:UIControlStateNormal];
+            self.skipButton.hidden = YES;
+            _bBlankFields = YES;
+        }
+        else
+        {
+            self.skipButton.hidden = NO;
+        }
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

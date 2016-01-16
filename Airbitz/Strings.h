@@ -21,6 +21,7 @@
 #define deleteButtonText                            NSLocalizedString(@"Delete", @"DELETE button text for wallet delete")
 #define okButtonText                                NSLocalizedString(@"OK", @"OK button text")
 #define skipButtonText                              NSLocalizedString(@"Skip", @"Skip button text")
+#define nextButtonText                              NSLocalizedString(@"Next", @"Next button text")
 #define laterButtonText                             NSLocalizedString(@"Later", @"Later button text")
 #define noButtonText                                NSLocalizedString(@"NO", @"NO button text")
 #define yesButtonText                               NSLocalizedString(@"YES", @"YES button text")
@@ -112,6 +113,10 @@
 #define noThanksText                                NSLocalizedString(@"No thanks", nil)
 #define wouldYouLikeToWriteReviewText               NSLocalizedString(@"Would you like to write a review in the App store?", nil)
 #define cantSendEmailText                           NSLocalizedString(@"Can't send e-mail",nil)
+#define setPasswordAndPinText                       NSLocalizedString(@"Set a Password and PIN",nil)
+#define setPasswordText                             NSLocalizedString(@"Set a Password",nil)
+
+
 
 
 
