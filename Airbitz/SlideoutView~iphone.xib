@@ -20,15 +20,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Kd7-Wc-vzE" customClass="SlideoutView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="qEK-dC-DG9" userLabel="exchangeView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O8N-2d-FwL" userLabel="exchangeText">
-                            <rect key="frame" x="45" y="0.0" width="275" height="42"/>
+                            <rect key="frame" x="45" y="0.0" width="330" height="42"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" none="YES"/>
@@ -51,7 +51,7 @@
                     </accessibility>
                 </view>
                 <view contentMode="scaleToFill" id="EpU-B2-VTR" userLabel="accountView" customClass="UIButton">
-                    <rect key="frame" x="0.0" y="42" width="320" height="70"/>
+                    <rect key="frame" x="0.0" y="42" width="375" height="70"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_account_secure.png" id="nOJ-e4-e5b">
@@ -72,12 +72,12 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" id="TCb-b7-HfE" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="69" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="69" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <imageView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow.png" id="dFV-3F-fjN">
-                            <rect key="frame" x="272" y="31" width="24" height="10"/>
+                            <rect key="frame" x="327" y="31" width="24" height="10"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -96,10 +96,11 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="BN8-sG-2n3" userLabel="otherAccountsView">
-                    <rect key="frame" x="0.0" y="113" width="320" height="368"/>
+                    <rect key="frame" x="0.0" y="113" width="375" height="555"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="8L6-iO-nWG" userLabel="View username picker" customClass="PickerTextView">
+                            <rect key="frame" x="0.0" y="0.0" width="55" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -107,11 +108,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="WFe-bF-Laf" userLabel="lowerViews">
-                    <rect key="frame" x="0.0" y="112" width="320" height="368"/>
+                    <rect key="frame" x="0.0" y="112" width="375" height="555"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="jpu-23-4kh" userLabel="buysellView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_exchange.png" id="Zim-he-CkY">
@@ -143,7 +144,7 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="Lwy-1d-Qgs" userLabel="importView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="100" width="320" height="50"/>
+                            <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_import.png" id="yTZ-dT-jac">
@@ -175,7 +176,7 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="Zu4-Fd-NGP" userLabel="discountedGiftCardView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="50" width="320" height="50"/>
+                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gift_box.png" id="Zo6-wU-Ik1">
@@ -207,7 +208,7 @@
                             </connections>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" id="aSM-QX-pLq" userLabel="walletsView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="268" width="320" height="50"/>
+                            <rect key="frame" x="0.0" y="455" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wallet_dark.png" id="Bge-Z2-aZb">
@@ -239,7 +240,7 @@
                             </connections>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" id="GIG-Sd-O0c" userLabel="logoutView" customClass="UIButton">
-                            <rect key="frame" x="0.0" y="318" width="259" height="50"/>
+                            <rect key="frame" x="0.0" y="505" width="314" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_logout.png" id="PFZ-VL-MPA">
@@ -271,18 +272,18 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="xna-m1-9hx" userLabel="settingsView" customClass="UIButton">
-                            <rect key="frame" x="265.5" y="318" width="54.5" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                            <rect key="frame" x="313" y="505" width="62" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_settings_dark.png" id="4PE-14-Bju">
-                                    <rect key="frame" x="10.5" y="12" width="26" height="25"/>
+                                    <rect key="frame" x="18" y="12" width="26" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zac-Lf-J4y" userLabel="settingsText">
-                                    <rect key="frame" x="-41.5" y="0.0" width="91" height="50"/>
+                                    <rect key="frame" x="-34" y="0.0" width="91" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -303,32 +304,32 @@
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="Jo0-RP-ZNs" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="50" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="50" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="I1t-ii-re1" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="100" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="100" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="rb4-q3-fT7" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="150" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="150" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="6sW-mE-1UL" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="268" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="455" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="iNr-7k-HKh" userLabel="divider1">
-                            <rect key="frame" x="0.0" y="318" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="505" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="Ukc-Z5-Xou" userLabel="divider1">
-                            <rect key="frame" x="258" y="318" width="1" height="50"/>
+                            <rect key="frame" x="313" y="505" width="1" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -338,7 +339,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
                 <outlet property="accountArrow" destination="dFV-3F-fjN" id="1Pa-o0-YeN"/>
                 <outlet property="accountButton" destination="EpU-B2-VTR" id="OU5-vY-J4n"/>
@@ -357,7 +358,7 @@
                 <outlet property="settingsButton" destination="xna-m1-9hx" id="s5I-7x-I5Z"/>
                 <outlet property="walletsButton" destination="aSM-QX-pLq" id="Qmd-7r-KN6"/>
             </connections>
-            <point key="canvasLocation" x="-454" y="21"/>
+            <point key="canvasLocation" x="-454.5" y="20.5"/>
         </view>
     </objects>
     <resources>
