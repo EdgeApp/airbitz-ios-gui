@@ -150,11 +150,18 @@
     }
 }
 
-- (IBAction)skipTouched:(id)sender {
+- (IBAction)skipTouched:(id)sender
+{
     self.passwordTextField.text = nil;
     self.reenterPasswordTextField.text = nil;
     _bBlankFields = YES;
     [self next];
+}
+
+- (IBAction)eyeButtonTouched:(id)sender
+{
+    self.passwordTextField.secureTextEntry = !self.passwordTextField.secureTextEntry;
+    self.reenterPasswordTextField.secureTextEntry = !self.reenterPasswordTextField.secureTextEntry;
 }
 
 
