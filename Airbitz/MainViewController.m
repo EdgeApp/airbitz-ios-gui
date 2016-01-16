@@ -1066,7 +1066,10 @@ MainViewController *singleton;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
-    _bNewDeviceLogin = bNewDevice;
+    if (!bUsedTouchID)
+    {
+        _bNewDeviceLogin = bNewDevice;        
+    }
 
     if (bNewAccount) {
         [FadingAlertView create:self.view

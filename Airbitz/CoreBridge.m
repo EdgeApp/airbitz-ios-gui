@@ -2754,6 +2754,17 @@ static BOOL bOtpError = NO;
     }
 }
 
++ (BOOL)accountExistsLocal:(NSString *)username;
+{
+    tABC_Error error;
+    bool result;
+    ABC_AccountSyncExists([username UTF8String],
+                          &result,
+                          &error);
+    return (BOOL)result;
+}
+
+
 
 + (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {

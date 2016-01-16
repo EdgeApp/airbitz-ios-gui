@@ -69,6 +69,9 @@ typedef enum eLoginMode
     UIAlertView                     *_uploadLogAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
+    BOOL                            _bNewDeviceLogin;
+    
+
 
 }
 
@@ -221,6 +224,7 @@ static BOOL bInitialized = false;
 
     _bTouchesEnabled = YES;
     _bUsedTouchIDToLogin = NO;
+    _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
@@ -573,6 +577,9 @@ typedef enum eReloginState
         _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
+        _bNewDeviceLogin = ![CoreBridge accountExistsLocal:self.usernameSelector.textField.text];
+        ABLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
             ABC_SignIn([self.usernameSelector.textField.text UTF8String],
@@ -1080,22 +1087,15 @@ typedef enum eReloginState
 
 - (void)signInComplete
 {
-    BOOL    bNewDeviceLogin;
-
     [self showSpinner:NO];
     [CoreBridge otpSetError:_resultCode];
-
-    if ([self.arrayAccounts containsObject:self.usernameSelector.textField.text])
-        bNewDeviceLogin = NO;
-    else
-        bNewDeviceLogin = YES;
 
     if (_bSuccess)
     {
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
         if ([Keychain bHasSecureEnclave])
         {
