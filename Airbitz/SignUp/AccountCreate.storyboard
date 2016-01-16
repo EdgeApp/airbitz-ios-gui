@@ -35,7 +35,6 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -54,8 +53,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZN-Fj-bKz">
                                 <rect key="frame" x="0.0" y="64" width="320" height="204"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-ZH-bDm" userLabel="Username" customClass="MinCharTextField">
-                                        <rect key="frame" x="20" y="49" width="280" height="40"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choose a Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-ZH-bDm" userLabel="Username" customClass="MinCharTextField">
+                                        <rect key="frame" x="20" y="20" width="280" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Zqz-SU-9Ia"/>
@@ -65,36 +64,24 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See Strings.h" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsW-1b-1cv">
-                                        <rect key="frame" x="20" y="97" width="280" height="105"/>
+                                        <rect key="frame" x="20" y="68" width="280" height="135"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="105" id="AKX-pK-uWI"/>
+                                            <constraint firstAttribute="height" constant="135" id="AKX-pK-uWI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                        <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wk-5R-JOh">
-                                        <rect key="frame" x="20" y="20" width="280" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="pKl-r2-vrX"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <color key="textColor" red="0.047058823530000002" green="0.3411764706" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="0wk-5R-JOh" firstAttribute="top" secondItem="lZN-Fj-bKz" secondAttribute="top" constant="20" symbolic="YES" id="7eB-Cx-ndD"/>
                                     <constraint firstItem="i3b-ZH-bDm" firstAttribute="leading" secondItem="lZN-Fj-bKz" secondAttribute="leading" constant="20" symbolic="YES" id="81v-2K-gzW"/>
                                     <constraint firstItem="SsW-1b-1cv" firstAttribute="top" secondItem="i3b-ZH-bDm" secondAttribute="bottom" constant="8" symbolic="YES" id="9sL-9G-e3F"/>
                                     <constraint firstAttribute="height" constant="204" id="Ifa-a8-xAy"/>
-                                    <constraint firstItem="i3b-ZH-bDm" firstAttribute="top" secondItem="0wk-5R-JOh" secondAttribute="bottom" constant="8" symbolic="YES" id="OA5-Bv-sTG"/>
+                                    <constraint firstItem="i3b-ZH-bDm" firstAttribute="top" secondItem="lZN-Fj-bKz" secondAttribute="top" constant="20" symbolic="YES" id="PRm-my-tMk"/>
                                     <constraint firstItem="SsW-1b-1cv" firstAttribute="leading" secondItem="lZN-Fj-bKz" secondAttribute="leading" constant="20" symbolic="YES" id="e0D-QE-MGh"/>
                                     <constraint firstAttribute="trailing" secondItem="SsW-1b-1cv" secondAttribute="trailing" constant="20" symbolic="YES" id="f6C-rS-HOH"/>
                                     <constraint firstAttribute="trailing" secondItem="i3b-ZH-bDm" secondAttribute="trailing" constant="20" symbolic="YES" id="fLA-OK-imm"/>
-                                    <constraint firstItem="0wk-5R-JOh" firstAttribute="leading" secondItem="lZN-Fj-bKz" secondAttribute="leading" constant="20" symbolic="YES" id="nlA-GW-Rgd"/>
-                                    <constraint firstAttribute="trailing" secondItem="0wk-5R-JOh" secondAttribute="trailing" constant="20" symbolic="YES" id="xFe-p5-1qO"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-Gm-7l2">
@@ -112,8 +99,8 @@
                                     <action selector="next" destination="ffT-O8-Myr" eventType="touchUpInside" id="4AT-VF-f24"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="wVA-Xf-B2I">
-                                <rect key="frame" x="280" y="287" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="wVA-Xf-B2I">
+                                <rect key="frame" x="280" y="291" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="S1W-OS-vdq"/>
                                     <constraint firstAttribute="width" constant="20" id="eMf-ye-Ygp"/>
@@ -124,11 +111,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lZN-Fj-bKz" firstAttribute="top" secondItem="m1q-D3-p9m" secondAttribute="bottom" constant="44" id="84F-cE-Oj2"/>
+                            <constraint firstItem="wVA-Xf-B2I" firstAttribute="centerY" secondItem="DgW-Gm-7l2" secondAttribute="centerY" id="EKS-88-Xk2"/>
                             <constraint firstAttribute="trailing" secondItem="lZN-Fj-bKz" secondAttribute="trailing" id="PTN-Zg-Zn4"/>
                             <constraint firstItem="DgW-Gm-7l2" firstAttribute="top" secondItem="lZN-Fj-bKz" secondAttribute="bottom" constant="8" symbolic="YES" id="cFd-9U-JVg"/>
                             <constraint firstAttribute="trailing" secondItem="DgW-Gm-7l2" secondAttribute="trailing" id="fQU-4i-ot2"/>
+                            <constraint firstAttribute="trailing" secondItem="wVA-Xf-B2I" secondAttribute="trailing" constant="20" id="gbT-oz-TCb"/>
                             <constraint firstItem="lZN-Fj-bKz" firstAttribute="leading" secondItem="kh5-U6-KrH" secondAttribute="leading" id="jG6-xB-Hrc"/>
-                            <constraint firstItem="wVA-Xf-B2I" firstAttribute="top" secondItem="DgW-Gm-7l2" secondAttribute="top" constant="11" id="uCw-ea-FAt"/>
                             <constraint firstItem="DgW-Gm-7l2" firstAttribute="leading" secondItem="kh5-U6-KrH" secondAttribute="leading" id="wtH-dP-ecP"/>
                         </constraints>
                     </view>

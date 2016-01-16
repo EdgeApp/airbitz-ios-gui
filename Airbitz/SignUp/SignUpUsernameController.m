@@ -132,6 +132,10 @@
             [self blockUser:NO];
         }
     }
+    else
+    {
+        [self blockUser:NO];
+    }
 
 }
 
