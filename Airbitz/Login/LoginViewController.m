@@ -211,6 +211,11 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
     [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationEnteredForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 
 }
 
@@ -282,6 +287,11 @@ static BOOL bInitialized = false;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
 
+}
+
+- (void)applicationEnteredForeground:(NSNotification *)notification {
+    ABLog(1, @"LoginViewController:applicationEnteredForeground");
+    [self autoReloginOrTouchIDIfPossible];
 }
 
 - (void)uploadLog {
