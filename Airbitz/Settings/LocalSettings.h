@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign)   BOOL            bDisableBLE;
 @property (nonatomic, assign)   BOOL            bMerchantMode;
+@property (nonatomic, assign)   BOOL            bLocalNotificationsAllowed;
 @property (nonatomic, retain)   NSString        *cachedUsername;
 @property (nonatomic, assign)   NSInteger       previousNotificationID;
 @property (nonatomic, assign)   NSInteger       receiveBitcoinCount;    // how many times user received bitcoin, for messaging

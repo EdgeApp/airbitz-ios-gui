@@ -40,6 +40,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
             singleton.clientID = [[NSUUID UUID] UUIDString];
             [LocalSettings saveAll];
         }
+        singleton.bLocalNotificationsAllowed = NO;
 
 		bInitialized = YES;
 	}

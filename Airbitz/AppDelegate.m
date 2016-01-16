@@ -72,6 +72,21 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    if (notificationSettings.types & UIUserNotificationTypeAlert)
+    {
+        [LocalSettings controller].bLocalNotificationsAllowed = YES;
+        ABLog(1, @"Local notifications allowed");
+    }
+    else
+    {
+        [LocalSettings controller].bLocalNotificationsAllowed = NO;
+        ABLog(1, @"Local notifications not allowed");
+    }
+    
+}
+
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     // Reset badges to 0
