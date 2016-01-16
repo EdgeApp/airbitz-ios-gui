@@ -351,7 +351,7 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossibleMain
 {
-    abDebugLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
+    ABLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
     _bUsedTouchIDToLogin = NO;
     
     if (HARD_CODED_LOGIN) {
@@ -369,7 +369,7 @@ typedef enum eReloginState
     }
 
     NSString *username = [LocalSettings controller].cachedUsername;
-    abDebugLog(1, [NSString stringWithFormat:@"Checking username=%@", username]);
+    ABLog(1, @"Checking username=%@", username);
     
 
     //
@@ -377,7 +377,7 @@ typedef enum eReloginState
     //
     if ([CoreBridge didLoginExpire:username])
     {
-        abDebugLog(1, @"Login expired. Continuing with TouchID validation");
+        ABLog(1, @"Login expired. Continuing with TouchID validation");
         [Keychain disableRelogin:username];
     }
 
@@ -397,7 +397,7 @@ typedef enum eReloginState
 
     if (!bRelogin && !bUseTouchID)
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
+        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
         return;
     }
 
@@ -412,20 +412,20 @@ typedef enum eReloginState
         {
             NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
 
-            abDebugLog(1, @"Launching TouchID prompt");
+            ABLog(1, @"Launching TouchID prompt");
             if ([Keychain authenticateTouchID:prompt fallbackString:usePasswordText]) {
                 bRelogin = YES;
                 _bUsedTouchIDToLogin = YES;
             }
             else
             {
-                abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
+                ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
                 return;
             }
         }
         else
         {
-            abDebugLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
+            ABLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
         }
 
         if (bRelogin)
@@ -442,7 +442,7 @@ typedef enum eReloginState
     }
     else
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
+        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
     }
 }
 
