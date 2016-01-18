@@ -233,6 +233,9 @@ static BOOL bInitialized = false;
     _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
+    if (![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
+        [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
+
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
 
     if (bPINModeEnabled)
@@ -540,7 +543,13 @@ typedef enum eReloginState
 - (void)setUsernameText:(NSString *)username
 {
     // Update non-PIN username
-    if (username && 0 < username.length)
+    if (!username || 0 == username.length)
+    {
+        if (self.arrayAccounts && [self.arrayAccounts count] > 0)
+            username = self.arrayAccounts[0];
+    }
+    
+    if (username && username.length)
     {
         //
         // Set the PIN username default
@@ -1304,15 +1313,20 @@ typedef enum eReloginState
 
 - (void)removeAccount:(NSString *)account
 {
-    // TODO delete the account, update array - current implementation is fake
-    tABC_Error error;
-    tABC_CC cc = ABC_AccountDelete((const char*)[account UTF8String], &error);
-    if(cc == ABC_CC_Ok) {
+    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
+    if(ABC_CC_Ok == cc)
+    {
         [self getAllAccounts];
         [self.usernameSelector updateChoices:self.arrayAccounts];
+
+        if ([account isEqualToString:[LocalSettings controller].cachedUsername])
+            [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
+
+        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
     }
-    else {
-        [MainViewController fadingAlert:[Util errorMap:&error]];
+    else
+    {
+        [MainViewController fadingAlert:[Util errorCC:cc]];
     }
 }
 
