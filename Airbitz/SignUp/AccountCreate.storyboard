@@ -580,7 +580,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                     <constraint firstAttribute="bottom" secondItem="KSv-b6-auz" secondAttribute="bottom" constant="20" symbolic="YES" id="mgP-nI-ctZ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-Oh-ifI" customClass="StylizedButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-Oh-ifI">
                                 <rect key="frame" x="0.0" y="330" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -628,12 +628,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd" customClass="StylizedButton">
-                                <rect key="frame" x="181" y="414" width="119" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-dw-ssd">
+                                <rect key="frame" x="0.0" y="420" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.50196078430000002" green="0.76470588240000004" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="Ety-b4-KRH"/>
-                                    <constraint firstAttribute="width" constant="119" id="gCY-8l-wjO"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ety-b4-KRH"/>
                                 </constraints>
                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                 <state key="normal" title="NEXT">
@@ -645,7 +644,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK6-aH-ad6">
-                                <rect key="frame" x="20" y="70" width="280" height="361"/>
+                                <rect key="frame" x="20" y="70" width="280" height="353"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write it Down!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wff-Il-8GU">
                                         <rect key="frame" x="20" y="20" width="240" height="21"/>
@@ -775,7 +774,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8f-q2-Sa7" customClass="StylizedButtonOutline">
-                                        <rect key="frame" x="20" y="316" width="85" height="34"/>
+                                        <rect key="frame" x="20" y="308" width="85" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="cUc-X7-GJg"/>
                                             <constraint firstAttribute="height" constant="34" id="e8C-5d-OXX"/>
@@ -797,7 +796,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                                     <constraint firstItem="wff-Il-8GU" firstAttribute="top" secondItem="KK6-aH-ad6" secondAttribute="top" constant="20" symbolic="YES" id="NkL-fb-UwG"/>
                                     <constraint firstItem="wES-c3-x79" firstAttribute="top" secondItem="qwh-Mw-sul" secondAttribute="bottom" constant="11" id="aGD-7Y-zj0"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wES-c3-x79" secondAttribute="leading" id="auK-Am-Qtk"/>
-                                    <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="bottom" constant="8" symbolic="YES" id="bNz-Pu-R9n"/>
+                                    <constraint firstItem="W8f-q2-Sa7" firstAttribute="top" secondItem="wES-c3-x79" secondAttribute="bottom" id="bNz-Pu-R9n"/>
                                     <constraint firstItem="qwh-Mw-sul" firstAttribute="leading" secondItem="wff-Il-8GU" secondAttribute="leading" id="cee-FN-qFM"/>
                                     <constraint firstItem="wff-Il-8GU" firstAttribute="leading" secondItem="KK6-aH-ad6" secondAttribute="leading" constant="20" symbolic="YES" id="gTb-uB-U5B"/>
                                     <constraint firstAttribute="bottom" secondItem="W8f-q2-Sa7" secondAttribute="bottom" constant="11" id="j8F-Cb-rh2"/>
@@ -808,10 +807,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6uu-dw-ssd" secondAttribute="trailing" id="L5L-CP-Rvh"/>
                             <constraint firstItem="KK6-aH-ad6" firstAttribute="top" secondItem="alR-Kk-2t9" secondAttribute="bottom" constant="50" id="MbG-yb-ilx"/>
-                            <constraint firstAttribute="trailing" secondItem="6uu-dw-ssd" secondAttribute="trailing" constant="20" symbolic="YES" id="bQo-DA-a1m"/>
+                            <constraint firstItem="6uu-dw-ssd" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" id="df7-cs-aI2"/>
                             <constraint firstItem="KK6-aH-ad6" firstAttribute="leading" secondItem="gVb-bf-YdA" secondAttribute="leading" constant="20" symbolic="YES" id="kBL-kR-8l5"/>
-                            <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="25" id="mdP-3r-JTB"/>
+                            <constraint firstItem="nqJ-hb-Kll" firstAttribute="top" secondItem="6uu-dw-ssd" secondAttribute="bottom" constant="10" id="mdP-3r-JTB"/>
                             <constraint firstAttribute="trailing" secondItem="KK6-aH-ad6" secondAttribute="trailing" constant="20" symbolic="YES" id="rp4-1v-tcI"/>
                         </constraints>
                     </view>
