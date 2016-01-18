@@ -247,6 +247,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self setupNavBar];
 
+    [FadingAlertView dismiss:FadingAlertDismissNow];
+    
     if (_bImportMode)
     {
         self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
