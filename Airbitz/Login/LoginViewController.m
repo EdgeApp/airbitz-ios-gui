@@ -233,7 +233,7 @@ static BOOL bInitialized = false;
     _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
-    if (![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
+    if (self.arrayAccounts.count > 0 && ![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
         [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
 
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
