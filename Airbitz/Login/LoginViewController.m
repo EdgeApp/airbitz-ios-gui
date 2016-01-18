@@ -50,7 +50,7 @@ typedef enum eLoginMode
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
-    NSString                        *_account;
+    NSString                        *_accountToDelete;
     tABC_CC                         _resultCode;
     SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
@@ -67,6 +67,7 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
+    UIAlertView                     *_deleteAccountAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
     BOOL                            _bNewDeviceLogin;
@@ -1317,18 +1318,28 @@ typedef enum eReloginState
 
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
-    _account = string;
-    NSString *message = [NSString stringWithFormat:deleteAccountWarning, string];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:NSLocalizedString(message, nil)
-                          delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
-    [alert show];
+    [self deleteAccountPopup:string];
     [self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
+}
 
+- (void)deleteAccountPopup:(NSString *)acct;
+{
+    NSString *warningText;
+    if ([CoreBridge passwordExists:acct])
+        warningText = deleteAccountWarning;
+    else
+        warningText = deleteAccountNoPasswordWarningText;
+    
+    _accountToDelete = acct;
+    NSString *message = [NSString stringWithFormat:warningText, acct];
+    _deleteAccountAlert = [[UIAlertView alloc]
+                          initWithTitle:deleteAccountText
+                          message:NSLocalizedString(message, nil)
+                          delegate:self
+                          cancelButtonTitle:noButtonText
+                          otherButtonTitles:yesButtonText, nil];
+    [_deleteAccountAlert show];
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1467,12 +1478,14 @@ typedef enum eReloginState
                 _spinnerView.hidden = YES;
             }];
         }
-    } else {
+    }
+    else if (_deleteAccountAlert == alertView)
+    {
         [self.usernameSelector.textField resignFirstResponder];
         // if they said they wanted to delete the account
         if (buttonIndex == 1)
         {
-            [self removeAccount:_account];
+            [self removeAccount:_accountToDelete];
             self.usernameSelector.textField.text = @"";
             [self.usernameSelector dismissPopupPicker];
         }
@@ -1557,16 +1570,7 @@ typedef enum eReloginState
 
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
-    _account = string;
-    NSString *message = [NSString stringWithFormat:deleteAccountWarning,
-                                                   string];
-    UIAlertView *alert = [[UIAlertView alloc]
-            initWithTitle:NSLocalizedString(@"Delete Account", @"Delete Account")
-                  message:NSLocalizedString(message, nil)
-                 delegate:self
-        cancelButtonTitle:@"No"
-        otherButtonTitles:@"Yes", nil];
-    [alert show];
+    [self deleteAccountPopup:string];
     [self.PINCodeView becomeFirstResponder];
 
 }
