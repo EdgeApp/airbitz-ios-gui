@@ -2284,7 +2284,7 @@ static BOOL bOtpError = NO;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            [FadingAlertView dismiss:NO];
+            [FadingAlertView dismiss:FadingAlertDismissGradual];
         });
         [CoreBridge startWatchers];
 

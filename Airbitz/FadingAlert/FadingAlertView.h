@@ -6,6 +6,11 @@
 #define FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER     -2 // Hold the alert until dismissed. Include a spinner
 #define FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP        9999999 // Hold the alert until dismissed or tapped
 
+typedef enum {
+    FadingAlertDismissNow,
+    FadingAlertDismissFast,
+    FadingAlertDismissGradual
+} eFadingAlertDismissType;
 
 @protocol FadingAlertViewDelegate;
 @protocol UIGestureRecognizerDelegate;
@@ -24,7 +29,7 @@
 + (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
 + (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb;
 + (void)update:(NSString *)message;
-+ (void)dismiss:(BOOL)bNow;
++ (void)dismiss:(eFadingAlertDismissType)dismissType;
 
 @end
 

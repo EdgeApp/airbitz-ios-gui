@@ -86,7 +86,7 @@ static UIView *alert;
     // Before anything else. Dismiss any previous alerts and kill the timer
     // Do this first so it calls the previous delegate
     if (singleton.dismissTimer)
-        [FadingAlertView dismiss:YES];
+        [FadingAlertView dismiss:FadingAlertDismissFast];
 
     singleton.delegate = delegate;
 
@@ -175,40 +175,50 @@ static UIView *alert;
 
 - (void)dismiss
 {
-    [FadingAlertView dismiss:NO];
+    [FadingAlertView dismiss:FadingAlertDismissGradual];
 }
 
-+ (void)dismiss:(BOOL)bNow
++ (void)dismiss:(eFadingAlertDismissType)dismissType;
 {
     CGFloat fadeTime;
-    if (bNow)
-        fadeTime = [Theme Singleton].animationDurationTimeDefault;
-    else
-        fadeTime = [Theme Singleton].alertFadeoutTimeDefault;
-
-    if (singleton.dismissTimer)
+    if (FadingAlertDismissNow == dismissType)
     {
-        [singleton.dismissTimer invalidate];
-        singleton.dismissTimer = nil;
+        singleton.alpha = 0.0;
+        [singleton removeFromSuperview];
+        if (singleton.delegate)
+            [singleton.delegate fadingAlertDismissed];
     }
-
-    [UIView animateWithDuration:fadeTime
-                          delay:[Theme Singleton].animationDelayTimeDefault
-                        options:[Theme Singleton].animationCurveDefault
-                     animations:^{
-                         singleton.alpha = 0.0;
-                     }
-                     completion:^(BOOL finished){
-                         [singleton removeFromSuperview];
-                         if (singleton.delegate)
-                             [singleton.delegate fadingAlertDismissed];
-                     }];
+    else
+    {
+        if (FadingAlertDismissFast == dismissType)
+            fadeTime = [Theme Singleton].animationDurationTimeDefault;
+        else if (FadingAlertDismissGradual == dismissType)
+            fadeTime = [Theme Singleton].alertFadeoutTimeDefault;
+        
+        if (singleton.dismissTimer)
+        {
+            [singleton.dismissTimer invalidate];
+            singleton.dismissTimer = nil;
+        }
+        
+        [UIView animateWithDuration:fadeTime
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:[Theme Singleton].animationCurveDefault
+                         animations:^{
+                             singleton.alpha = 0.0;
+                         }
+                         completion:^(BOOL finished){
+                             [singleton removeFromSuperview];
+                             if (singleton.delegate)
+                                 [singleton.delegate fadingAlertDismissed];
+                         }];
+    }
 }
 
 - (void)hideAlertByTap:(UITapGestureRecognizer *)sender
 {
     if (FADING_ALERT_HOLD_TIME_FOREVER < singleton.holdTime)
-        [FadingAlertView dismiss:YES];
+        [FadingAlertView dismiss:FadingAlertDismissFast];
 }
 
 #pragma mark - UIGestureRecognizer Delegate

@@ -249,7 +249,7 @@
 
 - (void)dismissFading:(BOOL)animated
 {
-    [FadingAlertView dismiss:YES];
+    [FadingAlertView dismiss:FadingAlertDismissFast];
 }
 
 #pragma mark - Misc Methods
