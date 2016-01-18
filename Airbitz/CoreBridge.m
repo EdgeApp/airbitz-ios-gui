@@ -2793,6 +2793,13 @@ static BOOL bOtpError = NO;
     }];
 }
 
++ (tABC_CC)accountDeleteLocal:(NSString *)account;
+{
+    tABC_Error error;
+    ABC_AccountDelete((const char*)[account UTF8String], &error);
+    return error.code;
+}
+
 + (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
     // Check if we are trying to delete the current wallet
