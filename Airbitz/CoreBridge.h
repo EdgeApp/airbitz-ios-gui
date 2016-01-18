@@ -67,7 +67,8 @@
 + (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 + (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 + (NSArray *)getLocalAccounts:(NSString **)strError;
-
++ (BOOL)accountExistsLocal:(NSString *)username;
++ (tABC_CC)accountDeleteLocal:(NSString *)account;
 
 + (void)updateWidgetQRCode;
 

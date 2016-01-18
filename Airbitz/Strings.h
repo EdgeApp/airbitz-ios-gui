@@ -21,6 +21,7 @@
 #define deleteButtonText                            NSLocalizedString(@"Delete", @"DELETE button text for wallet delete")
 #define okButtonText                                NSLocalizedString(@"OK", @"OK button text")
 #define skipButtonText                              NSLocalizedString(@"Skip", @"Skip button text")
+#define nextButtonText                              NSLocalizedString(@"Next", @"Next button text")
 #define laterButtonText                             NSLocalizedString(@"Later", @"Later button text")
 #define noButtonText                                NSLocalizedString(@"NO", @"NO button text")
 #define yesButtonText                               NSLocalizedString(@"YES", @"YES button text")
@@ -38,7 +39,9 @@
 #define selectWalletTransferPopupHeaderText         NSLocalizedString(@"▼ Choose a wallet to transfer funds to ▼", @"Header of popup in SendView from wallet to wallet transfer")
 #define invalidAddressPopupText                     NSLocalizedString(@"Invalid Bitcoin Address", nil)
 #define enterBitcoinAddressPopupText                NSLocalizedString(@"Send to Bitcoin Address", nil)
+#define deleteAccountText                           NSLocalizedString(@"Delete Account", nil)
 #define deleteAccountWarning                        NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning")
+#define deleteAccountNoPasswordWarningText          NSLocalizedString(@"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.", @"Delete Account With no Password Warning")
 #define enterBitcoinAddressPlaceholder              NSLocalizedString(@"Bitcoin Address or URI", nil)
 #define enterPrivateKeyPopupText                    NSLocalizedString(@"Sweep Funds From Private Key", nil)
 #define enterPrivateKeyPlaceholder                  NSLocalizedString(@"Bitcoin Private Key", nil)
@@ -55,7 +58,8 @@
 #define changePINText                               NSLocalizedString(@"Change PIN", nil)
 #define twoFactorText                               NSLocalizedString(@"Two Factor", nil)
 #define importText                                  NSLocalizedString(@"Import", nil)
-#define buySellText                                 NSLocalizedString(@"Buy/Sell/Spend Bitcoin", nil)
+#define buySellText                                 NSLocalizedString(@"Buy/Sell Bitcoin", nil)
+#define discountedGiftCardsText                     NSLocalizedString(@"Discounted Gift Cards", nil)
 #define passwordRecoveryText                        NSLocalizedString(@"Password Recovery", nil)
 #define passwordMismatchText                        NSLocalizedString(@"Password does not match re-entered password", @"")
 #define defaultCurrencyInfoText                     NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil)
@@ -84,6 +88,7 @@
 #define signupCameraText                            NSLocalizedString(@"You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.",@"Camera signup screen")
 #define signupContactsText                          NSLocalizedString(@"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.",@"Contacts signup screen")
 #define importPrivateKeyText                        NSLocalizedString(@"IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)", @"Slideout menu import private key text")
+#define giftCardText                                NSLocalizedString(@"DISCOUNTED GIFT CARDS", @"Slideout menu gift card text")
 #define bitcoinWalletTransactionsText               NSLocalizedString(@"Bitcoin Wallet Transactions", @"Export wallet transactions email subject line")
 #define accountsNeedsPasswordNotificationTitle      NSLocalizedString(@"WARNING: missing password", @"Title of missing password notification")
 #define accountsNeedsPasswordNotificationMessage    NSLocalizedString(@"Account '%@' needs a password. Account is not accessible on a new device without a password.", nil) 
@@ -110,6 +115,10 @@
 #define noThanksText                                NSLocalizedString(@"No thanks", nil)
 #define wouldYouLikeToWriteReviewText               NSLocalizedString(@"Would you like to write a review in the App store?", nil)
 #define cantSendEmailText                           NSLocalizedString(@"Can't send e-mail",nil)
+#define setPasswordAndPinText                       NSLocalizedString(@"Set a Password and PIN",nil)
+#define setPasswordText                             NSLocalizedString(@"Set a Password",nil)
+
+
 
 
 

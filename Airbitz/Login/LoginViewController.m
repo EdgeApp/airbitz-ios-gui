@@ -50,7 +50,7 @@ typedef enum eLoginMode
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
-    NSString                        *_account;
+    NSString                        *_accountToDelete;
     tABC_CC                         _resultCode;
     SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
@@ -67,8 +67,12 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
+    UIAlertView                     *_deleteAccountAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
+    BOOL                            _bNewDeviceLogin;
+    
+
 
 }
 
@@ -208,6 +212,11 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
     [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationEnteredForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 
 }
 
@@ -221,8 +230,12 @@ static BOOL bInitialized = false;
 
     _bTouchesEnabled = YES;
     _bUsedTouchIDToLogin = NO;
+    _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
+    if (![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
+        [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
+
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
 
     if (bPINModeEnabled)
@@ -278,6 +291,11 @@ static BOOL bInitialized = false;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
 
+}
+
+- (void)applicationEnteredForeground:(NSNotification *)notification {
+    ABLog(1, @"LoginViewController:applicationEnteredForeground");
+    [self autoReloginOrTouchIDIfPossible];
 }
 
 - (void)uploadLog {
@@ -347,7 +365,7 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossibleMain
 {
-    abDebugLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
+    ABLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
     _bUsedTouchIDToLogin = NO;
     
     if (HARD_CODED_LOGIN) {
@@ -365,7 +383,7 @@ typedef enum eReloginState
     }
 
     NSString *username = [LocalSettings controller].cachedUsername;
-    abDebugLog(1, [NSString stringWithFormat:@"Checking username=%@", username]);
+    ABLog(1, @"Checking username=%@", username);
     
 
     //
@@ -373,7 +391,7 @@ typedef enum eReloginState
     //
     if ([CoreBridge didLoginExpire:username])
     {
-        abDebugLog(1, @"Login expired. Continuing with TouchID validation");
+        ABLog(1, @"Login expired. Continuing with TouchID validation");
         [Keychain disableRelogin:username];
     }
 
@@ -393,7 +411,7 @@ typedef enum eReloginState
 
     if (!bRelogin && !bUseTouchID)
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
+        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
         return;
     }
 
@@ -408,20 +426,20 @@ typedef enum eReloginState
         {
             NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
 
-            abDebugLog(1, @"Launching TouchID prompt");
+            ABLog(1, @"Launching TouchID prompt");
             if ([Keychain authenticateTouchID:prompt fallbackString:usePasswordText]) {
                 bRelogin = YES;
                 _bUsedTouchIDToLogin = YES;
             }
             else
             {
-                abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
+                ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
                 return;
             }
         }
         else
         {
-            abDebugLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
+            ABLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
         }
 
         if (bRelogin)
@@ -438,7 +456,7 @@ typedef enum eReloginState
     }
     else
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
+        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
     }
 }
 
@@ -525,7 +543,13 @@ typedef enum eReloginState
 - (void)setUsernameText:(NSString *)username
 {
     // Update non-PIN username
-    if (username && 0 < username.length)
+    if (!username || 0 == username.length)
+    {
+        if (self.arrayAccounts && [self.arrayAccounts count] > 0)
+            username = self.arrayAccounts[0];
+    }
+    
+    if (username && username.length)
     {
         //
         // Set the PIN username default
@@ -573,6 +597,9 @@ typedef enum eReloginState
         _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
+        _bNewDeviceLogin = ![CoreBridge accountExistsLocal:self.usernameSelector.textField.text];
+        ABLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             tABC_Error error;
             ABC_SignIn([self.usernameSelector.textField.text UTF8String],
@@ -602,10 +629,6 @@ typedef enum eReloginState
         _signupManager = [[SignUpManager alloc] initWithController:self];
         _signupManager.delegate = self;
         _signupManager.strInUserName = nil;
-        if (self.usernameSelector.textField.text) {
-            if (![self.arrayAccounts containsObject:self.usernameSelector.textField.text])
-                _signupManager.strInUserName = self.usernameSelector.textField.text;
-        }
         [MainViewController animateFadeOut:self.view];
 
         [_signupManager startSignup];
@@ -1080,22 +1103,15 @@ typedef enum eReloginState
 
 - (void)signInComplete
 {
-    BOOL    bNewDeviceLogin;
-
     [self showSpinner:NO];
     [CoreBridge otpSetError:_resultCode];
-
-    if ([self.arrayAccounts containsObject:self.usernameSelector.textField.text])
-        bNewDeviceLogin = NO;
-    else
-        bNewDeviceLogin = YES;
 
     if (_bSuccess)
     {
         [User login:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO newDevice:bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+        [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
         if ([Keychain bHasSecureEnclave])
         {
@@ -1297,32 +1313,47 @@ typedef enum eReloginState
 
 - (void)removeAccount:(NSString *)account
 {
-    // TODO delete the account, update array - current implementation is fake
-    tABC_Error error;
-    tABC_CC cc = ABC_AccountDelete((const char*)[account UTF8String], &error);
-    if(cc == ABC_CC_Ok) {
+    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
+    if(ABC_CC_Ok == cc)
+    {
         [self getAllAccounts];
         [self.usernameSelector updateChoices:self.arrayAccounts];
+
+        if ([account isEqualToString:[LocalSettings controller].cachedUsername])
+            [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
+
+        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
     }
-    else {
-        [MainViewController fadingAlert:[Util errorMap:&error]];
+    else
+    {
+        [MainViewController fadingAlert:[Util errorCC:cc]];
     }
 }
 
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
-    _account = string;
-    NSString *message = [NSString stringWithFormat:deleteAccountWarning, string];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:NSLocalizedString(message, nil)
-                          delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
-    [alert show];
+    [self deleteAccountPopup:string];
     [self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
+}
 
+- (void)deleteAccountPopup:(NSString *)acct;
+{
+    NSString *warningText;
+    if ([CoreBridge passwordExists:acct])
+        warningText = deleteAccountWarning;
+    else
+        warningText = deleteAccountNoPasswordWarningText;
+    
+    _accountToDelete = acct;
+    NSString *message = [NSString stringWithFormat:warningText, acct];
+    _deleteAccountAlert = [[UIAlertView alloc]
+                          initWithTitle:deleteAccountText
+                          message:NSLocalizedString(message, nil)
+                          delegate:self
+                          cancelButtonTitle:noButtonText
+                          otherButtonTitles:yesButtonText, nil];
+    [_deleteAccountAlert show];
 }
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
@@ -1461,12 +1492,14 @@ typedef enum eReloginState
                 _spinnerView.hidden = YES;
             }];
         }
-    } else {
+    }
+    else if (_deleteAccountAlert == alertView)
+    {
         [self.usernameSelector.textField resignFirstResponder];
         // if they said they wanted to delete the account
         if (buttonIndex == 1)
         {
-            [self removeAccount:_account];
+            [self removeAccount:_accountToDelete];
             self.usernameSelector.textField.text = @"";
             [self.usernameSelector dismissPopupPicker];
         }
@@ -1551,16 +1584,7 @@ typedef enum eReloginState
 
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
-    _account = string;
-    NSString *message = [NSString stringWithFormat:deleteAccountWarning,
-                                                   string];
-    UIAlertView *alert = [[UIAlertView alloc]
-            initWithTitle:NSLocalizedString(@"Delete Account", @"Delete Account")
-                  message:NSLocalizedString(message, nil)
-                 delegate:self
-        cancelButtonTitle:@"No"
-        otherButtonTitles:@"Yes", nil];
-    [alert show];
+    [self deleteAccountPopup:string];
     [self.PINCodeView becomeFirstResponder];
 
 }

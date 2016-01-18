@@ -22,6 +22,7 @@
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
 #import "BuySellViewController.h"
+#import "GiftCardViewController.h"
 #import "AddressRequestController.h"
 #import "BlurView.h"
 #import "User.h"
@@ -69,7 +70,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -80,6 +81,7 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
+    GiftCardViewController      *_giftCardViewController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
     SignUpViewController            *_signUpController;
@@ -410,6 +412,10 @@ MainViewController *singleton;
         [_buySellViewController resetViews];
         _buySellViewController = nil;
     }
+    if (_giftCardViewController) {
+        [_giftCardViewController resetViews];
+        _giftCardViewController = nil;
+    }
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
     _settingsViewController.delegate = self;
@@ -417,6 +423,9 @@ MainViewController *singleton;
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
     _buySellViewController.delegate = self;
+
+    _giftCardViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"GiftCardViewController"];
+    _giftCardViewController.delegate = self;
 
     if (slideoutView)
     {
@@ -1057,7 +1066,10 @@ MainViewController *singleton;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
-    _bNewDeviceLogin = bNewDevice;
+    if (!bUsedTouchID)
+    {
+        _bNewDeviceLogin = bNewDevice;        
+    }
 
     if (bNewAccount) {
         [FadingAlertView create:self.view
@@ -1836,6 +1848,18 @@ MainViewController *singleton;
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             [_buySellViewController resetViews];
+        }
+    }
+    [slideoutView showSlideout:NO];
+}
+
+- (void)slideoutGiftCard
+{
+    if (_selectedViewController != _giftCardViewController) {
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            [MainViewController animateSwapViewControllers:_giftCardViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            [_giftCardViewController resetViews];
         }
     }
     [slideoutView showSlideout:NO];

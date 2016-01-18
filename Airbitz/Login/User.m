@@ -218,6 +218,13 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)clear
 {
+    // Delete webview cookies
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     if ([User isLoggedIn])
     {
         [CoreBridge logout];

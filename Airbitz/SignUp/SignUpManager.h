@@ -14,6 +14,7 @@
 @property (nonatomic, copy)     NSString                        *strUserName;
 @property (nonatomic, copy)     NSString                        *strPassword;
 @property (nonatomic, copy)     NSString                        *strPIN;
+@property (nonatomic, assign)   BOOL                            bAllowPINOnly;
 
 - (id)initWithController:(UIViewController *)parentController;
 - (void)startSignup;
