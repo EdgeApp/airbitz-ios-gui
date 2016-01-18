@@ -1911,7 +1911,7 @@ MainViewController *singleton;
                 [self loadUserViews];
                 [self launchViewControllerBasedOnAppMode];
 
-                [FadingAlertView dismiss:YES];
+                [FadingAlertView dismiss:FadingAlertDismissFast];
             }];
 }
 
@@ -2251,7 +2251,7 @@ MainViewController *singleton;
 
 + (void)fadingAlertDismiss
 {
-    [FadingAlertView dismiss:YES];
+    [FadingAlertView dismiss:FadingAlertDismissFast];
 }
 
 @end

@@ -125,7 +125,7 @@
             }
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                [FadingAlertView dismiss:YES];
+                [FadingAlertView dismiss:FadingAlertDismissFast];
                 if (error.code == ABC_CC_Ok)
                 {
                     _bSuccess = true;
