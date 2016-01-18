@@ -2756,6 +2756,9 @@ static BOOL bOtpError = NO;
 
 + (BOOL)accountExistsLocal:(NSString *)username;
 {
+    if (username == nil) {
+        return NO;
+    }
     tABC_Error error;
     bool result;
     ABC_AccountSyncExists([username UTF8String],
