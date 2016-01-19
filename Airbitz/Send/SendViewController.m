@@ -1757,10 +1757,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         [self showSendConfirmationTo:spendTarget];
                         [MainViewController fadingAlertDismiss];
                     }
+                    else
+                    {
+                        [MainViewController fadingAlert:NSLocalizedString(@"Destination wallet not loaded. Please try again in a few seconds.", nil)];
+                    }
                     
                 }
                 
-                if (!wallet || !wallet.loaded)
+                if (!wallet)
                 {
                     if (_bImportMode)
                     {
@@ -1775,6 +1779,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         [self trySpend:text];
                     }
                 }
+            }
+            else
+            {
+                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
             }
         });
     });
