@@ -1718,7 +1718,9 @@ MainViewController *singleton;
         } else {
             _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] || [uri.scheme isEqualToString:@"bitid"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin"] ||
+               [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] ||
+               [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
             _appMode = APP_MODE_SEND;
@@ -1756,6 +1758,25 @@ MainViewController *singleton;
         } else {
             _uri = uri;
         }
+    }
+    else if([uri.scheme isEqualToString:@"hbits"])
+    {
+        if ([User isLoggedIn])
+        {
+            _importViewController.bImportMode = YES;
+            [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
+            [slideoutView showSlideout:NO];
+            [_importViewController resetViews];
+            _importViewController.addressTextField.text = [uri absoluteString];
+            [_importViewController processURI];
+        }
+        else
+        {
+            _uri = uri;
+        }
+
     }
 }
 
