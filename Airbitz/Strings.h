@@ -15,6 +15,7 @@
 #define infoButtonText                              NSLocalizedString(@"Info", @"Info button text on top right")
 #define doneButtonText                              NSLocalizedString(@"Done", @"Generic DONE button text")
 #define cancelButtonText                            NSLocalizedString(@"CANCEL", @"Generic CANCEL button text")
+#define goBackButtonText                            NSLocalizedString(@"Go Back", @"Generic Go Back button text")
 #define closeButtonText                             NSLocalizedString(@"Close", @"Generic CLOSE button text")
 #define exportButtonText                            NSLocalizedString(@"Export", @"EXPORT button text for wallet export")
 #define renameButtonText                            NSLocalizedString(@"Rename", @"RENAME button text for wallet rename")
@@ -117,6 +118,8 @@
 #define cantSendEmailText                           NSLocalizedString(@"Can't send e-mail",nil)
 #define setPasswordAndPinText                       NSLocalizedString(@"Set a Password and PIN",nil)
 #define setPasswordText                             NSLocalizedString(@"Set a Password",nil)
+#define warningWithoutPasswordTitleText             NSLocalizedString(@"Account has no password",nil)
+#define warningWithoutPasswordPopupText             NSLocalizedString(@"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled", nil)
 
 
 
