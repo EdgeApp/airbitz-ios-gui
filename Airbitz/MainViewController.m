@@ -1764,7 +1764,10 @@ MainViewController *singleton;
         if ([User isLoggedIn])
         {
             _importViewController.bImportMode = YES;
-            [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
+            if (_selectedViewController != _importViewController)
+            {
+                [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
+            }
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             _appMode = APP_MODE_MORE;
             [slideoutView showSlideout:NO];
