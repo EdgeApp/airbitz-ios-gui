@@ -138,7 +138,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [MainViewController fadingAlertDismiss];
+    [FadingAlertView dismiss:FadingAlertDismissNow];
     
     bWalletListDropped = false;
 
@@ -1772,7 +1772,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         {
                             [self stopQRReader];
                         }
-                        [MainViewController fadingAlertDismiss];
+                        else
+                        {
+                            [MainViewController fadingAlertDismiss];
+                        }
                     }
                     else
                     {
@@ -1974,7 +1977,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)sweepDoneCallback:(NSNotification *)notification
 {
-    [MainViewController fadingAlertDismiss];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MainViewController fadingAlertDismiss];
+    });
+    
     [self cancelImportExpirationTimer];
 
     NSDictionary *userInfo = [notification userInfo];

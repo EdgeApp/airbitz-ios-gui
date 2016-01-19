@@ -15,7 +15,7 @@
 
 #define KEYBOARD_MARGIN         10.0
 
-@interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate>
+@interface SignUpPasswordController () <UITextFieldDelegate, PasswordVerifyViewDelegate, UIAlertViewDelegate>
 {
     UITextField                     *_activeTextField;
     PasswordVerifyView              *_passwordVerifyView;
@@ -38,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
 @property (weak, nonatomic) IBOutlet UIButton                   *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *skipButton;
+@property (strong, nonatomic)        UIAlertView                *noPasswordAlert;
+
 
 @end
 
@@ -102,6 +104,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - ABC Alert delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (_noPasswordAlert == alertView && buttonIndex == 1)
+    {
+        [self createAccount];
+    }
+}
+
+
 #pragma mark - Action Methods
 
 - (void)next
@@ -109,45 +122,63 @@
     // check the new password fields
     if ([self newPasswordFieldsAreValid] == YES && [self fieldsAreValid] == YES)
     {
-        [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        [_passwordTextField resignFirstResponder];
-        [_reenterPasswordTextField resignFirstResponder];
-        [_pinTextField resignFirstResponder];
+        if ([self.passwordTextField.text length] == 0)
+        {
+            _noPasswordAlert = [[UIAlertView alloc]
+                                initWithTitle:warningWithoutPasswordTitleText
+                                message:warningWithoutPasswordPopupText
+                                delegate:self
+                                cancelButtonTitle:goBackButtonText
+                                otherButtonTitles:okButtonText,nil];
+            [_noPasswordAlert show];
+        }
+        else
+        {
+            [self createAccount];
+        }
+    }
+}
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            tABC_Error error;
-            char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
-            ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
+- (void)createAccount
+{
+    [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [_passwordTextField resignFirstResponder];
+    [_reenterPasswordTextField resignFirstResponder];
+    [_pinTextField resignFirstResponder];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        tABC_Error error;
+        char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
+        ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
+        if (error.code == ABC_CC_Ok)
+        {
+            ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
+                       [self.pinTextField.text UTF8String], &error);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FadingAlertView dismiss:FadingAlertDismissFast];
             if (error.code == ABC_CC_Ok)
             {
-                ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
-                        [self.pinTextField.text UTF8String], &error);
+                _bSuccess = true;
+                
+                self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+                self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+                
+                [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
+                [CoreBridge setupNewAccount];
+                
+                [super next];
             }
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [FadingAlertView dismiss:FadingAlertDismissFast];
-                if (error.code == ABC_CC_Ok)
-                {
-                    _bSuccess = true;
-                    
-                    self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-                    self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-                    
-                    [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
-                    [CoreBridge setupNewAccount];
-
-                    [super next];
-                }
-                else
-                {
-                    _bSuccess = false;
-                    _strReason = [Util errorMap:&error];
-
-                    [FadingAlertView create:self.view message:_strReason holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-                }
-            });
+            else
+            {
+                _bSuccess = false;
+                _strReason = [Util errorMap:&error];
+                
+                [FadingAlertView create:self.view message:_strReason holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+            }
         });
-    }
+    });
 }
 
 - (IBAction)skipTouched:(id)sender
