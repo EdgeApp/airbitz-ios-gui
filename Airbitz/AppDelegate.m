@@ -308,31 +308,50 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             bDidNotification = true;
         };
         
+        const NSTimeInterval MinTimeBetweenNoPasswordNotifications = (60 * 60 * 24); // One day
+        
         //
         // Popup notification if user has accounts with no passwords
         //
         NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
-        
+        BOOL bDidNoPasswordNotification = false;
+
+        [LocalSettings loadAll];
+        NSTimeInterval intervalNow = [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval intervalLast = [LocalSettings controller].noPasswordNotificationTime;
+
         if (arrayAccounts)
         {
-            for (NSString *acct in arrayAccounts)
+            if ((intervalNow - intervalLast) > MinTimeBetweenNoPasswordNotifications)
             {
-                if (![CoreBridge passwordExists:acct])
+                for (NSString *acct in arrayAccounts)
                 {
-                    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-                    
-                    NSString *title = accountsNeedsPasswordNotificationTitle;
-                    [localNotif setAlertAction:title];
-                    
-                    NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
-                    [localNotif setAlertBody:message];
-                    
-                    // fire the notification now
-                    [localNotif setFireDate:[NSDate date]];
-                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-
+                    if (![CoreBridge passwordExists:acct])
+                    {
+                        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+                        
+                        NSString *title = accountsNeedsPasswordNotificationTitle;
+                        [localNotif setAlertAction:title];
+                        
+                        NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
+                        [localNotif setAlertBody:message];
+                        
+                        // fire the notification now
+                        [localNotif setFireDate:[NSDate date]];
+                        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+                        bDidNotification = true;
+                        bDidNoPasswordNotification = true;
+                        
+                    }
                 }
             }
+            
+        }
+        
+        if (bDidNoPasswordNotification)
+        {
+            [LocalSettings controller].noPasswordNotificationTime = intervalNow;
+            [LocalSettings saveAll];
         }
         
     }
