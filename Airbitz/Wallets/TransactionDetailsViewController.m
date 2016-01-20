@@ -195,7 +195,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    self.arrayCategories = [CoreBridge Singleton].arrayCategories;
+    self.arrayCategories = [AppDelegate abc].arrayCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -348,15 +348,15 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+            [[AppDelegate abc] formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+         [[AppDelegate abc] formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
     }
     else
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+            [[AppDelegate abc] formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
@@ -490,7 +490,7 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [CoreBridge addCategory:strFullCategory];
+    [[AppDelegate abc] addCategory:strFullCategory];
 
     if (![self.transaction.strCategory isEqualToString:strFullCategory])
     {
@@ -532,11 +532,11 @@ typedef enum eRequestType
 
     if (bSomethingChanged)
     {
-        [CoreBridge storeTransaction: self.transaction];
+        [[AppDelegate abc] storeTransaction: self.transaction];
     }
 
-    [CoreBridge postToTxSearchQueue:^{
-        if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+    [[AppDelegate abc] postToTxSearchQueue:^{
+        if (_wallet && !_bOldTransaction && [[AppDelegate abc] needsRecoveryQuestionsReminder:_wallet]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
                                 message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
@@ -605,13 +605,13 @@ typedef enum eRequestType
     NSMutableString *inAddresses = [[NSMutableString alloc] init];
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
-    if ([CoreBridge isTestNet]) {
+    if ([[AppDelegate abc] isTestNet]) {
         [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
     for (TxOutput *t in self.transaction.outputs) {
-        NSString *val = [CoreBridge formatSatoshi:t.value];
+        NSString *val = [[AppDelegate abc] formatSatoshi:t.value];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
@@ -627,13 +627,13 @@ typedef enum eRequestType
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[[AppDelegate abc] formatSatoshi:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[CoreBridge formatSatoshi:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[[AppDelegate abc] formatSatoshi:fees]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
@@ -1578,7 +1578,7 @@ typedef enum eRequestType
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
         ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [CoreBridge addCategory:catString];
+        [[AppDelegate abc] addCategory:catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
         self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];

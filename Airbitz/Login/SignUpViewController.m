@@ -164,15 +164,15 @@
                     // get their old pen
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
-                    [CoreBridge postToSyncQueue:^(void) {
+                    [[AppDelegate abc] postToSyncQueue:^(void) {
                         tABC_Error error;
-                        [CoreBridge stopWatchers];
-                        [CoreBridge stopQueues];
+                        [[AppDelegate abc] stopWatchers];
+                        [[AppDelegate abc] stopQueues];
 
                         // NOTE: userNameTextField is repurposed for current password
                         ABC_ChangePassword([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
                             [self.passwordTextField.text UTF8String], &error);
-                        [CoreBridge setupLoginPIN];
+                        [[AppDelegate abc] setupLoginPIN];
 
                         _bSuccess = error.code == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
@@ -185,17 +185,17 @@
                     // get their old pen
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
-                    [CoreBridge postToSyncQueue:^(void) {
+                    [[AppDelegate abc] postToSyncQueue:^(void) {
                         tABC_Error error;
-                        [CoreBridge stopWatchers];
-                        [CoreBridge stopQueues];
+                        [[AppDelegate abc] stopWatchers];
+                        [[AppDelegate abc] stopQueues];
                         
                         const char * ignore = "ignore";
                         
                         // NOTE: userNameTextField is repurposed for current password
                         ABC_ChangePassword([[User Singleton].name UTF8String], ignore,
                                            [self.passwordTextField.text UTF8String], &error);
-                        [CoreBridge setupLoginPIN];
+                        [[AppDelegate abc] setupLoginPIN];
                         
                         _bSuccess = error.code == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
@@ -205,7 +205,7 @@
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    [CoreBridge postToMiscQueue:^{
+                    [[AppDelegate abc] postToMiscQueue:^{
                         tABC_Error error;
                         ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
                             [self.strAnswers UTF8String], [self.passwordTextField.text UTF8String], &error);
@@ -231,8 +231,8 @@
                         [alert show];
 
                         // all other modes must wait for callback before PIN login setup
-                        [CoreBridge postToMiscQueue:^{
-                            [CoreBridge setupLoginPIN];
+                        [[AppDelegate abc] postToMiscQueue:^{
+                            [[AppDelegate abc] setupLoginPIN];
                         }];
                     }
                 }
@@ -270,7 +270,7 @@
     self.imagePassword.hidden = YES;
 
     if (mode == SignUpMode_ChangePasswordNoVerify
-            || (_mode == SignUpMode_ChangePassword && ![CoreBridge passwordExists]))
+            || (_mode == SignUpMode_ChangePassword && ![[AppDelegate abc] passwordExists]))
     {
         self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
@@ -341,7 +341,7 @@
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
-        self.userNameTextField.hidden = ![CoreBridge passwordExists];
+        self.userNameTextField.hidden = ![[AppDelegate abc] passwordExists];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
@@ -367,7 +367,7 @@
     BOOL bUserNameFieldIsValid = YES;
 
     if (_mode == SignUpMode_ChangePasswordNoVerify
-            || (![CoreBridge passwordExists] 
+            || (![[AppDelegate abc] passwordExists] 
                 && (_mode == SignUpMode_ChangePassword
                     || _mode == SignUpMode_ChangePIN)))
     {
@@ -376,7 +376,7 @@
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
-        if ([CoreBridge passwordOk:self.userNameTextField.text] == NO)
+        if ([[AppDelegate abc] passwordOk:self.userNameTextField.text] == NO)
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
@@ -471,7 +471,7 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([CoreBridge passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if ([[AppDelegate abc] passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
@@ -722,7 +722,7 @@
         if (self.strUserName) {
             username = self.strUserName;
         }
-        [CoreBridge stopWatchers];
+        [[AppDelegate abc] stopWatchers];
         [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
@@ -754,8 +754,8 @@
                  delegate:nil
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];
-        [CoreBridge startWatchers];
-        [CoreBridge startQueues];
+        [[AppDelegate abc] startWatchers];
+        [[AppDelegate abc] startQueues];
     }
 
     [alert show];
@@ -774,9 +774,9 @@
     if (ABC_CC_Ok == result)
     {
         // all other modes must wait for callback before PIN login setup
-        [CoreBridge postToMiscQueue:^
+        [[AppDelegate abc] postToMiscQueue:^
         {
-            [CoreBridge setupLoginPIN];
+            [[AppDelegate abc] setupLoginPIN];
         }];
     }
     else

@@ -593,8 +593,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (buttonIndex > 0)
         {
-            [CoreBridge postToMiscQueue:^{
-                BOOL success = [CoreBridge bitidLogin:_bitidURI];
+            [[AppDelegate abc] postToMiscQueue:^{
+                BOOL success = [[AppDelegate abc] bitidLogin:_bitidURI];
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (success)
                     {
@@ -1305,20 +1305,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
 
         NSString *walletName;
         if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", [AppDelegate abc].currentWallet.strName];
         else
-            walletName = [NSString stringWithFormat:@"From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"From: %@ ▼", [AppDelegate abc].currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -1392,12 +1392,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bSuccess)
             {
-                if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+                if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
                 {
                     // private key is a valid format
                     // attempt to sweep it
-                    _sweptAddress = [CoreBridge sweepKey:privateKey
-                                              intoWallet:[CoreBridge Singleton].currentWallet.strUUID
+                    _sweptAddress = [[AppDelegate abc] sweepKey:privateKey
+                                              intoWallet:[AppDelegate abc].currentWallet.strUUID
                                             withCallback:ABC_Sweep_Complete_Callback];
 
                     if (nil != _sweptAddress && _sweptAddress.length)
@@ -1486,13 +1486,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++)
+    for (int i = 0; i < [[AppDelegate abc].arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
-        if ([CoreBridge Singleton].currentWalletID != i)
+        if ([AppDelegate abc].currentWalletID != i)
         {
-            Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:i];
+            Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:i];
 
             BOOL bAddIt = bUseAll;
             if (!bAddIt)
@@ -1506,7 +1506,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [[AppDelegate abc] formatSatoshi:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -1597,7 +1597,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 
 }
@@ -1659,7 +1659,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    NSString *bitidDomainURL = [CoreBridge bitidParseURI:_addressTextField.text];
+    NSString *bitidDomainURL = [[AppDelegate abc] bitidParseURI:_addressTextField.text];
     if (bitidDomainURL)
     {
         _bitidURI = _addressTextField.text;
@@ -1723,10 +1723,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if ([CoreBridge Singleton].currentWallet.loaded != YES)
+            if ([AppDelegate abc].currentWallet.loaded != YES)
             {
                 // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
-                ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
+                ABLog(1,@"Waiting for wallet to load: %@", [AppDelegate abc].currentWallet.strName);
                 
                 if (numRecursions < 2)
                     [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
@@ -1746,11 +1746,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (text.length)
             {
                 // see if the text corresponds to one of the loaded wallets
-                NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
+                NSInteger index = [[AppDelegate abc].arrayWalletNames indexOfObject:text];
                 Wallet *wallet = nil;
                 if (index != NSNotFound)
                 {
-                    wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+                    wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
                         [spendTarget newTransfer:wallet.strUUID error:&error];
@@ -1793,7 +1793,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    [CoreBridge postToMiscQueue:^{
+    [[AppDelegate abc] postToMiscQueue:^{
         tABC_Error error;
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         if ([spendTarget newSpend:text error:&error]) {
@@ -1824,7 +1824,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     if (index >= 0)
     {
-        Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+        Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
 
         SpendTarget *spendTarget = [[SpendTarget alloc] init];
         spendTarget.destWallet = wallet;
@@ -1998,7 +1998,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 if (sweptTXID && [sweptTXID length]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
                                                                         object:nil
-                                                                    userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[CoreBridge Singleton].currentWallet.strUUID,
+                                                                    userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[AppDelegate abc].currentWallet.strUUID,
                                                                             KEY_TX_DETAILS_EXITED_TX_ID:sweptTXID}];
                 }
             }

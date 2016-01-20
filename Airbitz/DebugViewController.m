@@ -48,11 +48,11 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
-    self.coreLabel.text = [NSString stringWithFormat:@"%@", [CoreBridge coreVersion]];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [[AppDelegate abc] coreVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
-    if ([CoreBridge isTestNet]) {
+    if ([[AppDelegate abc] isTestNet]) {
         self.networkLabel.text = @"Testnet";
     } else {
         self.networkLabel.text = @"Mainnet";
@@ -102,7 +102,7 @@
         {
             ABLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
@@ -141,15 +141,15 @@
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 //    NSMutableArray *wallets = [[NSMutableArray alloc] init];
 //    NSMutableArray *archived = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:wallets archived:archived];
-    [CoreBridge refreshWallets];
+//    [[AppDelegate abc] loadWallets:wallets archived:archived];
+    [[AppDelegate abc] refreshWallets];
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [CoreBridge postToWalletsQueue:^{
-        [CoreBridge stopWatchers];
-        [CoreBridge deleteWatcherCache];
-        [CoreBridge startWatchers];
+    [[AppDelegate abc] postToWalletsQueue:^{
+        [[AppDelegate abc] stopWatchers];
+        [[AppDelegate abc] deleteWatcherCache];
+        [[AppDelegate abc] startWatchers];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.clearWatcherButton.titleLabel.text = buttonText;
             [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];

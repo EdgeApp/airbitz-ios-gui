@@ -233,7 +233,7 @@ static BOOL bInitialized = false;
     _bNewDeviceLogin = NO;
 
     [self getAllAccounts];
-    if (self.arrayAccounts.count > 0 && ![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
+    if (self.arrayAccounts.count > 0 && ![[AppDelegate abc] accountExistsLocal:[LocalSettings controller].cachedUsername])
         [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
 
     [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
@@ -389,7 +389,7 @@ typedef enum eReloginState
     //
     // If login expired, then disable relogin but continue validation of TouchID
     //
-    if ([CoreBridge didLoginExpire:username])
+    if ([[AppDelegate abc] didLoginExpire:username])
     {
         ABLog(1, @"Login expired. Continuing with TouchID validation");
         [Keychain disableRelogin:username];
@@ -597,7 +597,7 @@ typedef enum eReloginState
         _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-        _bNewDeviceLogin = ![CoreBridge accountExistsLocal:self.usernameSelector.textField.text];
+        _bNewDeviceLogin = ![[AppDelegate abc] accountExistsLocal:self.usernameSelector.textField.text];
         ABLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -649,7 +649,7 @@ typedef enum eReloginState
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             BOOL bSuccess = NO;
             NSMutableString *error = [[NSMutableString alloc] init];
-            NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+            NSArray *arrayQuestions = [[AppDelegate abc] getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
                                                                         isSuccess:&bSuccess
                                                                          errorMsg:error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
@@ -709,7 +709,7 @@ typedef enum eReloginState
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
         tABC_Error error;
-        [CoreBridge PINLoginWithPIN:PINCode error:&error];
+        [[AppDelegate abc] PINLoginWithPIN:PINCode error:&error];
         dispatch_async(dispatch_get_main_queue(), ^
         {
             switch (error.code)
@@ -720,7 +720,7 @@ typedef enum eReloginState
                     [[User Singleton] resetPINLoginInvalidEntryCount];
                     [self.delegate LoginViewControllerDidPINLogin];
 
-                    if ([Keychain bHasSecureEnclave] && [CoreBridge passwordExists])
+                    if ([Keychain bHasSecureEnclave] && [[AppDelegate abc] passwordExists])
                     {
                         //
                         // Check if user has not yet been asked to enable touchID on this device
@@ -1104,7 +1104,7 @@ typedef enum eReloginState
 - (void)signInComplete
 {
     [self showSpinner:NO];
-    [CoreBridge otpSetError:_resultCode];
+    [[AppDelegate abc] otpSetError:_resultCode];
 
     if (_bSuccess)
     {
@@ -1218,7 +1218,7 @@ typedef enum eReloginState
     [MainViewController showBackground:YES animate:YES];
     ABC_OtpKeySet([self.usernameSelector.textField.text UTF8String], (char *)[secret UTF8String], &error);
     if (bPINModeEnabled) {
-        [CoreBridge PINLoginWithPIN:_tempPin error:&error];
+        [[AppDelegate abc] PINLoginWithPIN:_tempPin error:&error];
     } else {
         ABC_SignIn([self.usernameSelector.textField.text UTF8String],
                    [self.passwordTextField.text UTF8String], &error);
@@ -1277,7 +1277,7 @@ typedef enum eReloginState
 - (void)getAllAccounts
 {
     NSString *strError;
-    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
+    self.arrayAccounts = [[AppDelegate abc] getLocalAccounts:&strError];
     if (nil == self.arrayAccounts)
     {
         if (strError)
@@ -1295,7 +1295,7 @@ typedef enum eReloginState
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([CoreBridge PINLoginExists:account])
+    if([[AppDelegate abc] PINLoginExists:account])
     {
         [LocalSettings controller].cachedUsername = account;
         bPINModeEnabled = true;
@@ -1313,7 +1313,7 @@ typedef enum eReloginState
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
+    tABC_CC cc = [[AppDelegate abc] accountDeleteLocal:account];
     if(ABC_CC_Ok == cc)
     {
         [self getAllAccounts];
@@ -1340,7 +1340,7 @@ typedef enum eReloginState
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([CoreBridge passwordExists:acct])
+    if ([[AppDelegate abc] passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -1469,7 +1469,7 @@ typedef enum eReloginState
         {
             [_logoImage setUserInteractionEnabled:NO];
             _spinnerView.hidden = NO;
-            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Succeeded"
@@ -1552,7 +1552,7 @@ typedef enum eReloginState
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [LocalSettings controller].cachedUsername = [self.otherAccounts objectAtIndex:itemIndex];
-    if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
+    if([[AppDelegate abc] PINLoginExists:[LocalSettings controller].cachedUsername])
     {
         [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
         [self autoReloginOrTouchIDIfPossible];

@@ -73,16 +73,16 @@
 {
     [MainViewController changeNavBarOwner:self];
     
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
         
-        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, [AppDelegate abc].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -98,9 +98,9 @@
 //    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
 //    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 //
-//    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-//    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-//    _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+//    _walletSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
+//    [_walletSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
+//    _walletSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -215,7 +215,7 @@
     char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
     if (szRequestID) {
         ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
             szRequestID, &pszURI, &pData, &width, &error);
         if (error.code == ABC_CC_Ok) {
             if (pszURI && strRequestURI) {
@@ -232,7 +232,7 @@
         }
         char *szRequestAddress = NULL;
         tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
             szRequestID, &szRequestAddress, &error);
         [Util printABC_Error:&error];
         if (result == ABC_CC_Ok) {
@@ -271,7 +271,7 @@
 	char *pRequestID;
     // create the request
 	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+        [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
         &details, &pRequestID, &error);
 	if (error.code == ABC_CC_Ok) {
 		return pRequestID;
@@ -285,7 +285,7 @@
     tABC_Error error;
     // Finalize this request so it isn't used elsewhere
     ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+        [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
         [requestId UTF8String], &error);
     [Util printABC_Error:&error];
     return error.code == ABC_CC_Ok ? YES : NO;
@@ -297,7 +297,7 @@
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
     
     bWalletListDropped = false;
 }

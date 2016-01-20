@@ -127,13 +127,13 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)updateViews:(NSNotification *)notification
 {
     [MainViewController changeNavBarOwner:self];
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", [AppDelegate abc].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
         if (notification == nil || ![notification.name isEqualToString:@"Skip"]) {
@@ -154,7 +154,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
@@ -360,7 +360,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [CoreBridge bitidSign:uri msg:msg];
+    BitidSignature *bitid = [[AppDelegate abc] bitidSign:uri msg:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.address]];
 }
@@ -370,7 +370,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [CoreBridge bitidSign:uri msg:msg];
+    BitidSignature *bitid = [[AppDelegate abc] bitidSign:uri msg:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
@@ -387,7 +387,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)notifyWalletChanged
 {
-    NSMutableDictionary *d = [self walletToDict:[CoreBridge Singleton].currentWallet];
+    NSMutableDictionary *d = [self walletToDict:[AppDelegate abc].currentWallet];
     NSDictionary *data = [self jsonResult:d];
 
     NSError *jsonError;
@@ -431,7 +431,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)selectedWallet:(NSDictionary *)params
 {
-    NSMutableDictionary *d = [self walletToDict:[CoreBridge Singleton].currentWallet];
+    NSMutableDictionary *d = [self walletToDict:[AppDelegate abc].currentWallet];
     [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:d]];
 }
 
@@ -439,7 +439,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     // TODO: move to queue
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
+    for (Wallet *w in [AppDelegate abc].arrayWallets) {
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         [d setObject:w.strUUID forKey:@"id"];
         [d setObject:w.strName forKey:@"name"];
@@ -459,7 +459,7 @@ static const NSString *PROTOCOL = @"bridge://";
         return;
     }
     _sendCbid = cbid;
-    _sendWallet = [CoreBridge getWallet:[args objectForKey:@"id"]];
+    _sendWallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
     tABC_Error error;
     _spendTarget = [[SpendTarget alloc] init];
@@ -477,8 +477,8 @@ static const NSString *PROTOCOL = @"bridge://";
         _sendConfirmationViewController.delegate = self;
         _sendConfirmationViewController.spendTarget = _spendTarget;
 
-        [CoreBridge makeCurrentWallet:_sendWallet];
-        _spendTarget.srcWallet = [CoreBridge Singleton].currentWallet;
+        [[AppDelegate abc] makeCurrentWallet:_sendWallet];
+        _spendTarget.srcWallet = [AppDelegate abc].currentWallet;
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
         _sendConfirmationViewController.bSignOnly = signOnly;
@@ -615,7 +615,7 @@ static const NSString *PROTOCOL = @"bridge://";
 	tABC_Error error;
     NSDictionary *results = nil;
 
-    Wallet *wallet = [CoreBridge getWallet:[args objectForKey:@"id"]];
+    Wallet *wallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
     tABC_TxDetails details;
     memset(&details, 0, sizeof(tABC_TxDetails));
@@ -767,7 +767,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    NSString *res = [CoreBridge formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
+    NSString *res = [[AppDelegate abc] formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
     [self setJsResults:cbid withArgs:[self jsonResult:res]];
 }
 
@@ -776,7 +776,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    NSString *res = [CoreBridge formatCurrency:[[args objectForKey:@"currency"] doubleValue]
+    NSString *res = [[AppDelegate abc] formatCurrency:[[args objectForKey:@"currency"] doubleValue]
                                 withCurrencyNum:[[args objectForKey:@"currencyNum"] intValue]
                                     withSymbol:[[args objectForKey:@"withSymbol"] boolValue]];
     res = [res stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

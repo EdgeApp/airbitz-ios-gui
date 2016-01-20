@@ -577,11 +577,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [CoreBridge PINLoginExists];
+        bool exists = [[AppDelegate abc] PINLoginExists];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [CoreBridge PINLoginExists];
+            bool exists = [[AppDelegate abc] PINLoginExists];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -1075,7 +1075,7 @@ MainViewController *singleton;
         [FadingAlertView create:self.view
                         message:creatingWalletText
                        holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        [CoreBridge setupNewAccount];
+        [[AppDelegate abc] setupNewAccount];
     }
 
     // After login, reset all the main views
@@ -1130,14 +1130,14 @@ MainViewController *singleton;
     [MainViewController changeNavBarTitle:_selectedViewController title:@""];
 
     // if the user has a password, increment PIN login count
-    if ([CoreBridge passwordExists]) {
+    if ([[AppDelegate abc] passwordExists]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
     
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
-    } else if (![CoreBridge passwordExists]) {
+    } else if (![[AppDelegate abc] passwordExists]) {
         [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
@@ -1257,7 +1257,7 @@ MainViewController *singleton;
     _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
     _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
 
-    Transaction *transaction = [CoreBridge getTransaction:_strWalletUUID withTx:_strTxID];
+    Transaction *transaction = [[AppDelegate abc] getTransaction:_strWalletUUID withTx:_strTxID];
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
@@ -1305,9 +1305,9 @@ MainViewController *singleton;
     //
     // If we just received money on the currentWallet then update the Widget's address & QRcode
     //
-    if ([_strWalletUUID isEqualToString:[CoreBridge Singleton].currentWallet.strUUID])
+    if ([_strWalletUUID isEqualToString:[AppDelegate abc].currentWallet.strUUID])
     {
-        [CoreBridge updateWidgetQRCode];
+        [[AppDelegate abc] updateWidgetQRCode];
     }
 }
 
@@ -1323,19 +1323,19 @@ MainViewController *singleton;
     NSString *fiat;
     
     tABC_Error error;
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    Wallet *wallet = [[AppDelegate abc] getWallet:walletUUID];
+    Transaction *transaction = [[AppDelegate abc] getTransaction:walletUUID withTx:txId];
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
     if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                               satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
-        fiat = [CoreBridge formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+        fiat = [[AppDelegate abc] formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
     if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                                   currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
-        coin = [CoreBridge formatSatoshi:satoshi withSymbol:false cropDecimals:[CoreBridge currencyDecimalPlaces]];
+        coin = [[AppDelegate abc] formatSatoshi:satoshi withSymbol:false cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
 
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
@@ -1371,8 +1371,8 @@ MainViewController *singleton;
 
 - (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    Wallet *wallet = [[AppDelegate abc] getWallet:walletUUID];
+    Transaction *transaction = [[AppDelegate abc] getTransaction:walletUUID withTx:txId];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
@@ -1616,7 +1616,7 @@ MainViewController *singleton;
         {
             NSDictionary *dictData = [notification userInfo];
             _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-            [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+            [[AppDelegate abc] makeCurrentWalletWithUUID:_strWalletUUID];
         }
 
 //        [_transactionsViewController resetViews];

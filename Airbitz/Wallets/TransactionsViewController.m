@@ -273,11 +273,11 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets
-            && [CoreBridge Singleton].currentWallet
-            && [CoreBridge Singleton].currentWallet.loaded)
+    if ([AppDelegate abc].arrayWallets
+            && [AppDelegate abc].currentWallet
+            && [AppDelegate abc].currentWallet.loaded)
     {
-        [self getBizImagesForWallet:[CoreBridge Singleton].currentWallet];
+        [self getBizImagesForWallet:[AppDelegate abc].currentWallet];
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
@@ -308,17 +308,17 @@
     //
     if (_bNewDeviceLogin) // Should be assert
     {
-        if (![CoreBridge Singleton].bAllWalletsLoaded)
+        if (![AppDelegate abc].bAllWalletsLoaded)
         {
             //
             // Wallets are loading from Git. Show popup with wallets loading status
             //
             NSString *walletsLoading;
-            if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].numTotalWallets > 1) {
+            if ([AppDelegate abc].arrayWallets && [AppDelegate abc].numTotalWallets > 1) {
                 walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
                                                             loadingWalletsText,
-                                                            [CoreBridge Singleton].numWalletsLoaded + 1,
-                                                            [CoreBridge Singleton].numTotalWallets,
+                                                            [AppDelegate abc].numWalletsLoaded + 1,
+                                                            [AppDelegate abc].numTotalWallets,
                                                             loadingWalletsNewDeviceText];
             }
             else
@@ -370,7 +370,7 @@
     [self.walletsTable reloadData];
 
     [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:0];
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[CoreBridge currencyAbbrevLookup:[User Singleton].defaultCurrencyNum]
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[[AppDelegate abc] currencyAbbrevLookup:[User Singleton].defaultCurrencyNum]
                                           forSegmentAtIndex:1];
 
     if (_balanceView.barIsUp)
@@ -382,7 +382,7 @@
     //
     // Update balance view in the wallet dropdown.
     //
-    for(Wallet * wallet in [CoreBridge Singleton].arrayWallets)
+    for(Wallet * wallet in [AppDelegate abc].arrayWallets)
     {
         totalSatoshi += wallet.balance;
     }
@@ -464,7 +464,7 @@
 - (IBAction)buttonRequestTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID};
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [AppDelegate abc].currentWallet.strUUID};
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -472,7 +472,7 @@
 - (IBAction)buttonSendTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [CoreBridge Singleton].currentWallet.strUUID };
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: [AppDelegate abc].currentWallet.strUUID };
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -493,31 +493,31 @@
 
 - (void)updateBalanceView //
 {
-    if (nil == [CoreBridge Singleton].arrayWallets ||
-            nil == [CoreBridge Singleton].currentWallet)
+    if (nil == [AppDelegate abc].arrayWallets ||
+            nil == [AppDelegate abc].currentWallet)
         return;
 
     int64_t totalSatoshi = 0.0;
-    for(Transaction * tx in [CoreBridge Singleton].currentWallet.arrayTransactions)
+    for(Transaction * tx in [AppDelegate abc].currentWallet.arrayTransactions)
     {
         totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [CoreBridge formatSatoshi: totalSatoshi];
+    _balanceView.topAmount.text = [[AppDelegate abc] formatSatoshi: totalSatoshi];
 
     double currency;
     tABC_Error error;
 
     ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
-                          totalSatoshi, &currency, [CoreBridge Singleton].currentWallet.currencyNum, &error);
-    _balanceView.botAmount.text = [CoreBridge formatCurrency:currency
-                                             withCurrencyNum:[CoreBridge Singleton].currentWallet.currencyNum];
+                          totalSatoshi, &currency, [AppDelegate abc].currentWallet.currencyNum, &error);
+    _balanceView.botAmount.text = [[AppDelegate abc] formatCurrency:currency
+                                             withCurrencyNum:[AppDelegate abc].currentWallet.currencyNum];
     _balanceView.topDenomination.text = [User Singleton].denominationLabel;
-    NSAssert([CoreBridge Singleton].currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
-    _balanceView.botDenomination.text = [CoreBridge Singleton].currentWallet.currencyAbbrev;
+    NSAssert([AppDelegate abc].currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
+    _balanceView.botDenomination.text = [AppDelegate abc].currentWallet.currencyAbbrev;
 
     [_balanceView refresh];
 
-    if ([[CoreBridge Singleton].currentWallet isArchived])
+    if ([[AppDelegate abc].currentWallet isArchived])
     {
         self.buttonRequest.enabled = false;
         self.buttonSend.enabled = false;
@@ -534,7 +534,7 @@
 
     NSString *walletName;
 
-    walletName = [NSString stringWithFormat:@"%@ ▼", [CoreBridge Singleton].currentWallet.strName];
+    walletName = [NSString stringWithFormat:@"%@ ▼", [AppDelegate abc].currentWallet.strName];
 
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
 
@@ -596,12 +596,12 @@
         tABC_Error error;
         ABC_SatoshiToCurrency([[User Singleton].name UTF8String],[[User Singleton].password UTF8String],
                               satoshi, &currency, currencyNum, &error);
-        return [CoreBridge formatCurrency:currency
+        return [[AppDelegate abc] formatCurrency:currency
                           withCurrencyNum:currencyNum];
     }
     else
     {
-        return [CoreBridge formatSatoshi:satoshi];
+        return [[AppDelegate abc] formatSatoshi:satoshi];
     }
 }
 
@@ -622,7 +622,7 @@
     
     self.transactionDetailsController.delegate = self;
     self.transactionDetailsController.transaction = transaction;
-    self.transactionDetailsController.wallet = [CoreBridge Singleton].currentWallet;
+    self.transactionDetailsController.wallet = [AppDelegate abc].currentWallet;
     self.transactionDetailsController.bOldTransaction = YES;
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     if (cell.imagePhoto.image != self.imageSend &&
@@ -661,10 +661,10 @@
     NSString *search = self.searchTextField.text;
     if (search != NULL && search.length > 0)
     {
-        [CoreBridge clearTxSearchQueue];
-        [CoreBridge postToTxSearchQueue:^{
+        [[AppDelegate abc] clearTxSearchQueue];
+        [[AppDelegate abc] postToTxSearchQueue:^{
             NSMutableArray *arraySearchTransactions = [[NSMutableArray alloc] init];
-            [CoreBridge searchTransactionsIn:[CoreBridge Singleton].currentWallet query:search addTo:arraySearchTransactions];
+            [[AppDelegate abc] searchTransactionsIn:[AppDelegate abc].currentWallet query:search addTo:arraySearchTransactions];
             dispatch_async(dispatch_get_main_queue(),^{
                 [self.arraySearchTransactions removeAllObjects];
                 self.arraySearchTransactions = arraySearchTransactions;
@@ -813,7 +813,7 @@
             return NO;
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
-            if ([[CoreBridge Singleton].arrayWallets count] == 1)
+            if ([[AppDelegate abc].arrayWallets count] == 1)
                 return NO;
             else
                 return YES;
@@ -830,7 +830,7 @@
     // If there is only 1 wallet left in the active wallets table, prohibit moving
     if (tableView == self.walletsTable)
     {
-        if (sourceIndexPath.section == WALLET_SECTION_ACTIVE && sourceIndexPath.row == 0 && [[CoreBridge Singleton].arrayWallets count] == 1)
+        if (sourceIndexPath.section == WALLET_SECTION_ACTIVE && sourceIndexPath.row == 0 && [[AppDelegate abc].arrayWallets count] == 1)
         {
             return sourceIndexPath;
         }
@@ -863,7 +863,7 @@
     srcIndexPath = [NSIndexPath indexPathForItem:sourceIndexPath.row inSection:sourceIndexPath.section - WALLET_SECTION_ACTIVE];
     dstIndexPath = [NSIndexPath indexPathForItem:destinationIndexPath.row inSection:destinationIndexPath.section - WALLET_SECTION_ACTIVE];
 
-    [CoreBridge reorderWallets:srcIndexPath toIndexPath:dstIndexPath];
+    [[AppDelegate abc] reorderWallets:srcIndexPath toIndexPath:dstIndexPath];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -876,7 +876,7 @@
         }
         else if (section == WALLET_SECTION_ARCHIVED)
         {
-            if (([[CoreBridge Singleton].arrayArchivedWallets count] >= 1) || ([[CoreBridge Singleton].arrayWallets count] > 1))
+            if (([[AppDelegate abc].arrayArchivedWallets count] >= 1) || ([[AppDelegate abc].arrayWallets count] > 1))
                 return [Theme Singleton].heightWalletHeader;
         }
 
@@ -930,10 +930,10 @@
         }
         else
         {
-            if (0 == [CoreBridge Singleton].currentWallet.arrayTransactions.count)
+            if (0 == [AppDelegate abc].currentWallet.arrayTransactions.count)
                 return 1;
             else
-                return [CoreBridge Singleton].currentWallet.arrayTransactions.count;
+                return [AppDelegate abc].currentWallet.arrayTransactions.count;
         }
     }
     else // self.walletsTable
@@ -944,7 +944,7 @@
             case WALLET_SECTION_BALANCE:
                 return 0;
             case WALLET_SECTION_ACTIVE:
-                return [CoreBridge Singleton].arrayWallets.count;
+                return [AppDelegate abc].arrayWallets.count;
 
             case WALLET_SECTION_ARCHIVED:
                 if(_archiveCollapsed)
@@ -953,7 +953,7 @@
                 }
                 else
                 {
-                    return [CoreBridge Singleton].arrayArchivedWallets.count;
+                    return [AppDelegate abc].arrayArchivedWallets.count;
                 }
         }
 
@@ -1011,7 +1011,7 @@
     NSInteger row = [indexPath row];
     {
         TransactionCell *cell;
-        Wallet *wallet = [CoreBridge Singleton].currentWallet;
+        Wallet *wallet = [AppDelegate abc].currentWallet;
 
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
@@ -1035,7 +1035,7 @@
         }
         else
         {
-            if ([[CoreBridge Singleton].currentWallet.arrayTransactions count] == 0)
+            if ([[AppDelegate abc].currentWallet.arrayTransactions count] == 0)
             {
                 bBlankCell = YES;
                 cell.addressLabel.text = transactionCellNoTransactionsText;
@@ -1043,7 +1043,7 @@
             }
             else
             {
-                transaction = [[CoreBridge Singleton].currentWallet.arrayTransactions objectAtIndex:indexPath.row];
+                transaction = [[AppDelegate abc].currentWallet.arrayTransactions objectAtIndex:indexPath.row];
             }
         }
 
@@ -1115,10 +1115,10 @@
             }
 
             //amount
-            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi wallet:[CoreBridge Singleton].currentWallet];
+            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi wallet:[AppDelegate abc].currentWallet];
 
             // balance
-            cell.balanceLabel.text = [self formatAmount:transaction.balance wallet:[CoreBridge Singleton].currentWallet];
+            cell.balanceLabel.text = [self formatAmount:transaction.balance wallet:[AppDelegate abc].currentWallet];
             cell.balanceLabel.textColor = COLOR_BALANCE;
         }
 
@@ -1179,8 +1179,8 @@
         }
         else
         {
-            if ([[CoreBridge Singleton].currentWallet.arrayTransactions count] > 0)
-                [self launchTransactionDetailsWithTransaction:[[CoreBridge Singleton].currentWallet.arrayTransactions objectAtIndex:indexPath.row] cell:cell];
+            if ([[AppDelegate abc].currentWallet.arrayTransactions count] > 0)
+                [self launchTransactionDetailsWithTransaction:[[AppDelegate abc].currentWallet.arrayTransactions objectAtIndex:indexPath.row] cell:cell];
         }
     }
     else
@@ -1188,7 +1188,7 @@
         NSIndexPath *setIndexPath = [[NSIndexPath alloc]init];
         setIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section - WALLET_SECTION_ACTIVE];
 
-        [CoreBridge makeCurrentWalletWithIndex:setIndexPath];
+        [[AppDelegate abc] makeCurrentWalletWithIndex:setIndexPath];
         [self toggleWalletDropdown:nil];
 
     }
@@ -1288,7 +1288,7 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [CoreBridge walletRemove:longTapWallet.strUUID notify:^{
+            [[AppDelegate abc] walletRemove:longTapWallet.strUUID notify:^{
                 [MainViewController fadingAlert:deleteWalletDeletedText];
             } error:^{
                 [MainViewController fadingAlert:deleteWalletErrorText];
@@ -1310,7 +1310,7 @@
                                  (char *)[textField.text UTF8String],
                                  &error);
                 [Util printABC_Error:&error];
-                [CoreBridge refreshWallets];
+                [[AppDelegate abc] refreshWallets];
             }
             else
             {
@@ -1351,16 +1351,16 @@
         ABLog(2,@"long press on table view at section %d, row %d", (int) indexPath.section, (int) indexPath.row);
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
-            longTapWallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:indexPath.row];
+            longTapWallet = [[AppDelegate abc].arrayWallets objectAtIndex:indexPath.row];
         }
         else if (indexPath.section == WALLET_SECTION_ARCHIVED)
         {
-            longTapWallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:indexPath.row];
+            longTapWallet = [[AppDelegate abc].arrayArchivedWallets objectAtIndex:indexPath.row];
         }
         NSString *deleteText = nil;
 
         // Only allow wallet delete if this wallet is archived or if there is another non-archived wallet
-        if ([[CoreBridge Singleton].arrayWallets count] > 1 ||
+        if ([[AppDelegate abc].arrayWallets count] > 1 ||
                 longTapWallet.archived)
         {
             deleteText = deleteWalletText;
@@ -1401,7 +1401,7 @@
 
 - (void)refresh:(id)sender
 {
-    [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^
+    [[AppDelegate abc] rotateWalletServer:[AppDelegate abc].currentWallet.strUUID refreshData:NO notify:^
     {
         [(UIRefreshControl *) sender endRefreshing];
     }];
@@ -1469,7 +1469,7 @@
 
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
-    if (nil == [CoreBridge Singleton].arrayWallets)
+    if (nil == [AppDelegate abc].arrayWallets)
         return cell;
 
     Wallet *wallet;
@@ -1480,10 +1480,10 @@
             NSAssert(0, @"No wallets in balance section");
             break;
         case WALLET_SECTION_ACTIVE:
-            wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:row];
+            wallet = [[AppDelegate abc].arrayWallets objectAtIndex:row];
             break;
         case WALLET_SECTION_ARCHIVED:
-            wallet = [[CoreBridge Singleton].arrayArchivedWallets objectAtIndex:row];
+            wallet = [[AppDelegate abc].arrayArchivedWallets objectAtIndex:row];
             break;
     }
 
@@ -1501,7 +1501,7 @@
     cell.amount.text = [self formatAmount:wallet];
 
     // If there is only 1 wallet left in the active wallets table, prohibit moving
-    if (indexPath.section == WALLET_SECTION_ACTIVE && [[CoreBridge Singleton].arrayWallets count] == 1)
+    if (indexPath.section == WALLET_SECTION_ACTIVE && [[AppDelegate abc].arrayWallets count] == 1)
     {
         [cell setEditing:NO];
     }
@@ -1540,7 +1540,7 @@
     {
         _archiveCollapsed = NO;
 
-        NSInteger countOfRowsToInsert = [CoreBridge Singleton].arrayArchivedWallets.count;
+        NSInteger countOfRowsToInsert = [AppDelegate abc].arrayArchivedWallets.count;
         NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < countOfRowsToInsert; i++)
         {
@@ -1557,7 +1557,7 @@
     else
     {
         _archiveCollapsed = YES;
-        NSInteger countOfRowsToDelete = [CoreBridge Singleton].arrayArchivedWallets.count;
+        NSInteger countOfRowsToDelete = [AppDelegate abc].arrayArchivedWallets.count;
         //ABLog(2,@"Rows to collapse: %i", countOfRowsToDelete);
         if (countOfRowsToDelete > 0)
         {

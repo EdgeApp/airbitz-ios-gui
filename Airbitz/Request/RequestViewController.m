@@ -225,20 +225,20 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
+        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [AppDelegate abc].currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
-        self.keypadView.currencyNum = [CoreBridge Singleton].currentWallet.currencyNum;
+        self.keypadView.currencyNum = [AppDelegate abc].currentWallet.currencyNum;
 
         [self updateTextFieldContents:YES];
 
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -277,7 +277,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (self.rotateServerTimer)
         [self.rotateServerTimer invalidate];
 
-    [CoreBridge prioritizeAddress:nil inWallet:[CoreBridge Singleton].currentWallet.strUUID];
+    [[AppDelegate abc] prioritizeAddress:nil inWallet:[AppDelegate abc].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -288,7 +288,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         return NO;
     }
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    Transaction *transaction = [[AppDelegate abc] getTransaction:walletUUID withTx:txId];
     for (TxOutput *output in transaction.outputs)
     {
         if (!output.bInput 
@@ -366,11 +366,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (IBAction)Refresh
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
         _refreshButton.hidden = YES;
         _refreshSpinner.hidden = NO;
-        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:^
+        [[AppDelegate abc] rotateWalletServer:[AppDelegate abc].currentWallet.strUUID refreshData:NO notify:^
         {
             [NSThread sleepForTimeInterval:2.0f];
             _refreshSpinner.hidden = YES;
@@ -381,9 +381,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)refreshBackground
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
     {
-//        [CoreBridge rotateWalletServer:[CoreBridge Singleton].currentWallet.strUUID refreshData:NO notify:nil];
+//        [[AppDelegate abc] rotateWalletServer:[AppDelegate abc].currentWallet.strUUID refreshData:NO notify:nil];
     }
 }
 
@@ -466,7 +466,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     BOOL mm = [LocalSettings controller].bMerchantMode;
     self.amountSatoshiReceived += incomingSatoshi;
-    self.amountSatoshiRequested = [CoreBridge denominationToSatoshi:self.BTC_TextField.text];
+    self.amountSatoshiRequested = [[AppDelegate abc] denominationToSatoshi:self.BTC_TextField.text];
     SInt64 remaining = self.amountSatoshiRequested;
 
     if (self.previousAmountSatoshiRequested != self.amountSatoshiRequested)
@@ -474,9 +474,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
         bChangeRequest = true;
     }
-    if (previousWalletUUID != [CoreBridge Singleton].currentWallet.strUUID)
+    if (previousWalletUUID != [AppDelegate abc].currentWallet.strUUID)
     {
-        previousWalletUUID = [CoreBridge Singleton].currentWallet.strUUID;
+        previousWalletUUID = [AppDelegate abc].currentWallet.strUUID;
         bChangeRequest = true;
     }
     if (incomingSatoshi)
@@ -552,10 +552,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             remaining = self.amountSatoshiRequested - self.amountSatoshiReceived;
             NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiRequested],string];
+            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:self.amountSatoshiRequested],string];
 
             string = NSLocalizedString(@"Remaining...", @"Remaining string on Request screen");
-            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:remaining],string];
+            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:remaining],string];
             break;
         }
         case kDonation:
@@ -564,7 +564,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             if (self.amountSatoshiReceived > 0)
             {
                 NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
-                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[CoreBridge formatSatoshi:self.amountSatoshiReceived],string];
+                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:self.amountSatoshiReceived],string];
             }
             else
             {
@@ -630,7 +630,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     SInt64 remaining = [nsRemaining longLongValue];
 
-    [CoreBridge postToGenQRQueue:^(void) {
+    [[AppDelegate abc] postToGenQRQueue:^(void) {
 
         ABLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
         UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
@@ -640,7 +640,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         addressString = strRequestAddress;
         _uriString = strRequestURI;
 
-        [CoreBridge prioritizeAddress:addressString inWallet:strUUID];
+        [[AppDelegate abc] prioritizeAddress:addressString inWallet:strUUID];
 
         dispatch_async(dispatch_get_main_queue(),^{
             self.statusLine3.text = addressString;
@@ -977,7 +977,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     
     Wallet *wallet = [self getCurrentWallet];
     
-    self.exchangeRateLabel.text = [CoreBridge conversionString:wallet];
+    self.exchangeRateLabel.text = [[AppDelegate abc] conversionString:wallet];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
     [self.segmentedControlBTCUSD setTitle:wallet.currencyAbbrev forSegmentAtIndex:0];
     _fiatLabel.text = wallet.currencyAbbrev;
@@ -985,7 +985,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
-        int64_t satoshi = [CoreBridge denominationToSatoshi: self.BTC_TextField.text];
+        int64_t satoshi = [[AppDelegate abc] denominationToSatoshi: self.BTC_TextField.text];
 
         if (satoshi == 0)
         {
@@ -999,7 +999,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                     satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
-                self.USD_TextField.text = [CoreBridge formatCurrency:currency
+                self.USD_TextField.text = [[AppDelegate abc] formatCurrency:currency
                                                      withCurrencyNum:wallet.currencyNum
                                                           withSymbol:false];
         }
@@ -1021,9 +1021,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                     currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
             {
-                self.BTC_TextField.text = [CoreBridge formatSatoshi:satoshi
+                self.BTC_TextField.text = [[AppDelegate abc] formatSatoshi:satoshi
                                                          withSymbol:false
-                                                       cropDecimals:[CoreBridge currencyDecimalPlaces]];
+                                                       cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
             }
         }
 	}
@@ -1070,7 +1070,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
 }
@@ -1101,7 +1101,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (Wallet *) getCurrentWallet
 {
-    return [CoreBridge Singleton].currentWallet;
+    return [AppDelegate abc].currentWallet;
 }
 
 -(void)showConnectedPopup
@@ -1184,16 +1184,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
                     amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
             {
-                NSString *fiatAmount = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+                NSString *fiatAmount = [[AppDelegate abc] currencySymbolLookup:wallet.currencyNum];
                 NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
                 NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
-                line2 = [CoreBridge formatSatoshi:amountSatoshi];
+                line2 = [[AppDelegate abc] formatSatoshi:amountSatoshi];
                 line3 = fiat;
             }
             else
             {
                 // failed to look up the wallet's fiat currency
-                line2 = [CoreBridge formatSatoshi:amountSatoshi];
+                line2 = [[AppDelegate abc] formatSatoshi:amountSatoshi];
                 line3  = @"";
             }
             [[AudioController controller] playReceived];
@@ -1370,10 +1370,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)replaceRequestTags:(NSString **) strContent
 {
-    NSString *amountBTC = [CoreBridge formatSatoshi:_amountSatoshiRequested
+    NSString *amountBTC = [[AppDelegate abc] formatSatoshi:_amountSatoshiRequested
                                          withSymbol:false
                                       forceDecimals:8];
-    NSString *amountBits = [CoreBridge formatSatoshi:_amountSatoshiRequested
+    NSString *amountBits = [[AppDelegate abc] formatSatoshi:_amountSatoshiRequested
                                           withSymbol:false
                                        forceDecimals:2];
     // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
@@ -1610,7 +1610,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
 
-    Wallet *wallet = [CoreBridge Singleton].currentWallet;
+    Wallet *wallet = [AppDelegate abc].currentWallet;
     txDetails.amountSatoshi = _amountSatoshiRequested;
 
     double currency;
@@ -1624,15 +1624,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-                        [CoreBridge formatSatoshi:txDetails.amountSatoshi],
-                        [CoreBridge formatCurrency:txDetails.amountCurrency withCurrencyNum:wallet.currencyNum],
+                        [[AppDelegate abc] formatSatoshi:txDetails.amountSatoshi],
+                        [[AppDelegate abc] formatCurrency:txDetails.amountCurrency withCurrencyNum:wallet.currencyNum],
                         _requestType, [dateFormatter stringFromDate:now]];
     txDetails.szNotes = (char *)[notes UTF8String];
     txDetails.szCategory = (char *) "Income:";
     // Update the Details
     if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String],
-            [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [[AppDelegate abc].currentWallet.strUUID UTF8String],
             [self.requestID UTF8String],
             &txDetails,
             &error))
@@ -1648,7 +1648,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     // Finalize this request so it isn't used elsewhere
     if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
             [[User Singleton].password UTF8String],
-            [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
+            [[AppDelegate abc].currentWallet.strUUID UTF8String],
             [self.requestID UTF8String],
             &Error))
     {

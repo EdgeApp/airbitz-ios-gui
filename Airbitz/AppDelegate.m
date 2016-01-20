@@ -29,6 +29,14 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 @implementation AppDelegate
 
+static CoreBridge *airbitzCore;
+
++ (CoreBridge *) abc;
+{
+    return airbitzCore;
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -45,7 +53,8 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    [CoreBridge initAll];
+    airbitzCore = [[CoreBridge alloc] init];
+    [airbitzCore initAll];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -128,7 +137,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     if ([User isLoggedIn])
     {
-        [CoreBridge saveLogoutDate];
+        [airbitzCore saveLogoutDate];
     }
 }
 
@@ -142,19 +151,19 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     if ([User isLoggedIn])
     {
-        [CoreBridge stopQueues];
+        [airbitzCore stopQueues];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgLogoutCleanup];
         }];
-        if ([CoreBridge allWatchersReady])
+        if ([airbitzCore allWatchersReady])
         {
-            [CoreBridge disconnectWatchers];
+            [airbitzCore disconnectWatchers];
         }
         else
         {
             // If the watchers aren't finished, let them finish
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                while (![CoreBridge allWatchersReady])
+                while (![airbitzCore allWatchersReady])
                 {
                     // if app is active, break out of loop
                     if ([self isAppActive])
@@ -166,7 +175,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
                 // if the app *is not* active, stop watchers
                 if (![self isAppActive])
                 {
-                    [CoreBridge disconnectWatchers];
+                    [airbitzCore disconnectWatchers];
                 }
             });
         }
@@ -180,8 +189,8 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [self checkLoginExpired];
     if ([User isLoggedIn])
     {
-        [CoreBridge connectWatchers];
-        [CoreBridge startQueues];
+        [airbitzCore connectWatchers];
+        [airbitzCore startQueues];
     }
 }
 
@@ -192,12 +201,12 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [CoreBridge stopQueues];
+    [airbitzCore stopQueues];
     [LocalSettings freeAll];
 
     int wait = 0;
     int maxWait = 200; // ~10 seconds
-    while ([CoreBridge dataOperationCount] > 0 && wait < maxWait) {
+    while ([airbitzCore dataOperationCount] > 0 && wait < maxWait) {
         [NSThread sleepForTimeInterval:.2];
         wait++;
     }
@@ -234,7 +243,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     else
         username = [LocalSettings controller].cachedUsername;
 
-    bLoginExpired = [CoreBridge didLoginExpire:username];
+    bLoginExpired = [airbitzCore didLoginExpire:username];
 
     if (bLoginExpired)
     {
@@ -313,7 +322,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         //
         // Popup notification if user has accounts with no passwords
         //
-        NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
+        NSArray *arrayAccounts = [airbitzCore getLocalAccounts:nil];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];
@@ -326,7 +335,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             {
                 for (NSString *acct in arrayAccounts)
                 {
-                    if (![CoreBridge passwordExists:acct])
+                    if (![airbitzCore passwordExists:acct])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
                         
@@ -375,7 +384,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [CoreBridge restoreConnectivity];
+        [airbitzCore restoreConnectivity];
     }
 }
 

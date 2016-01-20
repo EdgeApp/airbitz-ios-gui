@@ -61,7 +61,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.bNoImportButton = ![CoreBridge otpHasError];
+    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
     [MainViewController changeNavBarOwner:self];
 
     [self updateViews];
@@ -81,7 +81,7 @@
     _passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    if (![CoreBridge passwordExists]) {
+    if (![[AppDelegate abc] passwordExists]) {
         _passwordTextField.hidden = YES;
     }
 
@@ -297,7 +297,7 @@
         _viewQRCodeFrame.hidden = YES;
         self.bNoImportButton = YES;
     }
-    self.bNoImportButton = ![CoreBridge otpHasError];
+    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
     [self setText:on];
     _tfaEnabledSwitch.on = on;
     _loadingSpinner.hidden = YES;

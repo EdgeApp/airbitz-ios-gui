@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "CommonTypes.h"
 #import "ABC.h"
+#import "AppDelegate.h"
 
 @interface User : NSObject
 

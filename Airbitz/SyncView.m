@@ -9,6 +9,7 @@
 #import "SyncView.h"
 #import "CoreBridge.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 #define SYNC_CHECK_INTERVAL 1.0 // second
 
@@ -84,7 +85,7 @@
 
 - (void)checkSyncView:(NSNotification *)notification
 {
-    if ([CoreBridge watcherIsReady:_walletUUID])
+    if ([[AppDelegate abc] watcherIsReady:_walletUUID])
     {
         [self dismiss];
     }

@@ -32,28 +32,9 @@
 
 #define DOLLAR_CURRENCY_NUMBER	840
 
-static NSDictionary *_localeAsCurrencyNum;
-static long long _logoutTimeStamp = 0;
 
 const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
-
-static BOOL bInitialized = NO;
-static BOOL bDataFetched = NO;
-static long iLoginTimeSeconds = 0;
-static NSOperationQueue *loadedQueue;
-static NSOperationQueue *exchangeQueue;
-static NSOperationQueue *dataQueue;
-static NSOperationQueue *walletsQueue;
-static NSOperationQueue *genQRQueue;
-static NSOperationQueue *txSearchQueue;
-static NSOperationQueue *miscQueue;
-static NSOperationQueue *watcherQueue;
-static NSLock *watcherLock;
-static NSMutableDictionary *watchers;
-static NSMutableDictionary *currencyCodesCache;
-static NSMutableDictionary *currencySymbolCache;
-
 
 static CoreBridge *singleton = nil;
 
@@ -67,28 +48,48 @@ static CoreBridge *singleton = nil;
 
 @interface CoreBridge ()
 {
-}
+    NSDictionary                                    *localeAsCurrencyNum;
+    long long                                       logoutTimeStamp;
 
-+ (void)loadTransactions:(Wallet *) wallet;
-+ (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans;
-+ (NSDate *)dateFromTimestamp:(int64_t) intDate;
+    BOOL                                            bInitialized;
+    BOOL                                            bDataFetched;
+    long                                            iLoginTimeSeconds;
+    NSOperationQueue                                *loadedQueue;
+    NSOperationQueue                                *exchangeQueue;
+    NSOperationQueue                                *dataQueue;
+    NSOperationQueue                                *walletsQueue;
+    NSOperationQueue                                *genQRQueue;
+    NSOperationQueue                                *txSearchQueue;
+    NSOperationQueue                                *miscQueue;
+    NSOperationQueue                                *watcherQueue;
+    NSLock                                          *watcherLock;
+    NSMutableDictionary                             *watchers;
+    NSMutableDictionary                             *currencyCodesCache;
+    NSMutableDictionary                             *currencySymbolCache;
+
+    NSTimer                                         *exchangeTimer;
+    NSTimer                                         *dataSyncTimer;
+    NSTimer                                         *notificationTimer;
+    BOOL                                            bOtpError;
+
+
+}
 
 @end
 
 @implementation CoreBridge
-
-static NSTimer *_exchangeTimer;
-static NSTimer *_dataSyncTimer;
-static NSTimer *_notificationTimer;
-static BOOL bOtpError = NO;
 
 + (CoreBridge *)Singleton
 {
     return singleton;
 }
 
++ (void)putSingleton:(CoreBridge *)s;
+{
+    singleton = s;
+}
 
-+ (void)initAll
+- (void)initAll
 {
     if (NO == bInitialized)
     {
@@ -115,7 +116,7 @@ static BOOL bOtpError = NO;
         currencySymbolCache = [[NSMutableDictionary alloc] init];
         currencyCodesCache = [[NSMutableDictionary alloc] init];
 
-        _localeAsCurrencyNum = @{
+        localeAsCurrencyNum = @{
             @"AUD" : @CURRENCY_NUM_AUD,
             @"CAD" : @CURRENCY_NUM_CAD,
             @"CNY" : @CURRENCY_NUM_CNY,
@@ -129,10 +130,9 @@ static BOOL bOtpError = NO;
             @"EUR" : @CURRENCY_NUM_EUR,
         };
 
-        singleton = [[CoreBridge alloc] init];
         bInitialized = YES;
 
-        [CoreBridge cleanWallets];
+        [self cleanWallets];
 
         tABC_Error Error;
         tABC_Currency       *aCurrencies;
@@ -141,7 +141,7 @@ static BOOL bOtpError = NO;
         Error.code = ABC_CC_Ok;
 
         NSMutableData *seedData = [[NSMutableData alloc] init];
-        [CoreBridge fillSeedData:seedData];
+        [self fillSeedData:seedData];
 
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *docs_dir = [paths objectAtIndex:0];
@@ -171,12 +171,12 @@ static BOOL bOtpError = NO;
         ABC_GetCurrencies(&aCurrencies, &currencyCount, &Error);
         [Util printABC_Error:&Error];
 
-        singleton.currencyCount = currencyCount;
+        self.currencyCount = currencyCount;
         // set up our internal currency arrays
-        NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:singleton.currencyCount];
-        NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:singleton.currencyCount];
+        NSMutableArray *arrayCurrencyCodes = [[NSMutableArray alloc] initWithCapacity:self.currencyCount];
+        NSMutableArray *arrayCurrencyNums = [[NSMutableArray alloc] initWithCapacity:self.currencyCount];
         NSMutableArray *arrayCurrencyStrings = [[NSMutableArray alloc] init];
-        for (int i = 0; i < singleton.currencyCount; i++)
+        for (int i = 0; i < self.currencyCount; i++)
         {
             [arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
                                                                        aCurrencies[i].szCode,
@@ -184,15 +184,15 @@ static BOOL bOtpError = NO;
             [arrayCurrencyNums addObject:[NSNumber numberWithInt:aCurrencies[i].num]];
             [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:aCurrencies[i].szCode]];
         }
-        singleton.arrayCurrencyCodes = arrayCurrencyCodes;
-        singleton.arrayCurrencyNums = arrayCurrencyNums;
-        singleton.arrayCurrencyStrings = arrayCurrencyStrings;
-        singleton.arrayCategories = nil;
-        singleton.numCategories = 0;
+        self.arrayCurrencyCodes = arrayCurrencyCodes;
+        self.arrayCurrencyNums = arrayCurrencyNums;
+        self.arrayCurrencyStrings = arrayCurrencyStrings;
+        self.arrayCategories = nil;
+        self.numCategories = 0;
     }
 }
 
-+ (void)fillSeedData:(NSMutableData *)data
+- (void)fillSeedData:(NSMutableData *)data
 {
     NSMutableString *strSeed = [[NSMutableString alloc] init];
 
@@ -224,7 +224,7 @@ static BOOL bOtpError = NO;
 
 
 
-+ (void)freeAll
+- (void)freeAll
 {
     if (YES == bInitialized)
     {
@@ -238,44 +238,44 @@ static BOOL bOtpError = NO;
         loadedQueue = nil;
         watcherQueue = nil;
         bInitialized = NO;
-        singleton.arrayCategories = nil;
-        singleton.numCategories = 0;
-        [CoreBridge cleanWallets];
+        self.arrayCategories = nil;
+        self.numCategories = 0;
+        [self cleanWallets];
     }
 }
 
-+ (void)startQueues
+- (void)startQueues
 {
     if ([User isLoggedIn])
     {
         // Initialize the exchange rates queue
-        _exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
-            target:self
-            selector:@selector(requestExchangeRateUpdate:)
-            userInfo:nil
-            repeats:YES];
+        exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+                                                         target:self
+                                                       selector:@selector(requestExchangeRateUpdate:)
+                                                       userInfo:nil
+                                                        repeats:YES];
         // Request one right now
         [self requestExchangeRateUpdate:nil];
 
         // Initialize data sync queue
-        _dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS
-            target:self
-            selector:@selector(requestSyncData:)
-            userInfo:nil
-            repeats:YES];
+        dataSyncTimer = [NSTimer scheduledTimerWithTimeInterval:FILE_SYNC_FREQUENCY_SECONDS
+                                                         target:self
+                                                       selector:@selector(requestSyncData:)
+                                                       userInfo:nil
+                                                        repeats:YES];
         [self requestSyncData:nil];
     }
 }
 
-+ (void)stopQueues
+- (void)stopQueues
 {
-    if (_exchangeTimer) {
-        [_exchangeTimer invalidate];
-        _exchangeTimer = nil;
+    if (exchangeTimer) {
+        [exchangeTimer invalidate];
+        exchangeTimer = nil;
     }
-    if (_dataSyncTimer) {
-        [_dataSyncTimer invalidate];
-        _dataSyncTimer = nil;
+    if (dataSyncTimer) {
+        [dataSyncTimer invalidate];
+        dataSyncTimer = nil;
     }
     if (dataQueue)
         [dataQueue cancelAllOperations];
@@ -294,42 +294,42 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void)postToSyncQueue:(void(^)(void))cb;
+- (void)postToSyncQueue:(void(^)(void))cb;
 {
     [dataQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToLoadedQueue:(void(^)(void))cb;
+- (void)postToLoadedQueue:(void(^)(void))cb;
 {
     [loadedQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToWalletsQueue:(void(^)(void))cb;
+- (void)postToWalletsQueue:(void(^)(void))cb;
 {
     [walletsQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToGenQRQueue:(void(^)(void))cb;
+- (void)postToGenQRQueue:(void(^)(void))cb;
 {
     [genQRQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToTxSearchQueue:(void(^)(void))cb;
+- (void)postToTxSearchQueue:(void(^)(void))cb;
 {
     [txSearchQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToMiscQueue:(void(^)(void))cb;
+- (void)postToMiscQueue:(void(^)(void))cb;
 {
     [miscQueue addOperationWithBlock:cb];
 }
 
-+ (void)postToWatcherQueue:(void(^)(void))cb;
+- (void)postToWatcherQueue:(void(^)(void))cb;
 {
     [watcherQueue addOperationWithBlock:cb];
 }
 
-+ (int)dataOperationCount
+- (int)dataOperationCount
 {
     int total = 0;
     total += dataQueue == nil     ? 0 : [dataQueue operationCount];
@@ -342,23 +342,23 @@ static BOOL bOtpError = NO;
     return total;
 }
 
-+ (void)clearSyncQueue
+- (void)clearSyncQueue
 {
     [dataQueue cancelAllOperations];
 }
 
-+ (void)clearTxSearchQueue;
+- (void)clearTxSearchQueue;
 {
     [txSearchQueue cancelAllOperations];
 }
 
-+ (void)clearMiscQueue;
+- (void)clearMiscQueue;
 {
     [miscQueue cancelAllOperations];
 }
 
 // select the wallet with the given UUID
-+ (Wallet *)selectWalletWithUUID:(NSString *)strUUID
+- (Wallet *)selectWalletWithUUID:(NSString *)strUUID
 {
     Wallet *wallet = nil;
 
@@ -369,9 +369,9 @@ static BOOL bOtpError = NO;
             // If the transaction view is open, close it
 
             // look for the wallet in our arrays
-            if (singleton.arrayWallets)
+            if (self.arrayWallets)
             {
-                for (Wallet *curWallet in singleton.arrayWallets)
+                for (Wallet *curWallet in self.arrayWallets)
                 {
                     if ([strUUID isEqualToString:curWallet.strUUID])
                     {
@@ -384,7 +384,7 @@ static BOOL bOtpError = NO;
             // if we haven't found it yet, try the archived wallets
             if (nil == wallet)
             {
-                for (Wallet *curWallet in singleton.arrayArchivedWallets)
+                for (Wallet *curWallet in self.arrayArchivedWallets)
                 {
                     if ([strUUID isEqualToString:curWallet.strUUID])
                     {
@@ -400,7 +400,7 @@ static BOOL bOtpError = NO;
 }
 
 
-+ (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
+- (void)loadWalletUUIDs:(NSMutableArray *)arrayUUIDs
 {
     tABC_Error Error;
     char **aUUIDS = NULL;
@@ -429,7 +429,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (Wallet *)getWalletFromCore:(NSString *)uuid
+- (Wallet *)getWalletFromCore:(NSString *)uuid
 {
     tABC_Error error;
     Wallet *wallet = [[Wallet alloc] init];
@@ -439,7 +439,7 @@ static BOOL bOtpError = NO;
     wallet.balance = 0;
     wallet.loaded = NO;
 
-    if ([CoreBridge watcherExists:uuid]) {
+    if ([self watcherExists:uuid]) {
         char *szName = NULL;
         ABC_WalletName([[User Singleton].name UTF8String], [uuid UTF8String], &szName, &error);
         if (error.code == ABC_CC_Ok) {
@@ -453,8 +453,8 @@ static BOOL bOtpError = NO;
         ABC_WalletCurrency([[User Singleton].name UTF8String], [uuid UTF8String], &currencyNum, &error);
         if (error.code == ABC_CC_Ok) {
             wallet.currencyNum = currencyNum;
-            wallet.currencyAbbrev = [CoreBridge currencyAbbrevLookup:wallet.currencyNum];
-            wallet.currencySymbol = [CoreBridge currencySymbolLookup:wallet.currencyNum];
+            wallet.currencyAbbrev = [self currencyAbbrevLookup:wallet.currencyNum];
+            wallet.currencySymbol = [self currencySymbolLookup:wallet.currencyNum];
             wallet.loaded = YES;
         } else {
             wallet.loaded = NO;
@@ -478,15 +478,15 @@ static BOOL bOtpError = NO;
     return wallet;
 }
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
+- (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
     ABLog(2,@"ENTER loadWallets: %@", [NSThread currentThread].name);
 
     NSMutableArray *arrayUuids = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs:arrayUuids];
+    [self loadWalletUUIDs:arrayUuids];
 
     for (NSString *uuid in arrayUuids) {
-        Wallet *wallet = [CoreBridge getWalletFromCore:uuid];
+        Wallet *wallet = [self getWalletFromCore:uuid];
         if (bWithTx && wallet.loaded) {
             [self loadTransactions:wallet];
         }
@@ -496,93 +496,93 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void)makeCurrentWallet:(Wallet *)wallet
+- (void)makeCurrentWallet:(Wallet *)wallet
 {
-    if ([[CoreBridge Singleton].arrayWallets containsObject:wallet])
+    if ([self.arrayWallets containsObject:wallet])
     {
-        singleton.currentWallet = wallet;
-        singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+        self.currentWallet = wallet;
+        self.currentWalletID = (int) [self.arrayWallets indexOfObject:self.currentWallet];
     }
-    else if ([[CoreBridge Singleton].arrayArchivedWallets containsObject:wallet])
+    else if ([self.arrayArchivedWallets containsObject:wallet])
     {
-        singleton.currentWallet = wallet;
-        singleton.currentWalletID = (int) [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
+        self.currentWallet = wallet;
+        self.currentWalletID = (int) [self.arrayArchivedWallets indexOfObject:self.currentWallet];
     }
 
-    [CoreBridge postNotificationWalletsChanged];
+    [self postNotificationWalletsChanged];
 }
 
-+ (void)makeCurrentWalletWithUUID:(NSString *)strUUID
+- (void)makeCurrentWalletWithUUID:(NSString *)strUUID
 {
-    if ([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet])
+    if ([self.arrayWallets containsObject:self.currentWallet])
     {
         Wallet *wallet = [self selectWalletWithUUID:strUUID];
         [self makeCurrentWallet:wallet];
     }
 }
 
-+ (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath
+- (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath
 {
     //
     // Set new wallet. Hide the dropdown. Then reload the TransactionsView table
     //
     if(indexPath.section == 0)
     {
-        if ([singleton.arrayWallets count] > indexPath.row)
+        if ([self.arrayWallets count] > indexPath.row)
         {
-            singleton.currentWallet = [singleton.arrayWallets objectAtIndex:indexPath.row];
-            singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+            self.currentWallet = [self.arrayWallets objectAtIndex:indexPath.row];
+            self.currentWalletID = (int) [self.arrayWallets indexOfObject:self.currentWallet];
 
         }
     }
     else
     {
-        if ([singleton.arrayArchivedWallets count] > indexPath.row)
+        if ([self.arrayArchivedWallets count] > indexPath.row)
         {
-            singleton.currentWallet = [singleton.arrayArchivedWallets objectAtIndex:indexPath.row];
-            singleton.currentWalletID = (int) [singleton.arrayArchivedWallets indexOfObject:singleton.currentWallet];
+            self.currentWallet = [self.arrayArchivedWallets objectAtIndex:indexPath.row];
+            self.currentWalletID = (int) [self.arrayArchivedWallets indexOfObject:self.currentWallet];
         }
     }
 
-    [CoreBridge postNotificationWalletsChanged];
+    [self postNotificationWalletsChanged];
 
 }
 
-+ (void)cleanWallets
+- (void)cleanWallets
 {
-    singleton.arrayWallets = nil;
-    singleton.arrayArchivedWallets = nil;
-    singleton.arrayWalletNames = nil;
-    singleton.arrayUUIDs = nil;
-    singleton.currentWallet = nil;
-    singleton.currentWalletID = 0;
-    singleton.numWalletsLoaded = 0;
-    singleton.numTotalWallets = 0;
-    singleton.bAllWalletsLoaded = NO;
+    self.arrayWallets = nil;
+    self.arrayArchivedWallets = nil;
+    self.arrayWalletNames = nil;
+    self.arrayUUIDs = nil;
+    self.currentWallet = nil;
+    self.currentWalletID = 0;
+    self.numWalletsLoaded = 0;
+    self.numTotalWallets = 0;
+    self.bAllWalletsLoaded = NO;
 }
 
-+ (void)refreshWallets
+- (void)refreshWallets
 {
-    [CoreBridge refreshWallets:nil];
+    [self refreshWallets:nil];
 }
 
-+ (void)refreshWallets:(void(^)(void))cb
+- (void)refreshWallets:(void(^)(void))cb
 {
     dispatch_async(dispatch_get_main_queue(),^{
-        if ([CoreBridge Singleton].arrayWallets.count == 0) {
+        if (self.arrayWallets.count == 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
         }
     });
-    [CoreBridge postToWatcherQueue:^(void) {
-        [CoreBridge postToWalletsQueue:^(void) {
+    [self postToWatcherQueue:^(void) {
+        [self postToWalletsQueue:^(void) {
             ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
             NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
             NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
             NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
             NSMutableArray *arrayWalletNames = [[NSMutableArray alloc] init];
 
-            [CoreBridge loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:true];
-            [CoreBridge loadWalletUUIDs:arrayUUIDs];
+            [self loadWallets:arrayWallets archived:arrayArchivedWallets withTxs:true];
+            [self loadWalletUUIDs:arrayUUIDs];
 
             //
             // Update wallet names for various dropdowns
@@ -591,7 +591,7 @@ static BOOL bOtpError = NO;
             for (int i = 0; i < [arrayWallets count]; i++)
             {
                 Wallet *wallet = [arrayWallets objectAtIndex:i];
-                [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+                [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [self formatSatoshi:wallet.balance]]];
                 if (!wallet.loaded) {
                     loadingCount++;
                 }
@@ -607,38 +607,38 @@ static BOOL bOtpError = NO;
 
             dispatch_async(dispatch_get_main_queue(),^{
                 ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
-                singleton.arrayWallets = arrayWallets;
-                singleton.arrayArchivedWallets = arrayArchivedWallets;
-                singleton.arrayUUIDs = arrayUUIDs;
-                singleton.arrayWalletNames = arrayWalletNames;
-                singleton.numTotalWallets = (int) ([arrayWallets count] + [arrayArchivedWallets count]);
-                singleton.numWalletsLoaded = singleton.numTotalWallets  - loadingCount;
+                self.arrayWallets = arrayWallets;
+                self.arrayArchivedWallets = arrayArchivedWallets;
+                self.arrayUUIDs = arrayUUIDs;
+                self.arrayWalletNames = arrayWalletNames;
+                self.numTotalWallets = (int) ([arrayWallets count] + [arrayArchivedWallets count]);
+                self.numWalletsLoaded = self.numTotalWallets  - loadingCount;
 
                 if (loadingCount == 0)
                 {
-                    singleton.bAllWalletsLoaded = YES;
+                    self.bAllWalletsLoaded = YES;
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
                 }
                 else
                 {
-                    singleton.bAllWalletsLoaded = NO;
+                    self.bAllWalletsLoaded = NO;
                 }
 
-                if (nil == singleton.currentWallet)
+                if (nil == self.currentWallet)
                 {
-                    if ([singleton.arrayWallets count] > 0)
+                    if ([self.arrayWallets count] > 0)
                     {
-                        singleton.currentWallet = [arrayWallets objectAtIndex:0];
+                        self.currentWallet = [arrayWallets objectAtIndex:0];
                     }
-                    singleton.currentWalletID = 0;
+                    self.currentWalletID = 0;
                 }
                 else
                 {
-                    NSString *lastCurrentWalletUUID = singleton.currentWallet.strUUID;
-                    singleton.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
-                    singleton.currentWalletID = (int) [singleton.arrayWallets indexOfObject:singleton.currentWallet];
+                    NSString *lastCurrentWalletUUID = self.currentWallet.strUUID;
+                    self.currentWallet = [self selectWalletWithUUID:lastCurrentWalletUUID];
+                    self.currentWalletID = (int) [self.arrayWallets indexOfObject:self.currentWallet];
                 }
-                [CoreBridge postNotificationWalletsChanged];
+                [self postNotificationWalletsChanged];
 
                 ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
 
@@ -651,17 +651,17 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void) postNotificationWalletsChanged
+- (void) postNotificationWalletsChanged
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
                                                         object:self userInfo:nil];
-    [CoreBridge updateWidgetQRCode];
+    [self updateWidgetQRCode];
 }
 
 
-+ (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
+- (void)loadWallets:(NSMutableArray *)arrayWallets archived:(NSMutableArray *)arrayArchivedWallets withTxs:(BOOL)bWithTx
 {
-    [CoreBridge loadWallets:arrayWallets withTxs:bWithTx];
+    [self loadWallets:arrayWallets withTxs:bWithTx];
 
     // go through all the wallets and seperate out the archived ones
     for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
@@ -685,10 +685,10 @@ static BOOL bOtpError = NO;
 //
 // This triggers a switch of libbitcoin servers and possibly an update if new information comes in
 //
-+ (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
+- (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb
 {
-    [CoreBridge connectWatcher:walletUUID];
-    [CoreBridge postToMiscQueue:^{
+    [self connectWatcher:walletUUID];
+    [self postToMiscQueue:^{
         // Reconnect the watcher for this wallet
         if (bData) {
             // Clear data sync queue and sync the current wallet immediately
@@ -717,14 +717,14 @@ static BOOL bOtpError = NO;
     }];
 }
 
-+ (Wallet *)getWallet: (NSString *)walletUUID
+- (Wallet *)getWallet: (NSString *)walletUUID
 {
-    for (Wallet *w in singleton.arrayWallets)
+    for (Wallet *w in self.arrayWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
             return w;
     }
-    for (Wallet *w in singleton.arrayArchivedWallets)
+    for (Wallet *w in self.arrayArchivedWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
             return w;
@@ -732,12 +732,12 @@ static BOOL bOtpError = NO;
     return nil;
 }
 
-+ (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+- (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
 {
     tABC_Error Error;
     Transaction *transaction = nil;
     tABC_TxInfo *pTrans = NULL;
-    Wallet *wallet = [CoreBridge getWallet: walletUUID];
+    Wallet *wallet = [self getWallet: walletUUID];
     if (wallet == nil)
     {
         ABLog(2,@("Could not find wallet for %@"), walletUUID);
@@ -750,7 +750,7 @@ static BOOL bOtpError = NO;
     if (ABC_CC_Ok == result)
     {
         transaction = [[Transaction alloc] init];
-        [CoreBridge setTransaction: wallet transaction:transaction coreTx:pTrans];
+        [self setTransaction: wallet transaction:transaction coreTx:pTrans];
     }
     else
     {
@@ -761,7 +761,7 @@ static BOOL bOtpError = NO;
     return transaction;
 }
 
-+ (int64_t)getTotalSentToday:(Wallet *)wallet
+- (int64_t)getTotalSentToday:(Wallet *)wallet
 {
     int64_t total = 0;
 
@@ -782,7 +782,7 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void) loadTransactions: (Wallet *) wallet
+- (void) loadTransactions: (Wallet *) wallet
 {
     tABC_Error Error;
     unsigned int tCount = 0;
@@ -803,7 +803,7 @@ static BOOL bOtpError = NO;
         {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [CoreBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
+            [self setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
@@ -824,7 +824,7 @@ static BOOL bOtpError = NO;
     ABC_FreeTransactions(aTransactions, tCount);
 }
 
-+ (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
+- (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
 {
     transaction.strID = [NSString stringWithUTF8String: pTrans->szID];
     transaction.strName = [NSString stringWithUTF8String: pTrans->pDetails->szName];
@@ -865,7 +865,7 @@ static BOOL bOtpError = NO;
     transaction.bizId = pTrans->pDetails->bizId;
 }
 
-+ (int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
+- (int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
 {
     tABC_Error Error;
     int txHeight = 0;
@@ -901,7 +901,7 @@ static BOOL bOtpError = NO;
     return retHeight;
 }
 
-+ (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions 
+- (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions
 {
     tABC_Error Error;
     unsigned int tCount = 0;
@@ -916,7 +916,7 @@ static BOOL bOtpError = NO;
         for (int j = tCount - 1; j >= 0; --j) {
             tABC_TxInfo *pTrans = aTransactions[j];
             transaction = [[Transaction alloc] init];
-            [CoreBridge setTransaction:wallet transaction:transaction coreTx:pTrans];
+            [self setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
     }
@@ -929,46 +929,46 @@ static BOOL bOtpError = NO;
     return arrayTransactions;
 }
 
-+ (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+- (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     tABC_Error Error;
     Wallet *wallet;
     if(sourceIndexPath.section == 0)
     {
-        wallet = [singleton.arrayWallets objectAtIndex:sourceIndexPath.row];
-        [singleton.arrayWallets removeObjectAtIndex:sourceIndexPath.row];
+        wallet = [self.arrayWallets objectAtIndex:sourceIndexPath.row];
+        [self.arrayWallets removeObjectAtIndex:sourceIndexPath.row];
     }
     else
     {
-        wallet = [singleton.arrayArchivedWallets objectAtIndex:sourceIndexPath.row];
-        [singleton.arrayArchivedWallets removeObjectAtIndex:sourceIndexPath.row];
+        wallet = [self.arrayArchivedWallets objectAtIndex:sourceIndexPath.row];
+        [self.arrayArchivedWallets removeObjectAtIndex:sourceIndexPath.row];
     }
 
     if(destinationIndexPath.section == 0)
     {
         wallet.archived = NO;
-        [singleton.arrayWallets insertObject:wallet atIndex:destinationIndexPath.row];
+        [self.arrayWallets insertObject:wallet atIndex:destinationIndexPath.row];
 
     }
     else
     {
         wallet.archived = YES;
-        [singleton.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
+        [self.arrayArchivedWallets insertObject:wallet atIndex:destinationIndexPath.row];
     }
 
     if (sourceIndexPath.section != destinationIndexPath.section)
     {
         // Wallet moved to/from archive. Reset attributes to Core
-        [CoreBridge setWalletAttributes:wallet];
+        [self setWalletAttributes:wallet];
     }
 
     NSMutableString *uuids = [[NSMutableString alloc] init];
-    for (Wallet *w in singleton.arrayWallets)
+    for (Wallet *w in self.arrayWallets)
     {
         [uuids appendString:w.strUUID];
         [uuids appendString:@"\n"];
     }
-    for (Wallet *w in singleton.arrayArchivedWallets)
+    for (Wallet *w in self.arrayArchivedWallets)
     {
         [uuids appendString:w.strUUID];
         [uuids appendString:@"\n"];
@@ -984,10 +984,10 @@ static BOOL bOtpError = NO;
         [Util printABC_Error:&Error];
     }
 
-    [CoreBridge refreshWallets];
+    [self refreshWallets];
 }
 
-+ (bool)setWalletAttributes: (Wallet *) wallet
+- (bool)setWalletAttributes: (Wallet *) wallet
 {
     tABC_Error Error;
     tABC_CC result = ABC_SetWalletArchived([[User Singleton].name UTF8String],
@@ -1006,9 +1006,9 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (void)storeTransaction:(Transaction *)transaction
+- (void)storeTransaction:(Transaction *)transaction
 {
-    [CoreBridge postToMiscQueue:^{
+    [self postToMiscQueue:^{
 
         tABC_Error Error;
         tABC_TxDetails *pDetails;
@@ -1043,7 +1043,7 @@ static BOOL bOtpError = NO;
             return;
         }
 
-        [CoreBridge refreshWallets];
+        [self refreshWallets];
 //        return true;
         return;
     }];
@@ -1051,7 +1051,7 @@ static BOOL bOtpError = NO;
     return; // This might as well be a void. async task return value can't ever really be tested
 }
 
-+ (NSNumberFormatter *)generateNumberFormatter
+- (NSNumberFormatter *)generateNumberFormatter
 {
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setMinimumFractionDigits:2];
@@ -1060,22 +1060,22 @@ static BOOL bOtpError = NO;
     return f;
 }
 
-+ (NSDate *)dateFromTimestamp:(int64_t) intDate
+- (NSDate *)dateFromTimestamp:(int64_t) intDate
 {
     return [NSDate dateWithTimeIntervalSince1970: intDate];
 }
 
-+ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum
+- (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum
 {
-    return [CoreBridge formatCurrency:currency withCurrencyNum:currencyNum withSymbol:true];
+    return [self formatCurrency:currency withCurrencyNum:currencyNum withSymbol:true];
 }
 
-+ (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum withSymbol:(bool) symbol
+- (NSString *)formatCurrency:(double) currency withCurrencyNum:(int) currencyNum withSymbol:(bool) symbol
 {
-    NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
+    NSNumberFormatter *f = [self generateNumberFormatter];
     [f setNumberStyle: NSNumberFormatterCurrencyStyle];
     if (symbol) {
-        NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
+        NSString *symbol = [self currencySymbolLookup:currencyNum];
         [f setNegativePrefix:[NSString stringWithFormat:@"-%@ ",symbol]];
         [f setNegativeSuffix:@""];
         [f setCurrencySymbol:[NSString stringWithFormat:@"%@ ", symbol]];
@@ -1085,7 +1085,7 @@ static BOOL bOtpError = NO;
     return [f stringFromNumber:[NSNumber numberWithFloat:currency]];
 }
 
-+ (int) currencyDecimalPlaces
+- (int) currencyDecimalPlaces
 {
     int decimalPlaces = 5;
     switch ([[User Singleton] denominationType]) {
@@ -1102,7 +1102,7 @@ static BOOL bOtpError = NO;
     return decimalPlaces;
 }
 
-+ (int) maxDecimalPlaces
+- (int) maxDecimalPlaces
 {
     int decimalPlaces = 8;
     switch ([[User Singleton] denominationType]) {
@@ -1119,31 +1119,31 @@ static BOOL bOtpError = NO;
     return decimalPlaces;
 }
 
-+ (int64_t) cleanNumString:(NSString *) value
+- (int64_t) cleanNumString:(NSString *) value
 {
-    NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
+    NSNumberFormatter *f = [self generateNumberFormatter];
     NSNumber *num = [f numberFromString:value];
     return [num longLongValue];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount
+- (NSString *)formatSatoshi: (int64_t) amount
 {
-    return [CoreBridge formatSatoshi:amount withSymbol:true];
+    return [self formatSatoshi:amount withSymbol:true];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
+- (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol
 {
-    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:-1];
+    return [self formatSatoshi:amount withSymbol:symbol cropDecimals:-1];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol forceDecimals:(int) forcedecimals
+- (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol forceDecimals:(int) forcedecimals
 {
-    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:-1 forceDecimals:forcedecimals];
+    return [self formatSatoshi:amount withSymbol:symbol cropDecimals:-1 forceDecimals:forcedecimals];
 }
 
-+ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals
+- (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals
 {
-    return [CoreBridge formatSatoshi:amount withSymbol:symbol cropDecimals:decimals forceDecimals:-1];
+    return [self formatSatoshi:amount withSymbol:symbol cropDecimals:decimals forceDecimals:-1];
 }
 
 /** 
@@ -1162,7 +1162,7 @@ static BOOL bOtpError = NO;
  *  
 **/
 
-+ (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals forceDecimals:(int) forcedecimals
+- (NSString *)formatSatoshi: (int64_t) amount withSymbol:(bool) symbol cropDecimals:(int) decimals forceDecimals:(int) forcedecimals
 {
     tABC_Error error;
     char *pFormatted = NULL;
@@ -1188,7 +1188,7 @@ static BOOL bOtpError = NO;
         const char *decimal = strstr(pFormatted, ".");
         const char *start = (decimal == NULL) ? p + strlen(p) : decimal;
         int offset = (start - pFormatted) % 3;
-        NSNumberFormatter *f = [CoreBridge generateNumberFormatter];
+        NSNumberFormatter *f = [self generateNumberFormatter];
 
         for (int i = 0; i < strlen(pFormatted) && p - start <= decimalPlaces; ++i, ++p)
         {
@@ -1208,7 +1208,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (int64_t) denominationToSatoshi: (NSString *) amount
+- (int64_t) denominationToSatoshi: (NSString *) amount
 {
     uint64_t parsedAmount;
     int decimalPlaces = [self maxDecimalPlaces];
@@ -1218,12 +1218,12 @@ static BOOL bOtpError = NO;
     return (int64_t) parsedAmount;
 }
 
-+ (NSString *)conversionString:(Wallet *) wallet
+- (NSString *)conversionString:(Wallet *) wallet
 {
     return [self conversionStringFromNum:wallet.currencyNum withAbbrev:YES];
 }
 
-+ (NSString *)conversionStringFromNum:(int) currencyNum withAbbrev:(bool) includeAbbrev
+- (NSString *)conversionStringFromNum:(int) currencyNum withAbbrev:(bool) includeAbbrev
 {
     double currency;
     tABC_Error error;
@@ -1236,8 +1236,8 @@ static BOOL bOtpError = NO;
     [Util printABC_Error:&error];
     if (result == ABC_CC_Ok)
     {
-        NSString *abbrev = [CoreBridge currencyAbbrevLookup:currencyNum];
-        NSString *symbol = [CoreBridge currencySymbolLookup:currencyNum];
+        NSString *abbrev = [self currencyAbbrevLookup:currencyNum];
+        NSString *symbol = [self currencySymbolLookup:currencyNum];
         if ([User Singleton].denominationType == ABC_DENOMINATION_UBTC)
         {
             if(includeAbbrev) {
@@ -1267,7 +1267,7 @@ static BOOL bOtpError = NO;
 
 // gets the recover questions for a given account
 // nil is returned if there were no questions for this account
-+ (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
+- (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error
 {
@@ -1309,7 +1309,7 @@ static BOOL bOtpError = NO;
     return arrayQuestions;
 }
 
-+ (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error
+- (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error
 {
     BOOL bValid = NO;
     bool bABCValid = false;
@@ -1333,17 +1333,17 @@ static BOOL bOtpError = NO;
     return bValid;
 }
 
-+ (void)incRecoveryReminder
+- (void)incRecoveryReminder
 {
-    [CoreBridge incRecoveryReminder:1];
+    [self incRecoveryReminder:1];
 }
 
-+ (void)clearRecoveryReminder
+- (void)clearRecoveryReminder
 {
-    [CoreBridge incRecoveryReminder:RECOVERY_REMINDER_COUNT];
+    [self incRecoveryReminder:RECOVERY_REMINDER_COUNT];
 }
 
-+ (void)incRecoveryReminder:(int)val
+- (void)incRecoveryReminder:(int)val
 {
     tABC_Error error;
     tABC_AccountSettings *pSettings = NULL;
@@ -1357,7 +1357,7 @@ static BOOL bOtpError = NO;
     ABC_FreeAccountSettings(pSettings);
 }
 
-+ (int)getReminderCount
+- (int)getReminderCount
 {
     int count = 0;
     tABC_Error error;
@@ -1371,34 +1371,34 @@ static BOOL bOtpError = NO;
     return count;
 }
 
-+ (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
+- (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
 {
     BOOL bResult = NO;
-    int reminderCount = [CoreBridge getReminderCount];
+    int reminderCount = [self getReminderCount];
     if (wallet.balance >= RECOVERY_REMINDER_AMOUNT && reminderCount < RECOVERY_REMINDER_COUNT) {
         BOOL bQuestions = NO;
         NSMutableString *errorMsg = [[NSMutableString alloc] init];
-        [CoreBridge getRecoveryQuestionsForUserName:[User Singleton].name
+        [self getRecoveryQuestionsForUserName:[User Singleton].name
                                             isSuccess:&bQuestions
                                             errorMsg:errorMsg];
         if (!bQuestions) {
-            [CoreBridge incRecoveryReminder];
+            [self incRecoveryReminder];
             bResult = YES;
         } else {
-            [CoreBridge clearRecoveryReminder];
+            [self clearRecoveryReminder];
         }
     }
     return bResult;
 }
 
-+ (bool)PINLoginExists
+- (bool)PINLoginExists
 {
     NSString *username = [LocalSettings controller].cachedUsername;
     
     return [self PINLoginExists:username];
 }
 
-+ (bool)PINLoginExists:(NSString *)username
+- (bool)PINLoginExists:(NSString *)username
 {
     bool exists = NO;
     if (username && 0 < username.length)
@@ -1415,7 +1415,7 @@ static BOOL bOtpError = NO;
     return exists;
 }
 
-+ (void)deletePINLogin
+- (void)deletePINLogin
 {
     NSString *username = NULL;
     if ([User isLoggedIn])
@@ -1440,7 +1440,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (void)setupLoginPIN
+- (void)setupLoginPIN
 {
     NSString *name = [User Singleton].name;
     if (name && 0 < name.length)
@@ -1478,9 +1478,9 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError
+- (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError
 {
-    if ([CoreBridge PINLoginExists])
+    if ([self PINLoginExists])
     {
         NSString *username = [LocalSettings controller].cachedUsername;
         tABC_CC result = ABC_PinLogin([username UTF8String],
@@ -1497,13 +1497,13 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (BOOL)recentlyLoggedIn
+- (BOOL)recentlyLoggedIn
 {
     long now = (long) [[NSDate date] timeIntervalSince1970];
     return now - iLoginTimeSeconds <= PIN_REQUIRED_PERIOD_SECONDS;
 }
 
-+ (void)login
+- (void)login
 {
     NSString *username = [User Singleton].name;
     if (username && 0 < username.length)
@@ -1514,36 +1514,36 @@ static BOOL bOtpError = NO;
     [LocalSettings saveAll];
     bDataFetched = NO;
     bOtpError = NO;
-    [CoreBridge startPrimaryWallet];
-    [CoreBridge postToWatcherQueue: ^
+    [self startPrimaryWallet];
+    [self postToWatcherQueue: ^
     {
-        [CoreBridge postToLoadedQueue:^
+        [self postToLoadedQueue:^
         {
-            [CoreBridge startAsyncTasks];
+            [self startAsyncTasks];
         }];
     }];
 
-    iLoginTimeSeconds = [CoreBridge saveLogoutDate];
-    [CoreBridge loadCategories];
+    iLoginTimeSeconds = [self saveLogoutDate];
+    [self loadCategories];
 }
 
-+ (BOOL)didLoginExpire:(NSString *)username;
+- (BOOL)didLoginExpire:(NSString *)username;
 {
     //
-    // If app was killed then the static var _logoutTimeStamp will be zero so we'll pull the cached value
+    // If app was killed then the static var logoutTimeStamp will be zero so we'll pull the cached value
     // from the iOS Keychain. Also, on non A7 processors, we won't save anything in the keychain so we need
     // the static var to take care of cases where app is not killed.
     //
-    if (0 == _logoutTimeStamp)
+    if (0 == logoutTimeStamp)
     {
-        _logoutTimeStamp = [Keychain getKeychainInt:[Keychain createKeyWithUsername:[LocalSettings controller].cachedUsername key:LOGOUT_TIME_KEY] error:nil];
+        logoutTimeStamp = [Keychain getKeychainInt:[Keychain createKeyWithUsername:[LocalSettings controller].cachedUsername key:LOGOUT_TIME_KEY] error:nil];
     }
 
-    if (!_logoutTimeStamp) return YES;
+    if (!logoutTimeStamp) return YES;
 
     long long currentTimeStamp = [[NSDate date] timeIntervalSince1970];
 
-    if (currentTimeStamp > _logoutTimeStamp)
+    if (currentTimeStamp > logoutTimeStamp)
     {
         return YES;
     }
@@ -1556,42 +1556,42 @@ static BOOL bOtpError = NO;
 // Returns the current time
 //
 
-+ (long) saveLogoutDate;
+- (long) saveLogoutDate;
 {
     long currentTimeStamp = (long) [[NSDate date] timeIntervalSince1970];
-    _logoutTimeStamp = currentTimeStamp + (60 * [User Singleton].minutesAutoLogout);
+    logoutTimeStamp = currentTimeStamp + (60 * [User Singleton].minutesAutoLogout);
 
     // Save in iOS Keychain
-    [Keychain setKeychainInt:_logoutTimeStamp
+    [Keychain setKeychainInt:logoutTimeStamp
                          key:[Keychain createKeyWithUsername:[User Singleton].name key:LOGOUT_TIME_KEY]
                authenticated:YES];
 
     return currentTimeStamp;
 }
 
-+ (void)startPrimaryWallet;
+- (void)startPrimaryWallet;
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
+    [self loadWalletUUIDs: arrayWallets];
     if (0 < [arrayWallets count]) {
         NSString *uuid = arrayWallets[0];
-        [CoreBridge postToLoadedQueue:^{
+        [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
             [Util printABC_Error:&error];
-            [CoreBridge startWatcher:uuid];
+            [self startWatcher:uuid];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [CoreBridge refreshWallets];
+                [self refreshWallets];
             });
         }];
     }
 }
 
-+ (void)startAsyncTasks
+- (void)startAsyncTasks
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
+    [self loadWalletUUIDs: arrayWallets];
     bool bIsFirstWallet = YES;
     for (NSString *uuid in arrayWallets) {
         if (bIsFirstWallet)
@@ -1599,28 +1599,28 @@ static BOOL bOtpError = NO;
             bIsFirstWallet = NO;
             continue;
         }
-        [CoreBridge postToLoadedQueue:^{
+        [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([[User Singleton].name UTF8String], [uuid UTF8String], &error);
             [Util printABC_Error:&error];
-            [CoreBridge startWatcher:uuid];
+            [self startWatcher:uuid];
         }];
     }
-    [CoreBridge postToLoadedQueue:^{
+    [self postToLoadedQueue:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [CoreBridge startQueues];
+            [self startQueues];
         });
     }];
-    [CoreBridge postToLoadedQueue:^{
+    [self postToLoadedQueue:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [CoreBridge refreshWallets];
+            [self refreshWallets];
         });
     }];
 }
 
-+ (void)stopAsyncTasks
+- (void)stopAsyncTasks
 {
-    [CoreBridge stopQueues];
+    [self stopQueues];
 
     unsigned long wq, dq, gq, txq, eq, mq, lq;
 
@@ -1645,13 +1645,13 @@ static BOOL bOtpError = NO;
         [NSThread sleepForTimeInterval:.2];
     }
 
-    [CoreBridge stopWatchers];
-    [CoreBridge cleanWallets];
+    [self stopWatchers];
+    [self cleanWallets];
 }
 
-+ (void)logout
+- (void)logout
 {
-    [CoreBridge stopAsyncTasks];
+    [self stopAsyncTasks];
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
@@ -1662,7 +1662,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (BOOL)passwordOk:(NSString *)password
+- (BOOL)passwordOk:(NSString *)password
 {
     NSString *name = [User Singleton].name;
     bool ok = false;
@@ -1677,12 +1677,12 @@ static BOOL bOtpError = NO;
     return ok == true ? YES : NO;
 }
 
-+ (BOOL)passwordExists
+- (BOOL)passwordExists
 {
-    return [CoreBridge passwordExists:[User Singleton].name];
+    return [self passwordExists:[User Singleton].name];
 }
 
-+ (BOOL)passwordExists:(NSString *)username;
+- (BOOL)passwordExists:(NSString *)username;
 {
     tABC_Error error;
     bool exists = false;
@@ -1693,44 +1693,44 @@ static BOOL bOtpError = NO;
     return YES;
 }
 
-+ (BOOL)allWatchersReady
+- (BOOL)allWatchersReady
 {
     return YES;
 }
 
-+ (BOOL)watcherIsReady:(NSString *)UUID
+- (BOOL)watcherIsReady:(NSString *)UUID
 {
     return YES;
 }
 
-+ (void)startWatchers
+- (void)startWatchers
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
+    [self loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
-        [CoreBridge startWatcher:uuid];
+        [self startWatcher:uuid];
     }
     if (bDataFetched) {
-        [CoreBridge connectWatchers];
+        [self connectWatchers];
     }
 }
 
-+ (void)connectWatchers
+- (void)connectWatchers
 {
     if ([User isLoggedIn]) {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWalletUUIDs:arrayWallets];
+        [self loadWalletUUIDs:arrayWallets];
         for (NSString *uuid in arrayWallets)
         {
-            [CoreBridge connectWatcher:uuid];
+            [self connectWatcher:uuid];
         }
     }
 }
 
-+ (void)connectWatcher:(NSString *)uuid
+- (void)connectWatcher:(NSString *)uuid
 {
 //    dispatch_async(dispatch_get_main_queue(),^{
-    [CoreBridge postToWatcherQueue: ^{
+    [self postToWatcherQueue: ^{
         if ([User isLoggedIn]) {
             tABC_Error Error;
             ABC_WatcherConnect([uuid UTF8String], &Error);
@@ -1742,14 +1742,14 @@ static BOOL bOtpError = NO;
 //    });
 }
 
-+ (void)disconnectWatchers
+- (void)disconnectWatchers
 {
     if ([User isLoggedIn])
     {
         NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWalletUUIDs: arrayWallets];
+        [self loadWalletUUIDs: arrayWallets];
         for (NSString *uuid in arrayWallets) {
-            [CoreBridge postToWatcherQueue: ^{
+            [self postToWatcherQueue: ^{
                 const char *szUUID = [uuid UTF8String];
                 tABC_Error Error;
                 ABC_WatcherDisconnect(szUUID, &Error);
@@ -1759,7 +1759,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (BOOL)watcherExists:(NSString *)uuid
+- (BOOL)watcherExists:(NSString *)uuid
 {
     [watcherLock lock];
     BOOL exists = [watchers objectForKey:uuid] == nil ? NO : YES;
@@ -1767,7 +1767,7 @@ static BOOL bOtpError = NO;
     return exists;
 }
 
-+ (NSOperationQueue *)watcherGet:(NSString *)uuid
+- (NSOperationQueue *)watcherGet:(NSString *)uuid
 {
     [watcherLock lock];
     NSOperationQueue *queue = [watchers objectForKey:uuid];
@@ -1775,24 +1775,24 @@ static BOOL bOtpError = NO;
     return queue;
 }
 
-+ (void)watcherSet:(NSString *)uuid queue:(NSOperationQueue *)queue
+- (void)watcherSet:(NSString *)uuid queue:(NSOperationQueue *)queue
 {
     [watcherLock lock];
     [watchers setObject:queue forKey:uuid];
     [watcherLock unlock];
 }
 
-+ (void)watcherRemove:(NSString *)uuid
+- (void)watcherRemove:(NSString *)uuid
 {
     [watcherLock lock];
     [watchers removeObjectForKey:uuid];
     [watcherLock unlock];
 }
 
-+ (void)startWatcher:(NSString *) walletUUID
+- (void)startWatcher:(NSString *) walletUUID
 {
-    [CoreBridge postToWatcherQueue: ^{
-        if (![CoreBridge watcherExists:walletUUID]) {
+    [self postToWatcherQueue: ^{
+        if (![self watcherExists:walletUUID]) {
             tABC_Error Error;
             const char *szUUID = [walletUUID UTF8String];
             ABC_WatcherStart([[User Singleton].name UTF8String],
@@ -1801,7 +1801,7 @@ static BOOL bOtpError = NO;
             [Util printABC_Error: &Error];
 
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-            [CoreBridge watcherSet:walletUUID queue:queue];
+            [self watcherSet:walletUUID queue:queue];
             [queue addOperationWithBlock:^{
                 [queue setName:walletUUID];
                 tABC_Error Error;
@@ -1812,35 +1812,35 @@ static BOOL bOtpError = NO;
                 [Util printABC_Error:&Error];
             }];
 
-            [CoreBridge watchAddresses:walletUUID];
+            [self watchAddresses:walletUUID];
             if (bDataFetched) {
-                [CoreBridge connectWatcher:walletUUID];
+                [self connectWatcher:walletUUID];
             }
-            [CoreBridge requestWalletDataSync:walletUUID];
+            [self requestWalletDataSync:walletUUID];
         }
     }];
 }
 
-+ (void)stopWatchers
+- (void)stopWatchers
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
+    [self loadWalletUUIDs: arrayWallets];
     // stop watchers
-    [CoreBridge postToWatcherQueue: ^{
+    [self postToWatcherQueue: ^{
         for (NSString *uuid in arrayWallets) {
             tABC_Error Error;
             ABC_WatcherStop([uuid UTF8String], &Error);
         }
         // wait for threads to finish
         for (NSString *uuid in arrayWallets) {
-            NSOperationQueue *queue = [CoreBridge watcherGet:uuid];
+            NSOperationQueue *queue = [self watcherGet:uuid];
             if (queue == nil) {
                 continue;
             }
             // Wait until operations complete
             [queue waitUntilAllOperationsAreFinished];
             // Remove the watcher from the dictionary
-            [CoreBridge watcherRemove:uuid];
+            [self watcherRemove:uuid];
         }
         // Destroy watchers
         for (NSString *uuid in arrayWallets) {
@@ -1853,10 +1853,10 @@ static BOOL bOtpError = NO;
     while ([watcherQueue operationCount]);
 }
 
-+ (void)deleteWatcherCache;
+- (void)deleteWatcherCache;
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs:arrayWallets];
+    [self loadWalletUUIDs:arrayWallets];
     // stop watchers
     for (NSString *uuid in arrayWallets) {
         tABC_Error error;
@@ -1864,17 +1864,17 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (void)restoreConnectivity
+- (void)restoreConnectivity
 {
-    [CoreBridge connectWatchers];
-    [CoreBridge startQueues];
+    [self connectWatchers];
+    [self startQueues];
 }
 
-+ (void)lostConnectivity
+- (void)lostConnectivity
 {
 }
 
-+ (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID
+- (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID
 {
     char *szAddress = NULL;
     if (address)
@@ -1885,7 +1885,7 @@ static BOOL bOtpError = NO;
     if (walletUUID == nil)
         return;
 
-    [CoreBridge postToWatcherQueue:^{
+    [self postToWatcherQueue:^{
         tABC_Error Error;
         ABC_PrioritizeAddress([[User Singleton].name UTF8String],
                               [[User Singleton].password UTF8String],
@@ -1897,7 +1897,7 @@ static BOOL bOtpError = NO;
     }];
 }
 
-+ (void)watchAddresses: (NSString *) walletUUID
+- (void)watchAddresses: (NSString *) walletUUID
 {
     tABC_Error Error;
     ABC_WatchAddresses([[User Singleton].name UTF8String],
@@ -1906,19 +1906,19 @@ static BOOL bOtpError = NO;
     [Util printABC_Error: &Error];
 }
 
-+ (void)requestExchangeRateUpdate:(NSTimer *)object
+- (void)requestExchangeRateUpdate:(NSTimer *)object
 {
     dispatch_async(dispatch_get_main_queue(),^
     {
         NSMutableArray *arrayCurrencyNums= [[NSMutableArray alloc] init];
 
-        for (Wallet *w in singleton.arrayWallets)
+        for (Wallet *w in self.arrayWallets)
         {
             if (w.loaded) {
                 [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
             }
         }
-        for (Wallet *w in singleton.arrayArchivedWallets)
+        for (Wallet *w in self.arrayArchivedWallets)
         {
             if (w.loaded) {
                 [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
@@ -1927,12 +1927,12 @@ static BOOL bOtpError = NO;
 
         [exchangeQueue addOperationWithBlock:^{
             [[NSThread currentThread] setName:@"Exchange Rate Update"];
-            [CoreBridge requestExchangeUpdateBlocking:arrayCurrencyNums];
+            [self requestExchangeUpdateBlocking:arrayCurrencyNums];
         }];
     });
 }
 
-+ (void)requestExchangeUpdateBlocking:(NSMutableArray *)currencyNums
+- (void)requestExchangeUpdateBlocking:(NSMutableArray *)currencyNums
 {
     if ([User isLoggedIn])
     {
@@ -1959,7 +1959,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (void)requestSyncData:(NSTimer *)object
+- (void)requestSyncData:(NSTimer *)object
 {
     // Do not request a sync one is currently in progress
     if ([dataQueue operationCount] > 0) {
@@ -1998,9 +1998,9 @@ static BOOL bOtpError = NO;
     }
     // Sync Wallets
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [CoreBridge loadWalletUUIDs: arrayWallets];
+    [self loadWalletUUIDs: arrayWallets];
     for (NSString *uuid in arrayWallets) {
-        [CoreBridge requestWalletDataSync:uuid];
+        [self requestWalletDataSync:uuid];
     }
     // Mark data as sync'd
     [dataQueue addOperationWithBlock:^{
@@ -2010,7 +2010,7 @@ static BOOL bOtpError = NO;
     }];
 }
 
-+ (void)requestWalletDataSync:(NSString *)uuid
+- (void)requestWalletDataSync:(NSString *)uuid
 {
     [dataQueue addOperationWithBlock:^{
         tABC_Error error;
@@ -2024,13 +2024,13 @@ static BOOL bOtpError = NO;
 
         // Start watcher if the data has not been fetch
         if (!bDataFetched) {
-            [CoreBridge connectWatcher:uuid];
-            [CoreBridge requestExchangeRateUpdate:nil];
+            [self connectWatcher:uuid];
+            [self requestExchangeRateUpdate:nil];
         }
     }];
 }
 
-+ (bool)isTestNet
+- (bool)isTestNet
 {
     bool result = false;
     tABC_Error Error;
@@ -2041,7 +2041,7 @@ static BOOL bOtpError = NO;
     return result;
 }
 
-+ (NSString *)coreVersion
+- (NSString *)coreVersion
 {
     NSString *version;
     char *szVersion = NULL;
@@ -2051,7 +2051,7 @@ static BOOL bOtpError = NO;
     return version;
 }
 
-+ (NSString *)currencyAbbrevLookup:(int)currencyNum
+- (NSString *)currencyAbbrevLookup:(int)currencyNum
 {
     ABLog(2,@"ENTER currencyAbbrevLookup: %@", [NSThread currentThread].name);
     NSNumber *c = [NSNumber numberWithInt:currencyNum];
@@ -2079,7 +2079,7 @@ static BOOL bOtpError = NO;
     return @"";
 }
 
-+ (NSString *)currencySymbolLookup:(int)currencyNum
+- (NSString *)currencySymbolLookup:(int)currencyNum
 {
     NSNumber *c = [NSNumber numberWithInt:currencyNum];
     NSString *cached = [currencySymbolCache objectForKey:c];
@@ -2087,7 +2087,7 @@ static BOOL bOtpError = NO;
         return cached;
     }
     NSNumberFormatter *formatter = nil;
-    NSString *code = [CoreBridge currencyAbbrevLookup:currencyNum];
+    NSString *code = [self currencyAbbrevLookup:currencyNum];
     for (NSString *l in NSLocale.availableLocaleIdentifiers) {
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.locale = [NSLocale localeWithLocaleIdentifier:l];
@@ -2107,11 +2107,11 @@ static BOOL bOtpError = NO;
 /*
  * determine currency based on locale
  */
-+ (int)getCurrencyNumOfLocale
+- (int)getCurrencyNumOfLocale
 {
     NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
     NSString *localCurrency = [locale objectForKey:NSLocaleCurrencyCode];
-    NSNumber *currencyNum = [_localeAsCurrencyNum objectForKey:localCurrency];
+    NSNumber *currencyNum = [localeAsCurrencyNum objectForKey:localCurrency];
     if (currencyNum)
     {
         return [currencyNum intValue];
@@ -2122,7 +2122,7 @@ static BOOL bOtpError = NO;
 /*
  * set a new default currency for the account based on the parameter
  */
-+ (bool)setDefaultCurrencyNum:(int)currencyNum
+- (bool)setDefaultCurrencyNum:(int)currencyNum
 {
     tABC_CC cc = ABC_CC_Ok;
     tABC_Error Error;
@@ -2152,15 +2152,15 @@ static BOOL bOtpError = NO;
     return cc == ABC_CC_Ok;
 }
 
-+ (void)updateWidgetQRCode;
+- (void)updateWidgetQRCode;
 {
 
-    if (!singleton.currentWallet || !singleton.currentWallet.strUUID)
+    if (!self.currentWallet || !self.currentWallet.strUUID)
         return;
 
-    NSString *strUUID = singleton.currentWallet.strUUID;
+    NSString *strUUID = self.currentWallet.strUUID;
 
-    [CoreBridge postToGenQRQueue:^(void) {
+    [self postToGenQRQueue:^(void) {
 
         //creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
         tABC_CC result;
@@ -2241,7 +2241,7 @@ static BOOL bOtpError = NO;
 
                     [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
                     [tempSharedUserDefs setObject:addressString forKey:APP_GROUP_LAST_ADDRESS_KEY];
-                    [tempSharedUserDefs setObject:[CoreBridge Singleton].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+                    [tempSharedUserDefs setObject:self.currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
                     [tempSharedUserDefs setObject:[User Singleton].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
                     [tempSharedUserDefs synchronize];
                 }
@@ -2258,15 +2258,15 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (void)setupNewAccount
+- (void)setupNewAccount
 {
     [dataQueue addOperationWithBlock:^{
         // update user's default currency num to match their locale
-        int currencyNum = [CoreBridge getCurrencyNumOfLocale];
-        [CoreBridge setDefaultCurrencyNum:currencyNum];
+        int currencyNum = [self getCurrencyNumOfLocale];
+        [self setDefaultCurrencyNum:currencyNum];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
-        [CoreBridge loadWalletUUIDs:wallets];
+        [self loadWalletUUIDs:wallets];
 
         if ([wallets count] == 0)
         {
@@ -2286,17 +2286,17 @@ static BOOL bOtpError = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
             [FadingAlertView dismiss:FadingAlertDismissGradual];
         });
-        [CoreBridge startWatchers];
+        [self startWatchers];
 
     }];
     
-    [CoreBridge loadCategories];
+    [self loadCategories];
 }
 
-+ (void)addCategory:(NSString *)strCategory;
+- (void)addCategory:(NSString *)strCategory;
 {
     // check and see that it doesn't already exist
-    if ([singleton.arrayCategories indexOfObject:strCategory] == NSNotFound)
+    if ([self.arrayCategories indexOfObject:strCategory] == NSNotFound)
     {
         // add the category to the core
         tABC_Error Error;
@@ -2305,12 +2305,12 @@ static BOOL bOtpError = NO;
                         (char *)[strCategory UTF8String], &Error);
         [Util printABC_Error:&Error];
     }
-    [CoreBridge loadCategories];
+    [self loadCategories];
 }
 
-+ (void) loadCategories;
+- (void) loadCategories;
 {
-//    if (nil == singleton.arrayCategories || !singleton.numCategories)
+//    if (nil == self.arrayCategories || !self.numCategories)
     {
         [dataQueue addOperationWithBlock:^{
             char            **aszCategories = NULL;
@@ -2508,20 +2508,20 @@ static BOOL bOtpError = NO;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 // store the final as storted
-                singleton.arrayCategories = tempArray;
-                singleton.numCategories = countCategories;
+                self.arrayCategories = tempArray;
+                self.numCategories = countCategories;
             });
         }];
     }
 }
 
 // saves the categories to the core
-+ (void)saveCategories:(NSMutableArray *)saveArrayCategories;
+- (void)saveCategories:(NSMutableArray *)saveArrayCategories;
 {
     tABC_Error Error;
     
     // got through the existing categories
-    for (NSString *strCategory in singleton.arrayCategories)
+    for (NSString *strCategory in self.arrayCategories)
     {
         // if this category is in our new list
         if ([saveArrayCategories containsObject:strCategory])
@@ -2543,11 +2543,11 @@ static BOOL bOtpError = NO;
         ABC_AddCategory([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], (char *)[strCategory UTF8String], &Error);
         [Util printABC_Error:&Error];
     }
-    [CoreBridge loadCategories];
+    [self loadCategories];
 }
 
 
-+ (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback
+- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback
 {
     tABC_CC result = ABC_CC_Ok;
     tABC_Error Error;
@@ -2576,7 +2576,7 @@ static BOOL bOtpError = NO;
 {
     if ([params count] > 0)
     {
-        [CoreBridge refreshWallets:^
+        [self refreshWallets:^
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
         }];
@@ -2599,36 +2599,36 @@ static BOOL bOtpError = NO;
     if (! [User isLoggedIn])
         return;
 
-    unsigned long numWallets = [singleton.arrayWallets count] + [singleton.arrayArchivedWallets count];
+    unsigned long numWallets = [self.arrayWallets count] + [self.arrayArchivedWallets count];
 
-    [CoreBridge loadCategories];
+    [self loadCategories];
     
-    [CoreBridge refreshWallets:^
+    [self refreshWallets:^
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
 
         // if there are new wallets, we need to start their watchers
-        if ([singleton.arrayWallets count] + [singleton.arrayArchivedWallets count] != numWallets)
+        if ([self.arrayWallets count] + [self.arrayArchivedWallets count] != numWallets)
         {
-            [CoreBridge startWatchers];
+            [self startWatchers];
         }
     }];
 }
 
 - (void)notifyDataSyncDelayed:(NSArray *)params
 {
-    if (_notificationTimer) {
-        [_notificationTimer invalidate];
+    if (notificationTimer) {
+        [notificationTimer invalidate];
     }
 
     if (! [User isLoggedIn])
         return;
 
-    _notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFY_DATA_SYNC_DELAY
-        target:self
-        selector:@selector(notifyDataSync:)
-        userInfo:nil
-        repeats:NO];
+    notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFY_DATA_SYNC_DELAY
+                                                         target:self
+                                                       selector:@selector(notifyDataSync:)
+                                                       userInfo:nil
+                                                        repeats:NO];
 }
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
@@ -2636,22 +2636,22 @@ static BOOL bOtpError = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
-+ (void)otpSetError:(tABC_CC)cc
+- (void)otpSetError:(tABC_CC)cc
 {
     bOtpError = ABC_CC_InvalidOTP == cc;
 }
 
-+ (BOOL)otpHasError;
+- (BOOL)otpHasError;
 {
     return bOtpError;
 }
 
-+ (void)otpClearError
+- (void)otpClearError
 {
     bOtpError = NO;
 }
 
-+ (NSString *)getOtpSecret
+- (NSString *)getOtpSecret
 {
     tABC_Error error;
     NSString *secret = nil;
@@ -2667,7 +2667,7 @@ static BOOL bOtpError = NO;
     return secret;
 }
 
-+ (NSString *) bitidParseURI:(NSString *)uri;
+- (NSString *) bitidParseURI:(NSString *)uri;
 {
     tABC_Error error;
     char *szURLDomain = NULL;
@@ -2686,7 +2686,7 @@ static BOOL bOtpError = NO;
 
 }
 
-+ (BOOL) bitidLogin:(NSString *)uri;
+- (BOOL) bitidLogin:(NSString *)uri;
 {
     tABC_Error error;
 
@@ -2697,7 +2697,7 @@ static BOOL bOtpError = NO;
     return NO;
 }
 
-+ (BitidSignature *)bitidSign:(NSString *)uri msg:(NSString *)message 
+- (BitidSignature *)bitidSign:(NSString *)uri msg:(NSString *)message
 {
     tABC_Error error;
     char *szAddress = NULL;
@@ -2720,7 +2720,7 @@ static BOOL bOtpError = NO;
     return bitid;
 }
 
-+ (NSArray *)getLocalAccounts:(NSString **)strError;
+- (NSArray *)getLocalAccounts:(NSString **)strError;
 {
     char * pszUserNames;
     NSArray *arrayAccounts = nil;
@@ -2754,7 +2754,7 @@ static BOOL bOtpError = NO;
     }
 }
 
-+ (BOOL)accountExistsLocal:(NSString *)username;
+- (BOOL)accountExistsLocal:(NSString *)username;
 {
     if (username == nil) {
         return NO;
@@ -2769,7 +2769,7 @@ static BOOL bOtpError = NO;
 
 
 
-+ (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
+- (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -2783,7 +2783,7 @@ static BOOL bOtpError = NO;
     ABC_Log([[NSString stringWithFormat:@"OS Version:%d.%d.%d", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"Airbitz Version:%@", versionbuild] UTF8String]);
     
-    [CoreBridge postToMiscQueue:^{
+    [self postToMiscQueue:^{
         tABC_Error error;
         ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
         dispatch_async(dispatch_get_main_queue(),^{
@@ -2796,34 +2796,34 @@ static BOOL bOtpError = NO;
     }];
 }
 
-+ (tABC_CC)accountDeleteLocal:(NSString *)account;
+- (tABC_CC)accountDeleteLocal:(NSString *)account;
 {
     tABC_Error error;
     ABC_AccountDelete((const char*)[account UTF8String], &error);
     return error.code;
 }
 
-+ (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
+- (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
     // Check if we are trying to delete the current wallet
-    if ([singleton.currentWallet.strUUID isEqualToString:uuid])
+    if ([self.currentWallet.strUUID isEqualToString:uuid])
     {
         // Find a non-archived wallet that isn't the wallet we're going to delete
         // and make it the current wallet
-        for (Wallet *wallet in singleton.arrayWallets)
+        for (Wallet *wallet in self.arrayWallets)
         {
             if (![wallet.strUUID isEqualToString:uuid])
             {
                 if (!wallet.archived)
                 {
-                    [CoreBridge makeCurrentWallet:wallet];
+                    [self makeCurrentWallet:wallet];
                     break;
                 }
             }
         }
     }
 
-    [CoreBridge postToMiscQueue:^
+    [self postToMiscQueue:^
     {
         ABLog(1,@"Deleting wallet [%@]", uuid);
         tABC_Error error;
@@ -2831,7 +2831,7 @@ static BOOL bOtpError = NO;
         ABC_WalletRemove([[User Singleton].name UTF8String], [uuid UTF8String], &error);
 
         [Util printABC_Error:&error];
-        [CoreBridge refreshWallets];
+        [self refreshWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
             if (ABC_CC_Ok == error.code) {
@@ -2857,7 +2857,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     //     [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
 //        [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
-        [CoreBridge refreshWallets];
+        [coreBridge refreshWallets];
     } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
         [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
     } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {

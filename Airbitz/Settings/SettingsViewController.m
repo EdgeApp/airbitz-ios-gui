@@ -936,7 +936,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             if(_pAccountSettings) {
                 [cell.state setOn:!_pAccountSettings->bDisablePINLogin animated:NO];
             }
-            if ([CoreBridge passwordExists]) {
+            if ([[AppDelegate abc] passwordExists]) {
                 cell.state.userInteractionEnabled = YES;
             } else {
                 cell.state.userInteractionEnabled = NO;
@@ -950,7 +950,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
-            else if (![CoreBridge passwordExists])
+            else if (![[AppDelegate abc] passwordExists])
             {
                 cell.name.text = NSLocalizedString(@"TouchID: Set password first", @"settings text");
                 cell.state.userInteractionEnabled = NO;
@@ -965,7 +965,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 else
                     [cell.state setOn:YES animated:NO];
 
-                if ([CoreBridge passwordExists] && 1) {
+                if ([[AppDelegate abc] passwordExists] && 1) {
                     cell.state.userInteractionEnabled = YES;
                 } else {
                     cell.state.userInteractionEnabled = NO;
@@ -1003,10 +1003,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
             if (_pAccountSettings)
             {
-                NSInteger indexCurrency = [[CoreBridge Singleton].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                NSInteger indexCurrency = [[AppDelegate abc].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
                 if (indexCurrency != NSNotFound)
                 {
-                    [cell.button setTitle:[[CoreBridge Singleton].arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
+                    [cell.button setTitle:[[AppDelegate abc].arrayCurrencyCodes objectAtIndex:indexCurrency] forState:UIControlStateNormal];
                 }
             }
 		}
@@ -1372,15 +1372,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         [Keychain disableKeychainBasedOnSettings];
 
-        [CoreBridge postToMiscQueue:^{
+        [[AppDelegate abc] postToMiscQueue:^{
 
             if (theSwitch.on)
             {
-                [CoreBridge setupLoginPIN];
+                [[AppDelegate abc] setupLoginPIN];
             }
             else
             {
-                [CoreBridge deletePINLogin];
+                [[AppDelegate abc] deletePINLogin];
             }
         }];
     }
@@ -1470,13 +1470,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         {
             if (_pAccountSettings)
             {
-                curChoice = [[CoreBridge Singleton].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
+                curChoice = [[AppDelegate abc].arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:_pAccountSettings->currencyNum]];
                 if (curChoice == NSNotFound)
                 {
                     curChoice = -1;
                 }
             }
-            arrayPopupChoices = [CoreBridge Singleton].arrayCurrencyStrings;
+            arrayPopupChoices = [AppDelegate abc].arrayCurrencyStrings;
             popupPosition = PopupPicker2Position_Full_Fading;
             headerText = @"Default Currency";
 
@@ -1538,7 +1538,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         {
             if (_pAccountSettings)
             {
-                _pAccountSettings->currencyNum = [[[CoreBridge Singleton].arrayCurrencyNums objectAtIndex:row] intValue];
+                _pAccountSettings->currencyNum = [[[AppDelegate abc].arrayCurrencyNums objectAtIndex:row] intValue];
                 [FadingAlertView create:self.view message:defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
         }

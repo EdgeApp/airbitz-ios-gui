@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreBridge.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
++ (CoreBridge *) abc;
 
 @end

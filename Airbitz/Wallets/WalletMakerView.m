@@ -162,7 +162,7 @@
     
     // Default currency for new wallets should be the currency set in the account settings
     currencyNum = [[User Singleton] defaultCurrencyNum];
-    currencyString = [CoreBridge currencyAbbrevLookup:currencyNum];
+    currencyString = [[AppDelegate abc] currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
 //    ABLog(2,self.buttonSelectorView.button.currentTitle);
 
@@ -205,7 +205,7 @@
 {
     [self blockUser:YES];
     _bCreatingWallet = YES;
-    [CoreBridge clearSyncQueue];
+    [[AppDelegate abc] clearSyncQueue];
 
     int currencyNum;
 
@@ -214,7 +214,7 @@
     else
         currencyNum = [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
     
-    [CoreBridge postToSyncQueue:^{
+    [[AppDelegate abc] postToSyncQueue:^{
         tABC_Error error;
         char *szUUID = NULL;
         ABC_CreateWallet([[User Singleton].name UTF8String],
@@ -236,8 +236,8 @@
 {
     [self blockUser:NO];
     _bCreatingWallet = NO;
-    [CoreBridge startWatchers];
-    [CoreBridge refreshWallets];
+    [[AppDelegate abc] startWatchers];
+    [[AppDelegate abc] refreshWallets];
 
     //ABLog(2,@"Wallet create complete");
     if (_bSuccess)
@@ -284,7 +284,7 @@
 {
     _currencyChoice = (int) row;
     NSNumber *currencyNum = [arrayCurrencyNums objectAtIndex:_currencyChoice];
-    NSString *currencyString = [CoreBridge currencyAbbrevLookup:[currencyNum intValue]];
+    NSString *currencyString = [[AppDelegate abc] currencyAbbrevLookup:[currencyNum intValue]];
 
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
     [self.popupPickerCurrency removeFromSuperview];

@@ -134,7 +134,7 @@
 
             int num = [User Singleton].defaultCurrencyNum;
 
-            self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
+            self.conversionText.text = [[AppDelegate abc] conversionStringFromNum:num withAbbrev:YES];
 
 
             self.accountText.text = [User Singleton].name;
@@ -464,7 +464,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([CoreBridge passwordExists:acct])
+    if ([[AppDelegate abc] passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -494,7 +494,7 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
+    tABC_CC cc = [[AppDelegate abc] accountDeleteLocal:account];
     if(cc == ABC_CC_Ok)
     {
         [self getAllAccounts];
@@ -509,7 +509,7 @@
 - (void)getAllAccounts
 {
     NSString *strError;
-    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
+    self.arrayAccounts = [[AppDelegate abc] getLocalAccounts:&strError];
     if (nil == self.arrayAccounts)
     {
         if (strError)

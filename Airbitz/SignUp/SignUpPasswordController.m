@@ -166,7 +166,7 @@
                 self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
                 
                 [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
-                [CoreBridge setupNewAccount];
+                [[AppDelegate abc] setupNewAccount];
                 
                 [super next];
             }

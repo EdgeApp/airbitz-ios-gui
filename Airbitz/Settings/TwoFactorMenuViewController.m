@@ -117,7 +117,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (cc == ABC_CC_Ok) {
                 [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
-                [CoreBridge otpClearError];
+                [[AppDelegate abc] otpClearError];
             } else {
                 [MainViewController fadingAlert:[Util errorMap:&error]];
             }

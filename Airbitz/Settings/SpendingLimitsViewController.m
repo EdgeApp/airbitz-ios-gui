@@ -50,7 +50,7 @@
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
-    if (![CoreBridge passwordExists]) {
+    if (![[AppDelegate abc] passwordExists]) {
         self.passwordTextField.hidden = YES;
     }
 
@@ -74,12 +74,12 @@
     [Util printABC_Error:&Error];
 
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
-    _dailySpendLimitField.text = [CoreBridge formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.text = [[AppDelegate abc] formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _dailyDenomination.text = [User Singleton].denominationLabelShort;
 
     _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitField.text = [[AppDelegate abc] formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _pinDenomination.text = [User Singleton].denominationLabelShort;
 
@@ -238,7 +238,7 @@
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
-            [User Singleton].dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];
+            [User Singleton].dailySpendLimitSatoshis = [[AppDelegate abc] denominationToSatoshi:_dailySpendLimitField.text];
             _pAccountSettings->bDailySpendLimit = 1;
             _pAccountSettings->dailySpendLimitSatoshis = [User Singleton].dailySpendLimitSatoshis;
         } else {
@@ -248,7 +248,7 @@
 
         if (_pinSpendLimitSwitch.on) {
             _pAccountSettings->bSpendRequirePin = 1;
-            _pAccountSettings->spendRequirePinSatoshis = [CoreBridge denominationToSatoshi:_pinSpendLimitField.text];
+            _pAccountSettings->spendRequirePinSatoshis = [[AppDelegate abc] denominationToSatoshi:_pinSpendLimitField.text];
         } else {
             _pAccountSettings->bSpendRequirePin = 0;
         }

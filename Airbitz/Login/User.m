@@ -82,10 +82,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
     if (setupPIN) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [CoreBridge setupLoginPIN];
+            [[AppDelegate abc] setupLoginPIN];
         });
     }
-    [CoreBridge login];
+    [[AppDelegate abc] login];
 }
 
 - (id)init
@@ -227,7 +227,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
     if ([User isLoggedIn])
     {
-        [CoreBridge logout];
+        [[AppDelegate abc] logout];
     }
     self.password = nil;
     self.name = nil;
@@ -394,14 +394,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (BOOL)transactionCountTriggered
 {
     if ([User isLoggedIn] &&
-            [CoreBridge Singleton].arrayWallets != nil &&
-            [CoreBridge Singleton].arrayArchivedWallets != nil)
+            [AppDelegate abc].arrayWallets != nil &&
+            [AppDelegate abc].arrayArchivedWallets != nil)
     {
         int transactionCount = 0;
-        for (Wallet *curWallet in [CoreBridge Singleton].arrayWallets) {
+        for (Wallet *curWallet in [AppDelegate abc].arrayWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
-        for (Wallet *curWallet in [CoreBridge Singleton].arrayArchivedWallets) {
+        for (Wallet *curWallet in [AppDelegate abc].arrayArchivedWallets) {
             transactionCount += [curWallet.arrayTransactions count];
         }
         return transactionCount >= REVIEW_TX_COUNT;
@@ -414,10 +414,10 @@ static User *singleton = nil;  // this will be the one and only object this stat
 {
     NSDate *date = [NSDate date];
 
-    if ([CoreBridge Singleton].arrayWallets != nil &&
-            [CoreBridge Singleton].arrayArchivedWallets != nil)
+    if ([AppDelegate abc].arrayWallets != nil &&
+            [AppDelegate abc].arrayArchivedWallets != nil)
     {
-        for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
+        for (Wallet *w in [AppDelegate abc].arrayWallets) {
             for (Transaction *t in w.arrayTransactions) {
                 if (t.date && [t.date compare:date] == NSOrderedAscending) {
                     date = t.date;

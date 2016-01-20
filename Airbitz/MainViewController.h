@@ -12,6 +12,8 @@
 #import "AirbitzViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
+
 
 
 typedef enum eNavBarSide

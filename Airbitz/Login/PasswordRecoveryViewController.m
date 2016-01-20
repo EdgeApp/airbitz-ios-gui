@@ -107,7 +107,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [CoreBridge postToMiscQueue:^{
+        [[AppDelegate abc] postToMiscQueue:^{
             tABC_Error Error;
             tABC_QuestionChoices *pQuestionChoices = NULL;
             tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
@@ -316,7 +316,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = ![CoreBridge passwordExists];
+        self.passwordView.hidden = ![[AppDelegate abc] passwordExists];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -335,9 +335,9 @@ typedef enum eAlertType
 {
     _bSuccess = NO;
     [self showSpinner:YES];
-    [CoreBridge postToMiscQueue:^{
+    [[AppDelegate abc] postToMiscQueue:^{
         tABC_Error error;
-        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
+        BOOL bSuccess = [[AppDelegate abc] recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
         NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             _bSuccess = bSuccess;
@@ -363,7 +363,7 @@ typedef enum eAlertType
     }
     else
     {
-        [CoreBridge otpSetError:_statusCode];
+        [[AppDelegate abc] otpSetError:_statusCode];
         if (ABC_CC_InvalidOTP  == _statusCode) {
             [self launchTwoFactorMenu];
         } else {
@@ -427,7 +427,7 @@ typedef enum eAlertType
     } else {
         password = [User Singleton].password;
     }
-    if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:password]) {
+    if ([[AppDelegate abc] passwordExists] && ![[AppDelegate abc] passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
@@ -440,7 +440,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [CoreBridge postToMiscQueue:^{
+    [[AppDelegate abc] postToMiscQueue:^{
         tABC_Error error;
         ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
                                                 [password UTF8String],
