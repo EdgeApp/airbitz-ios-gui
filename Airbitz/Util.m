@@ -30,9 +30,28 @@ void abDebugLog(int level, NSString *statement) {
 
 @implementation Util
 
-+ (NSString *)errorMap:(const tABC_Error *)pError
++ (NSString *)errorMap:(const tABC_Error *)pError;
 {
     switch (pError->code)
+    {
+        case ABC_CC_InvalidPinWait:
+        {
+            NSString *description = [NSString stringWithUTF8String:pError->szDescription];
+            if ([@"0" isEqualToString:description]) {
+                return NSLocalizedString(@"Invalid PIN.", nil);
+            } else {
+                return [NSString stringWithFormat:
+                        NSLocalizedString(@"Too many failed login attempts. Please try again in %@ seconds.", nil),
+                        description];
+            }
+        }
+    }
+    return [Util errorCC:pError->code];
+}
+
++ (NSString *)errorCC:(const tABC_CC) cc;
+{
+    switch (cc)
     {
         case ABC_CC_AccountAlreadyExists:
             return NSLocalizedString(@"This account already exists.", nil);
@@ -60,16 +79,7 @@ void abDebugLog(int level, NSString *statement) {
         case ABC_CC_NonNumericPin:
             return NSLocalizedString(@"PIN must be a numeric value.", nil);
         case ABC_CC_InvalidPinWait:
-        {
-            NSString *description = [NSString stringWithUTF8String:pError->szDescription];
-            if ([@"0" isEqualToString:description]) {
-                return NSLocalizedString(@"Invalid PIN.", nil);
-            } else {
-                return [NSString stringWithFormat:
-                            NSLocalizedString(@"Too many failed login attempts. Please try again in %@ seconds.", nil),
-                            description];
-            }
-        }
+            return NSLocalizedString(@"Invalid PIN.", nil);
         case ABC_CC_Error:
         case ABC_CC_NULLPtr:
         case ABC_CC_NoAvailAccountSpace:

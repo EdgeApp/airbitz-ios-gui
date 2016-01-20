@@ -3,7 +3,7 @@
 //  AirBitz
 //
 
-#import "BuySellViewController.h"
+#import "GiftCardViewController.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "BuySellCell.h"
@@ -12,7 +12,7 @@
 #import "Plugin.h"
 #import "Util.h"
 
-@interface BuySellViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
+@interface GiftCardViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
     PluginViewController *_pluginViewController;
 }
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation BuySellViewController
+@implementation GiftCardViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,18 +44,7 @@
                                                    [MainViewController getFooterHeight],0)];
 
     _backButton.hidden = YES;
-//
-//    _buySellHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Buy / Sell Bitcoin", nil) collapse:NO];
-//    _buySellHeaderView.btn_expandCollapse.hidden = YES;
-//    _buySellHeaderView.btn_addWallet.hidden = YES;
-//    _buySellHeaderView.btn_exportWallet.hidden = YES;
-//    _buySellHeaderView.btn_header.hidden = YES;
-//    _giftCardHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Discounted Gift Cards", nil) collapse:NO];
-//    _giftCardHeaderView.btn_expandCollapse.hidden = YES;
-//    _giftCardHeaderView.btn_addWallet.hidden = YES;
-//    _giftCardHeaderView.btn_exportWallet.hidden = YES;
-//    _giftCardHeaderView.btn_header.hidden = YES;
-    
+
     [Plugin initAll];
 }
 
@@ -65,7 +54,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:buySellText];
+    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
     _pluginTable.editing = NO;
 }
 
@@ -88,7 +77,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[Plugin getBuySellPlugins] count];
+    return [[Plugin getGiftCardPlugins] count];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,7 +102,7 @@
     if (cell == nil) {
         cell = [[BuySellCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
+    plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
 
     [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
@@ -138,8 +127,8 @@
     NSInteger row = [indexPath row];
     Plugin *plugin;
     
-    plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
-
+    plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
+    
     [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

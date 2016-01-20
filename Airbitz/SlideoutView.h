@@ -34,6 +34,7 @@
 - (void)slideoutSettings;
 - (void)slideoutLogout;
 - (void)slideoutBuySell;
+- (void)slideoutGiftCard;
 - (void)slideoutImport;
 - (void)slideoutWallets;
 

@@ -5,6 +5,7 @@
 
 #import "SignUpManager.h"
 #import "SignUpUsernameController.h"
+#import "SignUpPINController.h"
 #import "SignUpPasswordController.h"
 #import "SignUpHandleController.h"
 #import "SignUpCameraController.h"
@@ -15,6 +16,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MainViewController.h"
 #import "Theme.h"
+#import "LocalSettings.h"
 
 #define FORCE_REQUEST_ACCESS_SCREENS 1
 
@@ -22,6 +24,7 @@
 {
     UIViewController         *_current;
     SignUpUsernameController *_signupUsernameController;
+    SignUpPINController      *_signupPINController;
     SignUpPasswordController *_signupPasswordController;
     SignUpHandleController   *_signupHandleController;
     SignUpContactsController *_signupContactController;
@@ -51,13 +54,36 @@
 {
     _bHasCameraAccess = [self haveRequestCamera];
     _bHasContactsAccess = [self haveRequestedContacts];
+    _bAllowPINOnly = NO;
+    self.strPIN = nil;
+
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusAvailable)
+    {
+        if ([LocalSettings controller].bLocalNotificationsAllowed)
+        {
+            _bAllowPINOnly = YES;
+        }
+    }
+    
     [MainViewController showNavBarAnimated:YES];
     [self launchUsernameController];
+
 }
 
 - (void)next
 {
     if (_current == _signupUsernameController)
+    {
+        if (_bAllowPINOnly)
+        {
+            [self launchPINController];
+        }
+        else
+        {
+            [self launchPasswordController];
+        }
+    }
+    else if (_current == _signupPINController)
     {
         [self launchPasswordController];
     }
@@ -121,10 +147,49 @@
             _current = nil;
             [self.delegate signupAborted];
         }];
-    } else if (_current == _signupPasswordController) {
-        [MainViewController animateOut:_signupPasswordController withBlur:NO complete:^(void) {
-            _signupPasswordController = nil;
+    } else if (_current == _signupPINController) {
+        [MainViewController animateOut:_signupPINController withBlur:NO complete:^(void) {
+            _signupPINController = nil;
             _current = _signupUsernameController;
+            _current.view.alpha = 1.0;
+            [MainViewController animateFadeIn:_current.view];
+        }];
+        [MainViewController changeNavBarOwner:_signupUsernameController];
+        [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    } else if (_current == _signupPasswordController) {
+        if (self.bAllowPINOnly)
+        {
+            [MainViewController animateOut:_signupPasswordController withBlur:NO complete:^(void) {
+                _signupPasswordController = nil;
+                _current = _signupPINController;
+                _current.view.alpha = 1.0;
+                [MainViewController animateFadeIn:_current.view];
+            }];
+        }
+        else
+        {
+            [MainViewController animateOut:_signupPasswordController withBlur:NO complete:^(void) {
+                _signupPasswordController = nil;
+                _current = _signupUsernameController;
+                _current.view.alpha = 1.0;
+                [MainViewController animateFadeIn:_current.view];
+            }];
+            [MainViewController changeNavBarOwner:_signupUsernameController];
+            [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+        }
+    } else if (_current == _signupContactController) {
+        [MainViewController animateOut:_signupContactController withBlur:NO complete:^(void) {
+            _signupContactController = nil;
+            _current = _signupCameraController;
+            _current.view.alpha = 1.0;
+            [MainViewController animateFadeIn:_current.view];
+        }];
+        [MainViewController changeNavBarOwner:_signupCameraController];
+        [MainViewController changeNavBar:_signupCameraController title:exitButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(back:) fromObject:self];
+    } else if (_current == _signupWriteItController) {
+        [MainViewController animateOut:_signupWriteItController withBlur:NO complete:^(void) {
+            _signupWriteItController = nil;
+            _current = _signupContactController;
             _current.view.alpha = 1.0;
             [MainViewController animateFadeIn:_current.view];
         }];
@@ -140,7 +205,21 @@
     [MainViewController changeNavBarOwner:_signupUsernameController];
     [MainViewController changeNavBarTitle:_signupUsernameController title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
     [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [MainViewController animateView:_signupUsernameController withBlur:YES];
+}
+
+- (void)launchPINController
+{
+    UIStoryboard *accountCreate = [UIStoryboard storyboardWithName:@"AccountCreate" bundle: nil];
+    _signupPINController = (SignUpPINController *)[accountCreate instantiateViewControllerWithIdentifier:@"SignUpPINController"];
+    _signupPINController.manager = self;
+    [MainViewController animateFadeOut:_current.view];
+    _current = _signupPINController;
+    [MainViewController changeNavBarOwner:_signupPINController];
+    [MainViewController changeNavBar:_signupPINController title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupPINController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController animateView:_signupPINController withBlur:NO];
 }
 
 - (void)launchPasswordController
@@ -151,6 +230,9 @@
     [MainViewController animateFadeOut:_current.view];
     _current = _signupPasswordController;
     [MainViewController animateView:_signupPasswordController withBlur:NO];
+    [MainViewController changeNavBarOwner:_signupPasswordController];
+    [MainViewController changeNavBar:_signupPasswordController title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupPasswordController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)launchCameraController
@@ -161,6 +243,9 @@
     [MainViewController animateFadeOut:_current.view];
     _current = _signupCameraController;
     [MainViewController animateView:_signupCameraController withBlur:NO];
+    [MainViewController changeNavBarOwner:_signupCameraController];
+    [MainViewController changeNavBar:_signupCameraController title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupCameraController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)launchContactController
@@ -171,6 +256,9 @@
     [MainViewController animateFadeOut:_current.view];
     _current = _signupContactController;
     [MainViewController animateView:_signupContactController withBlur:NO];
+    [MainViewController changeNavBarOwner:_signupContactController];
+    [MainViewController changeNavBar:_signupContactController title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupContactController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (void)launchWriteItController
@@ -181,6 +269,9 @@
     [MainViewController animateFadeOut:_current.view];
     _current = _signupWriteItController;
     [MainViewController animateView:_signupWriteItController withBlur:NO];
+    [MainViewController changeNavBarOwner:_signupWriteItController];
+    [MainViewController changeNavBar:_signupWriteItController title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
+    [MainViewController changeNavBar:_signupWriteItController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
 
 - (BOOL)haveRequestCamera

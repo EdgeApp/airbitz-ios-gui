@@ -810,7 +810,7 @@
 
 - (void)dismissErrorMessage
 {
-    [FadingAlertView dismiss:YES];
+    [FadingAlertView dismiss:FadingAlertDismissFast];
 }
 
 #pragma mark infoView Delegates

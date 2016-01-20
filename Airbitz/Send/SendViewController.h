@@ -31,7 +31,7 @@ typedef enum eLoopbackState
 @interface SendViewController : AirbitzViewController
 
 @property (nonatomic, strong) ZBarSymbolSet           *zBarSymbolSet;
-@property (nonatomic, weak) IBOutlet UITextField    *addressTextField;
+@property (nonatomic, strong) IBOutlet UITextField    *addressTextField;
 @property (nonatomic)       tLoopbackState          loopbackState;
 @property (nonatomic)       BOOL                    bImportMode;
 

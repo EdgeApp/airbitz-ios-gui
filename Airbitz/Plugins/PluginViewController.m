@@ -66,7 +66,7 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
-                @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
+                @"requestSpend":NSStringFromSelector(@selector(requestSpend:)),
                  @"requestSign":NSStringFromSelector(@selector(requestSign:)),
                  @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
                       @"saveTx":NSStringFromSelector(@selector(saveTx:)),
@@ -121,7 +121,6 @@ static const NSString *PROTOCOL = @"bridge://";
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
-    [self updateViews:nil];
     [self notifyDenominationChange];
 }
 
@@ -207,6 +206,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *padding = @"document.body.style.margin='0';document.body.style.padding = '0'";
     [_webView stringByEvaluatingJavaScriptFromString:padding];
+    [self updateViews:nil];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType

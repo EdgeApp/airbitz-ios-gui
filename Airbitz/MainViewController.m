@@ -22,6 +22,7 @@
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
 #import "BuySellViewController.h"
+#import "GiftCardViewController.h"
 #import "AddressRequestController.h"
 #import "BlurView.h"
 #import "User.h"
@@ -69,7 +70,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate>
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -80,6 +81,7 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
+    GiftCardViewController      *_giftCardViewController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
     SignUpViewController            *_signUpController;
@@ -410,6 +412,10 @@ MainViewController *singleton;
         [_buySellViewController resetViews];
         _buySellViewController = nil;
     }
+    if (_giftCardViewController) {
+        [_giftCardViewController resetViews];
+        _giftCardViewController = nil;
+    }
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
     _settingsViewController.delegate = self;
@@ -417,6 +423,9 @@ MainViewController *singleton;
 	UIStoryboard *pluginStoryboard = [UIStoryboard storyboardWithName:@"Plugins" bundle: nil];
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
     _buySellViewController.delegate = self;
+
+    _giftCardViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"GiftCardViewController"];
+    _giftCardViewController.delegate = self;
 
     if (slideoutView)
     {
@@ -1057,7 +1066,10 @@ MainViewController *singleton;
 {
 //    self.backgroundView.image = [Theme Singleton].backgroundApp;
 
-    _bNewDeviceLogin = bNewDevice;
+    if (!bUsedTouchID)
+    {
+        _bNewDeviceLogin = bNewDevice;        
+    }
 
     if (bNewAccount) {
         [FadingAlertView create:self.view
@@ -1706,7 +1718,9 @@ MainViewController *singleton;
         } else {
             _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin"] || [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] || [uri.scheme isEqualToString:@"bitid"]) {
+    } else if ([uri.scheme isEqualToString:@"bitcoin"] ||
+               [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] ||
+               [uri.scheme isEqualToString:@"bitid"]) {
         if ([User isLoggedIn]) {
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
             _appMode = APP_MODE_SEND;
@@ -1744,6 +1758,28 @@ MainViewController *singleton;
         } else {
             _uri = uri;
         }
+    }
+    else if([uri.scheme isEqualToString:@"hbits"])
+    {
+        if ([User isLoggedIn])
+        {
+            _importViewController.bImportMode = YES;
+            if (_selectedViewController != _importViewController)
+            {
+                [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
+            }
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
+            [slideoutView showSlideout:NO];
+            [_importViewController resetViews];
+            _importViewController.addressTextField.text = [uri absoluteString];
+            [_importViewController processURI];
+        }
+        else
+        {
+            _uri = uri;
+        }
+
     }
 }
 
@@ -1841,6 +1877,18 @@ MainViewController *singleton;
     [slideoutView showSlideout:NO];
 }
 
+- (void)slideoutGiftCard
+{
+    if (_selectedViewController != _giftCardViewController) {
+        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+            [MainViewController animateSwapViewControllers:_giftCardViewController out:_selectedViewController];
+            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            [_giftCardViewController resetViews];
+        }
+    }
+    [slideoutView showSlideout:NO];
+}
+
 - (void)slideoutWallets
 {
     if (_selectedViewController == _transactionsViewController)
@@ -1887,7 +1935,7 @@ MainViewController *singleton;
                 [self loadUserViews];
                 [self launchViewControllerBasedOnAppMode];
 
-                [FadingAlertView dismiss:YES];
+                [FadingAlertView dismiss:FadingAlertDismissFast];
             }];
 }
 
@@ -2227,7 +2275,7 @@ MainViewController *singleton;
 
 + (void)fadingAlertDismiss
 {
-    [FadingAlertView dismiss:YES];
+    [FadingAlertView dismiss:FadingAlertDismissFast];
 }
 
 @end

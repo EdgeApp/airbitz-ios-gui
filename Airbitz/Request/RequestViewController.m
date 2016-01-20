@@ -208,6 +208,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
+    [FadingAlertView dismiss:FadingAlertDismissNow];
     if ([[User Singleton] offerRequestHelp]) {
         [MainViewController fadingAlertHelpPopup:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment",nil)];
     }
@@ -249,7 +250,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-    -(void)viewDidAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 

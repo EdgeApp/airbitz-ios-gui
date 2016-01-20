@@ -42,6 +42,8 @@
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
 @property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
 @property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
+@property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
+@property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
@@ -67,6 +69,7 @@
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_walletsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_giftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
 
     return v;
 }
@@ -108,6 +111,7 @@
         NSString *tempText = importPrivateKeyText;
         [Util replaceHtmlTags:&tempText];
         self.importPrivateKeyLabel.text = tempText;
+        self.giftCardTextLabel.text = giftCardText;
         _initialized = YES;
     }
     
@@ -248,6 +252,12 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
         [self.delegate slideoutImport];
+    }
+}
+
+- (IBAction)giftCardTouched:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutGiftCard)]) {
+        [self.delegate slideoutGiftCard];
     }
 }
 
@@ -446,18 +456,31 @@
 
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
-    _account = string;
-    NSString *message = [NSString stringWithFormat:@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled, this device will not be able to login without a 2FA reset which takes 7 days.",
-                         string];
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Delete Account", nil)
-                          message:message
-                          delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
-    [alert show];
+    [self deleteAccountPopup:string];
+
     [self.accountPicker dismissPopupPicker];
 }
+
+- (void)deleteAccountPopup:(NSString *)acct;
+{
+    NSString *warningText;
+    if ([CoreBridge passwordExists:acct])
+        warningText = deleteAccountWarning;
+    else
+        warningText = deleteAccountNoPasswordWarningText;
+    
+    _account = acct;
+    NSString *message = [NSString stringWithFormat:warningText, acct];
+    UIAlertView *alert = [[UIAlertView alloc]
+                           initWithTitle:deleteAccountText
+                           message:NSLocalizedString(message, nil)
+                           delegate:self
+                           cancelButtonTitle:noButtonText
+                           otherButtonTitles:yesButtonText, nil];
+    [alert show];
+}
+
+
 
 - (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
 {
@@ -471,14 +494,15 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_Error error;
-    tABC_CC cc = ABC_AccountDelete((const char*)[account UTF8String], &error);
-    if(cc == ABC_CC_Ok) {
+    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
+    if(cc == ABC_CC_Ok)
+    {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
-    else {
-        [MainViewController fadingAlert:[Util errorMap:&error]];
+    else
+    {
+        [MainViewController fadingAlert:[Util errorCC:cc]];
     }
 }
 
