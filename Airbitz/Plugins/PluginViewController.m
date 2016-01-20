@@ -66,7 +66,7 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
-                @"requestSpend":NSStringFromSelector(@selector(launchSpendConfirmation:)),
+                @"requestSpend":NSStringFromSelector(@selector(requestSpend:)),
                  @"requestSign":NSStringFromSelector(@selector(requestSign:)),
                  @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
                       @"saveTx":NSStringFromSelector(@selector(saveTx:)),
