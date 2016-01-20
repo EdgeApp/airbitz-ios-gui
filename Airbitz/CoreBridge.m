@@ -79,16 +79,6 @@ static CoreBridge *singleton = nil;
 
 @implementation CoreBridge
 
-+ (CoreBridge *)Singleton
-{
-    return singleton;
-}
-
-+ (void)putSingleton:(CoreBridge *)s;
-{
-    singleton = s;
-}
-
 - (void)initAll
 {
     if (NO == bInitialized)

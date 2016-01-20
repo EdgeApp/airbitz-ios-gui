@@ -36,9 +36,6 @@
 @property (nonatomic)         int                       numCategories;
 
 
-+ (CoreBridge *)Singleton;
-+ (void)putSingleton:(CoreBridge *)s;
-
 - (void)initAll;
 - (void)freeAll;
 - (void)startQueues;
@@ -59,25 +56,8 @@
 // New methods
 - (void)refreshWallets;
 - (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
-
-
-
-
-
-
 - (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
-
-
-
-
-
-
-
-
 - (void)makeCurrentWallet:(Wallet *)wallet;
-
-
-
 - (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;
 - (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 - (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
