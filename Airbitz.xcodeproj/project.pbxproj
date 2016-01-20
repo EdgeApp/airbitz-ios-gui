@@ -37,6 +37,9 @@
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA42F1071C03D63800CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA42F1081C03D63900CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
+		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
+		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
+		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA9101F21C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F31C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
@@ -1454,6 +1457,7 @@
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
+		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
 		DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoDisclaimer.html; sourceTree = "<group>"; };
 		DA9101EF1C4964AD00603D62 /* icon_import.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_import.png; sourceTree = "<group>"; };
 		DA9101F01C4964AD00603D62 /* icon_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@2x.png"; sourceTree = "<group>"; };
@@ -3356,6 +3360,7 @@
 				DA9ED7B51BC61E680063DA07 /* SlideoutView.m */,
 				DA9ED7B61BC61E680063DA07 /* SlideoutView~iphone.xib */,
 				34644A95F98F7C787C35866F /* Strings.h */,
+				DA49A4CA1C394AC0003196D3 /* Strings.m */,
 				DA9ED7B71BC61E680063DA07 /* StylizedButton.h */,
 				DA9ED7B81BC61E680063DA07 /* StylizedButton.m */,
 				DA9ED7B91BC61E680063DA07 /* StylizedButtonOutline.h */,
@@ -4670,6 +4675,7 @@
 				DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */,
 				DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */,
 				DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */,
+				DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF3AB1BC7285D0063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				DA9EF3AC1BC7285D0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF3AD1BC7285D0063DA07 /* NSDate+Helper.m in Sources */,
@@ -4813,6 +4819,7 @@
 				DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */,
 				DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */,
 				DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */,
+				DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF5721BC729FA0063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				DA9EF5731BC729FA0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF5741BC729FA0063DA07 /* NSDate+Helper.m in Sources */,
@@ -4956,6 +4963,7 @@
 				DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */,
 				DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */,
 				DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */,
+				DA74B5371C394B8700C5CD43 /* Strings.m in Sources */,
 				DA9EE5221BC61F930063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				DA9EE5121BC61F930063DA07 /* SendStatusViewController.m in Sources */,
 				DA9ED7E81BC61E680063DA07 /* NSDate+Helper.m in Sources */,
