@@ -299,6 +299,10 @@ static BOOL bInitialized = false;
 }
 
 - (void)uploadLog {
+    [self.passwordTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
+
     NSString *title = NSLocalizedString(@"Upload Log File", nil);
     NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
     // show password reminder test
@@ -1479,6 +1483,7 @@ typedef enum eReloginState
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
+                [self assignFirstResponder];
             }
             error:^
             {
@@ -1490,8 +1495,10 @@ typedef enum eReloginState
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
+                [self assignFirstResponder];
             }];
         }
+        [self assignFirstResponder];
     }
     else if (_deleteAccountAlert == alertView)
     {
@@ -1502,6 +1509,25 @@ typedef enum eReloginState
             [self removeAccount:_accountToDelete];
             self.usernameSelector.textField.text = @"";
             [self.usernameSelector dismissPopupPicker];
+        }
+    }
+}
+
+- (void)assignFirstResponder
+{
+    if (bPINModeEnabled)
+    {
+        [self.PINCodeView becomeFirstResponder];
+    }
+    else
+    {
+        if ([self.usernameSelector.textField.text length] > 0)
+        {
+            [self.passwordTextField becomeFirstResponder];
+        }
+        else
+        {
+            [self.usernameSelector.textField becomeFirstResponder];
         }
     }
 }
