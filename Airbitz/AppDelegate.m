@@ -287,9 +287,12 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
-            NSString *title = [notif objectForKey:@"title"];
-            NSString *strippedTitle = [title stringByStrippingHTML];
-            [localNotif setAlertTitle:strippedTitle];
+            if ([localNotif respondsToSelector:@selector((setAlertTitle:))])
+            {
+                NSString *title = [notif objectForKey:@"title"];
+                NSString *strippedTitle = [title stringByStrippingHTML];
+                [localNotif setAlertTitle:strippedTitle];
+            }
             
             NSString *message = [notif objectForKey:@"message"];
             NSString *strippedMessage = [message stringByStrippingHTML];
@@ -329,9 +332,12 @@ UIBackgroundTaskIdentifier bgNotificationTask;
                     if (![CoreBridge passwordExists:acct])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-                        
-                        NSString *title = accountsNeedsPasswordNotificationTitle;
-                        [localNotif setAlertTitle:title];
+
+                        if ([localNotif respondsToSelector:@selector((setAlertTitle:))])
+                        {
+                            NSString *title = accountsNeedsPasswordNotificationTitle;
+                            [localNotif setAlertTitle:title];
+                        }
                         
                         NSString *message = [NSString stringWithFormat:accountsNeedsPasswordNotificationMessage, acct];
                         [localNotif setAlertBody:message];

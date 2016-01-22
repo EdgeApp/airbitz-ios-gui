@@ -21,7 +21,7 @@
 
 static const NSString *PROTOCOL = @"bridge://";
 
-@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UIImagePickerControllerDelegate>
+@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIAlertViewDelegate>
 {
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
@@ -32,7 +32,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString                       *_tempCbidForImagePicker;
     NSDictionary                   *_tempArgsForImagePicker;
     SpendTarget                    *_spendTarget;
-
+    UIAlertView                    *_imagePickerAlert;
+    
     BOOL                           bWalletListDropped;
 }
 
@@ -531,12 +532,30 @@ static const NSString *PROTOCOL = @"bridge://";
 
     _tempArgsForImagePicker = args;
     _tempCbidForImagePicker = cbid;
-
-    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+    _imagePickerAlert = [[UIAlertView alloc] initWithTitle:imagePickerAlertTitle
+                                                   message:nil
+                                                  delegate:self
+                                         cancelButtonTitle:nil
+                                         otherButtonTitles:imagePickerAlertUseCamera,imagePickerAlertUsePhotos,nil];
+    [_imagePickerAlert show];
 }
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _imagePickerAlert)
+    {
+        UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        if (0 == buttonIndex)
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        else if (1 == buttonIndex)
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     //UIGraphicsBeginImageContext(newSize);
