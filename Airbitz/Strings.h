@@ -120,6 +120,9 @@
 #define setPasswordText                             NSLocalizedString(@"Set a Password",nil)
 #define warningWithoutPasswordTitleText             NSLocalizedString(@"Account has no password",nil)
 #define warningWithoutPasswordPopupText             NSLocalizedString(@"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled", nil)
+#define imagePickerAlertTitle                       NSLocalizedString(@"Upload Image", nil)
+#define imagePickerAlertUseCamera                   NSLocalizedString(@"Use Camera", nil)
+#define imagePickerAlertUsePhotos                   NSLocalizedString(@"Use Photo Album", nil)
 
 
 
