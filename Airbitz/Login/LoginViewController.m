@@ -254,9 +254,7 @@ static BOOL bInitialized = false;
         self.credentialsPINView.hidden = true;
         self.credentialsView.hidden = false;
         self.userEntryView.hidden = false;
-        [self.passwordTextField resignFirstResponder];
-        [self.usernameSelector.textField resignFirstResponder];
-        [self.PINCodeView resignFirstResponder];
+        [self resignAllResponders];
     }
 
     if (_mode == MODE_NO_USERS)
@@ -299,9 +297,7 @@ static BOOL bInitialized = false;
 }
 
 - (void)uploadLog {
-    [self.passwordTextField resignFirstResponder];
-    [self.usernameSelector.textField resignFirstResponder];
-    [self.PINCodeView resignFirstResponder];
+    [self resignAllResponders];
 
     NSString *title = NSLocalizedString(@"Upload Log File", nil);
     NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
@@ -331,9 +327,7 @@ typedef enum eReloginState
     //
     if ([[User Singleton] offerDisclaimer])
     {
-        [self.passwordTextField resignFirstResponder];
-        [self.usernameSelector.textField resignFirstResponder];
-        [self.PINCodeView resignFirstResponder];
+        [self resignAllResponders];
 
         self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
@@ -371,6 +365,7 @@ typedef enum eReloginState
 {
     ABLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
     _bUsedTouchIDToLogin = NO;
+    [self resignAllResponders];
     
     if (HARD_CODED_LOGIN) {
         self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
@@ -383,7 +378,7 @@ typedef enum eReloginState
     if (! [Keychain bHasSecureEnclave] )
     {
         abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain: No secure enclave");
-        return;
+        return [self assignFirstResponder];
     }
 
     NSString *username = [LocalSettings controller].cachedUsername;
@@ -416,7 +411,7 @@ typedef enum eReloginState
     if (!bRelogin && !bUseTouchID)
     {
         ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
-        return;
+        return [self assignFirstResponder];
     }
 
     if ([kcPassword length] >= 10)
@@ -438,7 +433,7 @@ typedef enum eReloginState
             else
             {
                 ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
-                return;
+                return [self assignFirstResponder];
             }
         }
         else
@@ -455,6 +450,7 @@ typedef enum eReloginState
                 self.passwordTextField.text = kcPassword;
                 [self showSpinner:YES];
                 [self SignIn];
+                return;
             }
         }
     }
@@ -462,6 +458,7 @@ typedef enum eReloginState
     {
         ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
     }
+    return [self assignFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1511,6 +1508,13 @@ typedef enum eReloginState
             [self.usernameSelector dismissPopupPicker];
         }
     }
+}
+
+- (void)resignAllResponders
+{
+    [self.passwordTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
 }
 
 - (void)assignFirstResponder
