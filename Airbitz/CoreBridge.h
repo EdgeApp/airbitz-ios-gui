@@ -8,6 +8,7 @@
 #import "Transaction.h"
 #import "FadingAlertView.h"
 #import "Theme.h"
+#import "ABCConditionCode.h"
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
@@ -141,5 +142,100 @@
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
 void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
+
+///////////////////////// New AirbitzCore methods //////////////////////
+
+/*
+ * signIn
+ * @param NSString* username: username to login
+ * @param NSString* password: password of user
+ * @param NSString* otp: One Time Password token (optional) send nil if logging in w/o OTP
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
+- (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp
+                     complete:(void (^)(void)) completionHandler
+                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * signInWithPINAsync
+ * @param NSString* username: username to login
+ * @param NSString* pin: user's 4 digit PIN
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)signInWithPIN:(NSString *)username pin:(NSString *)pin;
+- (ABCConditionCode)signInWithPIN:(NSString *)username pin:(NSString *)pin
+                            complete:(void (^)(void)) completionHandler
+                               error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
+/*
+ * checkRecoveryAnswersAsync
+ * @param NSString* strAnswers: concatenated string of recovery answers
+ * @param NSString* username: username
+ * @param completionHandler: completion handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param BOOL               bABCValid: YES if answers are correct
+ *                          @param NSString         *strAnswers: NSString answers
+ * @return void
+ */
+- (void)checkRecoveryAnswersAsync:(NSString *)username answers:(NSString *)strAnswers
+                         complete:(void (^)(ABCConditionCode ccode,
+                                 BOOL bABCValid)) completionHandler;
+
+/*
+ * getRecoveryQuestionsChoicesAsync
+ * @param completionHandler: completion handler code block which is called with the following args
+ *                          @param ABCConditionCode ccode: ABC error code
+ *                          @param NSMutableString  arrayCategoryString:  array of string based questions
+ *                          @param NSMutableString  arrayCategoryNumeric: array of numeric based questions
+ *                          @param NSMutableString  arrayCategoryMust:    array of questions of which one must have an answer
+ * @return void
+ */
+-(void)getRecoveryQuestionsChoicesAsync:(void (^)(ABCConditionCode ccode,
+        NSMutableArray *arrayCategoryString,
+        NSMutableArray *arrayCategoryNumeric,
+        NSMutableArray *arrayCategoryMust)) completionHandler;
+
+
+/*
+ * errorMap
+ * @param  ABCConditionCode: error code to look up
+ * @return NSString*       : text description of error
+ */
+- (NSString *)conditionCodeMap:(const ABCConditionCode) code;
+
+
+/*
+ * getLocalAccounts
+ * @param  NSArray**       : array of strings of account names
+ * @return ABCConditionCode: error code to look up
+ */
+//- (ABCConditionCode)getLocalAccounts:(NSArray **) arrayAccounts;
+
+/*
+ * uploadLogsAsync
+ * @param NSString* username: username
+ * @param completionHandler: completion handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ * @return void
+ */
+- (void)uploadLogsAsync:(NSString *)username complete:(void (^)(ABCConditionCode ccode)) completionHandler;
+
+
+- (ABCConditionCode) getLastConditionCode;
+- (NSString *) getLastErrorString;
+
 
 @end
