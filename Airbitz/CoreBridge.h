@@ -67,8 +67,6 @@
 - (void)addCategory:(NSString *)strCategory;
 - (void)loadCategories;
 - (void)saveCategories:(NSMutableArray *)saveArrayCategories;
-- (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
-- (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
 - (NSArray *)getLocalAccounts:(NSString **)strError;
 - (BOOL)accountExistsLocal:(NSString *)username;
 - (tABC_CC)accountDeleteLocal:(NSString *)account;
@@ -155,6 +153,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
  * @param completionHandler: completion handler code block
  * @param errorHandler: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
  *
  * @return ABCConditionCode
  */
@@ -172,6 +171,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
  * @param completionHandler: completion handler code block
  * @param errorHandler: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
  * @return ABCConditionCode
  */
 - (ABCConditionCode)signInWithPIN:(NSString *)username pin:(NSString *)pin;
@@ -179,6 +179,38 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
                             complete:(void (^)(void)) completionHandler
                                error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
+/*
+ * uploadLogs
+ * @param NSString* userText: text to send to support staff
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param complete: completion handler code block which is called with void
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return void
+ */
+- (ABCConditionCode)uploadLogs:(NSString *)userText;
+- (ABCConditionCode)uploadLogs:(NSString *)userText
+        complete:(void(^)(void))completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * walletRemove
+ * @param NSString* uuid: UUID of wallet to delete
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param complete: completion handler code block which is called with void
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return void
+ */
+
+- (ABCConditionCode)walletRemove:(NSString *)uuid;
+- (ABCConditionCode)walletRemove:(NSString *)uuid
+                        complete:(void(^)(void))completionHandler
+                           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
  * checkRecoveryAnswersAsync

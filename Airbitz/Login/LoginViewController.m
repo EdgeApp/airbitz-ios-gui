@@ -1439,7 +1439,7 @@ typedef enum eReloginState
         {
             [_logoImage setUserInteractionEnabled:NO];
             _spinnerView.hidden = NO;
-            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Succeeded"
@@ -1449,8 +1449,7 @@ typedef enum eReloginState
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
-            }
-            error:^
+            } error:^(ABCConditionCode ccode, NSString *errorString)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"

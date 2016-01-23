@@ -1288,9 +1288,12 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [[AppDelegate abc] walletRemove:longTapWallet.strUUID notify:^{
+            [[AppDelegate abc] walletRemove:longTapWallet.strUUID complete:^
+            {
                 [MainViewController fadingAlert:deleteWalletDeletedText];
-            } error:^{
+
+            } error:^(ABCConditionCode ccode, NSString *errorString)
+            {
                 [MainViewController fadingAlert:deleteWalletErrorText];
             }];
         }

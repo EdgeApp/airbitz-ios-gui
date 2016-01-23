@@ -102,11 +102,11 @@
         {
             ABLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-            }
-            error:^
+                
+            } error:^(ABCConditionCode ccode, NSString *errorString)
             {
                 [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }];

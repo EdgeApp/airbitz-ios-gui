@@ -2763,32 +2763,44 @@ static CoreBridge *singleton = nil;
 }
 
 
-
-- (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
+- (ABCConditionCode)uploadLogs:(NSString *)userText;
 {
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
-    
-    
+
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     ABC_Log([[NSString stringWithFormat:@"User Comment:%@", userText] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"Platform:%@", [[Theme Singleton] platform]] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"Platform String:%@", [[Theme Singleton] platformString]] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"OS Version:%d.%d.%d", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"Airbitz Version:%@", versionbuild] UTF8String]);
-    
+
+    tABC_Error error;
+    ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
+
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)uploadLogs:(NSString *)userText
+        complete:(void(^)(void))completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
     [self postToMiscQueue:^{
-        tABC_Error error;
-        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
+
+        ABCConditionCode ccode;
+        ccode = [self uploadLogs:userText];
+        NSString *errorString = [self getLastErrorString];
+
         dispatch_async(dispatch_get_main_queue(),^{
-            if (ABC_CC_Ok == error.code) {
-                if (cb) cb();
+            if (ABC_CC_Ok == ccode) {
+                if (completionHandler) completionHandler();
             } else {
-                if (cberror) cberror();
+                if (errorHandler) errorHandler(ccode, errorString);
             }
         });
     }];
+    return ABCConditionCodeOk;
 }
 
 - (tABC_CC)accountDeleteLocal:(NSString *)account;
@@ -2798,7 +2810,38 @@ static CoreBridge *singleton = nil;
     return error.code;
 }
 
-- (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
+- (ABCConditionCode)walletRemove:(NSString *)uuid;
+{
+    // Check if we are trying to delete the current wallet
+    if ([self.currentWallet.strUUID isEqualToString:uuid])
+    {
+        // Find a non-archived wallet that isn't the wallet we're going to delete
+        // and make it the current wallet
+        for (Wallet *wallet in self.arrayWallets)
+        {
+            if (![wallet.strUUID isEqualToString:uuid])
+            {
+                if (!wallet.archived)
+                {
+                    [self makeCurrentWallet:wallet];
+                    break;
+                }
+            }
+        }
+    }
+    ABLog(1,@"Deleting wallet [%@]", uuid);
+    tABC_Error error;
+
+    ABC_WalletRemove([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+
+    [self refreshWallets];
+
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)walletRemove:(NSString *)uuid
+        complete:(void(^)(void))completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
     // Check if we are trying to delete the current wallet
     if ([self.currentWallet.strUUID isEqualToString:uuid])
@@ -2824,18 +2867,20 @@ static CoreBridge *singleton = nil;
         tABC_Error error;
 
         ABC_WalletRemove([[User Singleton].name UTF8String], [uuid UTF8String], &error);
+        ABCConditionCode ccode = [self setLastErrors:error];
+        NSString *errorString = [self getLastErrorString];
 
-        [Util printABC_Error:&error];
         [self refreshWallets];
 
         dispatch_async(dispatch_get_main_queue(),^{
-            if (ABC_CC_Ok == error.code) {
-                if (cb) cb();
+            if (ABC_CC_Ok == ccode) {
+                if (completionHandler) completionHandler();
             } else {
-                if (cberror) cberror();
+                if (errorHandler) errorHandler(ccode, errorString);
             }
         });
     }];
+    return ABCConditionCodeOk;
 }
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
@@ -2931,9 +2976,9 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
-                completionHandler();
+                if (completionHandler) completionHandler();
             else
-                errorHandler(ccode, errorString);
+                if (errorHandler) errorHandler(ccode, errorString);
         });
     });
     return ABCConditionCodeOk;
@@ -2981,9 +3026,9 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
         dispatch_async(dispatch_get_main_queue(), ^(void)
         {
             if (ABCConditionCodeOk == ccode)
-                completionHandler();
+            if (completionHandler) completionHandler();
             else
-                errorHandler(ccode, errorString);
+            if (errorHandler) errorHandler(ccode, errorString);
         });
     });
     return ABCConditionCodeOk;
@@ -2998,18 +3043,6 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 - (NSString *) getLastErrorString;
 {
     return lastErrorString;
-}
-
-- (void)uploadLogsAsync:(NSString *)username complete:(void (^)(ABCConditionCode ccode)) completionHandler
-{
-    [self postToMiscQueue:^{
-        tABC_Error error;
-        ABC_UploadLogs([[User Singleton].name UTF8String], NULL, &error);
-
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            completionHandler((ABCConditionCode) error.code);
-        });
-    }];
 }
 
 - (NSString *)conditionCodeMap:(ABCConditionCode) cc;
