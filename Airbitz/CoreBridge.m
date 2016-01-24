@@ -156,13 +156,13 @@ static CoreBridge *singleton = nil;
                 (unsigned char *)[seedData bytes],
                 (unsigned int)[seedData length],
                 &Error);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
 
         // Fetch general info as soon as possible
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             tABC_Error error;
             ABC_GeneralInfoUpdate(&error);
-            [Util printABC_Error:&error];
+            [self setLastErrors:Error];
         });
 
         Error.code = ABC_CC_Ok;
@@ -170,7 +170,7 @@ static CoreBridge *singleton = nil;
         // get the currencies
         aCurrencies = NULL;
         ABC_GetCurrencies(&aCurrencies, &currencyCount, &Error);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
 
         self.currencyCount = currencyCount;
         // set up our internal currency arrays
@@ -707,7 +707,7 @@ static CoreBridge *singleton = nil;
                             ABC_BitCoin_Event_Callback,
                             (__bridge void *) singleton,
                             &error);
-                [Util printABC_Error: &error];
+                [self setLastErrors:error];
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (cb) cb();
                 });
@@ -758,7 +758,7 @@ static CoreBridge *singleton = nil;
     else
     {
         ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     ABC_FreeTransaction(pTrans);
     return transaction;
@@ -822,7 +822,7 @@ static CoreBridge *singleton = nil;
     else
     {
         ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
 }
@@ -926,7 +926,7 @@ static CoreBridge *singleton = nil;
     else 
     {
         ABLog(2,@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
     return arrayTransactions;
@@ -984,7 +984,7 @@ static CoreBridge *singleton = nil;
                            &Error) != ABC_CC_Ok)
     {
         ABLog(2,@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
 
     [self refreshWallets];
@@ -1004,7 +1004,7 @@ static CoreBridge *singleton = nil;
     else
     {
         ABLog(2,@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
         return false;
     }
 }
@@ -1022,7 +1022,7 @@ static CoreBridge *singleton = nil;
                 &pDetails, &Error);
         if (ABC_CC_Ok != result) {
             ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
 //            return false;
             return;
         }
@@ -1041,7 +1041,7 @@ static CoreBridge *singleton = nil;
 
         if (ABC_CC_Ok != result) {
             ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
 //            return false;
             return;
         }
@@ -1236,7 +1236,7 @@ static CoreBridge *singleton = nil;
     tABC_CC result = ABC_SatoshiToCurrency([self.name UTF8String],
                                            [self.password UTF8String],
                                            denomination, &currency, currencyNum, &error);
-    [Util printABC_Error:&error];
+    [self setLastErrors:Error];
     if (result == ABC_CC_Ok)
     {
         NSString *abbrev = [self currencyAbbrevLookup:currencyNum];
@@ -1301,7 +1301,7 @@ static CoreBridge *singleton = nil;
     else
     {
         [error appendString:[Util errorMap:&Error]];
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
 
     if (szQuestions)
@@ -1416,7 +1416,7 @@ static CoreBridge *singleton = nil;
                                             &error);
         if (ABC_CC_Ok != result)
         {
-            [Util printABC_Error:&error];
+            [self setLastErrors:Error];
         }
     }
 }
@@ -1449,11 +1449,11 @@ static CoreBridge *singleton = nil;
                                               &error);
                 if (ABC_CC_Ok != result)
                 {
-                    [Util printABC_Error:&error];
+                    [self setLastErrors:Error];
                 }
             }
         } else {
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
         }
         ABC_FreeAccountSettings(pSettings);
     }
@@ -1540,7 +1540,7 @@ static CoreBridge *singleton = nil;
         [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([self.name UTF8String], [uuid UTF8String], &error);
-            [Util printABC_Error:&error];
+            [self setLastErrors:Error];
             [self startWatcher:uuid];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -1564,7 +1564,7 @@ static CoreBridge *singleton = nil;
         [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([self.name UTF8String], [uuid UTF8String], &error);
-            [Util printABC_Error:&error];
+            [self setLastErrors:Error];
             [self startWatcher:uuid];
         }];
     }
@@ -1620,7 +1620,7 @@ static CoreBridge *singleton = nil;
 
     if (ABC_CC_Ok != result)
     {
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     self.password = nil;
     self.name = nil;
@@ -1637,7 +1637,7 @@ static CoreBridge *singleton = nil;
 
         tABC_Error Error;
         ABC_PasswordOk(username, [password UTF8String], &ok, &Error);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     return ok == true ? YES : NO;
 }
@@ -1700,7 +1700,7 @@ static CoreBridge *singleton = nil;
             tABC_Error Error;
             ABC_WatcherConnect([uuid UTF8String], &Error);
 
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
             [self watchAddresses:uuid];
         }
     }];
@@ -1718,7 +1718,7 @@ static CoreBridge *singleton = nil;
                 const char *szUUID = [uuid UTF8String];
                 tABC_Error Error;
                 ABC_WatcherDisconnect(szUUID, &Error);
-                [Util printABC_Error:&Error];
+                [self setLastErrors:Error];
             }];
         }
     }
@@ -1763,7 +1763,7 @@ static CoreBridge *singleton = nil;
             ABC_WatcherStart([self.name UTF8String],
                             [self.password UTF8String],
                             szUUID, &Error);
-            [Util printABC_Error: &Error];
+            [self setLastErrors:error];
 
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
             [self watcherSet:walletUUID queue:queue];
@@ -1774,7 +1774,7 @@ static CoreBridge *singleton = nil;
                         ABC_BitCoin_Event_Callback,
                         (__bridge void *) singleton,
                         &Error);
-                [Util printABC_Error:&Error];
+                [self setLastErrors:Error];
             }];
 
             [self watchAddresses:walletUUID];
@@ -1811,7 +1811,7 @@ static CoreBridge *singleton = nil;
         for (NSString *uuid in arrayWallets) {
             tABC_Error Error;
             ABC_WatcherDelete([uuid UTF8String], &Error);
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
         }
     }];
     
@@ -1857,7 +1857,7 @@ static CoreBridge *singleton = nil;
                               [walletUUID UTF8String],
                               [address UTF8String],
                               &Error);
-        [Util printABC_Error: &Error];
+        [self setLastErrors:error];
         
     }];
 }
@@ -1868,7 +1868,7 @@ static CoreBridge *singleton = nil;
     ABC_WatchAddresses([self.name UTF8String],
                     [self.password UTF8String],
                     [walletUUID UTF8String], &Error);
-    [Util printABC_Error: &Error];
+    [self setLastErrors:error];
 }
 
 - (void)requestExchangeRateUpdate:(NSTimer *)object
@@ -1906,7 +1906,7 @@ static CoreBridge *singleton = nil;
         ABC_RequestExchangeRateUpdate([self.name UTF8String],
                                       [self.password UTF8String],
                                       self.settings.defaultCurrencyNum, &error);
-        [Util printABC_Error: &error];
+        [self setLastErrors:error];
 
         // Check each wallet is up to date
         for (NSNumber *n in currencyNums)
@@ -1915,7 +1915,7 @@ static CoreBridge *singleton = nil;
             ABC_RequestExchangeRateUpdate([self.name UTF8String],
                                           [self.password UTF8String],
                                           [n intValue], &error);
-            [Util printABC_Error: &error];
+            [self setLastErrors:error];
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
@@ -1935,7 +1935,7 @@ static CoreBridge *singleton = nil;
     [dataQueue addOperationWithBlock:^{
         tABC_Error error;
         ABC_GeneralInfoUpdate(&error);
-        [Util printABC_Error:&error];
+        [self setLastErrors:Error];
     }];
     // Sync Account
     if (bDataFetched) {
@@ -1985,7 +1985,7 @@ static CoreBridge *singleton = nil;
                         ABC_BitCoin_Event_Callback,
                         (__bridge void *) singleton,
                         &error);
-        [Util printABC_Error: &error];
+        [self setLastErrors:error];
 
         // Start watcher if the data has not been fetch
         if (!bDataFetched) {
@@ -2001,7 +2001,7 @@ static CoreBridge *singleton = nil;
     tABC_Error Error;
 
     if (ABC_IsTestNet(&result, &Error) != ABC_CC_Ok) {
-        [Util printABC_Error: &Error];
+        [self setLastErrors:error];
     }
     return result;
 }
@@ -2108,10 +2108,10 @@ static CoreBridge *singleton = nil;
         }
         else
         {
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
         }
     } else {
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     ABC_FreeAccountSettings(pSettings);
     return cc == ABC_CC_Ok;
@@ -2268,7 +2268,7 @@ static CoreBridge *singleton = nil;
         ABC_AddCategory([self.name UTF8String],
                         [self.password UTF8String],
                         (char *)[strCategory UTF8String], &Error);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     [self loadCategories];
 }
@@ -2290,7 +2290,7 @@ static CoreBridge *singleton = nil;
                               &countCategories,
                               &error);
             
-            [Util printABC_Error:&error];
+            [self setLastErrors:Error];
             
             // If we've never added any categories, add them now
             if (countCategories == 0)
@@ -2446,7 +2446,7 @@ static CoreBridge *singleton = nil;
                     ABC_AddCategory([self.name UTF8String],
                                     [self.password UTF8String],
                                     (char *)[strCategory UTF8String], &error);
-                    [Util printABC_Error:&error];
+                    [self setLastErrors:Error];
                 }
             }
             else
@@ -2498,7 +2498,7 @@ static CoreBridge *singleton = nil;
         {
             // it doesn't exist in our new list so delete it from the core
             ABC_RemoveCategory([self.name UTF8String], [self.password UTF8String], (char *)[strCategory UTF8String], &Error);
-            [Util printABC_Error:&Error];
+            [self setLastErrors:Error];
         }
     }
     
@@ -2506,7 +2506,7 @@ static CoreBridge *singleton = nil;
     for (NSString *strCategory in saveArrayCategories)
     {
         ABC_AddCategory([self.name UTF8String], [self.password UTF8String], (char *)[strCategory UTF8String], &Error);
-        [Util printABC_Error:&Error];
+        [self setLastErrors:Error];
     }
     [self loadCategories];
 }
