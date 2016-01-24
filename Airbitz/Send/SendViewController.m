@@ -1397,8 +1397,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     // private key is a valid format
                     // attempt to sweep it
                     _sweptAddress = [[AppDelegate abc] sweepKey:privateKey
-                                              intoWallet:[AppDelegate abc].currentWallet.strUUID
-                                            withCallback:ABC_Sweep_Complete_Callback];
+                                              intoWallet:[AppDelegate abc].currentWallet.strUUID];
 
                     if (nil != _sweptAddress && _sweptAddress.length)
                     {

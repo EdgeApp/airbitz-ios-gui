@@ -1312,30 +1312,6 @@ static CoreBridge *singleton = nil;
     return arrayQuestions;
 }
 
-- (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error
-{
-    BOOL bValid = NO;
-    bool bABCValid = false;
-
-    tABC_CC result = ABC_CheckRecoveryAnswers([strUserName UTF8String],
-                                              [strAnswers UTF8String],
-                                              &bABCValid,
-                                              error);
-    if (ABC_CC_Ok == result)
-    {
-        if (bABCValid == true)
-        {
-            bValid = YES;
-        }
-    }
-    else
-    {
-        [Util printABC_Error:error];
-    }
-
-    return bValid;
-}
-
 - (void)incRecoveryReminder
 {
     [self incRecoveryReminder:1];
@@ -1480,25 +1456,6 @@ static CoreBridge *singleton = nil;
             [Util printABC_Error:&Error];
         }
         ABC_FreeAccountSettings(pSettings);
-    }
-}
-
-- (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError
-{
-    if ([self PINLoginExists])
-    {
-        NSString *username = [LocalSettings controller].cachedUsername;
-        tABC_CC result = ABC_PinLogin([username UTF8String],
-                                      [PIN UTF8String],
-                                      pError);
-        if (ABC_CC_Ok == result)
-        {
-            [User login:[LocalSettings controller].cachedUsername password:NULL];
-        }
-    }
-    else
-    {
-        pError->code = ABC_CC_BadPassword;
     }
 }
 
@@ -2555,7 +2512,7 @@ static CoreBridge *singleton = nil;
 }
 
 
-- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback
+- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID
 {
     tABC_CC result = ABC_CC_Ok;
     tABC_Error Error;
@@ -2566,7 +2523,7 @@ static CoreBridge *singleton = nil;
                   [walletUUID UTF8String],
                   [privateKey UTF8String],
                   &pszAddress,
-                  callback,
+                  ABC_Sweep_Complete_Callback,
                   pData,
                   &Error);
     if (ABC_CC_Ok == result && pszAddress)
@@ -2644,21 +2601,21 @@ static CoreBridge *singleton = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
-- (void)otpSetError:(tABC_CC)cc
-{
-    bOtpError = ABC_CC_InvalidOTP == cc;
-}
-
-- (BOOL)otpHasError;
-{
-    return bOtpError;
-}
-
-- (void)otpClearError
-{
-    bOtpError = NO;
-}
-
+//- (void)otpSetError:(tABC_CC)cc
+//{
+//    bOtpError = ABC_CC_InvalidOTP == cc;
+//}
+//
+//- (BOOL)otpHasError;
+//{
+//    return bOtpError;
+//}
+//
+//- (void)otpClearError
+//{
+//    bOtpError = NO;
+//}
+//
 - (NSString *)getOtpSecret
 {
     tABC_Error error;
@@ -2816,11 +2773,12 @@ static CoreBridge *singleton = nil;
     return ABCConditionCodeOk;
 }
 
-- (tABC_CC)accountDeleteLocal:(NSString *)account;
+- (ABCConditionCode)accountDeleteLocal:(NSString *)account;
 {
     tABC_Error error;
     ABC_AccountDelete((const char*)[account UTF8String], &error);
-    return error.code;
+
+    return [self setLastErrors:error];
 }
 
 - (ABCConditionCode)walletRemove:(NSString *)uuid;
@@ -2991,9 +2949,13 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
+            {
                 if (completionHandler) completionHandler();
+            }
             else
+            {
                 if (errorHandler) errorHandler(ccode, errorString);
+            }
         });
     });
     return ABCConditionCodeOk;
@@ -3137,6 +3099,39 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
     return (ABCConditionCode) error.code;
 }
+
+- (void)checkRecoveryAnswers:(NSString *)username answers:(NSString *)strAnswers
+       complete:(void (^)(BOOL validAnswers)) completionHandler
+          error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+
+    [self postToMiscQueue:^{
+        BOOL bValid = NO;
+        bool bABCValid = false;
+        tABC_Error error;
+        ABCConditionCode ccode;
+
+        ABC_CheckRecoveryAnswers([username UTF8String],
+                [strAnswers UTF8String],
+                &bABCValid,
+                &error);
+        ccode = [self setLastErrors:error];
+        NSString *errorStr = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler(bABCValid);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorStr);
+            }
+        });
+    }];
+}
+
+
 
 - (ABCConditionCode) getLastConditionCode;
 {

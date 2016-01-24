@@ -3,7 +3,6 @@
 //  AirBitz
 //
 
-#import "ABC.h"
 #import "Wallet.h"
 #import "Transaction.h"
 #import "FadingAlertView.h"
@@ -98,8 +97,6 @@
 - (void)saveCategories:(NSMutableArray *)saveArrayCategories;
 - (NSArray *)getLocalAccounts:(NSString **)strError;
 - (BOOL)accountExistsLocal:(NSString *)username;
-- (tABC_CC)accountDeleteLocal:(NSString *)account;
-
 - (void)updateWidgetQRCode;
 
 
@@ -128,13 +125,11 @@
 - (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
-- (BOOL)recoveryAnswers:(NSString *)strAnswers areValidForUserName:(NSString *)strUserName status:(tABC_Error *)error;
 - (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 - (bool)PINLoginExists;
 - (bool)PINLoginExists:(NSString *)username;
 - (void)deletePINLogin;
 - (void)setupLoginPIN;
-- (void)PINLoginWithPIN:(NSString *)PIN error:(tABC_Error *)pError;
 - (BOOL)recentlyLoggedIn;
 - (void)login;
 - (void)logout;
@@ -159,16 +154,13 @@
 - (int)getCurrencyNumOfLocale;
 - (bool)setDefaultCurrencyNum:(int)currencyNum;
 - (void)setupNewAccount;
-- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID withCallback:(tABC_Sweep_Done_Callback)callback;
-- (void)otpSetError:(tABC_CC)cc;
-- (BOOL)otpHasError;
-- (void)otpClearError;
+- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID;
+//- (void)otpSetError:(ABCConditionCode)cc;
+//- (BOOL)otpHasError;
+//- (void)otpClearError;
 - (NSString *) bitidParseURI:(NSString *)uri;
 - (BOOL) bitidLogin:(NSString *)uri;
 - (BitidSignature *) bitidSign:(NSString *)uri msg:(NSString *)msg;
-
-void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo);
-void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
 
 ///////////////////////// New AirbitzCore methods //////////////////////
 
@@ -262,18 +254,30 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
 - (ABCConditionCode)saveSettings;
 
 /*
- * checkRecoveryAnswersAsync
- * @param NSString* strAnswers: concatenated string of recovery answers
- * @param NSString* username: username
- * @param completionHandler: completion handler code block which is called with the following args
- *                          @param ABCConditionCode       ccode: ABC error code
- *                          @param BOOL               bABCValid: YES if answers are correct
- *                          @param NSString         *strAnswers: NSString answers
- * @return void
+ * accountDeleteLocal
+ *      Deletes named account from local device. Account is recoverable if it contains a password
+ * @param NSString* username: username of account to delete
+ *
+ * @return ABCConditionCode
  */
-- (void)checkRecoveryAnswersAsync:(NSString *)username answers:(NSString *)strAnswers
-                         complete:(void (^)(ABCConditionCode ccode,
-                                 BOOL bABCValid)) completionHandler;
+- (ABCConditionCode)accountDeleteLocal:(NSString *)username;
+
+
+/*
+ * checkRecoveryAnswers
+ * @param NSString* username: username
+ * @param NSString* strAnswers: concatenated string of recovery answers separated by '\n' after each answer
+ *
+ * @param complete: completion handler code block which is called with void
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (void)checkRecoveryAnswers:(NSString *)username
+        answers:(NSString *)strAnswers
+       complete:(void (^)(BOOL validAnswers)) completionHandler
+          error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
  * getRecoveryQuestionsChoicesAsync

@@ -494,8 +494,8 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [[AppDelegate abc] accountDeleteLocal:account];
-    if(cc == ABC_CC_Ok)
+    ABCConditionCode cc = [[AppDelegate abc] accountDeleteLocal:account];
+    if(cc == ABCConditionCodeOk)
     {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];

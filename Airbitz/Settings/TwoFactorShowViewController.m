@@ -61,7 +61,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
+//    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
+    self.bNoImportButton = YES;
     [MainViewController changeNavBarOwner:self];
 
     [self updateViews];
@@ -297,7 +298,7 @@
         _viewQRCodeFrame.hidden = YES;
         self.bNoImportButton = YES;
     }
-    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
+//    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
     [self setText:on];
     _tfaEnabledSwitch.on = on;
     _loadingSpinner.hidden = YES;

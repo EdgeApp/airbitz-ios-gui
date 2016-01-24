@@ -333,49 +333,45 @@ typedef enum eAlertType
 
 - (void)recoverWithAnswers:(NSString *)strAnswers
 {
-    _bSuccess = NO;
     [self showSpinner:YES];
-    [[AppDelegate abc] postToMiscQueue:^{
-        tABC_Error error;
-        BOOL bSuccess = [[AppDelegate abc] recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
-        NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            _bSuccess = bSuccess;
-            _statusCode = error.code;
-            // If we have otp enabled, persist the token
-            if (_secret != nil) {
-                tABC_Error e;
-                ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &e);
-                [Util printABC_Error:&e];
-            }
-            [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
-        });
-    }];
-}
 
-- (void)checkRecoveryAnswersResponse:(NSArray *)params
-{
-    [self showSpinner:NO];
-    if (_bSuccess)
+    [[AppDelegate abc] checkRecoveryAnswers:self.strUserName answers:strAnswers complete:^(BOOL validAnswers)
     {
-        NSString *strAnswers = params[0];
-        [self bringUpSignUpViewWithAnswers:strAnswers];
-    }
-    else
-    {
-        [[AppDelegate abc] otpSetError:_statusCode];
-        if (ABC_CC_InvalidOTP  == _statusCode) {
-            [self launchTwoFactorMenu];
-        } else {
+        [self showSpinner:NO];
+        if (validAnswers)
+        {
+            [self bringUpSignUpViewWithAnswers:strAnswers];
+        }
+        else
+        {
             UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-                                message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-                                delegate:nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
+                    initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+                          message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+                         delegate:nil
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
             [alert show];
         }
-    }
+    } error:^(ABCConditionCode ccode, NSString *errorString)
+    {
+        [self showSpinner:NO];
+        if (ABCConditionCodeInvalidOTP == ccode)
+        {
+            [self launchTwoFactorMenu];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:errorRecoveringAccountTitle
+                          message:errorRecoveringAccountText
+                         delegate:nil
+                cancelButtonTitle:okButtonText
+                otherButtonTitles:nil];
+            [alert show];
+        }
+
+    }];
+
 }
 
 - (void)launchTwoFactorMenu
