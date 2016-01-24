@@ -120,5 +120,7 @@
 #define warningWithoutPasswordPopupText             NSLocalizedString(@"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled", nil)
 #define errorRecoveringAccountTitle                 NSLocalizedString(@"Error Recovering Account",nil)
 #define errorRecoveringAccountText                  NSLocalizedString(@"Please try again later or contact support",nil)
-
-
+#define setRecoveryQuestionsFailed                  NSLocalizedString(@"Setting recovery questions failed:\n%@", nil)
+#define recoveryQuestionsNotSet                     NSLocalizedString(@"Recovery Questions Not Set", @"Title of recovery questions setup error alert")
+#define recoveryQuestionsSet                        NSLocalizedString(@"Recovery Questions Set", @"Title of recovery questions setup complete alert")
+#define recoveryQuestionsSetWarning                 NSLocalizedString(@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!",nil)

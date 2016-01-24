@@ -155,9 +155,6 @@
 - (bool)setDefaultCurrencyNum:(int)currencyNum;
 - (void)setupNewAccount;
 - (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID;
-//- (void)otpSetError:(ABCConditionCode)cc;
-//- (BOOL)otpHasError;
-//- (void)otpClearError;
 - (NSString *) bitidParseURI:(NSString *)uri;
 - (BOOL) bitidLogin:(NSString *)uri;
 - (BitidSignature *) bitidSign:(NSString *)uri msg:(NSString *)msg;
@@ -280,18 +277,44 @@
           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
- * getRecoveryQuestionsChoicesAsync
- * @param completionHandler: completion handler code block which is called with the following args
- *                          @param ABCConditionCode ccode: ABC error code
+ * getRecoveryQuestionsChoices
+ * @param complete: completion handler code block which is called with the following args
  *                          @param NSMutableString  arrayCategoryString:  array of string based questions
  *                          @param NSMutableString  arrayCategoryNumeric: array of numeric based questions
  *                          @param NSMutableString  arrayCategoryMust:    array of questions of which one must have an answer
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
  * @return void
  */
--(void)getRecoveryQuestionsChoicesAsync:(void (^)(ABCConditionCode ccode,
+- (void)getRecoveryQuestionsChoices: (void (^)(
         NSMutableArray *arrayCategoryString,
         NSMutableArray *arrayCategoryNumeric,
-        NSMutableArray *arrayCategoryMust)) completionHandler;
+        NSMutableArray *arrayCategoryMust)) completionHandler
+                              error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * setRecoveryQuestions
+ * @param NSString* password: password of currently logged in user
+ * @param NSString* questions: concatenated string of recovery questions separated by '\n' after each question
+ * @param NSString* answers: concatenated string of recovery answers separated by '\n' after each answer
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param complete: completion handler code block which is called with void
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+
+- (ABCConditionCode)setRecoveryQuestions:(NSString *)password
+                               questions:(NSString *)questions
+                                 answers:(NSString *)answers;
+- (ABCConditionCode)setRecoveryQuestions:(NSString *)password
+                               questions:(NSString *)questions
+                                 answers:(NSString *)answers
+                                complete:(void (^)(void)) completionHandler
+                                   error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 
 /*

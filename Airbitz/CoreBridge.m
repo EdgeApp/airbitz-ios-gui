@@ -3100,6 +3100,85 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return (ABCConditionCode) error.code;
 }
 
+- (ABCConditionCode)setRecoveryQuestions:(NSString *)password
+                               questions:(NSString *)questions
+                                 answers:(NSString *)answers;
+{
+    tABC_Error error;
+    ABC_SetAccountRecoveryQuestions([self.name UTF8String],
+            [password UTF8String],
+            [questions UTF8String],
+            [answers UTF8String],
+            &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)setRecoveryQuestions:(NSString *)password
+                               questions:(NSString *)questions
+                                 answers:(NSString *)answers
+        complete:(void (^)(void)) completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    [self postToMiscQueue:^
+    {
+        ABCConditionCode ccode = [self setRecoveryQuestions:password questions:questions answers:answers];
+        NSString *errorString  = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler();
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
+    return ABCConditionCodeOk;
+}
+
+- (void)getRecoveryQuestionsChoices: (void (^)(
+        NSMutableArray *arrayCategoryString,
+        NSMutableArray *arrayCategoryNumeric,
+        NSMutableArray *arrayCategoryMust)) completionHandler
+        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+
+    [self postToMiscQueue:^{
+        tABC_Error error;
+        tABC_QuestionChoices *pQuestionChoices = NULL;
+        ABC_GetQuestionChoices(&pQuestionChoices, &error);
+
+        ABCConditionCode ccode = [self setLastErrors:error];
+        NSString *errorString = [self getLastErrorString];
+
+        if (ABCConditionCodeOk == ccode)
+        {
+            NSMutableArray        *arrayCategoryString  = [[NSMutableArray alloc] init];
+            NSMutableArray        *arrayCategoryNumeric = [[NSMutableArray alloc] init];
+            NSMutableArray        *arrayCategoryMust    = [[NSMutableArray alloc] init];
+
+            [self categorizeQuestionChoices:pQuestionChoices
+                             categoryString:&arrayCategoryString
+                            categoryNumeric:&arrayCategoryNumeric
+                               categoryMust:&arrayCategoryMust];
+
+
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                completionHandler(arrayCategoryString, arrayCategoryNumeric, arrayCategoryMust);
+            });
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                errorHandler(ccode, errorString);
+            });
+        }
+        ABC_FreeQuestionChoices(pQuestionChoices);
+    }];
+}
+
 - (void)checkRecoveryAnswers:(NSString *)username answers:(NSString *)strAnswers
        complete:(void (^)(BOOL validAnswers)) completionHandler
           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
@@ -3200,8 +3279,48 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }
 }
 
-
+////////////////////////////////////////////////////////
 #pragma internal routines
+////////////////////////////////////////////////////////
+
+- (void)categorizeQuestionChoices:(tABC_QuestionChoices *)pChoices
+                   categoryString:(NSMutableArray **)arrayCategoryString
+                  categoryNumeric:(NSMutableArray **)arrayCategoryNumeric
+                     categoryMust:(NSMutableArray **)arrayCategoryMust
+{
+    //splits wad of questions into three categories:  string, numeric and must
+    if (pChoices)
+    {
+        if (pChoices->aChoices)
+        {
+            for (int i = 0; i < pChoices->numChoices; i++)
+            {
+                tABC_QuestionChoice *pChoice = pChoices->aChoices[i];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+
+                [dict setObject: [NSString stringWithFormat:@"%s", pChoice->szQuestion] forKey:@"question"];
+                [dict setObject: [NSNumber numberWithInt:pChoice->minAnswerLength] forKey:@"minLength"];
+
+                //printf("question: %s, category: %s, min: %d\n", pChoice->szQuestion, pChoice->szCategory, pChoice->minAnswerLength);
+
+                NSString *category = [NSString stringWithFormat:@"%s", pChoice->szCategory];
+                if([category isEqualToString:@"string"])
+                {
+                    [*arrayCategoryString addObject:dict];
+                }
+                else if([category isEqualToString:@"numeric"])
+                {
+                    [*arrayCategoryNumeric addObject:dict];
+                }
+                else if([category isEqualToString:@"must"])
+                {
+                    [*arrayCategoryMust addObject:dict];
+                }
+            }
+        }
+    }
+}
+
 
 // replaces the string in the given variable with a duplicate of another
 - (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue
