@@ -3388,6 +3388,10 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }
 }
 
++ (int) getMinimumPasswordLength { return ABC_MIN_PASS_LENGTH; };
++ (int) getMinimumPINLength { return ABC_MIN_PIN_LENGTH; };
+
+
 ////////////////////////////////////////////////////////
 #pragma internal routines
 ////////////////////////////////////////////////////////

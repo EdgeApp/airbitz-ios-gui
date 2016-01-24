@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Wallet.h"
-#import "ABC.h"
 #import "SpendTarget.h"
 #import "AirbitzViewController.h"
 

@@ -409,9 +409,11 @@
  */
 //- (ABCConditionCode)getLocalAccounts:(NSArray **) arrayAccounts;
 
-
 - (ABCConditionCode) getLastConditionCode;
 - (NSString *) getLastErrorString;
+
++ (int) getMinimumPasswordLength;
++ (int) getMinimumPINLength;
 
 
 @end

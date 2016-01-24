@@ -7,7 +7,6 @@
 #import "User.h"
 #import "Util.h"
 #import "FadingAlertView.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "Theme.h"
 
@@ -15,7 +14,6 @@
 
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
-    tABC_AccountSettings            *_pAccountSettings;
     UITextField                     *_currentTextField;
 }
 
@@ -49,7 +47,7 @@
 {
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
     if (![[AppDelegate abc] passwordExists]) {
         self.passwordTextField.hidden = YES;
     }
@@ -70,7 +68,7 @@
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _dailyDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
 
-    _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
+    _pinSpendLimitSwitch.on = [AppDelegate abc].settings.bSpendRequirePin > 0;
     _pinSpendLimitField.text = [[AppDelegate abc] formatSatoshi:[AppDelegate abc].settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
     _pinDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
@@ -288,10 +286,6 @@
 
 - (void)exitWithBackButton:(BOOL)bBack
 {
-    if (_pAccountSettings)
-    {
-        ABC_FreeAccountSettings(_pAccountSettings);
-    }
     [self.delegate spendingLimitsViewControllerDone:self withBackButton:bBack];
 }
 

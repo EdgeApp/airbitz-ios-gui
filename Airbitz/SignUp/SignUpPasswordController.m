@@ -55,11 +55,11 @@
     [super viewDidLoad];
     
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
     self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.reenterPasswordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
     self.pinTextField.delegate = self;
-    self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+    self.pinTextField.minimumCharacters = [CoreBridge getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");

@@ -5,7 +5,6 @@
 
 #import "Wallet.h"
 #import "CoreBridge.h"
-#import "ABC.h"
 
 @interface SpendTarget : NSObject
 
@@ -36,13 +35,6 @@
 
 - (id)init:(id)abc;
 - (void)spendObjectSet:(void *)o;
-
-- (BOOL)spendNewInternal:(NSString *)address
-                   label:(NSString *)label
-                category:(NSString *)category
-                   notes:(NSString *)notes
-           amountSatoshi:(uint64_t)amountSatoshi
-                   error:(tABC_Error *)pError;
 
 - (BOOL)isMutable;
 - (uint64_t)maxSpendable:(NSString *)walletUUID;
