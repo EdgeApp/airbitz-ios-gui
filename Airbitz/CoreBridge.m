@@ -9,6 +9,7 @@
 #import "Util.h"
 #import "LocalSettings.h"
 #import "Keychain.h"
+#import "SpendTarget.h"
 
 #import "CoreBridge.h"
 #import "AppGroupConstants.h"
@@ -2760,6 +2761,7 @@ static CoreBridge *singleton = nil;
 
         ABCConditionCode ccode;
         ccode = [self uploadLogs:userText];
+
         NSString *errorString = [self getLastErrorString];
 
         dispatch_async(dispatch_get_main_queue(),^{
@@ -2853,7 +2855,6 @@ static CoreBridge *singleton = nil;
     }];
     return ABCConditionCodeOk;
 }
-
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
@@ -3210,7 +3211,115 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }];
 }
 
+- (ABCConditionCode)newSpendFromText:(NSString *)uri spendTarget:(SpendTarget **)spendTarget;
+{
+    tABC_Error error;
+    if (!uri || !spendTarget)
+    {
+        error.code = (tABC_CC)ABCConditionCodeNULLPtr;
+        return [self setLastErrors:error];
+    }
+    *spendTarget = [[SpendTarget alloc] init:self];
+    tABC_SpendTarget *pSpend = NULL;
 
+    ABC_SpendNewDecode([uri UTF8String], &pSpend, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+        [*spendTarget spendObjectSet:(void *)pSpend];
+    return ccode;
+}
+
+- (void)newSpendFromTextAsync:(NSString *)uri
+        complete:(void(^)(SpendTarget *sp))completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    [self postToMiscQueue:^{
+        SpendTarget *spendTarget;
+        ABCConditionCode ccode = [self newSpendFromText:uri spendTarget:&spendTarget];
+        NSString *errorString = [self getLastErrorString];
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABCConditionCodeOk == ccode) {
+                if (completionHandler) completionHandler(spendTarget);
+            } else {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
+}
+
+- (ABCConditionCode)newSpendTransfer:(NSString *)destWalletUUID spendTarget:(SpendTarget **)spendTarget;
+{
+    tABC_Error error;
+    if (!destWalletUUID || !spendTarget)
+    {
+        error.code = (tABC_CC)ABCConditionCodeNULLPtr;
+        return [self setLastErrors:error];
+    }
+    *spendTarget = [[SpendTarget alloc] init:self];
+    tABC_SpendTarget *pSpend = NULL;
+
+    ABC_SpendNewTransfer([self.name UTF8String],
+            [destWalletUUID UTF8String], 0, &pSpend, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        (*spendTarget).destWallet = [self selectWalletWithUUID:destWalletUUID];
+        [*spendTarget spendObjectSet:(void *)pSpend];
+    }
+    return ccode;
+}
+
+- (ABCConditionCode)newSpendInternal:(NSString *)address
+                               label:(NSString *)label
+                            category:(NSString *)category
+                               notes:(NSString *)notes
+                       amountSatoshi:(uint64_t)amountSatoshi
+                         spendTarget:(SpendTarget **)spendTarget;
+{
+    tABC_Error error;
+    *spendTarget = [[SpendTarget alloc] init:self];
+    tABC_SpendTarget *pSpend = NULL;
+
+    ABC_SpendNewInternal([address UTF8String], [label UTF8String],
+            [category UTF8String], [notes UTF8String],
+            amountSatoshi, &pSpend, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+        [*spendTarget spendObjectSet:(void *)pSpend];
+    return ccode;
+}
+
+
+
+//- (void)newSpendTransferAsync:(NSString *)destWalletUUID
+//                     complete:(void(^)(SpendTarget *sp))completionHandler
+//                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+//{
+//    [self postToMiscQueue:^{
+//        SpendTarget *spendTarget;
+//        ABCConditionCode ccode = [self newSpendTransfer:destWalletUUID spendTarget:&spendTarget];
+//        NSString *errorString = [self getLastErrorString];
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            if (ABCConditionCodeOk == ccode) {
+//                if (completionHandler) completionHandler(spendTarget);
+//            } else {
+//                if (errorHandler) errorHandler(ccode, errorString);
+//            }
+//        });
+//    }];
+//}
+
+
+- (ABCConditionCode) satoshiToCurrency:(uint64_t) satoshi
+                           currencyNum:(int)currencyNum
+                              currency:(double *)pCurrency;
+{
+    tABC_Error error;
+
+    ABC_SatoshiToCurrency([self.name UTF8String], [self.password UTF8String],
+            satoshi, pCurrency, currencyNum, &error);
+    return [self setLastErrors:error];
+}
 
 - (ABCConditionCode) getLastConditionCode;
 {

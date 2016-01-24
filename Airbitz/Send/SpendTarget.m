@@ -10,94 +10,203 @@
 #import "ABC.h"
 #import "Util.h"
 
+@interface SpendTarget ()
+
+@property (nonatomic)               tABC_SpendTarget        *pSpend;
+@property (nonatomic, strong)       CoreBridge              *airbitzCore;
+@property (nonatomic)               ABCConditionCode        lastConditionCode;
+@property (nonatomic, strong)       NSString                *lastErrorString;
+
+@end
+
 @implementation SpendTarget
 
-- (id)init
+- (id)init:(id)abc;
 {
     self = [super init];
     if (self) {
-        _pSpend = NULL;
-        _bizId = 0;
+        self.pSpend = NULL;
+        self.bizId = 0;
+        self.airbitzCore = abc;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    if (_pSpend != NULL) {
-        ABC_SpendTargetFree(_pSpend);
-        _pSpend = NULL;
+    if (self.pSpend != NULL) {
+        ABC_SpendTargetFree(self.pSpend);
+        self.pSpend = NULL;
     }
 }
 
-- (BOOL)newSpend:(NSString *)text error:(tABC_Error *)pError
+- (void)spendObjectSet:(void *)o;
 {
-    ABC_SpendNewDecode([text UTF8String], &_pSpend, pError);
-    return pError->code == ABC_CC_Ok ? YES : NO;
+    self.pSpend = (tABC_SpendTarget *)o;
+    [self copyABCtoOBJC];
 }
 
-- (BOOL)newTransfer:(NSString *)walletUUID error:(tABC_Error *)pError
+- (void)copyABCtoOBJC
 {
-    ABC_SpendNewTransfer([[AppDelegate abc].name UTF8String],
-        [walletUUID UTF8String], 0, &_pSpend, pError);
-    return pError->code == ABC_CC_Ok ? YES : NO;
+    if (!self.pSpend) return;
+
+    self.amount         = self.pSpend->amount;
+    self.amountMutable  = self.pSpend->amountMutable;
+    self.bSigned        = self.pSpend->bSigned;
+    self.spendName      = self.pSpend->szName       ? [NSString stringWithUTF8String:self.pSpend->szName] : nil;
+    self.returnURL      = self.pSpend->szRet        ? [NSString stringWithUTF8String:self.pSpend->szRet] : nil;
+    self.destUUID       = self.pSpend->szDestUUID   ? [NSString stringWithUTF8String:self.pSpend->szDestUUID] : nil;
 }
 
-- (BOOL)spendNewInternal:(NSString *)address label:(NSString *)label
-                category:(NSString *)category notes:(NSString *)notes
-           amountSatoshi:(uint64_t)amountSatoshi
-                   error:(tABC_Error *)pError
+- (void)copyOBJCtoABC
 {
-    ABC_SpendNewInternal([address UTF8String], [label UTF8String],
-        [category UTF8String], [notes UTF8String],
-        amountSatoshi, &_pSpend, pError);
-    return pError->code == ABC_CC_Ok ? YES : NO;
+    self.pSpend->amount              = self.amount       ;
+//    self.pSpend->amountMutable       = self.amountMutable;
+//    self.pSpend->bSigned             = self.bSigned      ;
+//    [self replaceString:&(self.pSpend->szName         ) withString:[self.spendName          UTF8String]];
+//    [self replaceString:&(self.pSpend->szRet          ) withString:[self.spendName          UTF8String]];
+//    [self replaceString:&(self.pSpend->szDestUUID     ) withString:[self.spendName          UTF8String]];
+//    szRet                           =
+//    szDestUUID                      =
 }
 
-- (NSString *)signTx:(tABC_Error *)pError
+
+- (ABCConditionCode)signTx:(NSString **)txData;
 {
     NSString *rawTx = nil;
     char *szRawTx = NULL;
+    tABC_Error error;
 
-    ABC_SpendSignTx([[AppDelegate abc].name UTF8String],
-            [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, pError);
-    if (pError->code == ABC_CC_Ok) {
+    ABC_SpendSignTx([self.airbitzCore.name UTF8String],
+            [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
         rawTx = [NSString stringWithUTF8String:szRawTx];
         free(szRawTx);
+        *txData = rawTx;
     }
-    return rawTx;
+    return ccode;
+}
+- (void)signTx:(void (^)(NSString * txData)) completionHandler
+        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    [self.airbitzCore postToMiscQueue:^
+    {
+        NSString *txData;
+        ABCConditionCode ccode = [self signTx:&txData];
+        NSString *errorString  = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler(txData);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
 }
 
-- (BOOL)broadcastTx:(NSString *)rawTx error:(tABC_Error *)pError
+- (void)signAndSaveTx:(void (^)(NSString * rawTx)) completionHandler
+         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
-    ABC_SpendBroadcastTx([[AppDelegate abc].name UTF8String],
-        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], pError);
-    return pError->code == ABC_CC_Ok;
+    [self.airbitzCore postToMiscQueue:^
+    {
+        NSString *rawTx;
+        NSString *txId;
+        tABC_Error error;
+
+        ABCConditionCode ccode = [self signTx:&rawTx];
+        if (ABCConditionCodeOk == ccode)
+        {
+            ccode = [self saveTx:rawTx txId:&txId];
+        }
+        NSString *errorString  = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler(rawTx);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
 }
 
-- (NSString *)saveTx:(NSString *)rawTx error:(tABC_Error *)pError
+- (ABCConditionCode)broadcastTx:(NSString *)rawTx;
 {
-    NSString *txid = nil;
+    tABC_Error error;
+    ABC_SpendBroadcastTx([self.airbitzCore.name UTF8String],
+        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)saveTx:(NSString *)rawTx txId:(NSString **)txId
+{
+    NSString *txidTemp = nil;
     char *szTxId = NULL;
+    tABC_Error error;
 
-    ABC_SpendSaveTx([[AppDelegate abc].name UTF8String],
-        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, pError);
-    if (pError->code == ABC_CC_Ok) {
-        txid = [NSString stringWithUTF8String:szTxId];
+    ABC_SpendSaveTx([self.airbitzCore.name UTF8String],
+        [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ccode == ABCConditionCodeOk) {
+        txidTemp = [NSString stringWithUTF8String:szTxId];
         free(szTxId);
-        [self updateTransaction:txid];
+        [self updateTransaction:txidTemp];
+        *txId = txidTemp;
     }
-    return txid;
+    return ccode;
 }
 
-- (NSString *)approve:(tABC_Error *)pError
+- (ABCConditionCode)signBroadcastSaveTx:(NSString **)txId;
 {
-    NSString *txId = nil;
-    NSString *rawTx = [self signTx:pError];
-    if (nil != rawTx && [self broadcastTx:rawTx error:pError]) {
-        txId = [self saveTx:rawTx error:pError];
+    NSString *txIdTemp = nil;
+    NSString *rawTx;
+    tABC_Error error;
+    ABCConditionCode ccode = [self signTx:&rawTx];
+    if (nil != rawTx)
+    {
+        ccode = [self broadcastTx:rawTx];
+        if (ABCConditionCodeOk == ccode)
+        {
+            ccode = [self saveTx:rawTx txId:&txIdTemp];
+            if (ABCConditionCodeOk == ccode)
+            {
+                *txId = txIdTemp;
+            }
+        }
     }
-    return txId;
+    return ccode;
+}
+
+- (void)signBroadcastSaveTx:(void (^)(NSString * txId)) completionHandler
+         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    [self.airbitzCore postToMiscQueue:^
+    {
+        NSString *txId;
+        ABCConditionCode ccode = [self signBroadcastSaveTx:&txId];
+        NSString *errorString  = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler(txId);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
+
 }
 
 - (void)updateTransaction:(NSString *)txId
@@ -110,7 +219,7 @@
     if (_pSpend->szDestUUID) {
         NSAssert((self.destWallet), @"destWallet missing");
     }
-    ABC_GetTransaction([[AppDelegate abc].name UTF8String], NULL,
+    ABC_GetTransaction([self.airbitzCore.name UTF8String], NULL,
         [self.srcWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
     if (ABC_CC_Ok == error.code) {
         if (self.destWallet) {
@@ -127,7 +236,7 @@
         if (0 < _bizId) {
             pTrans->pDetails->bizId = _bizId;
         }
-        ABC_SetTransactionDetails([[AppDelegate abc].name UTF8String], NULL,
+        ABC_SetTransactionDetails([self.airbitzCore.name UTF8String], NULL,
             [self.srcWallet.strUUID UTF8String], [txId UTF8String],
             pTrans->pDetails, &error);
     }
@@ -136,13 +245,13 @@
 
     // This was a transfer
     if (self.destWallet) {
-        ABC_GetTransaction([[AppDelegate abc].name UTF8String], NULL,
+        ABC_GetTransaction([self.airbitzCore.name UTF8String], NULL,
             [self.destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
         if (ABC_CC_Ok == error.code) {
             pTrans->pDetails->szName = strdup([self.srcWallet.strName UTF8String]);
             pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.srcWallet.strName] UTF8String]);
 
-            ABC_SetTransactionDetails([[AppDelegate abc].name UTF8String], NULL,
+            ABC_SetTransactionDetails([self.airbitzCore.name UTF8String], NULL,
                 [self.destWallet.strUUID UTF8String], [txId UTF8String],
                 pTrans->pDetails, &error);
         }
@@ -160,18 +269,79 @@
 {
     tABC_Error error;
     uint64_t result = 0;
-    ABC_SpendGetMax([[AppDelegate abc].name UTF8String],
+    ABC_SpendGetMax([self.airbitzCore.name UTF8String],
         [walletUUID UTF8String], _pSpend, &result, &error);
     return result;
 }
 
-- (tABC_Error)calcSendFees:(NSString *)walletUUID
-                 totalFees:(uint64_t *)totalFees
+- (ABCConditionCode)calcSendFees:(NSString *)walletUUID
+                       totalFees:(uint64_t *)totalFees
 {
     tABC_Error error;
-    ABC_SpendGetFee([[AppDelegate abc].name UTF8String],
-        [walletUUID UTF8String], _pSpend, totalFees, &error);
-    return error;
+    [self copyOBJCtoABC];
+    ABC_SpendGetFee([self.airbitzCore.name UTF8String],
+        [walletUUID UTF8String], self.pSpend, totalFees, &error);
+    return [self setLastErrors:error];
 }
+
+- (void)calcSendFees:(NSString *)walletUUID
+            complete:(void (^)(uint64_t totalFees)) completionHandler
+               error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    [self.airbitzCore postToMiscQueue:^
+    {
+        uint64_t totalFees = 0;
+        ABCConditionCode ccode = [self calcSendFees:walletUUID totalFees:&totalFees];
+        NSString *errorString  = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler(totalFees);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
+
+}
+
+- (ABCConditionCode)setLastErrors:(tABC_Error)error;
+{
+    self.lastConditionCode = (ABCConditionCode) error.code;
+    if (ABCConditionCodeOk == self.lastConditionCode)
+    {
+        self.lastErrorString = @"";
+    }
+    else
+    {
+        self.lastErrorString = [self.airbitzCore conditionCodeMap:(ABCConditionCode) error.code];
+    }
+    return self.lastConditionCode;
+}
+
+- (NSString *)getLastErrorString
+{
+    return _lastErrorString;
+}
+
+
+
+// replaces the string in the given variable with a duplicate of another
+//- (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue
+//{
+//    if (ppszValue)
+//    {
+//        if (*ppszValue)
+//        {
+//            free(*ppszValue);
+//        }
+//        *ppszValue = strdup(szNewValue);
+//    }
+//}
+
+
 
 @end

@@ -462,13 +462,17 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendWallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
     tABC_Error error;
-    _spendTarget = [[SpendTarget alloc] init];
-    if ([_spendTarget spendNewInternal:[args objectForKey:@"toAddress"]
-                                label:[args objectForKey:@"label"]
-                             category:[args objectForKey:@"category"]
-                                notes:[args objectForKey:@"notes"] 
-                        amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
-                                error:&error]) {
+    SpendTarget *pSpend;
+    ABCConditionCode ccode = 
+            [[AppDelegate abc] newSpendInternal:[args objectForKey:@"toAddress"]
+                                          label:[args objectForKey:@"label"]
+                                       category:[args objectForKey:@"category"]
+                                          notes:[args objectForKey:@"notes"]
+                                  amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
+                                    spendTarget:&pSpend];
+    if (ABCConditionCodeOk == ccode)
+    {
+        _spendTarget = pSpend;
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
             _spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
         }
@@ -502,7 +506,11 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     tABC_Error error;
 
-    if (_spendTarget != nil && [_spendTarget broadcastTx:[args objectForKey:@"rawTx"] error:&error]) {
+//    ABCConditionCodeOk == [_spendTarget broadcastTx:[args objectForKey:@"rawTx"] error:&error]) {
+
+    
+    if (_spendTarget != nil &&
+        (ABCConditionCodeOk == [_spendTarget broadcastTx:[args objectForKey:@"rawTx"]])) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -516,7 +524,8 @@ static const NSString *PROTOCOL = @"bridge://";
     tABC_Error error;
 
     if (_spendTarget != nil) {
-        NSString *txid =  [_spendTarget saveTx:[args objectForKey:@"rawTx"] error:&error];
+        NSString *txid;
+        [_spendTarget saveTx:[args objectForKey:@"rawTx"] txId:&txid];
         _spendTarget = nil;
         [self setJsResults:_sendCbid withArgs:[self jsonResult:txid]];
     } else {

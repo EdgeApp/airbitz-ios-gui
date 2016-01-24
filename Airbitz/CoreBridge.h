@@ -1,6 +1,6 @@
 //
 //  CoreBridge.h
-//  AirBitz
+//  Airbitz
 //
 
 #import "Wallet.h"
@@ -8,11 +8,14 @@
 #import "FadingAlertView.h"
 #import "Theme.h"
 #import "ABCConditionCode.h"
+#import "SpendTarget.h"
+
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
 #define ABC_ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase", @"CleverCoin"]
 
+@class SpendTarget;
 
 @interface BitidSignature : NSObject
 @property (nonatomic, strong) NSString *address;
@@ -316,6 +319,80 @@
                                 complete:(void (^)(void)) completionHandler
                                    error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
+
+
+/*
+ * newSpendFromText
+ *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ * @param NSString* uri: bitcoin address or full BIP21 uri
+ * @param SpendTarget **spendTarget: pointer to SpendTarget object
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)newSpendFromText:(NSString *)uri spendTarget:(SpendTarget **)spendTarget;
+
+
+/*
+ * newSpendFromTextAsync
+ *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ * @param NSString* walletUUID: walletUUID of destination wallet for transfer
+ *
+ * @param complete: completion handler code block which is called with SpendTarget *
+ *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return void
+ */
+
+- (void)newSpendFromTextAsync:(NSString *)uri
+                     complete:(void(^)(SpendTarget *sp))completionHandler
+                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
+/*
+ * newSpendFromTransfer
+ *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ * @param NSString* walletUUID: walletUUID of destination wallet for transfer
+ * @param SpendTarget **spendTarget: pointer to SpendTarget object
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)newSpendTransfer:(NSString *)destWalletUUID spendTarget:(SpendTarget **)spendTarget;
+
+/*
+ * newSpendFromTransferAsync
+ *      Creates a SpendTarget object from walletUUID.
+ * @param NSString* walletUUID: walletUUID of destination wallet for transfer
+ *
+ * @param complete: completion handler code block which is called with SpendTarget *
+ *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return void
+ */
+//- (void)newSpendTransferAsync:(NSString *)uri
+//                     complete:(void(^)(SpendTarget *sp))completionHandler
+//                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
+- (ABCConditionCode)newSpendInternal:(NSString *)address
+                               label:(NSString *)label
+                            category:(NSString *)category
+                               notes:(NSString *)notes
+                       amountSatoshi:(uint64_t)amountSatoshi
+                         spendTarget:(SpendTarget **)spendTarget;
+
+/*
+ * satoshiToCurrency
+ *      Convert bitcoin amount in satoshis to a fiat currency amount
+ * @param uint_64t     satoshi: amount to convert in satoshis
+ * @param int      currencyNum: ISO currency number of fiat currency to convert to
+ * @param double    *pCurrency: pointer to resulting value
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode) satoshiToCurrency:(uint64_t) satoshi
+                           currencyNum:(int)currencyNum
+                              currency:(double *)pCurrency;
 
 /*
  * errorMap

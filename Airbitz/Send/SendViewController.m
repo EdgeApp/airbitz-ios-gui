@@ -1739,7 +1739,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
             
             tABC_Error error;
-            SpendTarget *spendTarget = [[SpendTarget alloc] init];
             NSString *text = _addressTextField.text;
             
             if (text.length)
@@ -1752,9 +1751,17 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
-                        [spendTarget newTransfer:wallet.strUUID error:&error];
-                        [self showSendConfirmationTo:spendTarget];
-                        [MainViewController fadingAlertDismiss];
+                        SpendTarget *spendTarget;
+                        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID spendTarget:&spendTarget];
+                        if (ABCConditionCodeOk == ccode)
+                        {
+                            [self showSendConfirmationTo:spendTarget];
+                            [MainViewController fadingAlertDismiss];
+                        }
+                        else
+                        {
+                            [MainViewController fadingAlert:NSLocalizedString(@"Error initiating wallet transfer", nil)];
+                        }
                     }
                     else
                     {
@@ -1792,21 +1799,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    [[AppDelegate abc] postToMiscQueue:^{
-        tABC_Error error;
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-        if ([spendTarget newSpend:text error:&error]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self stopQRReader];
-                [self showSendConfirmationTo:spendTarget];
-                [MainViewController fadingAlertDismiss];
-
-            });
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
-            });
-        }
+    [[AppDelegate abc] newSpendFromTextAsync:text complete:^(SpendTarget *spendTarget){
+        [self stopQRReader];
+        [self showSendConfirmationTo:spendTarget];
+        [MainViewController fadingAlertDismiss];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
     }];
 }
 
@@ -1818,18 +1816,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
-    tABC_Error error;
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     if (index >= 0)
     {
         Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
 
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-        spendTarget.destWallet = wallet;
-        [spendTarget newTransfer:wallet.strUUID error:&error];
-        [self stopQRReader];
-        [self showSendConfirmationTo:spendTarget];
+        SpendTarget *spendTarget;
+        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID spendTarget:&spendTarget];
+        if (ABCConditionCodeOk == ccode)
+        {
+            [self stopQRReader];
+            [self showSendConfirmationTo:spendTarget];
+        }
     }
     [view dismiss];
 
