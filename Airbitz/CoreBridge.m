@@ -1236,7 +1236,7 @@ static CoreBridge *singleton = nil;
     tABC_CC result = ABC_SatoshiToCurrency([self.name UTF8String],
                                            [self.password UTF8String],
                                            denomination, &currency, currencyNum, &error);
-    [self setLastErrors:Error];
+    [self setLastErrors:error];
     if (result == ABC_CC_Ok)
     {
         NSString *abbrev = [self currencyAbbrevLookup:currencyNum];
@@ -1416,7 +1416,7 @@ static CoreBridge *singleton = nil;
                                             &error);
         if (ABC_CC_Ok != result)
         {
-            [self setLastErrors:Error];
+            [self setLastErrors:error];
         }
     }
 }
@@ -1540,7 +1540,7 @@ static CoreBridge *singleton = nil;
         [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([self.name UTF8String], [uuid UTF8String], &error);
-            [self setLastErrors:Error];
+            [self setLastErrors:error];
             [self startWatcher:uuid];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -1564,7 +1564,7 @@ static CoreBridge *singleton = nil;
         [self postToLoadedQueue:^{
             tABC_Error error;
             ABC_WalletLoad([self.name UTF8String], [uuid UTF8String], &error);
-            [self setLastErrors:Error];
+            [self setLastErrors:error];
             [self startWatcher:uuid];
         }];
     }
@@ -1763,7 +1763,7 @@ static CoreBridge *singleton = nil;
             ABC_WatcherStart([self.name UTF8String],
                             [self.password UTF8String],
                             szUUID, &Error);
-            [self setLastErrors:error];
+            [self setLastErrors:Error];
 
             NSOperationQueue *queue = [[NSOperationQueue alloc] init];
             [self watcherSet:walletUUID queue:queue];
@@ -1857,7 +1857,7 @@ static CoreBridge *singleton = nil;
                               [walletUUID UTF8String],
                               [address UTF8String],
                               &Error);
-        [self setLastErrors:error];
+        [self setLastErrors:Error];
         
     }];
 }
@@ -1868,7 +1868,7 @@ static CoreBridge *singleton = nil;
     ABC_WatchAddresses([self.name UTF8String],
                     [self.password UTF8String],
                     [walletUUID UTF8String], &Error);
-    [self setLastErrors:error];
+    [self setLastErrors:Error];
 }
 
 - (void)requestExchangeRateUpdate:(NSTimer *)object
@@ -1935,7 +1935,7 @@ static CoreBridge *singleton = nil;
     [dataQueue addOperationWithBlock:^{
         tABC_Error error;
         ABC_GeneralInfoUpdate(&error);
-        [self setLastErrors:Error];
+        [self setLastErrors:error];
     }];
     // Sync Account
     if (bDataFetched) {
@@ -2001,7 +2001,7 @@ static CoreBridge *singleton = nil;
     tABC_Error Error;
 
     if (ABC_IsTestNet(&result, &Error) != ABC_CC_Ok) {
-        [self setLastErrors:error];
+        [self setLastErrors:Error];
     }
     return result;
 }
@@ -2290,7 +2290,7 @@ static CoreBridge *singleton = nil;
                               &countCategories,
                               &error);
             
-            [self setLastErrors:Error];
+            [self setLastErrors:error];
             
             // If we've never added any categories, add them now
             if (countCategories == 0)
@@ -2446,7 +2446,7 @@ static CoreBridge *singleton = nil;
                     ABC_AddCategory([self.name UTF8String],
                                     [self.password UTF8String],
                                     (char *)[strCategory UTF8String], &error);
-                    [self setLastErrors:Error];
+                    [self setLastErrors:error];
                 }
             }
             else
