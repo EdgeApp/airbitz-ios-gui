@@ -481,8 +481,8 @@ typedef enum eExportOption
 
             
             tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_CsvExport([[User Singleton].name UTF8String],
-                               [[User Singleton].password UTF8String],
+            cc = ABC_CsvExport([[AppDelegate abc].name UTF8String],
+                               [[AppDelegate abc].password UTF8String],
                                [[AppDelegate abc].currentWallet.strUUID UTF8String],
                                startTime, endTime, &szCsvData, &Error);
             if (ABC_CC_Ok != cc)
@@ -542,8 +542,8 @@ typedef enum eExportOption
         {
             tABC_Error Error;
             char *szSeed = NULL;
-            tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
-                                                  [[User Singleton].password UTF8String],
+            tABC_CC result = ABC_ExportWalletSeed([[AppDelegate abc].name UTF8String],
+                                                  [[AppDelegate abc].password UTF8String],
                                                   [[AppDelegate abc].currentWallet.strUUID UTF8String],
                                                   &szSeed, &Error);
             if (ABC_CC_Ok == result)

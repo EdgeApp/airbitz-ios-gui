@@ -122,7 +122,7 @@
 - (BOOL)storeSecret
 {
     tABC_Error Error;
-    tABC_CC cc = ABC_OtpKeySet([[User Singleton].name UTF8String], (char *) [_secret UTF8String], &Error);
+    tABC_CC cc = ABC_OtpKeySet([[AppDelegate abc].name UTF8String], (char *) [_secret UTF8String], &Error);
     return cc == ABC_CC_Ok;
 }
 

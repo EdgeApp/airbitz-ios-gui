@@ -319,13 +319,11 @@ typedef enum eReloginState
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [[User Singleton] loadLocalSettings:nil];
-    
+
     //
     // Check if Disclaimer has ever been displayed on this device. If not, display it now
     //
-    if ([[User Singleton] offerDisclaimer])
+    if (![LocalSettings controller].bDisclaimerViewed)
     {
         [self.passwordTextField resignFirstResponder];
         [self.usernameSelector.textField resignFirstResponder];
@@ -346,7 +344,8 @@ typedef enum eReloginState
     [infoView removeFromSuperview];
     if (infoView == self.disclaimerInfoView)
     {
-        [[User Singleton] saveDisclaimerViewed];
+        [LocalSettings controller].bDisclaimerViewed = YES;
+        [LocalSettings saveAll];
     }
     if (bPINModeEnabled)
         [self.PINCodeView becomeFirstResponder];
@@ -577,7 +576,7 @@ typedef enum eReloginState
         //
         self.usernameSelector.textField.text = username;
     }
-    self.passwordTextField.text = [User Singleton].password;
+    self.passwordTextField.text = [AppDelegate abc].password;
 
 }
 
@@ -625,8 +624,8 @@ typedef enum eReloginState
              {
                  [MainViewController showBackground:NO animate:YES];
                  [MainViewController fadingAlert:errorString];
-                 [User Singleton].name = nil;
-                 [User Singleton].password = nil;
+                 [AppDelegate abc].name = nil;
+                 [AppDelegate abc].password = nil;
              }
          }];
 
@@ -756,8 +755,8 @@ typedef enum eReloginState
                          }
                          else
                          {
-                             [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                                      password:[User Singleton].password
+                             [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
+                                                      password:[AppDelegate abc].password
                                                     useTouchID:!onDisabled];
                          }
                      }
@@ -1125,8 +1124,8 @@ typedef enum eReloginState
         }
         else
         {
-            [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                     password:[User Singleton].password
+            [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
+                                     password:[AppDelegate abc].password
                                    useTouchID:!onDisabled];
         }
     }
@@ -1385,7 +1384,7 @@ typedef enum eReloginState
         }
         else
         {
-            if ([[User Singleton].password length] > 0)
+            if ([[AppDelegate abc].password length] > 0)
                 [SettingsViewController enableTouchID];
             else
             {
@@ -1495,7 +1494,7 @@ typedef enum eReloginState
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated)
     {
-        [User Singleton].password = _tempPassword;
+        [AppDelegate abc].password = _tempPassword;
         _tempPassword = nil;
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 

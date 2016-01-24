@@ -214,8 +214,8 @@
 
     char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
     if (szRequestID) {
-        ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
+        ABC_GenerateRequestQRCode([[AppDelegate abc].name UTF8String],
+            [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
             szRequestID, &pszURI, &pData, &width, &error);
         if (error.code == ABC_CC_Ok) {
             if (pszURI && strRequestURI) {
@@ -231,8 +231,8 @@
             [strRequestID appendFormat:@"%s", szRequestID];
         }
         char *szRequestAddress = NULL;
-        tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
+        tABC_CC result = ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
+            [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
             szRequestID, &szRequestAddress, &error);
         [Util printABC_Error:&error];
         if (result == ABC_CC_Ok) {
@@ -270,8 +270,8 @@
 
 	char *pRequestID;
     // create the request
-	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
+	ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
         &details, &pRequestID, &error);
 	if (error.code == ABC_CC_Ok) {
 		return pRequestID;
@@ -284,8 +284,8 @@
 {
     tABC_Error error;
     // Finalize this request so it isn't used elsewhere
-    ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
+    ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
         [requestId UTF8String], &error);
     [Util printABC_Error:&error];
     return error.code == ABC_CC_Ok ? YES : NO;

@@ -170,7 +170,7 @@
                         [[AppDelegate abc] stopQueues];
 
                         // NOTE: userNameTextField is repurposed for current password
-                        ABC_ChangePassword([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+                        ABC_ChangePassword([[AppDelegate abc].name UTF8String], [self.userNameTextField.text UTF8String],
                             [self.passwordTextField.text UTF8String], &error);
                         [[AppDelegate abc] setupLoginPIN];
 
@@ -193,7 +193,7 @@
                         const char * ignore = "ignore";
                         
                         // NOTE: userNameTextField is repurposed for current password
-                        ABC_ChangePassword([[User Singleton].name UTF8String], ignore,
+                        ABC_ChangePassword([[AppDelegate abc].name UTF8String], ignore,
                                            [self.passwordTextField.text UTF8String], &error);
                         [[AppDelegate abc] setupLoginPIN];
                         
@@ -217,7 +217,7 @@
                 else
                 {
                     tABC_Error error;
-                    ABC_SetPIN([[User Singleton].name UTF8String], [self.userNameTextField.text UTF8String],
+                    ABC_SetPIN([[AppDelegate abc].name UTF8String], [self.userNameTextField.text UTF8String],
                         [self.pinTextField.text UTF8String], &error);
                     if (ABC_CC_Ok == error.code)
                     {
@@ -274,7 +274,7 @@
     {
         self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [AppDelegate abc].name];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -292,7 +292,7 @@
     }
     else if (mode == SignUpMode_ChangePassword)
     {
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [AppDelegate abc].name];
         self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
@@ -335,7 +335,7 @@
     }
     else if (mode == SignUpMode_ChangePIN)
     {
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [User Singleton].name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", [AppDelegate abc].name];
         self.title = changePINText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
@@ -718,7 +718,7 @@
     if (_bSuccess)
     {
         // set up the user password to the new one
-        NSString *username = [User Singleton].name;
+        NSString *username = [AppDelegate abc].name;
         if (self.strUserName) {
             username = self.strUserName;
         }
@@ -736,13 +736,13 @@
         {
             [self changePIN];
         }
-        if ([[LocalSettings controller].touchIDUsersEnabled containsObject:[User Singleton].name] ||
-            ![User Singleton].bDisablePINLogin)
+        if ([[LocalSettings controller].touchIDUsersEnabled containsObject:[AppDelegate abc].name] ||
+            ![AppDelegate abc].settings.bDisablePINLogin)
         {
-            [[LocalSettings controller].touchIDUsersDisabled removeObject:[User Singleton].name];
+            [[LocalSettings controller].touchIDUsersDisabled removeObject:[AppDelegate abc].name];
             [LocalSettings saveAll];
-            [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                     password:[User Singleton].password
+            [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
+                                     password:[AppDelegate abc].password
                                    useTouchID:YES];
         }
     }

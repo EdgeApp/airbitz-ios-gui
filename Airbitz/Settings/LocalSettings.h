@@ -26,6 +26,14 @@
 @property (nonatomic, retain)   NSMutableArray  *touchIDUsersDisabled;
 @property (nonatomic, assign)   NSTimeInterval  noPasswordNotificationTime;
 
+
+@property (nonatomic) bool bDisclaimerViewed;
+@property (nonatomic) bool reviewNotified;
+@property (nonatomic) NSDate *firstLoginTime;
+@property (nonatomic) NSInteger loginCount;
+
+
+
 + (void)initAll;
 + (void)freeAll;
 
@@ -33,6 +41,12 @@
 + (void)saveAll;
 
 + (LocalSettings *)controller;
+
+- (BOOL)offerUserReview:(int)numTransactions earliestDate:(NSDate *)earliestDate;
+- (BOOL)offerRequestHelp;
+- (BOOL)offerSendHelp;
+- (BOOL)offerBleHelp;
+- (BOOL)offerWalletHelp;
 
 @end
 

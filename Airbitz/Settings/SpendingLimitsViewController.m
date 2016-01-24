@@ -65,23 +65,15 @@
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
-    _pAccountSettings = NULL;
-    tABC_Error Error;
-    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            &_pAccountSettings,
-                            &Error);
-    [Util printABC_Error:&Error];
-
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
     _dailySpendLimitField.text = [[AppDelegate abc] formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _dailyDenomination.text = [User Singleton].denominationLabelShort;
+    _dailyDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
 
     _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [[AppDelegate abc] formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitField.text = [[AppDelegate abc] formatSatoshi:[AppDelegate abc].settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _pinDenomination.text = [User Singleton].denominationLabelShort;
+    _pinDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
 
     [self switchFlipped:_dailySpendLimitSwitch];
     [self switchFlipped:_pinSpendLimitSwitch];
@@ -239,36 +231,28 @@
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
             [User Singleton].dailySpendLimitSatoshis = [[AppDelegate abc] denominationToSatoshi:_dailySpendLimitField.text];
-            _pAccountSettings->bDailySpendLimit = 1;
-            _pAccountSettings->dailySpendLimitSatoshis = [User Singleton].dailySpendLimitSatoshis;
         } else {
             [User Singleton].bDailySpendLimit = NO;
-            _pAccountSettings->bDailySpendLimit = 0;
         }
 
         if (_pinSpendLimitSwitch.on) {
-            _pAccountSettings->bSpendRequirePin = 1;
-            _pAccountSettings->spendRequirePinSatoshis = [[AppDelegate abc] denominationToSatoshi:_pinSpendLimitField.text];
+            [AppDelegate abc].settings.bSpendRequirePin = true;
+            [AppDelegate abc].settings.spendRequirePinSatoshis = [[AppDelegate abc] denominationToSatoshi:_pinSpendLimitField.text];
         } else {
-            _pAccountSettings->bSpendRequirePin = 0;
+            [AppDelegate abc].settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        tABC_Error Error;
-        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
-                                _pAccountSettings,
-                                &Error);
-        if (ABC_CC_Ok == Error.code) {
-            [[User Singleton] loadSettings];
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
-                                message:[Util errorMap:&Error]
-                                delegate:self
-                                cancelButtonTitle:@"Cancel"
-                                otherButtonTitles:@"OK", nil];
+        ABCConditionCode ccode = [[AppDelegate abc] saveSettings];
+        if (!(ABCConditionCodeOk == ccode))
+        {
+            UIAlertView *alert =
+                    [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
+                                  message:[[AppDelegate abc] getLastErrorString]
+                                 delegate:self
+                        cancelButtonTitle:cancelButtonText
+                        otherButtonTitles:okButtonText, nil];
             [alert show];
-            [Util printABC_Error:&Error];
         }
         [self exitWithBackButton:YES];
     } else {
@@ -276,8 +260,8 @@
                             initWithTitle:NSLocalizedString(@"Incorrect password", nil)
                             message:NSLocalizedString(@"Incorrect password", nil)
                             delegate:self
-                            cancelButtonTitle:@"Cancel"
-                            otherButtonTitles:@"OK", nil];
+                            cancelButtonTitle:cancelButtonText
+                            otherButtonTitles:okButtonText, nil];
         [alert show];
     }
 }

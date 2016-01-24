@@ -328,8 +328,8 @@ typedef enum eRequestType
         {
             double currency;
             tABC_Error error;
-            ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
-                                  [[User Singleton].password UTF8String], 
+            ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],
+                                  [[AppDelegate abc].password UTF8String],
                                   self.transaction.amountSatoshi, &currency, _wallet.currencyNum, &error);
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
@@ -360,7 +360,7 @@ typedef enum eRequestType
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = [User Singleton].denominationLabel;
+    self.labelBTC.text = [AppDelegate abc].settings.denominationLabel;
     
     
     if (self.categoryButton.titleLabel.text == nil)

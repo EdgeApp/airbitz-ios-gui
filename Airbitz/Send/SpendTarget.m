@@ -38,7 +38,7 @@
 
 - (BOOL)newTransfer:(NSString *)walletUUID error:(tABC_Error *)pError
 {
-    ABC_SpendNewTransfer([[User Singleton].name UTF8String],
+    ABC_SpendNewTransfer([[AppDelegate abc].name UTF8String],
         [walletUUID UTF8String], 0, &_pSpend, pError);
     return pError->code == ABC_CC_Ok ? YES : NO;
 }
@@ -59,7 +59,7 @@
     NSString *rawTx = nil;
     char *szRawTx = NULL;
 
-    ABC_SpendSignTx([[User Singleton].name UTF8String],
+    ABC_SpendSignTx([[AppDelegate abc].name UTF8String],
             [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, pError);
     if (pError->code == ABC_CC_Ok) {
         rawTx = [NSString stringWithUTF8String:szRawTx];
@@ -70,7 +70,7 @@
 
 - (BOOL)broadcastTx:(NSString *)rawTx error:(tABC_Error *)pError
 {
-    ABC_SpendBroadcastTx([[User Singleton].name UTF8String],
+    ABC_SpendBroadcastTx([[AppDelegate abc].name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], pError);
     return pError->code == ABC_CC_Ok;
 }
@@ -80,7 +80,7 @@
     NSString *txid = nil;
     char *szTxId = NULL;
 
-    ABC_SpendSaveTx([[User Singleton].name UTF8String],
+    ABC_SpendSaveTx([[AppDelegate abc].name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, pError);
     if (pError->code == ABC_CC_Ok) {
         txid = [NSString stringWithUTF8String:szTxId];
@@ -110,7 +110,7 @@
     if (_pSpend->szDestUUID) {
         NSAssert((self.destWallet), @"destWallet missing");
     }
-    ABC_GetTransaction([[User Singleton].name UTF8String], NULL,
+    ABC_GetTransaction([[AppDelegate abc].name UTF8String], NULL,
         [self.srcWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
     if (ABC_CC_Ok == error.code) {
         if (self.destWallet) {
@@ -127,7 +127,7 @@
         if (0 < _bizId) {
             pTrans->pDetails->bizId = _bizId;
         }
-        ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
+        ABC_SetTransactionDetails([[AppDelegate abc].name UTF8String], NULL,
             [self.srcWallet.strUUID UTF8String], [txId UTF8String],
             pTrans->pDetails, &error);
     }
@@ -136,13 +136,13 @@
 
     // This was a transfer
     if (self.destWallet) {
-        ABC_GetTransaction([[User Singleton].name UTF8String], NULL,
+        ABC_GetTransaction([[AppDelegate abc].name UTF8String], NULL,
             [self.destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
         if (ABC_CC_Ok == error.code) {
             pTrans->pDetails->szName = strdup([self.srcWallet.strName UTF8String]);
             pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.srcWallet.strName] UTF8String]);
 
-            ABC_SetTransactionDetails([[User Singleton].name UTF8String], NULL,
+            ABC_SetTransactionDetails([[AppDelegate abc].name UTF8String], NULL,
                 [self.destWallet.strUUID UTF8String], [txId UTF8String],
                 pTrans->pDetails, &error);
         }
@@ -160,7 +160,7 @@
 {
     tABC_Error error;
     uint64_t result = 0;
-    ABC_SpendGetMax([[User Singleton].name UTF8String],
+    ABC_SpendGetMax([[AppDelegate abc].name UTF8String],
         [walletUUID UTF8String], _pSpend, &result, &error);
     return result;
 }
@@ -169,7 +169,7 @@
                  totalFees:(uint64_t *)totalFees
 {
     tABC_Error error;
-    ABC_SpendGetFee([[User Singleton].name UTF8String],
+    ABC_SpendGetFee([[AppDelegate abc].name UTF8String],
         [walletUUID UTF8String], _pSpend, totalFees, &error);
     return error;
 }

@@ -176,8 +176,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    [self.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:1];
-    _btcLabel.text = [User Singleton].denominationLabel;
+    [self.segmentedControlBTCUSD setTitle:[AppDelegate abc].settings.denominationLabel forSegmentAtIndex:1];
+    _btcLabel.text = [AppDelegate abc].settings.denominationLabel;
 
     self.BTC_TextField.inputView = dummyView;
     self.USD_TextField.inputView = dummyView;
@@ -209,7 +209,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
     [FadingAlertView dismiss:FadingAlertDismissNow];
-    if ([[User Singleton] offerRequestHelp]) {
+    if ([[LocalSettings controller] offerRequestHelp]) {
         [MainViewController fadingAlertHelpPopup:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment",nil)];
     }
 
@@ -819,7 +819,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	_details.amountFeesAirbitzSatoshi = 0;
 	_details.amountFeesMinersSatoshi = 0;
 	
-	result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+	result = ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                    _details.amountSatoshi, &currency, currencyNum, &error);
 	if (result == ABC_CC_Ok)
 	{
@@ -835,8 +835,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	char *pRequestID;
 
     // create the request
-	result = ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-                                      [[User Singleton].password UTF8String],
+	result = ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
+                                      [[AppDelegate abc].password UTF8String],
                                       [strUUID UTF8String],
                                       &_details,
                                       &pRequestID,
@@ -844,8 +844,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 	if (result == ABC_CC_Ok)
 	{
-        result = ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
-                                          [[User Singleton].password UTF8String],
+        result = ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
+                                          [[AppDelegate abc].password UTF8String],
                                           [strUUID UTF8String],
                                           pRequestID,
                                           &_details,
@@ -883,8 +883,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         self.requestID = [NSString stringWithUTF8String:szRequestID];
 
-        tABC_CC result = ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-                                           [[User Singleton].password UTF8String],
+        tABC_CC result = ABC_GenerateRequestQRCode([[AppDelegate abc].name UTF8String],
+                                           [[AppDelegate abc].password UTF8String],
                                            [strUUID UTF8String],
                                                    szRequestID,
                                                    &pszURI,
@@ -918,8 +918,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         char *szRequestAddress = NULL;
 
         Wallet *wallet = [self getCurrentWallet];
-        tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-                                               [[User Singleton].password UTF8String],
+        tABC_CC result = ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
+                                               [[AppDelegate abc].password UTF8String],
                                                [wallet.strUUID UTF8String],
                                                szRequestID,
                                                &szRequestAddress,
@@ -997,7 +997,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+            if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                     satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
                 self.USD_TextField.text = [[AppDelegate abc] formatCurrency:currency
                                                      withCurrencyNum:wallet.currencyNum
@@ -1018,7 +1018,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+            if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                     currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
             {
                 self.BTC_TextField.text = [[AppDelegate abc] formatSatoshi:satoshi
@@ -1181,7 +1181,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
             tABC_Error error;
             double currency;
-            if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+            if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                     amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
             {
                 NSString *fiatAmount = [[AppDelegate abc] currencySymbolLookup:wallet.currencyNum];
@@ -1267,12 +1267,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             address = addressString;
         }
 
-        BOOL sendName = [User Singleton].bNameOnPayments;
+        BOOL sendName = [AppDelegate abc].settings.bNameOnPayments;
 
         NSString *name;
         if(sendName)
         {
-            name = [User Singleton].fullName ;
+            name = [AppDelegate abc].settings.fullName ;
             if ([name isEqualToString:@""])
             {
                 name = [[UIDevice currentDevice] name];
@@ -1405,9 +1405,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     NSString *name;
 
-    if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+    if ([AppDelegate abc].settings.bNameOnPayments && [AppDelegate abc].settings.fullName)
     {
-        name = [NSString stringWithString:[User Singleton].fullName];
+        name = [NSString stringWithString:[AppDelegate abc].settings.fullName];
     }
     else
     {
@@ -1469,9 +1469,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         NSString *subject;
 
-        if ([User Singleton].bNameOnPayments && [User Singleton].fullName)
+        if ([AppDelegate abc].settings.bNameOnPayments && [AppDelegate abc].settings.fullName)
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, [User Singleton].fullName];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, [AppDelegate abc].settings.fullName];
         }
         else
         {
@@ -1615,7 +1615,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     double currency;
     tABC_Error error;
-	if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+	if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
             txDetails.amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
 	{
 		txDetails.amountCurrency = currency;
@@ -1630,8 +1630,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     txDetails.szNotes = (char *)[notes UTF8String];
     txDetails.szCategory = (char *) "Income:";
     // Update the Details
-    if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String],
+    if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
+            [[AppDelegate abc].password UTF8String],
             [[AppDelegate abc].currentWallet.strUUID UTF8String],
             [self.requestID UTF8String],
             &txDetails,
@@ -1646,8 +1646,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     tABC_Error Error;
 
     // Finalize this request so it isn't used elsewhere
-    if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String],
+    if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
+            [[AppDelegate abc].password UTF8String],
             [[AppDelegate abc].currentWallet.strUUID UTF8String],
             [self.requestID UTF8String],
             &Error))

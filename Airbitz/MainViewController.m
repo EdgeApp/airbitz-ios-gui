@@ -1228,20 +1228,39 @@ MainViewController *singleton;
 
 - (void)checkUserReview
 {
-
-
     NSString *str2 = [NSString stringWithFormat:howAreYouLikingAirbitzText, appTitle];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        if([User offerUserReview]) {
-            _userReviewAlert = [[UIAlertView alloc]
-                                    initWithTitle:appTitle
-                                    message:str2
-                                    delegate:self
-                                    cancelButtonTitle:notSoGoodText
-                                    otherButtonTitles:itsGreatText, nil];
-            [_userReviewAlert show];
+        if ([User isLoggedIn] &&
+                [AppDelegate abc].arrayWallets != nil &&
+                [AppDelegate abc].arrayArchivedWallets != nil)
+        {
+            int transactionCount = 0;
+            NSDate *date = [NSDate date];
+
+            for (Wallet *curWallet in [AppDelegate abc].arrayWallets)
+            {
+                transactionCount += [curWallet.arrayTransactions count];
+                for (Transaction *t in curWallet.arrayTransactions) {
+                    if (t.date && [t.date compare:date] == NSOrderedAscending) {
+                        date = t.date;
+                    }
+                }
+            }
+            for (Wallet *curWallet in [AppDelegate abc].arrayArchivedWallets)
+            {
+                transactionCount += [curWallet.arrayTransactions count];
+            }
+            if([[LocalSettings controller] offerUserReview:transactionCount earliestDate:date]) {
+                _userReviewAlert = [[UIAlertView alloc]
+                        initWithTitle:appTitle
+                              message:str2
+                             delegate:self
+                    cancelButtonTitle:notSoGoodText
+                    otherButtonTitles:itsGreatText, nil];
+                [_userReviewAlert show];
+            }
         }
     });
 }
@@ -1328,12 +1347,12 @@ MainViewController *singleton;
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
-    if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                               satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
         fiat = [[AppDelegate abc] formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
-    if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                   currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
         coin = [[AppDelegate abc] formatSatoshi:satoshi withSymbol:false cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
 
@@ -1925,7 +1944,7 @@ MainViewController *singleton;
 {
     NSString *str = NSLocalizedString(@"Please wait while %@ gracefully exits your account. This may take a while on slow networks.", nil);
 
-    [Keychain disableRelogin:[User Singleton].name];
+    [Keychain disableRelogin:[AppDelegate abc].name];
     [FadingAlertView create:self.view
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{

@@ -161,7 +161,7 @@
 //    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
-    currencyNum = [[User Singleton] defaultCurrencyNum];
+    currencyNum = [AppDelegate abc].settings.defaultCurrencyNum;
     currencyString = [[AppDelegate abc] currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
 //    ABLog(2,self.buttonSelectorView.button.currentTitle);
@@ -217,8 +217,8 @@
     [[AppDelegate abc] postToSyncQueue:^{
         tABC_Error error;
         char *szUUID = NULL;
-        ABC_CreateWallet([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
+        ABC_CreateWallet([[AppDelegate abc].name UTF8String],
+                                [[AppDelegate abc].password UTF8String],
                                 [self.textField.text UTF8String],
                                 currencyNum,
                                 &szUUID,

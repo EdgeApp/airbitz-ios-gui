@@ -105,8 +105,8 @@
     tABC_Error Error;
     bool on = NO;
     long timeout = 0;
-    tABC_CC cc = ABC_OtpAuthGet([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], &on, &timeout, &Error);
+    tABC_CC cc = ABC_OtpAuthGet([[AppDelegate abc].name UTF8String],
+            [[AppDelegate abc].password UTF8String], &on, &timeout, &Error);
     if (cc == ABC_CC_Ok) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
             _isOn = on == true ? YES : NO;
@@ -129,7 +129,7 @@
     _secret = nil;
     tABC_Error error;
     if (_isOn) {
-        tABC_CC cc = ABC_OtpKeyGet([[User Singleton].name UTF8String], &szSecret, &error);
+        tABC_CC cc = ABC_OtpKeyGet([[AppDelegate abc].name UTF8String], &szSecret, &error);
         if (cc == ABC_CC_Ok && szSecret) {
             _secret = [NSString stringWithUTF8String:szSecret];
         } else {
@@ -228,7 +228,7 @@
         NSString *usernames;
         NSString *loggedInUser;
         usernames = [[NSString alloc] initWithUTF8String:szUsernames];
-        loggedInUser = [User Singleton].name;
+        loggedInUser = [AppDelegate abc].name;
         bPending = [usernames rangeOfString:loggedInUser].length > 0;
     }
     return bPending;
@@ -333,8 +333,8 @@
 
 - (tABC_CC)enableTwoFactor:(tABC_Error *)error
 {
-    tABC_CC cc = ABC_OtpAuthSet([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], OTP_RESET_DELAY, error);
+    tABC_CC cc = ABC_OtpAuthSet([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], OTP_RESET_DELAY, error);
     if (cc == ABC_CC_Ok) {
         _isOn = YES;
     }
@@ -343,14 +343,14 @@
 
 - (tABC_CC)disableTwoFactor:(tABC_Error *)error
 {
-    tABC_CC cc = ABC_OtpAuthRemove([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], error);
+    tABC_CC cc = ABC_OtpAuthRemove([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], error);
     if (cc == ABC_CC_Ok) {
         _secret = nil;
         _isOn = NO;
         [NotificationChecker resetOtpNotifications];
 
-        ABC_OtpKeyRemove([[User Singleton].name UTF8String], error);
+        ABC_OtpKeyRemove([[AppDelegate abc].name UTF8String], error);
     }
     return cc;
 }
@@ -365,7 +365,7 @@
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _tfaMenuViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorMenuViewController"];
     _tfaMenuViewController.delegate = self;
-    _tfaMenuViewController.username = [User Singleton].name;
+    _tfaMenuViewController.username = [AppDelegate abc].name;
     _tfaMenuViewController.bStoreSecret = YES;
 
     [Util addSubviewControllerWithConstraints:self child:_tfaMenuViewController];
@@ -428,8 +428,8 @@
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             tABC_Error Error;
-            tABC_CC cc = ABC_OtpResetRemove([[User Singleton].name UTF8String],
-                                            [[User Singleton].password UTF8String],
+            tABC_CC cc = ABC_OtpResetRemove([[AppDelegate abc].name UTF8String],
+                                            [[AppDelegate abc].password UTF8String],
                                             &Error);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (cc == ABC_CC_Ok) {

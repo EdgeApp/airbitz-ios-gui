@@ -411,7 +411,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)notifyDenominationChange
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:[User Singleton].denominationLabel forKey:@"value"];
+    [d setObject:[AppDelegate abc].settings.denominationLabel forKey:@"value"];
     NSDictionary *data = [self jsonResult:d];
 
     NSError *jsonError;
@@ -634,13 +634,13 @@ static const NSString *PROTOCOL = @"bridge://";
 	char *pRequestID = NULL;
 
     // create the request
-	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-                             [[User Singleton].password UTF8String],
+	ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
+                             [[AppDelegate abc].password UTF8String],
                              [wallet.strUUID UTF8String],
                              &details, &pRequestID, &error);
 	if (error.code == ABC_CC_Ok) {
-        ABC_ModifyReceiveRequest([[User Singleton].name UTF8String],
-                                 [[User Singleton].password UTF8String],
+        ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
+                                 [[AppDelegate abc].password UTF8String],
                                  [wallet.strUUID UTF8String],
                                  pRequestID,
                                  &details,
@@ -675,8 +675,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
 
     tABC_Error error;
-    ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-                               [[User Singleton].password UTF8String],
+    ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
+                               [[AppDelegate abc].password UTF8String],
                                [[args objectForKey:@"id"] UTF8String],
                                [[args objectForKey:@"requestId"] UTF8String],
                                &error);
@@ -720,7 +720,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    [self setJsResults:cbid withArgs:[self jsonResult:[User Singleton].denominationLabel]];
+    [self setJsResults:cbid withArgs:[self jsonResult:[AppDelegate abc].settings.denominationLabel]];
 }
 
 - (void)satoshiToCurrency:(NSDictionary *)params
@@ -730,8 +730,8 @@ static const NSString *PROTOCOL = @"bridge://";
             
     tABC_Error error;
     double currency;
-    ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
-                          [[User Singleton].password UTF8String],
+    ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],
+                          [[AppDelegate abc].password UTF8String],
                           [[args objectForKey:@"satoshi"] longValue],
                           &currency,
                           [[args objectForKey:@"currencyNum"] intValue],
@@ -750,8 +750,8 @@ static const NSString *PROTOCOL = @"bridge://";
 
     tABC_Error error;
     int64_t satoshis;
-    ABC_CurrencyToSatoshi([[User Singleton].name UTF8String],
-                          [[User Singleton].password UTF8String],
+    ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String],
+                          [[AppDelegate abc].password UTF8String],
                           [[args objectForKey:@"currency"] doubleValue],
                           [[args objectForKey:@"currencyNum"] intValue],
                           &satoshis, &error);
@@ -906,8 +906,8 @@ static const NSString *PROTOCOL = @"bridge://";
     char *szHex = NULL;
     NSString *hex = nil;
     tABC_Error error;
-    ABC_GetRawTransaction([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [walletUUID UTF8String], [txId UTF8String], &szHex, &error);
+    ABC_GetRawTransaction([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], [walletUUID UTF8String], [txId UTF8String], &szHex, &error);
     if (error.code == ABC_CC_Ok) {
         hex = [NSString stringWithUTF8String:szHex];
     }
@@ -922,8 +922,8 @@ static const NSString *PROTOCOL = @"bridge://";
     char *szRequestAddress = NULL;
     NSString *address;
     tABC_Error error;
-    ABC_GetRequestAddress([[User Singleton].name UTF8String],
-                          [[User Singleton].password UTF8String],
+    ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
+                          [[AppDelegate abc].password UTF8String],
                           [wallet.strUUID UTF8String],
                           szRequestID, &szRequestAddress, &error);
     if (error.code == ABC_CC_Ok) {
@@ -940,8 +940,8 @@ static const NSString *PROTOCOL = @"bridge://";
     tABC_Error error;
     NSString *result = nil;
     char *szData = NULL;
-    ABC_PluginDataGet([[User Singleton].name UTF8String],
-                      [[User Singleton].password UTF8String],
+    ABC_PluginDataGet([[AppDelegate abc].name UTF8String],
+                      [[AppDelegate abc].password UTF8String],
                       [pluginId UTF8String], [key UTF8String],
                       &szData, &error);
     if (error.code == ABC_CC_Ok) {
@@ -956,7 +956,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)pluginDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value
 {
     tABC_Error error;
-    ABC_PluginDataSet([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    ABC_PluginDataSet([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
         [pluginId UTF8String], [key UTF8String], [value UTF8String], &error);
     return error.code == ABC_CC_Ok;
 }
@@ -964,7 +964,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)pluginDataRemove:(NSString *)pluginId withKey:(NSString *)key
 {
     tABC_Error error;
-    ABC_PluginDataRemove([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    ABC_PluginDataRemove([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
         [pluginId UTF8String], [key UTF8String], &error);
     return error.code == ABC_CC_Ok;
 }
@@ -972,8 +972,8 @@ static const NSString *PROTOCOL = @"bridge://";
 - (BOOL)pluginDataClear:(NSString *)pluginId
 {
     tABC_Error error;
-    ABC_PluginDataClear([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [pluginId UTF8String], &error);
+    ABC_PluginDataClear([[AppDelegate abc].name UTF8String],
+        [[AppDelegate abc].password UTF8String], [pluginId UTF8String], &error);
     return error.code == ABC_CC_Ok;
 }
 

@@ -256,7 +256,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
     {
         self.topTextLabel.text = scanQrToSendFundsText;
-        if ([[User Singleton] offerSendHelp])
+        if ([[LocalSettings controller] offerSendHelp])
         {
             [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
         }
@@ -847,16 +847,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			
             // Write username to this characteristic
-			BOOL sendName = [User Singleton].bNameOnPayments;
+			BOOL sendName = [AppDelegate abc].settings.bNameOnPayments;
 
 			NSString *fullName = @" ";
 			if(sendName)
 			{
-				if([User Singleton].fullName)
+				if([AppDelegate abc].settings.fullName)
 				{
-					if([User Singleton].fullName.length)
+					if([AppDelegate abc].settings.fullName.length)
 					{
-						fullName = [User Singleton].fullName;
+						fullName = [AppDelegate abc].settings.fullName;
 					}
 				}
 			}

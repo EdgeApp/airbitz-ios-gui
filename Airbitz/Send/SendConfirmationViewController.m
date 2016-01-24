@@ -297,7 +297,7 @@
     double currency;
     tABC_Error error;
     
-    result = ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+    result = ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                    _spendTarget.pSpend->amount, &currency, _currencyNum, &error);
                 
     if(result == ABC_CC_Ok)
@@ -616,7 +616,7 @@
     if (_selectedTextField == self.amountBTCTextField)
     {
         _spendTarget.pSpend->amount = [[AppDelegate abc] denominationToSatoshi: self.amountBTCTextField.text];
-        if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                   _spendTarget.pSpend->amount, &currency, _currencyNum, &error) == ABC_CC_Ok)
         {
             self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
@@ -625,7 +625,7 @@
     else if (_selectedTextField == self.amountFiatTextField && [self.spendTarget isMutable])
     {
         currency = [self.amountFiatTextField.text doubleValue];
-        if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
+        if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                   currency, _currencyNum, &satoshi, &error) == ABC_CC_Ok)
         {
             _spendTarget.pSpend->amount = satoshi;
@@ -634,8 +634,8 @@
                                                     cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
         }
     }
-    self.amountBTCSymbol.text = [User Singleton].denominationLabelShort;
-    self.amountBTCLabel.text = [User Singleton].denominationLabel;
+    self.amountBTCSymbol.text = [AppDelegate abc].settings.denominationLabelShort;
+    self.amountBTCLabel.text = [AppDelegate abc].settings.denominationLabel;
     self.amountFiatSymbol.text = [[AppDelegate abc] currencySymbolLookup:_currencyNum];
     self.amountFiatLabel.text = [[AppDelegate abc] currencyAbbrevLookup:_currencyNum];
     self.conversionLabel.text = [[AppDelegate abc] conversionStringFromNum:_currencyNum withAbbrev:YES];
@@ -658,8 +658,8 @@
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
         _imagePINEmboss.hidden = NO;
     } else if (!_bAddressIsWalletUUID
-                && [User Singleton].bSpendRequirePin
-                && _spendTarget.pSpend->amount >= [User Singleton].spendRequirePinSatoshis
+                && [AppDelegate abc].settings.bSpendRequirePin
+                && _spendTarget.pSpend->amount >= [AppDelegate abc].settings.spendRequirePinSatoshis
                 && ![[AppDelegate abc] recentlyLoggedIn]) {
         // Show PIN pad
         _pinRequired = YES;
@@ -732,9 +732,9 @@
         [coinFeeString appendString:@"+ "];
         [coinFeeString appendString:[[AppDelegate abc] formatSatoshi:txFees withSymbol:false]];
         [coinFeeString appendString:@" "];
-        [coinFeeString appendString:[User Singleton].denominationLabel];
+        [coinFeeString appendString:[AppDelegate abc].settings.denominationLabel];
 
-        if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
+        if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                                   txFees, &currencyFees, _currencyNum, &error) == ABC_CC_Ok)
         {
             [fiatFeeString appendString:@"+ "];
@@ -905,7 +905,7 @@
             return;
         }
 
-        NSString *PIN = [User Singleton].strPIN;
+        NSString *PIN = [AppDelegate abc].settings.strPIN;
         if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {

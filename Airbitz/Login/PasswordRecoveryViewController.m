@@ -425,7 +425,7 @@ typedef enum eAlertType
     if (self.mode == PassRecovMode_Change) {
         password = _passwordField.text;
     } else {
-        password = [User Singleton].password;
+        password = [AppDelegate abc].password;
     }
     if ([[AppDelegate abc] passwordExists] && ![[AppDelegate abc] passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -442,7 +442,7 @@ typedef enum eAlertType
 
     [[AppDelegate abc] postToMiscQueue:^{
         tABC_Error error;
-        ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
+        ABC_SetAccountRecoveryQuestions([[AppDelegate abc].name UTF8String],
                                                 [password UTF8String],
                                                 [strQuestions UTF8String],
                                                 [strAnswers UTF8String],

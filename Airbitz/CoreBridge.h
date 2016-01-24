@@ -12,14 +12,39 @@
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
+#define ABC_ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase", @"CleverCoin"]
+
 
 @interface BitidSignature : NSObject
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *signature;
 @end
 
+@interface ABCSettings : NSObject
+
+// User Settings
+@property (nonatomic) int minutesAutoLogout;
+@property (nonatomic) int defaultCurrencyNum;
+@property (nonatomic) int64_t denomination;
+@property (nonatomic, copy) NSString* denominationLabel;
+@property (nonatomic) int denominationType;
+@property (nonatomic, copy) NSString* firstName;
+@property (nonatomic, copy) NSString* lastName;
+@property (nonatomic, copy) NSString* nickName;
+@property (nonatomic, copy) NSString* fullName;
+@property (nonatomic, copy) NSString* strPIN;
+@property (nonatomic, copy) NSString* exchangeRateSource;
+@property (nonatomic) bool bNameOnPayments;
+@property (nonatomic, copy) NSString* denominationLabelShort;
+@property (nonatomic) bool bSpendRequirePin;
+@property (nonatomic) int64_t spendRequirePinSatoshis;
+@property (nonatomic) bool bDisablePINLogin;
+
+@end
+
 @interface CoreBridge : NSObject
 
+@property (nonatomic, strong) ABCSettings               *settings;
 @property (nonatomic, strong) NSMutableArray            *arrayWallets;
 @property (nonatomic, strong) NSMutableArray            *arrayArchivedWallets;
 @property (nonatomic, strong) NSMutableArray            *arrayWalletNames;
@@ -35,6 +60,10 @@
 @property (nonatomic)         int                       numTotalWallets;
 @property (nonatomic)         int                       currencyCount;
 @property (nonatomic)         int                       numCategories;
+
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *password;
 
 
 - (void)initAll;
@@ -188,7 +217,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
  * @param error: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
  *                          @param NSString *       errorString: error message
- * @return void
+ * @return ABCConditionCode
  */
 - (ABCConditionCode)uploadLogs:(NSString *)userText;
 - (ABCConditionCode)uploadLogs:(NSString *)userText
@@ -204,13 +233,33 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
  * @param error: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
  *                          @param NSString *       errorString: error message
- * @return void
+ * @return ABCConditionCode
  */
 
 - (ABCConditionCode)walletRemove:(NSString *)uuid;
 - (ABCConditionCode)walletRemove:(NSString *)uuid
                         complete:(void(^)(void))completionHandler
                            error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * loadSettings
+ *      Load account settings from disk and update the ABCSettings object inside AirbitzCore object
+ * @param void
+ *
+ * @return ABCConditionCode
+ */
+
+- (ABCConditionCode)loadSettings;
+
+
+/*
+ * saveSettings
+ *      Uses ABCSettings object inside AirbitzCore object and saves settings to disk
+ * @param void
+ *
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)saveSettings;
 
 /*
  * checkRecoveryAnswersAsync
@@ -255,15 +304,6 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount);
  * @return ABCConditionCode: error code to look up
  */
 //- (ABCConditionCode)getLocalAccounts:(NSArray **) arrayAccounts;
-
-/*
- * uploadLogsAsync
- * @param NSString* username: username
- * @param completionHandler: completion handler code block which is called with the following args
- *                          @param ABCConditionCode       ccode: ABC error code
- * @return void
- */
-- (void)uploadLogsAsync:(NSString *)username complete:(void (^)(ABCConditionCode ccode)) completionHandler;
 
 
 - (ABCConditionCode) getLastConditionCode;

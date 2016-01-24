@@ -239,7 +239,7 @@ static CoreBridge *airbitzCore;
 
     NSString *username;
     if ([User isLoggedIn])
-        username = [User Singleton].name;
+        username = [AppDelegate abc].name;
     else
         username = [LocalSettings controller].cachedUsername;
 

@@ -26,6 +26,7 @@
 #import "WalletHeaderView.h"
 #import "WalletCell.h"
 #import "WalletMakerView.h"
+#import "LocalSettings.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -216,7 +217,7 @@
     }
                      completion: ^(BOOL finished)
                      {
-                         if (_bWalletsShowing && [[User Singleton] offerWalletHelp]) {
+                         if (_bWalletsShowing && [[LocalSettings controller] offerWalletHelp]) {
                              [MainViewController fadingAlertHelpPopup:walletsPopupHelpText];
                          }
                      }];
@@ -369,8 +370,8 @@
 {
     [self.walletsTable reloadData];
 
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[User Singleton].denominationLabel forSegmentAtIndex:0];
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[[AppDelegate abc] currencyAbbrevLookup:[User Singleton].defaultCurrencyNum]
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[AppDelegate abc].settings.denominationLabel forSegmentAtIndex:0];
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[[AppDelegate abc] currencyAbbrevLookup:[AppDelegate abc].settings.defaultCurrencyNum]
                                           forSegmentAtIndex:1];
 
     if (_balanceView.barIsUp)
@@ -507,11 +508,11 @@
     double currency;
     tABC_Error error;
 
-    ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String], 
+    ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
                           totalSatoshi, &currency, [AppDelegate abc].currentWallet.currencyNum, &error);
     _balanceView.botAmount.text = [[AppDelegate abc] formatCurrency:currency
                                              withCurrencyNum:[AppDelegate abc].currentWallet.currencyNum];
-    _balanceView.topDenomination.text = [User Singleton].denominationLabel;
+    _balanceView.topDenomination.text = [AppDelegate abc].settings.denominationLabel;
     NSAssert([AppDelegate abc].currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
     _balanceView.botDenomination.text = [AppDelegate abc].currentWallet.currencyAbbrev;
 
@@ -570,7 +571,7 @@
     if (wallet)
         return [self formatAmount:satoshi useFiat:bFiat currencyNum:wallet.currencyNum];
     else
-        return [self formatAmount:satoshi useFiat:bFiat currencyNum:[User Singleton].defaultCurrencyNum];
+        return [self formatAmount:satoshi useFiat:bFiat currencyNum:[AppDelegate abc].settings.defaultCurrencyNum];
 }
 
 
@@ -594,7 +595,7 @@
     {
         double currency;
         tABC_Error error;
-        ABC_SatoshiToCurrency([[User Singleton].name UTF8String],[[User Singleton].password UTF8String],
+        ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],[[AppDelegate abc].password UTF8String],
                               satoshi, &currency, currencyNum, &error);
         return [[AppDelegate abc] formatCurrency:currency
                           withCurrencyNum:currencyNum];
@@ -1307,8 +1308,8 @@
             {
                 //ABLog(2,@"rename wallet to: %@", textField.text);
                 tABC_Error error;
-                ABC_RenameWallet([[User Singleton].name UTF8String],
-                                 [[User Singleton].password UTF8String],
+                ABC_RenameWallet([[AppDelegate abc].name UTF8String],
+                                 [[AppDelegate abc].password UTF8String],
                                  [longTapWallet.strUUID UTF8String],
                                  (char *)[textField.text UTF8String],
                                  &error);
