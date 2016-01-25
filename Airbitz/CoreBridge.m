@@ -555,11 +555,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)refreshWallets:(void(^)(void))cb
 {
-    dispatch_async(dispatch_get_main_queue(),^{
-        if (self.arrayWallets.count == 0) {
-            [self postWalletsLoadingNotification];
-        }
-    });
     [self postToWatcherQueue:^(void) {
         [self postToWalletsQueue:^(void) {
             ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
@@ -681,7 +676,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        if (!self.arrayWallets || self.arrayWallets.count == 0)
+        ABLog(1, [NSString stringWithFormat:@"************ numWalletsLoaded=%d", self.numWalletsLoaded]);
+        if (!self.arrayWallets || self.numWalletsLoaded == 0)
             [self postWalletsLoadingNotification];
         else
             [self postWalletsLoadedNotification];
@@ -691,17 +687,14 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)postWalletsLoadingNotification
 {
-    dispatch_async(dispatch_get_main_queue(),^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
-    });
+    ABLog(1, [NSString stringWithFormat:@"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
 }
 
 - (void)postWalletsLoadedNotification
 {
-    dispatch_async(dispatch_get_main_queue(),^{
-        bNewDeviceLogin = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
-    });
+    bNewDeviceLogin = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
 }
 
 - (void) postNotificationWalletsChanged
@@ -1468,12 +1461,12 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     if (!self.settings.bDisablePINLogin)
     {
-        // attempt to setup the PIN package on disk
-        tABC_Error error;
-        tABC_CC result = ABC_PinSetup([self.name UTF8String],
-                [self.password length] > 0 ? [self.password UTF8String] : nil,
-                &error);
-        return [self setLastErrors:error];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+            tABC_Error error;
+            ABC_PinSetup([self.name UTF8String],
+                         [self.password length] > 0 ? [self.password UTF8String] : nil,
+                         &error);
+        });
     }
     return ABCConditionCodeOk;
 }
@@ -1607,8 +1600,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
             tABC_Error error;
             ABC_WalletLoad([self.name UTF8String], [uuid UTF8String], &error);
             [self setLastErrors:error];
-            [self startWatcher:uuid];
         }];
+        [self startWatcher:uuid];
         [self refreshWallets]; // Also goes to watcher queue.
     }
 }
@@ -2232,6 +2225,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     if ([wallets count] == 0)
     {
         // create first wallet if it doesn't already exist
+        ABLog(1, @"Creating first wallet in account");
         ccode = [self createWallet:nil currencyNum:0];
     }
     return ccode;
