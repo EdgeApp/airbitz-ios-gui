@@ -90,7 +90,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
     self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
-    self.walletLoadingTimerInterval             = 10.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
+    self.walletLoadingTimerInterval             = 15.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
     self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];

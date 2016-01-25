@@ -164,14 +164,15 @@
                     // get their old pen
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
-                    [[AppDelegate abc] postToSyncQueue:^(void) {
+                    [[AppDelegate abc] postToDataQueue:^(void)
+                    {
                         tABC_Error error;
                         [[AppDelegate abc] stopWatchers];
                         [[AppDelegate abc] stopQueues];
 
                         // NOTE: userNameTextField is repurposed for current password
                         ABC_ChangePassword([[AppDelegate abc].name UTF8String], [self.userNameTextField.text UTF8String],
-                            [self.passwordTextField.text UTF8String], &error);
+                                [self.passwordTextField.text UTF8String], &error);
                         [[AppDelegate abc] setupLoginPIN];
 
                         _bSuccess = error.code == ABC_CC_Ok;
@@ -185,18 +186,19 @@
                     // get their old pen
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
-                    [[AppDelegate abc] postToSyncQueue:^(void) {
+                    [[AppDelegate abc] postToDataQueue:^(void)
+                    {
                         tABC_Error error;
                         [[AppDelegate abc] stopWatchers];
                         [[AppDelegate abc] stopQueues];
-                        
-                        const char * ignore = "ignore";
-                        
+
+                        const char *ignore = "ignore";
+
                         // NOTE: userNameTextField is repurposed for current password
                         ABC_ChangePassword([[AppDelegate abc].name UTF8String], ignore,
-                                           [self.passwordTextField.text UTF8String], &error);
+                                [self.passwordTextField.text UTF8String], &error);
                         [[AppDelegate abc] setupLoginPIN];
-                        
+
                         _bSuccess = error.code == ABC_CC_Ok;
                         _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
                         [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];

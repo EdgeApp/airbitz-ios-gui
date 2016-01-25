@@ -77,6 +77,8 @@ typedef enum eNavBarSide
 +(CGFloat)getSafeOffscreenOffset:(CGFloat) widthOrHeight;
 + (void)generateListOfContactNames;
 + (void)generateListOfNearBusinesses;
++ (void)createFirstWallet;
++ (void)createFirstWallet:(BOOL) popupSpinner;
 
 + (AFHTTPRequestOperationManager *) createAFManager;
 

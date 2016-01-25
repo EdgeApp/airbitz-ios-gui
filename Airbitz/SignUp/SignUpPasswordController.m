@@ -153,8 +153,8 @@
          self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
          
          [User login:self.manager.strUserName password:self.passwordTextField.text];
-         [[AppDelegate abc] setupAccountAsWallet];
-         
+         [MainViewController createFirstWallet];
+
          [super next];
      }
                                error:^(ABCConditionCode ccode, NSString *errorString)

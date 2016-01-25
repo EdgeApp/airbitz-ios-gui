@@ -69,7 +69,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
 
     [LocalSettings saveAll];
-    [[User Singleton] loadSettings];
+    [[User Singleton] loadLocalSettings];
 
 }
 
@@ -93,15 +93,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.pinLoginCount = 0;
 
     return self;
-}
-
-- (void)loadSettings
-{
-    if(ABCConditionCodeOk == [[AppDelegate abc] loadSettings])
-    {
-        [self loadLocalSettings];
-    }
-
 }
 
 - (NSString *)userKey:(NSString *)base

@@ -18,8 +18,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 
-#define DEFAULT_CURRENCY_NUM 141 // USD
-
 @interface WalletMakerView () <PopupPickerViewDelegate, UITextFieldDelegate>
 {
     BOOL                        _bCurrencyPopup;
@@ -210,55 +208,32 @@
     int currencyNum;
 
     if ((nil == arrayCurrencyNums) || [arrayCurrencyNums count] <= _currencyChoice)
-        currencyNum = DEFAULT_CURRENCY_NUM;
+        currencyNum = 0;
     else
         currencyNum = [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
-    
-    [[AppDelegate abc] postToSyncQueue:^{
-        tABC_Error error;
-        char *szUUID = NULL;
-        ABC_CreateWallet([[AppDelegate abc].name UTF8String],
-                                [[AppDelegate abc].password UTF8String],
-                                [self.textField.text UTF8String],
-                                currencyNum,
-                                &szUUID,
-                                &error);
-        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
-        _strReason = [Util errorMap:&error];
-        if (szUUID) {
-            free(szUUID);
-        }
-        [self performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
-    }];
-}
 
-- (void)createWalletComplete
-{
-    [self blockUser:NO];
-    _bCreatingWallet = NO;
-    [[AppDelegate abc] startWatchers];
-    [[AppDelegate abc] refreshWallets];
-
-    //ABLog(2,@"Wallet create complete");
-    if (_bSuccess)
-    {
-        [self exit];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-							  message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", _strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
+    [[AppDelegate abc] createWallet:self.textField.text currencyNum:currencyNum complete:^(void)
+     {
+         [self blockUser:NO];
+         _bCreatingWallet = NO;
+         [self exit];
+     }
+                              error:^(ABCConditionCode ccode, NSString *errorString)
+     {
+         [self blockUser:NO];
+         _bCreatingWallet = NO;
+         UIAlertView *alert = [[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Create Wallet", nil)
+                               message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", errorString]
+                               delegate:nil
+                               cancelButtonTitle:okButtonText
+                               otherButtonTitles:nil];
+         [alert show];
+     }];
 }
 
 - (void)blockUser:(BOOL)bBlock
 {
-//    self.viewBlocker.hidden = !bBlock;
     self.activityIndicator.hidden = NO;
     [self.textField resignFirstResponder];
 }
@@ -268,7 +243,6 @@
     if (!_bCreatingWallet)
     {
         [self.textField resignFirstResponder];
-//        [self.buttonSelectorView close];
 
         if (self.delegate)
         {
@@ -292,24 +266,6 @@
     [self.textField becomeFirstResponder];
 }
 
-#pragma mark - ButtonSelector Delegates
-//
-//-(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
-//{
-//    _currencyChoice = itemIndex;
-//}
-//
-//-(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString
-//{
-//	NSString *result = [[desiredString componentsSeparatedByString:@" - "] firstObject];
-//	return result;
-//}
-//
-//- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
-//{
-//    [self.textField resignFirstResponder];
-//}
-//
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

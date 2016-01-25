@@ -72,12 +72,11 @@
 - (void)freeAll;
 - (void)startQueues;
 - (void)stopQueues;
-- (void)postToSyncQueue:(void(^)(void))cb;
 
 - (void)clearSyncQueue;
 - (void)clearTxSearchQueue;
 
-- (void)postToLoadedQueue:(void(^)(void))cb;
+- (void)postToDataQueue:(void(^)(void))cb;
 - (void)postToWalletsQueue:(void(^)(void))cb;
 - (void)postToGenQRQueue:(void(^)(void))cb;
 - (void)postToTxSearchQueue:(void(^)(void))cb;
@@ -133,7 +132,6 @@
 - (void)deletePINLogin;
 - (void)setupLoginPIN;
 - (BOOL)recentlyLoggedIn;
-- (void)login;
 - (void)logout;
 - (BOOL)passwordOk:(NSString *)password;
 - (BOOL)passwordExists;
@@ -181,6 +179,27 @@
                          complete:(void (^)(void)) completionHandler
                             error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
+/*
+ * createWallet
+ * @param NSString* walletName: set to nil to use default wallet name
+ * @param int       currencyNum: ISO currency number for wallet. set to 0 to use defaultCurrencyNum from
+ *                               settings or the global default currency number if settings unavailable
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode) createWallet:(NSString *)walletName currencyNum:(int) currencyNum;
+- (ABCConditionCode) createWallet:(NSString *)walletName currencyNum:(int) currencyNum
+                         complete:(void (^)(void)) completionHandler
+                            error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+- (ABCConditionCode) createFirstWalletIfNeeded;
+- (ABCConditionCode) getNumWalletsInAccount:(int *)numWallets;
+
 
 /*
  * signIn
@@ -198,8 +217,8 @@
  */
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp
-                     complete:(void (^)(void)) completionHandler
-                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+                  complete:(void (^)(void)) completionHandler
+                     error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
  * signInWithPINAsync
@@ -231,8 +250,8 @@
  */
 - (ABCConditionCode)uploadLogs:(NSString *)userText;
 - (ABCConditionCode)uploadLogs:(NSString *)userText
-        complete:(void(^)(void))completionHandler
-           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+                      complete:(void(^)(void))completionHandler
+                         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
  * walletRemove

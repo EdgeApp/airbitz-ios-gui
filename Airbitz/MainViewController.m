@@ -100,6 +100,8 @@ typedef enum eAppMode
     BOOL                        firstLaunch;
     BOOL                        sideBarLocked;
     BOOL                        _bNewDeviceLogin;
+    BOOL                        _bShowingWalletsLoadingAlert;
+
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
@@ -123,6 +125,8 @@ typedef enum eAppMode
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
+@property (nonatomic)       BOOL     bCreatingFirstWallet;
+
 
 @end
 
@@ -156,6 +160,7 @@ MainViewController *singleton;
     singleton = self;
 
     _bNewDeviceLogin = NO;
+    _bShowingWalletsLoadingAlert = NO;
     self.arrayContacts = nil;
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
@@ -181,8 +186,8 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_WALLETS_LOADING object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_WALLETS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockDisplay) name:NOTIFICATION_WALLETS_LOADING object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockDisplay) name:NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
@@ -1023,20 +1028,47 @@ MainViewController *singleton;
     }
 }
 
-- (void)lockTabbar
+- (void)lockDisplay
 {
-    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
-    item.enabled = NO;
-    item = self.tabBar.items[APP_MODE_REQUEST];
-    item.enabled = NO;
+    NSString *walletsLoading;
+    
+    if (![AppDelegate abc].arrayWallets || [AppDelegate abc].arrayWallets.count == 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingAccountText,
+                          loadingWalletsNewDeviceText];
+    }
+    else if (![AppDelegate abc].bAllWalletsLoaded && [AppDelegate abc].arrayWallets && [AppDelegate abc].numTotalWallets > 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+                          loadingWalletsText,
+                          [AppDelegate abc].numWalletsLoaded + 1,
+                          [AppDelegate abc].numTotalWallets,
+                          loadingWalletsNewDeviceText];
+    }
+    else
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingTransactionsText,
+                          loadingWalletsNewDeviceText];
+    }
+
+    
+    if (_bShowingWalletsLoadingAlert)
+        [MainViewController fadingAlertUpdate:walletsLoading];
+    else
+        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    
+    _bShowingWalletsLoadingAlert = YES;
 }
 
-- (void)unlockTabbar
+- (void)unlockDisplay
 {
-    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
-    item.enabled = YES;
-    item = self.tabBar.items[APP_MODE_REQUEST];
-    item.enabled = YES;
+    if (_bShowingWalletsLoadingAlert)
+    {
+        [FadingAlertView dismiss:FadingAlertDismissFast];
+        _bShowingWalletsLoadingAlert = NO;
+    }
 }
 
 #pragma mark - SettingsViewControllerDelegates
@@ -1061,78 +1093,100 @@ MainViewController *singleton;
     [_loginViewController removeFromParentViewController];
 }
 
++ (void)createFirstWallet;
+{
+    [MainViewController createFirstWallet:NO];
+}
+
++ (void)createFirstWallet:(BOOL) popupSpinner
+{
+    singleton.bCreatingFirstWallet = YES;
+    if (popupSpinner)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [MainViewController fadingAlert:creatingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        });
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        // Create the first wallet in the background
+        // loginViewControllerDidLogin will create a spinner while wallet is loading so close it once wallet is done
+        [[AppDelegate abc] createFirstWalletIfNeeded];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            singleton.bCreatingFirstWallet = NO;
+            [FadingAlertView dismiss:FadingAlertDismissGradual];
+        });
+    });
+}
+
+
 -(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
 {
-//    self.backgroundView.image = [Theme Singleton].backgroundApp;
-
-    if (!bUsedTouchID)
-    {
-        _bNewDeviceLogin = bNewDevice;        
-    }
-
-    if (bNewAccount) {
-        [FadingAlertView create:self.view
-                        message:creatingWalletText
-                       holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        [[AppDelegate abc] setupAccountAsWallet];
-    }
-
-    // After login, reset all the main views
-    [self loadUserViews];
-
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
-	[MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-
-    [self launchViewControllerBasedOnAppMode];
-    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
-
     // if the user logged in through TouchID, increment PIN login count
-    if (bUsedTouchID) {
+    if (bUsedTouchID)
+    {
         [[User Singleton] incPINorTouchIDLogin];
     }
-
-    if (_uri)
-    {
-        [self processBitcoinURI:_uri];
-        _uri = nil;
-    } else if ([User Singleton].needsPasswordCheck) {
-        [self showPasswordCheckAlert];
-    } else {
-        [self checkUserReview];
-    }
+    _bNewDeviceLogin = bNewDevice;
     
-    // add right to left swipe detection for slideout
-    [self installRightToLeftSwipeDetection];
+    [self didLoginCommon:bNewAccount];
 }
 
 - (void)LoginViewControllerDidPINLogin
 {
-//    self.backgroundView.image = [Theme Singleton].backgroundApp;
-
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-
-
-    // After login, reset all the main views
-    [self loadUserViews];
-
-    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
-    [MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-
-    [self launchViewControllerBasedOnAppMode];
-    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
-
     // if the user has a password, increment PIN login count
     if ([[AppDelegate abc] passwordExists]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
     
+    [self didLoginCommon:NO];
+}
+
+- (void)didLoginCommon:(BOOL) bNewAccount
+{
+    if (bNewAccount)
+    {
+        if (self.bCreatingFirstWallet)
+        {
+            [FadingAlertView create:self.view
+                            message:creatingWalletText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+    }
+    else
+    {
+        // Make sure there's a wallet in this account. If not, create it
+        int numWallets;
+        ABCConditionCode ccode = [[AppDelegate abc] getNumWalletsInAccount:&numWallets];
+        if (ABCConditionCodeOk == ccode)
+        {
+            if (0 == numWallets)
+            {
+                // Create the first wallet
+                [MainViewController createFirstWallet:YES];
+            }
+        }
+        else
+        {
+            [MainViewController fadingAlert:errorGettingWalletCount holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+        }
+    }
+    
+    // After login, reset all the main views
+    [self loadUserViews];
+
+    _appMode = APP_MODE_WALLETS;
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
+    [MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
+
+    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
+    [MainViewController showTabBarAnimated:YES];
+    [MainViewController showNavBarAnimated:YES];
+
+    [self launchViewControllerBasedOnAppMode];
+    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
+
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
