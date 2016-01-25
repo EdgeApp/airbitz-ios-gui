@@ -81,8 +81,6 @@ static CoreBridge *singleton = nil;
     NSTimer                                         *exchangeTimer;
     NSTimer                                         *dataSyncTimer;
     NSTimer                                         *notificationTimer;
-    BOOL                                            bOtpError;
-    NSString                                        *otpKey;
 
 
 }
@@ -1371,13 +1369,6 @@ static CoreBridge *singleton = nil;
     return bResult;
 }
 
-- (bool)PINLoginExists
-{
-    NSString *username = [LocalSettings controller].cachedUsername;
-    
-    return [self PINLoginExists:username];
-}
-
 - (bool)PINLoginExists:(NSString *)username
 {
     bool exists = NO;
@@ -1422,42 +1413,18 @@ static CoreBridge *singleton = nil;
     }
 }
 
-- (void)setupLoginPIN
+- (ABCConditionCode)setupLoginPIN
 {
-    NSString *name = self.name;
-    if (name && 0 < name.length)
+    if (!self.settings.bDisablePINLogin)
     {
-        const char *username = [name UTF8String];
-        NSString *pass = self.password;
-        const char *password = (nil == pass ? NULL : [pass UTF8String]);
-
-        // retrieve the user's settings to check whether PIN logins are disabled
-        tABC_CC cc = ABC_CC_Ok;
-        tABC_Error Error;
-        tABC_AccountSettings *pSettings = NULL;
-        
-        cc = ABC_LoadAccountSettings(username,
-                                     password,
-                                     &pSettings,
-                                     &Error);
-        if (cc == ABC_CC_Ok) {
-            if (!pSettings->bDisablePINLogin)
-            {
-                // attempt to setup the PIN package on disk
-                tABC_Error error;
-                tABC_CC result = ABC_PinSetup(username,
-                                              password,
-                                              &error);
-                if (ABC_CC_Ok != result)
-                {
-                    [self setLastErrors:Error];
-                }
-            }
-        } else {
-            [self setLastErrors:Error];
-        }
-        ABC_FreeAccountSettings(pSettings);
+        // attempt to setup the PIN package on disk
+        tABC_Error error;
+        tABC_CC result = ABC_PinSetup([self.name UTF8String],
+                [self.password length] > 0 ? [self.password UTF8String] : nil,
+                &error);
+        return [self setLastErrors:error];
     }
+    return ABCConditionCodeOk;
 }
 
 - (BOOL)recentlyLoggedIn
@@ -1466,17 +1433,10 @@ static CoreBridge *singleton = nil;
     return now - iLoginTimeSeconds <= PIN_REQUIRED_PERIOD_SECONDS;
 }
 
-- (void)login
+- (void)loginCommon
 {
-    NSString *username = self.name;
-    if (username && 0 < username.length)
-    {
-        [LocalSettings controller].cachedUsername = self.name;
-    }
-
-    [LocalSettings saveAll];
+    [self loadSettings];
     bDataFetched = NO;
-    bOtpError = NO;
     [self startPrimaryWallet];
     [self postToWatcherQueue: ^
     {
@@ -2088,34 +2048,15 @@ static CoreBridge *singleton = nil;
 /*
  * set a new default currency for the account based on the parameter
  */
-- (bool)setDefaultCurrencyNum:(int)currencyNum
+- (ABCConditionCode)setDefaultCurrencyNum:(int)currencyNum
 {
-    tABC_CC cc = ABC_CC_Ok;
-    tABC_Error Error;
-    tABC_AccountSettings *pSettings = NULL;
-    cc = ABC_LoadAccountSettings([self.name UTF8String],
-                                 [self.password UTF8String],
-                                 &pSettings,
-                                 &Error);
-    if (cc == ABC_CC_Ok) {
-        pSettings->currencyNum = currencyNum;
-        ABC_UpdateAccountSettings([self.name UTF8String],
-                                  [self.password UTF8String],
-                                  pSettings,
-                                  &Error);
-        if (cc == ABC_CC_Ok)
-        {
-            [[User Singleton] loadSettings];
-        }
-        else
-        {
-            [self setLastErrors:Error];
-        }
-    } else {
-        [self setLastErrors:Error];
+    ABCConditionCode ccode = [self loadSettings];
+    if (ABCConditionCodeOk == ccode)
+    {
+        self.settings.defaultCurrencyNum = currencyNum;
+        ccode = [self saveSettings];
     }
-    ABC_FreeAccountSettings(pSettings);
-    return cc == ABC_CC_Ok;
+    return ccode;
 }
 
 - (void)updateWidgetQRCode;
@@ -2224,12 +2165,9 @@ static CoreBridge *singleton = nil;
 
 }
 
-- (void)setupNewAccount
+- (void)setupAccountAsWallet
 {
     [dataQueue addOperationWithBlock:^{
-        // update user's default currency num to match their locale
-        int currencyNum = [self getCurrencyNumOfLocale];
-        [self setDefaultCurrencyNum:currencyNum];
 
         NSMutableArray *wallets = [[NSMutableArray alloc] init];
         [self loadWalletUUIDs:wallets];
@@ -2241,7 +2179,7 @@ static CoreBridge *singleton = nil;
             char *szUUID = NULL;
             ABC_CreateWallet([self.name UTF8String], [self.password UTF8String],
                     [NSLocalizedString(@"My Wallet", @"Name of initial wallet") UTF8String],
-                    currencyNum, &szUUID, &error);
+                    self.settings.defaultCurrencyNum, &szUUID, &error);
             if (szUUID) {
                 free(szUUID);
             }
@@ -2250,7 +2188,6 @@ static CoreBridge *singleton = nil;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            [FadingAlertView dismiss:FadingAlertDismissGradual];
         });
         [self startWatchers];
 
@@ -2905,6 +2842,53 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 //////////////////// New AirbitzCore methods ////////////////////
 /////////////////////////////////////////////////////////////////
 
+- (ABCConditionCode)createAccount:(NSString *)username password:(NSString *)password pin:(NSString *)pin;
+{
+    tABC_Error error;
+    char *szPassword = [password length] == 0 ? NULL : [password UTF8String];
+    ABC_CreateAccount([username UTF8String], szPassword, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        ABC_SetPIN([username UTF8String], [password UTF8String], [pin UTF8String], &error);
+
+        if (ABCConditionCodeOk != ccode)
+        {
+        }
+        self.name = username;
+        self.password = password;
+        [self loginCommon];
+        [self setupLoginPIN];
+        // update user's default currency num to match their locale
+        int currencyNum = [self getCurrencyNumOfLocale];
+        return [self setDefaultCurrencyNum:currencyNum];
+    }
+    return ccode;
+}
+
+- (ABCConditionCode)createAccount:(NSString *)username password:(NSString *)password pin:(NSString *)pin
+        complete:(void (^)(void)) completionHandler
+           error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        ABCConditionCode ccode = [self createAccount:username password:password pin:pin];
+        NSString *errorString = [self getLastErrorString];
+
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler();
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    });
+    return ABCConditionCodeOk;
+
+}
+
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
 {
     tABC_Error error;
@@ -2927,15 +2911,18 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
         {
             ABC_SignIn([username UTF8String],
                     [password UTF8String], &error);
-            if ((error.code == ABC_CC_Ok) && (otp != nil))
-                otpKey = otp;
-
             ccode = [self setLastErrors:error];
+
+            if (ABCConditionCodeOk == ccode)
+            {
+                self.name = username;
+                self.password = password;
+                [self loginCommon];
+                [self setupLoginPIN];
+            }
         }
     }
 
-    [self loadSettings];
-    
     return ccode;
 }
 
@@ -2979,9 +2966,12 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
                 [pin UTF8String],
                 &error);
         ccode = [self setLastErrors:error];
-        if (ABC_CC_Ok == ccode)
+
+        if (ABCConditionCodeOk == ccode)
         {
-            [User login:username password:NULL];
+            self.name = username;
+            self.password = nil;
+            [self loginCommon];
         }
     }
     else

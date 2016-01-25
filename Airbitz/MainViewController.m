@@ -576,11 +576,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [[AppDelegate abc] PINLoginExists];
+        bool exists = [[AppDelegate abc] PINLoginExists:[LocalSettings controller].cachedUsername];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [[AppDelegate abc] PINLoginExists];
+            bool exists = [[AppDelegate abc] PINLoginExists:[LocalSettings controller].cachedUsername];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -1074,7 +1074,7 @@ MainViewController *singleton;
         [FadingAlertView create:self.view
                         message:creatingWalletText
                        holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        [[AppDelegate abc] setupNewAccount];
+        [[AppDelegate abc] setupAccountAsWallet];
     }
 
     // After login, reset all the main views

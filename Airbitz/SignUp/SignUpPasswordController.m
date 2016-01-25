@@ -32,7 +32,6 @@
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic)           CGFloat                         contentViewY;
 @property (nonatomic, copy)     NSString                        *labelString;
-@property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (weak, nonatomic) IBOutlet UILabel                    *pinTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
@@ -145,40 +144,23 @@
     [_passwordTextField resignFirstResponder];
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        tABC_Error error;
-        char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
-        ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
-        if (error.code == ABC_CC_Ok)
-        {
-            ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
-                       [self.pinTextField.text UTF8String], &error);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FadingAlertView dismiss:FadingAlertDismissFast];
-            if (error.code == ABC_CC_Ok)
-            {
-                _bSuccess = true;
-                
-                self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-                self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-                
-                [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
-                [[AppDelegate abc] setupNewAccount];
-                
-                [super next];
-            }
-            else
-            {
-                _bSuccess = false;
-                _strReason = [Util errorMap:&error];
-                
-                [FadingAlertView create:self.view message:_strReason holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-            }
-        });
-    });
+
+    [[AppDelegate abc] createAccount:self.manager.strUserName password:self.passwordTextField.text pin:self.pinTextField.text
+                            complete:^(void)
+     {
+         [FadingAlertView dismiss:FadingAlertDismissFast];
+         self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+         self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+         
+         [User login:self.manager.strUserName password:self.passwordTextField.text];
+         [[AppDelegate abc] setupAccountAsWallet];
+         
+         [super next];
+     }
+                               error:^(ABCConditionCode ccode, NSString *errorString)
+     {
+         [FadingAlertView create:self.view message:errorString holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+     }];
 }
 
 - (IBAction)skipTouched:(id)sender

@@ -1093,8 +1093,7 @@ typedef enum eReloginState
 //    [[AppDelegate abc] otpSetError:_resultCode];
 
     [User login:self.usernameSelector.textField.text
-       password:self.passwordTextField.text
-       setupPIN:YES];
+       password:self.passwordTextField.text];
     [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
     if ([Keychain bHasSecureEnclave])

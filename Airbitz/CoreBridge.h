@@ -129,7 +129,6 @@
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
 - (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
-- (bool)PINLoginExists;
 - (bool)PINLoginExists:(NSString *)username;
 - (void)deletePINLogin;
 - (void)setupLoginPIN;
@@ -155,14 +154,33 @@
 - (NSString *)currencyAbbrevLookup:(int) currencyNum;
 - (NSString *)currencySymbolLookup:(int)currencyNum;
 - (int)getCurrencyNumOfLocale;
-- (bool)setDefaultCurrencyNum:(int)currencyNum;
-- (void)setupNewAccount;
+- (void)setupAccountAsWallet;
 - (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID;
 - (NSString *) bitidParseURI:(NSString *)uri;
 - (BOOL) bitidLogin:(NSString *)uri;
 - (BitidSignature *) bitidSign:(NSString *)uri msg:(NSString *)msg;
 
 ///////////////////////// New AirbitzCore methods //////////////////////
+
+/*
+ * createAccount
+ * @param NSString* username:
+ * @param NSString* password:
+ * @param NSString* pin:
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ *
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)createAccount:(NSString *)username password:(NSString *)password pin:(NSString *)pin;
+- (ABCConditionCode)createAccount:(NSString *)username password:(NSString *)password pin:(NSString *)pin
+                         complete:(void (^)(void)) completionHandler
+                            error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
 
 /*
  * signIn

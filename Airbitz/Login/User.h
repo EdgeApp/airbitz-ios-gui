@@ -32,7 +32,6 @@
 + (User *)Singleton;
 + (BOOL)isLoggedIn;
 + (void)login:(NSString *)user password:(NSString *)pword;
-+ (void)login:(NSString *)user password:(NSString *)pword setupPIN:(BOOL)setupPIN;
 
 - (id)init;
 - (void)clear;
