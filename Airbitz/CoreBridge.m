@@ -1478,7 +1478,9 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)loginCommon
 {
-    [self postWalletsLoadingNotification];
+    dispatch_async(dispatch_get_main_queue(),^{
+        [self postWalletsLoadingNotification];
+    });
     [self loadCategories];
     [self loadSettings];
     [self requestExchangeRateUpdate:nil];
