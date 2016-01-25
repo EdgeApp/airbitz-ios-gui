@@ -1031,6 +1031,7 @@ MainViewController *singleton;
 - (void)lockDisplay
 {
     NSString *walletsLoading;
+    if (![User isLoggedIn]) return;
     
     if (![AppDelegate abc].arrayWallets || [AppDelegate abc].arrayWallets.count == 0)
     {
