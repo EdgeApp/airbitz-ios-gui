@@ -1457,7 +1457,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
 }
 
-- (ABCConditionCode)setupLoginPIN
+- (void)setupLoginPIN
 {
     if (!self.settings.bDisablePINLogin)
     {
@@ -1468,7 +1468,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
                          &error);
         });
     }
-    return ABCConditionCodeOk;
 }
 
 - (BOOL)recentlyLoggedIn
