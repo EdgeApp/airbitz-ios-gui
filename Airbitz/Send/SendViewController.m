@@ -106,6 +106,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong)   PopupPickerView2                *popupPickerSendTo;
 @property (nonatomic, strong)   IBOutlet UILabel				*scanningErrorLabel;
 @property (weak, nonatomic)     IBOutlet UILabel                *topTextLabel;
+@property (weak, nonatomic)     IBOutlet UILabel                *textUnderQRScanner;
 
 @property (weak, nonatomic)     IBOutlet UISegmentedControl     *segmentedControl;
 @property (weak, nonatomic)     IBOutlet NSLayoutConstraint     *bleViewHeight;
@@ -138,7 +139,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [FadingAlertView dismiss:FadingAlertDismissNow];
     
     bWalletListDropped = false;
 
@@ -146,6 +146,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self.buttonSelector disableButton];
 
     self.addressTextField.delegate = self;
+    self.textUnderQRScanner.hidden = YES;
 
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
@@ -247,8 +248,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self setupNavBar];
 
-    [FadingAlertView dismiss:FadingAlertDismissNow];
-    
     if (_bImportMode)
     {
         self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
@@ -1320,9 +1319,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
         {
-            [FadingAlertView create:self.view
-                            message:walletHasBeenArchivedText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
+            self.textUnderQRScanner.text = walletHasBeenArchivedText;
+            self.textUnderQRScanner.hidden = NO;
+            self.scanFrame.hidden = YES;
+            self.segmentedControl.hidden = YES;
+        }
+        else
+        {
+            self.textUnderQRScanner.hidden = YES;
+            self.scanFrame.hidden = NO;
+            self.segmentedControl.hidden = NO;
         }
 
         [self.tableView reloadData];

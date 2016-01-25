@@ -99,6 +99,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) RequestState              state;
 @property (nonatomic, strong) NSTimer                   *qrTimer;
 @property (nonatomic, strong) NSTimer                   *rotateServerTimer;
+@property (weak, nonatomic)   IBOutlet UILabel          *textUnderQRCode;
 
 @property (nonatomic, strong) NSString *requestType;
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
@@ -208,7 +209,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
-    [FadingAlertView dismiss:FadingAlertDismissNow];
     if ([[LocalSettings controller] offerRequestHelp]) {
         [MainViewController fadingAlertHelpPopup:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment",nil)];
     }
@@ -240,9 +240,21 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
         {
-            [FadingAlertView create:self.view
-                            message:walletHasBeenArchivedText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
+            self.textUnderQRCode.text = walletHasBeenArchivedText;
+            self.qrCodeImageView.hidden = YES;
+            self.statusLine1.hidden = YES;
+            self.statusLine2.hidden = YES;
+            self.statusLine3.hidden = YES;
+            self.segmentedControlCopyEmailSMS.hidden = YES;
+        }
+        else
+        {
+            self.textUnderQRCode.text = generatingQRCode;
+            self.qrCodeImageView.hidden = NO;
+            self.statusLine1.hidden = NO;
+            self.statusLine2.hidden = NO;
+            self.statusLine3.hidden = NO;
+            self.segmentedControlCopyEmailSMS.hidden = NO;
         }
     }
     [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];

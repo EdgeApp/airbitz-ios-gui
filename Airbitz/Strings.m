@@ -32,7 +32,7 @@
 #define transactionCellNoTransactionsFoundText      NSLocalizedString(@"No Transactions Found", @"what to display when no transactions are found in search")
 #define fiatText                                    NSLocalizedString(@"Fiat", @"Fiat")
 #define walletHeaderButtonHelpText                  NSLocalizedString(@"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet", @"Popup wallet help test")
-#define walletHasBeenArchivedText                   NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] tab below", @"Popup sessage for when a wallet is archived")
+#define walletHasBeenArchivedText                   NSLocalizedString(@"This wallet has been archived. Please select a different wallet from the [Wallets] screen", @"Popup sessage for when a wallet is archived")
 #define walletsPopupHelpText                        NSLocalizedString(@"Tap and hold a wallet for additional options", nil)
 #define selectWalletTransferPopupHeaderText         NSLocalizedString(@"▼ Choose a wallet to transfer funds to ▼", @"Header of popup in SendView from wallet to wallet transfer")
 #define invalidAddressPopupText                     NSLocalizedString(@"Invalid Bitcoin Address", nil)
@@ -127,3 +127,4 @@
 #define recoveryQuestionsSetWarning                 NSLocalizedString(@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!",nil)
 #define defaultWalletName                           NSLocalizedString(@"My Wallet", @"Default wallet name for new accounts")
 #define errorGettingWalletCount                     NSLocalizedString(@"Error Getting Wallet Count", nil)
+#define generatingQRCode                            NSLocalizedString(@"Generating QR Code...", nil)
