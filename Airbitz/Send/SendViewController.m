@@ -138,7 +138,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [MainViewController fadingAlertDismiss];
+    [FadingAlertView dismiss:FadingAlertDismissNow];
     
     bWalletListDropped = false;
 
@@ -247,6 +247,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self setupNavBar];
 
+    [FadingAlertView dismiss:FadingAlertDismissNow];
+    
     if (_bImportMode)
     {
         self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
@@ -1755,10 +1757,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         [self showSendConfirmationTo:spendTarget];
                         [MainViewController fadingAlertDismiss];
                     }
+                    else
+                    {
+                        [MainViewController fadingAlert:NSLocalizedString(@"Destination wallet not loaded. Please try again in a few seconds.", nil)];
+                    }
                     
                 }
                 
-                if (!wallet || !wallet.loaded)
+                if (!wallet)
                 {
                     if (_bImportMode)
                     {
@@ -1766,13 +1772,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         {
                             [self stopQRReader];
                         }
-                        [MainViewController fadingAlertDismiss];
+                        else
+                        {
+                            [MainViewController fadingAlertDismiss];
+                        }
                     }
                     else
                     {
                         [self trySpend:text];
                     }
                 }
+            }
+            else
+            {
+                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
             }
         });
     });
@@ -1964,7 +1977,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)sweepDoneCallback:(NSNotification *)notification
 {
-    [MainViewController fadingAlertDismiss];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MainViewController fadingAlertDismiss];
+    });
+    
     [self cancelImportExpirationTimer];
 
     NSDictionary *userInfo = [notification userInfo];

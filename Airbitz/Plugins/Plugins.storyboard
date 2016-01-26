@@ -9,6 +9,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -150,6 +151,98 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfl-Y8-5Pt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="113" y="277"/>
+        </scene>
+        <!--Gift Card View Controller-->
+        <scene sceneID="1my-SH-8Ff">
+            <objects>
+                <viewController storyboardIdentifier="GiftCardViewController" id="ZtN-8h-L5B" customClass="GiftCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A6w-Mw-p4W"/>
+                        <viewControllerLayoutGuide type="bottom" id="0R9-XC-awJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="H46-5u-aX8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h0n-CS-eDT">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BuySellCell" id="xXL-AY-fYa" customClass="BuySellCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xXL-AY-fYa" id="ueS-wJ-clz">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pUi-PC-GEu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HwO-gg-3Ah">
+                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="HwO-gg-3Ah" secondAttribute="height" multiplier="1:1" id="uGk-NQ-1lU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plugin Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-oU-BAV" customClass="LatoLabel">
+                                                    <rect key="frame" x="46" y="12" width="232" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-Uo-nGh">
+                                                    <rect key="frame" x="288" y="11" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="22" id="QO3-LM-8nU"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="pUi-PC-GEu" firstAttribute="centerY" secondItem="ueS-wJ-clz" secondAttribute="centerY" id="0qT-6v-Tjc"/>
+                                                <constraint firstItem="fP8-oU-BAV" firstAttribute="leading" secondItem="HwO-gg-3Ah" secondAttribute="trailing" constant="2" id="H7A-kj-sKu"/>
+                                                <constraint firstItem="1tr-Uo-nGh" firstAttribute="leading" secondItem="fP8-oU-BAV" secondAttribute="trailing" constant="10" id="P2r-iz-sTt"/>
+                                                <constraint firstAttribute="trailing" secondItem="1tr-Uo-nGh" secondAttribute="trailing" constant="10" id="Tp9-EC-GeQ"/>
+                                                <constraint firstItem="HwO-gg-3Ah" firstAttribute="top" secondItem="ueS-wJ-clz" secondAttribute="top" id="XHo-MB-dsA"/>
+                                                <constraint firstAttribute="trailing" secondItem="pUi-PC-GEu" secondAttribute="trailing" id="Zyb-VL-3XE"/>
+                                                <constraint firstItem="pUi-PC-GEu" firstAttribute="top" secondItem="ueS-wJ-clz" secondAttribute="top" id="gmb-Fd-mvL"/>
+                                                <constraint firstItem="1tr-Uo-nGh" firstAttribute="centerY" secondItem="ueS-wJ-clz" secondAttribute="centerY" id="lcP-2h-PEY"/>
+                                                <constraint firstItem="fP8-oU-BAV" firstAttribute="centerY" secondItem="ueS-wJ-clz" secondAttribute="centerY" id="msE-W5-NcX"/>
+                                                <constraint firstAttribute="bottom" secondItem="HwO-gg-3Ah" secondAttribute="bottom" id="q5b-DW-9pD"/>
+                                                <constraint firstItem="HwO-gg-3Ah" firstAttribute="leading" secondItem="ueS-wJ-clz" secondAttribute="leading" id="qNR-cu-QFy"/>
+                                                <constraint firstItem="pUi-PC-GEu" firstAttribute="leading" secondItem="ueS-wJ-clz" secondAttribute="leading" id="xsI-Qc-WO9"/>
+                                                <constraint firstAttribute="bottom" secondItem="pUi-PC-GEu" secondAttribute="bottom" id="yf1-Wt-FsV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="1tr-Uo-nGh" id="rHf-6I-xJ5"/>
+                                            <outlet property="bkgImage" destination="pUi-PC-GEu" id="CfT-WS-CIt"/>
+                                            <outlet property="buySellImage" destination="HwO-gg-3Ah" id="dzX-8J-PO7"/>
+                                            <outlet property="text" destination="fP8-oU-BAV" id="a2E-6E-aOh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="h0n-CS-eDT" secondAttribute="trailing" id="Uw1-AF-Qas"/>
+                            <constraint firstItem="h0n-CS-eDT" firstAttribute="leading" secondItem="H46-5u-aX8" secondAttribute="leading" id="gWf-y7-J1V"/>
+                            <constraint firstItem="h0n-CS-eDT" firstAttribute="top" secondItem="A6w-Mw-p4W" secondAttribute="bottom" constant="44" id="q4G-xA-w2u"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="h0n-CS-eDT" secondAttribute="bottom" id="v99-Wa-YOu"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="pluginTable" destination="h0n-CS-eDT" id="mtZ-Q0-0V7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z93-mN-sGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-242" y="278"/>
         </scene>
     </scenes>
     <resources>

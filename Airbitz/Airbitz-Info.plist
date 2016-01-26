@@ -68,6 +68,16 @@
 				<string>bitid</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.airbitz.airbitz</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>hbits</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>99999999-99</string>

@@ -2284,7 +2284,7 @@ static BOOL bOtpError = NO;
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
-            [FadingAlertView dismiss:NO];
+            [FadingAlertView dismiss:FadingAlertDismissGradual];
         });
         [CoreBridge startWatchers];
 
@@ -2754,6 +2754,20 @@ static BOOL bOtpError = NO;
     }
 }
 
++ (BOOL)accountExistsLocal:(NSString *)username;
+{
+    if (username == nil) {
+        return NO;
+    }
+    tABC_Error error;
+    bool result;
+    ABC_AccountSyncExists([username UTF8String],
+                          &result,
+                          &error);
+    return (BOOL)result;
+}
+
+
 
 + (void)uploadLogs:(NSString *)userText notify:(void(^)(void))cb error:(void(^)(void))cberror;
 {
@@ -2780,6 +2794,13 @@ static BOOL bOtpError = NO;
             }
         });
     }];
+}
+
++ (tABC_CC)accountDeleteLocal:(NSString *)account;
+{
+    tABC_Error error;
+    ABC_AccountDelete((const char*)[account UTF8String], &error);
+    return error.code;
 }
 
 + (void)walletRemove:(NSString *)uuid notify:(void(^)(void))cb error:(void(^)(void))cberror;
