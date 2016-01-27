@@ -1270,6 +1270,8 @@ MainViewController *singleton;
     if (bAuthenticated) {
         [MainViewController fadingAlert:greatJobRememberingPasswordText];
     } else {
+        [FadingAlertView dismiss:FadingAlertDismissFast];
+
         _passwordIncorrectAlert = [[UIAlertView alloc]
                 initWithTitle:incorrectPasswordText
                       message:incorrectPasswordTryAgainText
