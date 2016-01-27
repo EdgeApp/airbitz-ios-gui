@@ -3,7 +3,6 @@
 #import "Wallet.h"
 #import "Transaction.h"
 #import "TxOutput.h"
-#import "ABC.h"
 #import "Config.h"
 #import "User.h"
 #import "Util.h"
@@ -242,7 +241,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)startQueues
 {
-    if ([User isLoggedIn])
+    if ([self isLoggedIn])
     {
         // Initialize the exchange rates queue
         exchangeTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
@@ -2928,6 +2927,52 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
 }
 
+- (ABCConditionCode)changePIN:(NSString *)pin;
+{
+    tABC_Error error;
+    if (!pin)
+    {
+        error.code = (tABC_CC) ABCConditionCodeNULLPtr;
+        return [self setLastErrors:error];
+    }
+    const char * passwd = [self.password length] > 0 ? [self.password UTF8String] : nil;
+    
+    ABC_SetPIN([self.name UTF8String], passwd, [pin UTF8String], &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        ABC_PinSetup([self.name UTF8String],
+                     passwd,
+                     &error);
+        ccode = [self setLastErrors:error];
+    }
+    return ccode;
+}
+
+- (ABCConditionCode)changePIN:(NSString *)pin
+                     complete:(void (^)(void)) completionHandler
+                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        ABCConditionCode ccode = [self changePIN:pin];
+        NSString *errorString = [self getLastErrorString];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler();
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    });
+    return ABCConditionCodeOk;
+    
+}
+
+
 - (ABCConditionCode) createWallet:(NSString *)walletName currencyNum:(int) currencyNum;
 {
     [self clearSyncQueue];
@@ -3115,6 +3160,118 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
             }
         });
     });
+    return ABCConditionCodeOk;
+}
+
+- (ABCConditionCode)changePasswordWithRecoveryAnswers:(NSString *)username
+                                      recoveryAnswers:(NSString *)answers
+                                          newPassword:(NSString *)password;
+{
+//    const char *ignore = "ignore";
+    tABC_Error error;
+    
+    if (!username || !answers || !password)
+    {
+        error.code = ABC_CC_BadPassword;
+        return [self setLastErrors:error];
+    }
+    [self stopWatchers];
+    [self stopQueues];
+    
+    
+    // NOTE: userNameTextField is repurposed for current password
+    ABC_ChangePasswordWithRecoveryAnswers([username UTF8String], [answers UTF8String], [password UTF8String], &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    
+    if (ABCConditionCodeOk == ccode)
+    {
+        [self setupLoginPIN];
+    }
+    
+    [self startWatchers];
+    [self startQueues];
+    
+    return ccode;
+}
+
+- (ABCConditionCode)changePasswordWithRecoveryAnswers:(NSString *)username
+                                      recoveryAnswers:(NSString *)answers
+                                          newPassword:(NSString *)password
+                         complete:(void (^)(void)) completionHandler
+                            error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    [self postToDataQueue:^(void)
+     {
+         ABCConditionCode ccode = [self changePasswordWithRecoveryAnswers:username
+                                                          recoveryAnswers:answers
+                                                              newPassword:password];
+         NSString *errorString = [self getLastErrorString];
+         dispatch_async(dispatch_get_main_queue(), ^(void)
+                        {
+                            if (ABCConditionCodeOk == ccode)
+                            {
+                                if (completionHandler) completionHandler();
+                            }
+                            else
+                            {
+                                if (errorHandler) errorHandler(ccode, errorString);
+                            }
+                        });
+         
+     }];
+    return ABCConditionCodeOk;
+}
+
+
+- (ABCConditionCode)changePassword:(NSString *)password;
+{
+    //    const char *ignore = "ignore";
+    tABC_Error error;
+    
+    if (!password)
+    {
+        error.code = ABC_CC_BadPassword;
+        return [self setLastErrors:error];
+    }
+    [self stopWatchers];
+    [self stopQueues];
+    
+    
+    ABC_ChangePassword([self.name UTF8String], [@"ignore" UTF8String], [password UTF8String], &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    
+    if (ABCConditionCodeOk == ccode)
+    {
+        [self setupLoginPIN];
+    }
+    
+    [self startWatchers];
+    [self startQueues];
+    
+    return ccode;
+}
+
+- (ABCConditionCode)changePassword:(NSString *)password
+                          complete:(void (^)(void)) completionHandler
+                             error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    [self postToDataQueue:^(void)
+     {
+         ABCConditionCode ccode = [self changePassword:password];
+         NSString *errorString = [self getLastErrorString];
+         dispatch_async(dispatch_get_main_queue(), ^(void)
+                        {
+                            if (ABCConditionCodeOk == ccode)
+                            {
+                                if (completionHandler) completionHandler();
+                            }
+                            else
+                            {
+                                if (errorHandler) errorHandler(ccode, errorString);
+                            }
+                        });
+         
+     }];
     return ABCConditionCodeOk;
 }
 
@@ -3571,6 +3728,10 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }
 }
 
+- (BOOL) isLoggedIn
+{
+    return !(nil == self.name);
+}
 
 // replaces the string in the given variable with a duplicate of another
 - (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue

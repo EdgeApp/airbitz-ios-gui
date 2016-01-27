@@ -7,7 +7,6 @@
 //
 
 #import "SignUpViewController.h"
-#import "ABC.h"
 #import "PasswordVerifyView.h"
 #import "MinCharTextField.h"
 #import "User.h"
@@ -159,84 +158,55 @@
             // check the username and pin field
             if ([self fieldsAreValid] == YES)
             {
-                if (_mode == SignUpMode_ChangePassword)
+                if (_mode == SignUpMode_ChangePassword ||
+                    _mode == SignUpMode_ChangePasswordNoVerify)
                 {
-                    // get their old pen
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
-                    [[AppDelegate abc] postToDataQueue:^(void)
+                    // NOTE: userNameTextField is repurposed for current password
+                    [[AppDelegate abc] changePassword:self.passwordTextField.text complete:^
                     {
-                        tABC_Error error;
-                        [[AppDelegate abc] stopWatchers];
-                        [[AppDelegate abc] stopQueues];
-
-                        // NOTE: userNameTextField is repurposed for current password
-                        ABC_ChangePassword([[AppDelegate abc].name UTF8String], [self.userNameTextField.text UTF8String],
-                                [self.passwordTextField.text UTF8String], &error);
-                        [[AppDelegate abc] setupLoginPIN];
-
-                        _bSuccess = error.code == ABC_CC_Ok;
-                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
-                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
-                    }];
-                }
-                else if (_mode == SignUpMode_ChangePasswordNoVerify)
-                {
-                    // change password without old password
-                    // get their old pen
-                    [self blockUser:YES];
-                    // We post this to the Data Sync queue, so password is updated in between sync's
-                    [[AppDelegate abc] postToDataQueue:^(void)
+                        [self changePasswordComplete:YES errorMessage:nil];
+                    } error:^(ABCConditionCode ccode, NSString *errorString)
                     {
-                        tABC_Error error;
-                        [[AppDelegate abc] stopWatchers];
-                        [[AppDelegate abc] stopQueues];
-
-                        const char *ignore = "ignore";
-
-                        // NOTE: userNameTextField is repurposed for current password
-                        ABC_ChangePassword([[AppDelegate abc].name UTF8String], ignore,
-                                [self.passwordTextField.text UTF8String], &error);
-                        [[AppDelegate abc] setupLoginPIN];
-
-                        _bSuccess = error.code == ABC_CC_Ok;
-                        _strReason = [NSString stringWithFormat:@"%@", [Util errorMap:&error]];
-                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
+                        [self changePasswordComplete:NO errorMessage:errorString];
                     }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    [[AppDelegate abc] postToMiscQueue:^{
-                        tABC_Error error;
-                        ABC_ChangePasswordWithRecoveryAnswers([self.strUserName UTF8String],
-                            [self.strAnswers UTF8String], [self.passwordTextField.text UTF8String], &error);
-                        _bSuccess = error.code == ABC_CC_Ok;
-                        _strReason = [Util errorMap:&error];
-                        [self performSelectorOnMainThread:@selector(changePasswordComplete) withObject:nil waitUntilDone:FALSE];
-                    }];
+                    [[AppDelegate abc] changePasswordWithRecoveryAnswers:self.strUserName recoveryAnswers:self.strAnswers newPassword:self.passwordTextField.text complete:^
+                     {
+                         [self changePasswordComplete:YES errorMessage:nil];
+                     } error:^(ABCConditionCode ccode, NSString *errorString)
+                     {
+                         [self changePasswordComplete:NO errorMessage:errorString];
+                     }];
                 }
                 else
                 {
-                    tABC_Error error;
-                    ABC_SetPIN([[AppDelegate abc].name UTF8String], [self.userNameTextField.text UTF8String],
-                        [self.pinTextField.text UTF8String], &error);
-                    if (ABC_CC_Ok == error.code)
-                    {
-                        // no callback on this one so tell them it was a success
-                        UIAlertView *alert = [[UIAlertView alloc]
-                                                initWithTitle:NSLocalizedString(@"PIN successfully changed.", @"")
-                                                message:nil
-                                                delegate:self
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-                        [alert show];
-
-                        // all other modes must wait for callback before PIN login setup
-                        [[AppDelegate abc] postToMiscQueue:^{
-                            [[AppDelegate abc] setupLoginPIN];
-                        }];
-                    }
+                    [self blockUser:YES];
+                    [[AppDelegate abc] changePIN:self.pinTextField.text complete:^
+                     {
+                         // no callback on this one so tell them it was a success
+                         UIAlertView *alert = [[UIAlertView alloc]
+                                               initWithTitle:NSLocalizedString(@"PIN successfully changed.", @"")
+                                               message:nil
+                                               delegate:self
+                                               cancelButtonTitle:okButtonText
+                                               otherButtonTitles:nil];
+                         [alert show];
+                     } error:^(ABCConditionCode ccode, NSString *errorString)
+                     {
+                         // no callback on this one so tell them it was a success
+                         UIAlertView *alert = [[UIAlertView alloc]
+                                               initWithTitle:NSLocalizedString(@"Error Changing PIN", @"")
+                                               message:errorString
+                                               delegate:self
+                                               cancelButtonTitle:okButtonText
+                                               otherButtonTitles:nil];
+                         [alert show];
+                     }];
                 }
             }
         }
@@ -712,19 +682,18 @@
 
 #pragma mark - ABC Callbacks
 
-- (void)changePasswordComplete
+- (void)changePasswordComplete:(BOOL)success errorMessage:(NSString *)errorMessage;
 {
     [self blockUser:NO];
 
     UIAlertView *alert;
-    if (_bSuccess)
+    if (success)
     {
         // set up the user password to the new one
         NSString *username = [AppDelegate abc].name;
         if (self.strUserName) {
             username = self.strUserName;
         }
-        [[AppDelegate abc] stopWatchers];
         [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
@@ -752,12 +721,10 @@
     {
         alert = [[UIAlertView alloc]
                  initWithTitle:self.title
-                 message:[NSString stringWithFormat:@"Password change failed:\n%@", _strReason]
+                 message:[NSString stringWithFormat:@"Password change failed:\n%@", errorMessage]
                  delegate:nil
-                 cancelButtonTitle:@"OK"
+                 cancelButtonTitle:okButtonText
                  otherButtonTitles:nil];
-        [[AppDelegate abc] startWatchers];
-        [[AppDelegate abc] startQueues];
     }
 
     [alert show];

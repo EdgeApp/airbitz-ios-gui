@@ -221,7 +221,7 @@
                      error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
- * signInWithPINAsync
+ * signInWithPIN
  * @param NSString* username: username to login
  * @param NSString* pin: user's 4 digit PIN
  *
@@ -236,6 +236,62 @@
 - (ABCConditionCode)signInWithPIN:(NSString *)username pin:(NSString *)pin
                             complete:(void (^)(void)) completionHandler
                                error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
+/*
+ * changePassword
+ * @param NSString* password: new password for currently logged in user
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)changePassword:(NSString *)password;
+- (ABCConditionCode)changePassword:(NSString *)password
+                          complete:(void (^)(void)) completionHandler
+                             error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * changePasswordWithRecoveryAnswers
+ * @param NSString*        username: username whose password to change
+ * @param NSString* recoveryAnswers: recovery answers delimited by '\n'
+ * @param NSString*     newPassword: new password
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)changePasswordWithRecoveryAnswers:(NSString *)username
+                                      recoveryAnswers:(NSString *)answers
+                                          newPassword:(NSString *)password;
+- (ABCConditionCode)changePasswordWithRecoveryAnswers:(NSString *)username
+                                      recoveryAnswers:(NSString *)answers
+                                          newPassword:(NSString *)password
+                                             complete:(void (^)(void)) completionHandler
+                                                error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/*
+ * changePIN
+ * @param NSString* pin: new pin for currently logged in user
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)changePIN:(NSString *)pin;
+- (ABCConditionCode)changePIN:(NSString *)pin
+                     complete:(void (^)(void)) completionHandler
+                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
 
 /*
  * uploadLogs
