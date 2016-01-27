@@ -7,7 +7,6 @@
 //
 
 #import "WalletMakerView.h"
-#import "ABC.h"
 #import "User.h"
 #import "CommonTypes.h"
 #import "OfflineWalletViewController.h"

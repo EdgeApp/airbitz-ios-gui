@@ -8,7 +8,6 @@
 
 #import "OfflineWalletViewController.h"
 #import "CommonTypes.h"
-#import "ABC.h"
 #import "Config.h"
 #import "Util.h"
 

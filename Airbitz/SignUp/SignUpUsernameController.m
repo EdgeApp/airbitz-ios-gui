@@ -6,7 +6,6 @@
 #import "SignUpUsernameController.h"
 #import "MinCharTextField.h"
 #import "LatoLabel.h"
-#import "ABC.h"
 #import "Util.h"
 #import "User.h"
 

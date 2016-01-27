@@ -7,7 +7,6 @@
 //
 
 #import "PasswordVerifyView.h"
-#import "ABC.h"
 #import "Util.h"
 
 @interface PasswordVerifyView ()

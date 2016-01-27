@@ -12,6 +12,7 @@
 #import "Theme.h"
 #import "User.h"
 #import "LocalSettings.h"
+#import "AppDelegate.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
 @implementation Keychain
