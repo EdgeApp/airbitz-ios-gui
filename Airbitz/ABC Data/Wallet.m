@@ -7,7 +7,6 @@
 //
 
 #import "Wallet.h"
-#import "ABC.h"
 
 @interface Wallet ()
 
