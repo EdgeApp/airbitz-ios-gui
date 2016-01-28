@@ -308,12 +308,12 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" id="I1t-ii-re1" userLabel="divider1">
+                        <view contentMode="scaleToFill" id="I1t-ii-re1" userLabel="divider2">
                             <rect key="frame" x="0.0" y="100" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" id="rb4-q3-fT7" userLabel="divider1">
+                        <view contentMode="scaleToFill" id="rb4-q3-fT7" userLabel="divider3">
                             <rect key="frame" x="0.0" y="150" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -346,8 +346,8 @@
                 <outlet property="accountPicker" destination="8L6-iO-nWG" id="mrV-4C-C8t"/>
                 <outlet property="accountText" destination="vsf-Ms-1Ff" id="EjR-p2-q8x"/>
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
-                <outlet property="buySellDivider" destination="I1t-ii-re1" id="mtc-ld-1GY"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
+                <outlet property="dividerView3" destination="rb4-q3-fT7" id="0LY-BK-ewa"/>
                 <outlet property="giftCardButton" destination="Zu4-Fd-NGP" id="2Qj-IR-oIT"/>
                 <outlet property="giftCardTextLabel" destination="bQy-8e-q5h" id="f4L-tB-flJ"/>
                 <outlet property="importGiftCardButton" destination="Lwy-1d-Qgs" id="rz3-xo-Vmf"/>

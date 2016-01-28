@@ -317,7 +317,7 @@
 		DA10BCD51BFF9E330086AD8B /* darken_bottom_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF421BC61F910063DA07 /* darken_bottom_table_cell.png */; };
 		DA10BCD61BFF9E330086AD8B /* glidera.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFED1BC61F920063DA07 /* glidera.html */; };
 		DA10BCD71BFF9E330086AD8B /* gift_box.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4E1BC61F910063DA07 /* gift_box.png */; };
-		DA10BCD81BFF9E330086AD8B /* gift_box@full.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF521BC61F910063DA07 /* gift_box@full.png */; };
+		DA10BCD81BFF9E330086AD8B /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DA10BCD91BFF9E330086AD8B /* icon_category_coffee_tea.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF671BC61F910063DA07 /* icon_category_coffee_tea.png */; };
 		DA10BCDA1BFF9E330086AD8B /* icon_account_secure@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5B1BC61F910063DA07 /* icon_account_secure@3x.png */; };
 		DA10BCDB1BFF9E330086AD8B /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF471BC61F910063DA07 /* emboss_down@2x.png */; };
@@ -514,6 +514,14 @@
 		DA5D69711C24E3AA0090D5FA /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
 		DA5D69721C24E3AA0090D5FA /* plugin_icon_target@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */; };
 		DA5D69731C24E3AA0090D5FA /* plugin_icon_usd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA01231C111950008702AB /* plugin_icon_usd@2x.png */; };
+		DA60FCEE1C5A8E0400AE4E6D /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		DA60FCF31C5A953A00AE4E6D /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		DA60FCF41C5A957E00AE4E6D /* eyeball.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102051C4A71EA00603D62 /* eyeball.png */; };
+		DA60FCF51C5A957E00AE4E6D /* eyeball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102061C4A71EA00603D62 /* eyeball@2x.png */; };
+		DA60FCF61C5A957E00AE4E6D /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
+		DA60FCF71C5A958A00AE4E6D /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
+		DA60FCF81C5A958A00AE4E6D /* icon_import@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F01C4964AD00603D62 /* icon_import@2x.png */; };
+		DA60FCF91C5A958A00AE4E6D /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA9101F21C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F31C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
@@ -4356,13 +4364,16 @@
 				DA10BCA91BFF9E330086AD8B /* icon_category_atm.png in Resources */,
 				DA10BCAA1BFF9E330086AD8B /* icon_transactions@3x.png in Resources */,
 				DA10BCAB1BFF9E330086AD8B /* icon_category_shopping@3x.png in Resources */,
+				DA60FCF71C5A958A00AE4E6D /* icon_import.png in Resources */,
 				DA10BCAC1BFF9E330086AD8B /* icon_directory@3x.png in Resources */,
+				DA60FCF41C5A957E00AE4E6D /* eyeball.png in Resources */,
 				DA10BCAD1BFF9E330086AD8B /* infoExportWalletOptions.html in Resources */,
 				DA10BCAE1BFF9E330086AD8B /* BitcoinReceived.mp3 in Resources */,
 				DA10BCAF1BFF9E330086AD8B /* icon_wallet@2x.png in Resources */,
 				DA10BCB01BFF9E330086AD8B /* icon_export_sdcard@2x.png in Resources */,
 				DA10BCB11BFF9E330086AD8B /* btn_slide_to_confirm@2x.png in Resources */,
 				DA10BDCD1C0014690086AD8B /* Rack Wallet.entitlements in Resources */,
+				DA60FCF81C5A958A00AE4E6D /* icon_import@2x.png in Resources */,
 				DA10BCB21BFF9E330086AD8B /* divider.png in Resources */,
 				DA10BCB31BFF9E330086AD8B /* bd_icon_clock@2x.png in Resources */,
 				DA10BCB41BFF9E330086AD8B /* PasswordVerifyView.xib in Resources */,
@@ -4403,8 +4414,9 @@
 				DA10BCD51BFF9E330086AD8B /* darken_bottom_table_cell.png in Resources */,
 				DA10BCD61BFF9E330086AD8B /* glidera.html in Resources */,
 				DA10BCD71BFF9E330086AD8B /* gift_box.png in Resources */,
-				DA10BCD81BFF9E330086AD8B /* gift_box@full.png in Resources */,
+				DA10BCD81BFF9E330086AD8B /* (null) in Resources */,
 				DA10BCD91BFF9E330086AD8B /* icon_category_coffee_tea.png in Resources */,
+				DA60FCF51C5A957E00AE4E6D /* eyeball@2x.png in Resources */,
 				DA10BCDA1BFF9E330086AD8B /* icon_account_secure@3x.png in Resources */,
 				DA10BCDB1BFF9E330086AD8B /* emboss_down@2x.png in Resources */,
 				DA10BCDC1BFF9E330086AD8B /* FadingAlertDropDownView.xib in Resources */,
@@ -4520,6 +4532,7 @@
 				DA10BD481BFF9E330086AD8B /* WalletExportQuicken.QIF in Resources */,
 				DA10BD491BFF9E330086AD8B /* (null) in Resources */,
 				DA10BD4A1BFF9E330086AD8B /* FadingAlertViewNew.xib in Resources */,
+				DA60FCF91C5A958A00AE4E6D /* icon_import@3x.png in Resources */,
 				DA5D69701C24E3AA0090D5FA /* plugin_icon_coffee@2x.png in Resources */,
 				DA10BD4B1BFF9E330086AD8B /* BitcoinSent.mp3 in Resources */,
 				DA10BD4C1BFF9E330086AD8B /* QR-bracket.png in Resources */,
@@ -4536,6 +4549,7 @@
 				DA10BD571BFF9E330086AD8B /* h_seperator@2x.png in Resources */,
 				DA10BD581BFF9E330086AD8B /* icon_send.png in Resources */,
 				DA10BD591BFF9E330086AD8B /* flash-on@2x.png in Resources */,
+				DA60FCF61C5A957E00AE4E6D /* eyeball@3x.png in Resources */,
 				DA10BD5A1BFF9E330086AD8B /* btn_collapse_expand@2x.png in Resources */,
 				DA10BD5B1BFF9E330086AD8B /* icon_send_padded@2x.png in Resources */,
 				DA10BD5C1BFF9E330086AD8B /* bd_icon_yelp@2x.png in Resources */,
@@ -5607,6 +5621,7 @@
 				DA10BBD11BFF9E330086AD8B /* BalanceView.m in Sources */,
 				DA10BBD21BFF9E330086AD8B /* SendConfirmationViewController.m in Sources */,
 				DA10BBD31BFF9E330086AD8B /* ExportWalletViewController.m in Sources */,
+				DA60FCEE1C5A8E0400AE4E6D /* GiftCardViewController.m in Sources */,
 				DA10BBD41BFF9E330086AD8B /* CDataScanner_Extensions.m in Sources */,
 				DA10BBD51BFF9E330086AD8B /* BuySellCell.m in Sources */,
 				DA10BBD61BFF9E330086AD8B /* SpendingLimitsViewController.m in Sources */,
@@ -5669,6 +5684,7 @@
 				DA10BC101BFF9E330086AD8B /* BuySellViewController.m in Sources */,
 				DA10BC111BFF9E330086AD8B /* CoreBridge.m in Sources */,
 				DA10BC121BFF9E330086AD8B /* (null) in Sources */,
+				DA60FCF31C5A953A00AE4E6D /* SignUpPINController.m in Sources */,
 				DA10BC131BFF9E330086AD8B /* StylizedTextField.m in Sources */,
 				DA10BC141BFF9E330086AD8B /* categoryCell.m in Sources */,
 				DA10BC151BFF9E330086AD8B /* FlashSelectView.m in Sources */,
