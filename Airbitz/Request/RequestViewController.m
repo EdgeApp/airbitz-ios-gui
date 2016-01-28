@@ -831,9 +831,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 	_details.amountFeesAirbitzSatoshi = 0;
 	_details.amountFeesMinersSatoshi = 0;
 	
-	result = ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                                   _details.amountSatoshi, &currency, currencyNum, &error);
-	if (result == ABC_CC_Ok)
+    if ([[AppDelegate abc] satoshiToCurrency:_details.amountSatoshi currencyNum:currencyNum currency:&currency] == ABCConditionCodeOk)
 	{
 		_details.amountCurrency = currency;
 	}
@@ -1009,8 +1007,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                    satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+            if ([[AppDelegate abc] satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
                 self.USD_TextField.text = [[AppDelegate abc] formatCurrency:currency
                                                      withCurrencyNum:wallet.currencyNum
                                                           withSymbol:false];
@@ -1030,8 +1027,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                    currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+            ABCConditionCode ccode;
+            ccode = [[AppDelegate abc] currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi];
+            if (ABCConditionCodeOk == ccode)
             {
                 self.BTC_TextField.text = [[AppDelegate abc] formatSatoshi:satoshi
                                                          withSymbol:false
@@ -1193,8 +1191,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
             tABC_Error error;
             double currency;
-            if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                    amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+            if ([[AppDelegate abc] satoshiToCurrency:amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             {
                 NSString *fiatAmount = [[AppDelegate abc] currencySymbolLookup:wallet.currencyNum];
                 NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
@@ -1627,8 +1624,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     double currency;
     tABC_Error error;
-	if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-            txDetails.amountSatoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+    if ([[AppDelegate abc] satoshiToCurrency:txDetails.amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
 	{
 		txDetails.amountCurrency = currency;
 	}

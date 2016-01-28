@@ -737,15 +737,13 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
             
-    tABC_Error error;
     double currency;
-    ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],
-                          [[AppDelegate abc].password UTF8String],
-                          [[args objectForKey:@"satoshi"] longValue],
-                          &currency,
-                          [[args objectForKey:@"currencyNum"] intValue],
-                          &error);
-    if (error.code == ABC_CC_Ok) {
+    ABCConditionCode ccode;
+    
+    ccode = [[AppDelegate abc] satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
+                                     currencyNum:[[args objectForKey:@"currencyNum"] intValue]
+                                        currency:&currency];
+    if (ABCConditionCodeOk == ccode) {
         [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithDouble:currency]]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -757,14 +755,12 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    tABC_Error error;
     int64_t satoshis;
-    ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String],
-                          [[AppDelegate abc].password UTF8String],
-                          [[args objectForKey:@"currency"] doubleValue],
-                          [[args objectForKey:@"currencyNum"] intValue],
-                          &satoshis, &error);
-    if (error.code == ABC_CC_Ok) {
+    ABCConditionCode ccode;
+    ccode = [[AppDelegate abc] currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
+                                     currencyNum:[[args objectForKey:@"currencyNum"] intValue]
+                                         satoshi:&satoshis];
+    if (ABCConditionCodeOk == ccode) {
         [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLongLong:satoshis]]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];

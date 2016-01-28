@@ -616,8 +616,7 @@
     if (_selectedTextField == self.amountBTCTextField)
     {
         _spendTarget.amount = [[AppDelegate abc] denominationToSatoshi: self.amountBTCTextField.text];
-        if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                                  _spendTarget.amount, &currency, _currencyNum, &error) == ABC_CC_Ok)
+        if ([[AppDelegate abc] satoshiToCurrency:_spendTarget.amount currencyNum:_currencyNum currency:&currency] == ABCConditionCodeOk)
         {
             self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
@@ -625,8 +624,8 @@
     else if (_selectedTextField == self.amountFiatTextField && [self.spendTarget isMutable])
     {
         currency = [self.amountFiatTextField.text doubleValue];
-        if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                                  currency, _currencyNum, &satoshi, &error) == ABC_CC_Ok)
+        ABCConditionCode ccode = [[AppDelegate abc] currencyToSatoshi:currency currencyNum:_currencyNum satoshi:&satoshi];
+        if (ABCConditionCodeOk == ccode)
         {
             _spendTarget.amount = satoshi;
             self.amountBTCTextField.text = [[AppDelegate abc] formatSatoshi:satoshi

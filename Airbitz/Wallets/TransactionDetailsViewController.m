@@ -327,10 +327,7 @@ typedef enum eRequestType
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            tABC_Error error;
-            ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],
-                                  [[AppDelegate abc].password UTF8String],
-                                  self.transaction.amountSatoshi, &currency, _wallet.currencyNum, &error);
+            if ([[AppDelegate abc] satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else

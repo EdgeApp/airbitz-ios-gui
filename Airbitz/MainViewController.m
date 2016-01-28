@@ -1403,13 +1403,13 @@ MainViewController *singleton;
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
-    if (ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                              satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
+    
+    if ([[AppDelegate abc] satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
         fiat = [[AppDelegate abc] formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
-    if (ABC_CurrencyToSatoshi([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
+    
+    if ([[AppDelegate abc] currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi] == ABCConditionCodeOk)
         coin = [[AppDelegate abc] formatSatoshi:satoshi withSymbol:false cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
 
 

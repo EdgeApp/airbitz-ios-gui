@@ -3617,6 +3617,17 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return [self setLastErrors:error];
 }
 
+- (ABCConditionCode) currencyToSatoshi:(double)currency
+                           currencyNum:(int)currencyNum
+                               satoshi:(int64_t *)pSatoshi;
+{
+    tABC_Error error;
+    ABC_CurrencyToSatoshi([self.name UTF8String], [self.password UTF8String], currency, currencyNum, pSatoshi, &error);
+    return [self setLastErrors:error];
+}
+
+
+
 - (ABCConditionCode) getLastConditionCode;
 {
     return lastConditionCode;

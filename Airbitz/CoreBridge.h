@@ -499,6 +499,17 @@
                               currency:(double *)pCurrency;
 
 /*
+ * currencyToSatoshi
+ *      Convert fiat amount to a satoshi amount
+ * @param double      currency: amount to convert in satoshis
+ * @param int      currencyNum: ISO currency number of fiat currency to convert from
+ * @param uint_64t   *pSatoshi: pointer to resulting value
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode) currencyToSatoshi:(double)currency
+                           currencyNum:(int)currencyNum
+                               satoshi:(int64_t *)pSatoshi;
+/*
  * errorMap
  * @param  ABCConditionCode: error code to look up
  * @return NSString*       : text description of error

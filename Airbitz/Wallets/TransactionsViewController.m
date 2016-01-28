@@ -427,10 +427,8 @@
     _balanceView.topAmount.text = [[AppDelegate abc] formatSatoshi: totalSatoshi];
 
     double currency;
-    tABC_Error error;
 
-    ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-                          totalSatoshi, &currency, [AppDelegate abc].currentWallet.currencyNum, &error);
+    [[AppDelegate abc] satoshiToCurrency:totalSatoshi currencyNum:[AppDelegate abc].currentWallet.currencyNum currency:&currency];
     _balanceView.botAmount.text = [[AppDelegate abc] formatCurrency:currency
                                              withCurrencyNum:[AppDelegate abc].currentWallet.currencyNum];
     _balanceView.topDenomination.text = [AppDelegate abc].settings.denominationLabel;
@@ -515,9 +513,7 @@
     if (bFiat)
     {
         double currency;
-        tABC_Error error;
-        ABC_SatoshiToCurrency([[AppDelegate abc].name UTF8String],[[AppDelegate abc].password UTF8String],
-                              satoshi, &currency, currencyNum, &error);
+        [[AppDelegate abc] satoshiToCurrency:satoshi currencyNum:currencyNum currency:&currency];
         return [[AppDelegate abc] formatCurrency:currency
                           withCurrencyNum:currencyNum];
     }
