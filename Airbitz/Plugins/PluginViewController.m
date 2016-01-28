@@ -5,7 +5,6 @@
 
 #import "PluginViewController.h"
 #import "ButtonSelectorView2.h"
-#import "ABC.h"
 #import "Config.h"
 #import "User.h"
 #import "FadingAlertView.h"
@@ -461,7 +460,6 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendCbid = cbid;
     _sendWallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
-    tABC_Error error;
     SpendTarget *pSpend;
     ABCConditionCode ccode = 
             [[AppDelegate abc] newSpendInternal:[args objectForKey:@"toAddress"]
@@ -504,10 +502,6 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    tABC_Error error;
-
-//    ABCConditionCodeOk == [_spendTarget broadcastTx:[args objectForKey:@"rawTx"] error:&error]) {
-
     
     if (_spendTarget != nil &&
         (ABCConditionCodeOk == [_spendTarget broadcastTx:[args objectForKey:@"rawTx"]])) {
@@ -521,7 +515,6 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    tABC_Error error;
 
     if (_spendTarget != nil) {
         NSString *txid;

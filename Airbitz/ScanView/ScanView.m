@@ -1,7 +1,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import "ScanView.h"
-#import "ABC.h"
 #import "FlashSelectView.h"
 #import "Util.h"
 #import "CommonTypes.h"

@@ -7,7 +7,6 @@
 //
 
 #import "SendConfirmationViewController.h"
-#import "ABC.h"
 #import "InfoView.h"
 #import "ConfirmationSliderView.h"
 #import "User.h"
@@ -611,7 +610,6 @@
 {
     double currency;
     int64_t satoshi;
-    tABC_Error error;
 
     if (_selectedTextField == self.amountBTCTextField)
     {
