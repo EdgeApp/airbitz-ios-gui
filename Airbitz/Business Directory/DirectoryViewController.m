@@ -253,9 +253,9 @@ static bool bInitialized = false;
     pt.x = 0.0;
     pt.y = -[MainViewController getHeaderHeight] + searchBarHeight;
     [self.tableView setContentOffset:pt animated:true];
-#ifndef LOCKED_SEARCH_CATEGORY
-    _locationSearchViewHeight.constant = 0;
-#endif
+     if (!LOCKED_SEARCH_CATEGORY)
+         _locationSearchViewHeight.constant = 0;
+
 }
 
 - (BOOL)gestureRecognizer: (UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer
@@ -292,22 +292,26 @@ static bool bInitialized = false;
     //ABLog(2,@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
 
-#ifdef LOCKED_SEARCH_CATEGORY
-    self.categoryButtonsView.hidden = YES;
-    self.categoryViewHeight.constant = 0;
-    _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
-    self.searchBarSearchHeight.constant = 0;
-    self.searchBarSearch.text = LOCKED_SEARCH_CATEGORY;
-    self.searchBarPrimary = self.searchBarLocation;
-    searchBarHeight = self.searchBarLocation.frame.size.height;
-    fullSearchBarHeight = (EXTRA_SEARCH_BAR_HEIGHT);
-    CGFloat height = 0 - [MainViewController getHeaderHeight];
-#else
-    self.searchBarPrimary = self.searchBarSearch;
-    searchBarHeight = self.searchBarSearch.frame.size.height;
-    fullSearchBarHeight = (2 * EXTRA_SEARCH_BAR_HEIGHT);
-    CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
-#endif
+    CGFloat height;
+    if (LOCKED_SEARCH_CATEGORY)
+    {
+        self.categoryButtonsView.hidden = YES;
+        self.categoryViewHeight.constant = 0;
+        _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
+        self.searchBarSearchHeight.constant = 0;
+        self.searchBarSearch.text = LOCKED_SEARCH_CATEGORY_STRING;
+        self.searchBarPrimary = self.searchBarLocation;
+        searchBarHeight = self.searchBarLocation.frame.size.height;
+        fullSearchBarHeight = (EXTRA_SEARCH_BAR_HEIGHT);
+        height = 0 - [MainViewController getHeaderHeight];
+    }
+    else
+    {
+        self.searchBarPrimary = self.searchBarSearch;
+        searchBarHeight = self.searchBarSearch.frame.size.height;
+        fullSearchBarHeight = (2 * EXTRA_SEARCH_BAR_HEIGHT);
+        height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
+    }
     
     if (bInitialized == false)
     {
@@ -881,9 +885,10 @@ static bool bInitialized = false;
     self.searchCluesTableView.hidden = YES;
     self.searchBarSearch.placeholder = NSLocalizedString(@"Search", @"SearchBarSearch placeholder");
 
-#ifndef LOCKED_SEARCH_CATEGORY
-    _locationSearchViewHeight.constant = 0;
-#endif
+    if (!LOCKED_SEARCH_CATEGORY)
+    {
+        _locationSearchViewHeight.constant = 0;
+    }
 }
 
 
@@ -1925,9 +1930,10 @@ static bool bInitialized = false;
     if (self.dividerView.userControllable == NO)
     {
         float offset = self.tableView.contentOffset.y;
-#ifdef LOCKED_SEARCH_CATEGORY
-        offset += 20;
-#endif
+        if (LOCKED_SEARCH_CATEGORY)
+        {
+            offset += 20;
+        }
         if (offset > self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight])
         {
             offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
