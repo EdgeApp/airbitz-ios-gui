@@ -267,7 +267,6 @@ static CoreBridge *airbitzCore;
     if (![self isAppActive])
     {
         [[User Singleton] clear];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
     }
     [self bgLogoutCleanup];
 

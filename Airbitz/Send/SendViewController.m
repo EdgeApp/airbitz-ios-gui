@@ -207,7 +207,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
            selector:@selector(applicationDidBecomeActiveNotification:)
                name:UIApplicationDidBecomeActiveNotification
              object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willRotate:) name:NOTIFICATION_ROTATION_CHANGED object:nil];
 

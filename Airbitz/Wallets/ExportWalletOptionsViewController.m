@@ -120,7 +120,7 @@ typedef enum eExportOption
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated

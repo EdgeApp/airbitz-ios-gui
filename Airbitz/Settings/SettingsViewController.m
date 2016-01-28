@@ -184,7 +184,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(refresh:)
-                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+                                                 name:ABC_NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 	_showBluetoothOption = NO;
     [self refresh:nil];
 	

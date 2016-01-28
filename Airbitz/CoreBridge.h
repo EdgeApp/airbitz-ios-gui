@@ -10,6 +10,17 @@
 #import "ABCConditionCode.h"
 #import "SpendTarget.h"
 
+#define ABC_NOTIFICATION_LOGOUT                             @"ABC_Main_Views_Reset"
+#define ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"ABC_Remote_Password_Change"
+#define ABC_NOTIFICATION_OTP_REQUIRED                       @"ABC_Otp_Required"
+#define ABC_NOTIFICATION_OTP_SKEW                           @"ABC_Otp_Skew"
+#define ABC_NOTIFICATION_DATA_SYNC_UPDATE                   @"ABC_Data_Sync_Update"
+#define ABC_NOTIFICATION_EXCHANGE_RATE_CHANGE               @"ABC_Exchange_Rate_Change"
+#define ABC_NOTIFICATION_TX_RECEIVED                        @"ABC_Transaction_Received"
+#define ABC_NOTIFICATION_WALLETS_LOADING                    @"ABC_Wallets_Loading"
+#define ABC_NOTIFICATION_WALLETS_LOADED                     @"ABC_Wallets_Loaded"
+#define ABC_NOTIFICATION_WALLETS_CHANGED                    @"ABC_Wallets_Changed"
+
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120

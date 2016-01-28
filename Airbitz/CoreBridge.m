@@ -687,18 +687,18 @@ const int RECOVERY_REMINDER_COUNT = 2;
 - (void)postWalletsLoadingNotification
 {
     ABLog(1, [NSString stringWithFormat:@"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADING object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADING object:self];
 }
 
 - (void)postWalletsLoadedNotification
 {
     bNewDeviceLogin = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_LOADED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADED object:self];
 }
 
 - (void) postNotificationWalletsChanged
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_CHANGED
                                                         object:self userInfo:nil];
     [self updateWidgetQRCode];
 }
@@ -1650,6 +1650,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
     self.password = nil;
     self.name = nil;
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_LOGOUT object:self];
+
 }
 
 - (BOOL)passwordOk:(NSString *)password
@@ -1940,7 +1942,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         }
 
         dispatch_async(dispatch_get_main_queue(),^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_EXCHANGE_RATE_CHANGE object:self];
         });
     }
 }
@@ -2519,7 +2521,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     {
         [self refreshWallets:^
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
         }];
     }
 
@@ -2527,12 +2529,12 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)notifyOtpRequired:(NSArray *)params
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_REQUIRED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_OTP_REQUIRED object:self];
 }
 
 - (void)notifyOtpSkew:(NSArray *)params
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_OTP_SKEW object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_OTP_SKEW object:self];
 }
 
 - (void)notifyDataSync:(NSArray *)params
@@ -2546,7 +2548,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     
     [self refreshWallets:^
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_DATA_SYNC_UPDATE object:self];
 
         // if there are new wallets, we need to start their watchers
         if ([self.arrayWallets count] + [self.arrayArchivedWallets count] != numWallets)
@@ -2574,7 +2576,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)notifyRemotePasswordChange:(NSArray *)params
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
 //- (void)otpSetError:(tABC_CC)cc
@@ -3780,7 +3782,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
         if (error.code == ABC_CC_DecryptError
                 || error.code == ABC_CC_DecryptFailure)
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_LOGOUT object:self];
         }
     }
     return lastConditionCode;

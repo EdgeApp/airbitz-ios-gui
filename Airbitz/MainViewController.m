@@ -178,16 +178,16 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRecoveryQuestions:) name:NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:NOTIFICATION_OTP_REQUIRED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:NOTIFICATION_OTP_SKEW object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:ABC_NOTIFICATION_LOGOUT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:ABC_NOTIFICATION_OTP_REQUIRED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:ABC_NOTIFICATION_OTP_SKEW object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:ABC_NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockDisplay) name:NOTIFICATION_WALLETS_LOADING object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockDisplay) name:NOTIFICATION_WALLETS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADING object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
