@@ -16,8 +16,6 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 
-#define SHOW_BUY_SELL 1
-
 @interface SlideoutView () <PickerTextViewDelegate >
 
 {
@@ -40,7 +38,6 @@
 @property (weak, nonatomic) IBOutlet UIButton               *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton               *settingsButton;
-@property (weak, nonatomic) IBOutlet UIView                 *buySellDivider;
 @property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
@@ -49,6 +46,7 @@
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 @property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
 
 @end
 
@@ -112,6 +110,19 @@
         [Util replaceHtmlTags:&tempText];
         self.importPrivateKeyLabel.text = tempText;
         self.giftCardTextLabel.text = giftCardText;
+        _buySellButton.hidden = !SHOW_BUY_SELL;
+        _dividerView3.hidden = !SHOW_BUY_SELL;
+        
+        if (!SHOW_BUY_SELL)
+        {
+            CGRect frame = _importGiftCardButton.frame;
+            frame.origin.y -= 50;
+            _importGiftCardButton.frame = frame;
+            
+            frame = _giftCardButton.frame;
+            frame.origin.y -= 50;
+            _giftCardButton.frame = frame;
+        }
         _initialized = YES;
     }
     
@@ -120,9 +131,6 @@
         if (show)
         {
             self.accountPicker.delegate = self;
-
-            _buySellButton.hidden = !SHOW_BUY_SELL;
-            _buySellDivider.hidden = !SHOW_BUY_SELL;
 
             // set up the specifics on our picker text view
             [self.accountPicker setTopMostView:self.otherAccountsView];
