@@ -251,7 +251,7 @@
     [self.toolbarBlur setTranslucent:[Theme Singleton].bTranslucencyEnable];
     self.walletMakerView.alpha = 0;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
 
     [self updateViews:nil];
 }
