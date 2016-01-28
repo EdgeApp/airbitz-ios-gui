@@ -140,8 +140,6 @@
                                     errorMsg:(NSMutableString *)error;
 - (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
 - (bool)PINLoginExists:(NSString *)username;
-- (void)deletePINLogin;
-- (void)setupLoginPIN;
 - (BOOL)recentlyLoggedIn;
 - (void)logout;
 - (BOOL)passwordOk:(NSString *)password;
@@ -158,7 +156,6 @@
 - (void)restoreConnectivity;
 - (void)lostConnectivity;
 - (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
-- (bool)isTestNet;
 - (NSString *)coreVersion;
 - (NSString *)currencyAbbrevLookup:(int) currencyNum;
 - (NSString *)currencySymbolLookup:(int)currencyNum;
@@ -515,6 +512,8 @@
  * @return NSString*       : text description of error
  */
 - (NSString *)conditionCodeMap:(const ABCConditionCode) code;
+
+- (bool)isTestNet;
 
 
 /*

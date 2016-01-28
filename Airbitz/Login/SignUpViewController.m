@@ -177,7 +177,26 @@
                     [self blockUser:YES];
                     [[AppDelegate abc] changePasswordWithRecoveryAnswers:self.strUserName recoveryAnswers:self.strAnswers newPassword:self.passwordTextField.text complete:^
                      {
-                         [self changePasswordComplete:YES errorMessage:nil];
+                         [[AppDelegate abc] changePIN:self.pinTextField.text complete:^
+                          {
+                              [self blockUser:NO];
+                              [self changePasswordComplete:YES errorMessage:nil];
+                          } error:^(ABCConditionCode ccode, NSString *errorString)
+                          {
+                              [self blockUser:NO];
+                              [self.activityView stopAnimating];
+                              
+                              UIAlertView *alert = [[UIAlertView alloc]
+                                                    initWithTitle:self.title
+                                                    message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                                             self.title,
+                                                             errorString]
+                                                    delegate:nil
+                                                    cancelButtonTitle:okButtonText
+                                                    otherButtonTitles:nil];
+                              [alert show];
+                              [self changePasswordComplete:YES errorMessage:nil];
+                          }];
                      } error:^(ABCConditionCode ccode, NSString *errorString)
                      {
                          [self changePasswordComplete:NO errorMessage:errorString];
@@ -703,10 +722,6 @@
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];
         
-        if (self.mode == SignUpMode_ChangePasswordUsingAnswers)
-        {
-            [self changePIN];
-        }
         if ([[LocalSettings controller].touchIDUsersEnabled containsObject:[AppDelegate abc].name] ||
             ![AppDelegate abc].settings.bDisablePINLogin)
         {
@@ -728,41 +743,6 @@
     }
 
     [alert show];
-}
-
-- (void)changePIN
-{
-    tABC_Error Error;
-    tABC_CC result = ABC_CC_Ok;
-    
-    result = ABC_SetPIN([self.strUserName UTF8String],
-                        [self.passwordTextField.text UTF8String],
-                        [self.pinTextField.text UTF8String],
-                        &Error);
-    // if success
-    if (ABC_CC_Ok == result)
-    {
-        // all other modes must wait for callback before PIN login setup
-        [[AppDelegate abc] postToMiscQueue:^
-        {
-            [[AppDelegate abc] setupLoginPIN];
-        }];
-    }
-    else
-    {
-        [self blockUser:NO];
-        [self.activityView stopAnimating];
-        [Util printABC_Error:&Error];
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:self.title
-                              message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                       self.title,
-                                       [Util errorMap:&Error]]
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-    }
 }
 
 #pragma mark - UIAlertView delegates

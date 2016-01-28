@@ -2885,7 +2885,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 - (ABCConditionCode)createAccount:(NSString *)username password:(NSString *)password pin:(NSString *)pin;
 {
     tABC_Error error;
-    char *szPassword = [password length] == 0 ? NULL : [password UTF8String];
+    const char *szPassword = [password length] == 0 ? NULL : [password UTF8String];
     ABC_CreateAccount([username UTF8String], szPassword, &error);
     ABCConditionCode ccode = [self setLastErrors:error];
     if (ABCConditionCodeOk == ccode)
@@ -3366,11 +3366,15 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 {
     tABC_Error error;
     tABC_AccountSettings *pSettings;
+    BOOL pinLoginChanged = NO;
 
     ABC_LoadAccountSettings([self.name UTF8String], [self.password UTF8String], &pSettings, &error);
 
     if (ABCConditionCodeOk == [self setLastErrors:error])
     {
+        if (pSettings->bDisablePINLogin != self.settings.bDisablePINLogin)
+             pinLoginChanged = YES;
+        
         pSettings->minutesAutoLogout                      = self.settings.minutesAutoLogout         ;
         pSettings->currencyNum                            = self.settings.defaultCurrencyNum        ;
         pSettings->bitcoinDenomination.satoshi            = self.settings.denomination              ;
@@ -3387,6 +3391,22 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
         self.settings.strPIN             ? [self replaceString:&(pSettings->szPIN               ) withString:[self.settings.strPIN             UTF8String]] : nil;
         self.settings.exchangeRateSource ? [self replaceString:&(pSettings->szExchangeRateSource) withString:[self.settings.exchangeRateSource UTF8String]] : nil;
 
+        if (pinLoginChanged)
+        {
+            [self postToMiscQueue:^{
+                
+                if (self.settings.bDisablePINLogin)
+                {
+                    [self deletePINLogin];
+                }
+                else
+                {
+                    [self setupLoginPIN];
+                }
+            }];
+        }
+
+        
         ABC_UpdateAccountSettings([self.name UTF8String], [self.password UTF8String], pSettings, &error);
         if (ABCConditionCodeOk == [self setLastErrors:error])
         {

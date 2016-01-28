@@ -1284,17 +1284,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
         [Keychain disableKeychainBasedOnSettings];
 
-        [[AppDelegate abc] postToMiscQueue:^{
-
-            if (theSwitch.on)
-            {
-                [[AppDelegate abc] setupLoginPIN];
-            }
-            else
-            {
-                [[AppDelegate abc] deletePINLogin];
-            }
-        }];
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_TOUCHID))
     {

@@ -5,7 +5,6 @@
 
 #import "Plugin.h"
 #import "Config.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "CommonTypes.h"
 
@@ -22,9 +21,7 @@ static NSMutableArray *giftCardPlugins;
 {
     if (NO == bInitialized)
     {
-        tABC_Error error;
-        bool isTestnet = false;
-        ABC_IsTestNet(&isTestnet, &error);
+        bool isTestnet = [[AppDelegate abc] isTestNet];
 
         buySellPlugins = [[NSMutableArray alloc] init];
         giftCardPlugins = [[NSMutableArray alloc] init];
