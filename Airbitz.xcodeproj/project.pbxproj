@@ -115,8 +115,6 @@
 		DA9ED7F01BC61E680063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9ED7F11BC61E680063DA07 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */; };
 		DA9ED7F21BC61E680063DA07 /* StylizedTextField3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */; };
-		DA9ED7F31BC61E680063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
-		DA9ED7F41BC61E680063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9ED7F51BC61E680063DA07 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C51BC61E680063DA07 /* Theme.m */; };
 		DA9ED7F61BC61E680063DA07 /* UIImage+Colorize.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C81BC61E680063DA07 /* UIImage+Colorize.m */; };
 		DA9ED7F71BC61E680063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
@@ -589,7 +587,6 @@
 		DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
-		DA9EF3CC1BC7285D0063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
 		DA9EF3CD1BC7285D0063DA07 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0931BC61F920063DA07 /* WalletCell.m */; };
 		DA9EF3CE1BC7285D0063DA07 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03F1BC61F920063DA07 /* CDataScanner.m */; };
 		DA9EF3CF1BC7285D0063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
@@ -872,7 +869,6 @@
 		DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
 		DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
-		DA9EF5071BC7285D0063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -996,7 +992,6 @@
 		DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
-		DA9EF5931BC729FA0063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
 		DA9EF5941BC729FA0063DA07 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0931BC61F920063DA07 /* WalletCell.m */; };
 		DA9EF5951BC729FA0063DA07 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03F1BC61F920063DA07 /* CDataScanner.m */; };
 		DA9EF5961BC729FA0063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
@@ -1279,7 +1274,6 @@
 		DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
 		DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
-		DA9EF6CE1BC729FA0063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -1550,9 +1544,6 @@
 		DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
 		DA9ED7BF1BC61E680063DA07 /* StylizedTextField3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField3.h; sourceTree = "<group>"; };
 		DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField3.m; sourceTree = "<group>"; };
-		DA9ED7C11BC61E680063DA07 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
-		DA9ED7C21BC61E680063DA07 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
-		DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		DA9ED7C41BC61E680063DA07 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		DA9ED7C51BC61E680063DA07 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		DA9ED7C61BC61E680063DA07 /* TransferService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferService.h; sourceTree = "<group>"; };
@@ -3365,9 +3356,6 @@
 				DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */,
 				DA9ED7BF1BC61E680063DA07 /* StylizedTextField3.h */,
 				DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */,
-				DA9ED7C11BC61E680063DA07 /* SyncView.h */,
-				DA9ED7C21BC61E680063DA07 /* SyncView.m */,
-				DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */,
 				DA9ED7C41BC61E680063DA07 /* Theme.h */,
 				DA9ED7C51BC61E680063DA07 /* Theme.m */,
 				DA9ED7C61BC61E680063DA07 /* TransferService.h */,
@@ -3898,7 +3886,6 @@
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */,
-				DA9EF5071BC7285D0063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */,
@@ -4160,7 +4147,6 @@
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */,
-				DA9EF6CE1BC729FA0063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */,
@@ -4421,7 +4407,6 @@
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EE50F1BC61F920063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4F71BC61F920063DA07 /* infoImportWallet.html in Resources */,
-				DA9ED7F41BC61E680063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4491BC61F920063DA07 /* btn_close_white.png in Resources */,
@@ -4701,7 +4686,6 @@
 				DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */,
 				DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9EF3CC1BC7285D0063DA07 /* SyncView.m in Sources */,
 				DA9EF3CD1BC7285D0063DA07 /* WalletCell.m in Sources */,
 				DA9EF3CE1BC7285D0063DA07 /* CDataScanner.m in Sources */,
 				DA9EF3CF1BC7285D0063DA07 /* TxOutput.m in Sources */,
@@ -4844,7 +4828,6 @@
 				DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */,
 				DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9EF5931BC729FA0063DA07 /* SyncView.m in Sources */,
 				DA9EF5941BC729FA0063DA07 /* WalletCell.m in Sources */,
 				DA9EF5951BC729FA0063DA07 /* CDataScanner.m in Sources */,
 				DA9EF5961BC729FA0063DA07 /* TxOutput.m in Sources */,
@@ -4987,7 +4970,6 @@
 				DA9EE5531BC61F930063DA07 /* CommonCell.m in Sources */,
 				DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */,
 				DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9ED7F31BC61E680063DA07 /* SyncView.m in Sources */,
 				DA9EE55D1BC61F930063DA07 /* WalletCell.m in Sources */,
 				DA9EE52F1BC61F930063DA07 /* CDataScanner.m in Sources */,
 				DA9EE0B61BC61F920063DA07 /* TxOutput.m in Sources */,
