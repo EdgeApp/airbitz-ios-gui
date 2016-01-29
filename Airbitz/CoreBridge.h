@@ -247,6 +247,29 @@
 
 
 /*
+ * checkPasswordRules
+ *  Checks a password for valid entropy looking for correct minimum
+ *  requirements such as upper, lowercase letters, numbers, and # of digits
+ * @param NSString                     *password: password to check
+ * @param BOOL                            *valid: pointer to valid which is true if password passes checks
+ * @param double                 *secondsToCrack: pointer to estimated time it takes to crack password
+ * @param int                             *count: pointer to number of rules used
+ * @param NSMutableArray        *ruleDescription: pointer to array of NSString * with description of each rule
+ * @param NSMutableArray             *rulePassed: pointer to array of NSNumber * with BOOL of whether rule passed
+ * @param NSMutableString   *checkResultsMessage: pointer to message describing failures
+ *
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)checkPasswordRules:(NSString *)password
+                                 valid:(BOOL *)valid
+                        secondsToCrack:(double *)secondsToCrack
+                                 count:(unsigned int *)count
+                       ruleDescription:(NSMutableArray **)ruleDescription
+                            rulePassed:(NSMutableArray **)rulePassed
+                   checkResultsMessage:(NSMutableString **) checkResultsMessage;
+
+
+/*
  * changePassword
  * @param NSString* password: new password for currently logged in user
  *

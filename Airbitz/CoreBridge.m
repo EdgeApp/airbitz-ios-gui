@@ -3165,6 +3165,51 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return ABCConditionCodeOk;
 }
 
+- (ABCConditionCode)checkPasswordRules:(NSString *)password
+                                 valid:(BOOL *)valid
+                        secondsToCrack:(double *)secondsToCrack
+                                 count:(unsigned int *)count
+                       ruleDescription:(NSMutableArray **)ruleDescription
+                            rulePassed:(NSMutableArray **)rulePassed
+                   checkResultsMessage:(NSMutableString **) checkResultsMessage;
+{
+    *valid = YES;
+    tABC_Error error;
+    tABC_PasswordRule **aRules = NULL;
+    ABC_CheckPassword([password UTF8String],
+                      secondsToCrack,
+                      &aRules,
+                      count,
+                      &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    
+    *ruleDescription = [NSMutableArray arrayWithCapacity:*count];
+    *rulePassed = [NSMutableArray arrayWithCapacity:*count];
+    
+    if (ABCConditionCodeOk == ccode)
+    [*checkResultsMessage appendString:@"Your password...\n"];
+    for (int i = 0; i < *count; i++)
+    {
+        tABC_PasswordRule *pRule = aRules[i];
+        (*ruleDescription)[i] = [NSString stringWithUTF8String:pRule->szDescription];
+        if (!pRule->bPassed)
+        {
+            *valid = NO;
+            [*checkResultsMessage appendFormat:@"%s.\n", pRule->szDescription];
+            (*rulePassed)[i] = [NSNumber numberWithBool:YES];
+        }
+        else
+        {
+            (*rulePassed)[i] = [NSNumber numberWithBool:NO];
+        }
+        
+        //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
+    }
+    
+    ABC_FreePasswordRuleArray(aRules, *count);
+    return ccode;
+}
+
 - (ABCConditionCode)changePasswordWithRecoveryAnswers:(NSString *)username
                                       recoveryAnswers:(NSString *)answers
                                           newPassword:(NSString *)password;

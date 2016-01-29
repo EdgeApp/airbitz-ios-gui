@@ -193,40 +193,28 @@
 
     BOOL bNewPasswordFieldsAreValid = YES;
     {
-        double secondsToCrack;
-        tABC_Error Error;
-        tABC_CC result;
         unsigned int count = 0;
-        tABC_PasswordRule **aRules = NULL;
-        result = ABC_CheckPassword([self.passwordTextField.text UTF8String],
-                &secondsToCrack,
-                &aRules,
-                &count,
-                &Error);
-
-        //printf("Password results:\n");
-        NSMutableString *message = [[NSMutableString alloc] init];
-        [message appendString:@"Your password...\n"];
-        for (int i = 0; i < count; i++)
-        {
-            tABC_PasswordRule *pRule = aRules[i];
-            if (!pRule->bPassed)
-            {
-                bNewPasswordFieldsAreValid = NO;
-                [message appendFormat:@"%s.\n", pRule->szDescription];
-            }
-
-            //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
-        }
-
-        ABC_FreePasswordRuleArray(aRules, count);
+        double secondsToCrack;
+        NSMutableArray *ruleDescription;
+        NSMutableArray *rulePassed;
+        NSMutableString *checkResultsMessage;
+        ABCConditionCode ccode;
+        
+        ccode = [[AppDelegate abc] checkPasswordRules:self.passwordTextField.text
+                                                valid:&bNewPasswordFieldsAreValid
+                                       secondsToCrack:&secondsToCrack
+                                                count:&count
+                                      ruleDescription:&ruleDescription
+                                           rulePassed:&rulePassed
+                                  checkResultsMessage:&checkResultsMessage];
+        
         if (bNewPasswordFieldsAreValid == NO)
         {
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
-                          message:message
+                          message:checkResultsMessage
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
         }

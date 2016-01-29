@@ -8,6 +8,7 @@
 
 #import "PasswordVerifyView.h"
 #import "Util.h"
+#import "AppDelegate.h"
 
 @interface PasswordVerifyView ()
 
@@ -87,20 +88,22 @@
 {
 	_password = password;
 	
-	tABC_Error Error;
-	tABC_PasswordRule **aRules = NULL;
     unsigned int count = 0;
     double secondsToCrack;
-	
-    ABC_CheckPassword([self.password UTF8String],
-                      &secondsToCrack,
-                      &aRules,
-                      &count,
-                      &Error);
-    [Util printABC_Error:&Error];
-	
-    printf("Password results:\n");
-    printf("Time to crack: %lf seconds\n", secondsToCrack);
+    NSMutableArray *ruleDescription;
+    NSMutableArray *rulePassed;
+    BOOL passed;
+    NSMutableString *checkResultsMessage;
+    ABCConditionCode ccode;
+    
+    ccode = [[AppDelegate abc] checkPasswordRules:self.password
+                                            valid:&passed
+                                   secondsToCrack:&secondsToCrack
+                                            count:&count
+                                  ruleDescription:&ruleDescription
+                                       rulePassed:&rulePassed
+                              checkResultsMessage:&checkResultsMessage];
+		
 	NSMutableString *crackString = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Time to crack:", @"text in password verification popup")];
 	if(secondsToCrack < 60.0)
 	{
@@ -137,12 +140,10 @@
 	self.crackMessageLabel.text = crackString;
     for (int i = 0; i < count; i++)
     {
-        tABC_PasswordRule *pRule = aRules[i];
-        printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
 		UIImageView *imageView = (UIImageView *)[self viewWithTag:i + 10];
 		if(imageView)
 		{
-			if(pRule->bPassed)
+			if([rulePassed[i] boolValue])
 			{
 				imageView.image = [UIImage imageNamed:@"Green-check"];
 			}
@@ -156,11 +157,9 @@
 		//ABLog(2,@"curent tag: %i for view: %@", i, label);
 		if(label)
 		{
-			label.text = [NSString stringWithFormat:@"%s", pRule->szDescription];
+			label.text = ruleDescription[i];
 		}
     }
-	
-    ABC_FreePasswordRuleArray(aRules, count);
 	
 }
 
