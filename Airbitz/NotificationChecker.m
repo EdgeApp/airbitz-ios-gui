@@ -12,7 +12,6 @@
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
 #import "User.h"
-#import "ABC.h"
 #import "CoreBridge.h"
 #import "Util.h"
 #import "MainViewController.h"
@@ -243,17 +242,11 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkOtpResetPending
 {
-    char *szUsernames = NULL;
-    NSArray *arrayUsers = nil;
-    NSString *usernames = nil;
-    tABC_Error error;
-    tABC_CC cc = ABC_OtpResetGet(&szUsernames, &error);
-    if (cc != ABC_CC_Ok || !szUsernames) {
-        goto exit;
-    }
-    usernames = [NSString stringWithUTF8String:szUsernames];
-    usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    arrayUsers = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
+    NSMutableArray *arrayUsers = nil;
+    
+    ABCConditionCode ccode = [[AppDelegate abc] getOTPResetUsernames:&arrayUsers];
+    
+    if (!ABCConditionCodeOk == ccode) return;
 
     for (NSString *username in arrayUsers)
     {
@@ -308,10 +301,6 @@ static NotificationChecker *singleton = nil;
             [[LocalSettings controller].otpNotifications addObject:notif];
         }
 
-    }
-exit:
-    if (szUsernames) {
-        free(szUsernames);
     }
 }
 

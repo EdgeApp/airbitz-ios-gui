@@ -208,6 +208,72 @@
 - (ABCConditionCode) createFirstWalletIfNeeded;
 - (ABCConditionCode) getNumWalletsInAccount:(int *)numWallets;
 
+- (ABCConditionCode)getOTPResetUsernames:(NSMutableArray **) usernameArray;
+- (ABCConditionCode)hasOTPResetPending:(BOOL *)needsReset;
+
+/**
+ * getOTPLocalKey
+ * @param NSString* username: user to get the OTP key for
+ * @param NSString**     key: pointer to key returned from routine
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)getOTPLocalKey:(NSString *)username
+                               key:(NSString **)key;
+
+/**
+ * setOTPKey
+ * Associates an OTP key with the given username.
+ * This will not write to disk until the user has successfully logged in
+ * at least once.
+ * @param NSString* username: user to set the OTP key for
+ * @param NSString*      key: key to set
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)setOTPKey:(NSString *)username
+                          key:(NSString *)key;
+
+/**
+ * removeOTPKey
+ * Removes the OTP key for current user.
+ * This will remove the key from disk as well.
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)removeOTPKey;
+
+/**
+ * getOTPDetails
+ * Reads the OTP configuration from the server.
+ * This will remove the key from disk as well.
+ * @param NSString* username:
+ * @param NSString* password:
+ * @param     bool*  enabled: enabled flag if OTP is enabled for this user
+ * @param     long*  timeout: number seconds required after a reset is requested
+ *                            before OTP is disabled. This is set by setOTPAuth
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)getOTPDetails:(NSString *)username
+                         password:(NSString *)password
+                          enabled:(bool *)enabled
+                          timeout:(long *)timeout;
+
+/**
+ * setOTPAuth
+ * Sets up OTP authentication on the server for currently logged in user
+ * This will generate a new token if the username doesn't already have one.
+ * @param     long   timeout: number seconds required after a reset is requested
+ *                            before OTP is disabled.
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)setOTPAuth:(long)timeout;
+
+/**
+ * removeOTPAuth
+ * Removes the OTP authentication requirement from the server for the 
+ * currently logged in user
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)removeOTPAuth;
+
 
 /*
  * signIn

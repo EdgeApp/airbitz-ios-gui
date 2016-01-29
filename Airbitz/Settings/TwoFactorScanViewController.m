@@ -121,9 +121,8 @@
 
 - (BOOL)storeSecret
 {
-    tABC_Error Error;
-    tABC_CC cc = ABC_OtpKeySet([[AppDelegate abc].name UTF8String], (char *) [_secret UTF8String], &Error);
-    return cc == ABC_CC_Ok;
+    ABCConditionCode ccode = [[AppDelegate abc] setOTPKey:[AppDelegate abc].name key:_secret];
+    return ABCConditionCodeOk == ccode;
 }
 
 - (void)testSecret

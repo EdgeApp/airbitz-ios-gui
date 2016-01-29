@@ -391,9 +391,8 @@ typedef enum eAlertType
         _tfaMenuViewController = nil;
         BOOL success = __bSuccess;
         if (success) {
-            tABC_Error error;
-            ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &error);
-            if (error.code == ABC_CC_Ok) {
+            ABCConditionCode ccode = [[AppDelegate abc] setOTPKey:self.strUserName key:_secret];
+            if (ABCConditionCodeOk == ccode) {
                 // Try again with OTP
                 [self CompleteSignup];
             } else {

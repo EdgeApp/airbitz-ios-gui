@@ -1972,7 +1972,9 @@ const int RECOVERY_REMINDER_COUNT = 2;
                         (__bridge void *) self,
                         &error);
         if (cc == ABC_CC_InvalidOTP) {
-            if ([self getOtpSecret] != nil) {
+            NSString *key = nil;
+            ABCConditionCode ccode = [self getOTPLocalKey:self.name key:&key];
+            if (key != nil && ccode == ABCConditionCodeOk) {
                 [self performSelectorOnMainThread:@selector(notifyOtpSkew:)
                                        withObject:nil
                                     waitUntilDone:NO];
@@ -2579,37 +2581,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
     [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
-//- (void)otpSetError:(tABC_CC)cc
-//{
-//    bOtpError = ABC_CC_InvalidOTP == cc;
-//}
-//
-//- (BOOL)otpHasError;
-//{
-//    return bOtpError;
-//}
-//
-//- (void)otpClearError
-//{
-//    bOtpError = NO;
-//}
-//
-- (NSString *)getOtpSecret
-{
-    tABC_Error error;
-    NSString *secret = nil;
-    char *szSecret = NULL;
-    ABC_OtpKeyGet([self.name UTF8String], &szSecret, &error);
-    if (error.code == ABC_CC_Ok && szSecret) {
-        secret = [NSString stringWithUTF8String:szSecret];
-    }
-    if (szSecret) {
-        free(szSecret);
-    }
-    ABLog(2,@("SECRET: %@"), secret);
-    return secret;
-}
-
 - (NSString *) bitidParseURI:(NSString *)uri;
 {
     tABC_Error error;
@@ -3062,8 +3033,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
         
         if (otp)
         {
-            ABC_OtpKeySet([username UTF8String], (char *) [otp UTF8String], &error);
-            ccode = [self setLastErrors:error];
+            ccode = [self setOTPKey:username key:otp];
         }
 
         if (ABCConditionCodeOk == ccode)
@@ -3321,6 +3291,142 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
      }];
     return ABCConditionCodeOk;
 }
+
+/* === OTP authentication: === */
+
+
+- (ABCConditionCode)getOTPResetUsernames:(NSMutableArray **) usernameArray
+{
+    char *szUsernames = NULL;
+    NSString *usernames = nil;
+    tABC_Error error;
+    ABC_OtpResetGet(&szUsernames, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        usernames = [NSString stringWithUTF8String:szUsernames];
+        usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        usernames = [self formatUsername:usernames];
+        *usernameArray = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
+    }
+    if (szUsernames)
+        free(szUsernames);
+    return ccode;
+}
+
+- (ABCConditionCode)hasOTPResetPending:(BOOL *)needsReset;
+{
+    char *szUsernames = NULL;
+    NSString *usernames = nil;
+    *needsReset = NO;
+    tABC_Error error;
+    ABC_OtpResetGet(&szUsernames, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    NSMutableArray *usernameArray = [[NSMutableArray alloc] init];
+    if (ABCConditionCodeOk == ccode)
+    {
+        usernames = [NSString stringWithUTF8String:szUsernames];
+        usernames = [self formatUsername:usernames];
+        usernameArray = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
+        if ([usernameArray containsObject:[self formatUsername:self.name]])
+            *needsReset = YES;
+    }
+    if (szUsernames)
+        free(szUsernames);
+    return ccode;
+}
+
+- (ABCConditionCode)getOTPLocalKey:(NSString *)username
+                               key:(NSString **)key;
+{
+    tABC_Error error;
+    char *szSecret = NULL;
+    ABC_OtpKeyGet([username UTF8String], &szSecret, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode && szSecret) {
+        *key = [NSString stringWithUTF8String:szSecret];
+    }
+    if (szSecret) {
+        free(szSecret);
+    }
+    ABLog(2,@("SECRET: %@"), *key);
+    return ccode;
+}
+
+- (ABCConditionCode)setOTPKey:(NSString *)username
+                          key:(NSString *)key;
+{
+    tABC_Error error;
+    ABC_OtpKeySet([username UTF8String], (char *)[key UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)removeOTPKey;
+{
+    tABC_Error error;
+    ABC_OtpKeyRemove([self.name UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)getOTPDetails:(NSString *)username
+                         password:(NSString *)password
+                          enabled:(bool *)enabled
+                          timeout:(long *)timeout;
+{
+    tABC_Error error;
+    ABC_OtpAuthGet([username UTF8String], [password UTF8String], enabled, timeout, &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)setOTPAuth:(long)timeout;
+{
+    tABC_Error error;
+    ABC_OtpAuthSet([self.name UTF8String], [self.password UTF8String], timeout, &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)removeOTPAuth;
+{
+    tABC_Error error;
+    ABC_OtpAuthRemove([self.name UTF8String], [self.password UTF8String], &error);
+    [self removeOTPKey];
+    return [self setLastErrors:error];
+}
+
+///**
+// * Returns the reset status for all accounts currently on the device.
+// * @return A newline-separated list of usernames with pending resets.
+// * The caller frees this.
+// */
+//tABC_CC ABC_OtpResetGet(char **szUsernames,
+//                        tABC_Error *pError);
+//
+///**
+// * Returns the OTP reset date for the last account that failed to log in,
+// * if any. Returns an empty string otherwise.
+// */
+//tABC_CC ABC_OtpResetDate(char **pszDate,
+//                         tABC_Error *pError);
+///**
+// * Launches an OTP reset timer on the server,
+// * which will disable the OTP authentication requirement when it expires.
+// *
+// * This only works after the caller has successfully authenticated
+// * with the server, such as through a password login,
+// * but has failed to fully log in due to a missing OTP key.
+// */
+//tABC_CC ABC_OtpResetSet(const char *szUserName,
+//                        tABC_Error *pError);
+//
+///**
+// * Cancels an OTP reset timer.
+// */
+//tABC_CC ABC_OtpResetRemove(const char *szUserName,
+//                           const char *szPassword,
+//                           tABC_Error *pError);
+//
+
+
 
 - (ABCConditionCode)getNumWalletsInAccount:(int *)numWallets
 {
@@ -3767,6 +3873,15 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 ////////////////////////////////////////////////////////
 #pragma internal routines
 ////////////////////////////////////////////////////////
+
+- (NSString *)formatUsername:(NSString *)username;
+{
+    username = [username stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    username = [username lowercaseString];
+    
+    return username;
+}
+
 
 - (void)categorizeQuestionChoices:(tABC_QuestionChoices *)pChoices
                    categoryString:(NSMutableArray **)arrayCategoryString

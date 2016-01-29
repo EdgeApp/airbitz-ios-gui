@@ -103,12 +103,15 @@
 
 - (void)doCheckStatus:(BOOL)bMsg
 {
-    tABC_Error Error;
     bool on = NO;
     long timeout = 0;
-    tABC_CC cc = ABC_OtpAuthGet([[AppDelegate abc].name UTF8String],
-            [[AppDelegate abc].password UTF8String], &on, &timeout, &Error);
-    if (cc == ABC_CC_Ok) {
+    
+    ABCConditionCode ccode = [[AppDelegate abc] getOTPDetails:[AppDelegate abc].name
+                                                     password:[AppDelegate abc].password
+                                                      enabled:&on
+                                                      timeout:&timeout];
+    
+    if (ABCConditionCodeOk == ccode) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
             _isOn = on == true ? YES : NO;
             _timeout = timeout;
@@ -126,20 +129,16 @@
 
 - (void)checkSecret:(BOOL)bMsg
 {
-    char *szSecret = NULL;
     _secret = nil;
-    tABC_Error error;
+    NSString *key;
     if (_isOn) {
-        tABC_CC cc = ABC_OtpKeyGet([[AppDelegate abc].name UTF8String], &szSecret, &error);
-        if (cc == ABC_CC_Ok && szSecret) {
-            _secret = [NSString stringWithUTF8String:szSecret];
+        ABCConditionCode ccode = [[AppDelegate abc] getOTPLocalKey:[AppDelegate abc].name key:&key];
+        if (key != nil && ABCConditionCodeOk == ccode) {
+            _secret = key;
+            _requestSpinner.hidden = NO;
         } else {
             _secret = nil;
             _viewQRCodeFrame.hidden = YES;
-        }
-        if (szSecret) {
-            free(szSecret);
-            _requestSpinner.hidden = NO;
         }
     }
     [self showQrCode:_isOn];
@@ -207,32 +206,19 @@
 
 - (void)checkRequest
 {
-    tABC_Error error;
-    BOOL pending = [self isResetPending:&error];
+    BOOL pending = NO;
+    ABCConditionCode ccode = [[AppDelegate abc] hasOTPResetPending:&pending];
+    NSString *errorString = [[AppDelegate abc] getLastErrorString];
+    
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        if (error.code == ABC_CC_Ok) {
+        if (ABCConditionCodeOk == ccode) {
             _requestView.hidden = !pending;
         } else {
             _requestView.hidden = YES;
-            [MainViewController fadingAlert:[Util errorMap:&error]];
+            [MainViewController fadingAlert:errorString];
         }
         _requestSpinner.hidden = YES;
     });
-}
-
-- (BOOL)isResetPending:(tABC_Error *)error
-{
-    BOOL bPending = NO;
-    char *szUsernames = NULL;
-    tABC_CC cc = ABC_OtpResetGet(&szUsernames, error);
-    if (cc == ABC_CC_Ok) {
-        NSString *usernames;
-        NSString *loggedInUser;
-        usernames = [[NSString alloc] initWithUTF8String:szUsernames];
-        loggedInUser = [AppDelegate abc].name;
-        bPending = [usernames rangeOfString:loggedInUser].length > 0;
-    }
-    return bPending;
 }
 
 #pragma mark - Keyboard Notifications
@@ -316,44 +302,27 @@
 
 - (BOOL)switchTwoFactor:(BOOL)on
 {
-    tABC_Error error;
-    tABC_CC cc;
+    ABCConditionCode ccode;
     if (on) {
-        cc = [self enableTwoFactor:&error];
+        ccode = [[AppDelegate abc] setOTPAuth:OTP_RESET_DELAY];
+        if (ABCConditionCodeOk == ccode)
+            _isOn = YES;
     } else {
-        cc = [self disableTwoFactor:&error];
+        ccode = [[AppDelegate abc] removeOTPAuth];
+        if (ABCConditionCodeOk == ccode)
+        {
+            _secret = nil;
+            _isOn = NO;
+            [NotificationChecker resetOtpNotifications];
+        }
     }
-    if (cc == ABC_CC_Ok) {
+    if (ABCConditionCodeOk == ccode) {
         [self updateTwoFactorUi:on];
         [self checkSecret:YES];
         return YES;
     } else {
         return NO;
     }
-}
-
-- (tABC_CC)enableTwoFactor:(tABC_Error *)error
-{
-    tABC_CC cc = ABC_OtpAuthSet([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], OTP_RESET_DELAY, error);
-    if (cc == ABC_CC_Ok) {
-        _isOn = YES;
-    }
-    return cc;
-}
-
-- (tABC_CC)disableTwoFactor:(tABC_Error *)error
-{
-    tABC_CC cc = ABC_OtpAuthRemove([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], error);
-    if (cc == ABC_CC_Ok) {
-        _secret = nil;
-        _isOn = NO;
-        [NotificationChecker resetOtpNotifications];
-
-        ABC_OtpKeyRemove([[AppDelegate abc].name UTF8String], error);
-    }
-    return cc;
 }
 
 - (IBAction)Back:(id)sender
@@ -392,14 +361,14 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            tABC_Error error;
-            tABC_CC cc = [self disableTwoFactor:&error];
+            ABCConditionCode ccode = [[AppDelegate abc] removeOTPAuth];
+            NSString *errorString = [[AppDelegate abc] getLastErrorString];
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                if (cc == ABC_CC_Ok) {
+                if (ABCConditionCodeOk == ccode) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
                     [self updateTwoFactorUi:NO];
                 } else {
-                    [MainViewController fadingAlert:[Util errorMap:&error]];
+                    [MainViewController fadingAlert:errorString];
                 }
                 _loadingSpinner.hidden = YES;
             });
