@@ -278,6 +278,38 @@ static const int ABCDenominationUBTC = 2;
 - (ABCConditionCode)removeOTPAuth;
 
 /**
+ * getOTPResetDateForLastFailedAccountLogin
+ *
+ * Returns the OTP reset date for the last account that failed to log in,
+ * if any. Returns an empty string otherwise.
+ * @param NSDate   **date: pointer to NSDate for return value date
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)getOTPResetDateForLastFailedAccountLogin:(NSDate **)date;
+
+/**
+ * requestOTPReset
+ * Launches an OTP reset timer on the server,
+ * which will disable the OTP authentication requirement when it expires.
+ *
+ * This only works after the caller has successfully authenticated
+ * with the server, such as through a password login,
+ * but has failed to fully log in due to a missing OTP key.
+ * @param NSString   *username:
+ *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)requestOTPReset:(NSString *)username;
+- (ABCConditionCode)requestOTPReset:(NSString *)username
+                           complete:(void (^)(void)) completionHandler
+                              error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+/**
  * removeOTPResetRequest
  * Removes the OTP reset request from the server for the
  * currently logged in user

@@ -3440,31 +3440,58 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return [self setLastErrors:error];
 }
 
-///**
-// * Returns the reset status for all accounts currently on the device.
-// * @return A newline-separated list of usernames with pending resets.
-// * The caller frees this.
-// */
-//tABC_CC ABC_OtpResetGet(char **szUsernames,
-//                        tABC_Error *pError);
-//
-///**
-// * Returns the OTP reset date for the last account that failed to log in,
-// * if any. Returns an empty string otherwise.
-// */
-//tABC_CC ABC_OtpResetDate(char **pszDate,
-//                         tABC_Error *pError);
-///**
-// * Launches an OTP reset timer on the server,
-// * which will disable the OTP authentication requirement when it expires.
-// *
-// * This only works after the caller has successfully authenticated
-// * with the server, such as through a password login,
-// * but has failed to fully log in due to a missing OTP key.
-// */
-//tABC_CC ABC_OtpResetSet(const char *szUserName,
-//                        tABC_Error *pError);
-//
+- (ABCConditionCode)getOTPResetDateForLastFailedAccountLogin:(NSDate **)date;
+{
+    tABC_Error error;
+    char *szDate = NULL;
+    ABC_OtpResetDate(&szDate, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode) {
+        if (szDate == NULL || strlen(szDate) == 0) {
+            *date = nil;
+        } else {
+            NSString *dateStr = [NSString stringWithUTF8String:szDate];
+
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+
+            NSDate *dateTemp = [dateFormatter dateFromString:dateStr];
+            *date = dateTemp;
+        }
+    }
+
+    if (szDate) free(szDate);
+
+    return ccode;
+}
+
+- (ABCConditionCode)requestOTPReset:(NSString *)username;
+{
+    tABC_Error error;
+    ABC_OtpResetSet([username UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)requestOTPReset:(NSString *)username
+                           complete:(void (^)(void)) completionHandler
+                              error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        ABCConditionCode ccode = [self requestOTPReset:username];
+        NSString *errorString = [self getLastErrorString];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionHandler) completionHandler();
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    });
+    return ABCConditionCodeOk;
+}
 
 - (ABCConditionCode)removeOTPResetRequest;
 {

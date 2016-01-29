@@ -4,12 +4,10 @@
 #import "MinCharTextField.h"
 #import "ScanView.h"
 #import "Util.h"
-#import "ABC.h"
 #import "CoreBridge.h"
 #import "NSDate+Helper.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "ABC.h"
 
 @interface TwoFactorMenuViewController ()
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
@@ -37,13 +35,6 @@
     return self;
 }
 
-- (NSDate *)parseDate:(NSString *)dateString
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-    return [dateFormatter dateFromString:dateString];
-}
-
 - (NSString *)formatDate:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -56,11 +47,11 @@
 {
     [super viewDidLoad];
 
-    tABC_Error error;
-    char *szDate = NULL;
-    ABC_OtpResetDate(&szDate, &error);
-    if (error.code == ABC_CC_Ok) {
-        if (szDate == NULL || strlen(szDate) == 0) {
+    NSDate *date = nil;
+    ABCConditionCode ccode = [[AppDelegate abc] getOTPResetDateForLastFailedAccountLogin:&date];
+    if (ABCConditionCodeOk == ccode)
+    {
+        if (date == nil) {
             _labelResetDate.hidden = YES;
             _labelResetDesc.hidden = YES;
             _buttonReset.hidden = NO;
@@ -68,18 +59,14 @@
             _buttonReset.hidden = YES;
             _labelResetDate.hidden = NO;
             _labelResetDesc.hidden = NO;
-            NSString *dateStr = [NSString stringWithUTF8String:szDate];
             _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
                                         NSLocalizedString(@"Reset Date", nil),
-                                        [self formatDate:[self parseDate:dateStr]]];
+                                        [self formatDate:date]];
         }
     } else {
         _buttonReset.hidden = NO;
         _labelResetDate.hidden = YES;
         _labelResetDesc.hidden = YES;
-    }
-    if (NULL != szDate) {
-        free(szDate);
     }
 }
 
@@ -112,18 +99,13 @@
 
 - (IBAction)Reset:(id)sender
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        tABC_Error error;
-        tABC_CC cc = ABC_OtpResetSet([_username UTF8String], &error);
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (cc == ABC_CC_Ok) {
-                [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
-//                [[AppDelegate abc] otpClearError];
-            } else {
-                [MainViewController fadingAlert:[Util errorCC:(ABCConditionCode)error.code]];
-            }
-        });
-    });
+    [[AppDelegate abc] requestOTPReset:_username complete:^
+     {
+         [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
+     } error:^(ABCConditionCode ccode, NSString *errorString)
+     {
+         [MainViewController fadingAlert:errorString];
+     }];
 }
 
 - (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack
