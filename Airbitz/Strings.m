@@ -80,6 +80,7 @@
 #define uploadSuccessfulText                        NSLocalizedString(@"Upload Successful", @"Upload Successful fading popup")
 #define uploadFailedText                            NSLocalizedString(@"Upload Failed", @"Upload Failed")
 #define watcherClearedText                          NSLocalizedString(@"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text")
+#define watcherClearedWithErrorText                 NSLocalizedString(@"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync", @"Watcher Database Cleared popup text")
 #define PINOnlyNumbersText                          NSLocalizedString(@"Only numbers allowed in PIN", @"")
 #define scanQrToSendFundsText                       NSLocalizedString(@"Scan QR to Send or Login with BitID", @"Text at top of Send screen")
 #define scanQrToImportPrivateKeyOrGiftCard          NSLocalizedString(@"Scan QR to Import Private Key/Gift Card", @"Text at top of Scan Screen")

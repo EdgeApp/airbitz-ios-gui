@@ -54,7 +54,6 @@ static CoreBridge *airbitzCore;
     [AudioController initAll];
 
     airbitzCore = [[CoreBridge alloc] init];
-    [airbitzCore initAll];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -151,34 +150,10 @@ static CoreBridge *airbitzCore;
 
     if ([User isLoggedIn])
     {
-        [airbitzCore stopQueues];
+        [airbitzCore enterBackground];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgLogoutCleanup];
         }];
-        if ([airbitzCore allWatchersReady])
-        {
-            [airbitzCore disconnectWatchers];
-        }
-        else
-        {
-            // If the watchers aren't finished, let them finish
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                while (![airbitzCore allWatchersReady])
-                {
-                    // if app is active, break out of loop
-                    if ([self isAppActive])
-                    {
-                        break;
-                    }
-                    sleep(5);
-                }
-                // if the app *is not* active, stop watchers
-                if (![self isAppActive])
-                {
-                    [airbitzCore disconnectWatchers];
-                }
-            });
-        }
     }
 }
 
@@ -187,11 +162,7 @@ static CoreBridge *airbitzCore;
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
     [self checkLoginExpired];
-    if ([User isLoggedIn])
-    {
-        [airbitzCore connectWatchers];
-        [airbitzCore startQueues];
-    }
+    [airbitzCore enterForeground];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -201,22 +172,12 @@ static CoreBridge *airbitzCore;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [airbitzCore stopQueues];
     [LocalSettings freeAll];
-
-    int wait = 0;
-    int maxWait = 200; // ~10 seconds
-    while ([airbitzCore dataOperationCount] > 0 && wait < maxWait) {
-        [NSThread sleepForTimeInterval:.2];
-        wait++;
-    }
-    
     [[User Singleton] clear];
-    ABC_Terminate();
-}
 
-- (void)watchStatus
-{
+    [airbitzCore free];
+    airbitzCore = nil;
+
 }
 
 - (void)bgLogoutCleanup

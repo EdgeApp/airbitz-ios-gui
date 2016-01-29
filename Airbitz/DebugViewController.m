@@ -138,21 +138,15 @@
 {
     ABLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
-//    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-//    NSMutableArray *archived = [[NSMutableArray alloc] init];
-//    [[AppDelegate abc] loadWallets:wallets archived:archived];
-    [[AppDelegate abc] refreshWallets];
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [[AppDelegate abc] postToWalletsQueue:^{
-        [[AppDelegate abc] stopWatchers];
-        [[AppDelegate abc] deleteWatcherCache];
-        [[AppDelegate abc] startWatchers];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            self.clearWatcherButton.titleLabel.text = buttonText;
-            [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-        });
+    [[AppDelegate abc] clearBlockchainCache:^{
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedWithErrorText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     }];
 }
 

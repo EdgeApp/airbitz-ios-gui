@@ -86,8 +86,9 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 @implementation CoreBridge
 
-- (void)initAll
+- (id)init
 {
+    
     if (NO == bInitialized)
     {
         exchangeQueue = [[NSOperationQueue alloc] init];
@@ -186,6 +187,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
         self.numCategories = 0;
         self.settings = [[ABCSettings alloc] init];
     }
+    
+    return self;
 }
 
 - (void)fillSeedData:(NSMutableData *)data
@@ -220,10 +223,20 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 
 
-- (void)freeAll
+- (void)free
 {
     if (YES == bInitialized)
     {
+        [self stopQueues];
+        int wait = 0;
+        int maxWait = 200; // ~10 seconds
+        while ([self dataOperationCount] > 0 && wait < maxWait) {
+            [NSThread sleepForTimeInterval:.2];
+            wait++;
+        }
+
+        ABC_Terminate();
+
         exchangeQueue = nil;
         dataQueue = nil;
         walletsQueue = nil;
@@ -258,6 +271,24 @@ const int RECOVERY_REMINDER_COUNT = 2;
                                                        selector:@selector(dataSyncAllWalletsAndAccount:)
                                                        userInfo:nil
                                                         repeats:YES];
+    }
+}
+
+- (void)enterBackground
+{
+    if ([self isLoggedIn])
+    {
+        [self stopQueues];
+        [self disconnectWatchers];
+    }
+}
+
+- (void)enterForeground
+{
+    if ([self isLoggedIn])
+    {
+        [self connectWatchers];
+        [self startQueues];
     }
 }
 
@@ -675,7 +706,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        ABLog(1, [NSString stringWithFormat:@"************ numWalletsLoaded=%d", self.numWalletsLoaded]);
+        ABLog(1, @"************ numWalletsLoaded=%d", self.numWalletsLoaded);
         if (!self.arrayWallets || self.numWalletsLoaded == 0)
             [self postWalletsLoadingNotification];
         else
@@ -686,7 +717,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)postWalletsLoadingNotification
 {
-    ABLog(1, [NSString stringWithFormat:@"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded]);
+    ABLog(1, @"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded);
     [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADING object:self];
 }
 
@@ -1686,16 +1717,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
     return YES;
 }
 
-- (BOOL)allWatchersReady
-{
-    return YES;
-}
-
-- (BOOL)watcherIsReady:(NSString *)UUID
-{
-    return YES;
-}
-
 - (void)startWatchers
 {
     NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
@@ -1840,17 +1861,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }];
     
     while ([watcherQueue operationCount]);
-}
-
-- (void)deleteWatcherCache;
-{
-    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
-    [self loadWalletUUIDs:arrayWallets];
-    // stop watchers
-    for (NSString *uuid in arrayWallets) {
-        tABC_Error error;
-        ABC_WatcherDeleteCache([uuid UTF8String], &error);
-    }
 }
 
 - (void)restoreConnectivity
@@ -3868,6 +3878,38 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 //        });
 //    }];
 //}
+
+- (ABCConditionCode)clearBlockchainCache;
+{
+    NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
+    [self stopWatchers];
+    [self loadWalletUUIDs:arrayWallets];
+    // stop watchers
+    for (NSString *uuid in arrayWallets) {
+        tABC_Error error;
+        ABC_WatcherDeleteCache([uuid UTF8String], &error);
+    }
+    [self startWatchers];
+    return ABCConditionCodeOk;
+}
+
+- (ABCConditionCode)clearBlockchainCache:(void (^)(void)) completionHandler
+                                    error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler
+{
+    [self postToWalletsQueue:^{
+        ABCConditionCode ccode = [self clearBlockchainCache];
+        NSString *errorString = [self getLastErrorString];
+        dispatch_async(dispatch_get_main_queue(),^{
+            if (ABCConditionCodeOk == ccode) {
+                if (completionHandler) completionHandler();
+            } else {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }
+        });
+    }];
+    return ABCConditionCodeOk;
+}
+
 
 
 - (ABCConditionCode) satoshiToCurrency:(uint64_t) satoshi

@@ -82,8 +82,8 @@ static const int ABCDenominationUBTC = 2;
 @property (nonatomic, copy) NSString *password;
 
 
-- (void)initAll;
-- (void)freeAll;
+- (CoreBridge *)init;
+- (void)free;
 - (void)startQueues;
 - (void)stopQueues;
 
@@ -148,13 +148,13 @@ static const int ABCDenominationUBTC = 2;
 - (BOOL)passwordOk:(NSString *)password;
 - (BOOL)passwordExists;
 - (BOOL)passwordExists:(NSString *)username;
-- (BOOL)allWatchersReady;
-- (BOOL)watcherIsReady:(NSString *)UUID;
-- (void)connectWatchers;
-- (void)disconnectWatchers;
-- (void)startWatchers;
-- (void)startWatcher:(NSString *)walletUUID;
-- (void)stopWatchers;
+//- (BOOL)allWatchersReady;
+//- (BOOL)watcherIsReady:(NSString *)UUID;
+//- (void)connectWatchers;
+//- (void)disconnectWatchers;
+//- (void)startWatchers;
+//- (void)startWatcher:(NSString *)walletUUID;
+//- (void)stopWatchers;
 - (void)deleteWatcherCache;
 - (void)restoreConnectivity;
 - (void)lostConnectivity;
@@ -163,7 +163,6 @@ static const int ABCDenominationUBTC = 2;
 - (NSString *)currencyAbbrevLookup:(int) currencyNum;
 - (NSString *)currencySymbolLookup:(int)currencyNum;
 - (int)getCurrencyNumOfLocale;
-- (void)setupAccountAsWallet;
 - (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID;
 - (NSString *) bitidParseURI:(NSString *)uri;
 - (BOOL) bitidLogin:(NSString *)uri;
@@ -641,6 +640,24 @@ static const int ABCDenominationUBTC = 2;
                        amountSatoshi:(uint64_t)amountSatoshi
                          spendTarget:(SpendTarget **)spendTarget;
 
+
+/*
+ * clearBlockchainCache
+ * clears the local cache of blockchain info and force a re-download. This will cause wallets
+ * to report incorrect balances which the blockchain is resynced
+ *
+ * @param complete: completion handler code block which is called with SpendTarget *
+ *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param error: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCodeOk (always returns Ok)
+ */
+- (ABCConditionCode)clearBlockchainCache;
+- (ABCConditionCode)clearBlockchainCache:(void (^)(void)) completionHandler
+                                   error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
 /*
  * satoshiToCurrency
  *      Convert bitcoin amount in satoshis to a fiat currency amount
@@ -687,6 +704,21 @@ static const int ABCDenominationUBTC = 2;
 + (int) getMinimumUsernamedLength;
 + (int) getMinimumPasswordLength;
 + (int) getMinimumPINLength;
+
+/*
+ * enterBackground
+ * Call this routine from within applicationDidEnterBackground to have ABC
+ * spin down any background queues
+ */
+- (void)enterBackground;
+
+
+/*
+ * enterBackground
+ * Call this routine from within applicationDidEnterBackground to have ABC
+ * spin down any background queues
+ */
+- (void)enterForeground;
 
 
 @end
