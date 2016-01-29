@@ -31,7 +31,6 @@
 #import "PopupPickerView.h"
 #import "Keychain.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "ABC.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -117,7 +116,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                                       SpendingLimitsViewControllerDelegate, TwoFactorShowViewControllerDelegate, DebugViewControllerDelegate,
                                       CBCentralManagerDelegate>
 {
-    tABC_Currency                   *_aCurrencies;
 	TextFieldCell                   *_activeTextFieldCell;
 	UITapGestureRecognizer          *_tapGesture;
     SignUpViewController            *_signUpController;
@@ -219,9 +217,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)refresh:(NSNotification *)notification
 {	
-	tABC_Error Error;
-    Error.code = ABC_CC_Ok;
-
     [[AppDelegate abc] loadSettings];
 
     _frameStart = self.tableView.frame;
