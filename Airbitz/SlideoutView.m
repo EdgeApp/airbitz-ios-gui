@@ -14,6 +14,7 @@
 #import "Util.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
+#import "AppDelegate.h"
 
 #define SHOW_BUY_SELL 1
 
@@ -501,7 +502,7 @@
     }
     else
     {
-        [MainViewController fadingAlert:[Util errorCC:cc]];
+        [MainViewController fadingAlert:[[AppDelegate abc] getLastErrorString]];
     }
 }
 

@@ -1230,7 +1230,7 @@
                                  [longTapWallet.strUUID UTF8String],
                                  (char *)[textField.text UTF8String],
                                  &error);
-                [Util printABC_Error:&error];
+//                [Util printABC_Error:&error];
                 [[AppDelegate abc] refreshWallets];
             }
             else

@@ -10,6 +10,7 @@
 #import "User.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABC.h"
 
 #define X_SOURCE @"Airbitz"
 
@@ -222,7 +223,7 @@
                 free(pszURI);
             }
         } else {
-            [Util printABC_Error:&error];
+//            [Util printABC_Error:&error];
         }
     }
     if (szRequestID) {
@@ -233,7 +234,7 @@
         tABC_CC result = ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
             [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
             szRequestID, &szRequestAddress, &error);
-        [Util printABC_Error:&error];
+//        [Util printABC_Error:&error];
         if (result == ABC_CC_Ok) {
             if (szRequestAddress && strRequestAddress) {
                 [strRequestAddress appendFormat:@"%s", szRequestAddress];
@@ -286,7 +287,7 @@
     ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
         [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
         [requestId UTF8String], &error);
-    [Util printABC_Error:&error];
+//    [Util printABC_Error:&error];
     return error.code == ABC_CC_Ok ? YES : NO;
 }
 

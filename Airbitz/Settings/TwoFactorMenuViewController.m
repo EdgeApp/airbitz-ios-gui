@@ -9,6 +9,7 @@
 #import "NSDate+Helper.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABC.h"
 
 @interface TwoFactorMenuViewController ()
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorScanViewControllerDelegate>
@@ -119,7 +120,7 @@
                 [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
 //                [[AppDelegate abc] otpClearError];
             } else {
-                [MainViewController fadingAlert:[Util errorMap:&error]];
+                [MainViewController fadingAlert:[Util errorCC:(ABCConditionCode)error.code]];
             }
         });
     });

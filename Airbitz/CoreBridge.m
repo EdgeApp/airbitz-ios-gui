@@ -1134,13 +1134,13 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     int decimalPlaces = 5;
     switch (self.settings.denominationType) {
-        case ABC_DENOMINATION_BTC:
+        case ABCDenominationBTC:
             decimalPlaces = 6;
             break;
-        case ABC_DENOMINATION_MBTC:
+        case ABCDenominationMBTC:
             decimalPlaces = 3;
             break;
-        case ABC_DENOMINATION_UBTC:
+        case ABCDenominationUBTC:
             decimalPlaces = 0;
             break;
     }
@@ -1151,13 +1151,13 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     int decimalPlaces = 8;
     switch (self.settings.denominationType) {
-        case ABC_DENOMINATION_BTC:
+        case ABCDenominationBTC:
             decimalPlaces = 8;
             break;
-        case ABC_DENOMINATION_MBTC:
+        case ABCDenominationMBTC:
             decimalPlaces = 5;
             break;
-        case ABC_DENOMINATION_UBTC:
+        case ABCDenominationUBTC:
             decimalPlaces = 2;
             break;
     }
@@ -1283,7 +1283,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     {
         NSString *abbrev = [self currencyAbbrevLookup:currencyNum];
         NSString *symbol = [self currencySymbolLookup:currencyNum];
-        if (self.settings.denominationType == ABC_DENOMINATION_UBTC)
+        if (self.settings.denominationType == ABCDenominationUBTC)
         {
             if(includeAbbrev) {
                 return [NSString stringWithFormat:@"1000 %@ = %@ %.3f %@", denominationLabel, symbol, currency*1000, abbrev];
@@ -1324,6 +1324,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     tABC_CC result = ABC_GetRecoveryQuestions([strUserName UTF8String],
                                               &szQuestions,
                                               &Error);
+    [self setLastErrors:Error];
     if (ABC_CC_Ok == result)
     {
         if (szQuestions && strlen(szQuestions))
@@ -1342,7 +1343,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        [error appendString:[Util errorMap:&Error]];
+        [error appendString:[self getLastErrorString]];
         [self setLastErrors:Error];
     }
 
@@ -2640,31 +2641,27 @@ const int RECOVERY_REMINDER_COUNT = 2;
     NSArray *arrayAccounts = nil;
     tABC_Error error;
     __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
-    switch (result)
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
     {
-        case ABC_CC_Ok:
+        NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
+        arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+        for(NSString *str in arrayAccounts)
         {
-            NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
-            arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-            NSMutableArray *stringArray = [[NSMutableArray alloc] init];
-            for(NSString *str in arrayAccounts)
+            if(str && str.length!=0)
             {
-                if(str && str.length!=0)
-                {
-                    [stringArray addObject:str];
-                }
+                [stringArray addObject:str];
             }
-            arrayAccounts = [stringArray copy];
-            if (strError) *strError = nil;
-            return arrayAccounts;
-            break;
         }
-        default:
-        {
-            if (strError) *strError = [Util errorMap:&error];
-            return nil;
-            break;
-        }
+        arrayAccounts = [stringArray copy];
+        if (strError) *strError = nil;
+        return arrayAccounts;
+    }
+    else
+    {
+        if (strError) *strError = [self getLastErrorString];
+        return nil;
     }
 }
 
@@ -3481,15 +3478,15 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
             self.settings.denominationType = pSettings->bitcoinDenomination.denominationType;
 
             switch (self.settings.denominationType) {
-                case ABC_DENOMINATION_BTC:
+                case ABCDenominationBTC:
                     self.settings.denominationLabel = @"BTC";
                     self.settings.denominationLabelShort = @"Ƀ ";
                     break;
-                case ABC_DENOMINATION_MBTC:
+                case ABCDenominationMBTC:
                     self.settings.denominationLabel = @"mBTC";
                     self.settings.denominationLabelShort = @"mɃ ";
                     break;
-                case ABC_DENOMINATION_UBTC:
+                case ABCDenominationUBTC:
                     self.settings.denominationLabel = @"bits";
                     self.settings.denominationLabelShort = @"ƀ ";
                     break;
@@ -3866,6 +3863,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     }
 }
 
++ (int) getMinimumUsernamedLength { return ABC_MIN_USERNAME_LENGTH; };
 + (int) getMinimumPasswordLength { return ABC_MIN_PASS_LENGTH; };
 + (int) getMinimumPINLength { return ABC_MIN_PIN_LENGTH; };
 

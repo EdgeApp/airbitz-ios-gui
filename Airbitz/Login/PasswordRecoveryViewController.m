@@ -39,7 +39,6 @@ typedef enum eAlertType
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
-    tABC_CC                 _statusCode;
     TwoFactorMenuViewController *_tfaMenuViewController;
     NSString                    *_secret;
 }

@@ -21,6 +21,9 @@
 #define ABC_NOTIFICATION_WALLETS_LOADED                     @"ABC_Wallets_Loaded"
 #define ABC_NOTIFICATION_WALLETS_CHANGED                    @"ABC_Wallets_Changed"
 
+static const int ABCDenominationBTC  = 0;
+static const int ABCDenominationMBTC = 1;
+static const int ABCDenominationUBTC = 2;
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
@@ -615,6 +618,7 @@
 - (ABCConditionCode) getLastConditionCode;
 - (NSString *) getLastErrorString;
 
++ (int) getMinimumUsernamedLength;
 + (int) getMinimumPasswordLength;
 + (int) getMinimumPINLength;
 

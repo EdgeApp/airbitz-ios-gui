@@ -31,6 +31,7 @@
 #import "PopupPickerView.h"
 #import "Keychain.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "ABC.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -99,13 +100,13 @@ typedef struct sDenomination
 
 tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
-        "BTC", 100000000 // ABC_DENOMINATION_BTC = 0
+        "BTC", 100000000 // ABCDenominationBTC = 0
     },
     {
-        "mBTC", 100000 // ABC_DENOMINATION_MBTC = 1
+        "mBTC", 100000 // ABCDenominationMBTC = 1
     },
     {
-        "bits", 100 // ABC_DENOMINATION_UBTC = 2
+        "bits", 100 // ABCDenominationUBTC = 2
     }
 };
 

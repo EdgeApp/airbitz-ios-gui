@@ -248,16 +248,16 @@
     BOOL valid = YES;
     {
         // if the pin isn't long enough
-        if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        if (self.pinTextField.text.length < [CoreBridge getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [CoreBridge getMinimumPINLength]]]
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
         }

@@ -22,6 +22,7 @@
 #import "FadingAlertView.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABC.h"
 
 #define CELL_HEIGHT 45.0
 
@@ -504,7 +505,7 @@ typedef enum eExportOption
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil];
                 [alert show];
-                [Util printABC_Error:&Error];
+//                [Util printABC_Error:&Error];
                 return nil;
             }
             else
@@ -551,7 +552,7 @@ typedef enum eExportOption
             }
             else
             {
-                [Util printABC_Error:&Error];
+//                [Util printABC_Error:&Error];
                 NSString* str = @"Error exporting private seed!";
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }

@@ -52,6 +52,7 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
+#import "ABC.h"
 
 #define IMPORT_TIMEOUT 30
 
@@ -1987,13 +1988,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self cancelImportExpirationTimer];
 
     NSDictionary *userInfo = [notification userInfo];
-    tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
+    ABCConditionCode result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
     uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
     if (nil == _sweptAlert)
     {
         _sweptAmount = amount;
 
-        if (ABC_CC_Ok == result)
+        if (ABCConditionCodeOk == result)
         {
             if (0 < amount)
             {
@@ -2018,9 +2019,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            tABC_Error temp;
-            temp.code = result;
-            NSString *message = [Util errorMap:&temp];
+            NSString *message = [Util errorCC:result];
             _sweptAlert = [[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Error", nil)
                           message:message

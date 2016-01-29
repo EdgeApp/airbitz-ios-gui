@@ -8,6 +8,7 @@
 #import "LatoLabel.h"
 #import "Util.h"
 #import "User.h"
+#import "ABC.h"
 
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {
@@ -37,7 +38,7 @@
 {
     [super viewDidLoad];
 	_userNameTextField.delegate = self;
-    _userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
+    _userNameTextField.minimumCharacters = [CoreBridge getMinimumUsernamedLength];
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
 
@@ -123,7 +124,7 @@
                 {
                     _bSuccess = false;
                 }
-                _strReason = [Util errorMap:&error];
+                _strReason = [Util errorCC:(ABCConditionCode)error.code];
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
             });
@@ -195,14 +196,14 @@
 
     // if we are signing up for a new account
     {
-        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if (self.userNameTextField.text.length < [CoreBridge getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [CoreBridge getMinimumUsernamedLength]]]
                          delegate:nil
                 cancelButtonTitle:@"OK"
                 otherButtonTitles:nil];

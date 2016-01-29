@@ -76,13 +76,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.userNameTextField.delegate = self;
-    self.userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
+    self.userNameTextField.minimumCharacters = [CoreBridge getMinimumUsernamedLength];
 	self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
 	self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.reenterPasswordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+	self.pinTextField.minimumCharacters = [CoreBridge getMinimumPINLength];
     if (self.strUserName)
     {
         self.userNameTextField.text = self.strUserName;
@@ -449,28 +449,28 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([[AppDelegate abc] passwordExists] && self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if ([[AppDelegate abc] passwordExists] && self.userNameTextField.text.length < [CoreBridge getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.title,
-                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
+                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [CoreBridge getMinimumUsernamedLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
             [alert show];
         }
         // if the pin isn't long enough
-        else if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        else if (self.pinTextField.text.length < [CoreBridge getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.title,
-                                           [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
+                                           [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [CoreBridge getMinimumPINLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "CoreBridge.h"
-#import "ABC.h"
+//#import "ABC.h"
 
 @import Foundation.NSString;
 
@@ -38,9 +38,9 @@ void abDebugLog(int level, NSString *statement);
 
 @interface Util : NSObject
 
-+ (NSString *)errorMap:(const tABC_Error *)pError;
-+ (NSString *)errorCC:(const tABC_CC) cc;
-+ (void)printABC_Error:(const tABC_Error *)pError;
+//+ (NSString *)errorMap:(const tABC_Error *)pError;
++ (NSString *)errorCC:(ABCConditionCode) ccode;
+//+ (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;

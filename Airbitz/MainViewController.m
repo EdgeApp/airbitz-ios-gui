@@ -1397,7 +1397,6 @@ MainViewController *singleton;
     NSString *coin;
     NSString *fiat;
     
-    tABC_Error error;
     Wallet *wallet = [[AppDelegate abc] getWallet:walletUUID];
     Transaction *transaction = [[AppDelegate abc] getTransaction:walletUUID withTx:txId];
     

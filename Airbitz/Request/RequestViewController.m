@@ -915,7 +915,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-                [Util printABC_Error:&error];
+//                [Util printABC_Error:&error];
         }
     }
 
@@ -945,7 +945,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [Util printABC_Error:&error];
+//            [Util printABC_Error:&error];
         }
 
         free((void*)szRequestID);
@@ -1645,7 +1645,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             &txDetails,
             &error))
     {
-        [Util printABC_Error:&error];
+//        [Util printABC_Error:&error];
     }
 }
 
@@ -1660,7 +1660,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             [self.requestID UTF8String],
             &Error))
     {
-        [Util printABC_Error:&Error];
+//        [Util printABC_Error:&Error];
     }
 }
 

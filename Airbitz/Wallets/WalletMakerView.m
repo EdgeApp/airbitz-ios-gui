@@ -16,6 +16,7 @@
 #import "PopupPickerView.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABC.h"
 
 @interface WalletMakerView () <PopupPickerViewDelegate, UITextFieldDelegate>
 {

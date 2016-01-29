@@ -17,6 +17,7 @@
 #import "CommonTypes.h"
 #import "SpendTarget.h"
 #import "MainViewController.h"
+#import "ABC.h"
 
 static const NSString *PROTOCOL = @"bridge://";
 

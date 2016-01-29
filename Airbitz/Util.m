@@ -30,26 +30,7 @@ void abDebugLog(int level, NSString *statement) {
 
 @implementation Util
 
-+ (NSString *)errorMap:(const tABC_Error *)pError;
-{
-    switch (pError->code)
-    {
-        case ABC_CC_InvalidPinWait:
-        {
-            NSString *description = [NSString stringWithUTF8String:pError->szDescription];
-            if ([@"0" isEqualToString:description]) {
-                return NSLocalizedString(@"Invalid PIN.", nil);
-            } else {
-                return [NSString stringWithFormat:
-                        NSLocalizedString(@"Too many failed login attempts. Please try again in %@ seconds.", nil),
-                        description];
-            }
-        }
-    }
-    return [Util errorCC:pError->code];
-}
-
-+ (NSString *)errorCC:(const tABC_CC) cc;
++ (NSString *)errorCC:(ABCConditionCode) cc;
 {
     switch (cc)
     {
@@ -152,29 +133,6 @@ void abDebugLog(int level, NSString *statement) {
                                                              withString:[replaceList objectAtIndex:i]];
     }
 
-}
-
-
-+ (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            NSString *err = [NSString stringWithFormat:@"Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine];
-            abDebugLog(1, err);
-        }
-        if (pError->code == ABC_CC_DecryptError
-                    || pError->code == ABC_CC_DecryptFailure)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_LOGOUT object:self];
-        }
-    }
 }
 
 // resizes a view that is one of the tab bar screens to the approriate size to avoid the toolbar

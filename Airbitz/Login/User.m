@@ -82,7 +82,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [self clear];
     }
     [AppDelegate abc].settings.denomination = 100000000;
-    [AppDelegate abc].settings.denominationType = ABC_DENOMINATION_UBTC;
+    [AppDelegate abc].settings.denominationType = ABCDenominationUBTC;
     [AppDelegate abc].settings.denominationLabel = @"bits";
     [AppDelegate abc].settings.denominationLabelShort = @"Ƀ ";
     self.sendInvalidEntryCount = 0;

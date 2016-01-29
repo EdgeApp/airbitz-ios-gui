@@ -406,7 +406,7 @@
                     [MainViewController fadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
                     _requestView.hidden = YES;
                 } else {
-                    [MainViewController fadingAlert:[Util errorMap:&Error]];
+                    [MainViewController fadingAlert:[Util errorCC:(ABCConditionCode)Error.code]];
                 }
                 _loadingSpinner.hidden = YES;
             });

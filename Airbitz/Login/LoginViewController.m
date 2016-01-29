@@ -50,7 +50,6 @@ typedef enum eLoginMode
     BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
-    tABC_CC                         _resultCode;
     SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
@@ -608,7 +607,6 @@ typedef enum eReloginState
                             error:^(ABCConditionCode ccode, NSString *errorString)
          {
              [self showSpinner:NO];
-             //                    [[AppDelegate abc] otpSetError:_resultCode];
              
              if (ABCConditionCodeInvalidOTP == ccode)
              {
@@ -1090,7 +1088,6 @@ typedef enum eReloginState
 - (void)signInComplete
 {
     [self showSpinner:NO];
-//    [[AppDelegate abc] otpSetError:_resultCode];
 
     [User login:self.usernameSelector.textField.text
        password:self.passwordTextField.text];
@@ -1280,8 +1277,9 @@ typedef enum eReloginState
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [[AppDelegate abc] accountDeleteLocal:account];
-    if(ABC_CC_Ok == cc)
+    ABCConditionCode ccode = [[AppDelegate abc] accountDeleteLocal:account];
+    NSString *errorString = [[AppDelegate abc] getLastErrorString];
+    if(ccode == ABCConditionCodeOk)
     {
         [self getAllAccounts];
         [self.usernameSelector updateChoices:self.arrayAccounts];
@@ -1293,7 +1291,7 @@ typedef enum eReloginState
     }
     else
     {
-        [MainViewController fadingAlert:[Util errorCC:cc]];
+        [MainViewController fadingAlert:errorString];
     }
 }
 
