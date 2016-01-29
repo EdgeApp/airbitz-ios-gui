@@ -429,7 +429,6 @@
 		DA9EE5551BC61F930063DA07 /* ExportWalletOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0831BC61F920063DA07 /* ExportWalletOptionsViewController.m */; };
 		DA9EE5561BC61F930063DA07 /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */; };
 		DA9EE5571BC61F930063DA07 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */; };
-		DA9EE5581BC61F930063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EE5591BC61F930063DA07 /* PayeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08B1BC61F920063DA07 /* PayeeCell.m */; };
 		DA9EE55A1BC61F930063DA07 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08D1BC61F920063DA07 /* TransactionCell.m */; };
 		DA9EE55B1BC61F930063DA07 /* TransactionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08F1BC61F920063DA07 /* TransactionDetailsViewController.m */; };
@@ -500,7 +499,6 @@
 		DA9EF36B1BC7285D0063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
 		DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03C1BC61F920063DA07 /* StrokeGradientButton.m */; };
 		DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED61BC61F910063DA07 /* SignUpViewController.m */; };
-		DA9EF36E1BC7285D0063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE71BC61F910063DA07 /* PluginViewController.m */; };
 		DA9EF3701BC7285D0063DA07 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8171BC61F8F0063DA07 /* Location.m */; };
 		DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7851BC61E670063DA07 /* BlurView.m */; };
@@ -908,7 +906,6 @@
 		DA9EF5321BC729FA0063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
 		DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03C1BC61F920063DA07 /* StrokeGradientButton.m */; };
 		DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED61BC61F910063DA07 /* SignUpViewController.m */; };
-		DA9EF5351BC729FA0063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE71BC61F910063DA07 /* PluginViewController.m */; };
 		DA9EF5371BC729FA0063DA07 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8171BC61F8F0063DA07 /* Location.m */; };
 		DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7851BC61E670063DA07 /* BlurView.m */; };
@@ -1965,8 +1962,6 @@
 		DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletPDFViewController.m; sourceTree = "<group>"; };
 		DA9EE0861BC61F920063DA07 /* ExportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletViewController.h; sourceTree = "<group>"; };
 		DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletViewController.m; sourceTree = "<group>"; };
-		DA9EE0881BC61F920063DA07 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
-		DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		DA9EE08A1BC61F920063DA07 /* PayeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayeeCell.h; sourceTree = "<group>"; };
 		DA9EE08B1BC61F920063DA07 /* PayeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayeeCell.m; sourceTree = "<group>"; };
 		DA9EE08C1BC61F920063DA07 /* TransactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionCell.h; sourceTree = "<group>"; };
@@ -3078,8 +3073,6 @@
 				DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */,
 				DA9EE0861BC61F920063DA07 /* ExportWalletViewController.h */,
 				DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */,
-				DA9EE0881BC61F920063DA07 /* OfflineWalletViewController.h */,
-				DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */,
 				DA9EE08A1BC61F920063DA07 /* PayeeCell.h */,
 				DA9EE08B1BC61F920063DA07 /* PayeeCell.m */,
 				DA9EE08C1BC61F920063DA07 /* TransactionCell.h */,
@@ -4617,7 +4610,6 @@
 				DA9EF36B1BC7285D0063DA07 /* Util.m in Sources */,
 				DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */,
-				DA9EF36E1BC7285D0063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */,
 				DA9EF3701BC7285D0063DA07 /* Location.m in Sources */,
 				DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */,
@@ -4761,7 +4753,6 @@
 				DA9EF5321BC729FA0063DA07 /* Util.m in Sources */,
 				DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */,
-				DA9EF5351BC729FA0063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */,
 				DA9EF5371BC729FA0063DA07 /* Location.m in Sources */,
 				DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */,
@@ -4905,7 +4896,6 @@
 				DA9ED7F71BC61E680063DA07 /* Util.m in Sources */,
 				DA9EE52E1BC61F930063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EE40E1BC61F920063DA07 /* SignUpViewController.m in Sources */,
-				DA9EE5581BC61F930063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EE4161BC61F920063DA07 /* PluginViewController.m in Sources */,
 				DA9EE0C11BC61F920063DA07 /* Location.m in Sources */,
 				DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */,

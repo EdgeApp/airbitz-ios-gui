@@ -9,7 +9,6 @@
 #import "WalletMakerView.h"
 #import "User.h"
 #import "CommonTypes.h"
-#import "OfflineWalletViewController.h"
 #import "Util.h"
 #import "CoreBridge.h"
 #import "ButtonSelectorView2.h"

@@ -4,7 +4,6 @@
 #import "ScanView.h"
 #import "User.h"
 #import "Util.h"
-#import "ABC.h"
 #import "CoreBridge.h"
 #import "MainViewController.h"
 #import "Theme.h"

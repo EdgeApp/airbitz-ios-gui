@@ -869,55 +869,32 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 
 // generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName walletUUID:(NSString *)strUUID currencyNum:(int)currencyNum withNotes:(NSString *)strNotes withCategory:(NSString *)strCategory
-    storeRequestIDIn:(NSMutableString *)strRequestID storeRequestURI:(NSMutableString *)strRequestURI 
-    storeRequestAddressIn:(NSMutableString *)strRequestAddress scaleAndSave:(BOOL)bScaleAndSave 
-    withAmount:(SInt64)amountSatoshi
+- (UIImage *)createRequestQRImageFor:(NSString *)strName
+                          walletUUID:(NSString *)strUUID
+                         currencyNum:(int)currencyNum
+                           withNotes:(NSString *)strNotes
+                        withCategory:(NSString *)strCategory
+                    storeRequestIDIn:(NSMutableString *)strRequestID
+                     storeRequestURI:(NSMutableString *)strRequestURI
+               storeRequestAddressIn:(NSMutableString *)strRequestAddress
+                        scaleAndSave:(BOOL)bScaleAndSave
+                          withAmount:(SInt64)amountSatoshi
 {
     ABLog(2,@"ENTER createRequestQRImageFor");
 
-    UIImage *qrImage = nil;
     [strRequestID setString:@""];
     [strRequestAddress setString:@""];
     [strRequestURI setString:@""];
 
-    unsigned int width = 0;
-    unsigned char *pData = NULL;
-    char *pszURI = NULL;
-    tABC_Error error;
+    NSString *uri;
+    NSString *address;
+    UIImage *qrcode;
 
-    const char *szRequestID = [self createReceiveRequestFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes
-        withCategory:strCategory withAmount:amountSatoshi];
-
-    if (szRequestID)
-    {
-        self.requestID = [NSString stringWithUTF8String:szRequestID];
-
-        tABC_CC result = ABC_GenerateRequestQRCode([[AppDelegate abc].name UTF8String],
-                                           [[AppDelegate abc].password UTF8String],
-                                           [strUUID UTF8String],
-                                                   szRequestID,
-                                                   &pszURI,
-                                                   &pData,
-                                                   &width,
-                                                   &error);
-
-        if (result == ABC_CC_Ok)
-        {
-                qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
-
-            if (pszURI && strRequestURI)
-            {
-                [strRequestURI appendFormat:@"%s", pszURI];
-                free(pszURI);
-            }
-            
-        }
-        else
-        {
-//                [Util printABC_Error:&error];
-        }
-    }
+    const char *szRequestID = [self createReceiveRequestFor:strName walletUUID:strUUID
+                                                currencyNum:currencyNum
+                                                  withNotes:strNotes
+                                               withCategory:strCategory
+                                                 withAmount:amountSatoshi];
 
     if (szRequestID)
     {
@@ -925,38 +902,25 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             [strRequestID appendFormat:@"%s", szRequestID];
         }
-        char *szRequestAddress = NULL;
-
-        Wallet *wallet = [self getCurrentWallet];
-        tABC_CC result = ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
-                                               [[AppDelegate abc].password UTF8String],
-                                               [wallet.strUUID UTF8String],
-                                               szRequestID,
-                                               &szRequestAddress,
-                                               &error);
-
-        if (result == ABC_CC_Ok)
+        self.requestID = [NSString stringWithUTF8String:szRequestID];
+        
+        ABCConditionCode ccode;
+        ccode = [[AppDelegate abc] generateQRCodeForRequest:strUUID
+                                                  requestID:self.requestID
+                                                    uriString:&uri
+                                                     address:&address
+                                                     qrcode:&qrcode];
+        if (ABCConditionCodeOk == ccode)
         {
-            if (szRequestAddress && strRequestAddress)
-            {
-                [strRequestAddress appendFormat:@"%s", szRequestAddress];
-                free(szRequestAddress);
-            }
+            [strRequestURI appendFormat:@"%@", uri];
+            [strRequestAddress appendFormat:@"%@", address];
         }
-        else
-        {
-//            [Util printABC_Error:&error];
-        }
+    }
 
+    if (szRequestID)
         free((void*)szRequestID);
-    }
 
-    if (pData)
-    {
-        free(pData);
-    }
-    
-    UIImage *qrImageFinal = qrImage;
+    UIImage *qrImageFinal = qrcode;
 
     if (bScaleAndSave)
     {
@@ -964,7 +928,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
         CGContextRef c = UIGraphicsGetCurrentContext();
         CGContextSetInterpolationQuality(c, kCGInterpolationNone);
-        [qrImage drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
+        [qrcode drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
         qrImageFinal = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
@@ -983,7 +947,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)updateTextFieldContents:(BOOL)allowBTCUpdate
 {
-    tABC_Error error;
     
     Wallet *wallet = [self getCurrentWallet];
     

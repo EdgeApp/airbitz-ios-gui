@@ -2181,7 +2181,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
             if (result == ABC_CC_Ok)
             {
-                qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
+                qrImage = [self dataToImage:pData withWidth:width andHeight:width];
 
 
                 tABC_CC result = ABC_GetRequestAddress([self.name UTF8String],
@@ -3289,6 +3289,56 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return ABCConditionCodeOk;
 }
 
+/* === Request: === */
+
+- (ABCConditionCode)generateQRCodeForRequest:(NSString *)walletUUID
+                                   requestID:(NSString *)request
+                                   uriString:(NSString **)uri
+                                     address:(NSString **)address
+                                      qrcode:(UIImage **)image
+{
+    unsigned int width = 0;
+    unsigned char *pData = NULL;
+    char *pszURI = NULL;
+    tABC_Error error;
+    
+    ABC_GenerateRequestQRCode([self.name UTF8String],
+                              [self.password UTF8String],
+                              [walletUUID UTF8String],
+                              [request UTF8String],
+                              &pszURI,
+                              &pData,
+                              &width,
+                              &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    
+    if (ABCConditionCodeOk == ccode)
+    {
+        *uri = [NSString stringWithUTF8String:pszURI];
+        *image = [self dataToImage:pData withWidth:width andHeight:width];
+        
+        char *szRequestAddress = NULL;
+        
+        ABC_GetRequestAddress([self.name UTF8String],
+                              [self.password UTF8String],
+                              [walletUUID UTF8String],
+                              [request UTF8String],
+                              &szRequestAddress,
+                              &error);
+        ABCConditionCode ccode = [self setLastErrors:error];
+        
+        if (ABCConditionCodeOk == ccode)
+        {
+            *address = [NSString stringWithUTF8String:szRequestAddress];
+        }
+        if (szRequestAddress) free(szRequestAddress);
+
+    }
+    if (pszURI) free(pszURI);
+    if (pData) free(pData);
+    return ccode;
+}
+
 /* === OTP authentication: === */
 
 
@@ -3415,15 +3465,34 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 //tABC_CC ABC_OtpResetSet(const char *szUserName,
 //                        tABC_Error *pError);
 //
-///**
-// * Cancels an OTP reset timer.
-// */
-//tABC_CC ABC_OtpResetRemove(const char *szUserName,
-//                           const char *szPassword,
-//                           tABC_Error *pError);
-//
 
+- (ABCConditionCode)removeOTPResetRequest;
+{
+    tABC_Error error;
+    ABC_OtpResetRemove([self.name UTF8String], [self.password UTF8String], &error);
+    [self removeOTPKey];
+    return [self setLastErrors:error];
+}
 
+- (ABCConditionCode)encodeStringToQRImage:(NSString *)string
+                                    image:(UIImage **)image;
+{
+    unsigned char *pData = NULL;
+    unsigned int width;
+    tABC_Error error;
+    
+    ABC_QrEncode([string UTF8String], &pData, &width, &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        *image = [self dataToImage:pData withWidth:width andHeight:width];
+    }
+    
+    if (pData) {
+        free(pData);
+    }
+    return ccode;
+}
 
 - (ABCConditionCode)getNumWalletsInAccount:(int *)numWallets
 {
@@ -3997,6 +4066,56 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
 }
 
+- (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
+{
+    //converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
+    char *pixels = malloc(4 * width * width);
+    char *buf = pixels;
+    
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if (data[(y * width) + x] & 0x1)
+            {
+                //printf("%c", '*');
+                *buf++ = 0;
+                *buf++ = 0;
+                *buf++ = 0;
+                *buf++ = 255;
+            }
+            else
+            {
+                printf(" ");
+                *buf++ = 255;
+                *buf++ = 255;
+                *buf++ = 255;
+                *buf++ = 255;
+            }
+        }
+        //printf("\n");
+    }
+    
+    CGContextRef ctx;
+    CGImageRef imageRef;
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    ctx = CGBitmapContextCreate(pixels,
+                                (float)width,
+                                (float)height,
+                                8,
+                                width * 4,
+                                colorSpace,
+                                (CGBitmapInfo)kCGImageAlphaPremultipliedLast ); //documentation says this is OK
+    CGColorSpaceRelease(colorSpace);
+    imageRef = CGBitmapContextCreateImage (ctx);
+    UIImage* rawImage = [UIImage imageWithCGImage:imageRef];
+    
+    CGContextRelease(ctx);
+    CGImageRelease(imageRef);
+    free(pixels);
+    return rawImage;
+}
 
 
 @end

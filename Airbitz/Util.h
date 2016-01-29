@@ -57,7 +57,6 @@ void abDebugLog(int level, NSString *statement);
 + (void)animateControllerFadeOut:(UIViewController *)viewController;
 + (void)animateControllerFadeIn:(UIViewController *)viewController;
 
-+ (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller;
 + (NSString *)urlencode:(NSString *)url;
 + (NSMutableDictionary *)getUrlParameters:(NSURL *)url;

@@ -277,6 +277,24 @@ static const int ABCDenominationUBTC = 2;
  */
 - (ABCConditionCode)removeOTPAuth;
 
+/**
+ * removeOTPResetRequest
+ * Removes the OTP reset request from the server for the
+ * currently logged in user
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)removeOTPResetRequest;
+
+/**
+ * encodeStringToQRImage
+ * Encodes a string into a QR code returned as UIImage *
+ *
+ * @param     NSString*   string: string to encode
+ * @param     UIImage**    image: returned image
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)encodeStringToQRImage:(NSString *)string
+                                    image:(UIImage **)image;
 
 /*
  * signIn
@@ -392,6 +410,22 @@ static const int ABCDenominationUBTC = 2;
                      complete:(void (^)(void)) completionHandler
                         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
+
+/*
+ * generateQRCodeForRequest
+ * @param NSString    *walletUUID: UUID of wallet to make request from
+ * @param NSString     *requestID: requestID from createReceiveRequest
+ * @param NSString     *uriString: returned string of full URI request
+ * @param UIImage        **qrcode: returned image of QR code
+ *
+ * @return ABCConditionCode
+ */
+
+- (ABCConditionCode)generateQRCodeForRequest:(NSString *)walletUUID
+                                   requestID:(NSString *)request
+                                   uriString:(NSString **)uri
+                                     address:(NSString **)address
+                                      qrcode:(UIImage **)image;
 
 /*
  * uploadLogs

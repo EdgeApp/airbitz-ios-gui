@@ -3,7 +3,6 @@
 #import "TwoFactorMenuViewController.h"
 #import "NotificationChecker.h"
 #import "MinCharTextField.h"
-#import "ABC.h"
 #import "CoreBridge.h"
 #import "Util.h"
 #import "User.h"
@@ -79,7 +78,7 @@
 {
     _passwordTextField.text = @"";
     _passwordTextField.delegate = self;
-    _passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    _passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     if (![[AppDelegate abc] passwordExists]) {
@@ -161,21 +160,15 @@
 - (void)showQrCode:(BOOL)show
 {
     if (show) {
-        unsigned char *pData = NULL;
-        unsigned int width;
-
-        tABC_Error error;
-        tABC_CC cc = ABC_QrEncode([_secret UTF8String], &pData, &width, &error);
-        if (cc == ABC_CC_Ok) {
-            UIImage *qrImage = [Util dataToImage:pData withWidth:width andHeight:width];
+        UIImage *qrImage;
+        ABCConditionCode ccode = [[AppDelegate abc] encodeStringToQRImage:_secret image:&qrImage];
+        if (ABCConditionCodeOk == ccode)
+        {
             _qrCodeImageView.image = qrImage;
             _qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
             [self animateQrCode:YES];
         } else {
             _viewQRCodeFrame.hidden = YES;
-        }
-        if (pData) {
-            free(pData);
         }
     } else {
         [self animateQrCode:NO];
@@ -397,16 +390,15 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            tABC_Error Error;
-            tABC_CC cc = ABC_OtpResetRemove([[AppDelegate abc].name UTF8String],
-                                            [[AppDelegate abc].password UTF8String],
-                                            &Error);
+            ABCConditionCode ccode = [[AppDelegate abc] removeOTPResetRequest];
+            NSString *errorString = [[AppDelegate abc] getLastErrorString];
+            
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                if (cc == ABC_CC_Ok) {
+                if (ABCConditionCodeOk == ccode) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
                     _requestView.hidden = YES;
                 } else {
-                    [MainViewController fadingAlert:[Util errorCC:(ABCConditionCode)Error.code]];
+                    [MainViewController fadingAlert:errorString];
                 }
                 _loadingSpinner.hidden = YES;
             });
