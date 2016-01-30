@@ -1223,15 +1223,7 @@
             //        // need at least one character in a wallet name
             if ([textField.text length])
             {
-                //ABLog(2,@"rename wallet to: %@", textField.text);
-                tABC_Error error;
-                ABC_RenameWallet([[AppDelegate abc].name UTF8String],
-                                 [[AppDelegate abc].password UTF8String],
-                                 [longTapWallet.strUUID UTF8String],
-                                 (char *)[textField.text UTF8String],
-                                 &error);
-//                [Util printABC_Error:&error];
-                [[AppDelegate abc] refreshWallets];
+                [[AppDelegate abc] renameWallet:longTapWallet.strUUID newName:textField.text];
             }
             else
             {

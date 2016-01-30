@@ -99,7 +99,6 @@ static const int ABCDenominationUBTC = 2;
 - (int)dataOperationCount;
 
 // New methods
-- (void)refreshWallets;
 - (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 - (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
 - (void)makeCurrentWallet:(Wallet *)wallet;
@@ -148,14 +147,6 @@ static const int ABCDenominationUBTC = 2;
 - (BOOL)passwordOk:(NSString *)password;
 - (BOOL)passwordExists;
 - (BOOL)passwordExists:(NSString *)username;
-//- (BOOL)allWatchersReady;
-//- (BOOL)watcherIsReady:(NSString *)UUID;
-//- (void)connectWatchers;
-//- (void)disconnectWatchers;
-//- (void)startWatchers;
-//- (void)startWatcher:(NSString *)walletUUID;
-//- (void)stopWatchers;
-- (void)deleteWatcherCache;
 - (void)restoreConnectivity;
 - (void)lostConnectivity;
 - (void)prioritizeAddress:(NSString *)address inWallet:(NSString *)walletUUID;
@@ -206,6 +197,16 @@ static const int ABCDenominationUBTC = 2;
 - (ABCConditionCode) createWallet:(NSString *)walletName currencyNum:(int) currencyNum
                          complete:(void (^)(void)) completionHandler
                             error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
+
+/*
+ * renameWallet
+ * @param NSString* walletUUID: UUID of wallet to rename
+ * @param NSString*    newName: new name of wallet
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode) renameWallet:(NSString *)walletUUID
+                          newName:(NSString *)walletName;
 
 - (ABCConditionCode) createFirstWalletIfNeeded;
 - (ABCConditionCode) getNumWalletsInAccount:(int *)numWallets;

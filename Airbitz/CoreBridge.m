@@ -3021,6 +3021,18 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 
 }
 
+- (ABCConditionCode) renameWallet:(NSString *)walletUUID
+                          newName:(NSString *)walletName;
+{
+    tABC_Error error;
+    ABC_RenameWallet([self.name UTF8String],
+                     [self.password UTF8String],
+                     [walletUUID UTF8String],
+                     (char *)[walletName UTF8String],
+                     &error);
+    [self refreshWallets];
+    return [self setLastErrors:error];
+}
 
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
 {
