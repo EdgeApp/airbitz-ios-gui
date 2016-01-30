@@ -334,6 +334,17 @@ void abcSetDebugLevel(int level);
 - (ABCConditionCode)encodeStringToQRImage:(NSString *)string
                                     image:(UIImage **)image;
 
+
+/**
+ * isAccountUsernameAvailable
+ * Checks if username is available
+ *
+ * @param     NSString*   username: username to check
+ * @return ABCConditionCodeOk if username is available
+ */
+- (ABCConditionCode)isAccountUsernameAvailable:(NSString *)username;
+
+
 /*
  * signIn
  * @param NSString* username: username to login

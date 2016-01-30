@@ -3034,6 +3034,13 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     return [self setLastErrors:error];
 }
 
+- (ABCConditionCode)isAccountUsernameAvailable:(NSString *)username;
+{
+    tABC_Error error;
+    ABC_AccountAvailable([username UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
 {
     tABC_Error error;
