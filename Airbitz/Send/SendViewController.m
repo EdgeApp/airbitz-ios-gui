@@ -52,7 +52,6 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
-#import "ABC.h"
 
 #define IMPORT_TIMEOUT 30
 
@@ -1744,7 +1743,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
                                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
             
-            tABC_Error error;
             NSString *text = _addressTextField.text;
             
             if (text.length)
