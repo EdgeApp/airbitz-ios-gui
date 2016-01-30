@@ -60,7 +60,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // ABLog(2,@"%s", __FUNCTION__);
+    // ABCLog(2,@"%s", __FUNCTION__);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];

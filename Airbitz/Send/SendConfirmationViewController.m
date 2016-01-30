@@ -258,7 +258,7 @@
     }
     else
     {
-        ABLog(2,@"Text changed for some field");
+        ABCLog(2,@"Text changed for some field");
     }
 }
 
@@ -597,7 +597,7 @@
 - (void)showTransactionDetails:(NSArray *)params
 {
     if ([params count] < 2) {
-        ABLog(2,@"Not enought args\n");
+        ABCLog(2,@"Not enought args\n");
         return;
     }
     Wallet *wallet = params[0];

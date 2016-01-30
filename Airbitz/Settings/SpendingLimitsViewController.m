@@ -106,7 +106,7 @@
 
 - (IBAction)doneClicked:(id)sender
 {
-    ABLog(2,@"Done Clicked.");
+    ABCLog(2,@"Done Clicked.");
     [self.view endEditing:YES];
 }
 

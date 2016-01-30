@@ -190,7 +190,7 @@
 
 - (void)toggleWalletDropdown: (UIButton *)sender
 {
-    ABLog(2,@"didTapWalletName: Hello world\n");
+    ABCLog(2,@"didTapWalletName: Hello world\n");
 
     CGFloat destination;
 
@@ -610,7 +610,7 @@
     {
         // find the image from the contacts
         image = [MainViewController Singleton].dictImages[[transaction.strName lowercaseString]];
-        ABLog(2, @"Looking for image for %@. Found image = %lx", transaction.strName, (unsigned long) image);
+        ABCLog(2, @"Looking for image for %@. Found image = %lx", transaction.strName, (unsigned long) image);
     }
 
     return image;
@@ -676,7 +676,7 @@
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(1, @"*** ERROR Connecting to Network");
+        ABCLog(1, @"*** ERROR Connecting to Network");
     }];
 }
 
@@ -813,7 +813,7 @@
             case WALLET_SECTION_ACTIVE:
 
                 //CellIdentifier = @"WalletsHeader";
-                //ABLog(2,@"Active wallets header view: %@", activeWalletsHeaderView);
+                //ABCLog(2,@"Active wallets header view: %@", activeWalletsHeaderView);
                 return _activeWalletsHeaderView;
 
             case WALLET_SECTION_ARCHIVED:
@@ -1125,14 +1125,14 @@
 {
     //XXX
     // Need to lock table header & shrink toggle bar
-    ABLog(2,@"TransactionsView: searchBarTextDidBeginEditing");
+    ABCLog(2,@"TransactionsView: searchBarTextDidBeginEditing");
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar;
 {
     //XXX
     // Need to unlock table header & grow toggle bar
-    ABLog(2,@"TransactionsView: searchBarTextDidEndEditing");
+    ABCLog(2,@"TransactionsView: searchBarTextDidEndEditing");
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)text
@@ -1259,9 +1259,9 @@
 
     NSIndexPath *indexPath = [self.walletsTable indexPathForRowAtPoint:p];
     if (indexPath == nil) {
-        ABLog(2,@"long press on table view but not on a row");
+        ABCLog(2,@"long press on table view but not on a row");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        ABLog(2,@"long press on table view at section %d, row %d", (int) indexPath.section, (int) indexPath.row);
+        ABCLog(2,@"long press on table view at section %d, row %d", (int) indexPath.section, (int) indexPath.row);
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
             longTapWallet = [[AppDelegate abc].arrayWallets objectAtIndex:indexPath.row];
@@ -1286,7 +1286,7 @@
                                         otherButtonTitles:renameButtonText,deleteText,nil];
         [longTapAlert show];
     } else {
-        ABLog(2,@"gestureRecognizer.state = %d", (int)gestureRecognizer.state);
+        ABCLog(2,@"gestureRecognizer.state = %d", (int)gestureRecognizer.state);
     }
 }
 
@@ -1471,7 +1471,7 @@
     {
         _archiveCollapsed = YES;
         NSInteger countOfRowsToDelete = [AppDelegate abc].arrayArchivedWallets.count;
-        //ABLog(2,@"Rows to collapse: %i", countOfRowsToDelete);
+        //ABCLog(2,@"Rows to collapse: %i", countOfRowsToDelete);
         if (countOfRowsToDelete > 0)
         {
             NSMutableArray *indexPathsToDelete = [[NSMutableArray alloc] init];

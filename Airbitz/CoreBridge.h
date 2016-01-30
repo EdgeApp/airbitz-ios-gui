@@ -29,6 +29,12 @@ static const int ABCDenominationUBTC = 2;
 #define PIN_REQUIRED_PERIOD_SECONDS     120
 #define ABC_ARRAY_EXCHANGES     @[@"Bitstamp", @"BraveNewCoin", @"Coinbase", @"CleverCoin"]
 
+#define ABCLog(level, format_string,...) \
+((abcDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
+
+void abcDebugLog(int level, NSString *string);
+void abcSetDebugLevel(int level);
+
 @class SpendTarget;
 
 @interface BitidSignature : NSObject

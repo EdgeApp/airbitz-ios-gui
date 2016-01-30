@@ -133,7 +133,7 @@
     currencyNum = [AppDelegate abc].settings.defaultCurrencyNum;
     currencyString = [[AppDelegate abc] currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
-//    ABLog(2,self.buttonSelectorView.button.currentTitle);
+//    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
     _currencyChoice = (int) [[AppDelegate abc].arrayCurrencyCodes indexOfObject:currencyString];
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];

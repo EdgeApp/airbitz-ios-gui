@@ -82,7 +82,7 @@ typedef enum eAlertType
 	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
-	//ABLog(2,@"Adding keyboard notification");
+	//ABCLog(2,@"Adding keyboard notification");
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -213,7 +213,7 @@ typedef enum eAlertType
 
 - (void)CompleteSignup
 {
-	//ABLog(2,@"Complete Signup");
+	//ABCLog(2,@"Complete Signup");
 	//verify that all six questions have been selected
 	BOOL allQuestionsSelected = YES;
 	BOOL allAnswersValid = YES;
@@ -615,7 +615,7 @@ typedef enum eAlertType
 		if (distanceToMove > 0)
 		{
 			//need to scroll
-			//ABLog(2,@"Scrolling %f", distanceToMove);
+			//ABCLog(2,@"Scrolling %f", distanceToMove);
 			CGPoint curContentOffset = self.scrollView.contentOffset;
 			curContentOffset.y += distanceToMove;
 			[self.scrollView setContentOffset:curContentOffset animated:YES];
@@ -631,7 +631,7 @@ typedef enum eAlertType
 {
 	if (_activeTextField)
 	{
-		//ABLog(2,@"Keyboard will hide for Login View Controller");
+		//ABCLog(2,@"Keyboard will hide for Login View Controller");
 
 		_activeTextField = nil;
 	}
@@ -805,7 +805,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectQuestion:(NSDictionary *)question oldQuestion:(NSString *)oldQuestion
 {
-	//ABLog(2,@"Selected Question: %@", [question objectForKey:@"question"]);
+	//ABCLog(2,@"Selected Question: %@", [question objectForKey:@"question"]);
 	[self.arrayChosenQuestions addObject:[question objectForKey:@"question"]];
 	
 	[self.arrayChosenQuestions removeObject:oldQuestion];
@@ -816,7 +816,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField
 {
-	//ABLog(2,@"Answer field selected");
+	//ABCLog(2,@"Answer field selected");
 	_activeTextField = textField;
 }
 

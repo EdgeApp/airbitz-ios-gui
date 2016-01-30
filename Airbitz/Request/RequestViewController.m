@@ -279,7 +279,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     [super viewWillDisappear:animated];
     if(self.peripheralManager.isAdvertising) {
-        ABLog(2,@"Removing all BLE services and stopping advertising");
+        ABCLog(2,@"Removing all BLE services and stopping advertising");
         [self.peripheralManager removeAllServices];
         [self.peripheralManager stopAdvertising];
         _peripheralManager = nil;
@@ -472,7 +472,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (RequestState)updateQRCode:(SInt64)incomingSatoshi
 {
-    ABLog(2,@"ENTER updateQRCode");
+    ABCLog(2,@"ENTER updateQRCode");
 
     BOOL bChangeRequest = false;
 
@@ -600,7 +600,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSArray *args = [NSArray arrayWithObjects:strName,strUUID,nsCurrencyNum,strNotes,strCategory,strRequestID,strRequestURI,strRequestAddress,nsRemaining,nil];
 
-    ABLog(2,@"updateQRCode setTimer req=%llu", [nsRemaining longLongValue]);
+    ABCLog(2,@"updateQRCode setTimer req=%llu", [nsRemaining longLongValue]);
     self.qrTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].qrCodeGenDelayTime target:self selector:@selector(updateQRAsync:) userInfo:args repeats:NO];
 
 
@@ -615,7 +615,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 
     return self.state;
-    ABLog(2,@"EXIT updateQRCode");
+    ABCLog(2,@"EXIT updateQRCode");
 
 }
 
@@ -644,7 +644,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [[AppDelegate abc] postToGenQRQueue:^(void) {
 
-        ABLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
+        ABCLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
         UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
                                         storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
                                             scaleAndSave:NO withAmount:remaining];
@@ -660,7 +660,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         });
 
         if(self.peripheralManager.isAdvertising) {
-            ABLog(2,@"Removing all BLE services and stopping advertising");
+            ABCLog(2,@"Removing all BLE services and stopping advertising");
             [self.peripheralManager removeAllServices];
             [self.peripheralManager stopAdvertising];
             _peripheralManager = nil;
@@ -688,7 +688,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)exchangeRateUpdate: (NSNotification *)notification
 {
-    ABLog(2,@"Updating exchangeRateUpdate");
+    ABCLog(2,@"Updating exchangeRateUpdate");
 	[self updateTextFieldContents:NO];
 }
 
@@ -880,7 +880,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                         scaleAndSave:(BOOL)bScaleAndSave
                           withAmount:(SInt64)amountSatoshi
 {
-    ABLog(2,@"ENTER createRequestQRImageFor");
+    ABCLog(2,@"ENTER createRequestQRImageFor");
 
     [strRequestID setString:@""];
     [strRequestAddress setString:@""];
@@ -938,7 +938,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         [UIImagePNGRepresentation(qrImageFinal) writeToFile:filePath atomically:YES];
     }
 
-    ABLog(2,@"EXIT createRequestQRImageFor");
+    ABCLog(2,@"EXIT createRequestQRImageFor");
 
     return qrImageFinal;
 }
@@ -1205,7 +1205,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if(peripheral.state == CBPeripheralManagerStatePoweredOn && [self isLECapableHardware])
     {
         // We're in CBPeripheralManagerStatePoweredOn state...
-        //ABLog(2,@"self.peripheralManager powered on.");
+        //ABCLog(2,@"self.peripheralManager powered on.");
 
         // ... so build our service.
 
@@ -1271,13 +1271,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
  */
 -(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
 {
-    //ABLog(2,@"didReceiveWriteRequests");
+    //ABCLog(2,@"didReceiveWriteRequests");
     for(CBATTRequest *request in requests)
     {
         if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
         {
             NSString *userName = [[NSString alloc] initWithData:request.value encoding:NSUTF8StringEncoding];
-            //ABLog(2,@"Received new string: %@", userName);
+            //ABCLog(2,@"Received new string: %@", userName);
 
             self.connectedName = userName;
         }
@@ -1291,7 +1291,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
  */
 -(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
 {
-    //ABLog(2,@"didReceiveReadRequests");
+    //ABCLog(2,@"didReceiveReadRequests");
 
     if([request.characteristic.UUID isEqual:[CBUUID UUIDWithString:TRANSFER_CHARACTERISTIC_UUID]])
     {
@@ -1328,15 +1328,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             state = @"Bluetooth is currently resetting.";
             break;
         case CBPeripheralManagerStatePoweredOn:
-            ABLog(2,@"powered on");
+            ABCLog(2,@"powered on");
             return TRUE;
         case CBPeripheralManagerStateUnknown:
-            ABLog(2,@"state unknown");
+            ABCLog(2,@"state unknown");
             return FALSE;
         default:
             return FALSE;
     }
-    ABLog(2,@"Peripheral manager state: %@", state);
+    ABCLog(2,@"Peripheral manager state: %@", state);
     return FALSE;
 }
 
@@ -1481,7 +1481,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)sendSMS
 {
-    //ABLog(2,@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
+    //ABCLog(2,@"sendSMS to: %@ / %@", self.strFullName, self.strPhoneNumber);
 
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
     if ([MFMessageComposeViewController canSendText] && [MFMessageComposeViewController canSendAttachments])
@@ -1502,7 +1502,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         BOOL bAttached = [controller addAttachmentData:UIImagePNGRepresentation(imageAttachment) typeIdentifier:(NSString*)kUTTypePNG filename:filePath];
         if (!bAttached)
         {
-            ABLog(2,@"Could not attach qr code");
+            ABCLog(2,@"Could not attach qr code");
         }
 
         controller.body = content;
@@ -1731,7 +1731,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.strEMail = strTarget;
         self.strPhoneNumber = strTarget;
 
-        //ABLog(2,@"name: %@, target: %@", strFullName, strTarget);
+        //ABCLog(2,@"name: %@, target: %@", strFullName, strTarget);
 
         if (controller.mode == RecipientMode_SMS)
         {

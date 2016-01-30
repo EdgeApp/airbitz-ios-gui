@@ -252,7 +252,7 @@
 //    //Get KeyboardFrame (in Window coordinates)
 //    if(_activeTextField)
 //    {
-//        //ABLog(2,@"Keyboard will show for SignUpView");
+//        //ABCLog(2,@"Keyboard will show for SignUpView");
 //        NSDictionary *userInfo = [notification userInfo];
 //        CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 //
@@ -266,7 +266,7 @@
 {
 //    if(_activeTextField)
 //    {
-//        //ABLog(2,@"Keyboard will hide for SignUpView");
+//        //ABCLog(2,@"Keyboard will hide for SignUpView");
 //        _activeTextField = nil;
 //    }
 //    _keyboardFrameOriginY = 0.0;

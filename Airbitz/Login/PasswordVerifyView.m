@@ -154,7 +154,7 @@
 		}
 		
 		UILabel* label = (UILabel *)[self viewWithTag:i + 20];
-		//ABLog(2,@"curent tag: %i for view: %@", i, label);
+		//ABCLog(2,@"curent tag: %i for view: %@", i, label);
 		if(label)
 		{
 			label.text = ruleDescription[i];

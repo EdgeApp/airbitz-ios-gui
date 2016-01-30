@@ -12,14 +12,6 @@
 
 @import Foundation.NSString;
 
-#define DEBUG_LEVEL 1
-
-#define ABLog(level, format_string,...) \
-    ((abDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
-
-void abDebugLog(int level, NSString *statement);
-
-
 @class AirbitzViewController;
 
 #define UIColorFromRGB(rgbValue) \

@@ -213,7 +213,7 @@ MainViewController *singleton;
     NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
     NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
-    ABLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
+    ABCLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
@@ -283,7 +283,7 @@ MainViewController *singleton;
                         NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
                         if (strThumbnail && strThumbnail != (id)[NSNull null])
                         {
-                            //ABLog(2,@"thumbnail path: %@", strThumbnail);
+                            //ABCLog(2,@"thumbnail path: %@", strThumbnail);
                             [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
                         }
                     }
@@ -297,7 +297,7 @@ MainViewController *singleton;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSInteger statusCode = operation.response.statusCode;
         
-        ABLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
+        ABCLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
     }];
     
 }
@@ -315,7 +315,7 @@ MainViewController *singleton;
     }
     else
     {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -360,16 +360,16 @@ MainViewController *singleton;
                         if(data)
                         {
                             singleton.dictImages[[strFullName lowercaseString]] = [UIImage imageWithData:data];
-                            ABLog(2, @"Add Image for: %@", strFullName);
+                            ABCLog(2, @"Add Image for: %@", strFullName);
                         }
                         else
                         {
-                            ABLog(2, @"No Image for : %@", strFullName);
+                            ABCLog(2, @"No Image for : %@", strFullName);
                         }
                     }
                     else
                     {
-                        ABLog(2, @"No Image for : %@", strFullName);
+                        ABCLog(2, @"No Image for : %@", strFullName);
                     }
                 }
             }
@@ -379,7 +379,7 @@ MainViewController *singleton;
     
     // store the final
     singleton.arrayContacts = arrayContacts;
-    //ABLog(2,@"contacts: %@", self.arrayContacts);
+    //ABCLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 
@@ -520,11 +520,11 @@ MainViewController *singleton;
 
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 
-    ABLog(2,@"navBar:%f %f\ntabBar: %f %f\n",
+    ABCLog(2,@"navBar:%f %f\ntabBar: %f %f\n",
             self.navBar.frame.origin.y, self.navBar.frame.size.height,
             self.tabBar.frame.origin.y, self.tabBar.frame.size.height);
 
-    ABLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
+    ABCLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
     
 
@@ -551,11 +551,11 @@ MainViewController *singleton;
             NSString *desc = [results objectForKey:@"description"];
             if ([desc containsString:@"enabled"])
             {
-                ABLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
+                ABCLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
                 [self.arrayPluginBizIDs addObject:numBizId];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            ABLog(1, @"Plugin Bizid Disabled");
+            ABCLog(1, @"Plugin Bizid Disabled");
         }];
 
     }
@@ -731,7 +731,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                          }];
@@ -760,7 +760,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }];
     }
@@ -791,7 +791,7 @@ MainViewController *singleton;
 		completion:^(BOOL finished)
 		{
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+            ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
 		}];
 	}
 	else
@@ -819,7 +819,7 @@ MainViewController *singleton;
                          completion:^(BOOL finished)
                          {
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
     else
@@ -1915,7 +1915,7 @@ MainViewController *singleton;
 
 - (void)slideoutAccount
 {
-    ABLog(2,@"MainViewController.slideoutAccount");
+    ABCLog(2,@"MainViewController.slideoutAccount");
 }
 
 - (void)slideoutSettings
@@ -2302,27 +2302,27 @@ MainViewController *singleton;
 {
     if (_selectedViewController == nil)
     {
-        ABLog(2,@"_selectedViewController == nil");
+        ABCLog(2,@"_selectedViewController == nil");
     }
     else if (_selectedViewController == _directoryViewController)
     {
-        ABLog(2,@"_selectedViewController == _directoryViewController");
+        ABCLog(2,@"_selectedViewController == _directoryViewController");
     }
     else if (_selectedViewController == _transactionsViewController)
     {
-        ABLog(2,@"_selectedViewController == _transactionsViewController");
+        ABCLog(2,@"_selectedViewController == _transactionsViewController");
     }
     else if (_selectedViewController == _loginViewController)
     {
-        ABLog(2,@"_selectedViewController == _loginViewController");
+        ABCLog(2,@"_selectedViewController == _loginViewController");
     }
     else if (_selectedViewController == _sendViewController)
     {
-        ABLog(2,@"_selectedViewController == _sendViewController");
+        ABCLog(2,@"_selectedViewController == _sendViewController");
     }
     else if (_selectedViewController == _requestViewController)
     {
-        ABLog(2,@"_selectedViewController == _requestViewController");
+        ABCLog(2,@"_selectedViewController == _requestViewController");
     }
 }
 

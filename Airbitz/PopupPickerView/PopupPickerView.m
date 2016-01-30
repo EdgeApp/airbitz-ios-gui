@@ -78,13 +78,13 @@ CGRect keyboardFrame;
 {
 	// Get the size of the keyboard.
 	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//ABLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABCLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
 	keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//ABLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABCLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 - (void)addCropLine:(CGPoint)pointOnScreen direction:(tPopupPickerPosition)cropDirection animated:(BOOL)animated
@@ -111,7 +111,7 @@ CGRect keyboardFrame;
 				[self constrainToKeepoutsAnimated:animated];
 			break;
 			default:
-				ABLog(2,@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
+				ABCLog(2,@"*** THIS CROP DIRECTION NOT SUPPORTED YET ***");
 				break;
 	}
 }
@@ -491,7 +491,7 @@ CGRect keyboardFrame;
 
 -(void)selectRow:(NSInteger)row
 {
-	//ABLog(2,@"Select Row");
+	//ABCLog(2,@"Select Row");
 	NSIndexPath *ip=[NSIndexPath indexPathForRow:row inSection:0];
 	[table selectRowAtIndexPath:ip animated:NO scrollPosition:UITableViewScrollPositionTop];
 	[table scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
@@ -587,7 +587,7 @@ CGRect keyboardFrame;
         }
     }
 
-	//ABLog(2,@"Number of rows: %i", nRows);
+	//ABCLog(2,@"Number of rows: %i", nRows);
     return nRows;
 }
 

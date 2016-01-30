@@ -401,15 +401,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     obscureAmount += (CGFloat) DISTANCE_ABOVE_KEYBOARD;
 
     // if obscured too much
-    //ABLog(2,@"obscure amount final = %f", obscureAmount);
+    //ABCLog(2,@"obscure amount final = %f", obscureAmount);
     if (obscureAmount != 0.0)
     {
         // it is obscured so move it to compensate
-        //ABLog(2,@"need to compensate");
+        //ABCLog(2,@"need to compensate");
         newFrame.origin.y -= obscureAmount;
     }
 
-    //ABLog(2,@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
+    //ABCLog(2,@"old origin: %f, new origin: %f", _frameStart.origin.y, newFrame.origin.y);
 
     // if our new position puts us lower then we were originally
     if (newFrame.origin.y > _frameStart.origin.y)
@@ -1127,7 +1127,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABCLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     // NOTE: if it isn't handled in here it is probably handled in a cell callback (e.g., buttonCellButtonPressed)
 

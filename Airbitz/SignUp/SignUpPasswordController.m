@@ -90,7 +90,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // ABLog(2,@"%s", __FUNCTION__);
+    // ABCLog(2,@"%s", __FUNCTION__);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
@@ -273,7 +273,7 @@
     CGFloat contentTop = [MainViewController getHeaderHeight]; // raise the view
     //called when user taps on either search textField or location textField
     
-    //ABLog(2,@"TextField began editing");
+    //ABCLog(2,@"TextField began editing");
     _activeTextField = textField;
     if(textField == self.passwordTextField)
     {

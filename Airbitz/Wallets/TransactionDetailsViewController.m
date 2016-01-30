@@ -1056,7 +1056,7 @@ typedef enum eRequestType
     }
     else
     {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -1075,7 +1075,7 @@ typedef enum eRequestType
         NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm];
         // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
         
-        ABLog(1, @"serverQuery: %@", strURL);
+        ABCLog(1, @"serverQuery: %@", strURL);
         [self.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSDictionary *results = (NSDictionary *)responseObject;
@@ -1120,7 +1120,7 @@ typedef enum eRequestType
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSInteger statusCode = operation.response.statusCode;
             
-            ABLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
+            ABCLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
 
         }];
         
@@ -1195,7 +1195,7 @@ typedef enum eRequestType
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-//    ABLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+//    ABCLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 
 }
 
@@ -1573,7 +1573,7 @@ typedef enum eRequestType
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
-        ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
+        ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
         [[AppDelegate abc] addCategory:catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
@@ -1605,12 +1605,12 @@ typedef enum eRequestType
     frame = self.pickerTextCategory.popupPicker.frame;
     frame.size.height = keyboardFrame.origin.y - self.pickerTextCategory.popupPicker.frame.origin.y;
     self.pickerTextCategory.popupPicker.frame = frame;
-    //ABLog(2,@"keyboard will show");
+    //ABCLog(2,@"keyboard will show");
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    //ABLog(2,@"keyboard will hide");
+    //ABCLog(2,@"keyboard will hide");
 
     if (_activeTextField.returnKeyType == UIReturnKeyDone)
     {

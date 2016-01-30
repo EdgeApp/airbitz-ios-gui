@@ -496,7 +496,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)loadWallets:(NSMutableArray *)arrayWallets withTxs:(BOOL)bWithTx
 {
-    ABLog(2,@"ENTER loadWallets: %@", [NSThread currentThread].name);
+    ABCLog(2,@"ENTER loadWallets: %@", [NSThread currentThread].name);
 
     NSMutableArray *arrayUuids = [[NSMutableArray alloc] init];
     [self loadWalletUUIDs:arrayUuids];
@@ -508,7 +508,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         }
         [arrayWallets addObject:wallet];
     }
-    ABLog(2,@"EXIT loadWallets: %@", [NSThread currentThread].name);
+    ABCLog(2,@"EXIT loadWallets: %@", [NSThread currentThread].name);
 
 }
 
@@ -587,7 +587,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     [self postToWatcherQueue:^(void) {
         [self postToWalletsQueue:^(void) {
-            ABLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+            ABCLog(2,@"ENTER refreshWallets WalletQueue: %@", [NSThread currentThread].name);
             NSMutableArray *arrayWallets = [[NSMutableArray alloc] init];
             NSMutableArray *arrayArchivedWallets = [[NSMutableArray alloc] init];
             NSMutableArray *arrayUUIDs = [[NSMutableArray alloc] init];
@@ -618,7 +618,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
             }
 
             dispatch_async(dispatch_get_main_queue(),^{
-                ABLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
+                ABCLog(2,@"ENTER refreshWallets MainQueue: %@", [NSThread currentThread].name);
                 self.arrayWallets = arrayWallets;
                 self.arrayArchivedWallets = arrayArchivedWallets;
                 self.arrayUUIDs = arrayUUIDs;
@@ -652,12 +652,12 @@ const int RECOVERY_REMINDER_COUNT = 2;
                 [self checkWalletsLoadingNotification];
                 [self postNotificationWalletsChanged];
 
-                ABLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
+                ABCLog(2,@"EXIT refreshWallets MainQueue: %@", [NSThread currentThread].name);
 
                 if (cb) cb();
 
             });
-            ABLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
+            ABCLog(2,@"EXIT refreshWallets WalletQueue: %@", [NSThread currentThread].name);
         }];
     }];
 }
@@ -693,9 +693,9 @@ const int RECOVERY_REMINDER_COUNT = 2;
                 [self.walletLoadingTimer invalidate];
                 self.walletLoadingTimer = nil;
             }
-            ABLog(1, @"************************************************");
-            ABLog(1, @"*** Received Packet from Core. Reset timer******");
-            ABLog(1, @"************************************************");
+            ABCLog(1, @"************************************************");
+            ABCLog(1, @"*** Received Packet from Core. Reset timer******");
+            ABCLog(1, @"************************************************");
             self.walletLoadingTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].walletLoadingTimerInterval
                                                                        target:self
                                                                      selector:@selector(postWalletsLoadedNotification)
@@ -706,7 +706,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        ABLog(1, @"************ numWalletsLoaded=%d", self.numWalletsLoaded);
+        ABCLog(1, @"************ numWalletsLoaded=%d", self.numWalletsLoaded);
         if (!self.arrayWallets || self.numWalletsLoaded == 0)
             [self postWalletsLoadingNotification];
         else
@@ -717,7 +717,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)postWalletsLoadingNotification
 {
-    ABLog(1, @"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded);
+    ABCLog(1, @"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded);
     [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADING object:self];
 }
 
@@ -816,7 +816,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     Wallet *wallet = [self getWallet: walletUUID];
     if (wallet == nil)
     {
-        ABLog(2,@("Could not find wallet for %@"), walletUUID);
+        ABCLog(2,@("Could not find wallet for %@"), walletUUID);
         return nil;
     }
     tABC_CC result = ABC_GetTransaction([self.name UTF8String],
@@ -830,7 +830,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransaction(pTrans);
@@ -894,7 +894,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        ABLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -954,7 +954,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         *syncing = YES;
         if (txHeight < 0)
         {
-            ABLog(0, @"calcTxConfirmations returning negative txHeight=%d", txHeight);
+            ABCLog(0, @"calcTxConfirmations returning negative txHeight=%d", txHeight);
             return txHeight;
         }
         else
@@ -998,7 +998,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else 
     {
-        ABLog(2,@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -1056,7 +1056,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
                            (char *)[ids UTF8String],
                            &Error) != ABC_CC_Ok)
     {
-        ABLog(2,@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
 
@@ -1076,7 +1076,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     }
     else
     {
-        ABLog(2,@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
         return false;
     }
@@ -1094,7 +1094,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
                 [transaction.strID UTF8String],
                 &pDetails, &Error);
         if (ABC_CC_Ok != result) {
-            ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABCLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
             [self setLastErrors:Error];
 //            return false;
             return;
@@ -1113,7 +1113,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
                 pDetails, &Error);
 
         if (ABC_CC_Ok != result) {
-            ABLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABCLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
             [self setLastErrors:Error];
 //            return false;
             return;
@@ -1658,7 +1658,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         if (0 == (wq + gq + txq + eq + mq))
             break;
 
-        ABLog(0,
+        ABCLog(0,
             @"Waiting for queues to complete wq=%lu dq=%lu gq=%lu txq=%lu eq=%lu mq=%lu",
             wq, dq, gq, txq, eq, mq);
         [NSThread sleepForTimeInterval:.2];
@@ -2048,29 +2048,29 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (NSString *)currencyAbbrevLookup:(int)currencyNum
 {
-    ABLog(2,@"ENTER currencyAbbrevLookup: %@", [NSThread currentThread].name);
+    ABCLog(2,@"ENTER currencyAbbrevLookup: %@", [NSThread currentThread].name);
     NSNumber *c = [NSNumber numberWithInt:currencyNum];
     NSString *cached = [currencyCodesCache objectForKey:c];
     if (cached != nil) {
-        ABLog(2,@"EXIT currencyAbbrevLookup CACHED code:%@ thread:%@", cached, [NSThread currentThread].name);
+        ABCLog(2,@"EXIT currencyAbbrevLookup CACHED code:%@ thread:%@", cached, [NSThread currentThread].name);
         return cached;
     }
     tABC_Error error;
     int currencyCount;
     tABC_Currency *currencies = NULL;
     ABC_GetCurrencies(&currencies, &currencyCount, &error);
-    ABLog(2,@"CALLED ABC_GetCurrencies: %@ currencyCount:%d", [NSThread currentThread].name, currencyCount);
+    ABCLog(2,@"CALLED ABC_GetCurrencies: %@ currencyCount:%d", [NSThread currentThread].name, currencyCount);
     if (error.code == ABC_CC_Ok) {
         for (int i = 0; i < currencyCount; ++i) {
             if (currencyNum == currencies[i].num) {
                 NSString *code = [NSString stringWithUTF8String:currencies[i].szCode];
                 [currencyCodesCache setObject:code forKey:c];
-                ABLog(2,@"EXIT currencyAbbrevLookup code:%@ thread:%@", code, [NSThread currentThread].name);
+                ABCLog(2,@"EXIT currencyAbbrevLookup code:%@ thread:%@", code, [NSThread currentThread].name);
                 return code;
             }
         }
     }
-    ABLog(2,@"EXIT currencyAbbrevLookup code:NULL thread:%@", [NSThread currentThread].name);
+    ABCLog(2,@"EXIT currencyAbbrevLookup code:NULL thread:%@", [NSThread currentThread].name);
     return @"";
 }
 
@@ -2240,7 +2240,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     if ([wallets count] == 0)
     {
         // create first wallet if it doesn't already exist
-        ABLog(1, @"Creating first wallet in account");
+        ABCLog(1, @"Creating first wallet in account");
         ccode = [self createWallet:nil currencyNum:0];
     }
     return ccode;
@@ -2606,7 +2606,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     if (szURLDomain) {
         free(szURLDomain);
     }
-    ABLog(2,@("bitidParseURI domain: %@"), urlDomain);
+    ABCLog(2,@("bitidParseURI domain: %@"), urlDomain);
     return urlDomain;
 
 }
@@ -2757,7 +2757,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
             }
         }
     }
-    ABLog(1,@"Deleting wallet [%@]", uuid);
+    ABCLog(1,@"Deleting wallet [%@]", uuid);
     tABC_Error error;
 
     ABC_WalletRemove([self.name UTF8String], [uuid UTF8String], &error);
@@ -2791,7 +2791,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
     [self postToMiscQueue:^
     {
-        ABLog(1,@"Deleting wallet [%@]", uuid);
+        ABCLog(1,@"Deleting wallet [%@]", uuid);
         tABC_Error error;
 
         ABC_WalletRemove([self.name UTF8String], [uuid UTF8String], &error);
@@ -3418,7 +3418,7 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     if (szSecret) {
         free(szSecret);
     }
-    ABLog(2,@("SECRET: %@"), *key);
+    ABCLog(2,@("SECRET: %@"), *key);
     return ccode;
 }
 
@@ -3768,7 +3768,6 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 {
 
     [self postToMiscQueue:^{
-        BOOL bValid = NO;
         bool bABCValid = false;
         tABC_Error error;
         ABCConditionCode ccode;
@@ -4017,6 +4016,30 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
 + (int) getMinimumPasswordLength { return ABC_MIN_PASS_LENGTH; };
 + (int) getMinimumPINLength { return ABC_MIN_PIN_LENGTH; };
 
+static int debugLevel = 1;
+
+void abcSetDebugLevel(int level)
+{
+    debugLevel = level;
+}
+
+void abcDebugLog(int level, NSString *statement)
+{
+    if (level <= debugLevel)
+    {
+        static NSDateFormatter *timeStampFormat;
+        if (!timeStampFormat) {
+            timeStampFormat = [[NSDateFormatter alloc] init];
+            [timeStampFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+            [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
+        }
+        
+        NSString *tempStr = [NSString stringWithFormat:@"<%@> %@",
+                             [timeStampFormat stringFromDate:[NSDate date]],statement];
+        
+        ABC_Log([tempStr UTF8String]);
+    }
+}
 
 ////////////////////////////////////////////////////////
 #pragma internal routines

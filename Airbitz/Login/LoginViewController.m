@@ -292,7 +292,7 @@ static BOOL bInitialized = false;
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
-    ABLog(1, @"LoginViewController:applicationEnteredForeground");
+    ABCLog(1, @"LoginViewController:applicationEnteredForeground");
     [self autoReloginOrTouchIDIfPossible];
 }
 
@@ -362,7 +362,7 @@ typedef enum eReloginState
 
 - (void)autoReloginOrTouchIDIfPossibleMain
 {
-    ABLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
+    ABCLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
     _bUsedTouchIDToLogin = NO;
     
     if (HARD_CODED_LOGIN) {
@@ -375,12 +375,12 @@ typedef enum eReloginState
     
     if (! [Keychain bHasSecureEnclave] )
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain: No secure enclave");
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain: No secure enclave");
         return;
     }
 
     NSString *username = [LocalSettings controller].cachedUsername;
-    ABLog(1, @"Checking username=%@", username);
+    ABCLog(1, @"Checking username=%@", username);
     
 
     //
@@ -388,7 +388,7 @@ typedef enum eReloginState
     //
     if ([[AppDelegate abc] didLoginExpire:username])
     {
-        ABLog(1, @"Login expired. Continuing with TouchID validation");
+        ABCLog(1, @"Login expired. Continuing with TouchID validation");
         [Keychain disableRelogin:username];
     }
 
@@ -408,7 +408,7 @@ typedef enum eReloginState
 
     if (!bRelogin && !bUseTouchID)
     {
-        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
         return;
     }
 
@@ -423,20 +423,20 @@ typedef enum eReloginState
         {
             NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
 
-            ABLog(1, @"Launching TouchID prompt");
+            ABCLog(1, @"Launching TouchID prompt");
             if ([Keychain authenticateTouchID:prompt fallbackString:usePasswordText]) {
                 bRelogin = YES;
                 _bUsedTouchIDToLogin = YES;
             }
             else
             {
-                ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
+                ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
                 return;
             }
         }
         else
         {
-            ABLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
+            ABCLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
         }
 
         if (bRelogin)
@@ -453,7 +453,7 @@ typedef enum eReloginState
     }
     else
     {
-        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
     }
 }
 
@@ -595,7 +595,7 @@ typedef enum eReloginState
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
         _bNewDeviceLogin = ![[AppDelegate abc] accountExistsLocal:self.usernameSelector.textField.text];
-        ABLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
+        ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         [[AppDelegate abc] signIn:self.usernameSelector.textField.text
                          password:self.passwordTextField.text
@@ -851,7 +851,7 @@ typedef enum eReloginState
 {
     [self updateDisplayForKeyboard:YES];
 
-    //ABLog(2,@"Keyboard will show for SignUpView");
+    //ABCLog(2,@"Keyboard will show for SignUpView");
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -1060,7 +1060,7 @@ typedef enum eReloginState
     }
     else if (_mode == MODE_NO_USERS)
     {
-        ABLog(2,@"XXX error. should not happen");
+        ABCLog(2,@"XXX error. should not happen");
     }
 
     // highlight all of the text

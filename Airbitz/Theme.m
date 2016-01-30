@@ -148,7 +148,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.fontSizeEnterPINText               = 20.0;     // Font size for PIN login screen "Enter PIN"
     }
 
-    ABLog(1,@"***Device Type: %@ %@", [self platform], [self platformString]);
+    ABCLog(1,@"***Device Type: %@ %@", [self platform], [self platformString]);
 
     NSString *devtype = [self platform];
 

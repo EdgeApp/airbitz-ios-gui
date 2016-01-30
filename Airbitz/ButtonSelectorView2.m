@@ -46,7 +46,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    ABLog(2,@"ButtonSelector2: drawRect");
+    ABCLog(2,@"ButtonSelector2: drawRect");
     self.enabled = YES;
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ButtonSelectorView2" owner:self options:nil] objectAtIndex:0];
     view.frame = self.bounds;

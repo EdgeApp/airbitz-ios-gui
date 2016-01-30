@@ -84,12 +84,12 @@ static CoreBridge *airbitzCore;
     if (notificationSettings.types & UIUserNotificationTypeAlert)
     {
         [LocalSettings controller].bLocalNotificationsAllowed = YES;
-        ABLog(1, @"Local notifications allowed");
+        ABCLog(1, @"Local notifications allowed");
     }
     else
     {
         [LocalSettings controller].bLocalNotificationsAllowed = NO;
-        ABLog(1, @"Local notifications not allowed");
+        ABCLog(1, @"Local notifications not allowed");
     }
     
 }
@@ -111,18 +111,18 @@ static CoreBridge *airbitzCore;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    ABLog(2,@"ENTER performFetch...\n");
+    ABCLog(2,@"ENTER performFetch...\n");
 
     bool bDidNotification = [self showNotifications];
 
     if (bDidNotification)
     {
-        ABLog(2,@"EXIT performFetch() NewData...\n");
+        ABCLog(2,@"EXIT performFetch() NewData...\n");
         completionHandler(UIBackgroundFetchResultNewData);
     }
     else
     {
-        ABLog(2,@"EXIT performFetch() NoData...\n");
+        ABCLog(2,@"EXIT performFetch() NoData...\n");
         completionHandler(UIBackgroundFetchResultNoData);
     }
 }
@@ -240,7 +240,7 @@ static CoreBridge *airbitzCore;
 
 - (BOOL)showNotifications
 {
-    ABLog(2,@"ENTER showNotifications\n");
+    ABCLog(2,@"ENTER showNotifications\n");
 
     bool bDidNotification = false;
 
@@ -251,7 +251,7 @@ static CoreBridge *airbitzCore;
         NSDictionary *notif = [NotificationChecker unseenNotification];
         while (notif)
         {
-            ABLog(2,@"IN showNotifications: while loop\n");
+            ABCLog(2,@"IN showNotifications: while loop\n");
 
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
@@ -324,7 +324,7 @@ static CoreBridge *airbitzCore;
         
     }
 
-    ABLog(2,@"EXIT showNotifications\n");
+    ABCLog(2,@"EXIT showNotifications\n");
 
     return bDidNotification;
 }

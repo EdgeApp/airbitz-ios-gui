@@ -99,7 +99,7 @@
     {
         if (1 == buttonIndex)
         {
-            ABLog(2,@"Uploading Logs\n");
+            ABCLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
             [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
@@ -136,7 +136,7 @@
 
 - (IBAction)clearWatcher:(id)sender
 {
-    ABLog(2,@"Clearing Watcher\n");
+    ABCLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";

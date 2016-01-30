@@ -116,7 +116,7 @@ typedef enum eExportOption
 //                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
 
 
-    //ABLog(2,@"type: %d", self.type);
+    //ABCLog(2,@"type: %d", self.type);
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -251,7 +251,7 @@ typedef enum eExportOption
 
         case ExportOption_SDCard:
         {
-            ABLog(2,@"Unsupported export option");
+            ABCLog(2,@"Unsupported export option");
         }
             break;
 
@@ -280,7 +280,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 }
@@ -325,14 +325,14 @@ typedef enum eExportOption
         }
         else
         {
-            ABLog(2,@"unsupported type for AirPrint");
+            ABCLog(2,@"unsupported type for AirPrint");
             return;
         }
 
         UIPrintInteractionCompletionHandler completionHandler =
         ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if(!completed && error){
-                ABLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+                ABCLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
             }
         };
 
@@ -457,7 +457,7 @@ typedef enum eExportOption
     } 
     else 
     {
-        ABLog(2,@"Only PDF and Wallet Seed are supported for viewing");
+        ABCLog(2,@"Only PDF and Wallet Seed are supported for viewing");
     }
 }
 
@@ -561,7 +561,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export option");
+            ABCLog(2,@"Unknown export option");
             break;
     }
 
@@ -595,7 +595,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 
@@ -629,7 +629,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
     
@@ -685,7 +685,7 @@ typedef enum eExportOption
 
 -(void)GDriveAuthControllerPresented
 {
-	ABLog(2,@"Auth Controller Presented");
+	ABCLog(2,@"Auth Controller Presented");
 //	[self.view bringSubviewToFront:self.viewHeader];
 }
 #pragma mark - UITableView Delegates
@@ -737,11 +737,11 @@ typedef enum eExportOption
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABCLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     tExportOption exportOption = (tExportOption) [[self.arrayChoices objectAtIndex:indexPath.row] intValue];
 
-    //ABLog(2,@"Export option: %d", exportOption);
+    //ABCLog(2,@"Export option: %d", exportOption);
 
     if (WalletExportType_PrivateSeed != self.type)
     {
