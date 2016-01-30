@@ -217,7 +217,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)refresh:(NSNotification *)notification
 {	
-    [[AppDelegate abc] loadSettings];
+    [[AppDelegate abc].settings loadSettings];
 
     _frameStart = self.tableView.frame;
     _keyboardHeight = 0.0;
@@ -262,7 +262,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)saveSettings
 {
-    ABCConditionCode ccode = [[AppDelegate abc] saveSettings];
+    ABCConditionCode ccode = [[AppDelegate abc].settings saveSettings];
     // update the settings in the core
 
     if (!(ABCConditionCodeOk == ccode))
@@ -1193,7 +1193,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }];
 
     // re-load the current account settings
-    [[AppDelegate abc] loadSettings];
+    [[AppDelegate abc].settings loadSettings];
 
     [_tableView reloadData];
     [self updateViews];

@@ -15,7 +15,7 @@
 #import "Util.h"
 #import "Notifications.h"
 #import "CommonTypes.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 #import "MainViewController.h"
 #import "ABC.h"
 
@@ -31,7 +31,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary                   *_functions;
     NSString                       *_tempCbidForImagePicker;
     NSDictionary                   *_tempArgsForImagePicker;
-    SpendTarget                    *_spendTarget;
+    ABCSpend *_abcSpend;
 
     BOOL                           bWalletListDropped;
 }
@@ -461,27 +461,27 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendCbid = cbid;
     _sendWallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
-    SpendTarget *pSpend;
+    ABCSpend *pSpend;
     ABCConditionCode ccode = 
             [[AppDelegate abc] newSpendInternal:[args objectForKey:@"toAddress"]
                                           label:[args objectForKey:@"label"]
                                        category:[args objectForKey:@"category"]
                                           notes:[args objectForKey:@"notes"]
                                   amountSatoshi:[[args objectForKey:@"amountSatoshi"] longValue]
-                                    spendTarget:&pSpend];
+                                    abcSpend:&pSpend];
     if (ABCConditionCodeOk == ccode)
     {
-        _spendTarget = pSpend;
+        _abcSpend = pSpend;
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
-            _spendTarget.bizId = [[args objectForKey:@"bizId"] longValue];
+            _abcSpend.bizId = [[args objectForKey:@"bizId"] longValue];
         }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
         _sendConfirmationViewController.delegate = self;
-        _sendConfirmationViewController.spendTarget = _spendTarget;
+        _sendConfirmationViewController.abcSpend = _abcSpend;
 
         [[AppDelegate abc] makeCurrentWallet:_sendWallet];
-        _spendTarget.srcWallet = [AppDelegate abc].currentWallet;
+        _abcSpend.srcWallet = [AppDelegate abc].currentWallet;
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
         _sendConfirmationViewController.bSignOnly = signOnly;
@@ -504,8 +504,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
     
-    if (_spendTarget != nil &&
-        (ABCConditionCodeOk == [_spendTarget broadcastTx:[args objectForKey:@"rawTx"]])) {
+    if (_abcSpend != nil &&
+        (ABCConditionCodeOk == [_abcSpend broadcastTx:[args objectForKey:@"rawTx"]])) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -517,10 +517,10 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    if (_spendTarget != nil) {
+    if (_abcSpend != nil) {
         NSString *txid;
-        [_spendTarget saveTx:[args objectForKey:@"rawTx"] txId:&txid];
-        _spendTarget = nil;
+        [_abcSpend saveTx:[args objectForKey:@"rawTx"] txId:&txid];
+        _abcSpend = nil;
         [self setJsResults:_sendCbid withArgs:[self jsonResult:txid]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -615,58 +615,34 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-	tABC_Error error;
+    ABCConditionCode ccode;
     NSDictionary *results = nil;
 
     Wallet *wallet = [[AppDelegate abc] getWallet:[args objectForKey:@"id"]];
 
-    tABC_TxDetails details;
-    memset(&details, 0, sizeof(tABC_TxDetails));
-    details.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
-    details.amountCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
-	details.amountFeesAirbitzSatoshi = 0;
-	details.amountFeesMinersSatoshi = 0;
-    details.szName = (char *)[[args objectForKey:@"label"] UTF8String];
-    details.szNotes = (char *)[[args objectForKey:@"notes"] UTF8String];
-    details.szCategory = (char *)[[args objectForKey:@"category"] UTF8String];
-	details.attributes = 0x0;
+    ABCRequest *request = [[ABCRequest alloc] init];
+    request.walletUUID = wallet.strUUID;
+    request.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
+//    details.amountCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
+    request.payeeName   = [args objectForKey:@"label"];
+    request.category    = [args objectForKey:@"category"];
+    request.notes       = [args objectForKey:@"notes"];
+    
     if (0 < [[args objectForKey:@"bizId"] longValue]) {
-        details.bizId = [[args objectForKey:@"bizId"] longValue];
+        request.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
     }
 
-	char *pRequestID = NULL;
-
-    // create the request
-	ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
-                             [[AppDelegate abc].password UTF8String],
-                             [wallet.strUUID UTF8String],
-                             &details, &pRequestID, &error);
-	if (error.code == ABC_CC_Ok) {
-        ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
-                                 [[AppDelegate abc].password UTF8String],
-                                 [wallet.strUUID UTF8String],
-                                 pRequestID,
-                                 &details,
-                                 &error);
-        
-        if (ABC_CC_Ok == error.code)
-        {
-            NSString *requestId = [NSString stringWithUTF8String:pRequestID];
-            NSString *address = [self getRequestAddress:pRequestID withWallet:wallet];
-            NSDictionary *d = @{@"requestId": requestId, @"address": address};
-            results = [self jsonResult:d];
-        }
-        else
-        {
-            results = [self jsonError];
-        }
-	} else {
-        results = [self jsonError];
-	}
-    
-    if (pRequestID)
+    ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request];
+    if (ABCConditionCodeOk == ccode)
     {
-        free(pRequestID);
+        NSString *requestId = request.requestID;
+        NSString *address = request.address;
+        NSDictionary *d = @{@"requestId": requestId, @"address": address};
+        results = [self jsonResult:d];
+    }
+    else
+    {
+        results = [self jsonError];
     }
 
     [self callJsFunction:cbid withArgs:results];

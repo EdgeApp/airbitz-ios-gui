@@ -1,16 +1,15 @@
 //
-//  SpendTarget.m
+//  ABCSpend.m
 //  AirBitz
 //
 
-#import "SpendTarget.h"
-#import "User.h"
+#import "ABCSpend.h"
 #import "CoreBridge.h"
 #import "Wallet.h"
 #import "ABC.h"
-#import "Util.h"
+#import "ABCError.h"
 
-@interface SpendTarget ()
+@interface ABCSpend ()
 
 @property (nonatomic)               tABC_SpendTarget        *pSpend;
 @property (nonatomic, strong)       CoreBridge              *airbitzCore;
@@ -19,7 +18,7 @@
 
 @end
 
-@implementation SpendTarget
+@implementation ABCSpend
 
 - (id)init:(id)abc;
 {
@@ -79,7 +78,7 @@
 
     ABC_SpendSignTx([self.airbitzCore.name UTF8String],
             [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, &error);
-    ABCConditionCode ccode = [self setLastErrors:error];
+    ABCConditionCode ccode = [ABCError setLastErrors:error];
     if (ABCConditionCodeOk == ccode)
     {
         rawTx = [NSString stringWithUTF8String:szRawTx];
@@ -95,7 +94,7 @@
     {
         NSString *txData;
         ABCConditionCode ccode = [self signTx:&txData];
-        NSString *errorString  = [self getLastErrorString];
+        NSString *errorString  = [ABCError getLastErrorString];
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
@@ -124,7 +123,7 @@
         {
             ccode = [self saveTx:rawTx txId:&txId];
         }
-        NSString *errorString  = [self getLastErrorString];
+        NSString *errorString  = [ABCError getLastErrorString];
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
@@ -144,7 +143,7 @@
     tABC_Error error;
     ABC_SpendBroadcastTx([self.airbitzCore.name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &error);
-    return [self setLastErrors:error];
+    return [ABCError setLastErrors:error];
 }
 
 - (ABCConditionCode)saveTx:(NSString *)rawTx txId:(NSString **)txId
@@ -155,7 +154,7 @@
 
     ABC_SpendSaveTx([self.airbitzCore.name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, &error);
-    ABCConditionCode ccode = [self setLastErrors:error];
+    ABCConditionCode ccode = [ABCError setLastErrors:error];
     if (ccode == ABCConditionCodeOk) {
         txidTemp = [NSString stringWithUTF8String:szTxId];
         free(szTxId);
@@ -169,7 +168,6 @@
 {
     NSString *txIdTemp = nil;
     NSString *rawTx;
-    tABC_Error error;
     ABCConditionCode ccode = [self signTx:&rawTx];
     if (nil != rawTx)
     {
@@ -193,7 +191,7 @@
     {
         NSString *txId;
         ABCConditionCode ccode = [self signBroadcastSaveTx:&txId];
-        NSString *errorString  = [self getLastErrorString];
+        NSString *errorString  = [ABCError getLastErrorString];
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
@@ -281,7 +279,7 @@
     [self copyOBJCtoABC];
     ABC_SpendGetFee([self.airbitzCore.name UTF8String],
         [walletUUID UTF8String], self.pSpend, totalFees, &error);
-    return [self setLastErrors:error];
+    return [ABCError setLastErrors:error];
 }
 
 - (void)calcSendFees:(NSString *)walletUUID
@@ -292,7 +290,7 @@
     {
         uint64_t totalFees = 0;
         ABCConditionCode ccode = [self calcSendFees:walletUUID totalFees:&totalFees];
-        NSString *errorString  = [self getLastErrorString];
+        NSString *errorString  = [ABCError getLastErrorString];
 
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             if (ABCConditionCodeOk == ccode)
@@ -307,41 +305,6 @@
     }];
 
 }
-
-- (ABCConditionCode)setLastErrors:(tABC_Error)error;
-{
-    self.lastConditionCode = (ABCConditionCode) error.code;
-    if (ABCConditionCodeOk == self.lastConditionCode)
-    {
-        self.lastErrorString = @"";
-    }
-    else
-    {
-        self.lastErrorString = [self.airbitzCore conditionCodeMap:(ABCConditionCode) error.code];
-    }
-    return self.lastConditionCode;
-}
-
-- (NSString *)getLastErrorString
-{
-    return _lastErrorString;
-}
-
-
-
-// replaces the string in the given variable with a duplicate of another
-//- (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue
-//{
-//    if (ppszValue)
-//    {
-//        if (*ppszValue)
-//        {
-//            free(*ppszValue);
-//        }
-//        *ppszValue = strdup(szNewValue);
-//    }
-//}
-
 
 
 @end

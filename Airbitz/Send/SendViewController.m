@@ -26,7 +26,7 @@
  */
 
 #import "SendViewController.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <Social/Social.h>
@@ -47,7 +47,7 @@
 #import "ButtonSelectorView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 #import "Server.h"
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
@@ -1336,13 +1336,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSendConfirmationTo:(SpendTarget *)spendTarget
+- (void)showSendConfirmationTo:(ABCSpend *)abcSpend
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
 	_sendConfirmationViewController.delegate = self;
-    _sendConfirmationViewController.spendTarget = spendTarget;
+    _sendConfirmationViewController.abcSpend = abcSpend;
 
     [_readerView stop];
 
@@ -1755,11 +1755,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
-                        SpendTarget *spendTarget;
-                        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID spendTarget:&spendTarget];
+                        ABCSpend *abcSpend;
+                        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
                         if (ABCConditionCodeOk == ccode)
                         {
-                            [self showSendConfirmationTo:spendTarget];
+                            [self showSendConfirmationTo:abcSpend];
                             [MainViewController fadingAlertDismiss];
                         }
                         else
@@ -1803,9 +1803,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    [[AppDelegate abc] newSpendFromTextAsync:text complete:^(SpendTarget *spendTarget){
+    [[AppDelegate abc] newSpendFromTextAsync:text complete:^(ABCSpend *abcSpend){
         [self stopQRReader];
-        [self showSendConfirmationTo:spendTarget];
+        [self showSendConfirmationTo:abcSpend];
         [MainViewController fadingAlertDismiss];
     } error:^(ABCConditionCode ccode, NSString *errorString) {
         [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
@@ -1826,12 +1826,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
 
-        SpendTarget *spendTarget;
-        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID spendTarget:&spendTarget];
+        ABCSpend *abcSpend;
+        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
         if (ABCConditionCodeOk == ccode)
         {
             [self stopQRReader];
-            [self showSendConfirmationTo:spendTarget];
+            [self showSendConfirmationTo:abcSpend];
         }
     }
     [view dismiss];

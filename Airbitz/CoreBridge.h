@@ -8,7 +8,9 @@
 #import "FadingAlertView.h"
 #import "Theme.h"
 #import "ABCConditionCode.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
+#import "ABCRequest.h"
+#import "ABCSettings.h"
 
 #define ABC_NOTIFICATION_LOGOUT                             @"ABC_Main_Views_Reset"
 #define ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"ABC_Remote_Password_Change"
@@ -35,33 +37,14 @@ static const int ABCDenominationUBTC = 2;
 void abcDebugLog(int level, NSString *string);
 void abcSetDebugLevel(int level);
 
-@class SpendTarget;
+@class ABCSpend;
+@class CoreBridge;
+@class ABCSettings;
+@class ABCRequest;
 
 @interface BitidSignature : NSObject
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *signature;
-@end
-
-@interface ABCSettings : NSObject
-
-// User Settings
-@property (nonatomic) int minutesAutoLogout;
-@property (nonatomic) int defaultCurrencyNum;
-@property (nonatomic) int64_t denomination;
-@property (nonatomic, copy) NSString* denominationLabel;
-@property (nonatomic) int denominationType;
-@property (nonatomic, copy) NSString* firstName;
-@property (nonatomic, copy) NSString* lastName;
-@property (nonatomic, copy) NSString* nickName;
-@property (nonatomic, copy) NSString* fullName;
-@property (nonatomic, copy) NSString* strPIN;
-@property (nonatomic, copy) NSString* exchangeRateSource;
-@property (nonatomic) bool bNameOnPayments;
-@property (nonatomic, copy) NSString* denominationLabelShort;
-@property (nonatomic) bool bSpendRequirePin;
-@property (nonatomic) int64_t spendRequirePinSatoshis;
-@property (nonatomic) bool bDisablePINLogin;
-
 @end
 
 @interface CoreBridge : NSObject
@@ -82,7 +65,6 @@ void abcSetDebugLevel(int level);
 @property (nonatomic)         int                       numTotalWallets;
 @property (nonatomic)         int                       currencyCount;
 @property (nonatomic)         int                       numCategories;
-
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
@@ -118,7 +100,8 @@ void abcSetDebugLevel(int level);
 - (void)saveCategories:(NSMutableArray *)saveArrayCategories;
 - (NSArray *)getLocalAccounts:(NSString **)strError;
 - (BOOL)accountExistsLocal:(NSString *)username;
-- (void)updateWidgetQRCode;
+- (BOOL) isLoggedIn;
+
 
 
 - (Wallet *)getWallet: (NSString *)walletUUID;
@@ -461,20 +444,22 @@ void abcSetDebugLevel(int level);
 
 
 /*
- * generateQRCodeForRequest
- * @param NSString    *walletUUID: UUID of wallet to make request from
- * @param NSString     *requestID: requestID from createReceiveRequest
- * @param NSString     *uriString: returned string of full URI request
- * @param UIImage        **qrcode: returned image of QR code
+ * createReceiveRequestWithDetails
+ * @param ABCRequest    *request: object with various bitcoin request details and return info
  *
+ * (Optional. If used, method returns immediately with ABCCConditionCodeOk)
+ * @param completionHandler: completion handler code block
+ * @param errorHandler: error handler code block which is called with the following args
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
  * @return ABCConditionCode
  */
+- (ABCConditionCode)createReceiveRequestWithDetails:(ABCRequest *)request;
+- (ABCConditionCode)createReceiveRequestWithDetails:(ABCRequest *)request
+                                           complete:(void (^)(void)) completionHandler
+                                              error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
-- (ABCConditionCode)generateQRCodeForRequest:(NSString *)walletUUID
-                                   requestID:(NSString *)request
-                                   uriString:(NSString **)uri
-                                     address:(NSString **)address
-                                      qrcode:(UIImage **)image;
+
 
 /*
  * uploadLogs
@@ -508,26 +493,6 @@ void abcSetDebugLevel(int level);
 - (ABCConditionCode)walletRemove:(NSString *)uuid
                         complete:(void(^)(void))completionHandler
                            error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
-
-/*
- * loadSettings
- *      Load account settings from disk and update the ABCSettings object inside AirbitzCore object
- * @param void
- *
- * @return ABCConditionCode
- */
-
-- (ABCConditionCode)loadSettings;
-
-
-/*
- * saveSettings
- *      Uses ABCSettings object inside AirbitzCore object and saves settings to disk
- * @param void
- *
- * @return ABCConditionCode
- */
-- (ABCConditionCode)saveSettings;
 
 /*
  * accountDeleteLocal
@@ -599,21 +564,21 @@ void abcSetDebugLevel(int level);
 
 /*
  * newSpendFromText
- *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ *      Creates a ABCSpend object from text. Text could be a bitcoin address or URI
  * @param NSString* uri: bitcoin address or full BIP21 uri
- * @param SpendTarget **spendTarget: pointer to SpendTarget object
+ * @param ABCSpend **abcSpend: pointer to ABCSpend object
  * @return ABCConditionCode
  */
-- (ABCConditionCode)newSpendFromText:(NSString *)uri spendTarget:(SpendTarget **)spendTarget;
+- (ABCConditionCode)newSpendFromText:(NSString *)uri abcSpend:(ABCSpend **)abcSpend;
 
 
 /*
  * newSpendFromTextAsync
- *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ *      Creates a ABCSpend object from text. Text could be a bitcoin address or URI
  * @param NSString* walletUUID: walletUUID of destination wallet for transfer
  *
- * @param complete: completion handler code block which is called with SpendTarget *
- *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param complete: completion handler code block which is called with ABCSpend *
+ *                          @param ABCSpend *    abcSpend: ABCSpend object
  * @param error: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
  *                          @param NSString *       errorString: error message
@@ -621,33 +586,33 @@ void abcSetDebugLevel(int level);
  */
 
 - (void)newSpendFromTextAsync:(NSString *)uri
-                     complete:(void(^)(SpendTarget *sp))completionHandler
+                     complete:(void(^)(ABCSpend *sp))completionHandler
                         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 
 /*
  * newSpendFromTransfer
- *      Creates a SpendTarget object from text. Text could be a bitcoin address or URI
+ *      Creates a ABCSpend object from text. Text could be a bitcoin address or URI
  * @param NSString* walletUUID: walletUUID of destination wallet for transfer
- * @param SpendTarget **spendTarget: pointer to SpendTarget object
+ * @param ABCSpend **abcSpend: pointer to ABCSpend object
  * @return ABCConditionCode
  */
-- (ABCConditionCode)newSpendTransfer:(NSString *)destWalletUUID spendTarget:(SpendTarget **)spendTarget;
+- (ABCConditionCode)newSpendTransfer:(NSString *)destWalletUUID abcSpend:(ABCSpend **)abcSpend;
 
 /*
  * newSpendFromTransferAsync
- *      Creates a SpendTarget object from walletUUID.
+ *      Creates a ABCSpend object from walletUUID.
  * @param NSString* walletUUID: walletUUID of destination wallet for transfer
  *
- * @param complete: completion handler code block which is called with SpendTarget *
- *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param complete: completion handler code block which is called with ABCSpend *
+ *                          @param ABCSpend *    abcSpend: ABCSpend object
  * @param error: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
  *                          @param NSString *       errorString: error message
  * @return void
  */
 //- (void)newSpendTransferAsync:(NSString *)uri
-//                     complete:(void(^)(SpendTarget *sp))completionHandler
+//                     complete:(void(^)(ABCSpend *sp))completionHandler
 //                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 
@@ -656,7 +621,7 @@ void abcSetDebugLevel(int level);
                             category:(NSString *)category
                                notes:(NSString *)notes
                        amountSatoshi:(uint64_t)amountSatoshi
-                         spendTarget:(SpendTarget **)spendTarget;
+                         abcSpend:(ABCSpend **)abcSpend;
 
 
 /*
@@ -664,8 +629,8 @@ void abcSetDebugLevel(int level);
  * clears the local cache of blockchain info and force a re-download. This will cause wallets
  * to report incorrect balances which the blockchain is resynced
  *
- * @param complete: completion handler code block which is called with SpendTarget *
- *                          @param SpendTarget *    spendTarget: SpendTarget object
+ * @param complete: completion handler code block which is called with ABCSpend *
+ *                          @param ABCSpend *    abcSpend: ABCSpend object
  * @param error: error handler code block which is called with the following args
  *                          @param ABCConditionCode       ccode: ABC error code
  *                          @param NSString *       errorString: error message
@@ -699,13 +664,6 @@ void abcSetDebugLevel(int level);
 - (ABCConditionCode) currencyToSatoshi:(double)currency
                            currencyNum:(int)currencyNum
                                satoshi:(int64_t *)pSatoshi;
-/*
- * errorMap
- * @param  ABCConditionCode: error code to look up
- * @return NSString*       : text description of error
- */
-- (NSString *)conditionCodeMap:(const ABCConditionCode) code;
-
 - (bool)isTestNet;
 
 

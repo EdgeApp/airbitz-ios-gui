@@ -8,11 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
+		3464407648AB26EF1C6543E4 /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
+		346440A6CDF92ED3B1A571AD /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
+		34644138EB3A9FF5F7B04A58 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		346441DD9295BE01A52C60B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
+		346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		3464460E39549AA0C4A799D9 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
+		346446561337E2A997B33519 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
+		34644833488870AF279439C2 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
+		346448A02912B5F1731EB559 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
+		34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
+		34644D994D5FE9666195A088 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -384,7 +396,7 @@
 		DA9EE5111BC61F930063DA07 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */; };
 		DA9EE5121BC61F930063DA07 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */; };
 		DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
-		DA9EE5141BC61F930063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EE5141BC61F930063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EE5151BC61F930063DA07 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00A1BC61F920063DA07 /* BooleanCell.m */; };
 		DA9EE5161BC61F930063DA07 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00C1BC61F920063DA07 /* ButtonCell.m */; };
 		DA9EE5171BC61F930063DA07 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00E1BC61F920063DA07 /* ButtonOnlyCell.m */; };
@@ -552,7 +564,7 @@
 		DA9EF3A41BC7285D0063DA07 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */; };
 		DA9EF3A51BC7285D0063DA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CC1BC61E680063DA07 /* ViewController.m */; };
 		DA9EF3A61BC7285D0063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
-		DA9EF3A71BC7285D0063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EF3A71BC7285D0063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
 		DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
 		DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
@@ -957,7 +969,7 @@
 		DA9EF56B1BC729FA0063DA07 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */; };
 		DA9EF56C1BC729FA0063DA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CC1BC61E680063DA07 /* ViewController.m */; };
 		DA9EF56D1BC729FA0063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
-		DA9EF56E1BC729FA0063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EF56E1BC729FA0063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
 		DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
 		DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
@@ -1433,13 +1445,21 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		34644047DB7E84BAF791CE9F /* ABCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCRequest.m; sourceTree = "<group>"; };
+		34644049506265C0A0A67895 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
 		3464472C40F04A9BEC2C1FD8 /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
+		34644740DA0DDC32A577180B /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
+		34644854DE406C11D49E7310 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
+		346448A0DE45E082A077B72A /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
+		346449BCB140E3EB004AD724 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
+		34644D213DC34F72FCF6FE14 /* ABCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCUtil.h; sourceTree = "<group>"; };
+		34644DC0B6EB7DE0B2C2D0B5 /* ABCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSettings.h; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -1869,8 +1889,8 @@
 		DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
 		DA9EE0041BC61F920063DA07 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
 		DA9EE0051BC61F920063DA07 /* SendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendViewController.m; sourceTree = "<group>"; };
-		DA9EE0061BC61F920063DA07 /* SpendTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTarget.h; sourceTree = "<group>"; };
-		DA9EE0071BC61F920063DA07 /* SpendTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendTarget.m; sourceTree = "<group>"; };
+		DA9EE0061BC61F920063DA07 /* ABCSpend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSpend.h; sourceTree = "<group>"; };
+		DA9EE0071BC61F920063DA07 /* ABCSpend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSpend.m; sourceTree = "<group>"; };
 		DA9EE0091BC61F920063DA07 /* BooleanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooleanCell.h; sourceTree = "<group>"; };
 		DA9EE00A1BC61F920063DA07 /* BooleanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooleanCell.m; sourceTree = "<group>"; };
 		DA9EE00B1BC61F920063DA07 /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
@@ -2912,8 +2932,8 @@
 				DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */,
 				DA9EE0041BC61F920063DA07 /* SendViewController.h */,
 				DA9EE0051BC61F920063DA07 /* SendViewController.m */,
-				DA9EE0061BC61F920063DA07 /* SpendTarget.h */,
-				DA9EE0071BC61F920063DA07 /* SpendTarget.m */,
+				DA9EE0061BC61F920063DA07 /* ABCSpend.h */,
+				DA9EE0071BC61F920063DA07 /* ABCSpend.m */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -3370,6 +3390,14 @@
 				DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
 				3464472C40F04A9BEC2C1FD8 /* ABCConditionCode.h */,
+				34644047DB7E84BAF791CE9F /* ABCRequest.m */,
+				34644740DA0DDC32A577180B /* ABCRequest.h */,
+				346449BCB140E3EB004AD724 /* ABCError.m */,
+				34644049506265C0A0A67895 /* ABCError.h */,
+				34644854DE406C11D49E7310 /* ABCSettings.m */,
+				34644DC0B6EB7DE0B2C2D0B5 /* ABCSettings.h */,
+				346448A0DE45E082A077B72A /* ABCUtil.m */,
+				34644D213DC34F72FCF6FE14 /* ABCUtil.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -4650,7 +4678,7 @@
 				DA9EF3A41BC7285D0063DA07 /* RadioButtonCell.m in Sources */,
 				DA9EF3A51BC7285D0063DA07 /* ViewController.m in Sources */,
 				DA9EF3A61BC7285D0063DA07 /* Transaction.m in Sources */,
-				DA9EF3A71BC7285D0063DA07 /* SpendTarget.m in Sources */,
+				DA9EF3A71BC7285D0063DA07 /* ABCSpend.m in Sources */,
 				DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */,
 				DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */,
 				DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */,
@@ -4701,6 +4729,10 @@
 				DA9EF3D91BC7285D0063DA07 /* GDrive.m in Sources */,
 				346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */,
 				3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */,
+				346448A02912B5F1731EB559 /* ABCRequest.m in Sources */,
+				3464460E39549AA0C4A799D9 /* ABCError.m in Sources */,
+				34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */,
+				346440A6CDF92ED3B1A571AD /* ABCUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4792,7 +4824,7 @@
 				DA9EF56B1BC729FA0063DA07 /* RadioButtonCell.m in Sources */,
 				DA9EF56C1BC729FA0063DA07 /* ViewController.m in Sources */,
 				DA9EF56D1BC729FA0063DA07 /* Transaction.m in Sources */,
-				DA9EF56E1BC729FA0063DA07 /* SpendTarget.m in Sources */,
+				DA9EF56E1BC729FA0063DA07 /* ABCSpend.m in Sources */,
 				DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */,
 				DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */,
 				DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */,
@@ -4843,6 +4875,10 @@
 				DA9EF5A01BC729FA0063DA07 /* GDrive.m in Sources */,
 				34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */,
 				346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */,
+				34644138EB3A9FF5F7B04A58 /* ABCRequest.m in Sources */,
+				346446561337E2A997B33519 /* ABCError.m in Sources */,
+				34644833488870AF279439C2 /* ABCSettings.m in Sources */,
+				34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4934,7 +4970,7 @@
 				DA9EE51D1BC61F930063DA07 /* RadioButtonCell.m in Sources */,
 				DA9ED7F81BC61E680063DA07 /* ViewController.m in Sources */,
 				DA9EE0B51BC61F920063DA07 /* Transaction.m in Sources */,
-				DA9EE5141BC61F930063DA07 /* SpendTarget.m in Sources */,
+				DA9EE5141BC61F930063DA07 /* ABCSpend.m in Sources */,
 				DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */,
 				DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */,
 				DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */,
@@ -4985,6 +5021,10 @@
 				DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */,
 				346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */,
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
+				34644D994D5FE9666195A088 /* ABCRequest.m in Sources */,
+				346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */,
+				346441DD9295BE01A52C60B4 /* ABCSettings.m in Sources */,
+				3464407648AB26EF1C6543E4 /* ABCUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

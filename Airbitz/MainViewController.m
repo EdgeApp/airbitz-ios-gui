@@ -44,6 +44,7 @@
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
+#import "AppGroupConstants.h"
 
 typedef enum eRequestType
 {
@@ -188,6 +189,7 @@ MainViewController *singleton;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADING object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWidgetQRCode) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
 
     // init and set API key
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
@@ -1382,9 +1384,44 @@ MainViewController *singleton;
     //
     if ([_strWalletUUID isEqualToString:[AppDelegate abc].currentWallet.strUUID])
     {
-        [[AppDelegate abc] updateWidgetQRCode];
+        [self updateWidgetQRCode];
     }
 }
+
+- (void)updateWidgetQRCode;
+{
+    
+    if (![AppDelegate abc].currentWallet || ![AppDelegate abc].currentWallet.strUUID)
+        return;
+    
+    ABCRequest *request = [[ABCRequest alloc] init];
+    
+    request.walletUUID = [AppDelegate abc].currentWallet.strUUID;
+    request.payeeName = [AppDelegate abc].settings.fullName;
+
+    ABCConditionCode ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request];
+    
+    if (ABCConditionCodeOk == ccode)
+    {
+        
+        //
+        // Save QR and address in shared data so Widget can access it
+        //
+        static NSUserDefaults *tempSharedUserDefs = nil;
+        
+        if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
+        
+        NSData *imageData = UIImagePNGRepresentation(request.qrCode);
+        
+        [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
+        [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
+        [tempSharedUserDefs setObject:[AppDelegate abc].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:[AppDelegate abc].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+        [tempSharedUserDefs synchronize];
+    }
+}
+
+
 
 - (void)handleReceiveFromQR:(NSString *)walletUUID withTx:(NSString *)txId
 {

@@ -240,7 +240,7 @@
             [AppDelegate abc].settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        ABCConditionCode ccode = [[AppDelegate abc] saveSettings];
+        ABCConditionCode ccode = [[AppDelegate abc].settings saveSettings];
         if (!(ABCConditionCodeOk == ccode))
         {
             UIAlertView *alert =

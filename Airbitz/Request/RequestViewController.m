@@ -17,7 +17,6 @@
 #import "TxOutput.h"
 #import "CalculatorView.h"
 #import "ButtonSelectorView2.h"
-#import "ABC.h"
 #import "User.h"
 #import "CoreBridge.h"
 #import "Util.h"
@@ -63,7 +62,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
 	UITextField                 *_selectedTextField;
 	int                         _selectedWalletIndex;
-    tABC_TxDetails              _details;
     CGRect                      topFrame;
     CGRect                      bottomFrame;
     BOOL                        bInitialized;
@@ -642,22 +640,29 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     SInt64 remaining = [nsRemaining longLongValue];
 
-    [[AppDelegate abc] postToGenQRQueue:^(void) {
 
-        ABCLog(2,@"updateQRAsync Do actual QR update str=%llu",remaining);
-        UIImage *qrImage = [self createRequestQRImageFor:strName walletUUID:strUUID currencyNum:currencyNum withNotes:strNotes withCategory:strCategory
-                                        storeRequestIDIn:strRequestID storeRequestURI:strRequestURI storeRequestAddressIn:strRequestAddress
-                                            scaleAndSave:NO withAmount:remaining];
+    ABCRequest *request = [ABCRequest alloc];
+    ABCConditionCode ccode;
 
-        addressString = strRequestAddress;
-        _uriString = strRequestURI;
+    request.walletUUID      = strUUID;
+    request.payeeName       = strName;
+    request.category        = strCategory;
+    request.notes           = strNotes;
+    request.amountSatoshi   = remaining;
+
+    ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request complete:^
+    {
+        UIImage *qrImage;
+
+        self.abcRequest = request;
+        addressString   = request.address;
+        _uriString      = request.uri;
+        qrImage         = request.qrCode;
+
+        self.statusLine3.text = addressString;
+        self.qrCodeImageView.image = qrImage;
 
         [[AppDelegate abc] prioritizeAddress:addressString inWallet:strUUID];
-
-        dispatch_async(dispatch_get_main_queue(),^{
-            self.statusLine3.text = addressString;
-            self.qrCodeImageView.image = qrImage;
-        });
 
         if(self.peripheralManager.isAdvertising) {
             ABCLog(2,@"Removing all BLE services and stopping advertising");
@@ -680,6 +685,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             }
             lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
+
+    } error:^(ABCConditionCode ccode, NSString *errorString)
+    {
+
     }];
 
 }
@@ -813,137 +822,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [bottomField setEnabled:false];
 
 }
-
-- (const char *)createReceiveRequestFor:(NSString *)strName walletUUID:(NSString *)strUUID currencyNum:(int)currencyNum withNotes:(NSString *)strNotes
-    withCategory:(NSString *)strCategory withAmount:(SInt64)amountSatoshi
-{
-	//creates a receive request.  Returns a requestID.  Caller must free this ID when done with it
-	tABC_CC result;
-	double currency;
-	tABC_Error error;
-
-	//first need to create a transaction details struct
-    memset(&_details, 0, sizeof(tABC_TxDetails));
-
-    _details.amountSatoshi = amountSatoshi;
-
-	//the true fee values will be set by the core
-	_details.amountFeesAirbitzSatoshi = 0;
-	_details.amountFeesMinersSatoshi = 0;
-	
-    if ([[AppDelegate abc] satoshiToCurrency:_details.amountSatoshi currencyNum:currencyNum currency:&currency] == ABCConditionCodeOk)
-	{
-		_details.amountCurrency = currency;
-	}
-
-    _details.szName = (char *) [strName UTF8String];
-    _details.szNotes = (char *) [strNotes UTF8String];
-	_details.szCategory = (char *) [strCategory UTF8String];
-	_details.attributes = 0x0; //for our own use (not used by the core)
-    _details.bizId = 0;
-
-	char *pRequestID;
-
-    // create the request
-	result = ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
-                                      [[AppDelegate abc].password UTF8String],
-                                      [strUUID UTF8String],
-                                      &_details,
-                                      &pRequestID,
-                                      &error);
-
-	if (result == ABC_CC_Ok)
-	{
-        result = ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
-                                          [[AppDelegate abc].password UTF8String],
-                                          [strUUID UTF8String],
-                                          pRequestID,
-                                          &_details,
-                                          &error);
-        if (ABC_CC_Ok == result)
-            return pRequestID;
-	}
-    
-    return 0;
-}
-
-
-// generates and returns a request qr image, stores request id in the given mutable string
-- (UIImage *)createRequestQRImageFor:(NSString *)strName
-                          walletUUID:(NSString *)strUUID
-                         currencyNum:(int)currencyNum
-                           withNotes:(NSString *)strNotes
-                        withCategory:(NSString *)strCategory
-                    storeRequestIDIn:(NSMutableString *)strRequestID
-                     storeRequestURI:(NSMutableString *)strRequestURI
-               storeRequestAddressIn:(NSMutableString *)strRequestAddress
-                        scaleAndSave:(BOOL)bScaleAndSave
-                          withAmount:(SInt64)amountSatoshi
-{
-    ABCLog(2,@"ENTER createRequestQRImageFor");
-
-    [strRequestID setString:@""];
-    [strRequestAddress setString:@""];
-    [strRequestURI setString:@""];
-
-    NSString *uri;
-    NSString *address;
-    UIImage *qrcode;
-
-    const char *szRequestID = [self createReceiveRequestFor:strName walletUUID:strUUID
-                                                currencyNum:currencyNum
-                                                  withNotes:strNotes
-                                               withCategory:strCategory
-                                                 withAmount:amountSatoshi];
-
-    if (szRequestID)
-    {
-        if (strRequestID)
-        {
-            [strRequestID appendFormat:@"%s", szRequestID];
-        }
-        self.requestID = [NSString stringWithUTF8String:szRequestID];
-        
-        ABCConditionCode ccode;
-        ccode = [[AppDelegate abc] generateQRCodeForRequest:strUUID
-                                                  requestID:self.requestID
-                                                    uriString:&uri
-                                                     address:&address
-                                                     qrcode:&qrcode];
-        if (ABCConditionCodeOk == ccode)
-        {
-            [strRequestURI appendFormat:@"%@", uri];
-            [strRequestAddress appendFormat:@"%@", address];
-        }
-    }
-
-    if (szRequestID)
-        free((void*)szRequestID);
-
-    UIImage *qrImageFinal = qrcode;
-
-    if (bScaleAndSave)
-    {
-        // scale qr image up
-        UIGraphicsBeginImageContext(CGSizeMake(QR_CODE_SIZE, QR_CODE_SIZE));
-        CGContextRef c = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(c, kCGInterpolationNone);
-        [qrcode drawInRect:CGRectMake(0, 0, QR_CODE_SIZE, QR_CODE_SIZE)];
-        qrImageFinal = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-
-        // save it to a file
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:QR_CODE_TEMP_FILENAME];
-        [UIImagePNGRepresentation(qrImageFinal) writeToFile:filePath atomically:YES];
-    }
-
-    ABCLog(2,@"EXIT createRequestQRImageFor");
-
-    return qrImageFinal;
-}
-
-
 
 - (void)updateTextFieldContents:(BOOL)allowBTCUpdate
 {
@@ -1152,7 +1030,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             duration = 2.0;
             image = [UIImage imageNamed:@"bitcoin_symbol.png"];
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
-            tABC_Error error;
             double currency;
             if ([[AppDelegate abc] satoshiToCurrency:amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             {
@@ -1569,62 +1446,33 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)saveRequest
 {
-    tABC_TxDetails txDetails;
-    memset(&txDetails, 0, sizeof(tABC_TxDetails));
     if (_strFullName) {
-        txDetails.szName = (char *)[_strFullName UTF8String];
+        self.abcRequest.payeeName = _strFullName;
     } else if (_strEMail) {
-        txDetails.szName = (char *)[_strEMail UTF8String];
+        self.abcRequest.payeeName = _strFullName;
     } else if (_strPhoneNumber) {
-        txDetails.szName = (char *)[_strPhoneNumber UTF8String];
+        self.abcRequest.payeeName = _strPhoneNumber;
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
-
+    
     Wallet *wallet = [AppDelegate abc].currentWallet;
-    txDetails.amountSatoshi = _amountSatoshiRequested;
-
+    self.abcRequest.amountSatoshi = _amountSatoshiRequested;
+    
     double currency;
-    tABC_Error error;
-    if ([[AppDelegate abc] satoshiToCurrency:txDetails.amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
-	{
-		txDetails.amountCurrency = currency;
-	}
-
+    [[AppDelegate abc] satoshiToCurrency:self.abcRequest.amountSatoshi currencyNum:wallet.currencyNum currency:&currency];
+    
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-                        [[AppDelegate abc] formatSatoshi:txDetails.amountSatoshi],
-                        [[AppDelegate abc] formatCurrency:txDetails.amountCurrency withCurrencyNum:wallet.currencyNum],
-                        _requestType, [dateFormatter stringFromDate:now]];
-    txDetails.szNotes = (char *)[notes UTF8String];
-    txDetails.szCategory = (char *) "Income:";
-    // Update the Details
-    if (ABC_CC_Ok != ABC_ModifyReceiveRequest([[AppDelegate abc].name UTF8String],
-            [[AppDelegate abc].password UTF8String],
-            [[AppDelegate abc].currentWallet.strUUID UTF8String],
-            [self.requestID UTF8String],
-            &txDetails,
-            &error))
-    {
-//        [Util printABC_Error:&error];
-    }
-}
+     [[AppDelegate abc] formatSatoshi:self.abcRequest.amountSatoshi],
+     [[AppDelegate abc] formatCurrency:currency withCurrencyNum:wallet.currencyNum],
+     _requestType, [dateFormatter stringFromDate:now]];
+    self.abcRequest.notes = notes;
+    self.abcRequest.category = @"Income:";
 
-- (void)finalizeRequest
-{
-    tABC_Error Error;
-
-    // Finalize this request so it isn't used elsewhere
-    if (ABC_CC_Ok != ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
-            [[AppDelegate abc].password UTF8String],
-            [[AppDelegate abc].currentWallet.strUUID UTF8String],
-            [self.requestID UTF8String],
-            &Error))
-    {
-//        [Util printABC_Error:&Error];
-    }
+    [self.abcRequest modifyRequestWithDetails];
 }
 
 #pragma mark - MFMessageComposeViewController delegate
@@ -1663,7 +1511,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
             [alert show];
-            [self finalizeRequest];
+            [self.abcRequest finalizeRequest];
         }
             break;
 
@@ -1695,7 +1543,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MFMailComposeResultSent:
             strMsg = NSLocalizedString(@"Email sent", nil);
-            [self finalizeRequest];
+            [self.abcRequest finalizeRequest];
             break;
 
         case MFMailComposeResultFailed:

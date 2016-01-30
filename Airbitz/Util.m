@@ -155,19 +155,6 @@
     return screenBounds ;
 }
 
-
-+ (void)freeStringArray:(char **)aszStrings count:(unsigned int)count
-{
-    if ((aszStrings != NULL) && (count > 0))
-    {
-        for (int i = 0; i < count; i++)
-        {
-            free(aszStrings[i]);
-        }
-        free(aszStrings);
-    }
-}
-
 // creates the full name from an address book record
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person
 {

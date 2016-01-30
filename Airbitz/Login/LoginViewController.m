@@ -353,6 +353,8 @@ typedef enum eReloginState
     [self autoReloginOrTouchIDIfPossible];
 }
 
+
+
 - (void)autoReloginOrTouchIDIfPossible
 {
     dispatch_async(dispatch_get_main_queue(), ^(void) {

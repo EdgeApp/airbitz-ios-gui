@@ -27,7 +27,6 @@
 
 @interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextView3Delegate>
 {
-    char            **_aszCategories;
     unsigned int    _count;
     CGRect          _frameTableOriginal;
     CGPoint         _offsetTableOriginal;
@@ -129,7 +128,6 @@
 
 - (void)dealloc
 {
-    [Util freeStringArray:_aszCategories count:_count];
 }
 
 #pragma mark - Action Methods

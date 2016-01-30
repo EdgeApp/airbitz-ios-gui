@@ -33,7 +33,6 @@
 + (NSString *)errorCC:(ABCConditionCode) ccode;
 //+ (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
-+ (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 + (void)callTelephoneNumber:(NSString *)telNum;
 + (void)stylizeTextField:(UITextField *)textField;

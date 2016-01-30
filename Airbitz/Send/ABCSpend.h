@@ -1,12 +1,12 @@
 //
-//  SpendTarget.h
+//  ABCSpend.h
 //  AirBitz
 //
 
 #import "Wallet.h"
 #import "CoreBridge.h"
 
-@interface SpendTarget : NSObject
+@interface ABCSpend : NSObject
 
 @property (nonatomic, strong)       Wallet                  *srcWallet;
 @property (nonatomic, strong)       Wallet                  *destWallet;

@@ -10,7 +10,6 @@
 #import "User.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "ABC.h"
 
 #define X_SOURCE @"Airbitz"
 
@@ -152,23 +151,28 @@
 {
     [self.view endEditing:YES];
 
-    NSMutableString *strRequestID = [[NSMutableString alloc] init];
-    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-    [self createRequest:strRequestID storeRequestURI:strRequestURI
-        storeRequestAddressIn:strRequestAddress withAmount:0 withRequestState:kRequest];
+    ABCRequest  *request  = [ABCRequest alloc];
+    
     if (_successUrl) {
+        
+        request.walletUUID = [AppDelegate abc].currentWallet.strUUID;
+        request.payeeName = strName;
+        request.category = strCategory;
+        request.notes = strNotes;
+
+        [[AppDelegate abc] createReceiveRequestWithDetails:request];
+        
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
         if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:request.uri]];
         } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:request.uri]];
         }
         [query appendFormat:@"&x-source=%@", X_SOURCE];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
             // If the URL was successfully opened, finalize the request
-            [self finalizeRequest:strRequestID];
+            [request finalizeRequest];
         } else {
             // If that failed to open, try error url
             [[UIApplication sharedApplication] openURL:_errorUrl];
@@ -180,115 +184,8 @@
 
 - (IBAction)cancel
 {
-//    if (_cancelUrl == nil) {
-//        _cancelUrl = _errorUrl;
-//    }
-//    if (_cancelUrl) {
-//        NSString *url = [_cancelUrl absoluteString];
-//        NSMutableString *query;
-//        NSString *cancelMessage = [Util urlencode:NSLocalizedString(@"User cancelled the request.", nil)];
-//        if ([url rangeOfString:@"?"].location == NSNotFound) {
-//            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=&cancelMessage=%@", url, cancelMessage];
-//        } else {
-//            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=&cancelMessage=%@", url, cancelMessage];
-//        }
-//        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
-//    }
     // finish
     [self.delegate AddressRequestControllerDone:self];
-}
-
-- (void)createRequest:(NSMutableString *)strRequestID
-    storeRequestURI:(NSMutableString *)strRequestURI
-    storeRequestAddressIn:(NSMutableString *)strRequestAddress
-    withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
-{
-    [strRequestID setString:@""];
-    [strRequestAddress setString:@""];
-    [strRequestURI setString:@""];
-
-    unsigned int width = 0;
-    unsigned char *pData = NULL;
-    char *pszURI = NULL;
-    tABC_Error error;
-
-    char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
-    if (szRequestID) {
-        ABC_GenerateRequestQRCode([[AppDelegate abc].name UTF8String],
-            [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
-            szRequestID, &pszURI, &pData, &width, &error);
-        if (error.code == ABC_CC_Ok) {
-            if (pszURI && strRequestURI) {
-                [strRequestURI appendFormat:@"%s", pszURI];
-                free(pszURI);
-            }
-        } else {
-//            [Util printABC_Error:&error];
-        }
-    }
-    if (szRequestID) {
-        if (strRequestID) {
-            [strRequestID appendFormat:@"%s", szRequestID];
-        }
-        char *szRequestAddress = NULL;
-        tABC_CC result = ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
-            [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
-            szRequestID, &szRequestAddress, &error);
-//        [Util printABC_Error:&error];
-        if (result == ABC_CC_Ok) {
-            if (szRequestAddress && strRequestAddress) {
-                [strRequestAddress appendFormat:@"%s", szRequestAddress];
-            }
-        }
-        if (szRequestAddress) {
-            free(szRequestAddress);
-        }
-    }
-    if (szRequestID) {
-        free(szRequestID);
-    }
-    if (pData) {
-        free(pData);
-    }
-}
-
-- (char *)createReceiveRequestFor: (SInt64)amountSatoshi withRequestState:(RequestState)state
-{
-	tABC_Error error;
-    tABC_TxDetails details;
-
-    memset(&details, 0, sizeof(tABC_TxDetails));
-    details.amountSatoshi = 0;
-	details.amountFeesAirbitzSatoshi = 0;
-	details.amountFeesMinersSatoshi = 0;
-    details.amountCurrency = 0;
-    details.szName = (char *) [strName UTF8String];
-    details.szNotes = (char *) [strNotes UTF8String];
-	details.szCategory = (char *) [strCategory UTF8String];
-	details.attributes = 0x0; //for our own use (not used by the core)
-    details.bizId = 0;
-
-	char *pRequestID;
-    // create the request
-	ABC_CreateReceiveRequest([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
-        &details, &pRequestID, &error);
-	if (error.code == ABC_CC_Ok) {
-		return pRequestID;
-	} else {
-		return 0;
-	}
-}
-
-- (BOOL)finalizeRequest:(NSString *)requestId
-{
-    tABC_Error error;
-    // Finalize this request so it isn't used elsewhere
-    ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], [[AppDelegate abc].currentWallet.strUUID UTF8String],
-        [requestId UTF8String], &error);
-//    [Util printABC_Error:&error];
-    return error.code == ABC_CC_Ok ? YES : NO;
 }
 
 #pragma mark - ButtonSelectorView delegates
