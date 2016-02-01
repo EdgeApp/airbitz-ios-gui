@@ -40,7 +40,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
-#import "Keychain.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
@@ -583,11 +582,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [[AppDelegate abc] PINLoginExists:[LocalSettings controller].cachedUsername];
+        bool exists = [[AppDelegate abc] PINLoginExists:[[AppDelegate abc] getLastAccessedAccount]];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [[AppDelegate abc] PINLoginExists:[LocalSettings controller].cachedUsername];
+            bool exists = [[AppDelegate abc] PINLoginExists:[[AppDelegate abc] getLastAccessedAccount]];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -1193,7 +1192,7 @@ MainViewController *singleton;
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
-    } else if (![[AppDelegate abc] passwordExists]) {
+    } else if (![[AppDelegate abc] passwordExists] && !bNewAccount) {
         [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
@@ -1522,6 +1521,7 @@ MainViewController *singleton;
     else if (_passwordChangeAlert == alertView)
     {
         _passwordChangeAlert = nil;
+        [[AppDelegate abc] logout];
     }
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
     {
@@ -1678,7 +1678,6 @@ MainViewController *singleton;
     if (_passwordChangeAlert == nil && [User isLoggedIn])
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [[User Singleton] clear];
         [self resetViews:nil];
         _passwordChangeAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Password Change", nil)
@@ -1907,15 +1906,18 @@ MainViewController *singleton;
 
 - (void)loggedOffRedirect:(NSNotification *)notification
 {
+    [[User Singleton] clear];
+    
     [slideoutView showSlideout:NO withAnimation:NO];
 
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_DIRECTORY];
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
+    [self loadUserViews];
     [self resetViews:notification];
     [MainViewController hideTabBarAnimated:NO];
     [MainViewController hideNavBarAnimated:NO];
+    
+
 
 }
 
@@ -2036,15 +2038,11 @@ MainViewController *singleton;
 {
     NSString *str = NSLocalizedString(@"Please wait while %@ gracefully exits your account. This may take a while on slow networks.", nil);
 
-    [Keychain disableRelogin:[AppDelegate abc].name];
     [FadingAlertView create:self.view
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                 // Log the user out and reset UI
-                [[User Singleton] clear];
-
-                [self loadUserViews];
-                [self launchViewControllerBasedOnAppMode];
+                [[AppDelegate abc] logout];
 
                 [FadingAlertView dismiss:FadingAlertDismissFast];
             }];

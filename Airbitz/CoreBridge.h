@@ -37,6 +37,11 @@ static const int ABCDenominationUBTC = 2;
 void abcDebugLog(int level, NSString *string);
 void abcSetDebugLevel(int level);
 
+typedef enum eABCDeviceCaps
+{
+    ABCDeviceCapsTouchID,
+} ABCDeviceCaps;
+
 @class ABCSpend;
 @class CoreBridge;
 @class ABCSettings;
@@ -70,7 +75,7 @@ void abcSetDebugLevel(int level);
 @property (nonatomic, copy) NSString *password;
 
 
-- (CoreBridge *)init;
+- (id)init:(NSString *)abcAPIKey hbits:(NSString *)hbitsKey;
 - (void)free;
 - (void)startQueues;
 - (void)stopQueues;
@@ -94,11 +99,9 @@ void abcSetDebugLevel(int level);
 - (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
 - (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
 - (long) saveLogoutDate;
-- (BOOL)didLoginExpire:(NSString *)username;
 - (void)addCategory:(NSString *)strCategory;
 - (void)loadCategories;
 - (void)saveCategories:(NSMutableArray *)saveArrayCategories;
-- (NSArray *)getLocalAccounts:(NSString **)strError;
 - (BOOL)accountExistsLocal:(NSString *)username;
 - (BOOL) isLoggedIn;
 
@@ -130,7 +133,6 @@ void abcSetDebugLevel(int level);
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
 - (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
-- (bool)PINLoginExists:(NSString *)username;
 - (BOOL)recentlyLoggedIn;
 - (void)logout;
 - (BOOL)passwordOk:(NSString *)password;
@@ -327,6 +329,19 @@ void abcSetDebugLevel(int level);
  */
 - (ABCConditionCode)isAccountUsernameAvailable:(NSString *)username;
 
+/**
+ * PINLoginExists
+ * Checks if PIN login is possible for the given username. This checks if
+ * there is a local PIN package on the device from a prior login
+ *
+ * @param     NSString   *username: username to check
+ * @return    BOOL: YES if username is available
+ */
+- (BOOL)PINLoginExists:(NSString *)username;
+
+- (NSString *) getLastAccessedAccount;
+- (void) setLastAccessedAccount:(NSString *) account;
+
 
 /*
  * signIn
@@ -364,6 +379,28 @@ void abcSetDebugLevel(int level);
                             complete:(void (^)(void)) completionHandler
                                error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
+
+/*
+ * autoReloginOrTouchIDIfPossible
+ *
+ * Attempts to auto-relogin the most recently logged in user if they are within their auto-logout 
+ * setting (default 1 hour). Should be called upon initial execution of app and when the Login screen 
+ * reappears after logout.
+ *
+ * @param username: user account to attempt to relogin
+ * @param doBeforeLogin: completion handler code block executes before login is attempted
+ * @param completeWithLogin: completion handler code block executes if login is successful
+ * @param completeNoLogin: completion handler code block executes if relogin not attempted
+ * @param errorHandler: error handler code block which is called if relogin attempted but failed
+ *                          @param ABCConditionCode       ccode: ABC error code
+ *                          @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (void)autoReloginOrTouchIDIfPossible:(NSString *)username
+                         doBeforeLogin:(void (^)(void)) doBeforeLogin
+                     completeWithLogin:(void (^)(BOOL usedTouchID)) completionWithLogin
+                       completeNoLogin:(void (^)(void)) completionNoLogin
+                                 error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
 /*
  * checkPasswordRules
@@ -669,13 +706,28 @@ void abcSetDebugLevel(int level);
 
 /*
  * getLocalAccounts
- * @param  NSArray**       : array of strings of account names
+ *      Get a list of previously logged in account names on this device
+ * @param  NSMutableArray*       : array of strings of account names
  * @return ABCConditionCode: error code to look up
  */
-//- (ABCConditionCode)getLocalAccounts:(NSArray **) arrayAccounts;
+- (ABCConditionCode) getLocalAccounts:(NSMutableArray *) accounts;
 
 - (ABCConditionCode) getLastConditionCode;
 - (NSString *) getLastErrorString;
+- (BOOL) hasDeviceCapability:(ABCDeviceCaps) caps;
+
+/*
+ * shouldAskUserToEnableTouchID
+ *  Evaluates if user should be asked to enable touch ID based
+ *  on various factors such as if they have ever disabled touchID
+ *  in the past, if they have touchID hardware support, and if
+ *  this account has a password. PIN only accounts can't user TouchID
+ *  at the moment. If user previously had touchID enabled, this will
+ *  automatically enable touchID and return NO.
+ *  Should be called while logged in.
+ * @return BOOL: Should GUI ask if user wants to enable
+ */
+- (BOOL) shouldAskUserToEnableTouchID;
 
 + (int) getMinimumUsernamedLength;
 + (int) getMinimumPasswordLength;

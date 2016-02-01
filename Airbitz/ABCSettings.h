@@ -6,12 +6,15 @@
 #import <Foundation/Foundation.h>
 #import "ABCConditionCode.h"
 #import "CoreBridge.h"
+#import "ABCLocalSettings.h"
+#import "Keychain.h"
 
 @class CoreBridge;
+@class Keychain;
 
 @interface ABCSettings : NSObject
 
-@property (nonatomic) CoreBridge *abc;
+
 
 // User Settings that are synced across devices
 @property (nonatomic) int minutesAutoLogout;
@@ -31,9 +34,12 @@
 @property (nonatomic) int64_t spendRequirePinSatoshis;
 @property (nonatomic) bool bDisablePINLogin;
 
+- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(Keychain *)keyChain;
 - (ABCConditionCode)loadSettings;
 - (ABCConditionCode)saveSettings;
-- (id)initWithABC:(CoreBridge *)abc;
+- (BOOL) touchIDEnabled;
+- (BOOL) enableTouchID;
+- (void) disableTouchID;
 
 @end
 

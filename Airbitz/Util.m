@@ -497,15 +497,3 @@
 
 @end
 
-@implementation NSString (reverse)
- 
-+ (NSString *)safeStringWithUTF8String:(const char *)bytes;
-{
-    if (bytes) {
-        return [NSString stringWithUTF8String:bytes];
-    } else {
-        return @"";
-    }
-}
- 
-@end

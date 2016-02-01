@@ -7,9 +7,19 @@
 #import <UIKit/UIKit.h>
 
 
+
 @implementation ABCUtil
 {
 
+}
+
++ (NSString *)safeStringWithUTF8String:(const char *)bytes;
+{
+    if (bytes) {
+        return [NSString stringWithUTF8String:bytes];
+    } else {
+        return @"";
+    }
 }
 
 // replaces the string in the given variable with a duplicate of another

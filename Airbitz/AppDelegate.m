@@ -21,7 +21,7 @@
 #import "NSString+StripHTML.h"
 #import "Reachability.h"
 #import "Util.h"
-#import "Keychain.h"
+#import "Config.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -52,7 +52,7 @@ static CoreBridge *airbitzCore;
 
     [AudioController initAll];
 
-    airbitzCore = [[CoreBridge alloc] init];
+    airbitzCore = [[CoreBridge alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -160,8 +160,11 @@ static CoreBridge *airbitzCore;
 {
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
-    [self checkLoginExpired];
     [airbitzCore enterForeground];
+    if (![self isAppActive] && ![[AppDelegate abc] isLoggedIn])
+    {
+        [[User Singleton] clear];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -191,47 +194,6 @@ static CoreBridge *airbitzCore;
     bgNotificationTask = UIBackgroundTaskInvalid;
 }
 
-// This is a fallback for auto logout. It is better to have the background task
-// or network fetch log the user out
-- (void)checkLoginExpired
-{
-    BOOL bLoginExpired;
-
-    NSString *username;
-    if ([User isLoggedIn])
-        username = [AppDelegate abc].name;
-    else
-        username = [LocalSettings controller].cachedUsername;
-
-    bLoginExpired = [airbitzCore didLoginExpire:username];
-
-    if (bLoginExpired)
-    {
-        // App will not auto login but we will retain login credentials
-        // inside iOS Keychain so we can use TouchID
-        [Keychain disableRelogin:username];
-    }
-
-    if (!bLoginExpired || ![User isLoggedIn])
-    {
-        return;
-    }
-
-    [self autoLogout];
-}
-
-
-// If the app is *not* active, log the user out
-- (void)autoLogout
-{
-
-    if (![self isAppActive])
-    {
-        [[User Singleton] clear];
-    }
-    [self bgLogoutCleanup];
-
-}
 
 - (BOOL)isAppActive
 {
@@ -281,7 +243,8 @@ static CoreBridge *airbitzCore;
         //
         // Popup notification if user has accounts with no passwords
         //
-        NSArray *arrayAccounts = [airbitzCore getLocalAccounts:nil];
+        NSMutableArray *arrayAccounts = [[NSMutableArray alloc] init];
+        [airbitzCore getLocalAccounts:arrayAccounts];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];

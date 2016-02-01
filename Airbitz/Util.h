@@ -59,7 +59,3 @@
 
 
 @end
-
-@interface NSString (reverse)
-+ (NSString *)safeStringWithUTF8String:(const char *)bytes;
-@end

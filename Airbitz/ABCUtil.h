@@ -8,6 +8,8 @@
 @class UIImage;
 
 @interface ABCUtil : NSObject
+
++ (NSString *)safeStringWithUTF8String:(const char *)bytes;
 + (void)replaceString:(char **)ppszValue withString:(const char *)szNewValue;
 + (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;

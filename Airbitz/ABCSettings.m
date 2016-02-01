@@ -8,16 +8,28 @@
 #import "ABCError.h"
 #import "CoreBridge.h"
 #import "ABCUtil.h"
+#import "Keychain.h"
+#import "ABCLocalSettings.h"
 
+
+@interface ABCSettings ()
+
+@property (nonatomic) CoreBridge *abc;
+@property (nonatomic) ABCLocalSettings *local;
+@property (nonatomic) Keychain *keyChain;
+
+@end
 
 @implementation ABCSettings
 {
 
 }
-- (id)initWithABC:(CoreBridge *)abc
+- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(Keychain *)keyChain;
 {
     self = [super init];
     self.abc = abc;
+    self.local = local;
+    self.keyChain = keyChain;
     return self;
 }
 
@@ -67,6 +79,7 @@
         self.bDisablePINLogin = pSettings->bDisablePINLogin;
     }
     ABC_FreeAccountSettings(pSettings);
+    [self.local loadAll];
 
     return [ABCError setLastErrors:error];
 }
@@ -114,11 +127,13 @@
                 }
             });
         }
-
+        
         ABC_UpdateAccountSettings([self.abc.name UTF8String], [self.abc.password UTF8String], pSettings, &error);
         if (ABCConditionCodeOk == [ABCError setLastErrors:error])
         {
             ABC_FreeAccountSettings(pSettings);
+            [self.keyChain disableKeychainBasedOnSettings:self.abc.name];
+            [self.local saveAll];
         }
     }
 
@@ -159,6 +174,47 @@
         });
     }
 }
+
+- (BOOL) touchIDEnabled;
+{
+    if ([self.local.touchIDUsersDisabled indexOfObject:self.abc.name] == NSNotFound &&
+        [self.local.touchIDUsersEnabled  indexOfObject:self.abc.name] != NSNotFound)
+    {
+        return YES;
+    }
+    return NO;
+
+}
+
+- (BOOL) enableTouchID;
+{
+    // Need a password to enable touchID until we get support for login handles
+    if (!self.abc.password) return NO;
+    
+    [self.local.touchIDUsersDisabled removeObject:self.abc.name];
+    [self.local.touchIDUsersEnabled addObject:self.abc.name];
+    [self.local saveAll];
+    [self.keyChain updateLoginKeychainInfo:self.abc.name
+                             password:self.abc.password
+                           useTouchID:YES];
+    
+    return YES;
+}
+
+- (void) disableTouchID;
+{
+    // Disable TouchID in LocalSettings
+    if (self.abc.name)
+    {
+        [self.local.touchIDUsersDisabled addObject:self.abc.name];
+        [self.local.touchIDUsersEnabled removeObject:self.abc.name];
+        [self.local saveAll];
+        [self.keyChain updateLoginKeychainInfo:self.abc.name
+                                 password:self.abc.password
+                               useTouchID:NO];
+    }
+}
+
 
 
 @end

@@ -16,13 +16,16 @@
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
+		346444A6E34E74B4DE7BB0DA /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
 		346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		3464455FE5AD6B4920EFC9EC /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		3464460E39549AA0C4A799D9 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
 		346446561337E2A997B33519 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
 		34644833488870AF279439C2 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
 		346448A02912B5F1731EB559 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
+		34644C629DC176DE151BDE53 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
 		34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
 		34644D994D5FE9666195A088 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
@@ -1450,8 +1453,10 @@
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
+		346445D8EA024D1E8810FB96 /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
 		3464472C40F04A9BEC2C1FD8 /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
 		34644740DA0DDC32A577180B /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
+		34644764F7CD65A845CDE528 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
 		34644854DE406C11D49E7310 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
 		346448A0DE45E082A077B72A /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
 		346449BCB140E3EB004AD724 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
@@ -3398,6 +3403,8 @@
 				34644DC0B6EB7DE0B2C2D0B5 /* ABCSettings.h */,
 				346448A0DE45E082A077B72A /* ABCUtil.m */,
 				34644D213DC34F72FCF6FE14 /* ABCUtil.h */,
+				34644764F7CD65A845CDE528 /* ABCLocalSettings.m */,
+				346445D8EA024D1E8810FB96 /* ABCLocalSettings.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -4733,6 +4740,7 @@
 				3464460E39549AA0C4A799D9 /* ABCError.m in Sources */,
 				34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */,
 				346440A6CDF92ED3B1A571AD /* ABCUtil.m in Sources */,
+				34644C629DC176DE151BDE53 /* ABCLocalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4879,6 +4887,7 @@
 				346446561337E2A997B33519 /* ABCError.m in Sources */,
 				34644833488870AF279439C2 /* ABCSettings.m in Sources */,
 				34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */,
+				346444A6E34E74B4DE7BB0DA /* ABCLocalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5025,6 +5034,7 @@
 				346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */,
 				346441DD9295BE01A52C60B4 /* ABCSettings.m in Sources */,
 				3464407648AB26EF1C6543E4 /* ABCUtil.m in Sources */,
+				3464455FE5AD6B4920EFC9EC /* ABCLocalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

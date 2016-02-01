@@ -63,11 +63,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (void)login:(NSString *)name password:(NSString *)pword
 {
-    if (name && 0 < name.length)
-    {
-        [LocalSettings controller].cachedUsername = name;
-    }
-
     [LocalSettings saveAll];
     [[User Singleton] loadLocalSettings];
 
@@ -129,10 +124,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    if ([User isLoggedIn])
-    {
-        [[AppDelegate abc] logout];
-    }
 }
 
 - (SendViewState)sendInvalidEntry

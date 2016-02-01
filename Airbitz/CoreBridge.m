@@ -3,13 +3,10 @@
 #import "Wallet.h"
 #import "Transaction.h"
 #import "TxOutput.h"
-#import "Config.h"
-#import "Util.h"
 #import "Keychain.h"
 #import "ABCSpend.h"
 
 #import "CoreBridge.h"
-#import "AppGroupConstants.h"
 #import "ABCError.h"
 #import "ABCRequest.h"
 #import "ABCSettings.h"
@@ -69,22 +66,22 @@ const int RECOVERY_REMINDER_COUNT = 2;
     NSTimer                                         *exchangeTimer;
     NSTimer                                         *dataSyncTimer;
     NSTimer                                         *notificationTimer;
-    ABCError                                        *abcError;
-
-
 }
-@property (nonatomic, strong) NSTimer                               *walletLoadingTimer;
+@property (nonatomic, strong) NSTimer               *walletLoadingTimer;
+@property (nonatomic, strong) ABCLocalSettings      *localSettings;
+@property (nonatomic, strong) Keychain              *keyChain;
+
 
 @end
 
 @implementation CoreBridge
 
-- (id)init
+- (id)init:(NSString *)abcAPIKey hbits:(NSString *)hbitsKey
 {
     
     if (NO == bInitialized)
     {
-        abcError = [[ABCError alloc] init];
+        [ABCError initAll];
 
         exchangeQueue = [[NSOperationQueue alloc] init];
         [exchangeQueue setMaxConcurrentOperationCount:1];
@@ -141,8 +138,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
         Error.code = ABC_CC_Ok;
         ABC_Initialize([docs_dir UTF8String],
                 [ca_path UTF8String],
-                API_KEY_HEADER,
-                HIDDENBITZ_KEY,
+                [abcAPIKey UTF8String],
+                [hbitsKey UTF8String],
                 (unsigned char *)[seedData bytes],
                 (unsigned int)[seedData length],
                 &Error);
@@ -180,7 +177,12 @@ const int RECOVERY_REMINDER_COUNT = 2;
         self.arrayCurrencyStrings = arrayCurrencyStrings;
         self.arrayCategories = nil;
         self.numCategories = 0;
-        self.settings = [[ABCSettings alloc] init];
+        self.localSettings = [[ABCLocalSettings alloc] init:self];
+        self.keyChain = [[Keychain alloc] init:self];
+        self.settings = [[ABCSettings alloc] init:self localSettings:self.localSettings keyChain:self.keyChain];
+
+        self.keyChain.settings = self.settings;
+        self.keyChain.localSettings = self.localSettings;
     }
     
     return self;
@@ -280,6 +282,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
 - (void)enterForeground
 {
+    [self checkLoginExpired];
+    
     if ([self isLoggedIn])
     {
         [self connectWatchers];
@@ -454,7 +458,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         char *szName = NULL;
         ABC_WalletName([self.name UTF8String], [uuid UTF8String], &szName, &error);
         if (error.code == ABC_CC_Ok) {
-            wallet.strName = [NSString safeStringWithUTF8String:szName];
+            wallet.strName = [ABCUtil safeStringWithUTF8String:szName];
         }
         if (szName) {
             free(szName);
@@ -1438,25 +1442,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
     return bResult;
 }
 
-- (bool)PINLoginExists:(NSString *)username
-{
-    bool exists = NO;
-
-    if (username && 0 < username.length)
-    {
-        tABC_Error error;
-        ABC_PinLoginExists([username UTF8String], &exists, &error);
-        if (ABC_CC_Ok != error.code)
-        {
-            [self printABC_Error:&error];
-        }
-        [self setLastErrors:error];
-
-    }
-    return exists;
-}
-
-
 - (BOOL)recentlyLoggedIn
 {
     long now = (long) [[NSDate date] timeIntervalSince1970];
@@ -1468,6 +1453,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     dispatch_async(dispatch_get_main_queue(),^{
         [self postWalletsLoadingNotification];
     });
+    [self setLastAccessedAccount:self.name];
     [self loadCategories];
     [self.settings loadSettings];
     [self requestExchangeRateUpdate:nil];
@@ -1518,6 +1504,142 @@ const int RECOVERY_REMINDER_COUNT = 2;
      }];
 }
 
+- (void)autoReloginOrTouchIDIfPossible:(NSString *)username
+                         doBeforeLogin:(void (^)(void)) doBeforeLogin
+                     completeWithLogin:(void (^)(BOOL usedTouchID)) completionWithLogin
+                       completeNoLogin:(void (^)(void)) completionNoLogin
+                                 error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        NSString *password;
+        BOOL      usedTouchID;
+        
+        BOOL doRelogin = [self autoReloginOrTouchIDIfPossibleMain:username password:&password usedTouchID:&usedTouchID];
+        
+        if (doRelogin)
+        {
+            if (doBeforeLogin) doBeforeLogin();
+            ABCConditionCode ccode = [self signIn:username password:password otp:nil];
+            NSString *errroString  = [self getLastErrorString];
+            if (ABCConditionCodeOk == ccode)
+            {
+                if (completionWithLogin) completionWithLogin(usedTouchID);
+            }
+            else
+            {
+                if (errorHandler) errorHandler(ccode, errroString);
+            }
+        }
+        else
+        {
+            if (completionNoLogin) completionNoLogin();
+        }
+    });
+}
+
+- (BOOL)autoReloginOrTouchIDIfPossibleMain:(NSString *)username
+                                  password:(NSString **)password
+                               usedTouchID:(BOOL *)usedTouchID
+{
+    ABCLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
+    *usedTouchID = NO;
+    
+//    if (HARD_CODED_LOGIN) {
+//        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
+//        self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
+//        [self showSpinner:YES];
+//        [self SignIn];
+//        return;
+//    }
+//    
+    if (! [self.keyChain bHasSecureEnclave] )
+    {
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain: No secure enclave");
+        return NO;
+    }
+    
+    ABCLog(1, @"Checking username=%@", username);
+    
+    
+    //
+    // If login expired, then disable relogin but continue validation of TouchID
+    //
+    if ([self didLoginExpire:username])
+    {
+        ABCLog(1, @"Login expired. Continuing with TouchID validation");
+        [self.keyChain disableRelogin:username];
+    }
+    
+    //
+    // Look for cached username & password or PIN in the keychain. Use it if present
+    //
+    BOOL bReloginState = NO;
+    
+    
+    NSString *strReloginKey  = [self.keyChain createKeyWithUsername:username key:RELOGIN_KEY];
+    NSString *strUseTouchID  = [self.keyChain createKeyWithUsername:username key:USE_TOUCHID_KEY];
+    NSString *strPasswordKey = [self.keyChain createKeyWithUsername:username key:PASSWORD_KEY];
+    
+    int64_t bReloginKey = [self.keyChain getKeychainInt:strReloginKey error:nil];
+    int64_t bUseTouchID = [self.keyChain getKeychainInt:strUseTouchID error:nil];
+    NSString *kcPassword = [self.keyChain getKeychainString:strPasswordKey error:nil];
+    
+    if (!bReloginKey && !bUseTouchID)
+    {
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
+        return NO;
+    }
+    
+    if ([kcPassword length] >= 10)
+    {
+        bReloginState = YES;
+    }
+    
+    if (bReloginState)
+    {
+        if (bUseTouchID && !bReloginKey)
+        {
+            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
+            
+            ABCLog(1, @"Launching TouchID prompt");
+            if ([self.keyChain authenticateTouchID:prompt fallbackString:usePasswordText]) {
+                bReloginKey = YES;
+                *usedTouchID = YES;
+            }
+            else
+            {
+                ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
+                return NO;
+            }
+        }
+        else
+        {
+            ABCLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
+        }
+        
+        if (bReloginKey)
+        {
+            if (bReloginState)
+            {
+                *password = kcPassword;
+                return YES;
+//                // try to login
+//                self.usernameSelector.textField.text = username;
+//                self.passwordTextField.text = kcPassword;
+//                [self showSpinner:YES];
+//                [self SignIn];
+            }
+        }
+    }
+    else
+    {
+        ABCLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
+    }
+    return NO;
+}
+
+
+
 - (BOOL)didLoginExpire:(NSString *)username;
 {
     //
@@ -1527,7 +1649,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     //
     if (0 == logoutTimeStamp)
     {
-        logoutTimeStamp = [Keychain getKeychainInt:[Keychain createKeyWithUsername:self.name key:LOGOUT_TIME_KEY] error:nil];
+        logoutTimeStamp = [self.keyChain getKeychainInt:[self.keyChain createKeyWithUsername:username key:LOGOUT_TIME_KEY] error:nil];
     }
 
     if (!logoutTimeStamp) return YES;
@@ -1542,6 +1664,38 @@ const int RECOVERY_REMINDER_COUNT = 2;
     return NO;
 }
 
+// This is a fallback for auto logout. It is better to have the background task
+// or network fetch log the user out
+- (void)checkLoginExpired
+{
+    BOOL bLoginExpired;
+    
+    NSString *username;
+    if ([self isLoggedIn])
+        username = self.name;
+    else
+        username = [self getLastAccessedAccount];
+    
+    bLoginExpired = [self didLoginExpire:username];
+    
+    if (bLoginExpired)
+    {
+        // App will not auto login but we will retain login credentials
+        // inside iOS Keychain so we can use TouchID
+        if ([self isLoggedIn])
+            [self logout];
+        else
+            [self.keyChain disableRelogin:username];
+    }
+    
+    if (!bLoginExpired || ![self isLoggedIn])
+    {
+        return;
+    }
+    
+}
+
+
 //
 // Saves the UNIX timestamp when user should be auto logged out
 // Returns the current time
@@ -1553,8 +1707,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
     logoutTimeStamp = currentTimeStamp + (60 * self.settings.minutesAutoLogout);
 
     // Save in iOS Keychain
-    [Keychain setKeychainInt:logoutTimeStamp
-                         key:[Keychain createKeyWithUsername:self.name key:LOGOUT_TIME_KEY]
+    [self.keyChain setKeychainInt:logoutTimeStamp
+                         key:[self.keyChain createKeyWithUsername:self.name key:LOGOUT_TIME_KEY]
                authenticated:YES];
 
     return currentTimeStamp;
@@ -1627,6 +1781,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 - (void)logout
 {
     [self stopAsyncTasks];
+    [self.keyChain disableRelogin:self.name];
 
     tABC_Error Error;
     tABC_CC result = ABC_ClearKeyCache(&Error);
@@ -2492,34 +2647,42 @@ const int RECOVERY_REMINDER_COUNT = 2;
     return bitid;
 }
 
-- (NSArray *)getLocalAccounts:(NSString **)strError;
+- (ABCConditionCode) getLocalAccounts:(NSMutableArray *) accounts;
 {
     char * pszUserNames;
     NSArray *arrayAccounts = nil;
     tABC_Error error;
-    __block tABC_CC result = ABC_ListAccounts(&pszUserNames, &error);
+    ABC_ListAccounts(&pszUserNames, &error);
     ABCConditionCode ccode = [self setLastErrors:error];
     if (ABCConditionCodeOk == ccode)
     {
+        [accounts removeAllObjects];
         NSString *str = [NSString stringWithCString:pszUserNames encoding:NSUTF8StringEncoding];
         arrayAccounts = [str componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        NSMutableArray *stringArray = [[NSMutableArray alloc] init];
         for(NSString *str in arrayAccounts)
         {
             if(str && str.length!=0)
             {
-                [stringArray addObject:str];
+                [accounts addObject:str];
             }
         }
-        arrayAccounts = [stringArray copy];
-        if (strError) *strError = nil;
-        return arrayAccounts;
     }
-    else
+    return ccode;
+}
+
+- (BOOL)PINLoginExists:(NSString *)username;
+{
+    ABCConditionCode ccode;
+    BOOL exists = NO;
+    if (username && 0 < username.length)
     {
-        if (strError) *strError = [self getLastErrorString];
-        return nil;
+        tABC_Error error;
+        ABC_PinLoginExists([username UTF8String], &exists, &error);
+        ccode = [self setLastErrors:error];
+        if (ABCConditionCodeOk == ccode)
+            return exists;
     }
+    return NO;
 }
 
 - (BOOL)accountExistsLocal:(NSString *)username;
@@ -2581,6 +2744,18 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     tABC_Error error;
     ABC_AccountDelete((const char*)[account UTF8String], &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode)
+    {
+        if ([account isEqualToString:[self getLastAccessedAccount]])
+        {
+            // If we deleted the account we most recently logged into,
+            // set the lastLoggedInAccount to the top most account in the list.
+            NSMutableArray *accounts = [[NSMutableArray alloc] init];
+            [self getLocalAccounts:accounts];
+            [self setLastAccessedAccount:accounts[0]];
+        }
+    }
 
     return [self setLastErrors:error];
 }
@@ -2715,15 +2890,16 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     ABCConditionCode ccode = [self setLastErrors:error];
     if (ABCConditionCodeOk == ccode)
     {
-        ABC_SetPIN([username UTF8String], [password UTF8String], [pin UTF8String], &error);
-        ccode = [self setLastErrors:error];
+        ccode = [self changePIN:pin];
 
         if (ABCConditionCodeOk == ccode)
         {
             self.name = username;
             self.password = password;
+            [self setLastAccessedAccount:username];
             // update user's default currency num to match their locale
             int currencyNum = [self getCurrencyNumOfLocale];
+            [self.settings enableTouchID];
             return [self setDefaultCurrencyNum:currencyNum];
         }
     }
@@ -2886,6 +3062,18 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     ABC_AccountAvailable([username UTF8String], &error);
     return [self setLastErrors:error];
 }
+
+- (NSString *) getLastAccessedAccount;
+{
+    return self.localSettings.lastLoggedInAccount;
+}
+
+- (void) setLastAccessedAccount:(NSString *) account;
+{
+    self.localSettings.lastLoggedInAccount = account;
+    [self.localSettings saveAll];
+}
+
 
 - (ABCConditionCode)signIn:(NSString *)username password:(NSString *)password otp:(NSString *)otp;
 {
@@ -3080,6 +3268,16 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     [self startWatchers];
     [self startQueues];
     
+    if ([self.localSettings.touchIDUsersEnabled containsObject:self.name] ||
+        !self.settings.bDisablePINLogin)
+    {
+        [self.localSettings.touchIDUsersDisabled removeObject:self.name];
+        [self.localSettings saveAll];
+        [self.keyChain updateLoginKeychainInfo:self.name
+                                      password:self.password
+                                    useTouchID:YES];
+    }
+    
     return ccode;
 }
 
@@ -3131,11 +3329,23 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     
     if (ABCConditionCodeOk == ccode)
     {
+        self.password = password;
         [self setupLoginPIN];
+
+        if ([self.localSettings.touchIDUsersEnabled containsObject:self.name] ||
+            !self.settings.bDisablePINLogin)
+        {
+            [self.localSettings.touchIDUsersDisabled removeObject:self.name];
+            [self.localSettings saveAll];
+            [self.keyChain updateLoginKeychainInfo:self.name
+                                          password:self.password
+                                        useTouchID:YES];
+        }
     }
     
     [self startWatchers];
     [self startQueues];
+    
     
     return ccode;
 }
@@ -3292,7 +3502,7 @@ exitnow:
     tABC_Error error;
     ABC_OtpResetGet(&szUsernames, &error);
     ABCConditionCode ccode = [self setLastErrors:error];
-    if (ABCConditionCodeOk == ccode)
+    if (ABCConditionCodeOk == ccode && szUsernames)
     {
         usernames = [NSString stringWithUTF8String:szUsernames];
         usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -3313,7 +3523,7 @@ exitnow:
     ABC_OtpResetGet(&szUsernames, &error);
     ABCConditionCode ccode = [self setLastErrors:error];
     NSMutableArray *usernameArray = [[NSMutableArray alloc] init];
-    if (ABCConditionCodeOk == ccode)
+    if (ABCConditionCodeOk == ccode && szUsernames)
     {
         usernames = [NSString stringWithUTF8String:szUsernames];
         usernames = [self formatUsername:usernames];
@@ -3769,10 +3979,45 @@ exitnow:
     return [ABCError getLastErrorString];
 }
 
+- (BOOL) hasDeviceCapability:(ABCDeviceCaps) caps
+{
+    switch (caps) {
+        case ABCDeviceCapsTouchID:
+            return [self.keyChain bHasSecureEnclave];
+            break;
+    }
+    return NO;
+}
+
+- (BOOL) shouldAskUserToEnableTouchID;
+{
+    if ([self hasDeviceCapability:ABCDeviceCapsTouchID] && [self passwordExists])
+    {
+        //
+        // Check if user has not yet been asked to enable touchID on this device
+        //
+        
+        BOOL onEnabled = ([self.localSettings.touchIDUsersEnabled indexOfObject:self.name] != NSNotFound);
+        BOOL onDisabled = ([self.localSettings.touchIDUsersDisabled indexOfObject:self.name] != NSNotFound);
+        
+        if (!onEnabled && !onDisabled)
+        {
+            return YES;
+        }
+        else
+        {
+            [self.keyChain updateLoginKeychainInfo:self.name
+                                          password:self.password
+                                        useTouchID:!onDisabled];
+        }
+    }
+    return NO;
+}
 
 + (int) getMinimumUsernamedLength { return ABC_MIN_USERNAME_LENGTH; };
 + (int) getMinimumPasswordLength { return ABC_MIN_PASS_LENGTH; };
 + (int) getMinimumPINLength { return ABC_MIN_PIN_LENGTH; };
+
 
 static int debugLevel = 1;
 

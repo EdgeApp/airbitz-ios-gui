@@ -14,11 +14,11 @@
 
 @end
 
-static ABCError *singleton;
+__strong static ABCError *singleton;
 
 @implementation ABCError
 
-+ (void)initAll
++ (void)initAll;
 {
     singleton = [ABCError alloc];
 }
@@ -106,29 +106,39 @@ static ABCError *singleton;
             return NSLocalizedString(@"Synchronizing with the network.", nil);
         case ABCConditionCodeNonNumericPin:
             return NSLocalizedString(@"PIN must be a numeric value.", nil);
-        case ABCConditionCodeError:
         case ABCConditionCodeNULLPtr:
+            return NSLocalizedString(@"Invalid NULL Ptr passed to ABC", nil);
         case ABCConditionCodeNoAvailAccountSpace:
+            return NSLocalizedString(@"No Available Account Space", nil);
         case ABCConditionCodeDirReadError:
+            return NSLocalizedString(@"Directory Read Error", nil);
         case ABCConditionCodeFileOpenError:
+            return NSLocalizedString(@"File Open Error", nil);
         case ABCConditionCodeFileReadError:
+            return NSLocalizedString(@"File Read Error", nil);
         case ABCConditionCodeFileWriteError:
+            return NSLocalizedString(@"File Write Error", nil);
         case ABCConditionCodeFileDoesNotExist:
+            return NSLocalizedString(@"File Does Not Exist Error", nil);
         case ABCConditionCodeUnknownCryptoType:
         case ABCConditionCodeInvalidCryptoType:
         case ABCConditionCodeDecryptError:
         case ABCConditionCodeDecryptFailure:
         case ABCConditionCodeEncryptError:
         case ABCConditionCodeScryptError:
+            return NSLocalizedString(@"Encryption/Decryption Error", nil);
+        case ABCConditionCodeMutexError:
+            return NSLocalizedString(@"Mutex Error", nil);
+        case ABCConditionCodeJSONError:
+            return NSLocalizedString(@"JSON Error", nil);
         case ABCConditionCodeSysError:
         case ABCConditionCodeNotInitialized:
         case ABCConditionCodeReinitialization:
-        case ABCConditionCodeJSONError:
-        case ABCConditionCodeMutexError:
         case ABCConditionCodeNoTransaction:
         case ABCConditionCodeParseError:
         case ABCConditionCodeNoRequest:
         case ABCConditionCodeNoAvailableAddress:
+        case ABCConditionCodeError:
         default:
             return NSLocalizedString(@"An error has occurred.", nil);
     }

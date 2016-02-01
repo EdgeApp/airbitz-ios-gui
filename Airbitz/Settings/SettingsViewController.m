@@ -29,7 +29,6 @@
 #import "Theme.h"
 #import "MainViewController.h"
 #import "PopupPickerView.h"
-#import "Keychain.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
@@ -869,7 +868,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (indexPath.row == ROW_TOUCHID)
         {
-            if (! [Keychain bHasSecureEnclave])
+            if (! [[AppDelegate abc] hasDeviceCapability:ABCDeviceCapsTouchID])
             {
                 cell.name.text = NSLocalizedString(@"TouchID: Unsupported Device", @"settings text");
                 cell.state.userInteractionEnabled = NO;
@@ -885,10 +884,10 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
 
-                if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[AppDelegate abc].name] != NSNotFound)
-                    [cell.state setOn:NO animated:NO];
-                else
+                if ([[AppDelegate abc].settings touchIDEnabled])
                     [cell.state setOn:YES animated:NO];
+                else
+                    [cell.state setOn:NO animated:NO];
 
                 if ([[AppDelegate abc] passwordExists] && 1) {
                     cell.state.userInteractionEnabled = YES;
@@ -1278,14 +1277,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
-        [Keychain disableKeychainBasedOnSettings];
-
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_TOUCHID))
     {
         if (!theSwitch.on)
         {
-            [SettingsViewController disableTouchID];
+            [[AppDelegate abc].settings disableTouchID];
         }
         else
         {
@@ -1295,7 +1292,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             //
             if ([[AppDelegate abc].password length] > 0)
             {
-                [SettingsViewController enableTouchID];
+                [[AppDelegate abc].settings enableTouchID];
             }
             else
             {
@@ -1307,31 +1304,6 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         // update the display by reloading the table
         [self.tableView reloadData];
 
-//        [Keychain disableKeychainBasedOnSettings];
-    }
-}
-
-+ (void) enableTouchID;
-{
-    [[LocalSettings controller].touchIDUsersDisabled removeObject:[AppDelegate abc].name];
-    [[LocalSettings controller].touchIDUsersEnabled addObject:[AppDelegate abc].name];
-    [LocalSettings saveAll];
-    [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
-                             password:[AppDelegate abc].password
-                           useTouchID:YES];
-}
-
-+ (void) disableTouchID;
-{
-    // Disable TouchID in LocalSettings
-    if ([AppDelegate abc].name)
-    {
-        [[LocalSettings controller].touchIDUsersDisabled addObject:[AppDelegate abc].name];
-        [[LocalSettings controller].touchIDUsersEnabled removeObject:[AppDelegate abc].name];
-        [LocalSettings saveAll];
-        [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
-                                 password:[AppDelegate abc].password
-                               useTouchID:NO];        
     }
 }
 
@@ -1494,7 +1466,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             // Need to disable TouchID in settings.
             //
             // Disable TouchID in LocalSettings
-            [SettingsViewController disableTouchID];
+            [[AppDelegate abc].settings disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
         }
         else
@@ -1516,7 +1488,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         if (buttonIndex == 0)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [SettingsViewController disableTouchID];
+            [[AppDelegate abc].settings disableTouchID];
         }
         else if (buttonIndex == 1)
         {
@@ -1550,7 +1522,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 
         // Enable Touch ID
-        [SettingsViewController enableTouchID];
+        [[AppDelegate abc].settings enableTouchID];
         [self.tableView reloadData];
 
     }

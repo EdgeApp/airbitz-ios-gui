@@ -16,14 +16,11 @@
 @property (nonatomic, assign)   BOOL            bDisableBLE;
 @property (nonatomic, assign)   BOOL            bMerchantMode;
 @property (nonatomic, assign)   BOOL            bLocalNotificationsAllowed;
-@property (nonatomic, retain)   NSString        *cachedUsername;
 @property (nonatomic, assign)   NSInteger       previousNotificationID;
 @property (nonatomic, assign)   NSInteger       receiveBitcoinCount;    // how many times user received bitcoin, for messaging
 @property (nonatomic, retain)   NSMutableArray  *notifications;
 @property (nonatomic, retain)   NSMutableArray  *otpNotifications;
 @property (nonatomic, retain)   NSString        *clientID;
-@property (nonatomic, retain)   NSMutableArray  *touchIDUsersEnabled;
-@property (nonatomic, retain)   NSMutableArray  *touchIDUsersDisabled;
 @property (nonatomic, assign)   NSTimeInterval  noPasswordNotificationTime;
 
 

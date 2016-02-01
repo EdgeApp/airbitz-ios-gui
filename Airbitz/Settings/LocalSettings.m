@@ -13,14 +13,11 @@
 
 #define KEY_LOCAL_SETTINGS_DISABLE_BLE			    @"disableBLE"
 #define KEY_LOCAL_SETTINGS_MERCHANT_MODE    	    @"merchantMode"
-#define KEY_LOCAL_SETTINGS_CACHED_USERNAME          @"cachedUsername"
 #define KEY_LOCAL_SETTINGS_PREV_NOTIF_ID            @"previousNotificationID"
 #define KEY_LOCAL_SETTINGS_RECEIVE_COUNT            @"receiveBitcoinCount"
 #define KEY_LOCAL_SETTINGS_NOTIFICATION_DATA        @"notificationData"
 #define KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA           @"otpNotificationData"
 #define KEY_LOCAL_SETTINGS_CLIENT_ID                @"clientID"
-#define KEY_LOCAL_SETTINGS_TOUCHID_USERS_ENABLED    @"touchIDUsersEnabled"
-#define KEY_LOCAL_SETTINGS_TOUCHID_USERS_DISABLED   @"touchIDUsersDisabled"
 #define KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME   @"noPasswordNotificationTime"
 
 #define KEY_LOCAL_SETTINGS_REVIEW_NOTIFIED          @"review_notified"
@@ -109,7 +106,6 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 
     self.bDisableBLE = [defaults boolForKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     self.bMerchantMode = [defaults boolForKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
-    self.cachedUsername = [defaults stringForKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     self.previousNotificationID = [defaults integerForKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
     self.receiveBitcoinCount = [defaults integerForKey:KEY_LOCAL_SETTINGS_RECEIVE_COUNT];
     self.noPasswordNotificationTime = [defaults doubleForKey:KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME];
@@ -140,19 +136,6 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         self.otpNotifications = [[NSMutableArray alloc] init];
     }
 
-    NSData *touchIDUsersEnabledData = [defaults objectForKey:KEY_LOCAL_SETTINGS_TOUCHID_USERS_ENABLED];
-    if (touchIDUsersEnabledData) {
-        self.touchIDUsersEnabled = [NSKeyedUnarchiver unarchiveObjectWithData:touchIDUsersEnabledData];
-    } else {
-        self.touchIDUsersEnabled = [[NSMutableArray alloc] init];
-    }
-
-    NSData *touchIDUsersDisabledData = [defaults objectForKey:KEY_LOCAL_SETTINGS_TOUCHID_USERS_DISABLED];
-    if (touchIDUsersDisabledData) {
-        self.touchIDUsersDisabled = [NSKeyedUnarchiver unarchiveObjectWithData:touchIDUsersDisabledData];
-    } else {
-        self.touchIDUsersDisabled = [[NSMutableArray alloc] init];
-    }
 }
 
 // saves all the settings to persistant memory
@@ -163,7 +146,6 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 
     [defaults setBool:      [self bDisableBLE] forKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     [defaults setBool:      [self bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
-    [defaults setValue:     [self cachedUsername] forKey:KEY_LOCAL_SETTINGS_CACHED_USERNAME];
     [defaults setInteger:   [self previousNotificationID] forKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];
     [defaults setInteger:   [self receiveBitcoinCount] forKey:KEY_LOCAL_SETTINGS_RECEIVE_COUNT];
     [defaults setDouble:    [self noPasswordNotificationTime] forKey:KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME];
@@ -183,12 +165,6 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 
     NSData *otpNotifsData = [NSKeyedArchiver archivedDataWithRootObject:self.otpNotifications];
     [defaults setObject:otpNotifsData forKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
-
-    NSData *touchIDUsersEnabledData = [NSKeyedArchiver archivedDataWithRootObject:self.touchIDUsersEnabled];
-    [defaults setObject:touchIDUsersEnabledData forKey:KEY_LOCAL_SETTINGS_TOUCHID_USERS_ENABLED];
-
-    NSData *touchIDUsersDisabledData = [NSKeyedArchiver archivedDataWithRootObject:self.touchIDUsersDisabled];
-    [defaults setObject:touchIDUsersDisabledData forKey:KEY_LOCAL_SETTINGS_TOUCHID_USERS_DISABLED];
 
     // flush the buffer
     [defaults synchronize];
@@ -211,10 +187,8 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         // init all here
         self.bDisableBLE = NO;
         self.bMerchantMode = NO;
-        self.cachedUsername = nil;
         self.notifications = nil;
         self.otpNotifications = nil;
-        self.touchIDUsersEnabled = nil;
         self.previousNotificationID = 0;
         self.receiveBitcoinCount = 0;
     }

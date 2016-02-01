@@ -21,7 +21,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "LocalSettings.h"
-#import "Keychain.h"
 
 #define KEYBOARD_MARGIN         10.0
 #define DOLLAR_CURRENCY_NUMBER	840
@@ -709,15 +708,6 @@
                  cancelButtonTitle:@"OK"
                  otherButtonTitles:nil];
         
-        if ([[LocalSettings controller].touchIDUsersEnabled containsObject:[AppDelegate abc].name] ||
-            ![AppDelegate abc].settings.bDisablePINLogin)
-        {
-            [[LocalSettings controller].touchIDUsersDisabled removeObject:[AppDelegate abc].name];
-            [LocalSettings saveAll];
-            [Keychain updateLoginKeychainInfo:[AppDelegate abc].name
-                                     password:[AppDelegate abc].password
-                                   useTouchID:YES];
-        }
     }
     else
     {

@@ -16,6 +16,7 @@
  */
 + (NSString *)conditionCodeMap:(const ABCConditionCode) code;
 
++ (void)initAll;
 + (ABCConditionCode)setLastErrors:(tABC_Error)error;
 + (ABCConditionCode) getLastConditionCode;
 + (NSString *) getLastErrorString;

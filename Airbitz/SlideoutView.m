@@ -45,7 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
-@property (nonatomic, strong) NSArray                       *arrayAccounts;
+@property (nonatomic, strong) NSMutableArray                *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 @property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
@@ -448,7 +448,7 @@
     
     // set the text field to the choice
     NSString *account = [self.otherAccounts objectAtIndex:row];
-    [LocalSettings controller].cachedUsername = account;
+    [[AppDelegate abc] setLastAccessedAccount:account];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
@@ -508,12 +508,12 @@
 
 - (void)getAllAccounts
 {
-    NSString *strError;
-    self.arrayAccounts = [[AppDelegate abc] getLocalAccounts:&strError];
-    if (nil == self.arrayAccounts)
+    if (!self.arrayAccounts)
+        self.arrayAccounts = [[NSMutableArray alloc] init];
+    ABCConditionCode ccode = [[AppDelegate abc] getLocalAccounts:self.arrayAccounts];
+    if (ABCConditionCodeOk != ccode)
     {
-        if (strError)
-            [MainViewController fadingAlert:strError];
+        [MainViewController fadingAlert:[[AppDelegate abc] getLastErrorString]];
     }
 }
 
