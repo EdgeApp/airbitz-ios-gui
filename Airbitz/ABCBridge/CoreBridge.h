@@ -496,7 +496,16 @@ typedef enum eABCDeviceCaps
                                            complete:(void (^)(void)) completionHandler
                                               error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 
-
+/*
+ * finalizeRequestWithID
+ *  Finalizes the request so the address cannot be used by future requests. Forces address
+ *  rotation so the next request gets a different address
+ * @param NSString   *walletUUID: wallet request is from
+ * @param ABCRequest    *request: object with various bitcoin request details and return info
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)finalizeRequestWithID:(NSString *)walletUUID
+                                requestID:(NSString *)requestID;
 
 /*
  * uploadLogs
@@ -659,6 +668,12 @@ typedef enum eABCDeviceCaps
                                notes:(NSString *)notes
                        amountSatoshi:(uint64_t)amountSatoshi
                          abcSpend:(ABCSpend **)abcSpend;
+
+
+- (ABCConditionCode)pluginDataGet:(NSString *)pluginId withKey:(NSString *)key data:(NSMutableString *)data;
+- (ABCConditionCode)pluginDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value;
+- (ABCConditionCode)pluginDataRemove:(NSString *)pluginId withKey:(NSString *)key;
+- (ABCConditionCode)pluginDataClear:(NSString *)pluginId;
 
 
 /*

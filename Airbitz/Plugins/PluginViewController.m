@@ -17,7 +17,6 @@
 #import "CommonTypes.h"
 #import "ABCSpend.h"
 #import "MainViewController.h"
-#import "ABC.h"
 
 static const NSString *PROTOCOL = @"bridge://";
 
@@ -671,13 +670,10 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    tABC_Error error;
-    ABC_FinalizeReceiveRequest([[AppDelegate abc].name UTF8String],
-                               [[AppDelegate abc].password UTF8String],
-                               [[args objectForKey:@"id"] UTF8String],
-                               [[args objectForKey:@"requestId"] UTF8String],
-                               &error);
-    if (error.code == ABC_CC_Ok) {
+    ABCConditionCode ccode;
+    ccode = [[AppDelegate abc] finalizeRequestWithID:[args objectForKey:@"id"]
+                                           requestID:[args objectForKey:@"requestId"]];
+    if (ABCConditionCodeOk == ccode) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -688,8 +684,9 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if ([self pluginDataSet:_plugin.pluginId withKey:[args objectForKey:@"key"] 
-                                    withValue:[args objectForKey:@"value"]]) {
+    if (ABCConditionCodeOk == [[AppDelegate abc] pluginDataSet:_plugin.pluginId
+                                                       withKey:[args objectForKey:@"key"]
+                                                     withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -699,7 +696,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)clearData:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    if ([self pluginDataClear:_plugin.pluginId]) {
+    if (ABCConditionCodeOk == [[AppDelegate abc] pluginDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -709,14 +706,14 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)readData:(NSDictionary *)params
 {
     NSDictionary *args = [params objectForKey:@"args"];
-    NSString *value = [self pluginDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"]];
+    NSMutableString *value = [[NSMutableString alloc] init];
+    [[AppDelegate abc] pluginDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"] data:value];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
 }
 
 - (void)getBtcDenomination:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
     [self setJsResults:cbid withArgs:[self jsonResult:[AppDelegate abc].settings.denominationLabel]];
 }
 
@@ -803,7 +800,6 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)hideAlert:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
 
     [MainViewController fadingAlertDismiss];
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -890,84 +886,6 @@ static const NSString *PROTOCOL = @"bridge://";
     [[UIApplication sharedApplication] openURL:url];
 
     [self setJsResults:cbid withArgs:[self jsonSuccess]];
-}
-
-#pragma - Helper Functions
-
-- (NSString *)getRawTransaction:(NSString *)walletUUID withTxId:(NSString *)txId
-{
-    char *szHex = NULL;
-    NSString *hex = nil;
-    tABC_Error error;
-    ABC_GetRawTransaction([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], [walletUUID UTF8String], [txId UTF8String], &szHex, &error);
-    if (error.code == ABC_CC_Ok) {
-        hex = [NSString stringWithUTF8String:szHex];
-    }
-    if (szHex) {
-        free(szHex);
-    }
-    return hex;
-}
-
-- (NSString *)getRequestAddress:(char *)szRequestID withWallet:(Wallet *)wallet
-{
-    char *szRequestAddress = NULL;
-    NSString *address;
-    tABC_Error error;
-    ABC_GetRequestAddress([[AppDelegate abc].name UTF8String],
-                          [[AppDelegate abc].password UTF8String],
-                          [wallet.strUUID UTF8String],
-                          szRequestID, &szRequestAddress, &error);
-    if (error.code == ABC_CC_Ok) {
-        address = [NSString stringWithUTF8String:szRequestAddress];
-    }
-    if (szRequestAddress) {
-        free(szRequestAddress);
-    }
-    return address;
-}
-
-- (NSString *)pluginDataGet:(NSString *)pluginId withKey:(NSString *)key
-{
-    tABC_Error error;
-    NSString *result = nil;
-    char *szData = NULL;
-    ABC_PluginDataGet([[AppDelegate abc].name UTF8String],
-                      [[AppDelegate abc].password UTF8String],
-                      [pluginId UTF8String], [key UTF8String],
-                      &szData, &error);
-    if (error.code == ABC_CC_Ok) {
-        result = [NSString stringWithUTF8String:szData];
-    }
-    if (szData != NULL) {
-        free(szData);
-    }
-    return result;
-}
-
-- (BOOL)pluginDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value
-{
-    tABC_Error error;
-    ABC_PluginDataSet([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-        [pluginId UTF8String], [key UTF8String], [value UTF8String], &error);
-    return error.code == ABC_CC_Ok;
-}
-
-- (BOOL)pluginDataRemove:(NSString *)pluginId withKey:(NSString *)key
-{
-    tABC_Error error;
-    ABC_PluginDataRemove([[AppDelegate abc].name UTF8String], [[AppDelegate abc].password UTF8String],
-        [pluginId UTF8String], [key UTF8String], &error);
-    return error.code == ABC_CC_Ok;
-}
-
-- (BOOL)pluginDataClear:(NSString *)pluginId
-{
-    tABC_Error error;
-    ABC_PluginDataClear([[AppDelegate abc].name UTF8String],
-        [[AppDelegate abc].password UTF8String], [pluginId UTF8String], &error);
-    return error.code == ABC_CC_Ok;
 }
 
 #pragma - SendConfirmationViewControllerDelegate

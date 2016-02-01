@@ -3492,6 +3492,18 @@ exitnow:
     return ABCConditionCodeOk;
 }
 
+- (ABCConditionCode)finalizeRequestWithID:(NSString *)walletUUID
+                                requestID:(NSString *)requestID;
+{
+    tABC_Error error;
+    ABC_FinalizeReceiveRequest([self.name UTF8String],
+                               [self.password UTF8String],
+                               [walletUUID UTF8String],
+                               [requestID UTF8String],
+                               &error);
+    return [self setLastErrors:error];
+}
+
 /* === OTP authentication: === */
 
 
@@ -3941,23 +3953,59 @@ exitnow:
     return ccode;
 }
 
-//- (void)newSpendTransferAsync:(NSString *)destWalletUUID
-//                     complete:(void(^)(ABCSpend *sp))completionHandler
-//                        error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
-//{
-//    [self postToMiscQueue:^{
-//        ABCSpend *abcSpend;
-//        ABCConditionCode ccode = [self newSpendTransfer:destWalletUUID abcSpend:&abcSpend];
-//        NSString *errorString = [self getLastErrorString];
-//        dispatch_async(dispatch_get_main_queue(),^{
-//            if (ABCConditionCodeOk == ccode) {
-//                if (completionHandler) completionHandler(abcSpend);
-//            } else {
-//                if (errorHandler) errorHandler(ccode, errorString);
-//            }
-//        });
-//    }];
-//}
+#pragma Data Methods
+
+- (ABCConditionCode)pluginDataGet:(NSString *)pluginId withKey:(NSString *)key data:(NSMutableString *)data;
+{
+    [data setString:@""];
+    tABC_Error error;
+    char *szData = NULL;
+    ABCConditionCode ccode;
+    ABC_PluginDataGet([self.name UTF8String],
+                      [self.password UTF8String],
+                      [pluginId UTF8String], [key UTF8String],
+                      &szData, &error);
+    ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode) {
+        [data appendString:[NSString stringWithUTF8String:szData]];
+    }
+    if (szData != NULL) {
+        free(szData);
+    }
+    return ccode;
+}
+
+- (ABCConditionCode)pluginDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value
+{
+    tABC_Error error;
+    ABC_PluginDataSet([self.name UTF8String],
+                      [self.password UTF8String],
+                      [pluginId UTF8String],
+                      [key UTF8String],
+                      [value UTF8String],
+                      &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)pluginDataRemove:(NSString *)pluginId withKey:(NSString *)key
+{
+    tABC_Error error;
+    ABC_PluginDataRemove([self.name UTF8String],
+                         [self.password UTF8String],
+                         [pluginId UTF8String], [key UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+- (ABCConditionCode)pluginDataClear:(NSString *)pluginId
+{
+    tABC_Error error;
+    ABC_PluginDataClear([self.name UTF8String],
+                        [self.password UTF8String],
+                        [pluginId UTF8String], &error);
+    return [self setLastErrors:error];
+}
+
+
 
 - (ABCConditionCode)clearBlockchainCache;
 {
