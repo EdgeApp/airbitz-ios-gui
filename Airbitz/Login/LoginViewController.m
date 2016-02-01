@@ -296,6 +296,7 @@ static BOOL bInitialized = false;
 }
 
 - (void)uploadLog {
+    [self resignAllResponders];
     NSString *title = NSLocalizedString(@"Upload Log File", nil);
     NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
     // show password reminder test
@@ -355,6 +356,7 @@ static BOOL bInitialized = false;
 
 - (void)assignFirstResponder
 {
+
     if (bPINModeEnabled)
     {
         [self.PINCodeView becomeFirstResponder];
@@ -1341,6 +1343,7 @@ static BOOL bInitialized = false;
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
+                [self assignFirstResponder];
             } error:^(ABCConditionCode ccode, NSString *errorString)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
@@ -1351,8 +1354,10 @@ static BOOL bInitialized = false;
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
+                [self assignFirstResponder];
             }];
         }
+        [self assignFirstResponder];
     }
     else if (_deleteAccountAlert == alertView)
     {

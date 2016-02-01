@@ -129,3 +129,6 @@
 #define defaultWalletName                           NSLocalizedString(@"My Wallet", @"Default wallet name for new accounts")
 #define errorGettingWalletCount                     NSLocalizedString(@"Error Getting Wallet Count", nil)
 #define generatingQRCode                            NSLocalizedString(@"Generating QR Code...", nil)
+#define imagePickerAlertTitle                       NSLocalizedString(@"Upload Image", nil)
+#define imagePickerAlertUseCamera                   NSLocalizedString(@"Use Camera", nil)
+#define imagePickerAlertUsePhotos                   NSLocalizedString(@"Use Photo Album", nil)
