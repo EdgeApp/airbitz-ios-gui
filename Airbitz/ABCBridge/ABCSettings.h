@@ -7,10 +7,10 @@
 #import "ABCConditionCode.h"
 #import "CoreBridge.h"
 #import "ABCLocalSettings.h"
-#import "Keychain.h"
+#import "ABCKeychain.h"
 
 @class CoreBridge;
-@class Keychain;
+@class ABCKeychain;
 
 @interface ABCSettings : NSObject
 
@@ -34,7 +34,7 @@
 @property (nonatomic) int64_t spendRequirePinSatoshis;
 @property (nonatomic) bool bDisablePINLogin;
 
-- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(Keychain *)keyChain;
+- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
 - (ABCConditionCode)loadSettings;
 - (ABCConditionCode)saveSettings;
 - (BOOL) touchIDEnabled;

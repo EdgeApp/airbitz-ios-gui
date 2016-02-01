@@ -1,5 +1,5 @@
 //
-//  Keychain.h
+//  ABCKeychain.h
 //  Airbitz
 //
 //  Created by Paul Puey on 2015-08-31.
@@ -20,7 +20,7 @@
 @class ABCSettings;
 @class ABCLocalSettings;
 
-@interface Keychain : NSObject
+@interface ABCKeychain : NSObject
 
 @property (nonatomic) ABCSettings *settings;
 @property (nonatomic) ABCLocalSettings *localSettings;

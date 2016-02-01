@@ -1,5 +1,5 @@
 //
-//  Keychain.m
+//  ABCKeychain.m
 //  Airbitz
 //
 //  Created by Paul Puey on 2015-08-31.
@@ -7,19 +7,19 @@
 //
 
 
-#import "Keychain.h"
+#import "ABCKeychain.h"
 #import "CoreBridge.h"
 #import "NSMutableData+Secure.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "ABCLocalSettings.h"
 
-@interface Keychain ()
+@interface ABCKeychain ()
 
 @property (nonatomic) CoreBridge *abc;
 
 @end
 
-@implementation Keychain
+@implementation ABCKeychain
 {
     
 }
@@ -233,7 +233,7 @@
     
     if (disableFingerprint)
     {
-        // If user has disabled TouchID, then do not use Keychain at all for maximum security
+        // If user has disabled TouchID, then do not use ABCKeychain at all for maximum security
         [self clearKeychainInfo:username];
         return YES;
     }

@@ -3,7 +3,7 @@
 #import "Wallet.h"
 #import "Transaction.h"
 #import "TxOutput.h"
-#import "Keychain.h"
+#import "ABCKeychain.h"
 #import "ABCSpend.h"
 
 #import "CoreBridge.h"
@@ -69,7 +69,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 }
 @property (nonatomic, strong) NSTimer               *walletLoadingTimer;
 @property (nonatomic, strong) ABCLocalSettings      *localSettings;
-@property (nonatomic, strong) Keychain              *keyChain;
+@property (nonatomic, strong) ABCKeychain *keyChain;
 
 
 @end
@@ -178,7 +178,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         self.arrayCategories = nil;
         self.numCategories = 0;
         self.localSettings = [[ABCLocalSettings alloc] init:self];
-        self.keyChain = [[Keychain alloc] init:self];
+        self.keyChain = [[ABCKeychain alloc] init:self];
         self.settings = [[ABCSettings alloc] init:self localSettings:self.localSettings keyChain:self.keyChain];
 
         self.keyChain.settings = self.settings;
@@ -1644,7 +1644,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
 {
     //
     // If app was killed then the static var logoutTimeStamp will be zero so we'll pull the cached value
-    // from the iOS Keychain. Also, on non A7 processors, we won't save anything in the keychain so we need
+    // from the iOS ABCKeychain. Also, on non A7 processors, we won't save anything in the keychain so we need
     // the static var to take care of cases where app is not killed.
     //
     if (0 == logoutTimeStamp)
@@ -1681,7 +1681,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     if (bLoginExpired)
     {
         // App will not auto login but we will retain login credentials
-        // inside iOS Keychain so we can use TouchID
+        // inside iOS ABCKeychain so we can use TouchID
         if ([self isLoggedIn])
             [self logout];
         else
@@ -1706,7 +1706,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
     long currentTimeStamp = (long) [[NSDate date] timeIntervalSince1970];
     logoutTimeStamp = currentTimeStamp + (60 * self.settings.minutesAutoLogout);
 
-    // Save in iOS Keychain
+    // Save in iOS ABCKeychain
     [self.keyChain setKeychainInt:logoutTimeStamp
                          key:[self.keyChain createKeyWithUsername:self.name key:LOGOUT_TIME_KEY]
                authenticated:YES];

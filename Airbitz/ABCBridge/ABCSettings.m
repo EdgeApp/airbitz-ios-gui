@@ -8,7 +8,7 @@
 #import "ABCError.h"
 #import "CoreBridge.h"
 #import "ABCUtil.h"
-#import "Keychain.h"
+#import "ABCKeychain.h"
 #import "ABCLocalSettings.h"
 
 
@@ -16,7 +16,7 @@
 
 @property (nonatomic) CoreBridge *abc;
 @property (nonatomic) ABCLocalSettings *local;
-@property (nonatomic) Keychain *keyChain;
+@property (nonatomic) ABCKeychain *keyChain;
 
 @end
 
@@ -24,7 +24,7 @@
 {
 
 }
-- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(Keychain *)keyChain;
+- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
 {
     self = [super init];
     self.abc = abc;

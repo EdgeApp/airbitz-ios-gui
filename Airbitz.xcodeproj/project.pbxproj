@@ -8,27 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
-		3464407648AB26EF1C6543E4 /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
-		346440A6CDF92ED3B1A571AD /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
-		34644138EB3A9FF5F7B04A58 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
+		34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644057CCD9187637760383 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		3464407B03DBCC2AD6BECB44 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		346440829320442D931D3866 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
-		346441DD9295BE01A52C60B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
+		34644217215092D4F2F06816 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
+		346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
-		34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448A0DE45E082A077B72A /* ABCUtil.m */; };
-		346444A6E34E74B4DE7BB0DA /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
-		346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
+		3464448993C099A42764377E /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
-		3464455FE5AD6B4920EFC9EC /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
-		3464460E39549AA0C4A799D9 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
-		346446561337E2A997B33519 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 346449BCB140E3EB004AD724 /* ABCError.m */; };
-		34644833488870AF279439C2 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
-		346448A02912B5F1731EB559 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
-		34644C629DC176DE151BDE53 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644764F7CD65A845CDE528 /* ABCLocalSettings.m */; };
-		34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644854DE406C11D49E7310 /* ABCSettings.m */; };
-		34644D994D5FE9666195A088 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644047DB7E84BAF791CE9F /* ABCRequest.m */; };
+		346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		346446B0D375F21479F5E91C /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		34644E9C14358F405DB8759D /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644F0F3076CE803615885C /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
+		34644FA26FCA347A81960356 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -108,7 +111,6 @@
 		DA9ED7D81BC61E680063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9ED7D91BC61E680063DA07 /* Config.h.example in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7911BC61E670063DA07 /* Config.h.example */; };
 		DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
-		DA9ED7DB1BC61E680063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
 		DA9ED7DD1BC61E680063DA07 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7991BC61E670063DA07 /* DateTime.m */; };
 		DA9ED7DE1BC61E680063DA07 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79B1BC61E670063DA07 /* DebugViewController.m */; };
@@ -163,7 +165,7 @@
 		DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */; };
 		DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */; };
-		DA9EE4051BC61F920063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EE4051BC61F920063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EE4061BC61F920063DA07 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC71BC61F910063DA07 /* LoginViewController.m */; };
 		DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; };
 		DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */; };
@@ -525,7 +527,7 @@
 		DA9EF3791BC7285D0063DA07 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
 		DA9EF37A1BC7285D0063DA07 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DA9EF37B1BC7285D0063DA07 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
-		DA9EF37C1BC7285D0063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EF37C1BC7285D0063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EF37D1BC7285D0063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EF37E1BC7285D0063DA07 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02F1BC61F920063DA07 /* SignUpContactsController.m */; };
 		DA9EF37F1BC7285D0063DA07 /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8151BC61F8F0063DA07 /* DividerView.m */; };
@@ -582,7 +584,6 @@
 		DA9EF3B31BC7285D0063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
-		DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -930,7 +931,7 @@
 		DA9EF5401BC729FA0063DA07 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
 		DA9EF5411BC729FA0063DA07 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DA9EF5421BC729FA0063DA07 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
-		DA9EF5431BC729FA0063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EF5431BC729FA0063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EF5441BC729FA0063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EF5451BC729FA0063DA07 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02F1BC61F920063DA07 /* SignUpContactsController.m */; };
 		DA9EF5461BC729FA0063DA07 /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8151BC61F8F0063DA07 /* DividerView.m */; };
@@ -987,7 +988,6 @@
 		DA9EF57A1BC729FA0063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
-		DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -1448,23 +1448,25 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		34644047DB7E84BAF791CE9F /* ABCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCRequest.m; sourceTree = "<group>"; };
-		34644049506265C0A0A67895 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
+		34644094FDFE70BFE3B9A7A8 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
+		346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
+		346441F52001A12B2E9187EE /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
+		3464446B9A66BA410AA0E017 /* ABCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSettings.h; sourceTree = "<group>"; };
+		3464455D2CF43EE05846DB82 /* ABCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCUtil.h; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
-		346445D8EA024D1E8810FB96 /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
-		3464472C40F04A9BEC2C1FD8 /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
-		34644740DA0DDC32A577180B /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
-		34644764F7CD65A845CDE528 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
-		34644854DE406C11D49E7310 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
-		346448A0DE45E082A077B72A /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
-		346449BCB140E3EB004AD724 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
+		3464460D4793BA199DB14504 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
+		346447584A8B61803711CB84 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
-		34644D213DC34F72FCF6FE14 /* ABCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCUtil.h; sourceTree = "<group>"; };
-		34644DC0B6EB7DE0B2C2D0B5 /* ABCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSettings.h; sourceTree = "<group>"; };
+		34644DE10A63062D42EFA426 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
+		34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
+		34644E21D66F895B121307AF /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
+		34644ED4090F92F550AB9B71 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
+		34644F90C87B4117D1851B98 /* ABCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCRequest.m; sourceTree = "<group>"; };
+		34644F92028A8B3650337231 /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -1526,8 +1528,6 @@
 		DA9ED7911BC61E670063DA07 /* Config.h.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.h.example; sourceTree = "<group>"; };
 		DA9ED7921BC61E670063DA07 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		DA9ED7931BC61E670063DA07 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		DA9ED7941BC61E670063DA07 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
-		DA9ED7951BC61E670063DA07 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		DA9ED7961BC61E670063DA07 /* DarkenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarkenView.h; sourceTree = "<group>"; };
 		DA9ED7971BC61E670063DA07 /* DarkenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DarkenView.m; sourceTree = "<group>"; };
 		DA9ED7981BC61E670063DA07 /* DateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
@@ -1631,8 +1631,8 @@
 		DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownAlertView.xib; sourceTree = "<group>"; };
 		DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertDropDownView.xib; sourceTree = "<group>"; };
 		DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertViewNew.xib; sourceTree = "<group>"; };
-		DA9EDEC31BC61F910063DA07 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
-		DA9EDEC41BC61F910063DA07 /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
+		DA9EDEC31BC61F910063DA07 /* ABCKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCKeychain.h; sourceTree = "<group>"; };
+		DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCKeychain.m; sourceTree = "<group>"; };
 		DA9EDEC61BC61F910063DA07 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DA9EDEC71BC61F910063DA07 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DA9EDEC81BC61F910063DA07 /* PasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordRecoveryViewController.h; sourceTree = "<group>"; };
@@ -2497,13 +2497,26 @@
 			path = FadingAlert2;
 			sourceTree = "<group>";
 		};
-		DA9EDEC21BC61F910063DA07 /* Keychain */ = {
+		DA9EDEC21BC61F910063DA07 /* ABCBridge */ = {
 			isa = PBXGroup;
 			children = (
-				DA9EDEC31BC61F910063DA07 /* Keychain.h */,
-				DA9EDEC41BC61F910063DA07 /* Keychain.m */,
+				DA9EDEC31BC61F910063DA07 /* ABCKeychain.h */,
+				DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */,
+				346441F52001A12B2E9187EE /* ABCConditionCode.h */,
+				3464446B9A66BA410AA0E017 /* ABCSettings.h */,
+				3464455D2CF43EE05846DB82 /* ABCUtil.h */,
+				34644DE10A63062D42EFA426 /* ABCError.h */,
+				34644E21D66F895B121307AF /* ABCLocalSettings.h */,
+				34644094FDFE70BFE3B9A7A8 /* ABCError.m */,
+				34644F90C87B4117D1851B98 /* ABCRequest.m */,
+				3464460D4793BA199DB14504 /* ABCLocalSettings.m */,
+				346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */,
+				34644F92028A8B3650337231 /* ABCRequest.h */,
+				34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */,
+				34644ED4090F92F550AB9B71 /* CoreBridge.m */,
+				346447584A8B61803711CB84 /* CoreBridge.h */,
 			);
-			path = Keychain;
+			path = ABCBridge;
 			sourceTree = "<group>";
 		};
 		DA9EDEC51BC61F910063DA07 /* Login */ = {
@@ -3289,7 +3302,7 @@
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
-				DA9EDEC21BC61F910063DA07 /* Keychain */,
+				DA9EDEC21BC61F910063DA07 /* ABCBridge */,
 				DA9EDEC51BC61F910063DA07 /* Login */,
 				DA9EDED91BC61F910063DA07 /* PickerTextView */,
 				DA9EDEDE1BC61F910063DA07 /* Plugins */,
@@ -3336,8 +3349,6 @@
 				DA9ED7911BC61E670063DA07 /* Config.h.example */,
 				DA9ED7921BC61E670063DA07 /* Contact.h */,
 				DA9ED7931BC61E670063DA07 /* Contact.m */,
-				DA9ED7941BC61E670063DA07 /* CoreBridge.h */,
-				DA9ED7951BC61E670063DA07 /* CoreBridge.m */,
 				DA9ED7961BC61E670063DA07 /* DarkenView.h */,
 				DA9ED7971BC61E670063DA07 /* DarkenView.m */,
 				DA9ED7981BC61E670063DA07 /* DateTime.h */,
@@ -3394,17 +3405,6 @@
 				DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */,
 				DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
-				3464472C40F04A9BEC2C1FD8 /* ABCConditionCode.h */,
-				34644047DB7E84BAF791CE9F /* ABCRequest.m */,
-				34644740DA0DDC32A577180B /* ABCRequest.h */,
-				346449BCB140E3EB004AD724 /* ABCError.m */,
-				34644049506265C0A0A67895 /* ABCError.h */,
-				34644854DE406C11D49E7310 /* ABCSettings.m */,
-				34644DC0B6EB7DE0B2C2D0B5 /* ABCSettings.h */,
-				346448A0DE45E082A077B72A /* ABCUtil.m */,
-				34644D213DC34F72FCF6FE14 /* ABCUtil.h */,
-				34644764F7CD65A845CDE528 /* ABCLocalSettings.m */,
-				346445D8EA024D1E8810FB96 /* ABCLocalSettings.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -4643,7 +4643,7 @@
 				DA9EF3791BC7285D0063DA07 /* BuySellCell.m in Sources */,
 				DA9EF37A1BC7285D0063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EF37B1BC7285D0063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EF37C1BC7285D0063DA07 /* Keychain.m in Sources */,
+				DA9EF37C1BC7285D0063DA07 /* ABCKeychain.m in Sources */,
 				DA9EF37D1BC7285D0063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EF37E1BC7285D0063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EF37F1BC7285D0063DA07 /* DividerView.m in Sources */,
@@ -4701,7 +4701,6 @@
 				DA9EF3B31BC7285D0063DA07 /* AudioController.m in Sources */,
 				DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */,
-				DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */,
 				DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */,
 				DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */,
@@ -4736,11 +4735,12 @@
 				DA9EF3D91BC7285D0063DA07 /* GDrive.m in Sources */,
 				346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */,
 				3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */,
-				346448A02912B5F1731EB559 /* ABCRequest.m in Sources */,
-				3464460E39549AA0C4A799D9 /* ABCError.m in Sources */,
-				34644D7DEA03785BF005AD81 /* ABCSettings.m in Sources */,
-				346440A6CDF92ED3B1A571AD /* ABCUtil.m in Sources */,
-				34644C629DC176DE151BDE53 /* ABCLocalSettings.m in Sources */,
+				346440829320442D931D3866 /* ABCError.m in Sources */,
+				34644057CCD9187637760383 /* ABCRequest.m in Sources */,
+				34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */,
+				34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */,
+				34644FA26FCA347A81960356 /* ABCSettings.m in Sources */,
+				3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4790,7 +4790,7 @@
 				DA9EF5401BC729FA0063DA07 /* BuySellCell.m in Sources */,
 				DA9EF5411BC729FA0063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EF5421BC729FA0063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EF5431BC729FA0063DA07 /* Keychain.m in Sources */,
+				DA9EF5431BC729FA0063DA07 /* ABCKeychain.m in Sources */,
 				DA9EF5441BC729FA0063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EF5451BC729FA0063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EF5461BC729FA0063DA07 /* DividerView.m in Sources */,
@@ -4848,7 +4848,6 @@
 				DA9EF57A1BC729FA0063DA07 /* AudioController.m in Sources */,
 				DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */,
-				DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */,
 				DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */,
 				DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */,
@@ -4883,11 +4882,12 @@
 				DA9EF5A01BC729FA0063DA07 /* GDrive.m in Sources */,
 				34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */,
 				346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */,
-				34644138EB3A9FF5F7B04A58 /* ABCRequest.m in Sources */,
-				346446561337E2A997B33519 /* ABCError.m in Sources */,
-				34644833488870AF279439C2 /* ABCSettings.m in Sources */,
-				34644496F3B2E1702188F3BB /* ABCUtil.m in Sources */,
-				346444A6E34E74B4DE7BB0DA /* ABCLocalSettings.m in Sources */,
+				3464448993C099A42764377E /* ABCError.m in Sources */,
+				346446B0D375F21479F5E91C /* ABCRequest.m in Sources */,
+				34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */,
+				34644E9C14358F405DB8759D /* ABCUtil.m in Sources */,
+				346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */,
+				346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4937,7 +4937,7 @@
 				DA9EE4121BC61F920063DA07 /* BuySellCell.m in Sources */,
 				DA9EE5201BC61F930063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EE0BF1BC61F920063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EE4051BC61F920063DA07 /* Keychain.m in Sources */,
+				DA9EE4051BC61F920063DA07 /* ABCKeychain.m in Sources */,
 				DA9EE0B91BC61F920063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EE5281BC61F930063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EE0C01BC61F920063DA07 /* DividerView.m in Sources */,
@@ -4995,7 +4995,6 @@
 				DA9ED7CD1BC61E680063DA07 /* AudioController.m in Sources */,
 				DA9ED7E91BC61E680063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EE4131BC61F920063DA07 /* BuySellViewController.m in Sources */,
-				DA9ED7DB1BC61E680063DA07 /* CoreBridge.m in Sources */,
 				DA9ED7F01BC61E680063DA07 /* StylizedTextField.m in Sources */,
 				DA9EE0BE1BC61F920063DA07 /* categoryCell.m in Sources */,
 				DA9EE5101BC61F930063DA07 /* FlashSelectView.m in Sources */,
@@ -5030,11 +5029,12 @@
 				DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */,
 				346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */,
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
-				34644D994D5FE9666195A088 /* ABCRequest.m in Sources */,
-				346444B898FFDCACECFDB9F0 /* ABCError.m in Sources */,
-				346441DD9295BE01A52C60B4 /* ABCSettings.m in Sources */,
-				3464407648AB26EF1C6543E4 /* ABCUtil.m in Sources */,
-				3464455FE5AD6B4920EFC9EC /* ABCLocalSettings.m in Sources */,
+				34644217215092D4F2F06816 /* ABCError.m in Sources */,
+				34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */,
+				346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */,
+				34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */,
+				34644F0F3076CE803615885C /* ABCSettings.m in Sources */,
+				3464407B03DBCC2AD6BECB44 /* CoreBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
