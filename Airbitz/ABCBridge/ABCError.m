@@ -131,10 +131,11 @@ __strong static ABCError *singleton;
             return NSLocalizedString(@"Mutex Error", nil);
         case ABCConditionCodeJSONError:
             return NSLocalizedString(@"JSON Error", nil);
+        case ABCConditionCodeNoTransaction:
+            return NSLocalizedString(@"No Transactions in Wallet", nil);
         case ABCConditionCodeSysError:
         case ABCConditionCodeNotInitialized:
         case ABCConditionCodeReinitialization:
-        case ABCConditionCodeNoTransaction:
         case ABCConditionCodeParseError:
         case ABCConditionCodeNoRequest:
         case ABCConditionCodeNoAvailableAddress:

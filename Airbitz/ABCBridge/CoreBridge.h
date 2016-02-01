@@ -662,6 +662,28 @@ typedef enum eABCDeviceCaps
 
 
 /*
+ * exportTransactionsToCSV
+ *      Export a wallet's transactions to CSV format
+ * @param NSString*         walletUUID: walletUUID of destination wallet for transfer
+ * @param NSMutableString*   csvString: allocated NSMutableString to receive csv
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)exportTransactionsToCSV:(NSString *)walletUUID
+                                  csvString:(NSMutableString *)csv;
+
+
+/*
+ * exportWalletPrivateSeed
+ *      Export a wallet's private seed
+ * @param NSString*         walletUUID: walletUUID of destination wallet for transfer
+ * @param NSMutableString*        seed: allocated NSMutableString to receive seed string
+ * @return ABCConditionCode
+ */
+- (ABCConditionCode)exportWalletPrivateSeed:(NSString *)walletUUID
+                                       seed:(NSMutableString *)seed;
+
+
+/*
  * clearBlockchainCache
  * clears the local cache of blockchain info and force a re-download. This will cause wallets
  * to report incorrect balances which the blockchain is resynced

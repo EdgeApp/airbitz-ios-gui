@@ -3896,7 +3896,50 @@ exitnow:
     return ccode;
 }
 
+- (ABCConditionCode)exportTransactionsToCSV:(NSString *)walletUUID
+                                  csvString:(NSMutableString *)csv;
+{
+    [csv setString:@""];
+    
+    char *szCsvData = nil;
+    tABC_Error error;
+    int64_t startTime = 0; // Need to pull this from GUI
+    int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
+    
+    ABCConditionCode ccode;
+    ABC_CsvExport([self.name UTF8String],
+                  [self.password UTF8String],
+                  [walletUUID UTF8String],
+                  startTime, endTime, &szCsvData, &error);
+    ccode = [self setLastErrors:error];
+    
+    if (ccode == ABCConditionCodeOk)
+    {
+        [csv appendString:[NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding]];
+    }
+    if (szCsvData) free(szCsvData);
+    return ccode;
+}
 
+- (ABCConditionCode)exportWalletPrivateSeed:(NSString *)walletUUID
+                                       seed:(NSMutableString *)seed;
+{
+    [seed setString:@""];
+    tABC_Error error;
+    char *szSeed = NULL;
+    ABCConditionCode ccode;
+    ABC_ExportWalletSeed([self.name UTF8String],
+                         [self.password UTF8String],
+                         [walletUUID UTF8String],
+                         &szSeed, &error);
+    ccode = [self setLastErrors:error];
+    if (ccode == ABCConditionCodeOk)
+    {
+        [seed appendString:[NSString stringWithUTF8String:szSeed]];
+    }
+    if (szSeed) free(szSeed);
+    return ccode;
+}
 
 //- (void)newSpendTransferAsync:(NSString *)destWalletUUID
 //                     complete:(void(^)(ABCSpend *sp))completionHandler

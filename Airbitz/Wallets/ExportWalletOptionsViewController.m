@@ -22,7 +22,6 @@
 #import "FadingAlertView.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "ABC.h"
 
 #define CELL_HEIGHT 45.0
 
@@ -472,48 +471,25 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString* str = @"[CSV Data Here]";
-
-            char *szCsvData = nil;
-            tABC_Error Error;
-            int64_t startTime = 0; // Need to pull this from GUI
-            int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
-
+            NSMutableString *str = [[NSMutableString alloc] init];
             
-            tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_CsvExport([[AppDelegate abc].name UTF8String],
-                               [[AppDelegate abc].password UTF8String],
-                               [[AppDelegate abc].currentWallet.strUUID UTF8String],
-                               startTime, endTime, &szCsvData, &Error);
-            if (ABC_CC_Ok != cc)
+            ABCConditionCode ccode = [[AppDelegate abc] exportTransactionsToCSV:[AppDelegate abc].currentWallet.strUUID csvString:str];
+            if (ABCConditionCodeOk == ccode)
             {
-                NSString *title, *message;
-                if (ABC_CC_Empty_Wallet == cc)
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions", nil);
-                    message = NSLocalizedString(@"No Transactions in Wallet", nil);
-                }
-                else
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions error", nil);
-                    message = NSLocalizedString(@"CSV Export failed", nil);
-                }
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:title
-                                      message:message
-                                      delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-//                [Util printABC_Error:&Error];
-                return nil;
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-                str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:[[AppDelegate abc] getLastErrorString]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            
-            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
         }
         break;
 
@@ -540,25 +516,27 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            tABC_Error Error;
-            char *szSeed = NULL;
-            tABC_CC result = ABC_ExportWalletSeed([[AppDelegate abc].name UTF8String],
-                                                  [[AppDelegate abc].password UTF8String],
-                                                  [[AppDelegate abc].currentWallet.strUUID UTF8String],
-                                                  &szSeed, &Error);
-            if (ABC_CC_Ok == result)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            ABCConditionCode ccode = [[AppDelegate abc] exportWalletPrivateSeed:[AppDelegate abc].currentWallet.strUUID seed:str];
+            if (ABCConditionCodeOk == ccode)
             {
-                dataExport = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-//                [Util printABC_Error:&Error];
-                NSString* str = @"Error exporting private seed!";
-                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Private Seed", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:[[AppDelegate abc] getLastErrorString]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            free(szSeed);
         }
-            break;
+        break;
 
         default:
             ABCLog(2,@"Unknown export option");
