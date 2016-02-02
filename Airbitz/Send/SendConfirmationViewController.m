@@ -174,7 +174,7 @@
                                              selector:@selector(exchangeRateUpdate:)
                                                  name:ABC_NOTIFICATION_EXCHANGE_RATE_CHANGE
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
 }
 

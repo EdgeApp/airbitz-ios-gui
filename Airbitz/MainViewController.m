@@ -69,7 +69,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate>
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,CoreBridgeDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -158,6 +158,7 @@ MainViewController *singleton;
     [FadingAlertView initAll];
 
     singleton = self;
+    [AppDelegate abc].delegate = self;
 
     _bNewDeviceLogin = NO;
     _bShowingWalletsLoadingAlert = NO;
@@ -178,17 +179,10 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRecoveryQuestions:) name:NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:ABC_NOTIFICATION_LOGOUT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:ABC_NOTIFICATION_OTP_REQUIRED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:ABC_NOTIFICATION_OTP_SKEW object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:ABC_NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADING object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockDisplay) name:ABC_NOTIFICATION_WALLETS_LOADED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateWidgetQRCode) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
 
     // init and set API key
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
@@ -1326,12 +1320,97 @@ MainViewController *singleton;
 {
 }
 
+#pragma mark - CoreBridgeDelegates
 
-- (void)launchReceiving:(NSNotification *)notification
+- (void) airbitzCoreWalletsLoading;
 {
-    NSDictionary *data = [notification userInfo];
-    _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-    _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
+    NSString *walletsLoading;
+    if (![User isLoggedIn]) return;
+    
+    if (![AppDelegate abc].arrayWallets || [AppDelegate abc].arrayWallets.count == 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingAccountText,
+                          loadingWalletsNewDeviceText];
+    }
+    else if (![AppDelegate abc].bAllWalletsLoaded && [AppDelegate abc].arrayWallets && [AppDelegate abc].numTotalWallets > 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+                          loadingWalletsText,
+                          [AppDelegate abc].numWalletsLoaded + 1,
+                          [AppDelegate abc].numTotalWallets,
+                          loadingWalletsNewDeviceText];
+    }
+    else
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingTransactionsText,
+                          loadingWalletsNewDeviceText];
+    }
+    
+    
+    if (_bShowingWalletsLoadingAlert)
+        [MainViewController fadingAlertUpdate:walletsLoading];
+    else
+        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    
+    _bShowingWalletsLoadingAlert = YES;
+
+}
+- (void) airbitzCoreWalletsLoaded;
+{
+    if (_bShowingWalletsLoadingAlert)
+    {
+        [FadingAlertView dismiss:FadingAlertDismissFast];
+        _bShowingWalletsLoadingAlert = NO;
+    }
+}
+- (void) airbitzCoreWalletsChanged;
+{
+    [self updateWidgetQRCode];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED
+                                                        object:self userInfo:nil];
+}
+- (void)airbitzCoreLoggedOut
+{
+    [[User Singleton] clear];
+    
+    [slideoutView showSlideout:NO withAnimation:NO];
+    
+    _appMode = APP_MODE_WALLETS;
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
+    [self loadUserViews];
+    [self resetViews];
+    [MainViewController hideTabBarAnimated:NO];
+    [MainViewController hideNavBarAnimated:NO];
+}
+
+- (void) airbitzCoreDataSyncUpdate
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+}
+
+- (void) airbitzCoreRemotePasswordChange;
+{
+    if (_passwordChangeAlert == nil && [User isLoggedIn])
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [self resetViews];
+        _passwordChangeAlert = [[UIAlertView alloc]
+                                initWithTitle:NSLocalizedString(@"Password Change", nil)
+                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
+                                delegate:self
+                                cancelButtonTitle:nil
+                                otherButtonTitles:okButtonText, nil];
+        [_passwordChangeAlert show];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    }
+}
+
+- (void) airbitzCoreIncomingBitcoin:(NSString *)walletUUID txid:(NSString *)txid;
+{
+    _strWalletUUID = walletUUID;
+    _strTxID = txid;
 
     Transaction *transaction = [[AppDelegate abc] getTransaction:_strWalletUUID withTx:_strTxID];
 
@@ -1389,7 +1468,6 @@ MainViewController *singleton;
 
 - (void)updateWidgetQRCode;
 {
-    
     if (![AppDelegate abc].currentWallet || ![AppDelegate abc].currentWallet.strUUID)
         return;
     
@@ -1398,26 +1476,27 @@ MainViewController *singleton;
     request.walletUUID = [AppDelegate abc].currentWallet.strUUID;
     request.payeeName = [AppDelegate abc].settings.fullName;
 
-    ABCConditionCode ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request];
-    
-    if (ABCConditionCodeOk == ccode)
+    ABCConditionCode ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request complete:^
     {
-        
-        //
-        // Save QR and address in shared data so Widget can access it
-        //
-        static NSUserDefaults *tempSharedUserDefs = nil;
-        
-        if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
-        
-        NSData *imageData = UIImagePNGRepresentation(request.qrCode);
-        
-        [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
-        [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
-        [tempSharedUserDefs setObject:[AppDelegate abc].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
-        [tempSharedUserDefs setObject:[AppDelegate abc].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
-        [tempSharedUserDefs synchronize];
-    }
+        if (ABCConditionCodeOk == ccode)
+        {
+            //
+            // Save QR and address in shared data so Widget can access it
+            //
+            static NSUserDefaults *tempSharedUserDefs = nil;
+            
+            if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
+            
+            NSData *imageData = UIImagePNGRepresentation(request.qrCode);
+            
+            [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
+            [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
+            [tempSharedUserDefs setObject:[AppDelegate abc].currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+            [tempSharedUserDefs setObject:[AppDelegate abc].name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+            [tempSharedUserDefs synchronize];
+        }
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    }];
 }
 
 
@@ -1673,23 +1752,6 @@ MainViewController *singleton;
 
 #pragma mark - Custom Notification Handlers
 
-- (void)notifyRemotePasswordChange:(NSArray *)params
-{
-    if (_passwordChangeAlert == nil && [User isLoggedIn])
-    {
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [self resetViews:nil];
-        _passwordChangeAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Password Change", nil)
-                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
-                                delegate:self
-                    cancelButtonTitle:nil
-                    otherButtonTitles:okButtonText, nil];
-        [_passwordChangeAlert show];
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    }
-}
-
 - (void)notifyOtpRequired:(NSArray *)params
 {
     if (_otpRequiredAlert == nil) {
@@ -1904,24 +1966,7 @@ MainViewController *singleton;
 
 }
 
-- (void)loggedOffRedirect:(NSNotification *)notification
-{
-    [[User Singleton] clear];
-    
-    [slideoutView showSlideout:NO withAnimation:NO];
-
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [self loadUserViews];
-    [self resetViews:notification];
-    [MainViewController hideTabBarAnimated:NO];
-    [MainViewController hideNavBarAnimated:NO];
-    
-
-
-}
-
-- (void)resetViews:(NSNotification *)notification
+- (void)resetViews
 {
     // Hide the keyboard
     [self.view endEditing:NO];

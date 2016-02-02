@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "LocalSettings.h"
+#import "FadingAlertView.h"
 
 #define KEYBOARD_MARGIN         10.0
 

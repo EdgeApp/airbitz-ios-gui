@@ -29,9 +29,6 @@
 
 @interface Util : NSObject
 
-//+ (NSString *)errorMap:(const tABC_Error *)pError;
-+ (NSString *)errorCC:(ABCConditionCode) ccode;
-//+ (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 + (void)callTelephoneNumber:(NSString *)telNum;

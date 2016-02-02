@@ -30,6 +30,7 @@
 #import "MainViewController.h"
 #import "PopupPickerView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "FadingAlertView.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -182,7 +183,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(refresh:)
-                                                 name:ABC_NOTIFICATION_DATA_SYNC_UPDATE object:nil];
+                                                 name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 	_showBluetoothOption = NO;
     [self refresh:nil];
 	

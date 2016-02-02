@@ -26,6 +26,8 @@
 #import "WalletCell.h"
 #import "WalletMakerView.h"
 #import "LocalSettings.h"
+#import "Theme.h"
+#import "FadingAlertView.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -250,7 +252,7 @@
     [self.toolbarBlur setTranslucent:[Theme Singleton].bTranslucencyEnable];
     self.walletMakerView.alpha = 0;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
     [self updateViews:nil];
 }

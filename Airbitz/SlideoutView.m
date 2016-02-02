@@ -15,6 +15,9 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "AppDelegate.h"
+#import "Theme.h"
+#import "FadingAlertView.h"
+#import "ABCUtil.h"
 
 #define SHOW_BUY_SELL 1
 

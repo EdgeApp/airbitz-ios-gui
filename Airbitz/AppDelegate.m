@@ -22,6 +22,7 @@
 #import "Reachability.h"
 #import "Util.h"
 #import "Config.h"
+#import "Theme.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;

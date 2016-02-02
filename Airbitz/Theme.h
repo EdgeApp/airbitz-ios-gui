@@ -73,15 +73,11 @@
 @property (nonatomic) CGFloat alertHoldTimeHelpPopups;
 
 @property (nonatomic) CGFloat qrCodeGenDelayTime;
-@property (nonatomic) CGFloat rotateServerInterval;
-@property (nonatomic) CGFloat walletLoadingTimerInterval;
 
 + (void)initAll;
 + (void)freeAll;
 + (Theme *)Singleton;
 - (id)init;
-- (NSString *)platform;
-- (NSString *)platformString;
 
 
 @end

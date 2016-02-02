@@ -38,11 +38,6 @@ __strong static ABCError *singleton;
     else
     {
         singleton.lastErrorString = [ABCError errorMap:error];
-        if (error.code == ABC_CC_DecryptError
-                || error.code == ABC_CC_DecryptFailure)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_LOGOUT object:self];
-        }
     }
     return singleton.lastConditionCode;
 }

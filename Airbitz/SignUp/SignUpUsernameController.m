@@ -8,6 +8,7 @@
 #import "LatoLabel.h"
 #import "Util.h"
 #import "User.h"
+#import "Theme.h"
 
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {

@@ -5,27 +5,23 @@
 
 #import "Wallet.h"
 #import "Transaction.h"
-#import "FadingAlertView.h"
-#import "Theme.h"
 #import "ABCConditionCode.h"
 #import "ABCSpend.h"
 #import "ABCRequest.h"
 #import "ABCSettings.h"
 
-#define ABC_NOTIFICATION_LOGOUT                             @"ABC_Main_Views_Reset"
-#define ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"ABC_Remote_Password_Change"
 #define ABC_NOTIFICATION_OTP_REQUIRED                       @"ABC_Otp_Required"
 #define ABC_NOTIFICATION_OTP_SKEW                           @"ABC_Otp_Skew"
-#define ABC_NOTIFICATION_DATA_SYNC_UPDATE                   @"ABC_Data_Sync_Update"
 #define ABC_NOTIFICATION_EXCHANGE_RATE_CHANGE               @"ABC_Exchange_Rate_Change"
-#define ABC_NOTIFICATION_TX_RECEIVED                        @"ABC_Transaction_Received"
-#define ABC_NOTIFICATION_WALLETS_LOADING                    @"ABC_Wallets_Loading"
-#define ABC_NOTIFICATION_WALLETS_LOADED                     @"ABC_Wallets_Loaded"
-#define ABC_NOTIFICATION_WALLETS_CHANGED                    @"ABC_Wallets_Changed"
 
 static const int ABCDenominationBTC  = 0;
 static const int ABCDenominationMBTC = 1;
 static const int ABCDenominationUBTC = 2;
+
+typedef NS_ENUM(NSUInteger, ABCImportDataModel) {
+    ABCImportWIF,
+    ABCImportHBitsURI,
+};
 
 #define CONFIRMED_CONFIRMATION_COUNT 6
 #define PIN_REQUIRED_PERIOD_SECONDS     120
@@ -52,8 +48,25 @@ typedef enum eABCDeviceCaps
 @property (nonatomic, strong) NSString *signature;
 @end
 
+@protocol CoreBridgeDelegate <NSObject>
+
+@optional
+
+- (void) airbitzCoreRemotePasswordChange;
+- (void) airbitzCoreLoggedOut;
+- (void) airbitzCoreDataSyncUpdate;
+- (void) airbitzCoreWalletsLoading;
+- (void) airbitzCoreWalletsLoaded;
+- (void) airbitzCoreWalletsChanged;
+- (void) airbitzCoreOTPRequired;
+- (void) airbitzCoreOTPSkew;
+- (void) airbitzCoreIncomingBitcoin:(NSString *)walletUUID txid:(NSString *)txid;
+
+@end
+
 @interface CoreBridge : NSObject
 
+@property (assign)            id<CoreBridgeDelegate>    delegate;
 @property (nonatomic, strong) ABCSettings               *settings;
 @property (nonatomic, strong) NSMutableArray            *arrayWallets;
 @property (nonatomic, strong) NSMutableArray            *arrayArchivedWallets;
@@ -145,7 +158,6 @@ typedef enum eABCDeviceCaps
 - (NSString *)currencyAbbrevLookup:(int) currencyNum;
 - (NSString *)currencySymbolLookup:(int)currencyNum;
 - (int)getCurrencyNumOfLocale;
-- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID;
 - (NSString *) bitidParseURI:(NSString *)uri;
 - (BOOL) bitidLogin:(NSString *)uri;
 - (BitidSignature *) bitidSign:(NSString *)uri msg:(NSString *)msg;
@@ -201,6 +213,31 @@ typedef enum eABCDeviceCaps
 
 - (ABCConditionCode) createFirstWalletIfNeeded;
 - (ABCConditionCode) getNumWalletsInAccount:(int *)numWallets;
+
+/*
+ * importPrivateKey
+ *  Import (sweep) private key funds into the specified wallet. Private key is discarded
+ *  after sweep.
+ * @param NSString* privateKey: WIF or HBITS format private key string
+ * @param NSString* walletUUID: UUID of wallet to sweep funds into
+ * @param  importingHandler: Called when private key is determined to be valid and ABC is
+ *                           sweeping funds. May take up to 30 seconds to sweep.
+ *                           @param NSString *       address: public address of private key for sweep
+ * @param completionHandler: completion handler code block
+ *                           @param ABCImportDataModel dataModel: type of private key imported
+ *                           @param NSString *           address: public address of key imported
+ *                           @param NSString *              txid: txid hash of importing transaction
+ *                           @param uint64_t              amount: amount imported in satoshis
+ * @param      errorHandler: error handler code block which is called with the following args
+ *                           @param ABCConditionCode       ccode: ABC error code
+ *                           @param NSString *       errorString: error message
+ * @return ABCConditionCode
+ */
+- (void)importPrivateKey:(NSString *)privateKey to:(NSString *)walletUUID
+               importing:(void (^)(NSString *address)) importingHandler
+                complete:(void (^)(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount)) completionHandler
+                   error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+
 
 - (ABCConditionCode)getOTPResetUsernames:(NSMutableArray **) usernameArray;
 - (ABCConditionCode)hasOTPResetPending:(BOOL *)needsReset;

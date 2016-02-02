@@ -14,6 +14,7 @@
 #import "Theme.h"
 #import "Util.h"
 #import "Strings.h"
+#import "FadingAlertView.h"
 
 @interface DebugViewController ()  <UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {

@@ -11,7 +11,7 @@
 #import "ABCRequest.h"
 #import "ABCSettings.h"
 #import "ABCUtil.h"
-
+#import "ABCStrings.h"
 #import <pthread.h>
 
 #define CURRENCY_NUM_AUD                 36
@@ -28,12 +28,24 @@
 
 #define FILE_SYNC_FREQUENCY_SECONDS     30
 #define NOTIFY_DATA_SYNC_DELAY          1
+#define IMPORT_TIMEOUT 30
 
 #define DEFAULT_CURRENCY_NUM CURRENCY_NUM_USD // USD
 
+#define KEY_SWEEP_CORE_CONDITION_CODE                   @"tABC_CC"
+#define KEY_SWEEP_TX_ID                                 @"transactionID"
+#define KEY_SWEEP_TX_AMOUNT                             @"transactionAmount"
+
+#define HIDDEN_BITZ_URI_SCHEME                          @"hbits"
+
+static const float walletLoadingTimerInterval = 15.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
 const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
+
+// XXX HACK. Need a singleton because the sweep callback doesn't pass us a CoreBridge object.
+// We really need to get rid of the sweep callback! -paulvp
+__strong static CoreBridge *singleton;
 
 @implementation BitidSignature
 - (id)init
@@ -66,10 +78,16 @@ const int RECOVERY_REMINDER_COUNT = 2;
     NSTimer                                         *exchangeTimer;
     NSTimer                                         *dataSyncTimer;
     NSTimer                                         *notificationTimer;
+
 }
 @property (nonatomic, strong) NSTimer               *walletLoadingTimer;
 @property (nonatomic, strong) ABCLocalSettings      *localSettings;
-@property (nonatomic, strong) ABCKeychain *keyChain;
+@property (nonatomic, strong) ABCKeychain           *keyChain;
+@property (nonatomic, strong) void                  (^importCompletionHandler)(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount);
+@property (nonatomic, strong) void                  (^importErrorHandler)(ABCConditionCode ccode, NSString *errorString);
+@property (nonatomic)         ABCImportDataModel    importDataModel;
+@property (nonatomic, strong) NSString              *sweptAddress;
+@property (nonatomic, strong) NSTimer               *importCallbackTimer;
 
 
 @end
@@ -184,7 +202,7 @@ const int RECOVERY_REMINDER_COUNT = 2;
         self.keyChain.settings = self.settings;
         self.keyChain.localSettings = self.localSettings;
     }
-    
+    singleton = self;
     return self;
 }
 
@@ -692,10 +710,11 @@ const int RECOVERY_REMINDER_COUNT = 2;
                 [self.walletLoadingTimer invalidate];
                 self.walletLoadingTimer = nil;
             }
+        
             ABCLog(1, @"************************************************");
             ABCLog(1, @"*** Received Packet from Core. Reset timer******");
             ABCLog(1, @"************************************************");
-            self.walletLoadingTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].walletLoadingTimerInterval
+            self.walletLoadingTimer = [NSTimer scheduledTimerWithTimeInterval:walletLoadingTimerInterval
                                                                        target:self
                                                                      selector:@selector(postWalletsLoadedNotification)
                                                                      userInfo:nil
@@ -717,19 +736,36 @@ const int RECOVERY_REMINDER_COUNT = 2;
 - (void)postWalletsLoadingNotification
 {
     ABCLog(1, @"postWalletsLoading numWalletsLoaded=%d", self.numWalletsLoaded);
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADING object:self];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(airbitzCoreWalletsLoading)]) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.delegate airbitzCoreWalletsLoading];
+            });
+        }
+    }
 }
 
 - (void)postWalletsLoadedNotification
 {
     bNewDeviceLogin = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_LOADED object:self];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(airbitzCoreWalletsLoaded)]) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.delegate airbitzCoreWalletsLoaded];
+            });
+        }
+    }
 }
 
 - (void) postNotificationWalletsChanged
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_WALLETS_CHANGED
-                                                        object:self userInfo:nil];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(airbitzCoreWalletsChanged)]) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.delegate airbitzCoreWalletsChanged];
+            });
+        }
+    }
 }
 
 
@@ -1793,8 +1829,14 @@ const int RECOVERY_REMINDER_COUNT = 2;
     self.password = nil;
     self.name = nil;
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_LOGOUT object:self];
-
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(airbitzCoreLoggedOut)]) {
+                [self.delegate airbitzCoreLoggedOut];
+            }
+        }
+    });
 }
 
 - (BOOL)passwordOk:(NSString *)password
@@ -2121,12 +2163,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
                         (__bridge void *) self,
                         &error);
         [self setLastErrors:error];
-
-        // Start watcher if the data has not been fetch
-//        if (!bAllWalletsHaveBeenDataSynced) {
-//            [self connectWatcher:uuid];
-//            [self requestExchangeRateUpdate:nil];
-//        }
     }];
 }
 
@@ -2504,52 +2540,50 @@ const int RECOVERY_REMINDER_COUNT = 2;
     [self loadCategories];
 }
 
-
-- (NSString *)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID
+- (ABCConditionCode)sweepKey:(NSString *)privateKey intoWallet:(NSString *)walletUUID address:(NSString **)address
 {
-    tABC_CC result = ABC_CC_Ok;
-    tABC_Error Error;
+    tABC_Error error;
     char *pszAddress = NULL;
     void *pData = NULL;
-    result = ABC_SweepKey([self.name UTF8String],
-                  [self.password UTF8String],
-                  [walletUUID UTF8String],
-                  [privateKey UTF8String],
-                  &pszAddress,
-                  ABC_Sweep_Complete_Callback,
-                  pData,
-                  &Error);
-    if (ABC_CC_Ok == result && pszAddress)
+    ABC_SweepKey([self.name UTF8String],
+                 [self.password UTF8String],
+                 [walletUUID UTF8String],
+                 [privateKey UTF8String],
+                 &pszAddress,
+                 ABC_Sweep_Complete_Callback,
+                 pData,
+                 &error);
+    ABCConditionCode ccode = [self setLastErrors:error];
+    if (ABCConditionCodeOk == ccode && pszAddress)
     {
-        NSString *address = [NSString stringWithUTF8String:pszAddress];
+        *address = [NSString stringWithUTF8String:pszAddress];
         free(pszAddress);
-        return address;
     }
-    return nil;
+    return ccode;
 }
 
 #pragma mark - ABC Callbacks
 
-- (void)notifyReceiving:(NSArray *)params
-{
-    if ([params count] > 0)
-    {
-        [self refreshWallets:^
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_TX_RECEIVED object:self userInfo:params[0]];
-        }];
-    }
-
-}
-
 - (void)notifyOtpRequired:(NSArray *)params
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_OTP_REQUIRED object:self];
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(airbitzCoreOTPRequired)])
+        {
+            [self.delegate airbitzCoreOTPRequired];
+        }
+    }
 }
 
 - (void)notifyOtpSkew:(NSArray *)params
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_OTP_SKEW object:self];
+    if (self.delegate)
+    {
+        if ([self.delegate respondsToSelector:@selector(airbitzCoreOTPSkew)])
+        {
+            [self.delegate airbitzCoreOTPSkew];
+        }
+    }
 }
 
 - (void)notifyDataSync:(NSArray *)params
@@ -2563,8 +2597,16 @@ const int RECOVERY_REMINDER_COUNT = 2;
     
     [self refreshWallets:^
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_DATA_SYNC_UPDATE object:self];
 
+        if (self.delegate)
+        {
+            if ([self.delegate respondsToSelector:@selector(airbitzCoreDataSyncUpdate)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate airbitzCoreDataSyncUpdate];
+                });
+            }
+        }
         // if there are new wallets, we need to start their watchers
         if ([self.arrayWallets count] + [self.arrayArchivedWallets count] != numWallets)
         {
@@ -2587,11 +2629,6 @@ const int RECOVERY_REMINDER_COUNT = 2;
                                                        selector:@selector(notifyDataSync:)
                                                        userInfo:nil
                                                         repeats:NO];
-}
-
-- (void)notifyRemotePasswordChange:(NSArray *)params
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ABC_NOTIFICATION_REMOTE_PASSWORD_CHANGE object:self];
 }
 
 - (NSString *) bitidParseURI:(NSString *)uri;
@@ -2707,8 +2744,8 @@ const int RECOVERY_REMINDER_COUNT = 2;
 
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     ABC_Log([[NSString stringWithFormat:@"User Comment:%@", userText] UTF8String]);
-    ABC_Log([[NSString stringWithFormat:@"Platform:%@", [[Theme Singleton] platform]] UTF8String]);
-    ABC_Log([[NSString stringWithFormat:@"Platform String:%@", [[Theme Singleton] platformString]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform:%@", [ABCUtil platform]] UTF8String]);
+    ABC_Log([[NSString stringWithFormat:@"Platform String:%@", [ABCUtil platformString]] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"OS Version:%d.%d.%d", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion] UTF8String]);
     ABC_Log([[NSString stringWithFormat:@"Airbitz Version:%@", versionbuild] UTF8String]);
 
@@ -2836,45 +2873,38 @@ const int RECOVERY_REMINDER_COUNT = 2;
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
     CoreBridge *coreBridge = (__bridge id) pInfo->pData;
-    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin) {
-        NSDictionary *data = @{
-            KEY_TX_DETAILS_EXITED_WALLET_UUID: [NSString stringWithUTF8String:pInfo->szWalletUUID],
-            KEY_TX_DETAILS_EXITED_TX_ID: [NSString stringWithUTF8String:pInfo->szTxID]
-        };
-        NSArray *params = [NSArray arrayWithObjects: data, nil];
-        [coreBridge performSelectorOnMainThread:@selector(notifyReceiving:) withObject:params waitUntilDone:NO];
-    // } else if (pInfo->eventType == ABC_AsyncEventType_OtpRequired) {
-    //     [coreBridge performSelectorOnMainThread:@selector(notifyOtpRequired:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange) {
-//        [coreBridge performSelectorOnMainThread:@selector(notifyBlockHeight:) withObject:nil waitUntilDone:NO];
-        [coreBridge refreshWallets];
-    } else if (pInfo->eventType == ABC_AsyncEventType_DataSyncUpdate) {
-        [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
-    } else if (pInfo->eventType == ABC_AsyncEventType_RemotePasswordChange) {
-        [coreBridge performSelectorOnMainThread:@selector(notifyRemotePasswordChange:) withObject:nil waitUntilDone:NO];
-    }
-}
-
-void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
-{
-    NSMutableDictionary *sweepData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithInt:cc], KEY_SWEEP_CORE_CONDITION_CODE,
-                                        [NSNumber numberWithUnsignedLongLong:amount], KEY_SWEEP_TX_AMOUNT,
-                                      nil];
-    if (szID)
+    if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
-        [sweepData setValue:[NSString stringWithUTF8String:szID] forKey:KEY_SWEEP_TX_ID];
+        [coreBridge refreshWallets:^
+        {
+            if (coreBridge.delegate) {
+                if ([coreBridge.delegate respondsToSelector:@selector(airbitzCoreIncomingBitcoin:)]) {
+                    [coreBridge.delegate airbitzCoreIncomingBitcoin:[NSString stringWithUTF8String:pInfo->szWalletUUID]
+                                                               txid:[NSString stringWithUTF8String:pInfo->szTxID]];
+                }
+            }
+        }];
+        return;
     }
-    else
+//    else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange)
+//    {
+//        [coreBridge refreshWallets];
+//    }
+    tABC_AsyncEventType eventType = pInfo->eventType;
+    
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-        [sweepData setValue:@"" forKey:KEY_SWEEP_TX_ID];
-    }
-
-    // broadcast message out that the sweep is done
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SWEEP
-                                                            object:nil
-                                                        userInfo:sweepData];
+        if (eventType == ABC_AsyncEventType_DataSyncUpdate) {
+            [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
+        } else if (eventType == ABC_AsyncEventType_RemotePasswordChange) {
+            if (coreBridge.delegate)
+            {
+                if ([coreBridge.delegate respondsToSelector:@selector(airbitzCoreRemotePasswordChange)])
+                {
+                    [coreBridge.delegate airbitzCoreRemotePasswordChange];
+                }
+            }
+        }
     });
 }
 
@@ -3719,6 +3749,94 @@ exitnow:
     return ccode;
 }
 
+- (void)importPrivateKey:(NSString *)privateKey to:(NSString *)walletUUID
+               importing:(void (^)(NSString *address)) importingHandler
+                complete:(void (^)(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount)) completionHandler
+                   error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
+{
+    bool bSuccess = NO;
+    tABC_Error error;
+    ABCConditionCode ccode;
+    
+    // We will use the sweep callback to call these GUI handlers when done.
+    self.importCompletionHandler = completionHandler;
+    self.importErrorHandler = errorHandler;
+    
+    if (!privateKey || !walletUUID)
+    {
+        error.code = ABC_CC_NULLPtr;
+        ccode = [self setLastErrors:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (errorHandler) errorHandler(ccode, [self getLastErrorString]);
+        });
+        return;
+    }
+    
+    privateKey = [privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSRange schemeMarkerRange = [privateKey rangeOfString:@"://"];
+
+    if (NSNotFound != schemeMarkerRange.location)
+    {
+        NSString *scheme = [privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
+        if (nil != scheme && 0 != [scheme length])
+        {
+            if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
+            {
+                self.importDataModel = ABCImportHBitsURI;
+                
+                privateKey = [privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
+                bSuccess = YES;
+            }
+        }
+    }
+    else
+    {
+        self.importDataModel = ABCImportWIF;
+        bSuccess = YES;
+    }
+    if (bSuccess)
+    {
+        // private key is a valid format
+        // attempt to sweep it
+        NSString *address;
+        ccode = [self sweepKey:privateKey
+                    intoWallet:walletUUID
+                       address:&address];
+        self.sweptAddress = address;
+        
+        if (nil != self.sweptAddress && self.sweptAddress.length)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (importingHandler) importingHandler(self.sweptAddress);
+            });
+            // If the sweep never completes, expireImport will call the errorHandler
+            self.importCallbackTimer = [NSTimer scheduledTimerWithTimeInterval:IMPORT_TIMEOUT
+                                                              target:self
+                                                            selector:@selector(expireImport)
+                                                            userInfo:nil
+                                                             repeats:NO];
+        }
+        else
+        {
+            // no address associated with the private key, must be invalid
+            ccode = [self setLastErrors:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorHandler) errorHandler(ccode, [self getLastErrorString]);
+            });
+            return;
+        }
+    }
+    
+    if (!bSuccess)
+    {
+        error.code = ABC_CC_ParseError;
+        ccode = [self setLastErrors:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (errorHandler) errorHandler(ccode, [self getLastErrorString]);
+        });
+        return;
+    }
+}
 
 
 - (ABCConditionCode)setRecoveryQuestions:(NSString *)password
@@ -4105,6 +4223,11 @@ exitnow:
     return NO;
 }
 
+- (BOOL) isLoggedIn
+{
+    return !(nil == self.name);
+}
+
 + (int) getMinimumUsernamedLength { return ABC_MIN_USERNAME_LENGTH; };
 + (int) getMinimumPasswordLength { return ABC_MIN_PASS_LENGTH; };
 + (int) getMinimumPINLength { return ABC_MIN_PIN_LENGTH; };
@@ -4136,8 +4259,63 @@ void abcDebugLog(int level, NSString *statement)
 }
 
 ////////////////////////////////////////////////////////
-#pragma internal routines
+#pragma mark - internal routines
 ////////////////////////////////////////////////////////
+
+void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
+{
+    [singleton cancelImportExpirationTimer];
+    
+    tABC_Error error;
+    ABCConditionCode ccode;
+    error.code = cc;
+    ccode = [singleton setLastErrors:error];
+    
+    NSString *txid = nil;
+    if (szID)
+    {
+        txid = [NSString stringWithUTF8String:szID];
+    }
+    else
+    {
+        txid = @"";
+    }
+    
+    if (ABCConditionCodeOk == ccode)
+    {
+        if (singleton.importCompletionHandler) singleton.importCompletionHandler(singleton.importDataModel, singleton.sweptAddress, txid, amount);
+    }
+    else
+    {
+        if (singleton.importErrorHandler) singleton.importErrorHandler(ccode, [singleton getLastErrorString]);
+    }
+    
+    singleton.importErrorHandler = nil;
+    singleton.importCompletionHandler = nil;
+}
+
+- (void)expireImport
+{
+    self.importCallbackTimer = nil;
+    tABC_Error error;
+    error.code = ABC_CC_NoTransaction;
+    ABCConditionCode ccode = [self setLastErrors:error];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.importErrorHandler) self.importErrorHandler(ccode, [self getLastErrorString]);
+    });
+    self.importErrorHandler = nil;
+    self.importCompletionHandler = nil;
+}
+
+- (void)cancelImportExpirationTimer
+{
+    if (self.importCallbackTimer)
+    {
+        [self.importCallbackTimer invalidate];
+        self.importCallbackTimer = nil;
+    }
+}
+
 
 - (NSString *)formatUsername:(NSString *)username;
 {
@@ -4199,11 +4377,6 @@ void abcDebugLog(int level, NSString *statement)
     }
 }
 
-- (BOOL) isLoggedIn
-{
-    return !(nil == self.name);
-}
-
 - (void)printABC_Error:(const tABC_Error *)pError
 {
     if (pError)
@@ -4225,7 +4398,19 @@ void abcDebugLog(int level, NSString *statement)
 
 - (ABCConditionCode)setLastErrors:(tABC_Error)error;
 {
-    return [ABCError setLastErrors:error];
+    ABCConditionCode ccode = [ABCError setLastErrors:error];
+    if (ccode == ABC_CC_DecryptError || ccode == ABC_CC_DecryptFailure)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            if (self.delegate) {
+                if ([self.delegate respondsToSelector:@selector(airbitzCoreLoggedOut)]) {
+                    [self.delegate airbitzCoreLoggedOut];
+                }
+            }
+        });
+    }
+    return ccode;
 }
 
 

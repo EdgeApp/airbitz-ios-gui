@@ -8,6 +8,7 @@
 #import "SignUpManager.h"
 #import "StylizedTextField.h"
 #import "Util.h"
+#import "Theme.h"
 
 @interface SignUpCameraController ()
 {

@@ -53,8 +53,6 @@
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
 
-#define IMPORT_TIMEOUT 30
-
 typedef enum eScanMode
 {
 	SCAN_MODE_UNINITIALIZED,
@@ -84,14 +82,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     BOOL                            bWalletListDropped;
     BOOL                            bFlashOn;
     UIAlertView                     *typeAddressAlertView;
-    ImportDataModel                 _dataModel;
-    NSString                        *_sweptAddress;
-    tImportState                    _state;
-    uint64_t                        _sweptAmount;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
     UIAlertView                     *_bitidAlert;
-    NSTimer                         *_callbackTimer;
     NSString                        *_tweet;
     NSString                        *_bitidURI;
 
@@ -150,10 +143,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
 
-    [self updateDisplay];
-
-    _dataModel = kWIF;
-    
     self.afmanager = [MainViewController createAFManager];
 }
 
@@ -194,8 +183,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
         [segmentedControl setEnabled:YES forSegmentAtIndex:0];
 
-    _dataModel = kWIF;
-
     [[NSNotificationCenter defaultCenter]
         addObserver:self
            selector:@selector(willResignActive)
@@ -206,7 +193,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
            selector:@selector(applicationDidBecomeActiveNotification:)
                name:UIApplicationDidBecomeActiveNotification
              object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sweepDoneCallback:) name:NOTIFICATION_SWEEP object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willRotate:) name:NOTIFICATION_ROTATION_CHANGED object:nil];
 
@@ -289,7 +276,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self willResignActive];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self cancelImportExpirationTimer];
+    
+    // XXX Yikes, is this still needed. ABC will callback our handlers in importWallet
+    // but will that still happen if the viewcontroller is destroyed? -paulvp
+//    [self cancelImportExpirationTimer];
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -1363,75 +1353,44 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (BOOL)importWallet:(NSString *)privateKey
+- (void)importWallet:(NSString *)privateKey
 {
-    bool bSuccess = NO;
-
-    if (privateKey)
-    {
-        privateKey = [privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([privateKey length])
+    
+    [[AppDelegate abc] importPrivateKey:privateKey to:[AppDelegate abc].currentWallet.strUUID importing:^(NSString *address) {
+        NSMutableString *statusMessage = [NSMutableString string];
+        [statusMessage appendString:[[NSString alloc]
+                initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
+        [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    } complete:^(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount) {
+        if (0 < amount)
         {
-            NSRange schemeMarkerRange = [privateKey rangeOfString:@"://"];
-            if (NSNotFound != schemeMarkerRange.location)
-            {
-                NSString *scheme = [privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
-                if (nil != scheme && 0 != [scheme length])
-                {
-                    if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
-                    {
-                        _dataModel = kHBURI;
-
-                        privateKey = [privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
-
-                        bSuccess = YES;
-                    }
-                }
+            [MainViewController fadingAlertDismiss];
+            if (txid && [txid length]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                    object:nil
+                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[AppDelegate abc].currentWallet.strUUID,
+                                                                             KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
-            else
-            {
-                _dataModel = kWIF;
-
-                bSuccess = YES;
-            }
-
-            if (bSuccess)
-            {
-                if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
-                {
-                    // private key is a valid format
-                    // attempt to sweep it
-                    _sweptAddress = [[AppDelegate abc] sweepKey:privateKey
-                                              intoWallet:[AppDelegate abc].currentWallet.strUUID];
-
-                    if (nil != _sweptAddress && _sweptAddress.length)
-                    {
-                        _state = ImportState_Importing;
-                        [self updateDisplay];
-                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:IMPORT_TIMEOUT
-                                                                          target:self
-                                                                        selector:@selector(expireImport)
-                                                                        userInfo:nil
-                                                                         repeats:NO];
-                    }
-                    else
-                    {
-                        // no address associated with the private key, must be invalid
-                        bSuccess = NO;
-                    }
-
-                }
-            }
+            if (ABCImportHBitsURI == dataModel)
+                [self showHbitsResults:address amount:amount];
         }
-    }
+        else if (ABCImportHBitsURI != dataModel)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
+        }
 
-    if (NO == bSuccess)
-    {
-        _sweptAddress = nil;
-        [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        if (ccode == ABCConditionCodeNoTransaction)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
+        }
+        else
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+        }
+
         [self updateState];
-    }
-    return bSuccess;
+    }];
 }
 
 
@@ -1778,14 +1737,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 {
                     if (_bImportMode)
                     {
-                        if ([self importWallet:text])
-                        {
-                            [self stopQRReader];
-                        }
-                        else
-                        {
-                            [MainViewController fadingAlertDismiss];
-                        }
+                        [self importWallet:text];
                     }
                     else
                     {
@@ -1838,32 +1790,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 }
 
-- (void)updateDisplay
-{
-    if (_state == ImportState_PrivateKey)
-    {
-//        self.viewDisplay.hidden = NO;
-//        self.viewPassword.hidden = YES;
-    }
-    else
-    {
-        if (_state == ImportState_Importing)
-        {
-            NSMutableString *statusMessage = [NSMutableString string];
-            [statusMessage appendString:[[NSString alloc]
-                         initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), _sweptAddress]];
-            [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        }
-    }
-}
-
-
 - (void)updateState
 {
     if (nil == _tweetAlert && nil == _sweptAlert)
     {
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
         [self startQRReader];
     }
 }
@@ -1890,145 +1820,59 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [MainViewController fadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
 }
 
-- (void)showSweepResults
+- (void)showHbitsResults:(NSString *)address amount:(uint64_t) amount
 {
-    if (_sweptAlert)
+    // make a query with the last bytes of the address
+    const int hBitzIDLength = 4;
+    if (nil != address && hBitzIDLength <= address.length)
     {
-        [_sweptAlert show];
-    }
-
-    if (kHBURI == _dataModel)
-    {
-        // make a query with the last bytes of the address
-        const int hBitzIDLength = 4;
-        if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
-        {
-            NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
-            NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-
-            [self.afmanager GET:hiddenBitzURI parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                NSDictionary *results = (NSDictionary *)responseObject;
-                
-                if (results)
+        NSString *hiddenBitzID = [address substringFromIndex:[address length]-hBitzIDLength];
+        NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+        
+        [self.afmanager GET:hiddenBitzURI parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSDictionary *results = (NSDictionary *)responseObject;
+            
+            if (results)
+            {
+                NSString *token = [results objectForKey:@"token"];
+                _tweet = [results objectForKey:@"tweet"];
+                if (token && _tweet)
                 {
-                    NSString *token = [results objectForKey:@"token"];
-                    _tweet = [results objectForKey:@"tweet"];
-                    if (token && _tweet)
+                    if (0 == amount)
                     {
-                        if (0 == _sweptAmount)
+                        NSString *zmessage = [results objectForKey:@"zero_message"];
+                        if (zmessage)
                         {
-                            NSString *zmessage = [results objectForKey:@"zero_message"];
-                            if (zmessage)
-                            {
-                                _tweetAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Sorry", nil)
-                                               message:zmessage
-                                               delegate:self
-                                               cancelButtonTitle:@"No"
-                                               otherButtonTitles:@"OK", nil];
-                                [_tweetAlert show];
-                            }
+                            _tweetAlert = [[UIAlertView alloc]
+                                           initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                           message:zmessage
+                                           delegate:self
+                                           cancelButtonTitle:@"No"
+                                           otherButtonTitles:@"OK", nil];
+                            [_tweetAlert show];
                         }
-                        else
+                    }
+                    else
+                    {
+                        NSString *message = [results objectForKey:@"message"];
+                        if (message)
                         {
-                            NSString *message = [results objectForKey:@"message"];
-                            if (message)
-                            {
-                                _tweetAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Congratulations", nil)
-                                               message:message
-                                               delegate:self
-                                               cancelButtonTitle:@"No"
-                                               otherButtonTitles:@"OK", nil];
-                                [_tweetAlert show];
-                            }
+                            _tweetAlert = [[UIAlertView alloc]
+                                           initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                           message:message
+                                           delegate:self
+                                           cancelButtonTitle:@"No"
+                                           otherButtonTitles:@"OK", nil];
+                            [_tweetAlert show];
                         }
                     }
                 }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                ABCLog(1, @"*** ERROR Connecting to Network: showSweepResults");
-            }];
-        }
-    }
-}
-
-
-- (void)expireImport
-{
-    [MainViewController fadingAlertDismiss];
-    UIAlertView *alert = [[UIAlertView alloc]
-              initWithTitle:NSLocalizedString(@"Error", nil)
-                    message:NSLocalizedString(@"Import failed", nil)
-                    delegate:nil
-        cancelButtonTitle:@"OK"
-        otherButtonTitles:nil];
-    [alert show];
-    _callbackTimer = nil;
-}
-
-- (void)cancelImportExpirationTimer
-{
-    if (_callbackTimer)
-    {
-        [_callbackTimer invalidate];
-        _callbackTimer = nil;
-    }
-}
-
-- (void)sweepDoneCallback:(NSNotification *)notification
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MainViewController fadingAlertDismiss];
-    });
-    
-    [self cancelImportExpirationTimer];
-
-    NSDictionary *userInfo = [notification userInfo];
-    ABCConditionCode result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
-    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-    if (nil == _sweptAlert)
-    {
-        _sweptAmount = amount;
-
-        if (ABCConditionCodeOk == result)
-        {
-            if (0 < amount)
-            {
-                NSString *sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-                if (sweptTXID && [sweptTXID length]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
-                                                                        object:nil
-                                                                    userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[AppDelegate abc].currentWallet.strUUID,
-                                                                            KEY_TX_DETAILS_EXITED_TX_ID:sweptTXID}];
-                }
             }
-            else if (kHBURI != _dataModel)
-            {
-                NSString *message = NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil);
-                _sweptAlert = [[UIAlertView alloc]
-                        initWithTitle:NSLocalizedString(@"Error", nil)
-                              message:message
-                             delegate:self
-                    cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil, nil];
-            }
-        }
-        else
-        {
-            NSString *message = [Util errorCC:result];
-            _sweptAlert = [[UIAlertView alloc]
-                    initWithTitle:NSLocalizedString(@"Error", nil)
-                          message:message
-                         delegate:self
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil, nil];
-        }
-
-        [self performSelectorOnMainThread:@selector(showSweepResults)
-                               withObject:nil
-                            waitUntilDone:NO];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ABCLog(1, @"*** ERROR Connecting to Network: showHbitsResults");
+        }];
     }
 }
 

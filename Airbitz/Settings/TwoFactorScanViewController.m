@@ -7,6 +7,7 @@
 #import "CoreBridge.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 @interface TwoFactorScanViewController () 
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,

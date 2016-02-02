@@ -30,6 +30,7 @@
 #import "RecipientViewController.h"
 #import "DropDownAlertView.h"
 #import "AppGroupConstants.h"
+#import "FadingAlertView.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -96,7 +97,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
 @property (nonatomic, strong) NSTimer                   *qrTimer;
-@property (nonatomic, strong) NSTimer                   *rotateServerTimer;
 @property (weak, nonatomic)   IBOutlet UILabel          *textUnderQRCode;
 
 @property (nonatomic, strong) NSString *requestType;
@@ -204,7 +204,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     [self changeTopField:true animate:false];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:ABC_NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:ABC_NOTIFICATION_EXCHANGE_RATE_CHANGE object:nil];
 
     if ([[LocalSettings controller] offerRequestHelp]) {
@@ -212,8 +212,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 
     [self updateViews:nil];
-
-    self.rotateServerTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].rotateServerInterval target:self selector:@selector(refreshBackground) userInfo:nil repeats:YES];
 
     [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
     [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
@@ -284,8 +282,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     if (self.qrTimer)
         [self.qrTimer invalidate];
-    if (self.rotateServerTimer)
-        [self.rotateServerTimer invalidate];
 
     [[AppDelegate abc] prioritizeAddress:nil inWallet:[AppDelegate abc].currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -386,14 +382,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             _refreshSpinner.hidden = YES;
             _refreshButton.hidden = NO;
         }];
-    }
-}
-
-- (void)refreshBackground
-{
-    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
-    {
-//        [[AppDelegate abc] rotateWalletServer:[AppDelegate abc].currentWallet.strUUID refreshData:NO notify:nil];
     }
 }
 
@@ -543,9 +531,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSString *strNotes = @"";
 
     // get the QR Code image
-    NSMutableString *strRequestID = [[NSMutableString alloc] init];
-    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
 
     self.statusLine1.text = @"";
     self.statusLine2.text = @"";
@@ -586,7 +571,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     Wallet *wallet = [self getCurrentWallet];
     NSString *strUUID = wallet.strUUID;
-    NSNumber *nsCurrencyNum = [NSNumber numberWithInt:wallet.currencyNum];
     NSNumber *nsRemaining = [NSNumber numberWithLongLong:remaining];
 
     //
@@ -596,7 +580,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (self.qrTimer)
         [self.qrTimer invalidate];
 
-    NSArray *args = [NSArray arrayWithObjects:strName,strUUID,nsCurrencyNum,strNotes,strCategory,strRequestID,strRequestURI,strRequestAddress,nsRemaining,nil];
+    NSArray *args = [NSArray arrayWithObjects:strName,strUUID,strNotes,strCategory,nsRemaining,nil];
 
     ABCLog(2,@"updateQRCode setTimer req=%llu", [nsRemaining longLongValue]);
     self.qrTimer = [NSTimer scheduledTimerWithTimeInterval:[Theme Singleton].qrCodeGenDelayTime target:self selector:@selector(updateQRAsync:) userInfo:args repeats:NO];
@@ -628,14 +612,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     NSString *strName = [args objectAtIndex:i++];
     NSString *strUUID = [args objectAtIndex:i++];
-    NSNumber *nsCurrencyNum = [args objectAtIndex:i++];
-    int currencyNum = [nsCurrencyNum intValue];
 
     NSString *strNotes = [args objectAtIndex:i++];
     NSString *strCategory = [args objectAtIndex:i++];
-    NSMutableString *strRequestID = [args objectAtIndex:i++];
-    NSMutableString *strRequestURI = [args objectAtIndex:i++];
-    NSMutableString *strRequestAddress = [args objectAtIndex:i++];
     NSNumber *nsRemaining = [args objectAtIndex:i++];
 
     SInt64 remaining = [nsRemaining longLongValue];

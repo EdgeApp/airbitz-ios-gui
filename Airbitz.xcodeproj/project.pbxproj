@@ -14,6 +14,7 @@
 		346440829320442D931D3866 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		34644217215092D4F2F06816 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
+		34644268D28E53E9B81B948E /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
 		346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
@@ -22,10 +23,12 @@
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		346445CC0CDF3213D139409C /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		346446B0D375F21479F5E91C /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
 		3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
 		34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
 		34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
@@ -1448,6 +1451,7 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464408F86584EFFA0DCAE24 /* ABCStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCStrings.m; sourceTree = "<group>"; };
 		34644094FDFE70BFE3B9A7A8 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
 		346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
 		346441F52001A12B2E9187EE /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
@@ -1455,6 +1459,7 @@
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
 		3464446B9A66BA410AA0E017 /* ABCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSettings.h; sourceTree = "<group>"; };
 		3464455D2CF43EE05846DB82 /* ABCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCUtil.h; sourceTree = "<group>"; };
+		346445CE29D47C2D7FC5F78D /* ABCStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCStrings.h; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
 		3464460D4793BA199DB14504 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
 		346447584A8B61803711CB84 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
@@ -2515,6 +2520,8 @@
 				34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */,
 				34644ED4090F92F550AB9B71 /* CoreBridge.m */,
 				346447584A8B61803711CB84 /* CoreBridge.h */,
+				3464408F86584EFFA0DCAE24 /* ABCStrings.m */,
+				346445CE29D47C2D7FC5F78D /* ABCStrings.h */,
 			);
 			path = ABCBridge;
 			sourceTree = "<group>";
@@ -4741,6 +4748,7 @@
 				34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */,
 				34644FA26FCA347A81960356 /* ABCSettings.m in Sources */,
 				3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */,
+				34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4888,6 +4896,7 @@
 				34644E9C14358F405DB8759D /* ABCUtil.m in Sources */,
 				346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */,
 				346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */,
+				34644268D28E53E9B81B948E /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5035,6 +5044,7 @@
 				34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */,
 				34644F0F3076CE803615885C /* ABCSettings.m in Sources */,
 				3464407B03DBCC2AD6BECB44 /* CoreBridge.m in Sources */,
+				346445CC0CDF3213D139409C /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABCUtil.h"
 
 #define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      120
