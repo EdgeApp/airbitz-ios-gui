@@ -1555,16 +1555,11 @@ __strong static CoreBridge *singleton;
         if (doRelogin)
         {
             if (doBeforeLogin) doBeforeLogin();
-            ABCConditionCode ccode = [self signIn:username password:password otp:nil];
-            NSString *errroString  = [self getLastErrorString];
-            if (ABCConditionCodeOk == ccode)
-            {
+            [self signIn:username password:password otp:nil complete:^{
                 if (completionWithLogin) completionWithLogin(usedTouchID);
-            }
-            else
-            {
-                if (errorHandler) errorHandler(ccode, errroString);
-            }
+            } error:^(ABCConditionCode ccode, NSString *errorString) {
+                if (errorHandler) errorHandler(ccode, errorString);
+            }];
         }
         else
         {
