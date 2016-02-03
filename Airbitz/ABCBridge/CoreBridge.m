@@ -4278,15 +4278,21 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     
     if (ABCConditionCodeOk == ccode)
     {
-        if (singleton.importCompletionHandler) singleton.importCompletionHandler(singleton.importDataModel, singleton.sweptAddress, txid, amount);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (singleton.importCompletionHandler) singleton.importCompletionHandler(singleton.importDataModel, singleton.sweptAddress, txid, amount);
+            singleton.importErrorHandler = nil;
+            singleton.importCompletionHandler = nil;
+        });
     }
     else
     {
-        if (singleton.importErrorHandler) singleton.importErrorHandler(ccode, [singleton getLastErrorString]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (singleton.importErrorHandler) singleton.importErrorHandler(ccode, [singleton getLastErrorString]);
+            singleton.importErrorHandler = nil;
+            singleton.importCompletionHandler = nil;
+        });
     }
     
-    singleton.importErrorHandler = nil;
-    singleton.importCompletionHandler = nil;
 }
 
 - (void)expireImport
@@ -4297,9 +4303,9 @@ void ABC_Sweep_Complete_Callback(tABC_CC cc, const char *szID, uint64_t amount)
     ABCConditionCode ccode = [self setLastErrors:error];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.importErrorHandler) self.importErrorHandler(ccode, [self getLastErrorString]);
+        self.importErrorHandler = nil;
+        self.importCompletionHandler = nil;
     });
-    self.importErrorHandler = nil;
-    self.importCompletionHandler = nil;
 }
 
 - (void)cancelImportExpirationTimer
