@@ -1374,7 +1374,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (ABCImportHBitsURI == dataModel)
                 [self showHbitsResults:address amount:amount];
         }
-        else if (ABCImportHBitsURI != dataModel)
+        else
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
         }
