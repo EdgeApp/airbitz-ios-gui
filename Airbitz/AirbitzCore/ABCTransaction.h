@@ -1,5 +1,5 @@
 //
-//  Transaction.h
+//  ABCTransaction.h
 //  AirBitz
 //
 //  Created by Adam Harris on 3/3/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Transaction : NSObject
+@interface ABCTransaction : NSObject
 
 @property (nonatomic, copy)     NSString        *strID;
 @property (nonatomic, copy)     NSString        *strMallealbeID;

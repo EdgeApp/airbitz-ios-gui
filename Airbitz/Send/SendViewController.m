@@ -1455,7 +1455,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         // in other words, we can move funds from and to the same wallet
         if (abc.currentWalletID != i)
         {
-            Wallet *wallet = [abc.arrayWallets objectAtIndex:i];
+            ABCWallet *wallet = [abc.arrayWallets objectAtIndex:i];
 
             BOOL bAddIt = bUseAll;
             if (!bAddIt)
@@ -1708,7 +1708,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             {
                 // see if the text corresponds to one of the loaded wallets
                 NSInteger index = [abc.arrayWalletNames indexOfObject:text];
-                Wallet *wallet = nil;
+                ABCWallet *wallet = nil;
                 if (index != NSNotFound)
                 {
                     wallet = [abc.arrayWallets objectAtIndex:index];
@@ -1776,7 +1776,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     if (index >= 0)
     {
-        Wallet *wallet = [abc.arrayWallets objectAtIndex:index];
+        ABCWallet *wallet = [abc.arrayWallets objectAtIndex:index];
 
         ABCSpend *abcSpend;
         ABCConditionCode ccode = [abc newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];

@@ -141,7 +141,7 @@
         NSAssert((_abcSpend.destWallet != nil), @"Empty destWallet");
         _destUUID = _abcSpend.destUUID;
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
-        for (Wallet *w in abc.arrayWallets) {
+        for (ABCWallet *w in abc.arrayWallets) {
             if (![w.strName isEqualToString:_sendTo]) {
                 [newArr addObject:w];
             } else {
@@ -543,7 +543,7 @@
 
 
 
-- (void)launchTransactionDetailsWithTransaction:(Wallet *)wallet withTx:(Transaction *)transaction
+- (void)launchTransactionDetailsWithTransaction:(ABCWallet *)wallet withTx:(ABCTransaction *)transaction
 {
 //    [self.view removeGestureRecognizer:tap];
 
@@ -600,9 +600,9 @@
         ABCLog(2,@"Not enought args\n");
         return;
     }
-    Wallet *wallet = params[0];
+    ABCWallet *wallet = params[0];
     NSString *txId = params[1];
-    Transaction *transaction = [abc getTransaction:wallet.strUUID withTx:txId];
+    ABCTransaction *transaction = [abc getTransaction:wallet.strUUID withTx:txId];
     [self launchTransactionDetailsWithTransaction:wallet withTx:transaction];
 }
 
@@ -981,7 +981,7 @@
 
 #pragma mark - ABC Callbacks
 
-- (void)txSendSuccess:(Wallet *)wallet withTx:(NSString *)txId
+- (void)txSendSuccess:(ABCWallet *)wallet withTx:(NSString *)txId
 {
     NSArray *params = [NSArray arrayWithObjects: wallet, txId, nil];
     [[AudioController controller] playSent];

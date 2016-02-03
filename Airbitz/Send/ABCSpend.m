@@ -5,7 +5,7 @@
 
 #import "ABCSpend.h"
 #import "AirbitzCore.h"
-#import "Wallet.h"
+#import "ABCWallet.h"
 #import "ABC.h"
 #import "ABCError.h"
 

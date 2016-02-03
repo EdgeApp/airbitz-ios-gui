@@ -3,13 +3,13 @@
 //  AirBitz
 //
 
-#import "Wallet.h"
+#import "ABCWallet.h"
 #import "AirbitzCore.h"
 
 @interface ABCSpend : NSObject
 
-@property (nonatomic, strong)       Wallet                  *srcWallet;
-@property (nonatomic, strong)       Wallet                  *destWallet;
+@property (nonatomic, strong)       ABCWallet *srcWallet;
+@property (nonatomic, strong)       ABCWallet *destWallet;
 @property (nonatomic)               long                    bizId;
 @property (nonatomic)               double                  amountFiat;
 

@@ -1,19 +1,19 @@
 //
-//  Transaction.m
+//  ABCTransaction.m
 //  AirBitz
 //
 //  Created by Adam Harris on 3/3/14.
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
-#import "Transaction.h"
+#import "ABCTransaction.h"
 
-@interface Transaction ()
+@interface ABCTransaction ()
 
 
 @end
 
-@implementation Transaction
+@implementation ABCTransaction
 
 #pragma mark - NSObject overrides
 
@@ -45,9 +45,9 @@
 // allows us to call things like removeObject in array's of these
 - (BOOL)isEqual:(id)object
 {
-    if ([object isKindOfClass:[Transaction class]])
+    if ([object isKindOfClass:[ABCTransaction class]])
     {
-        Transaction *transactionOther = object;
+        ABCTransaction *transactionOther = object;
 
         if ([self.strID isEqualToString:transactionOther.strID])
         {
@@ -69,7 +69,7 @@
 // overriding the description - used in debugging
 - (NSString *)description
 {
-    return([NSString stringWithFormat:@"Transaction - ID: %@, WalletUUID: %@, WalletName: %@, Name: %@, Address: %@, Date: %@, Confirmed: %@, Confirmations: %u, AmountSatoshi: %lli, AmountFiat: %lf, Balance: %lli, Category: %@, Notes: %@",
+    return([NSString stringWithFormat:@"ABCTransaction - ID: %@, WalletUUID: %@, WalletName: %@, Name: %@, Address: %@, Date: %@, Confirmed: %@, Confirmations: %u, AmountSatoshi: %lli, AmountFiat: %lf, Balance: %lli, Category: %@, Notes: %@",
             self.strID,
             self.strWalletUUID,
             self.strWalletName,

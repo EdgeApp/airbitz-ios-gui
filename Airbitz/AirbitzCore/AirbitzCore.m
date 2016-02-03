@@ -1,8 +1,8 @@
 
 #import "ABC.h"
-#import "Wallet.h"
-#import "Transaction.h"
-#import "TxOutput.h"
+#import "ABCWallet.h"
+#import "ABCTransaction.h"
+#import "ABCTxOutput.h"
 #import "ABCKeychain.h"
 #import "ABCSpend.h"
 
@@ -392,9 +392,9 @@ __strong static AirbitzCore *singleton;
 }
 
 // select the wallet with the given UUID
-- (Wallet *)selectWalletWithUUID:(NSString *)strUUID
+- (ABCWallet *)selectWalletWithUUID:(NSString *)strUUID
 {
-    Wallet *wallet = nil;
+    ABCWallet *wallet = nil;
 
     if (strUUID)
     {
@@ -405,7 +405,7 @@ __strong static AirbitzCore *singleton;
             // look for the wallet in our arrays
             if (self.arrayWallets)
             {
-                for (Wallet *curWallet in self.arrayWallets)
+                for (ABCWallet *curWallet in self.arrayWallets)
                 {
                     if ([strUUID isEqualToString:curWallet.strUUID])
                     {
@@ -418,7 +418,7 @@ __strong static AirbitzCore *singleton;
             // if we haven't found it yet, try the archived wallets
             if (nil == wallet)
             {
-                for (Wallet *curWallet in self.arrayArchivedWallets)
+                for (ABCWallet *curWallet in self.arrayArchivedWallets)
                 {
                     if ([strUUID isEqualToString:curWallet.strUUID])
                     {
@@ -462,10 +462,10 @@ __strong static AirbitzCore *singleton;
     }
 }
 
-- (Wallet *)getWalletFromCore:(NSString *)uuid
+- (ABCWallet *)getWalletFromCore:(NSString *)uuid
 {
     tABC_Error error;
-    Wallet *wallet = [[Wallet alloc] init];
+    ABCWallet *wallet = [[ABCWallet alloc] init];
     wallet.strUUID = uuid;
     wallet.strName = loadingText;
     wallet.currencyNum = -1;
@@ -519,7 +519,7 @@ __strong static AirbitzCore *singleton;
     [self loadWalletUUIDs:arrayUuids];
 
     for (NSString *uuid in arrayUuids) {
-        Wallet *wallet = [self getWalletFromCore:uuid];
+        ABCWallet *wallet = [self getWalletFromCore:uuid];
         if (bWithTx && wallet.loaded) {
             [self loadTransactions:wallet];
         }
@@ -529,7 +529,7 @@ __strong static AirbitzCore *singleton;
 
 }
 
-- (void)makeCurrentWallet:(Wallet *)wallet
+- (void)makeCurrentWallet:(ABCWallet *)wallet
 {
     if ([self.arrayWallets containsObject:wallet])
     {
@@ -549,7 +549,7 @@ __strong static AirbitzCore *singleton;
 {
     if ([self.arrayWallets containsObject:self.currentWallet])
     {
-        Wallet *wallet = [self selectWalletWithUUID:strUUID];
+        ABCWallet *wallet = [self selectWalletWithUUID:strUUID];
         [self makeCurrentWallet:wallet];
     }
 }
@@ -619,7 +619,7 @@ __strong static AirbitzCore *singleton;
             int loadingCount = 0;
             for (int i = 0; i < [arrayWallets count]; i++)
             {
-                Wallet *wallet = [arrayWallets objectAtIndex:i];
+                ABCWallet *wallet = [arrayWallets objectAtIndex:i];
                 [arrayWalletNames addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [self formatSatoshi:wallet.balance]]];
                 if (!wallet.loaded) {
                     loadingCount++;
@@ -628,7 +628,7 @@ __strong static AirbitzCore *singleton;
 
             for (int i = 0; i < [arrayArchivedWallets count]; i++)
             {
-                Wallet *wallet = [arrayArchivedWallets objectAtIndex:i];
+                ABCWallet *wallet = [arrayArchivedWallets objectAtIndex:i];
                 if (!wallet.loaded) {
                     loadingCount++;
                 }
@@ -776,7 +776,7 @@ __strong static AirbitzCore *singleton;
     // go through all the wallets and seperate out the archived ones
     for (int i = (int) [arrayWallets count] - 1; i >= 0; i--)
     {
-        Wallet *wallet = [arrayWallets objectAtIndex:i];
+        ABCWallet *wallet = [arrayWallets objectAtIndex:i];
 
         // if this is an archived wallet
         if ([wallet isArchived])
@@ -827,14 +827,14 @@ __strong static AirbitzCore *singleton;
     }];
 }
 
-- (Wallet *)getWallet: (NSString *)walletUUID
+- (ABCWallet *)getWallet: (NSString *)walletUUID
 {
-    for (Wallet *w in self.arrayWallets)
+    for (ABCWallet *w in self.arrayWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
             return w;
     }
-    for (Wallet *w in self.arrayArchivedWallets)
+    for (ABCWallet *w in self.arrayArchivedWallets)
     {
         if ([w.strUUID isEqualToString:walletUUID])
             return w;
@@ -842,12 +842,12 @@ __strong static AirbitzCore *singleton;
     return nil;
 }
 
-- (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+- (ABCTransaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
 {
     tABC_Error Error;
-    Transaction *transaction = nil;
+    ABCTransaction *transaction = nil;
     tABC_TxInfo *pTrans = NULL;
-    Wallet *wallet = [self getWallet: walletUUID];
+    ABCWallet *wallet = [self getWallet: walletUUID];
     if (wallet == nil)
     {
         ABCLog(2,@("Could not find wallet for %@"), walletUUID);
@@ -859,7 +859,7 @@ __strong static AirbitzCore *singleton;
                                         &pTrans, &Error);
     if (ABC_CC_Ok == result)
     {
-        transaction = [[Transaction alloc] init];
+        transaction = [[ABCTransaction alloc] init];
         [self setTransaction: wallet transaction:transaction coreTx:pTrans];
     }
     else
@@ -871,14 +871,14 @@ __strong static AirbitzCore *singleton;
     return transaction;
 }
 
-- (int64_t)getTotalSentToday:(Wallet *)wallet
+- (int64_t)getTotalSentToday:(ABCWallet *)wallet
 {
     int64_t total = 0;
 
     if ([wallet.arrayTransactions count] == 0)
         return 0;
 
-    for (Transaction *t in wallet.arrayTransactions)
+    for (ABCTransaction *t in wallet.arrayTransactions)
     {
         if ([[NSCalendar currentCalendar] isDateInToday:t.date])
         {
@@ -892,11 +892,11 @@ __strong static AirbitzCore *singleton;
 
 }
 
-- (void) loadTransactions: (Wallet *) wallet
+- (void) loadTransactions: (ABCWallet *) wallet
 {
     tABC_Error Error;
     unsigned int tCount = 0;
-    Transaction *transaction;
+    ABCTransaction *transaction;
     tABC_TxInfo **aTransactions = NULL;
     tABC_CC result = ABC_GetTransactions([self.name UTF8String],
                                          [self.password UTF8String],
@@ -912,14 +912,14 @@ __strong static AirbitzCore *singleton;
         for (int j = tCount - 1; j >= 0; --j)
         {
             tABC_TxInfo *pTrans = aTransactions[j];
-            transaction = [[Transaction alloc] init];
+            transaction = [[ABCTransaction alloc] init];
             [self setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
         SInt64 bal = 0;
         for (int j = (int) arrayTransactions.count - 1; j >= 0; --j)
         {
-            Transaction *t = arrayTransactions[j];
+            ABCTransaction *t = arrayTransactions[j];
             bal += t.amountSatoshi;
             t.balance = bal;
         }
@@ -934,7 +934,7 @@ __strong static AirbitzCore *singleton;
     ABC_FreeTransactions(aTransactions, tCount);
 }
 
-- (void)setTransaction:(Wallet *) wallet transaction:(Transaction *) transaction coreTx:(tABC_TxInfo *) pTrans
+- (void)setTransaction:(ABCWallet *) wallet transaction:(ABCTransaction *) transaction coreTx:(tABC_TxInfo *) pTrans
 {
     transaction.strID = [NSString stringWithUTF8String: pTrans->szID];
     transaction.strName = [NSString stringWithUTF8String: pTrans->pDetails->szName];
@@ -964,7 +964,7 @@ __strong static AirbitzCore *singleton;
     NSMutableArray *outputs = [[NSMutableArray alloc] init];
     for (int i = 0; i < pTrans->countOutputs; ++i)
     {
-        TxOutput *output = [[TxOutput alloc] init];
+        ABCTxOutput *output = [[ABCTxOutput alloc] init];
         output.strAddress = [NSString stringWithUTF8String: pTrans->aOutputs[i]->szAddress];
         output.bInput = pTrans->aOutputs[i]->input;
         output.value = pTrans->aOutputs[i]->value;
@@ -975,7 +975,7 @@ __strong static AirbitzCore *singleton;
     transaction.bizId = pTrans->pDetails->bizId;
 }
 
-- (int)calcTxConfirmations:(Wallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
+- (int)calcTxConfirmations:(ABCWallet *) wallet withTxId:(NSString *)txId isSyncing:(bool *)syncing
 {
     tABC_Error Error;
     int txHeight = 0;
@@ -1011,11 +1011,11 @@ __strong static AirbitzCore *singleton;
     return retHeight;
 }
 
-- (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions
+- (NSMutableArray *)searchTransactionsIn: (ABCWallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions
 {
     tABC_Error Error;
     unsigned int tCount = 0;
-    Transaction *transaction;
+    ABCTransaction *transaction;
     tABC_TxInfo **aTransactions = NULL;
     tABC_CC result = ABC_SearchTransactions([self.name UTF8String],
                                             [self.password UTF8String],
@@ -1025,7 +1025,7 @@ __strong static AirbitzCore *singleton;
     {
         for (int j = tCount - 1; j >= 0; --j) {
             tABC_TxInfo *pTrans = aTransactions[j];
-            transaction = [[Transaction alloc] init];
+            transaction = [[ABCTransaction alloc] init];
             [self setTransaction:wallet transaction:transaction coreTx:pTrans];
             [arrayTransactions addObject:transaction];
         }
@@ -1042,7 +1042,7 @@ __strong static AirbitzCore *singleton;
 - (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     tABC_Error Error;
-    Wallet *wallet;
+    ABCWallet *wallet;
     if(sourceIndexPath.section == 0)
     {
         wallet = [self.arrayWallets objectAtIndex:sourceIndexPath.row];
@@ -1073,12 +1073,12 @@ __strong static AirbitzCore *singleton;
     }
 
     NSMutableString *uuids = [[NSMutableString alloc] init];
-    for (Wallet *w in self.arrayWallets)
+    for (ABCWallet *w in self.arrayWallets)
     {
         [uuids appendString:w.strUUID];
         [uuids appendString:@"\n"];
     }
-    for (Wallet *w in self.arrayArchivedWallets)
+    for (ABCWallet *w in self.arrayArchivedWallets)
     {
         [uuids appendString:w.strUUID];
         [uuids appendString:@"\n"];
@@ -1097,7 +1097,7 @@ __strong static AirbitzCore *singleton;
     [self refreshWallets];
 }
 
-- (bool)setWalletAttributes: (Wallet *) wallet
+- (bool)setWalletAttributes: (ABCWallet *) wallet
 {
     tABC_Error Error;
     tABC_CC result = ABC_SetWalletArchived([self.name UTF8String],
@@ -1116,7 +1116,7 @@ __strong static AirbitzCore *singleton;
     }
 }
 
-- (void)storeTransaction:(Transaction *)transaction
+- (void)storeTransaction:(ABCTransaction *)transaction
 {
     [self postToMiscQueue:^{
 
@@ -1328,7 +1328,7 @@ __strong static AirbitzCore *singleton;
     return (int64_t) parsedAmount;
 }
 
-- (NSString *)conversionString:(Wallet *) wallet
+- (NSString *)conversionString:(ABCWallet *) wallet
 {
     return [self conversionStringFromNum:wallet.currencyNum withAbbrev:YES];
 }
@@ -1458,7 +1458,7 @@ __strong static AirbitzCore *singleton;
     return count;
 }
 
-- (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet
+- (BOOL)needsRecoveryQuestionsReminder:(ABCWallet *)wallet
 {
     BOOL bResult = NO;
     int reminderCount = [self getReminderCount];
@@ -2053,13 +2053,13 @@ __strong static AirbitzCore *singleton;
     {
         NSMutableArray *arrayCurrencyNums= [[NSMutableArray alloc] init];
 
-        for (Wallet *w in self.arrayWallets)
+        for (ABCWallet *w in self.arrayWallets)
         {
             if (w.loaded) {
                 [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
             }
         }
-        for (Wallet *w in self.arrayArchivedWallets)
+        for (ABCWallet *w in self.arrayArchivedWallets)
         {
             if (w.loaded) {
                 [arrayCurrencyNums addObject:[NSNumber numberWithInteger:w.currencyNum]];
@@ -2799,7 +2799,7 @@ __strong static AirbitzCore *singleton;
     {
         // Find a non-archived wallet that isn't the wallet we're going to delete
         // and make it the current wallet
-        for (Wallet *wallet in self.arrayWallets)
+        for (ABCWallet *wallet in self.arrayWallets)
         {
             if (![wallet.strUUID isEqualToString:uuid])
             {
@@ -2830,7 +2830,7 @@ __strong static AirbitzCore *singleton;
     {
         // Find a non-archived wallet that isn't the wallet we're going to delete
         // and make it the current wallet
-        for (Wallet *wallet in self.arrayWallets)
+        for (ABCWallet *wallet in self.arrayWallets)
         {
             if (![wallet.strUUID isEqualToString:uuid])
             {

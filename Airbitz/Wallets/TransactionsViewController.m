@@ -10,7 +10,7 @@
 #import "ExportWalletViewController.h"
 #import "BalanceView.h"
 #import "TransactionCell.h"
-#import "Transaction.h"
+#import "ABCTransaction.h"
 #import "AirbitzCore.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
@@ -54,7 +54,7 @@
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     BalanceView                         *_balanceView;
-    Wallet                              *longTapWallet;
+    ABCWallet *longTapWallet;
     UIAlertView                         *longTapAlert;
     UIAlertView                         *renameAlert;
     UIAlertView                         *deleteAlert;
@@ -305,7 +305,7 @@
     //
     // Update balance view in the wallet dropdown.
     //
-    for(Wallet * wallet in abc.arrayWallets)
+    for(ABCWallet * wallet in abc.arrayWallets)
     {
         totalSatoshi += wallet.balance;
     }
@@ -421,7 +421,7 @@
         return;
 
     int64_t totalSatoshi = 0.0;
-    for(Transaction * tx in abc.currentWallet.arrayTransactions)
+    for(ABCTransaction * tx in abc.currentWallet.arrayTransactions)
     {
         totalSatoshi += tx.amountSatoshi;
     }
@@ -485,7 +485,7 @@
 
 // formats the satoshi amount
 // if bFiat is YES, then the amount is shown in fiat, otherwise, bitcoin format as specified by user settings
-- (NSString *)formatAmount:(int64_t)satoshi wallet:(Wallet *)wallet
+- (NSString *)formatAmount:(int64_t)satoshi wallet:(ABCWallet *)wallet
 {
     BOOL bFiat = !_balanceView.barIsUp;
     if (wallet)
@@ -495,14 +495,14 @@
 }
 
 
-- (NSString *)formatAmount:(Wallet *)wallet
+- (NSString *)formatAmount:(ABCWallet *)wallet
 {
     BOOL bFiat = !_balanceView.barIsUp;
     return [self formatAmount:wallet useFiat:bFiat];
 }
 
 
-- (NSString *)formatAmount:(Wallet *)wallet useFiat:(BOOL)bFiat
+- (NSString *)formatAmount:(ABCWallet *)wallet useFiat:(BOOL)bFiat
 {
     return [self formatAmount:wallet.balance useFiat:bFiat currencyNum:wallet.currencyNum];
 }
@@ -531,7 +531,7 @@
 //    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
 //}
 //
--(void)launchTransactionDetailsWithTransaction:(Transaction *)transaction cell:(TransactionCell *)cell
+-(void)launchTransactionDetailsWithTransaction:(ABCTransaction *)transaction cell:(TransactionCell *)cell
 {
     if (self.transactionDetailsController) {
         return;
@@ -603,7 +603,7 @@
     return self.searchTextField.text.length > 0;
 }
 
-- (UIImage *)contactImageForTransaction:(Transaction *)transaction
+- (UIImage *)contactImageForTransaction:(ABCTransaction *)transaction
 {
     UIImage *image = nil;
 
@@ -617,7 +617,7 @@
     return image;
 }
 
-- (NSURLRequest *)imageRequestForTransaction:(Transaction *)transaction
+- (NSURLRequest *)imageRequestForTransaction:(ABCTransaction *)transaction
 {
     NSURLRequest *imageRequest = nil;
     if (transaction)
@@ -637,9 +637,9 @@
 }
 
 
-- (void)getBizImagesForWallet:(Wallet *)wallet
+- (void)getBizImagesForWallet:(ABCWallet *)wallet
 {
-    for (Transaction *transaction in wallet.arrayTransactions)
+    for (ABCTransaction *transaction in wallet.arrayTransactions)
     {
         // if this transaction has a biz id
         if (transaction && transaction.bizId)
@@ -654,7 +654,7 @@
     }
 }
 
-- (void)getBizDetailsForTransaction:(Transaction *)transaction
+- (void)getBizDetailsForTransaction:(ABCTransaction *)transaction
 {
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.bizId];
@@ -930,7 +930,7 @@
     NSInteger row = [indexPath row];
     {
         TransactionCell *cell;
-        Wallet *wallet = abc.currentWallet;
+        ABCWallet *wallet = abc.currentWallet;
 
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
@@ -938,7 +938,7 @@
 
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         
-        Transaction *transaction = NULL;
+        ABCTransaction *transaction = NULL;
         BOOL bBlankCell = NO;
         if ([self searchEnabled])
         {
@@ -1386,7 +1386,7 @@
     if (nil == abc.arrayWallets)
         return cell;
 
-    Wallet *wallet;
+    ABCWallet *wallet;
 
     switch (indexPath.section)
     {

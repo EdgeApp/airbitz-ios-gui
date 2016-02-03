@@ -1290,16 +1290,16 @@ MainViewController *singleton;
             int transactionCount = 0;
             NSDate *date = [NSDate date];
 
-            for (Wallet *curWallet in abc.arrayWallets)
+            for (ABCWallet *curWallet in abc.arrayWallets)
             {
                 transactionCount += [curWallet.arrayTransactions count];
-                for (Transaction *t in curWallet.arrayTransactions) {
+                for (ABCTransaction *t in curWallet.arrayTransactions) {
                     if (t.date && [t.date compare:date] == NSOrderedAscending) {
                         date = t.date;
                     }
                 }
             }
-            for (Wallet *curWallet in abc.arrayArchivedWallets)
+            for (ABCWallet *curWallet in abc.arrayArchivedWallets)
             {
                 transactionCount += [curWallet.arrayTransactions count];
             }
@@ -1412,7 +1412,7 @@ MainViewController *singleton;
     _strWalletUUID = walletUUID;
     _strTxID = txid;
 
-    Transaction *transaction = [abc getTransaction:_strWalletUUID withTx:_strTxID];
+    ABCTransaction *transaction = [abc getTransaction:_strWalletUUID withTx:_strTxID];
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
@@ -1512,8 +1512,8 @@ MainViewController *singleton;
     NSString *coin;
     NSString *fiat;
     
-    Wallet *wallet = [abc getWallet:walletUUID];
-    Transaction *transaction = [abc getTransaction:walletUUID withTx:txId];
+    ABCWallet *wallet = [abc getWallet:walletUUID];
+    ABCTransaction *transaction = [abc getTransaction:walletUUID withTx:txId];
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
@@ -1560,8 +1560,8 @@ MainViewController *singleton;
 
 - (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    Wallet *wallet = [abc getWallet:walletUUID];
-    Transaction *transaction = [abc getTransaction:walletUUID withTx:txId];
+    ABCWallet *wallet = [abc getWallet:walletUUID];
+    ABCTransaction *transaction = [abc getTransaction:walletUUID withTx:txId];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];

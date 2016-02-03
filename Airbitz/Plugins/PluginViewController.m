@@ -25,7 +25,7 @@ static const NSString *PROTOCOL = @"bridge://";
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
     NSString                       *_sendCbid;
-    Wallet                         *_sendWallet;
+    ABCWallet *_sendWallet;
     NSMutableArray                 *_navStack;
     NSDictionary                   *_functions;
     NSString                       *_tempCbidForImagePicker;
@@ -374,7 +374,7 @@ static const NSString *PROTOCOL = @"bridge://";
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
 
-- (NSMutableDictionary *)walletToDict:(Wallet *)w
+- (NSMutableDictionary *)walletToDict:(ABCWallet *)w
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
     [d setObject:w.strUUID forKey:@"id"];
@@ -438,7 +438,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     // TODO: move to queue
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    for (Wallet *w in abc.arrayWallets) {
+    for (ABCWallet *w in abc.arrayWallets) {
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         [d setObject:w.strUUID forKey:@"id"];
         [d setObject:w.strName forKey:@"name"];
@@ -635,7 +635,7 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCConditionCode ccode;
     NSDictionary *results = nil;
 
-    Wallet *wallet = [abc getWallet:[args objectForKey:@"id"]];
+    ABCWallet *wallet = [abc getWallet:[args objectForKey:@"id"]];
 
     ABCRequest *request = [[ABCRequest alloc] init];
     request.walletUUID = wallet.strUUID;

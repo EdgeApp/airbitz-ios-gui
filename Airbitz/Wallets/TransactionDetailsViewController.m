@@ -8,7 +8,7 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
-#import "TxOutput.h"
+#import "ABCTxOutput.h"
 #import "AirbitzCore.h"
 #import "User.h"
 #import "NSDate+Helper.h"
@@ -606,7 +606,7 @@ typedef enum eRequestType
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
-    for (TxOutput *t in self.transaction.outputs) {
+    for (ABCTxOutput *t in self.transaction.outputs) {
         NSString *val = [abc formatSatoshi:t.value];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.strAddress, t.strAddress, val];

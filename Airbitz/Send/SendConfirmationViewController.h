@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Wallet.h"
+#import "ABCWallet.h"
 #import "ABCSpend.h"
 #import "AirbitzViewController.h"
 

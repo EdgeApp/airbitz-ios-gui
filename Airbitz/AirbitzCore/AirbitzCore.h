@@ -3,8 +3,8 @@
 //  Airbitz
 //
 
-#import "Wallet.h"
-#import "Transaction.h"
+#import "ABCWallet.h"
+#import "ABCTransaction.h"
 #import "ABCConditionCode.h"
 #import "ABCSpend.h"
 #import "ABCRequest.h"
@@ -72,7 +72,7 @@ typedef enum eABCDeviceCaps
 @property (nonatomic, strong) NSMutableArray            *arrayArchivedWallets;
 @property (nonatomic, strong) NSMutableArray            *arrayWalletNames;
 @property (nonatomic, strong) NSMutableArray            *arrayUUIDs;
-@property (nonatomic, strong) Wallet                    *currentWallet;
+@property (nonatomic, strong) ABCWallet *currentWallet;
 @property (nonatomic, strong) NSArray                   *arrayCurrencyCodes;
 @property (nonatomic, strong) NSArray                   *arrayCurrencyNums;
 @property (nonatomic, strong) NSArray                   *arrayCurrencyStrings;
@@ -107,10 +107,10 @@ typedef enum eABCDeviceCaps
 // New methods
 - (void)rotateWalletServer:(NSString *)walletUUID refreshData:(BOOL)bData notify:(void(^)(void))cb;
 - (void)reorderWallets: (NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath;
-- (void)makeCurrentWallet:(Wallet *)wallet;
+- (void)makeCurrentWallet:(ABCWallet *)wallet;
 - (void)makeCurrentWalletWithIndex:(NSIndexPath *)indexPath;
 - (void)makeCurrentWalletWithUUID:(NSString *)strUUID;
-- (Wallet *)selectWalletWithUUID:(NSString *)strUUID;
+- (ABCWallet *)selectWalletWithUUID:(NSString *)strUUID;
 - (long) saveLogoutDate;
 - (void)addCategory:(NSString *)strCategory;
 - (void)loadCategories;
@@ -120,14 +120,14 @@ typedef enum eABCDeviceCaps
 
 
 
-- (Wallet *)getWallet: (NSString *)walletUUID;
-- (Transaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
-- (int64_t)getTotalSentToday:(Wallet *)wallet;
+- (ABCWallet *)getWallet: (NSString *)walletUUID;
+- (ABCTransaction *)getTransaction: (NSString *)walletUUID withTx:(NSString *) szTxId;
+- (int64_t)getTotalSentToday:(ABCWallet *)wallet;
 
-- (bool)setWalletAttributes: (Wallet *) wallet;
+- (bool)setWalletAttributes: (ABCWallet *) wallet;
 
-- (NSMutableArray *)searchTransactionsIn: (Wallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
-- (void)storeTransaction:(Transaction *)transaction;
+- (NSMutableArray *)searchTransactionsIn: (ABCWallet *) wallet query:(NSString *)term addTo:(NSMutableArray *) arrayTransactions;
+- (void)storeTransaction:(ABCTransaction *)transaction;
 
 - (int) currencyDecimalPlaces;
 - (int) maxDecimalPlaces;
@@ -140,12 +140,12 @@ typedef enum eABCDeviceCaps
 - (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol forceDecimals:(int) forcedecimals;
 - (NSString *)formatSatoshi:(int64_t) bitcoin withSymbol:(bool) symbol cropDecimals:(int) decimals forceDecimals:(int) forcedecimals;
 - (int64_t) denominationToSatoshi: (NSString *) amount;
-- (NSString *)conversionString: (Wallet *) wallet;
+- (NSString *)conversionString: (ABCWallet *) wallet;
 - (NSString *)conversionStringFromNum:(int) currencyNum withAbbrev:(bool) abbrev;
 - (NSArray *)getRecoveryQuestionsForUserName:(NSString *)strUserName
                                    isSuccess:(BOOL *)bSuccess
                                     errorMsg:(NSMutableString *)error;
-- (BOOL)needsRecoveryQuestionsReminder:(Wallet *)wallet;
+- (BOOL)needsRecoveryQuestionsReminder:(ABCWallet *)wallet;
 - (BOOL)recentlyLoggedIn;
 - (void)logout;
 - (BOOL)passwordOk:(NSString *)password;

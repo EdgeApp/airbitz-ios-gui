@@ -13,8 +13,8 @@
 #import "DDData.h"
 #import "RequestViewController.h"
 #import "Notifications.h"
-#import "Transaction.h"
-#import "TxOutput.h"
+#import "ABCTransaction.h"
+#import "ABCTxOutput.h"
 #import "CalculatorView.h"
 #import "ButtonSelectorView2.h"
 #import "User.h"
@@ -294,8 +294,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         return NO;
     }
-    Transaction *transaction = [abc getTransaction:walletUUID withTx:txId];
-    for (TxOutput *output in transaction.outputs)
+    ABCTransaction *transaction = [abc getTransaction:walletUUID withTx:txId];
+    for (ABCTxOutput *output in transaction.outputs)
     {
         if (!output.bInput 
             && [addressString isEqualToString:output.strAddress])
@@ -569,7 +569,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
     }
 
-    Wallet *wallet = [self getCurrentWallet];
+    ABCWallet *wallet = [self getCurrentWallet];
     NSString *strUUID = wallet.strUUID;
     NSNumber *nsRemaining = [NSNumber numberWithLongLong:remaining];
 
@@ -805,7 +805,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)updateTextFieldContents:(BOOL)allowBTCUpdate
 {
     
-    Wallet *wallet = [self getCurrentWallet];
+    ABCWallet *wallet = [self getCurrentWallet];
     
     self.exchangeRateLabel.text = [abc conversionString:wallet];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
@@ -929,7 +929,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 }
 
-- (Wallet *) getCurrentWallet
+- (ABCWallet *) getCurrentWallet
 {
     return abc.currentWallet;
 }
@@ -988,7 +988,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     NSTimeInterval delay;
     NSTimeInterval duration;
 
-    Wallet *wallet = [self getCurrentWallet];
+    ABCWallet *wallet = [self getCurrentWallet];
 
 
     switch (state) {
@@ -1436,7 +1436,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
     
-    Wallet *wallet = abc.currentWallet;
+    ABCWallet *wallet = abc.currentWallet;
     self.abcRequest.amountSatoshi = _amountSatoshiRequested;
     
     double currency;
