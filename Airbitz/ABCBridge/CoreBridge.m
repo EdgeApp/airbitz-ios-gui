@@ -3425,7 +3425,7 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     details.amountFeesMinersSatoshi = 0;
     details.amountCurrency = 0;
 
-    char *pRequestID;
+    char *pRequestID = nil;
     request.abc = self;
 
     if (!request.walletUUID)
