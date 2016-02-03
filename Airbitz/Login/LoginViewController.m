@@ -230,10 +230,10 @@ static BOOL bInitialized = false;
     _bNewDeviceLogin = NO;
 
 //    [self getAllAccounts];
-//    if (self.arrayAccounts.count > 0 && ![[AppDelegate abc] accountExistsLocal:[[AppDelegate abc] getLastAccessedAccount])
+//    if (self.arrayAccounts.count > 0 && ![abc accountExistsLocal:[abc getLastAccessedAccount])
 //        [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
 //
-    [self updateUsernameSelector:[[AppDelegate abc] getLastAccessedAccount]];
+    [self updateUsernameSelector:[abc getLastAccessedAccount]];
 
     if (bPINModeEnabled)
     {
@@ -380,7 +380,7 @@ static BOOL bInitialized = false;
     
     _bNewDeviceLogin = NO;
 
-    [[AppDelegate abc] autoReloginOrTouchIDIfPossible:[[AppDelegate abc] getLastAccessedAccount] doBeforeLogin:^{
+    [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
     } completeWithLogin:^(BOOL usedTouchID) {
@@ -511,7 +511,7 @@ static BOOL bInitialized = false;
         //
         self.usernameSelector.textField.text = username;
     }
-    self.passwordTextField.text = [AppDelegate abc].password;
+    self.passwordTextField.text = abc.password;
 
 }
 
@@ -531,10 +531,10 @@ static BOOL bInitialized = false;
 //        _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-        _bNewDeviceLogin = ![[AppDelegate abc] accountExistsLocal:self.usernameSelector.textField.text];
+        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-        [[AppDelegate abc] signIn:self.usernameSelector.textField.text
+        [abc signIn:self.usernameSelector.textField.text
                          password:self.passwordTextField.text
                               otp:nil
                          complete:^(void)
@@ -558,8 +558,8 @@ static BOOL bInitialized = false;
              {
                  [MainViewController showBackground:NO animate:YES];
                  [MainViewController fadingAlert:errorString];
-                 [AppDelegate abc].name = nil;
-                 [AppDelegate abc].password = nil;
+                 abc.name = nil;
+                 abc.password = nil;
              }
          }];
 
@@ -598,7 +598,7 @@ static BOOL bInitialized = false;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             BOOL bSuccess = NO;
             NSMutableString *error = [[NSMutableString alloc] init];
-            NSArray *arrayQuestions = [[AppDelegate abc] getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+            NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
                                                                         isSuccess:&bSuccess
                                                                          errorMsg:error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
@@ -654,16 +654,16 @@ static BOOL bInitialized = false;
 {
     [MainViewController showBackground:YES animate:YES];
 
-    [[AppDelegate abc]
-            signInWithPIN:[[AppDelegate abc] getLastAccessedAccount]
+    [abc
+            signInWithPIN:[abc getLastAccessedAccount]
                       pin:pin
                  complete:^(void)
                  {
-                     [User login:[[AppDelegate abc] getLastAccessedAccount] password:NULL];
+                     [User login:[abc getLastAccessedAccount] password:NULL];
 //                [[User Singleton] resetPINLoginInvalidEntryCount];
                      [self.delegate LoginViewControllerDidPINLogin];
 
-                     if ([[AppDelegate abc] shouldAskUserToEnableTouchID])
+                     if ([abc shouldAskUserToEnableTouchID])
                      {
                          //
                          // Ask if they want TouchID enabled for this user on this device
@@ -1014,7 +1014,7 @@ static BOOL bInitialized = false;
        password:self.passwordTextField.text];
     [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
-    if ([[AppDelegate abc] shouldAskUserToEnableTouchID])
+    if ([abc shouldAskUserToEnableTouchID])
     {
         //
         // Ask if they want TouchID enabled for this user on this device
@@ -1080,7 +1080,7 @@ static BOOL bInitialized = false;
         [self showSpinner:YES];
         // Perform the two factor sign in
 
-        [[AppDelegate abc]
+        [abc
          signIn:self.usernameSelector.textField.text
          password:self.passwordTextField.text
          otp:secret
@@ -1146,10 +1146,10 @@ static BOOL bInitialized = false;
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    ABCConditionCode ccode = [[AppDelegate abc] getLocalAccounts:self.arrayAccounts];
+    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
     if (ABCConditionCodeOk != ccode)
     {
-        [MainViewController fadingAlert:[[AppDelegate abc] getLastErrorString]];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 
@@ -1163,9 +1163,9 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([[AppDelegate abc] PINLoginExists:account])
+    if([abc PINLoginExists:account])
     {
-        [[AppDelegate abc] setLastAccessedAccount:account];
+        [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
         [self viewDidLoad];
         [self viewWillAppear:true];
@@ -1181,12 +1181,12 @@ static BOOL bInitialized = false;
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode ccode = [[AppDelegate abc] accountDeleteLocal:account];
-    NSString *errorString = [[AppDelegate abc] getLastErrorString];
+    ABCConditionCode ccode = [abc accountDeleteLocal:account];
+    NSString *errorString = [abc getLastErrorString];
 
     if(ccode == ABCConditionCodeOk)
     {
-        [self updateUsernameSelector:[[AppDelegate abc] getLastAccessedAccount]];
+        [self updateUsernameSelector:[abc getLastAccessedAccount]];
     }
     else
     {
@@ -1204,7 +1204,7 @@ static BOOL bInitialized = false;
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([[AppDelegate abc] passwordExists:acct])
+    if ([abc passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -1275,12 +1275,12 @@ static BOOL bInitialized = false;
     {
         if (0 == buttonIndex)
         {
-            [[AppDelegate abc].settings disableTouchID];
+            [abc.settings disableTouchID];
         }
         else
         {
-            if ([[AppDelegate abc].password length] > 0)
-                [[AppDelegate abc].settings enableTouchID];
+            if ([abc.password length] > 0)
+                [abc.settings enableTouchID];
             else
             {
                 [self showPasswordCheckAlertForTouchID];
@@ -1297,7 +1297,7 @@ static BOOL bInitialized = false;
             // Need to disable TouchID in settings.
             //
             // Disable TouchID in LocalSettings
-            [[AppDelegate abc].settings disableTouchID];
+            [abc.settings disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
         }
         else
@@ -1320,7 +1320,7 @@ static BOOL bInitialized = false;
         if (buttonIndex == 0)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [[AppDelegate abc].settings disableTouchID];
+            [abc.settings disableTouchID];
         }
         else if (buttonIndex == 1)
         {
@@ -1333,7 +1333,7 @@ static BOOL bInitialized = false;
         {
             [_logoImage setUserInteractionEnabled:NO];
             _spinnerView.hidden = NO;
-            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
+            [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Succeeded"
@@ -1392,12 +1392,12 @@ static BOOL bInitialized = false;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated)
     {
-        [AppDelegate abc].password = _tempPassword;
+        abc.password = _tempPassword;
         _tempPassword = nil;
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 
         // Enable Touch ID
-        [[AppDelegate abc].settings enableTouchID];
+        [abc.settings enableTouchID];
 
     }
     else
@@ -1417,10 +1417,10 @@ static BOOL bInitialized = false;
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-    [[AppDelegate abc] setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([[AppDelegate abc] PINLoginExists:[[AppDelegate abc] getLastAccessedAccount]])
+    [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
+    if([abc PINLoginExists:[abc getLastAccessedAccount]])
     {
-        [self updateUsernameSelector:[[AppDelegate abc] getLastAccessedAccount]];
+        [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
     }
     else

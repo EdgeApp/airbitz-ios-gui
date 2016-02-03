@@ -12,7 +12,7 @@
 #import "AirbitzViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
-#import "AppDelegate.h"
+#import "AB.h"
 
 
 

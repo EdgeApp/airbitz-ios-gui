@@ -48,7 +48,7 @@
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
-    if (![[AppDelegate abc] passwordExists]) {
+    if (![abc passwordExists]) {
         self.passwordTextField.hidden = YES;
     }
 
@@ -64,14 +64,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
-    _dailySpendLimitField.text = [[AppDelegate abc] formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.text = [abc formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _dailyDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
+    _dailyDenomination.text = abc.settings.denominationLabelShort;
 
-    _pinSpendLimitSwitch.on = [AppDelegate abc].settings.bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [[AppDelegate abc] formatSatoshi:[AppDelegate abc].settings.spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitSwitch.on = abc.settings.bSpendRequirePin > 0;
+    _pinSpendLimitField.text = [abc formatSatoshi:abc.settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _pinDenomination.text = [AppDelegate abc].settings.denominationLabelShort;
+    _pinDenomination.text = abc.settings.denominationLabelShort;
 
     [self switchFlipped:_dailySpendLimitSwitch];
     [self switchFlipped:_pinSpendLimitSwitch];
@@ -228,25 +228,25 @@
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
-            [User Singleton].dailySpendLimitSatoshis = [[AppDelegate abc] denominationToSatoshi:_dailySpendLimitField.text];
+            [User Singleton].dailySpendLimitSatoshis = [abc denominationToSatoshi:_dailySpendLimitField.text];
         } else {
             [User Singleton].bDailySpendLimit = NO;
         }
 
         if (_pinSpendLimitSwitch.on) {
-            [AppDelegate abc].settings.bSpendRequirePin = true;
-            [AppDelegate abc].settings.spendRequirePinSatoshis = [[AppDelegate abc] denominationToSatoshi:_pinSpendLimitField.text];
+            abc.settings.bSpendRequirePin = true;
+            abc.settings.spendRequirePinSatoshis = [abc denominationToSatoshi:_pinSpendLimitField.text];
         } else {
-            [AppDelegate abc].settings.bSpendRequirePin = false;
+            abc.settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        ABCConditionCode ccode = [[AppDelegate abc].settings saveSettings];
+        ABCConditionCode ccode = [abc.settings saveSettings];
         if (!(ABCConditionCodeOk == ccode))
         {
             UIAlertView *alert =
                     [[UIAlertView alloc]
                             initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
-                                  message:[[AppDelegate abc] getLastErrorString]
+                                  message:[abc getLastErrorString]
                                  delegate:self
                         cancelButtonTitle:cancelButtonText
                         otherButtonTitles:okButtonText, nil];

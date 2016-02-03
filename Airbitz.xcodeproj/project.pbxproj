@@ -18,6 +18,7 @@
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
 		346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		346442FF5C0981D87A7C8AB0 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		3464448993C099A42764377E /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -25,11 +26,13 @@
 		346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
 		346445CC0CDF3213D139409C /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		346446B0D375F21479F5E91C /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		3464491590D9099322E3B5CE /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
 		34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
 		34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
 		34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644D9C4171CC241B6B1609 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
 		34644E9C14358F405DB8759D /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
@@ -1463,9 +1466,11 @@
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
 		3464460D4793BA199DB14504 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
 		346447584A8B61803711CB84 /* AirbitzCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzCore.h; sourceTree = "<group>"; };
+		346448867CF607DEED6BA49C /* AB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AB.m; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
+		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AB.h; sourceTree = "<group>"; };
 		34644DE10A63062D42EFA426 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
 		34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
 		34644E21D66F895B121307AF /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
@@ -3412,6 +3417,8 @@
 				DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */,
 				DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
+				346448867CF607DEED6BA49C /* AB.m */,
+				34644D19B9AA8C31AD9453F3 /* AB.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -4749,6 +4756,7 @@
 				34644FA26FCA347A81960356 /* ABCSettings.m in Sources */,
 				3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */,
 				34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */,
+				34644D9C4171CC241B6B1609 /* AB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4897,6 +4905,7 @@
 				346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */,
 				346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */,
 				34644268D28E53E9B81B948E /* ABCStrings.m in Sources */,
+				3464491590D9099322E3B5CE /* AB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5045,6 +5054,7 @@
 				34644F0F3076CE803615885C /* ABCSettings.m in Sources */,
 				3464407B03DBCC2AD6BECB44 /* AirbitzCore.m in Sources */,
 				346445CC0CDF3213D139409C /* ABCStrings.m in Sources */,
+				346442FF5C0981D87A7C8AB0 /* AB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

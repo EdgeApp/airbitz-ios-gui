@@ -8,7 +8,7 @@
 
 #import "PasswordVerifyView.h"
 #import "Util.h"
-#import "AppDelegate.h"
+#import "AB.h"
 
 @interface PasswordVerifyView ()
 
@@ -96,7 +96,7 @@
     NSMutableString *checkResultsMessage;
     ABCConditionCode ccode;
     
-    ccode = [[AppDelegate abc] checkPasswordRules:self.password
+    ccode = [abc checkPasswordRules:self.password
                                             valid:&passed
                                    secondsToCrack:&secondsToCrack
                                             count:&count

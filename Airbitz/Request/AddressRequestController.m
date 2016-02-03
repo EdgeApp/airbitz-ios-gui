@@ -73,16 +73,16 @@
 {
     [MainViewController changeNavBarOwner:self];
     
-    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
         
-        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, [AppDelegate abc].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, abc.currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         
-        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -98,9 +98,9 @@
 //    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
 //    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 //
-//    _walletSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
-//    [_walletSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
-//    _walletSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
+//    _walletSelector.arrayItemsToSelect = abc.arrayWalletNames;
+//    [_walletSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+//    _walletSelector.selectedItemIndex = abc.currentWalletID;
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -156,12 +156,12 @@
     
     if (_successUrl) {
         
-        request.walletUUID = [AppDelegate abc].currentWallet.strUUID;
+        request.walletUUID = abc.currentWallet.strUUID;
         request.payeeName = strName;
         request.category = strCategory;
         request.notes = strNotes;
 
-        [[AppDelegate abc] createReceiveRequestWithDetails:request];
+        [abc createReceiveRequestWithDetails:request];
         
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
@@ -195,7 +195,7 @@
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
     
     bWalletListDropped = false;
 }

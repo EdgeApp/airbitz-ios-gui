@@ -21,7 +21,7 @@ static NSMutableArray *giftCardPlugins;
 {
     if (NO == bInitialized)
     {
-        bool isTestnet = [[AppDelegate abc] isTestNet];
+        bool isTestnet = [abc isTestNet];
 
         buySellPlugins = [[NSMutableArray alloc] init];
         giftCardPlugins = [[NSMutableArray alloc] init];

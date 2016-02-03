@@ -48,11 +48,11 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
-    self.coreLabel.text = [NSString stringWithFormat:@"%@", [[AppDelegate abc] coreVersion]];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [abc coreVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
-    if ([[AppDelegate abc] isTestNet]) {
+    if ([abc isTestNet]) {
         self.networkLabel.text = @"Testnet";
     } else {
         self.networkLabel.text = @"Mainnet";
@@ -102,7 +102,7 @@
         {
             ABCLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            [[AppDelegate abc] uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
+            [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                 
@@ -142,7 +142,7 @@
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [[AppDelegate abc] clearBlockchainCache:^{
+    [abc clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     } error:^(ABCConditionCode ccode, NSString *errorString) {

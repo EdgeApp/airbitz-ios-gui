@@ -81,7 +81,7 @@
         self.popupPickerCurrency = [PopupPickerView CreateForView:self
                                                    relativeToView:self.buttonCurrency
                                                  relativePosition:PopupPickerPosition_Below
-                                                      withStrings:[AppDelegate abc].arrayCurrencyStrings
+                                                      withStrings:abc.arrayCurrencyStrings
                                                    fromCategories:nil
                                                       selectedRow:-1
                                                         withWidth:[MainViewController getWidth]
@@ -130,12 +130,12 @@
 //    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
-    currencyNum = [AppDelegate abc].settings.defaultCurrencyNum;
-    currencyString = [[AppDelegate abc] currencyAbbrevLookup:currencyNum];
+    currencyNum = abc.settings.defaultCurrencyNum;
+    currencyString = [abc currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
 //    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
-    _currencyChoice = (int) [[AppDelegate abc].arrayCurrencyCodes indexOfObject:currencyString];
+    _currencyChoice = (int) [abc.arrayCurrencyCodes indexOfObject:currencyString];
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
     [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
 //    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
@@ -174,16 +174,16 @@
 {
     [self blockUser:YES];
     _bCreatingWallet = YES;
-    [[AppDelegate abc] clearSyncQueue];
+    [abc clearSyncQueue];
 
     int currencyNum;
 
-    if ((nil == [AppDelegate abc].arrayCurrencyNums) || [[AppDelegate abc].arrayCurrencyNums count] <= _currencyChoice)
+    if ((nil == abc.arrayCurrencyNums) || [abc.arrayCurrencyNums count] <= _currencyChoice)
         currencyNum = 0;
     else
-        currencyNum = [[[AppDelegate abc].arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
+        currencyNum = [[abc.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
 
-    [[AppDelegate abc] createWallet:self.textField.text currencyNum:currencyNum complete:^(void)
+    [abc createWallet:self.textField.text currencyNum:currencyNum complete:^(void)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
@@ -228,8 +228,8 @@
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
     _currencyChoice = (int) row;
-    NSNumber *currencyNum = [[AppDelegate abc].arrayCurrencyNums objectAtIndex:_currencyChoice];
-    NSString *currencyString = [[AppDelegate abc] currencyAbbrevLookup:[currencyNum intValue]];
+    NSNumber *currencyNum = [abc.arrayCurrencyNums objectAtIndex:_currencyChoice];
+    NSString *currencyString = [abc currencyAbbrevLookup:[currencyNum intValue]];
 
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
     [self.popupPickerCurrency removeFromSuperview];

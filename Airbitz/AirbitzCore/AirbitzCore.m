@@ -2867,14 +2867,14 @@ __strong static AirbitzCore *singleton;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
-    AirbitzCore *airbitzCore = (__bridge id) pInfo->pData;
+    AirbitzCore *abc = (__bridge id) pInfo->pData;
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
-        [airbitzCore refreshWallets:^
+        [abc refreshWallets:^
         {
-            if (airbitzCore.delegate) {
-                if ([airbitzCore.delegate respondsToSelector:@selector(airbitzCoreIncomingBitcoin:)]) {
-                    [airbitzCore.delegate airbitzCoreIncomingBitcoin:[NSString stringWithUTF8String:pInfo->szWalletUUID]
+            if (abc.delegate) {
+                if ([abc.delegate respondsToSelector:@selector(airbitzCoreIncomingBitcoin:)]) {
+                    [abc.delegate airbitzCoreIncomingBitcoin:[NSString stringWithUTF8String:pInfo->szWalletUUID]
                                                                txid:[NSString stringWithUTF8String:pInfo->szTxID]];
                 }
             }
@@ -2883,20 +2883,20 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     }
 //    else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange)
 //    {
-//        [airbitzCore refreshWallets];
+//        [abc refreshWallets];
 //    }
     tABC_AsyncEventType eventType = pInfo->eventType;
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
         if (eventType == ABC_AsyncEventType_DataSyncUpdate) {
-            [airbitzCore performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
+            [abc performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
         } else if (eventType == ABC_AsyncEventType_RemotePasswordChange) {
-            if (airbitzCore.delegate)
+            if (abc.delegate)
             {
-                if ([airbitzCore.delegate respondsToSelector:@selector(airbitzCoreRemotePasswordChange)])
+                if ([abc.delegate respondsToSelector:@selector(airbitzCoreRemotePasswordChange)])
                 {
-                    [airbitzCore.delegate airbitzCoreRemotePasswordChange];
+                    [abc.delegate airbitzCoreRemotePasswordChange];
                 }
             }
         }

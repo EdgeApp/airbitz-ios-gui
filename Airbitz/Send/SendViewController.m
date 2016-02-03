@@ -581,8 +581,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (buttonIndex > 0)
         {
-            [[AppDelegate abc] postToMiscQueue:^{
-                BOOL success = [[AppDelegate abc] bitidLogin:_bitidURI];
+            [abc postToMiscQueue:^{
+                BOOL success = [abc bitidLogin:_bitidURI];
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (success)
                     {
@@ -835,16 +835,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			
             // Write username to this characteristic
-			BOOL sendName = [AppDelegate abc].settings.bNameOnPayments;
+			BOOL sendName = abc.settings.bNameOnPayments;
 
 			NSString *fullName = @" ";
 			if(sendName)
 			{
-				if([AppDelegate abc].settings.fullName)
+				if(abc.settings.fullName)
 				{
-					if([AppDelegate abc].settings.fullName.length)
+					if(abc.settings.fullName.length)
 					{
-						fullName = [AppDelegate abc].settings.fullName;
+						fullName = abc.settings.fullName;
 					}
 				}
 			}
@@ -1293,20 +1293,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
 
         NSString *walletName;
         if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", [AppDelegate abc].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", abc.currentWallet.strName];
         else
-            walletName = [NSString stringWithFormat:@"From: %@ ▼", [AppDelegate abc].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"From: %@ ▼", abc.currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
             self.textUnderQRScanner.text = walletHasBeenArchivedText;
             self.textUnderQRScanner.hidden = NO;
@@ -1356,7 +1356,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)importWallet:(NSString *)privateKey
 {
     
-    [[AppDelegate abc] importPrivateKey:privateKey to:[AppDelegate abc].currentWallet.strUUID importing:^(NSString *address) {
+    [abc importPrivateKey:privateKey to:abc.currentWallet.strUUID importing:^(NSString *address) {
         NSMutableString *statusMessage = [NSMutableString string];
         [statusMessage appendString:[[NSString alloc]
                 initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
@@ -1368,7 +1368,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (txid && [txid length]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
                                                                     object:nil
-                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[AppDelegate abc].currentWallet.strUUID,
+                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abc.currentWallet.strUUID,
                                                                              KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
             if (ABCImportHBitsURI == dataModel)
@@ -1449,13 +1449,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < [[AppDelegate abc].arrayWallets count]; i++)
+    for (int i = 0; i < [abc.arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
-        if ([AppDelegate abc].currentWalletID != i)
+        if (abc.currentWalletID != i)
         {
-            Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:i];
+            Wallet *wallet = [abc.arrayWallets objectAtIndex:i];
 
             BOOL bAddIt = bUseAll;
             if (!bAddIt)
@@ -1469,7 +1469,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [[AppDelegate abc] formatSatoshi:wallet.balance]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [abc formatSatoshi:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -1560,7 +1560,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 
 }
@@ -1622,7 +1622,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    NSString *bitidDomainURL = [[AppDelegate abc] bitidParseURI:_addressTextField.text];
+    NSString *bitidDomainURL = [abc bitidParseURI:_addressTextField.text];
     if (bitidDomainURL)
     {
         _bitidURI = _addressTextField.text;
@@ -1686,10 +1686,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if ([AppDelegate abc].currentWallet.loaded != YES)
+            if (abc.currentWallet.loaded != YES)
             {
                 // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
-                ABCLog(1,@"Waiting for wallet to load: %@", [AppDelegate abc].currentWallet.strName);
+                ABCLog(1,@"Waiting for wallet to load: %@", abc.currentWallet.strName);
                 
                 if (numRecursions < 2)
                     [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
@@ -1707,15 +1707,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (text.length)
             {
                 // see if the text corresponds to one of the loaded wallets
-                NSInteger index = [[AppDelegate abc].arrayWalletNames indexOfObject:text];
+                NSInteger index = [abc.arrayWalletNames indexOfObject:text];
                 Wallet *wallet = nil;
                 if (index != NSNotFound)
                 {
-                    wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
+                    wallet = [abc.arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
                         ABCSpend *abcSpend;
-                        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
+                        ABCConditionCode ccode = [abc newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
                         if (ABCConditionCodeOk == ccode)
                         {
                             [self showSendConfirmationTo:abcSpend];
@@ -1755,7 +1755,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    [[AppDelegate abc] newSpendFromTextAsync:text complete:^(ABCSpend *abcSpend){
+    [abc newSpendFromTextAsync:text complete:^(ABCSpend *abcSpend){
         [self stopQRReader];
         [self showSendConfirmationTo:abcSpend];
         [MainViewController fadingAlertDismiss];
@@ -1776,10 +1776,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     if (index >= 0)
     {
-        Wallet *wallet = [[AppDelegate abc].arrayWallets objectAtIndex:index];
+        Wallet *wallet = [abc.arrayWallets objectAtIndex:index];
 
         ABCSpend *abcSpend;
-        ABCConditionCode ccode = [[AppDelegate abc] newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
+        ABCConditionCode ccode = [abc newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
         if (ABCConditionCodeOk == ccode)
         {
             [self stopQRReader];

@@ -102,7 +102,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [[AppDelegate abc] getRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
+        [abc getRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
 
             self.arrayCategoryString = arrayCategoryString;
             self.arrayCategoryNumeric = arrayCategoryNumeric;
@@ -314,7 +314,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = ![[AppDelegate abc] passwordExists];
+        self.passwordView.hidden = ![abc passwordExists];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -333,7 +333,7 @@ typedef enum eAlertType
 {
     [self showSpinner:YES];
 
-    [[AppDelegate abc] checkRecoveryAnswers:self.strUserName answers:strAnswers complete:^(BOOL validAnswers)
+    [abc checkRecoveryAnswers:self.strUserName answers:strAnswers complete:^(BOOL validAnswers)
     {
         [self showSpinner:NO];
         if (validAnswers)
@@ -391,7 +391,7 @@ typedef enum eAlertType
         _tfaMenuViewController = nil;
         BOOL success = __bSuccess;
         if (success) {
-            ABCConditionCode ccode = [[AppDelegate abc] setOTPKey:self.strUserName key:_secret];
+            ABCConditionCode ccode = [abc setOTPKey:self.strUserName key:_secret];
             if (ABCConditionCodeOk == ccode) {
                 // Try again with OTP
                 [self CompleteSignup];
@@ -418,9 +418,9 @@ typedef enum eAlertType
     if (self.mode == PassRecovMode_Change) {
         password = _passwordField.text;
     } else {
-        password = [AppDelegate abc].password;
+        password = abc.password;
     }
-    if ([[AppDelegate abc] passwordExists] && ![[AppDelegate abc] passwordOk:password]) {
+    if ([abc passwordExists] && ![abc passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
@@ -433,7 +433,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [[AppDelegate abc]
+    [abc
             setRecoveryQuestions:password
                        questions:strQuestions
                          answers:strAnswers

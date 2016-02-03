@@ -61,7 +61,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
+//    self.bNoImportButton = ![abc otpHasError];
     self.bNoImportButton = YES;
     [MainViewController changeNavBarOwner:self];
 
@@ -82,7 +82,7 @@
     _passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    if (![[AppDelegate abc] passwordExists]) {
+    if (![abc passwordExists]) {
         _passwordTextField.hidden = YES;
     }
 
@@ -106,8 +106,8 @@
     bool on = NO;
     long timeout = 0;
     
-    ABCConditionCode ccode = [[AppDelegate abc] getOTPDetails:[AppDelegate abc].name
-                                                     password:[AppDelegate abc].password
+    ABCConditionCode ccode = [abc getOTPDetails:abc.name
+                                                     password:abc.password
                                                       enabled:&on
                                                       timeout:&timeout];
     
@@ -132,7 +132,7 @@
     _secret = nil;
     NSString *key;
     if (_isOn) {
-        ABCConditionCode ccode = [[AppDelegate abc] getOTPLocalKey:[AppDelegate abc].name key:&key];
+        ABCConditionCode ccode = [abc getOTPLocalKey:abc.name key:&key];
         if (key != nil && ABCConditionCodeOk == ccode) {
             _secret = key;
             _requestSpinner.hidden = NO;
@@ -162,7 +162,7 @@
 {
     if (show) {
         UIImage *qrImage;
-        ABCConditionCode ccode = [[AppDelegate abc] encodeStringToQRImage:_secret image:&qrImage];
+        ABCConditionCode ccode = [abc encodeStringToQRImage:_secret image:&qrImage];
         if (ABCConditionCodeOk == ccode)
         {
             _qrCodeImageView.image = qrImage;
@@ -201,8 +201,8 @@
 - (void)checkRequest
 {
     BOOL pending = NO;
-    ABCConditionCode ccode = [[AppDelegate abc] hasOTPResetPending:&pending];
-    NSString *errorString = [[AppDelegate abc] getLastErrorString];
+    ABCConditionCode ccode = [abc hasOTPResetPending:&pending];
+    NSString *errorString = [abc getLastErrorString];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         if (ABCConditionCodeOk == ccode) {
@@ -278,7 +278,7 @@
         _viewQRCodeFrame.hidden = YES;
         self.bNoImportButton = YES;
     }
-//    self.bNoImportButton = ![[AppDelegate abc] otpHasError];
+//    self.bNoImportButton = ![abc otpHasError];
     [self setText:on];
     _tfaEnabledSwitch.on = on;
     _loadingSpinner.hidden = YES;
@@ -298,11 +298,11 @@
 {
     ABCConditionCode ccode;
     if (on) {
-        ccode = [[AppDelegate abc] setOTPAuth:OTP_RESET_DELAY];
+        ccode = [abc setOTPAuth:OTP_RESET_DELAY];
         if (ABCConditionCodeOk == ccode)
             _isOn = YES;
     } else {
-        ccode = [[AppDelegate abc] removeOTPAuth];
+        ccode = [abc removeOTPAuth];
         if (ABCConditionCodeOk == ccode)
         {
             _secret = nil;
@@ -329,7 +329,7 @@
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _tfaMenuViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorMenuViewController"];
     _tfaMenuViewController.delegate = self;
-    _tfaMenuViewController.username = [AppDelegate abc].name;
+    _tfaMenuViewController.username = abc.name;
     _tfaMenuViewController.bStoreSecret = YES;
 
     [Util addSubviewControllerWithConstraints:self child:_tfaMenuViewController];
@@ -355,8 +355,8 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [[AppDelegate abc] removeOTPAuth];
-            NSString *errorString = [[AppDelegate abc] getLastErrorString];
+            ABCConditionCode ccode = [abc removeOTPAuth];
+            NSString *errorString = [abc getLastErrorString];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (ABCConditionCodeOk == ccode) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
@@ -391,8 +391,8 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [[AppDelegate abc] removeOTPResetRequest];
-            NSString *errorString = [[AppDelegate abc] getLastErrorString];
+            ABCConditionCode ccode = [abc removeOTPResetRequest];
+            NSString *errorString = [abc getLastErrorString];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (ABCConditionCodeOk == ccode) {

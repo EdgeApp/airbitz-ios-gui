@@ -14,7 +14,7 @@
 #import "Util.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
-#import "AppDelegate.h"
+#import "AB.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
 #import "ABCUtil.h"
@@ -135,13 +135,13 @@
             [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
             [self.accountPicker setRoundedAndShadowed:NO];
 
-            int num = [AppDelegate abc].settings.defaultCurrencyNum;
+            int num = abc.settings.defaultCurrencyNum;
 
-            self.conversionText.text = [[AppDelegate abc] conversionStringFromNum:num withAbbrev:YES];
+            self.conversionText.text = [abc conversionStringFromNum:num withAbbrev:YES];
 
 
-            self.accountText.text = [AppDelegate abc].name;
-            [self.accountButton setAccessibilityLabel:[AppDelegate abc].name];
+            self.accountText.text = abc.name;
+            [self.accountButton setAccessibilityLabel:abc.name];
 
             self.lowerViews.hidden = NO;
             self.otherAccountsView.hidden = YES;
@@ -451,7 +451,7 @@
     
     // set the text field to the choice
     NSString *account = [self.otherAccounts objectAtIndex:row];
-    [[AppDelegate abc] setLastAccessedAccount:account];
+    [abc setLastAccessedAccount:account];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
@@ -467,7 +467,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([[AppDelegate abc] passwordExists:acct])
+    if ([abc passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -497,7 +497,7 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode cc = [[AppDelegate abc] accountDeleteLocal:account];
+    ABCConditionCode cc = [abc accountDeleteLocal:account];
     if(cc == ABCConditionCodeOk)
     {
         [self getAllAccounts];
@@ -505,7 +505,7 @@
     }
     else
     {
-        [MainViewController fadingAlert:[[AppDelegate abc] getLastErrorString]];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 
@@ -513,10 +513,10 @@
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    ABCConditionCode ccode = [[AppDelegate abc] getLocalAccounts:self.arrayAccounts];
+    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
     if (ABCConditionCodeOk != ccode)
     {
-        [MainViewController fadingAlert:[[AppDelegate abc] getLastErrorString]];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 

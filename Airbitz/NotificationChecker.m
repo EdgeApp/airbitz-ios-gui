@@ -223,7 +223,7 @@ static NotificationChecker *singleton = nil;
     int i = 0;
     while (i < [[LocalSettings controller].otpNotifications count]) {
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
-        if ([[notif objectForKey:@"id"] isEqualToString:[AppDelegate abc].name]) {
+        if ([[notif objectForKey:@"id"] isEqualToString:abc.name]) {
             [[LocalSettings controller].otpNotifications removeObject:notif];
             break;
         }
@@ -244,7 +244,7 @@ static NotificationChecker *singleton = nil;
 {
     NSMutableArray *arrayUsers = nil;
     
-    ABCConditionCode ccode = [[AppDelegate abc] getOTPResetUsernames:&arrayUsers];
+    ABCConditionCode ccode = [abc getOTPResetUsernames:&arrayUsers];
     
     if (!ABCConditionCodeOk == ccode) return;
 

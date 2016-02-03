@@ -7,7 +7,7 @@
 //
 
 #import "Location.h"
-#import "AppDelegate.h"
+#import "AB.h"
 #import "Util.h"
 
 #define ACCURACY_METERS 100

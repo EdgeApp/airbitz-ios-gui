@@ -175,8 +175,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    [self.segmentedControlBTCUSD setTitle:[AppDelegate abc].settings.denominationLabel forSegmentAtIndex:1];
-    _btcLabel.text = [AppDelegate abc].settings.denominationLabel;
+    [self.segmentedControlBTCUSD setTitle:abc.settings.denominationLabel forSegmentAtIndex:1];
+    _btcLabel.text = abc.settings.denominationLabel;
 
     self.BTC_TextField.inputView = dummyView;
     self.USD_TextField.inputView = dummyView;
@@ -221,20 +221,20 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [AppDelegate abc].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[AppDelegate abc].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [AppDelegate abc].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [AppDelegate abc].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", abc.currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
-        self.keypadView.currencyNum = [AppDelegate abc].currentWallet.currencyNum;
+        self.keypadView.currencyNum = abc.currentWallet.currencyNum;
 
         [self updateTextFieldContents:YES];
 
-        if (!([[AppDelegate abc].arrayWallets containsObject:[AppDelegate abc].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
             self.textUnderQRCode.text = walletHasBeenArchivedText;
             self.qrCodeImageView.hidden = YES;
@@ -283,7 +283,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (self.qrTimer)
         [self.qrTimer invalidate];
 
-    [[AppDelegate abc] prioritizeAddress:nil inWallet:[AppDelegate abc].currentWallet.strUUID];
+    [abc prioritizeAddress:nil inWallet:abc.currentWallet.strUUID];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -294,7 +294,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         return NO;
     }
-    Transaction *transaction = [[AppDelegate abc] getTransaction:walletUUID withTx:txId];
+    Transaction *transaction = [abc getTransaction:walletUUID withTx:txId];
     for (TxOutput *output in transaction.outputs)
     {
         if (!output.bInput 
@@ -372,11 +372,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (IBAction)Refresh
 {
-    if ([AppDelegate abc].arrayWallets && [AppDelegate abc].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
         _refreshButton.hidden = YES;
         _refreshSpinner.hidden = NO;
-        [[AppDelegate abc] rotateWalletServer:[AppDelegate abc].currentWallet.strUUID refreshData:NO notify:^
+        [abc rotateWalletServer:abc.currentWallet.strUUID refreshData:NO notify:^
         {
             [NSThread sleepForTimeInterval:2.0f];
             _refreshSpinner.hidden = YES;
@@ -464,7 +464,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     BOOL mm = [LocalSettings controller].bMerchantMode;
     self.amountSatoshiReceived += incomingSatoshi;
-    self.amountSatoshiRequested = [[AppDelegate abc] denominationToSatoshi:self.BTC_TextField.text];
+    self.amountSatoshiRequested = [abc denominationToSatoshi:self.BTC_TextField.text];
     SInt64 remaining = self.amountSatoshiRequested;
 
     if (self.previousAmountSatoshiRequested != self.amountSatoshiRequested)
@@ -472,9 +472,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
         bChangeRequest = true;
     }
-    if (previousWalletUUID != [AppDelegate abc].currentWallet.strUUID)
+    if (previousWalletUUID != abc.currentWallet.strUUID)
     {
-        previousWalletUUID = [AppDelegate abc].currentWallet.strUUID;
+        previousWalletUUID = abc.currentWallet.strUUID;
         bChangeRequest = true;
     }
     if (incomingSatoshi)
@@ -547,10 +547,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             remaining = self.amountSatoshiRequested - self.amountSatoshiReceived;
             NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:self.amountSatoshiRequested],string];
+            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[abc formatSatoshi:self.amountSatoshiRequested],string];
 
             string = NSLocalizedString(@"Remaining...", @"Remaining string on Request screen");
-            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:remaining],string];
+            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abc formatSatoshi:remaining],string];
             break;
         }
         case kDonation:
@@ -559,7 +559,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             if (self.amountSatoshiReceived > 0)
             {
                 NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
-                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[[AppDelegate abc] formatSatoshi:self.amountSatoshiReceived],string];
+                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abc formatSatoshi:self.amountSatoshiReceived],string];
             }
             else
             {
@@ -629,7 +629,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     request.notes           = strNotes;
     request.amountSatoshi   = remaining;
 
-    ccode = [[AppDelegate abc] createReceiveRequestWithDetails:request complete:^
+    ccode = [abc createReceiveRequestWithDetails:request complete:^
     {
         UIImage *qrImage;
 
@@ -641,7 +641,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.statusLine3.text = addressString;
         self.qrCodeImageView.image = qrImage;
 
-        [[AppDelegate abc] prioritizeAddress:addressString inWallet:strUUID];
+        [abc prioritizeAddress:addressString inWallet:strUUID];
 
         if(self.peripheralManager.isAdvertising) {
             ABCLog(2,@"Removing all BLE services and stopping advertising");
@@ -807,7 +807,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     
     Wallet *wallet = [self getCurrentWallet];
     
-    self.exchangeRateLabel.text = [[AppDelegate abc] conversionString:wallet];
+    self.exchangeRateLabel.text = [abc conversionString:wallet];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
     [self.segmentedControlBTCUSD setTitle:wallet.currencyAbbrev forSegmentAtIndex:0];
     _fiatLabel.text = wallet.currencyAbbrev;
@@ -815,7 +815,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
-        int64_t satoshi = [[AppDelegate abc] denominationToSatoshi: self.BTC_TextField.text];
+        int64_t satoshi = [abc denominationToSatoshi: self.BTC_TextField.text];
 
         if (satoshi == 0)
         {
@@ -827,8 +827,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if ([[AppDelegate abc] satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
-                self.USD_TextField.text = [[AppDelegate abc] formatCurrency:currency
+            if ([abc satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+                self.USD_TextField.text = [abc formatCurrency:currency
                                                      withCurrencyNum:wallet.currencyNum
                                                           withSymbol:false];
         }
@@ -848,12 +848,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         else
         {
             ABCConditionCode ccode;
-            ccode = [[AppDelegate abc] currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi];
+            ccode = [abc currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi];
             if (ABCConditionCodeOk == ccode)
             {
-                self.BTC_TextField.text = [[AppDelegate abc] formatSatoshi:satoshi
+                self.BTC_TextField.text = [abc formatSatoshi:satoshi
                                                          withSymbol:false
-                                                       cropDecimals:[[AppDelegate abc] currencyDecimalPlaces]];
+                                                       cropDecimals:[abc currencyDecimalPlaces]];
             }
         }
 	}
@@ -900,7 +900,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [[AppDelegate abc] makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
 }
@@ -931,7 +931,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (Wallet *) getCurrentWallet
 {
-    return [AppDelegate abc].currentWallet;
+    return abc.currentWallet;
 }
 
 -(void)showConnectedPopup
@@ -1010,18 +1010,18 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             image = [UIImage imageNamed:@"bitcoin_symbol.png"];
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
             double currency;
-            if ([[AppDelegate abc] satoshiToCurrency:amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+            if ([abc satoshiToCurrency:amountSatoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             {
-                NSString *fiatAmount = [[AppDelegate abc] currencySymbolLookup:wallet.currencyNum];
+                NSString *fiatAmount = [abc currencySymbolLookup:wallet.currencyNum];
                 NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
                 NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
-                line2 = [[AppDelegate abc] formatSatoshi:amountSatoshi];
+                line2 = [abc formatSatoshi:amountSatoshi];
                 line3 = fiat;
             }
             else
             {
                 // failed to look up the wallet's fiat currency
-                line2 = [[AppDelegate abc] formatSatoshi:amountSatoshi];
+                line2 = [abc formatSatoshi:amountSatoshi];
                 line3  = @"";
             }
             [[AudioController controller] playReceived];
@@ -1095,12 +1095,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             address = addressString;
         }
 
-        BOOL sendName = [AppDelegate abc].settings.bNameOnPayments;
+        BOOL sendName = abc.settings.bNameOnPayments;
 
         NSString *name;
         if(sendName)
         {
-            name = [AppDelegate abc].settings.fullName ;
+            name = abc.settings.fullName ;
             if ([name isEqualToString:@""])
             {
                 name = [[UIDevice currentDevice] name];
@@ -1198,10 +1198,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)replaceRequestTags:(NSString **) strContent
 {
-    NSString *amountBTC = [[AppDelegate abc] formatSatoshi:_amountSatoshiRequested
+    NSString *amountBTC = [abc formatSatoshi:_amountSatoshiRequested
                                          withSymbol:false
                                       forceDecimals:8];
-    NSString *amountBits = [[AppDelegate abc] formatSatoshi:_amountSatoshiRequested
+    NSString *amountBits = [abc formatSatoshi:_amountSatoshiRequested
                                           withSymbol:false
                                        forceDecimals:2];
     // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
@@ -1233,9 +1233,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     NSString *name;
 
-    if ([AppDelegate abc].settings.bNameOnPayments && [AppDelegate abc].settings.fullName)
+    if (abc.settings.bNameOnPayments && abc.settings.fullName)
     {
-        name = [NSString stringWithString:[AppDelegate abc].settings.fullName];
+        name = [NSString stringWithString:abc.settings.fullName];
     }
     else
     {
@@ -1297,9 +1297,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         NSString *subject;
 
-        if ([AppDelegate abc].settings.bNameOnPayments && [AppDelegate abc].settings.fullName)
+        if (abc.settings.bNameOnPayments && abc.settings.fullName)
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, [AppDelegate abc].settings.fullName];
+            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, abc.settings.fullName];
         }
         else
         {
@@ -1436,17 +1436,17 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
     
-    Wallet *wallet = [AppDelegate abc].currentWallet;
+    Wallet *wallet = abc.currentWallet;
     self.abcRequest.amountSatoshi = _amountSatoshiRequested;
     
     double currency;
-    [[AppDelegate abc] satoshiToCurrency:self.abcRequest.amountSatoshi currencyNum:wallet.currencyNum currency:&currency];
+    [abc satoshiToCurrency:self.abcRequest.amountSatoshi currencyNum:wallet.currencyNum currency:&currency];
     
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-     [[AppDelegate abc] formatSatoshi:self.abcRequest.amountSatoshi],
-     [[AppDelegate abc] formatCurrency:currency withCurrencyNum:wallet.currencyNum],
+     [abc formatSatoshi:self.abcRequest.amountSatoshi],
+     [abc formatCurrency:currency withCurrencyNum:wallet.currencyNum],
      _requestType, [dateFormatter stringFromDate:now]];
     self.abcRequest.notes = notes;
     self.abcRequest.category = @"Income:";

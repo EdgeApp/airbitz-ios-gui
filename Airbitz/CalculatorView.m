@@ -9,7 +9,7 @@
 #import "CalculatorView.h"
 #import "AirbitzCore.h"
 #import "Util.h"
-#import "AppDelegate.h"
+#import "AB.h"
 
 #define DIGIT_BACK			11
 
@@ -194,18 +194,18 @@
 {
     if (_calcMode == CALC_MODE_COIN)
     {
-        int64_t satoshi = [[AppDelegate abc] denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        int64_t satoshi = [abc denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
         if (satoshi == 0 || acc == 0.0)
             return @"";
         else
-            return [[AppDelegate abc] formatSatoshi:satoshi withSymbol:false];
+            return [abc formatSatoshi:satoshi withSymbol:false];
     }
     else
     {
         if (acc == 0.0)
             return @"";
         else
-            return [[AppDelegate abc] formatCurrency:acc
+            return [abc formatCurrency:acc
                               withCurrencyNum:self.currencyNum
                                    withSymbol:false];
     }

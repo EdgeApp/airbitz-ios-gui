@@ -8,7 +8,7 @@
 
 #import "User.h"
 #import "Util.h"
-#import "AppDelegate.h"
+#import "AB.h"
 #import "LocalSettings.h"
 
 
@@ -21,7 +21,7 @@ static BOOL bInitialized = NO;
 
 @interface User ()
 
-@property (nonatomic, strong) AirbitzCore *airbitzCore;
+@property (nonatomic, strong) AirbitzCore *abc;
 
 @end
 
@@ -58,7 +58,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (BOOL)isLoggedIn
 {
-    return (0 != [AppDelegate abc].name.length);// && [AppDelegate abc].password.length;
+    return (0 != abc.name.length);// && abc.password.length;
 }
 
 + (void)login:(NSString *)name password:(NSString *)pword
@@ -71,15 +71,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (id)init
 {
     self = [super init];
-    self.airbitzCore = [AppDelegate abc];
+    self.abc = abc;
     if(self)
     {
         [self clear];
     }
-    [AppDelegate abc].settings.denomination = 100000000;
-    [AppDelegate abc].settings.denominationType = ABCDenominationUBTC;
-    [AppDelegate abc].settings.denominationLabel = @"bits";
-    [AppDelegate abc].settings.denominationLabelShort = @"Ƀ ";
+    abc.settings.denomination = 100000000;
+    abc.settings.denominationType = ABCDenominationUBTC;
+    abc.settings.denominationLabel = @"bits";
+    abc.settings.denominationLabelShort = @"Ƀ ";
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
@@ -92,7 +92,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (NSString *)userKey:(NSString *)base
 {
-    return [NSString stringWithFormat:@"%@_%@", [AppDelegate abc].name, base];
+    return [NSString stringWithFormat:@"%@_%@", abc.name, base];
 }
 
 - (void)loadLocalSettings

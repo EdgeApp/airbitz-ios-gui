@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "AB.h"
 
 @interface AirbitzViewController : UIViewController
 

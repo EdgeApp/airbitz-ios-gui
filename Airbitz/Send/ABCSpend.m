@@ -12,7 +12,7 @@
 @interface ABCSpend ()
 
 @property (nonatomic)               tABC_SpendTarget        *pSpend;
-@property (nonatomic, strong)       AirbitzCore *airbitzCore;
+@property (nonatomic, strong)       AirbitzCore *abc;
 @property (nonatomic)               ABCConditionCode        lastConditionCode;
 @property (nonatomic, strong)       NSString                *lastErrorString;
 
@@ -26,7 +26,7 @@
     if (self) {
         self.pSpend = NULL;
         self.bizId = 0;
-        self.airbitzCore = abc;
+        self.abc = abc;
     }
     return self;
 }
@@ -76,7 +76,7 @@
     char *szRawTx = NULL;
     tABC_Error error;
 
-    ABC_SpendSignTx([self.airbitzCore.name UTF8String],
+    ABC_SpendSignTx([self.abc.name UTF8String],
             [self.srcWallet.strUUID UTF8String], _pSpend, &szRawTx, &error);
     ABCConditionCode ccode = [ABCError setLastErrors:error];
     if (ABCConditionCodeOk == ccode)
@@ -90,7 +90,7 @@
 - (void)signTx:(void (^)(NSString * txData)) completionHandler
         error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
-    [self.airbitzCore postToMiscQueue:^
+    [self.abc postToMiscQueue:^
     {
         NSString *txData;
         ABCConditionCode ccode = [self signTx:&txData];
@@ -112,7 +112,7 @@
 - (void)signAndSaveTx:(void (^)(NSString * rawTx)) completionHandler
          error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
-    [self.airbitzCore postToMiscQueue:^
+    [self.abc postToMiscQueue:^
     {
         NSString *rawTx;
         NSString *txId;
@@ -141,7 +141,7 @@
 - (ABCConditionCode)broadcastTx:(NSString *)rawTx;
 {
     tABC_Error error;
-    ABC_SpendBroadcastTx([self.airbitzCore.name UTF8String],
+    ABC_SpendBroadcastTx([self.abc.name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &error);
     return [ABCError setLastErrors:error];
 }
@@ -152,7 +152,7 @@
     char *szTxId = NULL;
     tABC_Error error;
 
-    ABC_SpendSaveTx([self.airbitzCore.name UTF8String],
+    ABC_SpendSaveTx([self.abc.name UTF8String],
         [self.srcWallet.strUUID UTF8String], _pSpend, [rawTx UTF8String], &szTxId, &error);
     ABCConditionCode ccode = [ABCError setLastErrors:error];
     if (ccode == ABCConditionCodeOk) {
@@ -187,7 +187,7 @@
 - (void)signBroadcastSaveTx:(void (^)(NSString * txId)) completionHandler
          error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
-    [self.airbitzCore postToMiscQueue:^
+    [self.abc postToMiscQueue:^
     {
         NSString *txId;
         ABCConditionCode ccode = [self signBroadcastSaveTx:&txId];
@@ -217,7 +217,7 @@
     if (_pSpend->szDestUUID) {
         NSAssert((self.destWallet), @"destWallet missing");
     }
-    ABC_GetTransaction([self.airbitzCore.name UTF8String], NULL,
+    ABC_GetTransaction([self.abc.name UTF8String], NULL,
         [self.srcWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
     if (ABC_CC_Ok == error.code) {
         if (self.destWallet) {
@@ -234,7 +234,7 @@
         if (0 < _bizId) {
             pTrans->pDetails->bizId = _bizId;
         }
-        ABC_SetTransactionDetails([self.airbitzCore.name UTF8String], NULL,
+        ABC_SetTransactionDetails([self.abc.name UTF8String], NULL,
             [self.srcWallet.strUUID UTF8String], [txId UTF8String],
             pTrans->pDetails, &error);
     }
@@ -243,13 +243,13 @@
 
     // This was a transfer
     if (self.destWallet) {
-        ABC_GetTransaction([self.airbitzCore.name UTF8String], NULL,
+        ABC_GetTransaction([self.abc.name UTF8String], NULL,
             [self.destWallet.strUUID UTF8String], [txId UTF8String], &pTrans, &error);
         if (ABC_CC_Ok == error.code) {
             pTrans->pDetails->szName = strdup([self.srcWallet.strName UTF8String]);
             pTrans->pDetails->szCategory = strdup([[NSString stringWithFormat:@"%@%@", transferCategory, self.srcWallet.strName] UTF8String]);
 
-            ABC_SetTransactionDetails([self.airbitzCore.name UTF8String], NULL,
+            ABC_SetTransactionDetails([self.abc.name UTF8String], NULL,
                 [self.destWallet.strUUID UTF8String], [txId UTF8String],
                 pTrans->pDetails, &error);
         }
@@ -267,7 +267,7 @@
 {
     tABC_Error error;
     uint64_t result = 0;
-    ABC_SpendGetMax([self.airbitzCore.name UTF8String],
+    ABC_SpendGetMax([self.abc.name UTF8String],
         [walletUUID UTF8String], _pSpend, &result, &error);
     return result;
 }
@@ -277,7 +277,7 @@
 {
     tABC_Error error;
     [self copyOBJCtoABC];
-    ABC_SpendGetFee([self.airbitzCore.name UTF8String],
+    ABC_SpendGetFee([self.abc.name UTF8String],
         [walletUUID UTF8String], self.pSpend, totalFees, &error);
     return [ABCError setLastErrors:error];
 }
@@ -286,7 +286,7 @@
             complete:(void (^)(uint64_t totalFees)) completionHandler
                error:(void (^)(ABCConditionCode ccode, NSString *errorString)) errorHandler;
 {
-    [self.airbitzCore postToMiscQueue:^
+    [self.abc postToMiscQueue:^
     {
         uint64_t totalFees = 0;
         ABCConditionCode ccode = [self calcSendFees:walletUUID totalFees:&totalFees];

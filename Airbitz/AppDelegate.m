@@ -23,19 +23,12 @@
 #import "Util.h"
 #import "Config.h"
 #import "Theme.h"
+#import "AB.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
 
 @implementation AppDelegate
-
-static AirbitzCore *airbitzCore;
-
-+ (AirbitzCore *) abc;
-{
-    return airbitzCore;
-}
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -53,7 +46,7 @@ static AirbitzCore *airbitzCore;
 
     [AudioController initAll];
 
-    airbitzCore = [[AirbitzCore alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
+    abc = [[AirbitzCore alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -136,7 +129,7 @@ static AirbitzCore *airbitzCore;
 
     if ([User isLoggedIn])
     {
-        [airbitzCore saveLogoutDate];
+        [abc saveLogoutDate];
     }
 }
 
@@ -150,7 +143,7 @@ static AirbitzCore *airbitzCore;
 
     if ([User isLoggedIn])
     {
-        [airbitzCore enterBackground];
+        [abc enterBackground];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgLogoutCleanup];
         }];
@@ -161,8 +154,8 @@ static AirbitzCore *airbitzCore;
 {
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
-    [airbitzCore enterForeground];
-    if (![self isAppActive] && ![[AppDelegate abc] isLoggedIn])
+    [abc enterForeground];
+    if (![self isAppActive] && ![abc isLoggedIn])
     {
         [[User Singleton] clear];
     }
@@ -178,8 +171,7 @@ static AirbitzCore *airbitzCore;
     [LocalSettings freeAll];
     [[User Singleton] clear];
 
-    [airbitzCore free];
-    airbitzCore = nil;
+    [abc free];
 
 }
 
@@ -248,7 +240,7 @@ static AirbitzCore *airbitzCore;
         // Popup notification if user has accounts with no passwords
         //
         NSMutableArray *arrayAccounts = [[NSMutableArray alloc] init];
-        [airbitzCore getLocalAccounts:arrayAccounts];
+        [abc getLocalAccounts:arrayAccounts];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];
@@ -261,7 +253,7 @@ static AirbitzCore *airbitzCore;
             {
                 for (NSString *acct in arrayAccounts)
                 {
-                    if (![airbitzCore passwordExists:acct])
+                    if (![abc passwordExists:acct])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
 
@@ -313,7 +305,7 @@ static AirbitzCore *airbitzCore;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [airbitzCore restoreConnectivity];
+        [abc restoreConnectivity];
     }
 }
 

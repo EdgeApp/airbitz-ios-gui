@@ -48,7 +48,7 @@
     [super viewDidLoad];
 
     NSDate *date = nil;
-    ABCConditionCode ccode = [[AppDelegate abc] getOTPResetDateForLastFailedAccountLogin:&date];
+    ABCConditionCode ccode = [abc getOTPResetDateForLastFailedAccountLogin:&date];
     if (ABCConditionCodeOk == ccode)
     {
         if (date == nil) {
@@ -99,7 +99,7 @@
 
 - (IBAction)Reset:(id)sender
 {
-    [[AppDelegate abc] requestOTPReset:_username complete:^
+    [abc requestOTPReset:_username complete:^
      {
          [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
      } error:^(ABCConditionCode ccode, NSString *errorString)

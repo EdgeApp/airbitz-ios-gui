@@ -145,7 +145,7 @@
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
 
-    [[AppDelegate abc] createAccount:self.manager.strUserName password:self.passwordTextField.text pin:self.pinTextField.text
+    [abc createAccount:self.manager.strUserName password:self.passwordTextField.text pin:self.pinTextField.text
                             complete:^(void)
      {
          [FadingAlertView dismiss:FadingAlertDismissFast];
@@ -201,7 +201,7 @@
         NSMutableString *checkResultsMessage;
         ABCConditionCode ccode;
         
-        ccode = [[AppDelegate abc] checkPasswordRules:self.passwordTextField.text
+        ccode = [abc checkPasswordRules:self.passwordTextField.text
                                                 valid:&bNewPasswordFieldsAreValid
                                        secondsToCrack:&secondsToCrack
                                                 count:&count
