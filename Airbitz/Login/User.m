@@ -21,7 +21,7 @@ static BOOL bInitialized = NO;
 
 @interface User ()
 
-@property (nonatomic, strong) CoreBridge                       *airbitzCore;
+@property (nonatomic, strong) AirbitzCore *airbitzCore;
 
 @end
 

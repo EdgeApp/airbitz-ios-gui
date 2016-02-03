@@ -4,7 +4,7 @@
 //
 
 #import "Wallet.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 @interface ABCSpend : NSObject
 

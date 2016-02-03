@@ -1,5 +1,5 @@
 //
-//  CoreBridge.h
+//  AirbitzCore.h
 //  Airbitz
 //
 
@@ -39,7 +39,7 @@ typedef enum eABCDeviceCaps
 } ABCDeviceCaps;
 
 @class ABCSpend;
-@class CoreBridge;
+@class AirbitzCore;
 @class ABCSettings;
 @class ABCRequest;
 
@@ -64,7 +64,7 @@ typedef enum eABCDeviceCaps
 
 @end
 
-@interface CoreBridge : NSObject
+@interface AirbitzCore : NSObject
 
 @property (assign)            id<CoreBridgeDelegate>    delegate;
 @property (nonatomic, strong) ABCSettings               *settings;

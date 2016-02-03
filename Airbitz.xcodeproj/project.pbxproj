@@ -10,7 +10,7 @@
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
 		34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
 		34644057CCD9187637760383 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
-		3464407B03DBCC2AD6BECB44 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		3464407B03DBCC2AD6BECB44 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
 		346440829320442D931D3866 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		34644217215092D4F2F06816 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
@@ -22,10 +22,10 @@
 		3464448993C099A42764377E /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
-		346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
 		346445CC0CDF3213D139409C /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		346446B0D375F21479F5E91C /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
-		3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* CoreBridge.m */; };
+		3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
 		34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
 		34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
 		34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
@@ -1462,14 +1462,14 @@
 		346445CE29D47C2D7FC5F78D /* ABCStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCStrings.h; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
 		3464460D4793BA199DB14504 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
-		346447584A8B61803711CB84 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
+		346447584A8B61803711CB84 /* AirbitzCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzCore.h; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
 		34644DE10A63062D42EFA426 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
 		34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
 		34644E21D66F895B121307AF /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
-		34644ED4090F92F550AB9B71 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
+		34644ED4090F92F550AB9B71 /* AirbitzCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzCore.m; sourceTree = "<group>"; };
 		34644F90C87B4117D1851B98 /* ABCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCRequest.m; sourceTree = "<group>"; };
 		34644F92028A8B3650337231 /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2502,7 +2502,7 @@
 			path = FadingAlert2;
 			sourceTree = "<group>";
 		};
-		DA9EDEC21BC61F910063DA07 /* ABCBridge */ = {
+		DA9EDEC21BC61F910063DA07 /* AirbitzCore */ = {
 			isa = PBXGroup;
 			children = (
 				DA9EDEC31BC61F910063DA07 /* ABCKeychain.h */,
@@ -2518,12 +2518,12 @@
 				346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */,
 				34644F92028A8B3650337231 /* ABCRequest.h */,
 				34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */,
-				34644ED4090F92F550AB9B71 /* CoreBridge.m */,
-				346447584A8B61803711CB84 /* CoreBridge.h */,
+				34644ED4090F92F550AB9B71 /* AirbitzCore.m */,
+				346447584A8B61803711CB84 /* AirbitzCore.h */,
 				3464408F86584EFFA0DCAE24 /* ABCStrings.m */,
 				346445CE29D47C2D7FC5F78D /* ABCStrings.h */,
 			);
-			path = ABCBridge;
+			path = AirbitzCore;
 			sourceTree = "<group>";
 		};
 		DA9EDEC51BC61F910063DA07 /* Login */ = {
@@ -3309,7 +3309,7 @@
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
-				DA9EDEC21BC61F910063DA07 /* ABCBridge */,
+				DA9EDEC21BC61F910063DA07 /* AirbitzCore */,
 				DA9EDEC51BC61F910063DA07 /* Login */,
 				DA9EDED91BC61F910063DA07 /* PickerTextView */,
 				DA9EDEDE1BC61F910063DA07 /* Plugins */,
@@ -4747,7 +4747,7 @@
 				34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */,
 				34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */,
 				34644FA26FCA347A81960356 /* ABCSettings.m in Sources */,
-				3464498DE4A707F8E61AFAE9 /* CoreBridge.m in Sources */,
+				3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */,
 				34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4895,7 +4895,7 @@
 				34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */,
 				34644E9C14358F405DB8759D /* ABCUtil.m in Sources */,
 				346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */,
-				346445B3FDDE69EEBC8BE376 /* CoreBridge.m in Sources */,
+				346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */,
 				34644268D28E53E9B81B948E /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5043,7 +5043,7 @@
 				346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */,
 				34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */,
 				34644F0F3076CE803615885C /* ABCSettings.m in Sources */,
-				3464407B03DBCC2AD6BECB44 /* CoreBridge.m in Sources */,
+				3464407B03DBCC2AD6BECB44 /* AirbitzCore.m in Sources */,
 				346445CC0CDF3213D139409C /* ABCStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

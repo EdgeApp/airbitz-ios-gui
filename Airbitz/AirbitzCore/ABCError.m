@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ABCError.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 @interface ABCError ()
 

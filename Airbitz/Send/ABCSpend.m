@@ -4,7 +4,7 @@
 //
 
 #import "ABCSpend.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Wallet.h"
 #import "ABC.h"
 #import "ABCError.h"
@@ -12,7 +12,7 @@
 @interface ABCSpend ()
 
 @property (nonatomic)               tABC_SpendTarget        *pSpend;
-@property (nonatomic, strong)       CoreBridge              *airbitzCore;
+@property (nonatomic, strong)       AirbitzCore *airbitzCore;
 @property (nonatomic)               ABCConditionCode        lastConditionCode;
 @property (nonatomic, strong)       NSString                *lastErrorString;
 

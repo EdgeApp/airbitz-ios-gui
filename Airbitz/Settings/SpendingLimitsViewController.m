@@ -2,7 +2,7 @@
 #import "SpendingLimitsViewController.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     if (![[AppDelegate abc] passwordExists]) {
         self.passwordTextField.hidden = YES;
     }

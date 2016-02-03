@@ -8,7 +8,7 @@
 #import "Config.h"
 #import "User.h"
 #import "FadingAlertView.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "SendConfirmationViewController.h"
 #import "MainViewController.h"
 #import "Theme.h"

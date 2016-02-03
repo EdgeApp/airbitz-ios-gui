@@ -12,7 +12,7 @@
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
 #import "MainViewController.h"
 

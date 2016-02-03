@@ -6,7 +6,7 @@
 #import "ABCKeychain.h"
 #import "ABCSpend.h"
 
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ABCError.h"
 #import "ABCRequest.h"
 #import "ABCSettings.h"
@@ -43,9 +43,9 @@ static const float walletLoadingTimerInterval = 15.0;     // How long to wait be
 const int64_t RECOVERY_REMINDER_AMOUNT = 10000000;
 const int RECOVERY_REMINDER_COUNT = 2;
 
-// XXX HACK. Need a singleton because the sweep callback doesn't pass us a CoreBridge object.
+// XXX HACK. Need a singleton because the sweep callback doesn't pass us a AirbitzCore object.
 // We really need to get rid of the sweep callback! -paulvp
-__strong static CoreBridge *singleton;
+__strong static AirbitzCore *singleton;
 
 @implementation BitidSignature
 - (id)init
@@ -55,7 +55,7 @@ __strong static CoreBridge *singleton;
 }
 @end
 
-@interface CoreBridge ()
+@interface AirbitzCore ()
 {
     NSDictionary                                    *localeAsCurrencyNum;
     long long                                       logoutTimeStamp;
@@ -92,7 +92,7 @@ __strong static CoreBridge *singleton;
 
 @end
 
-@implementation CoreBridge
+@implementation AirbitzCore
 
 - (id)init:(NSString *)abcAPIKey hbits:(NSString *)hbitsKey
 {
@@ -864,7 +864,7 @@ __strong static CoreBridge *singleton;
     }
     else
     {
-        ABCLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: AirbitzCore.loadTransactions:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransaction(pTrans);
@@ -928,7 +928,7 @@ __strong static CoreBridge *singleton;
     }
     else
     {
-        ABCLog(2,@("Error: CoreBridge.loadTransactions:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: AirbitzCore.loadTransactions:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -1032,7 +1032,7 @@ __strong static CoreBridge *singleton;
     }
     else 
     {
-        ABCLog(2,@("Error: CoreBridge.searchTransactionsIn:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: AirbitzCore.searchTransactionsIn:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
     ABC_FreeTransactions(aTransactions, tCount);
@@ -1090,7 +1090,7 @@ __strong static CoreBridge *singleton;
                            (char *)[ids UTF8String],
                            &Error) != ABC_CC_Ok)
     {
-        ABCLog(2,@("Error: CoreBridge.reorderWallets:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: AirbitzCore.reorderWallets:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
     }
 
@@ -1110,7 +1110,7 @@ __strong static CoreBridge *singleton;
     }
     else
     {
-        ABCLog(2,@("Error: CoreBridge.setWalletAttributes:  %s\n"), Error.szDescription);
+        ABCLog(2,@("Error: AirbitzCore.setWalletAttributes:  %s\n"), Error.szDescription);
         [self setLastErrors:Error];
         return false;
     }
@@ -1128,7 +1128,7 @@ __strong static CoreBridge *singleton;
                 [transaction.strID UTF8String],
                 &pDetails, &Error);
         if (ABC_CC_Ok != result) {
-            ABCLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABCLog(2,@("Error: AirbitzCore.storeTransaction:  %s\n"), Error.szDescription);
             [self setLastErrors:Error];
 //            return false;
             return;
@@ -1147,7 +1147,7 @@ __strong static CoreBridge *singleton;
                 pDetails, &Error);
 
         if (ABC_CC_Ok != result) {
-            ABCLog(2,@("Error: CoreBridge.storeTransaction:  %s\n"), Error.szDescription);
+            ABCLog(2,@("Error: AirbitzCore.storeTransaction:  %s\n"), Error.szDescription);
             [self setLastErrors:Error];
 //            return false;
             return;
@@ -2867,14 +2867,14 @@ __strong static CoreBridge *singleton;
 
 void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
 {
-    CoreBridge *coreBridge = (__bridge id) pInfo->pData;
+    AirbitzCore *airbitzCore = (__bridge id) pInfo->pData;
     if (pInfo->eventType == ABC_AsyncEventType_IncomingBitCoin)
     {
-        [coreBridge refreshWallets:^
+        [airbitzCore refreshWallets:^
         {
-            if (coreBridge.delegate) {
-                if ([coreBridge.delegate respondsToSelector:@selector(airbitzCoreIncomingBitcoin:)]) {
-                    [coreBridge.delegate airbitzCoreIncomingBitcoin:[NSString stringWithUTF8String:pInfo->szWalletUUID]
+            if (airbitzCore.delegate) {
+                if ([airbitzCore.delegate respondsToSelector:@selector(airbitzCoreIncomingBitcoin:)]) {
+                    [airbitzCore.delegate airbitzCoreIncomingBitcoin:[NSString stringWithUTF8String:pInfo->szWalletUUID]
                                                                txid:[NSString stringWithUTF8String:pInfo->szTxID]];
                 }
             }
@@ -2883,20 +2883,20 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
     }
 //    else if (pInfo->eventType == ABC_AsyncEventType_BlockHeightChange)
 //    {
-//        [coreBridge refreshWallets];
+//        [airbitzCore refreshWallets];
 //    }
     tABC_AsyncEventType eventType = pInfo->eventType;
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
         if (eventType == ABC_AsyncEventType_DataSyncUpdate) {
-            [coreBridge performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
+            [airbitzCore performSelectorOnMainThread:@selector(notifyDataSyncDelayed:) withObject:nil waitUntilDone:NO];
         } else if (eventType == ABC_AsyncEventType_RemotePasswordChange) {
-            if (coreBridge.delegate)
+            if (airbitzCore.delegate)
             {
-                if ([coreBridge.delegate respondsToSelector:@selector(airbitzCoreRemotePasswordChange)])
+                if ([airbitzCore.delegate respondsToSelector:@selector(airbitzCoreRemotePasswordChange)])
                 {
-                    [coreBridge.delegate airbitzCoreRemotePasswordChange];
+                    [airbitzCore.delegate airbitzCoreRemotePasswordChange];
                 }
             }
         }

@@ -7,7 +7,7 @@
 //
 
 #import "CalculatorView.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
 #import "AppDelegate.h"
 

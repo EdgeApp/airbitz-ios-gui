@@ -6,9 +6,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
-@class CoreBridge;
+@class AirbitzCore;
 
 //
 // Object used to pass in address request details
@@ -26,7 +26,7 @@
 @property (nonatomic)       unsigned int bizId;      // optional: will be added to URI/QRcode if given
 
 // The following are returned by ABC
-@property (nonatomic, weak) CoreBridge *abc; // pointer to CoreBridge object that created request
+@property (nonatomic, weak) AirbitzCore *abc; // pointer to AirbitzCore object that created request
 @property (nonatomic, copy) NSString *requestID;
 @property (nonatomic, copy) NSString *uri;
 @property (nonatomic, copy) NSString *address;

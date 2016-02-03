@@ -6,7 +6,7 @@
 #import "ABCSettings.h"
 #import <Foundation/Foundation.h>
 #import "ABCError.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ABCUtil.h"
 #import "ABCKeychain.h"
 #import "ABCLocalSettings.h"
@@ -14,7 +14,7 @@
 
 @interface ABCSettings ()
 
-@property (nonatomic) CoreBridge *abc;
+@property (nonatomic) AirbitzCore *abc;
 @property (nonatomic) ABCLocalSettings *local;
 @property (nonatomic) ABCKeychain *keyChain;
 
@@ -24,7 +24,7 @@
 {
 
 }
-- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
+- (id)init:(AirbitzCore *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
 {
     self = [super init];
     self.abc = abc;

@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
 	_userNameTextField.delegate = self;
-    _userNameTextField.minimumCharacters = [CoreBridge getMinimumUsernamedLength];
+    _userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
 
@@ -192,14 +192,14 @@
 
     // if we are signing up for a new account
     {
-        if (self.userNameTextField.text.length < [CoreBridge getMinimumUsernamedLength])
+        if (self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [CoreBridge getMinimumUsernamedLength]]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [AirbitzCore getMinimumUsernamedLength]]]
                          delegate:nil
                 cancelButtonTitle:@"OK"
                 otherButtonTitles:nil];

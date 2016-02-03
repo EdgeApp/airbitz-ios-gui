@@ -11,7 +11,7 @@
 #import "BalanceView.h"
 #import "TransactionCell.h"
 #import "Transaction.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
 #import "Util.h"

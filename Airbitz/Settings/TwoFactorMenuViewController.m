@@ -4,7 +4,7 @@
 #import "MinCharTextField.h"
 #import "ScanView.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "NSDate+Helper.h"
 #import "MainViewController.h"
 #import "Theme.h"

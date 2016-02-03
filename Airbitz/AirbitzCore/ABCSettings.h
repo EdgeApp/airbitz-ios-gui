@@ -5,11 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ABCConditionCode.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ABCLocalSettings.h"
 #import "ABCKeychain.h"
 
-@class CoreBridge;
+@class AirbitzCore;
 @class ABCKeychain;
 
 @interface ABCSettings : NSObject
@@ -34,7 +34,7 @@
 @property (nonatomic) int64_t spendRequirePinSatoshis;
 @property (nonatomic) bool bDisablePINLogin;
 
-- (id)init:(CoreBridge *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
+- (id)init:(AirbitzCore *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
 - (ABCConditionCode)loadSettings;
 - (ABCConditionCode)saveSettings;
 - (BOOL) touchIDEnabled;

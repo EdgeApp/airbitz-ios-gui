@@ -5,9 +5,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ABCLocalSettings.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
-@class CoreBridge;
+@class AirbitzCore;
 
 
 @interface ABCLocalSettings : NSObject
@@ -16,7 +16,7 @@
 @property (nonatomic, retain)   NSMutableArray  *touchIDUsersEnabled;
 @property (nonatomic, retain)   NSMutableArray  *touchIDUsersDisabled;
 
-- (id)init:(CoreBridge *)abc;
+- (id)init:(AirbitzCore *)abc;
 - (void)loadAll;
 - (void)saveAll;
 

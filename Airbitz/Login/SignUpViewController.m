@@ -14,7 +14,7 @@
 #import "LatoLabel.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
@@ -75,13 +75,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.userNameTextField.delegate = self;
-    self.userNameTextField.minimumCharacters = [CoreBridge getMinimumUsernamedLength];
+    self.userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
 	self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
 	self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = [CoreBridge getMinimumPasswordLength];
+    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = [CoreBridge getMinimumPINLength];
+	self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
     if (self.strUserName)
     {
         self.userNameTextField.text = self.strUserName;
@@ -448,28 +448,28 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([[AppDelegate abc] passwordExists] && self.userNameTextField.text.length < [CoreBridge getMinimumUsernamedLength])
+        if ([[AppDelegate abc] passwordExists] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.title,
-                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [CoreBridge getMinimumUsernamedLength]]]
+                                           [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [AirbitzCore getMinimumUsernamedLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
             [alert show];
         }
         // if the pin isn't long enough
-        else if (self.pinTextField.text.length < [CoreBridge getMinimumPINLength])
+        else if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.title
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                            self.title,
-                                           [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [CoreBridge getMinimumPINLength]]]
+                                           [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

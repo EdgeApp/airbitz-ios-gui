@@ -46,7 +46,7 @@
     [super viewDidLoad];
     
     self.pinTextField.delegate = self;
-    self.pinTextField.minimumCharacters = [CoreBridge getMinimumPINLength];
+    self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
@@ -94,14 +94,14 @@
     BOOL valid = YES;
     {
         // if the pin isn't long enough
-        if (self.pinTextField.text.length < [CoreBridge getMinimumPINLength])
+        if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [CoreBridge getMinimumPINLength]]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
                          delegate:nil
                 cancelButtonTitle:@"OK"
                 otherButtonTitles:nil];

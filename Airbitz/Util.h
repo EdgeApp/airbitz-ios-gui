@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 @import Foundation.NSString;
 

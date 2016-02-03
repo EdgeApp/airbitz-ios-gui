@@ -18,7 +18,7 @@
 #import "CalculatorView.h"
 #import "ButtonSelectorView2.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"

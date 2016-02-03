@@ -8,14 +8,14 @@
 
 
 #import "ABCKeychain.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "NSMutableData+Secure.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "ABCLocalSettings.h"
 
 @interface ABCKeychain ()
 
-@property (nonatomic) CoreBridge *abc;
+@property (nonatomic) AirbitzCore *abc;
 
 @end
 
@@ -24,7 +24,7 @@
     
 }
 
-- (id) init:(CoreBridge *)abc;
+- (id) init:(AirbitzCore *)abc;
 {
     self = [super init];
     self.abc = abc;

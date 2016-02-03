@@ -13,7 +13,7 @@
 #import "CalculatorView.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
 #import "AudioController.h"
 #import "MainViewController.h"

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (CoreBridge *) abc;
++ (AirbitzCore *) abc;
 
 @end

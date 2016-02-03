@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ABCSettings.h"
 #import "ABCLocalSettings.h"
 
@@ -25,7 +25,7 @@
 @property (nonatomic) ABCSettings *settings;
 @property (nonatomic) ABCLocalSettings *localSettings;
 
-- (id) init:(CoreBridge *)abc;
+- (id) init:(AirbitzCore *)abc;
 - (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
 - (NSData *) getKeychainData:(NSString *)key error:(NSError **)error;
 - (BOOL) setKeychainString:(NSString *)s key:(NSString *)key authenticated:(BOOL) authenticated;

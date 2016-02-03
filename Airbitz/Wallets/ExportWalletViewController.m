@@ -12,7 +12,7 @@
 #import "Util.h"
 #import "User.h"
 #import "CommonTypes.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "PopupWheelPickerView.h"
 #import "DateTime.h"
 #import "ButtonSelectorView2.h"

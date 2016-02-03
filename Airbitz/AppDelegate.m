@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
 #import "Plugin.h"
@@ -29,9 +29,9 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 @implementation AppDelegate
 
-static CoreBridge *airbitzCore;
+static AirbitzCore *airbitzCore;
 
-+ (CoreBridge *) abc;
++ (AirbitzCore *) abc;
 {
     return airbitzCore;
 }
@@ -53,7 +53,7 @@ static CoreBridge *airbitzCore;
 
     [AudioController initAll];
 
-    airbitzCore = [[CoreBridge alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
+    airbitzCore = [[AirbitzCore alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;

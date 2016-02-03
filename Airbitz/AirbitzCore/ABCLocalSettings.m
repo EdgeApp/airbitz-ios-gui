@@ -4,7 +4,7 @@
 //
 
 #import "ABCLocalSettings.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 #define KEY_LOCAL_SETTINGS_TOUCHID_USERS_ENABLED    @"touchIDUsersEnabled"
 #define KEY_LOCAL_SETTINGS_TOUCHID_USERS_DISABLED   @"touchIDUsersDisabled"
@@ -17,7 +17,7 @@ __strong static ABCLocalSettings *singleton = nil; // this will be the one and o
 
 @interface ABCLocalSettings ()
 
-@property (nonatomic) CoreBridge *abc;
+@property (nonatomic) AirbitzCore *abc;
 
 @end
 
@@ -27,7 +27,7 @@ __strong static ABCLocalSettings *singleton = nil; // this will be the one and o
 }
 
 
-- (id)init:(CoreBridge *)abc
+- (id)init:(AirbitzCore *)abc
 {
     self = [super init];
     if (self)

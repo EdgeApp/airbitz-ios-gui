@@ -12,7 +12,7 @@
 #import "User.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "SignUpViewController.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
