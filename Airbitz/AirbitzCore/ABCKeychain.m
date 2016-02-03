@@ -1,5 +1,5 @@
 //
-//  Keychain.m
+//  ABCKeychain.m
 //  Airbitz
 //
 //  Created by Paul Puey on 2015-08-31.
@@ -7,22 +7,38 @@
 //
 
 
-#import "Keychain.h"
+#import "ABCKeychain.h"
+#import "AirbitzCore.h"
 #import "NSMutableData+Secure.h"
-#import "Theme.h"
-#import "User.h"
-#import "LocalSettings.h"
 #import <LocalAuthentication/LocalAuthentication.h>
+#import "ABCLocalSettings.h"
 
-@implementation Keychain
+@interface ABCKeychain ()
 
-+ (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
+@property (nonatomic) AirbitzCore *abc;
+
+@end
+
+@implementation ABCKeychain
+{
+    
+}
+
+- (id) init:(AirbitzCore *)abc;
+{
+    self = [super init];
+    self.abc = abc;
+
+    return self;
+}
+
+- (BOOL) setKeychainData:(NSData *)data key:(NSString *)key authenticated:(BOOL) authenticated;
 {
     if (! key) return NO;
-    if (![Keychain bHasSecureEnclave]) return NO;
+    if (![self bHasSecureEnclave]) return NO;
 
-        id accessible = (authenticated) ? (__bridge id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly :
-            (__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
+    id accessible = (authenticated) ? (__bridge id)kSecAttrAccessibleWhenUnlockedThisDeviceOnly :
+    (__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
     NSDictionary *query = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
             (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
             (__bridge id)kSecAttrAccount:key};
@@ -59,7 +75,7 @@
     return NO;
 }
 
-+ (NSData *) getKeychainData:(NSString *)key error:(NSError **)error;
+- (NSData *) getKeychainData:(NSString *)key error:(NSError **)error;
 {
     NSDictionary *query = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
             (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
@@ -76,7 +92,7 @@
 }
 
 
-+ (BOOL) setKeychainString:(NSString *)s key:(NSString *)key authenticated:(BOOL) authenticated;
+- (BOOL) setKeychainString:(NSString *)s key:(NSString *)key authenticated:(BOOL) authenticated;
 {
     @autoreleasepool {
         NSData *d = (s) ? CFBridgingRelease(CFStringCreateExternalRepresentation(SecureAllocator(), (CFStringRef)s,
@@ -86,7 +102,7 @@
     }
 }
 
-+ (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
+- (NSString *) getKeychainString:(NSString *)key error:(NSError **)error;
 {
     @autoreleasepool {
         NSData *d = [self getKeychainData:key error:error];
@@ -96,7 +112,7 @@
     }
 }
 
-+ (BOOL) setKeychainInt:(int64_t) i key:(NSString *)key authenticated:(BOOL) authenticated;
+- (BOOL) setKeychainInt:(int64_t) i key:(NSString *)key authenticated:(BOOL) authenticated;
 {
     @autoreleasepool {
         NSMutableData *d = [NSMutableData secureDataWithLength:sizeof(int64_t)];
@@ -106,7 +122,7 @@
     }
 }
 
-+ (int64_t) getKeychainInt:(NSString *)key error:(NSError **)error;
+- (int64_t) getKeychainInt:(NSString *)key error:(NSError **)error;
 {
     @autoreleasepool {
         NSData *d = [self getKeychainData:key error:error];
@@ -115,12 +131,12 @@
     }
 }
 
-+ (NSString *) createKeyWithUsername:(NSString *)username key:(NSString *)key;
+- (NSString *) createKeyWithUsername:(NSString *)username key:(NSString *)key;
 {
     return [NSString stringWithFormat:@"%@___%@",username,key];
 }
 
-+ (BOOL) bHasSecureEnclave;
+- (BOOL) bHasSecureEnclave;
 {
     LAContext *context = [LAContext new];
     NSError *error = nil;
@@ -134,7 +150,7 @@
 }
 
 // Authenticate w/touchID
-+ (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
+- (BOOL)authenticateTouchID:(NSString *)promptString fallbackString:(NSString *)fallbackString;
 {
     LAContext *context = [LAContext new];
     NSError *error = nil;
@@ -175,98 +191,77 @@
     return NO;
 }
 
-+ (void) disableRelogin:(NSString *)username;
+- (void) disableRelogin:(NSString *)username;
 {
-    [Keychain setKeychainData:nil
-                          key:[Keychain createKeyWithUsername:username key:RELOGIN_KEY]
+    [self setKeychainData:nil
+                          key:[self createKeyWithUsername:username key:RELOGIN_KEY]
                 authenticated:YES];
 }
 
-+ (void) disableTouchID:(NSString *)username;
+- (void) disableTouchID:(NSString *)username;
 {
-    [Keychain setKeychainData:nil
-                          key:[Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY]
+    [self setKeychainData:nil
+                          key:[self createKeyWithUsername:username key:USE_TOUCHID_KEY]
                 authenticated:YES];
 }
 
-+ (void) clearKeychainInfo:(NSString *)username;
+- (void) clearKeychainInfo:(NSString *)username;
 {
-    [Keychain setKeychainData:nil
-                          key:[Keychain createKeyWithUsername:username key:PASSWORD_KEY]
+    [self setKeychainData:nil
+                          key:[self createKeyWithUsername:username key:PASSWORD_KEY]
                 authenticated:YES];
-    [Keychain setKeychainData:nil
-                          key:[Keychain createKeyWithUsername:username key:RELOGIN_KEY]
+    [self setKeychainData:nil
+                          key:[self createKeyWithUsername:username key:RELOGIN_KEY]
                 authenticated:YES];
-    [Keychain setKeychainData:nil
-                          key:[Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY]
+    [self setKeychainData:nil
+                          key:[self createKeyWithUsername:username key:USE_TOUCHID_KEY]
                 authenticated:YES];
 }
 
-+ (BOOL) disableKeychainBasedOnSettings;
+- (BOOL) disableKeychainBasedOnSettings:(NSString *)username;
 {
     BOOL disableFingerprint = NO;
-    if (![Keychain bHasSecureEnclave])
+    if (![self bHasSecureEnclave])
         return YES;
 
-    if ([[LocalSettings controller].touchIDUsersDisabled indexOfObject:[User Singleton].name] != NSNotFound)
+    if ([self.localSettings.touchIDUsersDisabled indexOfObject:username] != NSNotFound)
         disableFingerprint = YES;
 
-    [Keychain setKeychainInt:disableFingerprint ? 0 : 1
-                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
-               authenticated:YES];
-
-    if ([User Singleton].bDisablePINLogin && disableFingerprint)
+    [self setKeychainInt:disableFingerprint ? 0 : 1
+                     key:[self createKeyWithUsername:username key:USE_TOUCHID_KEY]
+           authenticated:YES];
+    
+    if (disableFingerprint)
     {
-        // If user has disabled TouchID and PIN relogin, then do not use Keychain at all for maximum security
-        [Keychain clearKeychainInfo:[User Singleton].name];
+        // If user has disabled TouchID, then do not use ABCKeychain at all for maximum security
+        [self clearKeychainInfo:username];
         return YES;
     }
 
     return NO;
 }
 
-+ (void) updateLoginKeychainInfo:(NSString *)username
-                        password:(NSString *)password
-                         relogin:(BOOL) bRelogin
-                      useTouchID:(BOOL) bUseTouchID;
-{
-    if ([self disableKeychainBasedOnSettings])
-        return;
-
-    NSString *name = [User Singleton].name;
-    
-    [Keychain setKeychainInt:bRelogin
-                         key:[Keychain createKeyWithUsername:[User Singleton].name key:RELOGIN_KEY]
-               authenticated:YES];
-    [Keychain setKeychainInt:bUseTouchID
-                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
-               authenticated:YES];
-    [Keychain setKeychainString:password
-                            key:[Keychain createKeyWithUsername:[User Singleton].name key:PASSWORD_KEY]
-                authenticated:YES];
-}
-
-+ (void) updateLoginKeychainInfo:(NSString *)username
+- (void) updateLoginKeychainInfo:(NSString *)username
                         password:(NSString *)password
                       useTouchID:(BOOL) bUseTouchID;
 {
-    if ([self disableKeychainBasedOnSettings])
-        return;
-
-    NSString *name = [User Singleton].name;
-
-    [Keychain setKeychainInt:1
-                         key:[Keychain createKeyWithUsername:[User Singleton].name key:RELOGIN_KEY]
-               authenticated:YES];
-    [Keychain setKeychainInt:bUseTouchID
-                         key:[Keychain createKeyWithUsername:[User Singleton].name key:USE_TOUCHID_KEY]
-               authenticated:YES];
-    if (password != nil)
-    {
-        [Keychain setKeychainString:password
-                                key:[Keychain createKeyWithUsername:[User Singleton].name key:PASSWORD_KEY]
-                      authenticated:YES];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        if ([self disableKeychainBasedOnSettings:username])
+            return;
+        
+        [self setKeychainInt:1
+                             key:[self createKeyWithUsername:username key:RELOGIN_KEY]
+                   authenticated:YES];
+        [self setKeychainInt:bUseTouchID
+                             key:[self createKeyWithUsername:username key:USE_TOUCHID_KEY]
+                   authenticated:YES];
+        if (password != nil)
+        {
+            [self setKeychainString:password
+                                    key:[self createKeyWithUsername:username key:PASSWORD_KEY]
+                          authenticated:YES];
+        }
+    });
 }
 
 @end

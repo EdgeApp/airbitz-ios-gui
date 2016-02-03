@@ -37,7 +37,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 -(void)awakeFromNib
 {
 	self.backgroundColor = [UIColor clearColor];
-	//ABLog(2,@"selectedView: %@", self.selectedBackgroundView);
+	//ABCLog(2,@"selectedView: %@", self.selectedBackgroundView);
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 	[super awakeFromNib];
@@ -52,11 +52,11 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//ABLog(2,@"Touches began");
+	//ABCLog(2,@"Touches began");
 	if(selectedCell == nil)
 	{
 		selectedCell = self;
-		//ABLog(2,@"Setting selected cell: %@", selectedCell);
+		//ABCLog(2,@"Setting selected cell: %@", selectedCell);
 		UITouch *touch = [touches anyObject];
 		firstTouch = [touch locationInView:self];
 		if([self.delegate respondsToSelector:@selector(OverviewCell:didStartDraggingFromPointInCell:)])
@@ -109,7 +109,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//ABLog(2,@"Touches Ended");
+	//ABCLog(2,@"Touches Ended");
 	if(selectedCell == self)
 	{
 		if((CACurrentMediaTime() - tapTimer) < TAP_TIME_THRESHOLD)
@@ -117,7 +117,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 			UITouch *touch = [touches anyObject];
 			CGPoint release = [touch locationInView:self];
 			//prevent false tap when user swiped to the right (allows swipe to left)
-			//ABLog(2,@"Touch delta: %f", release.x - firstTouch.x);
+			//ABCLog(2,@"Touch delta: %f", release.x - firstTouch.x);
 			if(release.x < firstTouch.x + 20.0)
 			{
 				[self springWithThreshold:-self.frame.size.width];  //always follow through, don't spring back
@@ -133,7 +133,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	//ABLog(2,@"Touches cancelled");
+	//ABCLog(2,@"Touches cancelled");
     if(selectedCell == self)
 	{
 		[self springWithThreshold:self.frame.size.width * 0.5];
@@ -164,7 +164,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 				 [selectedCell.delegate OverviewCellDidDismissSelectedCell:selectedCell];
 			 }
 			 selectedCell = nil;
-			 //ABLog(2,@"Cleared selected cell");
+			 //ABCLog(2,@"Cleared selected cell");
 		 }];
 		 return YES;
 	}
@@ -205,7 +205,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 							 originalCellFrame.origin.x = 0;
 							 self.contentView.frame = originalCellFrame;
 							 selectedCell = nil;
-							 ABLog(2,@"Cleared selected cell");
+							 ABCLog(2,@"Cleared selected cell");
 							 */
 							 if([self.delegate respondsToSelector:@selector(OverviewCellDidEndDraggingReturnedToStart:)])
 							 {
@@ -229,7 +229,7 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 						 completion:^(BOOL finished)
 						 {
 							 selectedCell = nil;
-							 //ABLog(2,@"Cleared selected cell");
+							 //ABCLog(2,@"Cleared selected cell");
 							 if([self.delegate respondsToSelector:@selector(OverviewCellDidEndDraggingReturnedToStart:)])
 							 {
 								 [self.delegate OverviewCellDidEndDraggingReturnedToStart:YES];

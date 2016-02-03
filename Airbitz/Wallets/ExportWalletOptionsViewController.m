@@ -13,14 +13,13 @@
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
 #import "ButtonSelectorView2.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "Theme.h"
 
@@ -92,7 +91,7 @@ typedef enum eExportOption
 
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
 
-    if (![CoreBridge passwordExists]) {
+    if (![abc passwordExists]) {
         self.viewPassword.hidden = YES;
     } else if (WalletExportType_PrivateSeed == self.type) {
         self.viewPassword.hidden = NO;
@@ -116,7 +115,7 @@ typedef enum eExportOption
 //                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
 
 
-    //ABLog(2,@"type: %d", self.type);
+    //ABCLog(2,@"type: %d", self.type);
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -146,17 +145,17 @@ typedef enum eExportOption
 
 - (void)updateViews
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abc.currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -251,7 +250,7 @@ typedef enum eExportOption
 
         case ExportOption_SDCard:
         {
-            ABLog(2,@"Unsupported export option");
+            ABCLog(2,@"Unsupported export option");
         }
             break;
 
@@ -280,7 +279,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 }
@@ -304,7 +303,7 @@ typedef enum eExportOption
 
             NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
-            [strBody appendFormat:@"Wallet: %@\n\n", [CoreBridge Singleton].currentWallet.strName];
+            [strBody appendFormat:@"Wallet: %@\n\n", abc.currentWallet.strName];
             [strBody appendString:@"Private Seed:\n"];
             [strBody appendString:strPrivateSeed];
             [strBody appendString:@"\n\n"];
@@ -325,14 +324,14 @@ typedef enum eExportOption
         }
         else
         {
-            ABLog(2,@"unsupported type for AirPrint");
+            ABCLog(2,@"unsupported type for AirPrint");
             return;
         }
 
         UIPrintInteractionCompletionHandler completionHandler =
         ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if(!completed && error){
-                ABLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+                ABCLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
             }
         };
 
@@ -362,7 +361,7 @@ typedef enum eExportOption
         [strBody appendString:@"<html><body>\n"];
 
 //        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
-        [strBody appendString:[CoreBridge Singleton].currentWallet.strName];
+        [strBody appendString:abc.currentWallet.strName];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
 
@@ -382,7 +381,7 @@ typedef enum eExportOption
         if (dataExport == nil)
             return;
 
-        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
+        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abc.currentWallet.strName, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
         [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
 
@@ -457,7 +456,7 @@ typedef enum eExportOption
     } 
     else 
     {
-        ABLog(2,@"Only PDF and Wallet Seed are supported for viewing");
+        ABCLog(2,@"Only PDF and Wallet Seed are supported for viewing");
     }
 }
 
@@ -472,48 +471,25 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString* str = @"[CSV Data Here]";
-
-            char *szCsvData = nil;
-            tABC_Error Error;
-            int64_t startTime = 0; // Need to pull this from GUI
-            int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
-
+            NSMutableString *str = [[NSMutableString alloc] init];
             
-            tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_CsvExport([[User Singleton].name UTF8String],
-                               [[User Singleton].password UTF8String],
-                               [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-                               startTime, endTime, &szCsvData, &Error);
-            if (ABC_CC_Ok != cc)
+            ABCConditionCode ccode = [abc exportTransactionsToCSV:abc.currentWallet.strUUID csvString:str];
+            if (ABCConditionCodeOk == ccode)
             {
-                NSString *title, *message;
-                if (ABC_CC_Empty_Wallet == cc)
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions", nil);
-                    message = NSLocalizedString(@"No Transactions in Wallet", nil);
-                }
-                else
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions error", nil);
-                    message = NSLocalizedString(@"CSV Export failed", nil);
-                }
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:title
-                                      message:message
-                                      delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-                [Util printABC_Error:&Error];
-                return nil;
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-                str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:[abc getLastErrorString]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            
-            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
         }
         break;
 
@@ -540,28 +516,30 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            tABC_Error Error;
-            char *szSeed = NULL;
-            tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
-                                                  [[User Singleton].password UTF8String],
-                                                  [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-                                                  &szSeed, &Error);
-            if (ABC_CC_Ok == result)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            ABCConditionCode ccode = [abc exportWalletPrivateSeed:abc.currentWallet.strUUID seed:str];
+            if (ABCConditionCodeOk == ccode)
             {
-                dataExport = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-                [Util printABC_Error:&Error];
-                NSString* str = @"Error exporting private seed!";
-                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Private Seed", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:[abc getLastErrorString]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            free(szSeed);
         }
-            break;
+        break;
 
         default:
-            ABLog(2,@"Unknown export option");
+            ABCLog(2,@"Unknown export option");
             break;
     }
 
@@ -595,7 +573,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 
@@ -629,7 +607,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
     
@@ -671,7 +649,7 @@ typedef enum eExportOption
 		NSData *dataExport = [self getExportDataInForm:self.type];
         if (dataExport == nil)
             return;
-		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
+		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abc.currentWallet.strName, [self suffixFor:self.type]];
 		NSString *strMimeType = [self mimeTypeFor:self.type];
 		
 		[gDrive uploadFile:dataExport name:strFilename mimeType:strMimeType];
@@ -685,7 +663,7 @@ typedef enum eExportOption
 
 -(void)GDriveAuthControllerPresented
 {
-	ABLog(2,@"Auth Controller Presented");
+	ABCLog(2,@"Auth Controller Presented");
 //	[self.view bringSubviewToFront:self.viewHeader];
 }
 #pragma mark - UITableView Delegates
@@ -737,11 +715,11 @@ typedef enum eExportOption
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABCLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     tExportOption exportOption = (tExportOption) [[self.arrayChoices objectAtIndex:indexPath.row] intValue];
 
-    //ABLog(2,@"Export option: %d", exportOption);
+    //ABCLog(2,@"Export option: %d", exportOption);
 
     if (WalletExportType_PrivateSeed != self.type)
     {
@@ -749,7 +727,7 @@ typedef enum eExportOption
     }
     else
     {
-        if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:self.passwordTextField.text])
+        if ([abc passwordExists] && ![abc passwordOk:self.passwordTextField.text])
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
             [self.passwordTextField becomeFirstResponder];
@@ -768,7 +746,7 @@ typedef enum eExportOption
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = NO;
 
 }

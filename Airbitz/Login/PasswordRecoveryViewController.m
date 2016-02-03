@@ -9,15 +9,15 @@
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
-#import "ABC.h"
 #import "User.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "SignUpViewController.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "ABCUtil.h"
 
 #define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      120
@@ -40,7 +40,6 @@ typedef enum eAlertType
 	UITextField             *_activeTextField;
 	CGSize                  _defaultContentSize;
 	tAlertType              _alertType;
-    tABC_CC                 _statusCode;
     TwoFactorMenuViewController *_tfaMenuViewController;
     NSString                    *_secret;
 }
@@ -61,10 +60,6 @@ typedef enum eAlertType
 @property (nonatomic, strong) NSMutableArray        *arrayCategoryNumeric;
 @property (nonatomic, strong) NSMutableArray        *arrayCategoryMust;
 @property (nonatomic, strong) NSMutableArray        *arrayChosenQuestions;
-@property (nonatomic, copy)   NSString              *strReason;
-@property (nonatomic, assign) BOOL                  bSuccess;
-
-
 
 @end
 
@@ -88,7 +83,7 @@ typedef enum eAlertType
 	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
-	//ABLog(2,@"Adding keyboard notification");
+	//ABCLog(2,@"Adding keyboard notification");
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -107,28 +102,31 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [CoreBridge postToMiscQueue:^{
-            tABC_Error Error;
-            tABC_QuestionChoices *pQuestionChoices = NULL;
-            tABC_CC result = ABC_GetQuestionChoices(&pQuestionChoices, &Error);
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [self blockUser:NO];
-                [self showSpinner:NO];
-                if (result == ABC_CC_Ok)
-                {
-                    _bSuccess = YES;
-                    [self categorizeQuestionChoices:pQuestionChoices];
-                    ABC_FreeQuestionChoices(pQuestionChoices);
-                } else {
-                    _bSuccess = NO;
-                }
-                [self performSelectorOnMainThread:@selector(getPasswordRecoveryQuestionsComplete) withObject:nil waitUntilDone:FALSE];
-            });
+        [abc getRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
+
+            self.arrayCategoryString = arrayCategoryString;
+            self.arrayCategoryNumeric = arrayCategoryNumeric;
+            self.arrayCategoryMust = arrayCategoryMust;
+
+            [self getPasswordRecoveryQuestionsComplete];
+
+        } error:^(ABCConditionCode ccode, NSString *errorString)
+        {
+            self.arrayCategoryString = nil;
+            self.arrayCategoryNumeric = nil;
+            self.arrayCategoryMust = nil;
+
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:self.labelTitle.text
+                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, errorString]
+                         delegate:nil
+                cancelButtonTitle:okButtonText
+                otherButtonTitles:nil];
+            [alert show];
         }];
     }
     else
     {
-        _bSuccess = YES;
         [self getPasswordRecoveryQuestionsComplete];
     }
 
@@ -216,7 +214,7 @@ typedef enum eAlertType
 
 - (void)CompleteSignup
 {
-	//ABLog(2,@"Complete Signup");
+	//ABCLog(2,@"Complete Signup");
 	//verify that all six questions have been selected
 	BOOL allQuestionsSelected = YES;
 	BOOL allAnswersValid = YES;
@@ -316,7 +314,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = ![CoreBridge passwordExists];
+        self.passwordView.hidden = ![abc passwordExists];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -333,49 +331,45 @@ typedef enum eAlertType
 
 - (void)recoverWithAnswers:(NSString *)strAnswers
 {
-    _bSuccess = NO;
     [self showSpinner:YES];
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error error;
-        BOOL bSuccess = [CoreBridge recoveryAnswers:strAnswers areValidForUserName:self.strUserName status:&error];
-        NSArray *params = [NSArray arrayWithObjects:strAnswers, nil];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            _bSuccess = bSuccess;
-            _statusCode = error.code;
-            // If we have otp enabled, persist the token
-            if (_secret != nil) {
-                tABC_Error e;
-                ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &e);
-                [Util printABC_Error:&e];
-            }
-            [self performSelectorOnMainThread:@selector(checkRecoveryAnswersResponse:) withObject:params waitUntilDone:NO];
-        });
-    }];
-}
 
-- (void)checkRecoveryAnswersResponse:(NSArray *)params
-{
-    [self showSpinner:NO];
-    if (_bSuccess)
+    [abc checkRecoveryAnswers:self.strUserName answers:strAnswers complete:^(BOOL validAnswers)
     {
-        NSString *strAnswers = params[0];
-        [self bringUpSignUpViewWithAnswers:strAnswers];
-    }
-    else
-    {
-        [CoreBridge otpSetError:_statusCode];
-        if (ABC_CC_InvalidOTP  == _statusCode) {
-            [self launchTwoFactorMenu];
-        } else {
+        [self showSpinner:NO];
+        if (validAnswers)
+        {
+            [self bringUpSignUpViewWithAnswers:strAnswers];
+        }
+        else
+        {
             UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-                                message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-                                delegate:nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
+                    initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
+                          message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+                         delegate:nil
+                cancelButtonTitle:@"OK"
+                otherButtonTitles:nil];
             [alert show];
         }
-    }
+    } error:^(ABCConditionCode ccode, NSString *errorString)
+    {
+        [self showSpinner:NO];
+        if (ABCConditionCodeInvalidOTP == ccode)
+        {
+            [self launchTwoFactorMenu];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:errorRecoveringAccountTitle
+                          message:errorRecoveringAccountText
+                         delegate:nil
+                cancelButtonTitle:okButtonText
+                otherButtonTitles:nil];
+            [alert show];
+        }
+
+    }];
+
 }
 
 - (void)launchTwoFactorMenu
@@ -397,9 +391,8 @@ typedef enum eAlertType
         _tfaMenuViewController = nil;
         BOOL success = __bSuccess;
         if (success) {
-            tABC_Error error;
-            ABC_OtpKeySet([self.strUserName UTF8String], (char *)[_secret UTF8String], &error);
-            if (error.code == ABC_CC_Ok) {
+            ABCConditionCode ccode = [abc setOTPKey:self.strUserName key:_secret];
+            if (ABCConditionCodeOk == ccode) {
                 // Try again with OTP
                 [self CompleteSignup];
             } else {
@@ -425,9 +418,9 @@ typedef enum eAlertType
     if (self.mode == PassRecovMode_Change) {
         password = _passwordField.text;
     } else {
-        password = [User Singleton].password;
+        password = abc.password;
     }
-    if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:password]) {
+    if ([abc passwordExists] && ![abc passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
@@ -440,17 +433,38 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error error;
-        ABC_SetAccountRecoveryQuestions([[User Singleton].name UTF8String],
-                                                [password UTF8String],
-                                                [strQuestions UTF8String],
-                                                [strAnswers UTF8String],
-                                                &error);
-        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
-        _strReason = [Util errorMap:&error];
-        [self performSelectorOnMainThread:@selector(setRecoveryComplete) withObject:nil waitUntilDone:FALSE];
-    }];
+    [abc
+            setRecoveryQuestions:password
+                       questions:strQuestions
+                         answers:strAnswers
+                        complete:^(void)
+                        {
+                            [self blockUser:NO];
+                            [self showSpinner:NO];
+                            _alertType = ALERT_TYPE_SETUP_COMPLETE;
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                    initWithTitle:recoveryQuestionsSet
+                                          message:recoveryQuestionsSetWarning
+                                         delegate:self
+                                cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
+                                otherButtonTitles:okButtonText, nil];
+                            [alert show];
+
+                        }
+                           error: ^(ABCConditionCode ccode, NSString *errorString)
+                           {
+                               [self blockUser:NO];
+                               [self showSpinner:NO];
+                               UIAlertView *alert = [[UIAlertView alloc]
+                                       initWithTitle:recoveryQuestionsNotSet
+                                             message:[NSString stringWithFormat:setRecoveryQuestionsFailed, errorString]
+                                            delegate:nil
+                                   cancelButtonTitle:okButtonText
+                                   otherButtonTitles:nil];
+                               [alert show];
+
+                           }];
+
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -602,7 +616,7 @@ typedef enum eAlertType
 		if (distanceToMove > 0)
 		{
 			//need to scroll
-			//ABLog(2,@"Scrolling %f", distanceToMove);
+			//ABCLog(2,@"Scrolling %f", distanceToMove);
 			CGPoint curContentOffset = self.scrollView.contentOffset;
 			curContentOffset.y += distanceToMove;
 			[self.scrollView setContentOffset:curContentOffset animated:YES];
@@ -618,7 +632,7 @@ typedef enum eAlertType
 {
 	if (_activeTextField)
 	{
-		//ABLog(2,@"Keyboard will hide for Login View Controller");
+		//ABCLog(2,@"Keyboard will hide for Login View Controller");
 
 		_activeTextField = nil;
 	}
@@ -632,7 +646,6 @@ typedef enum eAlertType
     [self blockUser:NO];
     [self showSpinner:NO];
 
-    if (_bSuccess)
     {
         float posY = 0;
         if(self.mode == PassRecovMode_Recover)
@@ -719,79 +732,6 @@ typedef enum eAlertType
 		self.scrollView.contentSize = size;
 		_defaultContentSize = size;
     }
-    else
-    {
-        //ABLog(2,@"%@", [NSString stringWithFormat:@"Account creation failed\n%@", strReason]);
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:self.labelTitle.text
-							  message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, self.strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
-}
-
-- (void)categorizeQuestionChoices:(tABC_QuestionChoices *)pChoices
-{
-	//splits wad of questions into three categories:  string, numeric and must
-    if (pChoices)
-    {
-        if (pChoices->aChoices)
-        {
-            for (int i = 0; i < pChoices->numChoices; i++)
-            {
-                tABC_QuestionChoice *pChoice = pChoices->aChoices[i];
-				NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-				
-				[dict setObject: [NSString stringWithFormat:@"%s", pChoice->szQuestion] forKey:@"question"];
-				[dict setObject: [NSNumber numberWithInt:pChoice->minAnswerLength] forKey:@"minLength"];
-				
-                //printf("question: %s, category: %s, min: %d\n", pChoice->szQuestion, pChoice->szCategory, pChoice->minAnswerLength);
-				
-				NSString *category = [NSString stringWithFormat:@"%s", pChoice->szCategory];
-				if([category isEqualToString:@"string"])
-				{
-					[self.arrayCategoryString addObject:dict];
-				}
-				else if([category isEqualToString:@"numeric"])
-				{
-					[self.arrayCategoryNumeric addObject:dict];
-				}
-				else if([category isEqualToString:@"must"])
-				{
-					[self.arrayCategoryMust addObject:dict];
-				}
-            }
-        }
-    }
-}
-
-- (void)setRecoveryComplete
-{
-	[self blockUser:NO];
-    [self showSpinner:NO];
-    if (_bSuccess)
-    {
-		_alertType = ALERT_TYPE_SETUP_COMPLETE;
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Recovery Questions Set", @"Title of recovery questions setup complete alert")
-							  message:@"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!"
-							  delegate:self
-							  cancelButtonTitle:(_mode == PassRecovMode_SignUp ? @"Back" : nil)
-							  otherButtonTitles:@"OK", nil];
-		[alert show];
-    }
-    else
-    {
-		UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Recovery Questions Not Set", @"Title of recovery questions setup error alert")
-							  message:[NSString stringWithFormat:@"Setting recovery questions failed:\n%@", self.strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
 }
 
 #pragma Password field delegate
@@ -866,7 +806,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectQuestion:(NSDictionary *)question oldQuestion:(NSString *)oldQuestion
 {
-	//ABLog(2,@"Selected Question: %@", [question objectForKey:@"question"]);
+	//ABCLog(2,@"Selected Question: %@", [question objectForKey:@"question"]);
 	[self.arrayChosenQuestions addObject:[question objectForKey:@"question"]];
 	
 	[self.arrayChosenQuestions removeObject:oldQuestion];
@@ -877,7 +817,7 @@ typedef enum eAlertType
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField
 {
-	//ABLog(2,@"Answer field selected");
+	//ABCLog(2,@"Answer field selected");
 	_activeTextField = textField;
 }
 

@@ -10,7 +10,7 @@
 #import "PickerTextView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AirbitzViewController.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 #import "ZBarSDK.h"
 
 

@@ -7,29 +7,25 @@
 //
 
 #import "User.h"
-#import "ABC.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AB.h"
+#import "LocalSettings.h"
+
 
 #define SPENDING_LIMIT_AMOUNT  @"spending_limit_amount"
 #define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
 
-#define REVIEW_NOTIFIED @"review_notified"
-#define DISCLAIMER_VIEWED @"disclaimer_viewed"
-#define FIRST_LOGIN_TIME @"first_login_time"
-#define LOGIN_COUNT @"login_count"
-#define REQUEST_VIEW_COUNT @"request_view_count"
-#define SEND_VIEW_COUNT @"send_view_count"
-#define BLE_VIEW_COUNT @"ble_view_count"
-#define WALLETS_VIEW_COUNT @"ble_view_count"
-
-#define REVIEW_ACCOUNT_AGE 14
-#define REVIEW_LOGIN_COUNT 7
-#define REVIEW_TX_COUNT    7
-
-#define FORCE_HELP_SCREENS 0
+#define USER_PIN_LOGIN_COUNT @"user_pin_login_count"
 
 static BOOL bInitialized = NO;
+
+@interface User ()
+
+@property (nonatomic, strong) AirbitzCore *abc;
+
+@end
+
+
 
 @implementation User
 
@@ -62,140 +58,51 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (BOOL)isLoggedIn
 {
-    return [User Singleton].name.length;// && [User Singleton].password.length;
+    return (0 != abc.name.length);// && abc.password.length;
 }
 
 + (void)login:(NSString *)name password:(NSString *)pword
 {
-    [User login:name password:pword setupPIN:NO];
-}
+    [LocalSettings saveAll];
+    [[User Singleton] loadLocalSettings];
 
-+ (void)login:(NSString *)name password:(NSString *)pword setupPIN:(BOOL)setupPIN
-{
-    [User Singleton].name = name;
-    [User Singleton].password = pword;
-    [[User Singleton] loadSettings];
-
-    [User Singleton].notifiedSend = NO;
-    [User Singleton].notifiedRequest = NO;
-    [User Singleton].notifiedBle = NO;
-
-    if (setupPIN) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [CoreBridge setupLoginPIN];
-        });
-    }
-    [CoreBridge login];
 }
 
 - (id)init
 {
     self = [super init];
+    self.abc = abc;
     if(self)
     {
         [self clear];
     }
-    self.denomination = 100000000;
-    self.denominationType = ABC_DENOMINATION_UBTC;
-    self.denominationLabel = @"bits";
-    self.denominationLabelShort = @"Ƀ ";
+    abc.settings.denomination = 100000000;
+    abc.settings.denominationType = ABCDenominationUBTC;
+    abc.settings.denominationLabel = @"bits";
+    abc.settings.denominationLabelShort = @"Ƀ ";
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
     self.PINLoginInvalidEntryCount = 0;
-    self.reviewNotified = NO;
-    self.bDisclaimerViewed = NO;
-    self.loginCount = 0;
     self.needsPasswordCheck = NO;
-    self.firstLoginTime = nil;
-    self.requestViewCount = 0;
-    self.sendViewCount = 0;
-    self.bleViewCount = 0;
+    self.pinLoginCount = 0;
 
     return self;
 }
 
-- (void)loadSettings
-{
-    tABC_Error Error;
-    tABC_AccountSettings *pSettings = NULL;
-    tABC_CC result = ABC_LoadAccountSettings([self.name UTF8String],
-                                             [self.password UTF8String],
-                                             &pSettings,
-                                             &Error);
-    if (ABC_CC_Ok == result)
-    {
-        self.minutesAutoLogout = pSettings->minutesAutoLogout;
-        self.defaultCurrencyNum = pSettings->currencyNum;
-        if (pSettings->bitcoinDenomination.satoshi > 0)
-        {
-            self.denomination = pSettings->bitcoinDenomination.satoshi;
-            self.denominationType = pSettings->bitcoinDenomination.denominationType;
-
-            switch (self.denominationType) {
-                case ABC_DENOMINATION_BTC:
-                    self.denominationLabel = @"BTC";
-                    self.denominationLabelShort = @"Ƀ ";
-                    break;
-                case ABC_DENOMINATION_MBTC:
-                    self.denominationLabel = @"mBTC";
-                    self.denominationLabelShort = @"mɃ ";
-                    break;
-                case ABC_DENOMINATION_UBTC:
-                    self.denominationLabel = @"bits";
-                    self.denominationLabelShort = @"ƀ ";
-                    break;
-
-            }
-        }
-        self.firstName = pSettings->szFirstName ? [NSString stringWithUTF8String:pSettings->szFirstName] : nil;
-        self.lastName = pSettings->szLastName ? [NSString stringWithUTF8String:pSettings->szLastName] : nil;
-        self.nickName = pSettings->szNickname ? [NSString stringWithUTF8String:pSettings->szNickname] : nil;
-        self.fullName = pSettings->szFullName ? [NSString stringWithUTF8String:pSettings->szFullName] : nil;
-        self.strPIN   = pSettings->szPIN ? [NSString stringWithUTF8String:pSettings->szPIN] : nil;
-        self.bNameOnPayments = pSettings->bNameOnPayments;
-
-        [self loadLocalSettings:pSettings];
-
-        self.bSpendRequirePin = pSettings->bSpendRequirePin;
-        self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
-        self.bDisablePINLogin = pSettings->bDisablePINLogin;
-    }
-    else
-    {
-        [Util printABC_Error:&Error];
-    }
-    ABC_FreeAccountSettings(pSettings);
-}
-
 - (NSString *)userKey:(NSString *)base
 {
-    return [NSString stringWithFormat:@"%@_%@", self.name, base];
+    return [NSString stringWithFormat:@"%@_%@", abc.name, base];
 }
 
-- (void)loadLocalSettings:(tABC_AccountSettings *)pSettings
+- (void)loadLocalSettings
 {
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
-    self.bDisclaimerViewed = [localConfig boolForKey:DISCLAIMER_VIEWED];
-    self.reviewNotified = [localConfig boolForKey:REVIEW_NOTIFIED];
-    self.firstLoginTime = [localConfig objectForKey:FIRST_LOGIN_TIME];
-    self.loginCount = [localConfig integerForKey:LOGIN_COUNT];
-    self.requestViewCount = [localConfig integerForKey:REQUEST_VIEW_COUNT];
-    self.sendViewCount = [localConfig integerForKey:SEND_VIEW_COUNT];
-    self.bleViewCount = [localConfig integerForKey:BLE_VIEW_COUNT];
-    self.walletsViewCount = [localConfig integerForKey:WALLETS_VIEW_COUNT];
 
-    if ([localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]]) {
-        self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
-        self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
-    } else {
-        if (pSettings)
-        {
-            self.dailySpendLimitSatoshis = pSettings->dailySpendLimitSatoshis;
-            self.bDailySpendLimit = pSettings->bDailySpendLimit > 0;
-            [self saveLocalSettings];
-        }
-    }
+    self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
+    self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
+    self.pinLoginCount = [localConfig integerForKey:[self userKey:USER_PIN_LOGIN_COUNT]];
+
 }
 
 - (void)saveLocalSettings
@@ -203,15 +110,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
     [localConfig setObject:@(_dailySpendLimitSatoshis) forKey:[self userKey:SPENDING_LIMIT_AMOUNT]];
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
-
-    [localConfig setBool:self.reviewNotified forKey:REVIEW_NOTIFIED];
-    [localConfig setBool:self.bDisclaimerViewed forKey:DISCLAIMER_VIEWED];
-    [localConfig setObject:self.firstLoginTime forKey:FIRST_LOGIN_TIME];
-    [localConfig setInteger:self.loginCount forKey:LOGIN_COUNT];
-    [localConfig setInteger:self.requestViewCount forKey:REQUEST_VIEW_COUNT];
-    [localConfig setInteger:self.sendViewCount forKey:SEND_VIEW_COUNT];
-    [localConfig setInteger:self.bleViewCount forKey:BLE_VIEW_COUNT];
-    [localConfig setInteger:self.walletsViewCount forKey:WALLETS_VIEW_COUNT];
+    [localConfig setInteger:self.pinLoginCount forKey:[self userKey:USER_PIN_LOGIN_COUNT]];
 
     [localConfig synchronize];
 }
@@ -225,12 +124,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    if ([User isLoggedIn])
-    {
-        [CoreBridge logout];
-    }
-    self.password = nil;
-    self.name = nil;
 }
 
 - (SendViewState)sendInvalidEntry
@@ -299,151 +192,18 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)incPINorTouchIDLogin
 {
-    tABC_Error error;
-    tABC_AccountSettings *pSettings;
-    ABC_LoadAccountSettings([_name UTF8String], [_password UTF8String], &pSettings, &error);
-    if (error.code == ABC_CC_Ok) {
-        int pinLoginCount = ++(pSettings->pinLoginCount);
-        ABC_UpdateAccountSettings([_name UTF8String], [_password UTF8String], pSettings, &error);
 
-        if (pinLoginCount == 3
-                || pinLoginCount == 10
-                || pinLoginCount == 40
-                || pinLoginCount == 100) {
-            _needsPasswordCheck = YES;
-        }
-    }
-}
-
-- (BOOL)offerDisclaimer;
-{
-    if (self.bDisclaimerViewed)
-    {
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
-
-- (void)saveDisclaimerViewed
-{
-    self.bDisclaimerViewed = YES;
+    self.pinLoginCount++;
     [self saveLocalSettings];
-}
-
-+ (BOOL)offerUserReview
-{
-    if ([User Singleton].reviewNotified) {
-        return NO;
+    
+    if (   self.pinLoginCount == 3
+        || self.pinLoginCount == 10
+        || self.pinLoginCount == 20) {
+        _needsPasswordCheck = YES;
     }
-    BOOL ret = NO;
-    BOOL timeTrigger = [User Singleton].timeUseTriggered;
-    [User Singleton].loginCount++;
-    if ([User Singleton].loginCount >= REVIEW_LOGIN_COUNT && timeTrigger
-            && [User Singleton].transactionCountTriggered) {
-        [User Singleton].reviewNotified = true;
-        ret = YES;
-    }
-    [[User Singleton] saveLocalSettings];
-    return ret;
-}
-
-- (BOOL)offerRequestHelp
-{
-    return [self offerHelp:&_requestViewCount
-               thisSession:&_notifiedRequest];
-}
-
-- (BOOL)offerSendHelp
-{
-    return [self offerHelp:&_sendViewCount
-               thisSession:&_notifiedSend];
-}
-
-- (BOOL)offerBleHelp
-{
-    return [self offerHelp:&_bleViewCount
-               thisSession:&_notifiedBle];
-}
-
-- (BOOL)offerWalletHelp
-{
-    return [self offerHelp:&_walletsViewCount
-               thisSession:&_notifiedWallet];
-}
-- (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
-{
-    if (*session) {
-        return NO;
-    }
-    *session = YES;
-
-    if (FORCE_HELP_SCREENS)
-        return YES;
-
-    if (*value > 2) {
-        return NO;
-    }
-    (*value)++;
-    [self saveLocalSettings];
-    return *value <= 2;
-}
-
-- (BOOL)transactionCountTriggered
-{
-    if ([User isLoggedIn] &&
-            [CoreBridge Singleton].arrayWallets != nil &&
-            [CoreBridge Singleton].arrayArchivedWallets != nil)
+    else if (self.pinLoginCount % 20 == 0)
     {
-        int transactionCount = 0;
-        for (Wallet *curWallet in [CoreBridge Singleton].arrayWallets) {
-            transactionCount += [curWallet.arrayTransactions count];
-        }
-        for (Wallet *curWallet in [CoreBridge Singleton].arrayArchivedWallets) {
-            transactionCount += [curWallet.arrayTransactions count];
-        }
-        return transactionCount >= REVIEW_TX_COUNT;
-    } else {
-        return NO;
+        _needsPasswordCheck = YES;
     }
 }
-
-- (NSDate *)earliestDate
-{
-    NSDate *date = [NSDate date];
-
-    if ([CoreBridge Singleton].arrayWallets != nil &&
-            [CoreBridge Singleton].arrayArchivedWallets != nil)
-    {
-        for (Wallet *w in [CoreBridge Singleton].arrayWallets) {
-            for (Transaction *t in w.arrayTransactions) {
-                if (t.date && [t.date compare:date] == NSOrderedAscending) {
-                    date = t.date;
-                }
-            }
-        }
-    }
-    return date;
-}
-
-- (BOOL)timeUseTriggered
-{
-    NSDate *earliest = [self earliestDate];
-    if (self.firstLoginTime == nil) {
-        self.firstLoginTime = earliest;
-        return NO;
-    }
-    if ([earliest compare:self.firstLoginTime] == NSOrderedAscending) {
-        self.firstLoginTime = earliest;
-    }
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
-                                                fromDate:self.firstLoginTime
-                                                    toDate:[NSDate date]
-                                                options:0];
-    return [difference day] >= REVIEW_ACCOUNT_AGE;
-}
-
 @end

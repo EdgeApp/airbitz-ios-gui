@@ -259,7 +259,7 @@ static bool bInitialized = false;
 
 - (void)disclosureTapped
 {
-    //ABLog(2,@"BUTTON TAPPED");
+    //ABCLog(2,@"BUTTON TAPPED");
     //selectedBusinessInfo = businessInfo;
     //[self performSegueWithIdentifier:@"BusinessDetailsSegue" sender:self];
     CLLocation *location = [Location controller].curLocation;
@@ -283,7 +283,7 @@ static bool bInitialized = false;
     [self hideBackButton];
     [self setupNavBar];
 
-    //ABLog(2,@"Adding keyboard notification");
+    //ABCLog(2,@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
 
     if (bInitialized == false)
@@ -294,7 +294,7 @@ static bool bInitialized = false;
         //
         CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
         CGRect headerFrame = _tableListingsCategoriesHeader.frame;
-        ABLog(2,@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
+        ABCLog(2,@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
         headerFrame.size.height = height;
         _tableListingsCategoriesHeader.frame = headerFrame;
         self.tableView.tableHeaderView = _tableListingsCategoriesHeader;
@@ -370,7 +370,7 @@ static bool bInitialized = false;
     //if(notification.object == self)
     {
         self.searchBarSearch.placeholder = @"Search";
-        //ABLog(2,@"Keyboard will hide for DirectoryViewController");
+        //ABCLog(2,@"Keyboard will hide for DirectoryViewController");
         //make searchCluesTableView go away
         //bring back divider bar
         [UIView animateWithDuration: 0.35
@@ -482,7 +482,7 @@ static bool bInitialized = false;
 
 - (IBAction)CategoryButton: (UIButton *)sender
 {
-    //ABLog(2,@"Category %li", (long)sender.tag);
+    //ABCLog(2,@"Category %li", (long)sender.tag);
     switch (sender.tag)
     {
         case TAG_CATEGORY_RESTAURANTS:
@@ -576,7 +576,7 @@ static bool bInitialized = false;
             [query appendFormat: @"&location=%@", self.searchBarLocation.text];
         }
     } else {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -591,7 +591,7 @@ static bool bInitialized = false;
 
     NSString *serverQuery = [query stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
-    ABLog(1, @"serverQuery: %@", serverQuery);
+    ABCLog(1, @"serverQuery: %@", serverQuery);
     [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *results = (NSDictionary *)responseObject;
@@ -605,7 +605,7 @@ static bool bInitialized = false;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSInteger statusCode = operation.response.statusCode;
         
-        ABLog(1,@"*** SERVER REQUEST STATUS FAILURE: %d", (int)statusCode);
+        ABCLog(1,@"*** SERVER REQUEST STATUS FAILURE: %d", (int)statusCode);
 //        NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
 //        UIAlertView *alert = [[UIAlertView alloc]
 //                              initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
@@ -663,7 +663,7 @@ static bool bInitialized = false;
         }
         if (foundMatch)
         {
-            //ABLog(2,@"Pruning From Results: %@", [searchResultsArray objectAtIndex:j]);
+            //ABCLog(2,@"Pruning From Results: %@", [searchResultsArray objectAtIndex:j]);
             [businessAutoCorrectArray removeObjectAtIndex: j];
         }
     }
@@ -780,7 +780,7 @@ static bool bInitialized = false;
                              default:
                                  break;
                          }
-                         ABLog(2,@"Directory Mode Transition %d -> %d\n", directoryMode, mode);
+                         ABCLog(2,@"Directory Mode Transition %d -> %d\n", directoryMode, mode);
                          previousDirectoryMode = directoryMode;
                          directoryMode = mode;
                      }];
@@ -920,7 +920,7 @@ static bool bInitialized = false;
     if (!dragProcessingComplete)
     {
         dragProcessingComplete = YES;
-        //ABLog(2,@"Processing drag operation");
+        //ABCLog(2,@"Processing drag operation");
         if (singleCalloutView)
         {
             [singleCalloutView dismissCalloutAnimated: YES];
@@ -928,7 +928,7 @@ static bool bInitialized = false;
     }
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded)
     {
-        //ABLog(2,@"drag ended");
+        //ABCLog(2,@"drag ended");
         dragProcessingComplete = NO;
     }
 }
@@ -984,13 +984,13 @@ static bool bInitialized = false;
 
 - (void)mapView: (MKMapView *)mapView didDeselectAnnotationView: (MKAnnotationView *)view
 {
-    //ABLog(2,@"Did deselect annotation view");
+    //ABCLog(2,@"Did deselect annotation view");
 
     if ([view isKindOfClass: [CustomAnnotationView class]])
     {
         if (view == singleCalloutView.superview)
         {
-            //ABLog(2,@"Dismissing callout due to annotation deselected");
+            //ABCLog(2,@"Dismissing callout due to annotation deselected");
             [singleCalloutView dismissCalloutAnimated: YES];
         }
     }
@@ -998,7 +998,7 @@ static bool bInitialized = false;
 
 - (void)mapViewDidFinishLoadingMap: (MKMapView *)mapView
 {
-    //ABLog(2,@"Did finish loading map");
+    //ABCLog(2,@"Did finish loading map");
     UITapGestureRecognizer *tap =
         [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removePopupView)];
     [mapView addGestureRecognizer:tap];
@@ -1057,7 +1057,7 @@ static bool bInitialized = false;
 
 - (void)popupCalloutView: (UIView *)parentView;
 {
-    //ABLog(2,@"Popping up callout");
+    //ABCLog(2,@"Popping up callout");
     // custom view to be used in our callout
     AnnotationContentView *av = [AnnotationContentView Create];
     av.backgroundColor = [UIColor colorWithWhite: 1 alpha: 0.5];
@@ -1260,7 +1260,7 @@ static bool bInitialized = false;
             NSDictionary *business = [businessSearchResults objectForKey: [NSNumber numberWithInt: row]];
             [businessSearchResults removeObjectForKey: [NSNumber numberWithInt: row]];
         }
-        //ABLog(2,@"Removed page: %i.  Buffer size: %lu", page, (unsigned long)[businessSearchResults count]);
+        //ABCLog(2,@"Removed page: %i.  Buffer size: %lu", page, (unsigned long)[businessSearchResults count]);
     }
 }
 
@@ -1287,7 +1287,7 @@ static bool bInitialized = false;
                 [self removeSearchResultsPage: page + 2];
             }
         }
-        //ABLog(2,@"Setting current page to: %i", page);
+        //ABCLog(2,@"Setting current page to: %i", page);
         currentPage = page;
     }
 }
@@ -1299,7 +1299,7 @@ static bool bInitialized = false;
 
     activeSearchBar = searchBar;
 
-    //ABLog(2,@"TextField began editing");
+    //ABCLog(2,@"TextField began editing");
     if (directoryMode != DIRECTORY_MODE_SEARCH)
     {
         [self transitionMode:DIRECTORY_MODE_SEARCH];
@@ -1310,7 +1310,7 @@ static bool bInitialized = false;
         mostRecentSearchTag = TAG_LOCATION_SEARCH;
         [self pruneCachedSearchItemsFromSearchResults];
         [self.searchCluesTableView reloadData];
-        //ABLog(2,@"Most Recent Search Tag: TAG_LOCATION_SEARCH");
+        //ABCLog(2,@"Most Recent Search Tag: TAG_LOCATION_SEARCH");
         [self searchBarLocationChanged:searchBar textDidChange:searchBar.text];
     }
     if (searchBar == self.searchBarSearch)
@@ -1318,7 +1318,7 @@ static bool bInitialized = false;
         mostRecentSearchTag = TAG_BUSINESS_SEARCH;
         [self pruneCachedLocationItemsFromSearchResults];
         [self.searchCluesTableView reloadData];
-        //ABLog(2,@"Most Recent Search Tag: TAG_BUSINESS_SEARCH");
+        //ABCLog(2,@"Most Recent Search Tag: TAG_BUSINESS_SEARCH");
         [self searchBarSearchChanged:searchBar textDidChange:searchBar.text];
     }
 }
@@ -1364,7 +1364,7 @@ static bool bInitialized = false;
             [self pruneCachedSearchItemsFromSearchResults];
             [self.searchCluesTableView reloadData];
             if (!businessAutoCorrectArray.count)
-                ABLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
+                ABCLog(2,@"SEARCH RESULTS ARRAY IS EMPTY!");
             self.searchIndicator.hidden = YES;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             self.searchIndicator.hidden = YES;
@@ -1464,7 +1464,7 @@ static bool bInitialized = false;
         
         NSDictionary *businessInfo = [businessSearchResults objectForKey:[NSNumber numberWithInteger:swipedIndexPath.row]];
         
-        //ABLog(2,@"Setting selected business info");
+        //ABCLog(2,@"Setting selected business info");
         selectedBusinessInfo = businessInfo;
         //[self performSegueWithIdentifier:@"BusinessDetailsSegue" sender:self];
         [self launchBusinessDetailsWithBizID:[businessInfo objectForKey:@"bizId"] andDistance:[[businessInfo objectForKey:@"distance"] floatValue] animated:YES];
@@ -1560,13 +1560,13 @@ static bool bInitialized = false;
             else
             {
                 cell.ribbon = nil;
-                //ABLog(2,@"Unknown");
+                //ABCLog(2,@"Unknown");
             }
             cell.businessNameLabel.text = [businessInfo objectForKey: @"name"];
             cell.businessNameLabel.textColor = [UIColor whiteColor];
             cell.addressLabel.text = [businessInfo objectForKey: @"address"];
 
-            //ABLog(2,@"Requesting background image");
+            //ABCLog(2,@"Requesting background image");
             UIImageView *imageView = cell.backgroundImageView;
             imageView.clipsToBounds = YES;
             
@@ -1702,8 +1702,8 @@ static bool bInitialized = false;
                 cacheSize = searchTermCache.count;
             }
             //show results for business search field
-            //ABLog(2,@"Row: %li", (long)indexPath.row);
-            //ABLog(2,@"Results array: %@", businessAutoCorrectArray);
+            //ABCLog(2,@"Row: %li", (long)indexPath.row);
+            //ABCLog(2,@"Results array: %@", businessAutoCorrectArray);
             if (indexPath.row < cacheSize)
             {
                 cell.textLabel.text = [self stringForObjectInCache: searchTermCache atIndex: indexPath.row]; //[searchTermCache objectAtIndex:indexPath.row];
@@ -1755,7 +1755,7 @@ static bool bInitialized = false;
     if (tableView == self.searchCluesTableView)
     {
         self.searchIndicator.hidden = YES;
-        //ABLog(2,@"Row: %i", indexPath.row);
+        //ABCLog(2,@"Row: %i", indexPath.row);
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
         if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
         {
@@ -1789,12 +1789,12 @@ static bool bInitialized = false;
             {
                 self.searchBarSearch.text = cell.textLabel.text;
                 [self.searchBarSearch resignFirstResponder];
-                //ABLog(2,@"Go to business");
+                //ABCLog(2,@"Go to business");
                 //[self transitionSearchToMap];
                 /*NSDictionary *businessInfo = [businessSearchResults objectForKey:[NSNumber numberWithInteger:indexPath.row]];
                 if(businessInfo)
                 {
-                    ABLog(2,@"Setting selected business info");
+                    ABCLog(2,@"Setting selected business info");
                     selectedBusinessInfo = businessInfo;
                     //[self performSegueWithIdentifier:@"BusinessDetailsSegue" sender:self];
                     [self launchBusinessDetails];
@@ -1806,7 +1806,7 @@ static bool bInitialized = false;
                 for (NSString *key in businessSearchResults)
                 {
                     NSDictionary *business = [businessSearchResults objectForKey: key];
-                    //ABLog(2,@"%@ = %@", [dict objectForKey:@"bizId"], [business objectForKey:@"bizId"]);
+                    //ABCLog(2,@"%@ = %@", [dict objectForKey:@"bizId"], [business objectForKey:@"bizId"]);
                     NSString *firstBizID = [dict objectForKey: @"bizId"];
                     NSString *secondBizID = [[business objectForKey: @"bizId"] stringValue];
                     if ([firstBizID isEqualToString: secondBizID])
@@ -1871,7 +1871,7 @@ static bool bInitialized = false;
         //business listings table
         NSDictionary *businessInfo = [businessSearchResults objectForKey: [NSNumber numberWithInteger: indexPath.row]];
 
-        //ABLog(2,@"Setting selected business info");
+        //ABCLog(2,@"Setting selected business info");
         selectedBusinessInfo = businessInfo;
         //[self performSegueWithIdentifier:@"BusinessDetailsSegue" sender:self];
         float distance = 0.0;
@@ -1907,13 +1907,13 @@ static bool bInitialized = false;
             offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
         }
         self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
-//        ABLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+//        ABCLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
 
     }
     else
     {
         self.dividerViewTop.constant = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
-//        ABLog(2,@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+//        ABCLog(2,@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
     }
 }
 /*
@@ -1948,8 +1948,8 @@ static bool bInitialized = false;
 
 - (void)DividerViewTouchesBegan: (NSSet *)touches withEvent: (UIEvent *)event
 {
-    //ABLog(2,@"Divider touches began");
-    //ABLog(2,@"Setting map state to RESIZE");
+    //ABCLog(2,@"Divider touches began");
+    //ABCLog(2,@"Setting map state to RESIZE");
     mapDisplayState = MAP_DISPLAY_RESIZE;
     dividerBarStartTouchPoint = [[touches anyObject] locationInView: self.contentView];
 }
@@ -1992,13 +1992,13 @@ static bool bInitialized = false;
 
 - (void)DividerViewTouchesEnded: (NSSet *)touches withEvent: (UIEvent *)event
 {
-    //ABLog(2,@"Setting map state to NORMAL");
+    //ABCLog(2,@"Setting map state to NORMAL");
     mapDisplayState = MAP_DISPLAY_NORMAL;
 }
 
 - (void)DividerViewTouchesCancelled: (NSSet *)touches withEvent: (UIEvent *)event
 {
-    //ABLog(2,@"Setting map state to NORMAL");
+    //ABCLog(2,@"Setting map state to NORMAL");
     mapDisplayState = MAP_DISPLAY_NORMAL;
 }
 
@@ -2006,7 +2006,7 @@ static bool bInitialized = false;
 
 - (void)DidReceiveLocation
 {
-    //ABLog(2,@"Location Received!");
+    //ABCLog(2,@"Location Received!");
     if (receivedInitialLocation == NO)
     {
         receivedInitialLocation = YES;
@@ -2066,7 +2066,7 @@ static bool bInitialized = false;
 
     NSDictionary *businessInfo = [businessSearchResults objectForKey: [NSNumber numberWithInteger: swipedIndexPath.row]];
 
-    // ABLog(2,@"Setting selected business info");
+    // ABCLog(2,@"Setting selected business info");
     selectedBusinessInfo = businessInfo;
     //[self performSegueWithIdentifier:@"BusinessDetailsSegue" sender:self];
     float distance = 0.0;
@@ -2096,7 +2096,7 @@ static bool bInitialized = false;
 
 - (void)OverviewCellDraggedWithOffset: (float)xOffset
 {
-    //ABLog(2,@"Drag offset: %f", xOffset);
+    //ABCLog(2,@"Drag offset: %f", xOffset);
     //CGRect frame = businessDetailsController.view.frame;
     //frame.origin.x = self.view.bounds.size.width + xOffset;
     //businessDetailsController.view.frame = frame;
@@ -2105,7 +2105,7 @@ static bool bInitialized = false;
 
 - (void)OverviewCellDidDismissSelectedCell: (CommonOverviewCell *)cell
 {
-    //ABLog(2,@"Removing business details controller");
+    //ABCLog(2,@"Removing business details controller");
     [businessDetailsController.view removeFromSuperview];
     [businessDetailsController removeFromParentViewController];
     businessDetailsController = nil;

@@ -6,15 +6,14 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
-#import "Wallet.h"
-#import "ABC.h"
+#import "ABCWallet.h"
 
-@interface Wallet ()
+@interface ABCWallet ()
 
 
 @end
 
-@implementation Wallet
+@implementation ABCWallet
 
 #pragma mark - NSObject overrides
 
@@ -40,9 +39,9 @@
 // allows us to call things like removeObject in array's of these
 - (BOOL)isEqual:(id)object
 {
-	if ([object isKindOfClass:[Wallet class]])
+	if ([object isKindOfClass:[ABCWallet class]])
 	{
-		Wallet *walletOther = object;
+		ABCWallet *walletOther = object;
 		
         if ([self.strUUID isEqualToString:walletOther.strUUID])
         {

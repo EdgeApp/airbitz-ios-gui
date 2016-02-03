@@ -7,18 +7,14 @@
 //
 
 #import "WalletMakerView.h"
-#import "ABC.h"
 #import "User.h"
 #import "CommonTypes.h"
-#import "OfflineWalletViewController.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ButtonSelectorView2.h"
 #import "PopupPickerView.h"
 #import "MainViewController.h"
 #import "Theme.h"
-
-#define DEFAULT_CURRENCY_NUM 141 // USD
 
 @interface WalletMakerView () <PopupPickerViewDelegate, UITextFieldDelegate>
 {
@@ -26,11 +22,6 @@
     BOOL                        _bCreatingWallet;
 	CGRect                      _originalFrame;
     int                         _currencyChoice;
-    NSMutableArray              *arrayCurrencyCodes;
-    NSMutableArray              *arrayCurrencyNums;
-    NSMutableArray              *arrayCurrencyStrings;
-
-
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageEditBox;
@@ -73,28 +64,6 @@
 		
 		_originalFrame = self.frame;
 		
-		tABC_Currency *currencyArray;
-		tABC_Error error;
-		int numCurrencies;
-		tABC_CC result = ABC_GetCurrencies(&currencyArray, &numCurrencies, &error);
-		if(result == ABC_CC_Ok)
-		{
-            arrayCurrencyCodes = [[NSMutableArray alloc] init];
-            arrayCurrencyNums = [[NSMutableArray alloc] init];
-			arrayCurrencyStrings = [[NSMutableArray alloc] init];
-			for(int i = 0; i < numCurrencies; i++)
-			{
-				//populate with currency code and description
-				[arrayCurrencyStrings addObject:[NSString stringWithFormat:@"%s - %@",
-                                                currencyArray[i].szCode,
-                                                [NSString stringWithUTF8String:currencyArray[i].szDescription]]];
-
-                [arrayCurrencyNums addObject:[NSNumber numberWithInt:currencyArray[i].num]];
-                [arrayCurrencyCodes addObject:[NSString stringWithUTF8String:currencyArray[i].szCode]];
-			}
-
-		}
-
         [self reset];
     }
     return;
@@ -112,7 +81,7 @@
         self.popupPickerCurrency = [PopupPickerView CreateForView:self
                                                    relativeToView:self.buttonCurrency
                                                  relativePosition:PopupPickerPosition_Below
-                                                      withStrings:arrayCurrencyStrings
+                                                      withStrings:abc.arrayCurrencyStrings
                                                    fromCategories:nil
                                                       selectedRow:-1
                                                         withWidth:[MainViewController getWidth]
@@ -161,12 +130,12 @@
 //    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
-    currencyNum = [[User Singleton] defaultCurrencyNum];
-    currencyString = [CoreBridge currencyAbbrevLookup:currencyNum];
+    currencyNum = abc.settings.defaultCurrencyNum;
+    currencyString = [abc currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
-//    ABLog(2,self.buttonSelectorView.button.currentTitle);
+//    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
-    _currencyChoice = (int) [arrayCurrencyCodes indexOfObject:currencyString];
+    _currencyChoice = (int) [abc.arrayCurrencyCodes indexOfObject:currencyString];
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
     [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
 //    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
@@ -205,60 +174,37 @@
 {
     [self blockUser:YES];
     _bCreatingWallet = YES;
-    [CoreBridge clearSyncQueue];
+    [abc clearSyncQueue];
 
     int currencyNum;
 
-    if ((nil == arrayCurrencyNums) || [arrayCurrencyNums count] <= _currencyChoice)
-        currencyNum = DEFAULT_CURRENCY_NUM;
+    if ((nil == abc.arrayCurrencyNums) || [abc.arrayCurrencyNums count] <= _currencyChoice)
+        currencyNum = 0;
     else
-        currencyNum = [[arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
-    
-    [CoreBridge postToSyncQueue:^{
-        tABC_Error error;
-        char *szUUID = NULL;
-        ABC_CreateWallet([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
-                                [self.textField.text UTF8String],
-                                currencyNum,
-                                &szUUID,
-                                &error);
-        _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
-        _strReason = [Util errorMap:&error];
-        if (szUUID) {
-            free(szUUID);
-        }
-        [self performSelectorOnMainThread:@selector(createWalletComplete) withObject:nil waitUntilDone:FALSE];
-    }];
-}
+        currencyNum = [[abc.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
 
-- (void)createWalletComplete
-{
-    [self blockUser:NO];
-    _bCreatingWallet = NO;
-    [CoreBridge startWatchers];
-    [CoreBridge refreshWallets];
-
-    //ABLog(2,@"Wallet create complete");
-    if (_bSuccess)
-    {
-        [self exit];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-							  initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-							  message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", _strReason]
-							  delegate:nil
-							  cancelButtonTitle:@"OK"
-							  otherButtonTitles:nil];
-		[alert show];
-    }
+    [abc createWallet:self.textField.text currencyNum:currencyNum complete:^(void)
+     {
+         [self blockUser:NO];
+         _bCreatingWallet = NO;
+         [self exit];
+     }
+                              error:^(ABCConditionCode ccode, NSString *errorString)
+     {
+         [self blockUser:NO];
+         _bCreatingWallet = NO;
+         UIAlertView *alert = [[UIAlertView alloc]
+                               initWithTitle:NSLocalizedString(@"Create Wallet", nil)
+                               message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", errorString]
+                               delegate:nil
+                               cancelButtonTitle:okButtonText
+                               otherButtonTitles:nil];
+         [alert show];
+     }];
 }
 
 - (void)blockUser:(BOOL)bBlock
 {
-//    self.viewBlocker.hidden = !bBlock;
     self.activityIndicator.hidden = NO;
     [self.textField resignFirstResponder];
 }
@@ -268,7 +214,6 @@
     if (!_bCreatingWallet)
     {
         [self.textField resignFirstResponder];
-//        [self.buttonSelectorView close];
 
         if (self.delegate)
         {
@@ -283,8 +228,8 @@
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
     _currencyChoice = (int) row;
-    NSNumber *currencyNum = [arrayCurrencyNums objectAtIndex:_currencyChoice];
-    NSString *currencyString = [CoreBridge currencyAbbrevLookup:[currencyNum intValue]];
+    NSNumber *currencyNum = [abc.arrayCurrencyNums objectAtIndex:_currencyChoice];
+    NSString *currencyString = [abc currencyAbbrevLookup:[currencyNum intValue]];
 
     [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
     [self.popupPickerCurrency removeFromSuperview];
@@ -292,24 +237,6 @@
     [self.textField becomeFirstResponder];
 }
 
-#pragma mark - ButtonSelector Delegates
-//
-//-(void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
-//{
-//    _currencyChoice = itemIndex;
-//}
-//
-//-(NSString *)ButtonSelector:(ButtonSelectorView *)view willSetButtonTextToString:(NSString *)desiredString
-//{
-//	NSString *result = [[desiredString componentsSeparatedByString:@" - "] firstObject];
-//	return result;
-//}
-//
-//- (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
-//{
-//    [self.textField resignFirstResponder];
-//}
-//
 #pragma mark - UITextField delegates
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Wallet.h"
-#import "ABC.h"
-#import "SpendTarget.h"
+#import "ABCWallet.h"
+#import "ABCSpend.h"
 #import "AirbitzViewController.h"
 
 @protocol SendConfirmationViewControllerDelegate;
@@ -19,7 +18,7 @@
 
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
 @property (nonatomic, assign)   double                                      overrideCurrency;
-@property (nonatomic, strong)   SpendTarget                                 *spendTarget;
+@property (nonatomic, strong)   ABCSpend *abcSpend;
 //@property (nonatomic, strong)   Wallet                                      *wallet;
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 @property (nonatomic, assign)   BOOL                                        bSignOnly;

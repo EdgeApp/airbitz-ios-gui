@@ -16,15 +16,20 @@
 @property (nonatomic, assign)   BOOL            bDisableBLE;
 @property (nonatomic, assign)   BOOL            bMerchantMode;
 @property (nonatomic, assign)   BOOL            bLocalNotificationsAllowed;
-@property (nonatomic, retain)   NSString        *cachedUsername;
 @property (nonatomic, assign)   NSInteger       previousNotificationID;
 @property (nonatomic, assign)   NSInteger       receiveBitcoinCount;    // how many times user received bitcoin, for messaging
 @property (nonatomic, retain)   NSMutableArray  *notifications;
 @property (nonatomic, retain)   NSMutableArray  *otpNotifications;
 @property (nonatomic, retain)   NSString        *clientID;
-@property (nonatomic, retain)   NSMutableArray  *touchIDUsersEnabled;
-@property (nonatomic, retain)   NSMutableArray  *touchIDUsersDisabled;
 @property (nonatomic, assign)   NSTimeInterval  noPasswordNotificationTime;
+
+
+@property (nonatomic) bool bDisclaimerViewed;
+@property (nonatomic) bool reviewNotified;
+@property (nonatomic) NSDate *firstLoginTime;
+@property (nonatomic) NSInteger loginCount;
+
+
 
 + (void)initAll;
 + (void)freeAll;
@@ -33,6 +38,12 @@
 + (void)saveAll;
 
 + (LocalSettings *)controller;
+
+- (BOOL)offerUserReview:(int)numTransactions earliestDate:(NSDate *)earliestDate;
+- (BOOL)offerRequestHelp;
+- (BOOL)offerSendHelp;
+- (BOOL)offerBleHelp;
+- (BOOL)offerWalletHelp;
 
 @end
 

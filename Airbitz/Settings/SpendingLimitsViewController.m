@@ -2,12 +2,11 @@
 #import "SpendingLimitsViewController.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
 #import "FadingAlertView.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "Theme.h"
 
@@ -15,7 +14,6 @@
 
 @interface SpendingLimitsViewController () <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate, InfoViewDelegate>
 {
-    tABC_AccountSettings            *_pAccountSettings;
     UITextField                     *_currentTextField;
 }
 
@@ -49,8 +47,8 @@
 {
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
-    if (![CoreBridge passwordExists]) {
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    if (![abc passwordExists]) {
         self.passwordTextField.hidden = YES;
     }
 
@@ -65,23 +63,15 @@
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
-    _pAccountSettings = NULL;
-    tABC_Error Error;
-    ABC_LoadAccountSettings([[User Singleton].name UTF8String],
-                            [[User Singleton].password UTF8String],
-                            &_pAccountSettings,
-                            &Error);
-    [Util printABC_Error:&Error];
-
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
-    _dailySpendLimitField.text = [CoreBridge formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.text = [abc formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _dailyDenomination.text = [User Singleton].denominationLabelShort;
+    _dailyDenomination.text = abc.settings.denominationLabelShort;
 
-    _pinSpendLimitSwitch.on = _pAccountSettings->bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [CoreBridge formatSatoshi:_pAccountSettings->spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitSwitch.on = abc.settings.bSpendRequirePin > 0;
+    _pinSpendLimitField.text = [abc formatSatoshi:abc.settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _pinDenomination.text = [User Singleton].denominationLabelShort;
+    _pinDenomination.text = abc.settings.denominationLabelShort;
 
     [self switchFlipped:_dailySpendLimitSwitch];
     [self switchFlipped:_pinSpendLimitSwitch];
@@ -116,7 +106,7 @@
 
 - (IBAction)doneClicked:(id)sender
 {
-    ABLog(2,@"Done Clicked.");
+    ABCLog(2,@"Done Clicked.");
     [self.view endEditing:YES];
 }
 
@@ -238,37 +228,29 @@
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
-            [User Singleton].dailySpendLimitSatoshis = [CoreBridge denominationToSatoshi:_dailySpendLimitField.text];
-            _pAccountSettings->bDailySpendLimit = 1;
-            _pAccountSettings->dailySpendLimitSatoshis = [User Singleton].dailySpendLimitSatoshis;
+            [User Singleton].dailySpendLimitSatoshis = [abc denominationToSatoshi:_dailySpendLimitField.text];
         } else {
             [User Singleton].bDailySpendLimit = NO;
-            _pAccountSettings->bDailySpendLimit = 0;
         }
 
         if (_pinSpendLimitSwitch.on) {
-            _pAccountSettings->bSpendRequirePin = 1;
-            _pAccountSettings->spendRequirePinSatoshis = [CoreBridge denominationToSatoshi:_pinSpendLimitField.text];
+            abc.settings.bSpendRequirePin = true;
+            abc.settings.spendRequirePinSatoshis = [abc denominationToSatoshi:_pinSpendLimitField.text];
         } else {
-            _pAccountSettings->bSpendRequirePin = 0;
+            abc.settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        tABC_Error Error;
-        ABC_UpdateAccountSettings([[User Singleton].name UTF8String],
-                                [[User Singleton].password UTF8String],
-                                _pAccountSettings,
-                                &Error);
-        if (ABC_CC_Ok == Error.code) {
-            [[User Singleton] loadSettings];
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
-                                message:[Util errorMap:&Error]
-                                delegate:self
-                                cancelButtonTitle:@"Cancel"
-                                otherButtonTitles:@"OK", nil];
+        ABCConditionCode ccode = [abc.settings saveSettings];
+        if (!(ABCConditionCodeOk == ccode))
+        {
+            UIAlertView *alert =
+                    [[UIAlertView alloc]
+                            initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
+                                  message:[abc getLastErrorString]
+                                 delegate:self
+                        cancelButtonTitle:cancelButtonText
+                        otherButtonTitles:okButtonText, nil];
             [alert show];
-            [Util printABC_Error:&Error];
         }
         [self exitWithBackButton:YES];
     } else {
@@ -276,8 +258,8 @@
                             initWithTitle:NSLocalizedString(@"Incorrect password", nil)
                             message:NSLocalizedString(@"Incorrect password", nil)
                             delegate:self
-                            cancelButtonTitle:@"Cancel"
-                            otherButtonTitles:@"OK", nil];
+                            cancelButtonTitle:cancelButtonText
+                            otherButtonTitles:okButtonText, nil];
         [alert show];
     }
 }
@@ -304,10 +286,6 @@
 
 - (void)exitWithBackButton:(BOOL)bBack
 {
-    if (_pAccountSettings)
-    {
-        ABC_FreeAccountSettings(_pAccountSettings);
-    }
     [self.delegate spendingLimitsViewControllerDone:self withBackButton:bBack];
 }
 

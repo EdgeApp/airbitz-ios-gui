@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "NSString+StripHTML.h"
 
 @implementation NSString (StripHTML)

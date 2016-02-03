@@ -8,11 +8,10 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
-#import "TxOutput.h"
-#import "CoreBridge.h"
+#import "ABCTxOutput.h"
+#import "AirbitzCore.h"
 #import "User.h"
 #import "NSDate+Helper.h"
-#import "ABC.h"
 #import "InfoView.h"
 #import "CalculatorView.h"
 #import "PickerTextView.h"
@@ -195,7 +194,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    self.arrayCategories = [CoreBridge Singleton].arrayCategories;
+    self.arrayCategories = abc.arrayCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -327,10 +326,7 @@ typedef enum eRequestType
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            tABC_Error error;
-            ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
-                                  [[User Singleton].password UTF8String], 
-                                  self.transaction.amountSatoshi, &currency, _wallet.currencyNum, &error);
+            if ([abc satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
@@ -348,19 +344,19 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+            [abc formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+         [abc formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
     }
     else
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+            [abc formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = [User Singleton].denominationLabel;
+    self.labelBTC.text = abc.settings.denominationLabel;
     
     
     if (self.categoryButton.titleLabel.text == nil)
@@ -490,7 +486,7 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [CoreBridge addCategory:strFullCategory];
+    [abc addCategory:strFullCategory];
 
     if (![self.transaction.strCategory isEqualToString:strFullCategory])
     {
@@ -532,11 +528,11 @@ typedef enum eRequestType
 
     if (bSomethingChanged)
     {
-        [CoreBridge storeTransaction: self.transaction];
+        [abc storeTransaction: self.transaction];
     }
 
-    [CoreBridge postToTxSearchQueue:^{
-        if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+    [abc postToTxSearchQueue:^{
+        if (_wallet && !_bOldTransaction && [abc needsRecoveryQuestionsReminder:_wallet]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
                                 message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
@@ -605,13 +601,13 @@ typedef enum eRequestType
     NSMutableString *inAddresses = [[NSMutableString alloc] init];
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
-    if ([CoreBridge isTestNet]) {
+    if ([abc isTestNet]) {
         [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
-    for (TxOutput *t in self.transaction.outputs) {
-        NSString *val = [CoreBridge formatSatoshi:t.value];
+    for (ABCTxOutput *t in self.transaction.outputs) {
+        NSString *val = [abc formatSatoshi:t.value];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
@@ -627,13 +623,13 @@ typedef enum eRequestType
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abc formatSatoshi:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[CoreBridge formatSatoshi:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abc formatSatoshi:fees]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
@@ -1060,7 +1056,7 @@ typedef enum eRequestType
     }
     else
     {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -1079,7 +1075,7 @@ typedef enum eRequestType
         NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm];
         // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
         
-        ABLog(1, @"serverQuery: %@", strURL);
+        ABCLog(1, @"serverQuery: %@", strURL);
         [self.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSDictionary *results = (NSDictionary *)responseObject;
@@ -1124,7 +1120,7 @@ typedef enum eRequestType
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSInteger statusCode = operation.response.statusCode;
             
-            ABLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
+            ABCLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
 
         }];
         
@@ -1199,7 +1195,7 @@ typedef enum eRequestType
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-//    ABLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+//    ABCLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 
 }
 
@@ -1577,8 +1573,8 @@ typedef enum eRequestType
     // add string to categories, update arrays
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
-        ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [CoreBridge addCategory:catString];
+        ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
+        [abc addCategory:catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
         self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -1609,12 +1605,12 @@ typedef enum eRequestType
     frame = self.pickerTextCategory.popupPicker.frame;
     frame.size.height = keyboardFrame.origin.y - self.pickerTextCategory.popupPicker.frame.origin.y;
     self.pickerTextCategory.popupPicker.frame = frame;
-    //ABLog(2,@"keyboard will show");
+    //ABCLog(2,@"keyboard will show");
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    //ABLog(2,@"keyboard will hide");
+    //ABCLog(2,@"keyboard will hide");
 
     if (_activeTextField.returnKeyType == UIReturnKeyDone)
     {

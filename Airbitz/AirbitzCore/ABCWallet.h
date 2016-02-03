@@ -10,7 +10,7 @@
 
 #define WALLET_ATTRIBUTE_ARCHIVE_BIT 0x1 // BIT0 is the archive bit
 
-@interface Wallet : NSObject
+@interface ABCWallet : NSObject
 
 @property (nonatomic, copy)     NSString        *strUUID;
 @property (nonatomic, copy)     NSString        *strName;

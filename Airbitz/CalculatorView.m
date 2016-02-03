@@ -7,8 +7,9 @@
 //
 
 #import "CalculatorView.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
+#import "AB.h"
 
 #define DIGIT_BACK			11
 
@@ -64,17 +65,17 @@
 
 - (IBAction)digit:(UIButton *)sender
 {
-	//ABLog(2,@"Digit: %i", (int)sender.tag);
+	//ABCLog(2,@"Digit: %i", (int)sender.tag);
 	if(operation == OPERATION_EQUAL)
 	{
 		//also clear the accumulator
-		//ABLog(2,@"Clearing accumulator");
+		//ABCLog(2,@"Clearing accumulator");
 		accumulator = 0.0;
 		operation = OPERATION_CLEAR;
 	}
 	if(lastKeyWasOperation)
 	{
-		//ABLog(2,@"Clearing textfield");
+		//ABCLog(2,@"Clearing textfield");
 		self.textField.text = @"";
 	}
 	if(sender.tag < 10)
@@ -112,7 +113,7 @@
 
 - (IBAction)operation:(UIButton *)sender
 {
-	//ABLog(2,@"Operation %i", (int)sender.tag);
+	//ABCLog(2,@"Operation %i", (int)sender.tag);
 	switch (sender.tag)
 	{
 		case OPERATION_CLEAR:
@@ -193,18 +194,18 @@
 {
     if (_calcMode == CALC_MODE_COIN)
     {
-        int64_t satoshi = [CoreBridge denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        int64_t satoshi = [abc denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
         if (satoshi == 0 || acc == 0.0)
             return @"";
         else
-            return [CoreBridge formatSatoshi:satoshi withSymbol:false];
+            return [abc formatSatoshi:satoshi withSymbol:false];
     }
     else
     {
         if (acc == 0.0)
             return @"";
         else
-            return [CoreBridge formatCurrency:acc
+            return [abc formatCurrency:acc
                               withCurrencyNum:self.currencyNum
                                    withSymbol:false];
     }
@@ -216,30 +217,30 @@
 	{
 		case OPERATION_CLEAR:
 		case OPERATION_DONE:
-			//ABLog(2,@"Performing loadAccumulator");
+			//ABCLog(2,@"Performing loadAccumulator");
 			[self loadAccumulator];
 			break;
 		case OPERATION_DIVIDE:
-			//ABLog(2,@"Performing Divide");
+			//ABCLog(2,@"Performing Divide");
 			accumulator /= [self.textField.text floatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_EQUAL:
-			//ABLog(2,@"Performing Equal");
+			//ABCLog(2,@"Performing Equal");
 			break;
 		case OPERATION_MINUS:
-			//ABLog(2,@"Performing Minus");
+			//ABCLog(2,@"Performing Minus");
 			accumulator -= [self.textField.text floatValue];
             if (accumulator < 0) accumulator = 0;
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_MULTIPLY:
-			//ABLog(2,@"Performing Multiply");
+			//ABCLog(2,@"Performing Multiply");
 			accumulator *= [self.textField.text floatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_PLUS:
-			//ABLog(2,@"Performing Plus");
+			//ABCLog(2,@"Performing Plus");
 			accumulator += [self.textField.text floatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;

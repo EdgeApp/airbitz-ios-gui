@@ -1,0 +1,220 @@
+//
+// Created by Paul P on 1/30/16.
+// Copyright (c) 2016 Airbitz. All rights reserved.
+//
+
+#import "ABCSettings.h"
+#import <Foundation/Foundation.h>
+#import "ABCError.h"
+#import "AirbitzCore.h"
+#import "ABCUtil.h"
+#import "ABCKeychain.h"
+#import "ABCLocalSettings.h"
+
+
+@interface ABCSettings ()
+
+@property (nonatomic) AirbitzCore *abc;
+@property (nonatomic) ABCLocalSettings *local;
+@property (nonatomic) ABCKeychain *keyChain;
+
+@end
+
+@implementation ABCSettings
+{
+
+}
+- (id)init:(AirbitzCore *)abc localSettings:(ABCLocalSettings *)local keyChain:(ABCKeychain *)keyChain;
+{
+    self = [super init];
+    self.abc = abc;
+    self.local = local;
+    self.keyChain = keyChain;
+    return self;
+}
+
+- (ABCConditionCode)loadSettings;
+{
+    tABC_Error error;
+    tABC_AccountSettings *pSettings = NULL;
+    tABC_CC result = ABC_LoadAccountSettings([self.abc.name UTF8String],
+            [self.abc.password UTF8String],
+            &pSettings,
+            &error);
+    if (ABC_CC_Ok == result)
+    {
+        self.minutesAutoLogout = pSettings->minutesAutoLogout;
+        self.defaultCurrencyNum = pSettings->currencyNum;
+        if (pSettings->bitcoinDenomination.satoshi > 0)
+        {
+            self.denomination = pSettings->bitcoinDenomination.satoshi;
+            self.denominationType = pSettings->bitcoinDenomination.denominationType;
+
+            switch (self.denominationType) {
+                case ABCDenominationBTC:
+                    self.denominationLabel = @"BTC";
+                    self.denominationLabelShort = @"Ƀ ";
+                    break;
+                case ABCDenominationMBTC:
+                    self.denominationLabel = @"mBTC";
+                    self.denominationLabelShort = @"mɃ ";
+                    break;
+                case ABCDenominationUBTC:
+                    self.denominationLabel = @"bits";
+                    self.denominationLabelShort = @"ƀ ";
+                    break;
+
+            }
+        }
+        self.firstName            = pSettings->szFirstName          ? [NSString stringWithUTF8String:pSettings->szFirstName] : nil;
+        self.lastName             = pSettings->szLastName           ? [NSString stringWithUTF8String:pSettings->szLastName] : nil;
+        self.nickName             = pSettings->szNickname           ? [NSString stringWithUTF8String:pSettings->szNickname] : nil;
+        self.fullName             = pSettings->szFullName           ? [NSString stringWithUTF8String:pSettings->szFullName] : nil;
+        self.strPIN               = pSettings->szPIN                ? [NSString stringWithUTF8String:pSettings->szPIN] : nil;
+        self.exchangeRateSource   = pSettings->szExchangeRateSource ? [NSString stringWithUTF8String:pSettings->szExchangeRateSource] : nil;
+
+        self.bNameOnPayments = pSettings->bNameOnPayments;
+        self.bSpendRequirePin = pSettings->bSpendRequirePin;
+        self.spendRequirePinSatoshis = pSettings->spendRequirePinSatoshis;
+        self.bDisablePINLogin = pSettings->bDisablePINLogin;
+    }
+    ABC_FreeAccountSettings(pSettings);
+    [self.local loadAll];
+
+    return [ABCError setLastErrors:error];
+}
+
+- (ABCConditionCode)saveSettings;
+{
+    tABC_Error error;
+    tABC_AccountSettings *pSettings;
+    BOOL pinLoginChanged = NO;
+
+    ABC_LoadAccountSettings([self.abc.name UTF8String], [self.abc.password UTF8String], &pSettings, &error);
+
+    if (ABCConditionCodeOk == [ABCError setLastErrors:error])
+    {
+        if (pSettings->bDisablePINLogin != self.bDisablePINLogin)
+            pinLoginChanged = YES;
+
+        pSettings->minutesAutoLogout                      = self.minutesAutoLogout         ;
+        pSettings->currencyNum                            = self.defaultCurrencyNum        ;
+        pSettings->bitcoinDenomination.satoshi            = self.denomination              ;
+        pSettings->bitcoinDenomination.denominationType   = self.denominationType          ;
+        pSettings->bNameOnPayments                        = self.bNameOnPayments           ;
+        pSettings->bSpendRequirePin                       = self.bSpendRequirePin          ;
+        pSettings->spendRequirePinSatoshis                = self.spendRequirePinSatoshis   ;
+        pSettings->bDisablePINLogin                       = self.bDisablePINLogin          ;
+
+        self.firstName          ? [ABCUtil replaceString:&(pSettings->szFirstName         ) withString:[self.firstName          UTF8String]] : nil;
+        self.lastName           ? [ABCUtil replaceString:&(pSettings->szLastName          ) withString:[self.lastName           UTF8String]] : nil;
+        self.nickName           ? [ABCUtil replaceString:&(pSettings->szNickname          ) withString:[self.nickName           UTF8String]] : nil;
+        self.fullName           ? [ABCUtil replaceString:&(pSettings->szFullName          ) withString:[self.fullName           UTF8String]] : nil;
+        self.strPIN             ? [ABCUtil replaceString:&(pSettings->szPIN               ) withString:[self.strPIN             UTF8String]] : nil;
+        self.exchangeRateSource ? [ABCUtil replaceString:&(pSettings->szExchangeRateSource) withString:[self.exchangeRateSource UTF8String]] : nil;
+
+        if (pinLoginChanged)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+
+                if (self.bDisablePINLogin)
+                {
+                    [self deletePINLogin];
+                }
+                else
+                {
+                    [self setupLoginPIN];
+                }
+            });
+        }
+        
+        ABC_UpdateAccountSettings([self.abc.name UTF8String], [self.abc.password UTF8String], pSettings, &error);
+        if (ABCConditionCodeOk == [ABCError setLastErrors:error])
+        {
+            ABC_FreeAccountSettings(pSettings);
+            [self.keyChain disableKeychainBasedOnSettings:self.abc.name];
+            [self.local saveAll];
+        }
+    }
+
+    return (ABCConditionCode) error.code;
+}
+
+- (void)deletePINLogin
+{
+    NSString *username = NULL;
+    if ([self.abc isLoggedIn])
+    {
+        username = self.abc.name;
+    }
+
+    tABC_Error error;
+    if (username && 0 < username.length)
+    {
+        tABC_CC result = ABC_PinLoginDelete([username UTF8String],
+                &error);
+        if (ABC_CC_Ok != result)
+        {
+            [ABCError setLastErrors:error];
+        }
+    }
+}
+
+
+
+- (void)setupLoginPIN
+{
+    if (!self.bDisablePINLogin)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+            tABC_Error error;
+            ABC_PinSetup([self.abc.name UTF8String],
+                    [self.abc.password length] > 0 ? [self.abc.password UTF8String] : nil,
+                    &error);
+        });
+    }
+}
+
+- (BOOL) touchIDEnabled;
+{
+    if ([self.local.touchIDUsersDisabled indexOfObject:self.abc.name] == NSNotFound &&
+        [self.local.touchIDUsersEnabled  indexOfObject:self.abc.name] != NSNotFound)
+    {
+        return YES;
+    }
+    return NO;
+
+}
+
+- (BOOL) enableTouchID;
+{
+    // Need a password to enable touchID until we get support for login handles
+    if (!self.abc.password) return NO;
+    
+    [self.local.touchIDUsersDisabled removeObject:self.abc.name];
+    [self.local.touchIDUsersEnabled addObject:self.abc.name];
+    [self.local saveAll];
+    [self.keyChain updateLoginKeychainInfo:self.abc.name
+                             password:self.abc.password
+                           useTouchID:YES];
+    
+    return YES;
+}
+
+- (void) disableTouchID;
+{
+    // Disable TouchID in LocalSettings
+    if (self.abc.name)
+    {
+        [self.local.touchIDUsersDisabled addObject:self.abc.name];
+        [self.local.touchIDUsersEnabled removeObject:self.abc.name];
+        [self.local saveAll];
+        [self.keyChain updateLoginKeychainInfo:self.abc.name
+                                 password:self.abc.password
+                               useTouchID:NO];
+    }
+}
+
+
+
+@end

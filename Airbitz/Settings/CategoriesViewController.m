@@ -9,13 +9,13 @@
 #import "CategoriesViewController.h"
 #import "CommonTypes.h"
 #import "CategoriesCell.h"
-#import "ABC.h"
 #import "User.h"
 #import "PickerTextView3.h"
 #import "MainViewController.h"
 #import "Util.h"
 #import "CommonTypes.h"
 #import "Theme.h"
+#import "ABCUtil.h"
 
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
@@ -28,7 +28,6 @@
 
 @interface CategoriesViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate, CategoriesCellDelegate, PickerTextView3Delegate>
 {
-    char            **_aszCategories;
     unsigned int    _count;
     CGRect          _frameTableOriginal;
     CGPoint         _offsetTableOriginal;
@@ -80,7 +79,7 @@
     _frameTableOriginal = self.tableView.frame;
 
     // load the categories
-    self.arrayCategories = [[CoreBridge Singleton].arrayCategories mutableCopy];
+    self.arrayCategories = [abc.arrayCategories mutableCopy];
     [self updateDisplay];
 
     // get a callback when the search changes
@@ -130,7 +129,6 @@
 
 - (void)dealloc
 {
-    [Util freeStringArray:_aszCategories count:_count];
 }
 
 #pragma mark - Action Methods
@@ -163,7 +161,7 @@
 
 - (IBAction)Done
 {
-    [CoreBridge saveCategories:self.arrayCategories];
+    [abc saveCategories:self.arrayCategories];
     [self animatedExit];
 }
 
@@ -604,7 +602,7 @@
 
 - (void)categoriesCellDidShowPopup:(CategoriesCell *)cell
 {
-    //ABLog(2,@"Did show show cell popup");
+    //ABCLog(2,@"Did show show cell popup");
 
     // So the popup has now appear on the screen, here is what we will do
     // (beware the magic numbers!)

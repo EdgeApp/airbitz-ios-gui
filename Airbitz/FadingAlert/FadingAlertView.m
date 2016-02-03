@@ -1,6 +1,5 @@
 
 #import "FadingAlertView.h"
-#import "ABC.h"
 #import "Util.h"
 #import "LatoLabel.h"
 #import "Theme.h"

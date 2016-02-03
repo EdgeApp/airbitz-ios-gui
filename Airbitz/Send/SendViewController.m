@@ -26,12 +26,11 @@
  */
 
 #import "SendViewController.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <Social/Social.h>
 #import "Notifications.h"
-#import "ABC.h"
 #import "SendConfirmationViewController.h"
 #import "FlashSelectView.h"
 #import "User.h"
@@ -39,7 +38,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "TransferService.h"
 #import "BLEScanCell.h"
 #import "Contact.h"
@@ -48,13 +47,11 @@
 #import "ButtonSelectorView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "SpendTarget.h"
+#import "ABCSpend.h"
 #import "Server.h"
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
-
-#define IMPORT_TIMEOUT 30
 
 typedef enum eScanMode
 {
@@ -85,14 +82,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     BOOL                            bWalletListDropped;
     BOOL                            bFlashOn;
     UIAlertView                     *typeAddressAlertView;
-    ImportDataModel                 _dataModel;
-    NSString                        *_sweptAddress;
-    tImportState                    _state;
-    uint64_t                        _sweptAmount;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
     UIAlertView                     *_bitidAlert;
-    NSTimer                         *_callbackTimer;
     NSString                        *_tweet;
     NSString                        *_bitidURI;
 
@@ -106,6 +98,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong)   PopupPickerView2                *popupPickerSendTo;
 @property (nonatomic, strong)   IBOutlet UILabel				*scanningErrorLabel;
 @property (weak, nonatomic)     IBOutlet UILabel                *topTextLabel;
+@property (weak, nonatomic)     IBOutlet UILabel                *textUnderQRScanner;
 
 @property (weak, nonatomic)     IBOutlet UISegmentedControl     *segmentedControl;
 @property (weak, nonatomic)     IBOutlet NSLayoutConstraint     *bleViewHeight;
@@ -138,7 +131,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    [FadingAlertView dismiss:FadingAlertDismissNow];
     
     bWalletListDropped = false;
 
@@ -146,14 +138,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self.buttonSelector disableButton];
 
     self.addressTextField.delegate = self;
+    self.textUnderQRScanner.hidden = YES;
 
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
 
-    [self updateDisplay];
-
-    _dataModel = kWIF;
-    
     self.afmanager = [MainViewController createAFManager];
 }
 
@@ -193,8 +182,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [segmentedControl setEnabled:NO forSegmentAtIndex:0];
     else
         [segmentedControl setEnabled:YES forSegmentAtIndex:0];
-
-    _dataModel = kWIF;
 
     [[NSNotificationCenter defaultCenter]
         addObserver:self
@@ -247,8 +234,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self setupNavBar];
 
-    [FadingAlertView dismiss:FadingAlertDismissNow];
-    
     if (_bImportMode)
     {
         self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
@@ -256,7 +241,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
     {
         self.topTextLabel.text = scanQrToSendFundsText;
-        if ([[User Singleton] offerSendHelp])
+        if ([[LocalSettings controller] offerSendHelp])
         {
             [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
         }
@@ -291,7 +276,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self willResignActive];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self cancelImportExpirationTimer];
+    
+    // XXX Yikes, is this still needed. ABC will callback our handlers in importWallet
+    // but will that still happen if the viewcontroller is destroyed? -paulvp
+//    [self cancelImportExpirationTimer];
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -364,11 +352,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		for (NSInteger i = numPeripherals - 1; i>= 0; i--)
 		{
 			PeripheralContainer *pc = [self.peripheralContainers objectAtIndex:i];
-			//ABLog(2,@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
+			//ABCLog(2,@"Last: %f Current: %f", [pc.lastAdvertisingTime floatValue], currentTime);
 			if(currentTime - [pc.lastAdvertisingTime doubleValue] > 1.0)
 			{
 				//haven't heard from this peripheral in a while.  Kill it.
-				//ABLog(2,@"Removing peripheral");
+				//ABCLog(2,@"Removing peripheral");
 				[self.peripheralContainers removeObjectAtIndex:i];
 				[self updateTable];
 			}
@@ -593,8 +581,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (buttonIndex > 0)
         {
-            [CoreBridge postToMiscQueue:^{
-                BOOL success = [CoreBridge bitidLogin:_bitidURI];
+            [abc postToMiscQueue:^{
+                BOOL success = [abc bitidLogin:_bitidURI];
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (success)
                     {
@@ -619,7 +607,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //ABLog(2,@"################## STARTED BLE ######################");
+        //ABCLog(2,@"################## STARTED BLE ######################");
         [self scan];
         //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
         peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
@@ -630,9 +618,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (!self.bImportMode)
     {
-        //ABLog(2,@"################## STOPPED BLE ######################");
+        //ABCLog(2,@"################## STOPPED BLE ######################");
         [self.centralManager stopScan];
-        //ABLog(2,@"Getting rid of timer");
+        //ABCLog(2,@"Getting rid of timer");
         [peripheralCleanupTimer invalidate];
     }
 }
@@ -644,7 +632,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-//	ABLog(2,@"DID UPDATE STATE");
+//	ABCLog(2,@"DID UPDATE STATE");
 
     if (central.state != CBCentralManagerStatePoweredOn)
 	{
@@ -653,7 +641,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 	else
 	{
-		ABLog(2,@"POWERED ON");
+		ABCLog(2,@"POWERED ON");
         [self startBLE];
 //		[self enableBLEMode];
 //		self.ble_button.hidden = NO;
@@ -665,13 +653,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)scan
 {
-	//ABLog(2,@"################## BLE SCAN STARTED ######################");
+	//ABCLog(2,@"################## BLE SCAN STARTED ######################");
     _data = [[NSMutableData alloc] init];
 	self.peripheralContainers = nil;
 	[self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]
                                                 options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES}];
     
-    //ABLog(2,@"Scanning started");
+    //ABCLog(2,@"Scanning started");
 }
 
 /*
@@ -772,7 +760,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			[self updateTable];
 		}
     }
-//    ABLog(2,@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
+//    ABCLog(2,@"Discovered %@ at %@ with adv data: %@", peripheral.name, RSSI, advertisementData);
 }
 
 
@@ -780,7 +768,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    ABLog(2,@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
+    ABCLog(2,@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]);
     [self cleanup];
 }
 
@@ -789,11 +777,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-//    ABLog(2,@"Peripheral Connected");
+//    ABCLog(2,@"Peripheral Connected");
     
     // Stop scanning
     [self.centralManager stopScan];
-//    ABLog(2,@"Scanning stopped");
+//    ABCLog(2,@"Scanning stopped");
     
     // Clear the data that we may already have
     [self.data setLength:0];
@@ -812,7 +800,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        ABLog(2,@"Error discovering services: %@", [error localizedDescription]);
+        ABCLog(2,@"Error discovering services: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -834,7 +822,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     // Deal with errors (if any)
     if (error) {
-        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABCLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         [self cleanup];
         return;
     }
@@ -847,16 +835,16 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		{
 			
             // Write username to this characteristic
-			BOOL sendName = [User Singleton].bNameOnPayments;
+			BOOL sendName = abc.settings.bNameOnPayments;
 
 			NSString *fullName = @" ";
 			if(sendName)
 			{
-				if([User Singleton].fullName)
+				if(abc.settings.fullName)
 				{
-					if([User Singleton].fullName.length)
+					if(abc.settings.fullName.length)
 					{
-						fullName = [User Singleton].fullName;
+						fullName = abc.settings.fullName;
 					}
 				}
 			}
@@ -869,7 +857,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 			
 			[peripheral writeValue:[fullName dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
 			
-//			ABLog(2,@"Writing: %@ to peripheral", fullName);
+//			ABCLog(2,@"Writing: %@ to peripheral", fullName);
         }
     }
     
@@ -882,7 +870,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        ABLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
+        ABCLog(2,@"Error discovering characteristics: %@", [error localizedDescription]);
         return;
     }
 	
@@ -948,7 +936,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (error)
 	{
-        ABLog(2,@"Error changing notification state: %@", error.localizedDescription);
+        ABCLog(2,@"Error changing notification state: %@", error.localizedDescription);
     }
     
     // Exit if it's not the transfer characteristic
@@ -960,7 +948,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (!characteristic.isNotifying)
 	{
         // so disconnect from the peripheral
-        ABLog(2,@"Notification stopped on %@.  Disconnecting", characteristic);
+        ABCLog(2,@"Notification stopped on %@.  Disconnecting", characteristic);
         [self.centralManager cancelPeripheralConnection:peripheral];
     }
 }
@@ -968,7 +956,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
-	ABLog(2,@"Did Modify Services: %@", invalidatedServices);
+	ABCLog(2,@"Did Modify Services: %@", invalidatedServices);
 }
 
 
@@ -976,7 +964,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    //ABLog(2,@"Did disconnect because: %@", error.description);
+    //ABCLog(2,@"Did disconnect because: %@", error.description);
 	self.peripheralContainers = nil;
     self.discoveredPeripheral = nil;
     
@@ -995,7 +983,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
-        ABLog(2,@"Error writing value for characteristic: %@", error.localizedDescription);
+        ABCLog(2,@"Error writing value for characteristic: %@", error.localizedDescription);
         return;
     }
 
@@ -1086,7 +1074,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //    printf("UUID : %s\r\n",CFStringGetCStringPtr(s, 0));
 //    CFRelease(s);
 //    printf("RSSI : %d\r\n",[peripheralContainer.peripheral.RSSI intValue]);
-//    ABLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
+//    ABCLog(2,@"Name : %@\r\n",peripheralContainer.peripheral.name);
 	BOOL connected = NO;
 	if(peripheralContainer.peripheral.state == CBPeripheralStateConnected)
 	{
@@ -1277,7 +1265,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-	//ABLog(2,@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
+	//ABCLog(2,@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Selecting row: %li", (long)indexPath.row);
 	
 	tableView.allowsSelection = NO;
 	//attempt to connect to this peripheral
@@ -1292,7 +1280,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	self.discoveredPeripheral = pc.peripheral;
 	
 	// And connect
-	//ABLog(2,@"Connecting to peripheral %@", pc.peripheral);
+	//ABCLog(2,@"Connecting to peripheral %@", pc.peripheral);
 	[self.centralManager connectPeripheral:pc.peripheral options:nil];
 }
 
@@ -1305,24 +1293,31 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
 
         NSString *walletName;
         if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", abc.currentWallet.strName];
         else
-            walletName = [NSString stringWithFormat:@"From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"From: %@ ▼", abc.currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
-            [FadingAlertView create:self.view
-                            message:walletHasBeenArchivedText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER];
+            self.textUnderQRScanner.text = walletHasBeenArchivedText;
+            self.textUnderQRScanner.hidden = NO;
+            self.scanFrame.hidden = YES;
+            self.segmentedControl.hidden = YES;
+        }
+        else
+        {
+            self.textUnderQRScanner.hidden = YES;
+            self.scanFrame.hidden = NO;
+            self.segmentedControl.hidden = NO;
         }
 
         [self.tableView reloadData];
@@ -1331,13 +1326,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSendConfirmationTo:(SpendTarget *)spendTarget
+- (void)showSendConfirmationTo:(ABCSpend *)abcSpend
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
 	_sendConfirmationViewController.delegate = self;
-    _sendConfirmationViewController.spendTarget = spendTarget;
+    _sendConfirmationViewController.abcSpend = abcSpend;
 
     [_readerView stop];
 
@@ -1358,76 +1353,44 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (BOOL)importWallet:(NSString *)privateKey
+- (void)importWallet:(NSString *)privateKey
 {
-    bool bSuccess = NO;
-
-    if (privateKey)
-    {
-        privateKey = [privateKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([privateKey length])
+    
+    [abc importPrivateKey:privateKey to:abc.currentWallet.strUUID importing:^(NSString *address) {
+        NSMutableString *statusMessage = [NSMutableString string];
+        [statusMessage appendString:[[NSString alloc]
+                initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
+        [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    } complete:^(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount) {
+        if (0 < amount)
         {
-            NSRange schemeMarkerRange = [privateKey rangeOfString:@"://"];
-            if (NSNotFound != schemeMarkerRange.location)
-            {
-                NSString *scheme = [privateKey substringWithRange:NSMakeRange(0, schemeMarkerRange.location)];
-                if (nil != scheme && 0 != [scheme length])
-                {
-                    if (NSNotFound != [scheme rangeOfString:HIDDEN_BITZ_URI_SCHEME].location)
-                    {
-                        _dataModel = kHBURI;
-
-                        privateKey = [privateKey substringFromIndex:schemeMarkerRange.location + schemeMarkerRange.length];
-
-                        bSuccess = YES;
-                    }
-                }
+            [MainViewController fadingAlertDismiss];
+            if (txid && [txid length]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                    object:nil
+                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abc.currentWallet.strUUID,
+                                                                             KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
-            else
-            {
-                _dataModel = kWIF;
-
-                bSuccess = YES;
-            }
-
-            if (bSuccess)
-            {
-                if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
-                {
-                    // private key is a valid format
-                    // attempt to sweep it
-                    _sweptAddress = [CoreBridge sweepKey:privateKey
-                                              intoWallet:[CoreBridge Singleton].currentWallet.strUUID
-                                            withCallback:ABC_Sweep_Complete_Callback];
-
-                    if (nil != _sweptAddress && _sweptAddress.length)
-                    {
-                        _state = ImportState_Importing;
-                        [self updateDisplay];
-                        _callbackTimer = [NSTimer scheduledTimerWithTimeInterval:IMPORT_TIMEOUT
-                                                                          target:self
-                                                                        selector:@selector(expireImport)
-                                                                        userInfo:nil
-                                                                         repeats:NO];
-                    }
-                    else
-                    {
-                        // no address associated with the private key, must be invalid
-                        bSuccess = NO;
-                    }
-
-                }
-            }
+            if (ABCImportHBitsURI == dataModel)
+                [self showHbitsResults:address amount:amount];
         }
-    }
+        else
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
+        }
 
-    if (NO == bSuccess)
-    {
-        _sweptAddress = nil;
-        [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        if (ccode == ABCConditionCodeNoTransaction)
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
+        }
+        else
+        {
+            [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
+        }
+
         [self updateState];
-    }
-    return bSuccess;
+    }];
 }
 
 
@@ -1486,13 +1449,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
     NSMutableArray *arrayChoicesIndexes = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < [[CoreBridge Singleton].arrayWallets count]; i++)
+    for (int i = 0; i < [abc.arrayWallets count]; i++)
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
-        if ([CoreBridge Singleton].currentWalletID != i)
+        if (abc.currentWalletID != i)
         {
-            Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:i];
+            ABCWallet *wallet = [abc.arrayWallets objectAtIndex:i];
 
             BOOL bAddIt = bUseAll;
             if (!bAddIt)
@@ -1506,7 +1469,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [CoreBridge formatSatoshi:wallet.balance]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [abc formatSatoshi:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -1523,7 +1486,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)toggleFlash
 {
 
-    //ABLog(2,@"Flash Item Selected: %i", flashType);
+    //ABCLog(2,@"Flash Item Selected: %i", flashType);
     if (bFlashOn)
     {
         [self flashItemSelected:FLASH_ITEM_OFF];
@@ -1597,7 +1560,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 
 }
@@ -1659,7 +1622,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    NSString *bitidDomainURL = [CoreBridge bitidParseURI:_addressTextField.text];
+    NSString *bitidDomainURL = [abc bitidParseURI:_addressTextField.text];
     if (bitidDomainURL)
     {
         _bitidURI = _addressTextField.text;
@@ -1723,10 +1686,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if ([CoreBridge Singleton].currentWallet.loaded != YES)
+            if (abc.currentWallet.loaded != YES)
             {
                 // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
-                ABLog(1,@"Waiting for wallet to load: %@", [CoreBridge Singleton].currentWallet.strName);
+                ABCLog(1,@"Waiting for wallet to load: %@", abc.currentWallet.strName);
                 
                 if (numRecursions < 2)
                     [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
@@ -1739,23 +1702,29 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
                                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
             
-            tABC_Error error;
-            SpendTarget *spendTarget = [[SpendTarget alloc] init];
             NSString *text = _addressTextField.text;
             
             if (text.length)
             {
                 // see if the text corresponds to one of the loaded wallets
-                NSInteger index = [[CoreBridge Singleton].arrayWalletNames indexOfObject:text];
-                Wallet *wallet = nil;
+                NSInteger index = [abc.arrayWalletNames indexOfObject:text];
+                ABCWallet *wallet = nil;
                 if (index != NSNotFound)
                 {
-                    wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+                    wallet = [abc.arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
-                        [spendTarget newTransfer:wallet.strUUID error:&error];
-                        [self showSendConfirmationTo:spendTarget];
-                        [MainViewController fadingAlertDismiss];
+                        ABCSpend *abcSpend;
+                        ABCConditionCode ccode = [abc newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
+                        if (ABCConditionCodeOk == ccode)
+                        {
+                            [self showSendConfirmationTo:abcSpend];
+                            [MainViewController fadingAlertDismiss];
+                        }
+                        else
+                        {
+                            [MainViewController fadingAlert:NSLocalizedString(@"Error initiating wallet transfer", nil)];
+                        }
                     }
                     else
                     {
@@ -1768,14 +1737,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 {
                     if (_bImportMode)
                     {
-                        if ([self importWallet:text])
-                        {
-                            [self stopQRReader];
-                        }
-                        else
-                        {
-                            [MainViewController fadingAlertDismiss];
-                        }
+                        [self importWallet:text];
                     }
                     else
                     {
@@ -1793,21 +1755,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)trySpend:(NSString *)text
 {
-    [CoreBridge postToMiscQueue:^{
-        tABC_Error error;
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-        if ([spendTarget newSpend:text error:&error]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self stopQRReader];
-                [self showSendConfirmationTo:spendTarget];
-                [MainViewController fadingAlertDismiss];
-
-            });
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
-            });
-        }
+    [abc newSpendFromTextAsync:text complete:^(ABCSpend *abcSpend){
+        [self stopQRReader];
+        [self showSendConfirmationTo:abcSpend];
+        [MainViewController fadingAlertDismiss];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
     }];
 }
 
@@ -1819,49 +1772,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
-    tABC_Error error;
     // set the text field to the choice
     NSInteger index = [[self.arrayChoicesIndexes objectAtIndex:row] integerValue];
     if (index >= 0)
     {
-        Wallet *wallet = [[CoreBridge Singleton].arrayWallets objectAtIndex:index];
+        ABCWallet *wallet = [abc.arrayWallets objectAtIndex:index];
 
-        SpendTarget *spendTarget = [[SpendTarget alloc] init];
-        spendTarget.destWallet = wallet;
-        [spendTarget newTransfer:wallet.strUUID error:&error];
-        [self stopQRReader];
-        [self showSendConfirmationTo:spendTarget];
+        ABCSpend *abcSpend;
+        ABCConditionCode ccode = [abc newSpendTransfer:wallet.strUUID abcSpend:&abcSpend];
+        if (ABCConditionCodeOk == ccode)
+        {
+            [self stopQRReader];
+            [self showSendConfirmationTo:abcSpend];
+        }
     }
     [view dismiss];
 
 }
 
-- (void)updateDisplay
-{
-    if (_state == ImportState_PrivateKey)
-    {
-//        self.viewDisplay.hidden = NO;
-//        self.viewPassword.hidden = YES;
-    }
-    else
-    {
-        if (_state == ImportState_Importing)
-        {
-            NSMutableString *statusMessage = [NSMutableString string];
-            [statusMessage appendString:[[NSString alloc]
-                         initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), _sweptAddress]];
-            [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        }
-    }
-}
-
-
 - (void)updateState
 {
     if (nil == _tweetAlert && nil == _sweptAlert)
     {
-        _state = ImportState_PrivateKey;
-        [self updateDisplay];
         [self startQRReader];
     }
 }
@@ -1888,147 +1820,59 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [MainViewController fadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
 }
 
-- (void)showSweepResults
+- (void)showHbitsResults:(NSString *)address amount:(uint64_t) amount
 {
-    if (_sweptAlert)
+    // make a query with the last bytes of the address
+    const int hBitzIDLength = 4;
+    if (nil != address && hBitzIDLength <= address.length)
     {
-        [_sweptAlert show];
-    }
-
-    if (kHBURI == _dataModel)
-    {
-        // make a query with the last bytes of the address
-        const int hBitzIDLength = 4;
-        if (nil != _sweptAddress && hBitzIDLength <= _sweptAddress.length)
-        {
-            NSString *hiddenBitzID = [_sweptAddress substringFromIndex:[_sweptAddress length]-hBitzIDLength];
-            NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
-
-            [self.afmanager GET:hiddenBitzURI parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                NSDictionary *results = (NSDictionary *)responseObject;
-                
-                if (results)
+        NSString *hiddenBitzID = [address substringFromIndex:[address length]-hBitzIDLength];
+        NSString *hiddenBitzURI = [NSString stringWithFormat:@"%@%@%@", SERVER_API, @"/hiddenbits/", hiddenBitzID];
+        
+        [self.afmanager GET:hiddenBitzURI parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSDictionary *results = (NSDictionary *)responseObject;
+            
+            if (results)
+            {
+                NSString *token = [results objectForKey:@"token"];
+                _tweet = [results objectForKey:@"tweet"];
+                if (token && _tweet)
                 {
-                    NSString *token = [results objectForKey:@"token"];
-                    _tweet = [results objectForKey:@"tweet"];
-                    if (token && _tweet)
+                    if (0 == amount)
                     {
-                        if (0 == _sweptAmount)
+                        NSString *zmessage = [results objectForKey:@"zero_message"];
+                        if (zmessage)
                         {
-                            NSString *zmessage = [results objectForKey:@"zero_message"];
-                            if (zmessage)
-                            {
-                                _tweetAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Sorry", nil)
-                                               message:zmessage
-                                               delegate:self
-                                               cancelButtonTitle:@"No"
-                                               otherButtonTitles:@"OK", nil];
-                                [_tweetAlert show];
-                            }
+                            _tweetAlert = [[UIAlertView alloc]
+                                           initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                           message:zmessage
+                                           delegate:self
+                                           cancelButtonTitle:@"No"
+                                           otherButtonTitles:@"OK", nil];
+                            [_tweetAlert show];
                         }
-                        else
+                    }
+                    else
+                    {
+                        NSString *message = [results objectForKey:@"message"];
+                        if (message)
                         {
-                            NSString *message = [results objectForKey:@"message"];
-                            if (message)
-                            {
-                                _tweetAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Congratulations", nil)
-                                               message:message
-                                               delegate:self
-                                               cancelButtonTitle:@"No"
-                                               otherButtonTitles:@"OK", nil];
-                                [_tweetAlert show];
-                            }
+                            _tweetAlert = [[UIAlertView alloc]
+                                           initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                           message:message
+                                           delegate:self
+                                           cancelButtonTitle:@"No"
+                                           otherButtonTitles:@"OK", nil];
+                            [_tweetAlert show];
                         }
                     }
                 }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                ABLog(1, @"*** ERROR Connecting to Network: showSweepResults");
-            }];
-        }
-    }
-}
-
-
-- (void)expireImport
-{
-    [MainViewController fadingAlertDismiss];
-    UIAlertView *alert = [[UIAlertView alloc]
-              initWithTitle:NSLocalizedString(@"Error", nil)
-                    message:NSLocalizedString(@"Import failed", nil)
-                    delegate:nil
-        cancelButtonTitle:@"OK"
-        otherButtonTitles:nil];
-    [alert show];
-    _callbackTimer = nil;
-}
-
-- (void)cancelImportExpirationTimer
-{
-    if (_callbackTimer)
-    {
-        [_callbackTimer invalidate];
-        _callbackTimer = nil;
-    }
-}
-
-- (void)sweepDoneCallback:(NSNotification *)notification
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MainViewController fadingAlertDismiss];
-    });
-    
-    [self cancelImportExpirationTimer];
-
-    NSDictionary *userInfo = [notification userInfo];
-    tABC_CC result = [[userInfo objectForKey:KEY_SWEEP_CORE_CONDITION_CODE] intValue];
-    uint64_t amount = [[userInfo objectForKey:KEY_SWEEP_TX_AMOUNT] unsignedLongLongValue];
-    if (nil == _sweptAlert)
-    {
-        _sweptAmount = amount;
-
-        if (ABC_CC_Ok == result)
-        {
-            if (0 < amount)
-            {
-                NSString *sweptTXID = [userInfo objectForKey:KEY_SWEEP_TX_ID];
-                if (sweptTXID && [sweptTXID length]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
-                                                                        object:nil
-                                                                    userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:[CoreBridge Singleton].currentWallet.strUUID,
-                                                                            KEY_TX_DETAILS_EXITED_TX_ID:sweptTXID}];
-                }
             }
-            else if (kHBURI != _dataModel)
-            {
-                NSString *message = NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil);
-                _sweptAlert = [[UIAlertView alloc]
-                        initWithTitle:NSLocalizedString(@"Error", nil)
-                              message:message
-                             delegate:self
-                    cancelButtonTitle:@"OK"
-                    otherButtonTitles:nil, nil];
-            }
-        }
-        else
-        {
-            tABC_Error temp;
-            temp.code = result;
-            NSString *message = [Util errorMap:&temp];
-            _sweptAlert = [[UIAlertView alloc]
-                    initWithTitle:NSLocalizedString(@"Error", nil)
-                          message:message
-                         delegate:self
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil, nil];
-        }
-
-        [self performSelectorOnMainThread:@selector(showSweepResults)
-                               withObject:nil
-                            waitUntilDone:NO];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            ABCLog(1, @"*** ERROR Connecting to Network: showHbitsResults");
+        }];
     }
 }
 

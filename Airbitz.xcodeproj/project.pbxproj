@@ -8,12 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C88A91632A7616E92B4670D /* libPods.a */; };
+		34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644057CCD9187637760383 /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		3464407B03DBCC2AD6BECB44 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
+		346440829320442D931D3866 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
+		34644171F69BDD4E274A6B0D /* ABCTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442C844B18610760B2984 /* ABCTransaction.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		3464420F3DDEFE61BA42F4C6 /* ABCTxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F47E0E1A279F4735D67 /* ABCTxOutput.m */; };
+		34644217215092D4F2F06816 /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
+		346442459158A3F1E68A677D /* ABCWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464404FFE8E658168EBEEFB /* ABCWallet.m */; };
+		34644268D28E53E9B81B948E /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
+		346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		346442FF5C0981D87A7C8AB0 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		3464448993C099A42764377E /* ABCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644094FDFE70BFE3B9A7A8 /* ABCError.m */; };
+		346444C7B6FFE05F1DE7D906 /* ABCWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464404FFE8E658168EBEEFB /* ABCWallet.m */; };
 		346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
+		3464455250DF9A47DDE4D8CA /* ABCTxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F47E0E1A279F4735D67 /* ABCTxOutput.m */; };
 		346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
+		346445CC0CDF3213D139409C /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
+		346446B0D375F21479F5E91C /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		3464491590D9099322E3B5CE /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
+		3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644ED4090F92F550AB9B71 /* AirbitzCore.m */; };
+		34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F90C87B4117D1851B98 /* ABCRequest.m */; };
+		34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464408F86584EFFA0DCAE24 /* ABCStrings.m */; };
+		34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644C087A2CEC8E2CAACAF5 /* ABCTxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644F47E0E1A279F4735D67 /* ABCTxOutput.m */; };
+		34644D1F075F9615406A94F1 /* ABCTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442C844B18610760B2984 /* ABCTransaction.m */; };
+		34644D9C4171CC241B6B1609 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		34644E0EFEE9E1623DAC9DB2 /* ABCTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442C844B18610760B2984 /* ABCTransaction.m */; };
+		34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464460D4793BA199DB14504 /* ABCLocalSettings.m */; };
+		34644E695BDDD02E189B37FC /* ABCWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464404FFE8E658168EBEEFB /* ABCWallet.m */; };
+		34644E9C14358F405DB8759D /* ABCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */; };
+		34644F0F3076CE803615885C /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
+		34644FA26FCA347A81960356 /* ABCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -93,7 +126,6 @@
 		DA9ED7D81BC61E680063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9ED7D91BC61E680063DA07 /* Config.h.example in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7911BC61E670063DA07 /* Config.h.example */; };
 		DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
-		DA9ED7DB1BC61E680063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
 		DA9ED7DD1BC61E680063DA07 /* DateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7991BC61E670063DA07 /* DateTime.m */; };
 		DA9ED7DE1BC61E680063DA07 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79B1BC61E670063DA07 /* DebugViewController.m */; };
@@ -115,15 +147,10 @@
 		DA9ED7F01BC61E680063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9ED7F11BC61E680063DA07 /* StylizedTextField2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */; };
 		DA9ED7F21BC61E680063DA07 /* StylizedTextField3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */; };
-		DA9ED7F31BC61E680063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
-		DA9ED7F41BC61E680063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9ED7F51BC61E680063DA07 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C51BC61E680063DA07 /* Theme.m */; };
 		DA9ED7F61BC61E680063DA07 /* UIImage+Colorize.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C81BC61E680063DA07 /* UIImage+Colorize.m */; };
 		DA9ED7F71BC61E680063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
 		DA9ED7F81BC61E680063DA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CC1BC61E680063DA07 /* ViewController.m */; };
-		DA9EE0B51BC61F920063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
-		DA9EE0B61BC61F920063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
-		DA9EE0B71BC61F920063DA07 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8021BC61F8F0063DA07 /* Wallet.m */; };
 		DA9EE0B91BC61F920063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EE0BA1BC61F920063DA07 /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80A1BC61F8F0063DA07 /* BD_Social_Cell.m */; };
 		DA9EE0BB1BC61F920063DA07 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80C1BC61F8F0063DA07 /* BusinessDetailsViewController.m */; };
@@ -150,7 +177,7 @@
 		DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */; };
 		DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */; };
-		DA9EE4051BC61F920063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EE4051BC61F920063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EE4061BC61F920063DA07 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC71BC61F910063DA07 /* LoginViewController.m */; };
 		DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; };
 		DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */; };
@@ -386,7 +413,7 @@
 		DA9EE5111BC61F930063DA07 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */; };
 		DA9EE5121BC61F930063DA07 /* SendStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */; };
 		DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
-		DA9EE5141BC61F930063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EE5141BC61F930063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EE5151BC61F930063DA07 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00A1BC61F920063DA07 /* BooleanCell.m */; };
 		DA9EE5161BC61F930063DA07 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00C1BC61F920063DA07 /* ButtonCell.m */; };
 		DA9EE5171BC61F930063DA07 /* ButtonOnlyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00E1BC61F920063DA07 /* ButtonOnlyCell.m */; };
@@ -429,7 +456,6 @@
 		DA9EE5551BC61F930063DA07 /* ExportWalletOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0831BC61F920063DA07 /* ExportWalletOptionsViewController.m */; };
 		DA9EE5561BC61F930063DA07 /* ExportWalletPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */; };
 		DA9EE5571BC61F930063DA07 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */; };
-		DA9EE5581BC61F930063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EE5591BC61F930063DA07 /* PayeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08B1BC61F920063DA07 /* PayeeCell.m */; };
 		DA9EE55A1BC61F930063DA07 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08D1BC61F920063DA07 /* TransactionCell.m */; };
 		DA9EE55B1BC61F930063DA07 /* TransactionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE08F1BC61F920063DA07 /* TransactionDetailsViewController.m */; };
@@ -500,7 +526,6 @@
 		DA9EF36B1BC7285D0063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
 		DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03C1BC61F920063DA07 /* StrokeGradientButton.m */; };
 		DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED61BC61F910063DA07 /* SignUpViewController.m */; };
-		DA9EF36E1BC7285D0063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE71BC61F910063DA07 /* PluginViewController.m */; };
 		DA9EF3701BC7285D0063DA07 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8171BC61F8F0063DA07 /* Location.m */; };
 		DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7851BC61E670063DA07 /* BlurView.m */; };
@@ -514,7 +539,7 @@
 		DA9EF3791BC7285D0063DA07 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
 		DA9EF37A1BC7285D0063DA07 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DA9EF37B1BC7285D0063DA07 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
-		DA9EF37C1BC7285D0063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EF37C1BC7285D0063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EF37D1BC7285D0063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EF37E1BC7285D0063DA07 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02F1BC61F920063DA07 /* SignUpContactsController.m */; };
 		DA9EF37F1BC7285D0063DA07 /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8151BC61F8F0063DA07 /* DividerView.m */; };
@@ -546,7 +571,6 @@
 		DA9EF39A1BC7285D0063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; };
 		DA9EF39B1BC7285D0063DA07 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED81A1BC61F8F0063DA07 /* Annotation.m */; };
 		DA9EF39C1BC7285D0063DA07 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80C1BC61F8F0063DA07 /* BusinessDetailsViewController.m */; };
-		DA9EF39D1BC7285D0063DA07 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8021BC61F8F0063DA07 /* Wallet.m */; };
 		DA9EF39E1BC7285D0063DA07 /* StylizedTextField3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */; };
 		DA9EF39F1BC7285D0063DA07 /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0791BC61F920063DA07 /* UIPhotoGalleryViewController.m */; };
 		DA9EF3A01BC7285D0063DA07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
@@ -555,8 +579,7 @@
 		DA9EF3A31BC7285D0063DA07 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80E1BC61F8F0063DA07 /* UIPhotoGalleryViewController+Slider.m */; };
 		DA9EF3A41BC7285D0063DA07 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */; };
 		DA9EF3A51BC7285D0063DA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CC1BC61E680063DA07 /* ViewController.m */; };
-		DA9EF3A61BC7285D0063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
-		DA9EF3A71BC7285D0063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EF3A71BC7285D0063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
 		DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
 		DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
@@ -571,7 +594,6 @@
 		DA9EF3B31BC7285D0063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
-		DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -591,10 +613,8 @@
 		DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
-		DA9EF3CC1BC7285D0063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
 		DA9EF3CD1BC7285D0063DA07 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0931BC61F920063DA07 /* WalletCell.m */; };
 		DA9EF3CE1BC7285D0063DA07 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03F1BC61F920063DA07 /* CDataScanner.m */; };
-		DA9EF3CF1BC7285D0063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
 		DA9EF3D01BC7285D0063DA07 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00A1BC61F920063DA07 /* BooleanCell.m */; };
 		DA9EF3D11BC7285D0063DA07 /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80A1BC61F8F0063DA07 /* BD_Social_Cell.m */; };
 		DA9EF3D21BC7285D0063DA07 /* UIPhotoGallerySliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0741BC61F920063DA07 /* UIPhotoGallerySliderView.m */; };
@@ -874,7 +894,6 @@
 		DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
 		DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
-		DA9EF5071BC7285D0063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -908,7 +927,6 @@
 		DA9EF5321BC729FA0063DA07 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CA1BC61E680063DA07 /* Util.m */; };
 		DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03C1BC61F920063DA07 /* StrokeGradientButton.m */; };
 		DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED61BC61F910063DA07 /* SignUpViewController.m */; };
-		DA9EF5351BC729FA0063DA07 /* OfflineWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */; };
 		DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE71BC61F910063DA07 /* PluginViewController.m */; };
 		DA9EF5371BC729FA0063DA07 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8171BC61F8F0063DA07 /* Location.m */; };
 		DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7851BC61E670063DA07 /* BlurView.m */; };
@@ -922,7 +940,7 @@
 		DA9EF5401BC729FA0063DA07 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
 		DA9EF5411BC729FA0063DA07 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DA9EF5421BC729FA0063DA07 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
-		DA9EF5431BC729FA0063DA07 /* Keychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* Keychain.m */; };
+		DA9EF5431BC729FA0063DA07 /* ABCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */; };
 		DA9EF5441BC729FA0063DA07 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
 		DA9EF5451BC729FA0063DA07 /* SignUpContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE02F1BC61F920063DA07 /* SignUpContactsController.m */; };
 		DA9EF5461BC729FA0063DA07 /* DividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8151BC61F8F0063DA07 /* DividerView.m */; };
@@ -954,7 +972,6 @@
 		DA9EF5611BC729FA0063DA07 /* LatoLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A01BC61E680063DA07 /* LatoLabel.m */; };
 		DA9EF5621BC729FA0063DA07 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED81A1BC61F8F0063DA07 /* Annotation.m */; };
 		DA9EF5631BC729FA0063DA07 /* BusinessDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80C1BC61F8F0063DA07 /* BusinessDetailsViewController.m */; };
-		DA9EF5641BC729FA0063DA07 /* Wallet.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8021BC61F8F0063DA07 /* Wallet.m */; };
 		DA9EF5651BC729FA0063DA07 /* StylizedTextField3.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */; };
 		DA9EF5661BC729FA0063DA07 /* UIPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0791BC61F920063DA07 /* UIPhotoGalleryViewController.m */; };
 		DA9EF5671BC729FA0063DA07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
@@ -963,8 +980,7 @@
 		DA9EF56A1BC729FA0063DA07 /* UIPhotoGalleryViewController+Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80E1BC61F8F0063DA07 /* UIPhotoGalleryViewController+Slider.m */; };
 		DA9EF56B1BC729FA0063DA07 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */; };
 		DA9EF56C1BC729FA0063DA07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7CC1BC61E680063DA07 /* ViewController.m */; };
-		DA9EF56D1BC729FA0063DA07 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */; };
-		DA9EF56E1BC729FA0063DA07 /* SpendTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* SpendTarget.m */; };
+		DA9EF56E1BC729FA0063DA07 /* ABCSpend.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0071BC61F920063DA07 /* ABCSpend.m */; };
 		DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
 		DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0051BC61F920063DA07 /* SendViewController.m */; };
 		DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7971BC61E670063DA07 /* DarkenView.m */; };
@@ -979,7 +995,6 @@
 		DA9EF57A1BC729FA0063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AF1BC61E680063DA07 /* NSMutableData+Secure.m */; };
 		DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
-		DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7951BC61E670063DA07 /* CoreBridge.m */; };
 		DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7BC1BC61E680063DA07 /* StylizedTextField.m */; };
 		DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8111BC61F8F0063DA07 /* categoryCell.m */; };
 		DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -999,10 +1014,8 @@
 		DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
-		DA9EF5931BC729FA0063DA07 /* SyncView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7C21BC61E680063DA07 /* SyncView.m */; };
 		DA9EF5941BC729FA0063DA07 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0931BC61F920063DA07 /* WalletCell.m */; };
 		DA9EF5951BC729FA0063DA07 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE03F1BC61F920063DA07 /* CDataScanner.m */; };
-		DA9EF5961BC729FA0063DA07 /* TxOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8001BC61F8F0063DA07 /* TxOutput.m */; };
 		DA9EF5971BC729FA0063DA07 /* BooleanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE00A1BC61F920063DA07 /* BooleanCell.m */; };
 		DA9EF5981BC729FA0063DA07 /* BD_Social_Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED80A1BC61F8F0063DA07 /* BD_Social_Cell.m */; };
 		DA9EF5991BC729FA0063DA07 /* UIPhotoGallerySliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0741BC61F920063DA07 /* UIPhotoGallerySliderView.m */; };
@@ -1282,7 +1295,6 @@
 		DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
 		DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
-		DA9EF6CE1BC729FA0063DA07 /* SyncView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */; };
 		DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -1442,12 +1454,35 @@
 /* Begin PBXFileReference section */
 		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3464404FFE8E658168EBEEFB /* ABCWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCWallet.m; sourceTree = "<group>"; };
+		3464408F86584EFFA0DCAE24 /* ABCStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCStrings.m; sourceTree = "<group>"; };
+		34644094FDFE70BFE3B9A7A8 /* ABCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCError.m; sourceTree = "<group>"; };
+		346440D2F7EA2D5CE8C9DB5D /* ABCWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCWallet.h; sourceTree = "<group>"; };
+		346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCUtil.m; sourceTree = "<group>"; };
+		346441F52001A12B2E9187EE /* ABCConditionCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCConditionCode.h; sourceTree = "<group>"; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
+		346442C844B18610760B2984 /* ABCTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCTransaction.m; sourceTree = "<group>"; };
+		3464446B9A66BA410AA0E017 /* ABCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSettings.h; sourceTree = "<group>"; };
+		3464455D2CF43EE05846DB82 /* ABCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCUtil.h; sourceTree = "<group>"; };
+		34644599995E0611AA16AB82 /* ABCTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCTransaction.h; sourceTree = "<group>"; };
+		346445CE29D47C2D7FC5F78D /* ABCStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCStrings.h; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
+		3464460D4793BA199DB14504 /* ABCLocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCLocalSettings.m; sourceTree = "<group>"; };
+		346447584A8B61803711CB84 /* AirbitzCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzCore.h; sourceTree = "<group>"; };
+		346448867CF607DEED6BA49C /* AB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AB.m; sourceTree = "<group>"; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
+		34644C030542DBECDD84F15A /* ABCTxOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCTxOutput.h; sourceTree = "<group>"; };
+		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AB.h; sourceTree = "<group>"; };
+		34644DE10A63062D42EFA426 /* ABCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCError.h; sourceTree = "<group>"; };
+		34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSettings.m; sourceTree = "<group>"; };
+		34644E21D66F895B121307AF /* ABCLocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCLocalSettings.h; sourceTree = "<group>"; };
+		34644ED4090F92F550AB9B71 /* AirbitzCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzCore.m; sourceTree = "<group>"; };
+		34644F47E0E1A279F4735D67 /* ABCTxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCTxOutput.m; sourceTree = "<group>"; };
+		34644F90C87B4117D1851B98 /* ABCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCRequest.m; sourceTree = "<group>"; };
+		34644F92028A8B3650337231 /* ABCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCRequest.h; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -1509,8 +1544,6 @@
 		DA9ED7911BC61E670063DA07 /* Config.h.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.h.example; sourceTree = "<group>"; };
 		DA9ED7921BC61E670063DA07 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		DA9ED7931BC61E670063DA07 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		DA9ED7941BC61E670063DA07 /* CoreBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBridge.h; sourceTree = "<group>"; };
-		DA9ED7951BC61E670063DA07 /* CoreBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreBridge.m; sourceTree = "<group>"; };
 		DA9ED7961BC61E670063DA07 /* DarkenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DarkenView.h; sourceTree = "<group>"; };
 		DA9ED7971BC61E670063DA07 /* DarkenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DarkenView.m; sourceTree = "<group>"; };
 		DA9ED7981BC61E670063DA07 /* DateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTime.h; sourceTree = "<group>"; };
@@ -1552,9 +1585,6 @@
 		DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField2.m; sourceTree = "<group>"; };
 		DA9ED7BF1BC61E680063DA07 /* StylizedTextField3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StylizedTextField3.h; sourceTree = "<group>"; };
 		DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StylizedTextField3.m; sourceTree = "<group>"; };
-		DA9ED7C11BC61E680063DA07 /* SyncView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncView.h; sourceTree = "<group>"; };
-		DA9ED7C21BC61E680063DA07 /* SyncView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncView.m; sourceTree = "<group>"; };
-		DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SyncView~iphone.xib"; sourceTree = "<group>"; };
 		DA9ED7C41BC61E680063DA07 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
 		DA9ED7C51BC61E680063DA07 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		DA9ED7C61BC61E680063DA07 /* TransferService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferService.h; sourceTree = "<group>"; };
@@ -1564,12 +1594,6 @@
 		DA9ED7CA1BC61E680063DA07 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		DA9ED7CB1BC61E680063DA07 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DA9ED7CC1BC61E680063DA07 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DA9ED7FD1BC61F8F0063DA07 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
-		DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
-		DA9ED7FF1BC61F8F0063DA07 /* TxOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TxOutput.h; sourceTree = "<group>"; };
-		DA9ED8001BC61F8F0063DA07 /* TxOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TxOutput.m; sourceTree = "<group>"; };
-		DA9ED8011BC61F8F0063DA07 /* Wallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wallet.h; sourceTree = "<group>"; };
-		DA9ED8021BC61F8F0063DA07 /* Wallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wallet.m; sourceTree = "<group>"; };
 		DA9ED8071BC61F8F0063DA07 /* BD_CommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_CommonCell.h; sourceTree = "<group>"; };
 		DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BD_CommonCell.m; sourceTree = "<group>"; };
 		DA9ED8091BC61F8F0063DA07 /* BD_Social_Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_Social_Cell.h; sourceTree = "<group>"; };
@@ -1617,8 +1641,8 @@
 		DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownAlertView.xib; sourceTree = "<group>"; };
 		DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertDropDownView.xib; sourceTree = "<group>"; };
 		DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertViewNew.xib; sourceTree = "<group>"; };
-		DA9EDEC31BC61F910063DA07 /* Keychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keychain.h; sourceTree = "<group>"; };
-		DA9EDEC41BC61F910063DA07 /* Keychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keychain.m; sourceTree = "<group>"; };
+		DA9EDEC31BC61F910063DA07 /* ABCKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCKeychain.h; sourceTree = "<group>"; };
+		DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCKeychain.m; sourceTree = "<group>"; };
 		DA9EDEC61BC61F910063DA07 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DA9EDEC71BC61F910063DA07 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DA9EDEC81BC61F910063DA07 /* PasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordRecoveryViewController.h; sourceTree = "<group>"; };
@@ -1880,8 +1904,8 @@
 		DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
 		DA9EE0041BC61F920063DA07 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
 		DA9EE0051BC61F920063DA07 /* SendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendViewController.m; sourceTree = "<group>"; };
-		DA9EE0061BC61F920063DA07 /* SpendTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTarget.h; sourceTree = "<group>"; };
-		DA9EE0071BC61F920063DA07 /* SpendTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendTarget.m; sourceTree = "<group>"; };
+		DA9EE0061BC61F920063DA07 /* ABCSpend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCSpend.h; sourceTree = "<group>"; };
+		DA9EE0071BC61F920063DA07 /* ABCSpend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABCSpend.m; sourceTree = "<group>"; };
 		DA9EE0091BC61F920063DA07 /* BooleanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooleanCell.h; sourceTree = "<group>"; };
 		DA9EE00A1BC61F920063DA07 /* BooleanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooleanCell.m; sourceTree = "<group>"; };
 		DA9EE00B1BC61F920063DA07 /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
@@ -1964,8 +1988,6 @@
 		DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletPDFViewController.m; sourceTree = "<group>"; };
 		DA9EE0861BC61F920063DA07 /* ExportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletViewController.h; sourceTree = "<group>"; };
 		DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletViewController.m; sourceTree = "<group>"; };
-		DA9EE0881BC61F920063DA07 /* OfflineWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfflineWalletViewController.h; sourceTree = "<group>"; };
-		DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineWalletViewController.m; sourceTree = "<group>"; };
 		DA9EE08A1BC61F920063DA07 /* PayeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayeeCell.h; sourceTree = "<group>"; };
 		DA9EE08B1BC61F920063DA07 /* PayeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayeeCell.m; sourceTree = "<group>"; };
 		DA9EE08C1BC61F920063DA07 /* TransactionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionCell.h; sourceTree = "<group>"; };
@@ -2376,12 +2398,6 @@
 		DA9ED7FC1BC61F8F0063DA07 /* ABC Data */ = {
 			isa = PBXGroup;
 			children = (
-				DA9ED7FD1BC61F8F0063DA07 /* Transaction.h */,
-				DA9ED7FE1BC61F8F0063DA07 /* Transaction.m */,
-				DA9ED7FF1BC61F8F0063DA07 /* TxOutput.h */,
-				DA9ED8001BC61F8F0063DA07 /* TxOutput.m */,
-				DA9ED8011BC61F8F0063DA07 /* Wallet.h */,
-				DA9ED8021BC61F8F0063DA07 /* Wallet.m */,
 			);
 			path = "ABC Data";
 			sourceTree = "<group>";
@@ -2485,13 +2501,34 @@
 			path = FadingAlert2;
 			sourceTree = "<group>";
 		};
-		DA9EDEC21BC61F910063DA07 /* Keychain */ = {
+		DA9EDEC21BC61F910063DA07 /* AirbitzCore */ = {
 			isa = PBXGroup;
 			children = (
-				DA9EDEC31BC61F910063DA07 /* Keychain.h */,
-				DA9EDEC41BC61F910063DA07 /* Keychain.m */,
+				DA9EDEC31BC61F910063DA07 /* ABCKeychain.h */,
+				DA9EDEC41BC61F910063DA07 /* ABCKeychain.m */,
+				346441F52001A12B2E9187EE /* ABCConditionCode.h */,
+				3464446B9A66BA410AA0E017 /* ABCSettings.h */,
+				3464455D2CF43EE05846DB82 /* ABCUtil.h */,
+				34644DE10A63062D42EFA426 /* ABCError.h */,
+				34644E21D66F895B121307AF /* ABCLocalSettings.h */,
+				34644094FDFE70BFE3B9A7A8 /* ABCError.m */,
+				34644F90C87B4117D1851B98 /* ABCRequest.m */,
+				3464460D4793BA199DB14504 /* ABCLocalSettings.m */,
+				346441C0A1B4B7BCA4206FB4 /* ABCUtil.m */,
+				34644F92028A8B3650337231 /* ABCRequest.h */,
+				34644DFCF4DA03E6A6ABAAE7 /* ABCSettings.m */,
+				34644ED4090F92F550AB9B71 /* AirbitzCore.m */,
+				346447584A8B61803711CB84 /* AirbitzCore.h */,
+				3464408F86584EFFA0DCAE24 /* ABCStrings.m */,
+				346445CE29D47C2D7FC5F78D /* ABCStrings.h */,
+				34644599995E0611AA16AB82 /* ABCTransaction.h */,
+				346442C844B18610760B2984 /* ABCTransaction.m */,
+				346440D2F7EA2D5CE8C9DB5D /* ABCWallet.h */,
+				34644C030542DBECDD84F15A /* ABCTxOutput.h */,
+				3464404FFE8E658168EBEEFB /* ABCWallet.m */,
+				34644F47E0E1A279F4735D67 /* ABCTxOutput.m */,
 			);
-			path = Keychain;
+			path = AirbitzCore;
 			sourceTree = "<group>";
 		};
 		DA9EDEC51BC61F910063DA07 /* Login */ = {
@@ -2925,8 +2962,8 @@
 				DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */,
 				DA9EE0041BC61F920063DA07 /* SendViewController.h */,
 				DA9EE0051BC61F920063DA07 /* SendViewController.m */,
-				DA9EE0061BC61F920063DA07 /* SpendTarget.h */,
-				DA9EE0071BC61F920063DA07 /* SpendTarget.m */,
+				DA9EE0061BC61F920063DA07 /* ABCSpend.h */,
+				DA9EE0071BC61F920063DA07 /* ABCSpend.m */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -3077,8 +3114,6 @@
 				DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */,
 				DA9EE0861BC61F920063DA07 /* ExportWalletViewController.h */,
 				DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */,
-				DA9EE0881BC61F920063DA07 /* OfflineWalletViewController.h */,
-				DA9EE0891BC61F920063DA07 /* OfflineWalletViewController.m */,
 				DA9EE08A1BC61F920063DA07 /* PayeeCell.h */,
 				DA9EE08B1BC61F920063DA07 /* PayeeCell.m */,
 				DA9EE08C1BC61F920063DA07 /* TransactionCell.h */,
@@ -3279,7 +3314,7 @@
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
-				DA9EDEC21BC61F910063DA07 /* Keychain */,
+				DA9EDEC21BC61F910063DA07 /* AirbitzCore */,
 				DA9EDEC51BC61F910063DA07 /* Login */,
 				DA9EDED91BC61F910063DA07 /* PickerTextView */,
 				DA9EDEDE1BC61F910063DA07 /* Plugins */,
@@ -3326,8 +3361,6 @@
 				DA9ED7911BC61E670063DA07 /* Config.h.example */,
 				DA9ED7921BC61E670063DA07 /* Contact.h */,
 				DA9ED7931BC61E670063DA07 /* Contact.m */,
-				DA9ED7941BC61E670063DA07 /* CoreBridge.h */,
-				DA9ED7951BC61E670063DA07 /* CoreBridge.m */,
 				DA9ED7961BC61E670063DA07 /* DarkenView.h */,
 				DA9ED7971BC61E670063DA07 /* DarkenView.m */,
 				DA9ED7981BC61E670063DA07 /* DateTime.h */,
@@ -3371,9 +3404,6 @@
 				DA9ED7BE1BC61E680063DA07 /* StylizedTextField2.m */,
 				DA9ED7BF1BC61E680063DA07 /* StylizedTextField3.h */,
 				DA9ED7C01BC61E680063DA07 /* StylizedTextField3.m */,
-				DA9ED7C11BC61E680063DA07 /* SyncView.h */,
-				DA9ED7C21BC61E680063DA07 /* SyncView.m */,
-				DA9ED7C31BC61E680063DA07 /* SyncView~iphone.xib */,
 				DA9ED7C41BC61E680063DA07 /* Theme.h */,
 				DA9ED7C51BC61E680063DA07 /* Theme.m */,
 				DA9ED7C61BC61E680063DA07 /* TransferService.h */,
@@ -3387,6 +3417,8 @@
 				DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */,
 				DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
+				346448867CF607DEED6BA49C /* AB.m */,
+				34644D19B9AA8C31AD9453F3 /* AB.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -3903,7 +3935,6 @@
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */,
-				DA9EF5071BC7285D0063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */,
@@ -4165,7 +4196,6 @@
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */,
-				DA9EF6CE1BC729FA0063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */,
@@ -4426,7 +4456,6 @@
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EE50F1BC61F920063DA07 /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4F71BC61F920063DA07 /* infoImportWallet.html in Resources */,
-				DA9ED7F41BC61E680063DA07 /* SyncView~iphone.xib in Resources */,
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4491BC61F920063DA07 /* btn_close_white.png in Resources */,
@@ -4615,7 +4644,6 @@
 				DA9EF36B1BC7285D0063DA07 /* Util.m in Sources */,
 				DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */,
-				DA9EF36E1BC7285D0063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */,
 				DA9EF3701BC7285D0063DA07 /* Location.m in Sources */,
 				DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */,
@@ -4629,7 +4657,7 @@
 				DA9EF3791BC7285D0063DA07 /* BuySellCell.m in Sources */,
 				DA9EF37A1BC7285D0063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EF37B1BC7285D0063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EF37C1BC7285D0063DA07 /* Keychain.m in Sources */,
+				DA9EF37C1BC7285D0063DA07 /* ABCKeychain.m in Sources */,
 				DA9EF37D1BC7285D0063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EF37E1BC7285D0063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EF37F1BC7285D0063DA07 /* DividerView.m in Sources */,
@@ -4661,7 +4689,6 @@
 				DA9EF39A1BC7285D0063DA07 /* LatoLabel.m in Sources */,
 				DA9EF39B1BC7285D0063DA07 /* Annotation.m in Sources */,
 				DA9EF39C1BC7285D0063DA07 /* BusinessDetailsViewController.m in Sources */,
-				DA9EF39D1BC7285D0063DA07 /* Wallet.m in Sources */,
 				DA9EF39E1BC7285D0063DA07 /* StylizedTextField3.m in Sources */,
 				DA9EF39F1BC7285D0063DA07 /* UIPhotoGalleryViewController.m in Sources */,
 				DA9EF3A01BC7285D0063DA07 /* AppDelegate.m in Sources */,
@@ -4670,8 +4697,7 @@
 				DA9EF3A31BC7285D0063DA07 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DA9EF3A41BC7285D0063DA07 /* RadioButtonCell.m in Sources */,
 				DA9EF3A51BC7285D0063DA07 /* ViewController.m in Sources */,
-				DA9EF3A61BC7285D0063DA07 /* Transaction.m in Sources */,
-				DA9EF3A71BC7285D0063DA07 /* SpendTarget.m in Sources */,
+				DA9EF3A71BC7285D0063DA07 /* ABCSpend.m in Sources */,
 				DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */,
 				DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */,
 				DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */,
@@ -4687,7 +4713,6 @@
 				DA9EF3B31BC7285D0063DA07 /* AudioController.m in Sources */,
 				DA9EF3B41BC7285D0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */,
-				DA9EF3B61BC7285D0063DA07 /* CoreBridge.m in Sources */,
 				DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */,
 				DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */,
@@ -4707,10 +4732,8 @@
 				DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */,
 				DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9EF3CC1BC7285D0063DA07 /* SyncView.m in Sources */,
 				DA9EF3CD1BC7285D0063DA07 /* WalletCell.m in Sources */,
 				DA9EF3CE1BC7285D0063DA07 /* CDataScanner.m in Sources */,
-				DA9EF3CF1BC7285D0063DA07 /* TxOutput.m in Sources */,
 				DA9EF3D01BC7285D0063DA07 /* BooleanCell.m in Sources */,
 				DA9EF3D11BC7285D0063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EF3D21BC7285D0063DA07 /* UIPhotoGallerySliderView.m in Sources */,
@@ -4723,6 +4746,17 @@
 				DA9EF3D91BC7285D0063DA07 /* GDrive.m in Sources */,
 				346443381EDD48998D3F87FC /* GiftCardViewController.m in Sources */,
 				3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */,
+				346440829320442D931D3866 /* ABCError.m in Sources */,
+				34644057CCD9187637760383 /* ABCRequest.m in Sources */,
+				34644ADDB092C94CF6F07B26 /* ABCLocalSettings.m in Sources */,
+				34644BD3251A6262D1A2228A /* ABCUtil.m in Sources */,
+				34644FA26FCA347A81960356 /* ABCSettings.m in Sources */,
+				3464498DE4A707F8E61AFAE9 /* AirbitzCore.m in Sources */,
+				34644B33AC1C57CC2C5DDDAA /* ABCStrings.m in Sources */,
+				34644D9C4171CC241B6B1609 /* AB.m in Sources */,
+				34644171F69BDD4E274A6B0D /* ABCTransaction.m in Sources */,
+				34644E695BDDD02E189B37FC /* ABCWallet.m in Sources */,
+				3464455250DF9A47DDE4D8CA /* ABCTxOutput.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4759,7 +4793,6 @@
 				DA9EF5321BC729FA0063DA07 /* Util.m in Sources */,
 				DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */,
-				DA9EF5351BC729FA0063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */,
 				DA9EF5371BC729FA0063DA07 /* Location.m in Sources */,
 				DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */,
@@ -4773,7 +4806,7 @@
 				DA9EF5401BC729FA0063DA07 /* BuySellCell.m in Sources */,
 				DA9EF5411BC729FA0063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EF5421BC729FA0063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EF5431BC729FA0063DA07 /* Keychain.m in Sources */,
+				DA9EF5431BC729FA0063DA07 /* ABCKeychain.m in Sources */,
 				DA9EF5441BC729FA0063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EF5451BC729FA0063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EF5461BC729FA0063DA07 /* DividerView.m in Sources */,
@@ -4805,7 +4838,6 @@
 				DA9EF5611BC729FA0063DA07 /* LatoLabel.m in Sources */,
 				DA9EF5621BC729FA0063DA07 /* Annotation.m in Sources */,
 				DA9EF5631BC729FA0063DA07 /* BusinessDetailsViewController.m in Sources */,
-				DA9EF5641BC729FA0063DA07 /* Wallet.m in Sources */,
 				DA9EF5651BC729FA0063DA07 /* StylizedTextField3.m in Sources */,
 				DA9EF5661BC729FA0063DA07 /* UIPhotoGalleryViewController.m in Sources */,
 				DA9EF5671BC729FA0063DA07 /* AppDelegate.m in Sources */,
@@ -4814,8 +4846,7 @@
 				DA9EF56A1BC729FA0063DA07 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DA9EF56B1BC729FA0063DA07 /* RadioButtonCell.m in Sources */,
 				DA9EF56C1BC729FA0063DA07 /* ViewController.m in Sources */,
-				DA9EF56D1BC729FA0063DA07 /* Transaction.m in Sources */,
-				DA9EF56E1BC729FA0063DA07 /* SpendTarget.m in Sources */,
+				DA9EF56E1BC729FA0063DA07 /* ABCSpend.m in Sources */,
 				DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */,
 				DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */,
 				DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */,
@@ -4831,7 +4862,6 @@
 				DA9EF57A1BC729FA0063DA07 /* AudioController.m in Sources */,
 				DA9EF57B1BC729FA0063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */,
-				DA9EF57D1BC729FA0063DA07 /* CoreBridge.m in Sources */,
 				DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */,
 				DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */,
@@ -4851,10 +4881,8 @@
 				DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */,
 				DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9EF5931BC729FA0063DA07 /* SyncView.m in Sources */,
 				DA9EF5941BC729FA0063DA07 /* WalletCell.m in Sources */,
 				DA9EF5951BC729FA0063DA07 /* CDataScanner.m in Sources */,
-				DA9EF5961BC729FA0063DA07 /* TxOutput.m in Sources */,
 				DA9EF5971BC729FA0063DA07 /* BooleanCell.m in Sources */,
 				DA9EF5981BC729FA0063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EF5991BC729FA0063DA07 /* UIPhotoGallerySliderView.m in Sources */,
@@ -4867,6 +4895,17 @@
 				DA9EF5A01BC729FA0063DA07 /* GDrive.m in Sources */,
 				34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */,
 				346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */,
+				3464448993C099A42764377E /* ABCError.m in Sources */,
+				346446B0D375F21479F5E91C /* ABCRequest.m in Sources */,
+				34644E512AE3D763D274891C /* ABCLocalSettings.m in Sources */,
+				34644E9C14358F405DB8759D /* ABCUtil.m in Sources */,
+				346442C3F53E20DF6ED796B4 /* ABCSettings.m in Sources */,
+				346445B3FDDE69EEBC8BE376 /* AirbitzCore.m in Sources */,
+				34644268D28E53E9B81B948E /* ABCStrings.m in Sources */,
+				3464491590D9099322E3B5CE /* AB.m in Sources */,
+				34644D1F075F9615406A94F1 /* ABCTransaction.m in Sources */,
+				346442459158A3F1E68A677D /* ABCWallet.m in Sources */,
+				3464420F3DDEFE61BA42F4C6 /* ABCTxOutput.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4903,7 +4942,6 @@
 				DA9ED7F71BC61E680063DA07 /* Util.m in Sources */,
 				DA9EE52E1BC61F930063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EE40E1BC61F920063DA07 /* SignUpViewController.m in Sources */,
-				DA9EE5581BC61F930063DA07 /* OfflineWalletViewController.m in Sources */,
 				DA9EE4161BC61F920063DA07 /* PluginViewController.m in Sources */,
 				DA9EE0C11BC61F920063DA07 /* Location.m in Sources */,
 				DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */,
@@ -4917,7 +4955,7 @@
 				DA9EE4121BC61F920063DA07 /* BuySellCell.m in Sources */,
 				DA9EE5201BC61F930063DA07 /* SpendingLimitsViewController.m in Sources */,
 				DA9EE0BF1BC61F920063DA07 /* DirectoryViewController.m in Sources */,
-				DA9EE4051BC61F920063DA07 /* Keychain.m in Sources */,
+				DA9EE4051BC61F920063DA07 /* ABCKeychain.m in Sources */,
 				DA9EE0B91BC61F920063DA07 /* BD_CommonCell.m in Sources */,
 				DA9EE5281BC61F930063DA07 /* SignUpContactsController.m in Sources */,
 				DA9EE0C01BC61F920063DA07 /* DividerView.m in Sources */,
@@ -4949,7 +4987,6 @@
 				DA9ED7E11BC61E680063DA07 /* LatoLabel.m in Sources */,
 				DA9EE0C21BC61F920063DA07 /* Annotation.m in Sources */,
 				DA9EE0BB1BC61F920063DA07 /* BusinessDetailsViewController.m in Sources */,
-				DA9EE0B71BC61F920063DA07 /* Wallet.m in Sources */,
 				DA9ED7F21BC61E680063DA07 /* StylizedTextField3.m in Sources */,
 				DA9EE5501BC61F930063DA07 /* UIPhotoGalleryViewController.m in Sources */,
 				DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */,
@@ -4958,8 +4995,7 @@
 				DA9EE0BC1BC61F920063DA07 /* UIPhotoGalleryViewController+Slider.m in Sources */,
 				DA9EE51D1BC61F930063DA07 /* RadioButtonCell.m in Sources */,
 				DA9ED7F81BC61E680063DA07 /* ViewController.m in Sources */,
-				DA9EE0B51BC61F920063DA07 /* Transaction.m in Sources */,
-				DA9EE5141BC61F930063DA07 /* SpendTarget.m in Sources */,
+				DA9EE5141BC61F930063DA07 /* ABCSpend.m in Sources */,
 				DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */,
 				DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */,
 				DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */,
@@ -4975,7 +5011,6 @@
 				DA9ED7CD1BC61E680063DA07 /* AudioController.m in Sources */,
 				DA9ED7E91BC61E680063DA07 /* NSMutableData+Secure.m in Sources */,
 				DA9EE4131BC61F920063DA07 /* BuySellViewController.m in Sources */,
-				DA9ED7DB1BC61E680063DA07 /* CoreBridge.m in Sources */,
 				DA9ED7F01BC61E680063DA07 /* StylizedTextField.m in Sources */,
 				DA9EE0BE1BC61F920063DA07 /* categoryCell.m in Sources */,
 				DA9EE5101BC61F930063DA07 /* FlashSelectView.m in Sources */,
@@ -4995,10 +5030,8 @@
 				DA9EE5531BC61F930063DA07 /* CommonCell.m in Sources */,
 				DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */,
 				DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */,
-				DA9ED7F31BC61E680063DA07 /* SyncView.m in Sources */,
 				DA9EE55D1BC61F930063DA07 /* WalletCell.m in Sources */,
 				DA9EE52F1BC61F930063DA07 /* CDataScanner.m in Sources */,
-				DA9EE0B61BC61F920063DA07 /* TxOutput.m in Sources */,
 				DA9EE5151BC61F930063DA07 /* BooleanCell.m in Sources */,
 				DA9EE0BA1BC61F920063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EE54D1BC61F930063DA07 /* UIPhotoGallerySliderView.m in Sources */,
@@ -5011,6 +5044,17 @@
 				DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */,
 				346445A65D1AF39AD0044785 /* GiftCardViewController.m in Sources */,
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
+				34644217215092D4F2F06816 /* ABCError.m in Sources */,
+				34644B15521A74CD7FF1A15A /* ABCRequest.m in Sources */,
+				346442FCC71B3C58B9C57735 /* ABCLocalSettings.m in Sources */,
+				34644050FE122EC7806EC8C4 /* ABCUtil.m in Sources */,
+				34644F0F3076CE803615885C /* ABCSettings.m in Sources */,
+				3464407B03DBCC2AD6BECB44 /* AirbitzCore.m in Sources */,
+				346445CC0CDF3213D139409C /* ABCStrings.m in Sources */,
+				346442FF5C0981D87A7C8AB0 /* AB.m in Sources */,
+				34644E0EFEE9E1623DAC9DB2 /* ABCTransaction.m in Sources */,
+				346444C7B6FFE05F1DE7D906 /* ABCWallet.m in Sources */,
+				34644C087A2CEC8E2CAACAF5 /* ABCTxOutput.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,18 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 
 @import Foundation.NSString;
-
-#define DEBUG_LEVEL 1
-
-#define ABLog(level, format_string,...) \
-    ((abDebugLog(level, [NSString stringWithFormat:format_string,##__VA_ARGS__])))
-
-void abDebugLog(int level, NSString *statement);
-
 
 @class AirbitzViewController;
 
@@ -38,11 +29,7 @@ void abDebugLog(int level, NSString *statement);
 
 @interface Util : NSObject
 
-+ (NSString *)errorMap:(const tABC_Error *)pError;
-+ (NSString *)errorCC:(const tABC_CC) cc;
-+ (void)printABC_Error:(const tABC_Error *)pError;
 + (void)resizeView:(UIView *)theView withDisplayView:(UIView *)theDisplayView;
-+ (void)freeStringArray:(char **)aszStrings count:(unsigned int)count;
 + (NSString *)getNameFromAddressRecord:(ABRecordRef)person;
 + (void)callTelephoneNumber:(NSString *)telNum;
 + (void)stylizeTextField:(UITextField *)textField;
@@ -57,7 +44,6 @@ void abDebugLog(int level, NSString *statement);
 + (void)animateControllerFadeOut:(UIViewController *)viewController;
 + (void)animateControllerFadeIn:(UIViewController *)viewController;
 
-+ (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height;
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller;
 + (NSString *)urlencode:(NSString *)url;
 + (NSMutableDictionary *)getUrlParameters:(NSURL *)url;
@@ -69,8 +55,4 @@ void abDebugLog(int level, NSString *statement);
 + (void)replaceHtmlTags:(NSString **) strContent;
 
 
-@end
-
-@interface NSString (reverse)
-+ (NSString *)safeStringWithUTF8String:(const char *)bytes;
 @end

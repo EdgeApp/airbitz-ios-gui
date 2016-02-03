@@ -4,10 +4,10 @@
 #import "ScanView.h"
 #import "User.h"
 #import "Util.h"
-#import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 @interface TwoFactorScanViewController () 
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,
@@ -121,9 +121,8 @@
 
 - (BOOL)storeSecret
 {
-    tABC_Error Error;
-    tABC_CC cc = ABC_OtpKeySet([[User Singleton].name UTF8String], (char *) [_secret UTF8String], &Error);
-    return cc == ABC_CC_Ok;
+    ABCConditionCode ccode = [abc setOTPKey:abc.name key:_secret];
+    return ABCConditionCodeOk == ccode;
 }
 
 - (void)testSecret

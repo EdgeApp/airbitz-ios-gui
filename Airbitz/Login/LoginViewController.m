@@ -7,18 +7,17 @@
 //
 
 #import "LoginViewController.h"
-#import "ABC.h"
 #import "PickerTextView.h"
 #import "SignUpViewController.h"
 #import "User.h"
 #import "StylizedTextField.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Config.h"
 #import "SignUpManager.h"
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "MainViewController.h"
@@ -26,7 +25,6 @@
 #import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
-#import "Keychain.h"
 #import "NSMutableData+Secure.h"
 #import "SettingsViewController.h"
 #import "InfoView.h"
@@ -51,7 +49,6 @@ typedef enum eLoginMode
     BOOL                            _bUsedTouchIDToLogin;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
-    tABC_CC                         _resultCode;
     SignUpManager                   *_signupManager;
     UITextField                     *_activeTextField;
     PasswordRecoveryViewController  *_passwordRecoveryController;
@@ -99,7 +96,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
 @property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
-@property (nonatomic, strong)           NSArray             *arrayAccounts;
+@property (nonatomic, strong)           NSMutableArray      *arrayAccounts;
 @property (nonatomic, strong)           NSArray             *otherAccounts;
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
@@ -232,11 +229,11 @@ static BOOL bInitialized = false;
     _bUsedTouchIDToLogin = NO;
     _bNewDeviceLogin = NO;
 
-    [self getAllAccounts];
-    if (self.arrayAccounts.count > 0 && ![CoreBridge accountExistsLocal:[LocalSettings controller].cachedUsername])
-        [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
-
-    [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+//    [self getAllAccounts];
+//    if (self.arrayAccounts.count > 0 && ![abc accountExistsLocal:[abc getLastAccessedAccount])
+//        [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
+//
+    [self updateUsernameSelector:[abc getLastAccessedAccount]];
 
     if (bPINModeEnabled)
     {
@@ -254,7 +251,9 @@ static BOOL bInitialized = false;
         self.credentialsPINView.hidden = true;
         self.credentialsView.hidden = false;
         self.userEntryView.hidden = false;
-        [self resignAllResponders];
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
+        [self.PINCodeView resignFirstResponder];
     }
 
     if (_mode == MODE_NO_USERS)
@@ -292,13 +291,12 @@ static BOOL bInitialized = false;
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
-    ABLog(1, @"LoginViewController:applicationEnteredForeground");
     [self autoReloginOrTouchIDIfPossible];
+
 }
 
 - (void)uploadLog {
     [self resignAllResponders];
-
     NSString *title = NSLocalizedString(@"Upload Log File", nil);
     NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
     // show password reminder test
@@ -311,23 +309,17 @@ static BOOL bInitialized = false;
     [_uploadLogAlert show];
 }
 
-typedef enum eReloginState
-{
-    RELOGIN_DISABLE = 0,
-    RELOGIN_USE_PASSWORD,
-}tReloginState;
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [[User Singleton] loadLocalSettings:nil];
-    
+
     //
     // Check if Disclaimer has ever been displayed on this device. If not, display it now
     //
-    if ([[User Singleton] offerDisclaimer])
+    if (![LocalSettings controller].bDisclaimerViewed)
     {
-        [self resignAllResponders];
+        [self.passwordTextField resignFirstResponder];
+        [self.usernameSelector.textField resignFirstResponder];
+        [self.PINCodeView resignFirstResponder];
 
         self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
@@ -344,7 +336,8 @@ typedef enum eReloginState
     [infoView removeFromSuperview];
     if (infoView == self.disclaimerInfoView)
     {
-        [[User Singleton] saveDisclaimerViewed];
+        [LocalSettings controller].bDisclaimerViewed = YES;
+        [LocalSettings saveAll];
     }
     if (bPINModeEnabled)
         [self.PINCodeView becomeFirstResponder];
@@ -354,113 +347,54 @@ typedef enum eReloginState
     [self autoReloginOrTouchIDIfPossible];
 }
 
-- (void)autoReloginOrTouchIDIfPossible
+- (void)resignAllResponders
 {
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [self autoReloginOrTouchIDIfPossibleMain];
-    });
+    [self.passwordTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
 }
 
-- (void)autoReloginOrTouchIDIfPossibleMain
+- (void)assignFirstResponder
 {
-    ABLog(1, @"ENTER autoReloginOrTouchIDIfPossibleMain");
-    _bUsedTouchIDToLogin = NO;
-    [self resignAllResponders];
-    
-    if (HARD_CODED_LOGIN) {
-        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
-        self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
-        [self showSpinner:YES];
-        [self SignIn];
-        return;
-    }
-    
-    if (! [Keychain bHasSecureEnclave] )
+
+    if (bPINModeEnabled)
     {
-        abDebugLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain: No secure enclave");
-        return [self assignFirstResponder];
-    }
-
-    NSString *username = [LocalSettings controller].cachedUsername;
-    ABLog(1, @"Checking username=%@", username);
-    
-
-    //
-    // If login expired, then disable relogin but continue validation of TouchID
-    //
-    if ([CoreBridge didLoginExpire:username])
-    {
-        ABLog(1, @"Login expired. Continuing with TouchID validation");
-        [Keychain disableRelogin:username];
-    }
-
-    //
-    // Look for cached username & password or PIN in the keychain. Use it if present
-    //
-    tReloginState reloginState = RELOGIN_DISABLE;
-
-
-    NSString *strReloginKey  = [Keychain createKeyWithUsername:username key:RELOGIN_KEY];
-    NSString *strUseTouchID  = [Keychain createKeyWithUsername:username key:USE_TOUCHID_KEY];
-    NSString *strPasswordKey = [Keychain createKeyWithUsername:username key:PASSWORD_KEY];
-    
-    int64_t bRelogin = [Keychain getKeychainInt:strReloginKey error:nil];
-    int64_t bUseTouchID = [Keychain getKeychainInt:strUseTouchID error:nil];
-    NSString *kcPassword = [Keychain getKeychainString:strPasswordKey error:nil];
-
-    if (!bRelogin && !bUseTouchID)
-    {
-        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain No relogin or touchid settings in keychain");
-        return [self assignFirstResponder];
-    }
-
-    if ([kcPassword length] >= 10)
-    {
-        reloginState = RELOGIN_USE_PASSWORD;
-    }
-
-    if (reloginState)
-    {
-        if (bUseTouchID && !bRelogin)
-        {
-            NSString *prompt = [NSString stringWithFormat:@"%@ [%@]",touchIDPromptText, username];
-
-            ABLog(1, @"Launching TouchID prompt");
-            if ([Keychain authenticateTouchID:prompt fallbackString:usePasswordText]) {
-                bRelogin = YES;
-                _bUsedTouchIDToLogin = YES;
-            }
-            else
-            {
-                ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain TouchID authentication failed");
-                return [self assignFirstResponder];
-            }
-        }
-        else
-        {
-            ABLog(1, @"autoReloginOrTouchIDIfPossibleMain Failed to enter TouchID");
-        }
-
-        if (bRelogin)
-        {
-            if (reloginState == RELOGIN_USE_PASSWORD)
-            {
-                // try to login
-                self.usernameSelector.textField.text = username;
-                self.passwordTextField.text = kcPassword;
-                [self showSpinner:YES];
-                [self SignIn];
-                return;
-            }
-        }
+        [self.PINCodeView becomeFirstResponder];
     }
     else
     {
-        ABLog(1, @"EXIT autoReloginOrTouchIDIfPossibleMain reloginState DISABLED");
+        if ([self.usernameSelector.textField.text length] > 0)
+        {
+            [self.passwordTextField becomeFirstResponder];
+        }
+        else
+        {
+            [self.usernameSelector.textField becomeFirstResponder];
+        }
     }
-    return [self assignFirstResponder];
 }
 
+- (void)autoReloginOrTouchIDIfPossible
+{
+    [self resignAllResponders];
+    
+    _bNewDeviceLogin = NO;
+
+    [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] doBeforeLogin:^{
+        [self showSpinner:YES];
+        [MainViewController showBackground:YES animate:YES];
+    } completeWithLogin:^(BOOL usedTouchID) {
+        _bUsedTouchIDToLogin = usedTouchID;
+        [self signInComplete];
+    } completeNoLogin:^{
+        [self assignFirstResponder];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        [self showSpinner:NO];
+        [MainViewController showBackground:NO animate:YES];
+        [MainViewController fadingAlert:errorString];
+        [self assignFirstResponder];
+    }];
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self dismissErrorMessage];
@@ -477,7 +411,7 @@ typedef enum eReloginState
 {
     [view resignFirstResponder];
     [self showSpinner:YES];
-    [self signIn:PINCode];
+    [self SignInPIN:PINCode];
 }
 
 - (void)didReceiveMemoryWarning
@@ -557,7 +491,6 @@ typedef enum eReloginState
         //
         UIFont *boldFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
-        UIColor *boldColor = [UIColor colorWithRed:60./255. green:140.5/255. blue:200/255. alpha:1.];
         NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
                            username];
         // Define general attributes like color and fonts for the entire text
@@ -578,7 +511,7 @@ typedef enum eReloginState
         //
         self.usernameSelector.textField.text = username;
     }
-    self.passwordTextField.text = [User Singleton].password;
+    self.passwordTextField.text = abc.password;
 
 }
 
@@ -595,26 +528,41 @@ typedef enum eReloginState
         [self.usernameSelector resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
 
-        _bSuccess = NO;
+//        _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-        _bNewDeviceLogin = ![CoreBridge accountExistsLocal:self.usernameSelector.textField.text];
-        ABLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            tABC_Error error;
-            ABC_SignIn([self.usernameSelector.textField.text UTF8String],
-                    [self.passwordTextField.text UTF8String], &error);
-            _bSuccess = error.code == ABC_CC_Ok ? YES: NO;
-            _strReason = [Util errorMap:&error];
+        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
+        ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-            // Core doesn't return anything specific for the case where network is down.
-            // Make up a better response in this case
-            if (error.code == ABC_CC_Error)
-                _strReason = NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil);
-            _resultCode = error.code;
-            [self performSelectorOnMainThread:@selector(signInComplete) withObject:nil waitUntilDone:FALSE];
-        });
+        [abc signIn:self.usernameSelector.textField.text
+                         password:self.passwordTextField.text
+                              otp:nil
+                         complete:^(void)
+         {
+             [self signInComplete];
+         }
+                            error:^(ABCConditionCode ccode, NSString *errorString)
+         {
+             [self showSpinner:NO];
+             
+             if (ABCConditionCodeInvalidOTP == ccode)
+             {
+                 [MainViewController showBackground:NO animate:YES];
+                 [self launchTwoFactorMenu];
+             }
+             else if (ABCConditionCodeError == ccode)
+             {
+                 [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
+             }
+             else
+             {
+                 [MainViewController showBackground:NO animate:YES];
+                 [MainViewController fadingAlert:errorString];
+                 abc.name = nil;
+                 abc.password = nil;
+             }
+         }];
+
     }
 }
 
@@ -650,7 +598,7 @@ typedef enum eReloginState
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
             BOOL bSuccess = NO;
             NSMutableString *error = [[NSMutableString alloc] init];
-            NSArray *arrayQuestions = [CoreBridge getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+            NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
                                                                         isSuccess:&bSuccess
                                                                          errorMsg:error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
@@ -702,114 +650,70 @@ typedef enum eReloginState
 
 #pragma mark - ReLogin Methods
 
-- (void)signIn:(NSString *)PINCode
+- (void)SignInPIN:(NSString *)pin
 {
     [MainViewController showBackground:YES animate:YES];
 
-    _tempPin = PINCode;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
-    {
-        tABC_Error error;
-        [CoreBridge PINLoginWithPIN:PINCode error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            switch (error.code)
+    [abc
+            signInWithPIN:[abc getLastAccessedAccount]
+                      pin:pin
+                 complete:^(void)
+                 {
+                     [User login:[abc getLastAccessedAccount] password:NULL];
+//                [[User Singleton] resetPINLoginInvalidEntryCount];
+                     [self.delegate LoginViewControllerDidPINLogin];
+
+                     if ([abc shouldAskUserToEnableTouchID])
+                     {
+                         //
+                         // Ask if they want TouchID enabled for this user on this device
+                         //
+                         NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+                         NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+                         _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                              message:message
+                                                                             delegate:self
+                                                                    cancelButtonTitle:@"Later"
+                                                                    otherButtonTitles:@"OK", nil];
+                         _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+                         [_enableTouchIDAlertView show];
+                     }
+                     [self showSpinner:NO];
+                     self.PINCodeView.PINCode = nil;
+
+                 }
+            error:^(ABCConditionCode ccode, NSString *errorString)
             {
-                case ABC_CC_Ok:
+
+                [MainViewController showBackground:NO animate:YES];
+                [self.PINCodeView becomeFirstResponder];
+                [self showSpinner:NO];
+                self.PINCodeView.PINCode = nil;
+
+                if (ABCConditionCodeBadPassword == ccode)
                 {
-                    [User login:[LocalSettings controller].cachedUsername password:NULL];
-                    [[User Singleton] resetPINLoginInvalidEntryCount];
-                    [self.delegate LoginViewControllerDidPINLogin];
-
-                    if ([Keychain bHasSecureEnclave] && [CoreBridge passwordExists])
-                    {
-                        //
-                        // Check if user has not yet been asked to enable touchID on this device
-                        //
-
-                        BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-                        BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-
-                        if (!onEnabled && !onDisabled)
-                        {
-                            //
-                            // Ask if they want TouchID enabled for this user on this device
-                            //
-                            NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-                            NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
-                            _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                                 message:message
-                                                                                delegate:self
-                                                                       cancelButtonTitle:@"Later"
-                                                                       otherButtonTitles:@"OK", nil];
-                            _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
-                            [_enableTouchIDAlertView show];
-                        }
-                        else
-                        {
-                            [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                                     password:[User Singleton].password
-                                                   useTouchID:!onDisabled];
-                        }
-                    }
-
-                    break;
+                    [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
+                    [self.PINCodeView becomeFirstResponder];
                 }
-                case ABC_CC_BadPassword:
+                else if (ABCConditionCodeInvalidOTP == ccode)
                 {
-                    [MainViewController showBackground:NO animate:YES];
-                    if ([[User Singleton] haveExceededPINLoginInvalidEntries])
-                    {
-                        [[User Singleton] resetPINLoginInvalidEntryCount];
-                        [self PINabortPermanently];
-                    }
-                    else
-                    {
-                        [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
-                        [self.PINCodeView becomeFirstResponder];
-                    }
-                    break;
-                }
-
-                case ABC_CC_InvalidOTP: {
                     [MainViewController showBackground:NO animate:YES];
                     [self launchTwoFactorMenu];
-                    break;
                 }
-
-                default:
+                else
                 {
                     NSString *reason;
-                    [MainViewController showBackground:NO animate:YES];
                     // Core doesn't return anything specific for the case where network is down.
                     // Make up a better response in this case
-                    if (error.code == ABC_CC_Error)
+                    if (ccode == ABCConditionCodeError)
                         reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
                     else
-                        reason = [Util errorMap:&error];
+                        reason = errorString;
 
                     [MainViewController fadingAlert:reason];
-                    [self.PINCodeView becomeFirstResponder];
-
                 }
-            }
-            [self showSpinner:NO];
-            self.PINCodeView.PINCode = nil;
-        });
-    });
+            }];
 }
-
-- (void)PINabortPermanently
-{
-    [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN. Please log in.", nil)];
-
-    bPINModeEnabled = false;
-    [self viewDidLoad];
-    [self viewWillAppear:true];
-
-
-}
-
 
 
 
@@ -868,7 +772,7 @@ typedef enum eReloginState
 {
     [self updateDisplayForKeyboard:YES];
 
-    //ABLog(2,@"Keyboard will show for SignUpView");
+    //ABCLog(2,@"Keyboard will show for SignUpView");
     NSDictionary *userInfo = [notification userInfo];
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
@@ -1077,7 +981,7 @@ typedef enum eReloginState
     }
     else if (_mode == MODE_NO_USERS)
     {
-        ABLog(2,@"XXX error. should not happen");
+        ABCLog(2,@"XXX error. should not happen");
     }
 
     // highlight all of the text
@@ -1105,55 +1009,25 @@ typedef enum eReloginState
 - (void)signInComplete
 {
     [self showSpinner:NO];
-    [CoreBridge otpSetError:_resultCode];
 
-    if (_bSuccess)
+    [User login:self.usernameSelector.textField.text
+       password:self.passwordTextField.text];
+    [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+
+    if ([abc shouldAskUserToEnableTouchID])
     {
-        [User login:self.usernameSelector.textField.text
-           password:self.passwordTextField.text
-           setupPIN:YES];
-        [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
-
-        if ([Keychain bHasSecureEnclave])
-        {
-            //
-            // Check if user has not yet been asked to enable touchID on this device
-            //
-
-            BOOL onEnabled  = ( [[LocalSettings controller].touchIDUsersEnabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-            BOOL onDisabled = ( [[LocalSettings controller].touchIDUsersDisabled indexOfObject:self.usernameSelector.textField.text] != NSNotFound );
-
-            if (!onEnabled && !onDisabled)
-            {
-                //
-                // Ask if they want TouchID enabled for this user on this device
-                //
-                NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-                NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
-                _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                     message:message
-                                                                    delegate:self
-                                                           cancelButtonTitle:@"Later"
-                                                           otherButtonTitles:@"OK", nil];
-                _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
-                [_enableTouchIDAlertView show];
-            }
-            else
-            {
-                [Keychain updateLoginKeychainInfo:[User Singleton].name
-                                         password:[User Singleton].password
-                                       useTouchID:!onDisabled];
-            }
-        }
-
-    } else if (ABC_CC_InvalidOTP == _resultCode) {
-        [MainViewController showBackground:NO animate:YES];
-        [self launchTwoFactorMenu];
-    } else {
-        [MainViewController showBackground:NO animate:YES];
-        [MainViewController fadingAlert:_strReason];
-        [User Singleton].name = nil;
-        [User Singleton].password = nil; 
+        //
+        // Ask if they want TouchID enabled for this user on this device
+        //
+        NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+        NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+        _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                             message:message
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Later"
+                                                   otherButtonTitles:@"OK", nil];
+        _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+        [_enableTouchIDAlertView show];
     }
 }
 
@@ -1184,6 +1058,7 @@ typedef enum eReloginState
 
 #pragma mark - TwoFactorScanViewControllerDelegate
 
+
 - (void)twoFactorMenuViewControllerDone:(TwoFactorMenuViewController *)controller withBackButton:(BOOL)bBack
 {
     BOOL success = controller.bSuccess;
@@ -1204,33 +1079,26 @@ typedef enum eReloginState
 
         [self showSpinner:YES];
         // Perform the two factor sign in
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            [self twoFactorSignIn:secret];
 
-        });
+        [abc
+         signIn:self.usernameSelector.textField.text
+         password:self.passwordTextField.text
+         otp:secret
+         complete:^(void)
+         {
+             [self signInComplete];
+         }
+         error:^(ABCConditionCode ccode, NSString *errorString)
+         {
+             [self showSpinner:NO];
+             if (ccode == ABCConditionCodeError)
+                 [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
+             else
+                 [MainViewController fadingAlert:errorString];
+         }];
     }];
 }
 
-- (void)twoFactorSignIn:(NSString *)secret
-{
-    _bSuccess = NO;
-    tABC_Error error;
-
-    [MainViewController showBackground:YES animate:YES];
-    ABC_OtpKeySet([self.usernameSelector.textField.text UTF8String], (char *)[secret UTF8String], &error);
-    if (bPINModeEnabled) {
-        [CoreBridge PINLoginWithPIN:_tempPin error:&error];
-    } else {
-        ABC_SignIn([self.usernameSelector.textField.text UTF8String],
-                   [self.passwordTextField.text UTF8String], &error);
-    }
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        _bSuccess = error.code == ABC_CC_Ok;
-        _strReason = [Util errorMap:&error];
-        _resultCode = error.code;
-        [self signInComplete];
-    });
-}
 
 #pragma mark - PasswordRecoveryViewController Delegate
 
@@ -1269,7 +1137,6 @@ typedef enum eReloginState
     if([User isLoggedIn])
     {
         _bSuccess = YES;
-        [SettingsViewController enableTouchID];
 
         [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO usedTouchID:NO];
     }
@@ -1277,12 +1144,12 @@ typedef enum eReloginState
 
 - (void)getAllAccounts
 {
-    NSString *strError;
-    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
-    if (nil == self.arrayAccounts)
+    if (!self.arrayAccounts)
+        self.arrayAccounts = [[NSMutableArray alloc] init];
+    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
+    if (ABCConditionCodeOk != ccode)
     {
-        if (strError)
-            [MainViewController fadingAlert:strError];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 
@@ -1296,9 +1163,9 @@ typedef enum eReloginState
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([CoreBridge PINLoginExists:account])
+    if([abc PINLoginExists:account])
     {
-        [LocalSettings controller].cachedUsername = account;
+        [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
         [self viewDidLoad];
         [self viewWillAppear:true];
@@ -1314,20 +1181,16 @@ typedef enum eReloginState
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
-    if(ABC_CC_Ok == cc)
+    ABCConditionCode ccode = [abc accountDeleteLocal:account];
+    NSString *errorString = [abc getLastErrorString];
+
+    if(ccode == ABCConditionCodeOk)
     {
-        [self getAllAccounts];
-        [self.usernameSelector updateChoices:self.arrayAccounts];
-
-        if ([account isEqualToString:[LocalSettings controller].cachedUsername])
-            [LocalSettings controller].cachedUsername = self.arrayAccounts[0];
-
-        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+        [self updateUsernameSelector:[abc getLastAccessedAccount]];
     }
     else
     {
-        [MainViewController fadingAlert:[Util errorCC:cc]];
+        [MainViewController fadingAlert:errorString];
     }
 }
 
@@ -1341,7 +1204,7 @@ typedef enum eReloginState
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([CoreBridge passwordExists:acct])
+    if ([abc passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -1412,12 +1275,12 @@ typedef enum eReloginState
     {
         if (0 == buttonIndex)
         {
-            [SettingsViewController disableTouchID];
+            [abc.settings disableTouchID];
         }
         else
         {
-            if ([[User Singleton].password length] > 0)
-                [SettingsViewController enableTouchID];
+            if ([abc.password length] > 0)
+                [abc.settings enableTouchID];
             else
             {
                 [self showPasswordCheckAlertForTouchID];
@@ -1434,7 +1297,7 @@ typedef enum eReloginState
             // Need to disable TouchID in settings.
             //
             // Disable TouchID in LocalSettings
-            [SettingsViewController disableTouchID];
+            [abc.settings disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
         }
         else
@@ -1457,7 +1320,7 @@ typedef enum eReloginState
         if (buttonIndex == 0)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [SettingsViewController disableTouchID];
+            [abc.settings disableTouchID];
         }
         else if (buttonIndex == 1)
         {
@@ -1470,7 +1333,7 @@ typedef enum eReloginState
         {
             [_logoImage setUserInteractionEnabled:NO];
             _spinnerView.hidden = NO;
-            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Succeeded"
@@ -1481,8 +1344,7 @@ typedef enum eReloginState
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
                 [self assignFirstResponder];
-            }
-            error:^
+            } error:^(ABCConditionCode ccode, NSString *errorString)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
@@ -1510,32 +1372,6 @@ typedef enum eReloginState
     }
 }
 
-- (void)resignAllResponders
-{
-    [self.passwordTextField resignFirstResponder];
-    [self.usernameSelector.textField resignFirstResponder];
-    [self.PINCodeView resignFirstResponder];
-}
-
-- (void)assignFirstResponder
-{
-    if (bPINModeEnabled)
-    {
-        [self.PINCodeView becomeFirstResponder];
-    }
-    else
-    {
-        if ([self.usernameSelector.textField.text length] > 0)
-        {
-            [self.passwordTextField becomeFirstResponder];
-        }
-        else
-        {
-            [self.usernameSelector.textField becomeFirstResponder];
-        }
-    }
-}
-
 - (void)showPasswordCheckAlertForTouchID
 {
     // Popup to ask user for their password
@@ -1556,12 +1392,12 @@ typedef enum eReloginState
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated)
     {
-        [User Singleton].password = _tempPassword;
+        abc.password = _tempPassword;
         _tempPassword = nil;
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 
         // Enable Touch ID
-        [SettingsViewController enableTouchID];
+        [abc.settings enableTouchID];
 
     }
     else
@@ -1581,10 +1417,10 @@ typedef enum eReloginState
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
-    [LocalSettings controller].cachedUsername = [self.otherAccounts objectAtIndex:itemIndex];
-    if([CoreBridge PINLoginExists:[LocalSettings controller].cachedUsername])
+    [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
+    if([abc PINLoginExists:[abc getLastAccessedAccount]])
     {
-        [self updateUsernameSelector:[LocalSettings controller].cachedUsername];
+        [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
     }
     else

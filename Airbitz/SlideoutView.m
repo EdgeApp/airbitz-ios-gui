@@ -8,13 +8,16 @@
 
 #import "SlideoutView.h"
 #import "PickerTextView.h"
-#import "CoreBridge.h"
-#import "ABC.h"
+#import "AirbitzCore.h"
 #import "User.h"
 #import "LocalSettings.h"
 #import "Util.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
+#import "AB.h"
+#import "Theme.h"
+#import "FadingAlertView.h"
+#import "ABCUtil.h"
 
 #define SHOW_BUY_SELL 1
 
@@ -45,7 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
-@property (nonatomic, strong) NSArray                       *arrayAccounts;
+@property (nonatomic, strong) NSMutableArray                *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 @property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
@@ -132,13 +135,13 @@
             [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
             [self.accountPicker setRoundedAndShadowed:NO];
 
-            int num = [User Singleton].defaultCurrencyNum;
+            int num = abc.settings.defaultCurrencyNum;
 
-            self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
+            self.conversionText.text = [abc conversionStringFromNum:num withAbbrev:YES];
 
 
-            self.accountText.text = [User Singleton].name;
-            [self.accountButton setAccessibilityLabel:[User Singleton].name];
+            self.accountText.text = abc.name;
+            [self.accountButton setAccessibilityLabel:abc.name];
 
             self.lowerViews.hidden = NO;
             self.otherAccountsView.hidden = YES;
@@ -349,7 +352,7 @@
     CGPoint location = [recognizer locationInView:self->_parentView];
     int openLeftX = self->_parentView.bounds.size.width - self.bounds.size.width;
     bool halfwayOut = location.x < self->_parentView.bounds.size.width - self.bounds.size.width / 2;
-    ABLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
+    ABCLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -448,7 +451,7 @@
     
     // set the text field to the choice
     NSString *account = [self.otherAccounts objectAtIndex:row];
-    [LocalSettings controller].cachedUsername = account;
+    [abc setLastAccessedAccount:account];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
@@ -464,7 +467,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([CoreBridge passwordExists:acct])
+    if ([abc passwordExists:acct])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -494,26 +497,26 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
-    if(cc == ABC_CC_Ok)
+    ABCConditionCode cc = [abc accountDeleteLocal:account];
+    if(cc == ABCConditionCodeOk)
     {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
     else
     {
-        [MainViewController fadingAlert:[Util errorCC:cc]];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 
 - (void)getAllAccounts
 {
-    NSString *strError;
-    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
-    if (nil == self.arrayAccounts)
+    if (!self.arrayAccounts)
+        self.arrayAccounts = [[NSMutableArray alloc] init];
+    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
+    if (ABCConditionCodeOk != ccode)
     {
-        if (strError)
-            [MainViewController fadingAlert:strError];
+        [MainViewController fadingAlert:[abc getLastErrorString]];
     }
 }
 

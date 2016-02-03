@@ -1,5 +1,5 @@
 //
-//  TxOutput.h
+//  ABCTxOutput.h
 //  AirBitz
 //
 //  Created by Timbo on 6/17/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TxOutput : NSObject
+@interface ABCTxOutput : NSObject
 
 @property (nonatomic, copy)     NSString        *strAddress;
 @property (nonatomic, assign)   BOOL            bInput;

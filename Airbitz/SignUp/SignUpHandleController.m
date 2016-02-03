@@ -6,8 +6,6 @@
 #import "SignUpHandleController.h"
 #import "SignUpManager.h"
 #import "StylizedTextField.h"
-#import "ABC.h"
-#import "Util.h"
 
 @interface SignUpHandleController ()
 

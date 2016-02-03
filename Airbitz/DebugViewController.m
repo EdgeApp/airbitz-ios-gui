@@ -7,14 +7,14 @@
 //
 
 #import "DebugViewController.h"
-#import "ABC.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "Util.h"
 #import "Strings.h"
+#import "FadingAlertView.h"
 
 @interface DebugViewController ()  <UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
@@ -48,11 +48,11 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
-    self.coreLabel.text = [NSString stringWithFormat:@"%@", [CoreBridge coreVersion]];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [abc coreVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
-    if ([CoreBridge isTestNet]) {
+    if ([abc isTestNet]) {
         self.networkLabel.text = @"Testnet";
     } else {
         self.networkLabel.text = @"Mainnet";
@@ -100,13 +100,13 @@
     {
         if (1 == buttonIndex)
         {
-            ABLog(2,@"Uploading Logs\n");
+            ABCLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-            }
-            error:^
+                
+            } error:^(ABCConditionCode ccode, NSString *errorString)
             {
                 [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }];
@@ -137,23 +137,17 @@
 
 - (IBAction)clearWatcher:(id)sender
 {
-    ABLog(2,@"Clearing Watcher\n");
+    ABCLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
-//    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-//    NSMutableArray *archived = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:wallets archived:archived];
-    [CoreBridge refreshWallets];
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [CoreBridge postToWalletsQueue:^{
-        [CoreBridge stopWatchers];
-        [CoreBridge deleteWatcherCache];
-        [CoreBridge startWatchers];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            self.clearWatcherButton.titleLabel.text = buttonText;
-            [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-        });
+    [abc clearBlockchainCache:^{
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+    } error:^(ABCConditionCode ccode, NSString *errorString) {
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedWithErrorText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     }];
 }
 

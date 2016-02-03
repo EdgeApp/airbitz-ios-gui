@@ -12,12 +12,13 @@
 #import "Util.h"
 #import "User.h"
 #import "CommonTypes.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "PopupWheelPickerView.h"
 #import "DateTime.h"
 #import "ButtonSelectorView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 #define STARTING_YEAR               2014
 
@@ -492,17 +493,17 @@ typedef enum eDatePeriod
 
 - (void)updateViews
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abc.arrayWallets && abc.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abc.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abc.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abc.currentWalletID;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abc.currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([abc.arrayWallets containsObject:abc.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -579,7 +580,7 @@ typedef enum eDatePeriod
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abc makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 }
 
