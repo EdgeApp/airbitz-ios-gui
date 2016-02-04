@@ -7,4 +7,4 @@
 #import "AB.h"
 #import "AirbitzCore.h"
 
-__strong static AirbitzCore *abc;
+AirbitzCore *abc;
