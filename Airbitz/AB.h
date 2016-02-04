@@ -8,4 +8,5 @@
 
 @class AirbitzCore;
 
-__strong static AirbitzCore *abc;
+extern AirbitzCore *abc;
+
