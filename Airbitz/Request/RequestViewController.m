@@ -605,7 +605,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     NSArray *args = [timer userInfo];
     
-    if ([args count] != 9)
+    if ([args count] != 5)
         return;
     
     int i = 0;
