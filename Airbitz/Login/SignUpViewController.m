@@ -699,6 +699,7 @@
         if (self.strUserName) {
             username = self.strUserName;
         }
+        [abc signIn:username password:self.passwordTextField.text otp:nil];
         [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
