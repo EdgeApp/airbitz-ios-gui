@@ -1,32 +1,6 @@
 #!/bin/bash
 
-set -u
-set -e
+echo "*********************************************"
+echo "RUN mkabc from airbitz-core-objc repo instead"
+echo "*********************************************"
 
-CURRENT_DIR=$( /bin/pwd )
-
-mkdir -m 0775 -p AirBitz/ABC/
-mkdir -m 0775 -p AirBitz/ABC-testnet/
-
-touch ../airbitz-core/deps/recipes/abc/abc.recipe
-
-if [ "${1-}" = "testnet" ]; then
-    shift
-    (
-        cd ../airbitz-core/deps
-        export BUILD_DIR=${CURRENT_DIR}/../airbitz-core/deps/build-testnet
-        make abc.package-ios-universal ENABLE_TESTNET=1 $@
-    )
-    rm -rf Airbitz/ABC-testnet/*
-    cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/include/* AirBitz/ABC-testnet/
-    cp -a ../airbitz-core/deps/build-testnet/abc/abc-ios-universal/lib/* AirBitz/ABC-testnet/
-else
-    (
-        cd ../airbitz-core/deps
-        export BUILD_DIR=${CURRENT_DIR}/../airbitz-core/deps/build
-        make abc.package-ios-universal $@
-    )
-    rm -rf Airbitz/ABC/*
-    cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/include/* AirBitz/ABC/
-    cp -a ../airbitz-core/deps/build/abc/abc-ios-universal/lib/* AirBitz/ABC/
-fi
