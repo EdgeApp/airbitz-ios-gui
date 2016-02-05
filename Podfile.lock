@@ -28,17 +28,13 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - AirbitzCore (from `{:http=>"http://localhost:8000/airbitz-core-objc-EFWef.zip"}`)
+  - AirbitzCore (from `../airbitz-core-objc/`)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.6)
 
 EXTERNAL SOURCES:
   AirbitzCore:
-    :http: http://localhost:8000/airbitz-core-objc-EFWef.zip
-
-CHECKOUT OPTIONS:
-  AirbitzCore:
-    :http: http://localhost:8000/airbitz-core-objc-EFWef.zip
+    :path: "../airbitz-core-objc/"
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
