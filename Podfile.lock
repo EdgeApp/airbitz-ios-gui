@@ -28,17 +28,17 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - AirbitzCore (from `../airbitz-core-objc/AirbitzCore/`)
+  - AirbitzCore (from `../airbitz-core-objc/`)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.6)
 
 EXTERNAL SOURCES:
   AirbitzCore:
-    :path: "../airbitz-core-objc/AirbitzCore/"
+    :path: "../airbitz-core-objc/"
 
 SPEC CHECKSUMS:
   AFNetworking: 96ac9bf3eda33582701cb1fcc5b896aa1e20311e
-  AirbitzCore: 71d82ca167309947d2579f93ea22ab53478ff086
+  AirbitzCore: 120bc0b614a2459d774e1590b7a76c063c02e379
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
 

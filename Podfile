@@ -7,4 +7,4 @@ link_with 'Airbitz', 'Airbitz-Testnet'
 pod 'SDWebImage', '~>3.6'
 pod 'Reachability', '~>3.2'
 pod "AFNetworking", "~> 2.0"
-pod 'AirbitzCore', :path => '../airbitz-core-objc/AirbitzCore/'
+pod 'AirbitzCore', :path => '../airbitz-core-objc/'
