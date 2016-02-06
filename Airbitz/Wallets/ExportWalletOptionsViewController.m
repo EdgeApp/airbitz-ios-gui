@@ -87,7 +87,7 @@ typedef enum eExportOption
     // Do any additional setup after loading the view.
 
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
 
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
 

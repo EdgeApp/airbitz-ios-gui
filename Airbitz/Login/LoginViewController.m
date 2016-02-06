@@ -25,7 +25,6 @@
 #import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
-#import "NSMutableData+Secure.h"
 #import "SettingsViewController.h"
 #import "InfoView.h"
 
