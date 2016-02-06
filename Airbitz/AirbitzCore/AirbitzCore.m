@@ -3251,11 +3251,11 @@ void ABC_BitCoin_Event_Callback(const tABC_AsyncBitCoinInfo *pInfo)
         {
             *valid = NO;
             [*checkResultsMessage appendFormat:@"%s.\n", pRule->szDescription];
-            (*rulePassed)[i] = [NSNumber numberWithBool:YES];
+            (*rulePassed)[i] = [NSNumber numberWithBool:NO];
         }
         else
         {
-            (*rulePassed)[i] = [NSNumber numberWithBool:NO];
+            (*rulePassed)[i] = [NSNumber numberWithBool:YES];
         }
         
         //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
