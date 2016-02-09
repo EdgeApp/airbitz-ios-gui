@@ -4068,7 +4068,7 @@ exitnow:
 
 #pragma Data Methods
 
-- (ABCConditionCode)pluginDataGet:(NSString *)pluginId withKey:(NSString *)key data:(NSMutableString *)data;
+- (ABCConditionCode)accountDataGet:(NSString *)pluginId withKey:(NSString *)key data:(NSMutableString *)data;
 {
     [data setString:@""];
     tABC_Error error;
@@ -4088,7 +4088,7 @@ exitnow:
     return ccode;
 }
 
-- (ABCConditionCode)pluginDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value
+- (ABCConditionCode)accountDataSet:(NSString *)pluginId withKey:(NSString *)key withValue:(NSString *)value
 {
     tABC_Error error;
     ABC_PluginDataSet([self.name UTF8String],
@@ -4100,7 +4100,7 @@ exitnow:
     return [self setLastErrors:error];
 }
 
-- (ABCConditionCode)pluginDataRemove:(NSString *)pluginId withKey:(NSString *)key
+- (ABCConditionCode)accountDataRemove:(NSString *)pluginId withKey:(NSString *)key
 {
     tABC_Error error;
     ABC_PluginDataRemove([self.name UTF8String],
@@ -4109,7 +4109,7 @@ exitnow:
     return [self setLastErrors:error];
 }
 
-- (ABCConditionCode)pluginDataClear:(NSString *)pluginId
+- (ABCConditionCode)accountDataClear:(NSString *)pluginId
 {
     tABC_Error error;
     ABC_PluginDataClear([self.name UTF8String],

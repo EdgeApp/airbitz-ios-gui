@@ -6,5 +6,8 @@
 
 #import "AB.h"
 #import "AirbitzCore.h"
+#import "ABCUser.h"
 
 AirbitzCore *abc;
+ABCUser *abcUser;
+

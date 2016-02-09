@@ -135,13 +135,13 @@
             [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
             [self.accountPicker setRoundedAndShadowed:NO];
 
-            int num = abc.settings.defaultCurrencyNum;
+            int num = abcUser.settings.defaultCurrencyNum;
 
-            self.conversionText.text = [abc conversionStringFromNum:num withAbbrev:YES];
+            self.conversionText.text = [abcUser conversionStringFromNum:num withAbbrev:YES];
 
 
-            self.accountText.text = abc.name;
-            [self.accountButton setAccessibilityLabel:abc.name];
+            self.accountText.text = abcUser.name;
+            [self.accountButton setAccessibilityLabel:abcUser.name];
 
             self.lowerViews.hidden = NO;
             self.otherAccountsView.hidden = YES;

@@ -146,13 +146,13 @@
     [_pinTextField resignFirstResponder];
 
     [abc createAccount:self.manager.strUserName password:self.passwordTextField.text pin:self.pinTextField.text
-                            complete:^(void)
+                            complete:^(ABCUser *user)
      {
          [FadingAlertView dismiss:FadingAlertDismissFast];
          self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
          self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-         
-         [User login:self.manager.strUserName password:self.passwordTextField.text];
+         user.delegate = [MainViewController Singleton];
+         [User login:user];
          [MainViewController createFirstWallet];
 
          [super next];
@@ -201,13 +201,12 @@
         NSMutableString *checkResultsMessage;
         ABCConditionCode ccode;
         
-        ccode = [abc checkPasswordRules:self.passwordTextField.text
-                                                valid:&bNewPasswordFieldsAreValid
-                                       secondsToCrack:&secondsToCrack
-                                                count:&count
-                                      ruleDescription:&ruleDescription
-                                           rulePassed:&rulePassed
-                                  checkResultsMessage:&checkResultsMessage];
+        bNewPasswordFieldsAreValid = [abc checkPasswordRules:self.passwordTextField.text
+                                              secondsToCrack:&secondsToCrack
+                                                       count:&count
+                                             ruleDescription:&ruleDescription
+                                                  rulePassed:&rulePassed
+                                         checkResultsMessage:&checkResultsMessage];
         
         if (bNewPasswordFieldsAreValid == NO)
         {

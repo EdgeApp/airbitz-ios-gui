@@ -129,7 +129,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     if ([User isLoggedIn])
     {
-        [abc saveLogoutDate];
+        [abcUser saveLogoutDate];
     }
 }
 
@@ -155,7 +155,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
     [abc enterForeground];
-    if (![self isAppActive] && ![abc isLoggedIn])
+    if (![self isAppActive] && !abcUser)
     {
         [[User Singleton] clear];
     }

@@ -121,24 +121,24 @@
 
 - (BOOL)storeSecret
 {
-    ABCConditionCode ccode = [abc setOTPKey:abc.name key:_secret];
+    ABCConditionCode ccode = [abc setOTPKey:abcUser.name key:_secret];
     return ABCConditionCodeOk == ccode;
 }
 
 - (void)testSecret
 {
     dispatch_async(dispatch_get_main_queue(), ^ {
-        if (YES) {
+//        if (YES) {
             [self exit];
-        } else {
-            _alertView = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Unable to import token", nil)
-                            message:NSLocalizedString(@"The two factor authentication token import failed. Please ensure you have the correct token!", nil)
-                            delegate:self
-                            cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
-                            otherButtonTitles:NSLocalizedString(@"Try Again?", nil), nil];
-            [_alertView show];
-        }
+//        } else {
+//            _alertView = [[UIAlertView alloc]
+//                            initWithTitle:NSLocalizedString(@"Unable to import token", nil)
+//                            message:NSLocalizedString(@"The two factor authentication token import failed. Please ensure you have the correct token!", nil)
+//                            delegate:self
+//                            cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
+//                            otherButtonTitles:NSLocalizedString(@"Try Again?", nil), nil];
+//            [_alertView show];
+//        }
     });
 }
 

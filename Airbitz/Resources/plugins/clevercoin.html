@@ -9616,8 +9616,21 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
         Airbitz.ui.showAlert('', 'Orders must be greater than 1 Euro.');
       } else {
         Airbitz.ui.showAlert('', 'Requesting quote...', { 'showSpinner': true });
-        $scope.order.orderFiatInput = parseFloat($scope.order.orderFiatInput).toFixed(2);
-        DataFactory.requestBuy($scope.order.orderFiatInput, $scope.order.paymentMethod.name).then(function(data) {
+        var $amount = 0;
+        var $currency = "BTC";
+
+        // Check if Euro value has not more than 2 digits
+        var $pattern = /^\d(\.\d{1,2})?$/;
+        if ($pattern.test($scope.order.orderFiatInput)) {  //buy as Euros
+          $amount = parseFloat($scope.order.orderFiatInput).toFixed(2);
+          $currency = "EUR"
+        }
+        else  // buy as Bitcoins
+        {
+          $amount = parseFloat($scope.order.orderBtcInput).toFixed(8);
+          $currency = "BTC"
+        }
+        DataFactory.requestBuy($amount, $currency, $scope.order.paymentMethod.name).then(function(data) {
           Airbitz.ui.hideAlert();
           $scope.order.quote = data;
           $state.go("reviewOrder");
@@ -9680,7 +9693,6 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     .module('app.user', ['app.dataFactory', 'app.constants'])
     .controller('homeController', ['$scope', '$state', '$location', 'UserFactory', homeController])
     .controller('pendingActivationController', ['$scope', '$state', 'Error', 'UserFactory', pendingActivationController])
-    .controller('activateController', ['$scope', '$state', '$stateParams', 'Error', 'UserFactory', activateController])
     .controller('dashboardController', ['$scope', '$sce', '$state', 'Error', 'DataFactory', 'UserFactory', 'Prices', dashboardController])
     .controller('signupController', ['$scope', '$state', 'Error', 'UserFactory', signupController])
     .controller('linkController', ['$scope', '$state', 'Error', 'UserFactory', linkController])
@@ -9695,18 +9707,14 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
 
   function homeController($scope, $state, $location, UserFactory) {
     var d = parseParameters($location);
-    if (d.token) {
-      $state.go('activate', {'token': d.token, 'email': d.email});
-    } else {
-      if (UserFactory.isSignedIn()) {
-        if (UserFactory.isActivated()) {
-          $state.go("dashboard");
-        } else {
-          $state.go("pendingActivation");
-        }
+    if (UserFactory.isSignedIn()) {
+      if (UserFactory.isActivated()) {
+        $state.go("dashboard");
       } else {
-        $state.go("signup");
+        $state.go("pendingActivation");
       }
+    } else {
+      $state.go("signup");
     }
   }
 
@@ -9728,8 +9736,9 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
   function signupController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('CleverCoin');
     $scope.account = UserFactory.getUserAccount();
+    // we have to null out the password otherwise account is linked to exchange
     if (!$scope.account.password) {
-      $scope.account.password = '';
+      $scope.account.password = null;
     }
 
     $scope.cancelSignup = function() {
@@ -9762,12 +9771,25 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
   function pendingActivationController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('Activate account');
     $scope.account = UserFactory.getUserAccount();
-    // If we can fetch the account, we know the user has been activated
-    UserFactory.fetchAccount().then(function(account) {
+    // If we can fetch the wallets, we know the user has been activated
+    UserFactory.fetchUserAccountStatus().then(function() {
       $scope.account.isActivated = true;
-      Airbitz.core.write('account', $scope.account);
+      Airbitz.core.writeData('account', $scope.account);
       $state.go("dashboard");
     });
+    $scope.toDashboard = function() {
+      Airbitz.ui.showAlert('', 'Checking account...', {
+        'showSpinner': true
+      });
+      UserFactory.fetchUserAccountStatus().then(function() {
+        $scope.account.isActivated = true;
+        Airbitz.core.writeData('account', $scope.account);
+        $state.go("dashboard");
+        Airbitz.ui.hideAlert();
+      }, function() {
+        Airbitz.ui.showAlert('', 'Account has not been activated. Please click the link in your email.');
+      });
+    };
     $scope.changeEmail = function() {
       Airbitz.ui.showAlert('', 'Removing old account...', {
         'showSpinner': true
@@ -9785,20 +9807,6 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     };
   }
 
-  function activateController($scope, $state, $stateParams, Error, UserFactory) {
-    Airbitz.ui.title('Activating your account');
-    Airbitz.ui.showAlert('', 'Activating account.', {
-      'showSpinner': true
-    });
-    UserFactory.activate($stateParams.email, $stateParams.token).then(function(b) {
-      Airbitz.ui.showAlert('', 'Account activated');
-      $state.go("dashboard");
-    }, function(b) {
-      Airbitz.ui.showAlert('', 'Unable to activate account.');
-      $state.go("pendingActivation");
-    });
-  }
-
   function dashboardController($scope, $sce, $state, Error, DataFactory, UserFactory, Prices) {
     Airbitz.ui.title('CleverCoin');
     // set variables that might be cached locally to make sure they load faster if available
@@ -9810,25 +9818,21 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     var showOpts = function(s) {
       $scope.showOptions = !s.userCanTransact; // || $scope.banks.length == 0;
     };
-    showOpts($scope.userStatus);
+    showOpts($scope.account);
 
     Prices.setBuyQty(1).then(function() {
       return Prices.setSellQty(1);
     }).then(function() {
       return UserFactory.fetchAccount().then(function(account) {
         $scope.account = account;
+        showOpts($scope.account);
       }, function() {
         // Error, error
       });
     }).then(function() {
       return UserFactory.fetchUserAccountStatus().then(function(b) {
         $scope.userStatus = b;
-        showOpts($scope.userStatus);
       });
-    // }).then(function() {
-    //   return UserFactory.fetchBanks(function(b) {
-    //     $scope.banks = b;
-    //   });
     }).then(function() {
       return UserFactory.fetchWallets(function(b) {
         $scope.wallets = b;
@@ -9890,7 +9894,7 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     };
 
     $scope.userInformation = function() {
-      if ($scope.userStatus.userCanTransact) {
+      if ($scope.account.userCanTransact) {
         Airbitz.ui.showAlert('', 'User information has been submitted. Cannot be resubmitted.');
       } else if($scope.account.requiredDataSupplied) {
         Airbitz.ui.showAlert('', 'User information has already been submitted.');
@@ -10426,7 +10430,8 @@ var app = angular.module('app.core', [
     var factory = {};
     var account = Airbitz.core.readData('account') || {
       isSignedIn: false,
-      isActivated: false
+      isActivated: false,
+      userCanTransact: false
     };
     var bankList = Airbitz.core.readData('bankList') || [];
     var walletList = Airbitz.core.readData('walletList') || [];
@@ -10504,7 +10509,6 @@ var app = angular.module('app.core', [
       return d.promise;
     };
     var userStatus = Airbitz.core.readData('userStatus') || {
-      userCanTransact: false,
       userIdentitySetup: false,
       userAddressSetup: false
     };
@@ -10530,8 +10534,6 @@ var app = angular.module('app.core', [
             userStatus.userAddressSetup = b.address.proof.progressState == 'Verified';
             userStatus.userAddressState = b.address.proof.progressState;
           }
-          userStatus.userCanTransact = userStatus.userIdentitySetup && userStatus.userAddressSetup;
-
           if (userStatus.userIdentityState == "Rejected") {
             userStatus.identityRejectedReason = b.identity.passport.rejectReason;
           } else {
@@ -10577,6 +10579,7 @@ var app = angular.module('app.core', [
             account.surname = b.surname || account.surname;
             account.email = b.email || account.email;
             account.verificationState = b.verificationState || account.verificationState;
+            account.userCanTransact = account.verificationState == "Verified";
             account.gender = b.gender || account.gender;
             if (b.birthday) {
               var arr = b.birthday.split("-");
@@ -10588,7 +10591,7 @@ var app = angular.module('app.core', [
             account.phonenumber = b.phonenumber || account.phonenumber;
             account.termsAgreedVersion = b.termsAgreedVersion || account.termsAgreedVersion;
             Airbitz.core.writeData('account', account);
-            resolve(b)
+            resolve(account)
           } else {
             reject(b);
           }
@@ -10870,13 +10873,13 @@ var app = angular.module('app.core', [
       return d.promise;
     };
 
-    factory.requestBuy = function(btcQty, paymentMethod) {
+    factory.requestBuy = function(qty, currency, paymentMethod) {
       var d = $q.defer();
       var uri = Airbitz.config.get('REDIRECT_URI');
       var wallet = Airbitz.currentWallet;
       createAddress(wallet, 'CleverCoin', 0, 0, 'Exchange:CleverCoin', '', function(request) {
         var address = request['address'];
-        CcFactory.quote('bid', btcQty, 'EUR', paymentMethod, uri, '', address, function(e, r, b) {
+        CcFactory.quote('bid', qty, currency, paymentMethod, uri, '', address, function(e, r, b) {
           if (r == 200) {
             if (true && !b.fees) {
               // TODO: once CC fixes fees, remove this
@@ -11078,12 +11081,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: "/pendingActivation/",
       templateUrl: "app/user/partials/pendingActivation.html",
       controller: "pendingActivationController",
-    })
-    // route for signup
-    .state("activate", {
-      url: "/activate/:email/:token",
-      templateUrl: "app/user/partials/activating.html",
-      controller: "activateController",
     })
     // route for dashboard
     .state("dashboard", {
@@ -11685,7 +11682,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/accountSummary.html',
     '<div class="exchange-user-account row">\n' +
     '  <div class="account-message col-xs-12"\n' +
-    '       ng-if="!userStatus.userCanTransact" ng-bind-html="regMessage()">\n' +
+    '       ng-if="!account.userCanTransact" ng-bind-html="regMessage()">\n' +
     '  </div>\n' +
     '  <div class="col-xs-12 no-pad">\n' +
     '    <ul class="list-group">\n' +
@@ -11693,7 +11690,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <span class="list-group-item-heading">{{ account.firstname || titlecase }} {{ account.surname || titlecase }}</span>\n' +
     '        <p class="list-group-item-text">{{ "Tap to view your account details" }}</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': userStatus.userCanTransact}">{{ userStatus.userCanTransact | statusFilter }}</label>\n' +
+    '               ng-class="{\'label-success\': account.userCanTransact}">{{ account.userCanTransact | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" class="ng-trans ng-trans-scale-up ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Email</span>\n' +
@@ -11704,8 +11701,8 @@ module.run(['$templateCache', function($templateCache) {
     '        <span class="list-group-item-heading">User Information</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 || userStatus.userCanTransact)}">\n' +
-    '               {{ (account.termsAgreedVersion == 1 || userStatus.userCanTransact) | statusFilter }}</label>\n' +
+    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 || account.userCanTransact)}">\n' +
+    '               {{ (account.termsAgreedVersion == 1 || account.userCanTransact) | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" ng-click="identity()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Verify Identity</span>\n' +
@@ -12141,7 +12138,7 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="exchange-buy-sell row">\n' +
+    '<div ng-if="account.userCanTransact" class="exchange-buy-sell row">\n' +
     '  <div class="col-xs-6 no-pad">\n' +
     '    <button ng-click="buy()" class="buy-button btn-success btn-lg btn-block btn">BUY</button>\n' +
     '  </div>\n' +
@@ -12152,13 +12149,13 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<div account-summary></div>\n' +
     '\n' +
-    '<div class="row" ng-if="userStatus.userCanTransact">\n' +
+    '<div class="row" ng-if="account.userCanTransact">\n' +
     '  <div class="col-xs-12 no-pad">\n' +
     '    <button data-ng-click="sepaDeposit()" class="buy-button btn-primary btn-lg btn-block btn">Deposit Euro via SEPA</button>\n' +
     '  </div>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="row" ng-if="wallets.length > 0">\n' +
+    '<div ng-if="account.userCanTransact" class="row" ng-if="wallets.length > 0">\n' +
     '  <table class="table table-bordered table-striped col-xs-12 no-pad">\n' +
     '    <tr>\n' +
     '      <th>Euro Wallet Balance</th>\n' +
@@ -12169,7 +12166,7 @@ module.run(['$templateCache', function($templateCache) {
     '  </table>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="ng-trans ng-trans-fade-up easeOutSine">\n' +
+    '<div ng-if="account.userCanTransact" class="ng-trans ng-trans-fade-up easeOutSine">\n' +
     '  <hr />\n' +
     '  <div class="row">\n' +
     '    <div class="col-xs-12 no-pad">\n' +
@@ -12409,6 +12406,12 @@ module.run(['$templateCache', function($templateCache) {
     '    <button type="button"\n' +
     '            ng-click="changeEmail()"\n' +
     '            class="btn btn-block btn-lg btn-info">Change Email</button>\n' +
+    '    <br />\n' +
+    '    <br />\n' +
+    '    <br />\n' +
+    '    <button type="button"\n' +
+    '            ng-click="toDashboard()"\n' +
+    '            class="btn btn-block btn-lg btn-success">Continue</button>\n' +
     '  </div>\n' +
     '</div>\n' +
     '');

@@ -110,6 +110,7 @@ typedef enum eTabBarButton
 #define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
 #define NOTIFICATION_SWEEP                              @"Notification_Sweep"
 #define NOTIFICATION_VIEW_SWEEP_TX                      @"Notification_View_Sweep_Transaction_Details"
+#define NOTIFICATION_EXCHANGE_RATE_CHANGED              @"Notification_Exchange_Rate_Changed"
 #define NOTIFICATION_ROTATION_CHANGED                   @"Rotation_Changed"
 #define NOTIFICATION_CONTACTS_CHANGED                   @"Contacts_Changed"
 #define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
