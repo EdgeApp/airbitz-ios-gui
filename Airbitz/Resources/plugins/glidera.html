@@ -9995,6 +9995,9 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
       $scope.userPictureIsSetup = userStatus.userPictureIdState == 'VERIFIED'
                                || userStatus.userPictureIdState == 'PASSED'
                                || userStatus.userPictureIdState == 'SUBMITTED';
+      if ($scope.exchange.countryCode == 'CA') {
+        $scope.userPictureIsSetup = true;
+      }
     }
     checkExtras($scope.userStatus);
     UserFactory.fetchUserAccountStatus().then(function(b) {
@@ -10044,7 +10047,7 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
         counter++;
         msg += '<h5><strong class="step">' + counter + "</strong> Verify mobile phone</h5>";
       }
-      if (!$scope.userStatus.userPictureIsSetup) {
+      if (!$scope.userStatus.userPictureIsSetup ) {
         counter++;
         msg += '<h5><strong class="step">' + counter + "</strong> Provide a photo for verification</h5>";
       }
@@ -11989,7 +11992,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label pull-right"\n' +
     '               ng-class="(userStatus.personalInfoState == \'VERIFIED\') ? \'label-success\' : \'label-danger\'">{{ userStatus.personalInfoState == \'VERIFIED\' | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-if="showOptions" ui-sref="idVerify" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" ui-sref="idVerify" class="ng-trans ng-trans-scale-up easeOutBack list-group-item" ng-show="exchange.countryCode != \'CA\'">\n' +
     '        <span class="list-group-item-heading">Identity Verification</span>\n' +
     '        <p class="list-group-item-text text-primary">Tap to edit</p>\n' +
     '        <label class="status label pull-right"\n' +
@@ -12457,7 +12460,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '\n' +
     '    <div class="row">\n' +
-    '      <div class="no-pad-left form-group col-xs-12">\n' +
+    '      <div class="no-pad-left form-group col-xs-12" ng-show="exchange.countryCode != \'CA\'">\n' +
     '        <label for="last4Ssn">Last 4 of SSN</label>\n' +
     '        <input ng-model="account.last4Ssn"\n' +
     '        type="number" id="last4Ssn" class="form-control large"\n' +

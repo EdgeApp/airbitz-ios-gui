@@ -1257,7 +1257,6 @@ static bool bInitialized = false;
     {
         for (int row = page * DEFAULT_RESULTS_PER_PAGE; row < ((page + 1) * DEFAULT_RESULTS_PER_PAGE); row++)
         {
-            NSDictionary *business = [businessSearchResults objectForKey: [NSNumber numberWithInt: row]];
             [businessSearchResults removeObjectForKey: [NSNumber numberWithInt: row]];
         }
         //ABCLog(2,@"Removed page: %i.  Buffer size: %lu", page, (unsigned long)[businessSearchResults count]);

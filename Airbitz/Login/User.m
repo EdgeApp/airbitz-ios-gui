@@ -21,11 +21,7 @@ static BOOL bInitialized = NO;
 
 @interface User ()
 
-@property (nonatomic, strong) AirbitzCore *abc;
-
 @end
-
-
 
 @implementation User
 
@@ -58,28 +54,23 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (BOOL)isLoggedIn
 {
-    return (0 != abc.name.length);// && abc.password.length;
+    return (0 != abcUser.name.length);// && abcUser.password.length;
 }
 
-+ (void)login:(NSString *)name password:(NSString *)pword
++ (void)login:(ABCUser *)user;
 {
+    abcUser = user;
     [LocalSettings saveAll];
     [[User Singleton] loadLocalSettings];
-
 }
 
 - (id)init
 {
     self = [super init];
-    self.abc = abc;
     if(self)
     {
         [self clear];
     }
-    abc.settings.denomination = 100000000;
-    abc.settings.denominationType = ABCDenominationUBTC;
-    abc.settings.denominationLabel = @"bits";
-    abc.settings.denominationLabelShort = @"Ƀ ";
     self.sendInvalidEntryCount = 0;
     self.sendState = kNormal;
     self.runLoop = [NSRunLoop currentRunLoop];
@@ -92,7 +83,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (NSString *)userKey:(NSString *)base
 {
-    return [NSString stringWithFormat:@"%@_%@", abc.name, base];
+    return [NSString stringWithFormat:@"%@_%@", abcUser.name, base];
 }
 
 - (void)loadLocalSettings

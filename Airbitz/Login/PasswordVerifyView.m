@@ -96,13 +96,12 @@
     NSMutableString *checkResultsMessage;
     ABCConditionCode ccode;
     
-    ccode = [abc checkPasswordRules:self.password
-                                            valid:&passed
-                                   secondsToCrack:&secondsToCrack
-                                            count:&count
-                                  ruleDescription:&ruleDescription
-                                       rulePassed:&rulePassed
-                              checkResultsMessage:&checkResultsMessage];
+    passed = [abc checkPasswordRules:self.password
+                      secondsToCrack:&secondsToCrack
+                               count:&count
+                     ruleDescription:&ruleDescription
+                          rulePassed:&rulePassed
+                 checkResultsMessage:&checkResultsMessage];
 		
 	NSMutableString *crackString = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Time to crack:", @"text in password verification popup")];
 	if(secondsToCrack < 60.0)

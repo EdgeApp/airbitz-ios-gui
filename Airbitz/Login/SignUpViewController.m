@@ -163,7 +163,7 @@
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
                     // NOTE: userNameTextField is repurposed for current password
-                    [abc changePassword:self.passwordTextField.text complete:^
+                    [abcUser changePassword:self.passwordTextField.text complete:^
                     {
                         [self changePasswordComplete:YES errorMessage:nil];
                     } error:^(ABCConditionCode ccode, NSString *errorString)
@@ -176,7 +176,7 @@
                     [self blockUser:YES];
                     [abc changePasswordWithRecoveryAnswers:self.strUserName recoveryAnswers:self.strAnswers newPassword:self.passwordTextField.text complete:^
                      {
-                         [abc changePIN:self.pinTextField.text complete:^
+                         [abcUser changePIN:self.pinTextField.text complete:^
                           {
                               [self blockUser:NO];
                               [self changePasswordComplete:YES errorMessage:nil];
@@ -204,7 +204,7 @@
                 else
                 {
                     [self blockUser:YES];
-                    [abc changePIN:self.pinTextField.text complete:^
+                    [abcUser changePIN:self.pinTextField.text complete:^
                      {
                          // no callback on this one so tell them it was a success
                          UIAlertView *alert = [[UIAlertView alloc]
@@ -260,11 +260,11 @@
     self.imagePassword.hidden = YES;
 
     if (mode == SignUpMode_ChangePasswordNoVerify
-            || (_mode == SignUpMode_ChangePassword && ![abc passwordExists]))
+            || (_mode == SignUpMode_ChangePassword && ![abcUser passwordExists]))
     {
         self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abc.name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcUser.name];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -282,7 +282,7 @@
     }
     else if (mode == SignUpMode_ChangePassword)
     {
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abc.name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcUser.name];
         self.title = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
@@ -325,13 +325,13 @@
     }
     else if (mode == SignUpMode_ChangePIN)
     {
-        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abc.name];
+        self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcUser.name];
         self.title = changePINText;
         [MainViewController changeNavBarTitle:self title:self.title];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
-        self.userNameTextField.hidden = ![abc passwordExists];
+        self.userNameTextField.hidden = ![abcUser passwordExists];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
@@ -357,7 +357,7 @@
     BOOL bUserNameFieldIsValid = YES;
 
     if (_mode == SignUpMode_ChangePasswordNoVerify
-            || (![abc passwordExists]
+            || (![abcUser passwordExists]
                 && (_mode == SignUpMode_ChangePassword
                     || _mode == SignUpMode_ChangePIN)))
     {
@@ -366,7 +366,7 @@
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
-        if ([abc passwordOk:self.userNameTextField.text] == NO)
+        if ([abcUser passwordOk:self.userNameTextField.text] == NO)
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
@@ -400,15 +400,13 @@
         NSMutableArray *ruleDescription;
         NSMutableArray *rulePassed;
         NSMutableString *checkResultsMessage;
-        ABCConditionCode ccode;
 
-        ccode = [abc checkPasswordRules:self.passwordTextField.text
-                                                valid:&bNewPasswordFieldsAreValid
-                                       secondsToCrack:&secondsToCrack
-                                                count:&count
-                                      ruleDescription:&ruleDescription
-                                           rulePassed:&rulePassed
-                                  checkResultsMessage:&checkResultsMessage];
+        bNewPasswordFieldsAreValid = [abc checkPasswordRules:self.passwordTextField.text
+                                              secondsToCrack:&secondsToCrack
+                                                       count:&count
+                                             ruleDescription:&ruleDescription
+                                                  rulePassed:&rulePassed
+                                         checkResultsMessage:&checkResultsMessage];
         if (bNewPasswordFieldsAreValid == NO)
         {
             UIAlertView *alert = [[UIAlertView alloc]
@@ -448,7 +446,7 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([abc passwordExists] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
+        if ([abcUser passwordExists] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
@@ -695,12 +693,10 @@
     if (success)
     {
         // set up the user password to the new one
-        NSString *username = abc.name;
+        NSString *username = abcUser.name;
         if (self.strUserName) {
             username = self.strUserName;
         }
-        [abc signIn:username password:self.passwordTextField.text otp:nil];
-        [User login:username password:self.passwordTextField.text];
 
         alert = [[UIAlertView alloc]
                  initWithTitle:self.title

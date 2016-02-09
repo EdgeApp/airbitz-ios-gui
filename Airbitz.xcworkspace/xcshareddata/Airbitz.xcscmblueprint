@@ -9,15 +9,17 @@
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : 0,
+    "5AE7B8E9D2D6893F452C87E6F7C3B846FFD4D7AA" : 0,
     "899723752B0FF939581C24CC942AA9D38F82FE42" : 0,
-    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : 0
+    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : 0,
+    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EDD7A20A-0F3E-4EB8-9B69-7BE6BD84AEE5",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : "airbitz-ios-gui-private\/Airbitz\/Google%20Drive\/Source\/OAuth2\/",
+    "5AE7B8E9D2D6893F452C87E6F7C3B846FFD4D7AA" : "airbitz-core-objc\/",
     "899723752B0FF939581C24CC942AA9D38F82FE42" : "airbitz-ios-gui-private\/",
-    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : "airbitz-ios-gui-private\/Airbitz\/Google%20Drive\/Source\/HTTPFetcher\/"
+    "b3aa69f0-f65c-a609-0a27-78855af037c1++2896" : "airbitz-ios-gui-private\/Airbitz\/Google%20Drive\/Source\/HTTPFetcher\/",
+    "22754eea-fc93-e339-b032-c1f495b90c16++2896" : "airbitz-ios-gui-private\/Airbitz\/Google%20Drive\/Source\/OAuth2\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Airbitz",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -27,6 +29,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/gtm-oauth2.googlecode.com\/svn",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "22754eea-fc93-e339-b032-c1f495b90c16++2896"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:Airbitz\/airbitz-core-objc-private.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5AE7B8E9D2D6893F452C87E6F7C3B846FFD4D7AA"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Airbitz\/airbitz-ios-gui-private.git",
