@@ -145,13 +145,15 @@
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
 
-    [abc createAccount:self.manager.strUserName password:self.passwordTextField.text pin:self.pinTextField.text
+    [abc createAccount:self.manager.strUserName
+              password:self.passwordTextField.text
+                   pin:self.pinTextField.text
+              delegate:[MainViewController Singleton]
                             complete:^(ABCUser *user)
      {
          [FadingAlertView dismiss:FadingAlertDismissFast];
          self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
          self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-         user.delegate = [MainViewController Singleton];
          [User login:user];
          [MainViewController createFirstWallet];
 

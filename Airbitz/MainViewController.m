@@ -1633,7 +1633,7 @@ MainViewController *singleton;
     else if (_passwordChangeAlert == alertView)
     {
         _passwordChangeAlert = nil;
-        [abcUser logout];
+        [abc logout:abcUser];
         abcUser = nil;
     }
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
@@ -2093,7 +2093,7 @@ MainViewController *singleton;
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                        // Log the user out and reset UI
-                       [abcUser logout];
+                       [abc logout:abcUser];
                        abcUser = nil;
                        
                        [FadingAlertView dismiss:FadingAlertDismissFast];

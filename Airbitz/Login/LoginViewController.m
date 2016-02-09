@@ -379,7 +379,7 @@ static BOOL bInitialized = false;
     
     _bNewDeviceLogin = NO;
 
-    [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] doBeforeLogin:^{
+    [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] delegate:[MainViewController Singleton] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
     } completeWithLogin:^(ABCUser *user, BOOL usedTouchID) {
@@ -534,11 +534,11 @@ static BOOL bInitialized = false;
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         [abc signIn:self.usernameSelector.textField.text
-                         password:self.passwordTextField.text
-                              otp:nil
-                         complete:^(ABCUser *user)
+           password:self.passwordTextField.text
+           delegate:[MainViewController Singleton]
+                otp:nil
+           complete:^(ABCUser *user)
          {
-             user.delegate = [MainViewController Singleton];
              [self signInComplete:user];
          }
                             error:^(ABCConditionCode ccode, NSString *errorString)
@@ -653,72 +653,68 @@ static BOOL bInitialized = false;
     [MainViewController showBackground:YES animate:YES];
 
     [abc
-            signInWithPIN:[abc getLastAccessedAccount]
-                      pin:pin
-                 complete:^(ABCUser *user)
-                 {
-                     user.delegate = [MainViewController Singleton];
-                     [User login:user];
-                     [self.delegate LoginViewControllerDidPINLogin];
-
-                     if ([abcUser shouldAskUserToEnableTouchID])
-                     {
-                         //
-                         // Ask if they want TouchID enabled for this user on this device
-                         //
-                         NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-                         NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
-                         _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
-                                                                              message:message
-                                                                             delegate:self
-                                                                    cancelButtonTitle:@"Later"
-                                                                    otherButtonTitles:@"OK", nil];
-                         _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
-                         [_enableTouchIDAlertView show];
-                     }
-                     [self showSpinner:NO];
-                     self.PINCodeView.PINCode = nil;
-
-                 }
-            error:^(ABCConditionCode ccode, NSString *errorString)
-            {
-
-                [MainViewController showBackground:NO animate:YES];
-                [self.PINCodeView becomeFirstResponder];
-                [self showSpinner:NO];
-                self.PINCodeView.PINCode = nil;
-
-                if (ABCConditionCodeBadPassword == ccode)
-                {
-                    [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
-                    [self.PINCodeView becomeFirstResponder];
-                }
-                else if (ABCConditionCodeInvalidOTP == ccode)
-                {
-                    [MainViewController showBackground:NO animate:YES];
-                    [self launchTwoFactorMenu];
-                }
-                else
-                {
-                    NSString *reason;
-                    // Core doesn't return anything specific for the case where network is down.
-                    // Make up a better response in this case
-                    if (ccode == ABCConditionCodeError)
-                        reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
-                    else
-                        reason = errorString;
-
-                    [MainViewController fadingAlert:reason];
-                }
-            }];
+     signInWithPIN:[abc getLastAccessedAccount]
+     pin:pin
+     delegate:[MainViewController Singleton] complete:^(ABCUser *user) {
+         [User login:user];
+         [self.delegate LoginViewControllerDidPINLogin];
+         
+         if ([abcUser shouldAskUserToEnableTouchID])
+         {
+             //
+             // Ask if they want TouchID enabled for this user on this device
+             //
+             NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
+             NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+             _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                  message:message
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Later"
+                                                        otherButtonTitles:@"OK", nil];
+             _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
+             [_enableTouchIDAlertView show];
+         }
+         [self showSpinner:NO];
+         self.PINCodeView.PINCode = nil;
+         
+     } error:^(ABCConditionCode ccode, NSString *errorString) {
+         
+         [MainViewController showBackground:NO animate:YES];
+         [self.PINCodeView becomeFirstResponder];
+         [self showSpinner:NO];
+         self.PINCodeView.PINCode = nil;
+         
+         if (ABCConditionCodeBadPassword == ccode)
+         {
+             [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
+             [self.PINCodeView becomeFirstResponder];
+         }
+         else if (ABCConditionCodeInvalidOTP == ccode)
+         {
+             [MainViewController showBackground:NO animate:YES];
+             [self launchTwoFactorMenu];
+         }
+         else
+         {
+             NSString *reason;
+             // Core doesn't return anything specific for the case where network is down.
+             // Make up a better response in this case
+             if (ccode == ABCConditionCodeError)
+                 reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
+             else
+                 reason = errorString;
+             
+             [MainViewController fadingAlert:reason];
+         }
+     }];
 }
 
 
 
 #pragma mark - Misc Methods
 
-- (void)animateSwipeArrowWithRepetitions:(int)repetitions 
-                                andDelay:(float)delay 
+- (void)animateSwipeArrowWithRepetitions:(int)repetitions
+                                andDelay:(float)delay
                                direction:(int)dir
 {
     if (!repetitions)
@@ -1077,13 +1073,12 @@ static BOOL bInitialized = false;
         [self showSpinner:YES];
         // Perform the two factor sign in
 
-        [abc
-         signIn:self.usernameSelector.textField.text
-         password:self.passwordTextField.text
-         otp:secret
-         complete:^(ABCUser *user)
+        [abc signIn:self.usernameSelector.textField.text
+           password:self.passwordTextField.text
+           delegate:[MainViewController Singleton]
+                otp:secret
+           complete:^(ABCUser *user)
          {
-             user.delegate = [MainViewController Singleton];
              [self signInComplete:user];
          }
          error:^(ABCConditionCode ccode, NSString *errorString)
