@@ -649,7 +649,7 @@ static const NSString *PROTOCOL = @"bridge://";
     ccode = [wallet createReceiveRequestWithDetails:request];
     if (ABCConditionCodeOk == ccode)
     {
-        NSString *requestId = request.requestID;
+        NSString *requestId = request.address;
         NSString *address = request.address;
         NSDictionary *d = @{@"requestId": requestId, @"address": address};
         results = [self jsonResult:d];
