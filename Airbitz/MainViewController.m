@@ -1331,7 +1331,7 @@ MainViewController *singleton;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
-- (void) abcUserBalanceUpdate;
+- (void) abcUserBalanceUpdate:(ABCWallet *)wallet txid:(NSString *)txid;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
