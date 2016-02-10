@@ -1339,7 +1339,6 @@ MainViewController *singleton;
 - (void) abcUserWalletsLoading;
 {
     NSString *walletsLoading;
-    if (![User isLoggedIn]) return;
     
     if (!abcUser.arrayWallets || abcUser.arrayWallets.count == 0)
     {
