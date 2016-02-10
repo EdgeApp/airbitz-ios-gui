@@ -619,7 +619,7 @@ typedef enum eRequestType
     }
     totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
-                                   baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
+                                   baseUrl, self.transaction.strMalleableID, self.transaction.strMalleableID];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent

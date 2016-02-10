@@ -1036,7 +1036,7 @@
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
-            else if (transaction.confirmations >= CONFIRMED_CONFIRMATION_COUNT)
+            else if (transaction.confirmations >= ABC_CONFIRMED_CONFIRMATION_COUNT)
             {
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
                 cell.confirmationLabel.text = confirmedText;

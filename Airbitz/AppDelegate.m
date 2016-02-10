@@ -127,10 +127,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [[SDImageCache sharedImageCache] cleanDisk];
     [[SDImageCache sharedImageCache] clearMemory];
 
-    if ([User isLoggedIn])
-    {
-        [abcUser saveLogoutDate];
-    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

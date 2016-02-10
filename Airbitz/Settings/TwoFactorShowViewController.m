@@ -159,9 +159,8 @@
 - (void)showQrCode:(BOOL)show
 {
     if (show) {
-        UIImage *qrImage;
-        ABCConditionCode ccode = [abc encodeStringToQRImage:_secret image:&qrImage];
-        if (ABCConditionCodeOk == ccode)
+        UIImage *qrImage = [abc encodeStringToQRImage:_secret];
+        if (qrImage)
         {
             _qrCodeImageView.image = qrImage;
             _qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;

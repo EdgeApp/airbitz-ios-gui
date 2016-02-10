@@ -304,7 +304,7 @@
     [self pickBestResponder];
     [self exchangeRateUpdate:nil];
 
-    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:PIN_REQUIRED_PERIOD_SECONDS
+    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_PIN_REQUIRED_PERIOD_SECONDS
         target:self
         selector:@selector(updateTextFieldContents)
         userInfo:nil

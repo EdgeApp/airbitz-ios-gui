@@ -152,7 +152,7 @@
 {
     [self.view endEditing:YES];
 
-    ABCRequest *request  = [ABCRequest alloc];
+    ABCRequest *request  = [[ABCRequest alloc] init];
     
     if (_successUrl) {
         
