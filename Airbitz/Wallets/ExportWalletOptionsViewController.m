@@ -115,7 +115,7 @@ typedef enum eExportOption
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -124,7 +124,7 @@ typedef enum eExportOption
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
-    [self updateViews];
+    [self updateViews:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -138,7 +138,7 @@ typedef enum eExportOption
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateViews
+- (void)updateViews:(NSNotification *)notification
 {
     if (abcUser.arrayWallets && abcUser.currentWallet)
     {
