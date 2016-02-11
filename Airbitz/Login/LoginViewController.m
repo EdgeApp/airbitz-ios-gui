@@ -466,6 +466,7 @@ static BOOL bInitialized = false;
 {
     [self setUsernameText:username];
     NSMutableArray *stringArray = [[NSMutableArray alloc] init];
+    [self getAllAccounts];
     for(NSString *str in self.arrayAccounts)
     {
         [stringArray addObject:str];
@@ -796,6 +797,7 @@ static BOOL bInitialized = false;
         {
                  if(self.usernameSelector.textField.isEditing)
                  {
+                     [self getAllAccounts];
                      [self.usernameSelector updateChoices:self.arrayAccounts];
                  }
 
