@@ -187,7 +187,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:buySellText];
+    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
     [Util animateOut:controller parentController:self complete:^(void) {
         [self resetViews];
         _pluginViewController = nil;
