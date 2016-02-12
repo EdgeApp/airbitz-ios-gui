@@ -554,6 +554,7 @@ static BOOL bInitialized = false;
              else if (ABCConditionCodeError == ccode)
              {
                  [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
+                 [MainViewController showBackground:NO animate:YES];
              }
              else
              {
