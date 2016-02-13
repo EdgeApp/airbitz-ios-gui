@@ -175,20 +175,20 @@
     [self blockUser:YES];
     _bCreatingWallet = YES;
 
-    int currencyNum;
+    NSString *currency;
 
     if ((nil == abc.arrayCurrencyNums) || [abc.arrayCurrencyNums count] <= _currencyChoice)
-        currencyNum = 0;
+        currency = nil;
     else
-        currencyNum = [[abc.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
+        currency = [abc.arrayCurrencyCodes objectAtIndex:_currencyChoice];
 
-    [abcAccount createWallet:self.textField.text currencyNum:currencyNum complete:^(ABCWallet *wallet)
+    [abcAccount createWallet:self.textField.text currency:currency complete:^(ABCWallet *wallet)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
          [self exit];
      }
-                              error:^(NSError *error)
+                       error:^(NSError *error)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
