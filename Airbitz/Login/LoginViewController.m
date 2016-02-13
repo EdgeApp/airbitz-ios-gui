@@ -679,19 +679,19 @@ static BOOL bInitialized = false;
          [self showSpinner:NO];
          self.PINCodeView.PINCode = nil;
          
-     } error:^(ABCConditionCode ccode, NSString *errorString) {
+     } error:^(NSError *error) {
          
          [MainViewController showBackground:NO animate:YES];
          [self.PINCodeView becomeFirstResponder];
          [self showSpinner:NO];
          self.PINCodeView.PINCode = nil;
          
-         if (ABCConditionCodeBadPassword == ccode)
+         if (ABCConditionCodeBadPassword == error.code)
          {
              [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
              [self.PINCodeView becomeFirstResponder];
          }
-         else if (ABCConditionCodeInvalidOTP == ccode)
+         else if (ABCConditionCodeInvalidOTP == error.code)
          {
              [MainViewController showBackground:NO animate:YES];
              [self launchTwoFactorMenu];
@@ -701,10 +701,10 @@ static BOOL bInitialized = false;
              NSString *reason;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
-             if (ccode == ABCConditionCodeError)
+             if (ABCConditionCodeError == error.code)
                  reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
              else
-                 reason = errorString;
+                 reason = error.userInfo[NSLocalizedDescriptionKey];
              
              [MainViewController fadingAlert:reason];
          }
@@ -1159,7 +1159,7 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc PINLoginExists:account])
+    if([abc PINLoginExists:account error:nil])
     {
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
@@ -1414,7 +1414,7 @@ static BOOL bInitialized = false;
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([abc PINLoginExists:[abc getLastAccessedAccount]])
+    if([abc PINLoginExists:[abc getLastAccessedAccount] error:nil])
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
