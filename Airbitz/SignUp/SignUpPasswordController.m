@@ -159,9 +159,11 @@
 
          [super next];
      }
-                               error:^(ABCConditionCode ccode, NSString *errorString)
+                 error:^(NSError *error)
      {
-         [FadingAlertView create:self.view message:errorString holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+         [FadingAlertView create:self.view
+                         message:error.userInfo[NSLocalizedDescriptionKey]
+                        holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
      }];
 }
 

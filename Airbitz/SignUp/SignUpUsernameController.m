@@ -110,17 +110,18 @@
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                ABCConditionCode ccode = [abc isAccountUsernameAvailable:self.userNameTextField.text];
+                NSError *error = [abc isAccountUsernameAvailable:self.userNameTextField.text];
 
-                if (ABCConditionCodeOk == ccode)
+                if (!error)
                 {
                     _bSuccess = true;
+                    _strReason = @"";
                 }
                 else
                 {
                     _bSuccess = false;
+                    _strReason = error.userInfo[NSLocalizedDescriptionKey];
                 }
-                _strReason = [abc getLastErrorString];
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
             });

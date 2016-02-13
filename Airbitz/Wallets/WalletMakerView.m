@@ -182,19 +182,19 @@
     else
         currencyNum = [[abc.arrayCurrencyNums objectAtIndex:_currencyChoice] intValue];
 
-    [abcAccount createWallet:self.textField.text currencyNum:currencyNum complete:^(void)
+    [abcAccount createWallet:self.textField.text currencyNum:currencyNum complete:^(ABCWallet *wallet)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
          [self exit];
      }
-                              error:^(ABCConditionCode ccode, NSString *errorString)
+                              error:^(NSError *error)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
          UIAlertView *alert = [[UIAlertView alloc]
                                initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-                               message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", errorString]
+                               message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", error.userInfo[NSLocalizedDescriptionKey]]
                                delegate:nil
                                cancelButtonTitle:okButtonText
                                otherButtonTitles:nil];
