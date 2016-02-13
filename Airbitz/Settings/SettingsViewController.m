@@ -217,7 +217,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)refresh:(NSNotification *)notification
 {	
-    [abcUser.settings loadSettings];
+    [abcAccount.settings loadSettings];
 
     _frameStart = self.tableView.frame;
     _keyboardHeight = 0.0;
@@ -262,7 +262,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)saveSettings
 {
-    ABCConditionCode ccode = [abcUser.settings saveSettings];
+    ABCConditionCode ccode = [abcAccount.settings saveSettings];
     // update the settings in the core
 
     if (!(ABCConditionCodeOk == ccode))
@@ -291,8 +291,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)setDenominationChoice:(NSInteger)nChoice
 {
     // set the new values
-    abcUser.settings.denomination = gaDenominations[nChoice].satoshi;
-    abcUser.settings.denominationType = (int) nChoice;
+    abcAccount.settings.denomination = gaDenominations[nChoice].satoshi;
+    abcAccount.settings.denominationType = (int) nChoice;
 
     // update the settings in the core
     [self saveSettings];
@@ -458,20 +458,20 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     int amount = 0;
     NSString *strType = @"";
     NSInteger maxVal = [[[ARRAY_LOGOUT objectAtIndex:0] lastObject] intValue];
-    if (abcUser.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:0] integerValue] * maxVal)
+    if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:0] integerValue] * maxVal)
     {
         strType = @"minute";
-        amount = abcUser.settings.minutesAutoLogout;
+        amount = abcAccount.settings.minutesAutoLogout;
     }
-    else if (abcUser.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue] * maxVal)
+    else if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue] * maxVal)
     {
         strType = @"hour";
-        amount = abcUser.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue];
+        amount = abcAccount.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue];
     }
     else
     {
         strType = @"day";
-        amount = abcUser.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:2] integerValue];
+        amount = abcAccount.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:2] integerValue];
     }
 
     [strRetVal appendFormat:@"%d %@", amount, strType];
@@ -496,14 +496,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     for (int type = 0; type < [[ARRAY_LOGOUT objectAtIndex:1] count]; type++)
     {
         // if the number is below or equal to this types maximum
-        if (abcUser.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] integerValue] * maxVal)
+        if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] integerValue] * maxVal)
         {
             finalType = type;
             for (int amountIndex = 0; amountIndex < [[ARRAY_LOGOUT objectAtIndex:0] count]; amountIndex++)
             {
                 int minutesBase = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:amountIndex] intValue];
                 int minutesMult = [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
-                if (abcUser.settings.minutesAutoLogout >= (minutesBase * minutesMult))
+                if (abcAccount.settings.minutesAutoLogout >= (minutesBase * minutesMult))
                 {
                     finalAmount = amountIndex;
                 }
@@ -593,15 +593,15 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (row == ROW_FIRST_NAME)
         {
-            abcUser.settings.firstName = [NSString stringWithString:cell.textField.text];
+            abcAccount.settings.firstName = [NSString stringWithString:cell.textField.text];
         }
         else if (row == ROW_LAST_NAME)
         {
-            abcUser.settings.lastName = [NSString stringWithString:cell.textField.text];
+            abcAccount.settings.lastName = [NSString stringWithString:cell.textField.text];
         }
         else if (row == ROW_NICKNAME)
         {
-            abcUser.settings.nickName = [NSString stringWithString:cell.textField.text];
+            abcAccount.settings.nickName = [NSString stringWithString:cell.textField.text];
         }
 
     }
@@ -717,7 +717,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell.name.text = NSLocalizedString(@"bits = (0.000001 Bitcoin)", @"settings text");
 	}
-	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcUser.settings.denominationType ? @"btn_selected" : @"btn_unselected")];
+	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denominationType ? @"btn_selected" : @"btn_unselected")];
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
@@ -787,26 +787,26 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.textField.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            cell.textField.text = abcUser.settings.firstName;
+            cell.textField.text = abcAccount.settings.firstName;
 		}
 		if (indexPath.row == 2)
 		{
 			cell.textField.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyNext;
-            cell.textField.text = abcUser.settings.lastName;
+            cell.textField.text = abcAccount.settings.lastName;
 		}
 		if (indexPath.row == 3)
 		{
 			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle (optional)", @"settings text");
             cell.textField.returnKeyType = UIReturnKeyDone;
-            cell.textField.text = abcUser.settings.nickName;
+            cell.textField.text = abcAccount.settings.nickName;
 		}
 
         cell.textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
         cell.textField.autocorrectionType = UITextAutocorrectionTypeNo;
         cell.textField.spellCheckingType = UITextSpellCheckingTypeNo;
 
-        cell.textField.enabled = abcUser.settings.bNameOnPayments;
+        cell.textField.enabled = abcAccount.settings.bNameOnPayments;
         cell.textField.textColor = cell.textField.enabled ? [UIColor whiteColor] : [UIColor grayColor];
 	}
 
@@ -831,7 +831,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		if (indexPath.row == ROW_SEND_NAME)
 		{
 			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
-            [cell.state setOn:abcUser.settings.bNameOnPayments animated:NO];
+            [cell.state setOn:abcAccount.settings.bNameOnPayments animated:NO];
 		}
 	}
     else if (indexPath.section == SECTION_OPTIONS)
@@ -860,8 +860,8 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         else if (indexPath.row == ROW_PIN_RELOGIN)
         {
 			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
-            [cell.state setOn:!abcUser.settings.bDisablePINLogin animated:NO];
-            if ([abcUser passwordExists]) {
+            [cell.state setOn:!abcAccount.settings.bDisablePINLogin animated:NO];
+            if ([abcAccount passwordExists]) {
                 cell.state.userInteractionEnabled = YES;
             } else {
                 cell.state.userInteractionEnabled = NO;
@@ -875,7 +875,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
-            else if (![abcUser passwordExists])
+            else if (![abcAccount passwordExists])
             {
                 cell.name.text = NSLocalizedString(@"TouchID: Set password first", @"settings text");
                 cell.state.userInteractionEnabled = NO;
@@ -885,12 +885,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             {
                 cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
 
-                if ([abcUser.settings touchIDEnabled])
+                if ([abcAccount.settings touchIDEnabled])
                     [cell.state setOn:YES animated:NO];
                 else
                     [cell.state setOn:NO animated:NO];
 
-                if ([abcUser passwordExists] && 1) {
+                if ([abcAccount passwordExists] && 1) {
                     cell.state.userInteractionEnabled = YES;
                 } else {
                     cell.state.userInteractionEnabled = NO;
@@ -926,7 +926,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
-            NSInteger indexCurrency = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcUser.settings.defaultCurrencyNum]];
+            NSInteger indexCurrency = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcAccount.settings.defaultCurrencyNum]];
             if (indexCurrency != NSNotFound)
             {
                 [cell.button setTitle:abc.arrayCurrencyCodes[indexCurrency] forState:UIControlStateNormal];
@@ -939,7 +939,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		{
 			cell.name.text = NSLocalizedString(@"Default Exchange", @"settings text");
 		}
-        [cell.button setTitle:abcUser.settings.exchangeRateSource forState:UIControlStateNormal];
+        [cell.button setTitle:abcAccount.settings.exchangeRateSource forState:UIControlStateNormal];
 	}
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
@@ -1035,7 +1035,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	if (section == SECTION_USERNAME)
 	{
 		label.text = NSLocalizedString(@"ACCOUNT: ", @"section header in settings table");
-        label.text = [NSString stringWithFormat:@"%@ %s", label.text, [abcUser.name UTF8String]];
+        label.text = [NSString stringWithFormat:@"%@ %s", label.text, [abcAccount.name UTF8String]];
 	}
     if (section == SECTION_NAME)
 	{
@@ -1193,7 +1193,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             }];
 
     // re-load the current account settings
-    [abcUser.settings loadSettings];
+    [abcAccount.settings loadSettings];
 
     [_tableView reloadData];
     [self updateViews];
@@ -1252,7 +1252,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
     if ((section == SECTION_NAME) && (row == ROW_SEND_NAME))
     {
-        abcUser.settings.bNameOnPayments = theSwitch.on;
+        abcAccount.settings.bNameOnPayments = theSwitch.on;
 
         // update the settings in the core
         [self saveSettings];
@@ -1272,7 +1272,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
     {
-        abcUser.settings.bDisablePINLogin = !theSwitch.on;
+        abcAccount.settings.bDisablePINLogin = !theSwitch.on;
         [self saveSettings];
         
         // update the display by reloading the table
@@ -1283,7 +1283,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (!theSwitch.on)
         {
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
         }
         else
         {
@@ -1291,9 +1291,9 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             // Check if we have a cached password. If so just enable touchID
             // If not, ask them for their password.
             //
-            if ([abcUser.password length] > 0)
+            if ([abcAccount.password length] > 0)
             {
-                [abcUser.settings enableTouchID];
+                [abcAccount.settings enableTouchID];
             }
             else
             {
@@ -1338,7 +1338,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-            curChoice = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcUser.settings.defaultCurrencyNum]];
+            curChoice = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcAccount.settings.defaultCurrencyNum]];
             if (curChoice == NSNotFound)
             {
                 curChoice = -1;
@@ -1352,7 +1352,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     else if (SECTION_DEFAULT_EXCHANGE == section)
     {
         curChoice = NSNotFound;
-        curChoice = [ABC_ARRAY_EXCHANGES indexOfObject:abcUser.settings.exchangeRateSource];
+        curChoice = [ABC_ARRAY_EXCHANGES indexOfObject:abcAccount.settings.exchangeRateSource];
         if (curChoice == NSNotFound)
         {
             curChoice = -1;
@@ -1399,13 +1399,13 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (rowCell == ROW_DEFAULT_CURRENCY)
         {
-            abcUser.settings.defaultCurrencyNum = [abc.arrayCurrencyNums[row] intValue];
+            abcAccount.settings.defaultCurrencyNum = [abc.arrayCurrencyNums[row] intValue];
             [FadingAlertView create:self.view message:defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
         }
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
     {
-        abcUser.settings.exchangeRateSource = ABC_ARRAY_EXCHANGES[row];
+        abcAccount.settings.exchangeRateSource = ABC_ARRAY_EXCHANGES[row];
     }
 
     // update the settings in the core
@@ -1429,7 +1429,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     int amount = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:[[arraySelections objectAtIndex:0] intValue]] intValue];
     int type   = [[arraySelections objectAtIndex:1] intValue];
-    abcUser.settings.minutesAutoLogout = amount * [ARRAY_LOGOUT_MINUTES[type] intValue];
+    abcAccount.settings.minutesAutoLogout = amount * [ARRAY_LOGOUT_MINUTES[type] intValue];
 
     // update the settings in the core
     [self saveSettings];
@@ -1467,7 +1467,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
             // Need to disable TouchID in settings.
             //
             // Disable TouchID in LocalSettings
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
         }
         else
@@ -1489,7 +1489,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         if (buttonIndex == 0)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
         }
         else if (buttonIndex == 1)
         {
@@ -1518,12 +1518,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated)
     {
-        abcUser.password = _tempPassword;
+        abcAccount.password = _tempPassword;
         _tempPassword = nil;
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 
         // Enable Touch ID
-        [abcUser.settings enableTouchID];
+        [abcAccount.settings enableTouchID];
         [self.tableView reloadData];
 
     }

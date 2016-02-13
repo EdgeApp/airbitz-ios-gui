@@ -121,7 +121,7 @@
 
 - (BOOL)storeSecret
 {
-    ABCConditionCode ccode = [abc setOTPKey:abcUser.name key:_secret];
+    ABCConditionCode ccode = [abc setOTPKey:abcAccount.name key:_secret];
     return ABCConditionCodeOk == ccode;
 }
 

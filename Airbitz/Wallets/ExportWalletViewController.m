@@ -493,17 +493,17 @@ typedef enum eDatePeriod
 
 - (void)updateViews
 {
-    if (abcUser.arrayWallets && abcUser.currentWallet)
+    if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = abcUser.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcUser.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcUser.currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcUser.currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.strName];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([abcUser.arrayWallets containsObject:abcUser.currentWallet]))
+        if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -580,7 +580,7 @@ typedef enum eDatePeriod
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [abcUser makeCurrentWalletWithIndex:indexPath];
+    [abcAccount makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 }
 

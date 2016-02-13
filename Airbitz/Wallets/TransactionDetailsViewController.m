@@ -194,7 +194,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    self.arrayCategories = abcUser.arrayCategories;
+    self.arrayCategories = abcAccount.arrayCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -326,7 +326,7 @@ typedef enum eRequestType
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            if ([abcUser satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+            if ([abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
@@ -344,19 +344,19 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-            [abcUser formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+            [abcAccount formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [abcUser formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+         [abcAccount formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
     }
     else
     {
         [coinFormatted appendString:
-            [abcUser formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+            [abcAccount formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = abcUser.settings.denominationLabel;
+    self.labelBTC.text = abcAccount.settings.denominationLabel;
     
     
     if (self.categoryButton.titleLabel.text == nil)
@@ -486,7 +486,7 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [abcUser addCategory:strFullCategory];
+    [abcAccount addCategory:strFullCategory];
 
     if (![self.transaction.strCategory isEqualToString:strFullCategory])
     {
@@ -532,7 +532,7 @@ typedef enum eRequestType
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        if (_wallet && !_bOldTransaction && [abcUser needsRecoveryQuestionsReminder]) {
+        if (_wallet && !_bOldTransaction && [abcAccount needsRecoveryQuestionsReminder]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
                                 message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
@@ -607,7 +607,7 @@ typedef enum eRequestType
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
     for (ABCTxOutput *t in self.transaction.outputs) {
-        NSString *val = [abcUser formatSatoshi:t.value];
+        NSString *val = [abcAccount formatSatoshi:t.value];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
@@ -623,13 +623,13 @@ typedef enum eRequestType
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcUser formatSatoshi:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcAccount formatSatoshi:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcUser formatSatoshi:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcAccount formatSatoshi:fees]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
@@ -1574,7 +1574,7 @@ typedef enum eRequestType
     NSInteger index = [self.arrayCategories indexOfObject:catString];
     if(index == NSNotFound) {
         ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [abcUser addCategory:catString];
+        [abcAccount addCategory:catString];
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
         [array addObject:catString];
         self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];

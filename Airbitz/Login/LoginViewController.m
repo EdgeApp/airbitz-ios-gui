@@ -382,7 +382,7 @@ static BOOL bInitialized = false;
     [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] delegate:[MainViewController Singleton] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-    } completeWithLogin:^(ABCUser *user, BOOL usedTouchID) {
+    } completeWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
         _bUsedTouchIDToLogin = usedTouchID;
         [self signInComplete:user];
     } completeNoLogin:^{
@@ -511,7 +511,7 @@ static BOOL bInitialized = false;
         //
         self.usernameSelector.textField.text = username;
     }
-    self.passwordTextField.text = abcUser.password;
+    self.passwordTextField.text = abcAccount.password;
 
 }
 
@@ -538,7 +538,7 @@ static BOOL bInitialized = false;
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:nil
-           complete:^(ABCUser *user)
+           complete:^(ABCAccount *user)
          {
              [self signInComplete:user];
          }
@@ -657,11 +657,11 @@ static BOOL bInitialized = false;
     [abc
      signInWithPIN:[abc getLastAccessedAccount]
      pin:pin
-     delegate:[MainViewController Singleton] complete:^(ABCUser *user) {
+     delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
          [User login:user];
          [self.delegate LoginViewControllerDidPINLogin];
          
-         if ([abcUser shouldAskUserToEnableTouchID])
+         if ([abcAccount shouldAskUserToEnableTouchID])
          {
              //
              // Ask if they want TouchID enabled for this user on this device
@@ -1003,14 +1003,14 @@ static BOOL bInitialized = false;
     return NO;
 }
 
-- (void)signInComplete:(ABCUser *)user
+- (void)signInComplete:(ABCAccount *)user
 {
     [self showSpinner:NO];
 
     [User login:user];
     [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
-    if ([abcUser shouldAskUserToEnableTouchID])
+    if ([abcAccount shouldAskUserToEnableTouchID])
     {
         //
         // Ask if they want TouchID enabled for this user on this device
@@ -1080,7 +1080,7 @@ static BOOL bInitialized = false;
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:secret
-           complete:^(ABCUser *user)
+           complete:^(ABCAccount *user)
          {
              [self signInComplete:user];
          }
@@ -1271,12 +1271,12 @@ static BOOL bInitialized = false;
     {
         if (0 == buttonIndex)
         {
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
         }
         else
         {
-            if ([abcUser.password length] > 0)
-                [abcUser.settings enableTouchID];
+            if ([abcAccount.password length] > 0)
+                [abcAccount.settings enableTouchID];
             else
             {
                 [self showPasswordCheckAlertForTouchID];
@@ -1293,7 +1293,7 @@ static BOOL bInitialized = false;
             // Need to disable TouchID in settings.
             //
             // Disable TouchID in LocalSettings
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
         }
         else
@@ -1316,7 +1316,7 @@ static BOOL bInitialized = false;
         if (buttonIndex == 0)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
-            [abcUser.settings disableTouchID];
+            [abcAccount.settings disableTouchID];
         }
         else if (buttonIndex == 1)
         {
@@ -1388,12 +1388,12 @@ static BOOL bInitialized = false;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated)
     {
-        abcUser.password = _tempPassword;
+        abcAccount.password = _tempPassword;
         _tempPassword = nil;
         [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
 
         // Enable Touch ID
-        [abcUser.settings enableTouchID];
+        [abcAccount.settings enableTouchID];
 
     }
     else

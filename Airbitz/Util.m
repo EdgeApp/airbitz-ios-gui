@@ -280,7 +280,7 @@
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller
 {
     if (!password || [password length] == 0) {
-        if ([abcUser passwordExists]) {
+        if ([abcAccount passwordExists]) {
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
         } else {
@@ -289,7 +289,7 @@
         }
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            BOOL matched = [abcUser passwordOk:password];
+            BOOL matched = [abcAccount passwordOk:password];
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:matched] waitUntilDone:NO];
         });

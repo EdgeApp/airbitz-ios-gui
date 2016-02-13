@@ -5,11 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import "AirbitzCore.h"
-#import "ABCUser.h"
+#import "ABCAccount.h"
 
 @class AirbitzCore;
-@class ABCUser;
+@class ABCAccount;
 
 extern AirbitzCore *abc;
-extern ABCUser *abcUser;
+extern ABCAccount *abcAccount;
 

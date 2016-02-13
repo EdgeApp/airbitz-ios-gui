@@ -314,7 +314,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = ![abcUser passwordExists];
+        self.passwordView.hidden = ![abcAccount passwordExists];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -428,9 +428,9 @@ typedef enum eAlertType
     if (self.mode == PassRecovMode_Change) {
         password = _passwordField.text;
     } else {
-        password = abcUser.password;
+        password = abcAccount.password;
     }
-    if ([abcUser passwordExists] && ![abcUser passwordOk:password]) {
+    if ([abcAccount passwordExists] && ![abcAccount passwordOk:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
@@ -443,7 +443,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcUser
+    [abcAccount
             setRecoveryQuestions:password
                        questions:strQuestions
                          answers:strAnswers

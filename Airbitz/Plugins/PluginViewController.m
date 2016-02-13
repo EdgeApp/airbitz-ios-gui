@@ -126,13 +126,13 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)updateViews:(NSNotification *)notification
 {
     [MainViewController changeNavBarOwner:self];
-    if (abcUser.arrayWallets && abcUser.currentWallet)
+    if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = abcUser.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcUser.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcUser.currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
 
-        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", abcUser.currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
         if (notification == nil || ![notification.name isEqualToString:@"Skip"]) {
@@ -153,7 +153,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [abcUser makeCurrentWalletWithIndex:indexPath];
+    [abcAccount makeCurrentWalletWithIndex:indexPath];
 
     bWalletListDropped = false;
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
@@ -359,7 +359,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [abcUser bitidSign:uri msg:msg];
+    BitidSignature *bitid = [abcAccount bitidSign:uri msg:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.address]];
 }
@@ -369,7 +369,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [abcUser bitidSign:uri msg:msg];
+    BitidSignature *bitid = [abcAccount bitidSign:uri msg:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
@@ -386,7 +386,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)notifyWalletChanged
 {
-    NSMutableDictionary *d = [self walletToDict:abcUser.currentWallet];
+    NSMutableDictionary *d = [self walletToDict:abcAccount.currentWallet];
     NSDictionary *data = [self jsonResult:d];
 
     NSError *jsonError;
@@ -410,7 +410,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)notifyDenominationChange
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:abcUser.settings.denominationLabel forKey:@"value"];
+    [d setObject:abcAccount.settings.denominationLabel forKey:@"value"];
     NSDictionary *data = [self jsonResult:d];
 
     NSError *jsonError;
@@ -430,7 +430,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)selectedWallet:(NSDictionary *)params
 {
-    NSMutableDictionary *d = [self walletToDict:abcUser.currentWallet];
+    NSMutableDictionary *d = [self walletToDict:abcAccount.currentWallet];
     [self callJsFunction:[params objectForKey:@"cbid"] withArgs:[self jsonResult:d]];
 }
 
@@ -438,7 +438,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     // TODO: move to queue
     NSMutableArray *results = [[NSMutableArray alloc] init];
-    for (ABCWallet *w in abcUser.arrayWallets) {
+    for (ABCWallet *w in abcAccount.arrayWallets) {
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         [d setObject:w.strUUID forKey:@"id"];
         [d setObject:w.strName forKey:@"name"];
@@ -458,7 +458,7 @@ static const NSString *PROTOCOL = @"bridge://";
         return;
     }
     _sendCbid = cbid;
-    _sendWallet = [abcUser getWallet:[args objectForKey:@"id"]];
+    _sendWallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
     ABCSpend *pSpend = [_sendWallet newSpendInternal:[args objectForKey:@"toAddress"]
                                                label:[args objectForKey:@"label"]
@@ -477,8 +477,8 @@ static const NSString *PROTOCOL = @"bridge://";
         _sendConfirmationViewController.delegate = self;
         _sendConfirmationViewController.abcSpend = _abcSpend;
 
-        [abcUser makeCurrentWallet:_sendWallet];
-        _abcSpend.srcWallet = abcUser.currentWallet;
+        [abcAccount makeCurrentWallet:_sendWallet];
+        _abcSpend.srcWallet = abcAccount.currentWallet;
         _sendConfirmationViewController.overrideCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
         _sendConfirmationViewController.bAdvanceToTx = NO;
         _sendConfirmationViewController.bSignOnly = signOnly;
@@ -633,7 +633,7 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCConditionCode ccode;
     NSDictionary *results = nil;
 
-    ABCWallet *wallet = [abcUser getWallet:[args objectForKey:@"id"]];
+    ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
     ABCRequest *request = [[ABCRequest alloc] init];
     request.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
@@ -668,7 +668,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uuid = [args objectForKey:@"id"];
     
-    ABCWallet *wallet = [abcUser getWallet:uuid];
+    ABCWallet *wallet = [abcAccount getWallet:uuid];
 
     ABCConditionCode ccode;
     ccode = [wallet finalizeRequestWithAddress:[args objectForKey:@"requestId"]];
@@ -683,7 +683,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if (ABCConditionCodeOk == [abcUser accountDataSet:_plugin.pluginId
+    if (ABCConditionCodeOk == [abcAccount accountDataSet:_plugin.pluginId
                                                        withKey:[args objectForKey:@"key"]
                                                      withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -695,7 +695,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)clearData:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    if (ABCConditionCodeOk == [abcUser accountDataClear:_plugin.pluginId]) {
+    if (ABCConditionCodeOk == [abcAccount accountDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -706,14 +706,14 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSDictionary *args = [params objectForKey:@"args"];
     NSMutableString *value = [[NSMutableString alloc] init];
-    [abcUser accountDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"] data:value];
+    [abcAccount accountDataGet:_plugin.pluginId withKey:[args objectForKey:@"key"] data:value];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
 }
 
 - (void)getBtcDenomination:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    [self setJsResults:cbid withArgs:[self jsonResult:abcUser.settings.denominationLabel]];
+    [self setJsResults:cbid withArgs:[self jsonResult:abcAccount.settings.denominationLabel]];
 }
 
 - (void)satoshiToCurrency:(NSDictionary *)params
@@ -724,7 +724,7 @@ static const NSString *PROTOCOL = @"bridge://";
     double currency;
     ABCConditionCode ccode;
     
-    ccode = [abcUser satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
+    ccode = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
                                      currencyNum:[[args objectForKey:@"currencyNum"] intValue]
                                         currency:&currency];
     if (ABCConditionCodeOk == ccode) {
@@ -741,7 +741,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
     int64_t satoshis;
     ABCConditionCode ccode;
-    ccode = [abcUser currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
+    ccode = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
                                      currencyNum:[[args objectForKey:@"currencyNum"] intValue]
                                          satoshi:&satoshis];
     if (ABCConditionCodeOk == ccode) {
@@ -756,7 +756,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    NSString *res = [abcUser formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
+    NSString *res = [abcAccount formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
     [self setJsResults:cbid withArgs:[self jsonResult:res]];
 }
 
@@ -765,7 +765,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    NSString *res = [abcUser formatCurrency:[[args objectForKey:@"currency"] doubleValue]
+    NSString *res = [abcAccount formatCurrency:[[args objectForKey:@"currency"] doubleValue]
                                 withCurrencyNum:[[args objectForKey:@"currencyNum"] intValue]
                                     withSymbol:[[args objectForKey:@"withSymbol"] boolValue]];
     res = [res stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

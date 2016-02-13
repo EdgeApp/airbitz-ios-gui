@@ -142,7 +142,7 @@
 
     self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
 
-    [abcUser clearBlockchainCache:^{
+    [abcAccount clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     } error:^(ABCConditionCode ccode, NSString *errorString) {

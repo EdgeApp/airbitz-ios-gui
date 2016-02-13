@@ -82,7 +82,7 @@
     _passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    if (![abcUser passwordExists]) {
+    if (![abcAccount passwordExists]) {
         _passwordTextField.hidden = YES;
     }
 
@@ -106,7 +106,7 @@
     bool on = NO;
     long timeout = 0;
     
-    ABCConditionCode ccode = [abcUser getOTPDetails:&on
+    ABCConditionCode ccode = [abcAccount getOTPDetails:&on
                                             timeout:&timeout];
     
     if (ABCConditionCodeOk == ccode) {
@@ -130,7 +130,7 @@
     _secret = nil;
     NSString *key;
     if (_isOn) {
-        key = [abcUser getOTPLocalKey];
+        key = [abcAccount getOTPLocalKey];
         if (key != nil) {
             _secret = key;
             _requestSpinner.hidden = NO;
@@ -197,9 +197,9 @@
 
 - (void)checkRequest
 {
-    BOOL pending = [abcUser hasOTPResetPending];
-    NSString *errorString = [abcUser getLastErrorString];
-    ABCConditionCode ccode = [abcUser getLastConditionCode];
+    BOOL pending = [abcAccount hasOTPResetPending];
+    NSString *errorString = [abcAccount getLastErrorString];
+    ABCConditionCode ccode = [abcAccount getLastConditionCode];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         if (ABCConditionCodeOk == ccode) {
@@ -295,11 +295,11 @@
 {
     ABCConditionCode ccode;
     if (on) {
-        ccode = [abcUser setOTPAuth:OTP_RESET_DELAY];
+        ccode = [abcAccount setOTPAuth:OTP_RESET_DELAY];
         if (ABCConditionCodeOk == ccode)
             _isOn = YES;
     } else {
-        ccode = [abcUser removeOTPAuth];
+        ccode = [abcAccount removeOTPAuth];
         if (ABCConditionCodeOk == ccode)
         {
             _secret = nil;
@@ -326,7 +326,7 @@
     UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle: nil];
     _tfaMenuViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"TwoFactorMenuViewController"];
     _tfaMenuViewController.delegate = self;
-    _tfaMenuViewController.username = abcUser.name;
+    _tfaMenuViewController.username = abcAccount.name;
     _tfaMenuViewController.bStoreSecret = YES;
 
     [Util addSubviewControllerWithConstraints:self child:_tfaMenuViewController];
@@ -352,7 +352,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [abcUser removeOTPAuth];
+            ABCConditionCode ccode = [abcAccount removeOTPAuth];
             NSString *errorString = [abc getLastErrorString];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (ABCConditionCodeOk == ccode) {
@@ -388,7 +388,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [abcUser removeOTPResetRequest];
+            ABCConditionCode ccode = [abcAccount removeOTPResetRequest];
             NSString *errorString = [abc getLastErrorString];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){

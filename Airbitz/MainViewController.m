@@ -69,7 +69,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,ABCUserDelegate>
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,ABCAccountDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -1025,18 +1025,18 @@ MainViewController *singleton;
     NSString *walletsLoading;
     if (![User isLoggedIn]) return;
     
-    if (!abcUser.arrayWallets || abcUser.arrayWallets.count == 0)
+    if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
     {
         walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
                           loadingAccountText,
                           loadingWalletsNewDeviceText];
     }
-    else if (!abcUser.bAllWalletsLoaded && abcUser.arrayWallets && abcUser.numTotalWallets > 0)
+    else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
     {
         walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
                           loadingWalletsText,
-                          abcUser.numWalletsLoaded + 1,
-                          abcUser.numTotalWallets,
+                          abcAccount.numWalletsLoaded + 1,
+                          abcAccount.numTotalWallets,
                           loadingWalletsNewDeviceText];
     }
     else
@@ -1104,7 +1104,7 @@ MainViewController *singleton;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         // Create the first wallet in the background
         // loginViewControllerDidLogin will create a spinner while wallet is loading so close it once wallet is done
-        [abcUser createFirstWalletIfNeeded];
+        [abcAccount createFirstWalletIfNeeded];
         dispatch_async(dispatch_get_main_queue(), ^ {
             singleton.bCreatingFirstWallet = NO;
             [FadingAlertView dismiss:FadingAlertDismissGradual];
@@ -1128,7 +1128,7 @@ MainViewController *singleton;
 - (void)LoginViewControllerDidPINLogin
 {
     // if the user has a password, increment PIN login count
-    if ([abcUser passwordExists]) {
+    if ([abcAccount passwordExists]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
     
@@ -1150,7 +1150,7 @@ MainViewController *singleton;
     {
         // Make sure there's a wallet in this account. If not, create it
         int numWallets;
-        ABCConditionCode ccode = [abcUser getNumWalletsInAccount:&numWallets];
+        ABCConditionCode ccode = [abcAccount getNumWalletsInAccount:&numWallets];
         if (ABCConditionCodeOk == ccode)
         {
             if (0 == numWallets)
@@ -1183,7 +1183,7 @@ MainViewController *singleton;
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
-    } else if (![abcUser passwordExists] && !bNewAccount) {
+    } else if (![abcAccount passwordExists] && !bNewAccount) {
         [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
@@ -1281,13 +1281,13 @@ MainViewController *singleton;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if ([User isLoggedIn] &&
-                abcUser.arrayWallets != nil &&
-                abcUser.arrayArchivedWallets != nil)
+                abcAccount.arrayWallets != nil &&
+                abcAccount.arrayArchivedWallets != nil)
         {
             int transactionCount = 0;
             NSDate *date = [NSDate date];
 
-            for (ABCWallet *curWallet in abcUser.arrayWallets)
+            for (ABCWallet *curWallet in abcAccount.arrayWallets)
             {
                 transactionCount += [curWallet.arrayTransactions count];
                 for (ABCTransaction *t in curWallet.arrayTransactions) {
@@ -1296,7 +1296,7 @@ MainViewController *singleton;
                     }
                 }
             }
-            for (ABCWallet *curWallet in abcUser.arrayArchivedWallets)
+            for (ABCWallet *curWallet in abcAccount.arrayArchivedWallets)
             {
                 transactionCount += [curWallet.arrayTransactions count];
             }
@@ -1317,41 +1317,41 @@ MainViewController *singleton;
 {
 }
 
-#pragma mark - abcUserDelegates
+#pragma mark - abcAccountDelegates
 
-- (void) abcUserWalletChanged:(ABCWallet *)wallet;
+- (void) abcAccountWalletChanged:(ABCWallet *)wallet;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
-- (void) abcUserWalletsChanged;
+- (void) abcAccountWalletsChanged;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
-- (void) abcUserBlockHeightChanged;
+- (void) abcAccountBlockHeightChanged;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
-- (void) abcUserBalanceUpdate:(ABCWallet *)wallet txid:(NSString *)txid;
+- (void) abcAccountBalanceUpdate:(ABCWallet *)wallet txid:(NSString *)txid;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
-- (void) abcUserWalletsLoading;
+- (void) abcAccountWalletsLoading;
 {
     NSString *walletsLoading;
     
-    if (!abcUser.arrayWallets || abcUser.arrayWallets.count == 0)
+    if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
     {
         walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
                           loadingAccountText,
                           loadingWalletsNewDeviceText];
     }
-    else if (!abcUser.bAllWalletsLoaded && abcUser.arrayWallets && abcUser.numTotalWallets > 0)
+    else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
     {
         walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
                           loadingWalletsText,
-                          abcUser.numWalletsLoaded + 1,
-                          abcUser.numTotalWallets,
+                          abcAccount.numWalletsLoaded + 1,
+                          abcAccount.numTotalWallets,
                           loadingWalletsNewDeviceText];
     }
     else
@@ -1370,7 +1370,7 @@ MainViewController *singleton;
     _bShowingWalletsLoadingAlert = YES;
 
 }
-- (void) abcUserWalletsLoaded;
+- (void) abcAccountWalletsLoaded;
 {
     if (_bShowingWalletsLoadingAlert)
     {
@@ -1378,14 +1378,14 @@ MainViewController *singleton;
         _bShowingWalletsLoadingAlert = NO;
     }
 }
-- (void) abcUserAccountChanged;
+- (void) abcAccountAccountChanged;
 {
     [self updateWidgetQRCode];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
 
 }
-- (void)abcUserLoggedOut:(ABCUser *)user;
+- (void)abcAccountLoggedOut:(ABCAccount *)user;
 {
     [[User Singleton] clear];
     
@@ -1397,10 +1397,10 @@ MainViewController *singleton;
     [self resetViews];
     [MainViewController hideTabBarAnimated:NO];
     [MainViewController hideNavBarAnimated:NO];
-    abcUser = nil;
+    abcAccount = nil;
 }
 
-- (void) abcUserRemotePasswordChange;
+- (void) abcAccountRemotePasswordChange;
 {
     if (_passwordChangeAlert == nil && [User isLoggedIn])
     {
@@ -1417,7 +1417,7 @@ MainViewController *singleton;
     }
 }
 
-- (void) abcUserIncomingBitcoin:(ABCWallet *)wallet txid:(NSString *)txid;
+- (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet txid:(NSString *)txid;
 {
     if (wallet) _strWalletUUID = wallet.strUUID;
     _strTxID = txid;
@@ -1470,13 +1470,13 @@ MainViewController *singleton;
     //
     // If we just received money on the currentWallet then update the Widget's address & QRcode
     //
-    if ([_strWalletUUID isEqualToString:abcUser.currentWallet.strUUID])
+    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.strUUID])
     {
         [self updateWidgetQRCode];
     }
 }
 
-- (void)abcUserOTPRequired;
+- (void)abcAccountOTPRequired;
 {
     if (_otpRequiredAlert == nil) {
         _otpRequiredAlert = [[UIAlertView alloc]
@@ -1489,7 +1489,7 @@ MainViewController *singleton;
     }
 }
 
-- (void)abcUserOTPSkew
+- (void)abcAccountOTPSkew
 {
     if (_otpSkewAlert == nil) {
         _otpSkewAlert = [[UIAlertView alloc]
@@ -1504,14 +1504,14 @@ MainViewController *singleton;
 
 - (void)updateWidgetQRCode;
 {
-    if (!abcUser.currentWallet || !abcUser.currentWallet.strUUID)
+    if (!abcAccount.currentWallet || !abcAccount.currentWallet.strUUID)
         return;
     
     ABCRequest *request = [[ABCRequest alloc] init];
     
-    request.payeeName = abcUser.settings.fullName;
+    request.payeeName = abcAccount.settings.fullName;
 
-    [abcUser.currentWallet createReceiveRequestWithDetails:request complete:^
+    [abcAccount.currentWallet createReceiveRequestWithDetails:request complete:^
     {
         //
         // Save QR and address in shared data so Widget can access it
@@ -1524,8 +1524,8 @@ MainViewController *singleton;
         
         [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
         [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
-        [tempSharedUserDefs setObject:abcUser.currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
-        [tempSharedUserDefs setObject:abcUser.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+        [tempSharedUserDefs setObject:abcAccount.currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
         [tempSharedUserDefs synchronize];
     } error:^(ABCConditionCode ccode, NSString *errorString) {
     }];
@@ -1544,19 +1544,19 @@ MainViewController *singleton;
     NSString *coin;
     NSString *fiat;
     
-    ABCWallet *wallet = [abcUser getWallet:walletUUID];
+    ABCWallet *wallet = [abcAccount getWallet:walletUUID];
     ABCTransaction *transaction = [wallet getTransaction:txId];
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
     
-    if ([abcUser satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
-        fiat = [abcUser formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+    if ([abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+        fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
     
-    if ([abcUser currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi] == ABCConditionCodeOk)
-        coin = [abcUser formatSatoshi:satoshi withSymbol:false cropDecimals:[abcUser currencyDecimalPlaces]];
+    if ([abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi] == ABCConditionCodeOk)
+        coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
 
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
@@ -1592,7 +1592,7 @@ MainViewController *singleton;
 
 - (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    ABCWallet *wallet = [abcUser getWallet:walletUUID];
+    ABCWallet *wallet = [abcAccount getWallet:walletUUID];
     ABCTransaction *transaction = [wallet getTransaction:txId];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
@@ -1632,8 +1632,8 @@ MainViewController *singleton;
     else if (_passwordChangeAlert == alertView)
     {
         _passwordChangeAlert = nil;
-        [abc logout:abcUser];
-        abcUser = nil;
+        [abc logout:abcAccount];
+        abcAccount = nil;
     }
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
     {
@@ -1793,7 +1793,7 @@ MainViewController *singleton;
         {
             NSDictionary *dictData = [notification userInfo];
             _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-            [abcUser makeCurrentWalletWithUUID:_strWalletUUID];
+            [abcAccount makeCurrentWalletWithUUID:_strWalletUUID];
         }
 
 //        [_transactionsViewController resetViews];
@@ -2092,8 +2092,8 @@ MainViewController *singleton;
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                        // Log the user out and reset UI
-                       [abc logout:abcUser];
-                       abcUser = nil;
+                       [abc logout:abcAccount];
+                       abcAccount = nil;
                        
                        [FadingAlertView dismiss:FadingAlertDismissFast];
                    }];

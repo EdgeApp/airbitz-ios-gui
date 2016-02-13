@@ -149,7 +149,7 @@
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
-                            complete:^(ABCUser *user)
+                            complete:^(ABCAccount *user)
      {
          [FadingAlertView dismiss:FadingAlertDismissFast];
          self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];

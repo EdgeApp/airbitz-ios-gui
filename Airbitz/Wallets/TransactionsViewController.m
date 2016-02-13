@@ -279,11 +279,11 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
-    if (abcUser.arrayWallets
-            && abcUser.currentWallet
-            && abcUser.currentWallet.loaded)
+    if (abcAccount.arrayWallets
+            && abcAccount.currentWallet
+            && abcAccount.currentWallet.loaded)
     {
-        [self getBizImagesForWallet:abcUser.currentWallet];
+        [self getBizImagesForWallet:abcAccount.currentWallet];
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
@@ -296,8 +296,8 @@
 {
     [self.walletsTable reloadData];
 
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcUser.settings.denominationLabel forSegmentAtIndex:0];
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[abc currencyAbbrevLookup:abcUser.settings.defaultCurrencyNum]
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.denominationLabel forSegmentAtIndex:0];
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[abc currencyAbbrevLookup:abcAccount.settings.defaultCurrencyNum]
                                           forSegmentAtIndex:1];
 
     if (_balanceView.barIsUp)
@@ -309,7 +309,7 @@
     //
     // Update balance view in the wallet dropdown.
     //
-    for(ABCWallet * wallet in abcUser.arrayWallets)
+    for(ABCWallet * wallet in abcAccount.arrayWallets)
     {
         totalSatoshi += wallet.balance;
     }
@@ -391,7 +391,7 @@
 - (IBAction)buttonRequestTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcUser.currentWallet.strUUID};
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.strUUID};
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -399,7 +399,7 @@
 - (IBAction)buttonSendTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcUser.currentWallet.strUUID };
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.strUUID };
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -420,29 +420,29 @@
 
 - (void)updateBalanceView //
 {
-    if (nil == abcUser.arrayWallets ||
-            nil == abcUser.currentWallet)
+    if (nil == abcAccount.arrayWallets ||
+            nil == abcAccount.currentWallet)
         return;
 
     int64_t totalSatoshi = 0.0;
-    for(ABCTransaction * tx in abcUser.currentWallet.arrayTransactions)
+    for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
     {
         totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [abcUser formatSatoshi: totalSatoshi];
+    _balanceView.topAmount.text = [abcAccount formatSatoshi: totalSatoshi];
 
     double currency;
 
-    [abcUser satoshiToCurrency:totalSatoshi currencyNum:abcUser.currentWallet.currencyNum currency:&currency];
-    _balanceView.botAmount.text = [abcUser formatCurrency:currency
-                                             withCurrencyNum:abcUser.currentWallet.currencyNum];
-    _balanceView.topDenomination.text = abcUser.settings.denominationLabel;
-    NSAssert(abcUser.currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
-    _balanceView.botDenomination.text = abcUser.currentWallet.currencyAbbrev;
+    [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum currency:&currency];
+    _balanceView.botAmount.text = [abcAccount formatCurrency:currency
+                                             withCurrencyNum:abcAccount.currentWallet.currencyNum];
+    _balanceView.topDenomination.text = abcAccount.settings.denominationLabel;
+    NSAssert(abcAccount.currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
+    _balanceView.botDenomination.text = abcAccount.currentWallet.currencyAbbrev;
 
     [_balanceView refresh];
 
-    if (abcUser.currentWallet.archived)
+    if (abcAccount.currentWallet.archived)
     {
         self.buttonRequest.enabled = false;
         self.buttonSend.enabled = false;
@@ -459,7 +459,7 @@
 
     NSString *walletName;
 
-    walletName = [NSString stringWithFormat:@"%@ ▼", abcUser.currentWallet.strName];
+    walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.strName];
 
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
 
@@ -495,7 +495,7 @@
     if (wallet)
         return [self formatAmount:satoshi useFiat:bFiat currencyNum:wallet.currencyNum];
     else
-        return [self formatAmount:satoshi useFiat:bFiat currencyNum:abcUser.settings.defaultCurrencyNum];
+        return [self formatAmount:satoshi useFiat:bFiat currencyNum:abcAccount.settings.defaultCurrencyNum];
 }
 
 
@@ -518,13 +518,13 @@
     if (bFiat)
     {
         double currency;
-        [abcUser satoshiToCurrency:satoshi currencyNum:currencyNum currency:&currency];
-        return [abcUser formatCurrency:currency
+        [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum currency:&currency];
+        return [abcAccount formatCurrency:currency
                           withCurrencyNum:currencyNum];
     }
     else
     {
-        return [abcUser formatSatoshi:satoshi];
+        return [abcAccount formatSatoshi:satoshi];
     }
 }
 
@@ -545,7 +545,7 @@
     
     self.transactionDetailsController.delegate = self;
     self.transactionDetailsController.transaction = transaction;
-    self.transactionDetailsController.wallet = abcUser.currentWallet;
+    self.transactionDetailsController.wallet = abcAccount.currentWallet;
     self.transactionDetailsController.bOldTransaction = YES;
     self.transactionDetailsController.transactionDetailsMode = (transaction.amountSatoshi < 0 ? TD_MODE_SENT : TD_MODE_RECEIVED);
     if (cell.imagePhoto.image != self.imageSend &&
@@ -597,7 +597,7 @@
         [self clearTxSearchQueue];
         [self postToTxSearchQueue:^{
             NSMutableArray *arraySearchTransactions = [[NSMutableArray alloc] init];
-            [abcUser.currentWallet searchTransactionsIn:search addTo:arraySearchTransactions];
+            [abcAccount.currentWallet searchTransactionsIn:search addTo:arraySearchTransactions];
             dispatch_async(dispatch_get_main_queue(),^{
                 [self.arraySearchTransactions removeAllObjects];
                 self.arraySearchTransactions = arraySearchTransactions;
@@ -746,7 +746,7 @@
             return NO;
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
-            if ([abcUser.arrayWallets count] == 1)
+            if ([abcAccount.arrayWallets count] == 1)
                 return NO;
             else
                 return YES;
@@ -763,7 +763,7 @@
     // If there is only 1 wallet left in the active wallets table, prohibit moving
     if (tableView == self.walletsTable)
     {
-        if (sourceIndexPath.section == WALLET_SECTION_ACTIVE && sourceIndexPath.row == 0 && [abcUser.arrayWallets count] == 1)
+        if (sourceIndexPath.section == WALLET_SECTION_ACTIVE && sourceIndexPath.row == 0 && [abcAccount.arrayWallets count] == 1)
         {
             return sourceIndexPath;
         }
@@ -796,7 +796,7 @@
     srcIndexPath = [NSIndexPath indexPathForItem:sourceIndexPath.row inSection:sourceIndexPath.section - WALLET_SECTION_ACTIVE];
     dstIndexPath = [NSIndexPath indexPathForItem:destinationIndexPath.row inSection:destinationIndexPath.section - WALLET_SECTION_ACTIVE];
 
-    [abcUser reorderWallets:srcIndexPath toIndexPath:dstIndexPath];
+    [abcAccount reorderWallets:srcIndexPath toIndexPath:dstIndexPath];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -809,7 +809,7 @@
         }
         else if (section == WALLET_SECTION_ARCHIVED)
         {
-            if (([abcUser.arrayArchivedWallets count] >= 1) || ([abcUser.arrayWallets count] > 1))
+            if (([abcAccount.arrayArchivedWallets count] >= 1) || ([abcAccount.arrayWallets count] > 1))
                 return [Theme Singleton].heightWalletHeader;
         }
 
@@ -863,10 +863,10 @@
         }
         else
         {
-            if (0 == abcUser.currentWallet.arrayTransactions.count)
+            if (0 == abcAccount.currentWallet.arrayTransactions.count)
                 return 1;
             else
-                return abcUser.currentWallet.arrayTransactions.count;
+                return abcAccount.currentWallet.arrayTransactions.count;
         }
     }
     else // self.walletsTable
@@ -877,7 +877,7 @@
             case WALLET_SECTION_BALANCE:
                 return 0;
             case WALLET_SECTION_ACTIVE:
-                return abcUser.arrayWallets.count;
+                return abcAccount.arrayWallets.count;
 
             case WALLET_SECTION_ARCHIVED:
                 if(_archiveCollapsed)
@@ -886,7 +886,7 @@
                 }
                 else
                 {
-                    return abcUser.arrayArchivedWallets.count;
+                    return abcAccount.arrayArchivedWallets.count;
                 }
         }
 
@@ -944,7 +944,7 @@
     NSInteger row = [indexPath row];
     {
         TransactionCell *cell;
-        ABCWallet *wallet = abcUser.currentWallet;
+        ABCWallet *wallet = abcAccount.currentWallet;
 
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
@@ -968,7 +968,7 @@
         }
         else
         {
-            if ([abcUser.currentWallet.arrayTransactions count] == 0)
+            if ([abcAccount.currentWallet.arrayTransactions count] == 0)
             {
                 bBlankCell = YES;
                 cell.addressLabel.text = transactionCellNoTransactionsText;
@@ -976,7 +976,7 @@
             }
             else
             {
-                transaction = [abcUser.currentWallet.arrayTransactions objectAtIndex:indexPath.row];
+                transaction = [abcAccount.currentWallet.arrayTransactions objectAtIndex:indexPath.row];
             }
         }
 
@@ -1048,10 +1048,10 @@
             }
 
             //amount
-            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi wallet:abcUser.currentWallet];
+            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi wallet:abcAccount.currentWallet];
 
             // balance
-            cell.balanceLabel.text = [self formatAmount:transaction.balance wallet:abcUser.currentWallet];
+            cell.balanceLabel.text = [self formatAmount:transaction.balance wallet:abcAccount.currentWallet];
             cell.balanceLabel.textColor = COLOR_BALANCE;
         }
 
@@ -1112,8 +1112,8 @@
         }
         else
         {
-            if ([abcUser.currentWallet.arrayTransactions count] > 0)
-                [self launchTransactionDetailsWithTransaction:[abcUser.currentWallet.arrayTransactions objectAtIndex:indexPath.row] cell:cell];
+            if ([abcAccount.currentWallet.arrayTransactions count] > 0)
+                [self launchTransactionDetailsWithTransaction:[abcAccount.currentWallet.arrayTransactions objectAtIndex:indexPath.row] cell:cell];
         }
     }
     else
@@ -1121,7 +1121,7 @@
         NSIndexPath *setIndexPath = [[NSIndexPath alloc]init];
         setIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section - WALLET_SECTION_ACTIVE];
 
-        [abcUser makeCurrentWalletWithIndex:setIndexPath];
+        [abcAccount makeCurrentWalletWithIndex:setIndexPath];
         [self toggleWalletDropdown:nil];
 
     }
@@ -1221,7 +1221,7 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [abcUser walletRemove:longTapWallet complete:^
+            [abcAccount walletRemove:longTapWallet complete:^
             {
                 [MainViewController fadingAlert:deleteWalletDeletedText];
 
@@ -1238,7 +1238,7 @@
             //        // need at least one character in a wallet name
             if ([textField.text length])
             {
-                [abcUser renameWallet:longTapWallet.strUUID newName:textField.text];
+                [abcAccount renameWallet:longTapWallet.strUUID newName:textField.text];
             }
             else
             {
@@ -1279,16 +1279,16 @@
         ABCLog(2,@"long press on table view at section %d, row %d", (int) indexPath.section, (int) indexPath.row);
         if (indexPath.section == WALLET_SECTION_ACTIVE)
         {
-            longTapWallet = [abcUser.arrayWallets objectAtIndex:indexPath.row];
+            longTapWallet = [abcAccount.arrayWallets objectAtIndex:indexPath.row];
         }
         else if (indexPath.section == WALLET_SECTION_ARCHIVED)
         {
-            longTapWallet = [abcUser.arrayArchivedWallets objectAtIndex:indexPath.row];
+            longTapWallet = [abcAccount.arrayArchivedWallets objectAtIndex:indexPath.row];
         }
         NSString *deleteText = nil;
 
         // Only allow wallet delete if this wallet is archived or if there is another non-archived wallet
-        if ([abcUser.arrayWallets count] > 1 ||
+        if ([abcAccount.arrayWallets count] > 1 ||
                 longTapWallet.archived)
         {
             deleteText = deleteWalletText;
@@ -1329,7 +1329,7 @@
 
 - (void)refresh:(id)sender
 {
-    [abcUser.currentWallet refreshServer:NO notify:^
+    [abcAccount.currentWallet refreshServer:NO notify:^
     {
         [(UIRefreshControl *) sender endRefreshing];
     }];
@@ -1397,7 +1397,7 @@
 
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
-    if (nil == abcUser.arrayWallets)
+    if (nil == abcAccount.arrayWallets)
         return cell;
 
     ABCWallet *wallet;
@@ -1408,10 +1408,10 @@
             NSAssert(0, @"No wallets in balance section");
             break;
         case WALLET_SECTION_ACTIVE:
-            wallet = [abcUser.arrayWallets objectAtIndex:row];
+            wallet = [abcAccount.arrayWallets objectAtIndex:row];
             break;
         case WALLET_SECTION_ARCHIVED:
-            wallet = [abcUser.arrayArchivedWallets objectAtIndex:row];
+            wallet = [abcAccount.arrayArchivedWallets objectAtIndex:row];
             break;
     }
 
@@ -1429,7 +1429,7 @@
     cell.amount.text = [self formatAmount:wallet];
 
     // If there is only 1 wallet left in the active wallets table, prohibit moving
-    if (indexPath.section == WALLET_SECTION_ACTIVE && [abcUser.arrayWallets count] == 1)
+    if (indexPath.section == WALLET_SECTION_ACTIVE && [abcAccount.arrayWallets count] == 1)
     {
         [cell setEditing:NO];
     }
@@ -1468,7 +1468,7 @@
     {
         _archiveCollapsed = NO;
 
-        NSInteger countOfRowsToInsert = abcUser.arrayArchivedWallets.count;
+        NSInteger countOfRowsToInsert = abcAccount.arrayArchivedWallets.count;
         NSMutableArray *indexPathsToInsert = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < countOfRowsToInsert; i++)
         {
@@ -1485,7 +1485,7 @@
     else
     {
         _archiveCollapsed = YES;
-        NSInteger countOfRowsToDelete = abcUser.arrayArchivedWallets.count;
+        NSInteger countOfRowsToDelete = abcAccount.arrayArchivedWallets.count;
         //ABCLog(2,@"Rows to collapse: %i", countOfRowsToDelete);
         if (countOfRowsToDelete > 0)
         {

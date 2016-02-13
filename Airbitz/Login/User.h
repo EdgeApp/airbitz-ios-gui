@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommonTypes.h"
-#import "ABCUser.h"
+#import "ABCAccount.h"
 
 @interface User : NSObject
 
@@ -31,7 +31,7 @@
 + (void)freeAll;
 + (User *)Singleton;
 + (BOOL)isLoggedIn;
-+ (void)login:(ABCUser *)user;
++ (void)login:(ABCAccount *)user;
 
 - (id)init;
 - (void)clear;

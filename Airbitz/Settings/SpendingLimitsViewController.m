@@ -48,7 +48,7 @@
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
-    if (![abcUser passwordExists]) {
+    if (![abcAccount passwordExists]) {
         self.passwordTextField.hidden = YES;
     }
 
@@ -64,14 +64,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
-    _dailySpendLimitField.text = [abcUser formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.text = [abcAccount formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _dailyDenomination.text = abcUser.settings.denominationLabelShort;
+    _dailyDenomination.text = abcAccount.settings.denominationLabelShort;
 
-    _pinSpendLimitSwitch.on = abcUser.settings.bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [abcUser formatSatoshi:abcUser.settings.spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitSwitch.on = abcAccount.settings.bSpendRequirePin > 0;
+    _pinSpendLimitField.text = [abcAccount formatSatoshi:abcAccount.settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _pinDenomination.text = abcUser.settings.denominationLabelShort;
+    _pinDenomination.text = abcAccount.settings.denominationLabelShort;
 
     [self switchFlipped:_dailySpendLimitSwitch];
     [self switchFlipped:_pinSpendLimitSwitch];
@@ -228,19 +228,19 @@
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
-            [User Singleton].dailySpendLimitSatoshis = [abcUser denominationToSatoshi:_dailySpendLimitField.text];
+            [User Singleton].dailySpendLimitSatoshis = [abcAccount denominationToSatoshi:_dailySpendLimitField.text];
         } else {
             [User Singleton].bDailySpendLimit = NO;
         }
 
         if (_pinSpendLimitSwitch.on) {
-            abcUser.settings.bSpendRequirePin = true;
-            abcUser.settings.spendRequirePinSatoshis = [abcUser denominationToSatoshi:_pinSpendLimitField.text];
+            abcAccount.settings.bSpendRequirePin = true;
+            abcAccount.settings.spendRequirePinSatoshis = [abcAccount denominationToSatoshi:_pinSpendLimitField.text];
         } else {
-            abcUser.settings.bSpendRequirePin = false;
+            abcAccount.settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        ABCConditionCode ccode = [abcUser.settings saveSettings];
+        ABCConditionCode ccode = [abcAccount.settings saveSettings];
         if (!(ABCConditionCodeOk == ccode))
         {
             UIAlertView *alert =

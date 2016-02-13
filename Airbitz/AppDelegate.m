@@ -151,7 +151,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
     [abc enterForeground];
-    if (![self isAppActive] && !abcUser)
+    if (![self isAppActive] && !abcAccount)
     {
         [[User Singleton] clear];
     }

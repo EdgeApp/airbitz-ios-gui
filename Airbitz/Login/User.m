@@ -54,12 +54,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 + (BOOL)isLoggedIn
 {
-    return (0 != abcUser.name.length);// && abcUser.password.length;
+    return (0 != abcAccount.name.length);// && abcAccount.password.length;
 }
 
-+ (void)login:(ABCUser *)user;
++ (void)login:(ABCAccount *)user;
 {
-    abcUser = user;
+    abcAccount = user;
     [LocalSettings saveAll];
     [[User Singleton] loadLocalSettings];
 }
@@ -83,7 +83,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (NSString *)userKey:(NSString *)base
 {
-    return [NSString stringWithFormat:@"%@_%@", abcUser.name, base];
+    return [NSString stringWithFormat:@"%@_%@", abcAccount.name, base];
 }
 
 - (void)loadLocalSettings
