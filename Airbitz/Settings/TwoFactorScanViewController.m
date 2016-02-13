@@ -121,8 +121,8 @@
 
 - (BOOL)storeSecret
 {
-    ABCConditionCode ccode = [abc setOTPKey:abcAccount.name key:_secret];
-    return ABCConditionCodeOk == ccode;
+    NSError *error = [abc setOTPKey:abcAccount.name key:_secret];
+    return !error;
 }
 
 - (void)testSecret

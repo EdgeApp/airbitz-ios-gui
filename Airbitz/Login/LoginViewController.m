@@ -382,15 +382,15 @@ static BOOL bInitialized = false;
     [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] delegate:[MainViewController Singleton] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-    } completeWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
+    } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
         _bUsedTouchIDToLogin = usedTouchID;
         [self signInComplete:user];
-    } completeNoLogin:^{
+    } completionNoLogin:^{
         [self assignFirstResponder];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         [self showSpinner:NO];
         [MainViewController showBackground:NO animate:YES];
-        [MainViewController fadingAlert:errorString];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
         [self assignFirstResponder];
     }];
 }
@@ -542,16 +542,16 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:user];
          }
-                            error:^(ABCConditionCode ccode, NSString *errorString)
+              error:^(NSError *error)
          {
              [self showSpinner:NO];
              
-             if (ABCConditionCodeInvalidOTP == ccode)
+             if (ABCConditionCodeInvalidOTP == error.code)
              {
                  [MainViewController showBackground:NO animate:YES];
                  [self launchTwoFactorMenu];
              }
-             else if (ABCConditionCodeError == ccode)
+             else if (ABCConditionCodeError == error.code)
              {
                  [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
                  [MainViewController showBackground:NO animate:YES];
@@ -559,7 +559,7 @@ static BOOL bInitialized = false;
              else
              {
                  [MainViewController showBackground:NO animate:YES];
-                 [MainViewController fadingAlert:errorString];
+                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
              }
          }];
 
@@ -1084,13 +1084,13 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:user];
          }
-         error:^(ABCConditionCode ccode, NSString *errorString)
+         error:^(NSError *error)
          {
              [self showSpinner:NO];
-             if (ccode == ABCConditionCodeError)
+             if (ABCConditionCodeError == error.code)
                  [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
              else
-                 [MainViewController fadingAlert:errorString];
+                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
          }];
     }];
 }
