@@ -1142,10 +1142,10 @@ static BOOL bInitialized = false;
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
-    if (ABCConditionCodeOk != ccode)
+    NSError *error = [abc getLocalAccounts:self.arrayAccounts];
+    if (error)
     {
-        [MainViewController fadingAlert:[abc getLastErrorString]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
