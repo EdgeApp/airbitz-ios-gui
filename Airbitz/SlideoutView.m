@@ -497,15 +497,15 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode cc = [abc accountDeleteLocal:account];
-    if(cc == ABCConditionCodeOk)
+    NSError *error = [abc removeLocalAccount:account];
+    if (!error)
     {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
     else
     {
-        [MainViewController fadingAlert:[abc getLastErrorString]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 

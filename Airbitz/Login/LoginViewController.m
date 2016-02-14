@@ -1177,16 +1177,14 @@ static BOOL bInitialized = false;
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode ccode = [abc accountDeleteLocal:account];
-    NSString *errorString = [abc getLastErrorString];
-
-    if(ccode == ABCConditionCodeOk)
+    NSError *error = [abc removeLocalAccount:account];
+    if (!error)
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
     }
     else
     {
-        [MainViewController fadingAlert:errorString];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
