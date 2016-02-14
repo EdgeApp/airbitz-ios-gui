@@ -47,26 +47,17 @@
 {
     [super viewDidLoad];
 
-    NSDate *date = nil;
-    ABCConditionCode ccode = [abc getOTPResetDateForLastFailedAccountLogin:&date];
-    if (ABCConditionCodeOk == ccode)
-    {
-        if (date == nil) {
-            _labelResetDate.hidden = YES;
-            _labelResetDesc.hidden = YES;
-            _buttonReset.hidden = NO;
-        } else {
-            _buttonReset.hidden = YES;
-            _labelResetDate.hidden = NO;
-            _labelResetDesc.hidden = NO;
-            _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
-                                        NSLocalizedString(@"Reset Date", nil),
-                                        [self formatDate:date]];
-        }
-    } else {
-        _buttonReset.hidden = NO;
+    if (nil == self.resetDate) {
         _labelResetDate.hidden = YES;
         _labelResetDesc.hidden = YES;
+        _buttonReset.hidden = NO;
+    } else {
+        _buttonReset.hidden = YES;
+        _labelResetDate.hidden = NO;
+        _labelResetDesc.hidden = NO;
+        _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
+                                NSLocalizedString(@"Reset Date", nil),
+                                [self formatDate:self.resetDate]];
     }
 }
 

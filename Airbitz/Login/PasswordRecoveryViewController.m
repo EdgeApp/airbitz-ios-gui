@@ -333,7 +333,10 @@ typedef enum eAlertType
 {
     [self showSpinner:YES];
 
-    [abc checkRecoveryAnswers:self.strUserName answers:strAnswers otp:_secret complete:^(BOOL validAnswers)
+    [abc signInWithRecoveryAnswers:self.strUserName
+                           answers:strAnswers
+                               otp:_secret
+                          complete:^(BOOL validAnswers)
     {
         [self showSpinner:NO];
         if (validAnswers)
@@ -350,12 +353,12 @@ typedef enum eAlertType
                 otherButtonTitles:nil];
             [alert show];
         }
-    } error:^(ABCConditionCode ccode, NSString *errorString)
+    } error:^(NSError *error, NSDate *resetDate)
     {
         [self showSpinner:NO];
-        if (ABCConditionCodeInvalidOTP == ccode)
+        if (ABCConditionCodeInvalidOTP == error.code)
         {
-            [self launchTwoFactorMenu];
+            [self launchTwoFactorMenu:resetDate];
         }
         else
         {
@@ -382,13 +385,14 @@ typedef enum eAlertType
 
 }
 
-- (void)launchTwoFactorMenu
+- (void)launchTwoFactorMenu:(NSDate *)resetDate;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = self.strUserName;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
+    _tfaMenuViewController.resetDate = resetDate;
 }
 
 #pragma mark - TwoFactorScanViewControllerDelegate
