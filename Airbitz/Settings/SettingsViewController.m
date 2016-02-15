@@ -82,9 +82,16 @@
                                 @"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49", \
                                 @"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59", \
                                 @"60"], \
-                              @[@"minute(s)",@"hour(s)",@"day(s)"]]
-#define ARRAY_LOGOUT_MINUTES @[@1, @60, @1440] // how many minutes in each of the 'types'
+                              @[@"second(s)",@"minute(s)",@"hour(s)",@"day(s)"]]
+#define ARRAY_LOGOUT_SECONDS @[@1, @60, @3600, @86400] // how many seconds in each of the 'types'
 
+typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
+{
+    ABCLogoutSecondsTypeSeconds = 0,
+    ABCLogoutSecondsTypeMinutes,
+    ABCLogoutSecondsTypeHours,
+    ABCLogoutSecondsTypeDays
+};
 
 
 #define PICKER_MAX_CELLS_VISIBLE        (!IS_IPHONE4 ? 9 : 8)
@@ -458,20 +465,25 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     int amount = 0;
     NSString *strType = @"";
     NSInteger maxVal = [[[ARRAY_LOGOUT objectAtIndex:0] lastObject] intValue];
-    if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:0] integerValue] * maxVal)
+    if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeSeconds] integerValue] * maxVal)
+    {
+        strType = @"second";
+        amount = abcAccount.settings.secondsAutoLogout;
+    }
+    else if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeMinutes] integerValue] * maxVal)
     {
         strType = @"minute";
-        amount = abcAccount.settings.minutesAutoLogout;
+        amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeMinutes] integerValue];
     }
-    else if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue] * maxVal)
+    else if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeHours] integerValue] * maxVal)
     {
         strType = @"hour";
-        amount = abcAccount.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:1] integerValue];
+        amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeHours] integerValue];
     }
     else
     {
         strType = @"day";
-        amount = abcAccount.settings.minutesAutoLogout / [[ARRAY_LOGOUT_MINUTES objectAtIndex:2] integerValue];
+        amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeDays] integerValue];
     }
 
     [strRetVal appendFormat:@"%d %@", amount, strType];
@@ -496,14 +508,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     for (int type = 0; type < [[ARRAY_LOGOUT objectAtIndex:1] count]; type++)
     {
         // if the number is below or equal to this types maximum
-        if (abcAccount.settings.minutesAutoLogout <= [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] integerValue] * maxVal)
+        if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:type] integerValue] * maxVal)
         {
             finalType = type;
             for (int amountIndex = 0; amountIndex < [[ARRAY_LOGOUT objectAtIndex:0] count]; amountIndex++)
             {
-                int minutesBase = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:amountIndex] intValue];
-                int minutesMult = [[ARRAY_LOGOUT_MINUTES objectAtIndex:type] intValue];
-                if (abcAccount.settings.minutesAutoLogout >= (minutesBase * minutesMult))
+                int secondsBase = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:amountIndex] intValue];
+                int secondsMult = [[ARRAY_LOGOUT_SECONDS objectAtIndex:type] intValue];
+                if (abcAccount.settings.secondsAutoLogout >= (secondsBase * secondsMult))
                 {
                     finalAmount = amountIndex;
                 }
@@ -1429,7 +1441,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 {
     int amount = [[[ARRAY_LOGOUT objectAtIndex:0] objectAtIndex:[[arraySelections objectAtIndex:0] intValue]] intValue];
     int type   = [[arraySelections objectAtIndex:1] intValue];
-    abcAccount.settings.minutesAutoLogout = amount * [ARRAY_LOGOUT_MINUTES[type] intValue];
+    abcAccount.settings.secondsAutoLogout = amount * [ARRAY_LOGOUT_SECONDS[type] intValue];
 
     // update the settings in the core
     [self saveSettings];
