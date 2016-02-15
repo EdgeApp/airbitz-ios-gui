@@ -538,18 +538,18 @@ static BOOL bInitialized = false;
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:nil
-           complete:^(ABCAccount *user)
+           complete:^(ABCAccount *account)
          {
-             [self signInComplete:user];
+             [self signInComplete:account];
          }
-              error:^(NSError *error)
+              error:^(NSError *error, NSDate *resetDate)
          {
              [self showSpinner:NO];
              
              if (ABCConditionCodeInvalidOTP == error.code)
              {
                  [MainViewController showBackground:NO animate:YES];
-                 [self launchTwoFactorMenu];
+                 [self launchTwoFactorMenu:resetDate];
              }
              else if (ABCConditionCodeError == error.code)
              {
@@ -694,7 +694,7 @@ static BOOL bInitialized = false;
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
              [MainViewController showBackground:NO animate:YES];
-             [self launchTwoFactorMenu];
+             [self launchTwoFactorMenu:nil];
          }
          else
          {
@@ -1027,13 +1027,15 @@ static BOOL bInitialized = false;
     }
 }
 
-- (void)launchTwoFactorMenu
+- (void)launchTwoFactorMenu:(NSDate *)resetDate;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = self.usernameSelector.textField.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
+    _tfaMenuViewController.resetDate = resetDate;
+    
     _bTouchesEnabled = NO;
 }
 
@@ -1084,7 +1086,7 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:user];
          }
-         error:^(NSError *error)
+         error:^(NSError *error, NSDate *date)
          {
              [self showSpinner:NO];
              if (ABCConditionCodeError == error.code)
