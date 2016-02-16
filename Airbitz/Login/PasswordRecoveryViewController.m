@@ -110,7 +110,7 @@ typedef enum eAlertType
 
             [self getPasswordRecoveryQuestionsComplete];
 
-        } error:^(ABCConditionCode ccode, NSString *errorString)
+        } error:^(NSError *error)
         {
             self.arrayCategoryString = nil;
             self.arrayCategoryNumeric = nil;
@@ -118,7 +118,7 @@ typedef enum eAlertType
 
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelTitle.text
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, errorString]
+                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
