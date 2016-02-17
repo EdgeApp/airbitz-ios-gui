@@ -200,17 +200,16 @@
     {
         unsigned int count = 0;
         double secondsToCrack;
-        NSMutableArray *ruleDescription;
-        NSMutableArray *rulePassed;
-        NSMutableString *checkResultsMessage;
-        ABCConditionCode ccode;
+        NSMutableArray *ruleDescription = [[NSMutableArray alloc] init];
+        NSMutableArray *rulePassed = [[NSMutableArray alloc] init];
+        NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
         
-        bNewPasswordFieldsAreValid = [abc checkPasswordRules:self.passwordTextField.text
-                                              secondsToCrack:&secondsToCrack
-                                                       count:&count
-                                             ruleDescription:&ruleDescription
-                                                  rulePassed:&rulePassed
-                                         checkResultsMessage:&checkResultsMessage];
+        bNewPasswordFieldsAreValid = [AirbitzCore checkPasswordRules:self.passwordTextField.text
+                                                      secondsToCrack:&secondsToCrack
+                                                               count:&count
+                                                     ruleDescription:ruleDescription
+                                                          rulePassed:rulePassed
+                                                 checkResultsMessage:checkResultsMessage];
         
         if (bNewPasswordFieldsAreValid == NO)
         {
