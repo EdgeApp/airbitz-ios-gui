@@ -1340,7 +1340,7 @@ static BOOL bInitialized = false;
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
                 [self assignFirstResponder];
-            } error:^(ABCConditionCode ccode, NSString *errorString)
+            } error:^(NSError *error)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
