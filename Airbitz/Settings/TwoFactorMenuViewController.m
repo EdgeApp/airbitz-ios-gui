@@ -93,9 +93,9 @@
     [abc requestOTPReset:_username complete:^
      {
          [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
-     } error:^(ABCConditionCode ccode, NSString *errorString)
+     } error:^(NSError *error)
      {
-         [MainViewController fadingAlert:errorString];
+         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
      }];
 }
 
