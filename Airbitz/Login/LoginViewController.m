@@ -596,16 +596,14 @@ static BOOL bInitialized = false;
     {
         [self showSpinner:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            BOOL bSuccess = NO;
-            NSMutableString *error = [[NSMutableString alloc] init];
+            NSError *error;
             NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
-                                                                        isSuccess:&bSuccess
-                                                                         errorMsg:error];
+                                                                     error:&error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 [self showSpinner:NO];
-                _bSuccess = bSuccess;
-                _strReason = error;
+                _bSuccess = !!arrayQuestions;
+                _strReason = error.userInfo[NSLocalizedDescriptionKey];
                 [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
             });
         });
