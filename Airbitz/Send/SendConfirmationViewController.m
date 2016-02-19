@@ -22,6 +22,8 @@
 #import "FadingAlertView.h"
 #import "PopupPickerView2.h"
 
+#define REFRESH_PERIOD_SECONDS 30
+
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate,
                                               ButtonSelector2Delegate, InfoViewDelegate>
@@ -39,7 +41,7 @@
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
-    NSTimer                             *_pinTimer;
+    NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
     BOOL                                _currencyNumOverride;
     int                                 _currencyNum;
@@ -226,8 +228,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [_pinTimer invalidate];
-    _pinTimer = nil;
+    [_refreshTimer invalidate];
+    _refreshTimer = nil;
     [self dismissErrorMessage];
     [super viewWillDisappear:animated];
 //    [self dismissGestureRecognizer];
@@ -304,7 +306,7 @@
     [self pickBestResponder];
     [self exchangeRateUpdate:nil];
 
-    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_PIN_REQUIRED_PERIOD_SECONDS
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_PERIOD_SECONDS
         target:self
         selector:@selector(updateTextFieldContents)
         userInfo:nil
