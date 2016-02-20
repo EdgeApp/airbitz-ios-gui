@@ -106,6 +106,7 @@ typedef enum eAppMode
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
+    NSTimer                     *updateExchangeRateTimer;
 
 }
 
@@ -192,7 +193,22 @@ MainViewController *singleton;
     [self checkEnabledPlugins];
     
     [NotificationChecker initAll];
+    
+#define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
+    
+    updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+                                                     target:self
+                                                   selector:@selector(sendUpdateExchangeNotification:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+
 }
+
+- (void) sendUpdateExchangeNotification:(id)object
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGED object:self userInfo:nil];
+}
+
 
 + (AFHTTPRequestOperationManager *) createAFManager;
 {
