@@ -7515,7 +7515,7 @@
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/AthenaWallet/Athena Wallet-Info.plist";
+				INFOPLIST_FILE = "AthenaWallet/Athena Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7561,7 +7561,7 @@
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/AthenaWallet/Athena Wallet-Info.plist";
+				INFOPLIST_FILE = "AthenaWallet/Athena Wallet-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7584,7 +7584,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AthenaWallet/Athena Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/AthenaWallet/Athena Widget-Info.plist";
+				INFOPLIST_FILE = "AthenaWallet/Athena Widget-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7599,7 +7599,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AthenaWallet/Athena Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$(SRCROOT)/AthenaWallet/Athena Widget-Info.plist";
+				INFOPLIST_FILE = "AthenaWallet/Athena Widget-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
