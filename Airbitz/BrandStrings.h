@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-#ifdef RACKWALLET
+#if RACKWALLET
 
 #define appTitle                @"Rack Wallet"
 #define appHomepage             @"http://coinbtm.com"
@@ -21,6 +21,18 @@
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2015/12/rack-logo-wht-100w.png"
 #define appDesignedBy           NSLocalizedString(@"Designed by CoinBTM in",nil)
 #define appCompanyLocation      NSLocalizedString(@"New York, New York, USA", nil)
+
+#elif ATHENA
+
+#define appTitle                @"Athena Bitcoin"
+#define appHomepage             @"http://athenabitcoin.com"
+#define supportEmail            @"support@athenabitcoin.com"
+#define appStoreLink            @"https://itunes.apple.com/us/app/rack-wallet/id1067132601"
+#define playStoreLink           @"https://play.google.com/store/apps/details?id=com.athenabitcoin.wallet"
+#define appDownloadLink         @"http://athenabitcoin.com/app"
+#define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2015/12/rack-logo-wht-100w.png"
+#define appDesignedBy           NSLocalizedString(@"Designed by Athena Bitcoin in",nil)
+#define appCompanyLocation      NSLocalizedString(@"St Louis, Missouri, USA", nil)
 
 #else
 

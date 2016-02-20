@@ -2458,7 +2458,7 @@
 		DA10BDCC1C0014690086AD8B /* Rack Widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Rack Widget.entitlements"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
-		DA2197111C71ACCF009A2CF5 /* Athena Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athena Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2197111C71ACCF009A2CF5 /* Athena Bitcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athena Bitcoin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA21972B1C71ACDE009A2CF5 /* Athena Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Athena Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA21972E1C71AE1E009A2CF5 /* Athena Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Athena Wallet-Info.plist"; path = "AthenaWallet/Athena Wallet-Info.plist"; sourceTree = SOURCE_ROOT; };
 		DA21972F1C71AE1E009A2CF5 /* Athena Wallet.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Athena Wallet.entitlements"; path = "AthenaWallet/Athena Wallet.entitlements"; sourceTree = SOURCE_ROOT; };
@@ -4472,7 +4472,7 @@
 				DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */,
 				DA10BD7D1BFF9E330086AD8B /* Rack Wallet.app */,
 				DA10BD901BFF9E4A0086AD8B /* Rack Widget.appex */,
-				DA2197111C71ACCF009A2CF5 /* Athena Wallet.app */,
+				DA2197111C71ACCF009A2CF5 /* Athena Bitcoin.app */,
 				DA21972B1C71ACDE009A2CF5 /* Athena Widget.appex */,
 			);
 			name = Products;
@@ -4688,7 +4688,7 @@
 			);
 			name = "Athena Wallet";
 			productName = Airbitz;
-			productReference = DA2197111C71ACCF009A2CF5 /* Athena Wallet.app */;
+			productReference = DA2197111C71ACCF009A2CF5 /* Athena Bitcoin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA2197171C71ACDE009A2CF5 /* Athena Widget */ = {
@@ -7527,7 +7527,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -7573,7 +7573,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
