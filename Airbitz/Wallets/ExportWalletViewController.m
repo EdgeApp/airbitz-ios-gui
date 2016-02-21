@@ -497,7 +497,7 @@ typedef enum eDatePeriod
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
 
         NSString *walletName;
         walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.strName];

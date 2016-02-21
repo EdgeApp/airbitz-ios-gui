@@ -130,7 +130,7 @@ static const NSString *PROTOCOL = @"bridge://";
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
 
         NSString *walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];

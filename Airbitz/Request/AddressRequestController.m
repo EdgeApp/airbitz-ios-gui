@@ -77,7 +77,7 @@
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
         
         NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, abcAccount.currentWallet.strName];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
@@ -100,7 +100,7 @@
 //
 //    _walletSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
 //    [_walletSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-//    _walletSelector.selectedItemIndex = abcAccount.currentWalletID;
+//    _walletSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
 }
 
 - (void)didTapTitle: (UIButton *)sender
