@@ -1221,11 +1221,11 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [abcAccount walletRemove:longTapWallet complete:^
+            [longTapWallet removeWallet:^
             {
                 [MainViewController fadingAlert:deleteWalletDeletedText];
 
-            } error:^(ABCConditionCode ccode, NSString *errorString)
+            } error:^(NSError *error)
             {
                 [MainViewController fadingAlert:deleteWalletErrorText];
             }];
@@ -1238,7 +1238,7 @@
             //        // need at least one character in a wallet name
             if ([textField.text length])
             {
-                [abcAccount renameWallet:longTapWallet.strUUID newName:textField.text];
+                [longTapWallet renameWallet:textField.text];
             }
             else
             {
