@@ -144,7 +144,7 @@
         _destUUID = _abcSpend.destUUID;
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
         for (ABCWallet *w in abcAccount.arrayWallets) {
-            if (![w.strName isEqualToString:_sendTo]) {
+            if (![w.name isEqualToString:_sendTo]) {
                 [newArr addObject:w];
             } else {
                 _bAddressIsWalletUUID = YES;
@@ -198,15 +198,15 @@
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.walletSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.walletSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.walletSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
+        [self.walletSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.walletSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
 
         if (_currencyNumOverride)
             self.keypadView.currencyNum = _currencyNum;
         else
             self.keypadView.currencyNum = abcAccount.currentWallet.currencyNum;
 
-        NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
@@ -687,7 +687,7 @@
         self.helpButton.hidden = YES;
         return;
     }
-    [_abcSpend calcSendFees:abcAccount.currentWallet.strUUID complete:^(uint64_t totalFees) {
+    [_abcSpend calcSendFees:abcAccount.currentWallet.uuid complete:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees error:NO errorString:nil];
     } error:^(ABCConditionCode ccode, NSString *errorString) {
         [self updateFeeFieldContents:0 error:YES errorString:errorString];

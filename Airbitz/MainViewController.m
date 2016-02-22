@@ -1435,7 +1435,7 @@ MainViewController *singleton;
 
 - (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet txid:(NSString *)txid;
 {
-    if (wallet) _strWalletUUID = wallet.strUUID;
+    if (wallet) _strWalletUUID = wallet.uuid;
     _strTxID = txid;
 
     ABCTransaction *transaction = [wallet getTransaction:_strTxID];
@@ -1486,7 +1486,7 @@ MainViewController *singleton;
     //
     // If we just received money on the currentWallet then update the Widget's address & QRcode
     //
-    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.strUUID])
+    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.uuid])
     {
         [self updateWidgetQRCode];
     }
@@ -1520,7 +1520,7 @@ MainViewController *singleton;
 
 - (void)updateWidgetQRCode;
 {
-    if (!abcAccount.currentWallet || !abcAccount.currentWallet.strUUID)
+    if (!abcAccount.currentWallet || !abcAccount.currentWallet.uuid)
         return;
     
     ABCRequest *request = [[ABCRequest alloc] init];
@@ -1540,7 +1540,7 @@ MainViewController *singleton;
         
         [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
         [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
-        [tempSharedUserDefs setObject:abcAccount.currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:abcAccount.currentWallet.name forKey:APP_GROUP_LAST_WALLET_KEY];
         [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
         [tempSharedUserDefs synchronize];
     } error:^(ABCConditionCode ccode, NSString *errorString) {

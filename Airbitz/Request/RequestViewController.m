@@ -224,10 +224,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
 
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", abcAccount.currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
         self.keypadView.currencyNum = abcAccount.currentWallet.currencyNum;
@@ -474,9 +474,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.previousAmountSatoshiRequested = self.amountSatoshiRequested;
         bChangeRequest = true;
     }
-    if (previousWalletUUID != abcAccount.currentWallet.strUUID)
+    if (previousWalletUUID != abcAccount.currentWallet.uuid)
     {
-        previousWalletUUID = abcAccount.currentWallet.strUUID;
+        previousWalletUUID = abcAccount.currentWallet.uuid;
         bChangeRequest = true;
     }
     if (incomingSatoshi)

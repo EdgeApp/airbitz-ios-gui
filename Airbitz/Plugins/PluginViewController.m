@@ -129,10 +129,10 @@ static const NSString *PROTOCOL = @"bridge://";
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.strUUID;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
 
-        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
         if (notification == nil || ![notification.name isEqualToString:@"Skip"]) {
@@ -377,8 +377,8 @@ static const NSString *PROTOCOL = @"bridge://";
 - (NSMutableDictionary *)walletToDict:(ABCWallet *)w
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:w.strUUID forKey:@"id"];
-    [d setObject:w.strName forKey:@"name"];
+    [d setObject:w.uuid forKey:@"id"];
+    [d setObject:w.name forKey:@"name"];
     [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
     [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
     return d;
@@ -440,8 +440,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSMutableArray *results = [[NSMutableArray alloc] init];
     for (ABCWallet *w in abcAccount.arrayWallets) {
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-        [d setObject:w.strUUID forKey:@"id"];
-        [d setObject:w.strName forKey:@"name"];
+        [d setObject:w.uuid forKey:@"id"];
+        [d setObject:w.name forKey:@"name"];
         [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
         [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
         [results addObject:d];
