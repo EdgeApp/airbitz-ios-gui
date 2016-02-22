@@ -106,10 +106,10 @@
     bool on = NO;
     long timeout = 0;
     
-    ABCConditionCode ccode = [abcAccount getOTPDetails:&on
-                                            timeout:&timeout];
+    NSError *error = [abcAccount getOTPDetails:&on
+                                       timeout:&timeout];
     
-    if (ABCConditionCodeOk == ccode) {
+    if (!error) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
             _isOn = on == true ? YES : NO;
             _timeout = timeout;
@@ -293,21 +293,21 @@
 
 - (BOOL)switchTwoFactor:(BOOL)on
 {
-    ABCConditionCode ccode;
+    NSError *error;
     if (on) {
-        ccode = [abcAccount setOTPAuth:OTP_RESET_DELAY];
-        if (ABCConditionCodeOk == ccode)
+        error = [abcAccount setOTPAuth:OTP_RESET_DELAY];
+        if (!error)
             _isOn = YES;
     } else {
-        ccode = [abcAccount removeOTPAuth];
-        if (ABCConditionCodeOk == ccode)
+        error = [abcAccount removeOTPAuth];
+        if (!error)
         {
             _secret = nil;
             _isOn = NO;
             [NotificationChecker resetOtpNotifications];
         }
     }
-    if (ABCConditionCodeOk == ccode) {
+    if (!error) {
         [self updateTwoFactorUi:on];
         [self checkSecret:YES];
         return YES;
