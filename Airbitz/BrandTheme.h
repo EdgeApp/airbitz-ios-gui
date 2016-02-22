@@ -31,8 +31,8 @@
 #define LoginTitleTextShadowRadius                      0.0f
 #define PinEntryTextShadowRadius                        1.0f
 
-#define SHOW_BUY_SELL                                   0
-#define LOCKED_SEARCH_CATEGORY                          1
+#define SHOW_BUY_SELL                                   1
+#define LOCKED_SEARCH_CATEGORY                          0
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
 #elif ATHENA
