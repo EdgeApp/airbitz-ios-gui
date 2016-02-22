@@ -7549,7 +7549,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"RACKWALLET=1",
+					"ATHENA=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
