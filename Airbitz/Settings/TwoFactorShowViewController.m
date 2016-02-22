@@ -353,7 +353,7 @@
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             ABCConditionCode ccode = [abcAccount removeOTPAuth];
-            NSString *errorString = [abc getLastErrorString];
+            NSString *errorString = [abcAccount getLastErrorString];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (ABCConditionCodeOk == ccode) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
@@ -389,7 +389,7 @@
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             ABCConditionCode ccode = [abcAccount removeOTPResetRequest];
-            NSString *errorString = [abc getLastErrorString];
+            NSString *errorString = [abcAccount getLastErrorString];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (ABCConditionCodeOk == ccode) {

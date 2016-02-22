@@ -276,7 +276,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
-                                   message:[abc getLastErrorString]
+                                   message:[abcAccount getLastErrorString]
                                   delegate:self
                          cancelButtonTitle:cancelButtonText
                          otherButtonTitles:okButtonText, nil];
