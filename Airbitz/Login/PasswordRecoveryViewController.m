@@ -447,38 +447,33 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount
-            setRecoveryQuestions:password
-                       questions:strQuestions
-                         answers:strAnswers
-                        complete:^(void)
-                        {
-                            [self blockUser:NO];
-                            [self showSpinner:NO];
-                            _alertType = ALERT_TYPE_SETUP_COMPLETE;
-                            UIAlertView *alert = [[UIAlertView alloc]
-                                    initWithTitle:recoveryQuestionsSet
-                                          message:recoveryQuestionsSetWarning
-                                         delegate:self
-                                cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                                otherButtonTitles:okButtonText, nil];
-                            [alert show];
+    [abcAccount setRecoveryQuestions:password
+                           questions:strQuestions
+                             answers:strAnswers
+                            complete:^(void) {
+                                [self blockUser:NO];
+                                [self showSpinner:NO];
+                                _alertType = ALERT_TYPE_SETUP_COMPLETE;
+                                UIAlertView *alert = [[UIAlertView alloc]
+                                                      initWithTitle:recoveryQuestionsSet
+                                                      message:recoveryQuestionsSetWarning
+                                                      delegate:self
+                                                      cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
+                                                      otherButtonTitles:okButtonText, nil];
+                                [alert show];
 
-                        }
-                           error: ^(ABCConditionCode ccode, NSString *errorString)
-                           {
-                               [self blockUser:NO];
-                               [self showSpinner:NO];
-                               UIAlertView *alert = [[UIAlertView alloc]
-                                       initWithTitle:recoveryQuestionsNotSet
-                                             message:[NSString stringWithFormat:setRecoveryQuestionsFailed, errorString]
-                                            delegate:nil
-                                   cancelButtonTitle:okButtonText
-                                   otherButtonTitles:nil];
-                               [alert show];
-
+                            }
+                               error: ^(NSError *error) {
+                                   [self blockUser:NO];
+                                   [self showSpinner:NO];
+                                   UIAlertView *alert = [[UIAlertView alloc]
+                                                         initWithTitle:recoveryQuestionsNotSet
+                                                         message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                                                         delegate:nil
+                                                         cancelButtonTitle:okButtonText
+                                                         otherButtonTitles:nil];
+                                   [alert show];
                            }];
-
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
