@@ -246,7 +246,7 @@
             UIAlertView *alert =
                     [[UIAlertView alloc]
                             initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
-                                  message:[abcAccount getLastErrorString]
+                                  message:nil ///[abcAccount getLastErrorString]
                                  delegate:self
                         cancelButtonTitle:cancelButtonText
                         otherButtonTitles:okButtonText, nil];
