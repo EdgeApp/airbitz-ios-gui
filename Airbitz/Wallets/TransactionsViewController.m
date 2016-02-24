@@ -433,7 +433,7 @@
 
     double currency;
 
-    [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum currency:&currency];
+    currency = [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum error:nil];
     _balanceView.botAmount.text = [abcAccount formatCurrency:currency
                                              withCurrencyNum:abcAccount.currentWallet.currencyNum];
     _balanceView.topDenomination.text = abcAccount.settings.denominationLabel;
@@ -518,7 +518,7 @@
     if (bFiat)
     {
         double currency;
-        [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum currency:&currency];
+        currency = [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum error:nil];
         return [abcAccount formatCurrency:currency
                           withCurrencyNum:currencyNum];
     }

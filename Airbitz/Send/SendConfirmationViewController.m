@@ -296,12 +296,8 @@
     
     double currency;
 
-    ABCConditionCode ccode = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum currency:&currency];
-
-    if(ABCConditionCodeOk == ccode)
-    {
-        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-    }
+    currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
+    self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
     [self startCalcFees];
     [self pickBestResponder];
     [self exchangeRateUpdate:nil];
@@ -615,22 +611,17 @@
     if (_selectedTextField == self.amountBTCTextField)
     {
         _abcSpend.amount = [abcAccount denominationToSatoshi: self.amountBTCTextField.text];
-        if ([abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum currency:&currency] == ABCConditionCodeOk)
-        {
-            self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-        }
+        currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
+        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
     }
     else if (_selectedTextField == self.amountFiatTextField && [self.abcSpend isMutable])
     {
         currency = [self.amountFiatTextField.text doubleValue];
-        ABCConditionCode ccode = [abcAccount currencyToSatoshi:currency currencyNum:_currencyNum satoshi:&satoshi];
-        if (ABCConditionCodeOk == ccode)
-        {
-            _abcSpend.amount = satoshi;
-            self.amountBTCTextField.text = [abcAccount formatSatoshi:satoshi
-                                                          withSymbol:false
+        satoshi = [abcAccount currencyToSatoshi:currency currencyNum:_currencyNum error:nil];
+        _abcSpend.amount = satoshi;
+        self.amountBTCTextField.text = [abcAccount formatSatoshi:satoshi
+                                                      withSymbol:false
                                                     cropDecimals:[abcAccount currencyDecimalPlaces]];
-        }
     }
     self.amountBTCSymbol.text = abcAccount.settings.denominationLabelShort;
     self.amountBTCLabel.text = abcAccount.settings.denominationLabel;
@@ -724,16 +715,15 @@
         [coinFeeString appendString:@" "];
         [coinFeeString appendString:abcAccount.settings.denominationLabel];
 
-        if ([abcAccount satoshiToCurrency:txFees currencyNum:_currencyNum currency:&currencyFees])
-        {
-            [fiatFeeString appendString:@"+ "];
-            [fiatFeeString appendString:[abcAccount formatCurrency:currencyFees
-                                                   withCurrencyNum:_currencyNum
-                                                        withSymbol:false]];
-            [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:[abc currencyAbbrevLookup:_currencyNum]];
-        }
-        self.amountBTCLabel.text = coinFeeString; 
+        currencyFees = [abcAccount satoshiToCurrency:txFees currencyNum:_currencyNum error:nil];
+        [fiatFeeString appendString:@"+ "];
+        [fiatFeeString appendString:[abcAccount formatCurrency:currencyFees
+                                               withCurrencyNum:_currencyNum
+                                                    withSymbol:false]];
+        [fiatFeeString appendString:@" "];
+        [fiatFeeString appendString:[abc currencyAbbrevLookup:_currencyNum]];
+        
+        self.amountBTCLabel.text = coinFeeString;
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [abcAccount conversionStringFromNum:_currencyNum withAbbrev:YES];
 

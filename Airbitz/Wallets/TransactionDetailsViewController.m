@@ -326,7 +326,7 @@ typedef enum eRequestType
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            if ([abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+            currency = [abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum error:nil];
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else

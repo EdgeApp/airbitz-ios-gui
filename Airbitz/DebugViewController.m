@@ -145,7 +145,7 @@
     [abcAccount clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedWithErrorText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     }];

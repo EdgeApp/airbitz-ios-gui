@@ -1165,9 +1165,9 @@ MainViewController *singleton;
     else
     {
         // Make sure there's a wallet in this account. If not, create it
-        int numWallets;
-        ABCConditionCode ccode = [abcAccount getNumWalletsInAccount:&numWallets];
-        if (ABCConditionCodeOk == ccode)
+        NSError *error = nil;
+        int numWallets = [abcAccount getNumWalletsInAccount:&error];
+        if (!error)
         {
             if (0 == numWallets)
             {
@@ -1566,14 +1566,13 @@ MainViewController *singleton;
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
     
-    if ([abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
-        fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+    currency = [abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum error:nil];
+    fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
     
-    if ([abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi] == ABCConditionCodeOk)
-        coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
-
+    satoshi = [abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum error:nil];
+    coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {

@@ -722,12 +722,13 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
             
     double currency;
-    ABCConditionCode ccode;
+    NSError *error = nil;
+
+    currency = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
+                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
+                                       error:&error];
     
-    ccode = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
-                                     currencyNum:[[args objectForKey:@"currencyNum"] intValue]
-                                        currency:&currency];
-    if (ABCConditionCodeOk == ccode) {
+    if (!error) {
         [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithDouble:currency]]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -740,11 +741,11 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
 
     int64_t satoshis;
-    ABCConditionCode ccode;
-    ccode = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
-                                     currencyNum:[[args objectForKey:@"currencyNum"] intValue]
-                                         satoshi:&satoshis];
-    if (ABCConditionCodeOk == ccode) {
+    NSError *error = nil;
+    satoshis = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
+                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
+                                       error:&error];
+    if (!error) {
         [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLongLong:satoshis]]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
