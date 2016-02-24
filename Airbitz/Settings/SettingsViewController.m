@@ -1364,12 +1364,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     else if (SECTION_DEFAULT_EXCHANGE == section)
     {
         curChoice = NSNotFound;
-        curChoice = [ABC_ARRAY_EXCHANGES indexOfObject:abcAccount.settings.exchangeRateSource];
+        curChoice = [ABCArrayExchanges indexOfObject:abcAccount.settings.exchangeRateSource];
         if (curChoice == NSNotFound)
         {
             curChoice = -1;
         }
-        arrayPopupChoices = ABC_ARRAY_EXCHANGES;
+        arrayPopupChoices = ABCArrayExchanges;
         headerText = @"Exchange Rate Data Source";
     }
 
@@ -1417,7 +1417,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
     {
-        abcAccount.settings.exchangeRateSource = ABC_ARRAY_EXCHANGES[row];
+        abcAccount.settings.exchangeRateSource = ABCArrayExchanges[row];
     }
 
     // update the settings in the core
