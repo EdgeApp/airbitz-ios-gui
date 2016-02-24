@@ -1379,8 +1379,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
         }
 
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
-        if (ccode == ABCConditionCodeNoTransaction)
+    } error:^(NSError *error) {
+        if (error.code == ABCConditionCodeNoTransaction)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
         }
