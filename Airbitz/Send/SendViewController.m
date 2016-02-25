@@ -1714,7 +1714,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     wallet = [abcAccount.arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
-                        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet];
+                        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
                         if (nil != abcSpend)
                         {
                             [self showSendConfirmationTo:abcSpend];
@@ -1777,7 +1777,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         ABCWallet *wallet = [abcAccount.arrayWallets objectAtIndex:index];
 
-        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet];
+        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
         if (nil != abcSpend)
         {
             [self stopQRReader];
