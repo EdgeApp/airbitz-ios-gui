@@ -38,7 +38,7 @@
 #define appTitle                @"Athena Bitcoin"
 #define appHomepage             @"http://athenabitcoin.com"
 #define supportEmail            @"support@athenabitcoin.com"
-#define appStoreLink            @"https://itunes.apple.com/us/app/airbitz/id843536046"
+#define appStoreLink            @"https://itunes.apple.com/us/app/athena-bitcoin/id1087704508"
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.athenabitcoin.wallet"
 #define appDownloadLink         @"http://athenabitcoin.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2016/02/Athena_Bitcoin_LOGO-01-white-100w.png"
