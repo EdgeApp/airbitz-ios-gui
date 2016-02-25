@@ -1543,7 +1543,7 @@ MainViewController *singleton;
         [tempSharedUserDefs setObject:abcAccount.currentWallet.name forKey:APP_GROUP_LAST_WALLET_KEY];
         [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
         [tempSharedUserDefs synchronize];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
     }];
 }
 

@@ -1758,7 +1758,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self stopQRReader];
         [self showSendConfirmationTo:abcSpend];
         [MainViewController fadingAlertDismiss];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
     }];
 }

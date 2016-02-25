@@ -664,7 +664,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
 
-    } error:^(ABCConditionCode ccode, NSString *errorString)
+    } error:^(NSError *error)
     {
 
     }];
