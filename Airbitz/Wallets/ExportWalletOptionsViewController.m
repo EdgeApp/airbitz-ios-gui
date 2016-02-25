@@ -466,10 +466,10 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString *str;
+            NSMutableString *str = [[NSMutableString alloc] init];
             
-            str = [abcAccount.currentWallet exportTransactionsToCSV];
-            if (nil != str)
+            NSError *error = [abcAccount.currentWallet exportTransactionsToCSV:str];
+            if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
@@ -479,7 +479,7 @@ typedef enum eExportOption
                 title = NSLocalizedString(@"Export Wallet Transactions", nil);
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
-                                      message:[abcAccount.currentWallet getLastErrorString]
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
                                       delegate:nil
                                       cancelButtonTitle:okButtonText
                                       otherButtonTitles:nil];
@@ -511,8 +511,10 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            NSString *str = [abcAccount.currentWallet exportWalletPrivateSeed];
-            if (nil != str)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportWalletPrivateSeed:str];
+            if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
@@ -522,7 +524,7 @@ typedef enum eExportOption
                 title = NSLocalizedString(@"Export Private Seed", nil);
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
-                                      message:[abcAccount.currentWallet getLastErrorString]
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
                                       delegate:nil
                                       cancelButtonTitle:okButtonText
                                       otherButtonTitles:nil];
