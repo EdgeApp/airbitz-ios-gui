@@ -225,7 +225,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];

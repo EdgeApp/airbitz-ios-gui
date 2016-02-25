@@ -1297,7 +1297,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
         if (self.bImportMode)
@@ -1453,7 +1453,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
-        if (abcAccount.currentWallet.uuid != i)
+        if (abcAccount.currentWalletIndex != i)
         {
             ABCWallet *wallet = [abcAccount.arrayWallets objectAtIndex:i];
 

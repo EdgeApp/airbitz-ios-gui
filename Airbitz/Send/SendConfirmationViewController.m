@@ -199,7 +199,7 @@
     {
         self.walletSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.walletSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
-        self.walletSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
+        self.walletSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         if (_currencyNumOverride)
             self.keypadView.currencyNum = _currencyNum;

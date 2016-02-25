@@ -144,7 +144,7 @@ typedef enum eExportOption
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
         [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWallet.uuid;
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
         walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
