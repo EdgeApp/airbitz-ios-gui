@@ -336,23 +336,10 @@ typedef enum eAlertType
     [abc signInWithRecoveryAnswers:self.strUserName
                            answers:strAnswers
                                otp:_secret
-                          complete:^(BOOL validAnswers)
+                          complete:^
     {
         [self showSpinner:NO];
-        if (validAnswers)
-        {
-            [self bringUpSignUpViewWithAnswers:strAnswers];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-                          message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-                         delegate:nil
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil];
-            [alert show];
-        }
+        [self bringUpSignUpViewWithAnswers:strAnswers];
     } error:^(NSError *error, NSDate *resetDate)
     {
         [self showSpinner:NO];
@@ -362,14 +349,6 @@ typedef enum eAlertType
         }
         else
         {
-//            UIAlertView *alert = [[UIAlertView alloc]
-//                    initWithTitle:errorRecoveringAccountTitle
-//                          message:errorRecoveringAccountText
-//                         delegate:nil
-//                cancelButtonTitle:okButtonText
-//                otherButtonTitles:nil];
-//            [alert show];
-//
             // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
             // Core should change to set error to OK but change validAnswers -paul
             UIAlertView *alert = [[UIAlertView alloc]
