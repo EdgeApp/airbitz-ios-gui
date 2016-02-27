@@ -240,13 +240,13 @@
             abcAccount.settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        ABCConditionCode ccode = [abcAccount.settings saveSettings];
-        if (!(ABCConditionCodeOk == ccode))
+        NSError *error = [abcAccount.settings saveSettings];
+        if (error)
         {
             UIAlertView *alert =
                     [[UIAlertView alloc]
                             initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
-                                  message:nil ///[abcAccount getLastErrorString]
+                                  message:error.userInfo[NSLocalizedDescriptionKey]
                                  delegate:self
                         cancelButtonTitle:cancelButtonText
                         otherButtonTitles:okButtonText, nil];

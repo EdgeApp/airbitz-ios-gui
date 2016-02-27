@@ -508,16 +508,16 @@
         {
             [_abcSpend signTx:^(NSString *rawTx) {
                 [self txSendSuccess:_abcSpend.srcWallet withTx:rawTx];
-            } error:^(ABCConditionCode ccode, NSString *errorString) {
-                [self txSendFailed:errorString];
+            } error:^(NSError *error) {
+                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
             }];
         }
         else
         {
             [_abcSpend signBroadcastSaveTx:^(NSString *txId) {
                 [self txSendSuccess:_abcSpend.srcWallet withTx:txId];
-            } error:^(ABCConditionCode ccode, NSString *errorString) {
-                [self txSendFailed:errorString];
+            } error:^(NSError *error) {
+                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
             }];
         }
     }
@@ -678,10 +678,10 @@
         self.helpButton.hidden = YES;
         return;
     }
-    [_abcSpend calcSendFees:abcAccount.currentWallet.uuid complete:^(uint64_t totalFees) {
+    [_abcSpend calcSendFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees error:NO errorString:nil];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
-        [self updateFeeFieldContents:0 error:YES errorString:errorString];
+    } error:^(NSError *error) {
+        [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
     }];
 }
 

@@ -515,8 +515,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
 
     if (_abcSpend != nil) {
-        NSString *txid;
-        [_abcSpend saveTx:[args objectForKey:@"rawTx"] txId:&txid];
+        NSMutableString *txid = [[NSMutableString alloc] init];
+        [_abcSpend saveTx:[args objectForKey:@"rawTx"] txId:txid];
         _abcSpend = nil;
         [self setJsResults:_sendCbid withArgs:[self jsonResult:txid]];
     } else {
@@ -630,7 +630,6 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
 
-    ABCConditionCode ccode;
     NSDictionary *results = nil;
 
     ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
@@ -646,8 +645,8 @@ static const NSString *PROTOCOL = @"bridge://";
         request.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
     }
 
-    ccode = [wallet createReceiveRequestWithDetails:request];
-    if (ABCConditionCodeOk == ccode)
+    NSError *error = [wallet createReceiveRequestWithDetails:request];
+    if (!error)
     {
         NSString *requestId = request.address;
         NSString *address = request.address;
@@ -670,9 +669,8 @@ static const NSString *PROTOCOL = @"bridge://";
     
     ABCWallet *wallet = [abcAccount getWallet:uuid];
 
-    ABCConditionCode ccode;
-    ccode = [wallet finalizeRequestWithAddress:[args objectForKey:@"requestId"]];
-    if (ABCConditionCodeOk == ccode) {
+    NSError *error = [wallet finalizeRequestWithAddress:[args objectForKey:@"requestId"]];
+    if (!error) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -683,9 +681,9 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if (ABCConditionCodeOk == [abcAccount accountDataSet:_plugin.pluginId
-                                                       withKey:[args objectForKey:@"key"]
-                                                     withValue:[args objectForKey:@"value"]]) {
+    if (![abcAccount accountDataSet:_plugin.pluginId
+                            withKey:[args objectForKey:@"key"]
+                          withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];
@@ -695,7 +693,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)clearData:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    if (ABCConditionCodeOk == [abcAccount accountDataClear:_plugin.pluginId]) {
+    if (![abcAccount accountDataClear:_plugin.pluginId]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {
         [self setJsResults:cbid withArgs:[self jsonError]];

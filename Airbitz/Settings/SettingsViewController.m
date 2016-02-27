@@ -269,14 +269,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)saveSettings
 {
-    ABCConditionCode ccode = [abcAccount.settings saveSettings];
+    NSError *error = [abcAccount.settings saveSettings];
     // update the settings in the core
 
-    if (!(ABCConditionCodeOk == ccode))
+    if (error)
     {
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
-                                   message:nil///[abcAccount getLastErrorString]
+                                   message:error.userInfo[NSLocalizedDescriptionKey]
                                   delegate:self
                          cancelButtonTitle:cancelButtonText
                          otherButtonTitles:okButtonText, nil];

@@ -159,7 +159,7 @@
 - (void)showQrCode:(BOOL)show
 {
     if (show) {
-        UIImage *qrImage = [AirbitzCore encodeStringToQRImage:_secret];
+        UIImage *qrImage = [AirbitzCore encodeStringToQRImage:_secret error:nil];
         if (qrImage)
         {
             _qrCodeImageView.image = qrImage;

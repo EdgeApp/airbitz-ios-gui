@@ -1198,7 +1198,7 @@ static BOOL bInitialized = false;
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abc passwordExists:acct])
+    if ([abcAccount passwordExists])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
