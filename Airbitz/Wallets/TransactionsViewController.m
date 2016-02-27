@@ -391,7 +391,7 @@
 - (IBAction)buttonRequestTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.strUUID};
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.uuid};
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -399,7 +399,7 @@
 - (IBAction)buttonSendTouched:(id)sender
 {
     [self resignAllResponders];
-    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.strUUID };
+    NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.uuid };
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
                                                         object:self userInfo:dictNotification];
 }
@@ -433,7 +433,7 @@
 
     double currency;
 
-    [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum currency:&currency];
+    currency = [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum error:nil];
     _balanceView.botAmount.text = [abcAccount formatCurrency:currency
                                              withCurrencyNum:abcAccount.currentWallet.currencyNum];
     _balanceView.topDenomination.text = abcAccount.settings.denominationLabel;
@@ -459,7 +459,7 @@
 
     NSString *walletName;
 
-    walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.strName];
+    walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
 
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
 
@@ -518,7 +518,7 @@
     if (bFiat)
     {
         double currency;
-        [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum currency:&currency];
+        currency = [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum error:nil];
         return [abcAccount formatCurrency:currency
                           withCurrencyNum:currencyNum];
     }
@@ -624,8 +624,8 @@
     if (transaction)
     {
         // find the image from the contacts
-        image = [MainViewController Singleton].dictImages[[transaction.strName lowercaseString]];
-        ABCLog(2, @"Looking for image for %@. Found image = %lx", transaction.strName, (unsigned long) image);
+        image = [MainViewController Singleton].dictImages[[transaction.payeeName lowercaseString]];
+        ABCLog(2, @"Looking for image for %@. Found image = %lx", transaction.payeeName, (unsigned long) image);
     }
 
     return image;
@@ -998,13 +998,13 @@
         cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 
         // address
-        cell.addressLabel.text = transaction.strName;
+        cell.addressLabel.text = transaction.payeeName;
 
         // if we are in search  mode
         if ([self searchEnabled])
         {
             // confirmation becomes category
-            cell.confirmationLabel.text = transaction.strCategory;
+            cell.confirmationLabel.text = transaction.category;
             cell.confirmationLabel.textColor = COLOR_BALANCE;
 
             // amount - always bitcoin
@@ -1036,7 +1036,7 @@
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
-            else if (transaction.confirmations >= ABC_CONFIRMED_CONFIRMATION_COUNT)
+            else if (transaction.confirmations >= ABCConfirmedConfirmationCount)
             {
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
                 cell.confirmationLabel.text = confirmedText;
@@ -1171,14 +1171,14 @@
         {
             // Do Rename popup
             renameAlert =[[UIAlertView alloc ] initWithTitle:renameWalletText
-                                                     message:longTapWallet.strName
+                                                     message:longTapWallet.name
                                                     delegate:self
                                            cancelButtonTitle:cancelButtonText
                                            otherButtonTitles:doneButtonText, nil];
             renameAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
             UITextField *textField = [renameAlert textFieldAtIndex:0];
-            textField.text = longTapWallet.strName;
-            textField.placeholder = longTapWallet.strName;
+            textField.text = longTapWallet.name;
+            textField.placeholder = longTapWallet.name;
 
             [renameAlert show];
         }
@@ -1192,7 +1192,7 @@
             {
                 // Do Delete popup
                 deleteAlert =[[UIAlertView alloc ] initWithTitle:deleteWalletText
-                                                         message:longTapWallet.strName
+                                                         message:longTapWallet.name
                                                         delegate:self
                                                cancelButtonTitle:cancelButtonText
                                                otherButtonTitles:okButtonText, nil];
@@ -1206,7 +1206,7 @@
     {
         if (buttonIndex == 1) {
             // Do Delete popup
-            deleteAlertWarning =[[UIAlertView alloc ] initWithTitle:[NSString stringWithFormat:@"%@: %@", deleteWalletText, longTapWallet.strName]
+            deleteAlertWarning =[[UIAlertView alloc ] initWithTitle:[NSString stringWithFormat:@"%@: %@", deleteWalletText, longTapWallet.name]
                                                      message:deleteWalletWarningText
                                                     delegate:self
                                            cancelButtonTitle:cancelButtonText
@@ -1221,11 +1221,11 @@
         if (buttonIndex == 1) {
             [MainViewController fadingAlert:deletingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-            [abcAccount walletRemove:longTapWallet complete:^
+            [longTapWallet removeWallet:^
             {
                 [MainViewController fadingAlert:deleteWalletDeletedText];
 
-            } error:^(ABCConditionCode ccode, NSString *errorString)
+            } error:^(NSError *error)
             {
                 [MainViewController fadingAlert:deleteWalletErrorText];
             }];
@@ -1238,7 +1238,7 @@
             //        // need at least one character in a wallet name
             if ([textField.text length])
             {
-                [abcAccount renameWallet:longTapWallet.strUUID newName:textField.text];
+                [longTapWallet renameWallet:textField.text];
             }
             else
             {
@@ -1294,7 +1294,7 @@
             deleteText = deleteWalletText;
         }
         
-        longTapAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@%@",walletNameHeaderText, longTapWallet.strName]
+        longTapAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@%@",walletNameHeaderText, longTapWallet.name]
                                                   message:@""
                                                  delegate:self
                                         cancelButtonTitle:cancelButtonText
@@ -1420,7 +1420,7 @@
 
     if (wallet.loaded) {
         cell.userInteractionEnabled = YES;
-        cell.name.text = wallet.strName;
+        cell.name.text = wallet.name;
     } else {
         cell.userInteractionEnabled = NO;
         cell.name.text = NSLocalizedString(@"Loading...", @"");

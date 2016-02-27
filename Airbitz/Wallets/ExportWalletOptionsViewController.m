@@ -143,11 +143,11 @@ typedef enum eExportOption
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
@@ -298,7 +298,7 @@ typedef enum eExportOption
 
             NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
-            [strBody appendFormat:@"Wallet: %@\n\n", abcAccount.currentWallet.strName];
+            [strBody appendFormat:@"Wallet: %@\n\n", abcAccount.currentWallet.name];
             [strBody appendString:@"Private Seed:\n"];
             [strBody appendString:strPrivateSeed];
             [strBody appendString:@"\n\n"];
@@ -356,7 +356,7 @@ typedef enum eExportOption
         [strBody appendString:@"<html><body>\n"];
 
 //        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
-        [strBody appendString:abcAccount.currentWallet.strName];
+        [strBody appendString:abcAccount.currentWallet.name];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
 
@@ -376,7 +376,7 @@ typedef enum eExportOption
         if (dataExport == nil)
             return;
 
-        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.strName, [self suffixFor:self.type]];
+        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.name, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
         [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
 
@@ -466,10 +466,10 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString *str;
+            NSMutableString *str = [[NSMutableString alloc] init];
             
-            str = [abcAccount.currentWallet exportTransactionsToCSV];
-            if (nil != str)
+            NSError *error = [abcAccount.currentWallet exportTransactionsToCSV:str];
+            if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
@@ -479,7 +479,7 @@ typedef enum eExportOption
                 title = NSLocalizedString(@"Export Wallet Transactions", nil);
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
-                                      message:[abcAccount.currentWallet getLastErrorString]
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
                                       delegate:nil
                                       cancelButtonTitle:okButtonText
                                       otherButtonTitles:nil];
@@ -511,8 +511,10 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            NSString *str = [abcAccount.currentWallet exportWalletPrivateSeed];
-            if (nil != str)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportWalletPrivateSeed:str];
+            if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
@@ -522,7 +524,7 @@ typedef enum eExportOption
                 title = NSLocalizedString(@"Export Private Seed", nil);
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
-                                      message:[abcAccount.currentWallet getLastErrorString]
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
                                       delegate:nil
                                       cancelButtonTitle:okButtonText
                                       otherButtonTitles:nil];
@@ -642,7 +644,7 @@ typedef enum eExportOption
 		NSData *dataExport = [self getExportDataInForm:self.type];
         if (dataExport == nil)
             return;
-		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.strName, [self suffixFor:self.type]];
+		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.name, [self suffixFor:self.type]];
 		NSString *strMimeType = [self mimeTypeFor:self.type];
 		
 		[gDrive uploadFile:dataExport name:strFilename mimeType:strMimeType];

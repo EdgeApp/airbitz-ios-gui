@@ -110,7 +110,7 @@ typedef enum eAlertType
 
             [self getPasswordRecoveryQuestionsComplete];
 
-        } error:^(ABCConditionCode ccode, NSString *errorString)
+        } error:^(NSError *error)
         {
             self.arrayCategoryString = nil;
             self.arrayCategoryNumeric = nil;
@@ -118,7 +118,7 @@ typedef enum eAlertType
 
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelTitle.text
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, errorString]
+                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
@@ -333,40 +333,22 @@ typedef enum eAlertType
 {
     [self showSpinner:YES];
 
-    [abc checkRecoveryAnswers:self.strUserName answers:strAnswers otp:_secret complete:^(BOOL validAnswers)
+    [abc signInWithRecoveryAnswers:self.strUserName
+                           answers:strAnswers
+                               otp:_secret
+                          complete:^
     {
         [self showSpinner:NO];
-        if (validAnswers)
+        [self bringUpSignUpViewWithAnswers:strAnswers];
+    } error:^(NSError *error, NSDate *resetDate)
+    {
+        [self showSpinner:NO];
+        if (ABCConditionCodeInvalidOTP == error.code)
         {
-            [self bringUpSignUpViewWithAnswers:strAnswers];
+            [self launchTwoFactorMenu:resetDate];
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-                          message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
-                         delegate:nil
-                cancelButtonTitle:@"OK"
-                otherButtonTitles:nil];
-            [alert show];
-        }
-    } error:^(ABCConditionCode ccode, NSString *errorString)
-    {
-        [self showSpinner:NO];
-        if (ABCConditionCodeInvalidOTP == ccode)
-        {
-            [self launchTwoFactorMenu];
-        }
-        else
-        {
-//            UIAlertView *alert = [[UIAlertView alloc]
-//                    initWithTitle:errorRecoveringAccountTitle
-//                          message:errorRecoveringAccountText
-//                         delegate:nil
-//                cancelButtonTitle:okButtonText
-//                otherButtonTitles:nil];
-//            [alert show];
-//
             // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
             // Core should change to set error to OK but change validAnswers -paul
             UIAlertView *alert = [[UIAlertView alloc]
@@ -382,13 +364,14 @@ typedef enum eAlertType
 
 }
 
-- (void)launchTwoFactorMenu
+- (void)launchTwoFactorMenu:(NSDate *)resetDate;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = self.strUserName;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
+    _tfaMenuViewController.resetDate = resetDate;
 }
 
 #pragma mark - TwoFactorScanViewControllerDelegate
@@ -401,8 +384,8 @@ typedef enum eAlertType
         _tfaMenuViewController = nil;
         BOOL success = __bSuccess;
         if (success) {
-            ABCConditionCode ccode = [abc setOTPKey:self.strUserName key:_secret];
-            if (ABCConditionCodeOk == ccode) {
+            NSError *error = [abc setOTPKey:self.strUserName key:_secret];
+            if (!error) {
                 // Try again with OTP
                 [self CompleteSignup];
             } else {
@@ -443,38 +426,33 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount
-            setRecoveryQuestions:password
-                       questions:strQuestions
-                         answers:strAnswers
-                        complete:^(void)
-                        {
-                            [self blockUser:NO];
-                            [self showSpinner:NO];
-                            _alertType = ALERT_TYPE_SETUP_COMPLETE;
-                            UIAlertView *alert = [[UIAlertView alloc]
-                                    initWithTitle:recoveryQuestionsSet
-                                          message:recoveryQuestionsSetWarning
-                                         delegate:self
-                                cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                                otherButtonTitles:okButtonText, nil];
-                            [alert show];
+    [abcAccount setRecoveryQuestions:password
+                           questions:strQuestions
+                             answers:strAnswers
+                            complete:^(void) {
+                                [self blockUser:NO];
+                                [self showSpinner:NO];
+                                _alertType = ALERT_TYPE_SETUP_COMPLETE;
+                                UIAlertView *alert = [[UIAlertView alloc]
+                                                      initWithTitle:recoveryQuestionsSet
+                                                      message:recoveryQuestionsSetWarning
+                                                      delegate:self
+                                                      cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
+                                                      otherButtonTitles:okButtonText, nil];
+                                [alert show];
 
-                        }
-                           error: ^(ABCConditionCode ccode, NSString *errorString)
-                           {
-                               [self blockUser:NO];
-                               [self showSpinner:NO];
-                               UIAlertView *alert = [[UIAlertView alloc]
-                                       initWithTitle:recoveryQuestionsNotSet
-                                             message:[NSString stringWithFormat:setRecoveryQuestionsFailed, errorString]
-                                            delegate:nil
-                                   cancelButtonTitle:okButtonText
-                                   otherButtonTitles:nil];
-                               [alert show];
-
+                            }
+                               error: ^(NSError *error) {
+                                   [self blockUser:NO];
+                                   [self showSpinner:NO];
+                                   UIAlertView *alert = [[UIAlertView alloc]
+                                                         initWithTitle:recoveryQuestionsNotSet
+                                                         message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                                                         delegate:nil
+                                                         cancelButtonTitle:okButtonText
+                                                         otherButtonTitles:nil];
+                                   [alert show];
                            }];
-
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions

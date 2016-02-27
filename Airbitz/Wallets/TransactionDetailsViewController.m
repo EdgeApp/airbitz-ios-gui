@@ -164,13 +164,13 @@ typedef enum eRequestType
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
-        [MainViewController Singleton].dictImages[[self.transaction.strName lowercaseString]] = self.photo;
+        [MainViewController Singleton].dictImages[[self.transaction.payeeName lowercaseString]] = self.photo;
     }
 
     // if there is a biz id, add this biz as the first bizid
     if (self.transaction.bizId)
     {
-        [MainViewController Singleton].dictBizIds[[self.transaction.strName lowercaseString]] = @(self.transaction.bizId);
+        [MainViewController Singleton].dictBizIds[[self.transaction.payeeName lowercaseString]] = @(self.transaction.bizId);
     }
 
     // resize ourselves to fit in area
@@ -235,12 +235,12 @@ typedef enum eRequestType
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
-    self.nameTextField.text = self.transaction.strName;
-    self.notesTextView.text = self.transaction.strNotes;
+    self.nameTextField.text = self.transaction.payeeName;
+    self.notesTextView.text = self.transaction.notes;
 
-    if ([self.transaction.strCategory length] > 1)
+    if ([self.transaction.category length] > 1)
     {
-        self.pickerTextCategory.textField.text = self.transaction.strCategory;
+        self.pickerTextCategory.textField.text = self.transaction.category;
     }
     else
     {
@@ -316,17 +316,17 @@ typedef enum eRequestType
         
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
+            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.wallet.name];
         }
         else
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
+            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.wallet.name];
         }
         
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            if ([abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
+            currency = [abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum error:nil];
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
@@ -488,19 +488,19 @@ typedef enum eRequestType
     // add the category if we didn't have it
     [abcAccount addCategory:strFullCategory];
 
-    if (![self.transaction.strCategory isEqualToString:strFullCategory])
+    if (![self.transaction.category isEqualToString:strFullCategory])
     {
-        self.transaction.strCategory = strFullCategory;
+        self.transaction.category = strFullCategory;
         bSomethingChanged = true;
     }
-    if (![self.transaction.strName isEqualToString:[self.nameTextField text]])
+    if (![self.transaction.payeeName isEqualToString:[self.nameTextField text]])
     {
-        self.transaction.strName = [self.nameTextField text];
+        self.transaction.payeeName = [self.nameTextField text];
         bSomethingChanged = true;
     }
-    if (![self.transaction.strNotes isEqualToString:[self.notesTextView text]])
+    if (![self.transaction.notes isEqualToString:[self.notesTextView text]])
     {
-        self.transaction.strNotes = [self.notesTextView text];
+        self.transaction.notes = [self.notesTextView text];
         bSomethingChanged = true;
     }
 
@@ -619,7 +619,7 @@ typedef enum eRequestType
     }
     totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
-                                   baseUrl, self.transaction.strMalleableID, self.transaction.strMalleableID];
+                                   baseUrl, self.transaction.malleableTxid, self.transaction.malleableTxid];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
@@ -1153,9 +1153,9 @@ typedef enum eRequestType
             if (self.transaction)
             {
                 dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
-                                                    KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.wallet.strUUID,
-                                                    KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.wallet.strName,
-                                                    KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                                    KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.wallet.uuid,
+                                                    KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.wallet.name,
+                                                    KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.txid
                                                     };
             }
             else

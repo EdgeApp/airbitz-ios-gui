@@ -496,11 +496,11 @@ typedef enum eDatePeriod
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))

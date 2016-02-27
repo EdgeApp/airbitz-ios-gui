@@ -106,7 +106,7 @@
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                 
-            } error:^(ABCConditionCode ccode, NSString *errorString)
+            } error:^(NSError *error)
             {
                 [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }];
@@ -145,7 +145,7 @@
     [abcAccount clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         self.clearWatcherButton.titleLabel.text = buttonText;
         [MainViewController fadingAlert:watcherClearedWithErrorText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     }];

@@ -1296,14 +1296,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.buttonSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletID;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
         if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", abcAccount.currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", abcAccount.currentWallet.name];
         else
-            walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.strName];
+            walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
@@ -1368,7 +1368,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (txid && [txid length]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
                                                                     object:nil
-                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abcAccount.currentWallet.strUUID,
+                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abcAccount.currentWallet.uuid,
                                                                              KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
             if (ABCImportHBitsURI == dataModel)
@@ -1379,8 +1379,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
         }
 
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
-        if (ccode == ABCConditionCodeNoTransaction)
+    } error:^(NSError *error) {
+        if (error.code == ABCConditionCodeNoTransaction)
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
         }
@@ -1453,7 +1453,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         // if this is not our currently selected wallet in the wallet selector
         // in other words, we can move funds from and to the same wallet
-        if (abcAccount.currentWalletID != i)
+        if (abcAccount.currentWalletIndex != i)
         {
             ABCWallet *wallet = [abcAccount.arrayWallets objectAtIndex:i];
 
@@ -1461,7 +1461,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (!bAddIt)
             {
                 // if we can find our current string within this wallet name
-                if ([wallet.strName rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
+                if ([wallet.name rangeOfString:strCur options:NSCaseInsensitiveSearch].location != NSNotFound)
                 {
                     bAddIt = YES;
                 }
@@ -1469,7 +1469,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.strName, [abcAccount formatSatoshi:wallet.balance]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.name, [abcAccount formatSatoshi:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -1689,7 +1689,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             if (abcAccount.currentWallet.loaded != YES)
             {
                 // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
-                ABCLog(1,@"Waiting for wallet to load: %@", abcAccount.currentWallet.strName);
+                ABCLog(1,@"Waiting for wallet to load: %@", abcAccount.currentWallet.name);
                 
                 if (numRecursions < 2)
                     [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
@@ -1714,7 +1714,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     wallet = [abcAccount.arrayWallets objectAtIndex:index];
                     if (wallet.loaded)
                     {
-                        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet];
+                        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
                         if (nil != abcSpend)
                         {
                             [self showSendConfirmationTo:abcSpend];
@@ -1758,7 +1758,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [self stopQRReader];
         [self showSendConfirmationTo:abcSpend];
         [MainViewController fadingAlertDismiss];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
     }];
 }
@@ -1777,7 +1777,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         ABCWallet *wallet = [abcAccount.arrayWallets objectAtIndex:index];
 
-        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet];
+        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
         if (nil != abcSpend)
         {
             [self stopQRReader];

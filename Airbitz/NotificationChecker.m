@@ -242,7 +242,8 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkOtpResetPending
 {
-    NSArray *arrayUsers = [abc getOTPResetUsernames];
+    NSError *error = nil;
+    NSArray *arrayUsers = [abc getOTPResetUsernames:&error];
     
     if (!arrayUsers) return;
 

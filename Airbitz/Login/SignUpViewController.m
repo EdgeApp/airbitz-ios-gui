@@ -166,16 +166,15 @@
                     [abcAccount changePassword:self.passwordTextField.text complete:^
                     {
                         [self changePasswordComplete:YES errorMessage:nil];
-                    } error:^(ABCConditionCode ccode, NSString *errorString)
+                    } error:^(NSError *error)
                     {
-                        [self changePasswordComplete:NO errorMessage:errorString];
+                        [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
                     }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    [abc changePasswordWithRecoveryAnswers:self.strUserName recoveryAnswers:self.strAnswers newPassword:self.passwordTextField.text complete:^
-                     {
+                    [abcAccount changePassword:self.passwordTextField.text complete:^{
                          [abcAccount changePIN:self.pinTextField.text complete:^
                           {
                               [self blockUser:NO];
@@ -196,9 +195,9 @@
                               [alert show];
                               [self changePasswordComplete:YES errorMessage:nil];
                           }];
-                     } error:^(ABCConditionCode ccode, NSString *errorString)
+                     } error:^(NSError *error)
                      {
-                         [self changePasswordComplete:NO errorMessage:errorString];
+                         [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
                      }];
                 }
                 else
@@ -397,16 +396,16 @@
     {
         unsigned int count = 0;
         double secondsToCrack;
-        NSMutableArray *ruleDescription;
-        NSMutableArray *rulePassed;
-        NSMutableString *checkResultsMessage;
+        NSMutableArray *ruleDescription = [[NSMutableArray alloc] init];
+        NSMutableArray *rulePassed = [[NSMutableArray alloc] init];
+        NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
 
-        bNewPasswordFieldsAreValid = [abc checkPasswordRules:self.passwordTextField.text
-                                              secondsToCrack:&secondsToCrack
-                                                       count:&count
-                                             ruleDescription:&ruleDescription
-                                                  rulePassed:&rulePassed
-                                         checkResultsMessage:&checkResultsMessage];
+        bNewPasswordFieldsAreValid = [AirbitzCore checkPasswordRules:self.passwordTextField.text
+                                                      secondsToCrack:&secondsToCrack
+                                                               count:&count
+                                                     ruleDescription:ruleDescription
+                                                          rulePassed:rulePassed
+                                                 checkResultsMessage:checkResultsMessage];
         if (bNewPasswordFieldsAreValid == NO)
         {
             UIAlertView *alert = [[UIAlertView alloc]

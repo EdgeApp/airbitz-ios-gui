@@ -90,18 +90,17 @@
 	
     unsigned int count = 0;
     double secondsToCrack;
-    NSMutableArray *ruleDescription;
-    NSMutableArray *rulePassed;
+    NSMutableArray *ruleDescription = [[NSMutableArray alloc] init];
+    NSMutableArray *rulePassed = [[NSMutableArray alloc] init];
+    NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
     BOOL passed;
-    NSMutableString *checkResultsMessage;
-    ABCConditionCode ccode;
     
-    passed = [abc checkPasswordRules:self.password
-                      secondsToCrack:&secondsToCrack
-                               count:&count
-                     ruleDescription:&ruleDescription
-                          rulePassed:&rulePassed
-                 checkResultsMessage:&checkResultsMessage];
+    passed = [AirbitzCore checkPasswordRules:self.password
+                              secondsToCrack:&secondsToCrack
+                                       count:&count
+                             ruleDescription:ruleDescription
+                                  rulePassed:rulePassed
+                         checkResultsMessage:checkResultsMessage];
 		
 	NSMutableString *crackString = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Time to crack:", @"text in password verification popup")];
 	if(secondsToCrack < 60.0)

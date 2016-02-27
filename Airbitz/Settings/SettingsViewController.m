@@ -269,14 +269,14 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 
 - (void)saveSettings
 {
-    ABCConditionCode ccode = [abcAccount.settings saveSettings];
+    NSError *error = [abcAccount.settings saveSettings];
     // update the settings in the core
 
-    if (!(ABCConditionCodeOk == ccode))
+    if (error)
     {
         UIAlertView *alert =
         [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
-                                   message:[abc getLastErrorString]
+                                   message:error.userInfo[NSLocalizedDescriptionKey]
                                   delegate:self
                          cancelButtonTitle:cancelButtonText
                          otherButtonTitles:okButtonText, nil];
@@ -1364,12 +1364,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     else if (SECTION_DEFAULT_EXCHANGE == section)
     {
         curChoice = NSNotFound;
-        curChoice = [ABC_ARRAY_EXCHANGES indexOfObject:abcAccount.settings.exchangeRateSource];
+        curChoice = [ABCArrayExchanges indexOfObject:abcAccount.settings.exchangeRateSource];
         if (curChoice == NSNotFound)
         {
             curChoice = -1;
         }
-        arrayPopupChoices = ABC_ARRAY_EXCHANGES;
+        arrayPopupChoices = ABCArrayExchanges;
         headerText = @"Exchange Rate Data Source";
     }
 
@@ -1417,7 +1417,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if (SECTION_DEFAULT_EXCHANGE == sectionCell)
     {
-        abcAccount.settings.exchangeRateSource = ABC_ARRAY_EXCHANGES[row];
+        abcAccount.settings.exchangeRateSource = ABCArrayExchanges[row];
     }
 
     // update the settings in the core

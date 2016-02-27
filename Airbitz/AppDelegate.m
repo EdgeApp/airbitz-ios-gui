@@ -249,7 +249,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             {
                 for (NSString *acct in arrayAccounts)
                 {
-                    if (![abc passwordExists:acct])
+                    if (![abcAccount passwordExists])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
 

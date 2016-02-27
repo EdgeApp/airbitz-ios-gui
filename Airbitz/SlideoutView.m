@@ -467,7 +467,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abc passwordExists:acct])
+    if ([abc passwordExists:acct error:nil])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -497,15 +497,15 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode cc = [abc accountDeleteLocal:account];
-    if(cc == ABCConditionCodeOk)
+    NSError *error = [abc removeLocalAccount:account];
+    if (!error)
     {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
     else
     {
-        [MainViewController fadingAlert:[abc getLastErrorString]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
@@ -513,10 +513,10 @@
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
-    if (ABCConditionCodeOk != ccode)
+    NSError *error = [abc getLocalAccounts:self.arrayAccounts];
+    if (error)
     {
-        [MainViewController fadingAlert:[abc getLastErrorString]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 

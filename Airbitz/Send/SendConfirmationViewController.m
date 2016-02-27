@@ -22,6 +22,8 @@
 #import "FadingAlertView.h"
 #import "PopupPickerView2.h"
 
+#define REFRESH_PERIOD_SECONDS 30
+
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
                                               TransactionDetailsViewControllerDelegate,
                                               ButtonSelector2Delegate, InfoViewDelegate>
@@ -39,7 +41,7 @@
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
-    NSTimer                             *_pinTimer;
+    NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
     BOOL                                _currencyNumOverride;
     int                                 _currencyNum;
@@ -142,7 +144,7 @@
         _destUUID = _abcSpend.destUUID;
         NSMutableArray *newArr = [[NSMutableArray alloc] init];
         for (ABCWallet *w in abcAccount.arrayWallets) {
-            if (![w.strName isEqualToString:_sendTo]) {
+            if (![w.name isEqualToString:_sendTo]) {
                 [newArr addObject:w];
             } else {
                 _bAddressIsWalletUUID = YES;
@@ -196,15 +198,15 @@
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.walletSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
-        [self.walletSelector.button setTitle:abcAccount.currentWallet.strName forState:UIControlStateNormal];
-        self.walletSelector.selectedItemIndex = abcAccount.currentWalletID;
+        [self.walletSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.walletSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         if (_currencyNumOverride)
             self.keypadView.currencyNum = _currencyNum;
         else
             self.keypadView.currencyNum = abcAccount.currentWallet.currencyNum;
 
-        NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
@@ -226,8 +228,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [_pinTimer invalidate];
-    _pinTimer = nil;
+    [_refreshTimer invalidate];
+    _refreshTimer = nil;
     [self dismissErrorMessage];
     [super viewWillDisappear:animated];
 //    [self dismissGestureRecognizer];
@@ -294,17 +296,13 @@
     
     double currency;
 
-    ABCConditionCode ccode = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum currency:&currency];
-
-    if(ABCConditionCodeOk == ccode)
-    {
-        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-    }
+    currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
+    self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
     [self startCalcFees];
     [self pickBestResponder];
     [self exchangeRateUpdate:nil];
 
-    _pinTimer = [NSTimer scheduledTimerWithTimeInterval:ABC_PIN_REQUIRED_PERIOD_SECONDS
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_PERIOD_SECONDS
         target:self
         selector:@selector(updateTextFieldContents)
         userInfo:nil
@@ -510,16 +508,16 @@
         {
             [_abcSpend signTx:^(NSString *rawTx) {
                 [self txSendSuccess:_abcSpend.srcWallet withTx:rawTx];
-            } error:^(ABCConditionCode ccode, NSString *errorString) {
-                [self txSendFailed:errorString];
+            } error:^(NSError *error) {
+                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
             }];
         }
         else
         {
             [_abcSpend signBroadcastSaveTx:^(NSString *txId) {
                 [self txSendSuccess:_abcSpend.srcWallet withTx:txId];
-            } error:^(ABCConditionCode ccode, NSString *errorString) {
-                [self txSendFailed:errorString];
+            } error:^(NSError *error) {
+                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
             }];
         }
     }
@@ -613,22 +611,17 @@
     if (_selectedTextField == self.amountBTCTextField)
     {
         _abcSpend.amount = [abcAccount denominationToSatoshi: self.amountBTCTextField.text];
-        if ([abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum currency:&currency] == ABCConditionCodeOk)
-        {
-            self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
-        }
+        currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
+        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
     }
     else if (_selectedTextField == self.amountFiatTextField && [self.abcSpend isMutable])
     {
         currency = [self.amountFiatTextField.text doubleValue];
-        ABCConditionCode ccode = [abcAccount currencyToSatoshi:currency currencyNum:_currencyNum satoshi:&satoshi];
-        if (ABCConditionCodeOk == ccode)
-        {
-            _abcSpend.amount = satoshi;
-            self.amountBTCTextField.text = [abcAccount formatSatoshi:satoshi
-                                                          withSymbol:false
+        satoshi = [abcAccount currencyToSatoshi:currency currencyNum:_currencyNum error:nil];
+        _abcSpend.amount = satoshi;
+        self.amountBTCTextField.text = [abcAccount formatSatoshi:satoshi
+                                                      withSymbol:false
                                                     cropDecimals:[abcAccount currencyDecimalPlaces]];
-        }
     }
     self.amountBTCSymbol.text = abcAccount.settings.denominationLabelShort;
     self.amountBTCLabel.text = abcAccount.settings.denominationLabel;
@@ -685,10 +678,10 @@
         self.helpButton.hidden = YES;
         return;
     }
-    [_abcSpend calcSendFees:abcAccount.currentWallet.strUUID complete:^(uint64_t totalFees) {
+    [_abcSpend calcSendFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees error:NO errorString:nil];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
-        [self updateFeeFieldContents:0 error:YES errorString:errorString];
+    } error:^(NSError *error) {
+        [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
     }];
 }
 
@@ -722,16 +715,15 @@
         [coinFeeString appendString:@" "];
         [coinFeeString appendString:abcAccount.settings.denominationLabel];
 
-        if ([abcAccount satoshiToCurrency:txFees currencyNum:_currencyNum currency:&currencyFees])
-        {
-            [fiatFeeString appendString:@"+ "];
-            [fiatFeeString appendString:[abcAccount formatCurrency:currencyFees
-                                                   withCurrencyNum:_currencyNum
-                                                        withSymbol:false]];
-            [fiatFeeString appendString:@" "];
-            [fiatFeeString appendString:[abc currencyAbbrevLookup:_currencyNum]];
-        }
-        self.amountBTCLabel.text = coinFeeString; 
+        currencyFees = [abcAccount satoshiToCurrency:txFees currencyNum:_currencyNum error:nil];
+        [fiatFeeString appendString:@"+ "];
+        [fiatFeeString appendString:[abcAccount formatCurrency:currencyFees
+                                               withCurrencyNum:_currencyNum
+                                                    withSymbol:false]];
+        [fiatFeeString appendString:@" "];
+        [fiatFeeString appendString:[abc currencyAbbrevLookup:_currencyNum]];
+        
+        self.amountBTCLabel.text = coinFeeString;
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [abcAccount conversionStringFromNum:_currencyNum withAbbrev:YES];
 

@@ -106,6 +106,7 @@ typedef enum eAppMode
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
+    NSTimer                     *updateExchangeRateTimer;
 
 }
 
@@ -192,7 +193,22 @@ MainViewController *singleton;
     [self checkEnabledPlugins];
     
     [NotificationChecker initAll];
+    
+#define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
+    
+    updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+                                                     target:self
+                                                   selector:@selector(sendUpdateExchangeNotification:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+
 }
+
+- (void) sendUpdateExchangeNotification:(id)object
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGED object:self userInfo:nil];
+}
+
 
 + (AFHTTPRequestOperationManager *) createAFManager;
 {
@@ -573,11 +589,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [abc PINLoginExists:[abc getLastAccessedAccount]];
+        bool exists = [abc PINLoginExists:[abc getLastAccessedAccount] error:nil];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [abc PINLoginExists:[abc getLastAccessedAccount]];
+            bool exists = [abc PINLoginExists:[abc getLastAccessedAccount] error:nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -1149,9 +1165,9 @@ MainViewController *singleton;
     else
     {
         // Make sure there's a wallet in this account. If not, create it
-        int numWallets;
-        ABCConditionCode ccode = [abcAccount getNumWalletsInAccount:&numWallets];
-        if (ABCConditionCodeOk == ccode)
+        NSError *error = nil;
+        int numWallets = [abcAccount getNumWalletsInAccount:&error];
+        if (!error)
         {
             if (0 == numWallets)
             {
@@ -1419,7 +1435,7 @@ MainViewController *singleton;
 
 - (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet txid:(NSString *)txid;
 {
-    if (wallet) _strWalletUUID = wallet.strUUID;
+    if (wallet) _strWalletUUID = wallet.uuid;
     _strTxID = txid;
 
     ABCTransaction *transaction = [wallet getTransaction:_strTxID];
@@ -1470,7 +1486,7 @@ MainViewController *singleton;
     //
     // If we just received money on the currentWallet then update the Widget's address & QRcode
     //
-    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.strUUID])
+    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.uuid])
     {
         [self updateWidgetQRCode];
     }
@@ -1504,7 +1520,7 @@ MainViewController *singleton;
 
 - (void)updateWidgetQRCode;
 {
-    if (!abcAccount.currentWallet || !abcAccount.currentWallet.strUUID)
+    if (!abcAccount.currentWallet || !abcAccount.currentWallet.uuid)
         return;
     
     ABCRequest *request = [[ABCRequest alloc] init];
@@ -1524,10 +1540,10 @@ MainViewController *singleton;
         
         [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
         [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
-        [tempSharedUserDefs setObject:abcAccount.currentWallet.strName forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:abcAccount.currentWallet.name forKey:APP_GROUP_LAST_WALLET_KEY];
         [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
         [tempSharedUserDefs synchronize];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
     }];
 }
 
@@ -1550,14 +1566,13 @@ MainViewController *singleton;
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
     
-    if ([abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum currency:&currency] == ABCConditionCodeOk)
-        fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+    currency = [abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum error:nil];
+    fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
     
-    if ([abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum satoshi:&satoshi] == ABCConditionCodeOk)
-        coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
-
+    satoshi = [abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum error:nil];
+    coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {

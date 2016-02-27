@@ -106,10 +106,10 @@
     bool on = NO;
     long timeout = 0;
     
-    ABCConditionCode ccode = [abcAccount getOTPDetails:&on
-                                            timeout:&timeout];
+    NSError *error = [abcAccount getOTPDetails:&on
+                                       timeout:&timeout];
     
-    if (ABCConditionCodeOk == ccode) {
+    if (!error) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
             _isOn = on == true ? YES : NO;
             _timeout = timeout;
@@ -130,7 +130,7 @@
     _secret = nil;
     NSString *key;
     if (_isOn) {
-        key = [abcAccount getOTPLocalKey];
+        key = [abcAccount getOTPLocalKey:nil];
         if (key != nil) {
             _secret = key;
             _requestSpinner.hidden = NO;
@@ -159,7 +159,7 @@
 - (void)showQrCode:(BOOL)show
 {
     if (show) {
-        UIImage *qrImage = [abc encodeStringToQRImage:_secret];
+        UIImage *qrImage = [AirbitzCore encodeStringToQRImage:_secret error:nil];
         if (qrImage)
         {
             _qrCodeImageView.image = qrImage;
@@ -197,16 +197,15 @@
 
 - (void)checkRequest
 {
-    BOOL pending = [abcAccount hasOTPResetPending];
-    NSString *errorString = [abcAccount getLastErrorString];
-    ABCConditionCode ccode = [abcAccount getLastConditionCode];
+    NSError *error = nil;
+    BOOL pending = [abcAccount hasOTPResetPending:&error];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        if (ABCConditionCodeOk == ccode) {
+        if (!error) {
             _requestView.hidden = !pending;
         } else {
             _requestView.hidden = YES;
-            [MainViewController fadingAlert:errorString];
+            [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
         }
         _requestSpinner.hidden = YES;
     });
@@ -293,21 +292,21 @@
 
 - (BOOL)switchTwoFactor:(BOOL)on
 {
-    ABCConditionCode ccode;
+    NSError *error;
     if (on) {
-        ccode = [abcAccount setOTPAuth:OTP_RESET_DELAY];
-        if (ABCConditionCodeOk == ccode)
+        error = [abcAccount setOTPAuth:OTP_RESET_DELAY];
+        if (!error)
             _isOn = YES;
     } else {
-        ccode = [abcAccount removeOTPAuth];
-        if (ABCConditionCodeOk == ccode)
+        error = [abcAccount removeOTPAuth];
+        if (!error)
         {
             _secret = nil;
             _isOn = NO;
             [NotificationChecker resetOtpNotifications];
         }
     }
-    if (ABCConditionCodeOk == ccode) {
+    if (!error) {
         [self updateTwoFactorUi:on];
         [self checkSecret:YES];
         return YES;
@@ -352,14 +351,13 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [abcAccount removeOTPAuth];
-            NSString *errorString = [abc getLastErrorString];
+            NSError *error = [abcAccount removeOTPAuth];
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                if (ABCConditionCodeOk == ccode) {
+                if (!error) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
                     [self updateTwoFactorUi:NO];
                 } else {
-                    [MainViewController fadingAlert:errorString];
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
                 }
                 _loadingSpinner.hidden = YES;
             });
@@ -388,15 +386,14 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            ABCConditionCode ccode = [abcAccount removeOTPResetRequest];
-            NSString *errorString = [abc getLastErrorString];
+            NSError *error = [abcAccount removeOTPResetRequest];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
-                if (ABCConditionCodeOk == ccode) {
+                if (!error) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
                     _requestView.hidden = YES;
                 } else {
-                    [MainViewController fadingAlert:errorString];
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
                 }
                 _loadingSpinner.hidden = YES;
             });

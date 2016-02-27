@@ -382,15 +382,15 @@ static BOOL bInitialized = false;
     [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] delegate:[MainViewController Singleton] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-    } completeWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
+    } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
         _bUsedTouchIDToLogin = usedTouchID;
         [self signInComplete:user];
-    } completeNoLogin:^{
+    } completionNoLogin:^{
         [self assignFirstResponder];
-    } error:^(ABCConditionCode ccode, NSString *errorString) {
+    } error:^(NSError *error) {
         [self showSpinner:NO];
         [MainViewController showBackground:NO animate:YES];
-        [MainViewController fadingAlert:errorString];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
         [self assignFirstResponder];
     }];
 }
@@ -538,20 +538,20 @@ static BOOL bInitialized = false;
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:nil
-           complete:^(ABCAccount *user)
+           complete:^(ABCAccount *account)
          {
-             [self signInComplete:user];
+             [self signInComplete:account];
          }
-                            error:^(ABCConditionCode ccode, NSString *errorString)
+              error:^(NSError *error, NSDate *resetDate)
          {
              [self showSpinner:NO];
              
-             if (ABCConditionCodeInvalidOTP == ccode)
+             if (ABCConditionCodeInvalidOTP == error.code)
              {
                  [MainViewController showBackground:NO animate:YES];
-                 [self launchTwoFactorMenu];
+                 [self launchTwoFactorMenu:resetDate];
              }
-             else if (ABCConditionCodeError == ccode)
+             else if (ABCConditionCodeError == error.code)
              {
                  [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
                  [MainViewController showBackground:NO animate:YES];
@@ -559,7 +559,7 @@ static BOOL bInitialized = false;
              else
              {
                  [MainViewController showBackground:NO animate:YES];
-                 [MainViewController fadingAlert:errorString];
+                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
              }
          }];
 
@@ -596,16 +596,14 @@ static BOOL bInitialized = false;
     {
         [self showSpinner:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            BOOL bSuccess = NO;
-            NSMutableString *error = [[NSMutableString alloc] init];
+            NSError *error;
             NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
-                                                                        isSuccess:&bSuccess
-                                                                         errorMsg:error];
+                                                                     error:&error];
             NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 [self showSpinner:NO];
-                _bSuccess = bSuccess;
-                _strReason = error;
+                _bSuccess = !!arrayQuestions;
+                _strReason = error.userInfo[NSLocalizedDescriptionKey];
                 [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
             });
         });
@@ -679,32 +677,32 @@ static BOOL bInitialized = false;
          [self showSpinner:NO];
          self.PINCodeView.PINCode = nil;
          
-     } error:^(ABCConditionCode ccode, NSString *errorString) {
+     } error:^(NSError *error) {
          
          [MainViewController showBackground:NO animate:YES];
          [self.PINCodeView becomeFirstResponder];
          [self showSpinner:NO];
          self.PINCodeView.PINCode = nil;
          
-         if (ABCConditionCodeBadPassword == ccode)
+         if (ABCConditionCodeBadPassword == error.code)
          {
              [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
              [self.PINCodeView becomeFirstResponder];
          }
-         else if (ABCConditionCodeInvalidOTP == ccode)
+         else if (ABCConditionCodeInvalidOTP == error.code)
          {
              [MainViewController showBackground:NO animate:YES];
-             [self launchTwoFactorMenu];
+             [self launchTwoFactorMenu:nil];
          }
          else
          {
              NSString *reason;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
-             if (ccode == ABCConditionCodeError)
+             if (ABCConditionCodeError == error.code)
                  reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
              else
-                 reason = errorString;
+                 reason = error.userInfo[NSLocalizedDescriptionKey];
              
              [MainViewController fadingAlert:reason];
          }
@@ -1027,13 +1025,15 @@ static BOOL bInitialized = false;
     }
 }
 
-- (void)launchTwoFactorMenu
+- (void)launchTwoFactorMenu:(NSDate *)resetDate;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
     _tfaMenuViewController.username = self.usernameSelector.textField.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
+    _tfaMenuViewController.resetDate = resetDate;
+    
     _bTouchesEnabled = NO;
 }
 
@@ -1084,13 +1084,13 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:user];
          }
-         error:^(ABCConditionCode ccode, NSString *errorString)
+         error:^(NSError *error, NSDate *date)
          {
              [self showSpinner:NO];
-             if (ccode == ABCConditionCodeError)
+             if (ABCConditionCodeError == error.code)
                  [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
              else
-                 [MainViewController fadingAlert:errorString];
+                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
          }];
     }];
 }
@@ -1142,10 +1142,10 @@ static BOOL bInitialized = false;
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    ABCConditionCode ccode = [abc getLocalAccounts:self.arrayAccounts];
-    if (ABCConditionCodeOk != ccode)
+    NSError *error = [abc getLocalAccounts:self.arrayAccounts];
+    if (error)
     {
-        [MainViewController fadingAlert:[abc getLastErrorString]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
@@ -1159,7 +1159,7 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc PINLoginExists:account])
+    if([abc PINLoginExists:account error:nil])
     {
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
@@ -1177,16 +1177,14 @@ static BOOL bInitialized = false;
 
 - (void)removeAccount:(NSString *)account
 {
-    ABCConditionCode ccode = [abc accountDeleteLocal:account];
-    NSString *errorString = [abc getLastErrorString];
-
-    if(ccode == ABCConditionCodeOk)
+    NSError *error = [abc removeLocalAccount:account];
+    if (!error)
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
     }
     else
     {
-        [MainViewController fadingAlert:errorString];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
@@ -1200,7 +1198,7 @@ static BOOL bInitialized = false;
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abc passwordExists:acct])
+    if ([abcAccount passwordExists])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -1340,7 +1338,7 @@ static BOOL bInitialized = false;
                 [_logoImage setUserInteractionEnabled:YES];
                 _spinnerView.hidden = YES;
                 [self assignFirstResponder];
-            } error:^(ABCConditionCode ccode, NSString *errorString)
+            } error:^(NSError *error)
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
                                                                 message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
@@ -1414,7 +1412,7 @@ static BOOL bInitialized = false;
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([abc PINLoginExists:[abc getLastAccessedAccount]])
+    if([abc PINLoginExists:[abc getLastAccessedAccount] error:nil])
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
