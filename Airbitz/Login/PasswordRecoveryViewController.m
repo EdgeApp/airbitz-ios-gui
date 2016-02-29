@@ -102,7 +102,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [abc getRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
+        [AirbitzCore listRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
 
             self.arrayCategoryString = arrayCategoryString;
             self.arrayCategoryNumeric = arrayCategoryNumeric;
@@ -427,7 +427,7 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount setRecoveryQuestions:password
+    [abcAccount setupRecoveryQuestions:password
                            questions:strQuestions
                              answers:strAnswers
                             complete:^(void) {
