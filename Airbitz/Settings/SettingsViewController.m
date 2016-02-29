@@ -852,7 +852,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         else if (indexPath.row == ROW_PIN_RELOGIN)
         {
 			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
-            [cell.state setOn:!abcAccount.settings.bDisablePINLogin animated:NO];
+            [cell.state setOn:[abcAccount isPINLoginEnabled] animated:NO];
             if ([abcAccount passwordExists]) {
                 cell.state.userInteractionEnabled = YES;
             } else {
@@ -1260,8 +1260,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
     {
-        abcAccount.settings.bDisablePINLogin = !theSwitch.on;
-        [self saveSettings];
+        [abcAccount pinLoginSetup:theSwitch.on];
         
         // update the display by reloading the table
         [self.tableView reloadData];
