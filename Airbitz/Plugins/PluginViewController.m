@@ -683,7 +683,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    if (![abcAccount.dataStore dataSet:_plugin.pluginId
+    if (![abcAccount.dataStore dataWrite:_plugin.pluginId
                             withKey:[args objectForKey:@"key"]
                           withValue:[args objectForKey:@"value"]]) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -706,7 +706,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSDictionary *args = [params objectForKey:@"args"];
     NSMutableString *value = [[NSMutableString alloc] init];
-    [abcAccount.dataStore dataGet:_plugin.pluginId withKey:[args objectForKey:@"key"] data:value];
+    [abcAccount.dataStore dataRead:_plugin.pluginId withKey:[args objectForKey:@"key"] data:value];
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
 }
 
