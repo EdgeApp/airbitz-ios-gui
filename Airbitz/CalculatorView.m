@@ -194,20 +194,19 @@
 {
     if (_calcMode == CALC_MODE_COIN)
     {
-        int64_t satoshi = [abcAccount denominationToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        int64_t satoshi = [abcAccount.settings.denomination btcStringToSatoshi:[NSString stringWithFormat:@"%f", acc]];
         if (satoshi == 0 || acc == 0.0)
             return @"";
         else
-            return [abcAccount formatSatoshi:satoshi withSymbol:false];
+            return [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false];
     }
     else
     {
         if (acc == 0.0)
             return @"";
         else
-            return [abcAccount formatCurrency:acc
-                              withCurrencyNum:self.currencyNum
-                                   withSymbol:false];
+            return [self.currency doubleToPrettyCurrencyString:acc
+                                                    withSymbol:false];
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AirbitzCore.h"
 
 typedef enum eCalcMode
 {
@@ -21,7 +22,7 @@ typedef enum eCalcMode
 @property (nonatomic, assign) id<CalculatorViewDelegate> delegate;
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, assign) tCalcMode calcMode;
-@property (nonatomic, assign) int currencyNum;
+@property (nonatomic, assign) ABCCurrency *currency;
 
 - (void)hideDoneButton;
 

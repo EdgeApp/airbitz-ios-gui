@@ -75,10 +75,10 @@ static const NSString *PROTOCOL = @"bridge://";
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
                     @"readData":NSStringFromSelector(@selector(readData:)),
           @"getBtcDenomination":NSStringFromSelector(@selector(getBtcDenomination:)),
-           @"satoshiToCurrency":NSStringFromSelector(@selector(satoshiToCurrency:)),
-           @"currencyToSatoshi":NSStringFromSelector(@selector(currencyToSatoshi:)),
-               @"formatSatoshi":NSStringFromSelector(@selector(formatSatoshi:)),
-              @"formatCurrency":NSStringFromSelector(@selector(formatCurrency:)),
+//           @"satoshiToCurrency":NSStringFromSelector(@selector(satoshiToCurrency:)),
+//           @"currencyToSatoshi":NSStringFromSelector(@selector(currencyToSatoshi:)),
+//               @"formatSatoshi":NSStringFromSelector(@selector(formatSatoshi:)),
+//              @"formatCurrency":NSStringFromSelector(@selector(formatCurrency:)),
                    @"getConfig":NSStringFromSelector(@selector(getConfig:)),
                    @"showAlert":NSStringFromSelector(@selector(showAlert:)),
                    @"hideAlert":NSStringFromSelector(@selector(hideAlert:)),
@@ -379,7 +379,8 @@ static const NSString *PROTOCOL = @"bridge://";
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
     [d setObject:w.uuid forKey:@"id"];
     [d setObject:w.name forKey:@"name"];
-    [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
+    [d setObject:[NSNumber numberWithInt:w.currency] forKey:@"currencyNum"];
+    [d setObject:w.currency forKey:@"currency"];
     [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
     return d;
 }
@@ -410,7 +411,7 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)notifyDenominationChange
 {
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
-    [d setObject:abcAccount.settings.denominationLabel forKey:@"value"];
+    [d setObject:abcAccount.settings.denomination.label forKey:@"value"];
     NSDictionary *data = [self jsonResult:d];
 
     NSError *jsonError;
@@ -442,7 +443,8 @@ static const NSString *PROTOCOL = @"bridge://";
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         [d setObject:w.uuid forKey:@"id"];
         [d setObject:w.name forKey:@"name"];
-        [d setObject:[NSNumber numberWithInt:w.currencyNum] forKey:@"currencyNum"];
+//        [d setObject:w.currencyNum forKey:@"currencyNum"];
+        [d setObject:w.currency forKey:@"currency"];
         [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
         [results addObject:d];
     }
@@ -711,66 +713,66 @@ static const NSString *PROTOCOL = @"bridge://";
 - (void)getBtcDenomination:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];
-    [self setJsResults:cbid withArgs:[self jsonResult:abcAccount.settings.denominationLabel]];
+    [self setJsResults:cbid withArgs:[self jsonResult:abcAccount.settings.denomination.label]];
 }
 
-- (void)satoshiToCurrency:(NSDictionary *)params
-{
-    NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
-            
-    double currency;
-    NSError *error = nil;
-
-    currency = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
-                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
-                                       error:&error];
-    
-    if (!error) {
-        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithDouble:currency]]];
-    } else {
-        [self setJsResults:cbid withArgs:[self jsonError]];
-    }
-}
-
-- (void)currencyToSatoshi:(NSDictionary *)params
-{
-    NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
-
-    int64_t satoshis;
-    NSError *error = nil;
-    satoshis = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
-                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
-                                       error:&error];
-    if (!error) {
-        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLongLong:satoshis]]];
-    } else {
-        [self setJsResults:cbid withArgs:[self jsonError]];
-    }
-}
-
-- (void)formatSatoshi:(NSDictionary *)params
-{
-    NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
-
-    NSString *res = [abcAccount formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
-    [self setJsResults:cbid withArgs:[self jsonResult:res]];
-}
-
-- (void)formatCurrency:(NSDictionary *)params
-{
-    NSString *cbid = [params objectForKey:@"cbid"];
-    NSDictionary *args = [params objectForKey:@"args"];
-
-    NSString *res = [abcAccount formatCurrency:[[args objectForKey:@"currency"] doubleValue]
-                                withCurrencyNum:[[args objectForKey:@"currencyNum"] intValue]
-                                    withSymbol:[[args objectForKey:@"withSymbol"] boolValue]];
-    res = [res stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    [self setJsResults:cbid withArgs:[self jsonResult:res]];
-}
-
+//- (void)satoshiToCurrency:(NSDictionary *)params
+//{
+//    NSString *cbid = [params objectForKey:@"cbid"];
+//    NSDictionary *args = [params objectForKey:@"args"];
+//            
+//    double currency;
+//    NSError *error = nil;
+//
+//    currency = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
+//                                    currency:[[args objectForKey:@"currencyNum"] intValue]
+//                                       error:&error];
+//    
+//    if (!error) {
+//        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithDouble:currency]]];
+//    } else {
+//        [self setJsResults:cbid withArgs:[self jsonError]];
+//    }
+//}
+//
+//- (void)currencyToSatoshi:(NSDictionary *)params
+//{
+//    NSString *cbid = [params objectForKey:@"cbid"];
+//    NSDictionary *args = [params objectForKey:@"args"];
+//
+//    int64_t satoshis;
+//    NSError *error = nil;
+//    satoshis = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
+//                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
+//                                       error:&error];
+//    if (!error) {
+//        [self setJsResults:cbid withArgs:[self jsonResult:[NSNumber numberWithLongLong:satoshis]]];
+//    } else {
+//        [self setJsResults:cbid withArgs:[self jsonError]];
+//    }
+//}
+//
+//- (void)formatSatoshi:(NSDictionary *)params
+//{
+//    NSString *cbid = [params objectForKey:@"cbid"];
+//    NSDictionary *args = [params objectForKey:@"args"];
+//
+//    NSString *res = [abcAccount formatSatoshi:[[args objectForKey:@"satoshi"] longValue]];
+//    [self setJsResults:cbid withArgs:[self jsonResult:res]];
+//}
+//
+//- (void)formatCurrency:(NSDictionary *)params
+//{
+//    NSString *cbid = [params objectForKey:@"cbid"];
+//    NSDictionary *args = [params objectForKey:@"args"];
+//
+//    NSString *res = [abcAccount formatCurrency:[[args objectForKey:@"currency"] doubleValue]
+//                                withCurrencyNum:[[args objectForKey:@"currencyNum"] intValue]
+//                                    withSymbol:[[args objectForKey:@"withSymbol"] boolValue]];
+//    res = [res stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    [self setJsResults:cbid withArgs:[self jsonResult:res]];
+//}
+//
 - (void)getConfig:(NSDictionary *)params
 {
     NSString *cbid = [params objectForKey:@"cbid"];

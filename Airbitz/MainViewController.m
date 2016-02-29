@@ -1566,13 +1566,13 @@ MainViewController *singleton;
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
     
-    currency = [abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum error:nil];
-    fiat = [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
+    currency = [abcAccount.exchangeCache satoshiToCurrency:satoshi currencyCode:wallet.currency.code error:nil];
+    fiat = [wallet.currency doubleToPrettyCurrencyString:currency withSymbol:true];
     
     currency = fabs(transaction.amountFiat);
     
-    satoshi = [abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum error:nil];
-    coin = [abcAccount formatSatoshi:satoshi withSymbol:false cropDecimals:[abcAccount currencyDecimalPlaces]];
+    satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code error:nil];
+    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false cropDecimals:YES];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {

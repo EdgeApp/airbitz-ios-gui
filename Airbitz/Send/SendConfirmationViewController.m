@@ -43,8 +43,8 @@
     UIAlertView                         *_alert;
     NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
-    BOOL                                _currencyNumOverride;
-    int                                 _currencyNum;
+    BOOL                                _currencyOverride;
+    ABCCurrency                         *_currency;
 
 }
 
@@ -201,10 +201,10 @@
         [self.walletSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
         self.walletSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
-        if (_currencyNumOverride)
-            self.keypadView.currencyNum = _currencyNum;
+        if (_currencyOverride)
+            self.keypadView.currency = _currency;
         else
-            self.keypadView.currencyNum = abcAccount.currentWallet.currencyNum;
+            self.keypadView.currency = abcAccount.currentWallet.currency;
 
         NSString *walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
@@ -273,7 +273,7 @@
 {
     [super viewWillAppear:animated];
 //    [self.view addGestureRecognizer:tap];
-    self.amountBTCTextField.text = [abcAccount formatSatoshi:_abcSpend.amount withSymbol:false];
+    self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_abcSpend.amount withSymbol:false];
     self.maxAmountButton.hidden = ![_abcSpend isMutable];
 
     NSString *prefix;
@@ -290,14 +290,14 @@
         self.addressLabel.text = _sendTo;
     }
 
-    _currencyNumOverride = NO;
-    _currencyNum = abcAccount.currentWallet.currencyNum;
+    _currencyOverride = NO;
+    _currency = abcAccount.currentWallet.currency;
     self.amountFiatLabel.textColor = [Theme Singleton].colorTextLinkOnDark;
     
-    double currency;
+    double fCurrency;
 
-    currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
-    self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+    fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_abcSpend.amount currencyCode:_currency.code error:nil];
+    self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", fCurrency];
     [self startCalcFees];
     [self pickBestResponder];
     [self exchangeRateUpdate:nil];
@@ -395,7 +395,7 @@
 
     NSArray *arrayPopupChoices = nil;
 
-    arrayPopupChoices = abc.arrayCurrencyStrings;
+    arrayPopupChoices = [ABCCurrency listCurrencyStrings];
     popupPosition = PopupPicker2Position_Full_Fading;
     headerText = NSLocalizedString(@"Select Currency", nil);
 
@@ -426,7 +426,7 @@
                 _maxLocked = NO;
                 _maxAmount = maxAmount;
                 _abcSpend.amount = maxAmount;
-                self.amountBTCTextField.text = [abcAccount formatSatoshi:_abcSpend.amount withSymbol:false];
+                self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_abcSpend.amount withSymbol:false];
 
                 [self updateTextFieldContents];
                 if (_pinRequired || _passwordRequired) {
@@ -443,8 +443,8 @@
 
 - (void)PopupPickerView2Selected:(PopupPickerView2 *)view onRow:(NSInteger)row userData:(id)data
 {
-    _currencyNum = [[abc.arrayCurrencyNums objectAtIndex:row] intValue];
-    _currencyNumOverride = YES;
+    _currency = [[ABCCurrency listCurrencies] objectAtIndex:row];
+    _currencyOverride = YES;
 
     [self dismissPopupPicker];
 
@@ -605,29 +605,29 @@
 
 - (void)updateTextFieldContents
 {
-    double currency;
+    double fCurrency;
     int64_t satoshi;
 
     if (_selectedTextField == self.amountBTCTextField)
     {
-        _abcSpend.amount = [abcAccount denominationToSatoshi: self.amountBTCTextField.text];
-        currency = [abcAccount satoshiToCurrency:_abcSpend.amount currencyNum:_currencyNum error:nil];
-        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
+        _abcSpend.amount = [abcAccount.settings.denomination btcStringToSatoshi:self.amountBTCTextField.text];
+        fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_abcSpend.amount currencyCode:_currency.code error:nil];
+        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", fCurrency];
     }
     else if (_selectedTextField == self.amountFiatTextField && [self.abcSpend isMutable])
     {
-        currency = [self.amountFiatTextField.text doubleValue];
-        satoshi = [abcAccount currencyToSatoshi:currency currencyNum:_currencyNum error:nil];
+        fCurrency = [self.amountFiatTextField.text doubleValue];
+        satoshi = [abcAccount.exchangeCache currencyToSatoshi:fCurrency currencyCode:_currency.code error:nil];
         _abcSpend.amount = satoshi;
-        self.amountBTCTextField.text = [abcAccount formatSatoshi:satoshi
-                                                      withSymbol:false
-                                                    cropDecimals:[abcAccount currencyDecimalPlaces]];
+        self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:satoshi
+                                                                                 withSymbol:false
+                                                                               cropDecimals:YES];
     }
-    self.amountBTCSymbol.text = abcAccount.settings.denominationLabelShort;
-    self.amountBTCLabel.text = abcAccount.settings.denominationLabel;
-    self.amountFiatSymbol.text = [abc currencySymbolLookup:_currencyNum];
-    self.amountFiatLabel.text = [abc currencyAbbrevLookup:_currencyNum];
-    self.conversionLabel.text = [abcAccount conversionStringFromNum:_currencyNum withAbbrev:YES];
+    self.amountBTCSymbol.text = abcAccount.settings.denomination.symbol;
+    self.amountBTCLabel.text = abcAccount.settings.denomination.label;
+    self.amountFiatSymbol.text = _currency.symbol;
+    self.amountFiatLabel.text = _currency.code;
+    self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
 
     [self checkAuthorization];
     [self startCalcFees];
@@ -669,7 +669,7 @@
     // Don't caculate fees until there is a value
     if (_abcSpend.amount == 0)
     {
-        self.conversionLabel.text = [abcAccount conversionStringFromNum:_currencyNum withAbbrev:YES];
+        self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
         self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
@@ -711,21 +711,19 @@
         NSMutableString *coinFeeString = [[NSMutableString alloc] init];
         NSMutableString *fiatFeeString = [[NSMutableString alloc] init];
         [coinFeeString appendString:@"+ "];
-        [coinFeeString appendString:[abcAccount formatSatoshi:txFees withSymbol:false]];
+        [coinFeeString appendString:[abcAccount.settings.denomination satoshiToBTCString:txFees withSymbol:false]];
         [coinFeeString appendString:@" "];
-        [coinFeeString appendString:abcAccount.settings.denominationLabel];
+        [coinFeeString appendString:abcAccount.settings.denomination.label];
 
-        currencyFees = [abcAccount satoshiToCurrency:txFees currencyNum:_currencyNum error:nil];
+        currencyFees = [abcAccount.exchangeCache satoshiToCurrency:txFees currencyCode:_currency.code error:nil];
         [fiatFeeString appendString:@"+ "];
-        [fiatFeeString appendString:[abcAccount formatCurrency:currencyFees
-                                               withCurrencyNum:_currencyNum
-                                                    withSymbol:false]];
+        [fiatFeeString appendString:[abcAccount.settings.denomination satoshiToBTCString:currencyFees withSymbol:false]];
         [fiatFeeString appendString:@" "];
-        [fiatFeeString appendString:[abc currencyAbbrevLookup:_currencyNum]];
+        [fiatFeeString appendString:_currency.code];
         
         self.amountBTCLabel.text = coinFeeString;
         self.amountFiatLabel.text = fiatFeeString;
-        self.conversionLabel.text = [abcAccount conversionStringFromNum:_currencyNum withAbbrev:YES];
+        self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
 
         self.helpButton.hidden = YES;
         self.conversionLabel.layer.shadowOpacity = 0.0f;

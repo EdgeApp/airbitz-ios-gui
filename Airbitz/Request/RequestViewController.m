@@ -175,8 +175,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // create a dummy view to replace the keyboard if we are on a 4.5" screen
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    [self.segmentedControlBTCUSD setTitle:abcAccount.settings.denominationLabel forSegmentAtIndex:1];
-    _btcLabel.text = abcAccount.settings.denominationLabel;
+    [self.segmentedControlBTCUSD setTitle:abcAccount.settings.denomination.label forSegmentAtIndex:1];
+    _btcLabel.text = abcAccount.settings.denomination.label;
 
     self.BTC_TextField.inputView = dummyView;
     self.USD_TextField.inputView = dummyView;
@@ -230,7 +230,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
 
-        self.keypadView.currencyNum = abcAccount.currentWallet.currencyNum;
+        self.keypadView.currency = abcAccount.currentWallet.currency;
 
         [self updateTextFieldContents:YES];
 
@@ -466,7 +466,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     BOOL mm = [LocalSettings controller].bMerchantMode;
     self.amountSatoshiReceived += incomingSatoshi;
-    self.amountSatoshiRequested = [abcAccount denominationToSatoshi:self.BTC_TextField.text];
+    self.amountSatoshiRequested = [abcAccount.settings.denomination btcStringToSatoshi:self.BTC_TextField.text];
     SInt64 remaining = self.amountSatoshiRequested;
 
     if (self.previousAmountSatoshiRequested != self.amountSatoshiRequested)
@@ -549,10 +549,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             remaining = self.amountSatoshiRequested - self.amountSatoshiReceived;
             NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
-            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[abcAccount formatSatoshi:self.amountSatoshiRequested],string];
+            self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:self.amountSatoshiRequested],string];
 
             string = NSLocalizedString(@"Remaining...", @"Remaining string on Request screen");
-            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount formatSatoshi:remaining],string];
+            self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:remaining],string];
             break;
         }
         case kDonation:
@@ -561,7 +561,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             if (self.amountSatoshiReceived > 0)
             {
                 NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
-                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount formatSatoshi:self.amountSatoshiReceived],string];
+                self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:self.amountSatoshiReceived],string];
             }
             else
             {
@@ -808,13 +808,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     
     self.exchangeRateLabel.text = [wallet conversionString];
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
-    [self.segmentedControlBTCUSD setTitle:wallet.currencyAbbrev forSegmentAtIndex:0];
-    _fiatLabel.text = wallet.currencyAbbrev;
+    [self.segmentedControlBTCUSD setTitle:wallet.currency.code forSegmentAtIndex:0];
+    _fiatLabel.text = wallet.currency.code;
 
     if (_selectedTextField == self.BTC_TextField)
 	{
 		double currency;
-        int64_t satoshi = [abcAccount denominationToSatoshi: self.BTC_TextField.text];
+        int64_t satoshi = [abcAccount.settings.denomination btcStringToSatoshi:self.BTC_TextField.text];
 
         if (satoshi == 0)
         {
@@ -826,10 +826,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            currency = [abcAccount satoshiToCurrency:satoshi currencyNum:wallet.currencyNum error:nil];
-            self.USD_TextField.text = [abcAccount formatCurrency:currency
-                                                 withCurrencyNum:wallet.currencyNum
-                                                      withSymbol:false];
+            currency = [abcAccount.exchangeCache satoshiToCurrency:satoshi
+                                                      currencyCode:wallet.currency.code
+                                                             error:nil];
+            self.USD_TextField.text =
+            [wallet.currency doubleToPrettyCurrencyString:currency
+                                                                   withSymbol:false];
         }
 	}
 	else if (allowBTCUpdate && (_selectedTextField == self.USD_TextField))
@@ -846,10 +848,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            satoshi = [abcAccount currencyToSatoshi:currency currencyNum:wallet.currencyNum error:nil];
-            self.BTC_TextField.text = [abcAccount formatSatoshi:satoshi
-                                                     withSymbol:false
-                                                   cropDecimals:[abcAccount currencyDecimalPlaces]];
+            satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code
+                                                            error:nil];
+            self.BTC_TextField.text = [abcAccount.settings.denomination satoshiToBTCString:satoshi
+                                                                                withSymbol:false
+                                                                              cropDecimals:YES];
         }
 	}
 
@@ -1005,11 +1008,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             image = [UIImage imageNamed:@"bitcoin_symbol.png"];
             line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
             double currency;
-            currency = [abcAccount satoshiToCurrency:amountSatoshi currencyNum:wallet.currencyNum error:nil];
-            NSString *fiatAmount = [abc currencySymbolLookup:wallet.currencyNum];
-            NSString *fiatSymbol = [NSString stringWithFormat:@"%.2f", currency];
-            NSString *fiat = [fiatAmount stringByAppendingString:fiatSymbol];
-            line2 = [abcAccount formatSatoshi:amountSatoshi];
+            currency = [abcAccount.exchangeCache satoshiToCurrency:amountSatoshi
+                                                      currencyCode:wallet.currency.code
+                                                            error:nil];
+            NSString *fiatSymbol = wallet.currency.symbol;
+            NSString *fiatAmount = [NSString stringWithFormat:@"%.2f", currency];
+            NSString *fiat = [fiatSymbol stringByAppendingString:fiatAmount];
+            line2 = [abcAccount.settings.denomination satoshiToBTCString:amountSatoshi];
             line3 = fiat;
             
             [[AudioController controller] playReceived];
@@ -1186,12 +1191,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)replaceRequestTags:(NSString **) strContent
 {
-    NSString *amountBTC = [abcAccount formatSatoshi:_amountSatoshiRequested
-                                         withSymbol:false
-                                      forceDecimals:8];
-    NSString *amountBits = [abcAccount formatSatoshi:_amountSatoshiRequested
-                                          withSymbol:false
-                                       forceDecimals:2];
+    ABCDenomination *BTCDenom = [ABCDenomination getDenominationForMultiplier:ABCDenominationMultiplierBTC];
+    ABCDenomination *bitsDenom = [ABCDenomination getDenominationForMultiplier:ABCDenominationMultiplierUBTC];
+    
+    NSString *amountBTC = [BTCDenom satoshiToBTCString:_amountSatoshiReceived
+                                            withSymbol:false
+                                          cropDecimals:NO];
+    NSString *amountBits = [bitsDenom satoshiToBTCString:_amountSatoshiReceived
+                                              withSymbol:false
+                                            cropDecimals:NO];
     // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)
 
     NSString *iosURL;
@@ -1428,13 +1436,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.abcRequest.amountSatoshi = _amountSatoshiRequested;
     
     double currency;
-    currency = [abcAccount satoshiToCurrency:self.abcRequest.amountSatoshi currencyNum:wallet.currencyNum error:nil];
+    currency = [abcAccount.exchangeCache satoshiToCurrency:self.abcRequest.amountSatoshi
+                                              currencyCode:wallet.currency.code
+                                                     error:nil];
     
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-     [abcAccount formatSatoshi:self.abcRequest.amountSatoshi],
-     [abcAccount formatCurrency:currency withCurrencyNum:wallet.currencyNum],
+     [abcAccount.settings.denomination satoshiToBTCString:self.abcRequest.amountSatoshi],
+     [wallet.currency doubleToPrettyCurrencyString:currency],
      _requestType, [dateFormatter stringFromDate:now]];
     self.abcRequest.notes = notes;
     self.abcRequest.category = @"Income:";

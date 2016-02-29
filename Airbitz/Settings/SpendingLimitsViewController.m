@@ -64,14 +64,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
 
     _dailySpendLimitSwitch.on = [User Singleton].bDailySpendLimit;
-    _dailySpendLimitField.text = [abcAccount formatSatoshi:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
+    _dailySpendLimitField.text = [abcAccount.settings.denomination satoshiToBTCString:[User Singleton].dailySpendLimitSatoshis withSymbol:false];
     _dailySpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _dailyDenomination.text = abcAccount.settings.denominationLabelShort;
+    _dailyDenomination.text = abcAccount.settings.denomination.symbol;
 
     _pinSpendLimitSwitch.on = abcAccount.settings.bSpendRequirePin > 0;
-    _pinSpendLimitField.text = [abcAccount formatSatoshi:abcAccount.settings.spendRequirePinSatoshis withSymbol:false];
+    _pinSpendLimitField.text = [abcAccount.settings.denomination satoshiToBTCString:abcAccount.settings.spendRequirePinSatoshis withSymbol:false];
     _pinSpendLimitField.keyboardType = UIKeyboardTypeDecimalPad;
-    _pinDenomination.text = abcAccount.settings.denominationLabelShort;
+    _pinDenomination.text = abcAccount.settings.denomination.symbol;
 
     [self switchFlipped:_dailySpendLimitSwitch];
     [self switchFlipped:_pinSpendLimitSwitch];
@@ -228,14 +228,14 @@
     if (bAuthenticated) {
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
-            [User Singleton].dailySpendLimitSatoshis = [abcAccount denominationToSatoshi:_dailySpendLimitField.text];
+            [User Singleton].dailySpendLimitSatoshis = [abcAccount.settings.denomination btcStringToSatoshi:_dailySpendLimitField.text];
         } else {
             [User Singleton].bDailySpendLimit = NO;
         }
 
         if (_pinSpendLimitSwitch.on) {
             abcAccount.settings.bSpendRequirePin = true;
-            abcAccount.settings.spendRequirePinSatoshis = [abcAccount denominationToSatoshi:_pinSpendLimitField.text];
+            abcAccount.settings.spendRequirePinSatoshis = [abcAccount.settings.denomination btcStringToSatoshi:_pinSpendLimitField.text];
         } else {
             abcAccount.settings.bSpendRequirePin = false;
         }
