@@ -881,8 +881,7 @@
             return;
         }
 
-        NSString *PIN = abcAccount.settings.strPIN;
-        if (_pinRequired && ![self.withdrawlPIN.text isEqualToString:PIN]) {
+        if (_pinRequired && ![abcAccount pinCheck:self.withdrawlPIN.text]) {
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
