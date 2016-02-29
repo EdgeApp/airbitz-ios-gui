@@ -182,7 +182,7 @@ typedef enum eRequestType
     self.buttonBack.hidden = !self.bOldTransaction;
     if (_wallet)
     {
-        _labelFiatName.text = _wallet.currencyAbbrev;
+        _labelFiatName.text = _wallet.currency.code;
     }
 
     // set up our user blocking button
@@ -326,7 +326,9 @@ typedef enum eRequestType
         if (self.transaction.amountFiat == 0)
         {
             double currency;
-            currency = [abcAccount satoshiToCurrency:self.transaction.amountSatoshi currencyNum:_wallet.currencyNum error:nil];
+            currency = [abcAccount.exchangeCache satoshiToCurrency:self.transaction.amountSatoshi
+                                                      currencyCode:_wallet.currency.code
+                                                            error:nil];
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
@@ -344,20 +346,20 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-            [abcAccount formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees))
+                                                   withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [abcAccount formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
     }
     else
     {
         [coinFormatted appendString:
-            [abcAccount formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:self.transaction.amountSatoshi withSymbol:false]];
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = abcAccount.settings.denominationLabel;
-    
+    self.labelBTC.text = abcAccount.settings.denomination.label;    
     
     if (self.categoryButton.titleLabel.text == nil)
     {
@@ -607,7 +609,7 @@ typedef enum eRequestType
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
     for (ABCTxOutput *t in self.transaction.outputs) {
-        NSString *val = [abcAccount formatSatoshi:t.value];
+        NSString *val = [abcAccount.settings.denomination satoshiToBTCString:t.value];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.strAddress, t.strAddress, val];
         if (t.bInput) {
@@ -623,13 +625,13 @@ typedef enum eRequestType
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcAccount formatSatoshi:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcAccount.settings.denomination satoshiToBTCString:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcAccount formatSatoshi:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcAccount.settings.denomination satoshiToBTCString:fees]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];

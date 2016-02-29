@@ -135,10 +135,7 @@
             [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
             [self.accountPicker setRoundedAndShadowed:NO];
 
-            int num = abcAccount.settings.defaultCurrencyNum;
-
-            self.conversionText.text = [abcAccount conversionStringFromNum:num withAbbrev:YES];
-
+            self.conversionText.text = [abcAccount createExchangeRateString:abcAccount.settings.defaultCurrency includeCurrencyCode:YES];
 
             self.accountText.text = abcAccount.name;
             [self.accountButton setAccessibilityLabel:abcAccount.name];

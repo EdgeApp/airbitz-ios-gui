@@ -296,8 +296,8 @@
 {
     [self.walletsTable reloadData];
 
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.denominationLabel forSegmentAtIndex:0];
-    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:[abc currencyAbbrevLookup:abcAccount.settings.defaultCurrencyNum]
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.denomination.label forSegmentAtIndex:0];
+    [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.defaultCurrency.code
                                           forSegmentAtIndex:1];
 
     if (_balanceView.barIsUp)
@@ -429,16 +429,14 @@
     {
         totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [abcAccount formatSatoshi: totalSatoshi];
+    _balanceView.topAmount.text = [abcAccount.settings.denomination satoshiToBTCString:totalSatoshi];
 
-    double currency;
+    double fCurrency;
 
-    currency = [abcAccount satoshiToCurrency:totalSatoshi currencyNum:abcAccount.currentWallet.currencyNum error:nil];
-    _balanceView.botAmount.text = [abcAccount formatCurrency:currency
-                                             withCurrencyNum:abcAccount.currentWallet.currencyNum];
-    _balanceView.topDenomination.text = abcAccount.settings.denominationLabel;
-    NSAssert(abcAccount.currentWallet.currencyAbbrev.length > 0, @"currencyAbbrev not set");
-    _balanceView.botDenomination.text = abcAccount.currentWallet.currencyAbbrev;
+    fCurrency = [abcAccount.exchangeCache satoshiToCurrency:totalSatoshi currencyCode:abcAccount.currentWallet.currency.code error:nil];
+    _balanceView.botAmount.text = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
+    _balanceView.topDenomination.text = abcAccount.settings.denomination.label;
+    _balanceView.botDenomination.text = abcAccount.currentWallet.currency.code;
 
     [_balanceView refresh];
 
@@ -493,9 +491,9 @@
 {
     BOOL bFiat = !_balanceView.barIsUp;
     if (wallet)
-        return [self formatAmount:satoshi useFiat:bFiat currencyNum:wallet.currencyNum];
+        return [self formatAmount:satoshi useFiat:bFiat currency:wallet.currency];
     else
-        return [self formatAmount:satoshi useFiat:bFiat currencyNum:abcAccount.settings.defaultCurrencyNum];
+        return [self formatAmount:satoshi useFiat:bFiat currency:abcAccount.settings.defaultCurrency];
 }
 
 
@@ -508,23 +506,22 @@
 
 - (NSString *)formatAmount:(ABCWallet *)wallet useFiat:(BOOL)bFiat
 {
-    return [self formatAmount:wallet.balance useFiat:bFiat currencyNum:wallet.currencyNum];
+    return [self formatAmount:wallet.balance useFiat:bFiat currency:wallet.currency];
 }
 
 
-- (NSString *)formatAmount:(int64_t)satoshi useFiat:(BOOL)bFiat currencyNum:(int)currencyNum
+- (NSString *)formatAmount:(int64_t)satoshi useFiat:(BOOL)bFiat currency:(ABCCurrency *)currency;
 {
     // if they want it in fiat
     if (bFiat)
     {
-        double currency;
-        currency = [abcAccount satoshiToCurrency:satoshi currencyNum:currencyNum error:nil];
-        return [abcAccount formatCurrency:currency
-                          withCurrencyNum:currencyNum];
+        double fCurrency;
+        fCurrency = [abcAccount.exchangeCache satoshiToCurrency:satoshi currencyCode:currency.code error:nil];
+        return [currency doubleToPrettyCurrencyString:fCurrency];
     }
     else
     {
-        return [abcAccount formatSatoshi:satoshi];
+        return [abcAccount.settings.denomination satoshiToBTCString:satoshi];
     }
 }
 
@@ -1008,10 +1005,11 @@
             cell.confirmationLabel.textColor = COLOR_BALANCE;
 
             // amount - always bitcoin
-            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currencyNum:wallet.currencyNum];
+//            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currencyNum:wallet.currencyNum];
+            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currency:wallet.currency];
 
             // balance becomes fiat
-            cell.balanceLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:YES currencyNum:wallet.currencyNum];
+            cell.balanceLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:YES currency:wallet.currency];
             cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
         else

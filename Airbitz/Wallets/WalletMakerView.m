@@ -21,7 +21,7 @@
     BOOL                        _bCurrencyPopup;
     BOOL                        _bCreatingWallet;
 	CGRect                      _originalFrame;
-    int                         _currencyChoice;
+    ABCCurrency                 *_currencyChoice;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView            *imageEditBox;
@@ -81,7 +81,7 @@
         self.popupPickerCurrency = [PopupPickerView CreateForView:self
                                                    relativeToView:self.buttonCurrency
                                                  relativePosition:PopupPickerPosition_Below
-                                                      withStrings:abc.arrayCurrencyStrings
+                                                      withStrings:[ABCCurrency listCurrencyStrings]
                                                    fromCategories:nil
                                                       selectedRow:-1
                                                         withWidth:[MainViewController getWidth]
@@ -116,8 +116,6 @@
 
 - (void)reset
 {
-    int currencyNum;
-    NSString *currencyString;
 //    CGRect frame = self.viewBlocker.frame;
 //    self.viewBlocker.hidden = YES;
     self.activityIndicator.hidden = YES;
@@ -130,13 +128,12 @@
 //    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
-    currencyNum = abcAccount.settings.defaultCurrencyNum;
-    currencyString = [abc currencyAbbrevLookup:currencyNum];
+    _currencyChoice = abcAccount.settings.defaultCurrency;
+//    currencyString = [abc currencyAbbrevLookup:currencyNum];
 //	[self.buttonSelectorView.button setTitle:currencyString forState:UIControlStateNormal];
 //    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
-    _currencyChoice = (int) [abc.arrayCurrencyCodes indexOfObject:currencyString];
-    [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
+    [self.buttonCurrency setTitle:_currencyChoice.code forState:UIControlStateNormal];
     [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
 //    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
 //    [self.buttonCurrency.layer setBorderWidth:2.0];
@@ -175,14 +172,7 @@
     [self blockUser:YES];
     _bCreatingWallet = YES;
 
-    NSString *currency;
-
-    if ((nil == abc.arrayCurrencyNums) || [abc.arrayCurrencyNums count] <= _currencyChoice)
-        currency = nil;
-    else
-        currency = [abc.arrayCurrencyCodes objectAtIndex:_currencyChoice];
-
-    [abcAccount createWallet:self.textField.text currency:currency complete:^(ABCWallet *wallet)
+    [abcAccount createWallet:self.textField.text currency:_currencyChoice.code complete:^(ABCWallet *wallet)
      {
          [self blockUser:NO];
          _bCreatingWallet = NO;
@@ -226,11 +216,9 @@
 
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
 {
-    _currencyChoice = (int) row;
-    NSNumber *currencyNum = [abc.arrayCurrencyNums objectAtIndex:_currencyChoice];
-    NSString *currencyString = [abc currencyAbbrevLookup:[currencyNum intValue]];
+    _currencyChoice = [ABCCurrency listCurrencies][row];
 
-    [self.buttonCurrency setTitle:currencyString forState:UIControlStateNormal];
+    [self.buttonCurrency setTitle:_currencyChoice.code forState:UIControlStateNormal];
     [self.popupPickerCurrency removeFromSuperview];
     _bCurrencyPopup = NO;
     [self.textField becomeFirstResponder];

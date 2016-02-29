@@ -98,25 +98,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              44
 
-typedef struct sDenomination
-{
-    char *szLabel;
-    int64_t satoshi;
-} tDenomination ;
-
-tDenomination gaDenominations[DENOMINATION_CHOICES] = {
-    {
-        "BTC", 100000000 // ABCDenominationBTC = 0
-    },
-    {
-        "mBTC", 100000 // ABCDenominationMBTC = 1
-    },
-    {
-        "bits", 100 // ABCDenominationUBTC = 2
-    }
-};
-
-
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, BooleanCellDelegate, ButtonCellDelegate, TextFieldCellDelegate,
                                       ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate,
                                       PopupPickerView2Delegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate,
@@ -298,8 +279,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 - (void)setDenominationChoice:(NSInteger)nChoice
 {
     // set the new values
-    abcAccount.settings.denomination = gaDenominations[nChoice].satoshi;
-    abcAccount.settings.denominationType = (int) nChoice;
+    abcAccount.settings.denomination = [ABCDenomination getDenominationForIndex:(int) nChoice];
 
     // update the settings in the core
     [self saveSettings];
@@ -729,7 +709,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 	{
 		cell.name.text = NSLocalizedString(@"bits = (0.000001 Bitcoin)", @"settings text");
 	}
-	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denominationType ? @"btn_selected" : @"btn_unselected")];
+	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denomination.index ? @"btn_selected" : @"btn_unselected")];
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
@@ -938,11 +918,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
 			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
-            NSInteger indexCurrency = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcAccount.settings.defaultCurrencyNum]];
-            if (indexCurrency != NSNotFound)
-            {
-                [cell.button setTitle:abc.arrayCurrencyCodes[indexCurrency] forState:UIControlStateNormal];
-            }
+            [cell.button setTitle:abcAccount.settings.defaultCurrency.code forState:UIControlStateNormal];
 		}
 	}
 	if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
@@ -1329,7 +1305,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
     NSString *headerText;
 
-    NSInteger curChoice = -1;
+//    NSInteger curChoice = -1;
     NSArray *arrayPopupChoices = nil;
 
     if (SECTION_OPTIONS == section)
@@ -1350,12 +1326,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
         }
         else if (row == ROW_DEFAULT_CURRENCY)
         {
-            curChoice = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcAccount.settings.defaultCurrencyNum]];
-            if (curChoice == NSNotFound)
-            {
-                curChoice = -1;
-            }
-            arrayPopupChoices = abc.arrayCurrencyStrings;
+//            curChoice = [abc.arrayCurrencyNums indexOfObject:[NSNumber numberWithInt:abcAccount.settings.defaultCurrencyNum]];
+//            if (curChoice == NSNotFound)
+//            {
+//                curChoice = -1;
+//            }
+            arrayPopupChoices = [ABCCurrency listCurrencyStrings];
             popupPosition = PopupPicker2Position_Full_Fading;
             headerText = @"Default Currency";
 
@@ -1363,12 +1339,12 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     }
     else if (SECTION_DEFAULT_EXCHANGE == section)
     {
-        curChoice = NSNotFound;
-        curChoice = [ABCArrayExchanges indexOfObject:abcAccount.settings.exchangeRateSource];
-        if (curChoice == NSNotFound)
-        {
-            curChoice = -1;
-        }
+//        curChoice = NSNotFound;
+//        curChoice = [ABCArrayExchanges indexOfObject:abcAccount.settings.exchangeRateSource];
+//        if (curChoice == NSNotFound)
+//        {
+//            curChoice = -1;
+//        }
         arrayPopupChoices = ABCArrayExchanges;
         headerText = @"Exchange Rate Data Source";
     }
@@ -1411,7 +1387,7 @@ tDenomination gaDenominations[DENOMINATION_CHOICES] = {
     {
         if (rowCell == ROW_DEFAULT_CURRENCY)
         {
-            abcAccount.settings.defaultCurrencyNum = [abc.arrayCurrencyNums[row] intValue];
+            abcAccount.settings.defaultCurrency = [ABCCurrency listCurrencies][row];
             [FadingAlertView create:self.view message:defaultCurrencyInfoText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
         }
     }

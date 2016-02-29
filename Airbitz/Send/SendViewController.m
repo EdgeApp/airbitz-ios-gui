@@ -1469,7 +1469,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
             if (bAddIt)
             {
-                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.name, [abcAccount formatSatoshi:wallet.balance]]];
+                [arrayChoices addObject:[NSString stringWithFormat:@"%@ (%@)", wallet.name, [abcAccount.settings.denomination satoshiToBTCString:wallet.balance]]];
                 [arrayChoicesIndexes addObject:[NSNumber numberWithInt:i]];
             }
         }
