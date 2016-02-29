@@ -335,8 +335,9 @@ typedef enum eAlertType
 
     [abc signInWithRecoveryAnswers:self.strUserName
                            answers:strAnswers
+                          delegate:nil
                                otp:_secret
-                          complete:^
+                          complete:^(ABCAccount *account)
     {
         [self showSpinner:NO];
         [self bringUpSignUpViewWithAnswers:strAnswers];
