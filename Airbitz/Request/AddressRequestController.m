@@ -148,9 +148,9 @@
     
     if (_successUrl) {
         
-        request.payeeName = strName;
-        request.category = strCategory;
-        request.notes = strNotes;
+        request.metaData.payeeName = strName;
+        request.metaData.category = strCategory;
+        request.metaData.notes = strNotes;
 
         [abcAccount.currentWallet createReceiveRequestWithDetails:request];
         

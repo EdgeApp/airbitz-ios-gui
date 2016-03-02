@@ -623,9 +623,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     ABCRequest *request = [ABCRequest alloc];
 
-    request.payeeName       = strName;
-    request.category        = strCategory;
-    request.notes           = strNotes;
+    request.metaData.payeeName       = strName;
+    request.metaData.category        = strCategory;
+    request.metaData.notes           = strNotes;
     request.amountSatoshi   = remaining;
 
     [wallet createReceiveRequestWithDetails:request complete:^
@@ -1422,11 +1422,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)saveRequest
 {
     if (_strFullName) {
-        self.abcRequest.payeeName = _strFullName;
+        self.abcRequest.metaData.payeeName = _strFullName;
     } else if (_strEMail) {
-        self.abcRequest.payeeName = _strFullName;
+        self.abcRequest.metaData.payeeName = _strFullName;
     } else if (_strPhoneNumber) {
-        self.abcRequest.payeeName = _strPhoneNumber;
+        self.abcRequest.metaData.payeeName = _strPhoneNumber;
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -1446,8 +1446,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
      [abcAccount.settings.denomination satoshiToBTCString:self.abcRequest.amountSatoshi],
      [wallet.currency doubleToPrettyCurrencyString:currency],
      _requestType, [dateFormatter stringFromDate:now]];
-    self.abcRequest.notes = notes;
-    self.abcRequest.category = @"Income:";
+    self.abcRequest.metaData.notes = notes;
+    self.abcRequest.metaData.category = @"Income:";
 
     [self.abcRequest modifyRequestWithDetails];
 }

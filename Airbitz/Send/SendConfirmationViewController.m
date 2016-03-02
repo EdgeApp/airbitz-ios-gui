@@ -132,7 +132,7 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
 
-    _sendTo = _abcSpend.spendName;
+    _sendTo = _abcSpend.metaData.payeeName;
     if (_abcSpend.bSigned)
     {
         self.addressLabel.textColor = [Theme Singleton].colorButtonGreen;
@@ -502,7 +502,7 @@
         _callbackTimestamp = [[NSDate date] timeIntervalSince1970];
 
         _abcSpend.srcWallet = abcAccount.currentWallet;
-        _abcSpend.amountFiat = _overrideCurrency;
+        _abcSpend.metaData.amountFiat = _overrideCurrency;
 
         if (_bSignOnly)
         {

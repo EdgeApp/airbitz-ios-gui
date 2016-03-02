@@ -472,7 +472,7 @@ static const NSString *PROTOCOL = @"bridge://";
     {
         _abcSpend = pSpend;
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
-            _abcSpend.bizId = [[args objectForKey:@"bizId"] longValue];
+            _abcSpend.metaData.bizId = [[args objectForKey:@"bizId"] longValue];
         }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
@@ -639,12 +639,12 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCRequest *request = [[ABCRequest alloc] init];
     request.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
 //    details.amountCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
-    request.payeeName   = [args objectForKey:@"label"];
-    request.category    = [args objectForKey:@"category"];
-    request.notes       = [args objectForKey:@"notes"];
+    request.metaData.payeeName   = [args objectForKey:@"label"];
+    request.metaData.category    = [args objectForKey:@"category"];
+    request.metaData.notes       = [args objectForKey:@"notes"];
     
     if (0 < [[args objectForKey:@"bizId"] longValue]) {
-        request.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
+        request.metaData.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
     }
 
     NSError *error = [wallet createReceiveRequestWithDetails:request];

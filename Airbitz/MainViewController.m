@@ -1525,7 +1525,7 @@ MainViewController *singleton;
     
     ABCRequest *request = [[ABCRequest alloc] init];
     
-    request.payeeName = abcAccount.settings.fullName;
+    request.metaData.payeeName = abcAccount.settings.fullName;
 
     [abcAccount.currentWallet createReceiveRequestWithDetails:request complete:^
     {
@@ -1569,7 +1569,7 @@ MainViewController *singleton;
     currency = [abcAccount.exchangeCache satoshiToCurrency:satoshi currencyCode:wallet.currency.code error:nil];
     fiat = [wallet.currency doubleToPrettyCurrencyString:currency withSymbol:true];
     
-    currency = fabs(transaction.amountFiat);
+    currency = fabs(transaction.metaData.amountFiat);
     
     satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code error:nil];
     coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false cropDecimals:YES];

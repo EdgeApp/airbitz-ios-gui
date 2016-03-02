@@ -621,8 +621,8 @@
     if (transaction)
     {
         // find the image from the contacts
-        image = [MainViewController Singleton].dictImages[[transaction.payeeName lowercaseString]];
-        ABCLog(2, @"Looking for image for %@. Found image = %lx", transaction.payeeName, (unsigned long) image);
+        image = [MainViewController Singleton].dictImages[[transaction.metaData.payeeName lowercaseString]];
+        ABCLog(2, @"Looking for image for %@. Found image = %lx", transaction.metaData.payeeName, (unsigned long) image);
     }
 
     return image;
@@ -634,10 +634,10 @@
     if (transaction)
     {
         // if this transaction has a biz id
-        if (transaction.bizId)
+        if (transaction.metaData.bizId)
         {
             // get the image for this bizId
-            NSString *requestURL = [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:transaction.bizId]];
+            NSString *requestURL = [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:transaction.metaData.bizId]];
             imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                       timeoutInterval:60];
@@ -653,10 +653,10 @@
     for (ABCTransaction *transaction in wallet.arrayTransactions)
     {
         // if this transaction has a biz id
-        if (transaction && transaction.bizId)
+        if (transaction && transaction.metaData.bizId)
         {
             // if we don't have an image for this biz id
-            if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(transaction.bizId)])
+            if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(transaction.metaData.bizId)])
             {
                 // start by getting the biz details...this will kick of a retreive of the images
                 [self getBizDetailsForTransaction:transaction];
@@ -668,7 +668,7 @@
 - (void)getBizDetailsForTransaction:(ABCTransaction *)transaction
 {
     //get business details
-	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.bizId];
+	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.metaData.bizId];
     
     [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -710,9 +710,9 @@
 -(void)TransactionDetailsViewControllerDone:(TransactionDetailsViewController *)controller
 {
     // if we got a new photo
-    if (controller.transaction.bizId && controller.photo && controller.photoUrl)
+    if (controller.transaction.metaData.bizId && controller.photo && controller.photoUrl)
     {
-        [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:controller.transaction.bizId]] = controller.photoUrl;
+        [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:controller.transaction.metaData.bizId]] = controller.photoUrl;
     }
 
     [MainViewController changeNavBarOwner:self];
@@ -995,13 +995,13 @@
         cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
 
         // address
-        cell.addressLabel.text = transaction.payeeName;
+        cell.addressLabel.text = transaction.metaData.payeeName;
 
         // if we are in search  mode
         if ([self searchEnabled])
         {
             // confirmation becomes category
-            cell.confirmationLabel.text = transaction.category;
+            cell.confirmationLabel.text = transaction.metaData.category;
             cell.confirmationLabel.textColor = COLOR_BALANCE;
 
             // amount - always bitcoin

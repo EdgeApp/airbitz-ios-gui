@@ -164,13 +164,13 @@ typedef enum eRequestType
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
-        [MainViewController Singleton].dictImages[[self.transaction.payeeName lowercaseString]] = self.photo;
+        [MainViewController Singleton].dictImages[[self.transaction.metaData.payeeName lowercaseString]] = self.photo;
     }
 
     // if there is a biz id, add this biz as the first bizid
-    if (self.transaction.bizId)
+    if (self.transaction.metaData.bizId)
     {
-        [MainViewController Singleton].dictBizIds[[self.transaction.payeeName lowercaseString]] = @(self.transaction.bizId);
+        [MainViewController Singleton].dictBizIds[[self.transaction.metaData.payeeName lowercaseString]] = @(self.transaction.metaData.bizId);
     }
 
     // resize ourselves to fit in area
@@ -229,18 +229,18 @@ typedef enum eRequestType
     [self.pickerTextCategory setCategories:self.arrayCategories];
     self.pickerTextCategory.delegate = self;
 
-    _bizId = self.transaction.bizId;
+    _bizId = self.transaction.metaData.bizId;
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
-    self.nameTextField.text = self.transaction.payeeName;
-    self.notesTextView.text = self.transaction.notes;
+    self.nameTextField.text = self.transaction.metaData.payeeName;
+    self.notesTextView.text = self.transaction.metaData.notes;
 
-    if ([self.transaction.category length] > 1)
+    if ([self.transaction.metaData.category length] > 1)
     {
-        self.pickerTextCategory.textField.text = self.transaction.category;
+        self.pickerTextCategory.textField.text = self.transaction.metaData.category;
     }
     else
     {
@@ -323,7 +323,7 @@ typedef enum eRequestType
             self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.wallet.name];
         }
         
-        if (self.transaction.amountFiat == 0)
+        if (self.transaction.metaData.amountFiat == 0)
         {
             double currency;
             currency = [abcAccount.exchangeCache satoshiToCurrency:self.transaction.amountSatoshi
@@ -333,7 +333,7 @@ typedef enum eRequestType
         }
         else
         {
-            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
+            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.metaData.amountFiat];
         }
 
         // push the calculator keypad to below the bottom of the screen
@@ -490,19 +490,19 @@ typedef enum eRequestType
     // add the category if we didn't have it
     [abcAccount addCategory:strFullCategory];
 
-    if (![self.transaction.category isEqualToString:strFullCategory])
+    if (![self.transaction.metaData.category isEqualToString:strFullCategory])
     {
-        self.transaction.category = strFullCategory;
+        self.transaction.metaData.category = strFullCategory;
         bSomethingChanged = true;
     }
-    if (![self.transaction.payeeName isEqualToString:[self.nameTextField text]])
+    if (![self.transaction.metaData.payeeName isEqualToString:[self.nameTextField text]])
     {
-        self.transaction.payeeName = [self.nameTextField text];
+        self.transaction.metaData.payeeName = [self.nameTextField text];
         bSomethingChanged = true;
     }
-    if (![self.transaction.notes isEqualToString:[self.notesTextView text]])
+    if (![self.transaction.metaData.notes isEqualToString:[self.notesTextView text]])
     {
-        self.transaction.notes = [self.notesTextView text];
+        self.transaction.metaData.notes = [self.notesTextView text];
         bSomethingChanged = true;
     }
 
@@ -517,14 +517,14 @@ typedef enum eRequestType
         }
     }
 
-    if (amountFiat != self.transaction.amountFiat)
+    if (amountFiat != self.transaction.metaData.amountFiat)
     {
-        self.transaction.amountFiat = amountFiat;
+        self.transaction.metaData.amountFiat = amountFiat;
         bSomethingChanged = true;
     }
-    if (self.transaction.bizId != _bizId)
+    if (self.transaction.metaData.bizId != _bizId)
     {
-        self.transaction.bizId = _bizId;
+        self.transaction.metaData.bizId = _bizId;
         bSomethingChanged = true;
     }
 
