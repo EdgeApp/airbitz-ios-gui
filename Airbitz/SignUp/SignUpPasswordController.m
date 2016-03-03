@@ -198,28 +198,18 @@
 
     BOOL bNewPasswordFieldsAreValid = YES;
     {
-        unsigned int count = 0;
-        double secondsToCrack;
-        NSMutableArray *ruleDescription = [[NSMutableArray alloc] init];
-        NSMutableArray *rulePassed = [[NSMutableArray alloc] init];
-        NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
+        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
         
-        bNewPasswordFieldsAreValid = [AirbitzCore checkPasswordRules:self.passwordTextField.text
-                                                      secondsToCrack:&secondsToCrack
-                                                               count:&count
-                                                     ruleDescription:ruleDescription
-                                                          rulePassed:rulePassed
-                                                 checkResultsMessage:checkResultsMessage];
-        
-        if (bNewPasswordFieldsAreValid == NO)
+        if (!result.passed)
         {
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
-                          message:checkResultsMessage
+                          message:[Util checkPasswordResultsMessage:result]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
+            bNewPasswordFieldsAreValid = NO;
         }
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {

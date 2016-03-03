@@ -53,6 +53,7 @@
 + (NSArray *)addSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController;
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
 + (void)replaceHtmlTags:(NSString **) strContent;
++ (NSString *)checkPasswordResultsMessage:(ABCPasswordRuleResult *)result;
 
 
 @end

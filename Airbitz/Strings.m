@@ -132,3 +132,8 @@
 #define imagePickerAlertTitle                       NSLocalizedString(@"Upload Image", nil)
 #define imagePickerAlertUseCamera                   NSLocalizedString(@"Use Camera", nil)
 #define imagePickerAlertUsePhotos                   NSLocalizedString(@"Use Photo Album", nil)
+#define yourPasswordText                            NSLocalizedString(@"Your password...", @"Start of password rules text")
+#define mustHaveUpperCase                           NSLocalizedString(@"Must have at least one upper case letter",nil)
+#define mustHaveLowerCase                           NSLocalizedString(@"Must have at least one lower case letter",nil)
+#define mustHaveNumber                              NSLocalizedString(@"Must have at least one number",nil)
+#define mustHaveMoreCharacters                      NSLocalizedString(@"Must have at least %d characters",nil)

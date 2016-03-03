@@ -7,6 +7,7 @@
 //
 
 #import "PasswordVerifyView.h"
+#import "Strings.h"
 #import "Util.h"
 #import "AB.h"
 
@@ -88,77 +89,93 @@
 {
 	_password = password;
 	
-    unsigned int count = 0;
-    double secondsToCrack;
-    NSMutableArray *ruleDescription = [[NSMutableArray alloc] init];
-    NSMutableArray *rulePassed = [[NSMutableArray alloc] init];
-    NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
-    BOOL passed;
+    ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.password];
     
-    passed = [AirbitzCore checkPasswordRules:self.password
-                              secondsToCrack:&secondsToCrack
-                                       count:&count
-                             ruleDescription:ruleDescription
-                                  rulePassed:rulePassed
-                         checkResultsMessage:checkResultsMessage];
+//    if (result)
 		
 	NSMutableString *crackString = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Time to crack:", @"text in password verification popup")];
-	if(secondsToCrack < 60.0)
+    
+	if(result.secondsToCrack < 60.0)
 	{
-		[crackString appendFormat:@"%.2lf seconds", secondsToCrack];
+		[crackString appendFormat:@"%.2lf seconds", result.secondsToCrack];
 	}
-	else if(secondsToCrack < 3600)
+	else if(result.secondsToCrack < 3600)
 	{
-		[crackString appendFormat:@"%.2lf minutes", secondsToCrack / 60.0];
+		[crackString appendFormat:@"%.2lf minutes", result.secondsToCrack / 60.0];
 	}
-	else if(secondsToCrack < 86400)
+	else if(result.secondsToCrack < 86400)
 	{
-		[crackString appendFormat:@"%.2lf hours", secondsToCrack / 3600.0];
+		[crackString appendFormat:@"%.2lf hours", result.secondsToCrack / 3600.0];
 	}
-	else if(secondsToCrack < 604800)
+	else if(result.secondsToCrack < 604800)
 	{
-		[crackString appendFormat:@"%.2lf days", secondsToCrack / 86400.0];
+		[crackString appendFormat:@"%.2lf days", result.secondsToCrack / 86400.0];
 	}
-	else if(secondsToCrack < 604800)
+	else if(result.secondsToCrack < 604800)
 	{
-		[crackString appendFormat:@"%.2lf days", secondsToCrack / 86400.0];
+		[crackString appendFormat:@"%.2lf days", result.secondsToCrack / 86400.0];
 	}
-	else if(secondsToCrack < 2419200)
+	else if(result.secondsToCrack < 2419200)
 	{
-		[crackString appendFormat:@"%.2lf weeks", secondsToCrack / 604800.0];
+		[crackString appendFormat:@"%.2lf weeks", result.secondsToCrack / 604800.0];
 	}
-	else if(secondsToCrack < 29030400)
+	else if(result.secondsToCrack < 29030400)
 	{
-		[crackString appendFormat:@"%.2lf months", secondsToCrack / 2419200.0];
+		[crackString appendFormat:@"%.2lf months", result.secondsToCrack / 2419200.0];
 	}
 	else
 	{
-		[crackString appendFormat:@"%.2lf years", secondsToCrack / 29030400.0];
+		[crackString appendFormat:@"%.2lf years", result.secondsToCrack / 29030400.0];
 	}
 	self.crackMessageLabel.text = crackString;
-    for (int i = 0; i < count; i++)
-    {
-		UIImageView *imageView = (UIImageView *)[self viewWithTag:i + 10];
-		if(imageView)
-		{
-			if([rulePassed[i] boolValue])
-			{
-				imageView.image = [UIImage imageNamed:@"Green-check"];
-			}
-			else
-			{
-				imageView.image = [UIImage imageNamed:@"White-Dot"];
-			}
-		}
-		
-		UILabel* label = (UILabel *)[self viewWithTag:i + 20];
-		//ABCLog(2,@"curent tag: %i for view: %@", i, label);
-		if(label)
-		{
-			label.text = ruleDescription[i];
-		}
+    
+    UILabel* label;
+    UIImageView *imageView;
+    
+    int i = 0;
+    
+    label = (UILabel *)[self viewWithTag:i + 20];
+    imageView = (UIImageView *)[self viewWithTag:i + 10];
+    if(label) label.text = mustHaveUpperCase;
+    if(imageView) {
+        if (result.noUpperCase)
+            imageView.image = [UIImage imageNamed:@"White-Dot"];
+        else
+            imageView.image = [UIImage imageNamed:@"Green-check"];
     }
-	
+    
+    i++;
+    label = (UILabel *)[self viewWithTag:i + 20];
+    imageView = (UIImageView *)[self viewWithTag:i + 10];
+    if(label) label.text = mustHaveLowerCase;
+    if(imageView) {
+        if (result.noLowerCase)
+            imageView.image = [UIImage imageNamed:@"White-Dot"];
+        else
+            imageView.image = [UIImage imageNamed:@"Green-check"];
+    }
+
+    i++;
+    label = (UILabel *)[self viewWithTag:i + 20];
+    imageView = (UIImageView *)[self viewWithTag:i + 10];
+    if(label) label.text = mustHaveNumber;
+    if(imageView) {
+        if (result.noNumber)
+            imageView.image = [UIImage imageNamed:@"White-Dot"];
+        else
+            imageView.image = [UIImage imageNamed:@"Green-check"];
+    }
+    
+    i++;
+    label = (UILabel *)[self viewWithTag:i + 20];
+    imageView = (UIImageView *)[self viewWithTag:i + 10];
+    if(label) label.text = [NSString stringWithFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+    if(imageView) {
+        if (result.tooShort)
+            imageView.image = [UIImage imageNamed:@"White-Dot"];
+        else
+            imageView.image = [UIImage imageNamed:@"Green-check"];
+    }
 }
 
 @end

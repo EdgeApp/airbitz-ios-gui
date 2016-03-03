@@ -296,6 +296,36 @@
     }
 }
 
++ (NSString *)checkPasswordResultsMessage:(ABCPasswordRuleResult *)result;
+{
+    NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
+    
+    [checkResultsMessage appendString:yourPasswordText];
+    
+    if (result.noUpperCase)
+    {
+        [checkResultsMessage appendString:mustHaveUpperCase];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.noLowerCase)
+    {
+        [checkResultsMessage appendString:mustHaveLowerCase];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.noNumber)
+    {
+        [checkResultsMessage appendString:mustHaveNumber];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.tooShort)
+    {
+        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    
+    return [NSString stringWithString:checkResultsMessage];
+}
+
 + (NSString *)urlencode:(NSString *)url
 {
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
