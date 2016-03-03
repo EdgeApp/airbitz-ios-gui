@@ -555,11 +555,18 @@ static bool bInitialized = false;
 
 - (void)businessListingQueryForPage: (int)page northEastCoordinate: (CLLocationCoordinate2D)ne southWestCoordinate: (CLLocationCoordinate2D)sw
 {
-    NSString *boundingBox = [NSString stringWithFormat: @"%f,%f|%f,%f", sw.latitude, sw.longitude, ne.latitude, ne.longitude];
-    NSString *myLatLong = [NSString stringWithFormat: @"%f,%f", self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude];
-    NSMutableString *query = [[NSMutableString alloc] initWithFormat: @"%@/search/?ll=%@&sort=%i&page=%i&page_size=%i&bounds=%@", SERVER_API, myLatLong, SORT_RESULT_DISTANCE, page + 1, DEFAULT_RESULTS_PER_PAGE, boundingBox];
-
-    [self businessListingQuery: query];
+    if (self.mapView.userLocation.location)
+    {
+        NSString *boundingBox = [NSString stringWithFormat: @"%f,%f|%f,%f", sw.latitude, sw.longitude, ne.latitude, ne.longitude];
+        NSString *myLatLong = [NSString stringWithFormat: @"%f,%f", self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude];
+        NSMutableString *query = [[NSMutableString alloc] initWithFormat: @"%@/search/?ll=%@&sort=%i&page=%i&page_size=%i&bounds=%@", SERVER_API, myLatLong, SORT_RESULT_DISTANCE, page + 1, DEFAULT_RESULTS_PER_PAGE, boundingBox];
+        
+        [self businessListingQuery: query];
+    }
+    else
+    {
+        [self businessListingQueryForPage:page];
+    }
 }
 /* cw no longer used but keep around just in case...
 -(void)businessListingQueryForPage:(int)page centerCoordinate:(CLLocationCoordinate2D)center radius:(float)radiusInMeters
