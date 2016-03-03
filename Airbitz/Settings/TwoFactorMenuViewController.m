@@ -90,7 +90,7 @@
 
 - (IBAction)Reset:(id)sender
 {
-    [abc requestOTPReset:_username complete:^
+    [abc requestOTPReset:_username token:_resetToken complete:^
      {
          [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
      } error:^(NSError *error)

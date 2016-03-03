@@ -341,12 +341,12 @@ typedef enum eAlertType
     {
         [self showSpinner:NO];
         [self bringUpSignUpViewWithAnswers:strAnswers];
-    } error:^(NSError *error, NSDate *resetDate)
+    } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
     {
         [self showSpinner:NO];
         if (ABCConditionCodeInvalidOTP == error.code)
         {
-            [self launchTwoFactorMenu:resetDate];
+            [self launchTwoFactorMenu:resetDate token:resetToken];
         }
         else
         {
@@ -365,7 +365,7 @@ typedef enum eAlertType
 
 }
 
-- (void)launchTwoFactorMenu:(NSDate *)resetDate;
+- (void)launchTwoFactorMenu:(NSDate *)resetDate token:(NSString *)resetToken;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
@@ -373,6 +373,7 @@ typedef enum eAlertType
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
     _tfaMenuViewController.resetDate = resetDate;
+    _tfaMenuViewController.resetToken = resetToken;
 }
 
 #pragma mark - TwoFactorScanViewControllerDelegate

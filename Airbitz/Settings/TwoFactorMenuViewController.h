@@ -10,6 +10,7 @@
 @property (copy) NSString *secret;
 @property (copy) NSString *username;
 @property (copy) NSDate *resetDate;
+@property (copy) NSString *resetToken;
 @property (assign) BOOL bSuccess;
 @property (assign) BOOL bStoreSecret;
 @property (assign) BOOL bTestSecret;

@@ -542,14 +542,14 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:account];
          }
-              error:^(NSError *error, NSDate *resetDate)
+              error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
          {
              [self showSpinner:NO];
              
              if (ABCConditionCodeInvalidOTP == error.code)
              {
                  [MainViewController showBackground:NO animate:YES];
-                 [self launchTwoFactorMenu:resetDate];
+                 [self launchTwoFactorMenu:resetDate token:resetToken];
              }
              else if (ABCConditionCodeError == error.code)
              {
@@ -692,7 +692,7 @@ static BOOL bInitialized = false;
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
              [MainViewController showBackground:NO animate:YES];
-             [self launchTwoFactorMenu:nil];
+             [self launchTwoFactorMenu:nil token:nil];
          }
          else
          {
@@ -1025,7 +1025,7 @@ static BOOL bInitialized = false;
     }
 }
 
-- (void)launchTwoFactorMenu:(NSDate *)resetDate;
+- (void)launchTwoFactorMenu:(NSDate *)resetDate token:(NSString *)resetToken;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
@@ -1033,6 +1033,7 @@ static BOOL bInitialized = false;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
     _tfaMenuViewController.resetDate = resetDate;
+    _tfaMenuViewController.resetToken = resetToken;
     
     _bTouchesEnabled = NO;
 }
@@ -1084,7 +1085,7 @@ static BOOL bInitialized = false;
          {
              [self signInComplete:user];
          }
-         error:^(NSError *error, NSDate *date)
+         error:^(NSError *error, NSDate *date, NSString *resetToken)
          {
              [self showSpinner:NO];
              if (ABCConditionCodeError == error.code)
