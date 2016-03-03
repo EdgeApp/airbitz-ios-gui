@@ -379,8 +379,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
     [d setObject:w.uuid forKey:@"id"];
     [d setObject:w.name forKey:@"name"];
-    [d setObject:[NSNumber numberWithInt:w.currency] forKey:@"currencyNum"];
-    [d setObject:w.currency forKey:@"currency"];
+    [d setObject:[NSNumber numberWithInt:w.currency.currencyNum] forKey:@"currencyNum"];
     [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
     return d;
 }
@@ -443,8 +442,7 @@ static const NSString *PROTOCOL = @"bridge://";
         NSMutableDictionary *d = [[NSMutableDictionary alloc] init];
         [d setObject:w.uuid forKey:@"id"];
         [d setObject:w.name forKey:@"name"];
-//        [d setObject:w.currencyNum forKey:@"currencyNum"];
-        [d setObject:w.currency forKey:@"currency"];
+        [d setObject:[NSNumber numberWithInt:w.currency.currencyNum] forKey:@"currencyNum"];
         [d setObject:[NSNumber numberWithLong:w.balance] forKey:@"balance"];
         [results addObject:d];
     }
