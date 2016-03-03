@@ -1525,13 +1525,16 @@ typedef enum eReloginState
     }
     else
     {
-        if ([self.usernameSelector.textField.text length] > 0)
+        if (_mode != MODE_NO_USERS)
         {
-            [self.passwordTextField becomeFirstResponder];
-        }
-        else
-        {
-            [self.usernameSelector.textField becomeFirstResponder];
+            if ([self.usernameSelector.textField.text length] > 0)
+            {
+                [self.passwordTextField becomeFirstResponder];
+            }
+            else
+            {
+                [self.usernameSelector.textField becomeFirstResponder];
+            }
         }
     }
 }
