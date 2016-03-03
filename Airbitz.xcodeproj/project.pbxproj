@@ -9095,7 +9095,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Coinsource/Coinsource Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = "$Coinsource/Coinsource Widget-Info.plist";
+				INFOPLIST_FILE = "Coinsource/Coinsource Widget-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinsource.wallet.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
