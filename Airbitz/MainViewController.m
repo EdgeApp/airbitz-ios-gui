@@ -1347,7 +1347,7 @@ MainViewController *singleton;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
-- (void) abcAccountBalanceUpdate:(ABCWallet *)wallet txid:(NSString *)txid;
+- (void) abcAccountBalanceUpdate:(ABCWallet *)wallet transaction:(ABCTransaction *)transaction;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
@@ -1433,12 +1433,10 @@ MainViewController *singleton;
     }
 }
 
-- (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet txid:(NSString *)txid;
+- (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet transaction:(ABCTransaction *)transaction;
 {
     if (wallet) _strWalletUUID = wallet.uuid;
-    _strTxID = txid;
-
-    ABCTransaction *transaction = [wallet getTransaction:_strTxID];
+    _strTxID = transaction.txid;
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 

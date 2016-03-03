@@ -1361,10 +1361,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [statusMessage appendString:[[NSString alloc]
                 initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
         [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-    } complete:^(ABCImportDataModel dataModel, NSString *address, NSString *txid, uint64_t amount) {
+    } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
         if (0 < amount)
         {
             [MainViewController fadingAlertDismiss];
+            NSString *txid = transaction.txid;
             if (txid && [txid length]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
                                                                     object:nil
