@@ -20,7 +20,7 @@
 
 static const NSString *PROTOCOL = @"bridge://";
 
-@interface PluginViewController () <UIWebViewDelegate, SendConfirmationViewControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIAlertViewDelegate>
+@interface PluginViewController () <UIWebViewDelegate, ButtonSelector2Delegate, SendConfirmationViewControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIAlertViewDelegate>
 {
     FadingAlertView                *_fadingAlert;
     SendConfirmationViewController *_sendConfirmationViewController;
@@ -470,7 +470,7 @@ static const NSString *PROTOCOL = @"bridge://";
     {
         _abcSpend = pSpend;
         if (0 < [[args objectForKey:@"bizId"] longValue]) {
-            _abcSpend.metaData.bizId = [[args objectForKey:@"bizId"] longValue];
+            _abcSpend.metaData.bizId = [[args objectForKey:@"bizId"] unsignedIntValue];
         }
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];

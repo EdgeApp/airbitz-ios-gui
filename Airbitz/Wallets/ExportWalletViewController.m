@@ -113,7 +113,7 @@ typedef enum eDatePeriod
 - (void)viewWillAppear:(BOOL)animated
 {
     [self setupNavBar];
-    [self updateViews];
+    [self updateViews:nil];
 }
 
 - (void)setupNavBar
@@ -491,7 +491,7 @@ typedef enum eDatePeriod
 	return stretchable;
 }
 
-- (void)updateViews
+- (void)updateViews:(id)object
 {
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {

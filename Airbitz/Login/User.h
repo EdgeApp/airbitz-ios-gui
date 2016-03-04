@@ -35,7 +35,6 @@
 
 - (id)init;
 - (void)clear;
-- (void)loadSettings;
 - (void)saveLocalSettings;
 - (SendViewState)sendInvalidEntry;
 - (void)startInvalidEntryWait;
@@ -45,7 +44,6 @@
 - (void)resetPINLoginInvalidEntryCount;
 - (void)incPINorTouchIDLogin;
 - (void)loadLocalSettings;
-- (void)saveDisclaimerViewed;
 
 
 @end

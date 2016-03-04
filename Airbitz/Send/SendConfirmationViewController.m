@@ -25,7 +25,7 @@
 #define REFRESH_PERIOD_SECONDS 30
 
 @interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
-                                              TransactionDetailsViewControllerDelegate,
+                                              TransactionDetailsViewControllerDelegate, PopupPickerView2Delegate,
                                               ButtonSelector2Delegate, InfoViewDelegate>
 {
     ConfirmationSliderView              *_confirmationSlider;

@@ -475,14 +475,14 @@
     // Paul doesn't want the 'touch background to dismiss keyboard' so for now we wil ignore this
     return;
 
-    if (bBlock)
-    {
-        self.buttonBlocker.hidden = NO;
-    }
-    else
-    {
-        self.buttonBlocker.hidden = YES;
-    }
+//    if (bBlock)
+//    {
+//        self.buttonBlocker.hidden = NO;
+//    }
+//    else
+//    {
+//        self.buttonBlocker.hidden = YES;
+//    }
 }
 
 // formats the satoshi amount

@@ -51,7 +51,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView                *imagePassword;
 
 @property (nonatomic, copy)     NSString                        *strReason;
-@property (nonatomic, copy)     NSString                        *title;
+@property (nonatomic, copy)     NSString                        *titleString;
 @property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic, strong)   NSMutableArray                  *arrayCategories;
@@ -185,9 +185,9 @@
                               [self.activityView stopAnimating];
                               
                               UIAlertView *alert = [[UIAlertView alloc]
-                                                    initWithTitle:self.title
+                                                    initWithTitle:self.titleString
                                                     message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                             self.title,
+                                                             self.titleString,
                                                              error]
                                                     delegate:nil
                                                     cancelButtonTitle:okButtonText
@@ -261,8 +261,8 @@
     if (mode == SignUpMode_ChangePasswordNoVerify
             || (_mode == SignUpMode_ChangePassword && ![abcAccount passwordExists]))
     {
-        self.title = changePasswordText;
-        [MainViewController changeNavBarTitle:self title:self.title];
+        self.titleString = changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.titleString];
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcAccount.name];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
@@ -282,8 +282,8 @@
     else if (mode == SignUpMode_ChangePassword)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcAccount.name];
-        self.title = changePasswordText;
-        [MainViewController changeNavBarTitle:self title:self.title];
+        self.titleString = changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.titleString];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -303,8 +303,8 @@
     }
     else if (mode == SignUpMode_ChangePasswordUsingAnswers)
     {
-        self.title = changePasswordText;
-        [MainViewController changeNavBarTitle:self title:self.title];
+        self.titleString = changePasswordText;
+        [MainViewController changeNavBarTitle:self title:self.titleString];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.passwordTextField.placeholder = NSLocalizedString(@"New Password", @"");
         self.reenterPasswordTextField.placeholder = NSLocalizedString(@"Re-enter New Password", @"");
@@ -325,8 +325,8 @@
     else if (mode == SignUpMode_ChangePIN)
     {
         self.labelUserName.text = [NSString stringWithFormat:@"User Name: %@", abcAccount.name];
-        self.title = changePINText;
-        [MainViewController changeNavBarTitle:self title:self.title];
+        self.titleString = changePINText;
+        [MainViewController changeNavBarTitle:self title:self.titleString];
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
@@ -369,9 +369,9 @@
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.title
+                                  initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.title,
+                                           self.titleString,
                                            NSLocalizedString(@"Incorrect current password", @"")]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -411,9 +411,9 @@
         {
             bNewPasswordFieldsAreValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.title
+                                  initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.title,
+                                           self.titleString,
                                            NSLocalizedString(@"Password does not match re-entered password", @"")]
                                   delegate:nil
                                   cancelButtonTitle:okButtonText
@@ -440,9 +440,9 @@
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.title
+                                  initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.title,
+                                           self.titleString,
                                            [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [AirbitzCore getMinimumUsernamedLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -454,9 +454,9 @@
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.title
+                                  initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                           self.title,
+                                           self.titleString,
                                            [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
@@ -689,7 +689,7 @@
         }
 
         alert = [[UIAlertView alloc]
-                 initWithTitle:self.title
+                 initWithTitle:self.titleString
                  message:NSLocalizedString(@"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!", @"")
                  delegate:self
                  cancelButtonTitle:@"OK"
@@ -699,7 +699,7 @@
     else
     {
         alert = [[UIAlertView alloc]
-                 initWithTitle:self.title
+                 initWithTitle:self.titleString
                  message:[NSString stringWithFormat:@"Password change failed:\n%@", errorMessage]
                  delegate:nil
                  cancelButtonTitle:okButtonText

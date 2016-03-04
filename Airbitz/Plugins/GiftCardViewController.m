@@ -94,7 +94,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BuySellCell";
-    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
     Plugin *plugin;
  
@@ -123,7 +122,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
     Plugin *plugin;
     

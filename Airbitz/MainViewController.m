@@ -1841,7 +1841,7 @@ MainViewController *singleton;
     }
 }
 
-- (void)switchToSettingsView:(UIViewController *)controller
+- (void)switchToSettingsView:(AirbitzViewController *)controller
 {
     if (controller != _selectedViewController) {
         [MainViewController animateSwapViewControllers:controller out:_selectedViewController];
