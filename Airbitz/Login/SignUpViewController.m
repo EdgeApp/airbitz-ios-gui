@@ -365,7 +365,7 @@
     else if (_mode != SignUpMode_ChangePasswordUsingAnswers) // the user name field is used for the old password in this case
     {
         // if the password is wrong
-        if ([abcAccount passwordOk:self.userNameTextField.text] == NO)
+        if ([abcAccount checkPassword:self.userNameTextField.text] == NO)
         {
             bUserNameFieldIsValid = NO;
             UIAlertView *alert = [[UIAlertView alloc]

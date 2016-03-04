@@ -1390,7 +1390,7 @@
 		DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		DA9ED7A21BC61E680063DA07 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DA9ED7A31BC61E680063DA07 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		DA9ED7A41BC61E680063DA07 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		DA9ED7A41BC61E680063DA07 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MainViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9ED7A51BC61E680063DA07 /* MinCharTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinCharTextField.h; sourceTree = "<group>"; };
 		DA9ED7A61BC61E680063DA07 /* MinCharTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinCharTextField.m; sourceTree = "<group>"; };
 		DA9ED7A91BC61E680063DA07 /* NotificationChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationChecker.h; sourceTree = "<group>"; };
@@ -1421,7 +1421,7 @@
 		DA9ED7C71BC61E680063DA07 /* UIImage+Colorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Colorize.h"; sourceTree = "<group>"; };
 		DA9ED7C81BC61E680063DA07 /* UIImage+Colorize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Colorize.m"; sourceTree = "<group>"; };
 		DA9ED7C91BC61E680063DA07 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		DA9ED7CA1BC61E680063DA07 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		DA9ED7CA1BC61E680063DA07 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Util.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9ED7CB1BC61E680063DA07 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DA9ED7CC1BC61E680063DA07 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DA9ED8071BC61F8F0063DA07 /* BD_CommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BD_CommonCell.h; sourceTree = "<group>"; };
@@ -1472,9 +1472,9 @@
 		DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertDropDownView.xib; sourceTree = "<group>"; };
 		DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertViewNew.xib; sourceTree = "<group>"; };
 		DA9EDEC61BC61F910063DA07 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		DA9EDEC71BC61F910063DA07 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		DA9EDEC71BC61F910063DA07 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LoginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDEC81BC61F910063DA07 /* PasswordRecoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordRecoveryViewController.h; sourceTree = "<group>"; };
-		DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordRecoveryViewController.m; sourceTree = "<group>"; };
+		DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PasswordRecoveryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDECA1BC61F910063DA07 /* PasswordVerifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordVerifyView.h; sourceTree = "<group>"; };
 		DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordVerifyView.m; sourceTree = "<group>"; };
 		DA9EDECC1BC61F910063DA07 /* PasswordVerifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordVerifyView.xib; sourceTree = "<group>"; };
@@ -1484,9 +1484,9 @@
 		DA9EDED31BC61F910063DA07 /* QuestionAnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionAnswerView.m; sourceTree = "<group>"; };
 		DA9EDED41BC61F910063DA07 /* QuestionAnswerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "QuestionAnswerView~iphone.xib"; sourceTree = "<group>"; };
 		DA9EDED51BC61F910063DA07 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		DA9EDED61BC61F910063DA07 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		DA9EDED71BC61F910063DA07 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		DA9EDED81BC61F910063DA07 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		DA9EDED61BC61F910063DA07 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SignUpViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DA9EDED71BC61F910063DA07 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = User.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		DA9EDED81BC61F910063DA07 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = User.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDEDA1BC61F910063DA07 /* PickerTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTextView.h; sourceTree = "<group>"; };
 		DA9EDEDB1BC61F910063DA07 /* PickerTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerTextView.m; sourceTree = "<group>"; };
 		DA9EDEDC1BC61F910063DA07 /* PickerTextView3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerTextView3.h; sourceTree = "<group>"; };
@@ -1727,7 +1727,7 @@
 		DA9EDFFE1BC61F920063DA07 /* FlashSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashSelectView.h; sourceTree = "<group>"; };
 		DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashSelectView.m; sourceTree = "<group>"; };
 		DA9EE0001BC61F920063DA07 /* SendConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendConfirmationViewController.h; sourceTree = "<group>"; };
-		DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendConfirmationViewController.m; sourceTree = "<group>"; };
+		DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SendConfirmationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EE0021BC61F920063DA07 /* SendStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendStatusViewController.h; sourceTree = "<group>"; };
 		DA9EE0031BC61F920063DA07 /* SendStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendStatusViewController.m; sourceTree = "<group>"; };
 		DA9EE0041BC61F920063DA07 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
@@ -1752,7 +1752,7 @@
 		DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButtonCell.m; sourceTree = "<group>"; };
 		DA9EE01B1BC61F920063DA07 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DA9EE01C1BC61F920063DA07 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EE01E1BC61F920063DA07 /* SpendingLimitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingLimitsViewController.h; sourceTree = "<group>"; };
 		DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendingLimitsViewController.m; sourceTree = "<group>"; };
 		DA9EE0201BC61F920063DA07 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
@@ -1809,7 +1809,7 @@
 		DA9EE0801BC61F920063DA07 /* ExportWalletOptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletOptionsCell.h; sourceTree = "<group>"; };
 		DA9EE0811BC61F920063DA07 /* ExportWalletOptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletOptionsCell.m; sourceTree = "<group>"; };
 		DA9EE0821BC61F920063DA07 /* ExportWalletOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletOptionsViewController.h; sourceTree = "<group>"; };
-		DA9EE0831BC61F920063DA07 /* ExportWalletOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletOptionsViewController.m; sourceTree = "<group>"; };
+		DA9EE0831BC61F920063DA07 /* ExportWalletOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExportWalletOptionsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EE0841BC61F920063DA07 /* ExportWalletPDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletPDFViewController.h; sourceTree = "<group>"; };
 		DA9EE0851BC61F920063DA07 /* ExportWalletPDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportWalletPDFViewController.m; sourceTree = "<group>"; };
 		DA9EE0861BC61F920063DA07 /* ExportWalletViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportWalletViewController.h; sourceTree = "<group>"; };

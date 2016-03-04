@@ -722,7 +722,7 @@ typedef enum eExportOption
     }
     else
     {
-        if ([abcAccount passwordExists] && ![abcAccount passwordOk:self.passwordTextField.text])
+        if ([abcAccount passwordExists] && ![abcAccount checkPassword:self.passwordTextField.text])
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
             [self.passwordTextField becomeFirstResponder];

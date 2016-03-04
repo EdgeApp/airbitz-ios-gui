@@ -881,7 +881,7 @@
             return;
         }
 
-        if (_pinRequired && ![abcAccount pinCheck:self.withdrawlPIN.text]) {
+        if (_pinRequired && ![abcAccount checkPIN:self.withdrawlPIN.text]) {
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
@@ -896,7 +896,7 @@
             [_confirmationSlider resetIn:1.0];
 
         } else if (_passwordRequired) {
-            BOOL matched = [abcAccount passwordOk:self.withdrawlPIN.text];
+            BOOL matched = [abcAccount checkPassword:self.withdrawlPIN.text];
             if (matched) {
                 [self continueChecks];
             } else {

@@ -289,7 +289,7 @@
         }
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            BOOL matched = [abcAccount passwordOk:password];
+            BOOL matched = [abcAccount checkPassword:password];
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:matched] waitUntilDone:NO];
         });

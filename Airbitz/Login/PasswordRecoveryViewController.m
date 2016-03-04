@@ -415,7 +415,7 @@ typedef enum eAlertType
     } else {
         password = abcAccount.password;
     }
-    if ([abcAccount passwordExists] && ![abcAccount passwordOk:password]) {
+    if ([abcAccount passwordExists] && ![abcAccount checkPassword:password]) {
         UIAlertView *alert = [[UIAlertView alloc]
                              initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                              message:NSLocalizedString(@"Please enter your correct password.", nil)
