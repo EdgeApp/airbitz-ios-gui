@@ -1521,12 +1521,10 @@ MainViewController *singleton;
     if (!abcAccount.currentWallet || !abcAccount.currentWallet.uuid)
         return;
     
-    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
-    
-    receiveAddress.metaData.payeeName = abcAccount.settings.fullName;
-
-    [abcAccount.currentWallet createReceiveAddressWithDetails:receiveAddress complete:^
+    [abcAccount.currentWallet createNewReceiveAddress:^(ABCReceiveAddress *receiveAddress)
     {
+        receiveAddress.metaData.payeeName = abcAccount.settings.fullName;
+        
         //
         // Save QR and address in shared data so Widget can access it
         //

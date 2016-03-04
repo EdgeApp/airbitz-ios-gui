@@ -8,7 +8,7 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
-#import "ABCTxOutput.h"
+#import "ABCTxInOut.h"
 #import "AirbitzCore.h"
 #import "User.h"
 #import "NSDate+Helper.h"
@@ -346,11 +346,11 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees))
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.providerFee))
                                                    withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.minerFees + self.transaction.providerFee) withSymbol:false]];
     }
     else
     {
@@ -598,7 +598,7 @@ typedef enum eRequestType
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
     uint64_t totalSent = 0;
-    uint64_t fees = self.transaction.minerFees + self.transaction.abFees;
+    uint64_t fees = self.transaction.minerFees + self.transaction.providerFee;
 
     NSMutableString *inAddresses = [[NSMutableString alloc] init];
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
@@ -608,13 +608,13 @@ typedef enum eRequestType
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
-    for (ABCTxOutput *t in self.transaction.outputs) {
-        NSString *val = [abcAccount.settings.denomination satoshiToBTCString:t.value];
+    for (ABCTxInOut *t in self.transaction.outputList) {
+        NSString *val = [abcAccount.settings.denomination satoshiToBTCString:t.amountSatoshi];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
-                          baseUrl, t.strAddress, t.strAddress, val];
-        if (t.bInput) {
+                          baseUrl, t.address, t.address, val];
+        if (t.isInput) {
             [inAddresses appendString:html];
-            totalSent += t.value;
+            totalSent += t.amountSatoshi;
         } else {
             [outAddresses appendString:html];
         }

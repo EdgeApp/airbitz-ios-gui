@@ -634,9 +634,11 @@ static const NSString *PROTOCOL = @"bridge://";
 
     ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
-    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
+    NSError *error = nil;
+    ABCReceiveAddress *receiveAddress = [wallet createNewReceiveAddress:&error];
+    
     receiveAddress.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
-//    details.amountCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
+    receiveAddress.metaData.amountFiat  = [[args objectForKey:@"amountFiat"] doubleValue];
     receiveAddress.metaData.payeeName   = [args objectForKey:@"label"];
     receiveAddress.metaData.category    = [args objectForKey:@"category"];
     receiveAddress.metaData.notes       = [args objectForKey:@"notes"];
@@ -644,8 +646,7 @@ static const NSString *PROTOCOL = @"bridge://";
     if (0 < [[args objectForKey:@"bizId"] longValue]) {
         receiveAddress.metaData.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
     }
-
-    NSError *error = [wallet createReceiveAddressWithDetails:receiveAddress];
+    
     if (!error)
     {
         NSString *requestId = receiveAddress.address;
@@ -668,8 +669,10 @@ static const NSString *PROTOCOL = @"bridge://";
     NSString *uuid = [args objectForKey:@"id"];
     
     ABCWallet *wallet = [abcAccount getWallet:uuid];
-
-    NSError *error = [wallet finalizeRequestWithAddress:[args objectForKey:@"requestId"]];
+    ABCReceiveAddress *receiveAddress = [wallet getReceiveAddress:[args objectForKey:@"requestId"]];
+    
+    NSError *error = [receiveAddress finalizeRequest];
+    
     if (!error) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
     } else {

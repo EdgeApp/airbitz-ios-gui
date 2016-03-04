@@ -152,7 +152,7 @@
         receiveAddress.metaData.category = strCategory;
         receiveAddress.metaData.notes = strNotes;
 
-        [abcAccount.currentWallet createReceiveAddressWithDetails:receiveAddress];
+        ABCReceiveAddress *receiveAddress = [abcAccount.currentWallet createNewReceiveAddress];
         
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;

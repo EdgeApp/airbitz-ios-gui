@@ -14,7 +14,7 @@
 #import "RequestViewController.h"
 #import "Notifications.h"
 #import "ABCTransaction.h"
-#import "ABCTxOutput.h"
+#import "ABCTxInOut.h"
 #import "CalculatorView.h"
 #import "ButtonSelectorView2.h"
 #import "User.h"
@@ -283,7 +283,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     if (self.qrTimer)
         [self.qrTimer invalidate];
 
-    [abcAccount.currentWallet prioritizeAddress:nil];
+    [abcAccount.currentWallet deprioritizeAllAddresses];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -297,10 +297,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     ABCWallet *wallet = [abcAccount getWallet:walletUUID];
     
     ABCTransaction *transaction = [wallet getTransaction:txId];
-    for (ABCTxOutput *output in transaction.outputs)
+    for (ABCTxInOut *output in transaction.outputList)
     {
-        if (!output.bInput 
-            && [addressString isEqualToString:output.strAddress])
+        if (!output.isInput
+            && [addressString isEqualToString:output.address])
         {
             return YES;
         }
@@ -621,15 +621,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     SInt64 remaining = [nsRemaining longLongValue];
 
 
-    ABCReceiveAddress *receiveAddress = [ABCReceiveAddress alloc];
+//    ABCReceiveAddress *receiveAddress = [ABCReceiveAddress alloc];
 
-    receiveAddress.metaData.payeeName       = strName;
-    receiveAddress.metaData.category        = strCategory;
-    receiveAddress.metaData.notes           = strNotes;
-    receiveAddress.amountSatoshi   = remaining;
-
-    [wallet createReceiveAddressWithDetails:receiveAddress complete:^
-    {
+    [wallet createNewReceiveAddress:^(ABCReceiveAddress *receiveAddress){
+        
+        receiveAddress.metaData.payeeName       = strName;
+        receiveAddress.metaData.category        = strCategory;
+        receiveAddress.metaData.notes           = strNotes;
+        receiveAddress.amountSatoshi            = remaining;
+        
         UIImage *qrImage;
 
         self.abcReceiveAddress = receiveAddress;
@@ -640,7 +640,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         self.statusLine3.text = addressString;
         self.qrCodeImageView.image = qrImage;
 
-        [wallet prioritizeAddress:addressString];
+        [self.abcReceiveAddress prioritizeAddress:YES];
 
         if (self.peripheralManager.isAdvertising)
         {

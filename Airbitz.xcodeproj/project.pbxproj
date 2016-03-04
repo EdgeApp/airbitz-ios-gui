@@ -1499,7 +1499,7 @@
 		DA9EDEE41BC61F910063DA07 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
 		DA9EDEE61BC61F910063DA07 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
-		DA9EDEE71BC61F910063DA07 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginViewController.m; sourceTree = "<group>"; };
+		DA9EDEE71BC61F910063DA07 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDEE91BC61F910063DA07 /* PopupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupPickerView.h; sourceTree = "<group>"; };
 		DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupPickerView.m; sourceTree = "<group>"; };
 		DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView.xib; sourceTree = "<group>"; };
