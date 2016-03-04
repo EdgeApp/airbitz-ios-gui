@@ -144,27 +144,27 @@
 {
     [self.view endEditing:YES];
 
-    ABCRequest *request  = [[ABCRequest alloc] init];
+    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
     
     if (_successUrl) {
         
-        request.metaData.payeeName = strName;
-        request.metaData.category = strCategory;
-        request.metaData.notes = strNotes;
+        receiveAddress.metaData.payeeName = strName;
+        receiveAddress.metaData.category = strCategory;
+        receiveAddress.metaData.notes = strNotes;
 
-        [abcAccount.currentWallet createReceiveRequestWithDetails:request];
+        [abcAccount.currentWallet createReceiveAddressWithDetails:receiveAddress];
         
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
         if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:request.uri]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:receiveAddress.uri]];
         } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:request.uri]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:receiveAddress.uri]];
         }
         [query appendFormat:@"&x-source=%@", X_SOURCE];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
-            // If the URL was successfully opened, finalize the request
-            [request finalizeRequest];
+            // If the URL was successfully opened, finalize the receiveAddress
+            [receiveAddress finalizeRequest];
         } else {
             // If that failed to open, try error url
             [[UIApplication sharedApplication] openURL:_errorUrl];

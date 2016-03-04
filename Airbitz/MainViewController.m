@@ -1521,11 +1521,11 @@ MainViewController *singleton;
     if (!abcAccount.currentWallet || !abcAccount.currentWallet.uuid)
         return;
     
-    ABCRequest *request = [[ABCRequest alloc] init];
+    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
     
-    request.metaData.payeeName = abcAccount.settings.fullName;
+    receiveAddress.metaData.payeeName = abcAccount.settings.fullName;
 
-    [abcAccount.currentWallet createReceiveRequestWithDetails:request complete:^
+    [abcAccount.currentWallet createReceiveAddressWithDetails:receiveAddress complete:^
     {
         //
         // Save QR and address in shared data so Widget can access it
@@ -1534,10 +1534,10 @@ MainViewController *singleton;
         
         if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
         
-        NSData *imageData = UIImagePNGRepresentation(request.qrCode);
+        NSData *imageData = UIImagePNGRepresentation(receiveAddress.qrCode);
         
         [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
-        [tempSharedUserDefs setObject:request.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
+        [tempSharedUserDefs setObject:receiveAddress.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
         [tempSharedUserDefs setObject:abcAccount.currentWallet.name forKey:APP_GROUP_LAST_WALLET_KEY];
         [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
         [tempSharedUserDefs synchronize];

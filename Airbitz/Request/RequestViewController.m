@@ -621,50 +621,51 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     SInt64 remaining = [nsRemaining longLongValue];
 
 
-    ABCRequest *request = [ABCRequest alloc];
+    ABCReceiveAddress *receiveAddress = [ABCReceiveAddress alloc];
 
-    request.metaData.payeeName       = strName;
-    request.metaData.category        = strCategory;
-    request.metaData.notes           = strNotes;
-    request.amountSatoshi   = remaining;
+    receiveAddress.metaData.payeeName       = strName;
+    receiveAddress.metaData.category        = strCategory;
+    receiveAddress.metaData.notes           = strNotes;
+    receiveAddress.amountSatoshi   = remaining;
 
-    [wallet createReceiveRequestWithDetails:request complete:^
+    [wallet createReceiveAddressWithDetails:receiveAddress complete:^
     {
         UIImage *qrImage;
 
-        self.abcRequest = request;
-        addressString   = request.address;
-        _uriString      = request.uri;
-        qrImage         = request.qrCode;
+        self.abcReceiveAddress = receiveAddress;
+        addressString = receiveAddress.address;
+        _uriString = receiveAddress.uri;
+        qrImage = receiveAddress.qrCode;
 
         self.statusLine3.text = addressString;
         self.qrCodeImageView.image = qrImage;
 
         [wallet prioritizeAddress:addressString];
 
-        if(self.peripheralManager.isAdvertising) {
-            ABCLog(2,@"Removing all BLE services and stopping advertising");
+        if (self.peripheralManager.isAdvertising)
+        {
+            ABCLog(2, @"Removing all BLE services and stopping advertising");
             [self.peripheralManager removeAllServices];
             [self.peripheralManager stopAdvertising];
             _peripheralManager = nil;
         }
 
-        if(![LocalSettings controller].bDisableBLE)
+        if (![LocalSettings controller].bDisableBLE)
         {
             // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
             NSTimeInterval curTime = CACurrentMediaTime();
-            if((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+            if ((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
             {
-                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES)}];
+                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey : @(YES)}];
             }
             else
             {
-                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(NO)}];
+                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey : @(NO)}];
             }
             lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
 
-    } error:^(NSError *error)
+    }                                 error:^(NSError *error)
     {
 
     }];
@@ -1422,34 +1423,34 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)saveRequest
 {
     if (_strFullName) {
-        self.abcRequest.metaData.payeeName = _strFullName;
+        self.abcReceiveAddress.metaData.payeeName = _strFullName;
     } else if (_strEMail) {
-        self.abcRequest.metaData.payeeName = _strFullName;
+        self.abcReceiveAddress.metaData.payeeName = _strFullName;
     } else if (_strPhoneNumber) {
-        self.abcRequest.metaData.payeeName = _strPhoneNumber;
+        self.abcReceiveAddress.metaData.payeeName = _strPhoneNumber;
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     NSDate *now = [NSDate date];
     
     ABCWallet *wallet = abcAccount.currentWallet;
-    self.abcRequest.amountSatoshi = _amountSatoshiRequested;
+    self.abcReceiveAddress.amountSatoshi = _amountSatoshiRequested;
     
     double currency;
-    currency = [abcAccount.exchangeCache satoshiToCurrency:self.abcRequest.amountSatoshi
+    currency = [abcAccount.exchangeCache satoshiToCurrency:self.abcReceiveAddress.amountSatoshi
                                               currencyCode:wallet.currency.code
                                                      error:nil];
     
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
     [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
-     [abcAccount.settings.denomination satoshiToBTCString:self.abcRequest.amountSatoshi],
+     [abcAccount.settings.denomination satoshiToBTCString:self.abcReceiveAddress.amountSatoshi],
      [wallet.currency doubleToPrettyCurrencyString:currency],
      _requestType, [dateFormatter stringFromDate:now]];
-    self.abcRequest.metaData.notes = notes;
-    self.abcRequest.metaData.category = @"Income:";
+    self.abcReceiveAddress.metaData.notes = notes;
+    self.abcReceiveAddress.metaData.category = @"Income:";
 
-    [self.abcRequest modifyRequestWithDetails];
+    [self.abcReceiveAddress modifyRequestWithDetails];
 }
 
 #pragma mark - MFMessageComposeViewController delegate
@@ -1488,7 +1489,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
             [alert show];
-            [self.abcRequest finalizeRequest];
+            [self.abcReceiveAddress finalizeRequest];
         }
             break;
 
@@ -1520,7 +1521,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         case MFMailComposeResultSent:
             strMsg = NSLocalizedString(@"Email sent", nil);
-            [self.abcRequest finalizeRequest];
+            [self.abcReceiveAddress finalizeRequest];
             break;
 
         case MFMailComposeResultFailed:

@@ -634,22 +634,22 @@ static const NSString *PROTOCOL = @"bridge://";
 
     ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
-    ABCRequest *request = [[ABCRequest alloc] init];
-    request.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
+    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
+    receiveAddress.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
 //    details.amountCurrency = [[args objectForKey:@"amountFiat"] doubleValue];
-    request.metaData.payeeName   = [args objectForKey:@"label"];
-    request.metaData.category    = [args objectForKey:@"category"];
-    request.metaData.notes       = [args objectForKey:@"notes"];
+    receiveAddress.metaData.payeeName   = [args objectForKey:@"label"];
+    receiveAddress.metaData.category    = [args objectForKey:@"category"];
+    receiveAddress.metaData.notes       = [args objectForKey:@"notes"];
     
     if (0 < [[args objectForKey:@"bizId"] longValue]) {
-        request.metaData.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
+        receiveAddress.metaData.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
     }
 
-    NSError *error = [wallet createReceiveRequestWithDetails:request];
+    NSError *error = [wallet createReceiveAddressWithDetails:receiveAddress];
     if (!error)
     {
-        NSString *requestId = request.address;
-        NSString *address = request.address;
+        NSString *requestId = receiveAddress.address;
+        NSString *address = receiveAddress.address;
         NSDictionary *d = @{@"requestId": requestId, @"address": address};
         results = [self jsonResult:d];
     }
