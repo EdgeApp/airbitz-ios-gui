@@ -409,52 +409,45 @@ typedef enum eAlertType
 - (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
 {
     // Check Password
-    NSString *password = nil;
     if (self.mode == PassRecovMode_Change) {
+        NSString *password = nil;
         password = _passwordField.text;
-    } else {
-        password = abcAccount.password;
-    }
-    if ([abcAccount passwordExists] && ![abcAccount checkPassword:password]) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                             initWithTitle:NSLocalizedString(@"Password mismatch", nil)
-                             message:NSLocalizedString(@"Please enter your correct password.", nil)
-                             delegate:nil
-                             cancelButtonTitle:@"OK"
-                             otherButtonTitles:nil];
-        [alert show];
-        return;
+        if ([abcAccount passwordExists] && ![abcAccount checkPassword:password]) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:NSLocalizedString(@"Password mismatch", nil)
+                                  message:NSLocalizedString(@"Please enter your correct password.", nil)
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
     }
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount setupRecoveryQuestions:password
-                           questions:strQuestions
-                             answers:strAnswers
-                            complete:^(void) {
-                                [self blockUser:NO];
-                                [self showSpinner:NO];
-                                _alertType = ALERT_TYPE_SETUP_COMPLETE;
-                                UIAlertView *alert = [[UIAlertView alloc]
-                                                      initWithTitle:recoveryQuestionsSet
-                                                      message:recoveryQuestionsSetWarning
-                                                      delegate:self
-                                                      cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                                                      otherButtonTitles:okButtonText, nil];
-                                [alert show];
-
-                            }
-                               error: ^(NSError *error) {
-                                   [self blockUser:NO];
-                                   [self showSpinner:NO];
-                                   UIAlertView *alert = [[UIAlertView alloc]
-                                                         initWithTitle:recoveryQuestionsNotSet
-                                                         message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
-                                                         delegate:nil
-                                                         cancelButtonTitle:okButtonText
-                                                         otherButtonTitles:nil];
-                                   [alert show];
-                           }];
+    [abcAccount setupRecoveryQuestions:strQuestions answers:strAnswers complete:^(void) {
+        [self blockUser:NO];
+        [self showSpinner:NO];
+        _alertType = ALERT_TYPE_SETUP_COMPLETE;
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:recoveryQuestionsSet
+                              message:recoveryQuestionsSetWarning
+                              delegate:self
+                              cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
+                              otherButtonTitles:okButtonText, nil];
+        [alert show];
+    } error: ^(NSError *error) {
+        [self blockUser:NO];
+        [self showSpinner:NO];
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:recoveryQuestionsNotSet
+                              message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                              delegate:nil
+                              cancelButtonTitle:okButtonText
+                              otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions

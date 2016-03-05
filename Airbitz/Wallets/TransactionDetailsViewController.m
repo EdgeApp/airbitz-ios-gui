@@ -117,7 +117,7 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
-@property (nonatomic, strong)        NSArray                *arrayCategories;
+//@property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSMutableArray         *arrayOtherBusinesses;    // businesses found using auto complete
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete; // array displayed in the drop-down table when user is entering a name
 @property (nonatomic, strong)        NSArray                *arrayAutoCompleteBizId; // array displayed in the drop-down table when user is entering a name
@@ -194,7 +194,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    self.arrayCategories = abcAccount.arrayCategories;
+//    self.arrayCategories = abcAccount.categories.listCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -226,7 +226,7 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
-    [self.pickerTextCategory setCategories:self.arrayCategories];
+    [self.pickerTextCategory setCategories:abcAccount.categories.listCategories];
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.metaData.bizId;
@@ -488,7 +488,7 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [abcAccount addCategory:strFullCategory];
+    [abcAccount.categories addCategory:strFullCategory];
 
     if (![self.transaction.metaData.category isEqualToString:strFullCategory])
     {
@@ -911,7 +911,7 @@ typedef enum eRequestType
     // run through each type
     for (NSString *strPrefix in arrayTypes)
     {
-        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:self.arrayCategories];
+        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:abcAccount.categories.listCategories];
     }
 
     // add the choices constructed with the current string
@@ -1573,14 +1573,14 @@ typedef enum eRequestType
     [self setCategoryButtonText:strPrefix];
     
     // add string to categories, update arrays
-    NSInteger index = [self.arrayCategories indexOfObject:catString];
+    NSInteger index = [abcAccount.categories.listCategories indexOfObject:catString];
     if(index == NSNotFound) {
         ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [abcAccount addCategory:catString];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
+        [abcAccount.categories addCategory:catString];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:abcAccount.categories.listCategories];
         [array addObject:catString];
-        self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        [pickerTextView setCategories:self.arrayCategories];
+        [abcAccount.categories saveCategories:[array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]];
+        [pickerTextView setCategories:abcAccount.categories.listCategories];
         NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
         [pickerTextView updateChoices:arrayChoices];
     }

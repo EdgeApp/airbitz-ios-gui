@@ -511,7 +511,7 @@ static BOOL bInitialized = false;
         //
         self.usernameSelector.textField.text = username;
     }
-    self.passwordTextField.text = abcAccount.password;
+//    self.passwordTextField.text = abcAccount.password;
 
 }
 
@@ -1274,7 +1274,7 @@ static BOOL bInitialized = false;
         }
         else
         {
-            if ([abcAccount.password length] > 0)
+            if ([abcAccount passwordExists])
                 [abcAccount.settings enableTouchID];
             else
             {
@@ -1301,12 +1301,29 @@ static BOOL bInitialized = false;
             // Check the password
             //
             _tempPassword = [[alertView textFieldAtIndex:0] text];
-
-            [Util checkPasswordAsync:_tempPassword
-                        withSelector:@selector(handlePasswordResults:)
-                          controller:self];
-            [MainViewController fadingAlert:NSLocalizedString(@"Checking password...", nil)
-                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            [FadingAlertView create:self.view
+                            message:NSLocalizedString(@"Checking password...", nil)
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
+                if ([abcAccount.settings enableTouchID:_tempPassword])
+                {
+                    _tempPassword = nil;
+                    [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+                    
+                    
+                }
+                else
+                {
+                    [MainViewController fadingAlertDismiss];
+                    _tempPassword = nil;
+                    _passwordIncorrectAlert = [[UIAlertView alloc]
+                                               initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
+                                               message:NSLocalizedString(@"Try again?", nil)
+                                               delegate:self
+                                               cancelButtonTitle:@"NO"
+                                               otherButtonTitles:@"YES", nil];
+                    [_passwordIncorrectAlert show];
+                }
+            }];
         }
         return;
     }
@@ -1384,27 +1401,6 @@ static BOOL bInitialized = false;
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
-    BOOL bAuthenticated = [authenticated boolValue];
-    if (bAuthenticated)
-    {
-        abcAccount.password = _tempPassword;
-        _tempPassword = nil;
-        [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
-
-        // Enable Touch ID
-        [abcAccount.settings enableTouchID];
-
-    }
-    else
-    {
-        _passwordIncorrectAlert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                      message:NSLocalizedString(@"Try again?", nil)
-                     delegate:self
-            cancelButtonTitle:@"NO"
-            otherButtonTitles:@"YES", nil];
-        [_passwordIncorrectAlert show];
-    }
 }
 
 

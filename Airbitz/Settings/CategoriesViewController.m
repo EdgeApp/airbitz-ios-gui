@@ -79,7 +79,7 @@
     _frameTableOriginal = self.tableView.frame;
 
     // load the categories
-    self.arrayCategories = [abcAccount.arrayCategories mutableCopy];
+    self.arrayCategories = [abcAccount.categories.listCategories mutableCopy];
     [self updateDisplay];
 
     // get a callback when the search changes
@@ -161,7 +161,7 @@
 
 - (IBAction)Done
 {
-    [abcAccount saveCategories:self.arrayCategories];
+    [abcAccount.categories saveCategories:self.arrayCategories];
     [self animatedExit];
 }
 
