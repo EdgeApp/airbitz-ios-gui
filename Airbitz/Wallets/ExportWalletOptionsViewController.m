@@ -497,8 +497,25 @@ typedef enum eExportOption
 
         case WalletExportType_Quickbooks:
         {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WalletExportQuicken" ofType:@"QIF"];
-            dataExport = [NSData dataWithContentsOfFile:filePath];
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportTransactionsToQBO:str];
+            if (!error)
+            {
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else
+            {
+                NSString *title;
+                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
         }
             break;
 
@@ -556,7 +573,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_Quickbooks:
-            strSuffix = @"QIF";
+            strSuffix = @"QBO";
             break;
 
         case WalletExportType_PDF:
@@ -590,7 +607,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_Quickbooks:
-            strMimeType = @"application/qbooks";
+            strMimeType = @"text/plain";
             break;
 
         case WalletExportType_PDF:

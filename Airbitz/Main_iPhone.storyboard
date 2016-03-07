@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jDp-Og-qtC">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -9,6 +9,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -1515,7 +1516,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hhg-jM-yf5" userLabel="BlurView" customClass="BlurView">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="90"/>
+                                        <rect key="frame" x="-26" y="0.0" width="70" height="62"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
@@ -1558,8 +1559,45 @@
                                             <constraint firstAttribute="trailing" secondItem="hOS-Gw-CqO" secondAttribute="trailing" id="zqQ-5H-3mR"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKf-ps-jXs" userLabel="View -Wallet Seed">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOu-AU-Qqk" userLabel="View -TxInfo QBO">
                                         <rect key="frame" x="0.0" y="109" width="375" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIj-oW-HUW">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Transaction Info (Quickbooks)">
+                                                    <color key="titleColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="buttonQuickbooksTouched:" destination="d2C-er-1Vd" eventType="touchUpInside" id="Myg-VO-aI8"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="JfQ-Vr-AnL" userLabel="arrow">
+                                                <rect key="frame" x="313" y="0.0" width="62" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="62" id="0qx-AE-Y8z"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Ah1-OV-8nZ"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="JfQ-Vr-AnL" secondAttribute="bottom" id="2H5-Ri-nbz"/>
+                                            <constraint firstAttribute="height" constant="45" id="5Zv-Sy-XO3"/>
+                                            <constraint firstAttribute="trailing" secondItem="pIj-oW-HUW" secondAttribute="trailing" id="BsD-8l-Tzm"/>
+                                            <constraint firstItem="pIj-oW-HUW" firstAttribute="top" secondItem="SOu-AU-Qqk" secondAttribute="top" id="Jya-m1-f8o"/>
+                                            <constraint firstAttribute="bottom" secondItem="pIj-oW-HUW" secondAttribute="bottom" id="X8B-1x-cMu"/>
+                                            <constraint firstAttribute="trailing" secondItem="JfQ-Vr-AnL" secondAttribute="trailing" id="XdA-o9-QHJ"/>
+                                            <constraint firstItem="pIj-oW-HUW" firstAttribute="leading" secondItem="SOu-AU-Qqk" secondAttribute="leading" id="oSM-Mm-dHB"/>
+                                            <constraint firstItem="JfQ-Vr-AnL" firstAttribute="top" secondItem="SOu-AU-Qqk" secondAttribute="top" id="ttD-hK-fmC"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKf-ps-jXs" userLabel="View -Wallet Seed">
+                                        <rect key="frame" x="0.0" y="154" width="375" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vuw-Bw-dQY" userLabel="Wallet Seed">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -1606,13 +1644,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="IJi-EJ-Slk" firstAttribute="leading" secondItem="OjT-60-9tw" secondAttribute="leading" id="0kY-CA-9Ij"/>
+                                    <constraint firstAttribute="trailing" secondItem="SOu-AU-Qqk" secondAttribute="trailing" id="Cat-HA-6xj"/>
                                     <constraint firstAttribute="trailing" secondItem="aKf-ps-jXs" secondAttribute="trailing" id="GGY-55-TEM"/>
-                                    <constraint firstItem="aKf-ps-jXs" firstAttribute="top" secondItem="o3d-0K-jmU" secondAttribute="bottom" id="GkC-lZ-zF6"/>
                                     <constraint firstItem="o3d-0K-jmU" firstAttribute="top" secondItem="OjT-60-9tw" secondAttribute="top" constant="64" id="KYL-wi-3C0"/>
                                     <constraint firstAttribute="trailing" secondItem="IJi-EJ-Slk" secondAttribute="trailing" id="OfH-VB-Zcc"/>
+                                    <constraint firstItem="SOu-AU-Qqk" firstAttribute="leading" secondItem="OjT-60-9tw" secondAttribute="leading" id="dTV-YZ-7uK"/>
                                     <constraint firstAttribute="trailing" secondItem="o3d-0K-jmU" secondAttribute="trailing" id="eYe-OR-BQ4"/>
                                     <constraint firstItem="aKf-ps-jXs" firstAttribute="leading" secondItem="OjT-60-9tw" secondAttribute="leading" id="hCh-Fj-I9v"/>
                                     <constraint firstItem="o3d-0K-jmU" firstAttribute="leading" secondItem="OjT-60-9tw" secondAttribute="leading" id="lYL-0P-gnP"/>
+                                    <constraint firstItem="SOu-AU-Qqk" firstAttribute="top" secondItem="o3d-0K-jmU" secondAttribute="bottom" id="u8B-UE-4zz"/>
+                                    <constraint firstItem="aKf-ps-jXs" firstAttribute="top" secondItem="SOu-AU-Qqk" secondAttribute="bottom" id="wEG-86-dQq"/>
                                     <constraint firstItem="IJi-EJ-Slk" firstAttribute="top" secondItem="OjT-60-9tw" secondAttribute="top" constant="64" id="xHW-6q-Ror"/>
                                 </constraints>
                             </view>
