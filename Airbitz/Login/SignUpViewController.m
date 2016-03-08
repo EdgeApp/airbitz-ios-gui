@@ -259,6 +259,12 @@
     self.labelPasswordInfo.hidden = YES;
     self.imagePassword.hidden = YES;
 
+    if (mode == SignUpMode_ChangePasswordNoVerify ||
+        mode == SignUpMode_ChangePasswordUsingAnswers)
+    {
+        [MainViewController changeNavBar:self title:cancelButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
+    }
+    
     if (mode == SignUpMode_ChangePasswordNoVerify
             || (_mode == SignUpMode_ChangePassword && ![abcAccount passwordExists]))
     {
