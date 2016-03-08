@@ -340,6 +340,7 @@ typedef enum eAlertType
                           complete:^(ABCAccount *account)
     {
         [self showSpinner:NO];
+        [User login:account];
         [self bringUpSignUpViewWithAnswers:strAnswers];
     } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
     {

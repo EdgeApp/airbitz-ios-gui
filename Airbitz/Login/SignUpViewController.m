@@ -197,6 +197,7 @@
                           }];
                      } error:^(NSError *error)
                      {
+                         [self blockUser:NO];
                          [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
                      }];
                 }
