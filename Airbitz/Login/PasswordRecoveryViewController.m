@@ -335,7 +335,7 @@ typedef enum eAlertType
 
     [abc signInWithRecoveryAnswers:self.strUserName
                            answers:strAnswers
-                          delegate:nil
+                          delegate:[MainViewController Singleton]
                                otp:_secret
                           complete:^(ABCAccount *account)
     {

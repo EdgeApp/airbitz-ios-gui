@@ -1201,7 +1201,7 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 
     [self launchViewControllerBasedOnAppMode];
-    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 
     if (_uri) {
         [self processBitcoinURI:_uri];
