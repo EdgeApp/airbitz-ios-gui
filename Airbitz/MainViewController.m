@@ -2141,6 +2141,11 @@ MainViewController *singleton;
     [controller removeFromParentViewController];
 
     _signUpController = nil;
+    
+    if (_selectedViewController == _transactionsViewController)
+    {
+        [_selectedViewController updateNavBar];
+    }
 }
 
 #pragma mark - UITabBarDelegate

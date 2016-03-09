@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSLayoutConstraint * leftConstraint;
 
+- (void)updateNavBar;
+
 @end

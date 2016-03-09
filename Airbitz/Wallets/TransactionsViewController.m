@@ -228,6 +228,16 @@
                      }];
 }
 
+- (void)updateNavBar
+{
+    [MainViewController changeNavBarOwner:self];
+    NSString *walletName;
+    walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
+    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
+    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -235,10 +245,6 @@
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
 
     _bWalletsShowing = false;
-
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 
     self.buttonRequest.enabled = false;
     self.buttonSend.enabled = false;
@@ -455,13 +461,7 @@
         [self.buttonRequest setAlpha:1.0];
     }
 
-    NSString *walletName;
-
-    walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
-
-    [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
-
-
+    [self updateNavBar];
 }
 
 
