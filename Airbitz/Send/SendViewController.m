@@ -520,6 +520,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             textField.returnKeyType = UIReturnKeyDone;
 
             [typeAddressAlertView show];
+            [self stopQRReader];
             break;
 
         case 2:
@@ -541,6 +542,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     if (alertView == typeAddressAlertView)
     {
+        [self startQRReader];
         if (1 == buttonIndex)
         {
             _addressTextField.text = [alertView textFieldAtIndex:0].text;
