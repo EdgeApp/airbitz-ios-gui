@@ -991,11 +991,6 @@ MainViewController *singleton;
 		case APP_MODE_MORE:
             if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
             {
-                if ([slideoutView isOpen]) {
-                    [slideoutView showSlideout:NO];
-                } else {
-                    [slideoutView showSlideout:YES];
-                }
             }
             else
             {
@@ -1003,6 +998,18 @@ MainViewController *singleton;
             }
 			break;
 	}
+}
+
+- (void)toggleSlideOut
+{
+    if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+    {
+        if ([slideoutView isOpen]) {
+            [slideoutView showSlideout:NO];
+        } else {
+            [slideoutView showSlideout:YES];
+        }
+    }
 }
 
 - (void)displayNextNotification
@@ -2172,7 +2179,9 @@ MainViewController *singleton;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
     {
-        newAppMode = APP_MODE_MORE;
+        [self toggleSlideOut];
+        _appMode = APP_MODE_MORE;
+        return;
     }
 
     if (newAppMode == _appMode && (newAppMode != APP_MODE_MORE))
