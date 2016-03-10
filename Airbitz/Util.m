@@ -24,6 +24,15 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
+    
+    NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+    
+    NSString *platform          = [NSString stringWithFormat:@"Platform:%@<br>\n", [ABCUtil platform]];
+    NSString *platformString    = [NSString stringWithFormat:@"Platform String:%@<br>\n", [ABCUtil platformString]];
+    NSString *osVersionString   = [NSString stringWithFormat:@"OS Version:%d.%d.%d<br>\n", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion];
+    NSString *airbitzVersion    = [NSString stringWithFormat:@"Airbitz Version:%@", versionbuild];
+
+    NSString *emailSupportTemplate = [NSString stringWithFormat:@"Email <a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
             @"[[abtag APP_TITLE]]",
@@ -36,6 +45,7 @@
             @"[[abtag APP_COMPANY_LOCATION]]",
             @"[[abtag APP_SUPPORT_EMAIL]]",
             @"[[abtag APP_VERSION]]",
+            @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
                     nil];
 
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
@@ -49,6 +59,7 @@
             appCompanyLocation,
             supportEmail,
             versionbuild,
+            emailSupportTemplate,
                     nil];
 
     for (int i=0; i<[searchList count];i++)
