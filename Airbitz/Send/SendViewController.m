@@ -58,13 +58,6 @@ typedef enum eScanMode
 	SCAN_MODE_UNINITIALIZED,
 }tScanMode;
 
-typedef enum eImportState
-{
-    ImportState_PrivateKey,
-    ImportState_Importing,
-} tImportState;
-
-
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
@@ -85,8 +78,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
     UIAlertView                     *_bitidAlert;
+    UIAlertView                     *_privateKeyAlert;
     NSString                        *_tweet;
     NSString                        *_bitidURI;
+    ABCParsedURI                    *_parsedURI;
 
 
 
@@ -156,7 +151,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     scanMode = SCAN_MODE_UNINITIALIZED;
     [self startQRReader];
 
-    if([LocalSettings controller].bDisableBLE == NO && !self.bImportMode)
+    if([LocalSettings controller].bDisableBLE == NO)
     {
         // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
         NSTimeInterval curTime = CACurrentMediaTime();
@@ -177,11 +172,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [self scanBLEstartCamera];
 
-    // Disable [Transfer] button if we're in Import Private Key mode
-    if (_bImportMode)
-        [segmentedControl setEnabled:NO forSegmentAtIndex:0];
-    else
-        [segmentedControl setEnabled:YES forSegmentAtIndex:0];
+    [segmentedControl setEnabled:YES forSegmentAtIndex:0];
 
     [[NSNotificationCenter defaultCenter]
         addObserver:self
@@ -233,17 +224,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     [self setupNavBar];
 
-    if (_bImportMode)
+    self.topTextLabel.text = scanQrToSendFundsText;
+    if ([[LocalSettings controller] offerSendHelp])
     {
-        self.topTextLabel.text = scanQrToImportPrivateKeyOrGiftCard;
-    }
-    else
-    {
-        self.topTextLabel.text = scanQrToSendFundsText;
-        if ([[LocalSettings controller] offerSendHelp])
-        {
-            [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
-        }
+        [MainViewController fadingAlertHelpPopup:sendScreenHelpText];
     }
 
     [self updateViews:nil];
@@ -447,10 +431,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[self.view endEditing:YES];
     [self resignAllResponders];
-    if (_bImportMode)
-        [InfoView CreateWithHTML:@"infoImportWallet" forView:self.view];
-    else
-        [InfoView CreateWithHTML:@"infoSend" forView:self.view];
+    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender
@@ -470,8 +451,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIPasteboard *pb = [UIPasteboard generalPasteboard];
     NSString *clipboard = [pb string];
     NSString *pasteString;
-
-
+    ABCParsedURI *parsedURI;
     switch (segmentedControl.selectedSegmentIndex)
     {
         case 0:
@@ -486,19 +466,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Transfer
             break;
         case 1:
-            if (_bImportMode)
+            title = enterBitcoinAddressPopupText;
+            placeholderText = enterBitcoinAddressPlaceholder;
+            parsedURI = [ABCUtil parseURI:clipboard error:nil];
+            if (parsedURI)
             {
-                title = enterPrivateKeyPopupText;
-                placeholderText = enterPrivateKeyPlaceholder;
-            }
-            else
-            {
-                title = enterBitcoinAddressPopupText;
-                placeholderText = enterBitcoinAddressPlaceholder;
-            }
-            if ([clipboard length] >= 10)
-            {
-                pasteString = [NSString stringWithFormat:@"%@ \"%@...\"", @"Paste", [clipboard substringToIndex:10]];
+                if (parsedURI.privateKey || parsedURI.address)
+                {
+                    pasteString = [NSString stringWithFormat:@"%@ \"%@...\"", @"Paste", [clipboard substringToIndex:10]];
+                }
             }
             else
             {
@@ -509,7 +485,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                                               message:nil
                                                              delegate:self
                                                     cancelButtonTitle:cancelButtonText
-//                                                    otherButtonTitles:doneButtonText, nil];
                                                     otherButtonTitles:doneButtonText, pasteString, nil];
             typeAddressAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
             textField = [typeAddressAlertView textFieldAtIndex:0];
@@ -578,6 +553,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         _sweptAlert = nil;
         [self updateState];
     }
+    else if (_privateKeyAlert == alertView)
+    {
+        if (buttonIndex == 1)
+        {
+            // Import
+            [self importWallet:_parsedURI.privateKey];
+        }
+        else if (buttonIndex == 2)
+        {
+            // Send
+            _addressTextField.text = _parsedURI.address;
+            [self doProcessSpendURI];
+        }
+    }
     else if (_bitidAlert == alertView)
     {
         if (buttonIndex > 0)
@@ -606,24 +595,18 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 -(void)startBLE
 {
-    if (!self.bImportMode)
-    {
-        //ABCLog(2,@"################## STARTED BLE ######################");
-        [self scan];
-        //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
-        peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
-    }
+    //ABCLog(2,@"################## STARTED BLE ######################");
+    [self scan];
+    //kick off peripheral cleanup timer (removes peripherals from table when they're no longer in range)
+    peripheralCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(cleanupPeripherals:) userInfo:nil repeats:YES];
 }
 
 -(void)stopBLE
 {
-    if (!self.bImportMode)
-    {
-        //ABCLog(2,@"################## STOPPED BLE ######################");
-        [self.centralManager stopScan];
-        //ABCLog(2,@"Getting rid of timer");
-        [peripheralCleanupTimer invalidate];
-    }
+    //ABCLog(2,@"################## STOPPED BLE ######################");
+    [self.centralManager stopScan];
+    //ABCLog(2,@"Getting rid of timer");
+    [peripheralCleanupTimer invalidate];
 }
 
 /** centralManagerDidUpdateState is a required protocol method.
@@ -1301,10 +1284,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        if (self.bImportMode)
-            walletName = [NSString stringWithFormat:@"Import To: %@ ▼", abcAccount.currentWallet.name];
-        else
-            walletName = [NSString stringWithFormat:@"From: %@ ▼", abcAccount.currentWallet.name];
+        walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
@@ -1402,16 +1382,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	for (ZBarSymbol *sym in syms)
 	{
 		NSString *text = (NSString *)sym.data;
-        if (_bImportMode)
-        {
-            [self importWallet:text];
-        }
-        else
-        {
-//            [self trySpend:text];
-            _addressTextField.text = text;
-            [self processURI];
-        }
+        
+        _addressTextField.text = text;
+        [self processURI];
 	}
 #endif
 }
@@ -1624,17 +1597,36 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI
 {
-    NSString *bitidDomainURL = [abcAccount bitidParseURI:_addressTextField.text];
-    if (bitidDomainURL)
+    _parsedURI = [ABCUtil parseURI:_addressTextField.text error:nil];
+
+    if (_parsedURI.bitIDURI)
     {
         _bitidURI = _addressTextField.text;
         _bitidAlert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"BitID Login", nil)
-                      message:bitidDomainURL
+                initWithTitle:bitIDLogin
+                      message:_parsedURI.bitIDURI
                      delegate:self
-            cancelButtonTitle:@"No"
-            otherButtonTitles:@"Yes",nil];
+            cancelButtonTitle:noButtonText
+            otherButtonTitles:yesButtonText,nil];
         [_bitidAlert show];
+        return;
+    }
+    else if (_parsedURI.privateKey)
+    {
+        // We can either fund the private key using it's address or ask the user if they want it swept
+        _privateKeyAlert = [[UIAlertView alloc]
+                            initWithTitle:bitcoinPrivateKeyText
+                            message:_parsedURI.address
+                            delegate:self
+                            cancelButtonTitle:cancelButtonText
+                            otherButtonTitles:importFunds,sendFundsToPrivateKey,nil];
+        [_privateKeyAlert show];
+        return;
+    }
+    else if (_parsedURI.address)
+    {
+        _addressTextField.text = _parsedURI.address;
+        [self doProcessSpendURI];
         return;
     }
     else
@@ -1657,8 +1649,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
     }
 
-    // If it's not BitID, then put into wallets queue since
-    // wallets are loaded asynchronously
     [self doProcessSpendURI];
 }
 
@@ -1736,14 +1726,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 
                 if (!wallet)
                 {
-                    if (_bImportMode)
-                    {
-                        [self importWallet:text];
-                    }
-                    else
-                    {
-                        [self trySpend:text];
-                    }
+                    [self trySpend:text];
                 }
             }
             else
