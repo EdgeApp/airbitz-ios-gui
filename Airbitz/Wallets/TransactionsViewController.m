@@ -61,7 +61,7 @@
     UIAlertView                         *deleteAlertWarning;
 
     BOOL                                _archiveCollapsed;
-
+    BOOL                                _showRunningBalance;
     CGRect                              _transactionTableStartFrame;
     BOOL                                _bWalletsShowing;
     BOOL                                _bNewDeviceLogin;
@@ -209,8 +209,8 @@
         destination = [MainViewController getHeaderHeight];
         _bWalletsShowing = true;
     }
-
-    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
+    
+    [self updateNavBar];
 
     [UIView animateWithDuration: 0.35
                           delay: 0.0
@@ -228,14 +228,30 @@
                      }];
 }
 
+- (void)toggleRunningBalance
+{
+    _showRunningBalance = !_showRunningBalance;
+    [self.tableView reloadData];
+    [self updateBalanceView];
+}
+
 - (void)updateNavBar
 {
     [MainViewController changeNavBarOwner:self];
     NSString *walletName;
     walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
-    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    
+    if (_bWalletsShowing)
+    {
+        [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(toggleWalletDropdown:) fromObject:self];
+    }
+    else
+    {
+        [MainViewController changeNavBar:self title:balanceButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(toggleRunningBalance) fromObject:self];
+    }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1004,13 +1020,6 @@
             cell.confirmationLabel.text = transaction.metaData.category;
             cell.confirmationLabel.textColor = COLOR_BALANCE;
 
-            // amount - always bitcoin
-//            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currencyNum:wallet.currencyNum];
-            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currency:wallet.currency];
-
-            // balance becomes fiat
-            cell.balanceLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:YES currency:wallet.currency];
-            cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
         else
         {
@@ -1045,16 +1054,26 @@
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
 
-            //amount
-            cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi wallet:abcAccount.currentWallet];
-
-            // balance
-            cell.balanceLabel.text = [self formatAmount:transaction.balance wallet:abcAccount.currentWallet];
-            cell.balanceLabel.textColor = COLOR_BALANCE;
         }
 
-        // color amount
+        // amount - always bitcoin
+        cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currency:wallet.currency];
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+
+        if (_showRunningBalance)
+        {
+            // balance
+            cell.balanceLabel.text = [abcAccount.settings.denomination satoshiToBTCString:transaction.balance withSymbol:YES cropDecimals:YES];
+            cell.balanceLabel.textColor = COLOR_BALANCE;
+        }
+        else
+        {
+            // balance becomes fiat
+            double fCurrency = [abcAccount.exchangeCache satoshiToCurrency:transaction.amountSatoshi currencyCode:wallet.currency.code error:nil];
+            cell.balanceLabel.text = [wallet.currency doubleToPrettyCurrencyString:fCurrency];
+            cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
+        }
+
         // set the photo
 
         UIImage *placeHolderImage;

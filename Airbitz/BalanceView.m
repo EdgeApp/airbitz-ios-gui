@@ -48,13 +48,13 @@
     self.barDenomination.text = self.topDenomination.text;
     self.barIcon.image = [UIImage imageNamed:@"icon_bitcoin_light"];
     
-    [self.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
-    [self.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
-    [self.layer setBorderWidth:1.0];
+//    [self.layer setBackgroundColor:[[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor]];
+//    [self.layer setBorderColor:[[[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0] colorWithAlphaComponent:1.0] CGColor]];
+//    [self.layer setBorderWidth:1.0];
     
     //The rounded corner part, where you specify your view's corner radius:
-    self.layer.cornerRadius = 5;
-    self.clipsToBounds = YES;
+//    self.layer.cornerRadius = 5;
+//    self.clipsToBounds = YES;
 
     
 }
@@ -62,6 +62,11 @@
 -(void)refresh
 {
     _barIsUp = [[NSUserDefaults standardUserDefaults] boolForKey:BAR_UP];
+    
+    NSString *fiatAmount = [NSString stringWithFormat:@"%@ %@", self.botDenomination.text, self.botAmount.text];
+    
+    self.botAmount.text = fiatAmount;
+    
     if(_barIsUp)
     {
         self.barAmount.text = self.topAmount.text;

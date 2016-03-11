@@ -142,3 +142,4 @@
 #define wouldYouLikeToSendOrImport                  NSLocalizedString(@"Would you like to send funds to this address or import funds into your wallet?", nil)
 #define importFunds                                 NSLocalizedString(@"Import Funds",nil)
 #define sendFundsToPrivateKey                       NSLocalizedString(@"Send Funds to Private Key",nil)
+#define balanceButtonText                           NSLocalizedString(@"Balance", nil)

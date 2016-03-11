@@ -1225,7 +1225,7 @@
                                         </searchBar>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance" customClass="BalanceView">
                                             <rect key="frame" x="40" y="60" width="294" height="82"/>
-                                            <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="294" id="vhx-hJ-oeV"/>
                                                 <constraint firstAttribute="height" constant="82" id="vmj-gk-ZkY"/>
