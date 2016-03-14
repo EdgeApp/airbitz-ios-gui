@@ -103,7 +103,6 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -385,14 +384,6 @@
                                     <constraint firstItem="AOi-Wp-bVq" firstAttribute="leading" secondItem="Wik-w7-rsL" secondAttribute="leading" constant="8" id="u5G-PQ-bIK"/>
                                 </constraints>
                             </view>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aan-73-l0U" userLabel="addressTextField">
-                                <rect key="frame" x="10" y="70" width="300" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="CTD-0U-PA7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9e-kM-2rC" customClass="ButtonSelectorView2">
                                 <rect key="frame" x="0.0" y="64" width="320" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -411,7 +402,6 @@
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="jrj-OZ-WpR" secondAttribute="top" id="FE7-MO-dAU"/>
                             <constraint firstAttribute="trailing" secondItem="IsP-NR-ytZ" secondAttribute="trailing" id="H3u-ks-fT0"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" id="JQC-lX-ebL"/>
-                            <constraint firstAttribute="trailing" secondItem="aan-73-l0U" secondAttribute="trailing" constant="10" id="KCd-YU-T1B"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="jrj-OZ-WpR" secondAttribute="leading" id="LEC-ps-Ftg"/>
                             <constraint firstItem="3Vs-Vv-LQH" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="NVC-zk-Btp"/>
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="OY9-2b-zt3"/>
@@ -419,7 +409,6 @@
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="Rlk-dD-FSj"/>
                             <constraint firstItem="l7X-cf-7C6" firstAttribute="top" secondItem="3Vs-Vv-LQH" secondAttribute="bottom" id="UVN-hy-3j9"/>
                             <constraint firstAttribute="trailing" secondItem="Wik-w7-rsL" secondAttribute="trailing" id="WB1-u2-Kp5"/>
-                            <constraint firstItem="aan-73-l0U" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" constant="10" id="XGu-8e-3kr"/>
                             <constraint firstItem="cYL-n1-ybU" firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="ZGq-0v-6Xy"/>
                             <constraint firstAttribute="trailing" secondItem="g9e-kM-2rC" secondAttribute="trailing" id="a1j-fU-gWs"/>
                             <constraint firstItem="3Vs-Vv-LQH" firstAttribute="top" secondItem="g9e-kM-2rC" secondAttribute="bottom" id="bYT-83-J90"/>
@@ -428,7 +417,6 @@
                             <constraint firstItem="cYL-n1-ybU" firstAttribute="top" secondItem="p3w-fU-j91" secondAttribute="top" id="oLv-Oy-6dx"/>
                             <constraint firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="qI8-gw-Y7C"/>
                             <constraint firstItem="cYL-n1-ybU" firstAttribute="leading" secondItem="p3w-fU-j91" secondAttribute="leading" id="qTq-d6-26Y"/>
-                            <constraint firstItem="aan-73-l0U" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="70" id="sQL-hq-oPg"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="V8c-6o-ibr" secondAttribute="bottom" id="sbw-6l-sjS"/>
                             <constraint firstAttribute="trailing" secondItem="V8c-6o-ibr" secondAttribute="trailing" id="uVA-Gd-QqU"/>
                             <constraint firstItem="p3w-fU-j91" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="uuz-aN-cYY"/>
@@ -439,7 +427,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="addressTextField" destination="aan-73-l0U" id="aRK-Io-jvN"/>
                         <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
                         <outlet property="buttonSelector" destination="g9e-kM-2rC" id="30G-6H-VYq"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>

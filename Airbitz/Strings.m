@@ -67,6 +67,7 @@
 #define twofactorWarningText                        NSLocalizedString(@"Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"", @"2FA warning on enable")
 #define loadingAccountText                          NSLocalizedString(@"Loading Account...", @"Loading account alert text")
 #define loadingWalletsText                          NSLocalizedString(@"Loading Wallets...", @"Loading wallets alert text")
+#define fetchingPaymentRequestText                  NSLocalizedString(@"Fetching Payment Request...", @"Fetching Payment Request popup")
 #define loadingWalletsNewDeviceText                 NSLocalizedString(@"This may take a few minutes if it is the first time logging into this device.", @"Loading Wallets alert text")
 #define loadingTransactionsText                     NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text")
 #define synchronizingText                           NSLocalizedString(@"Synchronizing", @"Synchronizing text in confirmation textfield")
@@ -142,3 +143,7 @@
 #define wouldYouLikeToSendOrImport                  NSLocalizedString(@"Would you like to send funds to this address or import funds into your wallet?", nil)
 #define importFunds                                 NSLocalizedString(@"Import Funds",nil)
 #define sendFundsToPrivateKey                       NSLocalizedString(@"Send Funds to Private Key",nil)
+#define transferToWalletText                        NSLocalizedString(@"Transfer To %@", @"To wallet transfer text")
+#define transferFromWalletText                      NSLocalizedString(@"Transfer From %@", @"From wallet transfer text")
+#define transferCategoryText                        NSLocalizedString(@"Transfer:Wallet:%@", @"Wallet transfer category")
+

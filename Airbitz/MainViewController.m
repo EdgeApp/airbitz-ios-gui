@@ -1931,8 +1931,7 @@ MainViewController *singleton;
             else
             {
                 [_sendViewController resetViews];
-                _sendViewController.addressTextField.text = [uri absoluteString];
-                [_sendViewController processURI];
+                [_sendViewController processURI:[uri absoluteString]];
             }
         } else {
             _uri = uri;
@@ -1967,8 +1966,7 @@ MainViewController *singleton;
             _appMode = APP_MODE_MORE;
             [slideoutView showSlideout:NO];
             [_importViewController resetViews];
-            _importViewController.addressTextField.text = [uri absoluteString];
-            [_importViewController processURI];
+            [_importViewController processURI:[uri absoluteString]];
         }
         else
         {
