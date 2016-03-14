@@ -2453,6 +2453,11 @@ MainViewController *singleton;
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
 }
 
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
+{
+    [FadingAlertView create:singleton.view message:message holdTime:holdTime notify:cb];
+}
+
 + (void)fadingAlertUpdate:(NSString *)message
 {
     [FadingAlertView update:message];
