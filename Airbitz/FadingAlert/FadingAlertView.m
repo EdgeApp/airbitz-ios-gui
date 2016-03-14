@@ -85,7 +85,7 @@ static UIView *alert;
     // Before anything else. Dismiss any previous alerts and kill the timer
     // Do this first so it calls the previous delegate
     if (singleton.dismissTimer)
-        [FadingAlertView dismiss:FadingAlertDismissFast];
+        [FadingAlertView dismiss:FadingAlertDismissNow];
 
     singleton.delegate = delegate;
 
