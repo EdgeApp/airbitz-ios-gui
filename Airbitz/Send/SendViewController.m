@@ -1596,7 +1596,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             _bitidAlert = [[UIAlertView alloc]
                            initWithTitle:bitIDLogin
-                           message:_parsedURI.bitIDURI
+                           message:_parsedURI.bitIDDomain
                            delegate:self
                            cancelButtonTitle:noButtonText
                            otherButtonTitles:yesButtonText,nil];
