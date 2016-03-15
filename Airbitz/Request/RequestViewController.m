@@ -423,7 +423,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         if (pb && addressString)
         {
             [pb setString:addressString];
-            [MainViewController fadingAlert:NSLocalizedString(@"Request is copied to the clipboard", nil)];
+            [MainViewController fadingAlert:requestIsCopiedToClipboardText];
         }
         else
         {
