@@ -31,6 +31,7 @@
 #import "PopupPickerView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "FadingAlertView.h"
+#import "Affiliate.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -118,7 +119,9 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     CGFloat                         _keyboardHeight;
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
+    UIAlertView                     *_affiliateAlert;
     NSString                        *_tempPassword;
+    NSString                        *_affiliateURL;
 
 }
 
@@ -945,9 +948,24 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     cell.delegate = self;
-    [cell.button setTitle:NSLocalizedString(@"Debug", @"debug text") forState:UIControlStateNormal];
+    [cell.button setTitle:debugButtonText forState:UIControlStateNormal];
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 	return cell;
+}
+
+- (ButtonOnlyCell *)getAffiliateButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
+{
+    ButtonOnlyCell *cell;
+    static NSString *cellIdentifier = @"ButtonOnlyCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[ButtonOnlyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    [cell.button setTitle:getAffiliateLinkButtonText forState:UIControlStateNormal];
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+    return cell;
 }
 
 #pragma mark - UITableView Delegates
@@ -982,7 +1000,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             break;
 
         case SECTION_DEBUG:
-            return 1;
+            return 2;
             break;
 
         default:
@@ -1052,7 +1070,14 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 {
 	UITableViewCell *cell;
     if (indexPath.section == SECTION_DEBUG) {
-		cell = [self getDebugButton:tableView withIndexPath:indexPath];
+        if (indexPath.row == 0)
+        {
+            cell = [self getAffiliateButton:tableView withIndexPath:indexPath];
+        }
+        else
+        {
+            cell = [self getDebugButton:tableView withIndexPath:indexPath];
+        }
 	}
 	else
 	{
@@ -1365,8 +1390,31 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 - (void)buttonOnlyCellButtonPressed:(ButtonOnlyCell *)cell
 {
     NSInteger section = (cell.tag >> 8);
+    NSInteger row     = (cell.tag & 0xff);
     if (section == SECTION_DEBUG) {
-        [self bringUpDebugView];
+        if (row == 0)
+        {
+            Affiliate *affiliate = [Affiliate alloc];
+
+            [affiliate getAffliateURL:^(NSString *url)
+            {
+                _affiliateAlert = [[UIAlertView alloc] initWithTitle:@"Affiliate Link"
+                                                             message:[NSString stringWithFormat:shareThisLinkAndReceiveRevenue, url, appTitle]
+                                                            delegate:self
+                                                   cancelButtonTitle:okButtonText
+                                                   otherButtonTitles:copyButtonText, shareButtonText, nil];
+                _affiliateURL = url;
+
+                [_affiliateAlert show];
+            } error:^
+            {
+
+            }];
+        }
+        else if (row == 1)
+        {
+            [self bringUpDebugView];
+        }
     }
 }
 
@@ -1497,6 +1545,28 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         else if (buttonIndex == 1)
         {
             [self showPasswordCheckAlertForTouchID];
+        }
+    }
+    else if (_affiliateAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            if (pb)
+            {
+                [pb setString:_affiliateURL];
+                [MainViewController fadingAlert:affiliateLinkIsCopiedToClipboardText];
+            }
+        }
+        else if (2 == buttonIndex)
+        {
+            // Share
+            NSString *shareString = [NSString stringWithFormat:@"%@ %@",affiliateLinkShareText, _affiliateURL];
+            NSArray* dataToShare = @[shareString];
+            UIActivityViewController* activityViewController =
+            [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                              applicationActivities:nil];
+            [self presentViewController:activityViewController animated:YES completion:^{}];
         }
     }
 }
