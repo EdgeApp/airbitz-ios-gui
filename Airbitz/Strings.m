@@ -146,4 +146,7 @@
 #define transferToWalletText                        NSLocalizedString(@"Transfer To %@", @"To wallet transfer text")
 #define transferFromWalletText                      NSLocalizedString(@"Transfer From %@", @"From wallet transfer text")
 #define transferCategoryText                        NSLocalizedString(@"Transfer:Wallet:%@", @"Wallet transfer category")
-
+#define incomeAffiliateRevenue                      NSLocalizedString(@"Income:Affiliate Revenue", @"Income category for affiliate revenue")
+#define notesAffiliateRevenue                       NSLocalizedString(@"Revenue share from affiliate link %@", @"Income notes field for affiliate revenue")
+#define debugButtonText                             NSLocalizedString(@"Debug", @"debug text")
+#define getAffiliateLinkButtonText                  NSLocalizedString(@"Get Affiliate Link", @"Button text for Get Affiliate Link")

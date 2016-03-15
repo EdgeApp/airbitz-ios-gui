@@ -186,6 +186,7 @@ MainViewController *singleton;
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
 
     self.afmanager = [AFHTTPRequestOperationManager manager];
+    self.afmanager.requestSerializer = [AFJSONRequestSerializer serializer];
     [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
