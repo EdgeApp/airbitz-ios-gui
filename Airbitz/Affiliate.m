@@ -28,9 +28,22 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
 
 }
 
+NSString *AffiliateDataStore = @"AffiliateDataStore";
+
 - (void) getAffliateURL:(void (^)(NSString *url)) completionHandler
                   error:(void (^)(void)) errorHandler;
 {
+    // Try to see if we have a link saved in the datastore
+    NSMutableString *data = [[NSMutableString alloc] init];
+    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:@"link" data:data];
+
+    if (!error && [data length] > 0)
+    {
+        NSString *url = [NSString stringWithString:data];
+        if (completionHandler) completionHandler(url);
+        return;
+    }
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
         self.afmanager = [MainViewController createAFManager];
@@ -73,8 +86,18 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
                         receiveAddress.metaData.notes     = [NSString stringWithFormat:notesAffiliateRevenue, affiliateURL];
                         [receiveAddress modifyRequestWithDetails];
                         [receiveAddress finalizeRequest];
-                        if (completionHandler) completionHandler(affiliateURL);
 
+                        // Save link in data store
+                        NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:@"link" withValue:affiliateURL];
+
+                        if (!error2)
+                        {
+                            if (completionHandler) completionHandler(affiliateURL);
+                        }
+                        else
+                        {
+                            if (errorHandler) errorHandler();
+                        }
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
                     {
                         if (errorHandler) errorHandler();
