@@ -119,7 +119,9 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     CGFloat                         _keyboardHeight;
     UIAlertView                     *_passwordCheckAlert;
     UIAlertView                     *_passwordIncorrectAlert;
+    UIAlertView                     *_affiliateAlert;
     NSString                        *_tempPassword;
+    NSString                        *_affiliateURL;
 
 }
 
@@ -1396,12 +1398,14 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
             [affiliate getAffliateURL:^(NSString *url)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Affiliate Link"
-                                                                message:url
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
+                _affiliateAlert = [[UIAlertView alloc] initWithTitle:@"Affiliate Link"
+                                                             message:[NSString stringWithFormat:shareThisLinkAndReceiveRevenue, url, appTitle]
+                                                            delegate:self
+                                                   cancelButtonTitle:okButtonText
+                                                   otherButtonTitles:copyButtonText, shareButtonText, nil];
+                _affiliateURL = url;
+
+                [_affiliateAlert show];
             } error:^
             {
 
@@ -1541,6 +1545,28 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         else if (buttonIndex == 1)
         {
             [self showPasswordCheckAlertForTouchID];
+        }
+    }
+    else if (_affiliateAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            if (pb)
+            {
+                [pb setString:_affiliateURL];
+                [MainViewController fadingAlert:affiliateLinkIsCopiedToClipboardText];
+            }
+        }
+        else if (2 == buttonIndex)
+        {
+            // Share
+            NSString *shareString = [NSString stringWithFormat:@"%@ %@",affiliateLinkShareText, _affiliateURL];
+            NSArray* dataToShare = @[shareString];
+            UIActivityViewController* activityViewController =
+            [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                              applicationActivities:nil];
+            [self presentViewController:activityViewController animated:YES completion:^{}];
         }
     }
 }

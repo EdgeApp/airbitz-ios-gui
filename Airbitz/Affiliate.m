@@ -71,11 +71,13 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
                         receiveAddress.metaData.payeeName = appTitle;
                         receiveAddress.metaData.category  = incomeAffiliateRevenue;
                         receiveAddress.metaData.notes     = [NSString stringWithFormat:notesAffiliateRevenue, affiliateURL];
+                        [receiveAddress modifyRequestWithDetails];
+                        [receiveAddress finalizeRequest];
+                        if (completionHandler) completionHandler(affiliateURL);
 
                     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
                     {
                         if (errorHandler) errorHandler();
-
                     }];
 
                 }
