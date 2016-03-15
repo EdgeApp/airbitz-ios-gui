@@ -17,11 +17,13 @@
 
 
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
-@property (nonatomic, assign)   double                                      overrideCurrency;
-@property (nonatomic, strong)   ABCSpend *abcSpend;
-//@property (nonatomic, strong)   Wallet                                      *wallet;
+@property (nonatomic, strong)   ABCParsedURI                                *parsedURI;
+@property (nonatomic, strong)   ABCWallet                                   *destWallet;
+@property (nonatomic, strong)   ABCPaymentRequest                           *paymentRequest;
+
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 @property (nonatomic, assign)   BOOL                                        bSignOnly;
+@property (nonatomic, assign)   BOOL                                        bAmountImmutable;
 
 @end
 
@@ -35,6 +37,6 @@
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                       withBack:(BOOL)bBack
                                      withError:(BOOL)bError
-                                      withTxId:(NSString *)txid;
+                                  withUnsentTx:(ABCUnsentTx *)unsentTx;
 
 @end

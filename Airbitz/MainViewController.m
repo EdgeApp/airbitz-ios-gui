@@ -44,6 +44,7 @@
 #import "Location.h"
 #import "CJSONDeserializer.h"
 #import "AppGroupConstants.h"
+#import "Affiliate.h"
 
 typedef enum eRequestType
 {
@@ -187,6 +188,7 @@ MainViewController *singleton;
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
 
     self.afmanager = [AFHTTPRequestOperationManager manager];
+    self.afmanager.requestSerializer = [AFJSONRequestSerializer serializer];
     [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
@@ -489,6 +491,13 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+//    Affiliate *affiliate = [Affiliate alloc];
+//    
+//    [affiliate queryAffiliateInfo:^(NSDictionary *dict) {
+//        [dict description];
+//    } error:^{
+//    }];
+
     //
     // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode
     //
@@ -1939,8 +1948,7 @@ MainViewController *singleton;
             else
             {
                 [_sendViewController resetViews];
-                _sendViewController.addressTextField.text = [uri absoluteString];
-                [_sendViewController processURI];
+                [_sendViewController processURI:[uri absoluteString]];
             }
         } else {
             _uri = uri;
@@ -1975,8 +1983,7 @@ MainViewController *singleton;
             _appMode = APP_MODE_MORE;
             [slideoutView showSlideout:NO];
             [_importViewController resetViews];
-            _importViewController.addressTextField.text = [uri absoluteString];
-            [_importViewController processURI];
+            [_importViewController processURI:[uri absoluteString]];
         }
         else
         {
@@ -2459,6 +2466,11 @@ MainViewController *singleton;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime
 {
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
+}
+
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
+{
+    [FadingAlertView create:singleton.view message:message holdTime:holdTime notify:cb];
 }
 
 + (void)fadingAlertUpdate:(NSString *)message

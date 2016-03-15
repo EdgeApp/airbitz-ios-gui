@@ -60,7 +60,7 @@ typedef enum eScanMode
 
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
-@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate, PickerTextViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
+@interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
  ,ZBarReaderDelegate, ZBarReaderViewDelegate, AddressRequestControllerDelegate
 >
 {
@@ -79,12 +79,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIAlertView                     *_tweetAlert;
     UIAlertView                     *_bitidAlert;
     UIAlertView                     *_privateKeyAlert;
-    NSString                        *_tweet;
-    NSString                        *_bitidURI;
     ABCParsedURI                    *_parsedURI;
-
-
-
+    NSString                        *_tweet;
 }
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
@@ -132,7 +128,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
 
-    self.addressTextField.delegate = self;
     self.textUnderQRScanner.hidden = YES;
 
     // load all the names from the address book
@@ -518,19 +513,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     if (alertView == typeAddressAlertView)
     {
         [self startQRReader];
+        NSString *uriString = nil;
         if (1 == buttonIndex)
         {
-            _addressTextField.text = [alertView textFieldAtIndex:0].text;
+            uriString = [alertView textFieldAtIndex:0].text;
         }
         else if (2 == buttonIndex)
         {
             UIPasteboard *pb = [UIPasteboard generalPasteboard];
-            _addressTextField.text = [pb string];
+            uriString = [pb string];
         }
         if (buttonIndex > 0) // 0 == CANCEL
         {
-            if ([_addressTextField.text length] > 0)
-                [self processURI];
+            if (uriString && [uriString length] > 0)
+                [self processURI:uriString];
         }
     }
     else if (_tweetAlert == alertView)
@@ -563,8 +559,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         else if (buttonIndex == 2)
         {
             // Send
-            _addressTextField.text = _parsedURI.address;
-            [self doProcessSpendURI];
+            [self doProcessParsedURI:_parsedURI];
         }
     }
     else if (_bitidAlert == alertView)
@@ -572,9 +567,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (buttonIndex > 0)
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                BOOL success = [abcAccount bitidLogin:_bitidURI];
+                NSError *error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
                 dispatch_async(dispatch_get_main_queue(),^{
-                    if (success)
+                    if (!error)
                     {
                         [MainViewController fadingAlert:NSLocalizedString(@"Successfully Logged In",nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                     }
@@ -874,8 +869,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        self.addressTextField.text = stringFromData;
-        [self processURI];
+        [self processURI:stringFromData];
     }
 
     // subscription a.k.a. notify mode isn't necessary unless your data is larger than >512 bytes
@@ -898,8 +892,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            self.pickerTextSendTo.textField.text = receivedData;
-            [self processURI];
+            [self processURI:receivedData];
         }
 
         // and disconnect from the peripehral
@@ -1272,7 +1265,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)resignAllResponders
 {
-    [self.addressTextField resignFirstResponder];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -1307,13 +1299,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSendConfirmationTo:(ABCSpend *)abcSpend
+- (void)showSendConfirmationTo:(ABCParsedURI *)parsedURI
+                    destWallet:(ABCWallet *)destWallet
+                paymentRequest:(ABCPaymentRequest *)paymentRequest
 {
 	UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
 	_sendConfirmationViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SendConfirmationViewController"];
 
-	_sendConfirmationViewController.delegate = self;
-    _sendConfirmationViewController.abcSpend = abcSpend;
+	_sendConfirmationViewController.delegate            = self;
+    _sendConfirmationViewController.paymentRequest      = paymentRequest;
+    _sendConfirmationViewController.parsedURI           = parsedURI;
+    _sendConfirmationViewController.destWallet          = destWallet;
+    
+    _sendConfirmationViewController.bSignOnly           = NO;
+    _sendConfirmationViewController.bAdvanceToTx        = YES;
+    _sendConfirmationViewController.bAmountImmutable    = NO;
 
     [_readerView stop];
 
@@ -1383,8 +1383,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	{
 		NSString *text = (NSString *)sym.data;
         
-        _addressTextField.text = text;
-        [self processURI];
+        [self processURI:text];
 	}
 #endif
 }
@@ -1513,7 +1512,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [_readerView start];
     [self startQRReader];
 
-    self.addressTextField.text = @"";
     //[self startCameraScanner:nil];
 	[_sendConfirmationViewController.view removeFromSuperview];
     [_sendConfirmationViewController removeFromParentViewController];
@@ -1588,50 +1586,44 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #endif
 
-- (BOOL)pickerTextViewFieldShouldReturn:(PickerTextView *)pickerTextView
+- (void)processURI:(NSString *)uriString;
 {
-	[pickerTextView.textField resignFirstResponder];
-    [self processURI];
-    return YES;
-}
+    _parsedURI = [ABCUtil parseURI:uriString error:nil];
 
-- (void)processURI
-{
-    _parsedURI = [ABCUtil parseURI:_addressTextField.text error:nil];
-
-    if (_parsedURI.bitIDURI)
+    if (_parsedURI)
     {
-        _bitidURI = _addressTextField.text;
-        _bitidAlert = [[UIAlertView alloc]
-                initWithTitle:bitIDLogin
-                      message:_parsedURI.bitIDURI
-                     delegate:self
-            cancelButtonTitle:noButtonText
-            otherButtonTitles:yesButtonText,nil];
-        [_bitidAlert show];
-        return;
-    }
-    else if (_parsedURI.privateKey)
-    {
-        // We can either fund the private key using it's address or ask the user if they want it swept
-        _privateKeyAlert = [[UIAlertView alloc]
-                            initWithTitle:bitcoinPrivateKeyText
-                            message:_parsedURI.address
-                            delegate:self
-                            cancelButtonTitle:cancelButtonText
-                            otherButtonTitles:importFunds,sendFundsToPrivateKey,nil];
-        [_privateKeyAlert show];
-        return;
-    }
-    else if (_parsedURI.address)
-    {
-        _addressTextField.text = _parsedURI.address;
-        [self doProcessSpendURI];
-        return;
+        if (_parsedURI.bitIDURI)
+        {
+            _bitidAlert = [[UIAlertView alloc]
+                           initWithTitle:bitIDLogin
+                           message:_parsedURI.bitIDDomain
+                           delegate:self
+                           cancelButtonTitle:noButtonText
+                           otherButtonTitles:yesButtonText,nil];
+            [_bitidAlert show];
+            return;
+        }
+        else if (_parsedURI.privateKey)
+        {
+            // We can either fund the private key using it's address or ask the user if they want it swept
+            _privateKeyAlert = [[UIAlertView alloc]
+                                initWithTitle:bitcoinPrivateKeyText
+                                message:_parsedURI.address
+                                delegate:self
+                                cancelButtonTitle:cancelButtonText
+                                otherButtonTitles:importFunds,sendFundsToPrivateKey,nil];
+            [_privateKeyAlert show];
+            return;
+        }
+        else if (_parsedURI.address || _parsedURI.paymentRequestURL)
+        {
+            [self doProcessParsedURI:_parsedURI];
+            return;
+        }
     }
     else
     {
-        NSURL *uri = [NSURL URLWithString:_addressTextField.text];
+        NSURL *uri = [NSURL URLWithString:uriString];
         
         if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
             || [uri.host isEqualToString:@"x-callback-url"]) {
@@ -1648,8 +1640,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
         }
     }
-
-    [self doProcessSpendURI];
 }
 
 -(void)AddressRequestControllerDone:(AddressRequestController *)vc
@@ -1663,12 +1653,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 
-- (void)doProcessSpendURI
+- (void)doProcessParsedURI:(ABCParsedURI *)parsedURI
 {
-    [self doProcessSpendURI:0];
+    [self doProcessParsedURI:parsedURI numRecursions:0];
 }
 
-- (void)doProcessSpendURI:(int) numRecursions;
+- (void)doProcessParsedURI:(ABCParsedURI *)parsedURI numRecursions:(int) numRecursions;
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         if (numRecursions)
@@ -1680,53 +1670,49 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             
             if (abcAccount.currentWallet.loaded != YES)
             {
-                // If the current wallet isn't loaded, callback into doProcessSpendURI and sleep
+                // If the current wallet isn't loaded, callback into doProcessParsedURI and sleep
                 ABCLog(1,@"Waiting for wallet to load: %@", abcAccount.currentWallet.name);
                 
                 if (numRecursions < 2)
-                    [MainViewController fadingAlert:NSLocalizedString(@"Loading Wallet...", nil)
+                    [MainViewController fadingAlert:loadingWalletsText
                                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
 
-                [self doProcessSpendURI:(numRecursions+1)];
+                [self doProcessParsedURI:parsedURI numRecursions:(numRecursions+1)];
                 return;
             }
             
-            [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
-                                   holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            
-            NSString *text = _addressTextField.text;
-            
-            if (text.length)
+            if (parsedURI)
             {
-                // see if the text corresponds to one of the loaded wallets
-                NSInteger index = [abcAccount.arrayWalletNames indexOfObject:text];
-                ABCWallet *wallet = nil;
-                if (index != NSNotFound)
+                if (parsedURI.paymentRequestURL)
                 {
-                    wallet = [abcAccount.arrayWallets objectAtIndex:index];
-                    if (wallet.loaded)
-                    {
-                        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
-                        if (nil != abcSpend)
+                    [self stopQRReader];
+                    [MainViewController fadingAlert:fetchingPaymentRequestText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT notify:^{
+                        NSError *error = nil;
+                        ABCPaymentRequest *paymentRequest = [parsedURI getPaymentRequest:&error];
+                        
+                        if (!error)
                         {
-                            [self showSendConfirmationTo:abcSpend];
+                            [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:paymentRequest];
                             [MainViewController fadingAlertDismiss];
                         }
                         else
                         {
-                            [MainViewController fadingAlert:NSLocalizedString(@"Error initiating wallet transfer", nil)];
+                            NSString *errorString = [NSString stringWithFormat:@"%@\n\n%@",
+                                                     error.userInfo[NSLocalizedDescriptionKey],
+                                                     error.userInfo[NSLocalizedFailureReasonErrorKey]];
+                            [MainViewController fadingAlert:errorString];
+                            [self startQRReader];
                         }
-                    }
-                    else
-                    {
-                        [MainViewController fadingAlert:NSLocalizedString(@"Destination wallet not loaded. Please try again in a few seconds.", nil)];
-                    }
+                    }];
                     
                 }
-                
-                if (!wallet)
+                else if (parsedURI.address)
                 {
-                    [self trySpend:text];
+                    [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
+                                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+                    [self stopQRReader];
+                    [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
+                    [MainViewController fadingAlertDismiss];
                 }
             }
             else
@@ -1735,17 +1721,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
         });
     });
-}
-
-- (void)trySpend:(NSString *)text
-{
-    [abcAccount.currentWallet newSpendFromText:text complete:^(ABCSpend *abcSpend){
-        [self stopQRReader];
-        [self showSendConfirmationTo:abcSpend];
-        [MainViewController fadingAlertDismiss];
-    } error:^(NSError *error) {
-        [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
-    }];
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
@@ -1762,11 +1737,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         ABCWallet *wallet = [abcAccount.arrayWallets objectAtIndex:index];
 
-        ABCSpend *abcSpend = [abcAccount.currentWallet newSpendTransfer:wallet error:nil];
-        if (nil != abcSpend)
+        if (wallet)
         {
             [self stopQRReader];
-            [self showSendConfirmationTo:abcSpend];
+            [self showSendConfirmationTo:nil destWallet:wallet paymentRequest:nil];
         }
     }
     [view dismiss];

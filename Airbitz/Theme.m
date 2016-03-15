@@ -128,7 +128,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightLoginScreenLogo = 120;
         self.heightBLETableCells = 65;
         self.heightPopupPicker = 60;
-        self.heightSettingsTableCell            = 45.0;
+        self.heightSettingsTableCell            = 55.0;
         self.heightSettingsTableHeader          = 65.0;
         self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
     }
