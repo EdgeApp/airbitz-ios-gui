@@ -30,6 +30,20 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
 
 NSString *AffiliateDataStore = @"AffiliateDataStore";
 
+- (void) queryAffiliateInfo:(void (^)(NSDictionary *dict)) completionHandler
+                      error:(void (^)(void)) errorHandler;
+{
+    self.afmanager = [MainViewController createAFManager];
+    [self.afmanager GET:AffiliatesQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSDictionary *results = (NSDictionary *) responseObject;
+        if (completionHandler) completionHandler(results);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABCLog(1, @"Error getting affiliate bitid URI");
+        if (errorHandler) errorHandler();
+    }];
+}
+
 - (void) getAffliateURL:(void (^)(NSString *url)) completionHandler
                   error:(void (^)(void)) errorHandler;
 {

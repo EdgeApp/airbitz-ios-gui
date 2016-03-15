@@ -44,6 +44,7 @@
 #import "Location.h"
 #import "CJSONDeserializer.h"
 #import "AppGroupConstants.h"
+#import "Affiliate.h"
 
 typedef enum eRequestType
 {
@@ -489,6 +490,13 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+//    Affiliate *affiliate = [Affiliate alloc];
+//    
+//    [affiliate queryAffiliateInfo:^(NSDictionary *dict) {
+//        [dict description];
+//    } error:^{
+//    }];
+
     //
     // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode
     //

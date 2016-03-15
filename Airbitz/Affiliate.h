@@ -10,4 +10,7 @@
 
 - (void) getAffliateURL:(void (^)(NSString *url)) completionHandler
                   error:(void (^)(void)) errorHandler;
+- (void) queryAffiliateInfo:(void (^)(NSDictionary *dict)) completionHandler
+                      error:(void (^)(void)) errorHandler;
+
 @end
