@@ -1007,8 +1007,9 @@ static BOOL bInitialized = false;
             [self showSpinner:YES];
             [self SignInPIN:textField.text];
         }
+        return NO;
     }
-    return NO;
+    return YES;
 }
 
 - (void)signInComplete:(ABCAccount *)user
