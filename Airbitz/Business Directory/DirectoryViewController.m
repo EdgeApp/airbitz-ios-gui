@@ -133,6 +133,8 @@ typedef enum eMapDisplayState
     CLLocationCoordinate2D mostRecentLatLong;
     UISearchBar *activeSearchBar;
     CGFloat originalCategoryViewHeight;
+    CGFloat searchBarHeight;
+    CGFloat fullSearchBarHeight;
     BOOL bShowBackButton;
 
 }
@@ -142,6 +144,7 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dividerViewTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *tableListingsCategoriesHeader;
+@property (strong, nonatomic)        UISearchBar *searchBarPrimary;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarLocation;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBarSearch;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeight;
@@ -149,6 +152,7 @@ typedef enum eMapDisplayState
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchCluesBottom;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *locationSearchViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarSearchHeight;
 @property (nonatomic, weak) IBOutlet DividerView *dividerView;
 @property (nonatomic, weak) IBOutlet UIView *spinnerView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -247,9 +251,11 @@ static bool bInitialized = false;
     [self.tableView setContentInset:UIEdgeInsetsMake(pt.y,0,0,0)];
 
     pt.x = 0.0;
-    pt.y = -[MainViewController getHeaderHeight] + self.searchBarSearch.frame.size.height;
+    pt.y = -[MainViewController getHeaderHeight] + searchBarHeight;
     [self.tableView setContentOffset:pt animated:true];
-    _locationSearchViewHeight.constant = 0;
+     if (!LOCKED_SEARCH_CATEGORY)
+         _locationSearchViewHeight.constant = 0;
+
 }
 
 - (BOOL)gestureRecognizer: (UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer: (UIGestureRecognizer *)otherGestureRecognizer
@@ -286,13 +292,33 @@ static bool bInitialized = false;
     //ABCLog(2,@"Adding keyboard notification");
     [self receiveKeyboardNotifications: YES];
 
+    CGFloat height;
+    if (LOCKED_SEARCH_CATEGORY)
+    {
+        self.categoryButtonsView.hidden = YES;
+        self.categoryViewHeight.constant = 0;
+        _locationSearchViewHeight.constant = EXTRA_SEARCH_BAR_HEIGHT;
+        self.searchBarSearchHeight.constant = 0;
+        self.searchBarSearch.text = LOCKED_SEARCH_CATEGORY_STRING;
+        self.searchBarPrimary = self.searchBarLocation;
+        searchBarHeight = self.searchBarLocation.frame.size.height;
+        fullSearchBarHeight = (EXTRA_SEARCH_BAR_HEIGHT);
+        height = 0 - [MainViewController getHeaderHeight];
+    }
+    else
+    {
+        self.searchBarPrimary = self.searchBarSearch;
+        searchBarHeight = self.searchBarSearch.frame.size.height;
+        fullSearchBarHeight = (2 * EXTRA_SEARCH_BAR_HEIGHT);
+        height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
+    }
+    
     if (bInitialized == false)
     {
         //
         // Calculate the header size of tableview and set it's frame to that height. Hack because Apple can't
         // figure it out for us automatically -paulvp
         //
-        CGFloat height = _dividerView.frame.origin.y + _dividerView.frame.size.height - [MainViewController getHeaderHeight];
         CGRect headerFrame = _tableListingsCategoriesHeader.frame;
         ABCLog(2,@"BizDirView viewWillAppear %f %f %f %f\n",_dividerView.frame.origin.y, _dividerView.frame.size.height, _tableListingsCategoriesHeader.frame.origin.y, _tableListingsCategoriesHeader.frame.size.height);
         headerFrame.size.height = height;
@@ -309,6 +335,7 @@ static bool bInitialized = false;
     }
 
     [self transitionMode:DIRECTORY_MODE_LISTING];
+    
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -528,11 +555,18 @@ static bool bInitialized = false;
 
 - (void)businessListingQueryForPage: (int)page northEastCoordinate: (CLLocationCoordinate2D)ne southWestCoordinate: (CLLocationCoordinate2D)sw
 {
-    NSString *boundingBox = [NSString stringWithFormat: @"%f,%f|%f,%f", sw.latitude, sw.longitude, ne.latitude, ne.longitude];
-    NSString *myLatLong = [NSString stringWithFormat: @"%f,%f", self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude];
-    NSMutableString *query = [[NSMutableString alloc] initWithFormat: @"%@/search/?ll=%@&sort=%i&page=%i&page_size=%i&bounds=%@", SERVER_API, myLatLong, SORT_RESULT_DISTANCE, page + 1, DEFAULT_RESULTS_PER_PAGE, boundingBox];
-
-    [self businessListingQuery: query];
+    if (self.mapView.userLocation.location)
+    {
+        NSString *boundingBox = [NSString stringWithFormat: @"%f,%f|%f,%f", sw.latitude, sw.longitude, ne.latitude, ne.longitude];
+        NSString *myLatLong = [NSString stringWithFormat: @"%f,%f", self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude];
+        NSMutableString *query = [[NSMutableString alloc] initWithFormat: @"%@/search/?ll=%@&sort=%i&page=%i&page_size=%i&bounds=%@", SERVER_API, myLatLong, SORT_RESULT_DISTANCE, page + 1, DEFAULT_RESULTS_PER_PAGE, boundingBox];
+        
+        [self businessListingQuery: query];
+    }
+    else
+    {
+        [self businessListingQueryForPage:page];
+    }
 }
 /* cw no longer used but keep around just in case...
 -(void)businessListingQueryForPage:(int)page centerCoordinate:(CLLocationCoordinate2D)center radius:(float)radiusInMeters
@@ -775,7 +809,7 @@ static bool bInitialized = false;
                          switch (mode)
                          {
                              case DIRECTORY_MODE_SEARCH:
-                                 [self.searchBarSearch becomeFirstResponder];
+                                 [self.searchBarPrimary becomeFirstResponder];
                                  break;
                              default:
                                  break;
@@ -840,10 +874,8 @@ static bool bInitialized = false;
 
     //
     // Open up the autocomplete clues tableview. Line up top of autocomplete table with bottom of searchBarLocation
-    //
-//    CGRect frame = [_searchBarLocation convertRect:_searchBarLocation.bounds toView:self.view];
-//    _searchCluesTop.constant = frame.origin.y + frame.size.height;
-    _searchCluesTop.constant = [MainViewController getHeaderHeight] + (2 * EXTRA_SEARCH_BAR_HEIGHT);
+    
+    _searchCluesTop.constant = [MainViewController getHeaderHeight] + fullSearchBarHeight;
     [self.view layoutIfNeeded];
 
     //
@@ -860,7 +892,10 @@ static bool bInitialized = false;
     self.searchCluesTableView.hidden = YES;
     self.searchBarSearch.placeholder = NSLocalizedString(@"Search", @"SearchBarSearch placeholder");
 
-    _locationSearchViewHeight.constant = 0;
+    if (!LOCKED_SEARCH_CATEGORY)
+    {
+        _locationSearchViewHeight.constant = 0;
+    }
 }
 
 
@@ -1901,16 +1936,28 @@ static bool bInitialized = false;
     if (self.dividerView.userControllable == NO)
     {
         float offset = self.tableView.contentOffset.y;
+        if (LOCKED_SEARCH_CATEGORY)
+        {
+            offset += 20;
+        }
         if (offset > self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight])
         {
             offset = self.tableView.tableHeaderView.frame.size.height - [MainViewController getHeaderHeight];
         }
-        self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
-//        ABCLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
+        CGFloat tfoy = self.tableView.frame.origin.y;
+        CGFloat thvfsh = self.tableView.tableHeaderView.frame.size.height;
+
+        self.dividerViewTop.constant = tfoy + thvfsh - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
+//        self.dividerViewTop.constant = tfoy + thvfsh - offset;
+        CGFloat dvt = self.dividerViewTop.constant;
+        
+//        self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
+        ABCLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
 
     }
     else
     {
+        self.dividerView.hidden = NO;
         self.dividerViewTop.constant = self.mapView.frame.origin.y + self.mapView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT;
 //        ABCLog(2,@"position control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
     }

@@ -80,6 +80,7 @@
     if ([self fieldsAreValid])
     {
         self.manager.strPIN = self.pinTextField.text;
+        [self.pinTextField resignFirstResponder];
         [super next];
     }
 }

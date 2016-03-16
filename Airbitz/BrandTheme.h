@@ -30,5 +30,8 @@
 
 #define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
+#define SHOW_BUY_SELL                                   1
+#define LOCKED_SEARCH_CATEGORY                          0
+#define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
 #endif /* BrandTheme_h */

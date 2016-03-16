@@ -346,33 +346,6 @@ static BOOL bInitialized = false;
     [self autoReloginOrTouchIDIfPossible];
 }
 
-- (void)resignAllResponders
-{
-    [self.passwordTextField resignFirstResponder];
-    [self.usernameSelector.textField resignFirstResponder];
-    [self.PINCodeView resignFirstResponder];
-}
-
-- (void)assignFirstResponder
-{
-
-    if (bPINModeEnabled)
-    {
-        [self.PINCodeView becomeFirstResponder];
-    }
-    else
-    {
-        if ([self.usernameSelector.textField.text length] > 0)
-        {
-            [self.passwordTextField becomeFirstResponder];
-        }
-        else
-        {
-            [self.usernameSelector.textField becomeFirstResponder];
-        }
-    }
-}
-
 - (void)autoReloginOrTouchIDIfPossible
 {
     [self resignAllResponders];
@@ -1381,6 +1354,35 @@ static BOOL bInitialized = false;
             [self removeAccount:_accountToDelete];
             self.usernameSelector.textField.text = @"";
             [self.usernameSelector dismissPopupPicker];
+        }
+    }
+}
+
+- (void)resignAllResponders
+{
+    [self.passwordTextField resignFirstResponder];
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.PINCodeView resignFirstResponder];
+}
+
+- (void)assignFirstResponder
+{
+    if (bPINModeEnabled)
+    {
+        [self.PINCodeView becomeFirstResponder];
+    }
+    else
+    {
+        if (_mode != MODE_NO_USERS)
+        {
+            if ([self.usernameSelector.textField.text length] > 0)
+            {
+                [self.passwordTextField becomeFirstResponder];
+            }
+            else
+            {
+                [self.usernameSelector.textField becomeFirstResponder];
+            }
         }
     }
 }
