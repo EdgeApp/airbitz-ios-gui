@@ -8,9 +8,7 @@
 
 #ifndef BrandTheme_h
 #define BrandTheme_h
-
-
-
+#import "ABCDenomination.h"
 
 #define AppFont                                         @"Lato-Regular"
 
@@ -30,7 +28,7 @@
 #define LoginTitleTextShadowRadius                      0.0f
 #define PinEntryTextShadowRadius                        1.0f
 
-
+#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
 
 #endif /* BrandTheme_h */

@@ -154,6 +154,8 @@
          [FadingAlertView dismiss:FadingAlertDismissFast];
          self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
          self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+         user.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
+         [user.settings saveSettings];
          [User login:user];
          [MainViewController createFirstWallet];
 
