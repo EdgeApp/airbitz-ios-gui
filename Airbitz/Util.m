@@ -32,7 +32,8 @@
     NSString *osVersionString   = [NSString stringWithFormat:@"OS Version:%d.%d.%d<br>\n", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion];
     NSString *airbitzVersion    = [NSString stringWithFormat:@"Airbitz Version:%@", versionbuild];
 
-    NSString *emailSupportTemplate = [NSString stringWithFormat:@"Email <a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
+    NSString *emailSupportTemplate = [NSString stringWithFormat:@"<a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
+    NSString *phoneSupportTemplate = [NSString stringWithFormat:@"<a href=\"tel:%@\">%@</a>", supportPhone, supportPhone];
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
             @"[[abtag APP_TITLE]]",
@@ -46,6 +47,7 @@
             @"[[abtag APP_SUPPORT_EMAIL]]",
             @"[[abtag APP_VERSION]]",
             @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
+            @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
                     nil];
 
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
@@ -60,6 +62,7 @@
             supportEmail,
             versionbuild,
             emailSupportTemplate,
+            phoneSupportTemplate,
                     nil];
 
     for (int i=0; i<[searchList count];i++)
