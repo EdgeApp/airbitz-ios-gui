@@ -26,6 +26,8 @@
 
 @property (nonatomic) bool bDisclaimerViewed;
 @property (nonatomic) bool reviewNotified;
+@property (nonatomic) bool showRunningBalance;
+@property (nonatomic) bool hideBalance;
 @property (nonatomic) NSDate *firstLoginTime;
 @property (nonatomic) NSInteger loginCount;
 

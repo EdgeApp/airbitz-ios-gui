@@ -92,6 +92,7 @@
 @property (nonatomic, strong) WalletHeaderView         *archivedWalletsHeaderView;
 @property (nonatomic, strong) UIImage               *imageReceive;
 @property (nonatomic, strong) UIImage               *imageSend;
+@property (weak, nonatomic) IBOutlet UIView *buttonsShadowView;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView    *imageWalletNameEmboss;
@@ -153,7 +154,10 @@
     _bWalletsShowing = NO;
     _bShowingWalletsLoadingAlert = NO;
     _balanceView = [BalanceView CreateWithDelegate:self];
+    _showRunningBalance = [LocalSettings controller].showRunningBalance;
+
     [self.balanceViewPlaceholder addSubview:_balanceView];
+    [_balanceView showBalance:![LocalSettings controller].hideBalance];
     
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
@@ -170,6 +174,13 @@
     _transactionTableStartFrame = self.tableView.frame;
 
     [self initializeWalletsTable];
+    
+    
+    self.buttonsShadowView.layer.shadowRadius = 5.0f;
+    self.buttonsShadowView.layer.shadowOpacity = 0.6f;
+    self.buttonsShadowView.layer.masksToBounds = NO;
+    self.buttonsShadowView.layer.shadowColor = [ColorDarkGrey CGColor];
+    self.buttonsShadowView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.afmanager = [MainViewController createAFManager];
     self.imageReceive = [UIImage imageNamed:@"icon_request_padded.png"];
@@ -231,6 +242,8 @@
 - (void)toggleRunningBalance
 {
     _showRunningBalance = !_showRunningBalance;
+    [LocalSettings controller].showRunningBalance = _showRunningBalance;
+    [LocalSettings saveAll];
     [self.tableView reloadData];
     [self updateBalanceView];
 }
@@ -249,7 +262,10 @@
     }
     else
     {
-        [MainViewController changeNavBar:self title:balanceButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(toggleRunningBalance) fromObject:self];
+        if (!_showRunningBalance && abcAccount.currentWallet)
+            [MainViewController changeNavBar:self title:balanceButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(toggleRunningBalance) fromObject:self];
+        else
+            [MainViewController changeNavBar:self title:abcAccount.currentWallet.currency.code side:NAV_BAR_LEFT button:true enable:true action:@selector(toggleRunningBalance) fromObject:self];
     }
 
 }
@@ -322,10 +338,10 @@
     [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.defaultCurrency.code
                                           forSegmentAtIndex:1];
 
-    if (_balanceView.barIsUp)
-        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
-    else
-        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
+//    if (_balanceView.barIsUp)
+//        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
+//    else
+//        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
 
     int64_t totalSatoshi = 0;
     //
@@ -442,8 +458,10 @@
 
 - (void)updateBalanceView //
 {
-    if (nil == abcAccount.arrayWallets ||
-            nil == abcAccount.currentWallet)
+    if (!abcAccount.arrayWallets ||
+        !abcAccount.currentWallet ||
+        !abcAccount.currentWallet.currency ||
+        !abcAccount.currentWallet.currency.code)
         return;
 
     int64_t totalSatoshi = 0.0;
@@ -456,12 +474,10 @@
     double fCurrency;
 
     fCurrency = [abcAccount.exchangeCache satoshiToCurrency:totalSatoshi currencyCode:abcAccount.currentWallet.currency.code error:nil];
-    _balanceView.botAmount.text = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
-    _balanceView.topDenomination.text = abcAccount.settings.denomination.label;
-    _balanceView.botDenomination.text = abcAccount.currentWallet.currency.code;
-
-    [_balanceView refresh];
-
+    
+    NSString *fiatAmount = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
+    _balanceView.botAmount.text = [NSString stringWithFormat:@"%@ %@", abcAccount.currentWallet.currency.code, fiatAmount];
+    
     if (abcAccount.currentWallet.archived)
     {
         self.buttonRequest.enabled = false;
@@ -505,18 +521,18 @@
 // if bFiat is YES, then the amount is shown in fiat, otherwise, bitcoin format as specified by user settings
 - (NSString *)formatAmount:(int64_t)satoshi wallet:(ABCWallet *)wallet
 {
-    BOOL bFiat = !_balanceView.barIsUp;
+//    BOOL bFiat = !_balanceView.barIsUp;
     if (wallet)
-        return [self formatAmount:satoshi useFiat:bFiat currency:wallet.currency];
+        return [self formatAmount:satoshi useFiat:YES currency:wallet.currency];
     else
-        return [self formatAmount:satoshi useFiat:bFiat currency:abcAccount.settings.defaultCurrency];
+        return [self formatAmount:satoshi useFiat:YES currency:abcAccount.settings.defaultCurrency];
 }
 
 
 - (NSString *)formatAmount:(ABCWallet *)wallet
 {
-    BOOL bFiat = !_balanceView.barIsUp;
-    return [self formatAmount:wallet useFiat:bFiat];
+//    BOOL bFiat = !_balanceView.barIsUp;
+    return [self formatAmount:wallet useFiat:YES];
 }
 
 
@@ -541,13 +557,6 @@
     }
 }
 
-
-//note this method duplicated in WalletsViewController
-//- (NSString *)conversion:(int64_t)satoshi
-//{
-//    return [self formatSatoshi:satoshi useFiat:!_balanceView.barIsUp];
-//}
-//
 -(void)launchTransactionDetailsWithTransaction:(ABCTransaction *)transaction cell:(TransactionCell *)cell
 {
     if (self.transactionDetailsController) {
@@ -731,9 +740,7 @@
         [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:controller.transaction.metaData.bizId]] = controller.photoUrl;
     }
 
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:_bWalletsShowing action:@selector(toggleWalletDropdown:) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    [self updateNavBar];
 
     [self dismissTransactionDetails];
     [self updateViews:nil];
@@ -1146,8 +1153,11 @@
 
 #pragma mark - BalanceViewDelegates
 
-- (void)BalanceView:(BalanceView *)view changedStateTo:(tBalanceViewState)state
+- (void)BalanceViewChanged:(BalanceView *)view show:(BOOL)show;
 {
+    [LocalSettings controller].hideBalance = !show;
+    [LocalSettings saveAll];
+
     [self updateViews:nil];
 }
 
@@ -1274,9 +1284,8 @@
     {
         self.exportWalletViewController = nil;
     }];
-    [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:false action:@selector(Back:) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
+    
+    [self updateNavBar];
 
     [self updateViews:nil];
 
@@ -1463,18 +1472,18 @@
 -(void)segmentedControlHeader
 {
 
-    if (self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex == 0)
-    {
-        // Choose BTC
-        [_balanceView balanceViewSetBTC];
-
-    }
-    else
-    {
-        // Choose Fiat
-        [_balanceView balanceViewSetFiat];
-    }
-
+//    if (self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex == 0)
+//    {
+//        // Choose BTC
+//        [_balanceView balanceViewSetBTC];
+//
+//    }
+//    else
+//    {
+//        // Choose Fiat
+//        [_balanceView balanceViewSetFiat];
+//    }
+//
     [self updateViews:nil];
 
 }
