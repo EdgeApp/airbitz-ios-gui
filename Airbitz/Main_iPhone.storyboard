@@ -1212,10 +1212,17 @@
                                         </searchBar>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qw-an-knM" userLabel="View -balance" customClass="BalanceView">
                                             <rect key="frame" x="40" y="60" width="294" height="82"/>
-                                            <color key="backgroundColor" red="0.98823535439999999" green="1" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="294" id="vhx-hJ-oeV"/>
                                                 <constraint firstAttribute="height" constant="82" id="vmj-gk-ZkY"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MG0-bb-TyY" userLabel="View shadow">
+                                            <rect key="frame" x="0.0" y="160" width="375" height="50"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="pmF-zC-EDx"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6EE-Aw-gGZ">
@@ -1255,9 +1262,11 @@
                                         <constraint firstAttribute="centerX" secondItem="3Qw-an-knM" secondAttribute="centerX" id="FxR-lB-Fqs"/>
                                         <constraint firstItem="LPo-UX-ZHi" firstAttribute="leading" secondItem="6EE-Aw-gGZ" secondAttribute="trailing" id="GPB-iN-sxK"/>
                                         <constraint firstItem="6EE-Aw-gGZ" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="HvY-C6-OSC"/>
+                                        <constraint firstAttribute="trailing" secondItem="MG0-bb-TyY" secondAttribute="trailing" id="MLA-Rp-HvV"/>
                                         <constraint firstAttribute="bottom" secondItem="6EE-Aw-gGZ" secondAttribute="bottom" id="MTS-8x-hJU"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="leading" secondItem="nxO-bQ-X5e" secondAttribute="leading" id="PEV-l3-eX9"/>
                                         <constraint firstItem="3Qw-an-knM" firstAttribute="top" secondItem="ltN-lB-ATB" secondAttribute="bottom" constant="16" id="PWc-Zf-hdR"/>
+                                        <constraint firstAttribute="bottom" secondItem="MG0-bb-TyY" secondAttribute="bottom" id="S1A-XM-NF8"/>
                                         <constraint firstAttribute="trailing" secondItem="ltN-lB-ATB" secondAttribute="trailing" id="SlL-fh-S2n"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="bottom" secondItem="nxO-bQ-X5e" secondAttribute="bottom" id="Ye2-CS-eim"/>
                                         <constraint firstAttribute="bottom" secondItem="LPo-UX-ZHi" secondAttribute="bottom" id="dju-aI-LIe"/>
@@ -1265,6 +1274,7 @@
                                         <constraint firstAttribute="trailing" secondItem="LPo-UX-ZHi" secondAttribute="trailing" id="hvO-S4-MO6"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="ilj-v6-bwr"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="trailing" secondItem="nxO-bQ-X5e" secondAttribute="trailing" id="lEP-eE-quS"/>
+                                        <constraint firstItem="MG0-bb-TyY" firstAttribute="leading" secondItem="Dyb-xZ-KkC" secondAttribute="leading" id="oiL-fl-QjP"/>
                                         <constraint firstItem="6EE-Aw-gGZ" firstAttribute="width" secondItem="LPo-UX-ZHi" secondAttribute="width" id="phP-09-OCE"/>
                                         <constraint firstItem="ltN-lB-ATB" firstAttribute="top" secondItem="nxO-bQ-X5e" secondAttribute="top" id="tJh-bH-xkj"/>
                                     </constraints>
@@ -1470,6 +1480,7 @@
                         <outlet property="balanceViewPlaceholder" destination="3Qw-an-knM" id="uWP-JF-vsP"/>
                         <outlet property="buttonRequest" destination="6EE-Aw-gGZ" id="uhQ-28-kwq"/>
                         <outlet property="buttonSend" destination="LPo-UX-ZHi" id="k0T-VH-273"/>
+                        <outlet property="buttonsShadowView" destination="MG0-bb-TyY" id="Fgh-MV-EkI"/>
                         <outlet property="searchTextField" destination="ltN-lB-ATB" id="zTA-qc-n5r"/>
                         <outlet property="tableView" destination="1la-Es-fPE" id="4pj-UV-ux5"/>
                         <outlet property="toolbarBlur" destination="tDk-Hi-NWo" id="rWe-RI-Y5U"/>

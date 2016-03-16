@@ -145,6 +145,7 @@
 #define wouldYouLikeToSendOrImport                  NSLocalizedString(@"Would you like to send funds to this address or import funds into your wallet?", nil)
 #define importFunds                                 NSLocalizedString(@"Import Funds",nil)
 #define sendFundsToPrivateKey                       NSLocalizedString(@"Send Funds to Private Key",nil)
+#define balanceButtonText                           NSLocalizedString(@"Balance", nil)
 #define transferToWalletText                        NSLocalizedString(@"Transfer To %@", @"To wallet transfer text")
 #define transferFromWalletText                      NSLocalizedString(@"Transfer From %@", @"From wallet transfer text")
 #define transferCategoryText                        NSLocalizedString(@"Transfer:Wallet:%@", @"Wallet transfer category")

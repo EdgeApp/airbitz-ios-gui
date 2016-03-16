@@ -28,6 +28,8 @@
 #define KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT          @"send_view_count"
 #define KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT           @"ble_view_count"
 #define KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT       @"ble_view_count"
+#define KEY_LOCAL_SETTINGS_HIDE_BALANCE             @"hide_balance"
+#define KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE     @"show_running_balance"
 
 #define REVIEW_ACCOUNT_AGE 14
 #define REVIEW_LOGIN_COUNT 7
@@ -73,6 +75,8 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         singleton.requestViewCount = 0;
         singleton.sendViewCount = 0;
         singleton.bleViewCount = 0;
+        singleton.showRunningBalance = NO;
+        singleton.hideBalance = NO;
 
 		// load the settings
 		[LocalSettings loadAll];
@@ -111,14 +115,16 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     self.noPasswordNotificationTime = [defaults doubleForKey:KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME];
     self.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
 
-    self.bDisclaimerViewed = [defaults boolForKey:   KEY_LOCAL_SETTINGS_DISCLAIMER_VIEWED];
-    self.reviewNotified    = [defaults boolForKey:   KEY_LOCAL_SETTINGS_REVIEW_NOTIFIED];
-    self.firstLoginTime    = [defaults objectForKey: KEY_LOCAL_SETTINGS_FIRST_LOGIN_TIME];
-    self.loginCount        = [defaults integerForKey:KEY_LOCAL_SETTINGS_LOGIN_COUNT];
-    self.requestViewCount  = [defaults integerForKey:KEY_LOCAL_SETTINGS_REQUEST_VIEW_COUNT];
-    self.sendViewCount     = [defaults integerForKey:KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT];
-    self.bleViewCount      = [defaults integerForKey:KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT];
-    self.walletsViewCount  = [defaults integerForKey:KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT];
+    self.showRunningBalance     = [defaults boolForKey:   KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE];
+    self.hideBalance            = [defaults boolForKey:   KEY_LOCAL_SETTINGS_HIDE_BALANCE];
+    self.bDisclaimerViewed      = [defaults boolForKey:   KEY_LOCAL_SETTINGS_DISCLAIMER_VIEWED];
+    self.reviewNotified         = [defaults boolForKey:   KEY_LOCAL_SETTINGS_REVIEW_NOTIFIED];
+    self.firstLoginTime         = [defaults objectForKey: KEY_LOCAL_SETTINGS_FIRST_LOGIN_TIME];
+    self.loginCount             = [defaults integerForKey:KEY_LOCAL_SETTINGS_LOGIN_COUNT];
+    self.requestViewCount       = [defaults integerForKey:KEY_LOCAL_SETTINGS_REQUEST_VIEW_COUNT];
+    self.sendViewCount          = [defaults integerForKey:KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT];
+    self.bleViewCount           = [defaults integerForKey:KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT];
+    self.walletsViewCount       = [defaults integerForKey:KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT];
 
 
 
@@ -144,6 +150,8 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
+    [defaults setBool:      [self showRunningBalance] forKey:KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE];
+    [defaults setBool:      [self hideBalance] forKey:KEY_LOCAL_SETTINGS_HIDE_BALANCE];
     [defaults setBool:      [self bDisableBLE] forKey:KEY_LOCAL_SETTINGS_DISABLE_BLE];
     [defaults setBool:      [self bMerchantMode] forKey:KEY_LOCAL_SETTINGS_MERCHANT_MODE];
     [defaults setInteger:   [self previousNotificationID] forKey:KEY_LOCAL_SETTINGS_PREV_NOTIF_ID];

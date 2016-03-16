@@ -102,6 +102,7 @@ typedef enum eAppMode
     BOOL                        sideBarLocked;
     BOOL                        _bNewDeviceLogin;
     BOOL                        _bShowingWalletsLoadingAlert;
+    BOOL                        _bDoneShowingWalletsLoadingAlert;
 
 
     CGRect                      _closedSlideoutFrame;
@@ -1354,10 +1355,12 @@ MainViewController *singleton;
 - (void) abcAccountWalletChanged:(ABCWallet *)wallet;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [self showWalletsLoadingAlert];
 }
 - (void) abcAccountWalletsChanged;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [self showWalletsLoadingAlert];
 }
 - (void) abcAccountBlockHeightChanged;
 {
@@ -1370,7 +1373,13 @@ MainViewController *singleton;
 
 - (void) abcAccountWalletsLoading;
 {
+    _bDoneShowingWalletsLoadingAlert = NO;
+    [self showWalletsLoadingAlert];
+}
+- (void) showWalletsLoadingAlert
+{
     NSString *walletsLoading;
+    if (_bDoneShowingWalletsLoadingAlert) return;
     
     if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
     {
@@ -1393,14 +1402,12 @@ MainViewController *singleton;
                           loadingWalletsNewDeviceText];
     }
     
-    
     if (_bShowingWalletsLoadingAlert)
         [MainViewController fadingAlertUpdate:walletsLoading];
     else
         [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     
-    _bShowingWalletsLoadingAlert = YES;
-
+        _bShowingWalletsLoadingAlert = YES;
 }
 - (void) abcAccountWalletsLoaded;
 {
@@ -1408,6 +1415,7 @@ MainViewController *singleton;
     {
         [FadingAlertView dismiss:FadingAlertDismissFast];
         _bShowingWalletsLoadingAlert = NO;
+        _bDoneShowingWalletsLoadingAlert = YES;
     }
 }
 - (void) abcAccountAccountChanged;
