@@ -72,6 +72,7 @@
     BOOL                        _walletMakerVisible;
     UIButton                    *_blockingButton;
     NSOperationQueue                                *txSearchQueue;
+    BOOL                                _segmentedControlUSD;
 
 
 }
@@ -338,10 +339,10 @@
     [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.defaultCurrency.code
                                           forSegmentAtIndex:1];
 
-//    if (_balanceView.barIsUp)
-//        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
-//    else
-//        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
+    if (_segmentedControlUSD)
+        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
+    else
+        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
 
     int64_t totalSatoshi = 0;
     //
@@ -1452,7 +1453,7 @@
         cell.name.text = NSLocalizedString(@"Loading...", @"");
     }
 
-    cell.amount.text = [self formatAmount:wallet];
+    cell.amount.text = [self formatAmount:wallet useFiat:_segmentedControlUSD];
 
     // If there is only 1 wallet left in the active wallets table, prohibit moving
     if (indexPath.section == WALLET_SECTION_ACTIVE && [abcAccount.arrayWallets count] == 1)
@@ -1472,18 +1473,17 @@
 -(void)segmentedControlHeader
 {
 
-//    if (self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex == 0)
-//    {
-//        // Choose BTC
-//        [_balanceView balanceViewSetBTC];
-//
-//    }
-//    else
-//    {
-//        // Choose Fiat
-//        [_balanceView balanceViewSetFiat];
-//    }
-//
+    if (self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex == 0)
+    {
+        // Choose BTC
+        _segmentedControlUSD = NO;
+    }
+    else
+    {
+        // Choose Fiat
+        _segmentedControlUSD = YES;
+    }
+
     [self updateViews:nil];
 
 }
