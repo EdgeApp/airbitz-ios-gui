@@ -75,7 +75,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
-@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
+//@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
@@ -90,6 +90,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
 @property (nonatomic, weak) IBOutlet UIView             *spinnerView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsPINView;
+@property (weak, nonatomic) IBOutlet StylizedTextField  *PINTextField;
 
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
@@ -125,7 +126,8 @@ static BOOL bInitialized = false;
     self.usernameSelector.textField.delegate = self;
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
-    self.PINCodeView.delegate = self;
+//    self.PINCodeView.delegate = self;
+    self.PINTextField.delegate = self;
     self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
     self.buttonOutsideTap.enabled = NO;
@@ -167,6 +169,7 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
     self.PINusernameSelector.textLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
     self.PINusernameSelector.textLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.PINusernameSelector.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:24.0];
 
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
@@ -209,6 +212,10 @@ static BOOL bInitialized = false;
     [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
     
+//    [self.PINTextField addTarget:self
+//                          action:@selector(PINTextFieldDidChange:)
+//                forControlEvents:UIControlEventEditingChanged];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationEnteredForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
@@ -242,7 +249,8 @@ static BOOL bInitialized = false;
         self.userEntryView.hidden = true;
         [self.passwordTextField resignFirstResponder];
         [self.usernameSelector.textField resignFirstResponder];
-        [self.PINCodeView becomeFirstResponder];
+//        [self.PINCodeView becomeFirstResponder];
+        [self.PINTextField becomeFirstResponder];
     }
     else
     {
@@ -252,7 +260,8 @@ static BOOL bInitialized = false;
         self.userEntryView.hidden = false;
         [self.passwordTextField resignFirstResponder];
         [self.usernameSelector.textField resignFirstResponder];
-        [self.PINCodeView resignFirstResponder];
+        [self.PINTextField resignFirstResponder];
+//        [self.PINCodeView resignFirstResponder];
     }
 
     if (_mode == MODE_NO_USERS)
@@ -318,7 +327,8 @@ static BOOL bInitialized = false;
     {
         [self.passwordTextField resignFirstResponder];
         [self.usernameSelector.textField resignFirstResponder];
-        [self.PINCodeView resignFirstResponder];
+        [self.PINTextField resignFirstResponder];
+//        [self.PINCodeView resignFirstResponder];
 
         self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
     }
@@ -339,9 +349,9 @@ static BOOL bInitialized = false;
         [LocalSettings saveAll];
     }
     if (bPINModeEnabled)
-        [self.PINCodeView becomeFirstResponder];
+        [self.PINTextField becomeFirstResponder];
     else
-        [self.PINCodeView resignFirstResponder];
+        [self.PINTextField resignFirstResponder];
 
     [self autoReloginOrTouchIDIfPossible];
 }
@@ -371,7 +381,8 @@ static BOOL bInitialized = false;
 {
     [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.PINCodeView.PINCode = nil;
+//    self.PINCodeView.PINCode = nil;
+    self.PINTextField.text = nil;
     _tempPin = nil;
     _tempPassword = nil;
     [super viewWillDisappear:animated];
@@ -396,14 +407,25 @@ static BOOL bInitialized = false;
 - (void)fadingAlertDismissedNew
 {
     if (bPINModeEnabled)
-        [self.PINCodeView becomeFirstResponder];
+        [self.PINTextField becomeFirstResponder];
     else
-        [self.PINCodeView resignFirstResponder];
+        [self.PINTextField resignFirstResponder];
 }
 
 
 
 #pragma mark - Action Methods
+
+- (IBAction)PINTextFieldChanged:(id)sender
+{
+    if ([self.PINTextField.text length] >= 4)
+    {
+        [self.PINTextField resignFirstResponder];
+        [self showSpinner:YES];
+        [self SignInPIN:self.PINTextField.text];
+
+    }
+}
 
 - (IBAction)Back
 {
@@ -464,9 +486,8 @@ static BOOL bInitialized = false;
         //
         UIFont *boldFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
-        NSString *title = [NSString stringWithFormat:@"Enter PIN for (%@)",
-                           username];
-        // Define general attributes like color and fonts for the entire text
+        NSString *title = [NSString stringWithFormat:@"%@",
+                           username];        // Define general attributes like color and fonts for the entire text
         NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
                                NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
@@ -648,19 +669,19 @@ static BOOL bInitialized = false;
              [_enableTouchIDAlertView show];
          }
          [self showSpinner:NO];
-         self.PINCodeView.PINCode = nil;
+         self.PINTextField.text = nil;
          
      } error:^(NSError *error) {
          
          [MainViewController showBackground:NO animate:YES];
-         [self.PINCodeView becomeFirstResponder];
+         [self.PINTextField becomeFirstResponder];
          [self showSpinner:NO];
-         self.PINCodeView.PINCode = nil;
+         self.PINTextField.text = nil;
          
          if (ABCConditionCodeBadPassword == error.code)
          {
              [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
-             [self.PINCodeView becomeFirstResponder];
+             [self.PINTextField becomeFirstResponder];
          }
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
@@ -971,6 +992,22 @@ static BOOL bInitialized = false;
         [self.passwordTextField becomeFirstResponder];
     }
 
+    return NO;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.PINTextField)
+    {
+        NSString *editedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        textField.text = editedString;
+        if ([textField.text length] >= 4)
+        {
+            [textField resignFirstResponder];
+            [self showSpinner:YES];
+            [self SignInPIN:textField.text];
+        }
+    }
     return NO;
 }
 
@@ -1362,14 +1399,14 @@ static BOOL bInitialized = false;
 {
     [self.passwordTextField resignFirstResponder];
     [self.usernameSelector.textField resignFirstResponder];
-    [self.PINCodeView resignFirstResponder];
+    [self.PINTextField resignFirstResponder];
 }
 
 - (void)assignFirstResponder
 {
     if (bPINModeEnabled)
     {
-        [self.PINCodeView becomeFirstResponder];
+        [self.PINTextField becomeFirstResponder];
     }
     else
     {
@@ -1430,14 +1467,14 @@ static BOOL bInitialized = false;
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
 {
     [self.PINusernameSelector.textLabel resignFirstResponder];
-    [self.PINCodeView resignFirstResponder];
+    [self.PINTextField resignFirstResponder];
     self.buttonOutsideTap.enabled = YES;
 
 }
 
 - (void)ButtonSelectorWillHideTable:(ButtonSelectorView *)view
 {
-    [self.PINCodeView becomeFirstResponder];
+    [self.PINTextField becomeFirstResponder];
     self.buttonOutsideTap.enabled = NO;
 
 }
@@ -1445,8 +1482,7 @@ static BOOL bInitialized = false;
 - (void)ButtonSelectorDidTouchAccessory:(ButtonSelectorView *)selector accountString:(NSString *)string
 {
     [self deleteAccountPopup:string];
-    [self.PINCodeView becomeFirstResponder];
-
+    [self.PINTextField becomeFirstResponder];
 }
 
 

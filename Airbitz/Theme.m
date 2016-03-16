@@ -110,7 +110,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSettingsTableHeader          = 60.0;
         self.heightButton                       = 45.0;
         self.buttonFontSize                     = 15.0;
-        self.fontSizeEnterPINText               = 16.0;     // Font size for PIN login screen "Enter PIN"
+        self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
 
     }
     if (IS_MIN_IPHONE5)

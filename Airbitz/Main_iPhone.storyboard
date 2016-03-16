@@ -103,6 +103,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1441,7 +1442,7 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="tDk-Hi-NWo" secondAttribute="bottom" id="Cjc-ot-QNm"/>
                                     <constraint firstItem="xQD-1v-Z9a" firstAttribute="top" secondItem="Sel-8S-IX8" secondAttribute="top" id="LGg-g7-AOt"/>
@@ -2794,7 +2795,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
                                         <rect key="frame" x="27" y="161" width="320" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-U4-C5T" userLabel="PINCode Text Field" customClass="StylizedTextField">
+                                                <rect key="frame" x="84.5" y="58" width="150" height="44"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="H0y-RR-nVF"/>
+                                                    <constraint firstAttribute="width" constant="150" id="wNH-4T-yhi"/>
+                                                </constraints>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <action selector="PINTextFieldChanged:" destination="zLx-xG-j1m" eventType="editingChanged" id="MPD-K7-fYF"/>
+                                                </connections>
+                                            </textField>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-w4-vLL" userLabel="View - PINCode" customClass="APPINView">
                                                 <rect key="frame" x="53" y="58" width="214" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -2804,15 +2819,15 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTg-3l-g7y" customClass="StylizedButton">
                                                 <rect key="frame" x="34" y="110" width="251" height="43"/>
-                                                <color key="backgroundColor" red="0.1333333333" green="0.56862745100000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="251" id="WsM-ti-Mul"/>
                                                     <constraint firstAttribute="height" constant="43" id="bjz-Zs-SaW"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                                 <size key="titleShadowOffset" width="0.0" height="1"/>
                                                 <state key="normal" title="Exit PIN Login">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.81176470590000005" green="0.92941176469999998" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -2832,6 +2847,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="DIc-w4-vLL" secondAttribute="centerX" id="4rb-wz-yLG"/>
+                                            <constraint firstItem="KTi-U4-C5T" firstAttribute="centerX" secondItem="BHf-E8-N2q" secondAttribute="centerX" id="EN6-ih-ntE"/>
+                                            <constraint firstItem="RTg-3l-g7y" firstAttribute="top" secondItem="KTi-U4-C5T" secondAttribute="bottom" constant="8" symbolic="YES" id="EjV-ze-FAQ"/>
                                             <constraint firstItem="DIc-w4-vLL" firstAttribute="top" secondItem="VWS-p6-0xj" secondAttribute="bottom" constant="8" symbolic="YES" id="FeL-Lr-a5V"/>
                                             <constraint firstItem="VWS-p6-0xj" firstAttribute="top" secondItem="BHf-E8-N2q" secondAttribute="top" constant="20" symbolic="YES" id="O0u-yh-FTc"/>
                                             <constraint firstAttribute="height" constant="200" id="Qw1-8d-FHt"/>
@@ -2880,8 +2897,8 @@
                                                     <action selector="SignUp" destination="zLx-xG-j1m" eventType="touchUpInside" id="BMw-Co-GHv"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="55" y="72" width="210" height="31"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
+                                                <rect key="frame" x="55" y="72" width="210" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
                                                 </constraints>
@@ -2979,7 +2996,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="PINCodeView" destination="DIc-w4-vLL" id="VK1-PT-9eC"/>
+                        <outlet property="PINTextField" destination="KTi-U4-C5T" id="5fd-8q-tPl"/>
                         <outlet property="PINusernameSelector" destination="VWS-p6-0xj" id="BKI-59-q7h"/>
                         <outlet property="backButton" destination="Ypw-4p-DZr" id="Gdl-4p-iBe"/>
                         <outlet property="buttonOutsideTap" destination="PwH-1d-Cnf" id="Td0-PY-ZnQ"/>
