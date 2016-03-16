@@ -1390,16 +1390,16 @@
                                         <items/>
                                     </toolbar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xQD-1v-Z9a" userLabel="Table View - Wallet List">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
+                                        <rect key="frame" x="10" y="0.0" width="355" height="380"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" id="Mhi-jw-aaR" customClass="WalletCell">
-                                                <rect key="frame" x="0.0" y="22" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="22" width="355" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mhi-jw-aaR" id="vKv-Bo-lvH" userLabel="Content View - Wallet">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
@@ -1425,11 +1425,11 @@
                                                     <constraints>
                                                         <constraint firstItem="9iF-nP-HJx" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="20" symbolic="YES" id="9z3-qs-7b7"/>
                                                         <constraint firstAttribute="bottom" secondItem="YUW-ey-Md7" secondAttribute="bottom" constant="20" symbolic="YES" id="LGa-vu-ZFb"/>
-                                                        <constraint firstAttribute="trailing" secondItem="YUW-ey-Md7" secondAttribute="trailing" constant="20" symbolic="YES" id="Lgd-bs-H0y"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YUW-ey-Md7" secondAttribute="trailing" constant="8" id="Lgd-bs-H0y"/>
                                                         <constraint firstAttribute="bottom" secondItem="9iF-nP-HJx" secondAttribute="bottom" constant="20" symbolic="YES" id="NJB-vJ-mcy"/>
                                                         <constraint firstItem="YUW-ey-Md7" firstAttribute="top" secondItem="vKv-Bo-lvH" secondAttribute="top" constant="20" symbolic="YES" id="Qbw-0B-KhB"/>
                                                         <constraint firstItem="YUW-ey-Md7" firstAttribute="leading" secondItem="9iF-nP-HJx" secondAttribute="trailing" constant="8" symbolic="YES" id="Uhx-bQ-W6m"/>
-                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="leading" secondItem="vKv-Bo-lvH" secondAttribute="leading" constant="20" symbolic="YES" id="u4N-SX-y50"/>
+                                                        <constraint firstItem="9iF-nP-HJx" firstAttribute="leading" secondItem="vKv-Bo-lvH" secondAttribute="leading" constant="8" id="u4N-SX-y50"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1445,11 +1445,11 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="tDk-Hi-NWo" secondAttribute="bottom" id="Cjc-ot-QNm"/>
                                     <constraint firstItem="xQD-1v-Z9a" firstAttribute="top" secondItem="Sel-8S-IX8" secondAttribute="top" id="LGg-g7-AOt"/>
-                                    <constraint firstAttribute="trailing" secondItem="xQD-1v-Z9a" secondAttribute="trailing" id="bCE-8z-5yX"/>
+                                    <constraint firstAttribute="trailing" secondItem="xQD-1v-Z9a" secondAttribute="trailing" constant="10" id="bCE-8z-5yX"/>
                                     <constraint firstAttribute="bottom" secondItem="xQD-1v-Z9a" secondAttribute="bottom" id="dvH-eN-eSa"/>
                                     <constraint firstItem="tDk-Hi-NWo" firstAttribute="top" secondItem="Sel-8S-IX8" secondAttribute="top" id="jdl-yR-U3z"/>
                                     <constraint firstAttribute="trailing" secondItem="tDk-Hi-NWo" secondAttribute="trailing" id="rQS-jo-VUZ"/>
-                                    <constraint firstItem="xQD-1v-Z9a" firstAttribute="leading" secondItem="Sel-8S-IX8" secondAttribute="leading" id="swQ-a3-M4t"/>
+                                    <constraint firstItem="xQD-1v-Z9a" firstAttribute="leading" secondItem="Sel-8S-IX8" secondAttribute="leading" constant="10" id="swQ-a3-M4t"/>
                                     <constraint firstItem="tDk-Hi-NWo" firstAttribute="leading" secondItem="Sel-8S-IX8" secondAttribute="leading" id="vgr-mX-iYn"/>
                                 </constraints>
                             </view>
