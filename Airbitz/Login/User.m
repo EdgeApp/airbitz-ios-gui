@@ -10,6 +10,7 @@
 #import "Util.h"
 #import "AB.h"
 #import "LocalSettings.h"
+#import "Affiliate.h"
 
 
 #define SPENDING_LIMIT_AMOUNT  @"spending_limit_amount"
@@ -62,6 +63,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
     abcAccount = user;
     [LocalSettings saveAll];
     [[User Singleton] loadLocalSettings];
+    Affiliate *affiliate = [Affiliate alloc];
+    [affiliate loadAffiliateInfoFromAccountToUser];
 }
 
 - (id)init

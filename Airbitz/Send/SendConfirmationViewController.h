@@ -20,6 +20,8 @@
 @property (nonatomic, strong)   ABCParsedURI                                *parsedURI;
 @property (nonatomic, strong)   ABCWallet                                   *destWallet;
 @property (nonatomic, strong)   ABCPaymentRequest                           *paymentRequest;
+@property (nonatomic, strong)   NSString                                    *address2;
+@property (nonatomic)           uint64_t                                    amountSatoshi2;
 
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 @property (nonatomic, assign)   BOOL                                        bSignOnly;
@@ -37,6 +39,7 @@
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                       withBack:(BOOL)bBack
                                      withError:(BOOL)bError
+                                   transaction:(ABCTransaction *)transaction
                                   withUnsentTx:(ABCUnsentTx *)unsentTx;
 
 @end

@@ -30,6 +30,8 @@
 #define KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT       @"ble_view_count"
 #define KEY_LOCAL_SETTINGS_HIDE_BALANCE             @"hide_balance"
 #define KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE     @"show_running_balance"
+#define KEY_LOCAL_SETTINGS_HAVE_CHECKED_AFFILIATE   @"have_checked_affiliate"
+#define KEY_LOCAL_SETTINGS_AFFILIATE_INFO           @"affiliate_info"
 
 #define REVIEW_ACCOUNT_AGE 14
 #define REVIEW_LOGIN_COUNT 7
@@ -77,6 +79,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         singleton.bleViewCount = 0;
         singleton.showRunningBalance = NO;
         singleton.hideBalance = NO;
+        singleton.bCheckedForAffiliate = NO;
 
 		// load the settings
 		[LocalSettings loadAll];
@@ -114,7 +117,9 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     self.receiveBitcoinCount = [defaults integerForKey:KEY_LOCAL_SETTINGS_RECEIVE_COUNT];
     self.noPasswordNotificationTime = [defaults doubleForKey:KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME];
     self.clientID = [defaults stringForKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
+    self.affiliateInfo = [defaults stringForKey:KEY_LOCAL_SETTINGS_AFFILIATE_INFO];
 
+    self.bCheckedForAffiliate   = [defaults boolForKey:   KEY_LOCAL_SETTINGS_HAVE_CHECKED_AFFILIATE];
     self.showRunningBalance     = [defaults boolForKey:   KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE];
     self.hideBalance            = [defaults boolForKey:   KEY_LOCAL_SETTINGS_HIDE_BALANCE];
     self.bDisclaimerViewed      = [defaults boolForKey:   KEY_LOCAL_SETTINGS_DISCLAIMER_VIEWED];
@@ -158,7 +163,9 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     [defaults setInteger:   [self receiveBitcoinCount] forKey:KEY_LOCAL_SETTINGS_RECEIVE_COUNT];
     [defaults setDouble:    [self noPasswordNotificationTime] forKey:KEY_LOCAL_SETTINGS_NO_PASSWORD_NOTIF_TIME];
     [defaults setValue:     [self clientID] forKey:KEY_LOCAL_SETTINGS_CLIENT_ID];
+    [defaults setValue:     [self affiliateInfo] forKey:KEY_LOCAL_SETTINGS_AFFILIATE_INFO];
 
+    [defaults setBool:   self.bCheckedForAffiliate    forKey:KEY_LOCAL_SETTINGS_HAVE_CHECKED_AFFILIATE];
     [defaults setBool:   self.reviewNotified    forKey:KEY_LOCAL_SETTINGS_REVIEW_NOTIFIED];
     [defaults setBool:   self.bDisclaimerViewed forKey:KEY_LOCAL_SETTINGS_DISCLAIMER_VIEWED];
     [defaults setObject: self.firstLoginTime    forKey:KEY_LOCAL_SETTINGS_FIRST_LOGIN_TIME];

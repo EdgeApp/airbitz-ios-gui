@@ -35,7 +35,6 @@
 #import "FadingAlertView.h"
 #import "InfoView.h"
 #import "NotificationChecker.h"
-#import "LocalSettings.h"
 #import "AirbitzViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
@@ -491,12 +490,9 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    Affiliate *affiliate = [Affiliate alloc];
-//    
-//    [affiliate queryAffiliateInfo:^(NSDictionary *dict) {
-//        [dict description];
-//    } error:^{
-//    }];
+    Affiliate *affiliate = [Affiliate alloc];
+    
+    [affiliate queryAffiliateInfo];
 
     //
     // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode

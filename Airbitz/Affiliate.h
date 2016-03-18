@@ -4,13 +4,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AirbitzCore.h"
 
 @interface Affiliate : NSObject
 
 - (void) getAffliateURL:(void (^)(NSString *url)) completionHandler
                   error:(void (^)(void)) errorHandler;
+- (void) queryAffiliateInfo;
 - (void) queryAffiliateInfo:(void (^)(NSDictionary *dict)) completionHandler
                       error:(void (^)(void)) errorHandler;
+- (void) copyLocalAffiliateInfoToAccount:(ABCAccount *)account;
+- (void) loadAffiliateInfoFromAccountToUser;
 
 @end

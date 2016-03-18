@@ -19,6 +19,8 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) BOOL needsPasswordCheck;
+@property (nonatomic) NSString *affiliateInfo;
+@property (nonatomic) NSDictionary *dictAffiliateInfo;
 
 //
 // Per user local device settings. Not sync'ed across devices

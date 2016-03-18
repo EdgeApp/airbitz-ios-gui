@@ -67,6 +67,7 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
                 @"requestSpend":NSStringFromSelector(@selector(requestSpend:)),
+               @"requestSpend2":NSStringFromSelector(@selector(requestSpend2:)),
                  @"requestSign":NSStringFromSelector(@selector(requestSign:)),
                  @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
                       @"saveTx":NSStringFromSelector(@selector(saveTx:)),
@@ -76,6 +77,7 @@ static const NSString *PROTOCOL = @"bridge://";
                    @"clearData":NSStringFromSelector(@selector(clearData:)),
                     @"readData":NSStringFromSelector(@selector(readData:)),
           @"getBtcDenomination":NSStringFromSelector(@selector(getBtcDenomination:)),
+            @"getAffiliateInfo":NSStringFromSelector(@selector(getAffiliateInfo:)),
 //           @"satoshiToCurrency":NSStringFromSelector(@selector(satoshiToCurrency:)),
 //           @"currencyToSatoshi":NSStringFromSelector(@selector(currencyToSatoshi:)),
 //               @"formatSatoshi":NSStringFromSelector(@selector(formatSatoshi:)),
@@ -336,6 +338,7 @@ static const NSString *PROTOCOL = @"bridge://";
         [self sendConfirmationViewControllerDidFinish:_sendConfirmationViewController
                                              withBack:YES
                                             withError:NO
+                                          transaction:nil
                                          withUnsentTx:nil];
     } else if ([_navStack count] == 0) {
         self.view.alpha = 1.0;
@@ -486,10 +489,24 @@ static const NSString *PROTOCOL = @"bridge://";
     _sendConfirmationViewController.bAdvanceToTx        = NO;
     _sendConfirmationViewController.bAmountImmutable    = YES;
     
+    NSString *address2 = [args objectForKey:@"toAddress2"];
+    uint64_t amountSatoshi2 = [[args objectForKey:@"amountSatoshi2"] longValue];
+    
+    if (amountSatoshi2 && address2 && [address2 length] > 20)
+    {
+        _sendConfirmationViewController.address2 = address2;
+        _sendConfirmationViewController.amountSatoshi2 = amountSatoshi2;
+    }
+    
     [Util animateController:_sendConfirmationViewController parentController:self];
 }
 
 - (void)requestSpend:(NSDictionary *)params
+{
+    [self launchSpendConfirmation:params signOnly:NO];
+}
+
+- (void)requestSpend2:(NSDictionary *)params
 {
     [self launchSpendConfirmation:params signOnly:NO];
 }
@@ -715,6 +732,12 @@ static const NSString *PROTOCOL = @"bridge://";
     }
 }
 
+- (void)getAffiliateInfo:(NSDictionary *)params
+{
+    NSString *value = [User Singleton].affiliateInfo;
+    [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:value]];
+}
+
 - (void)readData:(NSDictionary *)params
 {
     NSDictionary *args = [params objectForKey:@"args"];
@@ -905,12 +928,13 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
 {
-    [self sendConfirmationViewControllerDidFinish:controller withBack:NO withError:YES withUnsentTx:nil];
+    [self sendConfirmationViewControllerDidFinish:controller withBack:NO withError:YES transaction:nil withUnsentTx:nil];
 }
 
 - (void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                        withBack:(BOOL)bBack
                                       withError:(BOOL)bError
+                                    transaction:(ABCTransaction *)transaction
                                    withUnsentTx:(ABCUnsentTx *)unsentTx;
 {
     [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
@@ -924,6 +948,8 @@ static const NSString *PROTOCOL = @"bridge://";
             if (unsentTx) {
                 _unsentTx = unsentTx;
                 [self callJsFunction:_sendCbid withArgs:[self jsonResult:unsentTx.base16]];
+            } else if (transaction) {
+                [self callJsFunction:_sendCbid withArgs:[self jsonResult:transaction.txid]];
             } else {
                 [self callJsFunction:_sendCbid withArgs:[self jsonError]];
             }

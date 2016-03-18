@@ -12,6 +12,7 @@
 #import "Theme.h"
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
+#import "Affiliate.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -149,14 +150,16 @@
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
-                            complete:^(ABCAccount *user)
+                            complete:^(ABCAccount *account)
      {
          [FadingAlertView dismiss:FadingAlertDismissFast];
          self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
          self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-         user.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
-         [user.settings saveSettings];
-         [User login:user];
+         account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
+         [account.settings saveSettings];
+         Affiliate *affiliate = [Affiliate alloc];
+         [affiliate copyLocalAffiliateInfoToAccount:account];
+         [User login:account];
          [MainViewController createFirstWallet];
 
          [super next];

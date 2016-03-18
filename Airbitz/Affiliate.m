@@ -8,6 +8,8 @@
 #import "MainViewController.h"
 #import "BrandStrings.h"
 #import "Strings.h"
+#import "LocalSettings.h"
+#import "User.h"
 
 NSString *ServerRoot              = @"https://api.airbitz.co/";
 NSString *AffiliatesRegister      = @"https://api.airbitz.co/affiliates/register";
@@ -28,20 +30,82 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
 
 }
 
-NSString *AffiliateDataStore = @"AffiliateDataStore";
+NSString *AffiliateDataStore = @"affiliate_program";
+NSString *AffiliateLinkDataStoreKey = @"affiliate_link_beta";
+NSString *AffiliateInfoDataStoreKey = @"affiliate_info_beta";
 
+// Pings the server to see if the device's IP address has been recently (last 3 minutes)
+// registered as having clicked on an affiliate link. If so, it gets information
+// on the affiliate such as public address and saves the info in non-synced LocalSettings.
+- (void) queryAffiliateInfo;
+{
+    [self queryAffiliateInfo:nil error:nil];
+}
 - (void) queryAffiliateInfo:(void (^)(NSDictionary *dict)) completionHandler
                       error:(void (^)(void)) errorHandler;
 {
+    if ([LocalSettings controller].bCheckedForAffiliate)
+    {
+        NSString *json = [LocalSettings controller].affiliateInfo;
+        NSData * jsonData = [json dataUsingEncoding:NSUTF8StringEncoding];
+        NSError * error=nil;
+        NSDictionary * parsedData = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+        if (completionHandler) completionHandler(parsedData);
+        return;
+    }
+    
     self.afmanager = [MainViewController createAFManager];
     [self.afmanager GET:AffiliatesQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSDictionary *results = (NSDictionary *) responseObject;
-        if (completionHandler) completionHandler(results);
+        
+        // Convert back to JSON to save in LocalSettings12
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:results
+                                                           options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        if (! jsonData) {
+            NSLog(@"Got an error: %@", error);
+            if (errorHandler) errorHandler();
+        } else {
+            NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            [LocalSettings controller].affiliateInfo = jsonString;
+            [LocalSettings controller].bCheckedForAffiliate = YES;
+            [LocalSettings saveAll];
+            if (completionHandler) completionHandler(results);
+        }
+        
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ABCLog(1, @"Error getting affiliate bitid URI");
         if (errorHandler) errorHandler();
     }];
+}
+
+// Should be called after a new account is created. This will take any affiliate info that is
+// saved in LocalSettings and copy it to the user's data synced account.
+- (void) copyLocalAffiliateInfoToAccount:(ABCAccount *)account;
+{
+    NSString *affiliateInfo = [LocalSettings controller].affiliateInfo;
+    [account.dataStore dataWrite:AffiliateDataStore withKey:AffiliateInfoDataStoreKey withValue:affiliateInfo];
+}
+
+- (void) loadAffiliateInfoFromAccountToUser;
+{
+    NSMutableString *affiliateInfo = [[NSMutableString alloc] init];
+    
+    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateInfoDataStoreKey data:affiliateInfo];
+    
+    if (!error)
+    {
+        NSData * jsonData = [affiliateInfo dataUsingEncoding:NSUTF8StringEncoding];
+        NSError * error=nil;
+        NSDictionary *dictAffiliateInfo = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
+        [User Singleton].dictAffiliateInfo = dictAffiliateInfo;
+        [User Singleton].affiliateInfo = [NSString stringWithString:affiliateInfo];
+    }
+
 }
 
 - (void) getAffliateURL:(void (^)(NSString *url)) completionHandler
@@ -49,7 +113,8 @@ NSString *AffiliateDataStore = @"AffiliateDataStore";
 {
     // Try to see if we have a link saved in the datastore
     NSMutableString *data = [[NSMutableString alloc] init];
-    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:@"link" data:data];
+    
+    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateLinkDataStoreKey data:data];
 
     if (!error && [data length] > 0)
     {
@@ -102,7 +167,7 @@ NSString *AffiliateDataStore = @"AffiliateDataStore";
                         [receiveAddress finalizeRequest];
 
                         // Save link in data store
-                        NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:@"link" withValue:affiliateURL];
+                        NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:AffiliateLinkDataStoreKey withValue:affiliateURL];
 
                         if (!error2)
                         {

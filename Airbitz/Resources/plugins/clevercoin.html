@@ -1289,6 +1289,18 @@ function _bridge() {
       _native('requestSpend', cbid, options);
     },
 
+    requestSpend2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['toAddress'] = toAddress;
+      options['amountSatoshi'] = amountSatoshi;
+      options['toAddress2'] = toAddress2;
+      options['amountSatoshi2'] = amountSatoshi2;
+      options['amountFiat'] = amountFiat;
+      var cbid = createCallback(options);
+      _native('requestSpend2', cbid, options);
+    },
+
     requestSign: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
       var options = options || {};
       options['id'] = wallet.id;
@@ -1333,6 +1345,10 @@ function _bridge() {
 
     getBtcDenomination: function() {
       return _handleBlocking(_native('getBtcDenomination', newId(), {}, true));
+    },
+
+    getAffiliateInfo: function() {
+      return _handleBlocking(_native('getAffiliateInfo', newId(), {}, true));
     },
 
     satoshiToCurrency: function(satoshi, currencyNum) {
@@ -1473,6 +1489,10 @@ function _bridge() {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
+  Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+    Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
+  };
+
   // Takes a spend request and sends user to send confirmation screen to sign a tx.
   Airbitz.core.requestSign = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSign(wallet, toAddress, amountSatoshi, amountFiat, options);
@@ -1504,6 +1524,11 @@ function _bridge() {
   // Retrives data for a JSON key stored for the plugin.
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
+    return (data && data !== 'undefined') ? JSON.parse(data) : null;
+  };
+
+  Airbitz.core.getAffiliateInfo = function() {
+    var data = Airbitz._bridge.getAffiliateInfo();
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 

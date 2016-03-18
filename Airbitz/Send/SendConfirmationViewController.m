@@ -341,6 +341,9 @@
         {
             [_spend setMetaData:_parsedURI.metadata];
             [_spend addAddress:_parsedURI.address amount:_amountSatoshi];
+            if ([_address2 length] > 20 && _amountSatoshi2)
+                [_spend addAddress:_address2 amount:_amountSatoshi2];
+            
         }
     }
 }
@@ -409,8 +412,8 @@
      }
      completion:^(BOOL finished)
      {
-            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withUnsentTx:)]) {
-                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:YES withError:NO withUnsentTx:nil];
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:transaction:withUnsentTx:)]) {
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:YES withError:NO transaction:nil withUnsentTx:nil];
             } else {
                 [self.delegate sendConfirmationViewControllerDidFinish:self];
             }
@@ -701,7 +704,7 @@
     }
     [self buildSpend];
     [_spend getFees:^(uint64_t totalFees) {
-        [self updateFeeFieldContents:totalFees error:NO errorString:nil];
+        [self updateFeeFieldContents:totalFees+_amountSatoshi2 error:NO errorString:nil];
     } error:^(NSError *error) {
         [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
     }];
@@ -1002,9 +1005,9 @@
         if (_bAdvanceToTx) {
             [self showTransactionDetails:wallet transaction:transaction];
         } else {
-            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withUnsentTx:)]) {
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:transaction:withUnsentTx:)]) {
                 
-                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO withUnsentTx:unsentTx];
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO transaction:transaction withUnsentTx:unsentTx];
             } else {
                 [self.delegate sendConfirmationViewControllerDidFinish:self];
             }
@@ -1024,7 +1027,7 @@
             [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
         } else {
             if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withUnsentTx:)]) {
-                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO withUnsentTx:nil];
+                [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO transaction:nil withUnsentTx:nil];
             } else {
                 [self.delegate sendConfirmationViewControllerDidFinish:self];
             }
