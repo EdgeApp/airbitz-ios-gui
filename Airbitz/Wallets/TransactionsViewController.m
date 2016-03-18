@@ -339,11 +339,6 @@
     [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.defaultCurrency.code
                                           forSegmentAtIndex:1];
 
-    if (_segmentedControlUSD)
-        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
-    else
-        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
-
     int64_t totalSatoshi = 0;
     //
     // Update balance view in the wallet dropdown.
@@ -353,9 +348,21 @@
         totalSatoshi += wallet.balance;
     }
 
-    NSString *strCurrency = [self formatAmount:totalSatoshi wallet:nil];
-    NSString *str = [NSString stringWithFormat:@"%@%@",walletBalanceHeaderText,strCurrency];
-    _balanceHeaderView.titleLabel.text = str;
+    if (_segmentedControlUSD)
+    {
+        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
+        NSString *strCurrency = [self formatAmount:totalSatoshi wallet:nil];
+        NSString *str = [NSString stringWithFormat:@"%@%@",walletBalanceHeaderText,strCurrency];
+        _balanceHeaderView.titleLabel.text = str;
+    }
+    else
+    {
+        self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
+        NSString *strCurrency = [abcAccount.settings.denomination satoshiToBTCString:totalSatoshi withSymbol:YES cropDecimals:YES];
+        NSString *str = [NSString stringWithFormat:@"%@%@",walletBalanceHeaderText,strCurrency];
+        _balanceHeaderView.titleLabel.text = str;
+    }
+    
 
 }
 
