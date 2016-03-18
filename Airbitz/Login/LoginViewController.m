@@ -678,9 +678,10 @@ static BOOL bInitialized = false;
          [self showSpinner:NO];
          self.PINTextField.text = nil;
          
-         if (ABCConditionCodeBadPassword == error.code)
+         if (ABCConditionCodeBadPassword == error.code ||
+             ABCConditionCodeInvalidPinWait == error.code)
          {
-             [MainViewController fadingAlert:NSLocalizedString(@"Invalid PIN", nil)];
+             [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
              [self.PINTextField becomeFirstResponder];
          }
          else if (ABCConditionCodeInvalidOTP == error.code)
