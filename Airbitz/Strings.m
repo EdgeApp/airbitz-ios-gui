@@ -111,7 +111,7 @@
 #define notSoGoodText                               NSLocalizedString(@"Not so good", nil)
 #define itsGreatText                                NSLocalizedString(@"It's great", nil)
 #define receivedFundsText                           NSLocalizedString(@"Received Funds", nil)
-#define bitcoinReceivedTapText                      NSLocalizedString(@"Bitcoin received. Tap for details.", nil)
+#define bitcoinReceivedTapText                      NSLocalizedString(@"%@ Bitcoin received. Tap for details.", nil)
 #define youReceivedBitcoinText                      NSLocalizedString(@"You Received Bitcoin!\n%@ (~%@)", nil)
 #define youReceivedBitcoinUsePayeeText              NSLocalizedString(@"You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction", nil)
 #define wouldYouLikeToSendFeedbackText              NSLocalizedString(@"Would you like to send us some feedback?", nil)

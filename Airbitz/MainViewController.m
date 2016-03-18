@@ -1485,7 +1485,8 @@ MainViewController *singleton;
     {
         if (transaction && transaction.amountSatoshi >= 0) {
             NSString *title = receivedFundsText;
-            NSString *msg = bitcoinReceivedTapText;
+            NSString *amtString = [abcAccount.settings.denomination satoshiToBTCString:transaction.amountSatoshi withSymbol:YES cropDecimals:YES];
+            NSString *msg = [NSString stringWithFormat:bitcoinReceivedTapText, amtString];
             [[AudioController controller] playReceived];
             _receivedAlert = [[UIAlertView alloc]
                               initWithTitle:title
