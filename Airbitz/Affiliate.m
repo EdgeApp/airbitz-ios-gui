@@ -138,7 +138,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info_beta";
             }
             else
             {
-                BitidSignature *bitidSignature = [abcAccount bitidSign:bitiduri msg:bitiduri];
+                ABCBitIDSignature *bitidSignature = [abcAccount bitidSign:bitiduri message:bitiduri];
                 if (!bitidSignature)
                 {
                     if (errorHandler) errorHandler();

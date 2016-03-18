@@ -363,7 +363,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [abcAccount bitidSign:uri msg:msg];
+    ABCBitIDSignature *bitid = [abcAccount bitidSign:uri message:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.address]];
 }
@@ -373,7 +373,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    BitidSignature *bitid = [abcAccount bitidSign:uri msg:msg];
+    ABCBitIDSignature *bitid = [abcAccount bitidSign:uri message:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
