@@ -157,3 +157,4 @@
 #define affiliateLinkIsCopiedToClipboardText        NSLocalizedString(@"Affiliate link has been copied to the clipboard", nil)
 #define shareThisLinkAndReceiveRevenue              NSLocalizedString(@"%@\n\nShare this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app.", nil)
 #define affiliateLinkShareText                      NSLocalizedString(@"Download the Airbitz wallet and save money using bitcoin", nil)
+#define messageSentText                             NSLocalizedString(@"Message Sent", nil)

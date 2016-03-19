@@ -1566,6 +1566,14 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             UIActivityViewController* activityViewController =
             [[UIActivityViewController alloc] initWithActivityItems:dataToShare
                                               applicationActivities:nil];
+            [activityViewController setCompletionWithItemsHandler:^(NSString *activityType,
+                                                                    BOOL completed,
+                                                                    NSArray *returnedItems,
+                                                                    NSError *activityError) {
+                if (completed)
+                    [MainViewController fadingAlert:messageSentText];
+                
+            }];
             [self presentViewController:activityViewController animated:YES completion:^{}];
         }
     }
