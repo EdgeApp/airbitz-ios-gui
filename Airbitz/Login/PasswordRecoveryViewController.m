@@ -675,6 +675,7 @@ typedef enum eAlertType
             {
                 qav.answerField.returnKeyType = UIReturnKeyNext;
             }
+            qav.answerField.placeholder = answersAreCaseSensitiveText;
 			
 			size.height += qav.frame.size.height;
 

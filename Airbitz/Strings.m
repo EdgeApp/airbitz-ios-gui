@@ -158,3 +158,4 @@
 #define shareThisLinkAndReceiveRevenue              NSLocalizedString(@"%@\n\nShare this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app.", nil)
 #define affiliateLinkShareText                      NSLocalizedString(@"Download the Airbitz wallet and save money using bitcoin", nil)
 #define messageSentText                             NSLocalizedString(@"Message Sent", nil)
+#define answersAreCaseSensitiveText                 NSLocalizedString(@"Answers are case sensitive", @"Warning for password recovery textfields")
