@@ -1113,6 +1113,7 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
     [_loginViewController removeFromParentViewController];
+    [_directoryViewController updateNavBar];
 }
 
 + (void)createFirstWallet;

@@ -232,6 +232,11 @@ static bool bInitialized = false;
     self.afmanager = [MainViewController createAFManager];
 }
 
+- (void) updateNavBar;
+{
+    [self setupNavBar];
+}
+
 - (void) setupNavBar
 {
 //    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
