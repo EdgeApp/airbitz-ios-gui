@@ -2029,6 +2029,18 @@ MainViewController *singleton;
     [singleton slideoutGiftCard];
 }
 
++ (void)launchSend;
+{
+    [singleton launchSend];
+}
+
+- (void)launchSend;
+{
+    _appMode = APP_MODE_SEND;
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+    [self launchViewControllerBasedOnAppMode];
+}
+
 + (void)launchDirectoryATM;
 {
     [singleton launchDirectoryATM];

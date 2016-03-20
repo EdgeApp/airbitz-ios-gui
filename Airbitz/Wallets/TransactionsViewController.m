@@ -897,7 +897,7 @@
 //            if (0 == abcAccount.currentWallet.arrayTransactions.count)
 //                return 1;
 //            else
-                return abcAccount.currentWallet.arrayTransactions.count + 2;
+                return abcAccount.currentWallet.arrayTransactions.count + 4;
         }
     }
     else // self.walletsTable
@@ -987,19 +987,25 @@
         BOOL bBlankCell = NO;
         if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
         {
-            if (_totalSatoshi == 0)
-                cell.promoLabel.text = @"Step 1: Buy Bitcoin";
-            else
-                cell.promoLabel.text = @"Buy Bitcoin";
+            cell.promoLabel.text = buyBitcoinButton;
             
             bBlankCell = YES;
         }
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
         {
-            if (_totalSatoshi == 0)
-                cell.promoLabel.text = @"Step 2: Up to 20% off Starbucks & Target";
-            else
-                cell.promoLabel.text = @"Up to 20% off Starbucks & Target";
+            cell.promoLabel.text = importAirbitzGiftCardButton;
+            
+            bBlankCell = YES;
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 2)
+        {
+            cell.promoLabel.text = upTo20OffStarbucksTargetButton;
+            
+            bBlankCell = YES;
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 3)
+        {
+            cell.promoLabel.text = upTo15to20OffAmazonButton;
             
             bBlankCell = YES;
         }
@@ -1185,8 +1191,19 @@
         }
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
         {
+            // Import Gift Card
+            [MainViewController launchSend];
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 2)
+        {
             // 20% off button
             [MainViewController launchGiftCard];
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 3)
+        {
+            // Amazon button
+            NSURL *url = [[NSURL alloc] initWithString:@"http://bit.ly/AirbitzPurse"];
+            [[UIApplication sharedApplication] openURL:url];
         }
         else if ([self searchEnabled])
         {
