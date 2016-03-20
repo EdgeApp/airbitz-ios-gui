@@ -1178,9 +1178,10 @@
         {
             // Buy bitcoin button
             NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
-            if ([deviceCurrency isEqualToString:@"USD"] ||
-                [deviceCurrency isEqualToString:@"CAD"] ||
-                [deviceCurrency isEqualToString:@"EUR"])
+            if (SHOW_BUY_SELL &&
+                ([deviceCurrency isEqualToString:@"USD"] ||
+                 [deviceCurrency isEqualToString:@"CAD"] ||
+                 [deviceCurrency isEqualToString:@"EUR"]))
             {
                 [MainViewController launchBuySell];
             }
