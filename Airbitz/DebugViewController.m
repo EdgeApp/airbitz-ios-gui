@@ -140,7 +140,7 @@
     ABCLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 
-    self.clearWatcherButton.titleLabel.text = ;
+    self.clearWatcherButton.titleLabel.text = restartingWatcherServiceText;
 
     [abcAccount clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
