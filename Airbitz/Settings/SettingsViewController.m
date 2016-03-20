@@ -915,12 +915,12 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == ROW_AUTO_LOG_OFF)
 		{
-			cell.name.text = NSLocalizedString(@"Auto log off after", @"settings text");
+			cell.name.text = autoLogoffAfterText;
             [cell.button setTitle:[self logoutDisplay] forState:UIControlStateNormal];
 		}
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
-			cell.name.text = NSLocalizedString(@"Default Currency", @"settings text");
+			cell.name.text = defaultCurrencyText;
             [cell.button setTitle:abcAccount.settings.defaultCurrency.code forState:UIControlStateNormal];
 		}
 	}
@@ -928,7 +928,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == 0)
 		{
-			cell.name.text = NSLocalizedString(@"Default Exchange", @"settings text");
+			cell.name.text = defaultExchangeText;
 		}
         [cell.button setTitle:abcAccount.settings.exchangeRateSource forState:UIControlStateNormal];
 	}

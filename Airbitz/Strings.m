@@ -159,3 +159,7 @@
 #define affiliateLinkShareText                      NSLocalizedString(@"Download the Airbitz wallet and save money using bitcoin", nil)
 #define messageSentText                             NSLocalizedString(@"Message Sent", nil)
 #define answersAreCaseSensitiveText                 NSLocalizedString(@"Answers are case sensitive", @"Warning for password recovery textfields")
+#define autoLogoffAfterText                         NSLocalizedString(@"Auto log off after", @"settings text")
+#define defaultCurrencyText                         NSLocalizedString(@"Default Currency", @"settings text")
+#define defaultExchangeText                         NSLocalizedString(@"Default Exchange", @"settings text")
+
