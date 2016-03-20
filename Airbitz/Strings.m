@@ -178,7 +178,7 @@
 #define tfaOnText                                   NSLocalizedString(@"Two Factor Authentication On", nil)
 #define tfaEnabledFromDifferentDeviceText           NSLocalizedString(@"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.", nil)
 #define remindMeLaterText                           NSLocalizedString(@"Remind Me Later", nil)
-#define enableButtonText                            NSLocalizedString(@"Enable", nil), nil]
+#define enableButtonText                            NSLocalizedString(@"Enable", nil)
 #define tfaInvalidText                              NSLocalizedString(@"Two Factor Invalid", nil)
 #define tfaTokenOnThisDeviceInvalidText             NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
 #define checkingPasswordText                        NSLocalizedString(@"Checking password...", nil)
