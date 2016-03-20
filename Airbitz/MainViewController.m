@@ -1274,7 +1274,7 @@ MainViewController *singleton;
 
 - (void)showPasswordSetAlert
 {
-    NSString *title = NSLocalizedString(@"No password set", nil);
+    NSString *title = noPasswordSetText;
     NSString *message = createPasswordForAccountText;
     // show password reminder test
     _passwordSetAlert = [[UIAlertView alloc]
@@ -1443,12 +1443,11 @@ MainViewController *singleton;
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [self resetViews];
-        _passwordChangeAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Password Change", nil)
-                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
-                                delegate:self
-                                cancelButtonTitle:nil
-                                otherButtonTitles:okButtonText, nil];
+        _passwordChangeAlert = [[UIAlertView alloc] initWithTitle:passwordChangeText
+                                                          message:passwordToAccountChangeText
+                                                         delegate:self
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:okButtonText, nil];
         [_passwordChangeAlert show];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
@@ -1516,11 +1515,11 @@ MainViewController *singleton;
 {
     if (_otpRequiredAlert == nil) {
         _otpRequiredAlert = [[UIAlertView alloc]
-                             initWithTitle:NSLocalizedString(@"Two Factor Authentication On", nil)
-                             message:NSLocalizedString(@"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.", nil)
+                             initWithTitle:tfaOnText
+                             message:tfaEnabledFromDifferentDeviceText
                              delegate:self
-                             cancelButtonTitle:NSLocalizedString(@"Remind Me Later", nil)
-                             otherButtonTitles:NSLocalizedString(@"Enable", nil), nil];
+                             cancelButtonTitle:remindMeLaterText
+                             otherButtonTitles:enableButtonText, nil];
         [_otpRequiredAlert show];
     }
 }
@@ -1529,8 +1528,8 @@ MainViewController *singleton;
 {
     if (_otpSkewAlert == nil) {
         _otpSkewAlert = [[UIAlertView alloc]
-                         initWithTitle:NSLocalizedString(@"Two Factor Invalid", nil)
-                         message:NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
+                         initWithTitle:tfaInvalidText
+                         message:tfaTokenOnThisDeviceInvalidText
                          delegate:self
                          cancelButtonTitle:okButtonText
                          otherButtonTitles:nil, nil];
@@ -1681,7 +1680,7 @@ MainViewController *singleton;
             [Util checkPasswordAsync:[[alertView textFieldAtIndex:0] text]
                         withSelector:@selector(handlePasswordResults:)
                           controller:self];
-            [FadingAlertView create:self.view message:NSLocalizedString(@"Checking password...", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            [FadingAlertView create:self.view message:checkingPasswordText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         }
     }
     else if (_passwordIncorrectAlert == alertView)

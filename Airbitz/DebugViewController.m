@@ -74,7 +74,7 @@
 - (void)setupNavBar
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Debug Options", @"Debug screen header title")];
+    [MainViewController changeNavBarTitle:self title:debugOptionsTitle];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
@@ -123,14 +123,14 @@
 
 - (IBAction)uploadLogs:(id)sender
 {
-    NSString *title = NSLocalizedString(@"Upload Log File", nil);
-    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    NSString *title = uploadLogFileText;
+    NSString *message = enterAnyNotesForSupportStaff;
     // show password reminder test
     _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
                                                  message:message
                                                 delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:@"Upload Log", nil];
+                                       cancelButtonTitle:cancelButtonText
+                                       otherButtonTitles:uploadLogText, nil];
     _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [_uploadLogAlert show];
 }
@@ -140,7 +140,7 @@
     ABCLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
 
-    self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
+    self.clearWatcherButton.titleLabel.text = ;
 
     [abcAccount clearBlockchainCache:^{
         self.clearWatcherButton.titleLabel.text = buttonText;
