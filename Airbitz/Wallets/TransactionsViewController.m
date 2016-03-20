@@ -73,8 +73,7 @@
     UIButton                    *_blockingButton;
     NSOperationQueue                                *txSearchQueue;
     BOOL                                _segmentedControlUSD;
-
-
+    int64_t                             _totalSatoshi;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
@@ -339,26 +338,26 @@
     [self.balanceHeaderView.segmentedControlBTCUSD setTitle:abcAccount.settings.defaultCurrency.code
                                           forSegmentAtIndex:1];
 
-    int64_t totalSatoshi = 0;
+    _totalSatoshi = 0;
     //
     // Update balance view in the wallet dropdown.
     //
     for(ABCWallet * wallet in abcAccount.arrayWallets)
     {
-        totalSatoshi += wallet.balance;
+        _totalSatoshi += wallet.balance;
     }
 
     if (_segmentedControlUSD)
     {
         self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 1;
-        NSString *strCurrency = [self formatAmount:totalSatoshi wallet:nil];
+        NSString *strCurrency = [self formatAmount:_totalSatoshi wallet:nil];
         NSString *str = [NSString stringWithFormat:@"%@%@",walletBalanceHeaderText,strCurrency];
         _balanceHeaderView.titleLabel.text = str;
     }
     else
     {
         self.balanceHeaderView.segmentedControlBTCUSD.selectedSegmentIndex = 0;
-        NSString *strCurrency = [abcAccount.settings.denomination satoshiToBTCString:totalSatoshi withSymbol:YES cropDecimals:YES];
+        NSString *strCurrency = [abcAccount.settings.denomination satoshiToBTCString:_totalSatoshi withSymbol:YES cropDecimals:YES];
         NSString *str = [NSString stringWithFormat:@"%@%@",walletBalanceHeaderText,strCurrency];
         _balanceHeaderView.titleLabel.text = str;
     }
@@ -472,16 +471,15 @@
         !abcAccount.currentWallet.currency.code)
         return;
 
-    int64_t totalSatoshi = 0.0;
     for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
     {
-        totalSatoshi += tx.amountSatoshi;
+        _totalSatoshi += tx.amountSatoshi;
     }
-    _balanceView.topAmount.text = [abcAccount.settings.denomination satoshiToBTCString:totalSatoshi];
+    _balanceView.topAmount.text = [abcAccount.settings.denomination satoshiToBTCString:_totalSatoshi];
 
     double fCurrency;
 
-    fCurrency = [abcAccount.exchangeCache satoshiToCurrency:totalSatoshi currencyCode:abcAccount.currentWallet.currency.code error:nil];
+    fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_totalSatoshi currencyCode:abcAccount.currentWallet.currency.code error:nil];
     
     NSString *fiatAmount = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
     _balanceView.botAmount.text = [NSString stringWithFormat:@"%@ %@", abcAccount.currentWallet.currency.code, fiatAmount];
@@ -882,6 +880,11 @@
 {
     if (tableView == self.tableView)
     {
+//        if (_totalSatoshi == 0 &&
+//            [self.arraySearchTransactions count] == 0)
+//        {
+//            return 2;
+//        }
         if ([self searchEnabled])
         {
             if (self.arraySearchTransactions.count == 0)
@@ -891,10 +894,10 @@
         }
         else
         {
-            if (0 == abcAccount.currentWallet.arrayTransactions.count)
-                return 1;
-            else
-                return abcAccount.currentWallet.arrayTransactions.count;
+//            if (0 == abcAccount.currentWallet.arrayTransactions.count)
+//                return 1;
+//            else
+                return abcAccount.currentWallet.arrayTransactions.count + 2;
         }
     }
     else // self.walletsTable
@@ -967,22 +970,44 @@
     {
         return [self tableViewWallets:tableView cellForRowAtIndexPath:indexPath];
     }
-
+    
     UITableViewCell *finalCell;
     NSInteger row = [indexPath row];
     {
         TransactionCell *cell;
         ABCWallet *wallet = abcAccount.currentWallet;
-
+        
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
         [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
-
+        
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         
         ABCTransaction *transaction = NULL;
         BOOL bBlankCell = NO;
-        if ([self searchEnabled])
+        //    if (_totalSatoshi == 0 &&
+        //        [self.arraySearchTransactions count] == 0)
+        //    {
+        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
+        {
+            if (_totalSatoshi == 0)
+                cell.promoLabel.text = @"Step 1: Buy Bitcoin";
+            else
+                cell.promoLabel.text = @"Buy Bitcoin";
+            
+            bBlankCell = YES;
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
+        {
+            if (_totalSatoshi == 0)
+                cell.promoLabel.text = @"Step 2: Up to 20% off Starbucks & Target";
+            else
+                cell.promoLabel.text = @"Up to 20% off Starbucks & Target";
+            
+            bBlankCell = YES;
+        }
+        //    }
+        else if ([self searchEnabled])
         {
             if ([self.arraySearchTransactions count] == 0)
             {
@@ -1000,41 +1025,51 @@
             {
                 bBlankCell = YES;
                 cell.addressLabel.text = transactionCellNoTransactionsText;
-
+                
             }
             else
             {
                 transaction = [abcAccount.currentWallet.arrayTransactions objectAtIndex:indexPath.row];
             }
         }
-
+        
         //
         // if this is an empty table, generate a blank cell
         //
         if (bBlankCell)
         {
-//            cell.addressLabel.textColor = [Theme Singleton].colorTextDark;
-            cell.dateLabel.text = @"";
+            cell.promoLabel.textColor = [Theme Singleton].colorTextLink;
+            cell.promoLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
+            cell.addressLabel.text = @"";
             cell.confirmationLabel.text = @"";
+            cell.dateLabel.text = @"";
             cell.amountLabel.text = @"";
             cell.balanceLabel.text = @"";
             cell.imagePhoto.image = nil;
+            cell.promoLabel.textAlignment = NSTextAlignmentCenter;
+
             return cell;
         }
 
+        cell.promoLabel.text = @"";
+        cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+        cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].buttonFontSize];
+        cell.addressLabel.textAlignment = NSTextAlignmentLeft;
+        cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
+        
         // date
         cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
-
+        
         // address
         cell.addressLabel.text = transaction.metaData.payeeName;
-
+        
         // if we are in search  mode
         if ([self searchEnabled])
         {
             // confirmation becomes category
             cell.confirmationLabel.text = transaction.metaData.category;
             cell.confirmationLabel.textColor = COLOR_BALANCE;
-
+            
         }
         else
         {
@@ -1068,13 +1103,13 @@
                 cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, confirmationsText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
-
+            
         }
-
+        
         // amount - always bitcoin
         cell.amountLabel.text = [self formatAmount:transaction.amountSatoshi useFiat:NO currency:wallet.currency];
         cell.amountLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
-
+        
         if (_showRunningBalance)
         {
             // balance
@@ -1088,9 +1123,9 @@
             cell.balanceLabel.text = [wallet.currency doubleToPrettyCurrencyString:fCurrency];
             cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
-
+        
         // set the photo
-
+        
         UIImage *placeHolderImage;
         UIColor *backgroundColor;
         if (transaction.amountSatoshi < 0)
@@ -1117,14 +1152,13 @@
         [cell.imagePhoto.layer setBackgroundColor:[backgroundColor CGColor]];
         cell.imagePhoto.layer.cornerRadius = 5;
         cell.imagePhoto.layer.masksToBounds = YES;
-
+        
         CGFloat borderWidth = PHOTO_BORDER_WIDTH;
         cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
         cell.viewPhoto.layer.borderWidth = borderWidth;
         cell.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
         finalCell = cell;
     }
-
     return finalCell;
 }
 

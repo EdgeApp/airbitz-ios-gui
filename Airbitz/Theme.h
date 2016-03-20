@@ -21,6 +21,7 @@
 // User Settings
 @property (nonatomic) UIColor *colorTextLink;
 @property (nonatomic) UIColor *colorTextLinkOnDark;
+@property (nonatomic) UIColor *colorTextDarkGrey;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;
@@ -62,6 +63,7 @@
 @property (nonatomic) CGFloat heightButton;
 
 @property (nonatomic) CGFloat fontSizeEnterPINText;
+@property (nonatomic) CGFloat fontSizeTxListBuyBitcoin;
 
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
