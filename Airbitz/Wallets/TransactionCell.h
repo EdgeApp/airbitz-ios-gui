@@ -19,5 +19,6 @@
 @property (nonatomic, weak) IBOutlet LatoLabel          *balanceLabel;
 @property (weak, nonatomic) IBOutlet UIView             *viewPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView        *imagePhoto;
+@property (weak, nonatomic) IBOutlet LatoLabel          *promoLabel;
 
 @end

@@ -162,4 +162,7 @@
 #define autoLogoffAfterText                         NSLocalizedString(@"Auto log off after", @"settings text")
 #define defaultCurrencyText                         NSLocalizedString(@"Default Currency", @"settings text")
 #define defaultExchangeText                         NSLocalizedString(@"Default Exchange", @"settings text")
-
+#define buyBitcoinButton                            NSLocalizedString(@"Buy Bitcoin",nil)
+#define importAirbitzGiftCardButton                 NSLocalizedString(@"Import Airbitz Gift Card",nil)
+#define upTo20OffStarbucksTargetButton              NSLocalizedString(@"Up to 20% off Starbucks & Target",nil)
+#define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)

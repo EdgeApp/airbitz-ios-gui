@@ -50,6 +50,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextDark = UIColorFromARGB(0xff0C578C);
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
+    self.colorTextDarkGrey = UIColorFromARGB(0xFF404040);
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
     self.colorSendButton = self.colorButtonBlue;
@@ -111,7 +112,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightButton                       = 45.0;
         self.buttonFontSize                     = 15.0;
         self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
-
+        self.fontSizeTxListBuyBitcoin           = 20.0;
     }
     if (IS_MIN_IPHONE5)
     {
