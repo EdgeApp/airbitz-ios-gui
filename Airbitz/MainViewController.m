@@ -2017,6 +2017,31 @@ MainViewController *singleton;
     [self launchViewControllerBasedOnAppMode];
 }
 
+#pragma mark View Controller Deep Links
+
++ (void)launchBuySell;
+{
+    [singleton slideoutBuySell];
+}
+
++ (void)launchGiftCard;
+{
+    [singleton slideoutGiftCard];
+}
+
++ (void)launchDirectoryATM;
+{
+    [singleton launchDirectoryATM];
+}
+
+- (void)launchDirectoryATM;
+{
+    _appMode = APP_MODE_DIRECTORY;
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_DIRECTORY];
+    [self launchViewControllerBasedOnAppMode];
+    [_directoryViewController launchATMSearch];
+}
+
 #pragma mark infoView Delegates
 
 - (void)InfoViewFinished:(InfoView *)infoView
@@ -2065,6 +2090,7 @@ MainViewController *singleton;
         if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
             [_buySellViewController resetViews];
         }
     }
@@ -2077,6 +2103,7 @@ MainViewController *singleton;
         if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
             [MainViewController animateSwapViewControllers:_giftCardViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
             [_giftCardViewController resetViews];
         }
     }

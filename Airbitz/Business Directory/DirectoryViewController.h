@@ -10,5 +10,6 @@
 #import "AirbitzViewController.h"
 
 @interface DirectoryViewController : AirbitzViewController
+- (void)launchATMSearch;
 
 @end

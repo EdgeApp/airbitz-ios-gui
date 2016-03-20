@@ -1316,7 +1316,7 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-St-5IO" userLabel="promoLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                                    <rect key="frame" x="20" y="0.0" width="335" height="72"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1362,8 +1362,8 @@
                                                 <constraint firstItem="iE3-Jv-3vs" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="4" id="3gH-9m-cwA"/>
                                                 <constraint firstItem="jrM-St-5IO" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="5Yf-QL-as3"/>
                                                 <constraint firstAttribute="trailing" secondItem="iE3-Jv-3vs" secondAttribute="trailing" constant="20" symbolic="YES" id="5aT-uT-XBH"/>
-                                                <constraint firstAttribute="trailing" secondItem="jrM-St-5IO" secondAttribute="trailing" id="8ay-R4-hZq"/>
-                                                <constraint firstItem="jrM-St-5IO" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" id="9cU-yN-3Al"/>
+                                                <constraint firstAttribute="trailing" secondItem="jrM-St-5IO" secondAttribute="trailing" constant="20" symbolic="YES" id="8ay-R4-hZq"/>
+                                                <constraint firstItem="jrM-St-5IO" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="20" symbolic="YES" id="9cU-yN-3Al"/>
                                                 <constraint firstItem="eY0-zc-Tda" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="9" id="AEi-lW-i1Y"/>
                                                 <constraint firstItem="pqN-mY-o6I" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="CSr-oh-6Gt"/>
                                                 <constraint firstAttribute="bottom" secondItem="pqN-mY-o6I" secondAttribute="bottom" id="DDn-Iq-5z5"/>

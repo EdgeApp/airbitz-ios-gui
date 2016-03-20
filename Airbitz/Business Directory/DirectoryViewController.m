@@ -512,6 +512,13 @@ static bool bInitialized = false;
 
 #pragma mark category buttons
 
+- (void)launchATMSearch;
+{
+    self.searchBarSearch.text = NSLocalizedString(@"ATM", nil);
+    self.searchBarLocation.text = NSLocalizedString(@"", nil);
+    [self transitionMode:DIRECTORY_MODE_MAP];
+}
+
 - (IBAction)CategoryButton: (UIButton *)sender
 {
     //ABCLog(2,@"Category %li", (long)sender.tag);
@@ -528,9 +535,7 @@ static bool bInitialized = false;
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_ATM:
-            self.searchBarSearch.text = NSLocalizedString(@"ATM", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"", nil);
-            [self transitionMode:DIRECTORY_MODE_MAP];
+            [self launchATMSearch];
             break;
         case TAG_CATEGORY_GIFTCARDS:
             self.searchBarSearch.text = NSLocalizedString(@"Gift Cards", nil);

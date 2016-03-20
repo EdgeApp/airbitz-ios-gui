@@ -985,9 +985,6 @@
         
         ABCTransaction *transaction = NULL;
         BOOL bBlankCell = NO;
-        //    if (_totalSatoshi == 0 &&
-        //        [self.arraySearchTransactions count] == 0)
-        //    {
         if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
         {
             if (_totalSatoshi == 0)
@@ -1006,7 +1003,6 @@
             
             bBlankCell = YES;
         }
-        //    }
         else if ([self searchEnabled])
         {
             if ([self.arraySearchTransactions count] == 0)
@@ -1046,7 +1042,8 @@
             cell.amountLabel.text = @"";
             cell.balanceLabel.text = @"";
             cell.imagePhoto.image = nil;
-            cell.promoLabel.textAlignment = NSTextAlignmentCenter;
+            cell.imagePhoto.backgroundColor = [UIColor clearColor];
+            cell.promoLabel.textAlignment = NSTextAlignmentLeft;
 
             return cell;
         }
@@ -1171,7 +1168,27 @@
         TransactionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         [self resignAllResponders];
-        if ([self searchEnabled])
+        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
+        {
+            // Buy bitcoin button
+            NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
+            if ([deviceCurrency isEqualToString:@"USD"] ||
+                [deviceCurrency isEqualToString:@"CAD"] ||
+                [deviceCurrency isEqualToString:@"EUR"])
+            {
+                [MainViewController launchBuySell];
+            }
+            else
+            {
+                [MainViewController launchDirectoryATM];
+            }
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
+        {
+            // 20% off button
+            [MainViewController launchGiftCard];
+        }
+        else if ([self searchEnabled])
         {
             if ([self.arraySearchTransactions count] > 0)
                 [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row] cell:cell];

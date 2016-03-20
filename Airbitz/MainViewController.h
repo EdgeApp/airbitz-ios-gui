@@ -80,6 +80,11 @@ typedef enum eNavBarSide
 + (void)createFirstWallet;
 + (void)createFirstWallet:(BOOL) popupSpinner;
 
++ (void)launchBuySell;
++ (void)launchGiftCard;
++ (void)launchDirectoryATM;
+
+
 + (AFHTTPRequestOperationManager *) createAFManager;
 
 + (void)fadingAlertHelpPopup:(NSString *)message;
