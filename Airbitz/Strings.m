@@ -166,3 +166,4 @@
 #define importAirbitzGiftCardButton                 NSLocalizedString(@"Import Airbitz Gift Card",nil)
 #define upTo20OffStarbucksTargetButton              NSLocalizedString(@"Up to 20% off Starbucks & Target",nil)
 #define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)
+#define importPrivateKeyButton                      NSLocalizedString(@"Import Private Key", nil)

@@ -993,7 +993,10 @@
         }
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
         {
-            cell.promoLabel.text = importAirbitzGiftCardButton;
+            if (AIRBITZ)
+                cell.promoLabel.text = importAirbitzGiftCardButton;
+            else
+                cell.promoLabel.text = importPrivateKeyButton;
             
             bBlankCell = YES;
         }

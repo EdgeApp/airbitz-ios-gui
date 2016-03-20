@@ -4667,6 +4667,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"AIRBITZ_DEVELOP=1",
+					"AIRBITZ=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4713,6 +4714,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"AIRBITZ_DEVELOP=1",
+					"AIRBITZ=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4759,6 +4761,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"AIRBITZ_TESTNET=1",
+					"AIRBITZ=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4805,6 +4808,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"AIRBITZ_TESTNET=1",
+					"AIRBITZ=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4932,6 +4936,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -4972,6 +4981,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"AIRBITZ=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
