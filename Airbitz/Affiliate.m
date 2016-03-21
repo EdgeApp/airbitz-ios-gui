@@ -67,6 +67,9 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info_beta";
         
         if (! jsonData) {
             NSLog(@"Got an error: %@", error);
+            [LocalSettings controller].affiliateInfo = @"";
+            [LocalSettings controller].bCheckedForAffiliate = YES;
+            [LocalSettings saveAll];
             if (errorHandler) errorHandler();
         } else {
             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -79,6 +82,9 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info_beta";
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ABCLog(1, @"Error getting affiliate bitid URI");
+        [LocalSettings controller].affiliateInfo = @"";
+        [LocalSettings controller].bCheckedForAffiliate = YES;
+        [LocalSettings saveAll];
         if (errorHandler) errorHandler();
     }];
 }
