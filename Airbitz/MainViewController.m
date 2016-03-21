@@ -108,6 +108,10 @@ typedef enum eAppMode
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
     NSTimer                     *updateExchangeRateTimer;
+    
+    UIAlertView                     *_affiliateAlert;
+    NSString                        *_affiliateURL;
+
 
 }
 
@@ -1739,6 +1743,37 @@ MainViewController *singleton;
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
         }
     }
+    else if (_affiliateAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            if (pb)
+            {
+                [pb setString:_affiliateURL];
+                [MainViewController fadingAlert:affiliateLinkIsCopiedToClipboardText];
+            }
+        }
+        else if (2 == buttonIndex)
+        {
+            // Share
+            NSString *shareString = [NSString stringWithFormat:@"%@ %@",affiliateLinkShareText, _affiliateURL];
+            NSArray* dataToShare = @[shareString];
+            UIActivityViewController* activityViewController =
+            [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                              applicationActivities:nil];
+            [activityViewController setCompletionWithItemsHandler:^(NSString *activityType,
+                                                                    BOOL completed,
+                                                                    NSArray *returnedItems,
+                                                                    NSError *activityError) {
+                if (completed)
+                    [MainViewController fadingAlert:messageSentText];
+                
+            }];
+            [self presentViewController:activityViewController animated:YES completion:^{}];
+        }
+    }
+
 }
 
 - (void)alertViewCancel:(UIAlertView *)alertView
@@ -2137,6 +2172,25 @@ MainViewController *singleton;
         }
     }
     [slideoutView showSlideout:NO];
+
+}
+
+- (void)slideoutAffiliate;
+{
+    Affiliate *affiliate = [Affiliate alloc];
+    
+    [affiliate getAffliateURL:^(NSString *url) {
+        _affiliateAlert = [[UIAlertView alloc] initWithTitle:referYourFriendsText
+                                                     message:[NSString stringWithFormat:shareThisLinkAndReceiveRevenue, url, appTitle]
+                                                    delegate:self
+                                           cancelButtonTitle:okButtonText
+                                           otherButtonTitles:copyButtonText, shareButtonText, nil];
+        _affiliateURL = url;
+        
+        [_affiliateAlert show];
+     } error:^{
+         
+     }];
 
 }
 

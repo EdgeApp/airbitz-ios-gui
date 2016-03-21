@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -123,8 +123,8 @@
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY / SELL BITCOIN" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rWQ-uJ-DUX" userLabel="buysellText">
-                                    <rect key="frame" x="65" y="0.0" width="161" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="65" y="0.0" width="302" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
@@ -143,7 +143,7 @@
                                 <action selector="buysellTouched" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="Ryy-Il-so6"/>
                             </connections>
                         </view>
-                        <view contentMode="scaleToFill" id="Lwy-1d-Qgs" userLabel="importView" customClass="UIButton">
+                        <view contentMode="scaleToFill" id="Lwy-1d-Qgs" userLabel="affiliateView" customClass="UIButton">
                             <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -154,9 +154,9 @@
                                         <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See Strings.h" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xju-3Y-EvK" userLabel="importText">
-                                    <rect key="frame" x="65" y="0.0" width="168" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See Strings.h" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xju-3Y-EvK" userLabel="affiliateText">
+                                    <rect key="frame" x="65" y="0.0" width="302" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
@@ -172,7 +172,7 @@
                                 <bool key="isElement" value="YES"/>
                             </accessibility>
                             <connections>
-                                <action selector="importTouched:" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="igk-zh-qVI"/>
+                                <action selector="affiliateTouched:" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="9rG-v8-IUK"/>
                             </connections>
                         </view>
                         <view contentMode="scaleToFill" id="Zu4-Fd-NGP" userLabel="discountedGiftCardView" customClass="UIButton">
@@ -187,8 +187,8 @@
                                     </accessibility>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See Strings.h" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bQy-8e-q5h" userLabel="giftCardText">
-                                    <rect key="frame" x="65" y="0.0" width="212" height="50"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="65" y="0.0" width="302" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                         <bool key="isElement" value="NO"/>
@@ -345,13 +345,13 @@
                 <outlet property="accountButton" destination="EpU-B2-VTR" id="OU5-vY-J4n"/>
                 <outlet property="accountPicker" destination="8L6-iO-nWG" id="mrV-4C-C8t"/>
                 <outlet property="accountText" destination="vsf-Ms-1Ff" id="EjR-p2-q8x"/>
+                <outlet property="affiliateButton" destination="Lwy-1d-Qgs" id="sSU-EL-Wye"/>
+                <outlet property="affiliateLabel" destination="xju-3Y-EvK" id="9lR-TX-Xmr"/>
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
                 <outlet property="dividerView3" destination="rb4-q3-fT7" id="0LY-BK-ewa"/>
                 <outlet property="giftCardButton" destination="Zu4-Fd-NGP" id="2Qj-IR-oIT"/>
                 <outlet property="giftCardTextLabel" destination="bQy-8e-q5h" id="f4L-tB-flJ"/>
-                <outlet property="importGiftCardButton" destination="Lwy-1d-Qgs" id="rz3-xo-Vmf"/>
-                <outlet property="importPrivateKeyLabel" destination="xju-3Y-EvK" id="Zgm-Rg-Clf"/>
                 <outlet property="logoutButton" destination="GIG-Sd-O0c" id="G8X-1c-MlU"/>
                 <outlet property="lowerViews" destination="WFe-bF-Laf" id="Oyd-RS-Y5j"/>
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
