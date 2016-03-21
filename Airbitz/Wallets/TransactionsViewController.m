@@ -478,6 +478,7 @@ const int NumPromoRows              = 5;
         !abcAccount.currentWallet.currency.code)
         return;
 
+    _totalSatoshi = 0.0;
     for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
     {
         _totalSatoshi += tx.amountSatoshi;
@@ -1168,7 +1169,7 @@ const int NumPromoRows              = 5;
         if (_showRunningBalance)
         {
             // balance
-            cell.balanceLabel.text = [abcAccount.settings.denomination satoshiToBTCString:transaction.balance withSymbol:YES cropDecimals:YES];
+            cell.balanceLabel.text = [abcAccount.settings.denomination satoshiToBTCString:transaction.balance withSymbol:YES cropDecimals:NO];
             cell.balanceLabel.textColor = COLOR_BALANCE;
         }
         else
