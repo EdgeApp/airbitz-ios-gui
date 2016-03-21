@@ -183,3 +183,7 @@
 #define tfaInvalidText                              NSLocalizedString(@"Two Factor Invalid", nil)
 #define tfaTokenOnThisDeviceInvalidText             NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
 #define checkingPasswordText                        NSLocalizedString(@"Checking password...", nil)
+#define sentBitcoinText                             NSLocalizedString(@"Sent Bitcoin", nil)
+#define receivedBitcoinText                         NSLocalizedString(@"Received Bitcoin", nil)
+
+

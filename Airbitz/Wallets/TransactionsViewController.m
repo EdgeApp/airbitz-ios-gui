@@ -1108,7 +1108,15 @@ const int NumPromoRows              = 5;
         cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
         
         // address
-        cell.addressLabel.text = transaction.metaData.payeeName;
+        if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
+            cell.addressLabel.text = transaction.metaData.payeeName;
+        else
+        {
+            if (transaction.amountSatoshi < 0)
+                cell.addressLabel.text = sentBitcoinText;
+            else
+                cell.addressLabel.text = receivedBitcoinText;
+        }
         
         // if we are in search  mode
         if ([self searchEnabled])
