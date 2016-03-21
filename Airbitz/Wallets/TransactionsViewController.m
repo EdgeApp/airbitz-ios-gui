@@ -1098,8 +1098,9 @@ const int NumPromoRows              = 5;
 
         cell.buttonRight.hidden = YES;
         cell.promoLabel.text = @"";
+        cell.addressLabel.textColor = [Theme Singleton].colorTextDark;
+        cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListName];
         cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
-        cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].buttonFontSize];
         cell.addressLabel.textAlignment = NSTextAlignmentLeft;
         cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
         

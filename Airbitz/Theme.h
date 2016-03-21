@@ -64,6 +64,7 @@
 
 @property (nonatomic) CGFloat fontSizeEnterPINText;
 @property (nonatomic) CGFloat fontSizeTxListBuyBitcoin;
+@property (nonatomic) CGFloat fontSizeTxListName;
 
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;

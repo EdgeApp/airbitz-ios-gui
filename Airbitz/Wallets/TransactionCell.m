@@ -7,6 +7,7 @@
 //
 
 #import "TransactionCell.h"
+#import "Theme.h"
 
 @implementation TransactionCell
 

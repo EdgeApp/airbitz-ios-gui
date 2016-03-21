@@ -113,6 +113,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.buttonFontSize                     = 15.0;
         self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
         self.fontSizeTxListBuyBitcoin           = 18.0;
+        self.fontSizeTxListName                 = 15.0;
     }
     if (IS_MIN_IPHONE5)
     {
@@ -123,6 +124,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSearchClues = 40.0;
         self.heightBLETableCells = 55;
         self.heightPopupPicker = 55;
+        self.fontSizeTxListName                 = 18.0;
     }
     if (IS_MIN_IPHONE6)
     {
@@ -137,11 +139,14 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
+        self.heightTransactionCell = 85;
         self.heightWalletHeader = 55.0;
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 70;
         self.heightPopupPicker = 65;
+        self.fontSizeTxListBuyBitcoin           = 22.0;
+        self.fontSizeTxListName                 = 20.0;
     }
     if (IS_MIN_IPAD_MINI)
     {
