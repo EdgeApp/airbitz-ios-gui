@@ -49,6 +49,13 @@
 
 #define ARCHIVE_COLLAPSED @"archive_collapsed"
 
+const int PromoIndexBuyBitcoin      = 0;
+const int PromoIndexImportGiftCard  = 1;
+const int PromoIndex20offStarbucks  = 2;
+const int PromoIndex10offTarget     = 3;
+const int PromoIndex15to20offAmazon = 4;
+const int NumPromoRows              = 5;
+
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, UIGestureRecognizerDelegate>
@@ -69,18 +76,18 @@
 //    CGRect                              _searchShowingFrame;
     BOOL                                _bWalletNameWarningDisplaying;
     CGRect                              _frameTableWithSearchNoKeyboard;
-    BOOL                        _walletMakerVisible;
-    UIButton                    *_blockingButton;
-    NSOperationQueue                                *txSearchQueue;
+    BOOL                                _walletMakerVisible;
+    UIButton                            *_blockingButton;
+    NSOperationQueue                    *txSearchQueue;
     BOOL                                _segmentedControlUSD;
     int64_t                             _totalSatoshi;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
-@property (weak, nonatomic) IBOutlet UITableView *walletsTable;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbarBlur;
+@property (weak, nonatomic) IBOutlet UITableView        *walletsTable;
+@property (weak, nonatomic) IBOutlet UIToolbar          *toolbarBlur;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *walletsViewTop;
-@property (weak, nonatomic) IBOutlet UIView *walletsView;
+@property (weak, nonatomic) IBOutlet UIView             *walletsView;
 @property (nonatomic, weak) IBOutlet BalanceView    *balanceViewPlaceholder;
 @property (nonatomic, weak) IBOutlet UITableView    *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar    *searchTextField;
@@ -897,7 +904,7 @@
 //            if (0 == abcAccount.currentWallet.arrayTransactions.count)
 //                return 1;
 //            else
-                return abcAccount.currentWallet.arrayTransactions.count + 4;
+                return abcAccount.currentWallet.arrayTransactions.count + NumPromoRows;
         }
     }
     else // self.walletsTable
@@ -976,6 +983,7 @@
     {
         TransactionCell *cell;
         ABCWallet *wallet = abcAccount.currentWallet;
+        UIColor *backgroundColor;
         
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
@@ -985,30 +993,50 @@
         
         ABCTransaction *transaction = NULL;
         BOOL bBlankCell = NO;
-        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
+        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexBuyBitcoin)
         {
             cell.promoLabel.text = buyBitcoinButton;
+            cell.imagePhoto.image = self.imageReceive;
+            backgroundColor = [Theme Singleton].colorRequestButton;
             
             bBlankCell = YES;
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexImportGiftCard)
         {
             if (AIRBITZ)
+            {
                 cell.promoLabel.text = importAirbitzGiftCardButton;
+                cell.imagePhoto.image = [UIImage imageNamed:@"logo_icon_full.png"];
+                backgroundColor = [UIColor clearColor];
+            }
             else
+            {
                 cell.promoLabel.text = importPrivateKeyButton;
-            
+                cell.imagePhoto.image = self.imageReceive;
+                backgroundColor = [Theme Singleton].colorRequestButton;
+            }
             bBlankCell = YES;
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 2)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex20offStarbucks)
         {
-            cell.promoLabel.text = upTo20OffStarbucksTargetButton;
+            cell.promoLabel.text = upTo20OffStarbucksButton;
+            cell.imagePhoto.image = [UIImage imageNamed:@"green-coffee-mug-128px@2x"];
+            backgroundColor = [UIColor clearColor];
+            bBlankCell = YES;
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex10offTarget)
+        {
+            cell.promoLabel.text = upTo10OffTargetButton;
+            cell.imagePhoto.image = [UIImage imageNamed:@"red-bulls-eye-128px.png"];
+            backgroundColor = [UIColor clearColor];
             
             bBlankCell = YES;
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 3)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex15to20offAmazon)
         {
             cell.promoLabel.text = upTo15to20OffAmazonButton;
+            cell.imagePhoto.image = [UIImage imageNamed:@"amazon-icon.png"];
+            backgroundColor = [UIColor clearColor];
             
             bBlankCell = YES;
         }
@@ -1043,20 +1071,32 @@
         //
         if (bBlankCell)
         {
-            cell.promoLabel.textColor = [Theme Singleton].colorTextLink;
+            cell.promoLabel.textColor = [Theme Singleton].colorTextDark;
             cell.promoLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
             cell.addressLabel.text = @"";
             cell.confirmationLabel.text = @"";
             cell.dateLabel.text = @"";
             cell.amountLabel.text = @"";
             cell.balanceLabel.text = @"";
-            cell.imagePhoto.image = nil;
-            cell.imagePhoto.backgroundColor = [UIColor clearColor];
+//            cell.imagePhoto.image = nil;
+//            cell.imagePhoto.backgroundColor = [UIColor clearColor];
             cell.promoLabel.textAlignment = NSTextAlignmentLeft;
+            cell.buttonRight.hidden = NO;
+            
+            [cell.imagePhoto.layer setBackgroundColor:[backgroundColor CGColor]];
+            cell.imagePhoto.layer.cornerRadius = 5;
+            cell.imagePhoto.layer.masksToBounds = YES;
+            
+            CGFloat borderWidth = PHOTO_BORDER_WIDTH;
+            cell.viewPhoto.layer.borderColor = [PHOTO_BORDER_COLOR CGColor];
+            cell.viewPhoto.layer.borderWidth = borderWidth;
+            cell.viewPhoto.layer.cornerRadius = PHOTO_BORDER_CORNER_RADIUS;
+
 
             return cell;
         }
 
+        cell.buttonRight.hidden = YES;
         cell.promoLabel.text = @"";
         cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
         cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].buttonFontSize];
@@ -1133,7 +1173,6 @@
         // set the photo
         
         UIImage *placeHolderImage;
-        UIColor *backgroundColor;
         if (transaction.amountSatoshi < 0)
         {
             backgroundColor = [Theme Singleton].colorSendButton;
@@ -1177,7 +1216,7 @@
         TransactionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         [self resignAllResponders];
-        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count)
+        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexBuyBitcoin)
         {
             // Buy bitcoin button
             NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
@@ -1193,17 +1232,22 @@
                 [MainViewController launchDirectoryATM];
             }
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 1)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexImportGiftCard)
         {
             // Import Gift Card
             [MainViewController launchSend];
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 2)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex20offStarbucks)
         {
             // 20% off button
             [MainViewController launchGiftCard];
         }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + 3)
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex10offTarget)
+        {
+            // 10% off button
+            [MainViewController launchGiftCard];
+        }
+        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex15to20offAmazon)
         {
             // Amazon button
             NSURL *url = [[NSURL alloc] initWithString:@"http://bit.ly/AirbitzPurse"];

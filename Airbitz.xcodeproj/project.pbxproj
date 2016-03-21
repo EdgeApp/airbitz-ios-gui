@@ -1220,6 +1220,18 @@
 		DA9EF6D31BC729FA0063DA07 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFE41BC61F920063DA07 /* infoSpendingLimits.html */; };
 		DA9EF6E11BC730400063DA07 /* Airbitz-Develop-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */; };
 		DA9EF6E71BC7304C0063DA07 /* Airbitz-Testnet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */; };
+		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
+		DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
+		DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
+		DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
+		DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
+		DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
+		DAB5C0271C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
+		DAB5C0281C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
+		DAB5C0291C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
+		DAB5C02B1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
+		DAB5C02C1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
+		DAB5C02D1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
 		DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
 		DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
 		DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
@@ -1882,6 +1894,10 @@
 		DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Develop-Info.plist"; sourceTree = "<group>"; };
 		DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Testnet-Info.plist"; sourceTree = "<group>"; };
+		DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon_full@2x.png"; sourceTree = "<group>"; };
+		DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-coffee-mug-128px@2x.png"; sourceTree = "<group>"; };
+		DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-bulls-eye-128px@2x.png"; sourceTree = "<group>"; };
+		DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amazon-icon@2x.png"; sourceTree = "<group>"; };
 		DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_euro@2x.png"; sourceTree = "<group>"; };
 		DABA01231C111950008702AB /* plugin_icon_usd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_usd@2x.png"; sourceTree = "<group>"; };
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
@@ -2281,6 +2297,7 @@
 				DA9EDF021BC61F910063DA07 /* 3-bars@2x.png */,
 				DA9EDF031BC61F910063DA07 /* 4-bars@2x.png */,
 				DA9EDF041BC61F910063DA07 /* 5-bars@2x.png */,
+				DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */,
 				DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */,
 				DA10BB971BFF90980086AD8B /* background@2x.jpg */,
 				DA9EDF051BC61F910063DA07 /* background_launch.png */,
@@ -2349,6 +2366,7 @@
 				DA9EDF4F1BC61F910063DA07 /* gift_box@2x.png */,
 				DA9EDF501BC61F910063DA07 /* gift_box@3x.png */,
 				DA9EDF531BC61F910063DA07 /* Green-check@2x.png */,
+				DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */,
 				DA9EDF541BC61F910063DA07 /* h_seperator@2x.png */,
 				DA9EDF551BC61F910063DA07 /* ico_nav_directory_dark.png */,
 				DA9EDF561BC61F910063DA07 /* ico_nav_directory_dark@2x.png */,
@@ -2434,6 +2452,7 @@
 				DA9EDFB11BC61F920063DA07 /* large-digit-input_selected@2x.png */,
 				DA9EDFB21BC61F920063DA07 /* logo@2x.png */,
 				DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */,
+				DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */,
 				DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */,
 				DA9EDFB51BC61F920063DA07 /* password_dot@2x.png */,
 				DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */,
@@ -2445,6 +2464,7 @@
 				DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */,
 				DA9EEFB71BC724B00063DA07 /* QR-bracket.png */,
 				DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */,
+				DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */,
 				DA9EDFBA1BC61F920063DA07 /* ribbon@2x.png */,
 				DA9EDFBB1BC61F920063DA07 /* swipe-arrow@2x.png */,
 				DA9EDFBC1BC61F920063DA07 /* thumb@2x.png */,
@@ -3268,6 +3288,7 @@
 				DA9EF4171BC7285D0063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9EF4181BC7285D0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF4191BC7285D0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
+				DAB5C0281C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EF41A1BC7285D0063DA07 /* InfoView~iphone.xib in Resources */,
 				DA9EF41C1BC7285D0063DA07 /* infoRequestQR.html in Resources */,
 				DA9EF41E1BC7285D0063DA07 /* Lato-LightItalic.ttf in Resources */,
@@ -3322,11 +3343,13 @@
 				DA9EF44F1BC7285D0063DA07 /* infoTransactionDetails.html in Resources */,
 				DA9EF4501BC7285D0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA9EF4511BC7285D0063DA07 /* btn_unselected@2x.png in Resources */,
+				DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EF4521BC7285D0063DA07 /* icon_transactions.png in Resources */,
 				DA9EF4531BC7285D0063DA07 /* btn_collapse_expand@3x.png in Resources */,
 				DA9EF4541BC7285D0063DA07 /* ico_nav_directory_dark.png in Resources */,
 				DA9EF4551BC7285D0063DA07 /* bitcoin-icon-logo.png in Resources */,
 				DA9EF4561BC7285D0063DA07 /* icon_send@3x.png in Resources */,
+				DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */,
 				DA9EF4571BC7285D0063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EF4581BC7285D0063DA07 /* btn_add_black@2x.png in Resources */,
 				DA9EF4591BC7285D0063DA07 /* 2-bars@2x.png in Resources */,
@@ -3458,6 +3481,7 @@
 				DA9EF4DB1BC7285D0063DA07 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF4DC1BC7285D0063DA07 /* icon_approved.png in Resources */,
 				DA9EF4DD1BC7285D0063DA07 /* btn_collapse_expand.png in Resources */,
+				DAB5C02C1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EF4DE1BC7285D0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF4E11BC7285D0063DA07 /* BitcoinSent.mp3 in Resources */,
@@ -3529,6 +3553,7 @@
 				DA9EF5DE1BC729FA0063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9EF5DF1BC729FA0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF5E01BC729FA0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
+				DAB5C0291C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EF5E11BC729FA0063DA07 /* InfoView~iphone.xib in Resources */,
 				DA9EF5E31BC729FA0063DA07 /* infoRequestQR.html in Resources */,
 				DA9EF5E51BC729FA0063DA07 /* Lato-LightItalic.ttf in Resources */,
@@ -3583,11 +3608,13 @@
 				DA9EF6E71BC7304C0063DA07 /* Airbitz-Testnet-Info.plist in Resources */,
 				DA9EF6161BC729FA0063DA07 /* infoTransactionDetails.html in Resources */,
 				DA9EF6171BC729FA0063DA07 /* bd_icon_twitter@2x.png in Resources */,
+				DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EF6181BC729FA0063DA07 /* btn_unselected@2x.png in Resources */,
 				DA9EF6191BC729FA0063DA07 /* icon_transactions.png in Resources */,
 				DA9EF61A1BC729FA0063DA07 /* btn_collapse_expand@3x.png in Resources */,
 				DA9EF61B1BC729FA0063DA07 /* ico_nav_directory_dark.png in Resources */,
 				DA9EF61C1BC729FA0063DA07 /* bitcoin-icon-logo.png in Resources */,
+				DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */,
 				DA9EF61D1BC729FA0063DA07 /* icon_send@3x.png in Resources */,
 				DA9EF61E1BC729FA0063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EF61F1BC729FA0063DA07 /* btn_add_black@2x.png in Resources */,
@@ -3719,6 +3746,7 @@
 				DA9EF6A21BC729FA0063DA07 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF6A31BC729FA0063DA07 /* icon_approved.png in Resources */,
 				DA9EF6A41BC729FA0063DA07 /* btn_collapse_expand.png in Resources */,
+				DAB5C02D1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EF6A51BC729FA0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EF6A71BC729FA0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF6A81BC729FA0063DA07 /* BitcoinSent.mp3 in Resources */,
@@ -3779,6 +3807,7 @@
 				DABA01241C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
 				DA9EE4BB1BC61F920063DA07 /* icon_settings@2x.png in Resources */,
 				DA8ED2FB1BF6D1A70054E550 /* infoDisclaimer.html in Resources */,
+				DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */,
 				DA9101F21C4964AD00603D62 /* icon_import.png in Resources */,
 				DA9EE4BF1BC61F920063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EE4331BC61F920063DA07 /* bd_sliderbubble@2x.png in Resources */,
@@ -3806,6 +3835,7 @@
 				DA9EE46B1BC61F920063DA07 /* enable-camera.png in Resources */,
 				DA9EE4811BC61F920063DA07 /* icon_approved@2x.png in Resources */,
 				DA9EE4461BC61F920063DA07 /* btn_close@3x.png in Resources */,
+				DAB5C0271C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EE48B1BC61F920063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
 				DA9EE4641BC61F920063DA07 /* clearButton@2x.png in Resources */,
 				DA9EE50A1BC61F920063DA07 /* SMSTemplate.txt in Resources */,
@@ -4005,6 +4035,7 @@
 				DA9EE44E1BC61F920063DA07 /* btn_collapse_expand@2x.png in Resources */,
 				DA9EE4B91BC61F920063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EE4321BC61F920063DA07 /* bd_icon_yelp@2x.png in Resources */,
+				DAB5C02B1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EE45A1BC61F920063DA07 /* btn_export_white.png in Resources */,
 				DA9EE4C71BC61F920063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EE4F01BC61F920063DA07 /* Lato-Regular.ttf in Resources */,
@@ -4014,6 +4045,7 @@
 				DA9EE4FE1BC61F920063DA07 /* infoSettings.html in Resources */,
 				DA9EE47D1BC61F920063DA07 /* icon_account_secure@2x.png in Resources */,
 				DA9EE4D31BC61F920063DA07 /* logo@2x.png in Resources */,
+				DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EE4601BC61F920063DA07 /* btn_selected@2x.png in Resources */,
 				DA9EE4F31BC61F920063DA07 /* emailTemplate.html in Resources */,
 				DA9EE4921BC61F920063DA07 /* icon_category_gift_cards@3x.png in Resources */,

@@ -1243,7 +1243,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPo-UX-ZHi">
-                                            <rect key="frame" x="188" y="160" width="187" height="50"/>
+                                            <rect key="frame" x="187" y="160" width="188" height="50"/>
                                             <color key="backgroundColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="XB3-oL-6di"/>
@@ -1316,13 +1316,19 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-St-5IO" userLabel="promoLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="20" y="0.0" width="335" height="72"/>
+                                                    <rect key="frame" x="69" y="0.0" width="277" height="72"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="ajY-Lm-Xor" userLabel="right button image">
+                                                    <rect key="frame" x="350" y="0.0" width="20" height="72"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="Ypw-Sa-zU5"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-4E-YSl" userLabel="confLabel" customClass="LatoLabel">
                                                     <rect key="frame" x="63" y="45" width="162" height="21"/>
                                                     <constraints>
@@ -1362,24 +1368,27 @@
                                                 <constraint firstItem="iE3-Jv-3vs" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="4" id="3gH-9m-cwA"/>
                                                 <constraint firstItem="jrM-St-5IO" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="5Yf-QL-as3"/>
                                                 <constraint firstAttribute="trailing" secondItem="iE3-Jv-3vs" secondAttribute="trailing" constant="20" symbolic="YES" id="5aT-uT-XBH"/>
-                                                <constraint firstAttribute="trailing" secondItem="jrM-St-5IO" secondAttribute="trailing" constant="20" symbolic="YES" id="8ay-R4-hZq"/>
-                                                <constraint firstItem="jrM-St-5IO" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="20" symbolic="YES" id="9cU-yN-3Al"/>
                                                 <constraint firstItem="eY0-zc-Tda" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="9" id="AEi-lW-i1Y"/>
                                                 <constraint firstItem="pqN-mY-o6I" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="CSr-oh-6Gt"/>
                                                 <constraint firstAttribute="bottom" secondItem="pqN-mY-o6I" secondAttribute="bottom" id="DDn-Iq-5z5"/>
                                                 <constraint firstAttribute="trailing" secondItem="Yfp-gi-q8F" secondAttribute="trailing" constant="10" id="Evb-sK-BGY"/>
+                                                <constraint firstAttribute="trailing" secondItem="ajY-Lm-Xor" secondAttribute="trailing" constant="5" id="HxW-Sp-Yr9"/>
                                                 <constraint firstItem="eY0-zc-Tda" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="11" id="I81-Z3-FpV"/>
                                                 <constraint firstAttribute="trailing" secondItem="6qu-Co-pyz" secondAttribute="trailing" constant="10" id="JSS-lz-NlE"/>
                                                 <constraint firstAttribute="centerY" secondItem="iE3-Jv-3vs" secondAttribute="centerY" id="Kss-0q-bMM"/>
                                                 <constraint firstItem="6qu-Co-pyz" firstAttribute="leading" secondItem="a3J-4E-YSl" secondAttribute="trailing" constant="8" symbolic="YES" id="R7v-FB-ylm"/>
+                                                <constraint firstItem="ajY-Lm-Xor" firstAttribute="top" secondItem="jrM-St-5IO" secondAttribute="top" id="RnK-gW-Mss"/>
                                                 <constraint firstAttribute="bottom" secondItem="eY0-zc-Tda" secondAttribute="bottom" constant="10" id="UbC-r5-S0X"/>
+                                                <constraint firstItem="jrM-St-5IO" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="10" id="aPr-Jv-GEo"/>
                                                 <constraint firstItem="TJ3-SX-hen" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="10" id="cV9-Q9-Z9X"/>
                                                 <constraint firstItem="pqN-mY-o6I" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" id="dea-oL-gJM"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="iE3-Jv-3vs" secondAttribute="leading" id="j31-tz-fao"/>
                                                 <constraint firstItem="Yfp-gi-q8F" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="trailing" constant="8" symbolic="YES" id="jLO-Rp-ngq"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="leading" id="ltp-BN-I9v"/>
+                                                <constraint firstItem="ajY-Lm-Xor" firstAttribute="leading" secondItem="jrM-St-5IO" secondAttribute="trailing" constant="4" id="mVi-gW-8Hh"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.2" id="mmo-NP-soB"/>
                                                 <constraint firstAttribute="bottom" secondItem="6qu-Co-pyz" secondAttribute="bottom" constant="5" id="o45-qT-3KC"/>
+                                                <constraint firstItem="ajY-Lm-Xor" firstAttribute="bottom" secondItem="jrM-St-5IO" secondAttribute="bottom" id="oW1-aN-tY5"/>
                                                 <constraint firstItem="TJ3-SX-hen" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.33" id="pNG-EO-I3l"/>
                                                 <constraint firstAttribute="bottom" secondItem="a3J-4E-YSl" secondAttribute="bottom" constant="5" id="yhD-HJ-2ct"/>
                                             </constraints>
@@ -1389,6 +1398,7 @@
                                             <outlet property="addressLabel" destination="iE3-Jv-3vs" id="EQr-Le-RYd"/>
                                             <outlet property="amountLabel" destination="Yfp-gi-q8F" id="npZ-Bm-LdE"/>
                                             <outlet property="balanceLabel" destination="6qu-Co-pyz" id="CSv-ph-YjI"/>
+                                            <outlet property="buttonRight" destination="ajY-Lm-Xor" id="hj4-5X-qKS"/>
                                             <outlet property="confirmationLabel" destination="a3J-4E-YSl" id="K4R-UD-LQe"/>
                                             <outlet property="dateLabel" destination="TJ3-SX-hen" id="hrO-GV-he8"/>
                                             <outlet property="imagePhoto" destination="eY0-zc-Tda" id="cjk-H4-3VD"/>
@@ -1417,16 +1427,16 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
-                                                            <rect key="frame" x="8" y="4" width="292" height="51"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
+                                                            <rect key="frame" x="8" y="20" width="271" height="20"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="301" verticalHuggingPriority="252" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Amount" customClass="LatoLabel">
-                                                            <rect key="frame" x="310" y="4" width="60" height="51"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="301" verticalHuggingPriority="252" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YUW-ey-Md7" userLabel="Amount" customClass="LatoLabel">
+                                                            <rect key="frame" x="287" y="20" width="60" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="EyM-cs-3rB"/>
                                                             </constraints>
@@ -1468,8 +1478,8 @@
                                     <constraint firstItem="tDk-Hi-NWo" firstAttribute="leading" secondItem="Sel-8S-IX8" secondAttribute="leading" id="vgr-mX-iYn"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bjl-V6-xj5" customClass="WalletMakerView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bjl-V6-xj5" customClass="WalletMakerView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="367"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
