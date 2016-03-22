@@ -1017,6 +1017,7 @@ static BOOL bInitialized = false;
 {
     [self showSpinner:NO];
 
+    self.passwordTextField.text = nil;
     [User login:user];
     [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
 
