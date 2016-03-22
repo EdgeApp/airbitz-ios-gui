@@ -232,7 +232,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         self.keypadView.currency = abcAccount.currentWallet.currency;
 
-        [self updateTextFieldContents:YES];
+        [self updateTextFieldContents:NO];
 
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {

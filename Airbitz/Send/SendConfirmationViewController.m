@@ -460,7 +460,7 @@
             _amountSatoshi = _maxAmount;
             self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_amountSatoshi withSymbol:false];
             
-            [self updateTextFieldContents];
+            [self updateTextFieldContents:YES];
             if (_pinRequired || _passwordRequired) {
                 [self.withdrawlPIN becomeFirstResponder];
             } else {
@@ -631,6 +631,10 @@
 
 - (void)updateTextFieldContents
 {
+    [self updateTextFieldContents:NO];
+}
+- (void)updateTextFieldContents:(BOOL)bAllowBTCUpdate
+{
     double fCurrency;
 
     if (_selectedTextField == self.amountBTCTextField)
@@ -639,7 +643,7 @@
         fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_amountSatoshi currencyCode:_currency.code error:nil];
         self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", fCurrency];
     }
-    else if ((_selectedTextField == self.amountFiatTextField) && !self.bAmountImmutable)
+    else if ((_selectedTextField == self.amountFiatTextField) && !self.bAmountImmutable && bAllowBTCUpdate)
     {
         fCurrency = [self.amountFiatTextField.text doubleValue];
         _amountSatoshi = [abcAccount.exchangeCache currencyToSatoshi:fCurrency currencyCode:_currency.code error:nil];
@@ -974,7 +978,7 @@
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-    [self updateTextFieldContents];
+    [self updateTextFieldContents:YES];
 }
 
 #pragma mark - TransactionDetailsViewController delegates
