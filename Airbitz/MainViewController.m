@@ -167,6 +167,7 @@ MainViewController *singleton;
 
     _bNewDeviceLogin = NO;
     _bShowingWalletsLoadingAlert = NO;
+    _bDoneShowingWalletsLoadingAlert = NO;
     self.arrayContacts = nil;
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
@@ -1372,10 +1373,9 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
-- (void) abcAccountWalletsLoading;
++ (void) showWalletsLoadingAlert;
 {
-    _bDoneShowingWalletsLoadingAlert = NO;
-    [self showWalletsLoadingAlert];
+    [singleton showWalletsLoadingAlert];
 }
 - (void) showWalletsLoadingAlert
 {
@@ -1410,13 +1410,16 @@ MainViewController *singleton;
     
         _bShowingWalletsLoadingAlert = YES;
 }
-- (void) abcAccountWalletsLoaded;
+- (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
     if (_bShowingWalletsLoadingAlert)
     {
-        [FadingAlertView dismiss:FadingAlertDismissFast];
-        _bShowingWalletsLoadingAlert = NO;
-        _bDoneShowingWalletsLoadingAlert = YES;
+        if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] == wallet)
+        {
+            [FadingAlertView dismiss:FadingAlertDismissFast];
+            _bShowingWalletsLoadingAlert = NO;
+            _bDoneShowingWalletsLoadingAlert = YES;
+        }
     }
 }
 - (void) abcAccountAccountChanged;

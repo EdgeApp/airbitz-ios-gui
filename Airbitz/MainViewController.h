@@ -79,6 +79,8 @@ typedef enum eNavBarSide
 + (void)generateListOfNearBusinesses;
 + (void)createFirstWallet;
 + (void)createFirstWallet:(BOOL) popupSpinner;
++ (void) showWalletsLoadingAlert;
+
 
 + (void)launchSend;
 + (void)launchBuySell;

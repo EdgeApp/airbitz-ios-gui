@@ -652,6 +652,7 @@ static BOOL bInitialized = false;
      delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
          [User login:user];
          [self.delegate LoginViewControllerDidPINLogin];
+         [MainViewController showWalletsLoadingAlert];
          
          if ([abcAccount shouldAskUserToEnableTouchID])
          {
@@ -1020,6 +1021,7 @@ static BOOL bInitialized = false;
     self.passwordTextField.text = nil;
     [User login:user];
     [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+    [MainViewController showWalletsLoadingAlert];
 
     if ([abcAccount shouldAskUserToEnableTouchID])
     {
