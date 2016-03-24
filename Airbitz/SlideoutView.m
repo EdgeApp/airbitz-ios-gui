@@ -483,7 +483,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abc passwordExists:acct error:nil])
+    if ([abc accountHasPassword:acct error:nil])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;

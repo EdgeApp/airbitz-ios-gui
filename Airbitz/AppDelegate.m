@@ -249,7 +249,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             {
                 for (NSString *acct in arrayAccounts)
                 {
-                    if (![abc passwordExists:acct error:nil])
+                    if (![abc accountHasPassword:acct error:nil])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
 
@@ -301,7 +301,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [abc restoreConnectivity];
+        [abc setConnectivity:YES];
     }
 }
 

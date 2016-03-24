@@ -110,7 +110,7 @@
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                NSError *error = [abc isAccountUsernameAvailable:self.userNameTextField.text];
+                NSError *error = [abc isUsernameAvailable:self.userNameTextField.text];
 
                 if (!error)
                 {

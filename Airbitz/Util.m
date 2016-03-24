@@ -294,7 +294,7 @@
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller
 {
     if (!password || [password length] == 0) {
-        if ([abcAccount passwordExists]) {
+        if ([abcAccount accountHasPassword]) {
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
         } else {

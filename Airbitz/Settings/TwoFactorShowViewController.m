@@ -82,7 +82,7 @@
     _passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
-    if (![abcAccount passwordExists]) {
+    if (![abcAccount accountHasPassword]) {
         _passwordTextField.hidden = YES;
     }
 
@@ -198,7 +198,7 @@
 - (void)checkRequest
 {
     NSError *error = nil;
-    BOOL pending = [abcAccount hasOTPResetPending:&error];
+    BOOL pending = [abc hasOTPResetPending:abcAccount.name error:&error];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         if (!error) {

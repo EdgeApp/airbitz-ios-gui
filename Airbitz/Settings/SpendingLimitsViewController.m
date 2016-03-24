@@ -48,7 +48,7 @@
     [super viewDidLoad];
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
-    if (![abcAccount passwordExists]) {
+    if (![abcAccount accountHasPassword]) {
         self.passwordTextField.hidden = YES;
     }
 

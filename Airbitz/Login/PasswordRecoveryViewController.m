@@ -102,7 +102,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [AirbitzCore listRecoveryQuestionsChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
+        [AirbitzCore listRecoveryQuestionChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
 
             self.arrayCategoryString = arrayCategoryString;
             self.arrayCategoryNumeric = arrayCategoryNumeric;
@@ -314,7 +314,7 @@ typedef enum eAlertType
         self.buttonSkip.hidden = YES;
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
-        self.passwordView.hidden = ![abcAccount passwordExists];
+        self.passwordView.hidden = ![abcAccount accountHasPassword];
         [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
     }
@@ -333,7 +333,7 @@ typedef enum eAlertType
 {
     [self showSpinner:YES];
 
-    [abc signInWithRecoveryAnswers:self.strUserName
+    [abc recoveryLogin:self.strUserName
                            answers:strAnswers
                           delegate:[MainViewController Singleton]
                                otp:_secret
@@ -387,13 +387,8 @@ typedef enum eAlertType
         _tfaMenuViewController = nil;
         BOOL success = __bSuccess;
         if (success) {
-            NSError *error = [abc setOTPKey:self.strUserName key:_secret];
-            if (!error) {
-                // Try again with OTP
-                [self CompleteSignup];
-            } else {
-                success = NO;
-            }
+            // Try again with OTP
+            [self CompleteSignup];
         }
         if (!success && !bBack) {
             UIAlertView *alert = [[UIAlertView alloc]
@@ -413,7 +408,7 @@ typedef enum eAlertType
     if (self.mode == PassRecovMode_Change) {
         NSString *password = nil;
         password = _passwordField.text;
-        if ([abcAccount passwordExists] && ![abcAccount checkPassword:password]) {
+        if ([abcAccount accountHasPassword] && ![abcAccount checkPassword:password]) {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:NSLocalizedString(@"Password mismatch", nil)
                                   message:NSLocalizedString(@"Please enter your correct password.", nil)

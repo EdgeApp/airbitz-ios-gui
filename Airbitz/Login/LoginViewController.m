@@ -528,7 +528,7 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-        [abc signIn:self.usernameSelector.textField.text
+        [abc passwordLogin:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:nil
@@ -647,7 +647,7 @@ static BOOL bInitialized = false;
     [MainViewController showBackground:YES animate:YES];
 
     [abc
-     signInWithPIN:[abc getLastAccessedAccount]
+     pinLogin:[abc getLastAccessedAccount]
      pin:pin
      delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
          [User login:user];
@@ -1092,7 +1092,7 @@ static BOOL bInitialized = false;
         [self showSpinner:YES];
         // Perform the two factor sign in
 
-        [abc signIn:self.usernameSelector.textField.text
+        [abc passwordLogin:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:secret
@@ -1215,7 +1215,7 @@ static BOOL bInitialized = false;
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abcAccount passwordExists])
+    if ([abcAccount accountHasPassword])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -1290,7 +1290,7 @@ static BOOL bInitialized = false;
         }
         else
         {
-            if ([abcAccount passwordExists])
+            if ([abcAccount accountHasPassword])
                 [abcAccount.settings enableTouchID];
             else
             {

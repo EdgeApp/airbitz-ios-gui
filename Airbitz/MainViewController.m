@@ -1163,7 +1163,7 @@ MainViewController *singleton;
 - (void)LoginViewControllerDidPINLogin
 {
     // if the user has a password, increment PIN login count
-    if ([abcAccount passwordExists]) {
+    if ([abcAccount accountHasPassword]) {
         [[User Singleton] incPINorTouchIDLogin];
     }
     
@@ -1218,7 +1218,7 @@ MainViewController *singleton;
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
-    } else if (![abcAccount passwordExists] && !bNewAccount) {
+    } else if (![abcAccount accountHasPassword] && !bNewAccount) {
         [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
@@ -1671,7 +1671,7 @@ MainViewController *singleton;
     else if (_passwordChangeAlert == alertView)
     {
         _passwordChangeAlert = nil;
-        [abc logout:abcAccount];
+        [abcAccount logout];
         abcAccount = nil;
     }
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
@@ -2218,7 +2218,7 @@ MainViewController *singleton;
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
                        // Log the user out and reset UI
-                       [abc logout:abcAccount];
+                       [abcAccount logout];
                        abcAccount = nil;
                        
                        [FadingAlertView dismiss:FadingAlertDismissFast];

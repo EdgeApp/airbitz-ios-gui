@@ -266,7 +266,7 @@
     }
     
     if (mode == SignUpMode_ChangePasswordNoVerify
-            || (_mode == SignUpMode_ChangePassword && ![abcAccount passwordExists]))
+            || (_mode == SignUpMode_ChangePassword && ![abcAccount accountHasPassword]))
     {
         self.titleString = changePasswordText;
         [MainViewController changeNavBarTitle:self title:self.titleString];
@@ -337,7 +337,7 @@
         [self.buttonNextStep setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
         self.pinTextField.placeholder = NSLocalizedString(@"New PIN", @"");
         self.userNameTextField.placeholder = NSLocalizedString(@"Current Password", @"");
-        self.userNameTextField.hidden = ![abcAccount passwordExists];
+        self.userNameTextField.hidden = ![abcAccount accountHasPassword];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
@@ -363,7 +363,7 @@
     BOOL bUserNameFieldIsValid = YES;
 
     if (_mode == SignUpMode_ChangePasswordNoVerify
-            || (![abcAccount passwordExists]
+            || (![abcAccount accountHasPassword]
                 && (_mode == SignUpMode_ChangePassword
                     || _mode == SignUpMode_ChangePIN)))
     {
@@ -443,7 +443,7 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([abcAccount passwordExists] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
+        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]

@@ -853,7 +853,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         {
 			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
             [cell.state setOn:[abcAccount isPINLoginEnabled] animated:NO];
-            if ([abcAccount passwordExists]) {
+            if ([abcAccount accountHasPassword]) {
                 cell.state.userInteractionEnabled = YES;
             } else {
                 cell.state.userInteractionEnabled = NO;
@@ -867,7 +867,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
-            else if (![abcAccount passwordExists])
+            else if (![abcAccount accountHasPassword])
             {
                 cell.name.text = NSLocalizedString(@"TouchID: Set password first", @"settings text");
                 cell.state.userInteractionEnabled = NO;
@@ -882,7 +882,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                 else
                     [cell.state setOn:NO animated:NO];
 
-                if ([abcAccount passwordExists] && 1) {
+                if ([abcAccount accountHasPassword] && 1) {
                     cell.state.userInteractionEnabled = YES;
                 } else {
                     cell.state.userInteractionEnabled = NO;
