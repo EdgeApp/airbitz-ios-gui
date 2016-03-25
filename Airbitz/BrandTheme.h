@@ -11,6 +11,7 @@
 #import "ABCDenomination.h"
 
 #define AppFont                                         @"Lato-Regular"
+#define AppFontItalic                                   @"Lato-Italic"
 
 #define ColorOffBright                                  UIColorFromARGB(0xffeeeeee)
 #define ColorOffBrightFrost                             UIColorFromARGB(0xaaeeeeee)

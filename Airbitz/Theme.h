@@ -22,6 +22,7 @@
 @property (nonatomic) UIColor *colorTextLink;
 @property (nonatomic) UIColor *colorTextLinkOnDark;
 @property (nonatomic) UIColor *colorTextDarkGrey;
+@property (nonatomic) UIColor *colorTextMediumGrey;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;

@@ -1099,9 +1099,6 @@ const int NumPromoRows              = 5;
 
         cell.buttonRight.hidden = YES;
         cell.promoLabel.text = @"";
-        cell.addressLabel.textColor = [Theme Singleton].colorTextDark;
-        cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListName];
-        cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
         cell.addressLabel.textAlignment = NSTextAlignmentLeft;
         cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
         
@@ -1110,9 +1107,15 @@ const int NumPromoRows              = 5;
         
         // address
         if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
+        {
+            cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListName];
+            cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
             cell.addressLabel.text = transaction.metaData.payeeName;
+        }
         else
         {
+            cell.addressLabel.font = [UIFont fontWithName:AppFontItalic size:[Theme Singleton].fontSizeTxListName];
+            cell.addressLabel.textColor = [Theme Singleton].colorTextMediumGrey;
             if (transaction.amountSatoshi < 0)
                 cell.addressLabel.text = sentBitcoinText;
             else
