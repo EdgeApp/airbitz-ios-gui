@@ -852,7 +852,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         else if (indexPath.row == ROW_PIN_RELOGIN)
         {
 			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
-            [cell.state setOn:[abcAccount isPINLoginEnabled] animated:NO];
+            [cell.state setOn:[abcAccount hasPINLogin] animated:NO];
             if ([abcAccount accountHasPassword]) {
                 cell.state.userInteractionEnabled = YES;
             } else {

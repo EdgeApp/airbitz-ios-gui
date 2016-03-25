@@ -600,11 +600,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [abc PINLoginExists:[abc getLastAccessedAccount] error:nil];
+        bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [abc PINLoginExists:[abc getLastAccessedAccount] error:nil];
+            bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -1185,7 +1185,8 @@ MainViewController *singleton;
     {
         // Make sure there's a wallet in this account. If not, create it
         NSError *error = nil;
-        int numWallets = [abcAccount getNumWalletsInAccount:&error];
+        NSArray *arrayIDs = [abcAccount listWalletIDs:&error];
+        int numWallets = (int) [arrayIDs count];
         if (!error)
         {
             if (0 == numWallets)
@@ -1364,7 +1365,7 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
     [self showWalletsLoadingAlert];
 }
-- (void) abcAccountBlockHeightChanged;
+- (void) abcAccountBlockHeightChanged:(ABCWallet *)wallet;
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }

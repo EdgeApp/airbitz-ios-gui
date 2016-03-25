@@ -1129,34 +1129,42 @@ const int NumPromoRows              = 5;
         }
         else
         {
-            if (transaction.bSyncing)
+            int blockHeight = transaction.wallet.blockHeight;
+            int confirmations;
+            
+            if (transaction.height == 0)
+                confirmations = 0;
+            else
+                confirmations = blockHeight - transaction.height + 1;
+            
+            if (blockHeight <= 0)
             {
                 cell.confirmationLabel.text = synchronizingText;
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
-            else if (transaction.confirmations < 0)
+            else if (transaction.height < 0)
             {
                 cell.confirmationLabel.text = doubleSpendText;
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
-            else if (transaction.confirmations == 0)
+            else if (confirmations == 0)
             {
                 cell.confirmationLabel.text = pendingText;
                 cell.confirmationLabel.textColor = COLOR_NEGATIVE;
             }
-            else if (transaction.confirmations == 1)
+            else if (confirmations == 1)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, confirmationText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
-            else if (transaction.confirmations >= ABCConfirmedConfirmationCount)
+            else if (confirmations >= ABCConfirmedConfirmationCount)
             {
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
                 cell.confirmationLabel.text = confirmedText;
             }
             else
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", transaction.confirmations, confirmationsText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationsText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             

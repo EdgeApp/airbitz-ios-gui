@@ -294,11 +294,11 @@
 {
     NSError *error;
     if (on) {
-        error = [abcAccount setOTPAuth:OTP_RESET_DELAY];
+        error = [abcAccount enableOTP:OTP_RESET_DELAY];
         if (!error)
             _isOn = YES;
     } else {
-        error = [abcAccount removeOTPAuth];
+        error = [abcAccount disableOTP];
         if (!error)
         {
             _secret = nil;
@@ -351,7 +351,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount removeOTPAuth];
+            NSError *error = [abcAccount disableOTP];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {
                     [MainViewController fadingAlert:NSLocalizedString(@"Request confirmed, Two Factor off.", nil)];
@@ -386,7 +386,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount removeOTPResetRequest];
+            NSError *error = [abcAccount cancelOTPResetRequest];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {

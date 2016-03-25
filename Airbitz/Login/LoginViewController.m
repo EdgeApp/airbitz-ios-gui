@@ -1176,7 +1176,7 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc PINLoginExists:account error:nil])
+    if([abc accountHasPINLogin:account error:nil])
     {
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
@@ -1454,7 +1454,7 @@ static BOOL bInitialized = false;
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([abc PINLoginExists:[abc getLastAccessedAccount] error:nil])
+    if([abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil])
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
