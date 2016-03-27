@@ -296,6 +296,11 @@ static BOOL bInitialized = false;
     [_logoImage addGestureRecognizer:debug];
     [_logoImage setUserInteractionEnabled:YES];
 
+    if (HARD_CODED_LOGIN)
+    {
+        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
+        self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
+    }
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
