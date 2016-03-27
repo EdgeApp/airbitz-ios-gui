@@ -793,7 +793,7 @@
                                             <constraint firstAttribute="height" constant="65" id="ilF-6c-9V6"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BTC Amount" placeholder="BTC Amount" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" userLabel="Amt BTC">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BTC Amount" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-Vw-VAD" userLabel="Amt BTC">
                                         <rect key="frame" x="65" y="67" width="91" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -818,7 +818,7 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="USD Amount" placeholder="USD Amount" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" userLabel="Amt Fiat">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="USD Amount" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="dY3-MX-MNV" userLabel="Amt Fiat">
                                         <rect key="frame" x="65" y="17" width="150" height="35"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
