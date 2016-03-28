@@ -1095,15 +1095,18 @@ static BOOL bInitialized = false;
         [self.passwordTextField resignFirstResponder];
 
         [self showSpinner:YES];
-        // Perform the two factor sign in
+        [MainViewController showBackground:YES animate:YES];
+        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
+        ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
+        // Perform the two factor sign in
         [abc passwordLogin:self.usernameSelector.textField.text
            password:self.passwordTextField.text
            delegate:[MainViewController Singleton]
                 otp:secret
-           complete:^(ABCAccount *user)
+           complete:^(ABCAccount *account)
          {
-             [self signInComplete:user];
+             [self signInComplete:account];
          }
          error:^(NSError *error, NSDate *date, NSString *resetToken)
          {
