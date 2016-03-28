@@ -372,7 +372,7 @@ static BOOL bInitialized = false;
         [MainViewController showBackground:YES animate:YES];
     } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
         _bUsedTouchIDToLogin = usedTouchID;
-        [self signInComplete:user];
+        [self signInComplete:user newAccount:NO];
     } completionNoLogin:^{
         [self assignFirstResponder];
     } error:^(NSError *error) {
@@ -539,7 +539,7 @@ static BOOL bInitialized = false;
                 otp:nil
            complete:^(ABCAccount *account)
          {
-             [self signInComplete:account];
+             [self signInComplete:account newAccount:NO];
          }
               error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
          {
@@ -1019,13 +1019,16 @@ static BOOL bInitialized = false;
     return YES;
 }
 
-- (void)signInComplete:(ABCAccount *)user
+- (void)signInComplete:(ABCAccount *)user newAccount:(BOOL)bNewAccount
 {
     [self showSpinner:NO];
 
     self.passwordTextField.text = nil;
     [User login:user];
-    [self.delegate loginViewControllerDidLogin:NO newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+    [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+    
+    if (bNewAccount) return;
+    
     [MainViewController showWalletsLoadingAlert];
 
     if ([abcAccount shouldAskUserToEnableTouchID])
@@ -1106,7 +1109,7 @@ static BOOL bInitialized = false;
                 otp:secret
            complete:^(ABCAccount *account)
          {
-             [self signInComplete:account];
+             [self signInComplete:account newAccount:NO];
          }
          error:^(NSError *error, NSDate *date, NSString *resetToken)
          {
@@ -1159,7 +1162,7 @@ static BOOL bInitialized = false;
         _bSuccess = YES;
 
         [MainViewController showBackground:YES animate:YES];
-        [self signInComplete:abcAccount];
+        [self signInComplete:abcAccount newAccount:bNewAccount];
     }
 }
 
