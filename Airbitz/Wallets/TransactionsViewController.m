@@ -81,6 +81,7 @@ const int NumPromoRows              = 5;
     NSOperationQueue                    *txSearchQueue;
     BOOL                                _segmentedControlUSD;
     int64_t                             _totalSatoshi;
+    UIImage                             *_blankImage;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
@@ -192,6 +193,10 @@ const int NumPromoRows              = 5;
     self.afmanager = [MainViewController createAFManager];
     self.imageReceive = [UIImage imageNamed:@"icon_request_padded.png"];
     self.imageSend    = [UIImage imageNamed:@"icon_send_padded.png"];
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
+    _blankImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 - (void) dropdownWallets:(BOOL)bDropdown;
@@ -669,21 +674,28 @@ const int NumPromoRows              = 5;
 
 - (NSURLRequest *)imageRequestForTransaction:(ABCTransaction *)transaction
 {
-    NSURLRequest *imageRequest = nil;
     if (transaction)
     {
         // if this transaction has a biz id
         if (transaction.metaData.bizId)
         {
-            // get the image for this bizId
-            NSString *requestURL = [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:transaction.metaData.bizId]];
-            imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
-                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                                      timeoutInterval:60];
+            return [self imageRequestForBizID:transaction.metaData.bizId];
         }
     }
-    
-    return imageRequest;
+    return nil;
+}
+
+
+- (NSURLRequest *)imageRequestForBizID:(unsigned int)bizID;
+{
+    NSURLRequest *imageRequest = nil;
+
+    // get the image for this bizId
+    NSString *requestURL = [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:bizID]];
+    imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]
+                                    cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                timeoutInterval:60];
+    return  imageRequest;
 }
 
 
@@ -698,16 +710,33 @@ const int NumPromoRows              = 5;
             if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(transaction.metaData.bizId)])
             {
                 // start by getting the biz details...this will kick of a retreive of the images
-                [self getBizDetailsForTransaction:transaction];
+                [self getBizDetailsForBizID:transaction.metaData.bizId];
             }
         }
     }
+    // Get images for special bizIDs for gift card vendors
+    if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(TargetBizID)])
+    {
+        // start by getting the biz details...this will kick of a retreive of the images
+        [self getBizDetailsForBizID:TargetBizID];
+    }
+    if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(StarbucksBizID)])
+    {
+        // start by getting the biz details...this will kick of a retreive of the images
+        [self getBizDetailsForBizID:StarbucksBizID];
+    }
+    if (nil == [MainViewController Singleton].dictImageURLFromBizID[@(AmazonBizID)])
+    {
+        // start by getting the biz details...this will kick of a retreive of the images
+        [self getBizDetailsForBizID:AmazonBizID];
+    }
+    
 }
 
-- (void)getBizDetailsForTransaction:(ABCTransaction *)transaction
+- (void)getBizDetailsForBizID:(unsigned int)bizID;
 {
     //get business details
-	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, transaction.metaData.bizId];
+	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%u/", SERVER_API, bizID];
     
     [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -724,6 +753,7 @@ const int NumPromoRows              = 5;
 
                 // at the request to our dictionary and issue code to perform them
                 [[MainViewController Singleton].dictImageURLFromBizID setObject:urlString forKey:numBizId];
+                [self.tableView reloadData];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1017,18 +1047,20 @@ const int NumPromoRows              = 5;
                 backgroundColor = [Theme Singleton].colorRequestButton;
             }
             bBlankCell = YES;
-        }
+}
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex20offStarbucks)
         {
             cell.promoLabel.text = upTo20OffStarbucksButton;
-            cell.imagePhoto.image = [UIImage imageNamed:@"green-coffee-mug-128px@2x"];
+            NSURLRequest *urlRequest = [self imageRequestForBizID:StarbucksBizID];
+            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
             backgroundColor = [UIColor clearColor];
             bBlankCell = YES;
         }
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex10offTarget)
         {
             cell.promoLabel.text = upTo10OffTargetButton;
-            cell.imagePhoto.image = [UIImage imageNamed:@"red-bulls-eye-128px.png"];
+            NSURLRequest *urlRequest = [self imageRequestForBizID:TargetBizID];
+            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
             backgroundColor = [UIColor clearColor];
             
             bBlankCell = YES;
@@ -1036,7 +1068,8 @@ const int NumPromoRows              = 5;
         else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex15to20offAmazon)
         {
             cell.promoLabel.text = upTo15to20OffAmazonButton;
-            cell.imagePhoto.image = [UIImage imageNamed:@"amazon-icon.png"];
+            NSURLRequest *urlRequest = [self imageRequestForBizID:AmazonBizID];
+            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
             backgroundColor = [UIColor clearColor];
             
             bBlankCell = YES;

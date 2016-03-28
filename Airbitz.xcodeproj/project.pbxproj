@@ -1229,9 +1229,6 @@
 		DAB5C0271C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
 		DAB5C0281C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
 		DAB5C0291C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */; };
-		DAB5C02B1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
-		DAB5C02C1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
-		DAB5C02D1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */; };
 		DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
 		DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
 		DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */; };
@@ -1897,7 +1894,6 @@
 		DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon_full@2x.png"; sourceTree = "<group>"; };
 		DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-coffee-mug-128px@2x.png"; sourceTree = "<group>"; };
 		DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-bulls-eye-128px@2x.png"; sourceTree = "<group>"; };
-		DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amazon-icon@2x.png"; sourceTree = "<group>"; };
 		DABA011F1C111917008702AB /* plugin_icon_euro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_euro@2x.png"; sourceTree = "<group>"; };
 		DABA01231C111950008702AB /* plugin_icon_usd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_usd@2x.png"; sourceTree = "<group>"; };
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
@@ -2297,7 +2293,6 @@
 				DA9EDF021BC61F910063DA07 /* 3-bars@2x.png */,
 				DA9EDF031BC61F910063DA07 /* 4-bars@2x.png */,
 				DA9EDF041BC61F910063DA07 /* 5-bars@2x.png */,
-				DAB5C02A1C9FBF9F00CE4993 /* amazon-icon@2x.png */,
 				DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */,
 				DA10BB971BFF90980086AD8B /* background@2x.jpg */,
 				DA9EDF051BC61F910063DA07 /* background_launch.png */,
@@ -3481,7 +3476,6 @@
 				DA9EF4DB1BC7285D0063DA07 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF4DC1BC7285D0063DA07 /* icon_approved.png in Resources */,
 				DA9EF4DD1BC7285D0063DA07 /* btn_collapse_expand.png in Resources */,
-				DAB5C02C1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EF4DE1BC7285D0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF4E11BC7285D0063DA07 /* BitcoinSent.mp3 in Resources */,
@@ -3746,7 +3740,6 @@
 				DA9EF6A21BC729FA0063DA07 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF6A31BC729FA0063DA07 /* icon_approved.png in Resources */,
 				DA9EF6A41BC729FA0063DA07 /* btn_collapse_expand.png in Resources */,
-				DAB5C02D1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EF6A51BC729FA0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EF6A71BC729FA0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF6A81BC729FA0063DA07 /* BitcoinSent.mp3 in Resources */,
@@ -4035,7 +4028,6 @@
 				DA9EE44E1BC61F920063DA07 /* btn_collapse_expand@2x.png in Resources */,
 				DA9EE4B91BC61F920063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EE4321BC61F920063DA07 /* bd_icon_yelp@2x.png in Resources */,
-				DAB5C02B1C9FBF9F00CE4993 /* amazon-icon@2x.png in Resources */,
 				DA9EE45A1BC61F920063DA07 /* btn_export_white.png in Resources */,
 				DA9EE4C71BC61F920063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EE4F01BC61F920063DA07 /* Lato-Regular.ttf in Resources */,

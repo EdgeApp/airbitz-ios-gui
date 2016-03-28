@@ -42,7 +42,7 @@ static NSMutableArray *giftCardPlugins;
                            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                            @"BRAND": @"Starbucks",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/green-coffee-mug-128px.png",
-                           @"BIZID": @"11131",
+                           @"BIZID": [NSString stringWithFormat:@"%d",StarbucksBizID],
                            @"CATEGORY": @"Expense%3ACoffee Shops",
                            };
             [giftCardPlugins addObject:plugin];
@@ -62,7 +62,7 @@ static NSMutableArray *giftCardPlugins;
                            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                            @"BRAND": @"Target",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
-                           @"BIZID": @"11132",
+                           @"BIZID": [NSString stringWithFormat:@"%d",TargetBizID],
                            @"CATEGORY": @"Expense%3AShopping",
                            };
             [giftCardPlugins addObject:plugin];
@@ -83,7 +83,7 @@ static NSMutableArray *giftCardPlugins;
                            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                            @"BRAND": @"Whole Foods",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Whole-Foods-Market-128px.png",
-                           @"BIZID": @"11139",
+                           @"BIZID": [NSString stringWithFormat:@"%d",WholeFoodsBizID],
                            @"CATEGORY": @"Expense%3AGroceries",
                            };
             [giftCardPlugins addObject:plugin];
@@ -104,7 +104,7 @@ static NSMutableArray *giftCardPlugins;
                            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                            @"BRAND": @"Walmart",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/WalMart-128px.png",
-                           @"BIZID": @"11140",
+                           @"BIZID": [NSString stringWithFormat:@"%d",WalmartBizID],
                            @"CATEGORY": @"Expense%3AShopping",
                            };
             [giftCardPlugins addObject:plugin];
@@ -125,7 +125,7 @@ static NSMutableArray *giftCardPlugins;
                            @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
                            @"BRAND": @"Home Depot",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Home-Depot-square-128px.png",
-                           @"BIZID": @"11141",
+                           @"BIZID": [NSString stringWithFormat:@"%d",HomeDepotBizID],
                            @"CATEGORY": @"Expense%3AHome Improvement",
                            };
             [giftCardPlugins addObject:plugin];
