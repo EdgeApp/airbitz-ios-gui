@@ -1374,10 +1374,10 @@ MainViewController *singleton;
         if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] == wallet)
         {
             [FadingAlertView dismiss:FadingAlertDismissFast];
-            _bShowingWalletsLoadingAlert = NO;
-            _bDoneShowingWalletsLoadingAlert = YES;
         }
     }
+    _bShowingWalletsLoadingAlert = NO;
+    _bDoneShowingWalletsLoadingAlert = YES;
 }
 - (void) abcAccountAccountChanged;
 {
@@ -1389,6 +1389,8 @@ MainViewController *singleton;
 - (void)abcAccountLoggedOut:(ABCAccount *)user;
 {
     [[User Singleton] clear];
+    _bShowingWalletsLoadingAlert = NO;
+    _bDoneShowingWalletsLoadingAlert = NO;
     
     [slideoutView showSlideout:NO withAnimation:NO];
     
