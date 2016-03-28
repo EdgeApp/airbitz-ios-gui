@@ -53,17 +53,17 @@
         _showingBalance = NO;
     }
     
+    if (self.delegate)
+        if([self.delegate respondsToSelector:@selector(BalanceViewChanged:show:)])
+            [self.delegate BalanceViewChanged:self show:show];
+    
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:[Theme Singleton].animationCurveDefault
-                     animations:^
-     {
-         [self.balanceView setAlpha:balanceViewAlpha];
-         [self.showBalanceLabel setAlpha:showBalanceLabelAlpha];
-     }
-                     completion:^(BOOL finished){
-                         [self.delegate BalanceViewChanged:self show:show];
-                     }];
+                     animations:^{
+                         [self.balanceView setAlpha:balanceViewAlpha];
+                         [self.showBalanceLabel setAlpha:showBalanceLabelAlpha];
+                     } completion:nil];
 }
 
 - (IBAction)ShowBalanceTouched:(id)sender
