@@ -1370,10 +1370,15 @@ MainViewController *singleton;
 
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
-    if (!abcAccount.arrayWallets)
-        ABCLog(1, @"Assertion Failed. arrayWallet = NULL");
+    if (!wallet)
+        ABCLog(1, @"abcAccountWalletLoaded:wallet == NULL");
     
-    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] == wallet)
+    ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
+    
+    if (!abcAccount.arrayWallets)
+        ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
+    
+    if (abcAccount.arrayWallets && [wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
     {
         if (_bShowingWalletsLoadingAlert)
         {
