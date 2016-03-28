@@ -1365,20 +1365,25 @@ MainViewController *singleton;
     else
         [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     
-        _bShowingWalletsLoadingAlert = YES;
+    _bShowingWalletsLoadingAlert = YES;
 }
+
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
-    if (_bShowingWalletsLoadingAlert)
+    if (!abcAccount.arrayWallets)
+        ABCLog(1, @"Assertion Failed. arrayWallet = NULL");
+    
+    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] == wallet)
     {
-        if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] == wallet)
+        if (_bShowingWalletsLoadingAlert)
         {
             [FadingAlertView dismiss:FadingAlertDismissFast];
         }
+        _bShowingWalletsLoadingAlert = NO;
+        _bDoneShowingWalletsLoadingAlert = YES;
     }
-    _bShowingWalletsLoadingAlert = NO;
-    _bDoneShowingWalletsLoadingAlert = YES;
 }
+
 - (void) abcAccountAccountChanged;
 {
     [self updateWidgetQRCode];
