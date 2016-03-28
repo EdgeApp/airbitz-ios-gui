@@ -1054,50 +1054,6 @@ MainViewController *singleton;
     }
 }
 
-- (void)lockDisplay
-{
-    NSString *walletsLoading;
-    if (![User isLoggedIn]) return;
-    
-    if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
-    {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingAccountText,
-                          loadingWalletsNewDeviceText];
-    }
-    else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
-    {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
-                          loadingWalletsText,
-                          abcAccount.numWalletsLoaded + 1,
-                          abcAccount.numTotalWallets,
-                          loadingWalletsNewDeviceText];
-    }
-    else
-    {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingTransactionsText,
-                          loadingWalletsNewDeviceText];
-    }
-
-    
-    if (_bShowingWalletsLoadingAlert)
-        [MainViewController fadingAlertUpdate:walletsLoading];
-    else
-        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-    
-    _bShowingWalletsLoadingAlert = YES;
-}
-
-- (void)unlockDisplay
-{
-    if (_bShowingWalletsLoadingAlert)
-    {
-        [FadingAlertView dismiss:FadingAlertDismissFast];
-        _bShowingWalletsLoadingAlert = NO;
-    }
-}
-
 #pragma mark - SettingsViewControllerDelegates
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
