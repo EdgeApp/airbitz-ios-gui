@@ -1159,7 +1159,7 @@ static BOOL bInitialized = false;
         _bSuccess = YES;
 
         [MainViewController showBackground:YES animate:YES];
-        [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:NO usedTouchID:NO];
+        [self signInComplete:abcAccount];
     }
 }
 
