@@ -1198,7 +1198,7 @@ const int NumPromoRows              = 5;
             }
             else if (confirmations == 1)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             else if (confirmations >= ABCConfirmedConfirmationCount)
@@ -1208,7 +1208,7 @@ const int NumPromoRows              = 5;
             }
             else
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationsText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationsText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             
