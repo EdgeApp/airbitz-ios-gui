@@ -74,6 +74,7 @@
 #define loadingTransactionsText                     NSLocalizedString(@"Loading Transactions...", @"Loading Transactions alert text")
 #define synchronizingText                           NSLocalizedString(@"Synchronizing", @"Synchronizing text in confirmation textfield")
 #define pendingText                                 NSLocalizedString(@"Pending", @"Pending status in transaction list")
+#define warningRBFText                              NSLocalizedString(@"Warning: Replace by Fee Detected. Double spend likely", @"RBF status in transaction list")
 #define doubleSpendText                             NSLocalizedString(@"Warning: Double Spend", @"Double spend status in transaction list")
 #define confirmationText                            NSLocalizedString(@"Confirmation", @"Num of confirmations in transaction list")
 #define confirmationsText                           NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list")

@@ -297,7 +297,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     ABCWallet *wallet = [abcAccount getWallet:walletUUID];
     
     ABCTransaction *transaction = [wallet getTransaction:txId];
-    for (ABCTxInOut *output in transaction.outputList)
+    for (ABCTxInOut *output in transaction.inputOutputList)
     {
         if (!output.isInput
             && [addressString isEqualToString:output.address])

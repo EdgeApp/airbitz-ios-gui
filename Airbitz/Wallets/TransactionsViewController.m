@@ -1165,8 +1165,8 @@ const int NumPromoRows              = 5;
         }
         else
         {
-            int blockHeight = transaction.wallet.blockHeight;
-            int confirmations;
+            unsigned long blockHeight = transaction.wallet.blockHeight;
+            unsigned long confirmations;
             
             if (transaction.height == 0)
                 confirmations = 0;
@@ -1178,15 +1178,23 @@ const int NumPromoRows              = 5;
                 cell.confirmationLabel.text = synchronizingText;
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
-            else if (transaction.height < 0)
+            else if (confirmations <= 0)
             {
-                cell.confirmationLabel.text = doubleSpendText;
-                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
-            }
-            else if (confirmations == 0)
-            {
-                cell.confirmationLabel.text = pendingText;
-                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                if (transaction.isReplaceByFee)
+                {
+                    cell.confirmationLabel.text = warningRBFText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
+                else if (transaction.isDoubleSpend)
+                {
+                    cell.confirmationLabel.text = doubleSpendText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
+                else
+                {
+                    cell.confirmationLabel.text = pendingText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
             }
             else if (confirmations == 1)
             {

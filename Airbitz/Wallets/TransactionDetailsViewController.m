@@ -608,7 +608,7 @@ typedef enum eRequestType
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
-    for (ABCTxInOut *t in self.transaction.outputList) {
+    for (ABCTxInOut *t in self.transaction.inputOutputList) {
         NSString *val = [abcAccount.settings.denomination satoshiToBTCString:t.amountSatoshi];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
                           baseUrl, t.address, t.address, val];
@@ -621,7 +621,7 @@ typedef enum eRequestType
     }
     totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
-                                   baseUrl, self.transaction.malleableTxid, self.transaction.malleableTxid];
+                                   baseUrl, self.transaction.txid, self.transaction.txid];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
