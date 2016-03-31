@@ -35,6 +35,14 @@
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
 #define ARRAY_IMAGES_FOR_OPTIONS @[@"icon_export_printer", @"icon_export_sdcard", @"icon_export_email", @"icon_export_google", @"icon_export_dropbox", @"icon_export_view"]
 
+typedef enum eDatePeriod
+{
+    DatePeriod_None,
+    DatePeriod_ThisWeek,
+    DatePeriod_ThisMonth,
+    DatePeriod_ThisYear
+} tDatePeriod;
+
 
 typedef enum eExportOption
 {
@@ -53,6 +61,8 @@ typedef enum eExportOption
 	GDrive                              *drive;
     MFMailComposeViewController         *_mailComposer;
     BOOL                                bWalletListDropped;
+    tDatePeriod                         _datePeriod; // chosen with the 3 buttons
+    BOOL                                _bDatePickerFrom;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                     *viewPassword;
@@ -62,6 +72,21 @@ typedef enum eExportOption
 
 @property (nonatomic, strong) ExportWalletPDFViewController     *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                           *arrayChoices;
+
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisWeek;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisMonth;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisYear;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastWeek;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastMonth;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastYear;
+
+@property (weak, nonatomic) IBOutlet UIButton           *buttonFrom;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonTo;
+@property (weak, nonatomic) IBOutlet UIDatePicker       *datePicker;
+
+@property (nonatomic, strong) DateTime                  *fromDateTime;
+@property (nonatomic, strong) DateTime                  *toDateTime;
+
 
 @end
 
@@ -101,16 +126,16 @@ typedef enum eExportOption
     self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
+    
+    self.datePicker.hidden = YES;
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    self.fromDateTime = [DateTime alloc];
+    self.toDateTime = [DateTime alloc];
+    
+    [self.fromDateTime setWithDate:[NSDate dateWithTimeIntervalSince1970:0]];
+    [self.toDateTime setWithDate:[NSDate date]];
 
-//    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-//                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
-//    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-//                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
-
-
-    //ABCLog(2,@"type: %d", self.type);
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -125,6 +150,7 @@ typedef enum eExportOption
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
     [self updateViews:nil];
+    [self updateDateDisplay];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -195,23 +221,103 @@ typedef enum eExportOption
     [InfoView CreateWithHTML:@"infoExportWalletOptions" forView:self.view];
 }
 
-#pragma mark - Misc Methods
-
-- (int)displayFor12From24:(int)hour24
+- (IBAction)datePickerAction:(id)sender
 {
-    int retHour = hour24;
-
-    if (hour24 == 0)
-    {
-        retHour = 12;
-    }
-    else if (hour24 > 12)
-    {
-        retHour -= 12;
-    }
-
-    return retHour;
+    UIDatePicker *datePicker = sender;
+    
+    if (_bDatePickerFrom)
+        [self.fromDateTime setWithDate:datePicker.date];
+    else
+        [self.toDateTime setWithDate:datePicker.date];
+    
+    self.datePicker.hidden = YES;
+    [self updateDateDisplay];
 }
+
+- (IBAction)buttonFromTouched:(id)sender
+{
+    _bDatePickerFrom = YES;
+    [self.datePicker setDate:self.fromDateTime.date];
+    self.datePicker.hidden = NO;
+
+}
+
+- (IBAction)buttonToTouched:(id)sender
+{
+    _bDatePickerFrom = NO;
+    [self.datePicker setDate:self.toDateTime.date];
+    self.datePicker.hidden = NO;
+}
+
+- (IBAction)buttonDatePeriodTouched:(UIButton *)sender
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *startOfInterval;
+    NSDate *endOfInterval;
+    NSCalendarUnit calendarUnit;
+    
+    if (sender == self.buttonThisWeek)
+    {
+        calendarUnit = NSCalendarUnitWeekOfMonth;
+    }
+    else if (sender == self.buttonThisMonth)
+    {
+        calendarUnit = NSCalendarUnitMonth;
+    }
+    else if (sender == self.buttonThisYear)
+    {
+        calendarUnit = NSCalendarUnitYear;
+    }
+    else if (sender == self.buttonLastWeek)
+    {
+        calendarUnit = NSCalendarUnitWeekOfMonth;
+        now = [now dateByAddingTimeInterval:-7*24*60*60];
+    }
+    else if (sender == self.buttonLastMonth)
+    {
+        calendarUnit = NSCalendarUnitMonth;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [NSDateComponents new];
+        comps.month = -1;
+        now = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    }
+    else if (sender == self.buttonLastYear)
+    {
+        calendarUnit = NSCalendarUnitYear;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [NSDateComponents new];
+        comps.year = -1;
+        now = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    }
+    
+    NSTimeInterval interval;
+    [cal rangeOfUnit:calendarUnit
+           startDate:&startOfInterval
+            interval:&interval
+             forDate:now];
+    
+    endOfInterval = [endOfInterval dateByAddingTimeInterval:interval-1];
+    [self.fromDateTime setWithDate:startOfInterval];
+    [self.toDateTime setWithDate:endOfInterval];
+
+    [self updateDateDisplay];
+}
+
+#pragma mark - Date selection methods
+
+- (void)updateDateDisplay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    
+    [self.buttonFrom setTitle:[dateFormatter stringFromDate:self.fromDateTime.date] forState:UIControlStateNormal];
+    [self.buttonTo setTitle:[dateFormatter stringFromDate:self.toDateTime.date] forState:UIControlStateNormal];
+}
+
+#pragma mark - Misc Methods
 
 - (ExportWalletOptionsCell *)getOptionsCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
 {
