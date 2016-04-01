@@ -1803,7 +1803,7 @@
                                         <rect key="frame" x="20" y="138" width="335" height="135"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LI5-7a-oQG" userLabel="Start Date">
-                                                <rect key="frame" x="20" y="5" width="144" height="20"/>
+                                                <rect key="frame" x="20" y="5" width="143.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="lCP-Xg-ZH7"/>
                                                 </constraints>
@@ -1812,13 +1812,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dm1-b8-Vp0" userLabel="End Date">
-                                                <rect key="frame" x="172" y="5" width="143" height="20"/>
+                                                <rect key="frame" x="171" y="5" width="143.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlP-bB-ktv">
-                                                <rect key="frame" x="20" y="61" width="93" height="36"/>
+                                                <rect key="frame" x="20" y="61" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="This Week"/>
                                                 <connections>
@@ -1826,7 +1826,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBj-ek-BcU" userLabel="Last Week">
-                                                <rect key="frame" x="20" y="97" width="93" height="35"/>
+                                                <rect key="frame" x="20" y="96" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="Last Week"/>
                                                 <connections>
@@ -1834,7 +1834,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-NR-Nd9">
-                                                <rect key="frame" x="121" y="61" width="93" height="36"/>
+                                                <rect key="frame" x="121" y="61" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="This Month"/>
                                                 <connections>
@@ -1842,7 +1842,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDg-O2-8UT" userLabel="Last Month">
-                                                <rect key="frame" x="121" y="97" width="93" height="35"/>
+                                                <rect key="frame" x="121" y="96" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="Last Month"/>
                                                 <connections>
@@ -1850,7 +1850,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpC-BO-UBm">
-                                                <rect key="frame" x="222" y="61" width="93" height="36"/>
+                                                <rect key="frame" x="222" y="61" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="This Year"/>
                                                 <connections>
@@ -1858,7 +1858,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="90X-8Y-MEH" userLabel="Last Year">
-                                                <rect key="frame" x="222" y="97" width="93" height="35"/>
+                                                <rect key="frame" x="222" y="96" width="93" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="Last Year"/>
                                                 <connections>
@@ -1866,7 +1866,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCA-0y-iu5">
-                                                <rect key="frame" x="0.0" y="33" width="168" height="20"/>
+                                                <rect key="frame" x="0.0" y="33" width="167.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fHQ-mn-9tp"/>
                                                 </constraints>
@@ -1876,7 +1876,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZx-Kb-aB0">
-                                                <rect key="frame" x="168" y="28" width="167" height="30"/>
+                                                <rect key="frame" x="167" y="28" width="167.5" height="30"/>
                                                 <state key="normal" title="To Date"/>
                                                 <connections>
                                                     <action selector="buttonToTouched:" destination="2Tx-PY-TjH" eventType="touchUpInside" id="d2H-KW-9To"/>
@@ -1952,35 +1952,55 @@
                                             <constraint firstAttribute="width" constant="280" id="snF-MK-1w0"/>
                                         </constraints>
                                     </view>
-                                    <datePicker alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zlq-RU-2Mb">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KgQ-5B-xky" userLabel="Date Picker View">
                                         <rect key="frame" x="0.0" y="281" width="375" height="386"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="481078686.97074002">
-                                            <!--2016-03-31 00:58:06 +0000-->
-                                        </date>
-                                        <connections>
-                                            <action selector="datePickerAction:" destination="2Tx-PY-TjH" eventType="valueChanged" id="B1G-Ns-t1C"/>
-                                        </connections>
-                                    </datePicker>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eC8-Ff-93G" userLabel="Blur View" customClass="BlurView">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <datePicker alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zlq-RU-2Mb">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="481078686.97074002">
+                                                    <!--2016-03-31 00:58:06 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="datePickerAction:" destination="2Tx-PY-TjH" eventType="valueChanged" id="B1G-Ns-t1C"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="eC8-Ff-93G" firstAttribute="leading" secondItem="KgQ-5B-xky" secondAttribute="leading" id="0QH-Qd-BHe"/>
+                                            <constraint firstAttribute="bottom" secondItem="eC8-Ff-93G" secondAttribute="bottom" id="9HN-zd-rbM"/>
+                                            <constraint firstItem="eC8-Ff-93G" firstAttribute="top" secondItem="KgQ-5B-xky" secondAttribute="top" id="Ehr-H8-yDc"/>
+                                            <constraint firstItem="zlq-RU-2Mb" firstAttribute="top" secondItem="KgQ-5B-xky" secondAttribute="top" id="KN9-3v-B4n"/>
+                                            <constraint firstAttribute="bottom" secondItem="zlq-RU-2Mb" secondAttribute="bottom" id="Kw2-Gu-cFQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="eC8-Ff-93G" secondAttribute="trailing" id="Lct-jc-hAj"/>
+                                            <constraint firstAttribute="trailing" secondItem="zlq-RU-2Mb" secondAttribute="trailing" id="ez3-5z-CM9"/>
+                                            <constraint firstItem="zlq-RU-2Mb" firstAttribute="leading" secondItem="KgQ-5B-xky" secondAttribute="leading" id="hdY-2I-R7l"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="zlq-RU-2Mb" secondAttribute="bottom" id="4Qh-8L-6Ko"/>
                                     <constraint firstItem="X9c-wC-SPC" firstAttribute="top" secondItem="NpG-wD-BAx" secondAttribute="top" constant="64" id="5zp-4D-JbX"/>
                                     <constraint firstItem="zNA-eJ-y0I" firstAttribute="top" secondItem="NpG-wD-BAx" secondAttribute="top" constant="80" id="6JX-dF-6Ld"/>
                                     <constraint firstAttribute="centerX" secondItem="zNA-eJ-y0I" secondAttribute="centerX" id="8xo-Rh-w6H"/>
-                                    <constraint firstAttribute="trailing" secondItem="zlq-RU-2Mb" secondAttribute="trailing" id="9te-Zq-MW4"/>
+                                    <constraint firstItem="KgQ-5B-xky" firstAttribute="leading" secondItem="NpG-wD-BAx" secondAttribute="leading" id="9XI-Mg-87N"/>
                                     <constraint firstAttribute="trailing" secondItem="YI7-mf-0rF" secondAttribute="trailing" id="D3F-jE-y4I"/>
                                     <constraint firstItem="OQU-sf-F7B" firstAttribute="top" secondItem="zNA-eJ-y0I" secondAttribute="bottom" constant="8" symbolic="YES" id="JoD-Yk-0gR"/>
                                     <constraint firstAttribute="trailing" secondItem="OQU-sf-F7B" secondAttribute="trailing" constant="20" symbolic="YES" id="OL8-42-0Xb"/>
                                     <constraint firstItem="X9c-wC-SPC" firstAttribute="width" secondItem="NpG-wD-BAx" secondAttribute="width" id="OUQ-zQ-Cwb"/>
                                     <constraint firstAttribute="bottom" secondItem="YI7-mf-0rF" secondAttribute="bottom" constant="49" id="Ufc-gu-9KR"/>
                                     <constraint firstAttribute="centerX" secondItem="X9c-wC-SPC" secondAttribute="centerX" id="cpe-ME-ns6"/>
-                                    <constraint firstItem="zlq-RU-2Mb" firstAttribute="leading" secondItem="NpG-wD-BAx" secondAttribute="leading" id="ech-tV-69M"/>
-                                    <constraint firstItem="zlq-RU-2Mb" firstAttribute="top" secondItem="OQU-sf-F7B" secondAttribute="bottom" constant="8" id="fWi-3M-LDq"/>
+                                    <constraint firstItem="KgQ-5B-xky" firstAttribute="top" secondItem="OQU-sf-F7B" secondAttribute="bottom" constant="8" symbolic="YES" id="e3j-cr-rH4"/>
                                     <constraint firstItem="YI7-mf-0rF" firstAttribute="top" secondItem="OQU-sf-F7B" secondAttribute="bottom" constant="8" symbolic="YES" id="fdW-tn-7SR"/>
+                                    <constraint firstAttribute="trailing" secondItem="KgQ-5B-xky" secondAttribute="trailing" id="oXF-w7-5I7"/>
                                     <constraint firstItem="OQU-sf-F7B" firstAttribute="leading" secondItem="NpG-wD-BAx" secondAttribute="leading" constant="20" symbolic="YES" id="qEn-rm-Kj1"/>
                                     <constraint firstItem="YI7-mf-0rF" firstAttribute="leading" secondItem="NpG-wD-BAx" secondAttribute="leading" id="sKC-gk-LvW"/>
+                                    <constraint firstAttribute="bottom" secondItem="KgQ-5B-xky" secondAttribute="bottom" id="xbP-ch-DEz"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2008,7 +2028,7 @@
                         <outlet property="buttonTo" destination="JZx-Kb-aB0" id="vhp-x9-yZv"/>
                         <outlet property="datePicker" destination="zlq-RU-2Mb" id="Otp-Lk-dgn"/>
                         <outlet property="dateSelectorHeight" destination="gPR-bH-DWL" id="x7Z-07-9O3"/>
-                        <outlet property="dateSelectorView" destination="OQU-sf-F7B" id="A1f-4c-fTY"/>
+                        <outlet property="dateSelectorView" destination="KgQ-5B-xky" id="Hzo-dl-UxL"/>
                         <outlet property="passwordFieldHeight" destination="Ecl-J4-83b" id="DeQ-RY-pqL"/>
                         <outlet property="passwordTextField" destination="TJm-Ie-PWq" id="wbQ-OZ-OvW"/>
                         <outlet property="tableView" destination="YI7-mf-0rF" id="hV3-3Z-u32"/>

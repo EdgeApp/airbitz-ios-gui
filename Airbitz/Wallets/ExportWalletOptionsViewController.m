@@ -131,7 +131,7 @@ typedef enum eExportOption
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
     
-    self.datePicker.hidden = YES;
+    self.dateSelectorView.hidden = YES;
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     
     self.fromDateTime = [DateTime alloc];
@@ -245,7 +245,7 @@ typedef enum eExportOption
     else
         [self.toDateTime setWithDate:datePicker.date];
     
-    self.datePicker.hidden = YES;
+    self.dateSelectorView.hidden = YES;
     [self updateDateDisplay];
 }
 
@@ -253,7 +253,7 @@ typedef enum eExportOption
 {
     _bDatePickerFrom = YES;
     [self.datePicker setDate:self.fromDateTime.date];
-    self.datePicker.hidden = NO;
+    self.dateSelectorView.hidden = NO;
 
 }
 
@@ -261,7 +261,7 @@ typedef enum eExportOption
 {
     _bDatePickerFrom = NO;
     [self.datePicker setDate:self.toDateTime.date];
-    self.datePicker.hidden = NO;
+    self.dateSelectorView.hidden = NO;
 }
 
 - (IBAction)buttonDatePeriodTouched:(UIButton *)sender
