@@ -297,7 +297,7 @@ typedef enum eExportOption
             interval:&interval
              forDate:now];
     
-    endOfInterval = [endOfInterval dateByAddingTimeInterval:interval-1];
+    endOfInterval = [startOfInterval dateByAddingTimeInterval:interval-1];
     [self.fromDateTime setWithDate:startOfInterval];
     [self.toDateTime setWithDate:endOfInterval];
 
@@ -574,7 +574,9 @@ typedef enum eExportOption
         {
             NSMutableString *str = [[NSMutableString alloc] init];
             
-            NSError *error = [abcAccount.currentWallet exportTransactionsToCSV:str];
+            NSError *error = [abcAccount.currentWallet exportTransactionsToCSV:str
+                                                                         start:self.fromDateTime.date
+                                                                           end:self.toDateTime.date];
             if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -605,7 +607,10 @@ typedef enum eExportOption
         {
             NSMutableString *str = [[NSMutableString alloc] init];
             
-            NSError *error = [abcAccount.currentWallet exportTransactionsToQBO:str];
+            NSError *error = [abcAccount.currentWallet exportTransactionsToQBO:str
+                                                                         start:self.fromDateTime.date
+                                                                           end:self.toDateTime.date];
+
             if (!error)
             {
                 dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];

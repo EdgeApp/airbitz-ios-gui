@@ -1294,7 +1294,7 @@
                                         <rect key="frame" x="0.0" y="232" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VE0-S6-Hzh" id="w2k-NV-yYC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-mY-o6I" userLabel="View -white frost">
@@ -1432,7 +1432,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="355" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mhi-jw-aaR" id="vKv-Bo-lvH" userLabel="Content View - Wallet">
-                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
@@ -1824,7 +1824,7 @@
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                 <state key="normal" title="Last Week"/>
                                                 <connections>
-                                                    <action selector="buttonDatePeriodTouched:" destination="2Tx-PY-TjH" eventType="touchDragInside" id="UbN-ld-wUp"/>
+                                                    <action selector="buttonDatePeriodTouched:" destination="2Tx-PY-TjH" eventType="touchUpInside" id="Qyj-OF-IYN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-NR-Nd9">
@@ -1992,7 +1992,13 @@
                     </view>
                     <connections>
                         <outlet property="buttonFrom" destination="gCA-0y-iu5" id="VJW-vH-dv3"/>
+                        <outlet property="buttonLastMonth" destination="CDg-O2-8UT" id="OpW-HY-vhG"/>
+                        <outlet property="buttonLastWeek" destination="NBj-ek-BcU" id="Jx3-rk-rbb"/>
+                        <outlet property="buttonLastYear" destination="90X-8Y-MEH" id="B5N-46-JQK"/>
                         <outlet property="buttonSelector" destination="X9c-wC-SPC" id="ZPB-Je-LL0"/>
+                        <outlet property="buttonThisMonth" destination="0ea-NR-Nd9" id="LpL-yQ-3y3"/>
+                        <outlet property="buttonThisWeek" destination="vlP-bB-ktv" id="6Fh-MZ-cgo"/>
+                        <outlet property="buttonThisYear" destination="RpC-BO-UBm" id="Crf-7W-Fr8"/>
                         <outlet property="buttonTo" destination="JZx-Kb-aB0" id="vhp-x9-yZv"/>
                         <outlet property="datePicker" destination="zlq-RU-2Mb" id="Otp-Lk-dgn"/>
                         <outlet property="passwordTextField" destination="TJm-Ie-PWq" id="wbQ-OZ-OvW"/>
