@@ -31,8 +31,8 @@ NSString *AffiliatesTouch         = @"https://api.airbitz.co/affiliates/";
 }
 
 NSString *AffiliateDataStore = @"affiliate_program";
-NSString *AffiliateLinkDataStoreKey = @"affiliate_link_beta";
-NSString *AffiliateInfoDataStoreKey = @"affiliate_info_beta";
+NSString *AffiliateLinkDataStoreKey = @"affiliate_link";
+NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
 
 // Pings the server to see if the device's IP address has been recently (last 3 minutes)
 // registered as having clicked on an affiliate link. If so, it gets information

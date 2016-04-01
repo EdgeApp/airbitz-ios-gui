@@ -48,7 +48,7 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
-    self.coreLabel.text = [NSString stringWithFormat:@"%@", [abc coreVersion]];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [abc getVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else

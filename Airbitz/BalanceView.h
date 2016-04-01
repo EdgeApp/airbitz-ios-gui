@@ -15,6 +15,7 @@
 @property (assign) id<BalanceViewDelegate> delegate;
 + (BalanceView *)CreateWithDelegate:(id)del;
 - (void)showBalance:(BOOL)show;
+- (void)finishedLoading;
 @property (nonatomic, strong) IBOutlet UILabel *topAmount;
 @property (nonatomic, strong) IBOutlet UILabel *botAmount;
 @property (nonatomic, strong) IBOutlet UILabel *botDenomination;

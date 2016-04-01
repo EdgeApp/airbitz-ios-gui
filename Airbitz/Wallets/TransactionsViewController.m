@@ -165,7 +165,7 @@ const int NumPromoRows              = 5;
     _showRunningBalance = [LocalSettings controller].showRunningBalance;
 
     [self.balanceViewPlaceholder addSubview:_balanceView];
-    [_balanceView showBalance:![LocalSettings controller].hideBalance];
+    [_balanceView showBalance:NO];
     
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
@@ -483,6 +483,9 @@ const int NumPromoRows              = 5;
         !abcAccount.currentWallet.currency.code)
         return;
 
+    [_balanceView finishedLoading];
+    [_balanceView showBalance:![LocalSettings controller].hideBalance];
+    
     _totalSatoshi = 0.0;
     for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
     {
@@ -1165,8 +1168,8 @@ const int NumPromoRows              = 5;
         }
         else
         {
-            int blockHeight = transaction.wallet.blockHeight;
-            int confirmations;
+            unsigned long blockHeight = transaction.wallet.blockHeight;
+            unsigned long confirmations;
             
             if (transaction.height == 0)
                 confirmations = 0;
@@ -1178,19 +1181,27 @@ const int NumPromoRows              = 5;
                 cell.confirmationLabel.text = synchronizingText;
                 cell.confirmationLabel.textColor = COLOR_BALANCE;
             }
-            else if (transaction.height < 0)
+            else if (confirmations <= 0)
             {
-                cell.confirmationLabel.text = doubleSpendText;
-                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
-            }
-            else if (confirmations == 0)
-            {
-                cell.confirmationLabel.text = pendingText;
-                cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                if (transaction.isReplaceByFee)
+                {
+                    cell.confirmationLabel.text = warningRBFText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
+                else if (transaction.isDoubleSpend)
+                {
+                    cell.confirmationLabel.text = doubleSpendText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
+                else
+                {
+                    cell.confirmationLabel.text = pendingText;
+                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                }
             }
             else if (confirmations == 1)
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             else if (confirmations >= ABCConfirmedConfirmationCount)
@@ -1200,7 +1211,7 @@ const int NumPromoRows              = 5;
             }
             else
             {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%i %@", confirmations, confirmationsText];
+                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationsText];
                 cell.confirmationLabel.textColor = COLOR_POSITIVE;
             }
             

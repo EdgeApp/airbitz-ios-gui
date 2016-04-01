@@ -36,23 +36,31 @@
     [self initMyVariables];
 }
 
+- (void)finishedLoading;
+{
+    [self.showBalanceLabel setText:showBalanceText];
+}
+
 - (void)showBalance:(BOOL)show;
 {
     float balanceViewAlpha, showBalanceLabelAlpha;
-    
-    if (show)
+    if (show && !_showingBalance)
     {
         balanceViewAlpha = 1.0;
         showBalanceLabelAlpha = 0.0;
         _showingBalance = YES;
     }
-    else
+    else if (!show && _showingBalance)
     {
         balanceViewAlpha = 0.0;
         showBalanceLabelAlpha = 1.0;
         _showingBalance = NO;
     }
-    
+    else
+    {
+        return;
+    }
+
     if (self.delegate)
         if([self.delegate respondsToSelector:@selector(BalanceViewChanged:show:)])
             [self.delegate BalanceViewChanged:self show:show];
@@ -83,6 +91,9 @@
     bv = [[[NSBundle mainBundle] loadNibNamed:@"BalanceView~iphone" owner:self options:nil] objectAtIndex:0];
 
     bv.delegate = del;
+    [bv.showBalanceLabel setText:loadingText];
+    [bv.balanceView setAlpha:0.0];
+    [bv.showBalanceLabel setAlpha:1.0];
     
     return bv;
 }
