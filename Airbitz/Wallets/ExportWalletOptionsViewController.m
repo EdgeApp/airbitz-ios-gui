@@ -73,6 +73,10 @@ typedef enum eExportOption
 @property (nonatomic, strong) ExportWalletPDFViewController     *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                           *arrayChoices;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordFieldHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dateSelectorHeight;
+@property (weak, nonatomic) IBOutlet UIView             *dateSelectorView;
+
 @property (weak, nonatomic) IBOutlet UIButton           *buttonThisWeek;
 @property (weak, nonatomic) IBOutlet UIButton           *buttonThisMonth;
 @property (weak, nonatomic) IBOutlet UIButton           *buttonThisYear;
@@ -135,6 +139,17 @@ typedef enum eExportOption
     
     [self.fromDateTime setWithDate:[NSDate dateWithTimeIntervalSince1970:0]];
     [self.toDateTime setWithDate:[NSDate date]];
+    
+    if (WalletExportType_PrivateSeed == self.type)
+    {
+        self.dateSelectorHeight.constant = 0;
+        self.dateSelectorView.hidden = YES;
+    }
+    else
+    {
+        self.passwordFieldHeight.constant = 0;
+        self.viewPassword.hidden = YES;
+    }
 
 
     // add left to right swipe detection for going back

@@ -2001,6 +2001,9 @@
                         <outlet property="buttonThisYear" destination="RpC-BO-UBm" id="Crf-7W-Fr8"/>
                         <outlet property="buttonTo" destination="JZx-Kb-aB0" id="vhp-x9-yZv"/>
                         <outlet property="datePicker" destination="zlq-RU-2Mb" id="Otp-Lk-dgn"/>
+                        <outlet property="dateSelectorHeight" destination="gPR-bH-DWL" id="x7Z-07-9O3"/>
+                        <outlet property="dateSelectorView" destination="OQU-sf-F7B" id="A1f-4c-fTY"/>
+                        <outlet property="passwordFieldHeight" destination="Ecl-J4-83b" id="DeQ-RY-pqL"/>
                         <outlet property="passwordTextField" destination="TJm-Ie-PWq" id="wbQ-OZ-OvW"/>
                         <outlet property="tableView" destination="YI7-mf-0rF" id="hV3-3Z-u32"/>
                         <outlet property="viewPassword" destination="zNA-eJ-y0I" id="LeA-lr-jBv"/>
