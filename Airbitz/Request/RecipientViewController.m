@@ -164,7 +164,7 @@
 
     // assign final
     self.arrayContacts = [arrayContacts sortedArrayUsingSelector:@selector(compare:)];
-    //ABLog(2,@"contacts: %@", self.arrayContacts);
+    //ABCLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 - (void)addContactInfo:(ABRecordRef)person withName:(NSString *)strName toArray:(NSMutableArray *)arrayContacts

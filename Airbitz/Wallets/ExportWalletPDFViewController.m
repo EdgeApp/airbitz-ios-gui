@@ -43,7 +43,7 @@
     self.webView.scalesPageToFit = YES;
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
-    [self.webView loadData:self.dataPDF MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:nil];
+    [self.webView loadData:self.dataPDF MIMEType:@"application/pdf" textEncodingName:@"UTF-8" baseURL:[NSURL URLWithString:@""]];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];

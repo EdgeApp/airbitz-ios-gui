@@ -7,14 +7,14 @@
 //
 
 #import "DebugViewController.h"
-#import "ABC.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "Util.h"
 #import "Strings.h"
+#import "FadingAlertView.h"
 
 @interface DebugViewController ()  <UIAlertViewDelegate, UIGestureRecognizerDelegate>
 {
@@ -48,11 +48,11 @@
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     self.versionLabel.text = [NSString stringWithFormat:@"%@ %@", version, build];
-    self.coreLabel.text = [NSString stringWithFormat:@"%@", [CoreBridge coreVersion]];
+    self.coreLabel.text = [NSString stringWithFormat:@"%@", [abc getVersion]];
 #if NETWORK_FAKE
     self.networkLabel.text = @"Fake";
 #else
-    if ([CoreBridge isTestNet]) {
+    if ([abc isTestNet]) {
         self.networkLabel.text = @"Testnet";
     } else {
         self.networkLabel.text = @"Mainnet";
@@ -74,7 +74,7 @@
 - (void)setupNavBar
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Debug Options", @"Debug screen header title")];
+    [MainViewController changeNavBarTitle:self title:debugOptionsTitle];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
@@ -100,13 +100,13 @@
     {
         if (1 == buttonIndex)
         {
-            ABLog(2,@"Uploading Logs\n");
+            ABCLog(2,@"Uploading Logs\n");
             [MainViewController fadingAlert:uploadingLogText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-            [CoreBridge uploadLogs:[[alertView textFieldAtIndex:0] text] notify:^
+            [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
                 [MainViewController fadingAlert:uploadSuccessfulText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-            }
-            error:^
+                
+            } error:^(NSError *error)
             {
                 [MainViewController fadingAlert:uploadFailedText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }];
@@ -123,37 +123,31 @@
 
 - (IBAction)uploadLogs:(id)sender
 {
-    NSString *title = NSLocalizedString(@"Upload Log File", nil);
-    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    NSString *title = uploadLogFileText;
+    NSString *message = enterAnyNotesForSupportStaff;
     // show password reminder test
     _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
                                                  message:message
                                                 delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:@"Upload Log", nil];
+                                       cancelButtonTitle:cancelButtonText
+                                       otherButtonTitles:uploadLogText, nil];
     _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [_uploadLogAlert show];
 }
 
 - (IBAction)clearWatcher:(id)sender
 {
-    ABLog(2,@"Clearing Watcher\n");
+    ABCLog(2,@"Clearing Watcher\n");
     NSString *buttonText = self.clearWatcherButton.titleLabel.text;
-//    NSMutableArray *wallets = [[NSMutableArray alloc] init];
-//    NSMutableArray *archived = [[NSMutableArray alloc] init];
-//    [CoreBridge loadWallets:wallets archived:archived];
-    [CoreBridge refreshWallets];
 
-    self.clearWatcherButton.titleLabel.text = @"Restarting watcher service";
+    self.clearWatcherButton.titleLabel.text = restartingWatcherServiceText;
 
-    [CoreBridge postToWalletsQueue:^{
-        [CoreBridge stopWatchers];
-        [CoreBridge deleteWatcherCache];
-        [CoreBridge startWatchers];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            self.clearWatcherButton.titleLabel.text = buttonText;
-            [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-        });
+    [abcAccount clearBlockchainCache:^{
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+    } error:^(NSError *error) {
+        self.clearWatcherButton.titleLabel.text = buttonText;
+        [MainViewController fadingAlert:watcherClearedWithErrorText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
     }];
 }
 

@@ -306,7 +306,7 @@
 	cell.textLabel.minimumScaleFactor = 0.5;
 	cell.textLabel.adjustsFontSizeToFitWidth = YES;
 	//cell.textLabel.textColor = [UIColor redColor];
-	//ABLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
+	//ABCLog(2,@"Row: %i, text: %@", indexPath.row, cell.textLabel.text);
     
     if (self.accessoryImage) {
         UIImage *image = self.accessoryImage;

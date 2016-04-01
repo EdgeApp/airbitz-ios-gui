@@ -94,7 +94,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"BuySellCell";
-    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
     Plugin *plugin;
  
@@ -123,7 +122,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger section = [indexPath section];
     NSInteger row = [indexPath row];
     Plugin *plugin;
     
@@ -187,7 +185,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:buySellText];
+    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
     [Util animateOut:controller parentController:self complete:^(void) {
         [self resetViews];
         _pluginViewController = nil;

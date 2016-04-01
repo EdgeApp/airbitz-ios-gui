@@ -6,12 +6,13 @@
 #import "SignUpPasswordController.h"
 #import "MinCharTextField.h"
 #import "PasswordVerifyView.h"
-#import "ABC.h"
 #import "Util.h"
 #import "User.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "LocalSettings.h"
+#import "FadingAlertView.h"
+#import "Affiliate.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -32,7 +33,6 @@
 @property (nonatomic, strong)   UIButton                        *buttonBlocker;
 @property (nonatomic)           CGFloat                         contentViewY;
 @property (nonatomic, copy)     NSString                        *labelString;
-@property (nonatomic, assign)   BOOL                            bSuccess;
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (weak, nonatomic) IBOutlet UILabel                    *pinTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
@@ -55,11 +55,11 @@
     [super viewDidLoad];
     
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
     self.pinTextField.delegate = self;
-    self.pinTextField.minimumCharacters = ABC_MIN_PIN_LENGTH;
+    self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
@@ -92,7 +92,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // ABLog(2,@"%s", __FUNCTION__);
+    // ABCLog(2,@"%s", __FUNCTION__);
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewWillDisappear:animated];
@@ -145,40 +145,31 @@
     [_passwordTextField resignFirstResponder];
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        tABC_Error error;
-        char *szPassword = [self.passwordTextField.text length] == 0 ? NULL : [self.passwordTextField.text UTF8String];
-        ABC_CreateAccount([self.manager.strUserName UTF8String], szPassword, &error);
-        if (error.code == ABC_CC_Ok)
-        {
-            ABC_SetPIN([self.manager.strUserName UTF8String], [self.passwordTextField.text UTF8String],
-                       [self.pinTextField.text UTF8String], &error);
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FadingAlertView dismiss:FadingAlertDismissFast];
-            if (error.code == ABC_CC_Ok)
-            {
-                _bSuccess = true;
-                
-                self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-                self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-                
-                [User login:self.manager.strUserName password:self.passwordTextField.text setupPIN:YES];
-                [CoreBridge setupNewAccount];
-                
-                [super next];
-            }
-            else
-            {
-                _bSuccess = false;
-                _strReason = [Util errorMap:&error];
-                
-                [FadingAlertView create:self.view message:_strReason holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
-            }
-        });
-    });
+
+    [abc createAccount:self.manager.strUserName
+              password:self.passwordTextField.text
+                   pin:self.pinTextField.text
+              delegate:[MainViewController Singleton]
+                            complete:^(ABCAccount *account)
+     {
+         [FadingAlertView dismiss:FadingAlertDismissFast];
+         self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+         self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+         account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
+         [account.settings saveSettings];
+         Affiliate *affiliate = [Affiliate alloc];
+         [affiliate copyLocalAffiliateInfoToAccount:account];
+         [User login:account];
+         [MainViewController createFirstWallet];
+
+         [super next];
+     }
+                 error:^(NSError *error)
+     {
+         [FadingAlertView create:self.view
+                         message:error.userInfo[NSLocalizedDescriptionKey]
+                        holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+     }];
 }
 
 - (IBAction)skipTouched:(id)sender
@@ -212,42 +203,18 @@
 
     BOOL bNewPasswordFieldsAreValid = YES;
     {
-        double secondsToCrack;
-        tABC_Error Error;
-        tABC_CC result;
-        unsigned int count = 0;
-        tABC_PasswordRule **aRules = NULL;
-        result = ABC_CheckPassword([self.passwordTextField.text UTF8String],
-                &secondsToCrack,
-                &aRules,
-                &count,
-                &Error);
-
-        //printf("Password results:\n");
-        NSMutableString *message = [[NSMutableString alloc] init];
-        [message appendString:@"Your password...\n"];
-        for (int i = 0; i < count; i++)
-        {
-            tABC_PasswordRule *pRule = aRules[i];
-            if (!pRule->bPassed)
-            {
-                bNewPasswordFieldsAreValid = NO;
-                [message appendFormat:@"%s.\n", pRule->szDescription];
-            }
-
-            //printf("%s - %s\n", pRule->bPassed ? "pass" : "fail", pRule->szDescription);
-        }
-
-        ABC_FreePasswordRuleArray(aRules, count);
-        if (bNewPasswordFieldsAreValid == NO)
+        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
+        
+        if (!result.passed)
         {
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
-                          message:message
+                          message:[Util checkPasswordResultsMessage:result]
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
+            bNewPasswordFieldsAreValid = NO;
         }
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {
@@ -279,16 +246,16 @@
     BOOL valid = YES;
     {
         // if the pin isn't long enough
-        if (self.pinTextField.text.length < ABC_MIN_PIN_LENGTH)
+        if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), ABC_MIN_PIN_LENGTH]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
         }
@@ -304,7 +271,7 @@
     CGFloat contentTop = [MainViewController getHeaderHeight]; // raise the view
     //called when user taps on either search textField or location textField
     
-    //ABLog(2,@"TextField began editing");
+    //ABCLog(2,@"TextField began editing");
     _activeTextField = textField;
     if(textField == self.passwordTextField)
     {

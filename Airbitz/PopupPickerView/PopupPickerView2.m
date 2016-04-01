@@ -86,13 +86,13 @@ CGRect keyboardFrame2;
 {
 	// Get the size of the keyboard.
 	keyboardFrame2 = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//ABLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABCLog(2,@"SHOW: KeyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
 	keyboardFrame2 = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	//ABLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+	//ABCLog(2,@"HIDE: keyboardFrame:%f, %f, %f, %f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 }
 
 - (void)dismiss
@@ -270,7 +270,7 @@ CGRect keyboardFrame2;
 
 -(void)selectRow:(NSInteger)row
 {
-	//ABLog(2,@"Select Row");
+	//ABCLog(2,@"Select Row");
 
     NSInteger section;
 
@@ -420,7 +420,7 @@ CGRect keyboardFrame2;
         }
     }
 
-	//ABLog(2,@"Number of rows: %i", nRows);
+	//ABCLog(2,@"Number of rows: %i", nRows);
     return nRows;
 }
 

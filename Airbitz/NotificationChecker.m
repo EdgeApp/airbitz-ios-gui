@@ -12,8 +12,7 @@
 #import "LocalSettings.h"
 #import "CJSONDeserializer.h"
 #import "User.h"
-#import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "Util.h"
 #import "MainViewController.h"
 
@@ -62,10 +61,10 @@ static NotificationChecker *singleton = nil;
 
 + (void)requestNotifications
 {
-    ABLog(2,@"ENTER requestNotifications\n");
+    ABCLog(2,@"ENTER requestNotifications\n");
     [singleton checkOtpResetPending];
     [singleton checkDirectoryNotifications];
-    ABLog(2,@"EXIT requestNotifications\n");
+    ABCLog(2,@"EXIT requestNotifications\n");
 }
 
 + (NSDictionary *)haveNotifications
@@ -123,7 +122,7 @@ static NotificationChecker *singleton = nil;
 
 - (NSDictionary *)getFirstUnseenNotification
 {
-    ABLog(2,@"ENTER getFirstUnseenNotification\n");
+    ABCLog(2,@"ENTER getFirstUnseenNotification\n");
 
     NSArray *arrays = @[[LocalSettings controller].notifications,
                         [LocalSettings controller].otpNotifications];
@@ -132,20 +131,20 @@ static NotificationChecker *singleton = nil;
         for (NSDictionary *notif in array) {
             NSNumber *seen = [notif objectForKey:NOTIFICATION_SEEN_KEY];
             if (nil == seen || ![seen boolValue]) {
-                ABLog(2,@"EXIT getFirstUnseenNotification: %@\n", notif);
+                ABCLog(2,@"EXIT getFirstUnseenNotification: %@\n", notif);
                 return notif;
             }
             i++;
         }
     }
-    ABLog(2,@"EXIT getFirstUnseenNotification: nil\n");
+    ABCLog(2,@"EXIT getFirstUnseenNotification: nil\n");
 
     return nil;
 }
 
 - (void)postNotification
 {
-    ABLog(2,@"GO postNotification\n");
+    ABCLog(2,@"GO postNotification\n");
 
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
 }
@@ -154,7 +153,7 @@ static NotificationChecker *singleton = nil;
 //
 + (BOOL)setNotificationSeen:(NSDictionary *)setSeenNotif
 {
-    ABLog(2,@"ENTER setNotificationSeen\n");
+    ABCLog(2,@"ENTER setNotificationSeen\n");
 
     NSArray *arrays = @[[LocalSettings controller].notifications,
             [LocalSettings controller].otpNotifications];
@@ -177,7 +176,7 @@ static NotificationChecker *singleton = nil;
                     [array replaceObjectAtIndex:i withObject:temp];
 
                     [LocalSettings saveAll];
-                    ABLog(2,@"EXIT setNotificationSeen: true %@\n",notif);
+                    ABCLog(2,@"EXIT setNotificationSeen: true %@\n",notif);
 
                     return true;
                 }
@@ -185,7 +184,7 @@ static NotificationChecker *singleton = nil;
             i++;
         }
     }
-    ABLog(2,@"EXIT setNotificationSeen: false\n");
+    ABCLog(2,@"EXIT setNotificationSeen: false\n");
     return false;
 }
 
@@ -207,7 +206,7 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotifications
 {
-    ABLog(2,@"ENTER checkNotifications\n");
+    ABCLog(2,@"ENTER checkNotifications\n");
     [self checkOtpResetPending];
 
     [self checkDirectoryNotifications];
@@ -216,7 +215,7 @@ static NotificationChecker *singleton = nil;
     {
         [self postNotification];
     }
-    ABLog(2,@"EXIT checkNotifications\n");
+    ABCLog(2,@"EXIT checkNotifications\n");
 }
 
 + (void)resetOtpNotifications
@@ -224,7 +223,7 @@ static NotificationChecker *singleton = nil;
     int i = 0;
     while (i < [[LocalSettings controller].otpNotifications count]) {
         NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
-        if ([[notif objectForKey:@"id"] isEqualToString:[User Singleton].name]) {
+        if ([[notif objectForKey:@"id"] isEqualToString:abcAccount.name]) {
             [[LocalSettings controller].otpNotifications removeObject:notif];
             break;
         }
@@ -243,17 +242,10 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkOtpResetPending
 {
-    char *szUsernames = NULL;
-    NSArray *arrayUsers = nil;
-    NSString *usernames = nil;
-    tABC_Error error;
-    tABC_CC cc = ABC_OtpResetGet(&szUsernames, &error);
-    if (cc != ABC_CC_Ok || !szUsernames) {
-        goto exit;
-    }
-    usernames = [NSString stringWithUTF8String:szUsernames];
-    usernames = [usernames stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    arrayUsers = [[NSMutableArray alloc] initWithArray:[usernames componentsSeparatedByString:@"\n"]];
+    NSError *error = nil;
+    NSArray *arrayUsers = [abc listPendingOTPResetUsernames:&error];
+    
+    if (!arrayUsers) return;
 
     for (NSString *username in arrayUsers)
     {
@@ -309,10 +301,6 @@ static NotificationChecker *singleton = nil;
         }
 
     }
-exit:
-    if (szUsernames) {
-        free(szUsernames);
-    }
 }
 
 - (void)checkDirectoryNotifications
@@ -349,7 +337,7 @@ exit:
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(1, @"*** ERROR Connecting to Network: checkDirectoryNotifications");
+        ABCLog(1, @"*** ERROR Connecting to Network: checkDirectoryNotifications");
     }];
     
 }

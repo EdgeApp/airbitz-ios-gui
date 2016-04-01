@@ -7,106 +7,11 @@
 //
 
 #import "Util.h"
-#import "ABC.h"
 #import "CommonTypes.h"
 #import "AirbitzViewController.h"
-
-void abDebugLog(int level, NSString *statement) {
-    if (level <= DEBUG_LEVEL)
-    {
-        static NSDateFormatter *timeStampFormat;
-        if (!timeStampFormat) {
-            timeStampFormat = [[NSDateFormatter alloc] init];
-            [timeStampFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-            [timeStampFormat setTimeZone:[NSTimeZone systemTimeZone]];
-        }
-
-        NSString *tempStr = [NSString stringWithFormat:@"<%@> %@",
-                              [timeStampFormat stringFromDate:[NSDate date]],statement];
-        
-        ABC_Log([tempStr UTF8String]);
-    }
-}
+#import "Theme.h"
 
 @implementation Util
-
-+ (NSString *)errorMap:(const tABC_Error *)pError;
-{
-    switch (pError->code)
-    {
-        case ABC_CC_InvalidPinWait:
-        {
-            NSString *description = [NSString stringWithUTF8String:pError->szDescription];
-            if ([@"0" isEqualToString:description]) {
-                return NSLocalizedString(@"Invalid PIN.", nil);
-            } else {
-                return [NSString stringWithFormat:
-                        NSLocalizedString(@"Too many failed login attempts. Please try again in %@ seconds.", nil),
-                        description];
-            }
-        }
-    }
-    return [Util errorCC:pError->code];
-}
-
-+ (NSString *)errorCC:(const tABC_CC) cc;
-{
-    switch (cc)
-    {
-        case ABC_CC_AccountAlreadyExists:
-            return NSLocalizedString(@"This account already exists.", nil);
-        case ABC_CC_AccountDoesNotExist:
-            return NSLocalizedString(@"We were unable to find your account. Be sure your username is correct.", nil);
-        case ABC_CC_BadPassword:
-            return NSLocalizedString(@"Invalid user name or password", nil);
-        case ABC_CC_WalletAlreadyExists:
-            return NSLocalizedString(@"Wallet already exists.", nil);
-        case ABC_CC_InvalidWalletID:
-            return NSLocalizedString(@"Wallet does not exist.", nil);
-        case ABC_CC_URLError:
-        case ABC_CC_ServerError:
-            return NSLocalizedString(@"Unable to connect to servers. Please try again later.", nil);
-        case ABC_CC_NoRecoveryQuestions:
-            return NSLocalizedString(@"No recovery questions are available for this user", nil);
-        case ABC_CC_NotSupported:
-            return NSLocalizedString(@"This operation is not supported.", nil);
-        case ABC_CC_InsufficientFunds:
-            return NSLocalizedString(@"Insufficient funds", nil);
-        case ABC_CC_SpendDust:
-            return NSLocalizedString(@"Amount is too small", nil);
-        case ABC_CC_Synchronizing:
-            return NSLocalizedString(@"Synchronizing with the network.", nil);
-        case ABC_CC_NonNumericPin:
-            return NSLocalizedString(@"PIN must be a numeric value.", nil);
-        case ABC_CC_InvalidPinWait:
-            return NSLocalizedString(@"Invalid PIN.", nil);
-        case ABC_CC_Error:
-        case ABC_CC_NULLPtr:
-        case ABC_CC_NoAvailAccountSpace:
-        case ABC_CC_DirReadError:
-        case ABC_CC_FileOpenError:
-        case ABC_CC_FileReadError:
-        case ABC_CC_FileWriteError:
-        case ABC_CC_FileDoesNotExist:
-        case ABC_CC_UnknownCryptoType:
-        case ABC_CC_InvalidCryptoType:
-        case ABC_CC_DecryptError:
-        case ABC_CC_DecryptFailure:
-        case ABC_CC_EncryptError:
-        case ABC_CC_ScryptError:
-        case ABC_CC_SysError:
-        case ABC_CC_NotInitialized:
-        case ABC_CC_Reinitialization:
-        case ABC_CC_JSONError:
-        case ABC_CC_MutexError:
-        case ABC_CC_NoTransaction:
-        case ABC_CC_ParseError:
-        case ABC_CC_NoRequest:
-        case ABC_CC_NoAvailableAddress:
-        default:
-            return NSLocalizedString(@"An error has occurred.", nil);
-    }
-}
 
 + (void)replaceHtmlTags:(NSString **) strContent;
 {
@@ -119,6 +24,16 @@ void abDebugLog(int level, NSString *statement) {
     NSString *build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
+    
+    NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+    
+    NSString *platform          = [NSString stringWithFormat:@"Platform:%@<br>\n", [ABCUtil platform]];
+    NSString *platformString    = [NSString stringWithFormat:@"Platform String:%@<br>\n", [ABCUtil platformString]];
+    NSString *osVersionString   = [NSString stringWithFormat:@"OS Version:%d.%d.%d<br>\n", (int)osVersion.majorVersion, (int)osVersion.minorVersion, (int)osVersion.patchVersion];
+    NSString *airbitzVersion    = [NSString stringWithFormat:@"Airbitz Version:%@", versionbuild];
+
+    NSString *emailSupportTemplate = [NSString stringWithFormat:@"<a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
+    NSString *phoneSupportTemplate = [NSString stringWithFormat:@"<a href=\"tel:%@\">%@</a>", supportPhone, supportPhone];
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
             @"[[abtag APP_TITLE]]",
@@ -131,6 +46,8 @@ void abDebugLog(int level, NSString *statement) {
             @"[[abtag APP_COMPANY_LOCATION]]",
             @"[[abtag APP_SUPPORT_EMAIL]]",
             @"[[abtag APP_VERSION]]",
+            @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
+            @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
                     nil];
 
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
@@ -144,6 +61,8 @@ void abDebugLog(int level, NSString *statement) {
             appCompanyLocation,
             supportEmail,
             versionbuild,
+            emailSupportTemplate,
+            phoneSupportTemplate,
                     nil];
 
     for (int i=0; i<[searchList count];i++)
@@ -152,29 +71,6 @@ void abDebugLog(int level, NSString *statement) {
                                                              withString:[replaceList objectAtIndex:i]];
     }
 
-}
-
-
-+ (void)printABC_Error:(const tABC_Error *)pError
-{
-    if (pError)
-    {
-        if (pError->code != ABC_CC_Ok)
-        {
-            NSString *err = [NSString stringWithFormat:@"Code: %d, Desc: %s, Func: %s, File: %s, Line: %d\n",
-                   pError->code,
-                   pError->szDescription,
-                   pError->szSourceFunc,
-                   pError->szSourceFile,
-                   pError->nSourceLine];
-            abDebugLog(1, err);
-        }
-        if (pError->code == ABC_CC_DecryptError
-                    || pError->code == ABC_CC_DecryptFailure)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
-        }
-    }
 }
 
 // resizes a view that is one of the tab bar screens to the approriate size to avoid the toolbar
@@ -212,19 +108,6 @@ void abDebugLog(int level, NSString *statement) {
         screenBounds.size = CGSizeMake(height, width);
     }
     return screenBounds ;
-}
-
-
-+ (void)freeStringArray:(char **)aszStrings count:(unsigned int)count
-{
-    if ((aszStrings != NULL) && (count > 0))
-    {
-        for (int i = 0; i < count; i++)
-        {
-            free(aszStrings[i]);
-        }
-        free(aszStrings);
-    }
 }
 
 // creates the full name from an address book record
@@ -376,56 +259,6 @@ void abDebugLog(int level, NSString *statement) {
 }
 
 
-+ (UIImage *)dataToImage:(const unsigned char *)data withWidth:(int)width andHeight:(int)height
-{
-	//converts raw monochrome bitmap data (each byte is a 1 or a 0 representing a pixel) into a UIImage
-	char *pixels = malloc(4 * width * width);
-	char *buf = pixels;
-		
-	for (int y = 0; y < height; y++)
-	{
-		for (int x = 0; x < width; x++)
-		{
-			if (data[(y * width) + x] & 0x1)
-			{
-				//printf("%c", '*');
-				*buf++ = 0;
-				*buf++ = 0;
-				*buf++ = 0;
-				*buf++ = 255;
-			}
-			else
-			{
-				printf(" ");
-				*buf++ = 255;
-				*buf++ = 255;
-				*buf++ = 255;
-				*buf++ = 255;
-			}
-		}
-		//printf("\n");
-	}
-	
-	CGContextRef ctx;
-	CGImageRef imageRef;
-	
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	ctx = CGBitmapContextCreate(pixels,
-								(float)width,
-								(float)height,
-								8,
-								width * 4,
-								colorSpace,
-								(CGBitmapInfo)kCGImageAlphaPremultipliedLast ); //documentation says this is OK
-	CGColorSpaceRelease(colorSpace);
-	imageRef = CGBitmapContextCreateImage (ctx);
-	UIImage* rawImage = [UIImage imageWithCGImage:imageRef];
-	
-	CGContextRelease(ctx);
-	CGImageRelease(imageRef);
-	free(pixels);
-	return rawImage;
-}
 
 + (void)stylizeTextView:(UITextView *)textField
 {
@@ -461,7 +294,7 @@ void abDebugLog(int level, NSString *statement) {
 + (void)checkPasswordAsync:(NSString *)password withSelector:(SEL)selector controller:(UIViewController *)controller
 {
     if (!password || [password length] == 0) {
-        if ([CoreBridge passwordExists]) {
+        if ([abcAccount accountHasPassword]) {
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:NO] waitUntilDone:NO];
         } else {
@@ -470,11 +303,41 @@ void abDebugLog(int level, NSString *statement) {
         }
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            BOOL matched = [CoreBridge passwordOk:password];
+            BOOL matched = [abcAccount checkPassword:password];
             [controller performSelectorOnMainThread:selector
                 withObject:[NSNumber numberWithBool:matched] waitUntilDone:NO];
         });
     }
+}
+
++ (NSString *)checkPasswordResultsMessage:(ABCPasswordRuleResult *)result;
+{
+    NSMutableString *checkResultsMessage = [[NSMutableString alloc] init];
+    
+    [checkResultsMessage appendString:yourPasswordText];
+    
+    if (result.noUpperCase)
+    {
+        [checkResultsMessage appendString:mustHaveUpperCase];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.noLowerCase)
+    {
+        [checkResultsMessage appendString:mustHaveLowerCase];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.noNumber)
+    {
+        [checkResultsMessage appendString:mustHaveNumber];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    if (result.tooShort)
+    {
+        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+        [checkResultsMessage appendString:@"\n"];
+    }
+    
+    return [NSString stringWithString:checkResultsMessage];
 }
 
 + (NSString *)urlencode:(NSString *)url
@@ -619,15 +482,3 @@ void abDebugLog(int level, NSString *statement) {
 
 @end
 
-@implementation NSString (reverse)
- 
-+ (NSString *)safeStringWithUTF8String:(const char *)bytes;
-{
-    if (bytes) {
-        return [NSString stringWithUTF8String:bytes];
-    } else {
-        return @"";
-    }
-}
- 
-@end

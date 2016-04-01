@@ -4,10 +4,10 @@
 #import "ScanView.h"
 #import "User.h"
 #import "Util.h"
-#import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 @interface TwoFactorScanViewController () 
     <UITextFieldDelegate, UIAlertViewDelegate, UIGestureRecognizerDelegate,
@@ -121,25 +121,24 @@
 
 - (BOOL)storeSecret
 {
-    tABC_Error Error;
-    tABC_CC cc = ABC_OtpKeySet([[User Singleton].name UTF8String], (char *) [_secret UTF8String], &Error);
-    return cc == ABC_CC_Ok;
+    NSError *error = [abcAccount setOTPKey:_secret];
+    return !error;
 }
 
 - (void)testSecret
 {
     dispatch_async(dispatch_get_main_queue(), ^ {
-        if (YES) {
+//        if (YES) {
             [self exit];
-        } else {
-            _alertView = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Unable to import token", nil)
-                            message:NSLocalizedString(@"The two factor authentication token import failed. Please ensure you have the correct token!", nil)
-                            delegate:self
-                            cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
-                            otherButtonTitles:NSLocalizedString(@"Try Again?", nil), nil];
-            [_alertView show];
-        }
+//        } else {
+//            _alertView = [[UIAlertView alloc]
+//                            initWithTitle:NSLocalizedString(@"Unable to import token", nil)
+//                            message:NSLocalizedString(@"The two factor authentication token import failed. Please ensure you have the correct token!", nil)
+//                            delegate:self
+//                            cancelButtonTitle:NSLocalizedString(@"No thanks", nil)
+//                            otherButtonTitles:NSLocalizedString(@"Try Again?", nil), nil];
+//            [_alertView show];
+//        }
     });
 }
 

@@ -8,13 +8,17 @@
 
 #import "SlideoutView.h"
 #import "PickerTextView.h"
-#import "CoreBridge.h"
-#import "ABC.h"
+#import "AirbitzCore.h"
 #import "User.h"
 #import "LocalSettings.h"
 #import "Util.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
+#import "AB.h"
+#import "Theme.h"
+#import "FadingAlertView.h"
+#import "ABCUtil.h"
+#import "Affiliate.h"
 
 @interface SlideoutView () <PickerTextViewDelegate >
 
@@ -26,6 +30,7 @@
     FadingAlertView             *_fadingAlert;
     UIButton                    *_blockingButton;
     UIView                      *_parentView;
+
 }
 
 @property (weak, nonatomic) IBOutlet UILabel                *conversionText;
@@ -33,7 +38,8 @@
 @property (weak, nonatomic) IBOutlet UIView                 *accountArrow;
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
-@property (weak, nonatomic) IBOutlet UIButton               *importGiftCardButton;
+//@property (weak, nonatomic) IBOutlet UIButton               *importGiftCardButton;
+@property (weak, nonatomic) IBOutlet UIButton               *affiliateButton;
 @property (weak, nonatomic) IBOutlet UIButton               *buySellButton;
 @property (weak, nonatomic) IBOutlet UIButton               *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton               *logoutButton;
@@ -42,10 +48,11 @@
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
-@property (nonatomic, strong) NSArray                       *arrayAccounts;
+@property (nonatomic, strong) NSMutableArray                *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
-@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
+//@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
+@property (weak, nonatomic) IBOutlet UILabel                *affiliateLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
 
 @end
@@ -66,7 +73,8 @@
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_walletsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
-    [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+//    [v->_importGiftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
+    [v->_affiliateButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_giftCardButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
 
     return v;
@@ -106,18 +114,18 @@
 {
     if (!_initialized)
     {
-        NSString *tempText = importPrivateKeyText;
-        [Util replaceHtmlTags:&tempText];
-        self.importPrivateKeyLabel.text = tempText;
+//        NSString *tempText = importPrivateKeyText;
+//        [Util replaceHtmlTags:&tempText];
+        self.affiliateLabel.text = referYourFriendsAndGetRevenue;
         self.giftCardTextLabel.text = giftCardText;
         _buySellButton.hidden = !SHOW_BUY_SELL;
         _dividerView3.hidden = !SHOW_BUY_SELL;
         
         if (!SHOW_BUY_SELL)
         {
-            CGRect frame = _importGiftCardButton.frame;
+            CGRect frame = _affiliateButton.frame;
             frame.origin.y -= 50;
-            _importGiftCardButton.frame = frame;
+            _affiliateButton.frame = frame;
             
             frame = _giftCardButton.frame;
             frame.origin.y -= 50;
@@ -140,13 +148,10 @@
             [self.accountPicker setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
             [self.accountPicker setRoundedAndShadowed:NO];
 
-            int num = [User Singleton].defaultCurrencyNum;
+            self.conversionText.text = [abcAccount createExchangeRateString:abcAccount.settings.defaultCurrency includeCurrencyCode:YES];
 
-            self.conversionText.text = [CoreBridge conversionStringFromNum:num withAbbrev:YES];
-
-
-            self.accountText.text = [User Singleton].name;
-            [self.accountButton setAccessibilityLabel:[User Singleton].name];
+            self.accountText.text = abcAccount.name;
+            [self.accountButton setAccessibilityLabel:abcAccount.name];
 
             self.lowerViews.hidden = NO;
             self.otherAccountsView.hidden = YES;
@@ -263,6 +268,13 @@
     }
 }
 
+- (IBAction)affiliateTouched:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAffiliate)]) {
+        [self.delegate slideoutAffiliate];
+    }
+}
+
 - (IBAction)giftCardTouched:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutGiftCard)]) {
         [self.delegate slideoutGiftCard];
@@ -275,7 +287,6 @@
         [self.delegate slideoutWallets];
     }
 }
-
 
 - (IBAction)accountTouched
 {
@@ -357,7 +368,7 @@
     CGPoint location = [recognizer locationInView:self->_parentView];
     int openLeftX = self->_parentView.bounds.size.width - self.bounds.size.width;
     bool halfwayOut = location.x < self->_parentView.bounds.size.width - self.bounds.size.width / 2;
-    ABLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
+    ABCLog(2,@"transX, locX, centerX: %f %f %f", translation.x, location.x, self.center.x);
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -456,7 +467,7 @@
     
     // set the text field to the choice
     NSString *account = [self.otherAccounts objectAtIndex:row];
-    [LocalSettings controller].cachedUsername = account;
+    [abc setLastAccessedAccount:account];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
@@ -472,7 +483,7 @@
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([CoreBridge passwordExists:acct])
+    if ([abc accountHasPassword:acct error:nil])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;
@@ -502,26 +513,26 @@
 
 - (void)removeAccount:(NSString *)account
 {
-    tABC_CC cc = [CoreBridge accountDeleteLocal:account];
-    if(cc == ABC_CC_Ok)
+    NSError *error = [abc deleteLocalAccount:account];
+    if (!error)
     {
         [self getAllAccounts];
         [self.accountPicker updateChoices:self.arrayAccounts];
     }
     else
     {
-        [MainViewController fadingAlert:[Util errorCC:cc]];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
 - (void)getAllAccounts
 {
-    NSString *strError;
-    self.arrayAccounts = [CoreBridge getLocalAccounts:&strError];
-    if (nil == self.arrayAccounts)
+    if (!self.arrayAccounts)
+        self.arrayAccounts = [[NSMutableArray alloc] init];
+    NSError *error = [abc listLocalAccounts:self.arrayAccounts];
+    if (error)
     {
-        if (strError)
-            [MainViewController fadingAlert:strError];
+        [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
 
@@ -544,11 +555,11 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     // if they said they wanted to delete the account
-    if (buttonIndex == 1)
-    {
-        [self removeAccount:_account];
-    }
-    [self accountTouched];
+        if (buttonIndex == 1)
+        {
+            [self removeAccount:_account];
+        }
+        [self accountTouched];
 }
 
 @end

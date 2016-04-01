@@ -8,7 +8,7 @@
 
 #import "Theme.h"
 #import "Util.h"
-#import <sys/sysctl.h>
+#import "ABCUtil.h"
 
 static BOOL bInitialized = NO;
 
@@ -50,6 +50,8 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextDark = UIColorFromARGB(0xff0C578C);
     self.colorTextLink = UIColorFromARGB(0xFF007aFF);
     self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
+    self.colorTextDarkGrey = UIColorFromARGB(0xFF404040);
+    self.colorTextMediumGrey = UIColorFromARGB(0xFF808080);
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
     self.colorSendButton = self.colorButtonBlue;
@@ -89,8 +91,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
     self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
-    self.rotateServerInterval                   = 15.0;     // How long (in seconds) before we rotate libbitcoin servers while waiting on QR code screen
-    self.walletLoadingTimerInterval             = 10.0;     // How long to wait between wallet updates on new device logins before we consider the account fully loaded
 
     self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
@@ -112,17 +112,20 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightSettingsTableHeader          = 60.0;
         self.heightButton                       = 45.0;
         self.buttonFontSize                     = 15.0;
-        self.fontSizeEnterPINText               = 16.0;     // Font size for PIN login screen "Enter PIN"
-
+        self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
+        self.fontSizeTxListBuyBitcoin           = 18.0;
+        self.fontSizeTxListName                 = 15.0;
     }
     if (IS_MIN_IPHONE5)
     {
+        self.heightTransactionCell = 80;
         self.heightListings = 110.0;
         self.heightLoginScreenLogo = 100;
         self.heightWalletHeader = 50.0;
         self.heightSearchClues = 40.0;
         self.heightBLETableCells = 55;
         self.heightPopupPicker = 55;
+        self.fontSizeTxListName                 = 18.0;
     }
     if (IS_MIN_IPHONE6)
     {
@@ -130,17 +133,21 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightLoginScreenLogo = 120;
         self.heightBLETableCells = 65;
         self.heightPopupPicker = 60;
-        self.heightSettingsTableCell            = 45.0;
+        self.heightSettingsTableCell            = 55.0;
         self.heightSettingsTableHeader          = 65.0;
         self.fontSizeEnterPINText               = 18.0;     // Font size for PIN login screen "Enter PIN"
+        self.fontSizeTxListBuyBitcoin           = 20.0;
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
+        self.heightTransactionCell = 85;
         self.heightWalletHeader = 55.0;
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;
         self.heightBLETableCells = 70;
         self.heightPopupPicker = 65;
+        self.fontSizeTxListBuyBitcoin           = 22.0;
+        self.fontSizeTxListName                 = 20.0;
     }
     if (IS_MIN_IPAD_MINI)
     {
@@ -148,9 +155,9 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.fontSizeEnterPINText               = 20.0;     // Font size for PIN login screen "Enter PIN"
     }
 
-    ABLog(1,@"***Device Type: %@ %@", [self platform], [self platformString]);
+    ABCLog(1,@"***Device Type: %@ %@", [ABCUtil platform], [ABCUtil platformString]);
 
-    NSString *devtype = [self platform];
+    NSString *devtype = [ABCUtil platform];
 
     if (0 ||
             [devtype hasPrefix:@"iPod"] ||
@@ -167,80 +174,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.bTranslucencyEnable = YES;
     }
     return self;
-}
-
-- (NSString *)platform;
-{
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-    sysctlbyname("hw.machine", machine, &size, NULL, 0);
-
-    NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
-
-    free(machine);
-
-    return platform;
-}
-
-- (NSString *)platformString;
-{
-    NSString *platform = [self platform];
-
-    if ([platform isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
-    if ([platform isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
-    if ([platform isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
-    if ([platform isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
-    if ([platform isEqualToString:@"iPhone3,3"])    return @"Verizon iPhone 4";
-    if ([platform isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
-    if ([platform isEqualToString:@"iPhone5,1"])    return @"iPhone 5 (GSM)";
-    if ([platform isEqualToString:@"iPhone5,2"])    return @"iPhone 5 (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone5,3"])    return @"iPhone 5c (GSM)";
-    if ([platform isEqualToString:@"iPhone5,4"])    return @"iPhone 5c (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone6,1"])    return @"iPhone 5s (GSM)";
-    if ([platform isEqualToString:@"iPhone6,2"])    return @"iPhone 5s (GSM+CDMA)";
-    if ([platform isEqualToString:@"iPhone7,1"])    return @"iPhone 6 Plus";
-    if ([platform isEqualToString:@"iPhone7,2"])    return @"iPhone 6";
-    if ([platform isEqualToString:@"iPhone8,1"])    return @"iPhone 6s Plus";
-    if ([platform isEqualToString:@"iPhone8,2"])    return @"iPhone 6s";
-    if ([platform isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
-    if ([platform isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
-    if ([platform isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
-    if ([platform isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
-    if ([platform isEqualToString:@"iPod5,1"])      return @"iPod Touch 5G";
-    if ([platform isEqualToString:@"iPod7,1"])      return @"iPod Touch 6G";
-    if ([platform isEqualToString:@"iPad1,1"])      return @"iPad";
-    if ([platform isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
-    if ([platform isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
-    if ([platform isEqualToString:@"iPad2,4"])      return @"iPad 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad2,5"])      return @"iPad Mini (WiFi)";
-    if ([platform isEqualToString:@"iPad2,6"])      return @"iPad Mini (GSM)";
-    if ([platform isEqualToString:@"iPad2,7"])      return @"iPad Mini (CDMA)";
-    if ([platform isEqualToString:@"iPad3,1"])      return @"iPad 3 (WiFi)";
-    if ([platform isEqualToString:@"iPad3,2"])      return @"iPad 3 (CDMA)";
-    if ([platform isEqualToString:@"iPad3,3"])      return @"iPad 3 (GSM)";
-    if ([platform isEqualToString:@"iPad3,4"])      return @"iPad 4 (WiFi)";
-    if ([platform isEqualToString:@"iPad3,5"])      return @"iPad 4 (GSM)";
-    if ([platform isEqualToString:@"iPad3,6"])      return @"iPad 4 (CDMA)";
-    if ([platform isEqualToString:@"iPad4,1"])      return @"iPad Air (WiFi)";
-    if ([platform isEqualToString:@"iPad4,2"])      return @"iPad Air (GSM)";
-    if ([platform isEqualToString:@"iPad4,3"])      return @"iPad Air (CDMA)";
-    if ([platform isEqualToString:@"iPad4,4"])      return @"iPad Mini Retina (WiFi)";
-    if ([platform isEqualToString:@"iPad4,5"])      return @"iPad Mini Retina (Cellular)";
-    if ([platform isEqualToString:@"iPad4,7"])      return @"iPad Mini 3 (WiFi)";
-    if ([platform isEqualToString:@"iPad4,8"])      return @"iPad Mini 3 (Cellular)";
-    if ([platform isEqualToString:@"iPad4,9"])      return @"iPad Mini 3 (Cellular)";
-    if ([platform isEqualToString:@"iPad5,1"])      return @"iPad Mini 4 (WiFi)";
-    if ([platform isEqualToString:@"iPad5,2"])      return @"iPad Mini 4 (Cellular)";
-    if ([platform isEqualToString:@"iPad5,3"])      return @"iPad Air 2 (WiFi)";
-    if ([platform isEqualToString:@"iPad5,4"])      return @"iPad Air 2 (Cellular)";
-    if ([platform isEqualToString:@"iPad6,7"])      return @"iPad Pro (WiFi)";
-    if ([platform isEqualToString:@"iPad6,8"])      return @"iPad Pro (Cellular)";
-    if ([platform isEqualToString:@"i386"])         return @"Simulator x86 32 bit";
-    if ([platform isEqualToString:@"x86_64"])       return @"Simulator x86 64 bit";
-
-    return platform;
 }
 
 @end

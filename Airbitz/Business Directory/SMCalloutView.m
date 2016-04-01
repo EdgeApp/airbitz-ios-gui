@@ -148,7 +148,7 @@ NSTimeInterval kSMCalloutViewRepositionDelayForUIScrollView = 1.0/3.0;
 {
     if (self.contentView)
 	{
-		//ABLog(2,@"Content view height: %f", self.contentView.$height);
+		//ABCLog(2,@"Content view height: %f", self.contentView.$height);
         return self.contentView.$height + TITLE_TOP*2 + ANCHOR_HEIGHT + BOTTOM_ANCHOR_MARGIN;
 	}
     else
@@ -599,7 +599,7 @@ NSTimeInterval kSMCalloutViewRepositionDelayForUIScrollView = 1.0/3.0;
     SEL selector = NSSelectorFromString(name);
     
     if (![(id)self respondsToSelector:selector]) {
-        ABLog(2,@"Could not find an embedded image. Ensure that you've added a category method to UIImage named +%@", name);
+        ABCLog(2,@"Could not find an embedded image. Ensure that you've added a category method to UIImage named +%@", name);
         return nil;
     }
     

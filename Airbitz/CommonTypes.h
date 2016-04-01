@@ -8,23 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
-
-#define IS_IPHONE4 (([[UIScreen mainScreen] bounds].size.height < 568) ? YES : NO)
-#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height > 567 && [[UIScreen mainScreen] bounds].size.height < 569) ? YES : NO)
-#define IS_IPHONE6 (([[UIScreen mainScreen] bounds].size.height > 666 && [[UIScreen mainScreen] bounds].size.height < 668) ? YES : NO)
-#define IS_IPHONE6_PLUS (([[UIScreen mainScreen] bounds].size.height > 735 && [[UIScreen mainScreen] bounds].size.height < 737) ? YES : NO)
-#define IS_IPAD_MINI (([[UIScreen mainScreen] bounds].size.height > 737) ? YES : NO)
-
-#define IS_MIN_IPHONE5 ([[UIScreen mainScreen] bounds].size.height >= 568)
-#define IS_MIN_IPHONE6 ([[UIScreen mainScreen] bounds].size.height >= 667)
-#define IS_MIN_IPHONE6_PLUS ([[UIScreen mainScreen] bounds].size.height >= 736)
-#define IS_MIN_IPAD_MINI ([[UIScreen mainScreen] bounds].size.height > 737)
-
 #ifdef AIRBITZ_DEVELOP
 #define AIRBITZ_URI_PREFIX @"airbitz-develop"
 #endif
@@ -37,12 +20,6 @@
 #define AIRBITZ_URI_PREFIX @"airbitz"
 #endif
 
-typedef NS_ENUM(NSUInteger, ImportDataModel) {
-    kWIF,
-    kEWIF,
-    kHBURI,
-};
-#define HIDDEN_BITZ_URI_SCHEME @"hbits"
 #define BITCOIN_URI_SCHEME @"bitcoin"
 
 #define READER_VIEW_TAG     99999999
@@ -113,6 +90,13 @@ static NSString *kTimerStart = @"start";
 #define ENTER_ANIM_TIME_SECS    0.35                    // duration when animating a view controller as it slides on screen
 #define EXIT_ANIM_TIME_SECS     ENTER_ANIM_TIME_SECS    // duration when animating a view controller as it slides off screen to reveal the calling view
 
+static unsigned int StarbucksBizID =        11131;
+static unsigned int TargetBizID =           11132;
+static unsigned int WholeFoodsBizID =       11139;
+static unsigned int WalmartBizID =          11140;
+static unsigned int HomeDepotBizID =        11141;
+static unsigned int AmazonBizID =           11245;
+
 typedef enum eTabBarButton
 {
 	TAB_BAR_BUTTON_DIRECTORY = 0,
@@ -124,28 +108,20 @@ typedef enum eTabBarButton
 
 // notifications
 
-#define NOTIFICATION_MAIN_RESET                         @"Main_Views_Reset"
-#define NOTIFICATION_REMOTE_PASSWORD_CHANGE             @"Remote_Password_Change"
-#define NOTIFICATION_BLOCK_HEIGHT_CHANGE                @"Block_Height_Change"
-#define NOTIFICATION_OTP_REQUIRED                       @"Otp_Required"
-#define NOTIFICATION_OTP_SKEW                           @"Otp_Skew"
-#define NOTIFICATION_EXCHANGE_RATE_CHANGE               @"Exchange_Rate_Change"
-#define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
 #define NOTIFICATION_HANDLE_BITCOIN_URI                 @"Handle_Bitcoin_URI"
 #define NOTIFICATION_TRANSACTION_DETAILS_EXITED         @"Notification_Transaction_Details_Exited"     // sent when the user has finished using a transaction details screen
 #define NOTIFICATION_LAUNCH_SEND_FOR_WALLET             @"Notification_Launch_Send_For_Wallet"
 #define NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET          @"Notification_Launch_Request_For_Wallet"
 #define NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS          @"Notification_Launch_Recovery_Questions"
 #define NOTIFICATION_TAB_BAR_BUTTON_RESELECT            @"Notification_Tab_Bar_Button_Reselected"
-#define NOTIFICATION_TX_RECEIVED                        @"Transaction_Received"
 #define NOTIFICATION_NOTIFICATION_RECEIVED              @"Notification_Received"
 #define NOTIFICATION_SWEEP                              @"Notification_Sweep"
 #define NOTIFICATION_VIEW_SWEEP_TX                      @"Notification_View_Sweep_Transaction_Details"
-#define NOTIFICATION_WALLETS_LOADING                    @"Wallets_Loading"
-#define NOTIFICATION_WALLETS_LOADED                     @"Wallets_Loaded"
-#define NOTIFICATION_WALLETS_CHANGED                    @"Wallets_Changed"
+#define NOTIFICATION_EXCHANGE_RATE_CHANGED              @"Notification_Exchange_Rate_Changed"
 #define NOTIFICATION_ROTATION_CHANGED                   @"Rotation_Changed"
 #define NOTIFICATION_CONTACTS_CHANGED                   @"Contacts_Changed"
+#define NOTIFICATION_DATA_SYNC_UPDATE                   @"Data_Sync_Update"
+#define NOTIFICATION_WALLETS_CHANGED                    @"ABC_Wallets_Changed"
 
 #define KEY_ERROR_CODE                                  @"Error_Code"
 #define KEY_TX_DETAILS_EXITED_TX                        @"transaction"
@@ -154,10 +130,6 @@ typedef enum eTabBarButton
 #define KEY_TX_DETAILS_EXITED_TX_ID                     @"transactionID"
 
 #define KEY_ROTATION_ORIENTATION                        @"orientation"
-
-#define KEY_SWEEP_CORE_CONDITION_CODE                   @"tABC_CC"
-#define KEY_SWEEP_TX_ID                                 @"transactionID"
-#define KEY_SWEEP_TX_AMOUNT                             @"transactionAmount"
 
 #define KEY_TAB_BAR_BUTTON_RESELECT_ID                  @"tabBarButtonID"
 

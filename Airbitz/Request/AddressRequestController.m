@@ -8,9 +8,9 @@
 #import "ButtonSelectorView2.h"
 #import "Util.h"
 #import "User.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 #define X_SOURCE @"Airbitz"
 
@@ -73,16 +73,16 @@
 {
     [MainViewController changeNavBarOwner:self];
     
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
         
-        NSString *walletName = [NSString stringWithFormat:@"To: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        NSString *walletName = [NSString stringWithFormat:navbarToWalletPrefixText, abcAccount.currentWallet.name];
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -93,14 +93,6 @@
     [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:NO action:nil fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:NO action:nil fromObject:self];
     
-//    [MainViewController changeNavBarOwner:self];
-//    [MainViewController changeNavBarTitle:self title:@"Airbitz"];
-//    [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
-//    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-//
-//    _walletSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-//    [_walletSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-//    _walletSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
 }
 
 - (void)didTapTitle: (UIButton *)sender
@@ -152,23 +144,27 @@
 {
     [self.view endEditing:YES];
 
-    NSMutableString *strRequestID = [[NSMutableString alloc] init];
-    NSMutableString *strRequestAddress = [[NSMutableString alloc] init];
-    NSMutableString *strRequestURI = [[NSMutableString alloc] init];
-    [self createRequest:strRequestID storeRequestURI:strRequestURI
-        storeRequestAddressIn:strRequestAddress withAmount:0 withRequestState:kRequest];
+    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
+    
     if (_successUrl) {
+        
+        receiveAddress.metaData.payeeName = strName;
+        receiveAddress.metaData.category = strCategory;
+        receiveAddress.metaData.notes = strNotes;
+
+        ABCReceiveAddress *receiveAddress = [abcAccount.currentWallet createNewReceiveAddress];
+        
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
         if ([url rangeOfString:@"?"].location == NSNotFound) {
-            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@?address=%@", url, [Util urlencode:receiveAddress.uri]];
         } else {
-            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:strRequestURI]];
+            query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:receiveAddress.uri]];
         }
         [query appendFormat:@"&x-source=%@", X_SOURCE];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
-            // If the URL was successfully opened, finalize the request
-            [self finalizeRequest:strRequestID];
+            // If the URL was successfully opened, finalize the receiveAddress
+            [receiveAddress finalizeRequest];
         } else {
             // If that failed to open, try error url
             [[UIApplication sharedApplication] openURL:_errorUrl];
@@ -180,115 +176,8 @@
 
 - (IBAction)cancel
 {
-//    if (_cancelUrl == nil) {
-//        _cancelUrl = _errorUrl;
-//    }
-//    if (_cancelUrl) {
-//        NSString *url = [_cancelUrl absoluteString];
-//        NSMutableString *query;
-//        NSString *cancelMessage = [Util urlencode:NSLocalizedString(@"User cancelled the request.", nil)];
-//        if ([url rangeOfString:@"?"].location == NSNotFound) {
-//            query = [[NSMutableString alloc] initWithFormat: @"%@?addr=&cancelMessage=%@", url, cancelMessage];
-//        } else {
-//            query = [[NSMutableString alloc] initWithFormat: @"%@&addr=&cancelMessage=%@", url, cancelMessage];
-//        }
-//        [[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]];
-//    }
     // finish
     [self.delegate AddressRequestControllerDone:self];
-}
-
-- (void)createRequest:(NSMutableString *)strRequestID
-    storeRequestURI:(NSMutableString *)strRequestURI
-    storeRequestAddressIn:(NSMutableString *)strRequestAddress
-    withAmount:(SInt64)amountSatoshi withRequestState:(RequestState)state
-{
-    [strRequestID setString:@""];
-    [strRequestAddress setString:@""];
-    [strRequestURI setString:@""];
-
-    unsigned int width = 0;
-    unsigned char *pData = NULL;
-    char *pszURI = NULL;
-    tABC_Error error;
-
-    char *szRequestID = [self createReceiveRequestFor:amountSatoshi withRequestState:state];
-    if (szRequestID) {
-        ABC_GenerateRequestQRCode([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-            szRequestID, &pszURI, &pData, &width, &error);
-        if (error.code == ABC_CC_Ok) {
-            if (pszURI && strRequestURI) {
-                [strRequestURI appendFormat:@"%s", pszURI];
-                free(pszURI);
-            }
-        } else {
-            [Util printABC_Error:&error];
-        }
-    }
-    if (szRequestID) {
-        if (strRequestID) {
-            [strRequestID appendFormat:@"%s", szRequestID];
-        }
-        char *szRequestAddress = NULL;
-        tABC_CC result = ABC_GetRequestAddress([[User Singleton].name UTF8String],
-            [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-            szRequestID, &szRequestAddress, &error);
-        [Util printABC_Error:&error];
-        if (result == ABC_CC_Ok) {
-            if (szRequestAddress && strRequestAddress) {
-                [strRequestAddress appendFormat:@"%s", szRequestAddress];
-            }
-        }
-        if (szRequestAddress) {
-            free(szRequestAddress);
-        }
-    }
-    if (szRequestID) {
-        free(szRequestID);
-    }
-    if (pData) {
-        free(pData);
-    }
-}
-
-- (char *)createReceiveRequestFor: (SInt64)amountSatoshi withRequestState:(RequestState)state
-{
-	tABC_Error error;
-    tABC_TxDetails details;
-
-    memset(&details, 0, sizeof(tABC_TxDetails));
-    details.amountSatoshi = 0;
-	details.amountFeesAirbitzSatoshi = 0;
-	details.amountFeesMinersSatoshi = 0;
-    details.amountCurrency = 0;
-    details.szName = (char *) [strName UTF8String];
-    details.szNotes = (char *) [strNotes UTF8String];
-	details.szCategory = (char *) [strCategory UTF8String];
-	details.attributes = 0x0; //for our own use (not used by the core)
-    details.bizId = 0;
-
-	char *pRequestID;
-    // create the request
-	ABC_CreateReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-        &details, &pRequestID, &error);
-	if (error.code == ABC_CC_Ok) {
-		return pRequestID;
-	} else {
-		return 0;
-	}
-}
-
-- (BOOL)finalizeRequest:(NSString *)requestId
-{
-    tABC_Error error;
-    // Finalize this request so it isn't used elsewhere
-    ABC_FinalizeReceiveRequest([[User Singleton].name UTF8String],
-        [[User Singleton].password UTF8String], [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-        [requestId UTF8String], &error);
-    [Util printABC_Error:&error];
-    return error.code == ABC_CC_Ok ? YES : NO;
 }
 
 #pragma mark - ButtonSelectorView delegates
@@ -297,7 +186,7 @@
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abcAccount makeCurrentWalletWithIndex:indexPath];
     
     bWalletListDropped = false;
 }

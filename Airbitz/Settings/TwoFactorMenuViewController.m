@@ -4,8 +4,7 @@
 #import "MinCharTextField.h"
 #import "ScanView.h"
 #import "Util.h"
-#import "ABC.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "NSDate+Helper.h"
 #import "MainViewController.h"
 #import "Theme.h"
@@ -36,13 +35,6 @@
     return self;
 }
 
-- (NSDate *)parseDate:(NSString *)dateString
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-    return [dateFormatter dateFromString:dateString];
-}
-
 - (NSString *)formatDate:(NSDate *)date
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -55,30 +47,17 @@
 {
     [super viewDidLoad];
 
-    tABC_Error error;
-    char *szDate = NULL;
-    ABC_OtpResetDate(&szDate, &error);
-    if (error.code == ABC_CC_Ok) {
-        if (szDate == NULL || strlen(szDate) == 0) {
-            _labelResetDate.hidden = YES;
-            _labelResetDesc.hidden = YES;
-            _buttonReset.hidden = NO;
-        } else {
-            _buttonReset.hidden = YES;
-            _labelResetDate.hidden = NO;
-            _labelResetDesc.hidden = NO;
-            NSString *dateStr = [NSString stringWithUTF8String:szDate];
-            _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
-                                        NSLocalizedString(@"Reset Date", nil),
-                                        [self formatDate:[self parseDate:dateStr]]];
-        }
-    } else {
-        _buttonReset.hidden = NO;
+    if (nil == self.resetDate) {
         _labelResetDate.hidden = YES;
         _labelResetDesc.hidden = YES;
-    }
-    if (NULL != szDate) {
-        free(szDate);
+        _buttonReset.hidden = NO;
+    } else {
+        _buttonReset.hidden = YES;
+        _labelResetDate.hidden = NO;
+        _labelResetDesc.hidden = NO;
+        _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
+                                NSLocalizedString(@"Reset Date", nil),
+                                [self formatDate:self.resetDate]];
     }
 }
 
@@ -111,18 +90,13 @@
 
 - (IBAction)Reset:(id)sender
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        tABC_Error error;
-        tABC_CC cc = ABC_OtpResetSet([_username UTF8String], &error);
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (cc == ABC_CC_Ok) {
-                [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
-                [CoreBridge otpClearError];
-            } else {
-                [MainViewController fadingAlert:[Util errorMap:&error]];
-            }
-        });
-    });
+    [abc requestOTPReset:_username token:_resetToken complete:^
+     {
+         [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
+     } error:^(NSError *error)
+     {
+         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+     }];
 }
 
 - (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack

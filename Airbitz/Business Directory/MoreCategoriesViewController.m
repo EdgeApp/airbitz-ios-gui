@@ -106,7 +106,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(1, @"*** ERROR Connecting to Network: MoreCategories:doNetworkQuery");
+        ABCLog(1, @"*** ERROR Connecting to Network: MoreCategories:doNetworkQuery");
     }];
 
 }
@@ -136,7 +136,7 @@
 		}
 	}
 	
-	//ABLog(2,@"New categories: %@", categoriesArray);
+	//ABCLog(2,@"New categories: %@", categoriesArray);
 }
 
 -(IBAction)back

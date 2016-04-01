@@ -542,6 +542,9 @@ html body .label.label-outline.label-success {
 html body .label.label-outline.label-danger {
   background: #ff5656;
 }
+html body .label.label-outline.label-warning {
+  background: #ffffe0;
+}
 html body .label.status {
   font-size: 10px;
   position: absolute;
@@ -1166,6 +1169,8 @@ div.card.card-content.card-info-main {
   </div>
 
   <script type="text/javascript">
+var countryList = [{"name":"Afghanistan","codeAlpha3":"AFG","country-code":"004"},{"name":"Åland Islands","codeAlpha3":"ALA","country-code":"248"},{"name":"Albania","codeAlpha3":"ALB","country-code":"008"},{"name":"Algeria","codeAlpha3":"DZA","country-code":"012"},{"name":"American Samoa","codeAlpha3":"ASM","country-code":"016"},{"name":"Andorra","codeAlpha3":"AND","country-code":"020"},{"name":"Angola","codeAlpha3":"AGO","country-code":"024"},{"name":"Anguilla","codeAlpha3":"AIA","country-code":"660"},{"name":"Antarctica","codeAlpha3":"ATA","country-code":"010"},{"name":"Antigua and Barbuda","codeAlpha3":"ATG","country-code":"028"},{"name":"Argentina","codeAlpha3":"ARG","country-code":"032"},{"name":"Armenia","codeAlpha3":"ARM","country-code":"051"},{"name":"Aruba","codeAlpha3":"ABW","country-code":"533"},{"name":"Australia","codeAlpha3":"AUS","country-code":"036"},{"name":"Austria","codeAlpha3":"AUT","country-code":"040"},{"name":"Azerbaijan","codeAlpha3":"AZE","country-code":"031"},{"name":"Bahamas","codeAlpha3":"BHS","country-code":"044"},{"name":"Bahrain","codeAlpha3":"BHR","country-code":"048"},{"name":"Bangladesh","codeAlpha3":"BGD","country-code":"050"},{"name":"Barbados","codeAlpha3":"BRB","country-code":"052"},{"name":"Belarus","codeAlpha3":"BLR","country-code":"112"},{"name":"Belgium","codeAlpha3":"BEL","country-code":"056"},{"name":"Belize","codeAlpha3":"BLZ","country-code":"084"},{"name":"Benin","codeAlpha3":"BEN","country-code":"204"},{"name":"Bermuda","codeAlpha3":"BMU","country-code":"060"},{"name":"Bhutan","codeAlpha3":"BTN","country-code":"064"},{"name":"Bolivia (Plurinational State of)","codeAlpha3":"BOL","country-code":"068"},{"name":"Bonaire, Sint Eustatius and Saba","codeAlpha3":"BES","country-code":"535"},{"name":"Bosnia and Herzegovina","codeAlpha3":"BIH","country-code":"070"},{"name":"Botswana","codeAlpha3":"BWA","country-code":"072"},{"name":"Bouvet Island","codeAlpha3":"BVT","country-code":"074"},{"name":"Brazil","codeAlpha3":"BRA","country-code":"076"},{"name":"British Indian Ocean Territory","codeAlpha3":"IOT","country-code":"086"},{"name":"Brunei Darussalam","codeAlpha3":"BRN","country-code":"096"},{"name":"Bulgaria","codeAlpha3":"BGR","country-code":"100"},{"name":"Burkina Faso","codeAlpha3":"BFA","country-code":"854"},{"name":"Burundi","codeAlpha3":"BDI","country-code":"108"},{"name":"Cambodia","codeAlpha3":"KHM","country-code":"116"},{"name":"Cameroon","codeAlpha3":"CMR","country-code":"120"},{"name":"Canada","codeAlpha3":"CAN","country-code":"124"},{"name":"Cabo Verde","codeAlpha3":"CPV","country-code":"132"},{"name":"Cayman Islands","codeAlpha3":"CYM","country-code":"136"},{"name":"Central African Republic","codeAlpha3":"CAF","country-code":"140"},{"name":"Chad","codeAlpha3":"TCD","country-code":"148"},{"name":"Chile","codeAlpha3":"CHL","country-code":"152"},{"name":"China","codeAlpha3":"CHN","country-code":"156"},{"name":"Christmas Island","codeAlpha3":"CXR","country-code":"162"},{"name":"Cocos (Keeling) Islands","codeAlpha3":"CCK","country-code":"166"},{"name":"Colombia","codeAlpha3":"COL","country-code":"170"},{"name":"Comoros","codeAlpha3":"COM","country-code":"174"},{"name":"Congo","codeAlpha3":"COG","country-code":"178"},{"name":"Congo (Democratic Republic of the)","codeAlpha3":"COD","country-code":"180"},{"name":"Cook Islands","codeAlpha3":"COK","country-code":"184"},{"name":"Costa Rica","codeAlpha3":"CRI","country-code":"188"},{"name":"Côte d'Ivoire","codeAlpha3":"CIV","country-code":"384"},{"name":"Croatia","codeAlpha3":"HRV","country-code":"191"},{"name":"Cuba","codeAlpha3":"CUB","country-code":"192"},{"name":"Curaçao","codeAlpha3":"CUW","country-code":"531"},{"name":"Cyprus","codeAlpha3":"CYP","country-code":"196"},{"name":"Czech Republic","codeAlpha3":"CZE","country-code":"203"},{"name":"Denmark","codeAlpha3":"DNK","country-code":"208"},{"name":"Djibouti","codeAlpha3":"DJI","country-code":"262"},{"name":"Dominica","codeAlpha3":"DMA","country-code":"212"},{"name":"Dominican Republic","codeAlpha3":"DOM","country-code":"214"},{"name":"Ecuador","codeAlpha3":"ECU","country-code":"218"},{"name":"Egypt","codeAlpha3":"EGY","country-code":"818"},{"name":"El Salvador","codeAlpha3":"SLV","country-code":"222"},{"name":"Equatorial Guinea","codeAlpha3":"GNQ","country-code":"226"},{"name":"Eritrea","codeAlpha3":"ERI","country-code":"232"},{"name":"Estonia","codeAlpha3":"EST","country-code":"233"},{"name":"Ethiopia","codeAlpha3":"ETH","country-code":"231"},{"name":"Falkland Islands (Malvinas)","codeAlpha3":"FLK","country-code":"238"},{"name":"Faroe Islands","codeAlpha3":"FRO","country-code":"234"},{"name":"Fiji","codeAlpha3":"FJI","country-code":"242"},{"name":"Finland","codeAlpha3":"FIN","country-code":"246"},{"name":"France","codeAlpha3":"FRA","country-code":"250"},{"name":"French Guiana","codeAlpha3":"GUF","country-code":"254"},{"name":"French Polynesia","codeAlpha3":"PYF","country-code":"258"},{"name":"French Southern Territories","codeAlpha3":"ATF","country-code":"260"},{"name":"Gabon","codeAlpha3":"GAB","country-code":"266"},{"name":"Gambia","codeAlpha3":"GMB","country-code":"270"},{"name":"Georgia","codeAlpha3":"GEO","country-code":"268"},{"name":"Germany","codeAlpha3":"DEU","country-code":"276"},{"name":"Ghana","codeAlpha3":"GHA","country-code":"288"},{"name":"Gibraltar","codeAlpha3":"GIB","country-code":"292"},{"name":"Greece","codeAlpha3":"GRC","country-code":"300"},{"name":"Greenland","codeAlpha3":"GRL","country-code":"304"},{"name":"Grenada","codeAlpha3":"GRD","country-code":"308"},{"name":"Guadeloupe","codeAlpha3":"GLP","country-code":"312"},{"name":"Guam","codeAlpha3":"GUM","country-code":"316"},{"name":"Guatemala","codeAlpha3":"GTM","country-code":"320"},{"name":"Guernsey","codeAlpha3":"GGY","country-code":"831"},{"name":"Guinea","codeAlpha3":"GIN","country-code":"324"},{"name":"Guinea-Bissau","codeAlpha3":"GNB","country-code":"624"},{"name":"Guyana","codeAlpha3":"GUY","country-code":"328"},{"name":"Haiti","codeAlpha3":"HTI","country-code":"332"},{"name":"Heard Island and McDonald Islands","codeAlpha3":"HMD","country-code":"334"},{"name":"Holy See","codeAlpha3":"VAT","country-code":"336"},{"name":"Honduras","codeAlpha3":"HND","country-code":"340"},{"name":"Hong Kong","codeAlpha3":"HKG","country-code":"344"},{"name":"Hungary","codeAlpha3":"HUN","country-code":"348"},{"name":"Iceland","codeAlpha3":"ISL","country-code":"352"},{"name":"India","codeAlpha3":"IND","country-code":"356"},{"name":"Indonesia","codeAlpha3":"IDN","country-code":"360"},{"name":"Iran (Islamic Republic of)","codeAlpha3":"IRN","country-code":"364"},{"name":"Iraq","codeAlpha3":"IRQ","country-code":"368"},{"name":"Ireland","codeAlpha3":"IRL","country-code":"372"},{"name":"Isle of Man","codeAlpha3":"IMN","country-code":"833"},{"name":"Israel","codeAlpha3":"ISR","country-code":"376"},{"name":"Italy","codeAlpha3":"ITA","country-code":"380"},{"name":"Jamaica","codeAlpha3":"JAM","country-code":"388"},{"name":"Japan","codeAlpha3":"JPN","country-code":"392"},{"name":"Jersey","codeAlpha3":"JEY","country-code":"832"},{"name":"Jordan","codeAlpha3":"JOR","country-code":"400"},{"name":"Kazakhstan","codeAlpha3":"KAZ","country-code":"398"},{"name":"Kenya","codeAlpha3":"KEN","country-code":"404"},{"name":"Kiribati","codeAlpha3":"KIR","country-code":"296"},{"name":"Korea (Democratic People's Republic of)","codeAlpha3":"PRK","country-code":"408"},{"name":"Korea (Republic of)","codeAlpha3":"KOR","country-code":"410"},{"name":"Kuwait","codeAlpha3":"KWT","country-code":"414"},{"name":"Kyrgyzstan","codeAlpha3":"KGZ","country-code":"417"},{"name":"Lao People's Democratic Republic","codeAlpha3":"LAO","country-code":"418"},{"name":"Latvia","codeAlpha3":"LVA","country-code":"428"},{"name":"Lebanon","codeAlpha3":"LBN","country-code":"422"},{"name":"Lesotho","codeAlpha3":"LSO","country-code":"426"},{"name":"Liberia","codeAlpha3":"LBR","country-code":"430"},{"name":"Libya","codeAlpha3":"LBY","country-code":"434"},{"name":"Liechtenstein","codeAlpha3":"LIE","country-code":"438"},{"name":"Lithuania","codeAlpha3":"LTU","country-code":"440"},{"name":"Luxembourg","codeAlpha3":"LUX","country-code":"442"},{"name":"Macao","codeAlpha3":"MAC","country-code":"446"},{"name":"Macedonia (the former Yugoslav Republic of)","codeAlpha3":"MKD","country-code":"807"},{"name":"Madagascar","codeAlpha3":"MDG","country-code":"450"},{"name":"Malawi","codeAlpha3":"MWI","country-code":"454"},{"name":"Malaysia","codeAlpha3":"MYS","country-code":"458"},{"name":"Maldives","codeAlpha3":"MDV","country-code":"462"},{"name":"Mali","codeAlpha3":"MLI","country-code":"466"},{"name":"Malta","codeAlpha3":"MLT","country-code":"470"},{"name":"Marshall Islands","codeAlpha3":"MHL","country-code":"584"},{"name":"Martinique","codeAlpha3":"MTQ","country-code":"474"},{"name":"Mauritania","codeAlpha3":"MRT","country-code":"478"},{"name":"Mauritius","codeAlpha3":"MUS","country-code":"480"},{"name":"Mayotte","codeAlpha3":"MYT","country-code":"175"},{"name":"Mexico","codeAlpha3":"MEX","country-code":"484"},{"name":"Micronesia (Federated States of)","codeAlpha3":"FSM","country-code":"583"},{"name":"Moldova (Republic of)","codeAlpha3":"MDA","country-code":"498"},{"name":"Monaco","codeAlpha3":"MCO","country-code":"492"},{"name":"Mongolia","codeAlpha3":"MNG","country-code":"496"},{"name":"Montenegro","codeAlpha3":"MNE","country-code":"499"},{"name":"Montserrat","codeAlpha3":"MSR","country-code":"500"},{"name":"Morocco","codeAlpha3":"MAR","country-code":"504"},{"name":"Mozambique","codeAlpha3":"MOZ","country-code":"508"},{"name":"Myanmar","codeAlpha3":"MMR","country-code":"104"},{"name":"Namibia","codeAlpha3":"NAM","country-code":"516"},{"name":"Nauru","codeAlpha3":"NRU","country-code":"520"},{"name":"Nepal","codeAlpha3":"NPL","country-code":"524"},{"name":"Netherlands","codeAlpha3":"NLD","country-code":"528"},{"name":"New Caledonia","codeAlpha3":"NCL","country-code":"540"},{"name":"New Zealand","codeAlpha3":"NZL","country-code":"554"},{"name":"Nicaragua","codeAlpha3":"NIC","country-code":"558"},{"name":"Niger","codeAlpha3":"NER","country-code":"562"},{"name":"Nigeria","codeAlpha3":"NGA","country-code":"566"},{"name":"Niue","codeAlpha3":"NIU","country-code":"570"},{"name":"Norfolk Island","codeAlpha3":"NFK","country-code":"574"},{"name":"Northern Mariana Islands","codeAlpha3":"MNP","country-code":"580"},{"name":"Norway","codeAlpha3":"NOR","country-code":"578"},{"name":"Oman","codeAlpha3":"OMN","country-code":"512"},{"name":"Pakistan","codeAlpha3":"PAK","country-code":"586"},{"name":"Palau","codeAlpha3":"PLW","country-code":"585"},{"name":"Palestine, State of","codeAlpha3":"PSE","country-code":"275"},{"name":"Panama","codeAlpha3":"PAN","country-code":"591"},{"name":"Papua New Guinea","codeAlpha3":"PNG","country-code":"598"},{"name":"Paraguay","codeAlpha3":"PRY","country-code":"600"},{"name":"Peru","codeAlpha3":"PER","country-code":"604"},{"name":"Philippines","codeAlpha3":"PHL","country-code":"608"},{"name":"Pitcairn","codeAlpha3":"PCN","country-code":"612"},{"name":"Poland","codeAlpha3":"POL","country-code":"616"},{"name":"Portugal","codeAlpha3":"PRT","country-code":"620"},{"name":"Puerto Rico","codeAlpha3":"PRI","country-code":"630"},{"name":"Qatar","codeAlpha3":"QAT","country-code":"634"},{"name":"Réunion","codeAlpha3":"REU","country-code":"638"},{"name":"Romania","codeAlpha3":"ROU","country-code":"642"},{"name":"Russian Federation","codeAlpha3":"RUS","country-code":"643"},{"name":"Rwanda","codeAlpha3":"RWA","country-code":"646"},{"name":"Saint Barthélemy","codeAlpha3":"BLM","country-code":"652"},{"name":"Saint Helena, Ascension and Tristan da Cunha","codeAlpha3":"SHN","country-code":"654"},{"name":"Saint Kitts and Nevis","codeAlpha3":"KNA","country-code":"659"},{"name":"Saint Lucia","codeAlpha3":"LCA","country-code":"662"},{"name":"Saint Martin (French part)","codeAlpha3":"MAF","country-code":"663"},{"name":"Saint Pierre and Miquelon","codeAlpha3":"SPM","country-code":"666"},{"name":"Saint Vincent and the Grenadines","codeAlpha3":"VCT","country-code":"670"},{"name":"Samoa","codeAlpha3":"WSM","country-code":"882"},{"name":"San Marino","codeAlpha3":"SMR","country-code":"674"},{"name":"Sao Tome and Principe","codeAlpha3":"STP","country-code":"678"},{"name":"Saudi Arabia","codeAlpha3":"SAU","country-code":"682"},{"name":"Senegal","codeAlpha3":"SEN","country-code":"686"},{"name":"Serbia","codeAlpha3":"SRB","country-code":"688"},{"name":"Seychelles","codeAlpha3":"SYC","country-code":"690"},{"name":"Sierra Leone","codeAlpha3":"SLE","country-code":"694"},{"name":"Singapore","codeAlpha3":"SGP","country-code":"702"},{"name":"Sint Maarten (Dutch part)","codeAlpha3":"SXM","country-code":"534"},{"name":"Slovakia","codeAlpha3":"SVK","country-code":"703"},{"name":"Slovenia","codeAlpha3":"SVN","country-code":"705"},{"name":"Solomon Islands","codeAlpha3":"SLB","country-code":"090"},{"name":"Somalia","codeAlpha3":"SOM","country-code":"706"},{"name":"South Africa","codeAlpha3":"ZAF","country-code":"710"},{"name":"South Georgia and the South Sandwich Islands","codeAlpha3":"SGS","country-code":"239"},{"name":"South Sudan","codeAlpha3":"SSD","country-code":"728"},{"name":"Spain","codeAlpha3":"ESP","country-code":"724"},{"name":"Sri Lanka","codeAlpha3":"LKA","country-code":"144"},{"name":"Sudan","codeAlpha3":"SDN","country-code":"729"},{"name":"Suriname","codeAlpha3":"SUR","country-code":"740"},{"name":"Svalbard and Jan Mayen","codeAlpha3":"SJM","country-code":"744"},{"name":"Swaziland","codeAlpha3":"SWZ","country-code":"748"},{"name":"Sweden","codeAlpha3":"SWE","country-code":"752"},{"name":"Switzerland","codeAlpha3":"CHE","country-code":"756"},{"name":"Syrian Arab Republic","codeAlpha3":"SYR","country-code":"760"},{"name":"Taiwan, Province of China","codeAlpha3":"TWN","country-code":"158"},{"name":"Tajikistan","codeAlpha3":"TJK","country-code":"762"},{"name":"Tanzania, United Republic of","codeAlpha3":"TZA","country-code":"834"},{"name":"Thailand","codeAlpha3":"THA","country-code":"764"},{"name":"Timor-Leste","codeAlpha3":"TLS","country-code":"626"},{"name":"Togo","codeAlpha3":"TGO","country-code":"768"},{"name":"Tokelau","codeAlpha3":"TKL","country-code":"772"},{"name":"Tonga","codeAlpha3":"TON","country-code":"776"},{"name":"Trinidad and Tobago","codeAlpha3":"TTO","country-code":"780"},{"name":"Tunisia","codeAlpha3":"TUN","country-code":"788"},{"name":"Turkey","codeAlpha3":"TUR","country-code":"792"},{"name":"Turkmenistan","codeAlpha3":"TKM","country-code":"795"},{"name":"Turks and Caicos Islands","codeAlpha3":"TCA","country-code":"796"},{"name":"Tuvalu","codeAlpha3":"TUV","country-code":"798"},{"name":"Uganda","codeAlpha3":"UGA","country-code":"800"},{"name":"Ukraine","codeAlpha3":"UKR","country-code":"804"},{"name":"United Arab Emirates","codeAlpha3":"ARE","country-code":"784"},{"name":"United Kingdom of Great Britain and Northern Ireland","codeAlpha3":"GBR","country-code":"826"},{"name":"United States of America","codeAlpha3":"USA","country-code":"840"},{"name":"United States Minor Outlying Islands","codeAlpha3":"UMI","country-code":"581"},{"name":"Uruguay","codeAlpha3":"URY","country-code":"858"},{"name":"Uzbekistan","codeAlpha3":"UZB","country-code":"860"},{"name":"Vanuatu","codeAlpha3":"VUT","country-code":"548"},{"name":"Venezuela (Bolivarian Republic of)","codeAlpha3":"VEN","country-code":"862"},{"name":"Viet Nam","codeAlpha3":"VNM","country-code":"704"},{"name":"Virgin Islands (British)","codeAlpha3":"VGB","country-code":"092"},{"name":"Virgin Islands (U.S.)","codeAlpha3":"VIR","country-code":"850"},{"name":"Wallis and Futuna","codeAlpha3":"WLF","country-code":"876"},{"name":"Western Sahara","codeAlpha3":"ESH","country-code":"732"},{"name":"Yemen","codeAlpha3":"YEM","country-code":"887"},{"name":"Zambia","codeAlpha3":"ZMB","country-code":"894"},{"name":"Zimbabwe","codeAlpha3":"ZWE","country-code":"716"}];
+
 
 function _handleBlocking(j) {
   console.log(j);
@@ -1275,13 +1280,50 @@ function _bridge() {
     },
 
     requestSpend: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
-      options = options || {};
+      var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
       options['amountSatoshi'] = amountSatoshi;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
       _native('requestSpend', cbid, options);
+    },
+
+    requestSpend2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['toAddress'] = toAddress;
+      options['amountSatoshi'] = amountSatoshi;
+      options['toAddress2'] = toAddress2;
+      options['amountSatoshi2'] = amountSatoshi2;
+      options['amountFiat'] = amountFiat;
+      var cbid = createCallback(options);
+      _native('requestSpend2', cbid, options);
+    },
+
+    requestSign: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['toAddress'] = toAddress;
+      options['amountSatoshi'] = amountSatoshi;
+      options['amountFiat'] = amountFiat;
+      var cbid = createCallback(options);
+      _native('requestSign', cbid, options);
+    },
+
+    broadcastTx: function(wallet, rawTx) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['rawTx'] = rawTx;
+      var cbid = createCallback(options);
+      _native('broadcastTx', cbid, options);
+    },
+
+    saveTx: function(wallet, rawTx) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['rawTx'] = rawTx;
+      return _handleBlocking(_native('saveTx', newId(), options, true));
     },
 
     requestFile: function(options) {
@@ -1303,6 +1345,10 @@ function _bridge() {
 
     getBtcDenomination: function() {
       return _handleBlocking(_native('getBtcDenomination', newId(), {}, true));
+    },
+
+    getAffiliateInfo: function() {
+      return _handleBlocking(_native('getAffiliateInfo', newId(), {}, true));
     },
 
     satoshiToCurrency: function(satoshi, currencyNum) {
@@ -1443,6 +1489,25 @@ function _bridge() {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
+  Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+    Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
+  };
+
+  // Takes a spend request and sends user to send confirmation screen to sign a tx.
+  Airbitz.core.requestSign = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+    Airbitz._bridge.requestSign(wallet, toAddress, amountSatoshi, amountFiat, options);
+  };
+
+  // Broadcast a raw tx
+  Airbitz.core.broadcastTx = function(wallet, rawtx) {
+    Airbitz._bridge.broadcastTx(wallet, tx);
+  };
+
+  // Save a raw tx
+  Airbitz.core.saveTx = function(wallet, rawtx) {
+    Airbitz._bridge.saveTx(wallet, rawtx);
+  };
+
   Airbitz.core.requestFile = function(options) {
     Airbitz._bridge.requestFile(options);
   };
@@ -1459,6 +1524,11 @@ function _bridge() {
   // Retrives data for a JSON key stored for the plugin.
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
+    return (data && data !== 'undefined') ? JSON.parse(data) : null;
+  };
+
+  Airbitz.core.getAffiliateInfo = function() {
+    var data = Airbitz._bridge.getAffiliateInfo();
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
@@ -9115,6 +9185,17 @@ var CleverCoin = (function () {
       });
     },
 
+    deleteUser: function(reason, callback) {
+      var data = {
+        'reason': reason
+      };
+      return this._request(true, '/account', {
+        'method': 'DELETE',
+        'data': data,
+        'callback': callback
+      });
+    },
+
     requestLink: function(email, activateLink, callback) {
       var data = {
         'email': email,
@@ -9187,8 +9268,9 @@ var CleverCoin = (function () {
       });
     },
 
-    quotePrice: function(qty, currency, method, callback) {
+    quotePrice: function(qty, type, currency, method, callback) {
       var data = {
+        'type': type,
         'amount': qty,
         'currencyShort': currency,
         'paymentMethod': method
@@ -9215,7 +9297,7 @@ var CleverCoin = (function () {
         'callBackLink': callBackLink,
         'paymentParameter': paymentParameter,
         'directWithdrawAddress': address,
-        'profitPercentage': 1,
+        'profitPercentage': 0.5,
       };
       return this._request(true, '/quote', {
         'method': 'POST',
@@ -9360,6 +9442,25 @@ var CleverCoin = (function () {
 })();
 
 </script>
+  <script type="text/javascript">
+/*
+ * js-sha256 v0.3.0
+ * https://github.com/emn178/js-sha256
+ *
+ * Copyright 2014-2015, emn178@gmail.com
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+(function(I,R){var K="undefined"!=typeof module;K&&(I=global);var a="0123456789abcdef".split(""),Q=[-2147483648,8388608,32768,128],C=[24,16,8,0],M=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,
+    773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],c=[],L=function(a){return A(a,!0)},A=function(D,A){var J="string"!=typeof D;J&&D.constructor==I.ArrayBuffer&&(D=new Uint8Array(D));var m,n,p,q,r,t,u,v,f,K=!0,L=!1,b,B=
+    0,N=0,P=0,O=D.length,e,d,E,F,G,H;A?(m=3238371032,n=914150663,p=812702999,q=4144912697,r=4290775857,t=1750603025,u=1694076839,v=3204075428):(m=1779033703,n=3144134277,p=1013904242,q=2773480762,r=1359893119,t=2600822924,u=528734635,v=1541459225);f=0;do{c[0]=f;c[16]=c[1]=c[2]=c[3]=c[4]=c[5]=c[6]=c[7]=c[8]=c[9]=c[10]=c[11]=c[12]=c[13]=c[14]=c[15]=0;if(J)for(b=N;B<O&&64>b;++B)c[b>>2]|=D[B]<<C[b++&3];else for(b=N;B<O&&64>b;++B)f=D.charCodeAt(B),128>f?c[b>>2]|=f<<C[b++&3]:(2048>f?c[b>>2]|=(192|f>>6)<<C[b++&
+    3]:(55296>f||57344<=f?c[b>>2]|=(224|f>>12)<<C[b++&3]:(f=65536+((f&1023)<<10|D.charCodeAt(++B)&1023),c[b>>2]|=(240|f>>18)<<C[b++&3],c[b>>2]|=(128|f>>12&63)<<C[b++&3]),c[b>>2]|=(128|f>>6&63)<<C[b++&3]),c[b>>2]|=(128|f&63)<<C[b++&3]);P+=b-N;N=b-64;B==O&&(c[b>>2]|=Q[b&3],++B);f=c[16];B>O&&56>b&&(c[15]=P<<3,L=!0);var w=m,k=n,l=p,g=q,x=r,y=t,z=u,h=v;for(b=16;64>b;++b)d=c[b-15],e=(d>>>7|d<<25)^(d>>>18|d<<14)^d>>>3,d=c[b-2],d=(d>>>17|d<<15)^(d>>>19|d<<13)^d>>>10,c[b]=c[b-16]+e+c[b-7]+d<<0;H=k&l;for(b=0;64>
+b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704751109,d=c[0]-210244248,h=d-1521486534<<0,g=d+143694565<<0),K=!1):(e=(w>>>2|w<<30)^(w>>>13|w<<19)^(w>>>22|w<<10),d=(x>>>6|x<<26)^(x>>>11|x<<21)^(x>>>25|x<<7),G=w&k,E=G^w&l^H,F=x&y^~x&z,d=h+d+F+M[b]+c[b],e+=E,h=g+d<<0,g=d+e<<0),e=(g>>>2|g<<30)^(g>>>13|g<<19)^(g>>>22|g<<10),d=(h>>>6|h<<26)^(h>>>11|h<<21)^(h>>>25|h<<7),H=g&w,E=H^g&k^G,F=h&x^~h&y,d=z+d+F+M[b+1]+c[b+1],e+=E,z=l+d<<0,l=d+e<<0,e=(l>>>2|l<<30)^(l>>>13|l<<19)^
+    (l>>>22|l<<10),d=(z>>>6|z<<26)^(z>>>11|z<<21)^(z>>>25|z<<7),G=l&g,E=G^l&w^H,F=z&h^~z&x,d=y+d+F+M[b+2]+c[b+2],e+=E,y=k+d<<0,k=d+e<<0,e=(k>>>2|k<<30)^(k>>>13|k<<19)^(k>>>22|k<<10),d=(y>>>6|y<<26)^(y>>>11|y<<21)^(y>>>25|y<<7),H=k&l,E=H^k&g^G,F=y&z^~y&h,d=x+d+F+M[b+3]+c[b+3],e+=E,x=w+d<<0,w=d+e<<0;m=m+w<<0;n=n+k<<0;p=p+l<<0;q=q+g<<0;r=r+x<<0;t=t+y<<0;u=u+z<<0;v=v+h<<0}while(!L);J=a[m>>28&15]+a[m>>24&15]+a[m>>20&15]+a[m>>16&15]+a[m>>12&15]+a[m>>8&15]+a[m>>4&15]+a[m&15]+a[n>>28&15]+a[n>>24&15]+a[n>>20&
+    15]+a[n>>16&15]+a[n>>12&15]+a[n>>8&15]+a[n>>4&15]+a[n&15]+a[p>>28&15]+a[p>>24&15]+a[p>>20&15]+a[p>>16&15]+a[p>>12&15]+a[p>>8&15]+a[p>>4&15]+a[p&15]+a[q>>28&15]+a[q>>24&15]+a[q>>20&15]+a[q>>16&15]+a[q>>12&15]+a[q>>8&15]+a[q>>4&15]+a[q&15]+a[r>>28&15]+a[r>>24&15]+a[r>>20&15]+a[r>>16&15]+a[r>>12&15]+a[r>>8&15]+a[r>>4&15]+a[r&15]+a[t>>28&15]+a[t>>24&15]+a[t>>20&15]+a[t>>16&15]+a[t>>12&15]+a[t>>8&15]+a[t>>4&15]+a[t&15]+a[u>>28&15]+a[u>>24&15]+a[u>>20&15]+a[u>>16&15]+a[u>>12&15]+a[u>>8&15]+a[u>>4&15]+a[u&
+    15];A||(J+=a[v>>28&15]+a[v>>24&15]+a[v>>20&15]+a[v>>16&15]+a[v>>12&15]+a[v>>8&15]+a[v>>4&15]+a[v&15]);return J};!I.JS_SHA256_TEST&&K?(A.sha256=A,A.sha224=L,module.exports=A):I&&(I.sha256=A,I.sha224=L)})(this);
+</script>
 
   <script type="text/javascript">
 (function() {
@@ -9398,7 +9499,7 @@ var CleverCoin = (function () {
       return timestamp - new Date().getTime();
     };
     var cached = function(data) {
-      if (data && data.ask && !data.expires) {
+      if (data && data.btcPrice && !data.expires) {
         data.expires = new Date().getTime() + (60 * 1000); // expires in a minute
       }
       return (data && timeDiff(data.expires) > 30) ? data : null;
@@ -9411,7 +9512,7 @@ var CleverCoin = (function () {
     factory.convertFiatValue = function(orderAction, input) {
       if (typeof(input)==='undefined') input = 0;
       var price = (orderAction == 'buy')
-                ? factory.currentBuy.ask : factory.currentSell.ask;
+                ? factory.currentBuy.btcPrice : factory.currentSell.btcPrice;
       var btcValue = input / parseFloat(price);
       return {
         'orderValueSatoshi': btcValue * 100000000,
@@ -9423,7 +9524,7 @@ var CleverCoin = (function () {
     factory.convertBtcValue = function(orderAction, input) {
       if (typeof(input)==='undefined') input = 0;
       var price = (orderAction == 'buy')
-          ? factory.currentBuy.ask : factory.currentSell.ask;
+          ? factory.currentBuy.btcPrice : factory.currentSell.btcPrice;
       var btc = $filter('valToBtc')(input);
       var output = btc * price;
       return {
@@ -9448,7 +9549,7 @@ var CleverCoin = (function () {
       if (cached(factory.currentBuy)) {
         deferred.resolve(cached(factory.currentBuy));
       } else {
-        CcFactory.ticker(function(e, r, b) {
+        CcFactory.quotePrice(1, 'bid', 'BTC', 'Wallet', function(e, r, b) {
           factory.currentBuy = b;
           (r == 200) ?  deferred.resolve(b) : deferred.reject();
         });
@@ -9457,10 +9558,11 @@ var CleverCoin = (function () {
     };
     factory.updateSell = function() {
       var deferred = $q.defer();
-      if (cached(factory.currentSell)) {
-        deferred.resolve(cached(factory.currentSell));
+      // TODO: when sell is implemented switch back to currencySell
+      if (cached(factory.currentBuy)) {
+        deferred.resolve(cached(factory.currentBuy));
       } else {
-        CcFactory.ticker(function(e, r, b) {
+        CcFactory.quotePrice(1, 'ask', 'BTC', 'Wallet', function(e, r, b) {
           factory.currentSell = b;
           (r == 200) ?  deferred.resolve(b) : deferred.reject();
         });
@@ -9474,7 +9576,7 @@ var CleverCoin = (function () {
       templateUrl: 'app/prices/partials/rate.html',
       link: function(scope, elements, attrs){
         return priceLink($interval, Prices, scope, elements, attrs, function(scope, b) {
-          scope.price = $filter('currency')(b.ask, '€', 2);
+          scope.price = $filter('currency')(b.btcPrice, '€', 2);
           scope.currency = '';
         });
       }
@@ -9508,7 +9610,7 @@ var CleverCoin = (function () {
     $scope.account = UserFactory.getUserAccount();
     $scope.order = DataFactory.getOrder(false); // initialize new order and clear existing order
     $scope.order.orderAction = $stateParams.orderAction; // set order action
-    
+
     if ($scope.order.orderAction == 'buy') {
       Airbitz.ui.title('Buy Bitcoin');
       $scope.order.paymentMethod = {"name":"Wallet","lockDuration":0,"type":"pull"};
@@ -9522,14 +9624,14 @@ var CleverCoin = (function () {
     });
 
     $scope.convertFiatValue = function(input) {
-      var d = Prices.convertFiatValue($scope.order.orderAction, input); 
+      var d = Prices.convertFiatValue($scope.order.orderAction, input);
       $scope.order.orderValueSatoshi = d.orderValueSatoshi;
       $scope.order.orderValueInput = d.orderValueInput;
       $scope.order.orderBtcInput = d.orderBtcInput;
     };
 
     $scope.convertBtcValue = function(input) {
-      var d = Prices.convertBtcValue($scope.order.orderAction, input); 
+      var d = Prices.convertBtcValue($scope.order.orderAction, input);
       $scope.order.orderBtcInput = d.orderBtcInput;
       $scope.order.orderValueSatoshi = d.orderValueSatoshi;
       $scope.order.orderFiatInput = d.orderFiatInput;
@@ -9539,8 +9641,21 @@ var CleverCoin = (function () {
         Airbitz.ui.showAlert('', 'Orders must be greater than 1 Euro.');
       } else {
         Airbitz.ui.showAlert('', 'Requesting quote...', { 'showSpinner': true });
-        $scope.order.orderBtcInput = parseFloat($scope.order.orderBtcInput).toFixed(8);
-        DataFactory.requestBuy($scope.order.orderBtcInput, $scope.order.paymentMethod.name).then(function(data) {
+        var $amount = 0;
+        var $currency = "BTC";
+
+        // Check if Euro value has not more than 2 digits
+        var $pattern = /^\d(\.\d{1,2})?$/;
+        if ($pattern.test($scope.order.orderFiatInput)) {  //buy as Euros
+          $amount = parseFloat($scope.order.orderFiatInput).toFixed(2);
+          $currency = "EUR"
+        }
+        else  // buy as Bitcoins
+        {
+          $amount = parseFloat($scope.order.orderBtcInput).toFixed(8);
+          $currency = "BTC"
+        }
+        DataFactory.requestBuy($amount, $currency, $scope.order.paymentMethod.name).then(function(data) {
           Airbitz.ui.hideAlert();
           $scope.order.quote = data;
           $state.go("reviewOrder");
@@ -9603,7 +9718,6 @@ var CleverCoin = (function () {
     .module('app.user', ['app.dataFactory', 'app.constants'])
     .controller('homeController', ['$scope', '$state', '$location', 'UserFactory', homeController])
     .controller('pendingActivationController', ['$scope', '$state', 'Error', 'UserFactory', pendingActivationController])
-    .controller('activateController', ['$scope', '$state', '$stateParams', 'Error', 'UserFactory', activateController])
     .controller('dashboardController', ['$scope', '$sce', '$state', 'Error', 'DataFactory', 'UserFactory', 'Prices', dashboardController])
     .controller('signupController', ['$scope', '$state', 'Error', 'UserFactory', signupController])
     .controller('linkController', ['$scope', '$state', 'Error', 'UserFactory', linkController])
@@ -9618,18 +9732,14 @@ var CleverCoin = (function () {
 
   function homeController($scope, $state, $location, UserFactory) {
     var d = parseParameters($location);
-    if (d.token) {
-      $state.go('activate', {'token': d.token, 'email': d.email});
-    } else {
-      if (UserFactory.isSignedIn()) {
-        if (UserFactory.isActivated()) {
-          $state.go("dashboard");
-        } else {
-          $state.go("pendingActivation");
-        }
+    if (UserFactory.isSignedIn()) {
+      if (UserFactory.isActivated()) {
+        $state.go("dashboard");
       } else {
-        $state.go("signup");
+        $state.go("pendingActivation");
       }
+    } else {
+      $state.go("signup");
     }
   }
 
@@ -9651,8 +9761,9 @@ var CleverCoin = (function () {
   function signupController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('CleverCoin');
     $scope.account = UserFactory.getUserAccount();
+    // we have to null out the password otherwise account is linked to exchange
     if (!$scope.account.password) {
-      $scope.account.password = '';
+      $scope.account.password = null;
     }
 
     $scope.cancelSignup = function() {
@@ -9685,30 +9796,40 @@ var CleverCoin = (function () {
   function pendingActivationController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('Activate account');
     $scope.account = UserFactory.getUserAccount();
-    // If we can fetch the account, we know the user has been activated
-    UserFactory.fetchAccount().then(function(account) {
+    // If we can fetch the wallets, we know the user has been activated
+    UserFactory.fetchUserAccountStatus().then(function() {
       $scope.account.isActivated = true;
-      Airbitz.core.write('account', $scope.account);
+      Airbitz.core.writeData('account', $scope.account);
       $state.go("dashboard");
     });
-    $scope.changeEmail = function() {
-      Airbitz.core.clearData();
-      $state.go("signup");
+    $scope.toDashboard = function() {
+      Airbitz.ui.showAlert('', 'Checking account...', {
+        'showSpinner': true
+      });
+      UserFactory.fetchUserAccountStatus().then(function() {
+        $scope.account.isActivated = true;
+        Airbitz.core.writeData('account', $scope.account);
+        $state.go("dashboard");
+        Airbitz.ui.hideAlert();
+      }, function() {
+        Airbitz.ui.showAlert('', 'Account has not been activated. Please click the link in your email.');
+      });
     };
-  }
-
-  function activateController($scope, $state, $stateParams, Error, UserFactory) {
-    Airbitz.ui.title('Activating your account');
-    Airbitz.ui.showAlert('', 'Activating account.', {
-      'showSpinner': true
-    });
-    UserFactory.activate($stateParams.email, $stateParams.token).then(function(b) {
-      Airbitz.ui.showAlert('', 'Account activated');
-      $state.go("dashboard");
-    }, function(b) {
-      Airbitz.ui.showAlert('', 'Unable to activate account.');
-      $state.go("pendingActivation");
-    });
+    $scope.changeEmail = function() {
+      Airbitz.ui.showAlert('', 'Removing old account...', {
+        'showSpinner': true
+      });
+      UserFactory.deleteUser('Wrong email address').then(function() {
+        Airbitz.ui.hideAlert();
+        UserFactory.clearUser();
+        Airbitz.core.clearData();
+        $state.go("signup");
+      }, function(e) {
+        Airbitz.ui.hideAlert();
+        var msg = 'Unable to change email address at this time..\n' + Error.errorMap(e);
+        Airbitz.ui.showAlert('', msg);
+      });
+    };
   }
 
   function dashboardController($scope, $sce, $state, Error, DataFactory, UserFactory, Prices) {
@@ -9716,30 +9837,26 @@ var CleverCoin = (function () {
     // set variables that might be cached locally to make sure they load faster if available
     $scope.account = UserFactory.getUserAccount();
     $scope.userStatus = UserFactory.getUserAccountStatus();
-    $scope.banks = UserFactory.getBanks();
+    // $scope.banks = UserFactory.getBanks();
     $scope.wallets = UserFactory.getWallets();
 
     var showOpts = function(s) {
-      $scope.showOptions = !s.userCanTransact || $scope.banks.length == 0;
+      $scope.showOptions = !s.userCanTransact; // || $scope.banks.length == 0;
     };
-    showOpts($scope.userStatus);
+    showOpts($scope.account);
 
     Prices.setBuyQty(1).then(function() {
       return Prices.setSellQty(1);
     }).then(function() {
       return UserFactory.fetchAccount().then(function(account) {
         $scope.account = account;
+        showOpts($scope.account);
       }, function() {
         // Error, error
       });
     }).then(function() {
       return UserFactory.fetchUserAccountStatus().then(function(b) {
         $scope.userStatus = b;
-        showOpts($scope.userStatus);
-      });
-    }).then(function() {
-      return UserFactory.fetchBanks(function(b) {
-        $scope.banks = b;
       });
     }).then(function() {
       return UserFactory.fetchWallets(function(b) {
@@ -9767,7 +9884,7 @@ var CleverCoin = (function () {
       }
       if ($scope.userStatus.identityRejectedReason) {
         counter++;
-        msg += '<h5><strong>' + counter + "</strong>." + 
+        msg += '<h5><strong>' + counter + "</strong>." +
           " Identity documents rejected because "
             + rejectMap($scope.userStatus.identityRejectedReason)
             + ".</h5>";
@@ -9780,7 +9897,7 @@ var CleverCoin = (function () {
       }
       if ($scope.userStatus.addressRejectedReason) {
         counter++;
-        msg += '<h5><strong>' + counter + "</strong>." + 
+        msg += '<h5><strong>' + counter + "</strong>." +
           " Address documents rejected because "
             + rejectMap($scope.userStatus.addressRejectedReason)
             + ".</h5>";
@@ -9791,10 +9908,10 @@ var CleverCoin = (function () {
         counter++;
         msg += '<h5><strong>' + counter + "</strong>. Please verify your address.</h5>";
       }
-      if ($scope.banks.length == 0) {
-        counter++;
-        msg += '<h5><strong>' + counter + "</strong>. Please add a bank account.</h5>";
-      }
+      // if ($scope.banks.length == 0) {
+      //   counter++;
+      //   msg += '<h5><strong>' + counter + "</strong>. Please add a bank account.</h5>";
+      // }
       if (msg !== '') {
         msg = '<h4 style="margin-top: 0;">To Buy or Sell Bitcoin:</h4>' + msg;
       }
@@ -9802,8 +9919,10 @@ var CleverCoin = (function () {
     };
 
     $scope.userInformation = function() {
-      if ($scope.account.termsAgreedVersion == 1 || $scope.userStatus.userCanTransact) {
+      if ($scope.account.userCanTransact) {
         Airbitz.ui.showAlert('', 'User information has been submitted. Cannot be resubmitted.');
+      } else if($scope.account.requiredDataSupplied) {
+        Airbitz.ui.showAlert('', 'User information has already been submitted.');
       } else {
         $state.go("userInformation");
       }
@@ -9852,12 +9971,14 @@ var CleverCoin = (function () {
 
   function userInformationController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('User Information');
+    $scope.date = new Date();
+    $scope.date.setYear($scope.date.getYear() - 18 );
     $scope.account = UserFactory.getUserAccount();
     $scope.countries = UserFactory.getCountries();
-    UserFactory.fetchCountries().then(function(b) {
-      $scope.countries = b;
-      $scope.account.birthcountryObject = UserFactory.findCountry($scope.account.birthcountry);
-      $scope.account.addresscountryObject = UserFactory.findCountry($scope.account.addresscountry);
+    $scope.supportedCountries = UserFactory.getSupportedCountries();
+    UserFactory.fetchSupportedCountries().then(function(b) {
+      $scope.supportedCountries = b;
+      $scope.account.addresscountryObject = UserFactory.findSupportedCountry($scope.account.addresscountry);
     });
 
     $scope.cancel = function() {
@@ -9884,17 +10005,17 @@ var CleverCoin = (function () {
     $scope.account = UserFactory.getUserAccount();
     $scope.primaryFile = '';
     $scope.secondaryFile = '';
-    UserFactory.fetchCountries().then(function(b) {
-      $scope.countries = b;
-      $scope.account.nationalityObject = UserFactory.findCountry($scope.account.birthcountry);
-    });
+    $scope.countries = UserFactory.getCountries();
+    $scope.account.nationalityObject = UserFactory.findCountry($scope.account.birthcountry);
 
     $scope.loadIdentityFront = function() {
       Airbitz.core.requestFile({
         success: function(data) {
-          $scope.$apply(function() {
-            $scope.primaryFile = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
-          });
+          if (data) {
+            $scope.$apply(function() {
+              $scope.primaryFile = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
+            });
+          }
         },
         error: function() { }
       });
@@ -9903,9 +10024,11 @@ var CleverCoin = (function () {
     $scope.loadIdentityBack = function() {
       Airbitz.core.requestFile({
         success: function(data) {
-          $scope.$apply(function() {
-            $scope.secondaryFile = 'data:image/jpeg;name:secondaryFile.jpg;base64,' + data;
-          });
+          if (data) {
+            $scope.$apply(function() {
+              $scope.secondaryFile = 'data:image/jpeg;name:secondaryFile.jpg;base64,' + data;
+            });
+          }
         },
         error: function() { }
       });
@@ -9936,16 +10059,19 @@ var CleverCoin = (function () {
     Airbitz.ui.title('Address Verification');
     $scope.account = UserFactory.getUserAccount();
     $scope.proofFile = '';
-    UserFactory.fetchCountries().then(function(b) {
-      $scope.countries = b;
-      $scope.account.addresscountryObject = UserFactory.findCountry($scope.account.addresscountry);
+    $scope.supportedCountries = UserFactory.getSupportedCountries();
+    UserFactory.fetchSupportedCountries().then(function(b) {
+      $scope.supportedCountries = b;
+      $scope.account.addresscountryObject = UserFactory.findSupportedCountry($scope.account.addresscountry);
     });
     $scope.loadProofFile = function() {
       Airbitz.core.requestFile({
         success: function(data) {
-          $scope.$apply(function() {
-            $scope.proofFile = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
-          });
+          if (data) {
+            $scope.$apply(function() {
+              $scope.proofFile = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
+            });
+          }
         },
         error: function() { }
       });
@@ -9977,17 +10103,19 @@ var CleverCoin = (function () {
 
   function editBankController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('Bank Account');
-    UserFactory.fetchCountries().then(function(b) {
-      $scope.countries = b;
+    UserFactory.fetchSupportedCountries().then(function(b) {
+      $scope.supportedCountries = b;
     });
 
     $scope.bankstatement = '';
     $scope.loadBankStatement = function() {
       Airbitz.core.requestFile({
         success: function(data) {
-          $scope.$apply(function() {
-            $scope.bankstatement = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
-          });
+          if (data) {
+            $scope.$apply(function() {
+              $scope.bankstatement = 'data:image/jpeg;name:primaryFile.jpg;base64,' + data;
+            });
+          }
         },
         error: function() { }
       });
@@ -10034,15 +10162,17 @@ var CleverCoin = (function () {
     });
   }
   function fundsController($scope, $state, DataFactory) {
-    Airbitz.ui.title('Funds');
-    Airbitz.ui.showAlert('', 'Loading funds...', {
+    Airbitz.ui.title('Transactions');
+    Airbitz.ui.showAlert('', 'Loading transactions...', {
       'showSpinner': true
     });
+    $scope.showEmpty = false;
     DataFactory.getFundsLedger().then(function(funds) {
       Airbitz.ui.hideAlert();
       $scope.funds = funds;
+      $scope.showEmpty = funds.length == 0;
     }, function() {
-      Airbitz.ui.showAlert('', 'Error fetching funds.');
+      Airbitz.ui.showAlert('', 'Error fetching transactions.');
       $state.go('dashboard');
     });
     $scope.clearAccount = function(){
@@ -10062,7 +10192,7 @@ var CleverCoin = (function () {
         link: function(scope, element, attrs) {
             var model = $parse(attrs.fileModel);
             var modelSetter = model.assign;
-            
+
             element.bind('change', function(){
                 scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
@@ -10086,6 +10216,7 @@ var CleverCoin = (function () {
     .filter('roundBtc', roundBtc)
     .filter('valToBtc', valToBtc)
     .filter('satoshiToDenom', satoshiToDenom)
+    .filter('formatIban', formatIban)
     .directive('ngFocus', ['$timeout', ngFocus]);
 
   function statusFilter() {
@@ -10203,6 +10334,19 @@ var CleverCoin = (function () {
     }
   }
 
+  function formatIban() {
+    return function(val) {
+      var s = '';
+      for (var i = 0; i < val.length; ++i) {
+        if (i % 4 == 0) {
+          s += ' ';
+        }
+        s += val[i];
+      }
+      return s;
+    }
+  }
+
   function ngFocus($timeout) {
     return {
       link: function (scope, element, attrs) {
@@ -10264,7 +10408,11 @@ var CleverCoin = (function () {
     function reject(res) {
       console.log(res);
       if (res.error) {
-        Airbitz.ui.showAlert('Error', res.error);
+        var errorstring = errorMap(res);
+        if (~errorstring.indexOf("Insufficient funds")) {
+          errorstring = 'Insufficient Funds. Please deposit funds via SEPA transfer';
+        }
+        Airbitz.ui.showAlert('Error', errorstring);
       } else {
         Airbitz.ui.showAlert('Error', 'An unknown error occurred.');
       }
@@ -10295,7 +10443,7 @@ var app = angular.module('app.core', [
 
   angular
     .module('app.dataFactory', ['app.clevercoin', 'app.constants'])
-    .factory('StatsFactory', [ '$http', 'ExchangeFactory', StatsFactory])
+    .factory('StatsFactory', [ '$http', 'ExchangeFactory', 'UserFactory', StatsFactory])
     .factory('UserFactory', [ '$q', '$filter', 'ExchangeFactory', 'CcFactory', UserFactory])
     .factory('DataFactory', [ '$q', '$filter', 'ExchangeFactory', 'CcFactory', 'Prices', 'StatsFactory', DataFactory]);
 
@@ -10307,7 +10455,8 @@ var app = angular.module('app.core', [
     var factory = {};
     var account = Airbitz.core.readData('account') || {
       isSignedIn: false,
-      isActivated: false
+      isActivated: false,
+      userCanTransact: false
     };
     var bankList = Airbitz.core.readData('bankList') || [];
     var walletList = Airbitz.core.readData('walletList') || [];
@@ -10355,6 +10504,14 @@ var app = angular.module('app.core', [
       });
       return d.promise;
     };
+
+    factory.deleteUser = function(reason) {
+      var d = $q.defer();
+      CcFactory.deleteUser(reason, function(_, c, b) {
+        c >= 200 && c <= 300 ? d.resolve(b) : d.reject(b);
+      });
+      return d.promise;
+    };
     factory.requestLink = function(email) {
       var d = $q.defer();
       CcFactory.requestLink(email, redirectUri, function(_, c, b) {
@@ -10368,7 +10525,7 @@ var app = angular.module('app.core', [
       CcFactory.activate(account.email, token, function(_, c, b) {
         if (c >= 200 && c <= 300) {
           account.isActivated = true;
-          Airbitz.core.writeData('account', account); 
+          Airbitz.core.writeData('account', account);
           d.resolve(b);
         } else {
           d.reject(b);
@@ -10377,7 +10534,6 @@ var app = angular.module('app.core', [
       return d.promise;
     };
     var userStatus = Airbitz.core.readData('userStatus') || {
-      userCanTransact: false,
       userIdentitySetup: false,
       userAddressSetup: false
     };
@@ -10403,8 +10559,6 @@ var app = angular.module('app.core', [
             userStatus.userAddressSetup = b.address.proof.progressState == 'Verified';
             userStatus.userAddressState = b.address.proof.progressState;
           }
-          userStatus.userCanTransact = userStatus.userIdentitySetup && userStatus.userAddressSetup;
-
           if (userStatus.userIdentityState == "Rejected") {
             userStatus.identityRejectedReason = b.identity.passport.rejectReason;
           } else {
@@ -10434,7 +10588,7 @@ var app = angular.module('app.core', [
           walletList = b.filter(function(n) {
             return n.currency == 'EUR';
           });
-          Airbitz.core.writeData('walletList', walletList); 
+          Airbitz.core.writeData('walletList', walletList);
           resolve(walletList);
         } else {
           reject(b);
@@ -10450,6 +10604,7 @@ var app = angular.module('app.core', [
             account.surname = b.surname || account.surname;
             account.email = b.email || account.email;
             account.verificationState = b.verificationState || account.verificationState;
+            account.userCanTransact = account.verificationState == "Verified";
             account.gender = b.gender || account.gender;
             if (b.birthday) {
               var arr = b.birthday.split("-");
@@ -10461,7 +10616,7 @@ var app = angular.module('app.core', [
             account.phonenumber = b.phonenumber || account.phonenumber;
             account.termsAgreedVersion = b.termsAgreedVersion || account.termsAgreedVersion;
             Airbitz.core.writeData('account', account);
-            resolve(b)
+            resolve(account)
           } else {
             reject(b);
           }
@@ -10539,7 +10694,7 @@ var app = angular.module('app.core', [
       });
     };
 
-    factory.addBank = function(accountholder, iban, bic, bankstatement, 
+    factory.addBank = function(accountholder, iban, bic, bankstatement,
                                bankname, bankcountry, bankaddress) {
       return $q(function(resolve, reject) {
         CcFactory.addBank({
@@ -10564,32 +10719,45 @@ var app = angular.module('app.core', [
       });
     }
 
-    var countryList = [];
-    factory.getCountries = function() {
-      return countryList;
+    var supportedCountryList = [];
+    factory.getSupportedCountries = function() {
+      return supportedCountryList;
     };
-    factory.fetchCountries = function() {
-      if (countryList.length > 0) {
+    factory.fetchSupportedCountries = function() {
+      if (supportedCountryList.length > 0) {
         return $q(function(resolve, reject) {
-          resolve(countryList);
+          resolve(supportedCountryList);
         });
       } else {
         return $q(function(resolve, reject) {
           CcFactory.supportedCountries(function(e, s, b) {
             if (s === 200) {
-              countryList = b.filter(function(e) {
+              supportedCountryList = b.filter(function(e) {
                 return e.isResidenceAccepted;
               }).sort(function(a, b) {
                 return a.name.localeCompare(b.name);
               });
-              resolve(countryList);
+              resolve(supportedCountryList);
             } else {
               reject(b);
-            } 
-          }); 
+            }
+          });
         });
       }
     };
+    factory.findSupportedCountry = function(alpha3) {
+      for (var i = 0; i < supportedCountryList.length; ++i) {
+        if (supportedCountryList[i].codeAlpha3 == alpha3) {
+          return supportedCountryList[i];
+        }
+      }
+      return null;
+    };
+
+    factory.getCountries = function() {
+      return countryList;
+    };
+
     factory.findCountry = function(alpha3) {
       for (var i = 0; i < countryList.length; ++i) {
         if (countryList[i].codeAlpha3 == alpha3) {
@@ -10641,8 +10809,11 @@ var app = angular.module('app.core', [
             var ls = [];
             for (var k in b.ledger) {
               var row = b.ledger[k];
-              row.time = new Date(row.time * 1000);
-              ls.push(row);
+              if(row.type != "withdrawal")
+              {
+                row.time = new Date(row.time * 1000);
+                ls.push(row);
+              }
             }
             resolve(ls);
           } else {
@@ -10727,14 +10898,22 @@ var app = angular.module('app.core', [
       return d.promise;
     };
 
-    factory.requestBuy = function(btcQty, paymentMethod) {
+    factory.requestBuy = function(qty, currency, paymentMethod) {
       var d = $q.defer();
       var uri = Airbitz.config.get('REDIRECT_URI');
       var wallet = Airbitz.currentWallet;
       createAddress(wallet, 'CleverCoin', 0, 0, 'Exchange:CleverCoin', '', function(request) {
         var address = request['address'];
-        CcFactory.quote('bid', btcQty, 'BTC', paymentMethod, uri, '', address, function(e, r, b) {
+        CcFactory.quote('bid', qty, currency, paymentMethod, uri, '', address, function(e, r, b) {
           if (r == 200) {
+            if (true && !b.fees) {
+              // TODO: once CC fixes fees, remove this
+              // var quoted = Prices.currentBuy.btcPrice;
+              var quoted = b.btcPrice / 1.01;
+              var diff = b.toPay - b.amount * quoted;
+              b.fee = diff;
+              b.btcPrice = quoted;
+            }
             b.amount = Math.abs(b.amount);
             b.expires = new Date(b.expires * 1000);
             d.resolve(b);
@@ -10773,15 +10952,20 @@ var app = angular.module('app.core', [
     return factory;
   }
 
-  function StatsFactory($http, ExchangeFactory) {
+  function StatsFactory($http, ExchangeFactory, UserFactory) {
     var factory = {};
     factory.recordEvent = function(eventType, eventDictionary, btcAmount) {
       var statsKey = Airbitz.config.get('AIRBITZ_STATS_KEY');
       var network = Airbitz.config.get('SANDBOX') == 'true' ? 'testnet' : 'mainnet';
+      var acct = UserFactory.getUserAccount();
+      var string_to_hash = acct.name + acct.email;
+      var userhash = sha256(string_to_hash);
+      var shortuserhash = userhash.substr(0,8)
       var s = angular.copy(eventDictionary);
       s['btc'] = btcAmount;
       s['partner'] = 'CleverCoin ' + ExchangeFactory.currency;
       s['country'] = ExchangeFactory.currency;
+      s['user'] = shortuserhash;
       $http({
         method: 'POST',
         url: 'https://airbitz.co/api/v1/events',
@@ -10864,10 +11048,10 @@ var app = angular.module('app.core', [
         Airbitz.ui.navStackPush(current);
       }
       // if we are on the dashboard screen, empty history
-      if (next.match(/\.html#\/dashboard\/$/)
-        || next.match(/\.html#\/signup\/$/)
-        || next.match(/\.html#\/activate\/.*$/)
-        || next.match(/\.html#\/pendingActivation\/$/)) {
+      if (next.match(/#\/dashboard\//)
+        || next.match(/#\/signup\//)
+        || next.match(/#\/activate\/.*$/)
+        || next.match(/#\/pendingActivation\//)) {
         history.length = 0;
         Airbitz.ui.navStackClear();
       } else if (next.match(/\.html#\/receipt\/$/)) {
@@ -10922,12 +11106,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: "/pendingActivation/",
       templateUrl: "app/user/partials/pendingActivation.html",
       controller: "pendingActivationController",
-    })
-    // route for signup
-    .state("activate", {
-      url: "/activate/:email/:token",
-      templateUrl: "app/user/partials/activating.html",
-      controller: "activateController",
     })
     // route for dashboard
     .state("dashboard", {
@@ -11317,7 +11495,9 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="col-xs-6 no-pad">\n' +
     '  </div>\n' +
     '  <div class="col-xs-6 live-ticker text-right no-pad">\n' +
-    '    <div price-update price-type="{{ order.orderAction }}"></div>\n' +
+    '    <div class="live-price-rate">\n' +
+    '      <span class="price-rate-label">1 BTC =</span> <span class="price-rate-data">{{ order.quote.btcPrice || 0 | roundFiat }} {{ exchange.currency }}</span>\n' +
+    '    </div>\n' +
     '  </div>\n' +
     '</div>\n' +
     '\n' +
@@ -11351,7 +11531,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Fees</td>\n' +
-    '          <td>{{ order.quote.fee || 0 }}</td>\n' +
+    '          <td>{{ order.quote.fee || 0 | roundFiat }} {{ exchange.currency }} </td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Expires</td>\n' +
@@ -11427,7 +11607,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Fees</td>\n' +
-    '          <td>{{ order.quote.fee || 0 }}</td>\n' +
+    '          <td>{{ order.quote.fee || 0 | roundFiat }} {{ exchange.currency }} </td>\n' +
     '        </tr>\n' +
     '      </tbody>\n' +
     '    </table>\n' +
@@ -11527,7 +11707,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/accountSummary.html',
     '<div class="exchange-user-account row">\n' +
     '  <div class="account-message col-xs-12"\n' +
-    '       ng-if="!userStatus.userCanTransact" ng-bind-html="regMessage()">\n' +
+    '       ng-if="!account.userCanTransact" ng-bind-html="regMessage()">\n' +
     '  </div>\n' +
     '  <div class="col-xs-12 no-pad">\n' +
     '    <ul class="list-group">\n' +
@@ -11535,7 +11715,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <span class="list-group-item-heading">{{ account.firstname || titlecase }} {{ account.surname || titlecase }}</span>\n' +
     '        <p class="list-group-item-text">{{ "Tap to view your account details" }}</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': userStatus.userCanTransact}">{{ userStatus.userCanTransact | statusFilter }}</label>\n' +
+    '               ng-class="{\'label-success\': account.userCanTransact}">{{ account.userCanTransact | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" class="ng-trans ng-trans-scale-up ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Email</span>\n' +
@@ -11546,7 +11726,8 @@ module.run(['$templateCache', function($templateCache) {
     '        <span class="list-group-item-heading">User Information</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 || userStatus.userCanTransact)}">{{ (account.termsAgreedVersion == 1 || userStatus.userCanTransact) | statusFilter }}</label>\n' +
+    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 || account.userCanTransact)}">\n' +
+    '               {{ (account.termsAgreedVersion == 1 || account.userCanTransact) | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" ng-click="identity()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Verify Identity</span>\n' +
@@ -11560,6 +11741,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label label-outline pull-right {{userStatus.userAddressState | stateClassFilter }}">\n' +
     '          {{ userStatus.userAddressState | stateFilter }}</label>\n' +
     '      </li>\n' +
+    '      <!--\n' +
     '      <li ng-if="showOptions" data-ng-repeat="bank in banks" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '          <span class="list-group-item-heading">Bank Account</span>\n' +
     '          <p class="list-group-item-text">{{ bank.bank }} {{ bank.IBAN }}</p>\n' +
@@ -11571,6 +11753,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <p class="list-group-item-text">Tap to Add</p>\n' +
     '        <label class="status label label-outline pull-right">{{ false | statusFilter }}</label>\n' +
     '      </li>\n' +
+    '      -->\n' +
     '    </ul>\n' +
     '  </div>\n' +
     '</div>\n' +
@@ -11668,7 +11851,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group col-xs-6">\n' +
     '      <label for="inputCountry" class="sr-only">Country</label>\n' +
     '      <select\n' +
-    '        ng-options="o.name for o in countries"\n' +
+    '        ng-options="o.name for o in supportedCountries"\n' +
     '        ng-model="account.addresscountryObject" class="form-control"\n' +
     '        id="inputCountry" name="country" required="" />\n' +
     '        <option value="">Select a country</option>\n' +
@@ -11694,7 +11877,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '    <div class="col-xs-6 no-pad">\n' +
     '      <button type="button"\n' +
-    '        ng-click="save()" \n' +
+    '        ng-click="save()"\n' +
     '        ng-disabled="form.$invalid || proofFile.length == 0"\n' +
     '        class="btn btn-lg btn-block btn-success">Save</button>\n' +
     '    </div>\n' +
@@ -11715,13 +11898,16 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/bankDeposit.html',
     '<div class="row">\n' +
     '  <div class="col-xs-12 no-pad">\n' +
-    '    <table class="table table-striped">\n' +
-    '      <tr><td>IBAN</td><td>{{ iban || "" }}</td></tr>\n' +
-    '      <tr><td>BIC</td><td>{{ bic || "" }}</td></tr>\n' +
-    '      <tr><td>Description</td><td>{{ description || "" }}</td></tr>\n' +
+    '    <table class="table">\n' +
     '      <tr><td colspan="2">\n' +
-    '        <h5>Recipient</h5>\n' +
     '        <table class="table table-striped">\n' +
+    '          <tr><td colspan="2"><h4>To purchase Bitcoin, please fund your Euro wallet by sending a SEPA deposit to the following account.</h4>\n' +
+    '          <tr><td>IBAN</td><td>{{ iban || "" | formatIban}}</td></tr>\n' +
+    '          <tr><td>BIC</td><td>{{ bic || "" }}</td></tr>\n' +
+    '          <tr><td>Description</td><td>{{ description || "" }}</td></tr>\n' +
+    '        </table>\n' +
+    '        <table class="table table-striped">\n' +
+    '          <tr><td colspan="2"><h5>Recipient</h5></td></tr>\n' +
     '          <tr><td>Name</td><td>{{ recipientName || "" }}</td></tr>\n' +
     '          <tr><td>Address</td><td>{{ recipientAddress || "" }}</td></tr>\n' +
     '          <tr><td>Zipcode</td><td>{{ recipientZipcode || "" }}</td></tr>\n' +
@@ -11977,7 +12163,7 @@ module.run(['$templateCache', function($templateCache) {
     '  </div>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="exchange-buy-sell row">\n' +
+    '<div ng-if="account.userCanTransact" class="exchange-buy-sell row">\n' +
     '  <div class="col-xs-6 no-pad">\n' +
     '    <button ng-click="buy()" class="buy-button btn-success btn-lg btn-block btn">BUY</button>\n' +
     '  </div>\n' +
@@ -11988,16 +12174,16 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '<div account-summary></div>\n' +
     '\n' +
-    '<div class="row" ng-if="banks.length > 0">\n' +
+    '<div class="row" ng-if="account.userCanTransact">\n' +
     '  <div class="col-xs-12 no-pad">\n' +
-    '    <button data-ng-click="sepaDeposit()" class="buy-button btn-primary btn-lg btn-block btn">SEPA Deposit</button>\n' +
+    '    <button data-ng-click="sepaDeposit()" class="buy-button btn-primary btn-lg btn-block btn">Deposit Euro via SEPA</button>\n' +
     '  </div>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="row" ng-if="wallets.length > 0">\n' +
+    '<div ng-if="account.userCanTransact" class="row" ng-if="wallets.length > 0">\n' +
     '  <table class="table table-bordered table-striped col-xs-12 no-pad">\n' +
     '    <tr>\n' +
-    '      <th>CleverCoin Balance</th>\n' +
+    '      <th>Euro Wallet Balance</th>\n' +
     '    </tr>\n' +
     '    <tr ng-repeat="w in wallets">\n' +
     '      <td>{{ w.balance }} {{ w.currency }}</td>\n' +
@@ -12005,7 +12191,7 @@ module.run(['$templateCache', function($templateCache) {
     '  </table>\n' +
     '</div>\n' +
     '\n' +
-    '<div ng-if="userStatus.userCanTransact" class="ng-trans ng-trans-fade-up easeOutSine">\n' +
+    '<div ng-if="account.userCanTransact" class="ng-trans ng-trans-fade-up easeOutSine">\n' +
     '  <hr />\n' +
     '  <div class="row">\n' +
     '    <div class="col-xs-12 no-pad">\n' +
@@ -12064,6 +12250,9 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/funds.html',
     '<div class="transactions row">\n' +
     '  <table ng-model="transactions" class="table table-bordered table-striped col-xs-12 no-pad">\n' +
+    '    <tr ng-if="showEmpty">\n' +
+    '      <td colspan="2">No transaction history</td>\n' +
+    '    </tr>\n' +
     '    <tr ng-repeat="t in funds">\n' +
     '      <td>\n' +
     '        <table class="table-mini">\n' +
@@ -12127,7 +12316,7 @@ module.run(['$templateCache', function($templateCache) {
     '            required=""\n' +
     '            ng-focus="true"\n' +
     '            class="form-control">\n' +
-    '          <option value="passport">Passport</option>\n' +
+    '          <option selected value="passport">Passport</option>\n' +
     '          <option value="identityCard">Identity Card</option>\n' +
     '        </select>\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.identityType.$touched">\n' +
@@ -12154,11 +12343,14 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="row">\n' +
     '    <div class="form-group col-xs-12">\n' +
     '      <button type="button" ng-click="loadIdentityFront()" class="btn btn-lg"\n' +
-    '        ng-class="{\'btn-success\': primaryFile.length > 0, \'btn-info\': primaryFile.length == 0}">Identity File Front</button>\n' +
+    '        ng-class="{\'btn-success\': primaryFile.length > 0, \'btn-info\': primaryFile.length == 0}">\n' +
+    '        <span ng-if="identityType != \'identityCard\'">Passport Photo</span>\n' +
+    '        <span ng-if="identityType == \'identityCard\'">Identity File Front</span>\n' +
+    '      </button>\n' +
     '    </div>\n' +
     '  </div>\n' +
     '\n' +
-    '  <div class="row">\n' +
+    '  <div class="row" ng-if="identityType == \'identityCard\'">\n' +
     '    <div class="form-group col-xs-12">\n' +
     '      <button type="button" ng-click="loadIdentityBack()" class="btn btn-lg"\n' +
     '        ng-class="{\'btn-success\': secondaryFile.length > 0, \'btn-info\': secondaryFile.length == 0}">Identity File Back</button>\n' +
@@ -12174,7 +12366,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="col-xs-6 no-pad">\n' +
     '      <button type="button"\n' +
     '        ng-click="save()" \n' +
-    '        ng-disabled="form.$invalid || primaryFile.length == 0 || secondaryFile.length == 0"\n' +
+    '        ng-disabled="form.$invalid || primaryFile.length == 0 || (secondaryFile.length == 0 && identityType == \'identityCard\')"\n' +
     '        class="btn btn-lg btn-block btn-success">Save</button>\n' +
     '    </div>\n' +
     '  </div>\n' +
@@ -12238,7 +12430,13 @@ module.run(['$templateCache', function($templateCache) {
     '  <div class="col-xs-12 no-pad">\n' +
     '    <button type="button"\n' +
     '            ng-click="changeEmail()"\n' +
-    '            class="btn btn-block btn-info">Change Email</button>\n' +
+    '            class="btn btn-block btn-lg btn-info">Change Email</button>\n' +
+    '    <br />\n' +
+    '    <br />\n' +
+    '    <br />\n' +
+    '    <button type="button"\n' +
+    '            ng-click="toDashboard()"\n' +
+    '            class="btn btn-block btn-lg btn-success">Continue</button>\n' +
     '  </div>\n' +
     '</div>\n' +
     '');
@@ -12273,7 +12471,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('app/user/partials/signup.html',
     '<div class="row no-pad">\n' +
     '    <div class="col-xs-12">\n' +
-    '        <h5>Signup</h5>\n' +
+    '        <h4>Please register your name and email to buy Bitcoin in Airbitz</h4>\n' +
     '    </div>\n' +
     '</div>\n' +
     '<form name="form" novalidate>\n' +
@@ -12345,6 +12543,12 @@ module.run(['$templateCache', function($templateCache) {
     '              class="btn btn-lg btn-success">Next</button>\n' +
     '    </div>\n' +
     '  </div>\n' +
+    '  <div class="row no-pad">\n' +
+    '    <div class="col-xs-12">\n' +
+    '      <h6>Powered by CleverCoin</h6>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '\n' +
     '</form>\n' +
     '');
 }]);
@@ -12471,7 +12675,8 @@ module.run(['$templateCache', function($templateCache) {
     '            placeholder="Birthday"\n' +
     '            autocorrect="off"\n' +
     '            autocomplete="off"\n' +
-    '            required="" />\n' +
+    '            required=""\n' +
+    '            max="{{date | date:\'yyyy-MM-dd\'}}" />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.birthday.$touched">\n' +
     '        <span ng-show="form.birthday.$error.required" class="label label-danger">Required</span>\n' +
     '      </div>\n' +
@@ -12511,7 +12716,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group col-xs-12">\n' +
     '      <label for="inputAddressCountry" class="">Address Country</label>\n' +
     '      <select\n' +
-    '        ng-options="o.name for o in countries"\n' +
+    '        ng-options="o.name for o in supportedCountries"\n' +
     '        ng-model="account.addresscountryObject" class="form-control"\n' +
     '        id="inputAddressCountry" name="addresscountry" required="" />\n' +
     '        <option value="">Select a country</option>\n' +
@@ -12538,13 +12743,18 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '  <div class="row">\n' +
     '    <div class="form-group col-xs-12">\n' +
-    '        <label for="inputTos" class=""><a target="_blank" href="#" ng-click="launchExternal(\'https://www.clevercoin.com/en/terms-conditions\')">Agree to TOS?</a></label>\n' +
+    '        <a target="_blank" href="#" ng-click="launchExternal(\'https://www.clevercoin.com/en/terms-conditions\')">Review TOS?</a>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '\n' +
+    '  <div class="row">\n' +
+    '    <div class="form-group col-xs-12">\n' +
+    '        <label for="inputTos" class="">Agree to TOS?</label>\n' +
     '        <input type="checkbox"\n' +
     '          ng-required="true"\n' +
     '          ng-checked="account.termsAgreedVersion > 0"\n' +
     '          ng-click="account.termsAgreedVersion = account.termsAgreedVersion > 0 ? 0 : 1"\n' +
-    '          class="form-control"\n' +
-    '          id="inputAgreeOnTerms"\n' +
+    '          id="inputTos"\n' +
     '          name="agreeOnTerms"\n' +
     '          required="" />\n' +
     '        <div class="input-error" ng-show="form.$submitted || form.agreeOnTerms.$touched">\n' +
@@ -12561,7 +12771,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '    <div class="col-xs-6 no-pad">\n' +
     '      <button type="button"\n' +
-    '        ng-click="save()" \n' +
+    '        ng-click="save()"\n' +
     '        ng-disabled="form.$invalid"\n' +
     '        class="btn btn-lg btn-block btn-success">Save</button>\n' +
     '    </div>\n' +

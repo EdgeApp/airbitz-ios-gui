@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AB.h"
 
 @interface AirbitzViewController : UIViewController
 
 @property (nonatomic, strong) NSLayoutConstraint * leftConstraint;
+
+- (void)updateNavBar;
 
 @end
