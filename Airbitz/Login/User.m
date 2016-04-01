@@ -80,6 +80,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
     self.needsPasswordCheck = NO;
     self.pinLoginCount = 0;
+    self.dictAffiliateInfo = nil;
+    self.affiliateInfo = nil;
+
 
     return self;
 }

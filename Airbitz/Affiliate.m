@@ -111,6 +111,11 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
         [User Singleton].dictAffiliateInfo = dictAffiliateInfo;
         [User Singleton].affiliateInfo = [NSString stringWithString:affiliateInfo];
     }
+    else
+    {
+        [User Singleton].dictAffiliateInfo = nil;
+        [User Singleton].affiliateInfo = nil;
+    }
 
 }
 
