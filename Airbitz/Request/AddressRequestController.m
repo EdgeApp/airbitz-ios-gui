@@ -144,15 +144,13 @@
 {
     [self.view endEditing:YES];
 
-    ABCReceiveAddress *receiveAddress = [[ABCReceiveAddress alloc] init];
-    
     if (_successUrl) {
+        
+        ABCReceiveAddress *receiveAddress = [abcAccount.currentWallet createNewReceiveAddress];
         
         receiveAddress.metaData.payeeName = strName;
         receiveAddress.metaData.category = strCategory;
         receiveAddress.metaData.notes = strNotes;
-
-        ABCReceiveAddress *receiveAddress = [abcAccount.currentWallet createNewReceiveAddress];
         
         NSString *url = [_successUrl absoluteString];
         NSMutableString *query;
