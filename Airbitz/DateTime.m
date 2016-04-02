@@ -33,6 +33,7 @@
 
 - (void)setWithDate:(NSDate *)date
 {
+    self.date = date;
     NSCalendar *gregorian = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [gregorian components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear |
                                                               NSCalendarUnitHour | NSCalendarUnitMinute |NSCalendarUnitSecond)

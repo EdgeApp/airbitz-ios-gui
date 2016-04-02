@@ -165,7 +165,7 @@ const int NumPromoRows              = 5;
     _showRunningBalance = [LocalSettings controller].showRunningBalance;
 
     [self.balanceViewPlaceholder addSubview:_balanceView];
-    [_balanceView showBalance:![LocalSettings controller].hideBalance];
+    [_balanceView showBalance:NO];
     
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
@@ -483,6 +483,9 @@ const int NumPromoRows              = 5;
         !abcAccount.currentWallet.currency.code)
         return;
 
+    [_balanceView finishedLoading];
+    [_balanceView showBalance:![LocalSettings controller].hideBalance];
+    
     _totalSatoshi = 0.0;
     for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
     {

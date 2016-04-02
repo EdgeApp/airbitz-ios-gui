@@ -26,8 +26,6 @@ typedef enum eWalletExportType
 
 @property (assign)            id<ExportWalletOptionsViewControllerDelegate> delegate;
 @property (assign)            tWalletExportType                             type;
-@property (nonatomic, strong) DateTime                                      *fromDateTime;
-@property (nonatomic, strong) DateTime                                      *toDateTime;
 
 @end
 
