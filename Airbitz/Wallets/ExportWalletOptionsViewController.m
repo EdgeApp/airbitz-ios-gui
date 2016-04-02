@@ -84,9 +84,9 @@ typedef enum eExportOption
 @property (weak, nonatomic) IBOutlet UIButton           *buttonLastMonth;
 @property (weak, nonatomic) IBOutlet UIButton           *buttonLastYear;
 
-@property (weak, nonatomic) IBOutlet UIButton           *buttonFrom;
-@property (weak, nonatomic) IBOutlet UIButton           *buttonTo;
-@property (weak, nonatomic) IBOutlet UIDatePicker       *datePicker;
+@property (weak, nonatomic) IBOutlet UITextField        *dateFromTextField;
+@property (weak, nonatomic) IBOutlet UITextField        *dateToTextField;
+@property (strong, nonatomic)        UIDatePicker       *datePicker;
 
 @property (nonatomic, strong) DateTime                  *fromDateTime;
 @property (nonatomic, strong) DateTime                  *toDateTime;
@@ -131,9 +131,6 @@ typedef enum eExportOption
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
     
-    self.dateSelectorView.hidden = YES;
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-    
     self.fromDateTime = [DateTime alloc];
     self.toDateTime = [DateTime alloc];
     
@@ -151,6 +148,21 @@ typedef enum eExportOption
         self.viewPassword.hidden = YES;
     }
 
+    
+    self.datePicker = [[UIDatePicker alloc]init];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.dateFromTextField setInputView:self.datePicker];
+    [self.dateToTextField setInputView:self.datePicker];
+    self.dateToTextField.delegate = self;
+    self.dateFromTextField.delegate = self;
+    
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolBar setTintColor:[UIColor grayColor]];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(datePickerAction:)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    [self.dateFromTextField setInputAccessoryView:toolBar];
+    [self.dateToTextField setInputAccessoryView:toolBar];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
@@ -224,6 +236,22 @@ typedef enum eExportOption
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+{
+    if (textField == self.dateFromTextField)
+    {
+        _bDatePickerFrom = YES;
+        [self.datePicker setDate:self.fromDateTime.date];
+        
+    }
+    else if (textField == self.dateToTextField)
+    {
+        _bDatePickerFrom = NO;
+        [self.datePicker setDate:self.toDateTime.date];
+    }
+    
+
+}
 #pragma mark - Action Methods
 
 - (void)buttonBackTouched
@@ -238,30 +266,14 @@ typedef enum eExportOption
 
 - (IBAction)datePickerAction:(id)sender
 {
-    UIDatePicker *datePicker = sender;
-    
     if (_bDatePickerFrom)
-        [self.fromDateTime setWithDate:datePicker.date];
+        [self.fromDateTime setWithDate:self.datePicker.date];
     else
-        [self.toDateTime setWithDate:datePicker.date];
+        [self.toDateTime setWithDate:self.datePicker.date];
     
-    self.dateSelectorView.hidden = YES;
+    [self.dateFromTextField resignFirstResponder];
+    [self.dateToTextField resignFirstResponder];
     [self updateDateDisplay];
-}
-
-- (IBAction)buttonFromTouched:(id)sender
-{
-    _bDatePickerFrom = YES;
-    [self.datePicker setDate:self.fromDateTime.date];
-    self.dateSelectorView.hidden = NO;
-
-}
-
-- (IBAction)buttonToTouched:(id)sender
-{
-    _bDatePickerFrom = NO;
-    [self.datePicker setDate:self.toDateTime.date];
-    self.dateSelectorView.hidden = NO;
 }
 
 - (IBAction)buttonDatePeriodTouched:(UIButton *)sender
@@ -328,8 +340,8 @@ typedef enum eExportOption
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setLocale:[NSLocale currentLocale]];
     
-    [self.buttonFrom setTitle:[dateFormatter stringFromDate:self.fromDateTime.date] forState:UIControlStateNormal];
-    [self.buttonTo setTitle:[dateFormatter stringFromDate:self.toDateTime.date] forState:UIControlStateNormal];
+    self.dateFromTextField.text = [dateFormatter stringFromDate:self.fromDateTime.date];
+    self.dateToTextField.text = [dateFormatter stringFromDate:self.toDateTime.date];
 }
 
 #pragma mark - Misc Methods
