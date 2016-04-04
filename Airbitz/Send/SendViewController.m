@@ -166,6 +166,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)viewWillAppear:(BOOL)animated
 {
     [self scanBLEstartCamera];
+    [MainViewController changeNavBarOwner:self];
 
     [segmentedControl setEnabled:YES forSegmentAtIndex:0];
 
@@ -245,7 +246,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)setupNavBar
 {
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:closeButtonText side:NAV_BAR_LEFT button:true enable:bWalletListDropped action:@selector(didTapTitle:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
@@ -1523,6 +1523,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
 
     [self enableTableSelection];
+    [MainViewController changeNavBarOwner:self];
     [self setupNavBar];
     [self updateViews:nil];
 }
@@ -1650,6 +1651,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
     [MainViewController animateOut:vc withBlur:NO complete:^(void) {
         _addressRequestController = nil;
+        [MainViewController changeNavBarOwner:self];
         [self setupNavBar];
         [self updateViews:nil];
     }];

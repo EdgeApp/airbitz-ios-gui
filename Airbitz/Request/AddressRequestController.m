@@ -64,6 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [MainViewController changeNavBarOwner:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
     [self updateViews:nil];
@@ -71,7 +72,6 @@
 
 - (void)updateViews:(NSNotification *)notification
 {
-    [MainViewController changeNavBarOwner:self];
     
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {

@@ -169,7 +169,8 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [MainViewController changeNavBarOwner:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refresh:)
                                                  name:NOTIFICATION_DATA_SYNC_UPDATE object:nil];
 	_showBluetoothOption = NO;
@@ -189,7 +190,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)updateViews
 {
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:settingsText];
 
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
@@ -1216,11 +1216,11 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)spendingLimitsViewControllerDone:(SpendingLimitsViewController *)controller withBackButton:(BOOL)bBack
 {
-    [MainViewController animateOut:controller withBlur:NO complete:^(void)
-            {
-                    _spendLimitsController = nil;
-            }];
-    [self updateViews];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
+        _spendLimitsController = nil;
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews];
+    }];
 }
 
 #pragma mark - TwoFactorShowViewControllerDelegate
@@ -1230,8 +1230,9 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
         _tfaViewController = nil;
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews];
     }];
-    [self updateViews];
 }
 
 #pragma mark - BooleanCell Delegate

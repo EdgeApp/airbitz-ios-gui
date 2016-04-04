@@ -139,12 +139,12 @@ typedef enum eAlertType
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [MainViewController changeNavBarOwner:self];
     [self updateViews];
 }
 
 -(void)updateViews
 {
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:passwordRecoveryText];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back) fromObject:self];
     [MainViewController changeNavBar:self title:importText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
@@ -385,6 +385,8 @@ typedef enum eAlertType
     _secret = controller.secret;
     [Util animateOut:controller parentController:self complete:^(void) {
         _tfaMenuViewController = nil;
+        [MainViewController changeNavBarOwner:self];
+
         BOOL success = __bSuccess;
         if (success) {
             // Try again with OTP
@@ -827,7 +829,9 @@ typedef enum eAlertType
 {
     [MainViewController animateOut:controller withBlur:NO complete:^
     {
+
         self.signUpController = nil;
+        [MainViewController changeNavBarOwner:self];
 
         if (!bBack)
         {

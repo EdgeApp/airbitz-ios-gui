@@ -411,16 +411,15 @@
     BOOL success = controller.bSuccess;
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
+        [MainViewController changeNavBarOwner:self];
         _tfaMenuViewController = nil;
+        if (!bBack && !success) {
+            [MainViewController fadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
+        }
+        
+        [self updateViews];
+        [self checkStatus:success];
     }];
-    if (!bBack && !success) {
-        [MainViewController fadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
-    }
-
-    [MainViewController changeNavBarOwner:self];
-
-    [self updateViews];
-    [self checkStatus:success];
 }
 
 #pragma mark - Misc Methods

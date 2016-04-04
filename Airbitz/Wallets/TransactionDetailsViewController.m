@@ -304,6 +304,7 @@ typedef enum eRequestType
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+    [MainViewController changeNavBarOwner:self];
 
     self.spinnerView.hidden = YES;
 
@@ -381,7 +382,6 @@ typedef enum eRequestType
 
 - (void)setupNavBar
 {
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
@@ -685,6 +685,7 @@ typedef enum eRequestType
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
         businessDetailsController = nil;
+        [MainViewController changeNavBarOwner:self];
         [self setupNavBar];
     }];
 }
