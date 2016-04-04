@@ -92,12 +92,17 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self forceUpdateNavBar];
+}
+
+- (void)forceUpdateNavBar;
+{
     [MainViewController changeNavBarOwner:self];
-    [self setupNavBar];
+    [self updateNavBar];
     [self updateViews:nil];
 }
 
-- (void)setupNavBar
+- (void)updateNavBar;
 {
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
@@ -285,8 +290,7 @@
 {
     [MainViewController animateOut:controller withBlur:NO complete:^(void) {
         self.exportWalletOptionsViewController = nil;
-        [self setupNavBar];
-        [self updateViews:nil];
+        [self forceUpdateNavBar];
     }];
 }
 
