@@ -1588,7 +1588,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI:(NSString *)uriString;
 {
-    _parsedURI = [ABCUtil parseURI:uriString error:nil];
+    NSError *error;
+    _parsedURI = [ABCUtil parseURI:uriString error:&error];
 
     if (_parsedURI)
     {
@@ -1640,6 +1641,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
         }
     }
+    
+    // Did not get successfully processed. Throw error
+    [MainViewController fadingAlert:invalidQRCode holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
 }
 
 -(void)AddressRequestControllerDone:(AddressRequestController *)vc
