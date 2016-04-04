@@ -38,6 +38,7 @@
 #define walletsPopupHelpText                        NSLocalizedString(@"Tap and hold a wallet for additional options", nil)
 #define selectWalletTransferPopupHeaderText         NSLocalizedString(@"▼ Choose a wallet to transfer funds to ▼", @"Header of popup in SendView from wallet to wallet transfer")
 #define invalidAddressPopupText                     NSLocalizedString(@"Invalid Bitcoin Address", nil)
+#define invalidQRCode                               NSLocalizedString(@"Invalid QR Code", nil)
 #define enterBitcoinAddressPopupText                NSLocalizedString(@"Send to Bitcoin Address or Import Private Key", nil)
 #define deleteAccountText                           NSLocalizedString(@"Delete Account", nil)
 #define deleteAccountWarning                        NSLocalizedString(@"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.", @"Delete Account Warning")
