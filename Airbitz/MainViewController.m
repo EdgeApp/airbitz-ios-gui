@@ -1074,7 +1074,7 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
     [_loginViewController removeFromParentViewController];
-    [_directoryViewController updateNavBar];
+    [_directoryViewController forceUpdateNavBar];
 }
 
 + (void)createFirstWallet;
@@ -2228,7 +2228,7 @@ MainViewController *singleton;
     
     if (_selectedViewController == _transactionsViewController)
     {
-        [_selectedViewController updateNavBar];
+        [_selectedViewController forceUpdateNavBar];
     }
 }
 

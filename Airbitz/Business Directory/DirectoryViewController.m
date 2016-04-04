@@ -232,15 +232,14 @@ static bool bInitialized = false;
     self.afmanager = [MainViewController createAFManager];
 }
 
-- (void) updateNavBar;
+- (void) forceUpdateNavBar;
 {
+    [MainViewController changeNavBarOwner:self];
     [self setupNavBar];
 }
 
 - (void) setupNavBar
 {
-//    [MainViewController changeNavBarTitleWithImage:[UIImage imageWithContentsOfFile:@"logo.png"]];
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Directory", @"Directory title bar text")];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:bShowBackButton action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:infoButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
@@ -290,6 +289,7 @@ static bool bInitialized = false;
 - (void)viewWillAppear: (BOOL)animated
 {
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+    [MainViewController changeNavBarOwner:self];
 
     [self hideBackButton];
     [self setupNavBar];
@@ -2089,7 +2089,7 @@ static bool bInitialized = false;
     if (category)
     {
         [self transitionMode:DIRECTORY_MODE_SEARCH];
-        [self setupNavBar];
+        [self forceUpdateNavBar];
         [self.searchBarLocation becomeFirstResponder];
         self.searchBarSearch.text = category;
     }

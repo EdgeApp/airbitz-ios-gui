@@ -259,10 +259,14 @@ const int NumPromoRows              = 5;
     [self.tableView reloadData];
     [self updateBalanceView];
 }
+- (void)forceUpdateNavBar;
+{
+    [MainViewController changeNavBarOwner:self];
+    [self updateNavBar];
+}
 
 - (void)updateNavBar
 {
-    [MainViewController changeNavBarOwner:self];
     NSString *walletName;
     walletName = [NSString stringWithFormat:@"%@ ▼", abcAccount.currentWallet.name];
     [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(toggleWalletDropdown:) fromObject:self];
@@ -285,6 +289,7 @@ const int NumPromoRows              = 5;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MainViewController changeNavBarOwner:self];
 
     [self performSelector:@selector(resetTableHideSearch) withObject:nil afterDelay:0.0f];
 
@@ -787,9 +792,8 @@ const int NumPromoRows              = 5;
         [MainViewController Singleton].dictImageURLFromBizID[[NSNumber numberWithInt:controller.transaction.metaData.bizId]] = controller.photoUrl;
     }
 
-    [self updateNavBar];
-
     [self dismissTransactionDetails];
+    [self forceUpdateNavBar];
     [self updateViews:nil];
 
 }
@@ -1472,12 +1476,9 @@ const int NumPromoRows              = 5;
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
         self.exportWalletViewController = nil;
+        [self forceUpdateNavBar];
+        [self updateViews:nil];
     }];
-    
-    [self updateNavBar];
-
-    [self updateViews:nil];
-
 }
 
 

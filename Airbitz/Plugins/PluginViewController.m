@@ -113,12 +113,13 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
     [self resizeFrame:YES];
-    [super viewWillAppear:animated];
+    [MainViewController changeNavBarOwner:self];
 
 	self.buttonSelector.delegate = self;
     [self.buttonSelector disableButton];
@@ -128,7 +129,6 @@ static const NSString *PROTOCOL = @"bridge://";
 
 - (void)updateViews:(NSNotification *)notification
 {
-    [MainViewController changeNavBarOwner:self];
     if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
         self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
@@ -937,7 +937,6 @@ static const NSString *PROTOCOL = @"bridge://";
                                     transaction:(ABCTransaction *)transaction
                                    withUnsentTx:(ABCUnsentTx *)unsentTx;
 {
-    [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
     [Util animateOut:_sendConfirmationViewController parentController:self complete:^(void) {
         // hide calculator
         if (bBack) {
@@ -957,6 +956,8 @@ static const NSString *PROTOCOL = @"bridge://";
         // clean up
         _sendConfirmationViewController = nil;
         _sendCbid = nil;
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews:[NSNotification notificationWithName:@"Skip" object:nil]];
     }];
 }
 
