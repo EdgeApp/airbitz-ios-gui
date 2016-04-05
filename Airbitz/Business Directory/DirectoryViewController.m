@@ -2145,7 +2145,7 @@ static bool bInitialized = false;
         [businessDetailsController.view removeFromSuperview];
         [businessDetailsController removeFromParentViewController];
         businessDetailsController = nil;
-        [self setupNavBar];
+        [self forceUpdateNavBar];
     }
 }
 
@@ -2164,7 +2164,7 @@ static bool bInitialized = false;
     [businessDetailsController.view removeFromSuperview];
     [businessDetailsController removeFromParentViewController];
     businessDetailsController = nil;
-    [self setupNavBar];
+    [self forceUpdateNavBar];
 }
 
 @end
