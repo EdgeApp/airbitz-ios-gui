@@ -1236,7 +1236,6 @@ static bool bInitialized = false;
     [MainViewController animateOut:businessDetailsController withBlur:NO complete:^(void)
     {
         businessDetailsController = nil;
-        [self setupNavBar];
     }];
 }
 
@@ -2078,7 +2077,7 @@ static bool bInitialized = false;
     {
         [self dismissBusinessDetails];
     }
-    [self setupNavBar];
+    [self forceUpdateNavBar];
 }
 
 #pragma mark MoreCategoriesViewControllerDelegates

@@ -174,7 +174,7 @@ typedef enum eExportOption
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:false enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
     [self updateViews:nil];
     [self updateDateDisplay];
@@ -200,9 +200,9 @@ typedef enum eExportOption
         self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
+        walletName = [NSString stringWithFormat:@"Export From: %@", abcAccount.currentWallet.name];
 
-        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle) fromObject:self];
+        [MainViewController changeNavBarTitle:self title:walletName];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
             [FadingAlertView create:self.view
