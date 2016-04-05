@@ -1178,38 +1178,37 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 -(void)signupViewControllerDidFinish:(SignUpViewController *)controller withBackButton:(BOOL)bBack
 {
-    [MainViewController animateOut:controller withBlur:NO complete:^(void)
-            {
-                    _signUpController = nil;
-            }];
-
-    // re-load the current account settings
-    [abcAccount.settings loadSettings];
-
-    [_tableView reloadData];
-    [self updateViews];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
+        _signUpController = nil;
+        // re-load the current account settings
+        [abcAccount.settings loadSettings];
+        
+        [_tableView reloadData];
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews];
+    }];
 }
 
 #pragma mark - PasswordRecoveryViewController Delegate
 
 - (void)passwordRecoveryViewControllerDidFinish:(PasswordRecoveryViewController *)controller
 {
-    [MainViewController animateOut:controller withBlur:NO complete:^(void)
-            {
-                    _passwordRecoveryController = nil;
-            }];
-    [self updateViews];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
+        _passwordRecoveryController = nil;
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews];
+    }];
 }
 
 #pragma mark - CategoriesViewController Delegate
 
 - (void)categoriesViewControllerDidFinish:(CategoriesViewController *)controller
 {
-    [MainViewController animateOut:controller withBlur:NO complete:^(void)
-            {
-                    _categoriesController = nil;
-            }];
-    [self updateViews];
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
+        _categoriesController = nil;
+        [MainViewController changeNavBarOwner:self];
+        [self updateViews];
+    }];
 }
 
 #pragma mark - SpendingLimitsViewController Delegate
@@ -1227,8 +1226,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)twoFactorShowViewControllerDone:(TwoFactorShowViewController *)controller withBackButton:(BOOL)bBack
 {
-    [MainViewController animateOut:controller withBlur:NO complete:^(void)
-    {
+    [MainViewController animateOut:controller withBlur:NO complete:^(void) {
         _tfaViewController = nil;
         [MainViewController changeNavBarOwner:self];
         [self updateViews];
@@ -1442,6 +1440,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     [MainViewController animateOut:controller withBlur:NO complete:^
     {
         _debugViewController = nil;
+        [MainViewController changeNavBarOwner:self];
         [self updateViews];
     }];
 }
