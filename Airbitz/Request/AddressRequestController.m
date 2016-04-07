@@ -160,9 +160,9 @@
             query = [[NSMutableString alloc] initWithFormat: @"%@&address=%@", url, [Util urlencode:receiveAddress.uri]];
         }
         [query appendFormat:@"&x-source=%@", X_SOURCE];
+        [receiveAddress finalizeRequest];
         if ([[UIApplication sharedApplication] openURL:[[NSURL alloc] initWithString:query]]) {
             // If the URL was successfully opened, finalize the receiveAddress
-            [receiveAddress finalizeRequest];
         } else {
             // If that failed to open, try error url
             [[UIApplication sharedApplication] openURL:_errorUrl];
