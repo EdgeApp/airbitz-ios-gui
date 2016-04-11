@@ -15,6 +15,11 @@
 
 + (void)replaceHtmlTags:(NSString **) strContent;
 {
+    [self replaceHtmlTags:strContent footer:NO];
+}
+
++ (void)replaceHtmlTags:(NSString **) strContent footer:(BOOL)footer;
+{
     if (*strContent == NULL)
     {
         return;
@@ -26,6 +31,13 @@
     NSString *versionbuild = [NSString stringWithFormat:@"%@ %@", version, build];
     
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+
+    NSString* footerPath = [[NSBundle mainBundle] pathForResource:@"infoFooter" ofType:@"html"];
+    NSString* footerContent = [NSString stringWithContentsOfFile:footerPath encoding:NSUTF8StringEncoding error:NULL];
+    if (!footer)
+    {
+        [self replaceHtmlTags:&footerContent footer:YES];
+    }
     
     NSString *platform          = [NSString stringWithFormat:@"Platform:%@<br>\n", [ABCUtil platform]];
     NSString *platformString    = [NSString stringWithFormat:@"Platform String:%@<br>\n", [ABCUtil platformString]];
@@ -36,34 +48,36 @@
     NSString *phoneSupportTemplate = [NSString stringWithFormat:@"<a href=\"tel:%@\">%@</a>", supportPhone, supportPhone];
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
-            @"[[abtag APP_TITLE]]",
-            @"[[abtag APP_STORE_LINK]]",
-            @"[[abtag PLAY_STORE_LINK]]",
-            @"[[abtag APP_DOWNLOAD_LINK]]",
-            @"[[abtag APP_HOMEPAGE]]",
-            @"[[abtag APP_LOGO_WHITE_LINK]]",
-            @"[[abtag APP_DESIGNED_BY]]",
-            @"[[abtag APP_COMPANY_LOCATION]]",
-            @"[[abtag APP_SUPPORT_EMAIL]]",
-            @"[[abtag APP_VERSION]]",
-            @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
-            @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
-                    nil];
+                                   @"[[abtag APP_TITLE]]",
+                                   @"[[abtag APP_STORE_LINK]]",
+                                   @"[[abtag PLAY_STORE_LINK]]",
+                                   @"[[abtag APP_DOWNLOAD_LINK]]",
+                                   @"[[abtag APP_HOMEPAGE]]",
+                                   @"[[abtag APP_LOGO_WHITE_LINK]]",
+                                   @"[[abtag APP_DESIGNED_BY]]",
+                                   @"[[abtag APP_COMPANY_LOCATION]]",
+                                   @"[[abtag APP_SUPPORT_EMAIL]]",
+                                   @"[[abtag APP_VERSION]]",
+                                   @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag INFO_FOOTER]]",
+                                   nil];
 
     NSMutableArray* replaceList = [[NSMutableArray alloc] initWithObjects:
-            appTitle,
-            appStoreLink,
-            playStoreLink,
-            appDownloadLink,
-            appHomepage,
-            appLogoWhiteLink,
-            appDesignedBy,
-            appCompanyLocation,
-            supportEmail,
-            versionbuild,
-            emailSupportTemplate,
-            phoneSupportTemplate,
-                    nil];
+                                   appTitle,
+                                   appStoreLink,
+                                   playStoreLink,
+                                   appDownloadLink,
+                                   appHomepage,
+                                   appLogoWhiteLink,
+                                   appDesignedBy,
+                                   appCompanyLocation,
+                                   supportEmail,
+                                   versionbuild,
+                                   emailSupportTemplate,
+                                   phoneSupportTemplate,
+                                   footerContent,
+                                   nil];
 
     for (int i=0; i<[searchList count];i++)
     {
