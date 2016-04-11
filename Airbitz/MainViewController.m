@@ -952,7 +952,7 @@ MainViewController *singleton;
 		{
 			if (_selectedViewController != _requestViewController)
 			{
-				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn])
 				{
                     [MainViewController animateSwapViewControllers:_requestViewController out:_selectedViewController];
 				}
@@ -967,7 +967,7 @@ MainViewController *singleton;
 		{
 			if (_selectedViewController != _sendViewController)
 			{
-				if([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+				if([User isLoggedIn])
 				{
                     _sendViewController.bImportMode = NO;
                     [MainViewController animateSwapViewControllers:_sendViewController out:_selectedViewController];
@@ -983,7 +983,7 @@ MainViewController *singleton;
 		{
 			if (_selectedViewController != _transactionsViewController)
 			{
-				if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+				if ([User isLoggedIn])
 				{
                     [_transactionsViewController setNewDeviceLogin:_bNewDeviceLogin];
                     _bNewDeviceLogin = NO;
@@ -1000,7 +1000,7 @@ MainViewController *singleton;
 			break;
 		}
 		case APP_MODE_MORE:
-            if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+            if ([User isLoggedIn])
             {
             }
             else
@@ -1013,7 +1013,7 @@ MainViewController *singleton;
 
 - (void)toggleSlideOut
 {
-    if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+    if ([User isLoggedIn])
     {
         if ([slideoutView isOpen]) {
             [slideoutView showSlideout:NO];
@@ -2086,7 +2086,7 @@ MainViewController *singleton;
     [slideoutView showSlideout:NO];
     if (_selectedViewController != _settingsViewController)
     {
-        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+        if ([User isLoggedIn]) {
             [MainViewController animateSwapViewControllers:_settingsViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             [slideoutView showSlideout:NO];
@@ -2105,7 +2105,7 @@ MainViewController *singleton;
 - (void)slideoutBuySell
 {
     if (_selectedViewController != _buySellViewController) {
-        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+        if ([User isLoggedIn]) {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             _appMode = APP_MODE_MORE;
@@ -2118,7 +2118,7 @@ MainViewController *singleton;
 - (void)slideoutGiftCard
 {
     if (_selectedViewController != _giftCardViewController) {
-        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+        if ([User isLoggedIn]) {
             [MainViewController animateSwapViewControllers:_giftCardViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             _appMode = APP_MODE_MORE;
@@ -2137,7 +2137,7 @@ MainViewController *singleton;
     }
     else
     {
-        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+        if ([User isLoggedIn]) {
             [MainViewController animateSwapViewControllers:_transactionsViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
             [_transactionsViewController dropdownWallets:YES];
@@ -2170,7 +2170,7 @@ MainViewController *singleton;
 {
     if (_selectedViewController != _importViewController)
     {
-        if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
+        if ([User isLoggedIn]) {
             _importViewController.bImportMode = YES;
             [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
