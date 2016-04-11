@@ -358,7 +358,6 @@
 		DA9EE4F41BC61F920063DA07 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD91BC61F920063DA07 /* info.html */; };
 		DA9EE4F51BC61F920063DA07 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDA1BC61F920063DA07 /* infoExportWallet.html */; };
 		DA9EE4F61BC61F920063DA07 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDB1BC61F920063DA07 /* infoExportWalletOptions.html */; };
-		DA9EE4F71BC61F920063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
 		DA9EE4F81BC61F920063DA07 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDD1BC61F920063DA07 /* infoInsufficientFunds.html */; };
 		DA9EE4F91BC61F920063DA07 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDE1BC61F920063DA07 /* infoRecipient.html */; };
 		DA9EE4FA1BC61F920063DA07 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDF1BC61F920063DA07 /* infoRequest.html */; };
@@ -833,7 +832,6 @@
 		DA9EF5031BC7285D0063DA07 /* icon_request_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8F1BC61F910063DA07 /* icon_request_padded@2x.png */; };
 		DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
-		DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
 		DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -1216,7 +1214,6 @@
 		DA9EF6CA1BC729FA0063DA07 /* icon_request_padded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8F1BC61F910063DA07 /* icon_request_padded@2x.png */; };
 		DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF731BC61F910063DA07 /* icon_category_shopping.png */; };
 		DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFFD1BC61F920063DA07 /* ConfirmationSliderView.xib */; };
-		DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */; };
 		DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
@@ -1714,7 +1711,6 @@
 		DA9EDFD91BC61F920063DA07 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
 		DA9EDFDA1BC61F920063DA07 /* infoExportWallet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoExportWallet.html; sourceTree = "<group>"; };
 		DA9EDFDB1BC61F920063DA07 /* infoExportWalletOptions.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoExportWalletOptions.html; sourceTree = "<group>"; };
-		DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoImportWallet.html; sourceTree = "<group>"; };
 		DA9EDFDD1BC61F920063DA07 /* infoInsufficientFunds.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoInsufficientFunds.html; sourceTree = "<group>"; };
 		DA9EDFDE1BC61F920063DA07 /* infoRecipient.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRecipient.html; sourceTree = "<group>"; };
 		DA9EDFDF1BC61F920063DA07 /* infoRequest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoRequest.html; sourceTree = "<group>"; };
@@ -2537,7 +2533,6 @@
 				DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */,
 				DA9EDFDA1BC61F920063DA07 /* infoExportWallet.html */,
 				DA9EDFDB1BC61F920063DA07 /* infoExportWalletOptions.html */,
-				DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */,
 				DA9EDFDD1BC61F920063DA07 /* infoInsufficientFunds.html */,
 				DA9EDFDE1BC61F920063DA07 /* infoRecipient.html */,
 				DA9EDFDF1BC61F920063DA07 /* infoRequest.html */,
@@ -3525,7 +3520,6 @@
 				DA9EF5031BC7285D0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */,
-				DA9EF5061BC7285D0063DA07 /* infoImportWallet.html in Resources */,
 				DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */,
@@ -3790,7 +3784,6 @@
 				DA9EF6CA1BC729FA0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */,
-				DA9EF6CD1BC729FA0063DA07 /* infoImportWallet.html in Resources */,
 				DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */,
@@ -4054,7 +4047,6 @@
 				DA9EE4B21BC61F920063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EE50F1BC61F920063DA07 /* ConfirmationSliderView.xib in Resources */,
-				DA9EE4F71BC61F920063DA07 /* infoImportWallet.html in Resources */,
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4491BC61F920063DA07 /* btn_close_white.png in Resources */,
