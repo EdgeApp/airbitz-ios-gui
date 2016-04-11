@@ -13,14 +13,13 @@
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
 #import "ButtonSelectorView2.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
-#import "ABC.h"
 #import "MainViewController.h"
 #import "Theme.h"
 
@@ -35,6 +34,14 @@
                                 ]
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
 #define ARRAY_IMAGES_FOR_OPTIONS @[@"icon_export_printer", @"icon_export_sdcard", @"icon_export_email", @"icon_export_google", @"icon_export_dropbox", @"icon_export_view"]
+
+typedef enum eDatePeriod
+{
+    DatePeriod_None,
+    DatePeriod_ThisWeek,
+    DatePeriod_ThisMonth,
+    DatePeriod_ThisYear
+} tDatePeriod;
 
 
 typedef enum eExportOption
@@ -54,20 +61,36 @@ typedef enum eExportOption
 	GDrive                              *drive;
     MFMailComposeViewController         *_mailComposer;
     BOOL                                bWalletListDropped;
+    tDatePeriod                         _datePeriod; // chosen with the 3 buttons
+    BOOL                                _bDatePickerFrom;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                     *viewPassword;
 @property (weak, nonatomic) IBOutlet UITableView                *tableView;
-//@property (weak, nonatomic) IBOutlet UILabel        *labelFromDate;
-//@property (weak, nonatomic) IBOutlet UILabel        *labelToDate;
-//@property (weak, nonatomic) IBOutlet UIView			*viewHeader;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2        *buttonSelector;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
 
 @property (nonatomic, strong) ExportWalletPDFViewController     *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                           *arrayChoices;
-//@property (nonatomic, strong) NSArray                       *arrayWalletUUIDs;
-//@property (nonatomic, strong) NSArray                       *arrayWallets;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordFieldHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dateSelectorHeight;
+@property (weak, nonatomic) IBOutlet UIView             *dateSelectorView;
+
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisWeek;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisMonth;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonThisYear;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastWeek;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastMonth;
+@property (weak, nonatomic) IBOutlet UIButton           *buttonLastYear;
+
+@property (weak, nonatomic) IBOutlet UITextField        *dateFromTextField;
+@property (weak, nonatomic) IBOutlet UITextField        *dateToTextField;
+@property (strong, nonatomic)        UIDatePicker       *datePicker;
+
+@property (nonatomic, strong) DateTime                  *fromDateTime;
+@property (nonatomic, strong) DateTime                  *toDateTime;
+
 
 @end
 
@@ -88,11 +111,11 @@ typedef enum eExportOption
     // Do any additional setup after loading the view.
 
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = ABC_MIN_PASS_LENGTH;
+    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
 
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
 
-    if (![CoreBridge passwordExists]) {
+    if (![abcAccount accountHasPassword]) {
         self.viewPassword.hidden = YES;
     } else if (WalletExportType_PrivateSeed == self.type) {
         self.viewPassword.hidden = NO;
@@ -107,30 +130,54 @@ typedef enum eExportOption
     self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	self.tableView.delaysContentTouches = NO;
+    
+    self.fromDateTime = [DateTime alloc];
+    self.toDateTime = [DateTime alloc];
+    
+    [self.fromDateTime setWithDate:[NSDate dateWithTimeIntervalSince1970:0]];
+    [self.toDateTime setWithDate:[NSDate date]];
+    
+    if (WalletExportType_PrivateSeed == self.type)
+    {
+        self.dateSelectorHeight.constant = 0;
+        self.dateSelectorView.hidden = YES;
+    }
+    else
+    {
+        self.passwordFieldHeight.constant = 0;
+        self.viewPassword.hidden = YES;
+    }
 
-//    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-//                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
-//    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-//                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
-
-
-    //ABLog(2,@"type: %d", self.type);
+    
+    self.datePicker = [[UIDatePicker alloc]init];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.dateFromTextField setInputView:self.datePicker];
+    [self.dateToTextField setInputView:self.datePicker];
+    self.dateToTextField.delegate = self;
+    self.dateFromTextField.delegate = self;
+    
+    UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolBar setTintColor:[UIColor grayColor]];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(datePickerAction:)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+    [self.dateFromTextField setInputAccessoryView:toolBar];
+    [self.dateToTextField setInputAccessoryView:toolBar];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:false enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
-    [self updateViews];
+    [self updateViews:nil];
+    [self updateDateDisplay];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -144,19 +191,19 @@ typedef enum eExportOption
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateViews
+- (void)updateViews:(NSNotification *)notification
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@", abcAccount.currentWallet.name];
 
-        [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        [MainViewController changeNavBarTitle:self title:walletName];
+        if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -189,6 +236,22 @@ typedef enum eExportOption
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+{
+    if (textField == self.dateFromTextField)
+    {
+        _bDatePickerFrom = YES;
+        [self.datePicker setDate:self.fromDateTime.date];
+        
+    }
+    else if (textField == self.dateToTextField)
+    {
+        _bDatePickerFrom = NO;
+        [self.datePicker setDate:self.toDateTime.date];
+    }
+    
+
+}
 #pragma mark - Action Methods
 
 - (void)buttonBackTouched
@@ -201,23 +264,87 @@ typedef enum eExportOption
     [InfoView CreateWithHTML:@"infoExportWalletOptions" forView:self.view];
 }
 
-#pragma mark - Misc Methods
-
-- (int)displayFor12From24:(int)hour24
+- (IBAction)datePickerAction:(id)sender
 {
-    int retHour = hour24;
-
-    if (hour24 == 0)
-    {
-        retHour = 12;
-    }
-    else if (hour24 > 12)
-    {
-        retHour -= 12;
-    }
-
-    return retHour;
+    if (_bDatePickerFrom)
+        [self.fromDateTime setWithDate:self.datePicker.date];
+    else
+        [self.toDateTime setWithDate:self.datePicker.date];
+    
+    [self.dateFromTextField resignFirstResponder];
+    [self.dateToTextField resignFirstResponder];
+    [self updateDateDisplay];
 }
+
+- (IBAction)buttonDatePeriodTouched:(UIButton *)sender
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *startOfInterval;
+    NSDate *endOfInterval;
+    NSCalendarUnit calendarUnit;
+    
+    if (sender == self.buttonThisWeek)
+    {
+        calendarUnit = NSCalendarUnitWeekOfMonth;
+    }
+    else if (sender == self.buttonThisMonth)
+    {
+        calendarUnit = NSCalendarUnitMonth;
+    }
+    else if (sender == self.buttonThisYear)
+    {
+        calendarUnit = NSCalendarUnitYear;
+    }
+    else if (sender == self.buttonLastWeek)
+    {
+        calendarUnit = NSCalendarUnitWeekOfMonth;
+        now = [now dateByAddingTimeInterval:-7*24*60*60];
+    }
+    else if (sender == self.buttonLastMonth)
+    {
+        calendarUnit = NSCalendarUnitMonth;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [NSDateComponents new];
+        comps.month = -1;
+        now = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    }
+    else if (sender == self.buttonLastYear)
+    {
+        calendarUnit = NSCalendarUnitYear;
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [NSDateComponents new];
+        comps.year = -1;
+        now = [calendar dateByAddingComponents:comps toDate:[NSDate date] options:0];
+    }
+    
+    NSTimeInterval interval;
+    [cal rangeOfUnit:calendarUnit
+           startDate:&startOfInterval
+            interval:&interval
+             forDate:now];
+    
+    endOfInterval = [startOfInterval dateByAddingTimeInterval:interval-1];
+    [self.fromDateTime setWithDate:startOfInterval];
+    [self.toDateTime setWithDate:endOfInterval];
+
+    [self updateDateDisplay];
+}
+
+#pragma mark - Date selection methods
+
+- (void)updateDateDisplay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    
+    self.dateFromTextField.text = [dateFormatter stringFromDate:self.fromDateTime.date];
+    self.dateToTextField.text = [dateFormatter stringFromDate:self.toDateTime.date];
+}
+
+#pragma mark - Misc Methods
 
 - (ExportWalletOptionsCell *)getOptionsCellForTableView:(UITableView *)tableView withImage:(UIImage *)bkgImage andIndexPath:(NSIndexPath *)indexPath
 {
@@ -251,7 +378,7 @@ typedef enum eExportOption
 
         case ExportOption_SDCard:
         {
-            ABLog(2,@"Unsupported export option");
+            ABCLog(2,@"Unsupported export option");
         }
             break;
 
@@ -280,7 +407,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 }
@@ -304,7 +431,7 @@ typedef enum eExportOption
 
             NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
-            [strBody appendFormat:@"Wallet: %@\n\n", [CoreBridge Singleton].currentWallet.strName];
+            [strBody appendFormat:@"Wallet: %@\n\n", abcAccount.currentWallet.name];
             [strBody appendString:@"Private Seed:\n"];
             [strBody appendString:strPrivateSeed];
             [strBody appendString:@"\n\n"];
@@ -325,14 +452,14 @@ typedef enum eExportOption
         }
         else
         {
-            ABLog(2,@"unsupported type for AirPrint");
+            ABCLog(2,@"unsupported type for AirPrint");
             return;
         }
 
         UIPrintInteractionCompletionHandler completionHandler =
         ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
             if(!completed && error){
-                ABLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
+                ABCLog(2,@"Print failed - domain: %@ error code %u", error.domain, (unsigned int)error.code);
             }
         };
 
@@ -362,7 +489,7 @@ typedef enum eExportOption
         [strBody appendString:@"<html><body>\n"];
 
 //        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
-        [strBody appendString:[CoreBridge Singleton].currentWallet.strName];
+        [strBody appendString:abcAccount.currentWallet.name];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
 
@@ -382,7 +509,7 @@ typedef enum eExportOption
         if (dataExport == nil)
             return;
 
-        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
+        NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.name, [self suffixFor:self.type]];
         NSString *strMimeType = [self mimeTypeFor:self.type];
         [_mailComposer addAttachmentData:dataExport mimeType:strMimeType fileName:strFilename];
 
@@ -457,7 +584,7 @@ typedef enum eExportOption
     } 
     else 
     {
-        ABLog(2,@"Only PDF and Wallet Seed are supported for viewing");
+        ABCLog(2,@"Only PDF and Wallet Seed are supported for viewing");
     }
 }
 
@@ -472,48 +599,27 @@ typedef enum eExportOption
     {
         case WalletExportType_CSV:
         {
-            NSString* str = @"[CSV Data Here]";
-
-            char *szCsvData = nil;
-            tABC_Error Error;
-            int64_t startTime = 0; // Need to pull this from GUI
-            int64_t endTime = 0x0FFFFFFFFFFFFFFF; // Need to pull this from GUI
-
+            NSMutableString *str = [[NSMutableString alloc] init];
             
-            tABC_CC cc = ABC_CC_Ok;
-            cc = ABC_CsvExport([[User Singleton].name UTF8String],
-                               [[User Singleton].password UTF8String],
-                               [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-                               startTime, endTime, &szCsvData, &Error);
-            if (ABC_CC_Ok != cc)
+            NSError *error = [abcAccount.currentWallet exportTransactionsToCSV:str
+                                                                         start:self.fromDateTime.date
+                                                                           end:self.toDateTime.date];
+            if (!error)
             {
-                NSString *title, *message;
-                if (ABC_CC_Empty_Wallet == cc)
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions", nil);
-                    message = NSLocalizedString(@"No Transactions in Wallet", nil);
-                }
-                else
-                {
-                    title = NSLocalizedString(@"Export Wallet Transactions error", nil);
-                    message = NSLocalizedString(@"CSV Export failed", nil);
-                }
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle:title
-                                      message:message
-                                      delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-                [alert show];
-                [Util printABC_Error:&Error];
-                return nil;
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-                str = [NSString stringWithCString:szCsvData encoding:NSASCIIStringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            
-            dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
         }
         break;
 
@@ -526,8 +632,28 @@ typedef enum eExportOption
 
         case WalletExportType_Quickbooks:
         {
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"WalletExportQuicken" ofType:@"QIF"];
-            dataExport = [NSData dataWithContentsOfFile:filePath];
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportTransactionsToQBO:str
+                                                                         start:self.fromDateTime.date
+                                                                           end:self.toDateTime.date];
+
+            if (!error)
+            {
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else
+            {
+                NSString *title;
+                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
         }
             break;
 
@@ -540,28 +666,30 @@ typedef enum eExportOption
 
         case WalletExportType_PrivateSeed:
         {
-            tABC_Error Error;
-            char *szSeed = NULL;
-            tABC_CC result = ABC_ExportWalletSeed([[User Singleton].name UTF8String],
-                                                  [[User Singleton].password UTF8String],
-                                                  [[CoreBridge Singleton].currentWallet.strUUID UTF8String],
-                                                  &szSeed, &Error);
-            if (ABC_CC_Ok == result)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportWalletPrivateSeed:str];
+            if (!error)
             {
-                dataExport = [[NSData alloc] initWithBytes:szSeed length:strlen(szSeed)];
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
             }
             else
             {
-                [Util printABC_Error:&Error];
-                NSString* str = @"Error exporting private seed!";
-                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *title;
+                title = NSLocalizedString(@"Export Private Seed", nil);
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
             }
-            free(szSeed);
         }
-            break;
+        break;
 
         default:
-            ABLog(2,@"Unknown export option");
+            ABCLog(2,@"Unknown export option");
             break;
     }
 
@@ -583,7 +711,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_Quickbooks:
-            strSuffix = @"QIF";
+            strSuffix = @"QBO";
             break;
 
         case WalletExportType_PDF:
@@ -595,7 +723,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
 
@@ -617,7 +745,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_Quickbooks:
-            strMimeType = @"application/qbooks";
+            strMimeType = @"text/plain";
             break;
 
         case WalletExportType_PDF:
@@ -629,7 +757,7 @@ typedef enum eExportOption
             break;
 
         default:
-            ABLog(2,@"Unknown export type");
+            ABCLog(2,@"Unknown export type");
             break;
     }
     
@@ -671,7 +799,7 @@ typedef enum eExportOption
 		NSData *dataExport = [self getExportDataInForm:self.type];
         if (dataExport == nil)
             return;
-		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", [CoreBridge Singleton].currentWallet.strName, [self suffixFor:self.type]];
+		NSString *strFilename = [NSString stringWithFormat:@"%@.%@", abcAccount.currentWallet.name, [self suffixFor:self.type]];
 		NSString *strMimeType = [self mimeTypeFor:self.type];
 		
 		[gDrive uploadFile:dataExport name:strFilename mimeType:strMimeType];
@@ -685,7 +813,7 @@ typedef enum eExportOption
 
 -(void)GDriveAuthControllerPresented
 {
-	ABLog(2,@"Auth Controller Presented");
+	ABCLog(2,@"Auth Controller Presented");
 //	[self.view bringSubviewToFront:self.viewHeader];
 }
 #pragma mark - UITableView Delegates
@@ -737,11 +865,11 @@ typedef enum eExportOption
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//ABLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
+	//ABCLog(2,@"Selected section:%i, row:%i", (int)indexPath.section, (int)indexPath.row);
 
     tExportOption exportOption = (tExportOption) [[self.arrayChoices objectAtIndex:indexPath.row] intValue];
 
-    //ABLog(2,@"Export option: %d", exportOption);
+    //ABCLog(2,@"Export option: %d", exportOption);
 
     if (WalletExportType_PrivateSeed != self.type)
     {
@@ -749,7 +877,7 @@ typedef enum eExportOption
     }
     else
     {
-        if ([CoreBridge passwordExists] && ![CoreBridge passwordOk:self.passwordTextField.text])
+        if ([abcAccount accountHasPassword] && ![abcAccount checkPassword:self.passwordTextField.text])
         {
             [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
             [self.passwordTextField becomeFirstResponder];
@@ -768,7 +896,7 @@ typedef enum eExportOption
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abcAccount makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = NO;
 
 }

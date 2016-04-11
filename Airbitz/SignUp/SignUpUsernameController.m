@@ -6,9 +6,9 @@
 #import "SignUpUsernameController.h"
 #import "MinCharTextField.h"
 #import "LatoLabel.h"
-#import "ABC.h"
 #import "Util.h"
 #import "User.h"
+#import "Theme.h"
 
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {
@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
 	_userNameTextField.delegate = self;
-    _userNameTextField.minimumCharacters = ABC_MIN_USERNAME_LENGTH;
+    _userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
 
     self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
 
@@ -109,22 +109,19 @@
     {
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
-
-
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                tABC_Error error;
+                NSError *error = [abc isUsernameAvailable:self.userNameTextField.text];
 
-                ABC_AccountAvailable([self.userNameTextField.text UTF8String], &error);
-
-                if (error.code == ABC_CC_Ok)
+                if (!error)
                 {
                     _bSuccess = true;
+                    _strReason = @"";
                 }
                 else
                 {
                     _bSuccess = false;
+                    _strReason = error.userInfo[NSLocalizedDescriptionKey];
                 }
-                _strReason = [Util errorMap:&error];
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
             });
@@ -196,14 +193,14 @@
 
     // if we are signing up for a new account
     {
-        if (self.userNameTextField.text.length < ABC_MIN_USERNAME_LENGTH)
+        if (self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:@"%@ failed:\n%@",
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), ABC_MIN_USERNAME_LENGTH]]
+                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [AirbitzCore getMinimumUsernamedLength]]]
                          delegate:nil
                 cancelButtonTitle:@"OK"
                 otherButtonTitles:nil];
@@ -252,7 +249,7 @@
 //    //Get KeyboardFrame (in Window coordinates)
 //    if(_activeTextField)
 //    {
-//        //ABLog(2,@"Keyboard will show for SignUpView");
+//        //ABCLog(2,@"Keyboard will show for SignUpView");
 //        NSDictionary *userInfo = [notification userInfo];
 //        CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 //
@@ -266,7 +263,7 @@
 {
 //    if(_activeTextField)
 //    {
-//        //ABLog(2,@"Keyboard will hide for SignUpView");
+//        //ABCLog(2,@"Keyboard will hide for SignUpView");
 //        _activeTextField = nil;
 //    }
 //    _keyboardFrameOriginY = 0.0;

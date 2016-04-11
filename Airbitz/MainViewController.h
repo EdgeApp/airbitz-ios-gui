@@ -12,6 +12,8 @@
 #import "AirbitzViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "AB.h"
+
 
 
 typedef enum eNavBarSide
@@ -75,12 +77,23 @@ typedef enum eNavBarSide
 +(CGFloat)getSafeOffscreenOffset:(CGFloat) widthOrHeight;
 + (void)generateListOfContactNames;
 + (void)generateListOfNearBusinesses;
++ (void)createFirstWallet;
++ (void)createFirstWallet:(BOOL) popupSpinner;
++ (void) showWalletsLoadingAlert;
+
+
++ (void)launchSend;
++ (void)launchBuySell;
++ (void)launchGiftCard;
++ (void)launchDirectoryATM;
+
 
 + (AFHTTPRequestOperationManager *) createAFManager;
 
 + (void)fadingAlertHelpPopup:(NSString *)message;
 + (void)fadingAlert:(NSString *)message;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime;
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
 + (void)fadingAlertUpdate:(NSString *)message;
 + (void)fadingAlertDismiss;
 

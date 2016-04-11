@@ -12,12 +12,13 @@
 #import "Util.h"
 #import "User.h"
 #import "CommonTypes.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "PopupWheelPickerView.h"
 #import "DateTime.h"
 #import "ButtonSelectorView2.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "FadingAlertView.h"
 
 #define STARTING_YEAR               2014
 
@@ -32,33 +33,13 @@
 #define PICKER_COL_COUNT        8
 
 
-typedef enum eDatePeriod
-{
-    DatePeriod_None,
-    DatePeriod_ThisWeek,
-    DatePeriod_ThisMonth,
-    DatePeriod_ThisYear
-} tDatePeriod;
-
 @interface ExportWalletViewController () <ExportWalletOptionsViewControllerDelegate, ButtonSelector2Delegate, UIGestureRecognizerDelegate>
 {
-    tDatePeriod                         _datePeriod; // chosen with the 3 buttons
     BOOL                                bWalletListDropped;
 
 }
 
-//@property (weak, nonatomic) IBOutlet UIImageView        *imageButtonThisWeek;
-//@property (weak, nonatomic) IBOutlet UIImageView        *imageButtonThisMonth;
-//@property (weak, nonatomic) IBOutlet UIImageView        *imageButtonThisYear;
-//@property (weak, nonatomic) IBOutlet UIButton           *buttonThisWeek;
-//@property (weak, nonatomic) IBOutlet UIButton           *buttonThisMonth;
-//@property (weak, nonatomic) IBOutlet UIButton           *buttonThisYear;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2 *buttonSelector;
-//@property (weak, nonatomic) IBOutlet UIButton           *buttonFrom;
-//@property (weak, nonatomic) IBOutlet UIButton           *buttonTo;
-//@property (weak, nonatomic) IBOutlet UILabel            *labelFromDate;
-//@property (weak, nonatomic) IBOutlet UILabel            *labelToDate;
-//@property (weak, nonatomic) IBOutlet UIScrollView       *scrollView;
 
 //@property (nonatomic, strong) NSArray               *arrayWalletUUIDs;
 //@property (nonatomic, strong) NSArray               *arrayWallets;
@@ -105,19 +86,24 @@ typedef enum eDatePeriod
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setupNavBar];
-    [self updateViews];
+    [self forceUpdateNavBar];
 }
 
-- (void)setupNavBar
+- (void)forceUpdateNavBar;
 {
     [MainViewController changeNavBarOwner:self];
+    [self updateNavBar];
+    [self updateViews:nil];
+}
+
+- (void)updateNavBar;
+{
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
@@ -175,66 +161,6 @@ typedef enum eDatePeriod
     [self dismissPopupPicker];
     [InfoView CreateWithHTML:@"infoExportWallet" forView:self.view];
 }
-//
-//- (IBAction)buttonFromTouched:(id)sender
-//{
-//    [self showPopupPickerFor:sender];
-//}
-//
-//- (IBAction)buttonToTouched:(id)sender
-//{
-//    [self showPopupPickerFor:sender];
-//}
-
-//- (IBAction)buttonDatePeriodTouched:(UIButton *)sender
-//{
-//
-//    if (sender == self.buttonThisWeek)
-//    {
-//        _datePeriod = DatePeriod_ThisWeek;
-//        NSDate *today = [NSDate date];
-//        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//
-//         // Get the weekday component of the current date
-//         NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
-//
-//        /*
-//         Create a date components to represent the number of days to subtract
-//         from the current date.
-//         The weekday value for Sunday in the Gregorian calendar is 1, so
-//         subtract 1 from the number
-//         of days to subtract from the date in question.  (If today's Sunday,
-//         subtract 0 days.)
-//         */
-//         NSDateComponents *componentsToSubtract = [[NSDateComponents alloc]  init];
-//         [componentsToSubtract setDay: - ([weekdayComponents weekday] - 1)];
-//
-//         NSDate *beginningOfWeek = [gregorian dateByAddingComponents:componentsToSubtract toDate:today options:0];
-//
-//        [self.fromDateTime setWithDate:beginningOfWeek];
-//    }
-//    else if (sender == self.buttonThisMonth)
-//    {
-//        _datePeriod = DatePeriod_ThisMonth;
-//        [self.fromDateTime setWithCurrentDateAndTime];
-//        self.fromDateTime.day = 1;
-//    }
-//    else if (sender == self.buttonThisYear)
-//    {
-//        [self.fromDateTime setWithCurrentDateAndTime];
-//        self.fromDateTime.month = 1;
-//        self.fromDateTime.day = 1;
-//        _datePeriod = DatePeriod_ThisYear;
-//    }
-//
-//    self.fromDateTime.hour = 0;
-//    self.fromDateTime.minute = 0;
-//    self.fromDateTime.second = 0;
-//
-//    [self.toDateTime setWithCurrentDateAndTime];
-//
-//    [self updateDisplay];
-//}
 
 - (IBAction)buttonCSVTouched:(id)sender
 {
@@ -263,211 +189,6 @@ typedef enum eDatePeriod
 
 #pragma mark - Misc Methods
 
-//- (void)updateDisplay
-//{
-//    self.imageButtonThisWeek.hidden = (DatePeriod_ThisWeek != _datePeriod);
-//    self.imageButtonThisMonth.hidden = (DatePeriod_ThisMonth != _datePeriod);
-//    self.imageButtonThisYear.hidden = (DatePeriod_ThisYear != _datePeriod);
-//    self.labelFromDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                               (int) self.fromDateTime.month, (int) self.fromDateTime.day, (int) self.fromDateTime.year,
-//                               [self displayFor12From24:(int) self.fromDateTime.hour], (int) self.fromDateTime.minute, self.fromDateTime.hour > 11 ? @"pm" : @"am"];
-//    self.labelToDate.text = [NSString stringWithFormat:@"%d/%d/%d   %d:%.02d %@",
-//                             (int) self.toDateTime.month, (int) self.toDateTime.day, (int) self.toDateTime.year,
-//                             [self displayFor12From24:(int) self.toDateTime.hour], (int) self.toDateTime.minute, self.toDateTime.hour > 11 ?  @"pm" : @"am"];
-//}
-
-- (int)displayFor12From24:(int)hour24
-{
-    int retHour = hour24;
-
-    if (hour24 == 0)
-    {
-        retHour = 12;
-    }
-    else if (hour24 > 12)
-    {
-        retHour -= 12;
-    }
-
-    return retHour;
-}
-
-- (NSArray *)getPopupPickerChoices
-{
-    NSMutableArray *arrayChoices = [[NSMutableArray alloc] init];
-    NSMutableArray *arraySubChoices;
-
-    // month
-    [arrayChoices addObject:@[@"Jan", @"Feb", @"Mar", @"Apr", @"May", @"Jun", @"Jul", @"Aug", @"Sep", @"Nov", @"Dec"]];
-
-    // day
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 1; i <= 31; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
-    // year
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = STARTING_YEAR; i <= 2100; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
-    // spacer
-    [arrayChoices addObject:@[@""]];
-
-    // hour
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 1; i <= 12; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%@%d", (i < 10 ? @"  " : @""), i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
-    [arrayChoices addObject:@[@":"]];
-
-    // min
-    arraySubChoices = [[NSMutableArray alloc] init];
-    for (int i = 0; i <= 59; i++)
-    {
-        [arraySubChoices addObject:[NSString stringWithFormat:@"%.02d", i]];
-    }
-    [arrayChoices addObject:arraySubChoices];
-
-    // am/pm
-    [arrayChoices addObject:@[@"AM", @"PM"]];
-
-    return arrayChoices;
-}
-
-- (void)setDateTime:(DateTime *)dateTime fromPickerSelections:(NSArray *)arraySelections
-{
-    for (int nCol = 0; nCol < PICKER_COL_COUNT; nCol++)
-    {
-        NSInteger value = [[arraySelections objectAtIndex:nCol] integerValue];
-
-        if (PICKER_COL_MONTH == nCol)
-        {
-            dateTime.month = value + 1;
-        }
-        else if (PICKER_COL_DAY == nCol)
-        {
-            dateTime.day = value + 1;
-        }
-        else if (PICKER_COL_YEAR == nCol)
-        {
-            dateTime.year = value + STARTING_YEAR;
-        }
-        else if (PICKER_COL_HOUR == nCol)
-        {
-            BOOL bPM = ([[arraySelections objectAtIndex:PICKER_COL_AM_PM] integerValue] == 1);
-            dateTime.hour = value + 1;
-            if (bPM)
-            {
-                dateTime.hour += 12;
-            }
-            else if (value == 11)
-            {
-                dateTime.hour = 0;
-            }
-        }
-        else if (PICKER_COL_MINUTE == nCol)
-        {
-            dateTime.minute = value;
-        }
-    }
-
-    dateTime.second = 0;
-}
-
-- (NSArray *)getPopupPickerSelectionsFor:(DateTime *)dateTime givenChoices:(NSArray *)arrayChoices
-{
-    NSMutableArray *arraySelections = [[NSMutableArray alloc] init];
-
-    for (int nCol = 0; nCol < PICKER_COL_COUNT; nCol++)
-    {
-        NSInteger selection = 0;
-
-        if (PICKER_COL_MONTH == nCol)
-        {
-            selection = dateTime.month - 1;
-        }
-        else if (PICKER_COL_DAY == nCol)
-        {
-            selection = dateTime.day - 1;
-        }
-        else if (PICKER_COL_YEAR == nCol)
-        {
-            selection = dateTime.year - STARTING_YEAR;
-        }
-        else if (PICKER_COL_HOUR == nCol)
-        {
-            selection = dateTime.hour - 1;
-            if (selection > 11)
-            {
-                selection -= 12;
-            }
-            else if (selection < 0)
-            {
-                selection = 11;
-            }
-        }
-        else if (PICKER_COL_MINUTE == nCol)
-        {
-            selection = dateTime.minute;
-        }
-        else if (PICKER_COL_AM_PM == nCol)
-        {
-            if (dateTime.hour > 11)
-            {
-                selection = 1; // PM
-            }
-            else
-            {
-                selection = 0; // AM
-            }
-        }
-
-        [arraySelections addObject:[NSNumber numberWithInteger:selection]];
-    }
-
-    // month
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.month - 1]];
-
-    // day
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.day - 1]];
-
-    // year
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.year - STARTING_YEAR]];
-
-    // hour
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.hour]];
-
-    // minute
-    [arraySelections addObject:[NSNumber numberWithInteger:dateTime.minute]];
-
-    return arraySelections;
-}
-
-//- (void)showPopupPickerFor:(UIButton *)button
-//{
-//    [self blockUser:YES];
-//
-//    NSArray *arrayChoices = [self getPopupPickerChoices];
-//    NSArray *arraySelections = [self getPopupPickerSelectionsFor:(button == self.buttonFrom ? self.fromDateTime : self.toDateTime)
-//                                                    givenChoices:arrayChoices];
-//    self.popupWheelPicker = [PopupWheelPickerView CreateForView:self.view
-//                                             positionRelativeTo:button
-//                                                   withPosition:PopupWheelPickerPosition_Below
-//                                                    withChoices:arrayChoices
-//                                             startingSelections:arraySelections
-//                                                       userData:button
-//                                                    andDelegate:self];
-//}
-
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
 {
 
@@ -490,19 +211,19 @@ typedef enum eDatePeriod
 	return stretchable;
 }
 
-- (void)updateViews
+- (void)updateViews:(id)object
 {
-    if ([CoreBridge Singleton].arrayWallets && [CoreBridge Singleton].currentWallet)
+    if (abcAccount.arrayWallets && abcAccount.currentWallet)
     {
-        self.buttonSelector.arrayItemsToSelect = [CoreBridge Singleton].arrayWalletNames;
-        [self.buttonSelector.button setTitle:[CoreBridge Singleton].currentWallet.strName forState:UIControlStateNormal];
-        self.buttonSelector.selectedItemIndex = [CoreBridge Singleton].currentWalletID;
+        self.buttonSelector.arrayItemsToSelect = abcAccount.arrayWalletNames;
+        [self.buttonSelector.button setTitle:abcAccount.currentWallet.name forState:UIControlStateNormal];
+        self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", [CoreBridge Singleton].currentWallet.strName];
+        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
-        if (!([[CoreBridge Singleton].arrayWallets containsObject:[CoreBridge Singleton].currentWallet]))
+        if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
         {
             [FadingAlertView create:self.view
                             message:walletHasBeenArchivedText
@@ -569,7 +290,7 @@ typedef enum eDatePeriod
 {
     [MainViewController animateOut:controller withBlur:NO complete:^(void) {
         self.exportWalletOptionsViewController = nil;
-        [self viewWillAppear:YES];
+        [self forceUpdateNavBar];
     }];
 }
 
@@ -579,7 +300,7 @@ typedef enum eDatePeriod
 {
     NSIndexPath *indexPath = [[NSIndexPath alloc]init];
     indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
-    [CoreBridge makeCurrentWalletWithIndex:indexPath];
+    [abcAccount makeCurrentWalletWithIndex:indexPath];
     bWalletListDropped = false;
 }
 

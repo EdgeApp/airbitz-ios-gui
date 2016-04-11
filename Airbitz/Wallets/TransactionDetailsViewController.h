@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Transaction.h"
-#import "Wallet.h"
+#import "ABCTransaction.h"
+#import "ABCWallet.h"
 #import "AirbitzViewController.h"
 
 typedef enum eTDMode
@@ -22,8 +22,8 @@ typedef enum eTDMode
 @interface TransactionDetailsViewController : AirbitzViewController
 
 @property (assign)            id<TransactionDetailsViewControllerDelegate>  delegate;
-@property (nonatomic, strong) Transaction                                   *transaction;
-@property (nonatomic, strong) Wallet                                        *wallet;
+@property (nonatomic, strong) ABCTransaction *transaction;
+@property (nonatomic, strong) ABCWallet *wallet;
 @property (nonatomic, assign) tTDMode                                       transactionDetailsMode;
 @property (nonatomic, assign) BOOL                                          bOldTransaction;
 @property (nonatomic, strong) UIImage                                       *photo;

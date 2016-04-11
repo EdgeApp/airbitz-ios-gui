@@ -545,6 +545,9 @@ html body .label.label-outline.label-success {
 html body .label.label-outline.label-danger {
   background: #ff5656;
 }
+html body .label.label-outline.label-warning {
+  background: #ffffe0;
+}
 html body .label.status {
   font-size: 10px;
   position: absolute;
@@ -1169,6 +1172,8 @@ div.card.card-content.card-info-main {
   </div>
 
   <script type="text/javascript">
+var countryList = [{"name":"Afghanistan","codeAlpha3":"AFG","country-code":"004"},{"name":"Åland Islands","codeAlpha3":"ALA","country-code":"248"},{"name":"Albania","codeAlpha3":"ALB","country-code":"008"},{"name":"Algeria","codeAlpha3":"DZA","country-code":"012"},{"name":"American Samoa","codeAlpha3":"ASM","country-code":"016"},{"name":"Andorra","codeAlpha3":"AND","country-code":"020"},{"name":"Angola","codeAlpha3":"AGO","country-code":"024"},{"name":"Anguilla","codeAlpha3":"AIA","country-code":"660"},{"name":"Antarctica","codeAlpha3":"ATA","country-code":"010"},{"name":"Antigua and Barbuda","codeAlpha3":"ATG","country-code":"028"},{"name":"Argentina","codeAlpha3":"ARG","country-code":"032"},{"name":"Armenia","codeAlpha3":"ARM","country-code":"051"},{"name":"Aruba","codeAlpha3":"ABW","country-code":"533"},{"name":"Australia","codeAlpha3":"AUS","country-code":"036"},{"name":"Austria","codeAlpha3":"AUT","country-code":"040"},{"name":"Azerbaijan","codeAlpha3":"AZE","country-code":"031"},{"name":"Bahamas","codeAlpha3":"BHS","country-code":"044"},{"name":"Bahrain","codeAlpha3":"BHR","country-code":"048"},{"name":"Bangladesh","codeAlpha3":"BGD","country-code":"050"},{"name":"Barbados","codeAlpha3":"BRB","country-code":"052"},{"name":"Belarus","codeAlpha3":"BLR","country-code":"112"},{"name":"Belgium","codeAlpha3":"BEL","country-code":"056"},{"name":"Belize","codeAlpha3":"BLZ","country-code":"084"},{"name":"Benin","codeAlpha3":"BEN","country-code":"204"},{"name":"Bermuda","codeAlpha3":"BMU","country-code":"060"},{"name":"Bhutan","codeAlpha3":"BTN","country-code":"064"},{"name":"Bolivia (Plurinational State of)","codeAlpha3":"BOL","country-code":"068"},{"name":"Bonaire, Sint Eustatius and Saba","codeAlpha3":"BES","country-code":"535"},{"name":"Bosnia and Herzegovina","codeAlpha3":"BIH","country-code":"070"},{"name":"Botswana","codeAlpha3":"BWA","country-code":"072"},{"name":"Bouvet Island","codeAlpha3":"BVT","country-code":"074"},{"name":"Brazil","codeAlpha3":"BRA","country-code":"076"},{"name":"British Indian Ocean Territory","codeAlpha3":"IOT","country-code":"086"},{"name":"Brunei Darussalam","codeAlpha3":"BRN","country-code":"096"},{"name":"Bulgaria","codeAlpha3":"BGR","country-code":"100"},{"name":"Burkina Faso","codeAlpha3":"BFA","country-code":"854"},{"name":"Burundi","codeAlpha3":"BDI","country-code":"108"},{"name":"Cambodia","codeAlpha3":"KHM","country-code":"116"},{"name":"Cameroon","codeAlpha3":"CMR","country-code":"120"},{"name":"Canada","codeAlpha3":"CAN","country-code":"124"},{"name":"Cabo Verde","codeAlpha3":"CPV","country-code":"132"},{"name":"Cayman Islands","codeAlpha3":"CYM","country-code":"136"},{"name":"Central African Republic","codeAlpha3":"CAF","country-code":"140"},{"name":"Chad","codeAlpha3":"TCD","country-code":"148"},{"name":"Chile","codeAlpha3":"CHL","country-code":"152"},{"name":"China","codeAlpha3":"CHN","country-code":"156"},{"name":"Christmas Island","codeAlpha3":"CXR","country-code":"162"},{"name":"Cocos (Keeling) Islands","codeAlpha3":"CCK","country-code":"166"},{"name":"Colombia","codeAlpha3":"COL","country-code":"170"},{"name":"Comoros","codeAlpha3":"COM","country-code":"174"},{"name":"Congo","codeAlpha3":"COG","country-code":"178"},{"name":"Congo (Democratic Republic of the)","codeAlpha3":"COD","country-code":"180"},{"name":"Cook Islands","codeAlpha3":"COK","country-code":"184"},{"name":"Costa Rica","codeAlpha3":"CRI","country-code":"188"},{"name":"Côte d'Ivoire","codeAlpha3":"CIV","country-code":"384"},{"name":"Croatia","codeAlpha3":"HRV","country-code":"191"},{"name":"Cuba","codeAlpha3":"CUB","country-code":"192"},{"name":"Curaçao","codeAlpha3":"CUW","country-code":"531"},{"name":"Cyprus","codeAlpha3":"CYP","country-code":"196"},{"name":"Czech Republic","codeAlpha3":"CZE","country-code":"203"},{"name":"Denmark","codeAlpha3":"DNK","country-code":"208"},{"name":"Djibouti","codeAlpha3":"DJI","country-code":"262"},{"name":"Dominica","codeAlpha3":"DMA","country-code":"212"},{"name":"Dominican Republic","codeAlpha3":"DOM","country-code":"214"},{"name":"Ecuador","codeAlpha3":"ECU","country-code":"218"},{"name":"Egypt","codeAlpha3":"EGY","country-code":"818"},{"name":"El Salvador","codeAlpha3":"SLV","country-code":"222"},{"name":"Equatorial Guinea","codeAlpha3":"GNQ","country-code":"226"},{"name":"Eritrea","codeAlpha3":"ERI","country-code":"232"},{"name":"Estonia","codeAlpha3":"EST","country-code":"233"},{"name":"Ethiopia","codeAlpha3":"ETH","country-code":"231"},{"name":"Falkland Islands (Malvinas)","codeAlpha3":"FLK","country-code":"238"},{"name":"Faroe Islands","codeAlpha3":"FRO","country-code":"234"},{"name":"Fiji","codeAlpha3":"FJI","country-code":"242"},{"name":"Finland","codeAlpha3":"FIN","country-code":"246"},{"name":"France","codeAlpha3":"FRA","country-code":"250"},{"name":"French Guiana","codeAlpha3":"GUF","country-code":"254"},{"name":"French Polynesia","codeAlpha3":"PYF","country-code":"258"},{"name":"French Southern Territories","codeAlpha3":"ATF","country-code":"260"},{"name":"Gabon","codeAlpha3":"GAB","country-code":"266"},{"name":"Gambia","codeAlpha3":"GMB","country-code":"270"},{"name":"Georgia","codeAlpha3":"GEO","country-code":"268"},{"name":"Germany","codeAlpha3":"DEU","country-code":"276"},{"name":"Ghana","codeAlpha3":"GHA","country-code":"288"},{"name":"Gibraltar","codeAlpha3":"GIB","country-code":"292"},{"name":"Greece","codeAlpha3":"GRC","country-code":"300"},{"name":"Greenland","codeAlpha3":"GRL","country-code":"304"},{"name":"Grenada","codeAlpha3":"GRD","country-code":"308"},{"name":"Guadeloupe","codeAlpha3":"GLP","country-code":"312"},{"name":"Guam","codeAlpha3":"GUM","country-code":"316"},{"name":"Guatemala","codeAlpha3":"GTM","country-code":"320"},{"name":"Guernsey","codeAlpha3":"GGY","country-code":"831"},{"name":"Guinea","codeAlpha3":"GIN","country-code":"324"},{"name":"Guinea-Bissau","codeAlpha3":"GNB","country-code":"624"},{"name":"Guyana","codeAlpha3":"GUY","country-code":"328"},{"name":"Haiti","codeAlpha3":"HTI","country-code":"332"},{"name":"Heard Island and McDonald Islands","codeAlpha3":"HMD","country-code":"334"},{"name":"Holy See","codeAlpha3":"VAT","country-code":"336"},{"name":"Honduras","codeAlpha3":"HND","country-code":"340"},{"name":"Hong Kong","codeAlpha3":"HKG","country-code":"344"},{"name":"Hungary","codeAlpha3":"HUN","country-code":"348"},{"name":"Iceland","codeAlpha3":"ISL","country-code":"352"},{"name":"India","codeAlpha3":"IND","country-code":"356"},{"name":"Indonesia","codeAlpha3":"IDN","country-code":"360"},{"name":"Iran (Islamic Republic of)","codeAlpha3":"IRN","country-code":"364"},{"name":"Iraq","codeAlpha3":"IRQ","country-code":"368"},{"name":"Ireland","codeAlpha3":"IRL","country-code":"372"},{"name":"Isle of Man","codeAlpha3":"IMN","country-code":"833"},{"name":"Israel","codeAlpha3":"ISR","country-code":"376"},{"name":"Italy","codeAlpha3":"ITA","country-code":"380"},{"name":"Jamaica","codeAlpha3":"JAM","country-code":"388"},{"name":"Japan","codeAlpha3":"JPN","country-code":"392"},{"name":"Jersey","codeAlpha3":"JEY","country-code":"832"},{"name":"Jordan","codeAlpha3":"JOR","country-code":"400"},{"name":"Kazakhstan","codeAlpha3":"KAZ","country-code":"398"},{"name":"Kenya","codeAlpha3":"KEN","country-code":"404"},{"name":"Kiribati","codeAlpha3":"KIR","country-code":"296"},{"name":"Korea (Democratic People's Republic of)","codeAlpha3":"PRK","country-code":"408"},{"name":"Korea (Republic of)","codeAlpha3":"KOR","country-code":"410"},{"name":"Kuwait","codeAlpha3":"KWT","country-code":"414"},{"name":"Kyrgyzstan","codeAlpha3":"KGZ","country-code":"417"},{"name":"Lao People's Democratic Republic","codeAlpha3":"LAO","country-code":"418"},{"name":"Latvia","codeAlpha3":"LVA","country-code":"428"},{"name":"Lebanon","codeAlpha3":"LBN","country-code":"422"},{"name":"Lesotho","codeAlpha3":"LSO","country-code":"426"},{"name":"Liberia","codeAlpha3":"LBR","country-code":"430"},{"name":"Libya","codeAlpha3":"LBY","country-code":"434"},{"name":"Liechtenstein","codeAlpha3":"LIE","country-code":"438"},{"name":"Lithuania","codeAlpha3":"LTU","country-code":"440"},{"name":"Luxembourg","codeAlpha3":"LUX","country-code":"442"},{"name":"Macao","codeAlpha3":"MAC","country-code":"446"},{"name":"Macedonia (the former Yugoslav Republic of)","codeAlpha3":"MKD","country-code":"807"},{"name":"Madagascar","codeAlpha3":"MDG","country-code":"450"},{"name":"Malawi","codeAlpha3":"MWI","country-code":"454"},{"name":"Malaysia","codeAlpha3":"MYS","country-code":"458"},{"name":"Maldives","codeAlpha3":"MDV","country-code":"462"},{"name":"Mali","codeAlpha3":"MLI","country-code":"466"},{"name":"Malta","codeAlpha3":"MLT","country-code":"470"},{"name":"Marshall Islands","codeAlpha3":"MHL","country-code":"584"},{"name":"Martinique","codeAlpha3":"MTQ","country-code":"474"},{"name":"Mauritania","codeAlpha3":"MRT","country-code":"478"},{"name":"Mauritius","codeAlpha3":"MUS","country-code":"480"},{"name":"Mayotte","codeAlpha3":"MYT","country-code":"175"},{"name":"Mexico","codeAlpha3":"MEX","country-code":"484"},{"name":"Micronesia (Federated States of)","codeAlpha3":"FSM","country-code":"583"},{"name":"Moldova (Republic of)","codeAlpha3":"MDA","country-code":"498"},{"name":"Monaco","codeAlpha3":"MCO","country-code":"492"},{"name":"Mongolia","codeAlpha3":"MNG","country-code":"496"},{"name":"Montenegro","codeAlpha3":"MNE","country-code":"499"},{"name":"Montserrat","codeAlpha3":"MSR","country-code":"500"},{"name":"Morocco","codeAlpha3":"MAR","country-code":"504"},{"name":"Mozambique","codeAlpha3":"MOZ","country-code":"508"},{"name":"Myanmar","codeAlpha3":"MMR","country-code":"104"},{"name":"Namibia","codeAlpha3":"NAM","country-code":"516"},{"name":"Nauru","codeAlpha3":"NRU","country-code":"520"},{"name":"Nepal","codeAlpha3":"NPL","country-code":"524"},{"name":"Netherlands","codeAlpha3":"NLD","country-code":"528"},{"name":"New Caledonia","codeAlpha3":"NCL","country-code":"540"},{"name":"New Zealand","codeAlpha3":"NZL","country-code":"554"},{"name":"Nicaragua","codeAlpha3":"NIC","country-code":"558"},{"name":"Niger","codeAlpha3":"NER","country-code":"562"},{"name":"Nigeria","codeAlpha3":"NGA","country-code":"566"},{"name":"Niue","codeAlpha3":"NIU","country-code":"570"},{"name":"Norfolk Island","codeAlpha3":"NFK","country-code":"574"},{"name":"Northern Mariana Islands","codeAlpha3":"MNP","country-code":"580"},{"name":"Norway","codeAlpha3":"NOR","country-code":"578"},{"name":"Oman","codeAlpha3":"OMN","country-code":"512"},{"name":"Pakistan","codeAlpha3":"PAK","country-code":"586"},{"name":"Palau","codeAlpha3":"PLW","country-code":"585"},{"name":"Palestine, State of","codeAlpha3":"PSE","country-code":"275"},{"name":"Panama","codeAlpha3":"PAN","country-code":"591"},{"name":"Papua New Guinea","codeAlpha3":"PNG","country-code":"598"},{"name":"Paraguay","codeAlpha3":"PRY","country-code":"600"},{"name":"Peru","codeAlpha3":"PER","country-code":"604"},{"name":"Philippines","codeAlpha3":"PHL","country-code":"608"},{"name":"Pitcairn","codeAlpha3":"PCN","country-code":"612"},{"name":"Poland","codeAlpha3":"POL","country-code":"616"},{"name":"Portugal","codeAlpha3":"PRT","country-code":"620"},{"name":"Puerto Rico","codeAlpha3":"PRI","country-code":"630"},{"name":"Qatar","codeAlpha3":"QAT","country-code":"634"},{"name":"Réunion","codeAlpha3":"REU","country-code":"638"},{"name":"Romania","codeAlpha3":"ROU","country-code":"642"},{"name":"Russian Federation","codeAlpha3":"RUS","country-code":"643"},{"name":"Rwanda","codeAlpha3":"RWA","country-code":"646"},{"name":"Saint Barthélemy","codeAlpha3":"BLM","country-code":"652"},{"name":"Saint Helena, Ascension and Tristan da Cunha","codeAlpha3":"SHN","country-code":"654"},{"name":"Saint Kitts and Nevis","codeAlpha3":"KNA","country-code":"659"},{"name":"Saint Lucia","codeAlpha3":"LCA","country-code":"662"},{"name":"Saint Martin (French part)","codeAlpha3":"MAF","country-code":"663"},{"name":"Saint Pierre and Miquelon","codeAlpha3":"SPM","country-code":"666"},{"name":"Saint Vincent and the Grenadines","codeAlpha3":"VCT","country-code":"670"},{"name":"Samoa","codeAlpha3":"WSM","country-code":"882"},{"name":"San Marino","codeAlpha3":"SMR","country-code":"674"},{"name":"Sao Tome and Principe","codeAlpha3":"STP","country-code":"678"},{"name":"Saudi Arabia","codeAlpha3":"SAU","country-code":"682"},{"name":"Senegal","codeAlpha3":"SEN","country-code":"686"},{"name":"Serbia","codeAlpha3":"SRB","country-code":"688"},{"name":"Seychelles","codeAlpha3":"SYC","country-code":"690"},{"name":"Sierra Leone","codeAlpha3":"SLE","country-code":"694"},{"name":"Singapore","codeAlpha3":"SGP","country-code":"702"},{"name":"Sint Maarten (Dutch part)","codeAlpha3":"SXM","country-code":"534"},{"name":"Slovakia","codeAlpha3":"SVK","country-code":"703"},{"name":"Slovenia","codeAlpha3":"SVN","country-code":"705"},{"name":"Solomon Islands","codeAlpha3":"SLB","country-code":"090"},{"name":"Somalia","codeAlpha3":"SOM","country-code":"706"},{"name":"South Africa","codeAlpha3":"ZAF","country-code":"710"},{"name":"South Georgia and the South Sandwich Islands","codeAlpha3":"SGS","country-code":"239"},{"name":"South Sudan","codeAlpha3":"SSD","country-code":"728"},{"name":"Spain","codeAlpha3":"ESP","country-code":"724"},{"name":"Sri Lanka","codeAlpha3":"LKA","country-code":"144"},{"name":"Sudan","codeAlpha3":"SDN","country-code":"729"},{"name":"Suriname","codeAlpha3":"SUR","country-code":"740"},{"name":"Svalbard and Jan Mayen","codeAlpha3":"SJM","country-code":"744"},{"name":"Swaziland","codeAlpha3":"SWZ","country-code":"748"},{"name":"Sweden","codeAlpha3":"SWE","country-code":"752"},{"name":"Switzerland","codeAlpha3":"CHE","country-code":"756"},{"name":"Syrian Arab Republic","codeAlpha3":"SYR","country-code":"760"},{"name":"Taiwan, Province of China","codeAlpha3":"TWN","country-code":"158"},{"name":"Tajikistan","codeAlpha3":"TJK","country-code":"762"},{"name":"Tanzania, United Republic of","codeAlpha3":"TZA","country-code":"834"},{"name":"Thailand","codeAlpha3":"THA","country-code":"764"},{"name":"Timor-Leste","codeAlpha3":"TLS","country-code":"626"},{"name":"Togo","codeAlpha3":"TGO","country-code":"768"},{"name":"Tokelau","codeAlpha3":"TKL","country-code":"772"},{"name":"Tonga","codeAlpha3":"TON","country-code":"776"},{"name":"Trinidad and Tobago","codeAlpha3":"TTO","country-code":"780"},{"name":"Tunisia","codeAlpha3":"TUN","country-code":"788"},{"name":"Turkey","codeAlpha3":"TUR","country-code":"792"},{"name":"Turkmenistan","codeAlpha3":"TKM","country-code":"795"},{"name":"Turks and Caicos Islands","codeAlpha3":"TCA","country-code":"796"},{"name":"Tuvalu","codeAlpha3":"TUV","country-code":"798"},{"name":"Uganda","codeAlpha3":"UGA","country-code":"800"},{"name":"Ukraine","codeAlpha3":"UKR","country-code":"804"},{"name":"United Arab Emirates","codeAlpha3":"ARE","country-code":"784"},{"name":"United Kingdom of Great Britain and Northern Ireland","codeAlpha3":"GBR","country-code":"826"},{"name":"United States of America","codeAlpha3":"USA","country-code":"840"},{"name":"United States Minor Outlying Islands","codeAlpha3":"UMI","country-code":"581"},{"name":"Uruguay","codeAlpha3":"URY","country-code":"858"},{"name":"Uzbekistan","codeAlpha3":"UZB","country-code":"860"},{"name":"Vanuatu","codeAlpha3":"VUT","country-code":"548"},{"name":"Venezuela (Bolivarian Republic of)","codeAlpha3":"VEN","country-code":"862"},{"name":"Viet Nam","codeAlpha3":"VNM","country-code":"704"},{"name":"Virgin Islands (British)","codeAlpha3":"VGB","country-code":"092"},{"name":"Virgin Islands (U.S.)","codeAlpha3":"VIR","country-code":"850"},{"name":"Wallis and Futuna","codeAlpha3":"WLF","country-code":"876"},{"name":"Western Sahara","codeAlpha3":"ESH","country-code":"732"},{"name":"Yemen","codeAlpha3":"YEM","country-code":"887"},{"name":"Zambia","codeAlpha3":"ZMB","country-code":"894"},{"name":"Zimbabwe","codeAlpha3":"ZWE","country-code":"716"}];
+
 
 function _handleBlocking(j) {
   console.log(j);
@@ -1278,13 +1283,50 @@ function _bridge() {
     },
 
     requestSpend: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
-      options = options || {};
+      var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
       options['amountSatoshi'] = amountSatoshi;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
       _native('requestSpend', cbid, options);
+    },
+
+    requestSpend2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['toAddress'] = toAddress;
+      options['amountSatoshi'] = amountSatoshi;
+      options['toAddress2'] = toAddress2;
+      options['amountSatoshi2'] = amountSatoshi2;
+      options['amountFiat'] = amountFiat;
+      var cbid = createCallback(options);
+      _native('requestSpend2', cbid, options);
+    },
+
+    requestSign: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['toAddress'] = toAddress;
+      options['amountSatoshi'] = amountSatoshi;
+      options['amountFiat'] = amountFiat;
+      var cbid = createCallback(options);
+      _native('requestSign', cbid, options);
+    },
+
+    broadcastTx: function(wallet, rawTx) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['rawTx'] = rawTx;
+      var cbid = createCallback(options);
+      _native('broadcastTx', cbid, options);
+    },
+
+    saveTx: function(wallet, rawTx) {
+      var options = options || {};
+      options['id'] = wallet.id;
+      options['rawTx'] = rawTx;
+      return _handleBlocking(_native('saveTx', newId(), options, true));
     },
 
     requestFile: function(options) {
@@ -1306,6 +1348,10 @@ function _bridge() {
 
     getBtcDenomination: function() {
       return _handleBlocking(_native('getBtcDenomination', newId(), {}, true));
+    },
+
+    getAffiliateInfo: function() {
+      return _handleBlocking(_native('getAffiliateInfo', newId(), {}, true));
     },
 
     satoshiToCurrency: function(satoshi, currencyNum) {
@@ -1446,6 +1492,25 @@ function _bridge() {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
+  Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+    Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
+  };
+
+  // Takes a spend request and sends user to send confirmation screen to sign a tx.
+  Airbitz.core.requestSign = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+    Airbitz._bridge.requestSign(wallet, toAddress, amountSatoshi, amountFiat, options);
+  };
+
+  // Broadcast a raw tx
+  Airbitz.core.broadcastTx = function(wallet, rawtx) {
+    Airbitz._bridge.broadcastTx(wallet, tx);
+  };
+
+  // Save a raw tx
+  Airbitz.core.saveTx = function(wallet, rawtx) {
+    Airbitz._bridge.saveTx(wallet, rawtx);
+  };
+
   Airbitz.core.requestFile = function(options) {
     Airbitz._bridge.requestFile(options);
   };
@@ -1462,6 +1527,11 @@ function _bridge() {
   // Retrives data for a JSON key stored for the plugin.
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
+    return (data && data !== 'undefined') ? JSON.parse(data) : null;
+  };
+
+  Airbitz.core.getAffiliateInfo = function() {
+    var data = Airbitz._bridge.getAffiliateInfo();
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
@@ -9324,6 +9394,25 @@ var Glidera = (function () {
 })();
 
 </script>
+  <script type="text/javascript">
+/*
+ * js-sha256 v0.3.0
+ * https://github.com/emn178/js-sha256
+ *
+ * Copyright 2014-2015, emn178@gmail.com
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+(function(I,R){var K="undefined"!=typeof module;K&&(I=global);var a="0123456789abcdef".split(""),Q=[-2147483648,8388608,32768,128],C=[24,16,8,0],M=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,
+    773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],c=[],L=function(a){return A(a,!0)},A=function(D,A){var J="string"!=typeof D;J&&D.constructor==I.ArrayBuffer&&(D=new Uint8Array(D));var m,n,p,q,r,t,u,v,f,K=!0,L=!1,b,B=
+    0,N=0,P=0,O=D.length,e,d,E,F,G,H;A?(m=3238371032,n=914150663,p=812702999,q=4144912697,r=4290775857,t=1750603025,u=1694076839,v=3204075428):(m=1779033703,n=3144134277,p=1013904242,q=2773480762,r=1359893119,t=2600822924,u=528734635,v=1541459225);f=0;do{c[0]=f;c[16]=c[1]=c[2]=c[3]=c[4]=c[5]=c[6]=c[7]=c[8]=c[9]=c[10]=c[11]=c[12]=c[13]=c[14]=c[15]=0;if(J)for(b=N;B<O&&64>b;++B)c[b>>2]|=D[B]<<C[b++&3];else for(b=N;B<O&&64>b;++B)f=D.charCodeAt(B),128>f?c[b>>2]|=f<<C[b++&3]:(2048>f?c[b>>2]|=(192|f>>6)<<C[b++&
+    3]:(55296>f||57344<=f?c[b>>2]|=(224|f>>12)<<C[b++&3]:(f=65536+((f&1023)<<10|D.charCodeAt(++B)&1023),c[b>>2]|=(240|f>>18)<<C[b++&3],c[b>>2]|=(128|f>>12&63)<<C[b++&3]),c[b>>2]|=(128|f>>6&63)<<C[b++&3]),c[b>>2]|=(128|f&63)<<C[b++&3]);P+=b-N;N=b-64;B==O&&(c[b>>2]|=Q[b&3],++B);f=c[16];B>O&&56>b&&(c[15]=P<<3,L=!0);var w=m,k=n,l=p,g=q,x=r,y=t,z=u,h=v;for(b=16;64>b;++b)d=c[b-15],e=(d>>>7|d<<25)^(d>>>18|d<<14)^d>>>3,d=c[b-2],d=(d>>>17|d<<15)^(d>>>19|d<<13)^d>>>10,c[b]=c[b-16]+e+c[b-7]+d<<0;H=k&l;for(b=0;64>
+b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704751109,d=c[0]-210244248,h=d-1521486534<<0,g=d+143694565<<0),K=!1):(e=(w>>>2|w<<30)^(w>>>13|w<<19)^(w>>>22|w<<10),d=(x>>>6|x<<26)^(x>>>11|x<<21)^(x>>>25|x<<7),G=w&k,E=G^w&l^H,F=x&y^~x&z,d=h+d+F+M[b]+c[b],e+=E,h=g+d<<0,g=d+e<<0),e=(g>>>2|g<<30)^(g>>>13|g<<19)^(g>>>22|g<<10),d=(h>>>6|h<<26)^(h>>>11|h<<21)^(h>>>25|h<<7),H=g&w,E=H^g&k^G,F=h&x^~h&y,d=z+d+F+M[b+1]+c[b+1],e+=E,z=l+d<<0,l=d+e<<0,e=(l>>>2|l<<30)^(l>>>13|l<<19)^
+    (l>>>22|l<<10),d=(z>>>6|z<<26)^(z>>>11|z<<21)^(z>>>25|z<<7),G=l&g,E=G^l&w^H,F=z&h^~z&x,d=y+d+F+M[b+2]+c[b+2],e+=E,y=k+d<<0,k=d+e<<0,e=(k>>>2|k<<30)^(k>>>13|k<<19)^(k>>>22|k<<10),d=(y>>>6|y<<26)^(y>>>11|y<<21)^(y>>>25|y<<7),H=k&l,E=H^k&g^G,F=y&z^~y&h,d=x+d+F+M[b+3]+c[b+3],e+=E,x=w+d<<0,w=d+e<<0;m=m+w<<0;n=n+k<<0;p=p+l<<0;q=q+g<<0;r=r+x<<0;t=t+y<<0;u=u+z<<0;v=v+h<<0}while(!L);J=a[m>>28&15]+a[m>>24&15]+a[m>>20&15]+a[m>>16&15]+a[m>>12&15]+a[m>>8&15]+a[m>>4&15]+a[m&15]+a[n>>28&15]+a[n>>24&15]+a[n>>20&
+    15]+a[n>>16&15]+a[n>>12&15]+a[n>>8&15]+a[n>>4&15]+a[n&15]+a[p>>28&15]+a[p>>24&15]+a[p>>20&15]+a[p>>16&15]+a[p>>12&15]+a[p>>8&15]+a[p>>4&15]+a[p&15]+a[q>>28&15]+a[q>>24&15]+a[q>>20&15]+a[q>>16&15]+a[q>>12&15]+a[q>>8&15]+a[q>>4&15]+a[q&15]+a[r>>28&15]+a[r>>24&15]+a[r>>20&15]+a[r>>16&15]+a[r>>12&15]+a[r>>8&15]+a[r>>4&15]+a[r&15]+a[t>>28&15]+a[t>>24&15]+a[t>>20&15]+a[t>>16&15]+a[t>>12&15]+a[t>>8&15]+a[t>>4&15]+a[t&15]+a[u>>28&15]+a[u>>24&15]+a[u>>20&15]+a[u>>16&15]+a[u>>12&15]+a[u>>8&15]+a[u>>4&15]+a[u&
+    15];A||(J+=a[v>>28&15]+a[v>>24&15]+a[v>>20&15]+a[v>>16&15]+a[v>>12&15]+a[v>>8&15]+a[v>>4&15]+a[v&15]);return J};!I.JS_SHA256_TEST&&K?(A.sha256=A,A.sha224=L,module.exports=A):I&&(I.sha256=A,I.sha224=L)})(this);
+</script>
 
   <script type="text/javascript">
 (function() {
@@ -9483,7 +9572,10 @@ var Glidera = (function () {
       var price = ($scope.order.orderAction == 'buy')
                 ? Prices.currentBuy.price : Prices.currentSell.price;
       var btcValue = input / parseFloat(price);
-      $scope.order.orderValueSatoshi = btcValue * 100000000;
+      var valueSatoshi = Math.floor(btcValue * 100000000);
+      valueSatoshi = (Math.floor(valueSatoshi / 100) * 100)
+      btcValue = valueSatoshi / 100000000;
+
       $scope.order.orderValueInput = parseFloat($filter('roundBtc')(btcValue));
       $scope.order.orderBtcInput = btcValue;
       $scope.order.orderMode = 'fiat';
@@ -9923,11 +10015,20 @@ var Glidera = (function () {
     }
     showOptionStatus();
 
+    var checkExtras = function(userStatus) {
+      $scope.extraComplete = userStatus.userSsnIsSetup && userStatus.userOowIsSetup;
+      $scope.userPictureIsSetup = userStatus.userPictureIdState == 'VERIFIED'
+                               || userStatus.userPictureIdState == 'PASSED'
+                               || userStatus.userPictureIdState == 'SUBMITTED';
+      if ($scope.exchange.countryCode == 'CA') {
+        $scope.userPictureIsSetup = true;
+      }
+    }
+    checkExtras($scope.userStatus);
     UserFactory.fetchUserAccountStatus().then(function(b) {
       showOptionStatus();
       $scope.userStatus = b;
-      $scope.extraComplete = b.userSsnIsSetup && b.userOowIsSetup;
-      $scope.userPictureIsSetup = b.userPictureIdState == 'VERIFIED' || b.userPictureIdState == 'PASSED';
+      checkExtras($scope.userStatus);
     }).then(function() {
       return UserFactory.getEmailAddress();
     }).then(function() {
@@ -9971,7 +10072,7 @@ var Glidera = (function () {
         counter++;
         msg += '<h5><strong class="step">' + counter + "</strong> Verify mobile phone</h5>";
       }
-      if (!$scope.userStatus.userPictureIsSetup) {
+      if (!$scope.userStatus.userPictureIsSetup ) {
         counter++;
         msg += '<h5><strong class="step">' + counter + "</strong> Provide a photo for verification</h5>";
       }
@@ -10188,6 +10289,7 @@ var Glidera = (function () {
 (function() {
   angular.module('app.filters', [])
     .filter('statusFilter', statusFilter)
+    .filter('progressFilter', progressFilter)
     .filter('stateFilter', stateFilter)
     .filter('titlecase', titleCase)
     .filter('roundFiat', roundFiat)
@@ -10202,10 +10304,25 @@ var Glidera = (function () {
     };
   }
 
+  function progressFilter() {
+    return function(userStatus) {
+      if (userStatus.tier2SetupComplete) {
+        return 'Verified';
+      } else if (userStatus.tier2TransactionVolumeRequirementComplete 
+          || userStatus.tier2AccountAgeRequirementComplete
+          || userStatus.userOowIsSetup
+          || userStatus.userSsnIsSetup) {
+        return 'In Progress';
+      } else {
+        return 'Unverified';
+      }
+    };
+  }
+
   function stateFilter() {
     return function(state) {
       if (state == 'UNSUBMITTED') {
-        return 'Unsubmitted';
+        return 'Unverified';
       } else if (state == 'SUBMITTED') {
         return 'Submitted';
       } else if (state == 'VERIFIED') {
@@ -10477,7 +10594,7 @@ var app = angular.module('app.core', [
 
   angular
     .module('app.dataFactory', ['app.glidera', 'app.2fa', 'app.constants', 'app.limits', 'app.constants'])
-    .factory('StatsFactory', [ '$http', 'ExchangeFactory', StatsFactory])
+    .factory('StatsFactory', [ '$http', 'ExchangeFactory', 'UserFactory', StatsFactory])
     .factory('UserFactory', [ '$q', '$filter', 'States', 'Occupations', 'ExchangeFactory', 'glideraFactory', 'TwoFactor', UserFactory])
     .factory('DataFactory', [ '$q', '$filter', 'States', 'ExchangeFactory', 'glideraFactory', 'TwoFactor', 'Prices', 'StatsFactory', DataFactory]);
 
@@ -10559,7 +10676,13 @@ var app = angular.module('app.core', [
       'userCanTransact': false,
       'userEmailIsSetup': false,
       'userBankAccountIsSetup': false,
-      'userBasicInfoIsSetup': false
+      'userBasicInfoIsSetup': false,
+      'tier1SetupComplete': false,
+      'tier2SetupComplete': false,
+      'tier2TransactionVolumeRequirementComplete': false,
+      'tier2AccountAgeRequirementComplete': false,
+      'userOowIsSetup': false,
+      'userSsnIsSetup': false,
     };
     factory.getUserAccountStatus = function() {
       return userStatus;
@@ -10846,7 +10969,7 @@ var app = angular.module('app.core', [
         return d.promise;
       }).then(function(data) {
         var d = $q.defer();
-        Airbitz.core.requestSpend(wallet, data.sellAddress, btcToSatoshi(qty), amountFiat, {
+        Airbitz.core.requestSign(wallet, data.sellAddress, btcToSatoshi(qty), amountFiat, {
           label: 'Glidera',
           category: 'Exchange:Sell Bitcoin',
           bizId: ExchangeFactory.bizId,
@@ -10870,10 +10993,16 @@ var app = angular.module('app.core', [
         var opts = {'priceUuid': Prices.sellUuid()};
         glideraFactory.sell(TwoFactor.getCode(), data.refundAddress, data.signedTx, opts, function(e, r, b) {
           if (r == 200) {
+            // Save the tx in the airbit database
+            Airbitz.core.saveTx(wallet, data.signedTx);
+
             factory.getOrder(false).details = b;
             StatsFactory.recordEvent('sell', b, qty);
             d.resolve(b);
           } else {
+            console.log('------------');
+            console.log(JSON.stringify(b));
+            console.log('------------');
             d.reject(b);
           }
         });
@@ -10886,15 +11015,20 @@ var app = angular.module('app.core', [
     };
     return factory;
   }
-  function StatsFactory($http, ExchangeFactory) {
+  function StatsFactory($http, ExchangeFactory, UserFactory) {
     var factory = {};
     factory.recordEvent = function(eventType, eventDictionary, btcAmount) {
       var statsKey = Airbitz.config.get('AIRBITZ_STATS_KEY');
       var network = Airbitz.config.get('SANDBOX') == 'true' ? 'testnet' : 'mainnet';
+      var acct = UserFactory.getUserAccount();
+      var string_to_hash = acct.firstName + acct.lastName + acct.last4Ssn + acct.email;
+      var userhash = sha256(string_to_hash);
+      var shortuserhash = userhash.substr(0,8)
       var s = angular.copy(eventDictionary);
       s['btc'] = btcAmount;
       s['partner'] = 'Glidera ' + ExchangeFactory.countryCode;
       s['country'] = ExchangeFactory.countryCode;
+      s['user'] = shortuserhash;
       $http({
         method: 'POST',
         url: 'https://airbitz.co/api/v1/events',
@@ -11883,7 +12017,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label pull-right"\n' +
     '               ng-class="(userStatus.personalInfoState == \'VERIFIED\') ? \'label-success\' : \'label-danger\'">{{ userStatus.personalInfoState == \'VERIFIED\' | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      <li ng-if="showOptions" ui-sref="idVerify" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
+    '      <li ng-if="showOptions" ui-sref="idVerify" class="ng-trans ng-trans-scale-up easeOutBack list-group-item" ng-show="exchange.countryCode != \'CA\'">\n' +
     '        <span class="list-group-item-heading">Identity Verification</span>\n' +
     '        <p class="list-group-item-text text-primary">Tap to edit</p>\n' +
     '        <label class="status label pull-right"\n' +
@@ -11899,7 +12033,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <span class="list-group-item-heading">Increase Spending Limits</span>\n' +
     '        <p class="list-group-item-text text-primary">Tap to edit</p>\n' +
     '        <label class="status label pull-right"\n' +
-    '               ng-class="(extraComplete) ? \'label-success\' : \'label-danger\'">{{ extraComplete | statusFilter }}</label>\n' +
+    '               ng-class="(userStatus.tier2SetupComplete) ? \'label-success\' : \'label-warning\'">{{ userStatus | progressFilter }}</label>\n' +
     '      </li>\n' +
     '    </ul>\n' +
     '  </div>\n' +
@@ -12351,7 +12485,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '\n' +
     '    <div class="row">\n' +
-    '      <div class="no-pad-left form-group col-xs-12">\n' +
+    '      <div class="no-pad-left form-group col-xs-12" ng-show="exchange.countryCode != \'CA\'">\n' +
     '        <label for="last4Ssn">Last 4 of SSN</label>\n' +
     '        <input ng-model="account.last4Ssn"\n' +
     '        type="number" id="last4Ssn" class="form-control large"\n' +

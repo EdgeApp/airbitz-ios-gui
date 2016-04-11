@@ -37,6 +37,7 @@
 - (void)slideoutGiftCard;
 - (void)slideoutImport;
 - (void)slideoutWallets;
+- (void)slideoutAffiliate;
 
 - (void)slideoutWillOpen:(SlideoutView *)slideoutView;
 - (void)slideoutWillClose:(SlideoutView *)slideoutView;

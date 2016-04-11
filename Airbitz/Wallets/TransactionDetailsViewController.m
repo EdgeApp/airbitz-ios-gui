@@ -8,11 +8,10 @@
 
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
-#import "TxOutput.h"
-#import "CoreBridge.h"
+#import "ABCTxInOut.h"
+#import "AirbitzCore.h"
 #import "User.h"
 #import "NSDate+Helper.h"
-#import "ABC.h"
 #import "InfoView.h"
 #import "CalculatorView.h"
 #import "PickerTextView.h"
@@ -118,7 +117,7 @@ typedef enum eRequestType
 @property (nonatomic, weak) IBOutlet CalculatorView         *keypadView;
 @property (weak, nonatomic) IBOutlet UIButton               *buttonBack;
 
-@property (nonatomic, strong)        NSArray                *arrayCategories;
+//@property (nonatomic, strong)        NSArray                *arrayCategories;
 @property (nonatomic, strong)        NSMutableArray         *arrayOtherBusinesses;    // businesses found using auto complete
 @property (nonatomic, strong)        NSArray                *arrayAutoComplete; // array displayed in the drop-down table when user is entering a name
 @property (nonatomic, strong)        NSArray                *arrayAutoCompleteBizId; // array displayed in the drop-down table when user is entering a name
@@ -165,13 +164,13 @@ typedef enum eRequestType
     // if there is a photo, then add it as the first photo in our images
     if (self.photo)
     {
-        [MainViewController Singleton].dictImages[[self.transaction.strName lowercaseString]] = self.photo;
+        [MainViewController Singleton].dictImages[[self.transaction.metaData.payeeName lowercaseString]] = self.photo;
     }
 
     // if there is a biz id, add this biz as the first bizid
-    if (self.transaction.bizId)
+    if (self.transaction.metaData.bizId)
     {
-        [MainViewController Singleton].dictBizIds[[self.transaction.strName lowercaseString]] = @(self.transaction.bizId);
+        [MainViewController Singleton].dictBizIds[[self.transaction.metaData.payeeName lowercaseString]] = @(self.transaction.metaData.bizId);
     }
 
     // resize ourselves to fit in area
@@ -183,7 +182,7 @@ typedef enum eRequestType
     self.buttonBack.hidden = !self.bOldTransaction;
     if (_wallet)
     {
-        _labelFiatName.text = _wallet.currencyAbbrev;
+        _labelFiatName.text = _wallet.currency.code;
     }
 
     // set up our user blocking button
@@ -195,7 +194,7 @@ typedef enum eRequestType
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
     // update our array of categories
-    self.arrayCategories = [CoreBridge Singleton].arrayCategories;
+//    self.arrayCategories = abcAccount.categories.listCategories;
 
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
@@ -227,21 +226,21 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
-    [self.pickerTextCategory setCategories:self.arrayCategories];
+    [self.pickerTextCategory setCategories:abcAccount.categories.listCategories];
     self.pickerTextCategory.delegate = self;
 
-    _bizId = self.transaction.bizId;
+    _bizId = self.transaction.metaData.bizId;
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     self.dateLabel.text = [dateFormatter stringFromDate:self.transaction.date];
-    self.nameTextField.text = self.transaction.strName;
-    self.notesTextView.text = self.transaction.strNotes;
+    self.nameTextField.text = self.transaction.metaData.payeeName;
+    self.notesTextView.text = self.transaction.metaData.notes;
 
-    if ([self.transaction.strCategory length] > 1)
+    if ([self.transaction.metaData.category length] > 1)
     {
-        self.pickerTextCategory.textField.text = self.transaction.strCategory;
+        self.pickerTextCategory.textField.text = self.transaction.metaData.category;
     }
     else
     {
@@ -305,6 +304,7 @@ typedef enum eRequestType
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear: animated];
+    [MainViewController changeNavBarOwner:self];
 
     self.spinnerView.hidden = YES;
 
@@ -317,25 +317,24 @@ typedef enum eRequestType
         
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.strWalletName];
+            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.wallet.name];
         }
         else
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.strWalletName];
+            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.wallet.name];
         }
         
-        if (self.transaction.amountFiat == 0)
+        if (self.transaction.metaData.amountFiat == 0)
         {
             double currency;
-            tABC_Error error;
-            ABC_SatoshiToCurrency([[User Singleton].name UTF8String],
-                                  [[User Singleton].password UTF8String], 
-                                  self.transaction.amountSatoshi, &currency, _wallet.currencyNum, &error);
+            currency = [abcAccount.exchangeCache satoshiToCurrency:self.transaction.amountSatoshi
+                                                      currencyCode:_wallet.currency.code
+                                                            error:nil];
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", currency];
         }
         else
         {
-            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.amountFiat];
+            self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.metaData.amountFiat];
         }
 
         // push the calculator keypad to below the bottom of the screen
@@ -348,20 +347,20 @@ typedef enum eRequestType
     if (self.transaction.amountSatoshi < 0)
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.abFees) withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.amountSatoshi + (self.transaction.minerFees + self.transaction.providerFee))
+                                                   withSymbol:false]];
 
         [feeFormatted appendFormat:@"+%@ fee",
-         [CoreBridge formatSatoshi:self.transaction.minerFees + self.transaction.abFees withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:(self.transaction.minerFees + self.transaction.providerFee) withSymbol:false]];
     }
     else
     {
         [coinFormatted appendString:
-            [CoreBridge formatSatoshi:self.transaction.amountSatoshi withSymbol:false]];
+         [abcAccount.settings.denomination satoshiToBTCString:self.transaction.amountSatoshi withSymbol:false]];
     }
     self.labelFee.text = feeFormatted;
     self.bitCoinLabel.text = coinFormatted;
-    self.labelBTC.text = [User Singleton].denominationLabel;
-    
+    self.labelBTC.text = abcAccount.settings.denomination.label;    
     
     if (self.categoryButton.titleLabel.text == nil)
     {
@@ -383,7 +382,6 @@ typedef enum eRequestType
 
 - (void)setupNavBar
 {
-    [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
@@ -490,21 +488,21 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [CoreBridge addCategory:strFullCategory];
+    [abcAccount.categories addCategory:strFullCategory];
 
-    if (![self.transaction.strCategory isEqualToString:strFullCategory])
+    if (![self.transaction.metaData.category isEqualToString:strFullCategory])
     {
-        self.transaction.strCategory = strFullCategory;
+        self.transaction.metaData.category = strFullCategory;
         bSomethingChanged = true;
     }
-    if (![self.transaction.strName isEqualToString:[self.nameTextField text]])
+    if (![self.transaction.metaData.payeeName isEqualToString:[self.nameTextField text]])
     {
-        self.transaction.strName = [self.nameTextField text];
+        self.transaction.metaData.payeeName = [self.nameTextField text];
         bSomethingChanged = true;
     }
-    if (![self.transaction.strNotes isEqualToString:[self.notesTextView text]])
+    if (![self.transaction.metaData.notes isEqualToString:[self.notesTextView text]])
     {
-        self.transaction.strNotes = [self.notesTextView text];
+        self.transaction.metaData.notes = [self.notesTextView text];
         bSomethingChanged = true;
     }
 
@@ -519,24 +517,24 @@ typedef enum eRequestType
         }
     }
 
-    if (amountFiat != self.transaction.amountFiat)
+    if (amountFiat != self.transaction.metaData.amountFiat)
     {
-        self.transaction.amountFiat = amountFiat;
+        self.transaction.metaData.amountFiat = amountFiat;
         bSomethingChanged = true;
     }
-    if (self.transaction.bizId != _bizId)
+    if (self.transaction.metaData.bizId != _bizId)
     {
-        self.transaction.bizId = _bizId;
+        self.transaction.metaData.bizId = _bizId;
         bSomethingChanged = true;
     }
 
     if (bSomethingChanged)
     {
-        [CoreBridge storeTransaction: self.transaction];
+        [self.transaction saveTransactionDetails];
     }
 
-    [CoreBridge postToTxSearchQueue:^{
-        if (_wallet && !_bOldTransaction && [CoreBridge needsRecoveryQuestionsReminder:_wallet]) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        if (_wallet && !_bOldTransaction && [abcAccount needsRecoveryQuestionsReminder]) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
                                 message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
@@ -551,7 +549,7 @@ typedef enum eRequestType
                 [self exit:YES];
             });
         }
-    }];
+    });
 }
 
 - (IBAction)PopupPickerViewSelected:(PopupPickerView *)view onRow:(NSInteger)row userData:(id)data
@@ -600,40 +598,40 @@ typedef enum eRequestType
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
     uint64_t totalSent = 0;
-    uint64_t fees = self.transaction.minerFees + self.transaction.abFees;
+    uint64_t fees = self.transaction.minerFees + self.transaction.providerFee;
 
     NSMutableString *inAddresses = [[NSMutableString alloc] init];
     NSMutableString *outAddresses = [[NSMutableString alloc] init];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
-    if ([CoreBridge isTestNet]) {
+    if ([abc isTestNet]) {
         [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
     } else {
         [baseUrl appendString:@"https://insight.bitpay.com/"];
     }
-    for (TxOutput *t in self.transaction.outputs) {
-        NSString *val = [CoreBridge formatSatoshi:t.value];
+    for (ABCTxInOut *t in self.transaction.inputOutputList) {
+        NSString *val = [abcAccount.settings.denomination satoshiToBTCString:t.amountSatoshi];
         NSString *html = [NSString stringWithFormat:@("<div class=\"wrapped\"><a href=\"%@/address/%@\">%@</a></div><div>%@</div>"),
-                          baseUrl, t.strAddress, t.strAddress, val];
-        if (t.bInput) {
+                          baseUrl, t.address, t.address, val];
+        if (t.isInput) {
             [inAddresses appendString:html];
-            totalSent += t.value;
+            totalSent += t.amountSatoshi;
         } else {
             [outAddresses appendString:html];
         }
     }
     totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
-                                   baseUrl, self.transaction.strMallealbeID, self.transaction.strMallealbeID];
+                                   baseUrl, self.transaction.txid, self.transaction.txid];
     //transaction ID
     content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[CoreBridge formatSatoshi:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcAccount.settings.denomination satoshiToBTCString:totalSent]];
     //source
     content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
     //Destination
     content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[CoreBridge formatSatoshi:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcAccount.settings.denomination satoshiToBTCString:fees]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
@@ -687,6 +685,7 @@ typedef enum eRequestType
     [MainViewController animateOut:controller withBlur:NO complete:^(void)
     {
         businessDetailsController = nil;
+        [MainViewController changeNavBarOwner:self];
         [self setupNavBar];
     }];
 }
@@ -913,7 +912,7 @@ typedef enum eRequestType
     // run through each type
     for (NSString *strPrefix in arrayTypes)
     {
-        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:self.arrayCategories];
+        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:abcAccount.categories.listCategories];
     }
 
     // add the choices constructed with the current string
@@ -1060,7 +1059,7 @@ typedef enum eRequestType
     }
     else
     {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -1079,7 +1078,7 @@ typedef enum eRequestType
         NSString *strURL = [NSString stringWithFormat: @"%@/autocomplete-business/?term=%@", SERVER_API, searchTerm];
         // run the search - note we are using perform selector so it is handled on a seperate run of the run loop to avoid callback issues
         
-        ABLog(1, @"serverQuery: %@", strURL);
+        ABCLog(1, @"serverQuery: %@", strURL);
         [self.afmanager GET:strURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSDictionary *results = (NSDictionary *)responseObject;
@@ -1124,7 +1123,7 @@ typedef enum eRequestType
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSInteger statusCode = operation.response.statusCode;
             
-            ABLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
+            ABCLog(1,@"*** SERVER STATUS FAILURE getAutoCompleteResultsFor: %d", (int)statusCode);
 
         }];
         
@@ -1157,9 +1156,9 @@ typedef enum eRequestType
             if (self.transaction)
             {
                 dictNotification = @{ KEY_TX_DETAILS_EXITED_TX            : self.transaction,
-                                                    KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.strWalletUUID,
-                                                    KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.strWalletName,
-                                                    KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.strID
+                                                    KEY_TX_DETAILS_EXITED_WALLET_UUID   : self.transaction.wallet.uuid,
+                                                    KEY_TX_DETAILS_EXITED_WALLET_NAME   : self.transaction.wallet.name,
+                                                    KEY_TX_DETAILS_EXITED_TX_ID         : self.transaction.txid
                                                     };
             }
             else
@@ -1199,7 +1198,7 @@ typedef enum eRequestType
 
 - (void)CalculatorValueChanged:(CalculatorView *)calculator
 {
-//    ABLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
+//    ABCLog(2,@"calc change. Field now: %@ (%@)", self.fiatTextField.text, calculator.textField.text);
 
 }
 
@@ -1575,14 +1574,14 @@ typedef enum eRequestType
     [self setCategoryButtonText:strPrefix];
     
     // add string to categories, update arrays
-    NSInteger index = [self.arrayCategories indexOfObject:catString];
+    NSInteger index = [abcAccount.categories.listCategories indexOfObject:catString];
     if(index == NSNotFound) {
-        ABLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [CoreBridge addCategory:catString];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.arrayCategories];
+        ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
+        [abcAccount.categories addCategory:catString];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:abcAccount.categories.listCategories];
         [array addObject:catString];
-        self.arrayCategories = [array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        [pickerTextView setCategories:self.arrayCategories];
+        [abcAccount.categories saveCategories:[array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]];
+        [pickerTextView setCategories:abcAccount.categories.listCategories];
         NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
         [pickerTextView updateChoices:arrayChoices];
     }
@@ -1609,12 +1608,12 @@ typedef enum eRequestType
     frame = self.pickerTextCategory.popupPicker.frame;
     frame.size.height = keyboardFrame.origin.y - self.pickerTextCategory.popupPicker.frame.origin.y;
     self.pickerTextCategory.popupPicker.frame = frame;
-    //ABLog(2,@"keyboard will show");
+    //ABCLog(2,@"keyboard will show");
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    //ABLog(2,@"keyboard will hide");
+    //ABCLog(2,@"keyboard will hide");
 
     if (_activeTextField.returnKeyType == UIReturnKeyDone)
     {

@@ -110,7 +110,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
     //get business details
 	NSString *requestURL = [NSString stringWithFormat:@"%@/business/%@/?ll=%f,%f", SERVER_API, self.bizId, self.latLong.latitude, self.latLong.longitude];
-	//ABLog(2,@"Requesting: %@", requestURL);
+	//ABCLog(2,@"Requesting: %@", requestURL);
     
     self.afmanager = [MainViewController createAFManager];
     
@@ -196,11 +196,11 @@ typedef NS_ENUM(NSUInteger, CellType) {
             [self setCategoriesAndName];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            ABLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: get image URLs");
+            ABCLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: get image URLs");
         }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: getting business details");
+        ABCLog(1, @"*** ERROR Connecting to Network: BusinessDetailsViewController: getting business details");
     }];
 	
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -364,7 +364,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 		[geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error)
 		 {
-			 ABLog(2,@"error: %li", (long)error.code);
+			 ABCLog(2,@"error: %li", (long)error.code);
 			 
 			 // Convert the CLPlacemark to an MKPlacemark
 			 // Note: There's no error checking for a failed geocode
@@ -489,7 +489,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 				if([tag isEqualToString:@"Primary"])
 				{
 					//found primary image
-					//ABLog(2,@"Found primary tag at object index: %i", count);
+					//ABCLog(2,@"Found primary tag at object index: %i", count);
 					primaryImage = count;
 					break;
 				}
@@ -693,7 +693,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else if(cellType == kDetails)
 	{
-		//ABLog(2,@"returning details cell height of %f", detailsCellHeight);
+		//ABCLog(2,@"returning details cell height of %f", detailsCellHeight);
 		return detailsCellHeight;
 	}
 	else if(cellType == kWebsite)
@@ -813,7 +813,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	//ABLog(2,@"Clicked button %li", (long)buttonIndex);
+	//ABCLog(2,@"Clicked button %li", (long)buttonIndex);
 	if(buttonIndex == 1)
 	{
 		[self callBusinessNumber];

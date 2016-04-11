@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Wallet.h"
-#import "ABC.h"
-#import "SpendTarget.h"
+#import "ABCWallet.h"
+#import "ABCSpend.h"
 #import "AirbitzViewController.h"
 
 @protocol SendConfirmationViewControllerDelegate;
@@ -18,11 +17,15 @@
 
 
 @property (assign)              id<SendConfirmationViewControllerDelegate>  delegate;
-@property (nonatomic, assign)   double                                      overrideCurrency;
-@property (nonatomic, strong)   SpendTarget                                 *spendTarget;
-//@property (nonatomic, strong)   Wallet                                      *wallet;
+@property (nonatomic, strong)   ABCParsedURI                                *parsedURI;
+@property (nonatomic, strong)   ABCWallet                                   *destWallet;
+@property (nonatomic, strong)   ABCPaymentRequest                           *paymentRequest;
+@property (nonatomic, strong)   NSString                                    *address2;
+@property (nonatomic)           uint64_t                                    amountSatoshi2;
+
 @property (nonatomic, assign)   BOOL                                        bAdvanceToTx;
 @property (nonatomic, assign)   BOOL                                        bSignOnly;
+@property (nonatomic, assign)   BOOL                                        bAmountImmutable;
 
 @end
 
@@ -36,6 +39,7 @@
 -(void)sendConfirmationViewControllerDidFinish:(SendConfirmationViewController *)controller
                                       withBack:(BOOL)bBack
                                      withError:(BOOL)bError
-                                      withTxId:(NSString *)txid;
+                                   transaction:(ABCTransaction *)transaction
+                                  withUnsentTx:(ABCUnsentTx *)unsentTx;
 
 @end

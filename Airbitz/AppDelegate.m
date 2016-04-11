@@ -7,9 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ABC.h"
 #import "User.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
 #import "Plugin.h"
@@ -22,7 +21,9 @@
 #import "NSString+StripHTML.h"
 #import "Reachability.h"
 #import "Util.h"
-#import "Keychain.h"
+#import "Config.h"
+#import "Theme.h"
+#import "AB.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -45,7 +46,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    [CoreBridge initAll];
+    abc = [[AirbitzCore alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -77,12 +78,12 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     if (notificationSettings.types & UIUserNotificationTypeAlert)
     {
         [LocalSettings controller].bLocalNotificationsAllowed = YES;
-        ABLog(1, @"Local notifications allowed");
+        ABCLog(1, @"Local notifications allowed");
     }
     else
     {
         [LocalSettings controller].bLocalNotificationsAllowed = NO;
-        ABLog(1, @"Local notifications not allowed");
+        ABCLog(1, @"Local notifications not allowed");
     }
     
 }
@@ -104,18 +105,18 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    ABLog(2,@"ENTER performFetch...\n");
+    ABCLog(2,@"ENTER performFetch...\n");
 
     bool bDidNotification = [self showNotifications];
 
     if (bDidNotification)
     {
-        ABLog(2,@"EXIT performFetch() NewData...\n");
+        ABCLog(2,@"EXIT performFetch() NewData...\n");
         completionHandler(UIBackgroundFetchResultNewData);
     }
     else
     {
-        ABLog(2,@"EXIT performFetch() NoData...\n");
+        ABCLog(2,@"EXIT performFetch() NoData...\n");
         completionHandler(UIBackgroundFetchResultNoData);
     }
 }
@@ -126,10 +127,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [[SDImageCache sharedImageCache] cleanDisk];
     [[SDImageCache sharedImageCache] clearMemory];
 
-    if ([User isLoggedIn])
-    {
-        [CoreBridge saveLogoutDate];
-    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -142,34 +139,10 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     if ([User isLoggedIn])
     {
-        [CoreBridge stopQueues];
+        [abc enterBackground];
         bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
             [self bgLogoutCleanup];
         }];
-        if ([CoreBridge allWatchersReady])
-        {
-            [CoreBridge disconnectWatchers];
-        }
-        else
-        {
-            // If the watchers aren't finished, let them finish
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                while (![CoreBridge allWatchersReady])
-                {
-                    // if app is active, break out of loop
-                    if ([self isAppActive])
-                    {
-                        break;
-                    }
-                    sleep(5);
-                }
-                // if the app *is not* active, stop watchers
-                if (![self isAppActive])
-                {
-                    [CoreBridge disconnectWatchers];
-                }
-            });
-        }
     }
 }
 
@@ -177,11 +150,10 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     [self bgNotificationCleanup];
     [self bgLogoutCleanup];
-    [self checkLoginExpired];
-    if ([User isLoggedIn])
+    [abc enterForeground];
+    if (![self isAppActive] && !abcAccount)
     {
-        [CoreBridge connectWatchers];
-        [CoreBridge startQueues];
+        [[User Singleton] clear];
     }
 }
 
@@ -192,22 +164,11 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [CoreBridge stopQueues];
     [LocalSettings freeAll];
-
-    int wait = 0;
-    int maxWait = 200; // ~10 seconds
-    while ([CoreBridge dataOperationCount] > 0 && wait < maxWait) {
-        [NSThread sleepForTimeInterval:.2];
-        wait++;
-    }
-    
     [[User Singleton] clear];
-    ABC_Terminate();
-}
 
-- (void)watchStatus
-{
+    [abc free];
+
 }
 
 - (void)bgLogoutCleanup
@@ -222,48 +183,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     bgNotificationTask = UIBackgroundTaskInvalid;
 }
 
-// This is a fallback for auto logout. It is better to have the background task
-// or network fetch log the user out
-- (void)checkLoginExpired
-{
-    BOOL bLoginExpired;
-
-    NSString *username;
-    if ([User isLoggedIn])
-        username = [User Singleton].name;
-    else
-        username = [LocalSettings controller].cachedUsername;
-
-    bLoginExpired = [CoreBridge didLoginExpire:username];
-
-    if (bLoginExpired)
-    {
-        // App will not auto login but we will retain login credentials
-        // inside iOS Keychain so we can use TouchID
-        [Keychain disableRelogin:username];
-    }
-
-    if (!bLoginExpired || ![User isLoggedIn])
-    {
-        return;
-    }
-
-    [self autoLogout];
-}
-
-
-// If the app is *not* active, log the user out
-- (void)autoLogout
-{
-
-    if (![self isAppActive])
-    {
-        [[User Singleton] clear];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MAIN_RESET object:self];
-    }
-    [self bgLogoutCleanup];
-
-}
 
 - (BOOL)isAppActive
 {
@@ -272,7 +191,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (BOOL)showNotifications
 {
-    ABLog(2,@"ENTER showNotifications\n");
+    ABCLog(2,@"ENTER showNotifications\n");
 
     bool bDidNotification = false;
 
@@ -283,7 +202,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         NSDictionary *notif = [NotificationChecker unseenNotification];
         while (notif)
         {
-            ABLog(2,@"IN showNotifications: while loop\n");
+            ABCLog(2,@"IN showNotifications: while loop\n");
 
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
@@ -316,7 +235,8 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         //
         // Popup notification if user has accounts with no passwords
         //
-        NSArray *arrayAccounts = [CoreBridge getLocalAccounts:nil];
+        NSMutableArray *arrayAccounts = [[NSMutableArray alloc] init];
+        [abc listLocalAccounts:arrayAccounts];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];
@@ -329,7 +249,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             {
                 for (NSString *acct in arrayAccounts)
                 {
-                    if (![CoreBridge passwordExists:acct])
+                    if (![abc accountHasPassword:acct error:nil])
                     {
                         UILocalNotification *localNotif = [[UILocalNotification alloc] init];
 
@@ -362,7 +282,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         
     }
 
-    ABLog(2,@"EXIT showNotifications\n");
+    ABCLog(2,@"EXIT showNotifications\n");
 
     return bDidNotification;
 }
@@ -381,7 +301,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     Reachability *reachability = (Reachability *)[notification object];
     if ([reachability isReachable]) {
-        [CoreBridge restoreConnectivity];
+        [abc setConnectivity:YES];
     }
 }
 

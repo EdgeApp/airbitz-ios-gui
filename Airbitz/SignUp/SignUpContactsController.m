@@ -6,6 +6,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "SignUpContactsController.h"
 #import "Util.h"
+#import "Theme.h"
 
 @interface SignUpContactsController ()
 {

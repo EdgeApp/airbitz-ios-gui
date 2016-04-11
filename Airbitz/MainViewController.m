@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
-#import "ABC.h"
 #import "MainViewController.h"
 #import "SlideoutView.h"
 #import "DirectoryViewController.h"
@@ -29,22 +28,22 @@
 #import "Config.h"
 #import "Util.h"
 #import "Theme.h"
-#import "CoreBridge.h"
+#import "AirbitzCore.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "AudioController.h"
 #import "FadingAlertView.h"
 #import "InfoView.h"
 #import "NotificationChecker.h"
-#import "LocalSettings.h"
 #import "AirbitzViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
-#import "Keychain.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
+#import "AppGroupConstants.h"
+#import "Affiliate.h"
 
 typedef enum eRequestType
 {
@@ -70,7 +69,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate>
+                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,ABCAccountDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -101,10 +100,18 @@ typedef enum eAppMode
     BOOL                        firstLaunch;
     BOOL                        sideBarLocked;
     BOOL                        _bNewDeviceLogin;
+    BOOL                        _bShowingWalletsLoadingAlert;
+    BOOL                        _bDoneShowingWalletsLoadingAlert;
+
 
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
+    NSTimer                     *updateExchangeRateTimer;
+    
+    UIAlertView                     *_affiliateAlert;
+    NSString                        *_affiliateURL;
+
 
 }
 
@@ -124,6 +131,8 @@ typedef enum eAppMode
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
+@property (nonatomic)       BOOL     bCreatingFirstWallet;
+
 
 @end
 
@@ -157,6 +166,8 @@ MainViewController *singleton;
     singleton = self;
 
     _bNewDeviceLogin = NO;
+    _bShowingWalletsLoadingAlert = NO;
+    _bDoneShowingWalletsLoadingAlert = NO;
     self.arrayContacts = nil;
     self.dictImages = [[NSMutableDictionary alloc] init];
     self.dictAddresses = [[NSMutableDictionary alloc] init];
@@ -174,21 +185,14 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRequest:) name:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchRecoveryQuestions:) name:NOTIFICATION_LAUNCH_RECOVERY_QUESTIONS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBitcoinUri:) name:NOTIFICATION_HANDLE_BITCOIN_URI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedOffRedirect:) name:NOTIFICATION_MAIN_RESET object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRemotePasswordChange:) name:NOTIFICATION_REMOTE_PASSWORD_CHANGE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpRequired:) name:NOTIFICATION_OTP_REQUIRED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyOtpSkew:) name:NOTIFICATION_OTP_SKEW object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchReceiving:) name:NOTIFICATION_TX_RECEIVED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchViewSweep:) name:NOTIFICATION_VIEW_SWEEP_TX object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTabbar) name:NOTIFICATION_WALLETS_LOADING object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTabbar) name:NOTIFICATION_WALLETS_LOADED object:nil];
 
     // init and set API key
     NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
 
     self.afmanager = [AFHTTPRequestOperationManager manager];
+    self.afmanager.requestSerializer = [AFJSONRequestSerializer serializer];
     [self.afmanager.requestSerializer setValue:token forHTTPHeaderField:@"Authorization"];
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
@@ -196,7 +200,22 @@ MainViewController *singleton;
     [self checkEnabledPlugins];
     
     [NotificationChecker initAll];
+    
+#define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
+    
+    updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+                                                     target:self
+                                                   selector:@selector(sendUpdateExchangeNotification:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+
 }
+
+- (void) sendUpdateExchangeNotification:(id)object
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_EXCHANGE_RATE_CHANGED object:self userInfo:nil];
+}
+
 
 + (AFHTTPRequestOperationManager *) createAFManager;
 {
@@ -209,7 +228,7 @@ MainViewController *singleton;
     NSNumber *nOrientation = [NSNumber numberWithInteger:toOrientation];
     NSDictionary *dictNotification = @{ KEY_ROTATION_ORIENTATION : nOrientation };
 
-    ABLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
+    ABCLog(2,@"Woohoo we WILL rotate %d", (int)toOrientation);
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ROTATION_CHANGED object:self userInfo:dictNotification];
 }
 
@@ -279,7 +298,7 @@ MainViewController *singleton;
                         NSString *strThumbnail = [dictProfileImage objectForKey:@"thumbnail"];
                         if (strThumbnail && strThumbnail != (id)[NSNull null])
                         {
-                            //ABLog(2,@"thumbnail path: %@", strThumbnail);
+                            //ABCLog(2,@"thumbnail path: %@", strThumbnail);
                             [MainViewController Singleton].dictImageURLFromBizName[[strName lowercaseString]] = strThumbnail;
                         }
                     }
@@ -293,7 +312,7 @@ MainViewController *singleton;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSInteger statusCode = operation.response.statusCode;
         
-        ABLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
+        ABCLog(1,@"*** generateListOfNearBusinesses() REQUEST STATUS FAILURE: %d", (int)statusCode);
     }];
     
 }
@@ -311,7 +330,7 @@ MainViewController *singleton;
     }
     else
     {
-        //ABLog(2,@"string already contains ll");
+        //ABCLog(2,@"string already contains ll");
     }
 }
 
@@ -356,16 +375,16 @@ MainViewController *singleton;
                         if(data)
                         {
                             singleton.dictImages[[strFullName lowercaseString]] = [UIImage imageWithData:data];
-                            ABLog(2, @"Add Image for: %@", strFullName);
+                            ABCLog(2, @"Add Image for: %@", strFullName);
                         }
                         else
                         {
-                            ABLog(2, @"No Image for : %@", strFullName);
+                            ABCLog(2, @"No Image for : %@", strFullName);
                         }
                     }
                     else
                     {
-                        ABLog(2, @"No Image for : %@", strFullName);
+                        ABCLog(2, @"No Image for : %@", strFullName);
                     }
                 }
             }
@@ -375,7 +394,7 @@ MainViewController *singleton;
     
     // store the final
     singleton.arrayContacts = arrayContacts;
-    //ABLog(2,@"contacts: %@", self.arrayContacts);
+    //ABCLog(2,@"contacts: %@", self.arrayContacts);
 }
 
 
@@ -476,6 +495,10 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    Affiliate *affiliate = [Affiliate alloc];
+    
+    [affiliate queryAffiliateInfo];
+
     //
     // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode
     //
@@ -516,11 +539,11 @@ MainViewController *singleton;
 
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
 
-    ABLog(2,@"navBar:%f %f\ntabBar: %f %f\n",
+    ABCLog(2,@"navBar:%f %f\ntabBar: %f %f\n",
             self.navBar.frame.origin.y, self.navBar.frame.size.height,
             self.tabBar.frame.origin.y, self.tabBar.frame.size.height);
 
-    ABLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
+    ABCLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
     
 
@@ -547,11 +570,11 @@ MainViewController *singleton;
             NSString *desc = [results objectForKey:@"description"];
             if ([desc containsString:@"enabled"])
             {
-                ABLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
+                ABCLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
                 [self.arrayPluginBizIDs addObject:numBizId];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            ABLog(1, @"Plugin Bizid Disabled");
+            ABCLog(1, @"Plugin Bizid Disabled");
         }];
 
     }
@@ -577,11 +600,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [CoreBridge PINLoginExists];
+        bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [CoreBridge PINLoginExists];
+            bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });
@@ -727,7 +750,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
 
                          }];
@@ -756,7 +779,7 @@ MainViewController *singleton;
                          }
                          completion:^(BOOL finished)
                          {
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                          }];
     }
@@ -787,7 +810,7 @@ MainViewController *singleton;
 		completion:^(BOOL finished)
 		{
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+            ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
 		}];
 	}
 	else
@@ -815,7 +838,7 @@ MainViewController *singleton;
                          completion:^(BOOL finished)
                          {
                              [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-                             ABLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
+                             ABCLog(2,@"view: %f, %f, tab bar origin: %f", singleton.view.frame.origin.y, singleton.view.frame.size.height, singleton.tabBar.frame.origin.y);
                          }];
     }
     else
@@ -979,11 +1002,6 @@ MainViewController *singleton;
 		case APP_MODE_MORE:
             if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
             {
-                if ([slideoutView isOpen]) {
-                    [slideoutView showSlideout:NO];
-                } else {
-                    [slideoutView showSlideout:YES];
-                }
             }
             else
             {
@@ -991,6 +1009,18 @@ MainViewController *singleton;
             }
 			break;
 	}
+}
+
+- (void)toggleSlideOut
+{
+    if ([User isLoggedIn] || (DIRECTORY_ONLY == 1))
+    {
+        if ([slideoutView isOpen]) {
+            [slideoutView showSlideout:NO];
+        } else {
+            [slideoutView showSlideout:YES];
+        }
+    }
 }
 
 - (void)displayNextNotification
@@ -1024,22 +1054,6 @@ MainViewController *singleton;
     }
 }
 
-- (void)lockTabbar
-{
-    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
-    item.enabled = NO;
-    item = self.tabBar.items[APP_MODE_REQUEST];
-    item.enabled = NO;
-}
-
-- (void)unlockTabbar
-{
-    UITabBarItem *item = self.tabBar.items[APP_MODE_SEND];
-    item.enabled = YES;
-    item = self.tabBar.items[APP_MODE_REQUEST];
-    item.enabled = YES;
-}
-
 #pragma mark - SettingsViewControllerDelegates
 
 -(void)SettingsViewControllerDone:(SettingsViewController *)controller
@@ -1060,84 +1074,108 @@ MainViewController *singleton;
     [MainViewController showNavBarAnimated:YES];
 	[_loginViewController.view removeFromSuperview];
     [_loginViewController removeFromParentViewController];
+    [_directoryViewController forceUpdateNavBar];
 }
+
++ (void)createFirstWallet;
+{
+    [MainViewController createFirstWallet:NO];
+}
+
++ (void)createFirstWallet:(BOOL) popupSpinner
+{
+    singleton.bCreatingFirstWallet = YES;
+    if (popupSpinner)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [MainViewController fadingAlert:creatingWalletText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        });
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        // Create the first wallet in the background
+        // loginViewControllerDidLogin will create a spinner while wallet is loading so close it once wallet is done
+        [abcAccount createFirstWalletIfNeeded];
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            singleton.bCreatingFirstWallet = NO;
+            [FadingAlertView dismiss:FadingAlertDismissGradual];
+        });
+    });
+}
+
 
 -(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
 {
-//    self.backgroundView.image = [Theme Singleton].backgroundApp;
-
-    if (!bUsedTouchID)
-    {
-        _bNewDeviceLogin = bNewDevice;        
-    }
-
-    if (bNewAccount) {
-        [FadingAlertView create:self.view
-                        message:creatingWalletText
-                       holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        [CoreBridge setupNewAccount];
-    }
-
-    // After login, reset all the main views
-    [self loadUserViews];
-
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [MainViewController animateFadeOut:_loginViewController.view remove:YES];
-	[MainViewController showTabBarAnimated:YES];
-    [MainViewController showNavBarAnimated:YES];
-
-    [self launchViewControllerBasedOnAppMode];
-    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
-
     // if the user logged in through TouchID, increment PIN login count
-    if (bUsedTouchID) {
+    if (bUsedTouchID)
+    {
         [[User Singleton] incPINorTouchIDLogin];
     }
-
-    if (_uri)
-    {
-        [self processBitcoinURI:_uri];
-        _uri = nil;
-    } else if ([User Singleton].needsPasswordCheck) {
-        [self showPasswordCheckAlert];
-    } else {
-        [self checkUserReview];
-    }
+    _bNewDeviceLogin = bNewDevice;
     
-    // add right to left swipe detection for slideout
-    [self installRightToLeftSwipeDetection];
+    [self didLoginCommon:bNewAccount];
 }
 
 - (void)LoginViewControllerDidPINLogin
 {
-//    self.backgroundView.image = [Theme Singleton].backgroundApp;
+    // if the user has a password, increment PIN login count
+    if ([abcAccount accountHasPassword]) {
+        [[User Singleton] incPINorTouchIDLogin];
+    }
+    
+    [self didLoginCommon:NO];
+}
+
+- (void)didLoginCommon:(BOOL) bNewAccount
+{
+    if (bNewAccount)
+    {
+        if (self.bCreatingFirstWallet)
+        {
+            [FadingAlertView create:self.view
+                            message:creatingWalletText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+    }
+    else
+    {
+        // Make sure there's a wallet in this account. If not, create it
+        NSError *error = nil;
+        NSArray *arrayIDs = [abcAccount listWalletIDs:&error];
+        int numWallets = (int) [arrayIDs count];
+        if (!error)
+        {
+            if (0 == numWallets)
+            {
+                // Create the first wallet
+                [MainViewController createFirstWallet:YES];
+            }
+        }
+        else
+        {
+            [MainViewController fadingAlert:errorGettingWalletCount holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+        }
+    }
+    
+    // After login, reset all the main views
+    [self loadUserViews];
 
     _appMode = APP_MODE_WALLETS;
     self.tabBar.selectedItem = self.tabBar.items[_appMode];
     [MainViewController showTabBarAnimated:YES];
     [MainViewController showNavBarAnimated:YES];
 
-
-    // After login, reset all the main views
-    [self loadUserViews];
-
     [MainViewController animateFadeOut:_loginViewController.view remove:YES];
     [MainViewController showTabBarAnimated:YES];
     [MainViewController showNavBarAnimated:YES];
 
     [self launchViewControllerBasedOnAppMode];
-    [MainViewController changeNavBarTitle:_selectedViewController title:@""];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 
-    // if the user has a password, increment PIN login count
-    if ([CoreBridge passwordExists]) {
-        [[User Singleton] incPINorTouchIDLogin];
-    }
-    
     if (_uri) {
         [self processBitcoinURI:_uri];
         _uri = nil;
-    } else if (![CoreBridge passwordExists]) {
+    } else if (![abcAccount accountHasPassword] && !bNewAccount) {
         [self showPasswordSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
@@ -1198,7 +1236,7 @@ MainViewController *singleton;
 
 - (void)showPasswordSetAlert
 {
-    NSString *title = NSLocalizedString(@"No password set", nil);
+    NSString *title = noPasswordSetText;
     NSString *message = createPasswordForAccountText;
     // show password reminder test
     _passwordSetAlert = [[UIAlertView alloc]
@@ -1230,20 +1268,39 @@ MainViewController *singleton;
 
 - (void)checkUserReview
 {
-
-
     NSString *str2 = [NSString stringWithFormat:howAreYouLikingAirbitzText, appTitle];
 
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        if([User offerUserReview]) {
-            _userReviewAlert = [[UIAlertView alloc]
-                                    initWithTitle:appTitle
-                                    message:str2
-                                    delegate:self
-                                    cancelButtonTitle:notSoGoodText
-                                    otherButtonTitles:itsGreatText, nil];
-            [_userReviewAlert show];
+        if ([User isLoggedIn] &&
+                abcAccount.arrayWallets != nil &&
+                abcAccount.arrayArchivedWallets != nil)
+        {
+            int transactionCount = 0;
+            NSDate *date = [NSDate date];
+
+            for (ABCWallet *curWallet in abcAccount.arrayWallets)
+            {
+                transactionCount += [curWallet.arrayTransactions count];
+                for (ABCTransaction *t in curWallet.arrayTransactions) {
+                    if (t.date && [t.date compare:date] == NSOrderedAscending) {
+                        date = t.date;
+                    }
+                }
+            }
+            for (ABCWallet *curWallet in abcAccount.arrayArchivedWallets)
+            {
+                transactionCount += [curWallet.arrayTransactions count];
+            }
+            if([[LocalSettings controller] offerUserReview:transactionCount earliestDate:date]) {
+                _userReviewAlert = [[UIAlertView alloc]
+                        initWithTitle:appTitle
+                              message:str2
+                             delegate:self
+                    cancelButtonTitle:notSoGoodText
+                    otherButtonTitles:itsGreatText, nil];
+                [_userReviewAlert show];
+            }
         }
     });
 }
@@ -1252,14 +1309,130 @@ MainViewController *singleton;
 {
 }
 
+#pragma mark - abcAccountDelegates
 
-- (void)launchReceiving:(NSNotification *)notification
+- (void) abcAccountWalletChanged:(ABCWallet *)wallet;
 {
-    NSDictionary *data = [notification userInfo];
-    _strWalletUUID = [data objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-    _strTxID = [data objectForKey:KEY_TX_DETAILS_EXITED_TX_ID];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [self showWalletsLoadingAlert];
+}
+- (void) abcAccountWalletsChanged;
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [self showWalletsLoadingAlert];
+}
+- (void) abcAccountBlockHeightChanged:(ABCWallet *)wallet;
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+}
+- (void) abcAccountBalanceUpdate:(ABCWallet *)wallet transaction:(ABCTransaction *)transaction;
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+}
 
-    Transaction *transaction = [CoreBridge getTransaction:_strWalletUUID withTx:_strTxID];
++ (void) showWalletsLoadingAlert;
+{
+    [singleton showWalletsLoadingAlert];
+}
+- (void) showWalletsLoadingAlert
+{
+    NSString *walletsLoading;
+    if (_bDoneShowingWalletsLoadingAlert) return;
+    
+    if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingAccountText,
+                          loadingWalletsNewDeviceText];
+    }
+    else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+                          loadingWalletsText,
+                          abcAccount.numWalletsLoaded + 1,
+                          abcAccount.numTotalWallets,
+                          loadingWalletsNewDeviceText];
+    }
+    else
+    {
+        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
+                          loadingTransactionsText,
+                          loadingWalletsNewDeviceText];
+    }
+    
+    if (_bShowingWalletsLoadingAlert)
+        [MainViewController fadingAlertUpdate:walletsLoading];
+    else
+        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    
+    _bShowingWalletsLoadingAlert = YES;
+}
+
+- (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
+{
+    if (!wallet)
+        ABCLog(1, @"abcAccountWalletLoaded:wallet == NULL");
+    
+    ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
+    
+    if (!abcAccount.arrayWallets)
+        ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
+    
+    if (abcAccount.arrayWallets && [wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
+    {
+        if (_bShowingWalletsLoadingAlert)
+        {
+            [FadingAlertView dismiss:FadingAlertDismissFast];
+        }
+        _bShowingWalletsLoadingAlert = NO;
+        _bDoneShowingWalletsLoadingAlert = YES;
+    }
+}
+
+- (void) abcAccountAccountChanged;
+{
+    [self updateWidgetQRCode];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DATA_SYNC_UPDATE object:self];
+
+}
+- (void)abcAccountLoggedOut:(ABCAccount *)user;
+{
+    [[User Singleton] clear];
+    _bShowingWalletsLoadingAlert = NO;
+    _bDoneShowingWalletsLoadingAlert = NO;
+    
+    [slideoutView showSlideout:NO withAnimation:NO];
+    
+    _appMode = APP_MODE_WALLETS;
+    self.tabBar.selectedItem = self.tabBar.items[_appMode];
+    [self loadUserViews];
+    [self resetViews];
+    [MainViewController hideTabBarAnimated:NO];
+    [MainViewController hideNavBarAnimated:NO];
+    abcAccount = nil;
+}
+
+- (void) abcAccountRemotePasswordChange;
+{
+    if (_passwordChangeAlert == nil && [User isLoggedIn])
+    {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [self resetViews];
+        _passwordChangeAlert = [[UIAlertView alloc] initWithTitle:passwordChangeText
+                                                          message:passwordToAccountChangeText
+                                                         delegate:self
+                                                cancelButtonTitle:nil
+                                                otherButtonTitles:okButtonText, nil];
+        [_passwordChangeAlert show];
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+    }
+}
+
+- (void) abcAccountIncomingBitcoin:(ABCWallet *)wallet transaction:(ABCTransaction *)transaction;
+{
+    if (wallet) _strWalletUUID = wallet.uuid;
+    _strTxID = transaction.txid;
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
@@ -1284,7 +1457,8 @@ MainViewController *singleton;
     {
         if (transaction && transaction.amountSatoshi >= 0) {
             NSString *title = receivedFundsText;
-            NSString *msg = bitcoinReceivedTapText;
+            NSString *amtString = [abcAccount.settings.denomination satoshiToBTCString:transaction.amountSatoshi withSymbol:YES cropDecimals:YES];
+            NSString *msg = [NSString stringWithFormat:bitcoinReceivedTapText, amtString];
             [[AudioController controller] playReceived];
             _receivedAlert = [[UIAlertView alloc]
                               initWithTitle:title
@@ -1307,11 +1481,66 @@ MainViewController *singleton;
     //
     // If we just received money on the currentWallet then update the Widget's address & QRcode
     //
-    if ([_strWalletUUID isEqualToString:[CoreBridge Singleton].currentWallet.strUUID])
+    if ([_strWalletUUID isEqualToString:abcAccount.currentWallet.uuid])
     {
-        [CoreBridge updateWidgetQRCode];
+        [self updateWidgetQRCode];
     }
 }
+
+- (void)abcAccountOTPRequired;
+{
+    if (_otpRequiredAlert == nil) {
+        _otpRequiredAlert = [[UIAlertView alloc]
+                             initWithTitle:tfaOnText
+                             message:tfaEnabledFromDifferentDeviceText
+                             delegate:self
+                             cancelButtonTitle:remindMeLaterText
+                             otherButtonTitles:enableButtonText, nil];
+        [_otpRequiredAlert show];
+    }
+}
+
+- (void)abcAccountOTPSkew
+{
+    if (_otpSkewAlert == nil) {
+        _otpSkewAlert = [[UIAlertView alloc]
+                         initWithTitle:tfaInvalidText
+                         message:tfaTokenOnThisDeviceInvalidText
+                         delegate:self
+                         cancelButtonTitle:okButtonText
+                         otherButtonTitles:nil, nil];
+        [_otpSkewAlert show];
+    }
+}
+
+- (void)updateWidgetQRCode;
+{
+    if (!abcAccount.currentWallet || !abcAccount.currentWallet.uuid)
+        return;
+    
+    [abcAccount.currentWallet createNewReceiveAddress:^(ABCReceiveAddress *receiveAddress)
+    {
+        receiveAddress.metaData.payeeName = abcAccount.settings.fullName;
+        
+        //
+        // Save QR and address in shared data so Widget can access it
+        //
+        static NSUserDefaults *tempSharedUserDefs = nil;
+        
+        if (!tempSharedUserDefs) tempSharedUserDefs = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUP_ID];
+        
+        NSData *imageData = UIImagePNGRepresentation(receiveAddress.qrCode);
+        
+        [tempSharedUserDefs setObject:imageData forKey:APP_GROUP_LAST_QR_IMAGE_KEY];
+        [tempSharedUserDefs setObject:receiveAddress.address forKey:APP_GROUP_LAST_ADDRESS_KEY];
+        [tempSharedUserDefs setObject:abcAccount.currentWallet.name forKey:APP_GROUP_LAST_WALLET_KEY];
+        [tempSharedUserDefs setObject:abcAccount.name forKey:APP_GROUP_LAST_ACCOUNT_KEY];
+        [tempSharedUserDefs synchronize];
+    } error:^(NSError *error) {
+    }];
+}
+
+
 
 - (void)handleReceiveFromQR:(NSString *)walletUUID withTx:(NSString *)txId
 {
@@ -1324,21 +1553,19 @@ MainViewController *singleton;
     NSString *coin;
     NSString *fiat;
     
-    tABC_Error error;
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    ABCWallet *wallet = [abcAccount getWallet:walletUUID];
+    ABCTransaction *transaction = [wallet getTransaction:txId];
     
     double currency;
     int64_t satoshi = transaction.amountSatoshi;
-    if (ABC_SatoshiToCurrency([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                              satoshi, &currency, wallet.currencyNum, &error) == ABC_CC_Ok)
-        fiat = [CoreBridge formatCurrency:currency withCurrencyNum:wallet.currencyNum withSymbol:true];
     
-    currency = fabs(transaction.amountFiat);
-    if (ABC_CurrencyToSatoshi([[User Singleton].name UTF8String], [[User Singleton].password UTF8String],
-                                  currency, wallet.currencyNum, &satoshi, &error) == ABC_CC_Ok)
-        coin = [CoreBridge formatSatoshi:satoshi withSymbol:false cropDecimals:[CoreBridge currencyDecimalPlaces]];
-
+    currency = [abcAccount.exchangeCache satoshiToCurrency:satoshi currencyCode:wallet.currency.code error:nil];
+    fiat = [wallet.currency doubleToPrettyCurrencyString:currency withSymbol:true];
+    
+    currency = fabs(transaction.metaData.amountFiat);
+    
+    satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code error:nil];
+    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false cropDecimals:YES];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {
@@ -1373,8 +1600,8 @@ MainViewController *singleton;
 
 - (void)launchTransactionDetails:(NSString *)walletUUID withTx:(NSString *)txId
 {
-    Wallet *wallet = [CoreBridge getWallet:walletUUID];
-    Transaction *transaction = [CoreBridge getTransaction:walletUUID withTx:txId];
+    ABCWallet *wallet = [abcAccount getWallet:walletUUID];
+    ABCTransaction *transaction = [wallet getTransaction:txId];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     _txDetailsController = [mainStoryboard instantiateViewControllerWithIdentifier:@"TransactionDetailsViewController"];
@@ -1413,6 +1640,8 @@ MainViewController *singleton;
     else if (_passwordChangeAlert == alertView)
     {
         _passwordChangeAlert = nil;
+        [abcAccount logout];
+        abcAccount = nil;
     }
     else if (_otpRequiredAlert == alertView && buttonIndex == 1)
     {
@@ -1427,7 +1656,7 @@ MainViewController *singleton;
             [Util checkPasswordAsync:[[alertView textFieldAtIndex:0] text]
                         withSelector:@selector(handlePasswordResults:)
                           controller:self];
-            [FadingAlertView create:self.view message:NSLocalizedString(@"Checking password...", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            [FadingAlertView create:self.view message:checkingPasswordText holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
         }
     }
     else if (_passwordIncorrectAlert == alertView)
@@ -1486,6 +1715,37 @@ MainViewController *singleton;
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
         }
     }
+    else if (_affiliateAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            if (pb)
+            {
+                [pb setString:_affiliateURL];
+                [MainViewController fadingAlert:affiliateLinkIsCopiedToClipboardText];
+            }
+        }
+        else if (2 == buttonIndex)
+        {
+            // Share
+            NSString *shareString = [NSString stringWithFormat:@"%@ %@",affiliateLinkShareText, _affiliateURL];
+            NSArray* dataToShare = @[shareString];
+            UIActivityViewController* activityViewController =
+            [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                              applicationActivities:nil];
+            [activityViewController setCompletionWithItemsHandler:^(NSString *activityType,
+                                                                    BOOL completed,
+                                                                    NSArray *returnedItems,
+                                                                    NSError *activityError) {
+                if (completed)
+                    [MainViewController fadingAlert:messageSentText];
+                
+            }];
+            [self presentViewController:activityViewController animated:YES completion:^{}];
+        }
+    }
+
 }
 
 - (void)alertViewCancel:(UIAlertView *)alertView
@@ -1562,52 +1822,6 @@ MainViewController *singleton;
     [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Custom Notification Handlers
-
-- (void)notifyRemotePasswordChange:(NSArray *)params
-{
-    if (_passwordChangeAlert == nil && [User isLoggedIn])
-    {
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [[User Singleton] clear];
-        [self resetViews:nil];
-        _passwordChangeAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Password Change", nil)
-                                message:NSLocalizedString(@"The password to this account was changed by another device. Please login using the new credentials.", nil)
-                                delegate:self
-                    cancelButtonTitle:nil
-                    otherButtonTitles:okButtonText, nil];
-        [_passwordChangeAlert show];
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    }
-}
-
-- (void)notifyOtpRequired:(NSArray *)params
-{
-    if (_otpRequiredAlert == nil) {
-        _otpRequiredAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Two Factor Authentication On", nil)
-                                message:NSLocalizedString(@"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.", nil)
-                                delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Remind Me Later", nil)
-                                otherButtonTitles:NSLocalizedString(@"Enable", nil), nil];
-        [_otpRequiredAlert show];
-    }
-}
-
-- (void)notifyOtpSkew:(NSArray *)params
-{
-    if (_otpSkewAlert == nil) {
-        _otpSkewAlert = [[UIAlertView alloc]
-            initWithTitle:NSLocalizedString(@"Two Factor Invalid", nil)
-            message:NSLocalizedString(@"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.", nil)
-            delegate:self
-            cancelButtonTitle:okButtonText
-            otherButtonTitles:nil, nil];
-        [_otpSkewAlert show];
-    }
-}
-
 // called when the stats have been updated
 - (void)transactionDetailsExit:(NSNotification *)notification
 {
@@ -1618,7 +1832,7 @@ MainViewController *singleton;
         {
             NSDictionary *dictData = [notification userInfo];
             _strWalletUUID = [dictData objectForKey:KEY_TX_DETAILS_EXITED_WALLET_UUID];
-            [CoreBridge makeCurrentWalletWithUUID:_strWalletUUID];
+            [abcAccount makeCurrentWalletWithUUID:_strWalletUUID];
         }
 
 //        [_transactionsViewController resetViews];
@@ -1655,7 +1869,7 @@ MainViewController *singleton;
     }
 }
 
-- (void)switchToSettingsView:(UIViewController *)controller
+- (void)switchToSettingsView:(AirbitzViewController *)controller
 {
     if (controller != _selectedViewController) {
         [MainViewController animateSwapViewControllers:controller out:_selectedViewController];
@@ -1738,8 +1952,7 @@ MainViewController *singleton;
             else
             {
                 [_sendViewController resetViews];
-                _sendViewController.addressTextField.text = [uri absoluteString];
-                [_sendViewController processURI];
+                [_sendViewController processURI:[uri absoluteString]];
             }
         } else {
             _uri = uri;
@@ -1774,8 +1987,7 @@ MainViewController *singleton;
             _appMode = APP_MODE_MORE;
             [slideoutView showSlideout:NO];
             [_importViewController resetViews];
-            _importViewController.addressTextField.text = [uri absoluteString];
-            [_importViewController processURI];
+            [_importViewController processURI:[uri absoluteString]];
         }
         else
         {
@@ -1796,21 +2008,7 @@ MainViewController *singleton;
 
 }
 
-- (void)loggedOffRedirect:(NSNotification *)notification
-{
-    [slideoutView showSlideout:NO withAnimation:NO];
-
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_DIRECTORY];
-    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_WALLETS];
-    _appMode = APP_MODE_WALLETS;
-    self.tabBar.selectedItem = self.tabBar.items[_appMode];
-    [self resetViews:notification];
-    [MainViewController hideTabBarAnimated:NO];
-    [MainViewController hideNavBarAnimated:NO];
-
-}
-
-- (void)resetViews:(NSNotification *)notification
+- (void)resetViews
 {
     // Hide the keyboard
     [self.view endEditing:NO];
@@ -1823,6 +2021,43 @@ MainViewController *singleton;
         _selectedViewController = nil;
     }
     [self launchViewControllerBasedOnAppMode];
+}
+
+#pragma mark View Controller Deep Links
+
++ (void)launchBuySell;
+{
+    [singleton slideoutBuySell];
+}
+
++ (void)launchGiftCard;
+{
+    [singleton slideoutGiftCard];
+}
+
++ (void)launchSend;
+{
+    [singleton launchSend];
+}
+
+- (void)launchSend;
+{
+    _appMode = APP_MODE_SEND;
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
+    [self launchViewControllerBasedOnAppMode];
+}
+
++ (void)launchDirectoryATM;
+{
+    [singleton launchDirectoryATM];
+}
+
+- (void)launchDirectoryATM;
+{
+    _appMode = APP_MODE_DIRECTORY;
+    self.tabBar.selectedItem = self.tabBar.items[APP_MODE_DIRECTORY];
+    [self launchViewControllerBasedOnAppMode];
+    [_directoryViewController launchATMSearch];
 }
 
 #pragma mark infoView Delegates
@@ -1843,7 +2078,7 @@ MainViewController *singleton;
 
 - (void)slideoutAccount
 {
-    ABLog(2,@"MainViewController.slideoutAccount");
+    ABCLog(2,@"MainViewController.slideoutAccount");
 }
 
 - (void)slideoutSettings
@@ -1873,6 +2108,7 @@ MainViewController *singleton;
         if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
             [_buySellViewController resetViews];
         }
     }
@@ -1885,6 +2121,7 @@ MainViewController *singleton;
         if ([User isLoggedIn] || (DIRECTORY_ONLY == 1)) {
             [MainViewController animateSwapViewControllers:_giftCardViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
+            _appMode = APP_MODE_MORE;
             [_giftCardViewController resetViews];
         }
     }
@@ -1910,6 +2147,25 @@ MainViewController *singleton;
 
 }
 
+- (void)slideoutAffiliate;
+{
+    Affiliate *affiliate = [Affiliate alloc];
+    
+    [affiliate getAffliateURL:^(NSString *url) {
+        _affiliateAlert = [[UIAlertView alloc] initWithTitle:referYourFriendsText
+                                                     message:[NSString stringWithFormat:shareThisLinkAndReceiveRevenue, url, appTitle]
+                                                    delegate:self
+                                           cancelButtonTitle:okButtonText
+                                           otherButtonTitles:copyButtonText, shareButtonText, nil];
+        _affiliateURL = url;
+        
+        [_affiliateAlert show];
+     } error:^{
+         
+     }];
+
+}
+
 - (void)slideoutImport
 {
     if (_selectedViewController != _importViewController)
@@ -1925,20 +2181,17 @@ MainViewController *singleton;
 
 - (void)logout
 {
-    NSString *str = NSLocalizedString(@"Please wait while %@ gracefully exits your account. This may take a while on slow networks.", nil);
+    NSString *str = NSLocalizedString(@"Logging Out", nil);
 
-    [Keychain disableRelogin:[User Singleton].name];
     [FadingAlertView create:self.view
                     message:[NSString stringWithFormat:str, appTitle]
                    holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
-                // Log the user out and reset UI
-                [[User Singleton] clear];
-
-                [self loadUserViews];
-                [self launchViewControllerBasedOnAppMode];
-
-                [FadingAlertView dismiss:FadingAlertDismissFast];
-            }];
+                       // Log the user out and reset UI
+                       [abcAccount logout];
+                       abcAccount = nil;
+                       
+                       [FadingAlertView dismiss:FadingAlertDismissFast];
+                   }];
 }
 
 #pragma mark - Slideout Methods
@@ -1972,6 +2225,11 @@ MainViewController *singleton;
     [controller removeFromParentViewController];
 
     _signUpController = nil;
+    
+    if (_selectedViewController == _transactionsViewController)
+    {
+        [_selectedViewController forceUpdateNavBar];
+    }
 }
 
 #pragma mark - UITabBarDelegate
@@ -1998,7 +2256,9 @@ MainViewController *singleton;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
     {
-        newAppMode = APP_MODE_MORE;
+        [self toggleSlideOut];
+        _appMode = APP_MODE_MORE;
+        return;
     }
 
     if (newAppMode == _appMode && (newAppMode != APP_MODE_MORE))
@@ -2230,27 +2490,27 @@ MainViewController *singleton;
 {
     if (_selectedViewController == nil)
     {
-        ABLog(2,@"_selectedViewController == nil");
+        ABCLog(2,@"_selectedViewController == nil");
     }
     else if (_selectedViewController == _directoryViewController)
     {
-        ABLog(2,@"_selectedViewController == _directoryViewController");
+        ABCLog(2,@"_selectedViewController == _directoryViewController");
     }
     else if (_selectedViewController == _transactionsViewController)
     {
-        ABLog(2,@"_selectedViewController == _transactionsViewController");
+        ABCLog(2,@"_selectedViewController == _transactionsViewController");
     }
     else if (_selectedViewController == _loginViewController)
     {
-        ABLog(2,@"_selectedViewController == _loginViewController");
+        ABCLog(2,@"_selectedViewController == _loginViewController");
     }
     else if (_selectedViewController == _sendViewController)
     {
-        ABLog(2,@"_selectedViewController == _sendViewController");
+        ABCLog(2,@"_selectedViewController == _sendViewController");
     }
     else if (_selectedViewController == _requestViewController)
     {
-        ABLog(2,@"_selectedViewController == _requestViewController");
+        ABCLog(2,@"_selectedViewController == _requestViewController");
     }
 }
 
@@ -2268,6 +2528,11 @@ MainViewController *singleton;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime
 {
     [FadingAlertView create:singleton.view message:message holdTime:holdTime];
+}
+
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
+{
+    [FadingAlertView create:singleton.view message:message holdTime:holdTime notify:cb];
 }
 
 + (void)fadingAlertUpdate:(NSString *)message

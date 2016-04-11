@@ -32,14 +32,14 @@
 
 - (void)AnnotationContentTapped:(UITapGestureRecognizer *)recognizer
 {
-	//ABLog(2,@"Content Tapped!");
+	//ABCLog(2,@"Content Tapped!");
 }
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
 	UIView *hitView = [super hitTest:point withEvent:event];
 	
-	//ABLog(2,@"Content HitView: %@", hitView);
+	//ABCLog(2,@"Content HitView: %@", hitView);
 	return hitView;
 }
 

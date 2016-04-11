@@ -21,6 +21,8 @@
 // User Settings
 @property (nonatomic) UIColor *colorTextLink;
 @property (nonatomic) UIColor *colorTextLinkOnDark;
+@property (nonatomic) UIColor *colorTextDarkGrey;
+@property (nonatomic) UIColor *colorTextMediumGrey;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;
@@ -62,6 +64,8 @@
 @property (nonatomic) CGFloat heightButton;
 
 @property (nonatomic) CGFloat fontSizeEnterPINText;
+@property (nonatomic) CGFloat fontSizeTxListBuyBitcoin;
+@property (nonatomic) CGFloat fontSizeTxListName;
 
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
@@ -73,15 +77,11 @@
 @property (nonatomic) CGFloat alertHoldTimeHelpPopups;
 
 @property (nonatomic) CGFloat qrCodeGenDelayTime;
-@property (nonatomic) CGFloat rotateServerInterval;
-@property (nonatomic) CGFloat walletLoadingTimerInterval;
 
 + (void)initAll;
 + (void)freeAll;
 + (Theme *)Singleton;
 - (id)init;
-- (NSString *)platform;
-- (NSString *)platformString;
 
 
 @end

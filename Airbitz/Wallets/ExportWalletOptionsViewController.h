@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Wallet.h"
+#import "ABCWallet.h"
 #import "DateTime.h"
 #import "AirbitzViewController.h"
 
@@ -26,8 +26,6 @@ typedef enum eWalletExportType
 
 @property (assign)            id<ExportWalletOptionsViewControllerDelegate> delegate;
 @property (assign)            tWalletExportType                             type;
-@property (nonatomic, strong) DateTime                                      *fromDateTime;
-@property (nonatomic, strong) DateTime                                      *toDateTime;
 
 @end
 
