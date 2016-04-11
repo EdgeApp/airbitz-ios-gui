@@ -46,7 +46,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    abc = [[AirbitzCore alloc] init:API_KEY_HEADER hbits:HIDDENBITZ_KEY];
+    abc = [[AirbitzCore alloc] init:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
