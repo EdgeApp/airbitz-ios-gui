@@ -39,7 +39,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Starbucks (Up to 20% Off)";
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
-                           @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                           @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                            @"BRAND": @"Starbucks",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/green-coffee-mug-128px.png",
                            @"BIZID": [NSString stringWithFormat:@"%d",StarbucksBizID],
@@ -59,7 +59,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Target (Up to 10% Off)";
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
-                           @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                           @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                            @"BRAND": @"Target",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/red-bulls-eye-128px.png",
                            @"BIZID": [NSString stringWithFormat:@"%d",TargetBizID],
@@ -80,7 +80,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Whole Foods (Up to 10% Off)";
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
-                           @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                           @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                            @"BRAND": @"Whole Foods",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Whole-Foods-Market-128px.png",
                            @"BIZID": [NSString stringWithFormat:@"%d",WholeFoodsBizID],
@@ -101,7 +101,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Walmart (Up to 10% Off)";
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
-                           @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                           @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                            @"BRAND": @"Walmart",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/WalMart-128px.png",
                            @"BIZID": [NSString stringWithFormat:@"%d",WalmartBizID],
@@ -122,7 +122,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Home Depot (Up to 15% Off)";
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
-                           @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                           @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                            @"BRAND": @"Home Depot",
                            @"LOGO_URL": @"https://airbitz.co/go/wp-content/uploads/2015/12/Home-Depot-square-128px.png",
                            @"BIZID": [NSString stringWithFormat:@"%d",HomeDepotBizID],
@@ -143,7 +143,7 @@ static NSMutableArray *giftCardPlugins;
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
                        @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", AIRBITZ_URI_PREFIX, plugin.country],
-                       @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                       @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                        };
         [buySellPlugins addObject:plugin];
 
@@ -161,7 +161,7 @@ static NSMutableArray *giftCardPlugins;
                     @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
                     @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
                     @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
-                    @"AIRBITZ_STATS_KEY": AUTH_TOKEN,
+                    @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                     };
         [buySellPlugins addObject:plugin];
         

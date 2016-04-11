@@ -189,7 +189,7 @@ MainViewController *singleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNextNotification) name:NOTIFICATION_NOTIFICATION_RECEIVED object:nil];
 
     // init and set API key
-    NSString *token = [NSString stringWithFormat:@"Token %@", AUTH_TOKEN];
+    NSString *token = [NSString stringWithFormat:@"Token %@", AIRBITZ_DIRECTORY_API_KEY];
 
     self.afmanager = [AFHTTPRequestOperationManager manager];
     self.afmanager.requestSerializer = [AFJSONRequestSerializer serializer];
