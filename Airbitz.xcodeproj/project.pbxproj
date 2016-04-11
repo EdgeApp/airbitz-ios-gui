@@ -65,6 +65,9 @@
 		DA91020E1C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
 		DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
 		DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
+		DA9D8EF71CBB47CB006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
+		DA9D8EF81CBB47CB006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
+		DA9D8EF91CBB47CC006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
 		DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1346,6 +1349,7 @@
 		DA9102051C4A71EA00603D62 /* eyeball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeball.png; sourceTree = "<group>"; };
 		DA9102061C4A71EA00603D62 /* eyeball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@2x.png"; sourceTree = "<group>"; };
 		DA9102071C4A71EA00603D62 /* eyeball@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@3x.png"; sourceTree = "<group>"; };
+		DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoFooter.html; sourceTree = "<group>"; };
 		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -2530,6 +2534,7 @@
 			children = (
 				DA9EDFD81BC61F920063DA07 /* emailTemplate.html */,
 				DA9EDFD91BC61F920063DA07 /* info.html */,
+				DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */,
 				DA9EDFDA1BC61F920063DA07 /* infoExportWallet.html */,
 				DA9EDFDB1BC61F920063DA07 /* infoExportWalletOptions.html */,
 				DA9EDFDC1BC61F920063DA07 /* infoImportWallet.html */,
@@ -3420,6 +3425,7 @@
 				DA9EF4A41BC7285D0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF4A51BC7285D0063DA07 /* ribbon@2x.png in Resources */,
 				DA9EF4A61BC7285D0063DA07 /* Warning_icon@2x.png in Resources */,
+				DA9D8EF81CBB47CB006A8C0A /* infoFooter.html in Resources */,
 				DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */,
@@ -3684,6 +3690,7 @@
 				DA9EF66A1BC729FA0063DA07 /* icon_settings.png in Resources */,
 				DA9EF66B1BC729FA0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF66C1BC729FA0063DA07 /* ribbon@2x.png in Resources */,
+				DA9D8EF91CBB47CC006A8C0A /* infoFooter.html in Resources */,
 				DA9EF66D1BC729FA0063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */,
@@ -3796,6 +3803,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9EE4A61BC61F920063DA07 /* icon_logout@2x.png in Resources */,
+				DA9D8EF71CBB47CB006A8C0A /* infoFooter.html in Resources */,
 				DA9EE45E1BC61F920063DA07 /* btn_locateMe@2x.png in Resources */,
 				DABA01241C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
 				DA9EE4BB1BC61F920063DA07 /* icon_settings@2x.png in Resources */,
