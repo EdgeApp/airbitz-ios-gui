@@ -38,6 +38,7 @@
 #define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
 #define SHOW_BUY_SELL                                   1
+#define SHOW_AFFILIATE                                  1
 #define LOCKED_SEARCH_CATEGORY                          0
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
@@ -68,6 +69,7 @@
 #define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierBTC
 
 #define SHOW_BUY_SELL                                   0
+#define SHOW_AFFILIATE                                  0
 #define LOCKED_SEARCH_CATEGORY                          1
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
@@ -98,6 +100,7 @@
 #define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
 #define SHOW_BUY_SELL                                   0
+#define SHOW_AFFILIATE                                  0
 #define LOCKED_SEARCH_CATEGORY                          0
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
