@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Lato-Regular.ttf">
@@ -349,7 +349,8 @@
                 <outlet property="affiliateLabel" destination="xju-3Y-EvK" id="9lR-TX-Xmr"/>
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
-                <outlet property="dividerView3" destination="rb4-q3-fT7" id="0LY-BK-ewa"/>
+                <outlet property="dividerView2" destination="I1t-ii-re1" id="Lhd-Oe-NvF"/>
+                <outlet property="dividerView3" destination="rb4-q3-fT7" id="dLh-bz-ZX0"/>
                 <outlet property="giftCardButton" destination="Zu4-Fd-NGP" id="2Qj-IR-oIT"/>
                 <outlet property="giftCardTextLabel" destination="bQy-8e-q5h" id="f4L-tB-flJ"/>
                 <outlet property="logoutButton" destination="GIG-Sd-O0c" id="G8X-1c-MlU"/>
