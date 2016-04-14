@@ -54,6 +54,7 @@
 //@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *affiliateLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView2;
 
 @end
 
@@ -118,11 +119,13 @@
 //        [Util replaceHtmlTags:&tempText];
         self.affiliateLabel.text = referYourFriendsAndGetRevenue;
         self.giftCardTextLabel.text = giftCardText;
-        _buySellButton.hidden = !SHOW_BUY_SELL;
-        _dividerView3.hidden = !SHOW_BUY_SELL;
+        
+        int numHidden = 0;
         
         if (!SHOW_BUY_SELL)
         {
+            numHidden++;
+            _buySellButton.hidden = YES;
             CGRect frame = _affiliateButton.frame;
             frame.origin.y -= 50;
             _affiliateButton.frame = frame;
@@ -131,6 +134,18 @@
             frame.origin.y -= 50;
             _giftCardButton.frame = frame;
         }
+        
+        if (!SHOW_AFFILIATE)
+        {
+            numHidden++;
+            _affiliateButton.hidden = YES;
+        }
+        
+        if (numHidden >= 1)
+            _dividerView3.hidden = YES;
+        if (numHidden >= 2)
+            _dividerView2.hidden = YES;
+        
         _initialized = YES;
     }
     
