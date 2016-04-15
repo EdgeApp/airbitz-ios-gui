@@ -20,6 +20,9 @@
 		34644BA757EFF80569B02240 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		34644D9C4171CC241B6B1609 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		B18D4E4491AF7D4AA4F67966 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
+		B22A6D43349CDB468E8B2B1C /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8C0D11E923B823B5252B6F /* libPods-osx.a */; };
+		C4555DB1DB29B5C62CB3DECE /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -68,6 +71,13 @@
 		DA9D8EF71CBB47CB006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
 		DA9D8EF81CBB47CB006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
 		DA9D8EF91CBB47CC006A8C0A /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */; };
+		DA9D8F581CC0C191006A8C0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F571CC0C191006A8C0A /* AppDelegate.m */; };
+		DA9D8F5B1CC0C191006A8C0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5A1CC0C191006A8C0A /* main.m */; };
+		DA9D8F5E1CC0C191006A8C0A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5D1CC0C191006A8C0A /* ViewController.m */; };
+		DA9D8F601CC0C191006A8C0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */; };
+		DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F611CC0C191006A8C0A /* Main.storyboard */; };
+		DA9D8F6E1CC0C191006A8C0A /* Airbitz_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */; };
+		DA9D8F791CC0C191006A8C0A /* Airbitz_OSXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */; };
 		DA9ED6ED1BC607FA0063DA07 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
 		DA9ED6F11BC607FA0063DA07 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
 		DA9ED6F81BC607FA0063DA07 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1251,6 +1261,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DA9D8F6A1CC0C191006A8C0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA9D8F531CC0C191006A8C0A;
+			remoteInfo = "Airbitz-OSX";
+		};
+		DA9D8F751CC0C191006A8C0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA9D8F531CC0C191006A8C0A;
+			remoteInfo = "Airbitz-OSX";
+		};
 		DA9ED6F61BC607FA0063DA07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DAD1AD6F1BC6065100C648C4 /* Project object */;
@@ -1329,7 +1353,10 @@
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AB.h; sourceTree = "<group>"; };
+		3523C7DAFB8BC2437C882DF2 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
+		5C786738E173658785EE4A39 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
 		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C2320AE4B6022C6128227D4F /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
@@ -1347,6 +1374,21 @@
 		DA9102061C4A71EA00603D62 /* eyeball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@2x.png"; sourceTree = "<group>"; };
 		DA9102071C4A71EA00603D62 /* eyeball@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@3x.png"; sourceTree = "<group>"; };
 		DA9D8EF61CBB47CB006A8C0A /* infoFooter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = infoFooter.html; sourceTree = "<group>"; };
+		DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA9D8F561CC0C191006A8C0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DA9D8F571CC0C191006A8C0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DA9D8F5A1CC0C191006A8C0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DA9D8F5C1CC0C191006A8C0A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DA9D8F5D1CC0C191006A8C0A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA9D8F621CC0C191006A8C0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA9D8F641CC0C191006A8C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Airbitz-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airbitz_OSXTests.m; sourceTree = "<group>"; };
+		DA9D8F6F1CC0C191006A8C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Airbitz-OSXUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airbitz_OSXUITests.m; sourceTree = "<group>"; };
+		DA9D8F7A1CC0C191006A8C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Airbitz Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -1909,9 +1951,32 @@
 		DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzUITests.m; sourceTree = "<group>"; };
 		DAD1ADA11BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB8C0D11E923B823B5252B6F /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA9D8F511CC0C191006A8C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B22A6D43349CDB468E8B2B1C /* libPods-osx.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F661CC0C191006A8C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F711CC0C191006A8C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA9ED6E71BC607FA0063DA07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1979,6 +2044,7 @@
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
 				DA9EF5C71BC729FA0063DA07 /* libzbar.a in Frameworks */,
 				DA9EF5C81BC729FA0063DA07 /* libPods.a in Frameworks */,
+				C4555DB1DB29B5C62CB3DECE /* libPods-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2010,6 +2076,7 @@
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
 				DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */,
 				09E7B90DE94333BDB8D48513 /* libPods.a in Frameworks */,
+				B18D4E4491AF7D4AA4F67966 /* libPods-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2035,8 +2102,51 @@
 			children = (
 				61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */,
 				0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */,
+				3523C7DAFB8BC2437C882DF2 /* Pods-osx.debug.xcconfig */,
+				5C786738E173658785EE4A39 /* Pods-osx.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				DA9D8F561CC0C191006A8C0A /* AppDelegate.h */,
+				DA9D8F571CC0C191006A8C0A /* AppDelegate.m */,
+				DA9D8F5C1CC0C191006A8C0A /* ViewController.h */,
+				DA9D8F5D1CC0C191006A8C0A /* ViewController.m */,
+				DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */,
+				DA9D8F611CC0C191006A8C0A /* Main.storyboard */,
+				DA9D8F641CC0C191006A8C0A /* Info.plist */,
+				DA9D8F591CC0C191006A8C0A /* Supporting Files */,
+			);
+			path = "Airbitz-OSX";
+			sourceTree = "<group>";
+		};
+		DA9D8F591CC0C191006A8C0A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA9D8F5A1CC0C191006A8C0A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA9D8F6C1CC0C191006A8C0A /* Airbitz-OSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */,
+				DA9D8F6F1CC0C191006A8C0A /* Info.plist */,
+			);
+			path = "Airbitz-OSXTests";
+			sourceTree = "<group>";
+		};
+		DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */,
+				DA9D8F7A1CC0C191006A8C0A /* Info.plist */,
+			);
+			path = "Airbitz-OSXUITests";
 			sourceTree = "<group>";
 		};
 		DA9ED6EB1BC607FA0063DA07 /* Frameworks */ = {
@@ -2065,6 +2175,8 @@
 				DA9ED7341BC60AA90063DA07 /* UIKit.framework */,
 				DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */,
 				0C88A91632A7616E92B4670D /* libPods.a */,
+				C2320AE4B6022C6128227D4F /* libPods-ios.a */,
+				EB8C0D11E923B823B5252B6F /* libPods-osx.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2869,6 +2981,9 @@
 				DAD1AD931BC6065100C648C4 /* AirbitzTests */,
 				DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */,
 				DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */,
+				DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */,
+				DA9D8F6C1CC0C191006A8C0A /* Airbitz-OSXTests */,
+				DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */,
 				DA9ED6EB1BC607FA0063DA07 /* Frameworks */,
 				DAD1AD781BC6065100C648C4 /* Products */,
 				344438B8948D894D296136BA /* Pods */,
@@ -2884,6 +2999,9 @@
 				DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */,
 				DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */,
 				DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */,
+				DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */,
+				DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */,
+				DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3034,6 +3152,62 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA9D8F531CC0C191006A8C0A /* Airbitz-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA9D8F851CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSX" */;
+			buildPhases = (
+				F92AA7B1963D8F04CC258110 /* Check Pods Manifest.lock */,
+				DA9D8F501CC0C191006A8C0A /* Sources */,
+				DA9D8F511CC0C191006A8C0A /* Frameworks */,
+				DA9D8F521CC0C191006A8C0A /* Resources */,
+				BD316E09E2C64353990B63AC /* Embed Pods Frameworks */,
+				4C6A081D131B2AD44C085707 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Airbitz-OSX";
+			productName = "Airbitz-OSX";
+			productReference = DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA9D8F681CC0C191006A8C0A /* Airbitz-OSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA9D8F861CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSXTests" */;
+			buildPhases = (
+				DA9D8F651CC0C191006A8C0A /* Sources */,
+				DA9D8F661CC0C191006A8C0A /* Frameworks */,
+				DA9D8F671CC0C191006A8C0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA9D8F6B1CC0C191006A8C0A /* PBXTargetDependency */,
+			);
+			name = "Airbitz-OSXTests";
+			productName = "Airbitz-OSXTests";
+			productReference = DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DA9D8F731CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA9D8F871CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSXUITests" */;
+			buildPhases = (
+				DA9D8F701CC0C191006A8C0A /* Sources */,
+				DA9D8F711CC0C191006A8C0A /* Frameworks */,
+				DA9D8F721CC0C191006A8C0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA9D8F761CC0C191006A8C0A /* PBXTargetDependency */,
+			);
+			name = "Airbitz-OSXUITests";
+			productName = "Airbitz-OSXUITests";
+			productReference = DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9ED6FB1BC607FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */;
@@ -3157,6 +3331,17 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Airbitz;
 				TargetAttributes = {
+					DA9D8F531CC0C191006A8C0A = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					DA9D8F681CC0C191006A8C0A = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = DA9D8F531CC0C191006A8C0A;
+					};
+					DA9D8F731CC0C191006A8C0A = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = DA9D8F531CC0C191006A8C0A;
+					};
 					DA9ED6E91BC607FA0063DA07 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = G5LQ7MERPK;
@@ -3216,6 +3401,9 @@
 				DAD1AD8F1BC6065100C648C4 /* AirbitzTests */,
 				DAD1AD9A1BC6065100C648C4 /* AirbitzUITests */,
 				DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */,
+				DA9D8F531CC0C191006A8C0A /* Airbitz-OSX */,
+				DA9D8F681CC0C191006A8C0A /* Airbitz-OSXTests */,
+				DA9D8F731CC0C191006A8C0A /* Airbitz-OSXUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3252,6 +3440,29 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA9D8F521CC0C191006A8C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9D8F601CC0C191006A8C0A /* Assets.xcassets in Resources */,
+				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F671CC0C191006A8C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F721CC0C191006A8C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA9ED6E81BC607FA0063DA07 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4071,6 +4282,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4C6A081D131B2AD44C085707 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6861DED29A6F9662DAB11141 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4083,7 +4309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8B133C261F11057BC79BA010 /* Embed Pods Frameworks */ = {
@@ -4098,7 +4324,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		961B071DECC6BDB21387EE53 /* Embed Pods Frameworks */ = {
@@ -4113,7 +4339,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD316E09E2C64353990B63AC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DA9EF34F1BC7285D0063DA07 /* Check Pods Manifest.lock */ = {
@@ -4173,7 +4414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DF63B0E9B5BB0C91752C2F4F /* Check Pods Manifest.lock */ = {
@@ -4191,9 +4432,50 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F92AA7B1963D8F04CC258110 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA9D8F501CC0C191006A8C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9D8F5E1CC0C191006A8C0A /* ViewController.m in Sources */,
+				DA9D8F5B1CC0C191006A8C0A /* main.m in Sources */,
+				DA9D8F581CC0C191006A8C0A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F651CC0C191006A8C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9D8F6E1CC0C191006A8C0A /* Airbitz_OSXTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA9D8F701CC0C191006A8C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA9D8F791CC0C191006A8C0A /* Airbitz_OSXUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DA9ED6E61BC607FA0063DA07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4632,6 +4914,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DA9D8F6B1CC0C191006A8C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA9D8F531CC0C191006A8C0A /* Airbitz-OSX */;
+			targetProxy = DA9D8F6A1CC0C191006A8C0A /* PBXContainerItemProxy */;
+		};
+		DA9D8F761CC0C191006A8C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA9D8F531CC0C191006A8C0A /* Airbitz-OSX */;
+			targetProxy = DA9D8F751CC0C191006A8C0A /* PBXContainerItemProxy */;
+		};
 		DA9ED6F71BC607FA0063DA07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DA9ED6E91BC607FA0063DA07 /* Airbitz Widget */;
@@ -4649,7 +4941,118 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		DA9D8F611CC0C191006A8C0A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA9D8F621CC0C191006A8C0A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		DA9D8F7B1CC0C191006A8C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3523C7DAFB8BC2437C882DF2 /* Pods-osx.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSX/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DA9D8F7C1CC0C191006A8C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C786738E173658785EE4A39 /* Pods-osx.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSX/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DA9D8F7D1CC0C191006A8C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Airbitz-OSX.app/Contents/MacOS/Airbitz-OSX";
+			};
+			name = Debug;
+		};
+		DA9D8F7E1CC0C191006A8C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Airbitz-OSX.app/Contents/MacOS/Airbitz-OSX";
+			};
+			name = Release;
+		};
+		DA9D8F7F1CC0C191006A8C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSXUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSXUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Airbitz-OSX";
+			};
+			name = Debug;
+		};
+		DA9D8F801CC0C191006A8C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Airbitz-OSXUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSXUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = "Airbitz-OSX";
+			};
+			name = Release;
+		};
 		DA9ED6F91BC607FA0063DA07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5089,6 +5492,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA9D8F851CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9D8F7B1CC0C191006A8C0A /* Debug */,
+				DA9D8F7C1CC0C191006A8C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA9D8F861CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9D8F7D1CC0C191006A8C0A /* Debug */,
+				DA9D8F7E1CC0C191006A8C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA9D8F871CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSXUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9D8F7F1CC0C191006A8C0A /* Debug */,
+				DA9D8F801CC0C191006A8C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DA9ED6FB1BC607FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
