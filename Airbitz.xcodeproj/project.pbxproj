@@ -347,8 +347,6 @@
 		DA9EE4E21BC61F920063DA07 /* BitcoinReceived.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC21BC61F920063DA07 /* BitcoinReceived.mp3 */; };
 		DA9EE4E31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 */; };
 		DA9EE4E41BC61F920063DA07 /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */; };
-		DA9EE4E51BC61F920063DA07 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC61BC61F920063DA07 /* api.cer */; };
-		DA9EE4E61BC61F920063DA07 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
 		DA9EE4E71BC61F920063DA07 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCA1BC61F920063DA07 /* Lato-Black.ttf */; };
 		DA9EE4E81BC61F920063DA07 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCB1BC61F920063DA07 /* Lato-BlackItalic.ttf */; };
 		DA9EE4E91BC61F920063DA07 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCC1BC61F920063DA07 /* Lato-Bold.ttf */; };
@@ -751,7 +749,6 @@
 		DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF871BC61F910063DA07 /* icon_more@2x.png */; };
 		DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9D1BC61F910063DA07 /* icon_settings_dark@3x.png */; };
-		DA9EF4AB1BC7285D0063DA07 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
 		DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFEF1BC61F920063DA07 /* bankcheck.png */; };
 		DA9EF4AD1BC7285D0063DA07 /* flash_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4C1BC61F910063DA07 /* flash_off@2x.png */; };
 		DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA71BC61F910063DA07 /* icon_wallet@3x.png */; };
@@ -786,7 +783,6 @@
 		DA9EF4CD1BC7285D0063DA07 /* icon_request@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8D1BC61F910063DA07 /* icon_request@3x.png */; };
 		DA9EF4CE1BC7285D0063DA07 /* icon_rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF901BC61F910063DA07 /* icon_rightArrow@2x.png */; };
 		DA9EF4CF1BC7285D0063DA07 /* Red-X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */; };
-		DA9EF4D01BC7285D0063DA07 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC61BC61F920063DA07 /* api.cer */; };
 		DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF171BC61F910063DA07 /* btn_add.png */; };
 		DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF121BC61F910063DA07 /* bitcoin_symbol@3x.png */; };
 		DA9EF4D31BC7285D0063DA07 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE01B1BC61F920063DA07 /* Settings.storyboard */; };
@@ -1131,7 +1127,6 @@
 		DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78E1BC61E670063DA07 /* CalculatorView~iphone.xib */; };
 		DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF871BC61F910063DA07 /* icon_more@2x.png */; };
 		DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9D1BC61F910063DA07 /* icon_settings_dark@3x.png */; };
-		DA9EF6721BC729FA0063DA07 /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
 		DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFEF1BC61F920063DA07 /* bankcheck.png */; };
 		DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4C1BC61F910063DA07 /* flash_off@2x.png */; };
 		DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA71BC61F910063DA07 /* icon_wallet@3x.png */; };
@@ -1166,7 +1161,6 @@
 		DA9EF6941BC729FA0063DA07 /* icon_request@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8D1BC61F910063DA07 /* icon_request@3x.png */; };
 		DA9EF6951BC729FA0063DA07 /* icon_rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF901BC61F910063DA07 /* icon_rightArrow@2x.png */; };
 		DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */; };
-		DA9EF6971BC729FA0063DA07 /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC61BC61F920063DA07 /* api.cer */; };
 		DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF171BC61F910063DA07 /* btn_add.png */; };
 		DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF121BC61F910063DA07 /* bitcoin_symbol@3x.png */; };
 		DA9EF69A1BC729FA0063DA07 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE01B1BC61F920063DA07 /* Settings.storyboard */; };
@@ -1256,8 +1250,6 @@
 		DAE1BE391CC36EE3003494AB /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DAE1BE3A1CC36F39003494AB /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DAE1BE3B1CC36F93003494AB /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
-		DAE1BE3C1CC374CF003494AB /* ca-certificates.crt in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */; };
-		DAE1BE3D1CC37525003494AB /* api.cer in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC61BC61F920063DA07 /* api.cer */; };
 		DAE1BE471CC37883003494AB /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BE461CC37883003494AB /* MainController.m */; };
 		DAE1BE481CC37883003494AB /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BE461CC37883003494AB /* MainController.m */; };
 		DAE1BE491CC37883003494AB /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BE461CC37883003494AB /* MainController.m */; };
@@ -1727,8 +1719,6 @@
 		DA9EDFC21BC61F920063DA07 /* BitcoinReceived.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BitcoinReceived.mp3; sourceTree = "<group>"; };
 		DA9EDFC31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BitcoinReceivedPartial.mp3; sourceTree = "<group>"; };
 		DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BitcoinSent.mp3; sourceTree = "<group>"; };
-		DA9EDFC61BC61F920063DA07 /* api.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = api.cer; sourceTree = "<group>"; };
-		DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ca-certificates.crt"; sourceTree = "<group>"; };
 		DA9EDFCA1BC61F920063DA07 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		DA9EDFCB1BC61F920063DA07 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		DA9EDFCC1BC61F920063DA07 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -2388,7 +2378,6 @@
 			children = (
 				DA9EDEFE1BC61F910063DA07 /* Artwork */,
 				DA9EDFC11BC61F920063DA07 /* Audio */,
-				DA9EDFC51BC61F920063DA07 /* Certs */,
 				DA9EDFC81BC61F920063DA07 /* Fonts */,
 				DA9EDFD71BC61F920063DA07 /* html */,
 				DA9EDFE91BC61F920063DA07 /* MockData */,
@@ -2593,15 +2582,6 @@
 				DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */,
 			);
 			path = Audio;
-			sourceTree = "<group>";
-		};
-		DA9EDFC51BC61F920063DA07 /* Certs */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EDFC61BC61F920063DA07 /* api.cer */,
-				DA9EDFC71BC61F920063DA07 /* ca-certificates.crt */,
-			);
-			path = Certs;
 			sourceTree = "<group>";
 		};
 		DA9EDFC81BC61F920063DA07 /* Fonts */ = {
@@ -3453,9 +3433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9D8F601CC0C191006A8C0A /* Assets.xcassets in Resources */,
-				DAE1BE3D1CC37525003494AB /* api.cer in Resources */,
 				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
-				DAE1BE3C1CC374CF003494AB /* ca-certificates.crt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3645,7 +3623,6 @@
 				DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */,
-				DA9EF4AB1BC7285D0063DA07 /* ca-certificates.crt in Resources */,
 				DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */,
 				DA9EF4AD1BC7285D0063DA07 /* flash_off@2x.png in Resources */,
 				DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */,
@@ -3684,7 +3661,6 @@
 				DA9EF4CD1BC7285D0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF4CE1BC7285D0063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA9EF4CF1BC7285D0063DA07 /* Red-X@2x.png in Resources */,
-				DA9EF4D01BC7285D0063DA07 /* api.cer in Resources */,
 				DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */,
 				DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA9EF4D31BC7285D0063DA07 /* Settings.storyboard in Resources */,
@@ -3910,7 +3886,6 @@
 				DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */,
-				DA9EF6721BC729FA0063DA07 /* ca-certificates.crt in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
 				DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */,
 				DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */,
@@ -3948,7 +3923,6 @@
 				DA9EF6941BC729FA0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF6951BC729FA0063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */,
-				DA9EF6971BC729FA0063DA07 /* api.cer in Resources */,
 				DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */,
 				DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA9EF69A1BC729FA0063DA07 /* Settings.storyboard in Resources */,
@@ -4177,7 +4151,6 @@
 				DA9EE4AA1BC61F920063DA07 /* icon_more@2x.png in Resources */,
 				DA9EE4C01BC61F920063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9102081C4A71EA00603D62 /* eyeball.png in Resources */,
-				DA9EE4E61BC61F920063DA07 /* ca-certificates.crt in Resources */,
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,
 				DA9EE46F1BC61F920063DA07 /* flash_off@2x.png in Resources */,
 				DA9EE4CA1BC61F920063DA07 /* icon_wallet@3x.png in Resources */,
@@ -4214,7 +4187,6 @@
 				DA9EE4B31BC61F920063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA91020B1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
 				DA9EE4DA1BC61F920063DA07 /* Red-X@2x.png in Resources */,
-				DA9EE4E51BC61F920063DA07 /* api.cer in Resources */,
 				DA9EE43A1BC61F920063DA07 /* btn_add.png in Resources */,
 				DA9EE4351BC61F920063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA9EE51E1BC61F930063DA07 /* Settings.storyboard in Resources */,

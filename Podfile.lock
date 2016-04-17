@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AirbitzCore: f0bb19fc5b82e7ad44bad91bb74a488613c37f1d
+  AirbitzCore: 1a4abf94c0bb2db98feba22a5bd32e51ed2f6147
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
