@@ -16,26 +16,15 @@
 #import "User.h"
 
 @interface AppDelegate ()
-
+{
+}
 @end
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
-    [LocalSettings initAll];
-//    [AudioController initAll];
-
-    abc = [[AirbitzCore alloc] init:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
     
-    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
-    [reachability startNotifier];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityDidChange:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-    
-
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -48,17 +37,5 @@
     
 
 }
-
-#pragma mark - Notification handlers
-
-- (void)reachabilityDidChange:(NSNotification *)notification
-{
-    Reachability *reachability = (Reachability *)[notification object];
-    if ([reachability isReachable]) {
-        [abc setConnectivity:YES];
-    }
-}
-
-
 
 @end
