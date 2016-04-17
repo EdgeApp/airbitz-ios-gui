@@ -6,14 +6,16 @@
 //  Copyright © 2016 Airbitz. All rights reserved.
 //
 
+#import "MainController.h"
 #import "ViewController.h"
+#import "User.h"
+
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Do any additional setup after loading the view.
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {

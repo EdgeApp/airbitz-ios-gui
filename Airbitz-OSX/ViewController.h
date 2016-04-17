@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MainController.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : MainController
 
 
 @end

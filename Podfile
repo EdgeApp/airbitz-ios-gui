@@ -15,7 +15,7 @@ target :ios do
 end
 
 target :osx do
-    platform :osx, '10.10'
+    platform :osx, '10.9'
     link_with 'Airbitz-OSX'
     import_pods
 end
