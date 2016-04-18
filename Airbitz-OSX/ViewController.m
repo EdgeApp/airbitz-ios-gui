@@ -24,6 +24,7 @@
 @property (weak)            IBOutlet    NSTextField                     *usernameTextField;
 @property (weak)            IBOutlet    NSSecureTextField               *passwordTextField;
 @property (weak)            IBOutlet    NSTextField                     *infoTextLabel;
+@property (weak)            IBOutlet    NSImageView                     *qrcodeImageView;
 
 @end
 
@@ -42,7 +43,9 @@
     [_passwordTextField setAction:@selector(passwordTextFieldDidHitEnter:)];
     
     [_usernameTextField becomeFirstResponder];
-
+    
+    [_qrcodeImageView setWantsLayer:YES];
+    [_qrcodeImageView.layer setBackgroundColor:[[NSColor clearColor] CGColor]];
 }
 
 - (void)usernameTextFieldDidHitEnter:(id)sender
@@ -82,6 +85,21 @@
 {
     NSString *str = [NSString stringWithFormat:@"Wallets Loaded"];
     [_infoTextLabel setStringValue:str];
+    
+    
+    if ([wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
+    {
+        ABCReceiveAddress *address = [wallet createNewReceiveAddress];
+        
+        if (address)
+        {
+            [_qrcodeImageView setWantsLayer:YES];
+            [_qrcodeImageView.layer setBackgroundColor:[[NSColor whiteColor] CGColor]];
+            
+            [_qrcodeImageView setImage:address.qrCode];
+            [_qrcodeImageView setImageScaling:NSScaleToFit];
+        }
+    }
 }
 
 - (void) didFinishLaunching

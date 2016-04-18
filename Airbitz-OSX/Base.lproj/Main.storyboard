@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,32 +674,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="826" height="550"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5X-Xs-2a4">
-                                <rect key="frame" x="0.0" y="0.0" width="826" height="550"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="background" id="YDt-Xl-Hoc"/>
-                            </imageView>
-                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-cQ-4PN">
-                                <rect key="frame" x="285" y="346" width="256" height="60"/>
-                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="center" placeholderString="Enter Password" drawsBackground="YES" usesSingleLineMode="YES" id="RKx-o9-fnj">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <allowedInputSourceLocales>
-                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                                    </allowedInputSourceLocales>
-                                </secureTextFieldCell>
-                            </secureTextField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A80-Mn-g66">
-                                <rect key="frame" x="283" y="246" width="260" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NUU-hc-mfT"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="zBl-1d-zei">
-                                    <font key="font" size="27" name="Lato-Regular"/>
-                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VKU-Kt-pDl">
                                 <rect key="frame" x="285" y="428" width="256" height="60"/>
                                 <constraints>
@@ -711,6 +686,39 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-cQ-4PN">
+                                <rect key="frame" x="285" y="346" width="256" height="60"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="center" placeholderString="Enter Password" drawsBackground="YES" usesSingleLineMode="YES" id="RKx-o9-fnj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </secureTextFieldCell>
+                            </secureTextField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5cc-sL-WDX">
+                                <rect key="frame" x="295" y="105" width="236" height="236"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5cc-sL-WDX" secondAttribute="height" multiplier="1:1" id="3p2-XY-YmC"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="photo" id="yGe-88-FVj"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A80-Mn-g66">
+                                <rect key="frame" x="18" y="50" width="790" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NUU-hc-mfT"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="zBl-1d-zei">
+                                    <font key="font" size="27" name="Lato-Regular"/>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5X-Xs-2a4">
+                                <rect key="frame" x="0.0" y="0.0" width="826" height="550"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="YDt-Xl-Hoc"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="A80-Mn-g66" secondAttribute="bottom" constant="50" id="5Gf-9E-jnF"/>
@@ -721,7 +729,10 @@
                             <constraint firstItem="C5X-Xs-2a4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="UuH-Vy-NGy"/>
                             <constraint firstItem="C5X-Xs-2a4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="WbU-AC-LP4"/>
                             <constraint firstItem="v4w-cQ-4PN" firstAttribute="trailing" secondItem="VKU-Kt-pDl" secondAttribute="trailing" id="X3s-ou-4x6"/>
+                            <constraint firstItem="5cc-sL-WDX" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="cSA-iL-rvK"/>
+                            <constraint firstItem="A80-Mn-g66" firstAttribute="top" secondItem="5cc-sL-WDX" secondAttribute="bottom" constant="8" symbolic="YES" id="dxd-0x-Tk0"/>
                             <constraint firstItem="v4w-cQ-4PN" firstAttribute="height" secondItem="VKU-Kt-pDl" secondAttribute="height" id="evB-7c-nJY"/>
+                            <constraint firstItem="5cc-sL-WDX" firstAttribute="top" secondItem="v4w-cQ-4PN" secondAttribute="bottom" constant="8" symbolic="YES" id="fHX-ta-Wpu"/>
                             <constraint firstAttribute="trailing" secondItem="A80-Mn-g66" secondAttribute="trailing" constant="20" symbolic="YES" id="hMG-Bb-8SY"/>
                             <constraint firstItem="v4w-cQ-4PN" firstAttribute="leading" secondItem="VKU-Kt-pDl" secondAttribute="leading" id="mlt-tg-sXc"/>
                             <constraint firstAttribute="bottom" secondItem="C5X-Xs-2a4" secondAttribute="bottom" id="veQ-zC-yRL"/>
@@ -731,6 +742,7 @@
                     <connections>
                         <outlet property="infoTextLabel" destination="A80-Mn-g66" id="LL3-qu-Mtx"/>
                         <outlet property="passwordTextField" destination="v4w-cQ-4PN" id="vvw-Fa-KSK"/>
+                        <outlet property="qrcodeImageView" destination="5cc-sL-WDX" id="Rm7-eE-jBD"/>
                         <outlet property="usernameTextField" destination="VKU-Kt-pDl" id="TyZ-V7-s1j"/>
                     </connections>
                 </viewController>
@@ -739,7 +751,4 @@
             <point key="canvasLocation" x="194" y="802"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="background" width="826" height="550"/>
-    </resources>
 </document>
