@@ -45,6 +45,7 @@
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA42F1071C03D63800CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
 		DA42F1081C03D63900CE6874 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA8ED2FA1BF6D1A70054E550 /* infoDisclaimer.html */; };
+		DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB971BFF90980086AD8B /* background@2x.jpg */; };
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
@@ -3433,6 +3434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9D8F601CC0C191006A8C0A /* Assets.xcassets in Resources */,
+				DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */,
 				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

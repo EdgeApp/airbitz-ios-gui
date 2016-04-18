@@ -670,13 +670,76 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="826" height="550"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5X-Xs-2a4">
+                                <rect key="frame" x="0.0" y="0.0" width="826" height="550"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="background" id="YDt-Xl-Hoc"/>
+                            </imageView>
+                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-cQ-4PN">
+                                <rect key="frame" x="285" y="346" width="256" height="60"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="center" placeholderString="Enter Password" drawsBackground="YES" usesSingleLineMode="YES" id="RKx-o9-fnj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </secureTextFieldCell>
+                            </secureTextField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A80-Mn-g66">
+                                <rect key="frame" x="283" y="246" width="260" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NUU-hc-mfT"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="zBl-1d-zei">
+                                    <font key="font" size="27" name="Lato-Regular"/>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VKU-Kt-pDl">
+                                <rect key="frame" x="285" y="428" width="256" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="cF1-NN-e6K"/>
+                                    <constraint firstAttribute="height" constant="60" id="quu-Wh-4aw"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Enter Username" drawsBackground="YES" id="GyU-mb-def">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="A80-Mn-g66" secondAttribute="bottom" constant="50" id="5Gf-9E-jnF"/>
+                            <constraint firstItem="VKU-Kt-pDl" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="62" id="9iD-P5-6Sf"/>
+                            <constraint firstAttribute="trailing" secondItem="C5X-Xs-2a4" secondAttribute="trailing" id="EWB-GQ-N9i"/>
+                            <constraint firstItem="VKU-Kt-pDl" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="H24-2D-m2T"/>
+                            <constraint firstItem="v4w-cQ-4PN" firstAttribute="top" secondItem="VKU-Kt-pDl" secondAttribute="bottom" constant="22" id="HqV-Np-EOD"/>
+                            <constraint firstItem="C5X-Xs-2a4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="UuH-Vy-NGy"/>
+                            <constraint firstItem="C5X-Xs-2a4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="WbU-AC-LP4"/>
+                            <constraint firstItem="v4w-cQ-4PN" firstAttribute="trailing" secondItem="VKU-Kt-pDl" secondAttribute="trailing" id="X3s-ou-4x6"/>
+                            <constraint firstItem="v4w-cQ-4PN" firstAttribute="height" secondItem="VKU-Kt-pDl" secondAttribute="height" id="evB-7c-nJY"/>
+                            <constraint firstAttribute="trailing" secondItem="A80-Mn-g66" secondAttribute="trailing" constant="20" symbolic="YES" id="hMG-Bb-8SY"/>
+                            <constraint firstItem="v4w-cQ-4PN" firstAttribute="leading" secondItem="VKU-Kt-pDl" secondAttribute="leading" id="mlt-tg-sXc"/>
+                            <constraint firstAttribute="bottom" secondItem="C5X-Xs-2a4" secondAttribute="bottom" id="veQ-zC-yRL"/>
+                            <constraint firstItem="A80-Mn-g66" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="wrK-xv-lRE"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="infoTextLabel" destination="A80-Mn-g66" id="LL3-qu-Mtx"/>
+                        <outlet property="passwordTextField" destination="v4w-cQ-4PN" id="vvw-Fa-KSK"/>
+                        <outlet property="usernameTextField" destination="VKU-Kt-pDl" id="TyZ-V7-s1j"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="194" y="802"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="826" height="550"/>
+    </resources>
 </document>

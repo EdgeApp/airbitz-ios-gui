@@ -16,6 +16,16 @@
 #import "Reachability.h"
 #import "User.h"
 
+@interface ViewController () <NSTextFieldDelegate, ABCAccountDelegate>
+{
+    
+}
+
+@property (weak)            IBOutlet    NSTextField                     *usernameTextField;
+@property (weak)            IBOutlet    NSSecureTextField               *passwordTextField;
+@property (weak)            IBOutlet    NSTextField                     *infoTextLabel;
+
+@end
 
 @implementation ViewController
 
@@ -23,15 +33,55 @@
     [self didFinishLaunching];
     [super viewDidLoad];
     
-    NSError *error;
-    abcAccount = [abc passwordLogin:@"hello8" password:@"Hello12345" delegate:self error:&error];
+    _usernameTextField.delegate = self;
+    [_usernameTextField setTarget:self];
+    [_usernameTextField setAction:@selector(usernameTextFieldDidHitEnter:)];
     
+    _passwordTextField.delegate = self;
+    [_passwordTextField setTarget:self];
+    [_passwordTextField setAction:@selector(passwordTextFieldDidHitEnter:)];
+    
+    [_usernameTextField becomeFirstResponder];
+
+}
+
+- (void)usernameTextFieldDidHitEnter:(id)sender
+{
+    
+}
+
+
+
+- (void)passwordTextFieldDidHitEnter:(id)sender
+{
+    if (abcAccount)
+    {
+        [abcAccount logout];
+    }
+    
+    NSError *error;
+    NSString *str = [NSString stringWithFormat:@"Attempting to log into account: %@", _usernameTextField.stringValue];
+    [_infoTextLabel setStringValue:str];
+    abcAccount = [abc passwordLogin:_usernameTextField.stringValue password:_passwordTextField.stringValue delegate:self error:&error];
+    
+    if (abcAccount && abcAccount.name)
+    {
+        NSString *str = [NSString stringWithFormat:@"Successfully logged into account: %@ (Loading Wallets...)", _usernameTextField.stringValue];
+        [_infoTextLabel setStringValue:str];
+    }
+    else
+    {
+        NSString *str = [NSString stringWithFormat:@"Failed to log into account: %@", _usernameTextField.stringValue];
+        [_infoTextLabel setStringValue:str];
+    }
     NSLog(@"%@", abcAccount.name);
+    
 }
 
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
-    
+    NSString *str = [NSString stringWithFormat:@"Wallets Loaded"];
+    [_infoTextLabel setStringValue:str];
 }
 
 - (void) didFinishLaunching
