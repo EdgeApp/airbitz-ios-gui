@@ -13,8 +13,10 @@
 #import "CJSONDeserializer.h"
 #import "User.h"
 #import "AirbitzCore.h"
-#import "Util.h"
-#import "MainViewController.h"
+//#import "Util.h"
+#import "MainController.h"
+#import "AFNetworking.h"
+#import "AB.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
 #define OTP_TIME                  @"otp_time"
@@ -42,7 +44,7 @@ static NotificationChecker *singleton = nil;
     if (NO == bInitialized)
     {
         singleton = [[NotificationChecker alloc] init];
-        singleton.afmanager = [MainViewController createAFManager];
+        singleton.afmanager = [MainController createAFManager];
 
         bInitialized = YES;
         [singleton start];

@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AirbitzCore (1.0.0)
+  - AirbitzCore (0.9.2)
   - Reachability (3.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AirbitzCore: e0e3fa23a15f41c92314ed42eb35cabda36e4fc1
+  AirbitzCore: 1a4abf94c0bb2db98feba22a5bd32e51ed2f6147
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 

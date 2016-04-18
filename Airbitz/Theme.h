@@ -27,7 +27,6 @@
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;
 @property (nonatomic) UIColor *colorRequestButtonDisabled;
-@property (nonatomic) CGFloat sendRequestButtonDisabled;
 @property (nonatomic) UIColor *colorTextBright;
 @property (nonatomic) UIColor *colorTextDark;
 @property (nonatomic) UIColor *colorRequestTopTextField;
