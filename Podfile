@@ -10,7 +10,7 @@ end
 target :ios do
     platform :ios, '8.0'
     pod 'SDWebImage', '~>3.6'
-    link_with 'Airbitz', 'Airbitz-Testnet'
+    link_with 'Airbitz', 'Airbitz-Develop', 'Airbitz-Testnet'
     import_pods
 end
 
