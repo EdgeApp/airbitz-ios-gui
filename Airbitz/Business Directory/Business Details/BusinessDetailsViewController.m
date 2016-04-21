@@ -564,7 +564,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		//share cell
         commonCell.cellIcon.hidden = NO;
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_share.png"];
-        commonCell.leftLabel.text = NSLocalizedString(@"Share", @"Share button text");
+        commonCell.leftLabel.text = shareButtonText;
         shareView = commonCell;
 	}
 	else if(cellType == kHours)
@@ -740,10 +740,10 @@ typedef NS_ENUM(NSUInteger, CellType) {
         case kPhone:
         {
 #if SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT
-            NSString *msg = NSLocalizedString(@"Are you sure you want to call", nil);
+            NSString *msg = areYouSureYouWantToCall;
             
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Place Call", nil)
+                                  initWithTitle:placeCallText
                                   message:[NSString stringWithFormat:@"%@ %@?", msg, [self.businessGeneralInfo objectForKey:@"phone"]]
                                   delegate:self
                                   cancelButtonTitle:@"No"
@@ -765,7 +765,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSString *subject = [NSString stringWithFormat:@"%@ - %@ %@",
                              [self.businessDetails objectForKey:@"name"],
                              [self.businessDetails objectForKey:@"city"],
-                             NSLocalizedString(@"Bitcoin | Airbitz", nil)
+                             @"Bitcoin | Airbitz"
                              ];
             NSString *msg = [NSString stringWithFormat:@"%@ https://airbitz.co/biz/%@",
                                 subject, [self.businessDetails objectForKey:@"bizId"]

@@ -57,7 +57,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"More Categories", @"")];
+    [MainViewController changeNavBarTitle:self title:moreCategoriesText];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 

@@ -39,8 +39,6 @@
 
 #define MAX_SEARCH_CACHE_SIZE	2 /* each cache can hold this many items */
 
-#define CURRENT_LOCATION_STRING	NSLocalizedString(@"Current Location", nil)
-#define ON_THE_WEB_STRING	NSLocalizedString(@"On The Web", nil)
 #define NUM_PROGRAMMATIC_RESULTS 2
 
 //#define DEFAULT_SEARCH_RADIUS_MILES	50
@@ -189,7 +187,7 @@ static bool bInitialized = false;
 
     self.dividerView.delegate = self;
 
-    self.searchBarLocation.placeholder = NSLocalizedString(@"City, State/Province, or Country", @"City, State/Province, or Country placeholder");
+    self.searchBarLocation.placeholder = cityStateProvinceOrCountry;
 
     //
     // Add a footer so the last listing is visible above tabbar
@@ -240,7 +238,7 @@ static bool bInitialized = false;
 
 - (void) setupNavBar
 {
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Directory", @"Directory title bar text")];
+    [MainViewController changeNavBarTitle:self title:directoryText];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:bShowBackButton action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:infoButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info:) fromObject:self];
 }
@@ -525,31 +523,31 @@ static bool bInitialized = false;
     switch (sender.tag)
     {
         case TAG_CATEGORY_RESTAURANTS:
-            self.searchBarSearch.text = NSLocalizedString(@"Restaurants & Food Trucks", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"", nil);
+            self.searchBarSearch.text = restaurantsAndFoodTrucks;
+            self.searchBarLocation.text = @"";
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_COFFEE:
-            self.searchBarSearch.text = NSLocalizedString(@"Coffee & Tea", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"", nil);
+            self.searchBarSearch.text = coffeeAndTea;
+            self.searchBarLocation.text = @"";
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_ATM:
             [self launchATMSearch];
             break;
         case TAG_CATEGORY_GIFTCARDS:
-            self.searchBarSearch.text = NSLocalizedString(@"Gift Cards", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            self.searchBarSearch.text = giftCards;
+            self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_ELECTRONICS:
-            self.searchBarSearch.text = NSLocalizedString(@"Electronics", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            self.searchBarSearch.text = electronicsText;
+            self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_SHOPPING:
-            self.searchBarSearch.text = NSLocalizedString(@"Shopping", nil);
-            self.searchBarLocation.text = NSLocalizedString(@"On the Web", nil);
+            self.searchBarSearch.text = shoppingText;
+            self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_MORE:
@@ -607,7 +605,7 @@ static bool bInitialized = false;
 
             if ([self.searchBarLocation.text length])
             {
-                if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [CURRENT_LOCATION_STRING uppercaseString]])
+                if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [currentLocationString uppercaseString]])
                 {
                     //NSString *locationString = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
                     //[query appendFormat:@"&ll=%@", locationString];
@@ -650,16 +648,6 @@ static bool bInitialized = false;
         NSInteger statusCode = operation.response.statusCode;
         
         ABCLog(1,@"*** SERVER REQUEST STATUS FAILURE: %d", (int)statusCode);
-//        NSString *msg = NSLocalizedString(@"Can't connect to server.  Check your internet connection", nil);
-//        UIAlertView *alert = [[UIAlertView alloc]
-//                              initWithTitle: NSLocalizedString(@"No Connection", @"Alert title that warns user couldn't connect to server")
-//                              message: msg
-//                              delegate: nil
-//                              cancelButtonTitle: @"OK"
-//                              otherButtonTitles: nil];
-//        self.spinnerView.hidden = YES;
-//        self.searchIndicator.hidden = YES;
-//        [alert show];
     }];
 }
 
@@ -861,7 +849,7 @@ static bool bInitialized = false;
     //
     // Set placeholder text
     //
-    self.searchBarSearch.placeholder = NSLocalizedString(@"Business Name or Category", @"Business Name or Category placeholder");
+    self.searchBarSearch.placeholder = businessNameOrCategory;
     self.searchCluesTableView.hidden = NO;
 
     //
@@ -900,7 +888,7 @@ static bool bInitialized = false;
     // Put bottom of searchCluesTable to top of screen.
     self.searchCluesBottom.constant = self.view.frame.size.height;
     self.searchCluesTableView.hidden = YES;
-    self.searchBarSearch.placeholder = NSLocalizedString(@"Search", @"SearchBarSearch placeholder");
+    self.searchBarSearch.placeholder = searchText;
 
     if (!LOCKED_SEARCH_CATEGORY)
     {
@@ -1456,7 +1444,7 @@ static bool bInitialized = false;
     {
         if (directoryMode == DIRECTORY_MODE_SEARCH)
         {
-            if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [ON_THE_WEB_STRING uppercaseString]])
+            if ([[self.searchBarLocation.text uppercaseString] isEqualToString: [onTheWebString uppercaseString]])
             {
                 [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             }
@@ -1715,12 +1703,12 @@ static bool bInitialized = false;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize)
             {
-                cell.textLabel.text = CURRENT_LOCATION_STRING;
+                cell.textLabel.text = currentLocationString;
                 cell.textLabel.textColor = [UIColor blueColor];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize + 1)
             {
-                cell.textLabel.text = ON_THE_WEB_STRING;
+                cell.textLabel.text = onTheWebString;
                 cell.textLabel.textColor = [UIColor blueColor];
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (locationAutoCorrectArray != nil)
@@ -1885,7 +1873,7 @@ static bool bInitialized = false;
             //add to search cache
             if ([searchLocationCache containsObject: cell.textLabel.text] == NO)
             {
-                if (([cell.textLabel.text isEqualToString: ON_THE_WEB_STRING] == NO) && ([cell.textLabel.text isEqualToString: CURRENT_LOCATION_STRING] == NO)) //don't cache the default items
+                if (([cell.textLabel.text isEqualToString: onTheWebString] == NO) && ([cell.textLabel.text isEqualToString: currentLocationString] == NO)) //don't cache the default items
                 {
                     [searchLocationCache addObject: cell.textLabel.text];
                     if (searchLocationCache.count > MAX_SEARCH_CACHE_SIZE)
@@ -1895,7 +1883,7 @@ static bool bInitialized = false;
                 }
             }
 
-            if ([cell.textLabel.text isEqualToString: ON_THE_WEB_STRING])
+            if ([cell.textLabel.text isEqualToString: onTheWebString])
             {
                 [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             }

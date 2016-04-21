@@ -1765,8 +1765,8 @@ MainViewController *singleton;
     {
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
         [mailComposer setToRecipients:[NSArray arrayWithObjects:supportEmail, nil]];
-        NSString *subject = [NSString stringWithFormat:@"%@ Feedback", appTitle];
-        [mailComposer setSubject:NSLocalizedString(subject, nil)];
+        NSString *subject = [NSString stringWithFormat:@"%@ %@", appTitle, feedbackText];
+        [mailComposer setSubject:subject];
         mailComposer.mailComposeDelegate = self;
         [self presentViewController:mailComposer animated:YES completion:nil];
     }
@@ -1791,20 +1791,20 @@ MainViewController *singleton;
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled", nil);
+            strMsg = emailCancelled;
             break;
             
         case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later", nil);
+            strMsg = emailSavedToSendLater;
             break;
             
         case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent", nil);
+            strMsg = emailSent;
             break;
             
         case MFMailComposeResultFailed:
         {
-            strTitle = NSLocalizedString(@"Error sending Email", nil);
+            strTitle = errorSendingEmail;
             strMsg = [error localizedDescription];
             break;
         }
@@ -2181,7 +2181,7 @@ MainViewController *singleton;
 
 - (void)logout
 {
-    NSString *str = NSLocalizedString(@"Logging Out", nil);
+    NSString *str = loggingOutText;
 
     [FadingAlertView create:self.view
                     message:[NSString stringWithFormat:str, appTitle]

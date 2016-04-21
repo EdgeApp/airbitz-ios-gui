@@ -64,8 +64,8 @@
 {
     [super viewDidLoad];
 
-	[self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"cancel button title") forState:UIControlStateNormal];
-	[self.doneButton setTitle:NSLocalizedString(@"Done", @"done button title") forState:UIControlStateNormal];
+	[self.cancelButton setTitle:cancelButtonText forState:UIControlStateNormal];
+	[self.doneButton setTitle:doneButtonText forState:UIControlStateNormal];
 
     // This will remove extra separators from tableview
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -87,7 +87,7 @@
 
     // set up the specifics on our picker text view
     self.pickerTextNew.textField.returnKeyType = UIReturnKeyDone;
-    self.pickerTextNew.textField.placeholder = NSLocalizedString(@"Add New", nil);
+    self.pickerTextNew.textField.placeholder = addNewText;
     self.pickerTextNew.textField.borderStyle = UITextBorderStyleLine;
     self.pickerTextNew.textField.backgroundColor = [UIColor whiteColor];
     self.pickerTextNew.textField.layer.cornerRadius = 5;
@@ -151,8 +151,8 @@
 - (IBAction)Cancel
 {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"Cancel Changes", nil)
-                          message:NSLocalizedString(@"Are you sure you want to cancel any changes you've made?", nil)
+                          initWithTitle:cancelButtonText
+                          message:areYouSureYouWantToCancel
                           delegate:self
                           cancelButtonTitle:@"No"
                           otherButtonTitles:@"Yes", nil];

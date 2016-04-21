@@ -13,7 +13,7 @@
 #import "CJSONDeserializer.h"
 #import "User.h"
 #import "AirbitzCore.h"
-//#import "Util.h"
+#import "Strings.h"
 #import "MainController.h"
 #import "AFNetworking.h"
 #import "AB.h"
@@ -295,10 +295,9 @@ static NotificationChecker *singleton = nil;
             [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SEEN_KEY];
             [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SHOWN_IN_APP];
             [notif setValue:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:OTP_TIME];
-            [notif setObject:NSLocalizedString(@"Two Factor Reset", nil) forKey:@"title"];
-            NSString *message = [NSString stringWithFormat:
-                    @"A two factor reset has been requested. Please login as %@ and approve or cancel the request.", username];
-            [notif setObject:NSLocalizedString(message, nil) forKey:@"message"];
+            [notif setObject:twoFactorResetText forKey:@"title"];
+            NSString *message = [NSString stringWithFormat:aTwoFactorResetHasBeenRequested, username];
+            [notif setObject:message forKey:@"message"];
             [[LocalSettings controller].otpNotifications addObject:notif];
         }
 

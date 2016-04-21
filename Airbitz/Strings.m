@@ -190,4 +190,62 @@
 #define receivedBitcoinText                         NSLocalizedString(@"Received Bitcoin", nil)
 #define referYourFriendsText                        NSLocalizedString(@"Refer Your Friends", nil)
 #define referYourFriendsAndGetRevenue               NSLocalizedString(@"REFER YOUR FRIENDS\n(Earn Bitcoin)", nil)
+#define appnameHasRequestedABitcoinAddress          NSLocalizedString(@"%@ has requested a bitcoin address to send money to.", nil)
+#define anAppHasRequestedABitcoinAddress            NSLocalizedString(@"An app has requested a bitcoin address to send money to.", nil)
+#define pleaseChooseAWalletToReceiveFunds           NSLocalizedString(@" Please choose a wallet to receive funds.", nil)
+#define shareButtonText                             NSLocalizedString(@"Share", @"Share button text")
+#define areYouSureYouWantToCall                     NSLocalizedString(@"Are you sure you want to call", nil)
+#define placeCallText                               NSLocalizedString(@"Place Call", nil)
+#define addNewText                                  NSLocalizedString(@"Add New", nil)
+#define areYouSureYouWantToCancel                   NSLocalizedString(@"Are you sure you want to cancel any changes you've made?", nil)
+#define currentLocationString                       NSLocalizedString(@"Current Location", nil)
+#define onTheWebString                              NSLocalizedString(@"On The Web", nil)
+#define cityStateProvinceOrCountry                  NSLocalizedString(@"City, State/Province, or Country", @"City, State/Province, or Country placeholder")
+#define directoryText                               NSLocalizedString(@"Directory", @"Directory title bar text")
+#define restaurantsAndFoodTrucks                    NSLocalizedString(@"Restaurants & Food Trucks", nil)
+#define coffeeAndTea                                NSLocalizedString(@"Coffee & Tea", nil)
+#define giftCards                                   NSLocalizedString(@"Gift Cards", nil)
+#define electronicsText                             NSLocalizedString(@"Electronics", nil)
+#define shoppingText                                NSLocalizedString(@"Electronics", nil)
+#define businessNameOrCategory                      NSLocalizedString(@"Business Name or Category", @"Business Name or Category placeholder")
+#define searchText                                  NSLocalizedString(@"Search", @"SearchBarSearch placeholder")
+#define walletExport                                NSLocalizedString(@"Wallet Export", nil)
+#define privateSeedText                             NSLocalizedString(@"Private Seed", nil)
+#define exportWalletTransactions                    NSLocalizedString(@"Export Wallet Transactions", nil)
+#define airprintIsNotAvailable                      NSLocalizedString(@"AirPrint is not currently available", nil)
+#define walletPrivateSeed                           NSLocalizedString(@"Wallet Private Seed", nil)
+#define exportPrivateSeed                           NSLocalizedString(@"Export Private Seed", nil)
+#define emailCancelled                              NSLocalizedString(@"Email cancelled.", nil)
+#define emailSavedToSendLater                       NSLocalizedString(@"Email saved to send later.", nil)
+#define emailSent                                   NSLocalizedString(@"Email saved to send later.", nil)
+#define errorSendingEmail                           NSLocalizedString(@"Error sending Email.", nil)
+#define usernameText                                NSLocalizedString(@"Username", @"Username")
+#define anErrorOccurredNetworkOrIncorrectPassword   NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)
+#define pleaseEnterAUsername                        NSLocalizedString(@"Please enter a User Name", nil)
+#define enableTouchIDText                           NSLocalizedString(@"Enable Touch ID", nil)
+#define wouldYouLikeToEnableTouchID                 NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil)
+#define pinLoginErrorText                           NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil)
+#define touchIDDisabled                             NSLocalizedString(@"Touch ID Disabled", nil)
+#define touchIDEnabledText                          NSLocalizedString(@"Touch ID Enabled", nil)
+#define tryAgainText                                NSLocalizedString(@"Try again?", nil)
+#define touchIDText                                 NSLocalizedString(@"Touch ID", nil)
+#define enterYourPasswordToEnableTouchID            NSLocalizedString(@"Please enter your password to enable Touch ID", nil)
+#define feedbackText                                NSLocalizedString(@"Feedback" ,nil)
+#define loggingOutText                              NSLocalizedString(@"Logging Out", nil)
+#define moreCategoriesText                          NSLocalizedString(@"More Categories", @"")
+#define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
+#define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
+//#define
+//#define
+//#define
+//#define
+//#define
+//#define  NSLocalizedString( ,nil)
+//#define  NSLocalizedString( ,nil)
+//#define
+//#define
+//#define
+//#define
+//#define
+
 
