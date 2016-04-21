@@ -80,6 +80,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIAlertView                     *_bitidAlert;
     UIAlertView                     *_privateKeyAlert;
     ABCParsedURI                    *_parsedURI;
+    NSString                        *_privateKeyURI;
     NSString                        *_tweet;
 }
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
@@ -554,7 +555,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (buttonIndex == 1)
         {
             // Import
-            [self importWallet:_parsedURI.privateKey];
+            [self importWallet:_privateKeyURI];
         }
         else if (buttonIndex == 2)
         {
@@ -1343,7 +1344,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
         [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
-        if (0 < amount)
+        if (ABCImportHBitsURI == dataModel)
+        {
+            [self showHbitsResults:address amount:amount];
+        }
+        else if (0 < amount)
         {
             [MainViewController fadingAlertDismiss];
             NSString *txid = transaction.txid;
@@ -1353,11 +1358,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                                                   userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abcAccount.currentWallet.uuid,
                                                                              KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
-            if (ABCImportHBitsURI == dataModel)
-                [self showHbitsResults:address amount:amount];
         }
         else
         {
+            if (ABCImportHBitsURI == dataModel)
+            {
+                [self showHbitsResults:address amount:amount];
+            }
+            else
             [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
         }
 
@@ -1615,6 +1623,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                 cancelButtonTitle:cancelButtonText
                                 otherButtonTitles:importFunds,sendFundsToPrivateKey,nil];
             [_privateKeyAlert show];
+            _privateKeyURI = uriString;
             return;
         }
         else if (_parsedURI.address || _parsedURI.paymentRequestURL)
