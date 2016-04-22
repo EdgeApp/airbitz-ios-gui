@@ -320,10 +320,10 @@
 #define disabledButtonText                          NSLocalizedString(@"Disabled", nil)
 #define resetCancelledText                          NSLocalizedString(@"Reset Cancelled", nil)
 #define unableToImportSecret                        NSLocalizedString(@"Unable to import secret", nil)
-//#define
-//#define
-//#define
-//#define
+#define unableToDetermineTwoFactor                  NSLocalizedString(@"Unable to determine two factor status", nil)
+#define twoFactorDisabled                           NSLocalizedString(@"Two Factor Disabled", nil)
+#define requestConfirmedTwoFactorOff                NSLocalizedString(@"Request confirmed, Two Factor off.", nil)
+#define createWalletText                            NSLocalizedString(@"Create Wallet", nil)
 //#define
 //#define
 //#define
@@ -347,7 +347,7 @@
 #define open24Text                                  NSLocalizedString(@"Open 24" ,nil)
 #define hoursText                                   NSLocalizedString(@"hours" ,nil)
 #define toFormatString                              NSLocalizedString(@"To: %@" ,nil)
-//#define  NSLocalizedString( ,nil)
+#define walletCreateFailedFormatString              NSLocalizedString(@"Wallet creation failed:\n%@" ,nil)
 //#define  NSLocalizedString( ,nil)
 //#define  NSLocalizedString( ,nil)
 //#define  NSLocalizedString( ,nil)

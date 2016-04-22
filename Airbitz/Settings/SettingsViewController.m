@@ -1039,7 +1039,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	}
 	if (section == SECTION_DEBUG)
 	{
-		label.text = NSLocalizedString(@"", nil);
+		label.text = @"";
 	}
     cell.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:cell.bounds];
