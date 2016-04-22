@@ -512,8 +512,8 @@ static bool bInitialized = false;
 
 - (void)launchATMSearch;
 {
-    self.searchBarSearch.text = NSLocalizedString(@"ATM", nil);
-    self.searchBarLocation.text = NSLocalizedString(@"", nil);
+    self.searchBarSearch.text = atmSearchString;
+    self.searchBarLocation.text = @"";
     [self transitionMode:DIRECTORY_MODE_MAP];
 }
 

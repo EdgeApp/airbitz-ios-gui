@@ -235,12 +235,23 @@
 #define moreCategoriesText                          NSLocalizedString(@"More Categories", @"")
 #define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
 #define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
+#define atmSearchString                             NSLocalizedString(@"ATM" ,nil)
+#define warningExclamationText                      NSLocalizedString(@"Warning!", nil)
+#define aboutToExitPasswordRecovery                 NSLocalizedString(@"Warning!", nil)
+#define skipThisStepText                            NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")
+#define warningYouWillNeverBeAbleToRecover          NSLocalizedString(@"**WARNING** You will NEVER be able to recover your password if it is forgotten!!", @"")
+#define completeSignupText                          NSLocalizedString(@"Complete Signup", @"")
+#define passwordRecoverySetup                       NSLocalizedString(@"Password Recovery Setup", @"")
+#define wrongAnswersText                            NSLocalizedString(@"Wrong Answers", nil)
+#define givenAnswersAreIncorrect                    NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+#define unableToImportToken                         NSLocalizedString(@"Unable to import token", nil)
+#define errorImportingTokenTryAgain                 NSLocalizedString(@"Error importing the token at this time. Please try again.", nil)
+#define passwordMismatchText                        NSLocalizedString(@"Password mismatch", nil)
+#define pleaseEnterCorrectPassword                  NSLocalizedString(@"Please enter your correct password.", nil)
+#define timeToCrackText                             NSLocalizedString(@"Time to crack:", @"text in password verification popup")
 //#define
 //#define
 //#define
-//#define
-//#define
-//#define  NSLocalizedString( ,nil)
 //#define  NSLocalizedString( ,nil)
 //#define
 //#define

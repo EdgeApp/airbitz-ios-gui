@@ -170,11 +170,11 @@ typedef enum eAlertType
         if ([self isFormDirty]) {
             _alertType = ALERT_TYPE_EXIT;
             UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Warning!", nil)
-                message:NSLocalizedString(@"You are about to exit password recovery and questions & answers have not yet been set.", nil)
+                initWithTitle:warningExclamationText
+                message:aboutToExitPasswordRecovery
                 delegate:self
-                cancelButtonTitle:@"Cancel"
-                otherButtonTitles:@"OK", nil];
+                cancelButtonTitle:cancelButtonText
+                otherButtonTitles:okButtonText, nil];
             [alert show];
         } else {
             [self exit];
@@ -187,11 +187,11 @@ typedef enum eAlertType
 	_alertType = ALERT_TYPE_SKIP_THIS_STEP;
 	
 	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")
-						  message:NSLocalizedString(@"**WARNING** You will NEVER be able to recover your password if it is forgotten!!", @"")
+						  initWithTitle:skipThisStepText
+						  message:warningYouWillNeverBeAbleToRecover
 						  delegate:self
-						  cancelButtonTitle:@"Go Back"
-						  otherButtonTitles:@"OK", nil];
+						  cancelButtonTitle:goBackButtonText
+						  otherButtonTitles:okButtonText, nil];
 	[alert show];
 }
 
@@ -306,8 +306,8 @@ typedef enum eAlertType
         self.imageSkip.hidden = NO;
         self.passwordView.hidden = YES;
         self.buttonBack.hidden = YES;
-        [self.completeSignupButton setTitle:NSLocalizedString(@"Complete Signup", @"") forState:UIControlStateNormal];
-        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
+        [self.completeSignupButton setTitle:completeSignupText forState:UIControlStateNormal];
+        [self.labelTitle setText:passwordRecoverySetup];
     }
     else if (mode == PassRecovMode_Change)
     {
@@ -315,8 +315,8 @@ typedef enum eAlertType
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
         self.passwordView.hidden = ![abcAccount accountHasPassword];
-        [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
-        [self.labelTitle setText:NSLocalizedString(@"Password Recovery Setup", @"")];
+        [self.completeSignupButton setTitle:doneButtonText forState:UIControlStateNormal];
+        [self.labelTitle setText:passwordRecoverySetup];
     }
     else if (mode == PassRecovMode_Recover)
     {
@@ -324,8 +324,8 @@ typedef enum eAlertType
         self.imageSkip.hidden = YES;
         self.buttonBack.hidden = NO;
         self.passwordView.hidden = YES;
-        [self.completeSignupButton setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
-        [self.labelTitle setText:NSLocalizedString(@"Password Recovery", @"")];
+        [self.completeSignupButton setTitle:doneButtonText forState:UIControlStateNormal];
+        [self.labelTitle setText:passwordRecoveryText];
     }
 }
 
@@ -354,10 +354,10 @@ typedef enum eAlertType
             // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
             // Core should change to set error to OK but change validAnswers -paul
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Wrong Answers", nil)
-                                  message:NSLocalizedString(@"The given answers were incorrect. Please try again.", nil)
+                                  initWithTitle:wrongAnswersText
+                                  message:givenAnswersAreIncorrect
                                   delegate:nil
-                                  cancelButtonTitle:@"OK"
+                                  cancelButtonTitle:okButtonText
                                   otherButtonTitles:nil];
             [alert show];
         }
@@ -394,10 +394,10 @@ typedef enum eAlertType
         }
         if (!success && !bBack) {
             UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Unable to import token", nil)
-                                message:NSLocalizedString(@"We are sorry we are unable to import the token at this time.", nil)
+                                initWithTitle:unableToImportToken
+                                message:errorImportingTokenTryAgain
                                 delegate:nil
-                                cancelButtonTitle:@"OK"
+                                cancelButtonTitle:okButtonText
                                 otherButtonTitles:nil];
             [alert show];
         }
@@ -412,10 +412,10 @@ typedef enum eAlertType
         password = _passwordField.text;
         if ([abcAccount accountHasPassword] && ![abcAccount checkPassword:password]) {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Password mismatch", nil)
-                                  message:NSLocalizedString(@"Please enter your correct password.", nil)
+                                  initWithTitle:passwordMismatchText
+                                  message:pleaseEnterCorrectPassword
                                   delegate:nil
-                                  cancelButtonTitle:@"OK"
+                                  cancelButtonTitle:okButtonText
                                   otherButtonTitles:nil];
             [alert show];
             return;
