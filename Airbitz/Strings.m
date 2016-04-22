@@ -190,4 +190,9 @@
 #define receivedBitcoinText                         NSLocalizedString(@"Received Bitcoin", nil)
 #define referYourFriendsText                        NSLocalizedString(@"Refer Your Friends", nil)
 #define referYourFriendsAndGetRevenue               NSLocalizedString(@"REFER YOUR FRIENDS\n(Earn Bitcoin)", nil)
+#define importFailedPrivateKeyEmpty                 NSLocalizedString(@"Import failed. Private key is empty", nil)
+#define importFailedText                            NSLocalizedString(@"Import failed", nil)
+#define errorCodeText                               NSLocalizedString(@"Error code", nil)
+#define errorDescriptionText                        NSLocalizedString(@"Error desc", nil)
+
 

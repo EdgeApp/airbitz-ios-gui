@@ -3,13 +3,14 @@
 // Copyright (c) 2016 Airbitz. All rights reserved.
 //
 
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "AFNetworking.h"
 #import "Affiliate.h"
-#import "MainViewController.h"
+#import "MainController.h"
 #import "BrandStrings.h"
 #import "Strings.h"
 #import "LocalSettings.h"
 #import "User.h"
+#import "AB.h"
 
 NSString *ServerRoot              = @"https://api.airbitz.co/";
 NSString *AffiliatesRegister      = @"https://api.airbitz.co/affiliates/register";
@@ -54,7 +55,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
         return;
     }
     
-    self.afmanager = [MainViewController createAFManager];
+    self.afmanager = [MainController createAFManager];
     [self.afmanager GET:AffiliatesQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSDictionary *results = (NSDictionary *) responseObject;
@@ -136,7 +137,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
-        self.afmanager = [MainViewController createAFManager];
+        self.afmanager = [MainController createAFManager];
 
         [self.afmanager GET:AffiliatesRegister parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
