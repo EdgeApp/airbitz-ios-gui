@@ -236,11 +236,11 @@
 - (void)invalidPasswordAlert
 {
     UIAlertView *alert = [[UIAlertView alloc]
-                        initWithTitle:NSLocalizedString(@"Incorrect password", nil)
-                        message:NSLocalizedString(@"Incorrect password", nil)
+                        initWithTitle:incorrectPasswordText
+                        message:incorrectPasswordText
                         delegate:self
-                        cancelButtonTitle:@"Cancel"
-                        otherButtonTitles:@"OK", nil];
+                        cancelButtonTitle:cancelButtonText
+                        otherButtonTitles:okButtonText, nil];
     [alert show];
 }
 
@@ -284,9 +284,9 @@
 - (void)setText:(BOOL)on
 {
     if (on) {
-        _onOffLabel.text = NSLocalizedString(@"Enabled", nil);
+        _onOffLabel.text = enableButtonText;
     } else {
-        _onOffLabel.text = NSLocalizedString(@"Disabled", nil);
+        _onOffLabel.text = disabledButtonText;
     }
 }
 
@@ -390,7 +390,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {
-                    [MainViewController fadingAlert:NSLocalizedString(@"Reset Cancelled", nil)];
+                    [MainViewController fadingAlert:resetCancelledText];
                     _requestView.hidden = YES;
                 } else {
                     [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -414,7 +414,7 @@
         [MainViewController changeNavBarOwner:self];
         _tfaMenuViewController = nil;
         if (!bBack && !success) {
-            [MainViewController fadingAlert:NSLocalizedString(@("Unable to import secret"), nil)];
+            [MainViewController fadingAlert:unableToImportSecret];
         }
         
         [self updateViews];

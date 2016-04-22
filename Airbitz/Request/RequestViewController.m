@@ -208,7 +208,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exchangeRateUpdate:) name:NOTIFICATION_EXCHANGE_RATE_CHANGED object:nil];
 
     if ([[LocalSettings controller] offerRequestHelp]) {
-        [MainViewController fadingAlertHelpPopup:NSLocalizedString(@"Present QR code to Sender and have them scan to send you payment",nil)];
+        [MainViewController fadingAlertHelpPopup:presentQRCodeToSender];
     }
 
     [self updateViews:nil];
@@ -427,7 +427,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            [MainViewController fadingAlert:NSLocalizedString(@"Error occured copying to the clipboard", nil)];
+            [MainViewController fadingAlert:errorOccurredCopyingToClipboard];
         }
     }
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 1)
@@ -542,16 +542,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case kNone:
         case kDone:
         {
-            self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
+            self.statusLine2.text = waitingForPaymentText;
             break;
         }
         case kPartial:
         {
             remaining = self.amountSatoshiRequested - self.amountSatoshiReceived;
-            NSString *string = NSLocalizedString(@"Requested...", @"Requested string on Request screen");
+            NSString *string = amountRequestedString;
             self.statusLine1.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:self.amountSatoshiRequested],string];
 
-            string = NSLocalizedString(@"Remaining...", @"Remaining string on Request screen");
+            string = amountRemainingString;
             self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:remaining],string];
             break;
         }
@@ -560,12 +560,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
             if (self.amountSatoshiReceived > 0)
             {
-                NSString *string = NSLocalizedString(@"Received...", @"Received string on Request screen");
+                NSString *string = amountReceivedString;
                 self.statusLine2.text = [NSString stringWithFormat:@"%@ %@",[abcAccount.settings.denomination satoshiToBTCString:self.amountSatoshiReceived],string];
             }
             else
             {
-                self.statusLine2.text = NSLocalizedString(@"Waiting for Payment...", @"Status on Request screen");
+                self.statusLine2.text = waitingForPaymentText;
             }
             break;
         }
@@ -775,7 +775,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.btcWidth.constant = btcFrame.size.width;
     self.btcHeight.constant = btcFrame.size.height;
 
-    NSString *string = NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount");
+    NSString *string = enterAmountOptionalText;
     self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
 
     [topLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
@@ -942,7 +942,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     line1 = self.connectedName;
     line2 = @"";
-    line3 = NSLocalizedString(@"Connected", "Popup text when BLE connects");
+    line3 = connectedText;
 
     //see if there is a match between advertised name and name in contacts.  If so, use the photo from contacts
     BOOL imageIsFromContacts = NO;
@@ -995,9 +995,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             delay = 4.0;
             duration = 2.0;
-            line1 = NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment");
+            line1 = warningWithAsterisks;
             line2 = @"";
-            line3 = NSLocalizedString(@"Partial Payment", @"Text on partial payment");
+            line3 = partialPaymentText;
             image = [UIImage imageNamed:@"Warning_icon.png"];
             [[AudioController controller] playPartialReceived];
             break;
@@ -1007,7 +1007,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
             delay = 7.0;
             duration = 2.0;
             image = [UIImage imageNamed:@"bitcoin_symbol.png"];
-            line1 = NSLocalizedString(@"Payment received", @"Text on payment recived popup");
+            line1 = paymentReceivedText;
             double currency;
             currency = [abcAccount.exchangeCache satoshiToCurrency:amountSatoshi
                                                       currencyCode:wallet.currency.code
@@ -1296,14 +1296,14 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (abcAccount.settings.bNameOnPayments && abcAccount.settings.fullName)
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request from %@", appTitle, abcAccount.settings.fullName];
+            subject = [NSString stringWithFormat:bitcoinRequestFormatString, appTitle, abcAccount.settings.fullName];
         }
         else
         {
-            subject = [NSString stringWithFormat:@"%@ Bitcoin Request", appTitle];
+            subject = [NSString stringWithFormat:bitcoinRequestFromFormatString, appTitle];
         }
 
-        [mailComposer setSubject:NSLocalizedString(subject, nil)];
+        [mailComposer setSubject:subject];
 
         [mailComposer setMessageBody:content isHTML:YES];
 
@@ -1322,9 +1322,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Can't send e-mail"
+                                                        message:cantSendEmailText
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:okButtonText
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -1443,12 +1443,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     
     // Set notes
     NSMutableString *notes = [[NSMutableString alloc] init];
-    [notes appendFormat:NSLocalizedString(@"%@ / %@ requested via %@ on %@.", nil),
+    [notes appendFormat:requestNotesFormatString,
      [abcAccount.settings.denomination satoshiToBTCString:self.abcReceiveAddress.amountSatoshi],
      [wallet.currency doubleToPrettyCurrencyString:currency],
      _requestType, [dateFormatter stringFromDate:now]];
     self.abcReceiveAddress.metaData.notes = notes;
-    self.abcReceiveAddress.metaData.category = @"Income:";
 
     [self.abcReceiveAddress modifyRequestWithDetails];
 }
@@ -1462,10 +1461,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case MessageComposeResultCancelled:
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
-                                                            message:@"SMS cancelled"
+                                                            message:smsCancelledText
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
             [alert show];
         }
             break;
@@ -1473,10 +1472,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case MessageComposeResultFailed:
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
-                                                            message:@"Error sending SMS"
+                                                            message:errorSendingSMS
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
             [alert show];
         }
             break;
@@ -1484,10 +1483,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         case MessageComposeResultSent:
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
-                                                            message:@"SMS sent"
+                                                            message:smsSent
                                                            delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
             [alert show];
             [self.abcReceiveAddress finalizeRequest];
         }
@@ -1506,27 +1505,27 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    NSString *strTitle = NSLocalizedString(appTitle, nil);
+    NSString *strTitle = appTitle;
     NSString *strMsg = nil;
 
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled", nil);
+            strMsg = emailCancelled;
             break;
 
         case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later", nil);
+            strMsg = emailSavedToSendLater;
             break;
 
         case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent", nil);
+            strMsg = emailSent;
             [self.abcReceiveAddress finalizeRequest];
             break;
 
         case MFMailComposeResultFailed:
         {
-            strTitle = NSLocalizedString(@"Error sending Email", nil);
+            strTitle = errorSendingEmail;
             strMsg = [error localizedDescription];
             break;
         }
@@ -1537,7 +1536,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
                                                     message:strMsg
                                                    delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          cancelButtonTitle:okButtonText
                                           otherButtonTitles:nil];
     [alert show];
 
@@ -1571,9 +1570,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appTitle
-                                                        message:(controller.mode == RecipientMode_SMS ? @"SMS cancelled" : @"Email cancelled")
+                                                        message:(controller.mode == RecipientMode_SMS ? smsCancelledText : emailCancelled)
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              cancelButtonTitle:okButtonText
                                               otherButtonTitles:nil];
         [alert show];
     }

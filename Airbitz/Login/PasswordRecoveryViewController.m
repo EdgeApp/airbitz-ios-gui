@@ -268,9 +268,9 @@ typedef enum eAlertType
 		{
 			UIAlertView *alert = [[UIAlertView alloc]
 								  initWithTitle:self.labelTitle.text
-								  message:@"You must answer all six questions. Make sure your answers are long enough."
+								  message:youMustAnswerAllSix
 								  delegate:nil
-								  cancelButtonTitle:@"OK"
+								  cancelButtonTitle:okButtonText
 								  otherButtonTitles:nil];
 			[alert show];
 		}
@@ -279,9 +279,9 @@ typedef enum eAlertType
 	{
 		UIAlertView *alert = [[UIAlertView alloc]
 							  initWithTitle:self.labelTitle.text
-							  message:@"You must choose all six questions before proceeding."
+							  message:youMustChooseAllSix
 							  delegate:nil
-							  cancelButtonTitle:@"OK"
+							  cancelButtonTitle:okButtonText
 							  otherButtonTitles:nil];
 		[alert show];
 	}
@@ -412,7 +412,7 @@ typedef enum eAlertType
         password = _passwordField.text;
         if ([abcAccount accountHasPassword] && ![abcAccount checkPassword:password]) {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:passwordMismatchText
+                                  initWithTitle:passwordMismatchTitle
                                   message:pleaseEnterCorrectPassword
                                   delegate:nil
                                   cancelButtonTitle:okButtonText

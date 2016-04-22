@@ -20,8 +20,6 @@
 #define BOTTOM_BUTTON_EXTRA_OFFSET_Y    3
 #define TABLE_SIZE_EXTRA_HEIGHT         5
 
-#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
-
 #define PICKER_MAX_CELLS_VISIBLE        (!IS_IPHONE4 ? 3 : 2)
 
 #define POS_THRESHOLD_TO_GET_3_CHOICES  180.0
@@ -154,8 +152,8 @@
                           initWithTitle:cancelButtonText
                           message:areYouSureYouWantToCancel
                           delegate:self
-                          cancelButtonTitle:@"No"
-                          otherButtonTitles:@"Yes", nil];
+                          cancelButtonTitle:noButtonText
+                          otherButtonTitles:yesButtonText, nil];
     [alert show];
 }
 

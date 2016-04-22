@@ -28,8 +28,6 @@
 #import "Theme.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define ARRAY_CATEGORY_PREFIXES         @[@"Expense:",@"Income:",@"Transfer:",@"Exchange:"]
-#define ARRAY_CATEGORY_PREFIXES_NOCOLON @[@"Expense",@"Income",@"Transfer",@"Exchange"]
 
 #define PICKER_WIDTH                    160
 #define PICKER_CELL_HEIGHT              40
@@ -245,15 +243,15 @@ typedef enum eRequestType
     else
     {
         if (_transaction.amountSatoshi < 0)
-            self.pickerTextCategory.textField.text = @"Expense:";
+            self.pickerTextCategory.textField.text = expenseCategoryColon;
         else
-            self.pickerTextCategory.textField.text = @"Income:";
+            self.pickerTextCategory.textField.text = incomeCategoryColon;
     }
 
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
 
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:nil action:@selector(notesTextViewDone)];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:doneButtonText style:UIBarButtonItemStylePlain target:nil action:@selector(notesTextViewDone)];
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     toolbar.items = [NSArray arrayWithObjects:leftButton, flex, barButton, nil];
 
@@ -269,7 +267,7 @@ typedef enum eRequestType
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    self.nameTextField.placeholder = NSLocalizedString(@"Enter Payee", nil);
+    self.nameTextField.placeholder = enterPayeeText;
     self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.font = [UIFont systemFontOfSize:18];
     
@@ -317,11 +315,11 @@ typedef enum eRequestType
         
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"From: %@", self.transaction.wallet.name];
+            self.walletLabel.text = [NSString stringWithFormat:fromFormatString, self.transaction.wallet.name];
         }
         else
         {
-            self.walletLabel.text = [NSString stringWithFormat:@"To: %@", self.transaction.wallet.name];
+            self.walletLabel.text = [NSString stringWithFormat:toFormatString, self.transaction.wallet.name];
         }
         
         if (self.transaction.metaData.amountFiat == 0)
@@ -366,11 +364,11 @@ typedef enum eRequestType
     {
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            [self setCategoryButtonText:@"Expense"];
+            [self setCategoryButtonText:abcStringExpenseCategory];
         }
         else if (_transactionDetailsMode == TD_MODE_RECEIVED)
         {
-            [self setCategoryButtonText:@"Income"];
+            [self setCategoryButtonText:abcStringIncomeCategory];
         }
     }
 
@@ -382,7 +380,7 @@ typedef enum eRequestType
 
 - (void)setupNavBar
 {
-    [MainViewController changeNavBarTitle:self title:NSLocalizedString(@"Transaction Details", @"Transaction Details header text")];
+    [MainViewController changeNavBarTitle:self title:transactionDetailsHeaderText];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
@@ -438,21 +436,21 @@ typedef enum eRequestType
 
 - (IBAction)setCategoryButtonText:(NSString *)text
 {
-    if ([text isEqual:@"Income"])
+    if ([text isEqual:abcStringIncomeCategory])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.3
                                                                 green:0.6
                                                                  blue:0.0
                                                                 alpha:1.0]];
     }
-    else if ([text isEqual:@"Expense"])
+    else if ([text isEqual:abcStringExpenseCategory])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.7
                                                                 green:0.0
                                                                  blue:0.0
                                                                 alpha:1.0]];
     }
-    else if ([text isEqual:@"Transfer"])
+    else if ([text isEqual:abcStringTransferCategory])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.0
                                                                 green:0.4
@@ -536,11 +534,11 @@ typedef enum eRequestType
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         if (_wallet && !_bOldTransaction && [abcAccount needsRecoveryQuestionsReminder]) {
             _recoveryAlert = [[UIAlertView alloc]
-                                initWithTitle:NSLocalizedString(@"Recovery Password Reminder", nil)
-                                message:NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
+                                initWithTitle:recoveryPasswordReminder
+                                message:receivedBitcoinRecommendSetupRecovery
                                 delegate:self
-                                cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                cancelButtonTitle:cancelButtonText
+                                otherButtonTitles:okButtonText, nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [_recoveryAlert show];
             });
@@ -886,32 +884,32 @@ typedef enum eRequestType
         [strCurVal setString:[self categoryPrefixRemove:strCurVal]];
     }
 
-    NSString *strFirstType = @"Expense:";
-    NSString *strSecondType = @"Income:";
-    NSString *strThirdType = @"Transfer:";
-    NSString *strFourthType = @"Exchange:"; 
+    NSString *strFirstType = expenseCategoryColon;
+    NSString *strSecondType = incomeCategoryColon;
+    NSString *strThirdType = transferCategoryColon;
+    NSString *strFourthType = exchangeCategoryColon;
 
     if (self.transactionDetailsMode == TD_MODE_RECEIVED ||
-        [self.categoryButton.titleLabel.text isEqual:@"Income"])
+        [self.categoryButton.titleLabel.text isEqual:abcStringIncomeCategory])
     {
-        strFirstType = @"Income:";
-        strSecondType = @"Expense:";
+        strFirstType = incomeCategoryColon;
+        strSecondType = expenseCategoryColon;
     }
     
-    if ([self.categoryButton.titleLabel.text isEqual:@"Transfer"])
+    if ([self.categoryButton.titleLabel.text isEqual:abcStringTransferCategory])
     {
-        strFirstType = @"Transfer:";
-        strSecondType = @"Expense:";
-        strThirdType = @"Income:";
-        strFourthType = @"Exchange:";
+        strFirstType = transferCategoryColon;
+        strSecondType = expenseCategoryColon;
+        strThirdType = incomeCategoryColon;
+        strFourthType = exchangeCategoryColon;
     }
 
-    if ([self.categoryButton.titleLabel.text isEqual:@"Exchange"])
+    if ([self.categoryButton.titleLabel.text isEqual:abcStringExchangeCategory])
     {
-        strFirstType =  @"Exchange:";
-        strSecondType = @"Expense:";
-        strThirdType = @"Income:";
-        strFourthType = @"Transfer:";
+        strFirstType =  exchangeCategoryColon;
+        strSecondType = expenseCategoryColon;
+        strThirdType = incomeCategoryColon;
+        strFourthType = transferCategoryColon;
     }
     
     NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType, strFourthType];

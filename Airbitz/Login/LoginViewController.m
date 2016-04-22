@@ -1374,10 +1374,10 @@ static BOOL bInitialized = false;
             _spinnerView.hidden = NO;
             [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Succeeded"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:debugLogFileText
+                                                                message:uploadSuccessfulText
                                                                delegate:self
-                                                      cancelButtonTitle:@"Ok"
+                                                      cancelButtonTitle:okButtonText
                                                       otherButtonTitles:nil];
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
@@ -1385,10 +1385,10 @@ static BOOL bInitialized = false;
                 [self assignFirstResponder];
             } error:^(NSError *error)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:debugLogFileText
+                                                                message:uploadFailedText
                                                                delegate:self
-                                                      cancelButtonTitle:@"Ok"
+                                                      cancelButtonTitle:okButtonText
                                                       otherButtonTitles:nil];
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];

@@ -376,10 +376,10 @@
 
 + (BOOL)isValidCategory:(NSString *)category
 {
-    return [category hasPrefix:NSLocalizedString(@"Expense", nil)]
-            || [category hasPrefix:NSLocalizedString(@"Income", nil)]
-            || [category hasPrefix:NSLocalizedString(@"Transfer", nil)]
-            || [category hasPrefix:NSLocalizedString(@"Exchange", nil)];
+    return [category hasPrefix:abcStringExpenseCategory]
+            || [category hasPrefix:abcStringIncomeCategory]
+            || [category hasPrefix:abcStringTransferCategory]
+            || [category hasPrefix:abcStringExchangeCategory];
 }
 
 + (NSArray *)insertSubviewControllerWithConstraints:(AirbitzViewController *)parentViewController child:(AirbitzViewController *)childViewController belowSubView:(UIView *)belowView

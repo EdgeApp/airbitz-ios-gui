@@ -49,7 +49,7 @@
     self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
-    self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
+    self.labelString = signupText;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -100,11 +100,11 @@
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                          message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
+                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
         }

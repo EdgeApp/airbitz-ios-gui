@@ -197,10 +197,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
 
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-                      message:NSLocalizedString(@"Unable to scan QR code", nil)
+                initWithTitle:qrCodeScanFailure
+                      message:unableToScanQR
                      delegate:nil
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
     }
@@ -208,9 +208,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:invalidAddressPopupText
-                      message:NSLocalizedString(@"", nil)
+                      message:@""
                      delegate:self
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
 
@@ -860,10 +860,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         //start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
-                              message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                              initWithTitle:bitcoinAddressMismatch
+                              message:[NSString stringWithFormat:bitcoinAddressMismatchFormatText, [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
                               delegate:nil
-                              cancelButtonTitle:@"OK"
+                              cancelButtonTitle:okButtonText
                               otherButtonTitles:nil];
         [alert show];
     }
@@ -883,8 +883,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             // start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
-                                  message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                                  initWithTitle:bitcoinAddressMismatch, nil)
+                                  message:[NSString stringWithFormat:bitcoinAddressMismatchFormatText, [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -1808,11 +1808,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         if (zmessage)
                         {
                             _tweetAlert = [[UIAlertView alloc]
-                                           initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                           initWithTitle:sorryText
                                            message:zmessage
                                            delegate:self
-                                           cancelButtonTitle:@"No"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:noButtonText
+                                           otherButtonTitles:okButtonText, nil];
                             [_tweetAlert show];
                         }
                     }
@@ -1822,11 +1822,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         if (message)
                         {
                             _tweetAlert = [[UIAlertView alloc]
-                                           initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                           initWithTitle:congratulationsText
                                            message:message
                                            delegate:self
-                                           cancelButtonTitle:@"No"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:noButtonText
+                                           otherButtonTitles:okButtonText, nil];
                             [_tweetAlert show];
                         }
                     }

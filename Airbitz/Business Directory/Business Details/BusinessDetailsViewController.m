@@ -40,8 +40,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 #define SINGLE_ROW_CELL_HEIGHT	50
 #define LABEL_WIDTH_WILD_GUESS  300
 
-#define CLOSED_STRING	@"closed"
-
 @interface BusinessDetailsViewController () <UITableViewDataSource, UITableViewDelegate,
                                              UIAlertViewDelegate, UIPhotoGalleryDataSource, UIPhotoGalleryDelegate>
 {
@@ -318,7 +316,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else
 	{
-		pmamDateString = CLOSED_STRING;
+		pmamDateString = closedText;
 	}
 	return [pmamDateString lowercaseString];
 }
@@ -596,9 +594,11 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					{
 						[hoursString appendFormat:@"%@\n", closedTime];
 					}
-					else if(![openTime isEqualToString:CLOSED_STRING] && [closedTime isEqualToString:CLOSED_STRING])
+					else if(![openTime isEqualToString:closedText] && [closedTime isEqualToString:closedText])
 					{
-						[hoursString appendString:@"Open 24 hours\n"];
+						[hoursString appendString:open24HoursText];
+                        [hoursString appendString:@"\n"];
+
 					}
 					else
 					{
@@ -611,8 +611,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			}
 			else
 			{
-				[dayString appendString:@"Open 24"];
-				[hoursString appendString:@"hours\n"];
+				[dayString appendString:open24Text];
+                [hoursString appendString:hoursText];
+                [hoursString appendString:@"\n"];
 			}
             NSInteger leftLines = [[dayString componentsSeparatedByCharactersInSet:
                     [NSCharacterSet newlineCharacterSet]] count];
@@ -746,8 +747,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
                                   initWithTitle:placeCallText
                                   message:[NSString stringWithFormat:@"%@ %@?", msg, [self.businessGeneralInfo objectForKey:@"phone"]]
                                   delegate:self
-                                  cancelButtonTitle:@"No"
-                                  otherButtonTitles:@"Yes", nil];
+                                  cancelButtonTitle:noButtonText
+                                  otherButtonTitles:yesButtonText, nil];
             [alert show];
 #else
             [self callBusinessNumber];

@@ -203,7 +203,7 @@
     _signupUsernameController.manager = self;
     _current = _signupUsernameController;
     [MainViewController changeNavBarOwner:_signupUsernameController];
-    [MainViewController changeNavBarTitle:_signupUsernameController title:NSLocalizedString(@"Sign Up", @"Sign Up title bar text")];
+    [MainViewController changeNavBarTitle:_signupUsernameController title:signupText];
     [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(back:) fromObject:self];
     [MainViewController changeNavBar:_signupUsernameController title:exitButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
     [MainViewController animateView:_signupUsernameController withBlur:YES];
