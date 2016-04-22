@@ -34,9 +34,6 @@
 		DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
-		DA2EF2581CC9D54B00893D50 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF25C1CC9D54B00893D50 /* Airbitz-Info.plist */; };
-		DA2EF2591CC9D54B00893D50 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF25C1CC9D54B00893D50 /* Airbitz-Info.plist */; };
-		DA2EF25A1CC9D54B00893D50 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF25C1CC9D54B00893D50 /* Airbitz-Info.plist */; };
 		DA2EF2661CC9D74A00893D50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA2EF2681CC9D74A00893D50 /* InfoPlist.strings */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -47,6 +44,14 @@
 		DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
+		DA51EA151CC9F3F500C7C95F /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA171CC9F3F500C7C95F /* Airbitz-InfoPlist.strings */; };
+		DA51EA1E1CC9F59900C7C95F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA201CC9F59900C7C95F /* Localizable.strings */; };
+		DA51EA231CC9F59B00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA251CC9F59B00C7C95F /* InfoPlist.strings */; };
+		DA51EA281CC9F59B00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA2A1CC9F59B00C7C95F /* InfoPlist.strings */; };
+		DA51EA2D1CC9F59C00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA2F1CC9F59C00C7C95F /* InfoPlist.strings */; };
+		DA51EA321CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA341CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings */; };
+		DA51EA371CC9F59E00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA391CC9F59E00C7C95F /* InfoPlist.strings */; };
+		DA555B381CC9E36F0000CBE4 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */; };
 		DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB971BFF90980086AD8B /* background@2x.jpg */; };
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
@@ -1354,15 +1359,21 @@
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
-		DA2EF25B1CC9D54B00893D50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Airbitz-Info.plist"; sourceTree = "<group>"; };
-		DA2EF2611CC9D54E00893D50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/Airbitz-Info.plist"; sourceTree = "<group>"; };
-		DA2EF2621CC9D54F00893D50 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-MX"; path = "es-MX.lproj/Airbitz-Info.plist"; sourceTree = "<group>"; };
-		DA2EF2631CC9D55000893D50 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-Info.plist"; sourceTree = "<group>"; };
 		DA2EF2671CC9D74A00893D50 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
 		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
+		DA51EA161CC9F3F500C7C95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA1A1CC9F44700C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA1B1CC9F44800C7C95F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA1F1CC9F59900C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DA51EA241CC9F59B00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA291CC9F59B00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA2E1CC9F59C00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA331CC9F59D00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA51EA381CC9F59E00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
 		DA9101EF1C4964AD00603D62 /* icon_import.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_import.png; sourceTree = "<group>"; };
 		DA9101F01C4964AD00603D62 /* icon_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@2x.png"; sourceTree = "<group>"; };
 		DA9101F11C4964AD00603D62 /* icon_import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@3x.png"; sourceTree = "<group>"; };
@@ -1987,8 +1998,8 @@
 		DAE4CD531CC9D92800082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoWallets.html"; sourceTree = "<group>"; };
 		DAE4CD541CC9D92A00082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/infoWallets.html"; sourceTree = "<group>"; };
 		DAE4CD581CC9D93000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/transactionDetails.html; sourceTree = "<group>"; };
-		DAE4CD5A1CC9D93300082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transactionDetails.html"; sourceTree = "<group>"; };
-		DAE4CD5B1CC9D93400082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transactionDetails.html"; sourceTree = "<group>"; };
+		DAE4CD5C1CC9E0CD00082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transactionDetails.html"; sourceTree = "<group>"; };
+		DAE4CD5D1CC9E0CE00082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transactionDetails.html"; sourceTree = "<group>"; };
 		E789935EB56C2B5BD137B2C6 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
 		F2352337656E1FCF99AFBF69 /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -2152,6 +2163,7 @@
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				DA51EA251CC9F59B00C7C95F /* InfoPlist.strings */,
 				DAC83B461CC9D7EF00140876 /* InfoPlist.strings */,
 				DA9D8F561CC0C191006A8C0A /* AppDelegate.h */,
 				DA9D8F571CC0C191006A8C0A /* AppDelegate.m */,
@@ -2186,6 +2198,7 @@
 		DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DA51EA391CC9F59E00C7C95F /* InfoPlist.strings */,
 				DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */,
 				DA9D8F7A1CC0C191006A8C0A /* Info.plist */,
 			);
@@ -3047,6 +3060,8 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
+				DA51EA341CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings */,
+				DA51EA201CC9F59900C7C95F /* Localizable.strings */,
 				DA93DE4F1CC9D4760063CD52 /* Airbitz-Develop-InfoPlist.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
@@ -3148,7 +3163,8 @@
 				DA9ED7C81BC61E680063DA07 /* UIImage+Colorize.m */,
 				DA9ED7C91BC61E680063DA07 /* Util.h */,
 				DA9ED7CA1BC61E680063DA07 /* Util.m */,
-				DA2EF25C1CC9D54B00893D50 /* Airbitz-Info.plist */,
+				DA51EA171CC9F3F500C7C95F /* Airbitz-InfoPlist.strings */,
+				DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */,
 				DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */,
 				DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
@@ -3171,6 +3187,7 @@
 		DAD1AD931BC6065100C648C4 /* AirbitzTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA51EA2F1CC9F59C00C7C95F /* InfoPlist.strings */,
 				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
 				DAD1AD961BC6065100C648C4 /* Info.plist */,
 			);
@@ -3180,6 +3197,7 @@
 		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DA51EA2A1CC9F59B00C7C95F /* InfoPlist.strings */,
 				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
 				DAD1ADA11BC6065100C648C4 /* Info.plist */,
 			);
@@ -3496,6 +3514,7 @@
 				DAC83B471CC9D7EF00140876 /* InfoPlist.strings in Resources */,
 				DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */,
 				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
+				DA51EA231CC9F59B00C7C95F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3511,6 +3530,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA51EA371CC9F59E00C7C95F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3778,7 +3798,6 @@
 				DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF5001BC7285D0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF5011BC7285D0063DA07 /* bd_icon_web@2x.png in Resources */,
-				DA2EF2591CC9D54B00893D50 /* Airbitz-Info.plist in Resources */,
 				DA9EF5031BC7285D0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF5051BC7285D0063DA07 /* ConfirmationSliderView.xib in Resources */,
@@ -3799,6 +3818,7 @@
 				DA9101FA1C4964AD00603D62 /* icon_import@3x.png in Resources */,
 				DA9EF5CF1BC729FA0063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EF5D21BC729FA0063DA07 /* bd_sliderbubble@2x.png in Resources */,
+				DA51EA321CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EF5D61BC729FA0063DA07 /* icon_category_restaurants@3x.png in Resources */,
 				DA9EF5D71BC729FA0063DA07 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF5D81BC729FA0063DA07 /* 1-bar@2x.png in Resources */,
@@ -4040,7 +4060,6 @@
 				DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF6C71BC729FA0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF6C81BC729FA0063DA07 /* bd_icon_web@2x.png in Resources */,
-				DA2EF25A1CC9D54B00893D50 /* Airbitz-Info.plist in Resources */,
 				DA9EF6CA1BC729FA0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EF6CC1BC729FA0063DA07 /* ConfirmationSliderView.xib in Resources */,
@@ -4075,6 +4094,7 @@
 				DA9EE4411BC61F920063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9ED7D61BC61E680063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EE54E1BC61F930063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
+				DA555B381CC9E36F0000CBE4 /* Airbitz-Info.plist in Resources */,
 				DA9ED7E01BC61E680063DA07 /* InfoView~iphone.xib in Resources */,
 				DAE4CD161CC9D8DD00082868 /* infoRequestQR.html in Resources */,
 				DA9EE4EF1BC61F920063DA07 /* Lato-LightItalic.ttf in Resources */,
@@ -4227,6 +4247,7 @@
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
+				DA51EA1E1CC9F59900C7C95F /* Localizable.strings in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD551CC9D93000082868 /* transactionDetails.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
@@ -4240,6 +4261,7 @@
 				DAE4CD0F1CC9D8D100082868 /* infoRequest.html in Resources */,
 				DA9EE44A1BC61F920063DA07 /* btn_close_white@2x.png in Resources */,
 				DA9EE4901BC61F920063DA07 /* icon_category_gift_cards.png in Resources */,
+				DA51EA151CC9F3F500C7C95F /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EE4CD1BC61F920063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EE4A01BC61F920063DA07 /* icon_export_google@2x.png in Resources */,
 				DA9EE4911BC61F920063DA07 /* icon_category_gift_cards@2x.png in Resources */,
@@ -4301,7 +4323,6 @@
 				DA93DE331CC9CB710063CD52 /* emailTemplate.html in Resources */,
 				DA9EE4921BC61F920063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EE4311BC61F920063DA07 /* bd_icon_web@2x.png in Resources */,
-				DA2EF2581CC9D54B00893D50 /* Airbitz-Info.plist in Resources */,
 				DA9EE4B21BC61F920063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
 				DA9EE50F1BC61F920063DA07 /* ConfirmationSliderView.xib in Resources */,
@@ -4316,6 +4337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA51EA2D1CC9F59C00C7C95F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4323,6 +4345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA51EA281CC9F59B00C7C95F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5011,21 +5034,68 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DA2EF25C1CC9D54B00893D50 /* Airbitz-Info.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA2EF25B1CC9D54B00893D50 /* Base */,
-				DA2EF2611CC9D54E00893D50 /* en */,
-				DA2EF2621CC9D54F00893D50 /* es-MX */,
-				DA2EF2631CC9D55000893D50 /* pt-BR */,
-			);
-			name = "Airbitz-Info.plist";
-			sourceTree = "<group>";
-		};
 		DA2EF2681CC9D74A00893D50 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA2EF2671CC9D74A00893D50 /* es-MX */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA51EA171CC9F3F500C7C95F /* Airbitz-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA161CC9F3F500C7C95F /* Base */,
+				DA51EA1A1CC9F44700C7C95F /* es-MX */,
+				DA51EA1B1CC9F44800C7C95F /* pt-BR */,
+			);
+			name = "Airbitz-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DA51EA201CC9F59900C7C95F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA1F1CC9F59900C7C95F /* es-MX */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		DA51EA251CC9F59B00C7C95F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA241CC9F59B00C7C95F /* es-MX */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA51EA2A1CC9F59B00C7C95F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA291CC9F59B00C7C95F /* es-MX */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA51EA2F1CC9F59C00C7C95F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA2E1CC9F59C00C7C95F /* es-MX */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA51EA341CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA331CC9F59D00C7C95F /* es-MX */,
+			);
+			name = "Airbitz-Testnet-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DA51EA391CC9F59E00C7C95F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA51EA381CC9F59E00C7C95F /* es-MX */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -5238,8 +5308,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD581CC9D93000082868 /* Base */,
-				DAE4CD5A1CC9D93300082868 /* es-MX */,
-				DAE4CD5B1CC9D93400082868 /* pt-BR */,
+				DAE4CD5C1CC9E0CD00082868 /* es-MX */,
+				DAE4CD5D1CC9E0CE00082868 /* pt-BR */,
 			);
 			name = transactionDetails.html;
 			sourceTree = "<group>";

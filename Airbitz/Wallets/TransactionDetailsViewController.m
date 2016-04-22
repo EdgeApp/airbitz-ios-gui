@@ -622,16 +622,23 @@ typedef enum eRequestType
     totalSent -= fees;
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
                                    baseUrl, self.transaction.txid, self.transaction.txid];
+    unsigned long confirmations = 0;
+    if (self.transaction.height)
+        confirmations = (unsigned long) self.transaction.wallet.blockHeight - self.transaction.height;
+    else
+        confirmations = 0;
+    
     //transaction ID
-    content = [content stringByReplacingOccurrencesOfString:@"*1" withString:txIdLink];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag TXID]]" withString:txIdLink];
     //Total sent
-    content = [content stringByReplacingOccurrencesOfString:@"*2" withString:[abcAccount.settings.denomination satoshiToBTCString:totalSent]];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag BTCTOTAL]]" withString:[abcAccount.settings.denomination satoshiToBTCString:totalSent]];
     //source
-    content = [content stringByReplacingOccurrencesOfString:@"*3" withString:inAddresses];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag INPUT_ADDRESSES]]" withString:inAddresses];
     //Destination
-    content = [content stringByReplacingOccurrencesOfString:@"*4" withString:outAddresses];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag OUTPUT_ADDRESSES]]" withString:outAddresses];
     //Miner Fee
-    content = [content stringByReplacingOccurrencesOfString:@"*5" withString:[abcAccount.settings.denomination satoshiToBTCString:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag FEES]]" withString:[abcAccount.settings.denomination satoshiToBTCString:fees]];
+    content = [content stringByReplacingOccurrencesOfString:@"[[abtag CONFIRMATIONS]]" withString:[NSString stringWithFormat:@"%lu", confirmations]];
     [Util replaceHtmlTags:&content];
     iv.htmlInfoToDisplay = content;
     [self.view addSubview:iv];
