@@ -1366,18 +1366,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [self showHbitsResults:address amount:amount];
             }
             else
-            [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
+            [MainViewController fadingAlert:importFailedPrivateKeyEmpty];
         }
 
     } error:^(NSError *error) {
-        if (error.code == ABCConditionCodeNoTransaction)
-        {
-            [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
-        }
-        else
-        {
-            [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
-        }
+        NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n%@: %d\n\n%@: %@", importFailedText, errorCodeText, (int) error.code, errorDescriptionText, error.userInfo[NSLocalizedDescriptionKey]];
+        [MainViewController fadingAlert:errorMessage];
 
         [self updateState];
     }];
