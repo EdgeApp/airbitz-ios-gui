@@ -115,7 +115,7 @@
         [_scanningErrorLabel setHidden:YES];
         [_flashSelector setHidden:NO];
     } else {
-        _scanningErrorLabel.text = cameraUnavailableText;
+        _scanningErrorLabel.text = cameraUnavailablePleaseEnable;
         [_scanningErrorLabel setHidden:NO];
         [_flashSelector setHidden:YES];
     }

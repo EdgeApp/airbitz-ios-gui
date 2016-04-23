@@ -256,7 +256,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     if (error)
     {
         UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Unable to save Settings", nil)
+        [[UIAlertView alloc] initWithTitle:unableToSaveSettings
                                    message:error.userInfo[NSLocalizedDescriptionKey]
                                   delegate:self
                          cancelButtonTitle:cancelButtonText
@@ -699,15 +699,15 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 	if (indexPath.row == ROW_BITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"Bitcoin", @"settings text");
+		cell.name.text = bitcoinDenominationText;
 	}
 	if (indexPath.row == ROW_MBITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"mBitcoin = (0.001 Bitcoin)", @"settings text");
+		cell.name.text = mBitcoinDenominatinText;
 	}
 	if (indexPath.row == ROW_UBITCOIN)
 	{
-		cell.name.text = NSLocalizedString(@"bits = (0.000001 Bitcoin)", @"settings text");
+		cell.name.text = bitsDenominationText;
 	}
 	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denomination.index ? @"btn_selected" : @"btn_unselected")];
 
@@ -731,26 +731,26 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == ROW_PASSWORD)
 		{
-			cell.name.text = NSLocalizedString(@"Change password", @"settings text");
+			cell.name.text = changePasswordText;
 		}
 		if (indexPath.row == ROW_PIN)
 		{
-			cell.name.text = NSLocalizedString(@"Change PIN", @"settings text");
+			cell.name.text = changePINText;
 		}
 		if (indexPath.row == ROW_RECOVERY_QUESTIONS)
 		{
-			cell.name.text = NSLocalizedString(@"Change recovery questions", @"settings text");
+			cell.name.text = changeRecoveryQuestionsText;
 		}
 	}
     else if (indexPath.section == SECTION_OPTIONS)
     {
         if (indexPath.row == ROW_CHANGE_CATEGORIES)
         {
-			cell.name.text = NSLocalizedString(@"Change Categories", @"settings text");
+			cell.name.text = changeCategoriesText;
         } else if (indexPath.row == ROW_SPEND_LIMITS) {
-			cell.name.text = NSLocalizedString(@"Spending Limits", @"spending limits text");
+			cell.name.text = spendingLimitsText;
         } else if (indexPath.row == ROW_TFA) {
-			cell.name.text = NSLocalizedString(@"2 Factor (Enhanced Security)", nil);
+			cell.name.text = twoFactorSettingsHeader;
         }
     }
 
@@ -777,19 +777,19 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == 1)
 		{
-			cell.textField.placeholder = NSLocalizedString(@"First Name (optional)", @"settings text");
+			cell.textField.placeholder = firstNameSettingsText;
             cell.textField.returnKeyType = UIReturnKeyNext;
             cell.textField.text = abcAccount.settings.firstName;
 		}
 		if (indexPath.row == 2)
 		{
-			cell.textField.placeholder = NSLocalizedString(@"Last Name (optional)", @"settings text");
+			cell.textField.placeholder = lastNameSettingsText;
             cell.textField.returnKeyType = UIReturnKeyNext;
             cell.textField.text = abcAccount.settings.lastName;
 		}
 		if (indexPath.row == 3)
 		{
-			cell.textField.placeholder = NSLocalizedString(@"Nickname / Handle (optional)", @"settings text");
+			cell.textField.placeholder = nickNameSettingsText;
             cell.textField.returnKeyType = UIReturnKeyDone;
             cell.textField.text = abcAccount.settings.nickName;
 		}
@@ -822,7 +822,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == ROW_SEND_NAME)
 		{
-			cell.name.text = NSLocalizedString(@"Send name on payment request", @"settings text");
+			cell.name.text = sendNameOnPaymentText;
             [cell.state setOn:abcAccount.settings.bNameOnPayments animated:NO];
 		}
 	}
@@ -832,13 +832,13 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         {
             if (_showBluetoothOption)
             {
-                cell.name.text = NSLocalizedString(@"Bluetooth", @"settings text");
+                cell.name.text = bluetoothText;
                 [cell.state setOn:!LocalSettings.controller.bDisableBLE animated:NO];
                 cell.state.userInteractionEnabled = YES;
             }
             else
             {
-                cell.name.text = NSLocalizedString(@"Enable Bluetooth in System Settings", @"settings text");
+                cell.name.text = enableBluetoothInSystem;
                 [cell.state setOn:NO animated:NO];
                 cell.state.userInteractionEnabled = NO;
             }
@@ -846,12 +846,12 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         }
         else if (indexPath.row == ROW_MERCHANT_MODE)
         {
-			cell.name.text = NSLocalizedString(@"Merchant Mode", @"settings text");
+			cell.name.text = merchangeModeText;
             [cell.state setOn:LocalSettings.controller.bMerchantMode animated:NO];
         }
         else if (indexPath.row == ROW_PIN_RELOGIN)
         {
-			cell.name.text = NSLocalizedString(@"PIN Re-Login", @"settings text");
+			cell.name.text = pinReloginText;
             [cell.state setOn:[abcAccount hasPINLogin] animated:NO];
             if ([abcAccount accountHasPassword]) {
                 cell.state.userInteractionEnabled = YES;
@@ -863,19 +863,19 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         {
             if (! [abc hasDeviceCapability:ABCDeviceCapsTouchID])
             {
-                cell.name.text = NSLocalizedString(@"TouchID: Unsupported Device", @"settings text");
+                cell.name.text = touchIDUnsupportedText;
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
             else if (![abcAccount accountHasPassword])
             {
-                cell.name.text = NSLocalizedString(@"TouchID: Set password first", @"settings text");
+                cell.name.text = touchIDSetPasswordFirst;
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
             else
             {
-                cell.name.text = NSLocalizedString(@"Use TouchID", @"settings text");
+                cell.name.text = useTouchIDText;
 
                 if ([abcAccount.settings touchIDEnabled])
                     [cell.state setOn:YES animated:NO];
@@ -1018,24 +1018,24 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	UILabel *label = (UILabel *)[cell viewWithTag:1];
 	if (section == SECTION_BITCOIN_DENOMINATION)
 	{
-		label.text = NSLocalizedString(@"BITCOIN DENOMINATION", @"section header in settings table");
+		label.text = bitcoinDenominationHeader;
 	}
 	if (section == SECTION_USERNAME)
 	{
-		label.text = NSLocalizedString(@"ACCOUNT: ", @"section header in settings table");
+		label.text = accountInfoHeader;
         label.text = [NSString stringWithFormat:@"%@ %s", label.text, [abcAccount.name UTF8String]];
 	}
     if (section == SECTION_NAME)
 	{
-		label.text = NSLocalizedString(@"NAME", @"section header in settings table");
+		label.text = nameSettingsHeader;
 	}
 	if (section == SECTION_OPTIONS)
 	{
-		label.text = NSLocalizedString(@"OPTIONS", @"section header in settings table");
+		label.text = optionsSettingsHeader;
 	}
 	if (section == SECTION_DEFAULT_EXCHANGE)
 	{
-		label.text = NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table");
+		label.text = defaultExchangeRateHeader;
 	}
 	if (section == SECTION_DEBUG)
 	{
@@ -1458,7 +1458,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             //
             // Disable TouchID in LocalSettings
             [abcAccount.settings disableTouchID];
-            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [MainViewController fadingAlert:touchIDDisabled];
         }
         else
         {
@@ -1468,12 +1468,12 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             _tempPassword = [[alertView textFieldAtIndex:0] text];
 
             [FadingAlertView create:self.view
-                            message:NSLocalizedString(@"Checking password...", nil)
+                            message:checkingPasswordText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
                 if ([abcAccount.settings enableTouchID:_tempPassword])
                 {
                     _tempPassword = nil;
-                    [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+                    [MainViewController fadingAlert:touchIDEnabledText];
                     
                     // Enable Touch ID
                     [self.tableView reloadData];
@@ -1484,8 +1484,8 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                     [MainViewController fadingAlertDismiss];
                     _tempPassword = nil;
                     _passwordIncorrectAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                                               message:NSLocalizedString(@"Try again?", nil)
+                                               initWithTitle:incorrectPasswordText
+                                               message:tryAgainText
                                                delegate:self
                                                cancelButtonTitle:noButtonText
                                                otherButtonTitles:yesButtonText, nil];
@@ -1498,7 +1498,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     {
         if (buttonIndex == 0)
         {
-            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [MainViewController fadingAlert:touchIDDisabled];
             [abcAccount.settings disableTouchID];
         }
         else if (buttonIndex == 1)

@@ -397,7 +397,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-        self.scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"");
+        self.scanningErrorLabel.text = cameraUnavailablePleaseEnable;
         [self.scanningErrorLabel setHidden:NO];
     }
 
@@ -572,11 +572,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (!error)
                     {
-                        [MainViewController fadingAlert:NSLocalizedString(@"Successfully Logged In",nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                        [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                     }
                     else
                     {
-                        [MainViewController fadingAlert:NSLocalizedString(@"Error Logging In",nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                        [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                     }
 
 
@@ -1225,9 +1225,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
     {
         // Invalid BLE request. Assign some warning text and image
-        scanCell.contactName.text = NSLocalizedString(@"Invalid Bluetooth Request", nil);
+        scanCell.contactName.text = invalidBluetoothRequest;
         scanCell.contactName.textColor = scanCell.duplicateNamesLabel.textColor;
-        scanCell.contactBitcoinAddress.text = NSLocalizedString(@"Please have Requestor contact support", nil);
+        scanCell.contactBitcoinAddress.text = pleaseHaveRequestorContactSupport;
         scanCell.contactBitcoinAddress.textColor = scanCell.duplicateNamesLabel.textColor;
         scanCell.contactImage.image = [UIImage imageNamed:@"Warning_icon.png"];
     }
@@ -1341,7 +1341,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [abcAccount.currentWallet importPrivateKey:privateKey importing:^(NSString *address) {
         NSMutableString *statusMessage = [NSMutableString string];
         [statusMessage appendString:[[NSString alloc]
-                initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
+                initWithFormat:importingFundsIntoWallet, address]];
         [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
         if (ABCImportHBitsURI == dataModel)
@@ -1717,7 +1717,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 }
                 else if (parsedURI.address)
                 {
-                    [MainViewController fadingAlert:NSLocalizedString(@"Validating Address...", nil)
+                    [MainViewController fadingAlert:validatingAddressText
                                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
                     [self stopQRReader];
                     [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
@@ -1726,7 +1726,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
             else
             {
-                [MainViewController fadingAlert:NSLocalizedString(@"Invalid Bitcoin Address", nil)];
+                [MainViewController fadingAlert:invalidAddressPopupText];
             }
         });
     });
@@ -1783,7 +1783,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)tweetCancelled
 {
-    [MainViewController fadingAlert:NSLocalizedString(@"Import the private key again to retry Twitter", nil)];
+    [MainViewController fadingAlert:importAgainToRetryTwitter];
 }
 
 - (void)showHbitsResults:(NSString *)address amount:(uint64_t) amount
