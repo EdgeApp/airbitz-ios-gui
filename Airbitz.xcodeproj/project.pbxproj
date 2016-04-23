@@ -45,7 +45,6 @@
 		DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA51EA151CC9F3F500C7C95F /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA171CC9F3F500C7C95F /* Airbitz-InfoPlist.strings */; };
-		DA51EA1E1CC9F59900C7C95F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA201CC9F59900C7C95F /* Localizable.strings */; };
 		DA51EA231CC9F59B00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA251CC9F59B00C7C95F /* InfoPlist.strings */; };
 		DA51EA281CC9F59B00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA2A1CC9F59B00C7C95F /* InfoPlist.strings */; };
 		DA51EA2D1CC9F59C00C7C95F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA51EA2F1CC9F59C00C7C95F /* InfoPlist.strings */; };
@@ -1240,9 +1239,6 @@
 		DAE4CD0F1CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
 		DAE4CD101CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
 		DAE4CD111CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
-		DAE4CD161CC9D8DD00082868 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD1A1CC9D8DD00082868 /* infoRequestQR.html */; };
-		DAE4CD171CC9D8DD00082868 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD1A1CC9D8DD00082868 /* infoRequestQR.html */; };
-		DAE4CD181CC9D8DD00082868 /* infoRequestQR.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD1A1CC9D8DD00082868 /* infoRequestQR.html */; };
 		DAE4CD1D1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
 		DAE4CD1E1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
 		DAE4CD1F1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
@@ -1363,6 +1359,25 @@
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA2EF2671CC9D74A00893D50 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DA3624E71CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA3624E81CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/emailTemplate.html"; sourceTree = "<group>"; };
+		DA3624E91CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info.html"; sourceTree = "<group>"; };
+		DA3624EA1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoFooter.html"; sourceTree = "<group>"; };
+		DA3624EB1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoExportWallet.html"; sourceTree = "<group>"; };
+		DA3624EC1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoExportWalletOptions.html"; sourceTree = "<group>"; };
+		DA3624ED1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoInsufficientFunds.html"; sourceTree = "<group>"; };
+		DA3624EE1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoRecipient.html"; sourceTree = "<group>"; };
+		DA3624EF1CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoRequest.html"; sourceTree = "<group>"; };
+		DA3624F01CCB585600D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSend.html"; sourceTree = "<group>"; };
+		DA3624F11CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoDisclaimer.html"; sourceTree = "<group>"; };
+		DA3624F21CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSendConfirmation.html"; sourceTree = "<group>"; };
+		DA3624F31CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSettings.html"; sourceTree = "<group>"; };
+		DA3624F41CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSpendingLimits.html"; sourceTree = "<group>"; };
+		DA3624F51CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoTransactionDetails.html"; sourceTree = "<group>"; };
+		DA3624F61CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoTransactions.html"; sourceTree = "<group>"; };
+		DA3624F71CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoWallets.html"; sourceTree = "<group>"; };
+		DA3624F81CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/transactionDetails.html"; sourceTree = "<group>"; };
+		DA3624F91CCB585700D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -1370,7 +1385,6 @@
 		DA51EA161CC9F3F500C7C95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
 		DA51EA1A1CC9F44700C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
 		DA51EA1B1CC9F44800C7C95F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DA51EA1F1CC9F59900C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA51EA241CC9F59B00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA51EA291CC9F59B00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA51EA2E1CC9F59C00C7C95F /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1974,9 +1988,6 @@
 		DAE4CD121CC9D8D100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoRequest.html; sourceTree = "<group>"; };
 		DAE4CD141CC9D8D300082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoRequest.html"; sourceTree = "<group>"; };
 		DAE4CD151CC9D8D400082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/infoRequest.html"; sourceTree = "<group>"; };
-		DAE4CD191CC9D8DD00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoRequestQR.html; sourceTree = "<group>"; };
-		DAE4CD1B1CC9D8E000082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoRequestQR.html"; sourceTree = "<group>"; };
-		DAE4CD1C1CC9D8E100082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/infoRequestQR.html"; sourceTree = "<group>"; };
 		DAE4CD201CC9D8E700082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoSend.html; sourceTree = "<group>"; };
 		DAE4CD221CC9D8E900082868 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoSend.html"; sourceTree = "<group>"; };
 		DAE4CD231CC9D8EA00082868 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/infoSend.html"; sourceTree = "<group>"; };
@@ -2702,7 +2713,6 @@
 				DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */,
 				DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */,
 				DAE4CD131CC9D8D100082868 /* infoRequest.html */,
-				DAE4CD1A1CC9D8DD00082868 /* infoRequestQR.html */,
 				DAE4CD211CC9D8E700082868 /* infoSend.html */,
 				DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */,
 				DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */,
@@ -3065,7 +3075,6 @@
 			isa = PBXGroup;
 			children = (
 				DA51EA341CC9F59D00C7C95F /* Airbitz-Testnet-InfoPlist.strings */,
-				DA51EA201CC9F59900C7C95F /* Localizable.strings */,
 				DA93DE4F1CC9D4760063CD52 /* Airbitz-Develop-InfoPlist.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
@@ -3454,6 +3463,7 @@
 				Base,
 				"es-MX",
 				"pt-BR",
+				"hi-IN",
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -3573,7 +3583,6 @@
 				DA9EF4191BC7285D0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DAB5C0281C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EF41A1BC7285D0063DA07 /* InfoView~iphone.xib in Resources */,
-				DAE4CD171CC9D8DD00082868 /* infoRequestQR.html in Resources */,
 				DA9EF41E1BC7285D0063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EF41F1BC7285D0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF4201BC7285D0063DA07 /* write-it-down.png in Resources */,
@@ -3836,7 +3845,6 @@
 				DA9EF5E01BC729FA0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DAB5C0291C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EF5E11BC729FA0063DA07 /* InfoView~iphone.xib in Resources */,
-				DAE4CD181CC9D8DD00082868 /* infoRequestQR.html in Resources */,
 				DA9EF5E51BC729FA0063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EF5E61BC729FA0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF5E71BC729FA0063DA07 /* write-it-down.png in Resources */,
@@ -4101,7 +4109,6 @@
 				DA9EE54E1BC61F930063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DA555B381CC9E36F0000CBE4 /* Airbitz-Info.plist in Resources */,
 				DA9ED7E01BC61E680063DA07 /* InfoView~iphone.xib in Resources */,
-				DAE4CD161CC9D8DD00082868 /* infoRequestQR.html in Resources */,
 				DA9EE4EF1BC61F920063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EE44B1BC61F920063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EE4E11BC61F920063DA07 /* write-it-down.png in Resources */,
@@ -4252,7 +4259,6 @@
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
-				DA51EA1E1CC9F59900C7C95F /* Localizable.strings in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD551CC9D93000082868 /* transactionDetails.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
@@ -5056,16 +5062,9 @@
 				DA51EA161CC9F3F500C7C95F /* Base */,
 				DA51EA1A1CC9F44700C7C95F /* es-MX */,
 				DA51EA1B1CC9F44800C7C95F /* pt-BR */,
+				DA3624F91CCB585700D674EF /* hi-IN */,
 			);
 			name = "Airbitz-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		DA51EA201CC9F59900C7C95F /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA51EA1F1CC9F59900C7C95F /* es-MX */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		DA51EA251CC9F59B00C7C95F /* InfoPlist.strings */ = {
@@ -5114,6 +5113,7 @@
 				DA93DE2D1CC9CB530063CD52 /* Base */,
 				DA93DE431CC9D32D0063CD52 /* es-MX */,
 				DA93DE471CC9D33A0063CD52 /* pt-BR */,
+				DA3624E71CCB585600D674EF /* hi-IN */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -5124,6 +5124,7 @@
 				DA93DE361CC9CB710063CD52 /* Base */,
 				DA93DE441CC9D32D0063CD52 /* es-MX */,
 				DA93DE481CC9D33A0063CD52 /* pt-BR */,
+				DA3624E81CCB585600D674EF /* hi-IN */,
 			);
 			name = emailTemplate.html;
 			sourceTree = "<group>";
@@ -5134,6 +5135,7 @@
 				DA93DE3B1CC9CB740063CD52 /* Base */,
 				DA93DE451CC9D32D0063CD52 /* es-MX */,
 				DA93DE491CC9D33A0063CD52 /* pt-BR */,
+				DA3624E91CCB585600D674EF /* hi-IN */,
 			);
 			name = info.html;
 			sourceTree = "<group>";
@@ -5144,6 +5146,7 @@
 				DA93DE401CC9CB780063CD52 /* Base */,
 				DA93DE461CC9D32E0063CD52 /* es-MX */,
 				DA93DE4A1CC9D33A0063CD52 /* pt-BR */,
+				DA3624EA1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoFooter.html;
 			sourceTree = "<group>";
@@ -5178,6 +5181,7 @@
 				DAE4CCF21CC9D89900082868 /* Base */,
 				DAE4CCFD1CC9D8B000082868 /* es-MX */,
 				DAE4CCFE1CC9D8B200082868 /* pt-BR */,
+				DA3624EB1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoExportWallet.html;
 			sourceTree = "<group>";
@@ -5188,6 +5192,7 @@
 				DAE4CCFB1CC9D8A000082868 /* Base */,
 				DAE4CCFF1CC9D8B600082868 /* es-MX */,
 				DAE4CD001CC9D8B600082868 /* pt-BR */,
+				DA3624EC1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoExportWalletOptions.html;
 			sourceTree = "<group>";
@@ -5198,6 +5203,7 @@
 				DAE4CD041CC9D8BB00082868 /* Base */,
 				DAE4CD061CC9D8C000082868 /* es-MX */,
 				DAE4CD071CC9D8C100082868 /* pt-BR */,
+				DA3624ED1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoInsufficientFunds.html;
 			sourceTree = "<group>";
@@ -5208,6 +5214,7 @@
 				DAE4CD0B1CC9D8C700082868 /* Base */,
 				DAE4CD0D1CC9D8C900082868 /* es-MX */,
 				DAE4CD0E1CC9D8CA00082868 /* pt-BR */,
+				DA3624EE1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoRecipient.html;
 			sourceTree = "<group>";
@@ -5218,18 +5225,9 @@
 				DAE4CD121CC9D8D100082868 /* Base */,
 				DAE4CD141CC9D8D300082868 /* es-MX */,
 				DAE4CD151CC9D8D400082868 /* pt-BR */,
+				DA3624EF1CCB585600D674EF /* hi-IN */,
 			);
 			name = infoRequest.html;
-			sourceTree = "<group>";
-		};
-		DAE4CD1A1CC9D8DD00082868 /* infoRequestQR.html */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAE4CD191CC9D8DD00082868 /* Base */,
-				DAE4CD1B1CC9D8E000082868 /* es-MX */,
-				DAE4CD1C1CC9D8E100082868 /* pt-BR */,
-			);
-			name = infoRequestQR.html;
 			sourceTree = "<group>";
 		};
 		DAE4CD211CC9D8E700082868 /* infoSend.html */ = {
@@ -5238,6 +5236,7 @@
 				DAE4CD201CC9D8E700082868 /* Base */,
 				DAE4CD221CC9D8E900082868 /* es-MX */,
 				DAE4CD231CC9D8EA00082868 /* pt-BR */,
+				DA3624F01CCB585600D674EF /* hi-IN */,
 			);
 			name = infoSend.html;
 			sourceTree = "<group>";
@@ -5248,6 +5247,7 @@
 				DAE4CD271CC9D8F100082868 /* Base */,
 				DAE4CD291CC9D8F300082868 /* es-MX */,
 				DAE4CD2A1CC9D8F400082868 /* pt-BR */,
+				DA3624F11CCB585700D674EF /* hi-IN */,
 			);
 			name = infoDisclaimer.html;
 			sourceTree = "<group>";
@@ -5258,6 +5258,7 @@
 				DAE4CD2E1CC9D8F900082868 /* Base */,
 				DAE4CD301CC9D8FB00082868 /* es-MX */,
 				DAE4CD311CC9D8FB00082868 /* pt-BR */,
+				DA3624F21CCB585700D674EF /* hi-IN */,
 			);
 			name = infoSendConfirmation.html;
 			sourceTree = "<group>";
@@ -5268,6 +5269,7 @@
 				DAE4CD351CC9D90100082868 /* Base */,
 				DAE4CD371CC9D90300082868 /* es-MX */,
 				DAE4CD381CC9D90400082868 /* pt-BR */,
+				DA3624F31CCB585700D674EF /* hi-IN */,
 			);
 			name = infoSettings.html;
 			sourceTree = "<group>";
@@ -5278,6 +5280,7 @@
 				DAE4CD3C1CC9D90900082868 /* Base */,
 				DAE4CD3E1CC9D90B00082868 /* es-MX */,
 				DAE4CD3F1CC9D90C00082868 /* pt-BR */,
+				DA3624F41CCB585700D674EF /* hi-IN */,
 			);
 			name = infoSpendingLimits.html;
 			sourceTree = "<group>";
@@ -5288,6 +5291,7 @@
 				DAE4CD431CC9D91200082868 /* Base */,
 				DAE4CD451CC9D91400082868 /* es-MX */,
 				DAE4CD461CC9D91500082868 /* pt-BR */,
+				DA3624F51CCB585700D674EF /* hi-IN */,
 			);
 			name = infoTransactionDetails.html;
 			sourceTree = "<group>";
@@ -5298,6 +5302,7 @@
 				DAE4CD4A1CC9D91C00082868 /* Base */,
 				DAE4CD4C1CC9D91E00082868 /* es-MX */,
 				DAE4CD4D1CC9D91F00082868 /* pt-BR */,
+				DA3624F61CCB585700D674EF /* hi-IN */,
 			);
 			name = infoTransactions.html;
 			sourceTree = "<group>";
@@ -5308,6 +5313,7 @@
 				DAE4CD511CC9D92600082868 /* Base */,
 				DAE4CD531CC9D92800082868 /* es-MX */,
 				DAE4CD541CC9D92A00082868 /* pt-BR */,
+				DA3624F71CCB585700D674EF /* hi-IN */,
 			);
 			name = infoWallets.html;
 			sourceTree = "<group>";
@@ -5318,6 +5324,7 @@
 				DAE4CD581CC9D93000082868 /* Base */,
 				DAE4CD5C1CC9E0CD00082868 /* es-MX */,
 				DAE4CD5D1CC9E0CE00082868 /* pt-BR */,
+				DA3624F81CCB585700D674EF /* hi-IN */,
 			);
 			name = transactionDetails.html;
 			sourceTree = "<group>";
