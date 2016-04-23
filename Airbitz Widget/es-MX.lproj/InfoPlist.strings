@@ -1,1 +1,9 @@
-/* No Localized Strings */
+/* (No Commment) */
+"CFBundleDisplayName" = "Airbitz Widget";
+
+/* (No Commment) */
+"CFBundleName" = "$(PRODUCT_NAME)";
+
+/* (No Commment) */
+"CFBundleShortVersionString" = "1.8.6";
+

@@ -1,3 +1,4 @@
+
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS"; */
 "0Ma-6E-cjS.placeholder" = "Current Password";
 
@@ -5,19 +6,22 @@
 "0ea-NR-Nd9.normalTitle" = "This Month";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
-"2cx-Qx-XQc.placeholder" = "Nombre de usuario";
+"2cx-Qx-XQc.placeholder" = "User Name";
 
 /* Class = "UILabel"; text = "Status Line 1"; ObjectID = "3A3-3d-okn"; */
 "3A3-3d-okn.text" = "Status Line 1";
 
 /* Class = "UIButton"; normalTitle = "Advanced"; ObjectID = "3Py-nn-1AR"; */
-"3Py-nn-1AR.normalTitle" = "Avanzado";
+"3Py-nn-1AR.normalTitle" = "Advanced";
 
 /* Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA"; */
 "4KX-hj-tJA.text" = "Offline Wallet";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
-"4ab-Wa-eS4.placeholder" = "Contraseña";
+"4ab-Wa-eS4.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB"; */
+"51g-oU-QIB.text" = "Import Wallet";
 
 /* Class = "UIButton"; normalTitle = "Request"; ObjectID = "6EE-Aw-gGZ"; */
 "6EE-Aw-gGZ.normalTitle" = "Request";
@@ -35,13 +39,10 @@
 "8Nr-wB-OaB.text" = "External Storage / Print";
 
 /* Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
-"8XB-1A-1hO.text" = "Pase a ver Negocios Directorio";
+"8XB-1A-1hO.text" = "Swipe to View Business Directory";
 
 /* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
 "8iz-Uc-LTS.normalTitle" = "Sign Up";
-
-/* Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB"; */
-"51g-oU-QIB.text" = "Import Wallet";
 
 /* Class = "UIButton"; normalTitle = "Last Year"; ObjectID = "90X-8Y-MEH"; */
 "90X-8Y-MEH.normalTitle" = "Last Year";
@@ -50,10 +51,10 @@
 "AOi-Wp-bVq.segmentTitles[0]" = "Transfer";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
-"AOi-Wp-bVq.segmentTitles[1]" = "Dirección";
+"AOi-Wp-bVq.segmentTitles[1]" = "Address";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[2] = "Photos"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
-"AOi-Wp-bVq.segmentTitles[2]" = "Fotos";
+"AOi-Wp-bVq.segmentTitles[2]" = "Photos";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[3]" = "Flash";
@@ -62,13 +63,13 @@
 "BED-Cf-F1n.text" = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
-"Bxa-tB-mk3.text" = "Teléfono";
+"Bxa-tB-mk3.text" = "Phone";
 
 /* Class = "UIButton"; normalTitle = "Last Month"; ObjectID = "CDg-O2-8UT"; */
-"CDg-O2-8UT.normalTitle" = "Mes pasado";
+"CDg-O2-8UT.normalTitle" = "Last Month";
 
 /* Class = "UILabel"; text = "Category"; ObjectID = "ClG-um-kmI"; */
-"ClG-um-kmI.text" = "Categoría";
+"ClG-um-kmI.text" = "Category";
 
 /* Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
 "CuI-Tj-a8q.text" = "Enter password to decode wallet";
@@ -83,10 +84,10 @@
 "EuE-s0-NQ2.text" = "USD";
 
 /* Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg"; */
-"GFx-1Z-kFg.text" = "De:";
+"GFx-1Z-kFg.text" = "From:";
 
 /* Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8"; */
-"Hba-dd-to8.text" = "(Nombres duplicados)";
+"Hba-dd-to8.text" = "(Duplicate Names)";
 
 /* Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO"; */
 "HzM-6V-ckO.text" = "Export";
@@ -95,13 +96,13 @@
 "Int-ih-AH6.title" = "Request View Controller";
 
 /* Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
-"JZ8-MW-EwQ.text" = "CLAVE PRIVADA";
+"JZ8-MW-EwQ.text" = "PRIVATE KEY";
 
 /* Class = "UITextField"; placeholder = "Enter PIN"; ObjectID = "KTi-U4-C5T"; */
-"KTi-U4-C5T.placeholder" = "Introducir PIN";
+"KTi-U4-C5T.placeholder" = "Enter PIN";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE"; */
-"L8T-Xw-aVE.text" = "Notas";
+"L8T-Xw-aVE.text" = "Notes";
 
 /* Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG"; */
 "LI5-7a-oQG.text" = "Start Date";
@@ -113,7 +114,7 @@
 "Maf-2U-Gv8.text" = "Copy Public Address";
 
 /* Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU"; */
-"NBj-ek-BcU.normalTitle" = "La semana pasada";
+"NBj-ek-BcU.normalTitle" = "Last Week";
 
 /* Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
 "PDc-Am-Qmc.text" = "PUBLIC ADDRESS";
@@ -161,10 +162,10 @@
 "U2R-0A-Vdq.text" = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF";
 
 /* Class = "UILabel"; text = "To:"; ObjectID = "Uak-ip-kgV"; */
-"Uak-ip-kgV.text" = "Para:";
+"Uak-ip-kgV.text" = "To:";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z"; */
-"V5e-1n-K9Z.placeholder" = "Contraseña";
+"V5e-1n-K9Z.placeholder" = "Password";
 
 /* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
 "Vcb-0y-fDf.text" = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:";
@@ -173,10 +174,13 @@
 "Vuw-Bw-dQY.normalTitle" = "Wallet Private Seed (advanced)";
 
 /* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
-"WB0-Ox-RAw.text" = "PIN de 4 dígitos";
+"WB0-Ox-RAw.text" = "4 Digit PIN";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F"; */
 "Yfp-gi-q8F.text" = "Label";
+
+/* Class = "UIButton"; accessibilityLabel = " "; ObjectID = "Ypw-4p-DZr"; */
+"Ypw-4p-DZr.accessibilityLabel" = " ";
 
 /* Class = "UIViewController"; title = "Wallets View Controller"; ObjectID = "ZP6-jP-fb3"; */
 "ZP6-jP-fb3.title" = "Wallets View Controller";
@@ -288,4 +292,3 @@
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "x8T-QG-WiU"; */
 "x8T-QG-WiU.normalTitle" = "Done";
-
