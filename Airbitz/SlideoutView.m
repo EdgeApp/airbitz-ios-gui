@@ -507,7 +507,7 @@
     NSString *message = [NSString stringWithFormat:warningText, acct];
     UIAlertView *alert = [[UIAlertView alloc]
                            initWithTitle:deleteAccountText
-                           message:NSLocalizedString(message, nil)
+                           message:message
                            delegate:self
                            cancelButtonTitle:noButtonText
                            otherButtonTitles:yesButtonText, nil];

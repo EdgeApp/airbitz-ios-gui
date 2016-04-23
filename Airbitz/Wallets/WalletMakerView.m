@@ -124,8 +124,6 @@
     [self.switchOnlineOffline setOn:NO];
     [self.popupPickerCurrency removeFromSuperview];
     _bCurrencyPopup = NO;
-//    [self.buttonSelectorView close];
-//    self.buttonSelectorView.textLabel.text = NSLocalizedString(@"Currency:", @"name of button on wallets view");
     
     // Default currency for new wallets should be the currency set in the account settings
     _currencyChoice = abcAccount.settings.defaultCurrency;
@@ -183,8 +181,8 @@
          [self blockUser:NO];
          _bCreatingWallet = NO;
          UIAlertView *alert = [[UIAlertView alloc]
-                               initWithTitle:NSLocalizedString(@"Create Wallet", nil)
-                               message:[NSString stringWithFormat:@"Wallet creation failed:\n%@", error.userInfo[NSLocalizedDescriptionKey]]
+                               initWithTitle:createWalletText
+                               message:[NSString stringWithFormat:walletCreateFailedFormatString, error.userInfo[NSLocalizedDescriptionKey]]
                                delegate:nil
                                cancelButtonTitle:okButtonText
                                otherButtonTitles:nil];

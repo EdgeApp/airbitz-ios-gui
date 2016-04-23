@@ -196,7 +196,7 @@ static BOOL bInitialized = false;
     self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
     self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    self.usernameSelector.textField.placeholder = NSLocalizedString(@"Username", @"Username");
+    self.usernameSelector.textField.placeholder = usernameText;
     self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
 
     [self.usernameSelector setTopMostView:self.view];
@@ -208,7 +208,7 @@ static BOOL bInitialized = false;
     [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
     [self.PINusernameSelector.button setBackgroundColor:[UIColor clearColor]];
 
-    self.PINusernameSelector.textLabel.text = NSLocalizedString(@"", @"username");
+    self.PINusernameSelector.textLabel.text = @"";
     [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
     self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
     
@@ -310,14 +310,14 @@ static BOOL bInitialized = false;
 
 - (void)uploadLog {
     [self resignAllResponders];
-    NSString *title = NSLocalizedString(@"Upload Log File", nil);
-    NSString *message = NSLocalizedString(@"Enter any notes you would like to send to our support staff", nil);
+    NSString *title = uploadLogText;
+    NSString *message = enterAnyNotesForSupportStaff;
     // show password reminder test
     _uploadLogAlert = [[UIAlertView alloc] initWithTitle:title
                                                      message:message
                                                     delegate:self
-                                           cancelButtonTitle:@"Cancel"
-                                           otherButtonTitles:@"Upload Log", nil];
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:uploadLogText, nil];
     _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [_uploadLogAlert show];
 }
@@ -552,7 +552,7 @@ static BOOL bInitialized = false;
              }
              else if (ABCConditionCodeError == error.code)
              {
-                 [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
+                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                  [MainViewController showBackground:NO animate:YES];
              }
              else
@@ -609,7 +609,7 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [MainViewController fadingAlert:NSLocalizedString(@"Please enter a User Name", nil)];
+        [MainViewController fadingAlert:pleaseEnterAUsername];
     }
 }
 
@@ -664,13 +664,13 @@ static BOOL bInitialized = false;
              //
              // Ask if they want TouchID enabled for this user on this device
              //
-             NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-             NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+             NSString *title = enableTouchIDText;
+             NSString *message = wouldYouLikeToEnableTouchID;
              _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
                                                                   message:message
                                                                  delegate:self
-                                                        cancelButtonTitle:@"Later"
-                                                        otherButtonTitles:@"OK", nil];
+                                                        cancelButtonTitle:laterButtonText
+                                                        otherButtonTitles:okButtonText, nil];
              _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
              [_enableTouchIDAlertView show];
          }
@@ -701,7 +701,7 @@ static BOOL bInitialized = false;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
              if (ABCConditionCodeError == error.code)
-                 reason = NSLocalizedString(@"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline", nil);
+                 reason = pinLoginErrorText;
              else
                  reason = error.userInfo[NSLocalizedDescriptionKey];
              
@@ -1036,13 +1036,13 @@ static BOOL bInitialized = false;
         //
         // Ask if they want TouchID enabled for this user on this device
         //
-        NSString *title = NSLocalizedString(@"Enable Touch ID", nil);
-        NSString *message = NSLocalizedString(@"Would you like to enable TouchID for this account and device?", nil);
+        NSString *title = enableTouchIDText;
+        NSString *message = wouldYouLikeToEnableTouchID;
         _enableTouchIDAlertView = [[UIAlertView alloc] initWithTitle:title
                                                              message:message
                                                             delegate:self
-                                                   cancelButtonTitle:@"Later"
-                                                   otherButtonTitles:@"OK", nil];
+                                                   cancelButtonTitle:laterButtonText
+                                                   otherButtonTitles:okButtonText, nil];
         _enableTouchIDAlertView.alertViewStyle = UIAlertViewStyleDefault;
         [_enableTouchIDAlertView show];
     }
@@ -1115,7 +1115,7 @@ static BOOL bInitialized = false;
          {
              [self showSpinner:NO];
              if (ABCConditionCodeError == error.code)
-                 [MainViewController fadingAlert:NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)];
+                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
              else
                  [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
          }];
@@ -1235,7 +1235,7 @@ static BOOL bInitialized = false;
     NSString *message = [NSString stringWithFormat:warningText, acct];
     _deleteAccountAlert = [[UIAlertView alloc]
                           initWithTitle:deleteAccountText
-                          message:NSLocalizedString(message, nil)
+                          message:message
                           delegate:self
                           cancelButtonTitle:noButtonText
                           otherButtonTitles:yesButtonText, nil];
@@ -1320,7 +1320,7 @@ static BOOL bInitialized = false;
             //
             // Disable TouchID in LocalSettings
             [abcAccount.settings disableTouchID];
-            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [MainViewController fadingAlert:touchIDDisabled];
         }
         else
         {
@@ -1329,12 +1329,12 @@ static BOOL bInitialized = false;
             //
             _tempPassword = [[alertView textFieldAtIndex:0] text];
             [FadingAlertView create:self.view
-                            message:NSLocalizedString(@"Checking password...", nil)
+                            message:checkingPasswordText
                            holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
                 if ([abcAccount.settings enableTouchID:_tempPassword])
                 {
                     _tempPassword = nil;
-                    [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Enabled", nil)];
+                    [MainViewController fadingAlert:touchIDEnabledText];
                     
                     
                 }
@@ -1343,11 +1343,11 @@ static BOOL bInitialized = false;
                     [MainViewController fadingAlertDismiss];
                     _tempPassword = nil;
                     _passwordIncorrectAlert = [[UIAlertView alloc]
-                                               initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
-                                               message:NSLocalizedString(@"Try again?", nil)
+                                               initWithTitle:incorrectPasswordText
+                                               message:tryAgainText
                                                delegate:self
-                                               cancelButtonTitle:@"NO"
-                                               otherButtonTitles:@"YES", nil];
+                                               cancelButtonTitle:noButtonText
+                                               otherButtonTitles:yesButtonText, nil];
                     [_passwordIncorrectAlert show];
                 }
             }];
@@ -1358,7 +1358,7 @@ static BOOL bInitialized = false;
     {
         if (buttonIndex == 0)
         {
-            [MainViewController fadingAlert:NSLocalizedString(@"Touch ID Disabled", nil)];
+            [MainViewController fadingAlert:touchIDDisabled];
             [abcAccount.settings disableTouchID];
         }
         else if (buttonIndex == 1)
@@ -1374,10 +1374,10 @@ static BOOL bInitialized = false;
             _spinnerView.hidden = NO;
             [abc uploadLogs:[[alertView textFieldAtIndex:0] text] complete:^
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Succeeded"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:debugLogFileText
+                                                                message:uploadSuccessfulText
                                                                delegate:self
-                                                      cancelButtonTitle:@"Ok"
+                                                      cancelButtonTitle:okButtonText
                                                       otherButtonTitles:nil];
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
@@ -1385,10 +1385,10 @@ static BOOL bInitialized = false;
                 [self assignFirstResponder];
             } error:^(NSError *error)
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Debug Log File"
-                                                                message:@"Upload Failed. Please check your network connection or contact support@airbitz.co"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:debugLogFileText
+                                                                message:uploadFailedText
                                                                delegate:self
-                                                      cancelButtonTitle:@"Ok"
+                                                      cancelButtonTitle:okButtonText
                                                       otherButtonTitles:nil];
                 [alert show];
                 [_logoImage setUserInteractionEnabled:YES];
@@ -1443,14 +1443,14 @@ static BOOL bInitialized = false;
 - (void)showPasswordCheckAlertForTouchID
 {
     // Popup to ask user for their password
-    NSString *title = NSLocalizedString(@"Touch ID", nil);
-    NSString *message = NSLocalizedString(@"Please enter your password to enable Touch ID", nil);
+    NSString *title = touchIDText;
+    NSString *message = enterYourPasswordToEnableTouchID;
     // show password reminder test
     _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
                                                      message:message
                                                     delegate:self
-                                           cancelButtonTitle:@"Later"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:laterButtonText
+                                           otherButtonTitles:okButtonText, nil];
     _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
     [_passwordCheckAlert show];
 }

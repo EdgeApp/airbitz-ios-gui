@@ -324,12 +324,12 @@
             
             // Setup source wallet metadata
             sourceMetaData.payeeName = [NSString stringWithFormat:transferToWalletText, _destWallet.name];
-            sourceMetaData.category  = [NSString stringWithFormat:transferCategoryText, _destWallet.name];
+            sourceMetaData.category  = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, _destWallet.name];
             [_spend setMetaData:sourceMetaData];
             
             // Setup dest wallet metadata
             destMetaData.payeeName   = [NSString stringWithFormat:transferFromWalletText, abcAccount.currentWallet.name];
-            destMetaData.category    = [NSString stringWithFormat:transferCategoryText, abcAccount.currentWallet.name];
+            destMetaData.category    = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, abcAccount.currentWallet.name];
             
             [_spend addTransfer:_destWallet amount:_amountSatoshi destMeta:destMetaData];
         }
@@ -430,7 +430,7 @@
 
     arrayPopupChoices = [ABCCurrency listCurrencyStrings];
     popupPosition = PopupPicker2Position_Full_Fading;
-    headerText = NSLocalizedString(@"Select Currency", nil);
+    headerText = selectCurrencyText;
 
     self.popupPicker = [PopupPickerView2 CreateForView:self.viewDisplayArea
                                       relativePosition:popupPosition
@@ -518,7 +518,7 @@
 
     [Util addSubviewControllerWithConstraints:self child:self.sendStatusController];
 
-    self.sendStatusController.messageLabel.text = NSLocalizedString(@"Sending...", @"status message");
+    self.sendStatusController.messageLabel.text = sendingDotDotDot;
 
     [Util animateControllerFadeIn:self.sendStatusController];
 }
@@ -618,7 +618,7 @@
                             initWithTitle:title
                             message:message
                             delegate:nil
-                            cancelButtonTitle:@"OK"
+                            cancelButtonTitle:okButtonText
                             otherButtonTitles:nil];
     [_alert show];
     [self hideSendStatus];
@@ -670,7 +670,7 @@
         // Show password
         _passwordRequired = YES;
         _labelPINTitle.hidden = NO;
-        _labelPINTitle.text = NSLocalizedString(@"Password", nil);
+        _labelPINTitle.text = passwordText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
         _imagePINEmboss.hidden = NO;
@@ -681,7 +681,7 @@
         // Show PIN pad
         _pinRequired = YES;
         _labelPINTitle.hidden = NO;
-        _labelPINTitle.text = NSLocalizedString(@"4 Digit PIN", nil);
+        _labelPINTitle.text = fourDigitPINText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeNumberPad;
         _imagePINEmboss.hidden = NO;
@@ -887,15 +887,13 @@
     if (kInvalidEntryWait == [User Singleton].sendState)
     {
         NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
-        NSString *entry = _pinRequired ? @"PIN" : @"password";
+        NSString *entry = _pinRequired ? pinText : passwordText;
         if(remaining < 1.5) {
-            [self fadingAlertDelayed:[NSString stringWithFormat:
-                NSLocalizedString(@"Please wait 1 second before retrying %@", nil), entry]];
+            [self fadingAlertDelayed:[NSString stringWithFormat:pleaseWait1SecondFormatString, entry]];
         }
         else
         {
-           [self fadingAlertDelayed:[NSString stringWithFormat:
-                NSLocalizedString(@"Please wait %.0f seconds before retrying %@", nil), remaining, entry]];
+           [self fadingAlertDelayed:[NSString stringWithFormat:pleaseWaitXXXSecondsFormatString, remaining, entry]];
         }
         [_confirmationSlider resetIn:remaining];
     }
@@ -903,7 +901,7 @@
     {
         //make sure PIN is good
         if (_pinRequired && !self.withdrawlPIN.text.length) {
-            [self fadingAlertDelayed:NSLocalizedString(@"Please enter your PIN", nil)];
+            [self fadingAlertDelayed:pleaseEnterYourPIN];
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
             [_confirmationSlider resetIn:1.0];
@@ -914,11 +912,11 @@
             if (kInvalidEntryWait == [user sendInvalidEntry])
             {
                 NSTimeInterval remaining = [user getRemainingInvalidEntryWait];
-                [self fadingAlertDelayed:[NSString stringWithFormat:NSLocalizedString(@"Incorrect PIN. Please wait %.0f seconds and try again.", nil), remaining]];
+                [self fadingAlertDelayed:[NSString stringWithFormat:incorrectPINPleaseWaitXXX, remaining]];
             }
             else
             {
-                [self fadingAlertDelayed:NSLocalizedString(@"Incorrect PIN", nil)];
+                [self fadingAlertDelayed:incorrectPIN];
             }
             [_withdrawlPIN becomeFirstResponder];
             [_withdrawlPIN selectAll:nil];
@@ -929,7 +927,7 @@
             if (matched) {
                 [self continueChecks];
             } else {
-                [self fadingAlertDelayed:NSLocalizedString(@"Incorrect password", nil)];
+                [self fadingAlertDelayed:incorrectPasswordText];
                 [_withdrawlPIN becomeFirstResponder];
                 [_withdrawlPIN selectAll:nil];
                 [_confirmationSlider resetIn:1.0];
@@ -953,7 +951,7 @@
 - (void)continueChecks
 {
     if (_amountSatoshi == 0) {
-        [self fadingAlertDelayed:NSLocalizedString(@"Please enter an amount to send", nil)];
+        [self fadingAlertDelayed:pleaseEnterAnAmountToSend];
         [_confirmationSlider resetIn:1.0];
     } else {
         [self initiateSendRequest];
@@ -962,7 +960,7 @@
 
 - (void)tooSmallAlert
 {
-    [self fadingAlertDelayed:NSLocalizedString(@"Amount is too small", nil)];
+    [self fadingAlertDelayed:amountIsTooSmall];
 }
 
 #pragma mark - Calculator delegates
@@ -1023,7 +1021,7 @@
 
 - (void)txSendFailed:(NSString *)errorString
 {
-    NSString *title = NSLocalizedString(@"Error during send", nil);
+    NSString *title = errorDuringSend;
     NSArray *params = [NSArray arrayWithObjects: title, errorString, nil];
 //    dispatch_async(dispatch_get_main_queue(), ^(void) {
         [_confirmationSlider resetIn:1.0];

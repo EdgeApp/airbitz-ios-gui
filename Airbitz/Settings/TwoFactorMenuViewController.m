@@ -56,7 +56,7 @@
         _labelResetDate.hidden = NO;
         _labelResetDesc.hidden = NO;
         _labelResetDate.text = [NSString stringWithFormat:@"%@: %@",
-                                NSLocalizedString(@"Reset Date", nil),
+                                resetDateText,
                                 [self formatDate:self.resetDate]];
     }
 }
@@ -97,7 +97,7 @@
 {
     [abc requestOTPReset:_username token:_resetToken complete:^
      {
-         [MainViewController fadingAlert:NSLocalizedString(@"Reset requested. Please retry login after 7 days.", nil)];
+         [MainViewController fadingAlert:resetRequestedText];
      } error:^(NSError *error)
      {
          [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];

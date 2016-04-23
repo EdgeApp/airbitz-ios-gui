@@ -419,7 +419,7 @@ typedef enum eExportOption
         UIPrintInteractionController *pc = [UIPrintInteractionController sharedPrintController];
         UIPrintInfo *printInfo = [UIPrintInfo printInfo];
         printInfo.outputType = UIPrintInfoOutputGeneral;
-        printInfo.jobName = NSLocalizedString(@"Wallet Export", nil);
+        printInfo.jobName = walletExport;
         pc.printInfo = printInfo;
         pc.showsPageRange = YES;
         NSData *dataExport = [self getExportDataInForm:self.type];
@@ -431,8 +431,9 @@ typedef enum eExportOption
 
             NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
-            [strBody appendFormat:@"Wallet: %@\n\n", abcAccount.currentWallet.name];
-            [strBody appendString:@"Private Seed:\n"];
+            [strBody appendFormat:@"%@%@\n\n", walletNameHeaderText, abcAccount.currentWallet.name];
+            [strBody appendString:privateSeedText];
+            [strBody appendString:@":\n"];
             [strBody appendString:strPrivateSeed];
             [strBody appendString:@"\n\n"];
 
@@ -469,10 +470,10 @@ typedef enum eExportOption
     {
         // not available
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Export Wallet Transactions", nil)
-                              message:@"AirPrint is not currently available"
+                              initWithTitle:exportWalletTransactions
+                              message:airprintIsNotAvailable
                               delegate:nil
-                              cancelButtonTitle:@"OK"
+                              cancelButtonTitle:okButtonText
                               otherButtonTitles:nil];
         [alert show];
     }
@@ -488,7 +489,6 @@ typedef enum eExportOption
 
         [strBody appendString:@"<html><body>\n"];
 
-//        [strBody appendString:NSLocalizedString(@"Attached are the transactions for the AirBitz Bitcoin Wallet: ", nil)];
         [strBody appendString:abcAccount.currentWallet.name];
         [strBody appendString:@"\n"];
         [strBody appendString:@"<br><br>\n"];
@@ -520,9 +520,9 @@ typedef enum eExportOption
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Can't send e-mail"
+                                                        message:cantSendEmailText
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:okButtonText
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -575,7 +575,7 @@ typedef enum eExportOption
         NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
 
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Wallet Private Seed", nil)
+                              initWithTitle:walletPrivateSeed
                                     message:strPrivateSeed
                                    delegate:nil
                               cancelButtonTitle:@"OK"
@@ -611,7 +611,7 @@ typedef enum eExportOption
             else
             {
                 NSString *title;
-                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                title = exportWalletTransactions;
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
                                       message:error.userInfo[NSLocalizedDescriptionKey]
@@ -645,7 +645,7 @@ typedef enum eExportOption
             else
             {
                 NSString *title;
-                title = NSLocalizedString(@"Export Wallet Transactions", nil);
+                title = exportWalletTransactions;
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
                                       message:error.userInfo[NSLocalizedDescriptionKey]
@@ -676,7 +676,7 @@ typedef enum eExportOption
             else
             {
                 NSString *title;
-                title = NSLocalizedString(@"Export Private Seed", nil);
+                title = exportPrivateSeed;
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle:title
                                       message:error.userInfo[NSLocalizedDescriptionKey]
@@ -879,7 +879,7 @@ typedef enum eExportOption
     {
         if ([abcAccount accountHasPassword] && ![abcAccount checkPassword:self.passwordTextField.text])
         {
-            [MainViewController fadingAlert:NSLocalizedString(@"Incorrect password", nil)];
+            [MainViewController fadingAlert:incorrectPasswordText];
             [self.passwordTextField becomeFirstResponder];
             [self.passwordTextField selectAll:nil];
         }
@@ -912,20 +912,20 @@ typedef enum eExportOption
 	switch (result)
     {
 		case MFMailComposeResultCancelled:
-            strMsg = NSLocalizedString(@"Email cancelled.", nil);
+            strMsg = emailCancelled;
 			break;
 
 		case MFMailComposeResultSaved:
-            strMsg = NSLocalizedString(@"Email saved to send later.", nil);
+            strMsg = emailSavedToSendLater;
 			break;
 
 		case MFMailComposeResultSent:
-            strMsg = NSLocalizedString(@"Email sent.", nil);
+            strMsg = emailSent;
 			break;
 
 		case MFMailComposeResultFailed:
 		{
-            strTitle = NSLocalizedString(@"Error sending Email.", nil);
+            strTitle = errorSendingEmail;
             strMsg = [error localizedDescription];
 			break;
 		}
@@ -936,7 +936,7 @@ typedef enum eExportOption
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
                                                     message:strMsg
                                                    delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                          cancelButtonTitle:okButtonText
                                           otherButtonTitles:nil];
     [alert show];
 

@@ -26,6 +26,13 @@
                          blue:((float)((rgbValue & 0x000000FF) >>  0))/255.0 \
                         alpha:((float)((rgbValue & 0xFF000000) >> 24))/255.0]
 
+#define expenseCategoryColon    [NSString stringWithFormat:@"%@:", abcStringExpenseCategory]
+#define incomeCategoryColon     [NSString stringWithFormat:@"%@:", abcStringIncomeCategory]
+#define transferCategoryColon   [NSString stringWithFormat:@"%@:", abcStringTransferCategory]
+#define exchangeCategoryColon   [NSString stringWithFormat:@"%@:", abcStringExchangeCategory]
+
+#define ARRAY_CATEGORY_PREFIXES         @[expenseCategoryColon,incomeCategoryColon,transferCategoryColon,exchangeCategoryColon]
+#define ARRAY_CATEGORY_PREFIXES_NOCOLON @[abcStringExpenseCategory,abcStringIncomeCategory,abcStringTransferCategory,abcStringExchangeCategory]
 
 @interface Util : NSObject
 

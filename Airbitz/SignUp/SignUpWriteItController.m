@@ -5,6 +5,7 @@
 
 #import "SignUpWriteItController.h"
 #import "StylizedButtonOutline.h"
+#import "Strings.h"
 
 @interface SignUpWriteItController ()
 {
@@ -48,7 +49,7 @@
         self.labelInfo.hidden = YES;
         self.labelWriteIt.hidden = YES;
         self.viewShowHide.hidden = NO;
-        [self.buttonShowHide setTitle:NSLocalizedString(@"Hide", "Hide") forState:UIControlStateNormal];
+        [self.buttonShowHide setTitle:hideText forState:UIControlStateNormal];
 
         self.bShow = NO;
     }
@@ -57,7 +58,7 @@
         self.labelInfo.hidden = NO;
         self.labelWriteIt.hidden = NO;
         self.viewShowHide.hidden = YES;
-        [self.buttonShowHide setTitle:NSLocalizedString(@"Show", "Show") forState:UIControlStateNormal];
+        [self.buttonShowHide setTitle:showText forState:UIControlStateNormal];
 
         self.bShow = YES;
 
