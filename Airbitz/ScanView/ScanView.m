@@ -7,6 +7,7 @@
 #if !TARGET_IPHONE_SIMULATOR
 #import "ZBarSDK.h"
 #import "MainViewController.h"
+#import "Strings.h"
 
 #endif
 
@@ -114,7 +115,7 @@
         [_scanningErrorLabel setHidden:YES];
         [_flashSelector setHidden:NO];
     } else {
-        _scanningErrorLabel.text = NSLocalizedString(@"Camera unavailable", @"");
+        _scanningErrorLabel.text = cameraUnavailableText;
         [_scanningErrorLabel setHidden:NO];
         [_flashSelector setHidden:YES];
     }
@@ -240,10 +241,10 @@
     [reader dismissViewControllerAnimated:YES completion:nil];
 
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-                          message:NSLocalizedString(@"Unable to scan QR code", nil)
+                          initWithTitle:qrCodeScanFailure
+                          message:unableToScanQR
                           delegate:nil
-                          cancelButtonTitle:@"OK"
+                          cancelButtonTitle:okButtonText
                           otherButtonTitles:nil];
     [alert show];
 

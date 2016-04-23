@@ -62,7 +62,7 @@
     self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
-    self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
+    self.labelString = signupText;
 
 
 }
@@ -141,7 +141,7 @@
 
 - (void)createAccount
 {
-    [FadingAlertView create:self.view message:NSLocalizedString(@"Creating and securing account", nil) holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [FadingAlertView create:self.view message:creatingAndSecuringAccount holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     [_passwordTextField resignFirstResponder];
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
@@ -208,7 +208,7 @@
         if (!result.passed)
         {
             UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:NSLocalizedString(@"Insufficient Password", @"Title of password check popup alert")
+                    initWithTitle:insufficientPasswordText
                           message:[Util checkPasswordResultsMessage:result]
                          delegate:nil
                 cancelButtonTitle:okButtonText
@@ -230,9 +230,9 @@
 {
     UIAlertView *alert = [[UIAlertView alloc]
             initWithTitle:self.labelString
-                    message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelString, passwordMismatchText]
+                    message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString, self.labelString, passwordMismatchText]
                     delegate:nil
-        cancelButtonTitle:@"OK"
+        cancelButtonTitle:okButtonText
         otherButtonTitles:nil];
     [alert show];
 }
@@ -251,9 +251,9 @@
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                          message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"PIN must be 4 digits", @""), [AirbitzCore getMinimumPINLength]]]
+                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];

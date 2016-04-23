@@ -40,8 +40,6 @@ typedef NS_ENUM(NSUInteger, CellType) {
 #define SINGLE_ROW_CELL_HEIGHT	50
 #define LABEL_WIDTH_WILD_GUESS  300
 
-#define CLOSED_STRING	@"closed"
-
 @interface BusinessDetailsViewController () <UITableViewDataSource, UITableViewDelegate,
                                              UIAlertViewDelegate, UIPhotoGalleryDataSource, UIPhotoGalleryDelegate>
 {
@@ -318,7 +316,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	}
 	else
 	{
-		pmamDateString = CLOSED_STRING;
+		pmamDateString = closedText;
 	}
 	return [pmamDateString lowercaseString];
 }
@@ -564,7 +562,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 		//share cell
         commonCell.cellIcon.hidden = NO;
         commonCell.cellIcon.image = [UIImage imageNamed:@"bd_icon_share.png"];
-        commonCell.leftLabel.text = NSLocalizedString(@"Share", @"Share button text");
+        commonCell.leftLabel.text = shareButtonText;
         shareView = commonCell;
 	}
 	else if(cellType == kHours)
@@ -596,9 +594,11 @@ typedef NS_ENUM(NSUInteger, CellType) {
 					{
 						[hoursString appendFormat:@"%@\n", closedTime];
 					}
-					else if(![openTime isEqualToString:CLOSED_STRING] && [closedTime isEqualToString:CLOSED_STRING])
+					else if(![openTime isEqualToString:closedText] && [closedTime isEqualToString:closedText])
 					{
-						[hoursString appendString:@"Open 24 hours\n"];
+						[hoursString appendString:open24HoursText];
+                        [hoursString appendString:@"\n"];
+
 					}
 					else
 					{
@@ -611,8 +611,9 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			}
 			else
 			{
-				[dayString appendString:@"Open 24"];
-				[hoursString appendString:@"hours\n"];
+				[dayString appendString:open24Text];
+                [hoursString appendString:hoursText];
+                [hoursString appendString:@"\n"];
 			}
             NSInteger leftLines = [[dayString componentsSeparatedByCharactersInSet:
                     [NSCharacterSet newlineCharacterSet]] count];
@@ -740,14 +741,14 @@ typedef NS_ENUM(NSUInteger, CellType) {
         case kPhone:
         {
 #if SHOW_PHONE_CALL_ARE_YOU_SURE_ALERT
-            NSString *msg = NSLocalizedString(@"Are you sure you want to call", nil);
+            NSString *msg = areYouSureYouWantToCall;
             
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Place Call", nil)
+                                  initWithTitle:placeCallText
                                   message:[NSString stringWithFormat:@"%@ %@?", msg, [self.businessGeneralInfo objectForKey:@"phone"]]
                                   delegate:self
-                                  cancelButtonTitle:@"No"
-                                  otherButtonTitles:@"Yes", nil];
+                                  cancelButtonTitle:noButtonText
+                                  otherButtonTitles:yesButtonText, nil];
             [alert show];
 #else
             [self callBusinessNumber];
@@ -765,7 +766,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             NSString *subject = [NSString stringWithFormat:@"%@ - %@ %@",
                              [self.businessDetails objectForKey:@"name"],
                              [self.businessDetails objectForKey:@"city"],
-                             NSLocalizedString(@"Bitcoin | Airbitz", nil)
+                             @"Bitcoin | Airbitz"
                              ];
             NSString *msg = [NSString stringWithFormat:@"%@ https://airbitz.co/biz/%@",
                                 subject, [self.businessDetails objectForKey:@"bizId"]

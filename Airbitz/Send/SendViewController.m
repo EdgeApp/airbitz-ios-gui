@@ -80,6 +80,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIAlertView                     *_bitidAlert;
     UIAlertView                     *_privateKeyAlert;
     ABCParsedURI                    *_parsedURI;
+    NSString                        *_privateKeyURI;
     NSString                        *_tweet;
 }
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
@@ -197,10 +198,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
 
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"QR Code Scan Failure", nil)
-                      message:NSLocalizedString(@"Unable to scan QR code", nil)
+                initWithTitle:qrCodeScanFailure
+                      message:unableToScanQR
                      delegate:nil
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
     }
@@ -208,9 +209,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:invalidAddressPopupText
-                      message:NSLocalizedString(@"", nil)
+                      message:@""
                      delegate:self
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
 
@@ -554,7 +555,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (buttonIndex == 1)
         {
             // Import
-            [self importWallet:_parsedURI.privateKey];
+            [self importWallet:_privateKeyURI];
         }
         else if (buttonIndex == 2)
         {
@@ -860,10 +861,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         //start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
-                              message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                              initWithTitle:bitcoinAddressMismatch
+                              message:[NSString stringWithFormat:bitcoinAddressMismatchFormatText, [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
                               delegate:nil
-                              cancelButtonTitle:@"OK"
+                              cancelButtonTitle:okButtonText
                               otherButtonTitles:nil];
         [alert show];
     }
@@ -883,8 +884,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             // start at index 9 to skip over "bitcoin:".  Partial address is 10 characters long
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:NSLocalizedString(@"Bitcoin address mismatch", nil)
-                                  message:[NSString stringWithFormat:@"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@", [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
+                                  initWithTitle:bitcoinAddressMismatch, nil)
+                                  message:[NSString stringWithFormat:bitcoinAddressMismatchFormatText, [stringFromData substringWithRange:NSMakeRange(8, 10) ], self.advertisedPartialBitcoinAddress]
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -1343,7 +1344,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 initWithFormat:NSLocalizedString(@"Importing funds from %@ into wallet...", nil), address]];
         [MainViewController fadingAlert:statusMessage holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
     } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
-        if (0 < amount)
+        if (ABCImportHBitsURI == dataModel)
+        {
+            [self showHbitsResults:address amount:amount];
+        }
+        else if (0 < amount)
         {
             [MainViewController fadingAlertDismiss];
             NSString *txid = transaction.txid;
@@ -1353,23 +1358,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                                                   userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abcAccount.currentWallet.uuid,
                                                                              KEY_TX_DETAILS_EXITED_TX_ID:txid}];
             }
-            if (ABCImportHBitsURI == dataModel)
-                [self showHbitsResults:address amount:amount];
         }
         else
         {
-            [MainViewController fadingAlert:NSLocalizedString(@"Failed to import because there is 0 bitcoin remaining at this address", nil)];
+            if (ABCImportHBitsURI == dataModel)
+            {
+                [self showHbitsResults:address amount:amount];
+            }
+            else
+            [MainViewController fadingAlert:importFailedPrivateKeyEmpty];
         }
 
     } error:^(NSError *error) {
-        if (error.code == ABCConditionCodeNoTransaction)
-        {
-            [MainViewController fadingAlert:NSLocalizedString(@"Import failed", nil)];
-        }
-        else
-        {
-            [MainViewController fadingAlert:NSLocalizedString(@"Invalid private key", nil)];
-        }
+        NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n%@: %d\n\n%@: %@", importFailedText, errorCodeText, (int) error.code, errorDescriptionText, error.userInfo[NSLocalizedDescriptionKey]];
+        [MainViewController fadingAlert:errorMessage];
 
         [self updateState];
     }];
@@ -1615,6 +1617,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                                 cancelButtonTitle:cancelButtonText
                                 otherButtonTitles:importFunds,sendFundsToPrivateKey,nil];
             [_privateKeyAlert show];
+            _privateKeyURI = uriString;
             return;
         }
         else if (_parsedURI.address || _parsedURI.paymentRequestURL)
@@ -1808,11 +1811,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         if (zmessage)
                         {
                             _tweetAlert = [[UIAlertView alloc]
-                                           initWithTitle:NSLocalizedString(@"Sorry", nil)
+                                           initWithTitle:sorryText
                                            message:zmessage
                                            delegate:self
-                                           cancelButtonTitle:@"No"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:noButtonText
+                                           otherButtonTitles:okButtonText, nil];
                             [_tweetAlert show];
                         }
                     }
@@ -1822,11 +1825,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         if (message)
                         {
                             _tweetAlert = [[UIAlertView alloc]
-                                           initWithTitle:NSLocalizedString(@"Congratulations", nil)
+                                           initWithTitle:congratulationsText
                                            message:message
                                            delegate:self
-                                           cancelButtonTitle:@"No"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:noButtonText
+                                           otherButtonTitles:okButtonText, nil];
                             [_tweetAlert show];
                         }
                     }

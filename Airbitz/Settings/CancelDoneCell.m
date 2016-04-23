@@ -7,6 +7,7 @@
 //
 
 #import "CancelDoneCell.h"
+#import "Strings.h"
 
 @implementation CancelDoneCell
 
@@ -25,8 +26,8 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
-	[self.cancelButton setTitle:NSLocalizedString(@"Cancel", @"cancel button title") forState:UIControlStateNormal];
-	[self.doneButton setTitle:NSLocalizedString(@"Done", @"done button title") forState:UIControlStateNormal];
+	[self.cancelButton setTitle:cancelButtonText forState:UIControlStateNormal];
+	[self.doneButton setTitle:doneButtonText forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
