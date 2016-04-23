@@ -51,11 +51,11 @@
 
     NSMutableString *msg = [[NSMutableString alloc] init];
     if ([strName length] > 0) {
-        [msg appendFormat:NSLocalizedString(@"%@ has requested a bitcoin address to send money to.", nil), strName];
+        [msg appendFormat:appnameHasRequestedABitcoinAddress, strName];
     } else {
-        [msg appendString:NSLocalizedString(@"An app has requested a bitcoin address to send money to.", nil)];
+        [msg appendString:anAppHasRequestedABitcoinAddress];
     }
-    [msg appendString:NSLocalizedString(@" Please choose a wallet to receive funds.", nil)];
+    [msg appendString:pleaseChooseAWalletToReceiveFunds];
     _message.text = msg;
 
 

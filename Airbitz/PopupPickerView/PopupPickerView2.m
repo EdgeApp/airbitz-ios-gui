@@ -371,7 +371,7 @@ CGRect keyboardFrame2;
     {
         if (section == 0)
         {
-            self.headerView = [WalletHeaderView CreateWithTitle:NSLocalizedString(self.headerText, nil)
+            self.headerView = [WalletHeaderView CreateWithTitle:self.headerText
                                                                     collapse:NO];
             self.headerView.btn_expandCollapse.hidden = YES;
             self.headerView.btn_expandCollapse.enabled = NO;

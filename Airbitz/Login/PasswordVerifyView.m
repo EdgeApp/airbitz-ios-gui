@@ -93,7 +93,7 @@
     
 //    if (result)
 		
-	NSMutableString *crackString = [[NSMutableString alloc] initWithString:NSLocalizedString(@"Time to crack:", @"text in password verification popup")];
+	NSMutableString *crackString = [[NSMutableString alloc] initWithString:timeToCrackText];
     
 	if(result.secondsToCrack < 60.0)
 	{

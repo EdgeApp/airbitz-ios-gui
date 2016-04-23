@@ -44,17 +44,6 @@
                                                    [MainViewController getFooterHeight],0)];
 
     _backButton.hidden = YES;
-//
-//    _buySellHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Buy / Sell Bitcoin", nil) collapse:NO];
-//    _buySellHeaderView.btn_expandCollapse.hidden = YES;
-//    _buySellHeaderView.btn_addWallet.hidden = YES;
-//    _buySellHeaderView.btn_exportWallet.hidden = YES;
-//    _buySellHeaderView.btn_header.hidden = YES;
-//    _giftCardHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Discounted Gift Cards", nil) collapse:NO];
-//    _giftCardHeaderView.btn_expandCollapse.hidden = YES;
-//    _giftCardHeaderView.btn_addWallet.hidden = YES;
-//    _giftCardHeaderView.btn_exportWallet.hidden = YES;
-//    _giftCardHeaderView.btn_header.hidden = YES;
     
     [Plugin initAll];
 }

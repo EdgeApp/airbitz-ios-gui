@@ -1564,7 +1564,7 @@ const int NumPromoRows              = 5;
     self.walletsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.walletsTable.allowsSelectionDuringEditing = YES;
 
-    self.balanceHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"Loading Balance...", @"title of wallets table balance header")
+    self.balanceHeaderView = [WalletHeaderView CreateWithTitle:loadingBalanceDotDotDot
                                                             collapse:NO];
     self.balanceHeaderView.btn_expandCollapse.hidden = YES;
     self.balanceHeaderView.btn_expandCollapse.enabled = NO;
@@ -1574,7 +1574,7 @@ const int NumPromoRows              = 5;
     self.balanceHeaderView.segmentedControlBTCUSD.enabled = YES;
     self.balanceHeaderView.delegate = self;
 
-    self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"WALLETS", @"title of active wallets table")
+    self.activeWalletsHeaderView = [WalletHeaderView CreateWithTitle:walletsTableHeaderText
                                                             collapse:NO];
     self.activeWalletsHeaderView.btn_expandCollapse.hidden = YES;
     self.activeWalletsHeaderView.btn_expandCollapse.enabled = NO;
@@ -1585,7 +1585,7 @@ const int NumPromoRows              = 5;
     self.activeWalletsHeaderView.delegate = self;
 
     _archiveCollapsed = [[NSUserDefaults standardUserDefaults] boolForKey:ARCHIVE_COLLAPSED];
-    self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:NSLocalizedString(@"ARCHIVE", @"title of archived wallets table")
+    self.archivedWalletsHeaderView = [WalletHeaderView CreateWithTitle:archiveTableHeaderText
                                                               collapse:_archiveCollapsed];
     self.archivedWalletsHeaderView.btn_addWallet.hidden = YES;
     self.archivedWalletsHeaderView.btn_addWallet.enabled = NO;
@@ -1639,7 +1639,7 @@ const int NumPromoRows              = 5;
         cell.name.text = wallet.name;
     } else {
         cell.userInteractionEnabled = NO;
-        cell.name.text = NSLocalizedString(@"Loading...", @"");
+        cell.name.text = loadingText;
     }
 
     cell.amount.text = [self formatAmount:wallet useFiat:_segmentedControlUSD];

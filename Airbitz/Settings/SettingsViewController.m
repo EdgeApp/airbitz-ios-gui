@@ -1039,7 +1039,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	}
 	if (section == SECTION_DEBUG)
 	{
-		label.text = NSLocalizedString(@"", nil);
+		label.text = @"";
 	}
     cell.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = [[UIImageView alloc] initWithFrame:cell.bounds];
@@ -1487,8 +1487,8 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                                                initWithTitle:NSLocalizedString(@"Incorrect Password", nil)
                                                message:NSLocalizedString(@"Try again?", nil)
                                                delegate:self
-                                               cancelButtonTitle:@"NO"
-                                               otherButtonTitles:@"YES", nil];
+                                               cancelButtonTitle:noButtonText
+                                               otherButtonTitles:yesButtonText, nil];
                     [_passwordIncorrectAlert show];
                 }
             }];
@@ -1511,14 +1511,14 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 - (void)showPasswordCheckAlertForTouchID
 {
     // Popup to ask user for their password
-    NSString *title = NSLocalizedString(@"Touch ID", nil);
-    NSString *message = NSLocalizedString(@"Please enter your password to enable Touch ID", nil);
+    NSString *title = touchIDText;
+    NSString *message = enterYourPasswordToEnableTouchID;
     // show password reminder test
     _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
                                                      message:message
                                                     delegate:self
-                                           cancelButtonTitle:@"Later"
-                                           otherButtonTitles:@"OK", nil];
+                                           cancelButtonTitle:laterButtonText
+                                           otherButtonTitles:okButtonText, nil];
     _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
     [_passwordCheckAlert show];
 }

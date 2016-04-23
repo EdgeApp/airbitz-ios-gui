@@ -40,7 +40,7 @@
 	_userNameTextField.delegate = self;
     _userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
 
-    self.labelString = NSLocalizedString(@"Sign Up", @"Sign Up");
+    self.labelString = signupText;
 
     if (self.manager.strInUserName) {
         self.userNameTextField.text = self.manager.strInUserName;
@@ -145,10 +145,10 @@
     } else {
 //        [self dismissFading:NO];
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:NSLocalizedString(@"Account Sign Up", @"Title of account signin error alert")
-                      message:[NSString stringWithFormat:@"Sign-Up failed:\n%@", _strReason]
+                initWithTitle:accountSignUpText
+                      message:[NSString stringWithFormat:signupFailedFormatString, _strReason]
                      delegate:nil
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
     }
@@ -174,11 +174,10 @@
         bUserNameFieldIsValid = NO;
         UIAlertView *alert = [[UIAlertView alloc]
                 initWithTitle:self.labelString
-                      message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                         self.labelString,
-                                      NSLocalizedString(@"You must enter a user name", @"")]
+                      message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
+                                                         self.labelString, youMustEnterAUsername]
                      delegate:nil
-            cancelButtonTitle:@"OK"
+            cancelButtonTitle:okButtonText
             otherButtonTitles:nil];
         [alert show];
     }
@@ -198,11 +197,11 @@
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                          message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:NSLocalizedString(@"Username must be at least %d characters.", @""), [AirbitzCore getMinimumUsernamedLength]]]
+                                                             [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [AirbitzCore getMinimumUsernamedLength]]]
                          delegate:nil
-                cancelButtonTitle:@"OK"
+                cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];
             [alert show];
         }

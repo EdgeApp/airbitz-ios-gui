@@ -9,6 +9,7 @@
 #import "Location.h"
 #import "AB.h"
 #import "Util.h"
+#import "Strings.h"
 
 #define ACCURACY_METERS 100
 
@@ -157,7 +158,7 @@ static Location *singleton = nil;  // this will be the one and only object this 
                             initWithTitle:strTitle
                             message:strMsg
                             delegate:nil
-                            cancelButtonTitle:@"OK"
+                            cancelButtonTitle:okButtonText
                             otherButtonTitles:nil];
         [alert show];
     });

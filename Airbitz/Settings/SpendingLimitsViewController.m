@@ -245,7 +245,7 @@
         {
             UIAlertView *alert =
                     [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Unable to update Settings", nil)
+                            initWithTitle:unableToUpdateSettings
                                   message:error.userInfo[NSLocalizedDescriptionKey]
                                  delegate:self
                         cancelButtonTitle:cancelButtonText
@@ -255,8 +255,8 @@
         [self exitWithBackButton:YES];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]
-                            initWithTitle:NSLocalizedString(@"Incorrect password", nil)
-                            message:NSLocalizedString(@"Incorrect password", nil)
+                            initWithTitle:incorrectPasswordText
+                            message:incorrectPasswordText
                             delegate:self
                             cancelButtonTitle:cancelButtonText
                             otherButtonTitles:okButtonText, nil];
