@@ -2602,7 +2602,7 @@
 		DA36214F1CCB0C5900D674EF /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "RackWallet/logo@2x.png"; sourceTree = "<group>"; };
 		DA3621511CCB0C5900D674EF /* Rack Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Rack Wallet-Info.plist"; path = "RackWallet/Rack Wallet-Info.plist"; sourceTree = "<group>"; };
 		DA3621601CCB0E5E00D674EF /* infoDisclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = infoDisclaimer.html; path = "WL-Common/infoDisclaimer.html"; sourceTree = "<group>"; };
-		DA36230A1CCB11F400D674EF /* Athena Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athena Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA36230A1CCB11F400D674EF /* Athena Bitcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athena Bitcoin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA36230D1CCB127D00D674EF /* Athena Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Athena Wallet-Info.plist"; path = "AthenaWallet/Athena Wallet-Info.plist"; sourceTree = "<group>"; };
 		DA36230E1CCB127D00D674EF /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_launch.png; path = AthenaWallet/background_launch.png; sourceTree = "<group>"; };
 		DA36230F1CCB127D00D674EF /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background-fade@2x.jpg"; path = "AthenaWallet/background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -4460,7 +4460,7 @@
 				DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */,
 				DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */,
 				DA3621401CCB0AE300D674EF /* Rack Wallet.app */,
-				DA36230A1CCB11F400D674EF /* Athena Wallet.app */,
+				DA36230A1CCB11F400D674EF /* Athena Bitcoin.app */,
 				DA3624C11CCB13FB00D674EF /* Coinsource Wallet.app */,
 			);
 			name = Products;
@@ -4663,7 +4663,7 @@
 			);
 			name = "Athena Wallet";
 			productName = Airbitz;
-			productReference = DA36230A1CCB11F400D674EF /* Athena Wallet.app */;
+			productReference = DA36230A1CCB11F400D674EF /* Athena Bitcoin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA36231D1CCB13FB00D674EF /* Coinsource Wallet */ = {
@@ -8263,7 +8263,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -8305,7 +8305,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
