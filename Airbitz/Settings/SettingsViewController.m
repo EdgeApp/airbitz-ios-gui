@@ -571,7 +571,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (IBAction)Info
 {
-    [InfoView CreateWithHTML:@"infoSettings" forView:self.view];
+    [InfoView CreateWithHTML:@"info_settings" forView:self.view];
 }
 
 #pragma mark - textFieldCell delegates

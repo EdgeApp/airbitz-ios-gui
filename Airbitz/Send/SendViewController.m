@@ -427,7 +427,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 {
 	[self.view endEditing:YES];
     [self resignAllResponders];
-    [InfoView CreateWithHTML:@"infoSend" forView:self.view];
+    [InfoView CreateWithHTML:@"info_send" forView:self.view];
 }
 
 - (IBAction)buttonCameraTouched:(id)sender

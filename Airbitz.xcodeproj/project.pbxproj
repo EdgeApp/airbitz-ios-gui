@@ -34,19 +34,9 @@
 		DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
-		DA3624FA1CCBFE5400D674EF /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* SMSTemplate.txt */; };
-		DA3624FB1CCBFE5400D674EF /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* SMSTemplate.txt */; };
-		DA3624FC1CCBFE5400D674EF /* SMSTemplate.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* SMSTemplate.txt */; };
-		DA36252B1CCC077D00D674EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA36252D1CCC077D00D674EF /* Localizable.strings */; };
-		DA3625301CCC077F00D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625321CCC077F00D674EF /* InfoPlist.strings */; };
-		DA3625351CCC078000D674EF /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625371CCC078000D674EF /* Airbitz-Develop-InfoPlist.strings */; };
-		DA36253A1CCC078100D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA36253C1CCC078100D674EF /* InfoPlist.strings */; };
-		DA36253F1CCC078200D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625411CCC078200D674EF /* InfoPlist.strings */; };
-		DA3625441CCC078300D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625461CCC078300D674EF /* InfoPlist.strings */; };
-		DA3625491CCC078400D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA36254B1CCC078400D674EF /* InfoPlist.strings */; };
-		DA36254E1CCC078500D674EF /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625501CCC078500D674EF /* Airbitz-Testnet-InfoPlist.strings */; };
-		DA3625531CCC078600D674EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3625551CCC078600D674EF /* InfoPlist.strings */; };
-		DA3625581CCC078700D674EF /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA36255A1CCC078700D674EF /* Airbitz-InfoPlist.strings */; };
+		DA3624FA1CCBFE5400D674EF /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* sms_template.txt */; };
+		DA3624FB1CCBFE5400D674EF /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* sms_template.txt */; };
+		DA3624FC1CCBFE5400D674EF /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA3624FE1CCBFE5400D674EF /* sms_template.txt */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -85,15 +75,15 @@
 		DA93DE2A1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
 		DA93DE2B1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
 		DA93DE2C1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
-		DA93DE331CC9CB710063CD52 /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* emailTemplate.html */; };
-		DA93DE341CC9CB710063CD52 /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* emailTemplate.html */; };
-		DA93DE351CC9CB710063CD52 /* emailTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* emailTemplate.html */; };
+		DA93DE331CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
+		DA93DE341CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
+		DA93DE351CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
 		DA93DE381CC9CB740063CD52 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE3C1CC9CB740063CD52 /* info.html */; };
 		DA93DE391CC9CB740063CD52 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE3C1CC9CB740063CD52 /* info.html */; };
 		DA93DE3A1CC9CB740063CD52 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE3C1CC9CB740063CD52 /* info.html */; };
-		DA93DE3D1CC9CB780063CD52 /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* infoFooter.html */; };
-		DA93DE3E1CC9CB780063CD52 /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* infoFooter.html */; };
-		DA93DE3F1CC9CB780063CD52 /* infoFooter.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* infoFooter.html */; };
+		DA93DE3D1CC9CB780063CD52 /* info_footer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* info_footer.html */; };
+		DA93DE3E1CC9CB780063CD52 /* info_footer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* info_footer.html */; };
+		DA93DE3F1CC9CB780063CD52 /* info_footer.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE411CC9CB780063CD52 /* info_footer.html */; };
 		DA9D8F581CC0C191006A8C0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F571CC0C191006A8C0A /* AppDelegate.m */; };
 		DA9D8F5B1CC0C191006A8C0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5A1CC0C191006A8C0A /* main.m */; };
 		DA9D8F5E1CC0C191006A8C0A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5D1CC0C191006A8C0A /* ViewController.m */; };
@@ -1208,6 +1198,9 @@
 		DABF60F11C10263A004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DABF60F61C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DABF60F71C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
+		DAC7D2D91CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
+		DAC7D2DA1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
+		DAC7D2DB1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
 		DAC83B471CC9D7EF00140876 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC83B461CC9D7EF00140876 /* InfoPlist.strings */; };
 		DAD1AD7C1BC6065100C648C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
@@ -1225,48 +1218,48 @@
 		DAE1BE4B1CC3801F003494AB /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
 		DAE1BE4C1CC3816A003494AB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED81BC61F910063DA07 /* User.m */; };
 		DAE1BE4D1CC381C1003494AB /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
-		DAE4CCEF1CC9D89900082868 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* infoExportWallet.html */; };
-		DAE4CCF01CC9D89900082868 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* infoExportWallet.html */; };
-		DAE4CCF11CC9D89900082868 /* infoExportWallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* infoExportWallet.html */; };
-		DAE4CCF81CC9D8A000082868 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* infoExportWalletOptions.html */; };
-		DAE4CCF91CC9D8A000082868 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* infoExportWalletOptions.html */; };
-		DAE4CCFA1CC9D8A000082868 /* infoExportWalletOptions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* infoExportWalletOptions.html */; };
-		DAE4CD011CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */; };
-		DAE4CD021CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */; };
-		DAE4CD031CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */; };
-		DAE4CD081CC9D8C700082868 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */; };
-		DAE4CD091CC9D8C700082868 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */; };
-		DAE4CD0A1CC9D8C700082868 /* infoRecipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */; };
-		DAE4CD0F1CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
-		DAE4CD101CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
-		DAE4CD111CC9D8D100082868 /* infoRequest.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* infoRequest.html */; };
-		DAE4CD1D1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
-		DAE4CD1E1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
-		DAE4CD1F1CC9D8E700082868 /* infoSend.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* infoSend.html */; };
-		DAE4CD241CC9D8F100082868 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */; };
-		DAE4CD251CC9D8F100082868 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */; };
-		DAE4CD261CC9D8F100082868 /* infoDisclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */; };
-		DAE4CD2B1CC9D8F900082868 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */; };
-		DAE4CD2C1CC9D8F900082868 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */; };
-		DAE4CD2D1CC9D8F900082868 /* infoSendConfirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */; };
-		DAE4CD321CC9D90100082868 /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* infoSettings.html */; };
-		DAE4CD331CC9D90100082868 /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* infoSettings.html */; };
-		DAE4CD341CC9D90100082868 /* infoSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* infoSettings.html */; };
-		DAE4CD391CC9D90900082868 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* infoSpendingLimits.html */; };
-		DAE4CD3A1CC9D90900082868 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* infoSpendingLimits.html */; };
-		DAE4CD3B1CC9D90900082868 /* infoSpendingLimits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* infoSpendingLimits.html */; };
-		DAE4CD401CC9D91200082868 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* infoTransactionDetails.html */; };
-		DAE4CD411CC9D91200082868 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* infoTransactionDetails.html */; };
-		DAE4CD421CC9D91200082868 /* infoTransactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* infoTransactionDetails.html */; };
-		DAE4CD471CC9D91C00082868 /* infoTransactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* infoTransactions.html */; };
-		DAE4CD481CC9D91C00082868 /* infoTransactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* infoTransactions.html */; };
-		DAE4CD491CC9D91C00082868 /* infoTransactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* infoTransactions.html */; };
-		DAE4CD4E1CC9D92600082868 /* infoWallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* infoWallets.html */; };
-		DAE4CD4F1CC9D92600082868 /* infoWallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* infoWallets.html */; };
-		DAE4CD501CC9D92600082868 /* infoWallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* infoWallets.html */; };
-		DAE4CD551CC9D93000082868 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transactionDetails.html */; };
-		DAE4CD561CC9D93000082868 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transactionDetails.html */; };
-		DAE4CD571CC9D93000082868 /* transactionDetails.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transactionDetails.html */; };
+		DAE4CCEF1CC9D89900082868 /* info_export_wallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* info_export_wallet.html */; };
+		DAE4CCF01CC9D89900082868 /* info_export_wallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* info_export_wallet.html */; };
+		DAE4CCF11CC9D89900082868 /* info_export_wallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCF31CC9D89900082868 /* info_export_wallet.html */; };
+		DAE4CCF81CC9D8A000082868 /* info_export_wallet_options.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* info_export_wallet_options.html */; };
+		DAE4CCF91CC9D8A000082868 /* info_export_wallet_options.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* info_export_wallet_options.html */; };
+		DAE4CCFA1CC9D8A000082868 /* info_export_wallet_options.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CCFC1CC9D8A000082868 /* info_export_wallet_options.html */; };
+		DAE4CD011CC9D8BB00082868 /* info_insufficient_funds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* info_insufficient_funds.html */; };
+		DAE4CD021CC9D8BB00082868 /* info_insufficient_funds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* info_insufficient_funds.html */; };
+		DAE4CD031CC9D8BB00082868 /* info_insufficient_funds.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD051CC9D8BB00082868 /* info_insufficient_funds.html */; };
+		DAE4CD081CC9D8C700082868 /* info_recipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* info_recipient.html */; };
+		DAE4CD091CC9D8C700082868 /* info_recipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* info_recipient.html */; };
+		DAE4CD0A1CC9D8C700082868 /* info_recipient.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD0C1CC9D8C700082868 /* info_recipient.html */; };
+		DAE4CD0F1CC9D8D100082868 /* info_request.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* info_request.html */; };
+		DAE4CD101CC9D8D100082868 /* info_request.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* info_request.html */; };
+		DAE4CD111CC9D8D100082868 /* info_request.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD131CC9D8D100082868 /* info_request.html */; };
+		DAE4CD1D1CC9D8E700082868 /* info_send.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* info_send.html */; };
+		DAE4CD1E1CC9D8E700082868 /* info_send.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* info_send.html */; };
+		DAE4CD1F1CC9D8E700082868 /* info_send.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD211CC9D8E700082868 /* info_send.html */; };
+		DAE4CD241CC9D8F100082868 /* info_disclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* info_disclaimer.html */; };
+		DAE4CD251CC9D8F100082868 /* info_disclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* info_disclaimer.html */; };
+		DAE4CD261CC9D8F100082868 /* info_disclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD281CC9D8F100082868 /* info_disclaimer.html */; };
+		DAE4CD2B1CC9D8F900082868 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* info_send_confirmation.html */; };
+		DAE4CD2C1CC9D8F900082868 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* info_send_confirmation.html */; };
+		DAE4CD2D1CC9D8F900082868 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD2F1CC9D8F900082868 /* info_send_confirmation.html */; };
+		DAE4CD321CC9D90100082868 /* info_settings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* info_settings.html */; };
+		DAE4CD331CC9D90100082868 /* info_settings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* info_settings.html */; };
+		DAE4CD341CC9D90100082868 /* info_settings.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD361CC9D90100082868 /* info_settings.html */; };
+		DAE4CD391CC9D90900082868 /* info_spending_limits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* info_spending_limits.html */; };
+		DAE4CD3A1CC9D90900082868 /* info_spending_limits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* info_spending_limits.html */; };
+		DAE4CD3B1CC9D90900082868 /* info_spending_limits.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD3D1CC9D90900082868 /* info_spending_limits.html */; };
+		DAE4CD401CC9D91200082868 /* info_transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* info_transaction_details.html */; };
+		DAE4CD411CC9D91200082868 /* info_transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* info_transaction_details.html */; };
+		DAE4CD421CC9D91200082868 /* info_transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD441CC9D91200082868 /* info_transaction_details.html */; };
+		DAE4CD471CC9D91C00082868 /* info_transactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* info_transactions.html */; };
+		DAE4CD481CC9D91C00082868 /* info_transactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* info_transactions.html */; };
+		DAE4CD491CC9D91C00082868 /* info_transactions.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD4B1CC9D91C00082868 /* info_transactions.html */; };
+		DAE4CD4E1CC9D92600082868 /* info_wallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* info_wallets.html */; };
+		DAE4CD4F1CC9D92600082868 /* info_wallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* info_wallets.html */; };
+		DAE4CD501CC9D92600082868 /* info_wallets.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD521CC9D92600082868 /* info_wallets.html */; };
+		DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
+		DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
+		DAE4CD571CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
 		E21B87AFD96098F33846111E /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
 /* End PBXBuildFile section */
 
@@ -1359,59 +1352,7 @@
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
-		DA3624FD1CCBFE5400D674EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/SMSTemplate.txt; sourceTree = "<group>"; };
-		DA3624FF1CCC062A00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA3625001CCC062A00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/emailTemplate.html"; sourceTree = "<group>"; };
-		DA3625011CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info.html"; sourceTree = "<group>"; };
-		DA3625021CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoFooter.html"; sourceTree = "<group>"; };
-		DA3625031CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoExportWallet.html"; sourceTree = "<group>"; };
-		DA3625041CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoExportWalletOptions.html"; sourceTree = "<group>"; };
-		DA3625051CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoInsufficientFunds.html"; sourceTree = "<group>"; };
-		DA3625061CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoRecipient.html"; sourceTree = "<group>"; };
-		DA3625071CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoRequest.html"; sourceTree = "<group>"; };
-		DA3625081CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoSend.html"; sourceTree = "<group>"; };
-		DA3625091CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoDisclaimer.html"; sourceTree = "<group>"; };
-		DA36250A1CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoSendConfirmation.html"; sourceTree = "<group>"; };
-		DA36250B1CCC062B00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoSettings.html"; sourceTree = "<group>"; };
-		DA36250C1CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoSpendingLimits.html"; sourceTree = "<group>"; };
-		DA36250D1CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoTransactionDetails.html"; sourceTree = "<group>"; };
-		DA36250E1CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoTransactions.html"; sourceTree = "<group>"; };
-		DA36250F1CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/infoWallets.html"; sourceTree = "<group>"; };
-		DA3625101CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transactionDetails.html"; sourceTree = "<group>"; };
-		DA3625111CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "es-MX"; path = "es-MX.lproj/Main.storyboard"; sourceTree = "<group>"; };
-		DA3625121CCC062C00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/SMSTemplate.txt"; sourceTree = "<group>"; };
-		DA3625131CCC063E00D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA3625141CCC063E00D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/emailTemplate.html"; sourceTree = "<group>"; };
-		DA3625151CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoFooter.html"; sourceTree = "<group>"; };
-		DA3625161CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoExportWallet.html"; sourceTree = "<group>"; };
-		DA3625171CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoExportWalletOptions.html"; sourceTree = "<group>"; };
-		DA3625181CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoInsufficientFunds.html"; sourceTree = "<group>"; };
-		DA3625191CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoRecipient.html"; sourceTree = "<group>"; };
-		DA36251A1CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoRequest.html"; sourceTree = "<group>"; };
-		DA36251B1CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSend.html"; sourceTree = "<group>"; };
-		DA36251C1CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoDisclaimer.html"; sourceTree = "<group>"; };
-		DA36251D1CCC064200D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSendConfirmation.html"; sourceTree = "<group>"; };
-		DA36251E1CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSettings.html"; sourceTree = "<group>"; };
-		DA36251F1CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoSpendingLimits.html"; sourceTree = "<group>"; };
-		DA3625201CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoTransactionDetails.html"; sourceTree = "<group>"; };
-		DA3625211CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoTransactions.html"; sourceTree = "<group>"; };
-		DA3625221CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/infoWallets.html"; sourceTree = "<group>"; };
-		DA3625231CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/transactionDetails.html"; sourceTree = "<group>"; };
-		DA3625241CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text; name = "hi-IN"; path = "hi-IN.lproj/SMSTemplate.txt"; sourceTree = "<group>"; };
-		DA3625251CCC064300D674EF /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "hi-IN"; path = "hi-IN.lproj/Main.storyboard"; sourceTree = "<group>"; };
-		DA3625261CCC065500D674EF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA3625271CCC066E00D674EF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-BR"; path = "pt-BR.lproj/SMSTemplate.txt"; sourceTree = "<group>"; };
-		DA3625281CCC066E00D674EF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "pt-BR"; path = "pt-BR.lproj/Main.storyboard"; sourceTree = "<group>"; };
-		DA36252C1CCC077D00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DA3625311CCC077F00D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA3625361CCC078000D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DA36253B1CCC078100D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA3625401CCC078200D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA3625451CCC078300D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA36254A1CCC078400D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA36254F1CCC078500D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DA3625541CCC078600D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA3625591CCC078700D674EF /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA3624FD1CCBFE5400D674EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -1425,9 +1366,9 @@
 		DA9102061C4A71EA00603D62 /* eyeball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@2x.png"; sourceTree = "<group>"; };
 		DA9102071C4A71EA00603D62 /* eyeball@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@3x.png"; sourceTree = "<group>"; };
 		DA93DE2D1CC9CB530063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		DA93DE361CC9CB710063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/emailTemplate.html; sourceTree = "<group>"; };
+		DA93DE361CC9CB710063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template.html; sourceTree = "<group>"; };
 		DA93DE3B1CC9CB740063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info.html; sourceTree = "<group>"; };
-		DA93DE401CC9CB780063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoFooter.html; sourceTree = "<group>"; };
+		DA93DE401CC9CB780063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_footer.html; sourceTree = "<group>"; };
 		DA93DE421CC9CDD30063CD52 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9D8F561CC0C191006A8C0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1972,6 +1913,64 @@
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
 		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
+		DAC7D2D81CCCBE6000608219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template_simple.html; sourceTree = "<group>"; };
+		DAC7D2E01CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template.html"; sourceTree = "<group>"; };
+		DAC7D2E11CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DAC7D2E21CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info.html"; sourceTree = "<group>"; };
+		DAC7D2E31CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DAC7D2E41CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DAC7D2E51CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DAC7D2E61CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DAC7D2E71CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DAC7D2E81CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_request.html"; sourceTree = "<group>"; };
+		DAC7D2E91CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send.html"; sourceTree = "<group>"; };
+		DAC7D2EA1CCCBEC500608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DAC7D2EB1CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DAC7D2EC1CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DAC7D2ED1CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DAC7D2EE1CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D2EF1CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DAC7D2F01CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DAC7D2F11CCCBEC600608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D2F21CCCBEC700608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-BR"; path = "pt-BR.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DAC7D2F51CCCBED800608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/email_template.html"; sourceTree = "<group>"; };
+		DAC7D2F61CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DAC7D2F71CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info.html"; sourceTree = "<group>"; };
+		DAC7D2F81CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DAC7D2F91CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DAC7D2FA1CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DAC7D2FB1CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DAC7D2FC1CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DAC7D2FD1CCCBED900608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_request.html"; sourceTree = "<group>"; };
+		DAC7D2FE1CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_send.html"; sourceTree = "<group>"; };
+		DAC7D2FF1CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DAC7D3001CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DAC7D3011CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DAC7D3021CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DAC7D3031CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D3041CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DAC7D3051CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DAC7D3061CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "hi-IN"; path = "hi-IN.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D3071CCCBEDA00608219 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text; name = "hi-IN"; path = "hi-IN.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DAC7D30A1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template.html"; sourceTree = "<group>"; };
+		DAC7D30B1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DAC7D30C1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info.html"; sourceTree = "<group>"; };
+		DAC7D30D1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DAC7D30E1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DAC7D30F1CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DAC7D3101CCCBEEA00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DAC7D3111CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DAC7D3121CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_request.html"; sourceTree = "<group>"; };
+		DAC7D3131CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send.html"; sourceTree = "<group>"; };
+		DAC7D3141CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DAC7D3151CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DAC7D3161CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DAC7D3171CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DAC7D3181CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D3191CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DAC7D31A1CCCBEEB00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DAC7D31B1CCCBEEC00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DAC7D31C1CCCBEEC00608219 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/sms_template.txt"; sourceTree = "<group>"; };
 		DAC83B461CC9D7EF00140876 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1988,20 +1987,20 @@
 		DAE1BE371CC36C5E003494AB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		DAE1BE451CC37883003494AB /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = "Airbitz-Common/MainController.h"; sourceTree = "<group>"; };
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; };
-		DAE4CCF21CC9D89900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoExportWallet.html; sourceTree = "<group>"; };
-		DAE4CCFB1CC9D8A000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoExportWalletOptions.html; sourceTree = "<group>"; };
-		DAE4CD041CC9D8BB00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoInsufficientFunds.html; sourceTree = "<group>"; };
-		DAE4CD0B1CC9D8C700082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoRecipient.html; sourceTree = "<group>"; };
-		DAE4CD121CC9D8D100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoRequest.html; sourceTree = "<group>"; };
-		DAE4CD201CC9D8E700082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoSend.html; sourceTree = "<group>"; };
-		DAE4CD271CC9D8F100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoDisclaimer.html; sourceTree = "<group>"; };
-		DAE4CD2E1CC9D8F900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoSendConfirmation.html; sourceTree = "<group>"; };
-		DAE4CD351CC9D90100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoSettings.html; sourceTree = "<group>"; };
-		DAE4CD3C1CC9D90900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoSpendingLimits.html; sourceTree = "<group>"; };
-		DAE4CD431CC9D91200082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoTransactionDetails.html; sourceTree = "<group>"; };
-		DAE4CD4A1CC9D91C00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoTransactions.html; sourceTree = "<group>"; };
-		DAE4CD511CC9D92600082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/infoWallets.html; sourceTree = "<group>"; };
-		DAE4CD581CC9D93000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/transactionDetails.html; sourceTree = "<group>"; };
+		DAE4CCF21CC9D89900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_export_wallet.html; sourceTree = "<group>"; };
+		DAE4CCFB1CC9D8A000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_export_wallet_options.html; sourceTree = "<group>"; };
+		DAE4CD041CC9D8BB00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_insufficient_funds.html; sourceTree = "<group>"; };
+		DAE4CD0B1CC9D8C700082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_recipient.html; sourceTree = "<group>"; };
+		DAE4CD121CC9D8D100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_request.html; sourceTree = "<group>"; };
+		DAE4CD201CC9D8E700082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_send.html; sourceTree = "<group>"; };
+		DAE4CD271CC9D8F100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_disclaimer.html; sourceTree = "<group>"; };
+		DAE4CD2E1CC9D8F900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_send_confirmation.html; sourceTree = "<group>"; };
+		DAE4CD351CC9D90100082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_settings.html; sourceTree = "<group>"; };
+		DAE4CD3C1CC9D90900082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_spending_limits.html; sourceTree = "<group>"; };
+		DAE4CD431CC9D91200082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_transaction_details.html; sourceTree = "<group>"; };
+		DAE4CD4A1CC9D91C00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_transactions.html; sourceTree = "<group>"; };
+		DAE4CD511CC9D92600082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_wallets.html; sourceTree = "<group>"; };
+		DAE4CD581CC9D93000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/transaction_details.html; sourceTree = "<group>"; };
 		E789935EB56C2B5BD137B2C6 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
 		F2352337656E1FCF99AFBF69 /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -2165,7 +2164,6 @@
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				DA3625411CCC078200D674EF /* InfoPlist.strings */,
 				DAC83B461CC9D7EF00140876 /* InfoPlist.strings */,
 				DA9D8F561CC0C191006A8C0A /* AppDelegate.h */,
 				DA9D8F571CC0C191006A8C0A /* AppDelegate.m */,
@@ -2190,7 +2188,6 @@
 		DA9D8F6C1CC0C191006A8C0A /* Airbitz-OSXTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA36253C1CCC078100D674EF /* InfoPlist.strings */,
 				DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */,
 				DA9D8F6F1CC0C191006A8C0A /* Info.plist */,
 			);
@@ -2200,7 +2197,6 @@
 		DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA3625551CCC078600D674EF /* InfoPlist.strings */,
 				DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */,
 				DA9D8F7A1CC0C191006A8C0A /* Info.plist */,
 			);
@@ -2245,7 +2241,6 @@
 		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXGroup;
 			children = (
-				DA3625321CCC077F00D674EF /* InfoPlist.strings */,
 				DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */,
 				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
 				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
@@ -2692,23 +2687,24 @@
 		DA9EDFD71BC61F920063DA07 /* html */ = {
 			isa = PBXGroup;
 			children = (
-				DA93DE371CC9CB710063CD52 /* emailTemplate.html */,
+				DA93DE371CC9CB710063CD52 /* email_template.html */,
+				DAC7D2D71CCCBE6000608219 /* email_template_simple.html */,
 				DA93DE3C1CC9CB740063CD52 /* info.html */,
-				DA93DE411CC9CB780063CD52 /* infoFooter.html */,
-				DAE4CCF31CC9D89900082868 /* infoExportWallet.html */,
-				DAE4CCFC1CC9D8A000082868 /* infoExportWalletOptions.html */,
-				DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */,
-				DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */,
-				DAE4CD131CC9D8D100082868 /* infoRequest.html */,
-				DAE4CD211CC9D8E700082868 /* infoSend.html */,
-				DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */,
-				DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */,
-				DAE4CD361CC9D90100082868 /* infoSettings.html */,
-				DAE4CD3D1CC9D90900082868 /* infoSpendingLimits.html */,
-				DAE4CD441CC9D91200082868 /* infoTransactionDetails.html */,
-				DAE4CD4B1CC9D91C00082868 /* infoTransactions.html */,
-				DAE4CD521CC9D92600082868 /* infoWallets.html */,
-				DAE4CD591CC9D93000082868 /* transactionDetails.html */,
+				DA93DE411CC9CB780063CD52 /* info_footer.html */,
+				DAE4CCF31CC9D89900082868 /* info_export_wallet.html */,
+				DAE4CCFC1CC9D8A000082868 /* info_export_wallet_options.html */,
+				DAE4CD051CC9D8BB00082868 /* info_insufficient_funds.html */,
+				DAE4CD0C1CC9D8C700082868 /* info_recipient.html */,
+				DAE4CD131CC9D8D100082868 /* info_request.html */,
+				DAE4CD211CC9D8E700082868 /* info_send.html */,
+				DAE4CD281CC9D8F100082868 /* info_disclaimer.html */,
+				DAE4CD2F1CC9D8F900082868 /* info_send_confirmation.html */,
+				DAE4CD361CC9D90100082868 /* info_settings.html */,
+				DAE4CD3D1CC9D90900082868 /* info_spending_limits.html */,
+				DAE4CD441CC9D91200082868 /* info_transaction_details.html */,
+				DAE4CD4B1CC9D91C00082868 /* info_transactions.html */,
+				DAE4CD521CC9D92600082868 /* info_wallets.html */,
+				DAE4CD591CC9D93000082868 /* transaction_details.html */,
 			);
 			path = html;
 			sourceTree = "<group>";
@@ -2746,7 +2742,7 @@
 		DA9EDFF21BC61F920063DA07 /* Text */ = {
 			isa = PBXGroup;
 			children = (
-				DA3624FE1CCBFE5400D674EF /* SMSTemplate.txt */,
+				DA3624FE1CCBFE5400D674EF /* sms_template.txt */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -3061,10 +3057,6 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
-				DA36255A1CCC078700D674EF /* Airbitz-InfoPlist.strings */,
-				DA3625501CCC078500D674EF /* Airbitz-Testnet-InfoPlist.strings */,
-				DA3625371CCC078000D674EF /* Airbitz-Develop-InfoPlist.strings */,
-				DA36252D1CCC077D00D674EF /* Localizable.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
@@ -3189,7 +3181,6 @@
 		DAD1AD931BC6065100C648C4 /* AirbitzTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA36254B1CCC078400D674EF /* InfoPlist.strings */,
 				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
 				DAD1AD961BC6065100C648C4 /* Info.plist */,
 			);
@@ -3199,7 +3190,6 @@
 		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA3625461CCC078300D674EF /* InfoPlist.strings */,
 				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
 				DAD1ADA11BC6065100C648C4 /* Info.plist */,
 			);
@@ -3449,9 +3439,9 @@
 			knownRegions = (
 				en,
 				Base,
-				"es-MX",
-				"hi-IN",
 				"pt-BR",
+				"hi-IN",
+				"es-MX",
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -3517,7 +3507,6 @@
 				DAC83B471CC9D7EF00140876 /* InfoPlist.strings in Resources */,
 				DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */,
 				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
-				DA36253F1CCC078200D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3525,7 +3514,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA36253A1CCC078100D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3533,7 +3521,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA3625531CCC078600D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3545,7 +3532,6 @@
 				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
-				DA3625301CCC077F00D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3584,15 +3570,14 @@
 				DA9EF4271BC7285D0063DA07 /* btn_close@3x.png in Resources */,
 				DA9EF4281BC7285D0063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
 				DA9EF4291BC7285D0063DA07 /* clearButton@2x.png in Resources */,
-				DA3624FB1CCBFE5400D674EF /* SMSTemplate.txt in Resources */,
+				DA3624FB1CCBFE5400D674EF /* sms_template.txt in Resources */,
 				DA9EF42B1BC7285D0063DA07 /* btn_slider@2x.png in Resources */,
 				DA9EF42C1BC7285D0063DA07 /* icon_export_view@2x.png in Resources */,
-				DAE4CD1E1CC9D8E700082868 /* infoSend.html in Resources */,
+				DAE4CD1E1CC9D8E700082868 /* info_send.html in Resources */,
 				DA9EF42E1BC7285D0063DA07 /* Config.h.example in Resources */,
 				DA9EF42F1BC7285D0063DA07 /* icon_category_atm@3x.png in Resources */,
 				DA9EF4301BC7285D0063DA07 /* flash-off@2x.png in Resources */,
 				DA9EF4311BC7285D0063DA07 /* icon_category_electronics@3x.png in Resources */,
-				DA3625351CCC078000D674EF /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF4321BC7285D0063DA07 /* btn_export_white@2x.png in Resources */,
 				DA9EF4331BC7285D0063DA07 /* BusinessDirectory.storyboard in Resources */,
@@ -3606,7 +3591,7 @@
 				DA9EF43D1BC7285D0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF43E1BC7285D0063DA07 /* icon_directory@3x.png in Resources */,
 				DA9101F31C4964AD00603D62 /* icon_import.png in Resources */,
-				DAE4CCF91CC9D8A000082868 /* infoExportWalletOptions.html in Resources */,
+				DAE4CCF91CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EF4401BC7285D0063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DA9EF4411BC7285D0063DA07 /* icon_wallet@2x.png in Resources */,
 				DA9EF4421BC7285D0063DA07 /* icon_export_sdcard@2x.png in Resources */,
@@ -3621,7 +3606,7 @@
 				DA9EF44C1BC7285D0063DA07 /* btn_export@2x.png in Resources */,
 				DA9EF44D1BC7285D0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF44E1BC7285D0063DA07 /* 5-bars@2x.png in Resources */,
-				DAE4CD411CC9D91200082868 /* infoTransactionDetails.html in Resources */,
+				DAE4CD411CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EF4501BC7285D0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA9EF4511BC7285D0063DA07 /* btn_unselected@2x.png in Resources */,
 				DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
@@ -3636,9 +3621,9 @@
 				DA9EF4591BC7285D0063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EF45A1BC7285D0063DA07 /* Montserrat-Bold.ttf in Resources */,
 				DA9EF45D1BC7285D0063DA07 /* WalletMakerView~iphone.xib in Resources */,
-				DAE4CCF01CC9D89900082868 /* infoExportWallet.html in Resources */,
+				DAE4CCF01CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EF45F1BC7285D0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
-				DAE4CD091CC9D8C700082868 /* infoRecipient.html in Resources */,
+				DAE4CD091CC9D8C700082868 /* info_recipient.html in Resources */,
 				DA9EF4611BC7285D0063DA07 /* PopupPickerView2.xib in Resources */,
 				DA9EF4621BC7285D0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF4631BC7285D0063DA07 /* icon_search@2x.png in Resources */,
@@ -3682,7 +3667,7 @@
 				DA9EF48B1BC7285D0063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EF48C1BC7285D0063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF48D1BC7285D0063DA07 /* Lato-Black.ttf in Resources */,
-				DAE4CD2C1CC9D8F900082868 /* infoSendConfirmation.html in Resources */,
+				DAE4CD2C1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EF48F1BC7285D0063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
 				DA9EF4901BC7285D0063DA07 /* btn_right@2x.png in Resources */,
 				DA9EF4911BC7285D0063DA07 /* BLE_Logo@2x.png in Resources */,
@@ -3706,14 +3691,15 @@
 				DA9EF4A41BC7285D0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF4A51BC7285D0063DA07 /* ribbon@2x.png in Resources */,
 				DA9EF4A61BC7285D0063DA07 /* Warning_icon@2x.png in Resources */,
-				DA93DE3E1CC9CB780063CD52 /* infoFooter.html in Resources */,
+				DA93DE3E1CC9CB780063CD52 /* info_footer.html in Resources */,
 				DA9EF4A71BC7285D0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */,
 				DA9EF4AD1BC7285D0063DA07 /* flash_off@2x.png in Resources */,
 				DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */,
-				DAE4CD4F1CC9D92600082868 /* infoWallets.html in Resources */,
+				DAC7D2DA1CCCBE6000608219 /* email_template_simple.html in Resources */,
+				DAE4CD4F1CC9D92600082868 /* info_wallets.html in Resources */,
 				DA9EF4B01BC7285D0063DA07 /* thumb@2x.png in Resources */,
 				DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8D1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
@@ -3724,7 +3710,7 @@
 				DA9EF4B41BC7285D0063DA07 /* icon_logout.png in Resources */,
 				DA9EF4B51BC7285D0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF4B61BC7285D0063DA07 /* Images.xcassets in Resources */,
-				DAE4CD561CC9D93000082868 /* transactionDetails.html in Resources */,
+				DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EF4B91BC7285D0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF4BA1BC7285D0063DA07 /* icon_settings_dark.png in Resources */,
 				DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
@@ -3734,7 +3720,7 @@
 				DA9EF4BE1BC7285D0063DA07 /* 4-bars@2x.png in Resources */,
 				DA9EF4BF1BC7285D0063DA07 /* btn_add_black.png in Resources */,
 				DA9EF4C11BC7285D0063DA07 /* icon_calendar@2x.png in Resources */,
-				DAE4CD101CC9D8D100082868 /* infoRequest.html in Resources */,
+				DAE4CD101CC9D8D100082868 /* info_request.html in Resources */,
 				DA9EF4C31BC7285D0063DA07 /* btn_close_white@2x.png in Resources */,
 				DA9EF4C41BC7285D0063DA07 /* icon_category_gift_cards.png in Resources */,
 				DA9EF4C51BC7285D0063DA07 /* icon_wallet_dark@3x.png in Resources */,
@@ -3767,7 +3753,7 @@
 				DA9EF4E21BC7285D0063DA07 /* QR-bracket.png in Resources */,
 				DA9EF4E31BC7285D0063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EF4E41BC7285D0063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
-				DAE4CD481CC9D91C00082868 /* infoTransactions.html in Resources */,
+				DAE4CD481CC9D91C00082868 /* info_transactions.html in Resources */,
 				DA9EF4E61BC7285D0063DA07 /* icon_exchange.png in Resources */,
 				DA9EF4E71BC7285D0063DA07 /* San Diego.gpx in Resources */,
 				DA9EF4E81BC7285D0063DA07 /* btn_export.png in Resources */,
@@ -3787,16 +3773,16 @@
 				DA9EF4F41BC7285D0063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EF4F51BC7285D0063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EF4F61BC7285D0063DA07 /* Green-check@2x.png in Resources */,
-				DAE4CD021CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */,
+				DAE4CD021CC9D8BB00082868 /* info_insufficient_funds.html in Resources */,
 				DA9EF4F81BC7285D0063DA07 /* Lato-Light.ttf in Resources */,
-				DAE4CD251CC9D8F100082868 /* infoDisclaimer.html in Resources */,
+				DAE4CD251CC9D8F100082868 /* info_disclaimer.html in Resources */,
 				DABA01291C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
-				DAE4CD331CC9D90100082868 /* infoSettings.html in Resources */,
+				DAE4CD331CC9D90100082868 /* info_settings.html in Resources */,
 				DA9EF4FA1BC7285D0063DA07 /* icon_account_secure@2x.png in Resources */,
 				DA9EF4FC1BC7285D0063DA07 /* logo@2x.png in Resources */,
 				DA9EF4FD1BC7285D0063DA07 /* btn_selected@2x.png in Resources */,
 				DABA01251C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
-				DA93DE341CC9CB710063CD52 /* emailTemplate.html in Resources */,
+				DA93DE341CC9CB710063CD52 /* email_template.html in Resources */,
 				DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF5001BC7285D0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF5011BC7285D0063DA07 /* bd_icon_web@2x.png in Resources */,
@@ -3806,7 +3792,7 @@
 				DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */,
-				DAE4CD3A1CC9D90900082868 /* infoSpendingLimits.html in Resources */,
+				DAE4CD3A1CC9D90900082868 /* info_spending_limits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3845,10 +3831,10 @@
 				DA9EF5EE1BC729FA0063DA07 /* btn_close@3x.png in Resources */,
 				DA9EF5EF1BC729FA0063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
 				DA9EF5F01BC729FA0063DA07 /* clearButton@2x.png in Resources */,
-				DA3624FC1CCBFE5400D674EF /* SMSTemplate.txt in Resources */,
+				DA3624FC1CCBFE5400D674EF /* sms_template.txt in Resources */,
 				DA9EF5F21BC729FA0063DA07 /* btn_slider@2x.png in Resources */,
 				DA9EF5F31BC729FA0063DA07 /* icon_export_view@2x.png in Resources */,
-				DAE4CD1F1CC9D8E700082868 /* infoSend.html in Resources */,
+				DAE4CD1F1CC9D8E700082868 /* info_send.html in Resources */,
 				DA9EF5F51BC729FA0063DA07 /* Config.h.example in Resources */,
 				DA9EF5F61BC729FA0063DA07 /* icon_category_atm@3x.png in Resources */,
 				DA9EF5F71BC729FA0063DA07 /* flash-off@2x.png in Resources */,
@@ -3866,7 +3852,7 @@
 				DA9EF6041BC729FA0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF6051BC729FA0063DA07 /* icon_directory@3x.png in Resources */,
 				DA9101F41C4964AD00603D62 /* icon_import.png in Resources */,
-				DAE4CCFA1CC9D8A000082868 /* infoExportWalletOptions.html in Resources */,
+				DAE4CCFA1CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EF6071BC729FA0063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DA9EF6081BC729FA0063DA07 /* icon_wallet@2x.png in Resources */,
 				DA9EF6091BC729FA0063DA07 /* icon_export_sdcard@2x.png in Resources */,
@@ -3882,8 +3868,7 @@
 				DA9EF6141BC729FA0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF6151BC729FA0063DA07 /* 5-bars@2x.png in Resources */,
 				DA9EF6E71BC7304C0063DA07 /* Airbitz-Testnet-Info.plist in Resources */,
-				DAE4CD421CC9D91200082868 /* infoTransactionDetails.html in Resources */,
-				DA36254E1CCC078500D674EF /* Airbitz-Testnet-InfoPlist.strings in Resources */,
+				DAE4CD421CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EF6171BC729FA0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EF6181BC729FA0063DA07 /* btn_unselected@2x.png in Resources */,
@@ -3898,9 +3883,9 @@
 				DA9EF6201BC729FA0063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EF6211BC729FA0063DA07 /* Montserrat-Bold.ttf in Resources */,
 				DA9EF6241BC729FA0063DA07 /* WalletMakerView~iphone.xib in Resources */,
-				DAE4CCF11CC9D89900082868 /* infoExportWallet.html in Resources */,
+				DAE4CCF11CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EF6261BC729FA0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
-				DAE4CD0A1CC9D8C700082868 /* infoRecipient.html in Resources */,
+				DAE4CD0A1CC9D8C700082868 /* info_recipient.html in Resources */,
 				DA9EF6281BC729FA0063DA07 /* PopupPickerView2.xib in Resources */,
 				DA9EF6291BC729FA0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF62A1BC729FA0063DA07 /* icon_search@2x.png in Resources */,
@@ -3944,7 +3929,7 @@
 				DA9EF6521BC729FA0063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EF6531BC729FA0063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF6541BC729FA0063DA07 /* Lato-Black.ttf in Resources */,
-				DAE4CD2D1CC9D8F900082868 /* infoSendConfirmation.html in Resources */,
+				DAE4CD2D1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EF6561BC729FA0063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
 				DA9EF6571BC729FA0063DA07 /* btn_right@2x.png in Resources */,
 				DA9EF6581BC729FA0063DA07 /* BLE_Logo@2x.png in Resources */,
@@ -3967,15 +3952,16 @@
 				DA9EF66A1BC729FA0063DA07 /* icon_settings.png in Resources */,
 				DA9EF66B1BC729FA0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF66C1BC729FA0063DA07 /* ribbon@2x.png in Resources */,
-				DA93DE3F1CC9CB780063CD52 /* infoFooter.html in Resources */,
+				DA93DE3F1CC9CB780063CD52 /* info_footer.html in Resources */,
 				DA9EF66D1BC729FA0063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9EF66E1BC729FA0063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
 				DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */,
+				DAC7D2DB1CCCBE6000608219 /* email_template_simple.html in Resources */,
 				DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */,
-				DAE4CD501CC9D92600082868 /* infoWallets.html in Resources */,
+				DAE4CD501CC9D92600082868 /* info_wallets.html in Resources */,
 				DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EF6771BC729FA0063DA07 /* thumb@2x.png in Resources */,
@@ -3985,7 +3971,7 @@
 				DA9EF67B1BC729FA0063DA07 /* icon_logout.png in Resources */,
 				DA9EF67C1BC729FA0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF67D1BC729FA0063DA07 /* Images.xcassets in Resources */,
-				DAE4CD571CC9D93000082868 /* transactionDetails.html in Resources */,
+				DAE4CD571CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EF6801BC729FA0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF6811BC729FA0063DA07 /* icon_settings_dark.png in Resources */,
 				DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */,
@@ -3995,7 +3981,7 @@
 				DA9EF6851BC729FA0063DA07 /* 4-bars@2x.png in Resources */,
 				DA9EF6861BC729FA0063DA07 /* btn_add_black.png in Resources */,
 				DA9EF6881BC729FA0063DA07 /* icon_calendar@2x.png in Resources */,
-				DAE4CD111CC9D8D100082868 /* infoRequest.html in Resources */,
+				DAE4CD111CC9D8D100082868 /* info_request.html in Resources */,
 				DA9EF68A1BC729FA0063DA07 /* btn_close_white@2x.png in Resources */,
 				DA9EF68B1BC729FA0063DA07 /* icon_category_gift_cards.png in Resources */,
 				DA9EF68C1BC729FA0063DA07 /* icon_wallet_dark@3x.png in Resources */,
@@ -4028,7 +4014,7 @@
 				DA9EF6A91BC729FA0063DA07 /* QR-bracket.png in Resources */,
 				DA9EF6AA1BC729FA0063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EF6AB1BC729FA0063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
-				DAE4CD491CC9D91C00082868 /* infoTransactions.html in Resources */,
+				DAE4CD491CC9D91C00082868 /* info_transactions.html in Resources */,
 				DA9EF6AD1BC729FA0063DA07 /* icon_exchange.png in Resources */,
 				DA9EF6AE1BC729FA0063DA07 /* San Diego.gpx in Resources */,
 				DA9EF6AF1BC729FA0063DA07 /* btn_export.png in Resources */,
@@ -4048,16 +4034,16 @@
 				DA9EF6BB1BC729FA0063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EF6BC1BC729FA0063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EF6BD1BC729FA0063DA07 /* Green-check@2x.png in Resources */,
-				DAE4CD031CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */,
+				DAE4CD031CC9D8BB00082868 /* info_insufficient_funds.html in Resources */,
 				DA9EF6BF1BC729FA0063DA07 /* Lato-Light.ttf in Resources */,
-				DAE4CD261CC9D8F100082868 /* infoDisclaimer.html in Resources */,
+				DAE4CD261CC9D8F100082868 /* info_disclaimer.html in Resources */,
 				DABA012A1C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
-				DAE4CD341CC9D90100082868 /* infoSettings.html in Resources */,
+				DAE4CD341CC9D90100082868 /* info_settings.html in Resources */,
 				DA9EF6C11BC729FA0063DA07 /* icon_account_secure@2x.png in Resources */,
 				DA9EF6C31BC729FA0063DA07 /* logo@2x.png in Resources */,
 				DA9EF6C41BC729FA0063DA07 /* btn_selected@2x.png in Resources */,
 				DABA01261C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
-				DA93DE351CC9CB710063CD52 /* emailTemplate.html in Resources */,
+				DA93DE351CC9CB710063CD52 /* email_template.html in Resources */,
 				DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF6C71BC729FA0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF6C81BC729FA0063DA07 /* bd_icon_web@2x.png in Resources */,
@@ -4067,7 +4053,7 @@
 				DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */,
-				DAE4CD3B1CC9D90900082868 /* infoSpendingLimits.html in Resources */,
+				DAE4CD3B1CC9D90900082868 /* info_spending_limits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4076,11 +4062,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9EE4A61BC61F920063DA07 /* icon_logout@2x.png in Resources */,
-				DA93DE3D1CC9CB780063CD52 /* infoFooter.html in Resources */,
+				DA93DE3D1CC9CB780063CD52 /* info_footer.html in Resources */,
 				DA9EE45E1BC61F920063DA07 /* btn_locateMe@2x.png in Resources */,
 				DABA01241C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
 				DA9EE4BB1BC61F920063DA07 /* icon_settings@2x.png in Resources */,
-				DAE4CD241CC9D8F100082868 /* infoDisclaimer.html in Resources */,
+				DAE4CD241CC9D8F100082868 /* info_disclaimer.html in Resources */,
 				DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */,
 				DA9101F21C4964AD00603D62 /* icon_import.png in Resources */,
 				DA9EE4BF1BC61F920063DA07 /* icon_settings_dark@2x.png in Resources */,
@@ -4112,10 +4098,10 @@
 				DAB5C0271C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
 				DA9EE48B1BC61F920063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
 				DA9EE4641BC61F920063DA07 /* clearButton@2x.png in Resources */,
-				DA3624FA1CCBFE5400D674EF /* SMSTemplate.txt in Resources */,
+				DA3624FA1CCBFE5400D674EF /* sms_template.txt in Resources */,
 				DA9EE4621BC61F920063DA07 /* btn_slider@2x.png in Resources */,
 				DA9EE4A31BC61F920063DA07 /* icon_export_view@2x.png in Resources */,
-				DAE4CD1D1CC9D8E700082868 /* infoSend.html in Resources */,
+				DAE4CD1D1CC9D8E700082868 /* info_send.html in Resources */,
 				DA9ED7D91BC61E680063DA07 /* Config.h.example in Resources */,
 				DA9EE4891BC61F920063DA07 /* icon_category_atm@3x.png in Resources */,
 				DA9EE46D1BC61F920063DA07 /* flash-off@2x.png in Resources */,
@@ -4131,7 +4117,7 @@
 				DA9EE4C41BC61F920063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EE4981BC61F920063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EE49B1BC61F920063DA07 /* icon_directory@3x.png in Resources */,
-				DAE4CCF81CC9D8A000082868 /* infoExportWalletOptions.html in Resources */,
+				DAE4CCF81CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EE4E21BC61F920063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DA9EE4C91BC61F920063DA07 /* icon_wallet@2x.png in Resources */,
 				DA9EE4A21BC61F920063DA07 /* icon_export_sdcard@2x.png in Resources */,
@@ -4146,7 +4132,7 @@
 				DA9EE4571BC61F920063DA07 /* btn_export@2x.png in Resources */,
 				DA9EE4831BC61F920063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EE4271BC61F920063DA07 /* 5-bars@2x.png in Resources */,
-				DAE4CD401CC9D91200082868 /* infoTransactionDetails.html in Resources */,
+				DAE4CD401CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EE4301BC61F920063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA91020E1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
 				DA9EE4631BC61F920063DA07 /* btn_unselected@2x.png in Resources */,
@@ -4161,16 +4147,15 @@
 				DA9EE4241BC61F920063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EE4F11BC61F920063DA07 /* Montserrat-Bold.ttf in Resources */,
 				DA9EE5611BC61F930063DA07 /* WalletMakerView~iphone.xib in Resources */,
-				DAE4CCEF1CC9D89900082868 /* infoExportWallet.html in Resources */,
+				DAE4CCEF1CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EE4E31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
-				DAE4CD081CC9D8C700082868 /* infoRecipient.html in Resources */,
+				DAE4CD081CC9D8C700082868 /* info_recipient.html in Resources */,
 				DA9EE41A1BC61F920063DA07 /* PopupPickerView2.xib in Resources */,
 				DA9EE49E1BC61F920063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EE4B41BC61F920063DA07 /* icon_search@2x.png in Resources */,
 				DA9EE47C1BC61F920063DA07 /* icon_account_secure.png in Resources */,
 				DA9EE42D1BC61F920063DA07 /* bd_icon_location@2x.png in Resources */,
 				DA9EE5041BC61F920063DA07 /* WalletExportPDF.pdf in Resources */,
-				DA36252B1CCC077D00D674EF /* Localizable.strings in Resources */,
 				DA9EE4AB1BC61F920063DA07 /* icon_more@3x.png in Resources */,
 				DA9EE4651BC61F920063DA07 /* darken_bottom_table_cell.png in Resources */,
 				DA9EE5061BC61F920063DA07 /* glidera.html in Resources */,
@@ -4209,7 +4194,7 @@
 				DA9EE4CB1BC61F920063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EE55F1BC61F930063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EE4E71BC61F920063DA07 /* Lato-Black.ttf in Resources */,
-				DAE4CD2B1CC9D8F900082868 /* infoSendConfirmation.html in Resources */,
+				DAE4CD2B1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EE47A1BC61F920063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
 				DA9EE45F1BC61F920063DA07 /* btn_right@2x.png in Resources */,
 				DA9EE4371BC61F920063DA07 /* BLE_Logo@2x.png in Resources */,
@@ -4235,12 +4220,13 @@
 				DA9EE4DF1BC61F920063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9ED7D81BC61E680063DA07 /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4AA1BC61F920063DA07 /* icon_more@2x.png in Resources */,
+				DAC7D2D91CCCBE6000608219 /* email_template_simple.html in Resources */,
 				DA9EE4C01BC61F920063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9102081C4A71EA00603D62 /* eyeball.png in Resources */,
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,
 				DA9EE46F1BC61F920063DA07 /* flash_off@2x.png in Resources */,
 				DA9EE4CA1BC61F920063DA07 /* icon_wallet@3x.png in Resources */,
-				DAE4CD4E1CC9D92600082868 /* infoWallets.html in Resources */,
+				DAE4CD4E1CC9D92600082868 /* info_wallets.html in Resources */,
 				DA9EE4DD1BC61F920063DA07 /* thumb@2x.png in Resources */,
 				DA9EEC481BC6332F0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EE46C1BC61F920063DA07 /* enable-contacts.png in Resources */,
@@ -4249,7 +4235,7 @@
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
-				DAE4CD551CC9D93000082868 /* transactionDetails.html in Resources */,
+				DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EE4BE1BC61F920063DA07 /* icon_settings_dark.png in Resources */,
 				DA9EE4521BC61F920063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
@@ -4258,10 +4244,9 @@
 				DA9EE4261BC61F920063DA07 /* 4-bars@2x.png in Resources */,
 				DA9EE43F1BC61F920063DA07 /* btn_add_black.png in Resources */,
 				DA9EE4861BC61F920063DA07 /* icon_calendar@2x.png in Resources */,
-				DAE4CD0F1CC9D8D100082868 /* infoRequest.html in Resources */,
+				DAE4CD0F1CC9D8D100082868 /* info_request.html in Resources */,
 				DA9EE44A1BC61F920063DA07 /* btn_close_white@2x.png in Resources */,
 				DA9EE4901BC61F920063DA07 /* icon_category_gift_cards.png in Resources */,
-				DA3625581CCC078700D674EF /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EE4CD1BC61F920063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EE4A01BC61F920063DA07 /* icon_export_google@2x.png in Resources */,
 				DA9EE4911BC61F920063DA07 /* icon_category_gift_cards@2x.png in Resources */,
@@ -4295,7 +4280,7 @@
 				DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
-				DAE4CD471CC9D91C00082868 /* infoTransactions.html in Resources */,
+				DAE4CD471CC9D91C00082868 /* info_transactions.html in Resources */,
 				DA9EE49D1BC61F920063DA07 /* icon_exchange.png in Resources */,
 				DA9ED7EB1BC61E680063DA07 /* San Diego.gpx in Resources */,
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
@@ -4313,14 +4298,14 @@
 				DA9EE4C71BC61F920063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EE4F01BC61F920063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EE4761BC61F920063DA07 /* Green-check@2x.png in Resources */,
-				DAE4CD011CC9D8BB00082868 /* infoInsufficientFunds.html in Resources */,
+				DAE4CD011CC9D8BB00082868 /* info_insufficient_funds.html in Resources */,
 				DA9EE4EE1BC61F920063DA07 /* Lato-Light.ttf in Resources */,
-				DAE4CD321CC9D90100082868 /* infoSettings.html in Resources */,
+				DAE4CD321CC9D90100082868 /* info_settings.html in Resources */,
 				DA9EE47D1BC61F920063DA07 /* icon_account_secure@2x.png in Resources */,
 				DA9EE4D31BC61F920063DA07 /* logo@2x.png in Resources */,
 				DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EE4601BC61F920063DA07 /* btn_selected@2x.png in Resources */,
-				DA93DE331CC9CB710063CD52 /* emailTemplate.html in Resources */,
+				DA93DE331CC9CB710063CD52 /* email_template.html in Resources */,
 				DA9EE4921BC61F920063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EE4311BC61F920063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EE4B21BC61F920063DA07 /* icon_request_padded@2x.png in Resources */,
@@ -4329,7 +4314,7 @@
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4491BC61F920063DA07 /* btn_close_white.png in Resources */,
-				DAE4CD391CC9D90900082868 /* infoSpendingLimits.html in Resources */,
+				DAE4CD391CC9D90900082868 /* info_spending_limits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4337,7 +4322,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA3625491CCC078400D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4345,7 +4329,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA3625441CCC078300D674EF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5037,286 +5020,235 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DA3624FE1CCBFE5400D674EF /* SMSTemplate.txt */ = {
+		DA3624FE1CCBFE5400D674EF /* sms_template.txt */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA3624FD1CCBFE5400D674EF /* Base */,
-				DA3625121CCC062C00D674EF /* es-MX */,
-				DA3625241CCC064300D674EF /* hi-IN */,
-				DA3625271CCC066E00D674EF /* pt-BR */,
+				DAC7D2F21CCCBEC700608219 /* pt-BR */,
+				DAC7D3071CCCBEDA00608219 /* hi-IN */,
+				DAC7D31C1CCCBEEC00608219 /* es-MX */,
 			);
-			name = SMSTemplate.txt;
-			sourceTree = "<group>";
-		};
-		DA36252D1CCC077D00D674EF /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA36252C1CCC077D00D674EF /* es-MX */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		DA3625321CCC077F00D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625311CCC077F00D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA3625371CCC078000D674EF /* Airbitz-Develop-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625361CCC078000D674EF /* es-MX */,
-			);
-			name = "Airbitz-Develop-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		DA36253C1CCC078100D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA36253B1CCC078100D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA3625411CCC078200D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625401CCC078200D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA3625461CCC078300D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625451CCC078300D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA36254B1CCC078400D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA36254A1CCC078400D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA3625501CCC078500D674EF /* Airbitz-Testnet-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA36254F1CCC078500D674EF /* es-MX */,
-			);
-			name = "Airbitz-Testnet-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		DA3625551CCC078600D674EF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625541CCC078600D674EF /* es-MX */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA36255A1CCC078700D674EF /* Airbitz-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA3625591CCC078700D674EF /* es-MX */,
-			);
-			name = "Airbitz-InfoPlist.strings";
+			name = sms_template.txt;
 			sourceTree = "<group>";
 		};
 		DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE2D1CC9CB530063CD52 /* Base */,
-				DA3624FF1CCC062A00D674EF /* es-MX */,
-				DA3625131CCC063E00D674EF /* hi-IN */,
-				DA3625261CCC065500D674EF /* pt-BR */,
+				DAC7D2DE1CCCBEC400608219 /* pt-BR */,
+				DAC7D2F31CCCBED800608219 /* hi-IN */,
+				DAC7D3081CCCBEE900608219 /* es-MX */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		DA93DE371CC9CB710063CD52 /* emailTemplate.html */ = {
+		DA93DE371CC9CB710063CD52 /* email_template.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE361CC9CB710063CD52 /* Base */,
-				DA3625001CCC062A00D674EF /* es-MX */,
-				DA3625141CCC063E00D674EF /* hi-IN */,
+				DAC7D2E01CCCBEC400608219 /* pt-BR */,
+				DAC7D2F51CCCBED800608219 /* hi-IN */,
+				DAC7D30A1CCCBEEA00608219 /* es-MX */,
 			);
-			name = emailTemplate.html;
+			name = email_template.html;
 			sourceTree = "<group>";
 		};
 		DA93DE3C1CC9CB740063CD52 /* info.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE3B1CC9CB740063CD52 /* Base */,
-				DA3625011CCC062B00D674EF /* es-MX */,
+				DAC7D2E21CCCBEC400608219 /* pt-BR */,
+				DAC7D2F71CCCBED900608219 /* hi-IN */,
+				DAC7D30C1CCCBEEA00608219 /* es-MX */,
 			);
 			name = info.html;
 			sourceTree = "<group>";
 		};
-		DA93DE411CC9CB780063CD52 /* infoFooter.html */ = {
+		DA93DE411CC9CB780063CD52 /* info_footer.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE401CC9CB780063CD52 /* Base */,
-				DA3625021CCC062B00D674EF /* es-MX */,
-				DA3625151CCC064200D674EF /* hi-IN */,
+				DAC7D2E31CCCBEC400608219 /* pt-BR */,
+				DAC7D2F81CCCBED900608219 /* hi-IN */,
+				DAC7D30D1CCCBEEA00608219 /* es-MX */,
 			);
-			name = infoFooter.html;
+			name = info_footer.html;
 			sourceTree = "<group>";
 		};
 		DA9D8F611CC0C191006A8C0A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE421CC9CDD30063CD52 /* en */,
-				DA3625111CCC062C00D674EF /* es-MX */,
-				DA3625251CCC064300D674EF /* hi-IN */,
-				DA3625281CCC066E00D674EF /* pt-BR */,
+				DAC7D2DF1CCCBEC400608219 /* pt-BR */,
+				DAC7D2F41CCCBED800608219 /* hi-IN */,
+				DAC7D3091CCCBEEA00608219 /* es-MX */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		DAE4CCF31CC9D89900082868 /* infoExportWallet.html */ = {
+		DAC7D2D71CCCBE6000608219 /* email_template_simple.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC7D2D81CCCBE6000608219 /* Base */,
+				DAC7D2E11CCCBEC400608219 /* pt-BR */,
+				DAC7D2F61CCCBED900608219 /* hi-IN */,
+				DAC7D30B1CCCBEEA00608219 /* es-MX */,
+			);
+			name = email_template_simple.html;
+			sourceTree = "<group>";
+		};
+		DAE4CCF31CC9D89900082868 /* info_export_wallet.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CCF21CC9D89900082868 /* Base */,
-				DA3625031CCC062B00D674EF /* es-MX */,
-				DA3625161CCC064200D674EF /* hi-IN */,
+				DAC7D2E41CCCBEC500608219 /* pt-BR */,
+				DAC7D2F91CCCBED900608219 /* hi-IN */,
+				DAC7D30E1CCCBEEA00608219 /* es-MX */,
 			);
-			name = infoExportWallet.html;
+			name = info_export_wallet.html;
 			sourceTree = "<group>";
 		};
-		DAE4CCFC1CC9D8A000082868 /* infoExportWalletOptions.html */ = {
+		DAE4CCFC1CC9D8A000082868 /* info_export_wallet_options.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CCFB1CC9D8A000082868 /* Base */,
-				DA3625041CCC062B00D674EF /* es-MX */,
-				DA3625171CCC064200D674EF /* hi-IN */,
+				DAC7D2E51CCCBEC500608219 /* pt-BR */,
+				DAC7D2FA1CCCBED900608219 /* hi-IN */,
+				DAC7D30F1CCCBEEA00608219 /* es-MX */,
 			);
-			name = infoExportWalletOptions.html;
+			name = info_export_wallet_options.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD051CC9D8BB00082868 /* infoInsufficientFunds.html */ = {
+		DAE4CD051CC9D8BB00082868 /* info_insufficient_funds.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD041CC9D8BB00082868 /* Base */,
-				DA3625051CCC062B00D674EF /* es-MX */,
-				DA3625181CCC064200D674EF /* hi-IN */,
+				DAC7D2E61CCCBEC500608219 /* pt-BR */,
+				DAC7D2FB1CCCBED900608219 /* hi-IN */,
+				DAC7D3101CCCBEEA00608219 /* es-MX */,
 			);
-			name = infoInsufficientFunds.html;
+			name = info_insufficient_funds.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD0C1CC9D8C700082868 /* infoRecipient.html */ = {
+		DAE4CD0C1CC9D8C700082868 /* info_recipient.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD0B1CC9D8C700082868 /* Base */,
-				DA3625061CCC062B00D674EF /* es-MX */,
-				DA3625191CCC064200D674EF /* hi-IN */,
+				DAC7D2E71CCCBEC500608219 /* pt-BR */,
+				DAC7D2FC1CCCBED900608219 /* hi-IN */,
+				DAC7D3111CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoRecipient.html;
+			name = info_recipient.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD131CC9D8D100082868 /* infoRequest.html */ = {
+		DAE4CD131CC9D8D100082868 /* info_request.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD121CC9D8D100082868 /* Base */,
-				DA3625071CCC062B00D674EF /* es-MX */,
-				DA36251A1CCC064200D674EF /* hi-IN */,
+				DAC7D2E81CCCBEC500608219 /* pt-BR */,
+				DAC7D2FD1CCCBED900608219 /* hi-IN */,
+				DAC7D3121CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoRequest.html;
+			name = info_request.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD211CC9D8E700082868 /* infoSend.html */ = {
+		DAE4CD211CC9D8E700082868 /* info_send.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD201CC9D8E700082868 /* Base */,
-				DA3625081CCC062B00D674EF /* es-MX */,
-				DA36251B1CCC064200D674EF /* hi-IN */,
+				DAC7D2E91CCCBEC500608219 /* pt-BR */,
+				DAC7D2FE1CCCBEDA00608219 /* hi-IN */,
+				DAC7D3131CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoSend.html;
+			name = info_send.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD281CC9D8F100082868 /* infoDisclaimer.html */ = {
+		DAE4CD281CC9D8F100082868 /* info_disclaimer.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD271CC9D8F100082868 /* Base */,
-				DA3625091CCC062B00D674EF /* es-MX */,
-				DA36251C1CCC064200D674EF /* hi-IN */,
+				DAC7D2EA1CCCBEC500608219 /* pt-BR */,
+				DAC7D2FF1CCCBEDA00608219 /* hi-IN */,
+				DAC7D3141CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoDisclaimer.html;
+			name = info_disclaimer.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD2F1CC9D8F900082868 /* infoSendConfirmation.html */ = {
+		DAE4CD2F1CC9D8F900082868 /* info_send_confirmation.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD2E1CC9D8F900082868 /* Base */,
-				DA36250A1CCC062B00D674EF /* es-MX */,
-				DA36251D1CCC064200D674EF /* hi-IN */,
+				DAC7D2EB1CCCBEC600608219 /* pt-BR */,
+				DAC7D3001CCCBEDA00608219 /* hi-IN */,
+				DAC7D3151CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoSendConfirmation.html;
+			name = info_send_confirmation.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD361CC9D90100082868 /* infoSettings.html */ = {
+		DAE4CD361CC9D90100082868 /* info_settings.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD351CC9D90100082868 /* Base */,
-				DA36250B1CCC062B00D674EF /* es-MX */,
-				DA36251E1CCC064300D674EF /* hi-IN */,
+				DAC7D2EC1CCCBEC600608219 /* pt-BR */,
+				DAC7D3011CCCBEDA00608219 /* hi-IN */,
+				DAC7D3161CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoSettings.html;
+			name = info_settings.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD3D1CC9D90900082868 /* infoSpendingLimits.html */ = {
+		DAE4CD3D1CC9D90900082868 /* info_spending_limits.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD3C1CC9D90900082868 /* Base */,
-				DA36250C1CCC062C00D674EF /* es-MX */,
-				DA36251F1CCC064300D674EF /* hi-IN */,
+				DAC7D2ED1CCCBEC600608219 /* pt-BR */,
+				DAC7D3021CCCBEDA00608219 /* hi-IN */,
+				DAC7D3171CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoSpendingLimits.html;
+			name = info_spending_limits.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD441CC9D91200082868 /* infoTransactionDetails.html */ = {
+		DAE4CD441CC9D91200082868 /* info_transaction_details.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD431CC9D91200082868 /* Base */,
-				DA36250D1CCC062C00D674EF /* es-MX */,
-				DA3625201CCC064300D674EF /* hi-IN */,
+				DAC7D2EE1CCCBEC600608219 /* pt-BR */,
+				DAC7D3031CCCBEDA00608219 /* hi-IN */,
+				DAC7D3181CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoTransactionDetails.html;
+			name = info_transaction_details.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD4B1CC9D91C00082868 /* infoTransactions.html */ = {
+		DAE4CD4B1CC9D91C00082868 /* info_transactions.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD4A1CC9D91C00082868 /* Base */,
-				DA36250E1CCC062C00D674EF /* es-MX */,
-				DA3625211CCC064300D674EF /* hi-IN */,
+				DAC7D2EF1CCCBEC600608219 /* pt-BR */,
+				DAC7D3041CCCBEDA00608219 /* hi-IN */,
+				DAC7D3191CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoTransactions.html;
+			name = info_transactions.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD521CC9D92600082868 /* infoWallets.html */ = {
+		DAE4CD521CC9D92600082868 /* info_wallets.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD511CC9D92600082868 /* Base */,
-				DA36250F1CCC062C00D674EF /* es-MX */,
-				DA3625221CCC064300D674EF /* hi-IN */,
+				DAC7D2F01CCCBEC600608219 /* pt-BR */,
+				DAC7D3051CCCBEDA00608219 /* hi-IN */,
+				DAC7D31A1CCCBEEB00608219 /* es-MX */,
 			);
-			name = infoWallets.html;
+			name = info_wallets.html;
 			sourceTree = "<group>";
 		};
-		DAE4CD591CC9D93000082868 /* transactionDetails.html */ = {
+		DAE4CD591CC9D93000082868 /* transaction_details.html */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CD581CC9D93000082868 /* Base */,
-				DA3625101CCC062C00D674EF /* es-MX */,
-				DA3625231CCC064300D674EF /* hi-IN */,
+				DAC7D2F11CCCBEC600608219 /* pt-BR */,
+				DAC7D3061CCCBEDA00608219 /* hi-IN */,
+				DAC7D31B1CCCBEEC00608219 /* es-MX */,
 			);
-			name = transactionDetails.html;
+			name = transaction_details.html;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

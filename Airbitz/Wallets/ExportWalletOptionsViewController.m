@@ -261,7 +261,7 @@ typedef enum eExportOption
 
 - (void)buttonInfoTouched
 {
-    [InfoView CreateWithHTML:@"infoExportWalletOptions" forView:self.view];
+    [InfoView CreateWithHTML:@"info_export_wallet_options" forView:self.view];
 }
 
 - (IBAction)datePickerAction:(id)sender

@@ -1,9 +1,0 @@
-/* (No Commment) */
-"CFBundleName" = "$(PRODUCT_NAME)";
-
-/* (No Commment) */
-"CFBundleShortVersionString" = "1.0";
-
-/* (No Commment) */
-"NSHumanReadableCopyright" = "Copyright © 2016 Airbitz. All rights reserved.";
-

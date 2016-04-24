@@ -32,7 +32,7 @@
     
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
 
-    NSString* footerPath = [[NSBundle mainBundle] pathForResource:@"infoFooter" ofType:@"html"];
+    NSString* footerPath = [[NSBundle mainBundle] pathForResource:@"info_footer" ofType:@"html"];
     NSString* footerContent = [NSString stringWithContentsOfFile:footerPath encoding:NSUTF8StringEncoding error:NULL];
     if (!footer)
     {
