@@ -335,7 +335,7 @@ static BOOL bInitialized = false;
         [self.PINTextField resignFirstResponder];
 //        [self.PINCodeView resignFirstResponder];
 
-        self.disclaimerInfoView = [InfoView CreateWithHTML:@"infoDisclaimer" forView:self.view agreeButton:YES delegate:self];
+        self.disclaimerInfoView = [InfoView CreateWithHTML:@"info_disclaimer" forView:self.view agreeButton:YES delegate:self];
     }
     else
     {

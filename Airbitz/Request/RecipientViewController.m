@@ -132,7 +132,7 @@
 
 - (IBAction)buttonInfoTouched:(id)sender
 {
-    [InfoView CreateWithHTML:@"infoRecipient" forView:self.view];
+    [InfoView CreateWithHTML:@"info_recipient" forView:self.view];
 }
 
 #pragma mark - Misc Methods

@@ -1,0 +1,19 @@
+Bitcoin Payment Request
+From: [[abtag FROM]]
+
+Please scan QR code or click on the links to pay
+
+Click to Pay
+[[abtag REDIRECT_URL]]
+
+[[abtag BITCOIN_URI]]
+
+Address: [[abtag ADDRESS]]
+Amount: [[abtag AMOUNT_BTC]] BTC
+Amount: [[abtag AMOUNT_BITS]] bits
+
+Sent from the [[abtag APP_TITLE]] Mobile Bitcoin Wallet + Business Directory
+
+Download [[abtag APP_TITLE]] for iOS or Android
+[[abtag APP_DOWNLOAD_LINK]]
+

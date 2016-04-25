@@ -383,7 +383,7 @@
     [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
-    [self setInfoView:[InfoView CreateWithHTML:@"infoSendConfirmation" forView:self.view]];
+    [self setInfoView:[InfoView CreateWithHTML:@"info_send_confirmation" forView:self.view]];
     [self.infoView setDelegate:self];
 }
 
@@ -392,7 +392,7 @@
     [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
-    [self setInfoView:[InfoView CreateWithHTML:@"infoInsufficientFunds" forView:self.view]];
+    [self setInfoView:[InfoView CreateWithHTML:@"info_insufficient_funds" forView:self.view]];
     [self.infoView setDelegate:self];
 }
 

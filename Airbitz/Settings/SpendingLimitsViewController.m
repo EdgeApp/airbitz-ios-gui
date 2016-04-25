@@ -267,7 +267,7 @@
 - (IBAction)info
 {
 	[self.view endEditing:YES];
-    [InfoView CreateWithHTML:@"infoSpendingLimits" forView:self.view];
+    [InfoView CreateWithHTML:@"info_spending_limits" forView:self.view];
 }
 
 #pragma mark - Misc Methods
