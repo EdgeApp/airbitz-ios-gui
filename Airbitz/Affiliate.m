@@ -5,7 +5,7 @@
 
 #import "AFNetworking.h"
 #import "Affiliate.h"
-#import "MainController.h"
+#import "MainViewController.h"
 #import "BrandStrings.h"
 #import "Strings.h"
 #import "LocalSettings.h"
@@ -55,7 +55,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
         return;
     }
     
-    self.afmanager = [MainController createAFManager];
+    self.afmanager = [MainViewController createAFManager];
     [self.afmanager GET:AffiliatesQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSDictionary *results = (NSDictionary *) responseObject;
@@ -95,6 +95,8 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
 - (void) copyLocalAffiliateInfoToAccount:(ABCAccount *)account;
 {
     NSString *affiliateInfo = [LocalSettings controller].affiliateInfo;
+    if (!affiliateInfo)
+        affiliateInfo = @"";
     [account.dataStore dataWrite:AffiliateDataStore withKey:AffiliateInfoDataStoreKey withValue:affiliateInfo];
 }
 
@@ -137,7 +139,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
     {
-        self.afmanager = [MainController createAFManager];
+        self.afmanager = [MainViewController createAFManager];
 
         [self.afmanager GET:AffiliatesRegister parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
         {
