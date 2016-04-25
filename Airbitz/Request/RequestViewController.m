@@ -451,7 +451,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
-    [InfoView CreateWithHTML:@"infoRequest" forView:self.view];
+    [InfoView CreateWithHTML:@"info_request" forView:self.view];
 }
 
 //
@@ -1278,7 +1278,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
 
         NSError* error = nil;
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"emailTemplate" ofType:@"html"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"email_template" ofType:@"html"];
         NSString* content = [NSString stringWithContentsOfFile:path
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];
@@ -1341,7 +1341,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     {
 
         NSError* error = nil;
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"SMSTemplate" ofType:@"txt"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"sms_template" ofType:@"txt"];
         NSString* content = [NSString stringWithContentsOfFile:path
                                                       encoding:NSUTF8StringEncoding
                                                          error:&error];

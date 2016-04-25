@@ -592,7 +592,7 @@ typedef enum eRequestType
 
     iv.frame = frame;
     
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"transactionDetails" ofType:@"html"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"transaction_details" ofType:@"html"];
     NSString* content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
 
     uint64_t totalSent = 0;
@@ -645,7 +645,7 @@ typedef enum eRequestType
 - (IBAction)buttonInfoTouched:(id)sender
 {
     [self resignAllResponders];
-    [InfoView CreateWithHTML:@"infoTransactionDetails" forView:self.view];
+    [InfoView CreateWithHTML:@"info_transaction_details" forView:self.view];
 }
 
 - (IBAction)imagePhotoTouched:(id)sender

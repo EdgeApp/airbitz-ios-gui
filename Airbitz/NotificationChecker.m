@@ -14,7 +14,7 @@
 #import "User.h"
 #import "AirbitzCore.h"
 #import "Strings.h"
-#import "MainController.h"
+#import "MainViewController.h"
 #import "AFNetworking.h"
 #import "AB.h"
 
@@ -44,7 +44,7 @@ static NotificationChecker *singleton = nil;
     if (NO == bInitialized)
     {
         singleton = [[NotificationChecker alloc] init];
-        singleton.afmanager = [MainController createAFManager];
+        singleton.afmanager = [MainViewController createAFManager];
 
         bInitialized = YES;
         [singleton start];

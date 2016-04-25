@@ -288,7 +288,6 @@
 #define pinOrPasswordCheckFailedFormatString        NSLocalizedString(@"%@ failed:\n%@" ,nil)
 #define signupFailedFormatString                    NSLocalizedString(@"Sign-Up failed:\n%@" ,nil)
 #define passwordChangeFailedFormatString            NSLocalizedString(@"Password change failed:\n%@" ,nil)
-#define cameraUnavailableText                       NSLocalizedString(@"Camera unavailable", @"")
 #define selectCurrencyText                          NSLocalizedString(@"Select Currency", nil)
 #define sendingDotDotDot                            NSLocalizedString(@"Sending...", @"status message")
 #define passwordText                                NSLocalizedString(@"Password", nil)
@@ -328,16 +327,45 @@
 #define twoFactorDisabled                           NSLocalizedString(@"Two Factor Disabled", nil)
 #define requestConfirmedTwoFactorOff                NSLocalizedString(@"Request confirmed, Two Factor off.", nil)
 #define createWalletText                            NSLocalizedString(@"Create Wallet", nil)
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
+#define cameraUnavailablePleaseEnable               NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"")
+#define successfullyLoggedIn                        NSLocalizedString(@"Successfully Logged In",nil)
+#define errorLoggingIn                              NSLocalizedString(@"Error Logging In",nil)
+#define invalidBluetoothRequest                     NSLocalizedString(@"Invalid Bluetooth Request", nil)
+#define pleaseHaveRequestorContactSupport           NSLocalizedString(@"Please have Requestor contact support", nil)
+#define importingFundsIntoWallet                    NSLocalizedString(@"Importing funds from %@ into wallet...", nil)
+#define validatingAddressText                       NSLocalizedString(@"Validating Address...", nil)
+#define importAgainToRetryTwitter                   NSLocalizedString(@"Import the private key again to retry Twitter", nil)
+#define pinText                                     NSLocalizedString(@"PIN" ,nil)
+#define usernameFormatString                        NSLocalizedString(@"User Name: %@" ,nil)
+#define open24HoursText                             NSLocalizedString(@"Open 24 hours" ,nil)
+#define open24Text                                  NSLocalizedString(@"Open 24" ,nil)
+#define hoursText                                   NSLocalizedString(@"hours" ,nil)
+#define toFormatString                              NSLocalizedString(@"To: %@" ,nil)
+#define walletCreateFailedFormatString              NSLocalizedString(@"Wallet creation failed:\n%@" ,nil)
+#define unableToSaveSettings                        NSLocalizedString(@"Unable to save Settings", nil)
+#define bitcoinDenominationText                     NSLocalizedString(@"Bitcoin", @"settings text")
+#define mBitcoinDenominatinText                     NSLocalizedString(@"mBitcoin = (0.001 Bitcoin)", @"settings text")
+#define bitsDenominationText                        NSLocalizedString(@"bits = (0.000001 Bitcoin)", @"settings text")
+#define changeRecoveryQuestionsText                 NSLocalizedString(@"Change recovery questions", @"settings text")
+#define changeCategoriesText                        NSLocalizedString(@"Change Categories", @"settings text")
+#define spendingLimitsText                          NSLocalizedString(@"Spending Limits", @"spending limits text")
+#define twoFactorSettingsHeader                     NSLocalizedString(@"2 Factor (Enhanced Security)", nil)
+#define firstNameSettingsText                       NSLocalizedString(@"First Name (optional)", @"settings text")
+#define lastNameSettingsText                        NSLocalizedString(@"Last Name (optional)", @"settings text")
+#define nickNameSettingsText                        NSLocalizedString(@"Nickname / Handle (optional)", @"settings text")
+#define sendNameOnPaymentText                       NSLocalizedString(@"Send name on payment request", @"settings text")
+#define bluetoothText                               NSLocalizedString(@"Bluetooth", @"settings text")
+#define enableBluetoothInSystem                     NSLocalizedString(@"Enable Bluetooth in System Settings", @"settings text")
+#define merchangeModeText                           NSLocalizedString(@"Merchant Mode", @"settings text")
+#define pinReloginText                              NSLocalizedString(@"PIN Re-Login", @"settings text")
+#define touchIDUnsupportedText                      NSLocalizedString(@"TouchID: Unsupported Device", @"settings text")
+#define touchIDSetPasswordFirst                     NSLocalizedString(@"TouchID: Set password first", @"settings text")
+#define useTouchIDText                              NSLocalizedString(@"Use TouchID", @"settings text")
+#define bitcoinDenominationHeader                   NSLocalizedString(@"BITCOIN DENOMINATION", @"section header in settings table")
+#define accountInfoHeader                           NSLocalizedString(@"ACCOUNT: ", @"section header in settings table")
+#define nameSettingsHeader                          NSLocalizedString(@"NAME", @"section header in settings table")
+#define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
+#define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
 //#define
 //#define
 //#define
@@ -345,13 +373,6 @@
 //#define
 //#define
 
-#define pinText NSLocalizedString(@"PIN" ,nil)
-#define usernameFormatString                        NSLocalizedString(@"User Name: %@" ,nil)
-#define open24HoursText                             NSLocalizedString(@"Open 24 hours" ,nil)
-#define open24Text                                  NSLocalizedString(@"Open 24" ,nil)
-#define hoursText                                   NSLocalizedString(@"hours" ,nil)
-#define toFormatString                              NSLocalizedString(@"To: %@" ,nil)
-#define walletCreateFailedFormatString              NSLocalizedString(@"Wallet creation failed:\n%@" ,nil)
 //#define  NSLocalizedString( ,nil)
 //#define  NSLocalizedString( ,nil)
 //#define  NSLocalizedString( ,nil)

@@ -436,11 +436,11 @@ const int NumPromoRows              = 5;
     [self resignAllResponders];
     if (_bWalletsShowing)
     {
-        [InfoView CreateWithHTML:@"infoWallets" forView:self.view];
+        [InfoView CreateWithHTML:@"info_wallets" forView:self.view];
     }
     else
     {
-        [InfoView CreateWithHTML:@"infoTransactions" forView:self.view];
+        [InfoView CreateWithHTML:@"info_transactions" forView:self.view];
     }
 }
 
