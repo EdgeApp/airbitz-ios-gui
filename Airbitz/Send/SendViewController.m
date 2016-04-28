@@ -1680,44 +1680,57 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 message = [NSString stringWithFormat:@"%@\n%@\n\n%@", message, wouldLikeToColon, bitidRequestString];
             }
             
-            if (_parsedURI.bitidKYCRequest && _kycTokenKeys)
+            if (_parsedURI.bitidKYCRequest)
             {
-                int count = (int)[_kycTokenKeys count];
-
-                if (count == 1)
+                if (_kycTokenKeys)
                 {
+                    int count = (int)[_kycTokenKeys count];
                     
-                    _bitidAlert = [[UIAlertView alloc]
-                                   initWithTitle:bitIDLogin
-                                   message:message
-                                   delegate:self
-                                   cancelButtonTitle:noButtonText
-                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
-                }
-                else if (count == 2)
-                {
-                    _bitidAlert = [[UIAlertView alloc]
-                                   initWithTitle:bitIDLogin
-                                   message:message
-                                   delegate:self
-                                   cancelButtonTitle:noButtonText
-                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-                                   nil];
+                    if (count == 1)
+                    {
+                        
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
+                    }
+                    else if (count == 2)
+                    {
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+                                       nil];
+                        
+                    }
+                    else
+                    {
+                        // Only support a max of 3 tokens for now
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
+                                       nil];
+                    }
                     
                 }
                 else
                 {
-                    // Only support a max of 3 tokens for now
                     _bitidAlert = [[UIAlertView alloc]
                                    initWithTitle:bitIDLogin
                                    message:message
                                    delegate:self
-                                   cancelButtonTitle:noButtonText
-                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
-                                   nil];
+                                   cancelButtonTitle:cancelButtonText
+                                   otherButtonTitles:nil];
                 }
                 
             }
