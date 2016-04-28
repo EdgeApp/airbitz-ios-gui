@@ -329,6 +329,7 @@
 #define createWalletText                            NSLocalizedString(@"Create Wallet", nil)
 #define cameraUnavailablePleaseEnable               NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"")
 #define successfullyLoggedIn                        NSLocalizedString(@"Successfully Logged In",nil)
+#define successfullyLoggedInWithIdentityToken       NSLocalizedString(@"Successfully Logged In With Identity Token",nil)
 #define errorLoggingIn                              NSLocalizedString(@"Error Logging In",nil)
 #define invalidBluetoothRequest                     NSLocalizedString(@"Invalid Bluetooth Request", nil)
 #define pleaseHaveRequestorContactSupport           NSLocalizedString(@"Please have Requestor contact support", nil)
@@ -366,6 +367,8 @@
 #define nameSettingsHeader                          NSLocalizedString(@"NAME", @"section header in settings table")
 #define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
+#define successfullyReceivedIdentityToken           NSLocalizedString(@"Successfully received identity token from %@" ,nil)
+
 //#define
 //#define
 //#define
@@ -373,12 +376,11 @@
 //#define
 //#define
 
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
+#define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token\n" ,nil)
+#define requestYourIdentityTokenButNone             NSLocalizedString(@"Request your Identity Token but you don't have any\n" ,nil)
+#define requestPaymentAddress                       NSLocalizedString(@"Request a Payment Address\n" ,nil)
+#define wouldLikeToColon                            NSLocalizedString(@"Would like to:" ,nil)
+#define provideIdentityTokenText                    NSLocalizedString(@"Provide an Identity Token\n" ,nil)
 //#define
 //#define
 
