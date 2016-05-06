@@ -208,16 +208,19 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotifications
 {
-    ABCLog(2,@"ENTER checkNotifications\n");
-    [self checkOtpResetPending];
-
-    [self checkDirectoryNotifications];
-
-    if ([self getFirstUnseenNotification] != nil)
-    {
-        [self postNotification];
-    }
-    ABCLog(2,@"EXIT checkNotifications\n");
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        ABCLog(2,@"ENTER checkNotifications\n");
+        [self checkOtpResetPending];
+        
+        [self checkDirectoryNotifications];
+        
+        if ([self getFirstUnseenNotification] != nil)
+        {
+            [self postNotification];
+        }
+        ABCLog(2,@"EXIT checkNotifications\n");
+    });
 }
 
 + (void)resetOtpNotifications
