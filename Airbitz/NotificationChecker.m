@@ -17,6 +17,7 @@
 #import "MainViewController.h"
 #import "AFNetworking.h"
 #import "AB.h"
+#import "Config.h"
 
 #define OTP_NOTIFICATION          @"otp_notification"
 #define OTP_TIME                  @"otp_time"
@@ -47,7 +48,6 @@ static NotificationChecker *singleton = nil;
         singleton.afmanager = [MainViewController createAFManager];
 
         bInitialized = YES;
-        [singleton start];
     }
 }
 
@@ -61,12 +61,12 @@ static NotificationChecker *singleton = nil;
     }
 }
 
-+ (void)requestNotifications
++ (void)requestNotificationsFromBackgroundFetch
 {
-    ABCLog(2,@"ENTER requestNotifications\n");
+    ABCLog(2,@"ENTER requestNotificationsFromBackgroundFetch\n");
     [singleton checkOtpResetPending];
     [singleton checkDirectoryNotifications];
-    ABCLog(2,@"EXIT requestNotifications\n");
+    ABCLog(2,@"EXIT requestNotificationsFromBackgroundFetch\n");
 }
 
 + (NSDictionary *)haveNotifications
@@ -148,8 +148,11 @@ static NotificationChecker *singleton = nil;
 {
     ABCLog(2,@"GO postNotification\n");
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
+    });
 }
+
 //
 // Set a notification as SEEN
 //
@@ -190,6 +193,10 @@ static NotificationChecker *singleton = nil;
     return false;
 }
 
++ (void)start;
+{
+    [singleton start];
+}
 
 - (void)start
 {
@@ -208,19 +215,19 @@ static NotificationChecker *singleton = nil;
 
 - (void)checkNotifications
 {
+    ABCLog(2,@"ENTER checkNotifications\n");
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        
-        ABCLog(2,@"ENTER checkNotifications\n");
         [self checkOtpResetPending];
-        
         [self checkDirectoryNotifications];
         
         if ([self getFirstUnseenNotification] != nil)
         {
             [self postNotification];
         }
-        ABCLog(2,@"EXIT checkNotifications\n");
     });
+    
+    ABCLog(2,@"EXIT checkNotifications\n");
 }
 
 + (void)resetOtpNotifications
@@ -316,33 +323,43 @@ static NotificationChecker *singleton = nil;
     NSString *serverQuery = [NSString stringWithFormat:@"%@/notifications/?since_id=%ld&ios_build=%@",
                              SERVER_API, (long)prevNotifID, build];
     
-    [self.afmanager GET:serverQuery parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:serverQuery]];
+    
+    NSString *token = [NSString stringWithFormat:@"Token %@", AIRBITZ_DIRECTORY_API_KEY];
+    [request setValue:token forHTTPHeaderField:@"Authorization"];
+    [request setValue:[[NSUUID UUID] UUIDString] forHTTPHeaderField:@"X-Client-ID"];
+    
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:request
+                                          returningResponse:&response
+                                                      error:&error];
+    if (error) return;
+
+    NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    if (error) return;
+    
+    if ([results objectForKey: @"results"] != (id)[NSNull null])
+    {
+        NSArray *notifsArray;
+        notifsArray = [[results objectForKey:@"results"] copy];
         
-        NSDictionary *results = (NSDictionary *)responseObject;
-        
-        if ([results objectForKey: @"results"] != (id)[NSNull null])
+        NSInteger highestNotifID = [LocalSettings controller].previousNotificationID;
+        for(NSDictionary *dict in notifsArray)
         {
-            NSArray *notifsArray;
-            notifsArray = [[results objectForKey:@"results"] copy];
-            
-            NSInteger highestNotifID = [LocalSettings controller].previousNotificationID;
-            for(NSDictionary *dict in notifsArray)
+            NSInteger notifID = [[dict objectForKey:@"id"] intValue];
+            if (highestNotifID < notifID)
             {
-                NSInteger notifID = [[dict objectForKey:@"id"] intValue];
-                if (highestNotifID < notifID)
-                {
-                    highestNotifID = notifID;
-                }
-                [[LocalSettings controller].notifications addObject:dict];
+                highestNotifID = notifID;
             }
-            
-            [LocalSettings controller].previousNotificationID = highestNotifID;
-            [LocalSettings saveAll];
-            
+            [[LocalSettings controller].notifications addObject:dict];
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network: checkDirectoryNotifications");
-    }];
+        
+        [LocalSettings controller].previousNotificationID = highestNotifID;
+        [LocalSettings saveAll];
+        
+    }
     
 }
 

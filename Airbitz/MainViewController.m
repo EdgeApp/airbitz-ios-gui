@@ -548,6 +548,8 @@ MainViewController *singleton;
 - (void)viewDidAppear:(BOOL)animated
 {
     [NotificationChecker initAll];
+    [NotificationChecker start];
+
     Affiliate *affiliate = [Affiliate alloc];
     
     [affiliate queryAffiliateInfo];
