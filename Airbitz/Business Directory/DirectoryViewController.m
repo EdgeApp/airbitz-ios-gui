@@ -443,7 +443,7 @@ static bool bInitialized = false;
     frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
 
     iv.frame = frame;
-    [iv enableScrolling: NO];
+    [iv enableScrolling: YES];
     [self.view addSubview: iv];
 
     NSString *path = [[NSBundle mainBundle] pathForResource: @"info" ofType: @"html"];

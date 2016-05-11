@@ -197,10 +197,6 @@ MainViewController *singleton;
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
     
-    [self checkEnabledPlugins];
-    
-    [NotificationChecker initAll];
-    
 #define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
     
     updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
@@ -495,9 +491,6 @@ MainViewController *singleton;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    Affiliate *affiliate = [Affiliate alloc];
-    
-    [affiliate queryAffiliateInfo];
 
     //
     // If this has already been initialized. Don't initialize again. Just jump to launchViewControllerBasedOnAppMode with current appMode
@@ -550,6 +543,18 @@ MainViewController *singleton;
     [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [NotificationChecker initAll];
+    [NotificationChecker start];
+
+    Affiliate *affiliate = [Affiliate alloc];
+    
+    [affiliate queryAffiliateInfo];
+    
+    [self checkEnabledPlugins];
 }
 
 - (void)checkEnabledPlugins

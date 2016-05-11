@@ -1195,10 +1195,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     ABCDenomination *BTCDenom = [ABCDenomination getDenominationForMultiplier:ABCDenominationMultiplierBTC];
     ABCDenomination *bitsDenom = [ABCDenomination getDenominationForMultiplier:ABCDenominationMultiplierUBTC];
     
-    NSString *amountBTC = [BTCDenom satoshiToBTCString:_amountSatoshiReceived
+    NSString *amountBTC = [BTCDenom satoshiToBTCString:_amountSatoshiRequested
                                             withSymbol:false
                                           cropDecimals:NO];
-    NSString *amountBits = [bitsDenom satoshiToBTCString:_amountSatoshiReceived
+    NSString *amountBits = [bitsDenom satoshiToBTCString:_amountSatoshiRequested
                                               withSymbol:false
                                             cropDecimals:NO];
     // For sending requests, use 8 decimal places which is a BTC (not mBTC or uBTC amount)

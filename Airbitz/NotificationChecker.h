@@ -12,6 +12,7 @@
 {
 }
 + (void)initAll;
++ (void)start;
 
 + (BOOL)setNotificationSeen:(NSDictionary *)setSeenNotif;
 
@@ -19,5 +20,5 @@
 + (NSDictionary *)haveNotifications;
 + (NSDictionary *)firstNotification;
 + (NSDictionary *)unseenNotification;
-+ (void)requestNotifications;
++ (void)requestNotificationsFromBackgroundFetch;
 @end
