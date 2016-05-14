@@ -63,6 +63,6 @@ files:
     source: '/Localization/Airbitz/en.xliff'                                    #source files filter
     translation: '/Localization/Airbitz/%locale%.xliff' #where translations live
   -
-    source: '/store_description.txt'                                    #source files filter
-    translation: '/store_description-%locale%.txt' #where translations live
+    source: '/Localization/store_description.txt'                                    #source files filter
+    translation: '/Localization/store_description-%locale%.txt' #where translations live
 
