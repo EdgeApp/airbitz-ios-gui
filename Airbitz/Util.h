@@ -61,6 +61,13 @@
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
 + (void)replaceHtmlTags:(NSString **) strContent;
 + (NSString *)checkPasswordResultsMessage:(ABCPasswordRuleResult *)result;
+#define printTimerStart() \
+ABCLog(0, @"*** %s:%d Timer START %lf", __FUNCTION__, __LINE__, [[NSDate date] timeIntervalSince1970])
+
+#define printTimerEnd() \
+ABCLog(0, @"*** %s:%d Timer END %lf", __FUNCTION__, __LINE__, [[NSDate date] timeIntervalSince1970])
+
+
 
 
 @end
