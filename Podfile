@@ -7,18 +7,26 @@ def import_pods
     pod 'AirbitzCore', :path => '../airbitz-core-objc/'
 end
 
-target :ios do
-    platform :ios, '8.0'
-    pod 'SDWebImage', '~>3.6'
-    link_with 'Airbitz', 'Airbitz-Develop', 'Airbitz-Testnet'
-    import_pods
-end
+    target "Airbitz" do 
+        platform :ios, '8.0'
+        import_pods
+        pod 'SDWebImage', '~>3.6'
+    end
 
-target :osx do
-    platform :osx, '10.9'
-    link_with 'Airbitz-OSX'
-    import_pods
-end
+    target "Airbitz-Develop" do 
+        import_pods
+        pod 'SDWebImage', '~>3.6'
+    end
+
+    target "Airbitz-Testnet" do 
+        import_pods
+        pod 'SDWebImage', '~>3.6'
+    end
+
+    target 'Airbitz-OSX' do
+        platform :osx, '10.9'
+        import_pods
+    end
 
 
 
