@@ -910,6 +910,10 @@ Enter it below to make sure:</source>
         <source>Email saved to send later.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Email sent.">
+        <source>Email sent.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Enable">
         <source>Enable</source>
         <note>No comment provided by engineer.</note>
