@@ -1,5 +1,5 @@
-Bitcoin Payment Request
-From: [[abtag FROM]]
+बिटकॉइन भुगतान का अनुरोध
+से:[[abtag FROM]]
 
 Please scan QR code or click on the links to pay
 
@@ -8,7 +8,7 @@ Click to Pay
 
 [[abtag BITCOIN_URI]]
 
-Address: [[abtag ADDRESS]]
+पता: [[abtag ADDRESS]]
 Amount: [[abtag AMOUNT_BTC]] BTC
 Amount: [[abtag AMOUNT_BITS]] bits
 
