@@ -107,8 +107,16 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     ABCLog(2,@"ENTER performFetch...\n");
 
-    bool bDidNotification = [self showNotifications];
+    [NotificationChecker initAll];
+    
+    bool bDidNotification = [self showNotificationsFromBackgroundFetch];
 
+    if (abc)
+    {
+        [abc enterForeground];
+        [abc enterBackground];
+    }
+    
     if (bDidNotification)
     {
         ABCLog(2,@"EXIT performFetch() NewData...\n");
@@ -189,20 +197,20 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     return [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
 }
 
-- (BOOL)showNotifications
+- (BOOL)showNotificationsFromBackgroundFetch
 {
-    ABCLog(2,@"ENTER showNotifications\n");
+    ABCLog(2,@"ENTER showNotificationsFromBackgroundFetch\n");
 
     bool bDidNotification = false;
 
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
     {
-        [NotificationChecker requestNotifications];
+        [NotificationChecker requestNotificationsFromBackgroundFetch];
 
         NSDictionary *notif = [NotificationChecker unseenNotification];
         while (notif)
         {
-            ABCLog(2,@"IN showNotifications: while loop\n");
+            ABCLog(2,@"IN showNotificationsFromBackgroundFetch: while loop\n");
 
             UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             
@@ -282,7 +290,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         
     }
 
-    ABCLog(2,@"EXIT showNotifications\n");
+    ABCLog(2,@"EXIT showNotificationsFromBackgroundFetch\n");
 
     return bDidNotification;
 }

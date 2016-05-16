@@ -59,6 +59,7 @@ static MainController *singleton;
     [self checkEnabledPlugins];
     
     [NotificationChecker initAll];
+    [NotificationChecker start];
     
 #define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
     

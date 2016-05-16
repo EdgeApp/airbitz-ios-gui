@@ -1206,6 +1206,18 @@
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
 		DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		DAD6D23E1CE96039003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2401CE96039003EEA42 /* InfoPlist.strings */; };
+		DAD6D2431CE9603A003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2451CE9603A003EEA42 /* InfoPlist.strings */; };
+		DAD6D2481CE9603A003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D24A1CE9603A003EEA42 /* InfoPlist.strings */; };
+		DAD6D2571CE9603D003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2591CE9603D003EEA42 /* InfoPlist.strings */; };
+		DAD6D25C1CE9603D003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D25E1CE9603D003EEA42 /* InfoPlist.strings */; };
+		DAD6D2661CE9603F003EEA42 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2681CE9603F003EEA42 /* InfoPlist.strings */; };
+		DAD6D26B1CE96160003EEA42 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D26D1CE96160003EEA42 /* Airbitz-InfoPlist.strings */; };
+		DAD6D2731CE96162003EEA42 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2751CE96162003EEA42 /* Airbitz-Testnet-InfoPlist.strings */; };
+		DAD6D2781CE96163003EEA42 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D27A1CE96163003EEA42 /* Airbitz-Develop-InfoPlist.strings */; };
+		DAD6D27F1CE96164003EEA42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2811CE96164003EEA42 /* Localizable.strings */; };
+		DAD6D28C1CE961D8003EEA42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2811CE96164003EEA42 /* Localizable.strings */; };
+		DAD6D28D1CE961D9003EEA42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAD6D2811CE96164003EEA42 /* Localizable.strings */; };
 		DAE1BE361CC36C58003494AB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE351CC36C58003494AB /* libc++.tbd */; };
 		DAE1BE381CC36C5E003494AB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE371CC36C5E003494AB /* libiconv.tbd */; };
 		DAE1BE391CC36EE3003494AB /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
@@ -1358,6 +1370,34 @@
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
 		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
 		DA51EA401CCA162800C7C95F /* BrandStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStrings.m; sourceTree = "<group>"; };
+		DA5549901CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA5549911CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template.html"; sourceTree = "<group>"; };
+		DA5549921CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DA5549931CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info.html"; sourceTree = "<group>"; };
+		DA5549941CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DA5549951CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DA5549961CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DA5549971CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DA5549981CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DA5549991CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_request.html"; sourceTree = "<group>"; };
+		DA55499A1CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send.html"; sourceTree = "<group>"; };
+		DA55499B1CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DA55499C1CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DA55499D1CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DA55499E1CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DA55499F1CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DA5549A01CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DA5549A11CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DA5549A21CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DA5549A31CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DA5549A41CE7A60700CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		DA5549A61CE7A78100CEF104 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA5549A81CE7A78900CEF104 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA5549AA1CE7A78D00CEF104 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA5549AB1CE7A7EF00CEF104 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA5549AD1CE7A80200CEF104 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		DA5549AF1CE7A80400CEF104 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main.strings"; sourceTree = "<group>"; };
+		DA5549B11CE7A80900CEF104 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
 		DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
 		DA9101EF1C4964AD00603D62 /* icon_import.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_import.png; sourceTree = "<group>"; };
 		DA9101F01C4964AD00603D62 /* icon_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@2x.png"; sourceTree = "<group>"; };
@@ -1369,7 +1409,6 @@
 		DA93DE361CC9CB710063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template.html; sourceTree = "<group>"; };
 		DA93DE3B1CC9CB740063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info.html; sourceTree = "<group>"; };
 		DA93DE401CC9CB780063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_footer.html; sourceTree = "<group>"; };
-		DA93DE421CC9CDD30063CD52 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz-OSX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9D8F561CC0C191006A8C0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA9D8F571CC0C191006A8C0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1982,6 +2021,26 @@
 		DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzUITests.m; sourceTree = "<group>"; };
 		DAD1ADA11BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD6D23F1CE96039003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2441CE9603A003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2491CE9603A003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2581CE9603D003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D25D1CE9603D003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2671CE9603F003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D26C1CE96160003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D26E1CE96161003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D26F1CE96161003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2701CE96161003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2741CE96162003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2791CE96163003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D27B1CE96164003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D27C1CE96164003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2801CE96164003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DAD6D2821CE96165003EEA42 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2831CE96198003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2841CE96198003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2851CE96198003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
+		DAD6D2861CE96198003EEA42 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DAE1BDD91CC330DD003494AB /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
 		DAE1BE351CC36C58003494AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		DAE1BE371CC36C5E003494AB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
@@ -2164,6 +2223,7 @@
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D2451CE9603A003EEA42 /* InfoPlist.strings */,
 				DAC83B461CC9D7EF00140876 /* InfoPlist.strings */,
 				DA9D8F561CC0C191006A8C0A /* AppDelegate.h */,
 				DA9D8F571CC0C191006A8C0A /* AppDelegate.m */,
@@ -2188,6 +2248,7 @@
 		DA9D8F6C1CC0C191006A8C0A /* Airbitz-OSXTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D2591CE9603D003EEA42 /* InfoPlist.strings */,
 				DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */,
 				DA9D8F6F1CC0C191006A8C0A /* Info.plist */,
 			);
@@ -2197,6 +2258,7 @@
 		DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D2681CE9603F003EEA42 /* InfoPlist.strings */,
 				DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */,
 				DA9D8F7A1CC0C191006A8C0A /* Info.plist */,
 			);
@@ -2241,6 +2303,7 @@
 		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D2401CE96039003EEA42 /* InfoPlist.strings */,
 				DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */,
 				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
 				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
@@ -3057,6 +3120,10 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D2811CE96164003EEA42 /* Localizable.strings */,
+				DAD6D27A1CE96163003EEA42 /* Airbitz-Develop-InfoPlist.strings */,
+				DAD6D2751CE96162003EEA42 /* Airbitz-Testnet-InfoPlist.strings */,
+				DAD6D26D1CE96160003EEA42 /* Airbitz-InfoPlist.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
@@ -3181,6 +3248,7 @@
 		DAD1AD931BC6065100C648C4 /* AirbitzTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D25E1CE9603D003EEA42 /* InfoPlist.strings */,
 				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
 				DAD1AD961BC6065100C648C4 /* Info.plist */,
 			);
@@ -3190,6 +3258,7 @@
 		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
 			isa = PBXGroup;
 			children = (
+				DAD6D24A1CE9603A003EEA42 /* InfoPlist.strings */,
 				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
 				DAD1ADA11BC6065100C648C4 /* Info.plist */,
 			);
@@ -3442,6 +3511,7 @@
 				"pt-BR",
 				"hi-IN",
 				"es-MX",
+				"zh-Hans",
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -3507,6 +3577,7 @@
 				DAC83B471CC9D7EF00140876 /* InfoPlist.strings in Resources */,
 				DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */,
 				DA9D8F631CC0C191006A8C0A /* Main.storyboard in Resources */,
+				DAD6D2431CE9603A003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3514,6 +3585,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD6D2571CE9603D003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3521,6 +3593,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD6D2661CE9603F003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3532,6 +3605,7 @@
 				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
+				DAD6D23E1CE96039003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3616,6 +3690,7 @@
 				DA9EF4551BC7285D0063DA07 /* bitcoin-icon-logo.png in Resources */,
 				DA9EF4561BC7285D0063DA07 /* icon_send@3x.png in Resources */,
 				DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */,
+				DAD6D2781CE96163003EEA42 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DA9EF4571BC7285D0063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EF4581BC7285D0063DA07 /* btn_add_black@2x.png in Resources */,
 				DA9EF4591BC7285D0063DA07 /* 2-bars@2x.png in Resources */,
@@ -3711,6 +3786,7 @@
 				DA9EF4B51BC7285D0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF4B61BC7285D0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */,
+				DAD6D28C1CE961D8003EEA42 /* Localizable.strings in Resources */,
 				DA9EF4B91BC7285D0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF4BA1BC7285D0063DA07 /* icon_settings_dark.png in Resources */,
 				DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
@@ -3806,6 +3882,7 @@
 				DA9101FA1C4964AD00603D62 /* icon_import@3x.png in Resources */,
 				DA9EF5CF1BC729FA0063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EF5D21BC729FA0063DA07 /* bd_sliderbubble@2x.png in Resources */,
+				DAD6D2731CE96162003EEA42 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EF5D61BC729FA0063DA07 /* icon_category_restaurants@3x.png in Resources */,
 				DA9EF5D71BC729FA0063DA07 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF5D81BC729FA0063DA07 /* 1-bar@2x.png in Resources */,
@@ -3972,6 +4049,7 @@
 				DA9EF67C1BC729FA0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF67D1BC729FA0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD571CC9D93000082868 /* transaction_details.html in Resources */,
+				DAD6D28D1CE961D9003EEA42 /* Localizable.strings in Resources */,
 				DA9EF6801BC729FA0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF6811BC729FA0063DA07 /* icon_settings_dark.png in Resources */,
 				DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */,
@@ -4234,6 +4312,7 @@
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
+				DAD6D27F1CE96164003EEA42 /* Localizable.strings in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
@@ -4247,6 +4326,7 @@
 				DAE4CD0F1CC9D8D100082868 /* info_request.html in Resources */,
 				DA9EE44A1BC61F920063DA07 /* btn_close_white@2x.png in Resources */,
 				DA9EE4901BC61F920063DA07 /* icon_category_gift_cards.png in Resources */,
+				DAD6D26B1CE96160003EEA42 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EE4CD1BC61F920063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EE4A01BC61F920063DA07 /* icon_export_google@2x.png in Resources */,
 				DA9EE4911BC61F920063DA07 /* icon_category_gift_cards@2x.png in Resources */,
@@ -4322,6 +4402,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD6D25C1CE9603D003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4329,6 +4410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD6D2481CE9603A003EEA42 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5027,6 +5109,7 @@
 				DAC7D2F21CCCBEC700608219 /* pt-BR */,
 				DAC7D3071CCCBEDA00608219 /* hi-IN */,
 				DAC7D31C1CCCBEEC00608219 /* es-MX */,
+				DA5549A31CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = sms_template.txt;
 			sourceTree = "<group>";
@@ -5035,9 +5118,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				DA93DE2D1CC9CB530063CD52 /* Base */,
-				DAC7D2DE1CCCBEC400608219 /* pt-BR */,
-				DAC7D2F31CCCBED800608219 /* hi-IN */,
-				DAC7D3081CCCBEE900608219 /* es-MX */,
+				DA5549901CE7A60600CEF104 /* zh-Hans */,
+				DA5549A61CE7A78100CEF104 /* es-MX */,
+				DA5549A81CE7A78900CEF104 /* hi-IN */,
+				DA5549AA1CE7A78D00CEF104 /* pt-BR */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -5049,6 +5133,7 @@
 				DAC7D2E01CCCBEC400608219 /* pt-BR */,
 				DAC7D2F51CCCBED800608219 /* hi-IN */,
 				DAC7D30A1CCCBEEA00608219 /* es-MX */,
+				DA5549911CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = email_template.html;
 			sourceTree = "<group>";
@@ -5060,6 +5145,7 @@
 				DAC7D2E21CCCBEC400608219 /* pt-BR */,
 				DAC7D2F71CCCBED900608219 /* hi-IN */,
 				DAC7D30C1CCCBEEA00608219 /* es-MX */,
+				DA5549931CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info.html;
 			sourceTree = "<group>";
@@ -5071,6 +5157,7 @@
 				DAC7D2E31CCCBEC400608219 /* pt-BR */,
 				DAC7D2F81CCCBED900608219 /* hi-IN */,
 				DAC7D30D1CCCBEEA00608219 /* es-MX */,
+				DA5549941CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_footer.html;
 			sourceTree = "<group>";
@@ -5078,10 +5165,11 @@
 		DA9D8F611CC0C191006A8C0A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA93DE421CC9CDD30063CD52 /* en */,
-				DAC7D2DF1CCCBEC400608219 /* pt-BR */,
-				DAC7D2F41CCCBED800608219 /* hi-IN */,
-				DAC7D3091CCCBEEA00608219 /* es-MX */,
+				DA5549A41CE7A60700CEF104 /* zh-Hans */,
+				DA5549AB1CE7A7EF00CEF104 /* Base */,
+				DA5549AD1CE7A80200CEF104 /* pt-BR */,
+				DA5549AF1CE7A80400CEF104 /* hi-IN */,
+				DA5549B11CE7A80900CEF104 /* es-MX */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -5093,8 +5181,99 @@
 				DAC7D2E11CCCBEC400608219 /* pt-BR */,
 				DAC7D2F61CCCBED900608219 /* hi-IN */,
 				DAC7D30B1CCCBEEA00608219 /* es-MX */,
+				DA5549921CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = email_template_simple.html;
+			sourceTree = "<group>";
+		};
+		DAD6D2401CE96039003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D23F1CE96039003EEA42 /* es-MX */,
+				DAD6D26E1CE96161003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D2451CE9603A003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2441CE9603A003EEA42 /* es-MX */,
+				DAD6D26F1CE96161003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D24A1CE9603A003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2491CE9603A003EEA42 /* es-MX */,
+				DAD6D2701CE96161003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D2591CE9603D003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2581CE9603D003EEA42 /* es-MX */,
+				DAD6D27B1CE96164003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D25E1CE9603D003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D25D1CE9603D003EEA42 /* es-MX */,
+				DAD6D27C1CE96164003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D2681CE9603F003EEA42 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2671CE9603F003EEA42 /* es-MX */,
+				DAD6D2821CE96165003EEA42 /* pt-BR */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAD6D26D1CE96160003EEA42 /* Airbitz-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D26C1CE96160003EEA42 /* pt-BR */,
+				DAD6D2841CE96198003EEA42 /* es-MX */,
+			);
+			name = "Airbitz-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DAD6D2751CE96162003EEA42 /* Airbitz-Testnet-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2741CE96162003EEA42 /* pt-BR */,
+				DAD6D2851CE96198003EEA42 /* es-MX */,
+			);
+			name = "Airbitz-Testnet-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DAD6D27A1CE96163003EEA42 /* Airbitz-Develop-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2791CE96163003EEA42 /* pt-BR */,
+				DAD6D2831CE96198003EEA42 /* es-MX */,
+			);
+			name = "Airbitz-Develop-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+		DAD6D2811CE96164003EEA42 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD6D2801CE96164003EEA42 /* pt-BR */,
+				DAD6D2861CE96198003EEA42 /* es-MX */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		DAE4CCF31CC9D89900082868 /* info_export_wallet.html */ = {
@@ -5104,6 +5283,7 @@
 				DAC7D2E41CCCBEC500608219 /* pt-BR */,
 				DAC7D2F91CCCBED900608219 /* hi-IN */,
 				DAC7D30E1CCCBEEA00608219 /* es-MX */,
+				DA5549951CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_export_wallet.html;
 			sourceTree = "<group>";
@@ -5115,6 +5295,7 @@
 				DAC7D2E51CCCBEC500608219 /* pt-BR */,
 				DAC7D2FA1CCCBED900608219 /* hi-IN */,
 				DAC7D30F1CCCBEEA00608219 /* es-MX */,
+				DA5549961CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_export_wallet_options.html;
 			sourceTree = "<group>";
@@ -5126,6 +5307,7 @@
 				DAC7D2E61CCCBEC500608219 /* pt-BR */,
 				DAC7D2FB1CCCBED900608219 /* hi-IN */,
 				DAC7D3101CCCBEEA00608219 /* es-MX */,
+				DA5549971CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_insufficient_funds.html;
 			sourceTree = "<group>";
@@ -5137,6 +5319,7 @@
 				DAC7D2E71CCCBEC500608219 /* pt-BR */,
 				DAC7D2FC1CCCBED900608219 /* hi-IN */,
 				DAC7D3111CCCBEEB00608219 /* es-MX */,
+				DA5549981CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_recipient.html;
 			sourceTree = "<group>";
@@ -5148,6 +5331,7 @@
 				DAC7D2E81CCCBEC500608219 /* pt-BR */,
 				DAC7D2FD1CCCBED900608219 /* hi-IN */,
 				DAC7D3121CCCBEEB00608219 /* es-MX */,
+				DA5549991CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_request.html;
 			sourceTree = "<group>";
@@ -5159,6 +5343,7 @@
 				DAC7D2E91CCCBEC500608219 /* pt-BR */,
 				DAC7D2FE1CCCBEDA00608219 /* hi-IN */,
 				DAC7D3131CCCBEEB00608219 /* es-MX */,
+				DA55499A1CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_send.html;
 			sourceTree = "<group>";
@@ -5170,6 +5355,7 @@
 				DAC7D2EA1CCCBEC500608219 /* pt-BR */,
 				DAC7D2FF1CCCBEDA00608219 /* hi-IN */,
 				DAC7D3141CCCBEEB00608219 /* es-MX */,
+				DA55499B1CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_disclaimer.html;
 			sourceTree = "<group>";
@@ -5181,6 +5367,7 @@
 				DAC7D2EB1CCCBEC600608219 /* pt-BR */,
 				DAC7D3001CCCBEDA00608219 /* hi-IN */,
 				DAC7D3151CCCBEEB00608219 /* es-MX */,
+				DA55499C1CE7A60600CEF104 /* zh-Hans */,
 			);
 			name = info_send_confirmation.html;
 			sourceTree = "<group>";
@@ -5192,6 +5379,7 @@
 				DAC7D2EC1CCCBEC600608219 /* pt-BR */,
 				DAC7D3011CCCBEDA00608219 /* hi-IN */,
 				DAC7D3161CCCBEEB00608219 /* es-MX */,
+				DA55499D1CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = info_settings.html;
 			sourceTree = "<group>";
@@ -5203,6 +5391,7 @@
 				DAC7D2ED1CCCBEC600608219 /* pt-BR */,
 				DAC7D3021CCCBEDA00608219 /* hi-IN */,
 				DAC7D3171CCCBEEB00608219 /* es-MX */,
+				DA55499E1CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = info_spending_limits.html;
 			sourceTree = "<group>";
@@ -5214,6 +5403,7 @@
 				DAC7D2EE1CCCBEC600608219 /* pt-BR */,
 				DAC7D3031CCCBEDA00608219 /* hi-IN */,
 				DAC7D3181CCCBEEB00608219 /* es-MX */,
+				DA55499F1CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = info_transaction_details.html;
 			sourceTree = "<group>";
@@ -5225,6 +5415,7 @@
 				DAC7D2EF1CCCBEC600608219 /* pt-BR */,
 				DAC7D3041CCCBEDA00608219 /* hi-IN */,
 				DAC7D3191CCCBEEB00608219 /* es-MX */,
+				DA5549A01CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = info_transactions.html;
 			sourceTree = "<group>";
@@ -5236,6 +5427,7 @@
 				DAC7D2F01CCCBEC600608219 /* pt-BR */,
 				DAC7D3051CCCBEDA00608219 /* hi-IN */,
 				DAC7D31A1CCCBEEB00608219 /* es-MX */,
+				DA5549A11CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = info_wallets.html;
 			sourceTree = "<group>";
@@ -5247,6 +5439,7 @@
 				DAC7D2F11CCCBEC600608219 /* pt-BR */,
 				DAC7D3061CCCBEDA00608219 /* hi-IN */,
 				DAC7D31B1CCCBEEC00608219 /* es-MX */,
+				DA5549A21CE7A60700CEF104 /* zh-Hans */,
 			);
 			name = transaction_details.html;
 			sourceTree = "<group>";

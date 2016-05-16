@@ -219,7 +219,7 @@
 #define exportPrivateSeed                           NSLocalizedString(@"Export Private Seed", nil)
 #define emailCancelled                              NSLocalizedString(@"Email cancelled.", nil)
 #define emailSavedToSendLater                       NSLocalizedString(@"Email saved to send later.", nil)
-#define emailSent                                   NSLocalizedString(@"Email saved to send later.", nil)
+#define emailSent                                   NSLocalizedString(@"Email sent.", nil)
 #define errorSendingEmail                           NSLocalizedString(@"Error sending Email.", nil)
 #define usernameText                                NSLocalizedString(@"Username", @"Username")
 #define anErrorOccurredNetworkOrIncorrectPassword   NSLocalizedString(@"An error occurred. Possible network connection issue or incorrect username & password", nil)

@@ -1,10 +1,10 @@
-ell, Secure, Send, and Receive Bitcoin
+बेचें,सुरक्षित करें,भेजें,और बिटकॉइन प्राप्त करें
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+दमदार और इस्तेमाल में सरल बिटकॉइन वॉलेट अपने उपयोगकर्ताओं को बिटकॉइन गोपनीय चाबी पर पूरा नियंत्रण रखने की अनुमति देता है और मोबाइल बैंकिंग को आसान बनाता है|
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. आपको प्रदान किए गए वित्तीय गोपनीयता और बिट कॉइन स्वायत्तता सरलता से इस्तेमाल के लिए इस तरह से बनाया गया है कि आपकी दादी भी इसे संभाल सकती हैं|
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+एक अद्भुत यूजर अनुभव प्रदान करने के साथ-साथ, एयरबिट्ज़ वॉलेट निम्नलिखित शानदार कार्यक्षमता भी प्रदान करता है:
 
 • Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
 • Integrated buy/sell for US and Canada residents

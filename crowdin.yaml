@@ -1,5 +1,5 @@
 project_identifier: airbitz
-api_key: d13f98dec6d253c5e272edeee77f6ed1                          #can be found in your project settings page
+api_key_env: CROWDIN_API_KEY
 base_path: ./
 files:
   -
@@ -63,6 +63,6 @@ files:
     source: '/Localization/Airbitz/en.xliff'                                    #source files filter
     translation: '/Localization/Airbitz/%locale%.xliff' #where translations live
   -
-    source: '/store_description.txt'                                    #source files filter
-    translation: '/store_description-%locale%.txt' #where translations live
+    source: '/Localization/store_description.txt'                                    #source files filter
+    translation: '/Localization/store_description-%locale%.txt' #where translations live
 
