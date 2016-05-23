@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03480B507CB74C86154EB1FE /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
+		313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -20,8 +20,8 @@
 		34644BA757EFF80569B02240 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		34644D9C4171CC241B6B1609 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
-		CF5C3DE92324E58F7BD3FCDA /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2352337656E1FCF99AFBF69 /* libPods-osx.a */; };
-		D84F821FCEA67DCC61B65143 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
+		622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */; };
+		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1272,7 +1272,7 @@
 		DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
 		DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
 		DAE4CD571CC9D93000082868 /* transaction_details.html in Resources */ = {isa = PBXBuildFile; fileRef = DAE4CD591CC9D93000082868 /* transaction_details.html */; };
-		E21B87AFD96098F33846111E /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2320AE4B6022C6128227D4F /* libPods-ios.a */; };
+		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1342,8 +1342,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C88A91632A7616E92B4670D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* GiftCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftCardViewController.m; sourceTree = "<group>"; };
@@ -1354,11 +1353,15 @@
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* GiftCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftCardViewController.h; sourceTree = "<group>"; };
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AB.h; sourceTree = "<group>"; };
-		61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		9D0FC1763A7238766C6ABBEA /* Pods-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.debug.xcconfig"; sourceTree = "<group>"; };
-		C2320AE4B6022C6128227D4F /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF40816606439A89F2B35C7D /* Pods-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios/Pods-ios.release.xcconfig"; sourceTree = "<group>"; };
-		DA00F06E3663656CE1A26363 /* Pods-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.release.xcconfig"; sourceTree = "<group>"; };
+		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; };
+		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; };
+		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
+		71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; };
 		DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
@@ -2060,8 +2063,8 @@
 		DAE4CD4A1CC9D91C00082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_transactions.html; sourceTree = "<group>"; };
 		DAE4CD511CC9D92600082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_wallets.html; sourceTree = "<group>"; };
 		DAE4CD581CC9D93000082868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/transaction_details.html; sourceTree = "<group>"; };
-		E789935EB56C2B5BD137B2C6 /* Pods-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-osx/Pods-osx.debug.xcconfig"; sourceTree = "<group>"; };
-		F2352337656E1FCF99AFBF69 /* libPods-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; };
+		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2071,7 +2074,7 @@
 			files = (
 				DAE1BE381CC36C5E003494AB /* libiconv.tbd in Frameworks */,
 				DAE1BE361CC36C58003494AB /* libc++.tbd in Frameworks */,
-				CF5C3DE92324E58F7BD3FCDA /* libPods-osx.a in Frameworks */,
+				F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2124,7 +2127,7 @@
 				DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */,
 				DA9EF4001BC7285D0063DA07 /* libzbar.a in Frameworks */,
-				E21B87AFD96098F33846111E /* libPods-ios.a in Frameworks */,
+				313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2155,7 +2158,7 @@
 				DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
 				DA9EF5C71BC729FA0063DA07 /* libzbar.a in Frameworks */,
-				D84F821FCEA67DCC61B65143 /* libPods-ios.a in Frameworks */,
+				662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2186,7 +2189,7 @@
 				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
 				DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */,
-				03480B507CB74C86154EB1FE /* libPods-ios.a in Frameworks */,
+				622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2207,15 +2210,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		344438B8948D894D296136BA /* Pods */ = {
+		6899E08CA9EF50ED0056D896 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				61962A913BC3099D425D6DDE /* Pods.debug.xcconfig */,
-				0D767DD7126F2AEE8B62446C /* Pods.release.xcconfig */,
-				9D0FC1763A7238766C6ABBEA /* Pods-ios.debug.xcconfig */,
-				CF40816606439A89F2B35C7D /* Pods-ios.release.xcconfig */,
-				E789935EB56C2B5BD137B2C6 /* Pods-osx.debug.xcconfig */,
-				DA00F06E3663656CE1A26363 /* Pods-osx.release.xcconfig */,
+				6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */,
+				C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */,
+				E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */,
+				5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */,
+				F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */,
+				4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */,
+				487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */,
+				2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2293,9 +2298,10 @@
 				DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */,
 				DA9ED7341BC60AA90063DA07 /* UIKit.framework */,
 				DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */,
-				0C88A91632A7616E92B4670D /* libPods.a */,
-				C2320AE4B6022C6128227D4F /* libPods-ios.a */,
-				F2352337656E1FCF99AFBF69 /* libPods-osx.a */,
+				57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */,
+				526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */,
+				5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */,
+				71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3097,7 +3103,7 @@
 				DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */,
 				DA9ED6EB1BC607FA0063DA07 /* Frameworks */,
 				DAD1AD781BC6065100C648C4 /* Products */,
-				344438B8948D894D296136BA /* Pods */,
+				6899E08CA9EF50ED0056D896 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3281,12 +3287,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9D8F851CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSX" */;
 			buildPhases = (
-				B5C7C2B67A41B02F194DBB3E /* Check Pods Manifest.lock */,
+				8098D09DC906C087001E94A0 /* 📦 Check Pods Manifest.lock */,
 				DA9D8F501CC0C191006A8C0A /* Sources */,
 				DA9D8F511CC0C191006A8C0A /* Frameworks */,
 				DA9D8F521CC0C191006A8C0A /* Resources */,
-				87901D49FBA9BD2555D26D6E /* Embed Pods Frameworks */,
-				B9C7A4519C07AAAEE1EA8653 /* Copy Pods Resources */,
+				F736412B2F002033811E3ECD /* 📦 Embed Pods Frameworks */,
+				EB1F9F1B010317F8520994B9 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3354,12 +3360,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF5101BC7285D0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Develop" */;
 			buildPhases = (
-				DA9EF34F1BC7285D0063DA07 /* Check Pods Manifest.lock */,
+				A4A2902C0CC41F6230966708 /* 📦 Check Pods Manifest.lock */,
 				DA9EF3501BC7285D0063DA07 /* Sources */,
 				DA9EF3DA1BC7285D0063DA07 /* Frameworks */,
 				DA9EF4021BC7285D0063DA07 /* Resources */,
-				3ED7291EF4504EB2C0D7F33E /* Embed Pods Frameworks */,
-				911D1E3DD139BDAFA41F8B39 /* Copy Pods Resources */,
+				C8206127E5601AA2C80919B3 /* 📦 Embed Pods Frameworks */,
+				77521873930B17B23434AFD3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3374,12 +3380,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF6D51BC729FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */;
 			buildPhases = (
-				DA9EF5161BC729FA0063DA07 /* Check Pods Manifest.lock */,
+				07AA425DC801DD902C371688 /* 📦 Check Pods Manifest.lock */,
 				DA9EF5171BC729FA0063DA07 /* Sources */,
 				DA9EF5A11BC729FA0063DA07 /* Frameworks */,
 				DA9EF5C91BC729FA0063DA07 /* Resources */,
-				DA9EF6D41BC729FA0063DA07 /* Copy Pods Resources */,
-				961B071DECC6BDB21387EE53 /* Embed Pods Frameworks */,
+				148495570A5C654A9580E66E /* 📦 Embed Pods Frameworks */,
+				362598A803D456F4E4BF374A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3394,12 +3400,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAD1ADA41BC6065100C648C4 /* Build configuration list for PBXNativeTarget "Airbitz" */;
 			buildPhases = (
-				DF63B0E9B5BB0C91752C2F4F /* Check Pods Manifest.lock */,
+				84E4F0AEEF0E1054D0334101 /* 📦 Check Pods Manifest.lock */,
 				DAD1AD731BC6065100C648C4 /* Sources */,
 				DAD1AD741BC6065100C648C4 /* Frameworks */,
 				DAD1AD751BC6065100C648C4 /* Resources */,
-				6861DED29A6F9662DAB11141 /* Copy Pods Resources */,
-				8B133C261F11057BC79BA010 /* Embed Pods Frameworks */,
+				AC39B6D1FB9EDE1712613FD4 /* 📦 Embed Pods Frameworks */,
+				0AF405240848F7D4E657A31C /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4417,104 +4423,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3ED7291EF4504EB2C0D7F33E /* Embed Pods Frameworks */ = {
+		07AA425DC801DD902C371688 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6861DED29A6F9662DAB11141 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		87901D49FBA9BD2555D26D6E /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B133C261F11057BC79BA010 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		911D1E3DD139BDAFA41F8B39 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		961B071DECC6BDB21387EE53 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B5C7C2B67A41B02F194DBB3E /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4522,29 +4438,74 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B9C7A4519C07AAAEE1EA8653 /* Copy Pods Resources */ = {
+		0AF405240848F7D4E657A31C /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-osx/Pods-osx-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA9EF34F1BC7285D0063DA07 /* Check Pods Manifest.lock */ = {
+		148495570A5C654A9580E66E /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		362598A803D456F4E4BF374A /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77521873930B17B23434AFD3 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8098D09DC906C087001E94A0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4552,14 +4513,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		DA9EF5161BC729FA0063DA07 /* Check Pods Manifest.lock */ = {
+		84E4F0AEEF0E1054D0334101 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4567,34 +4528,79 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		DA9EF6D41BC729FA0063DA07 /* Copy Pods Resources */ = {
+		A4A2902C0CC41F6230966708 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios/Pods-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF63B0E9B5BB0C91752C2F4F /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AC39B6D1FB9EDE1712613FD4 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8206127E5601AA2C80919B3 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB1F9F1B010317F8520994B9 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F736412B2F002033811E3ECD /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5449,7 +5455,7 @@
 /* Begin XCBuildConfiguration section */
 		DA9D8F7B1CC0C191006A8C0A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E789935EB56C2B5BD137B2C6 /* Pods-osx.debug.xcconfig */;
+			baseConfigurationReference = F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5470,7 +5476,7 @@
 		};
 		DA9D8F7C1CC0C191006A8C0A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA00F06E3663656CE1A26363 /* Pods-osx.release.xcconfig */;
+			baseConfigurationReference = 4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5581,7 +5587,7 @@
 		};
 		DA9EF5111BC7285D0063DA07 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D0FC1763A7238766C6ABBEA /* Pods-ios.debug.xcconfig */;
+			baseConfigurationReference = E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -5624,7 +5630,7 @@
 		};
 		DA9EF5121BC7285D0063DA07 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF40816606439A89F2B35C7D /* Pods-ios.release.xcconfig */;
+			baseConfigurationReference = 5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Develop";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -5667,7 +5673,7 @@
 		};
 		DA9EF6D61BC729FA0063DA07 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D0FC1763A7238766C6ABBEA /* Pods-ios.debug.xcconfig */;
+			baseConfigurationReference = 487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -5710,7 +5716,7 @@
 		};
 		DA9EF6D71BC729FA0063DA07 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF40816606439A89F2B35C7D /* Pods-ios.release.xcconfig */;
+			baseConfigurationReference = 2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -5837,7 +5843,7 @@
 		};
 		DAD1ADA51BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D0FC1763A7238766C6ABBEA /* Pods-ios.debug.xcconfig */;
+			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -5878,7 +5884,7 @@
 		};
 		DAD1ADA61BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF40816606439A89F2B35C7D /* Pods-ios.release.xcconfig */;
+			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
