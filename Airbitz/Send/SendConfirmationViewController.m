@@ -401,8 +401,8 @@
     [self dismissErrorMessage];
 
     [self.withdrawlPIN resignFirstResponder];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -593,8 +593,8 @@
     self.transactionDetailsController.view.frame = frame;
     
     [self.view addSubview:self.transactionDetailsController.view];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {

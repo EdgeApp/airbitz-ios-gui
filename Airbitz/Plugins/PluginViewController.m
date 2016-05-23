@@ -342,8 +342,8 @@ static const NSString *PROTOCOL = @"bridge://";
                                          withUnsentTx:nil];
     } else if ([_navStack count] == 0) {
         self.view.alpha = 1.0;
-        [UIView animateWithDuration:0.35
-                            delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                         animations:^{
             self.view.alpha = 0.0;

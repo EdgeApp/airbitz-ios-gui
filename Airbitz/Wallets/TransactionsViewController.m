@@ -235,8 +235,8 @@ const int NumPromoRows              = 5;
     
     [self updateNavBar];
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
@@ -611,8 +611,8 @@ const int NumPromoRows              = 5;
 
 -(void)dismissTransactionDetails
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -1732,8 +1732,8 @@ const int NumPromoRows              = 5;
     {
         _walletMakerVisible = NO;
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1761,8 +1761,8 @@ const int NumPromoRows              = 5;
         [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
         [self createBlockingButton:self.walletMakerView];
         [self.walletMakerView.textField becomeFirstResponder];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1791,8 +1791,8 @@ const int NumPromoRows              = 5;
                         action:@selector(blockingButtonHit:)
               forControlEvents:UIControlEventTouchDown];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {
@@ -1807,8 +1807,8 @@ const int NumPromoRows              = 5;
 
 - (void)removeBlockingButton
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {

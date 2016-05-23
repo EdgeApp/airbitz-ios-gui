@@ -554,8 +554,8 @@
         self.tableView.scrollEnabled = YES;
 
         // animate it all
-        [UIView animateWithDuration:0.35
-                            delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseOut
                         animations:^
         {
@@ -611,8 +611,8 @@
     bTableCellSelected = YES;
 
     // animate it all
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
@@ -643,8 +643,8 @@
 
 - (void)shrinkSearchBarView
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
@@ -660,8 +660,8 @@
 
 - (void)growSearchBarView
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {

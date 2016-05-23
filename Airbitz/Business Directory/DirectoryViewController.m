@@ -380,8 +380,8 @@ static bool bInitialized = false;
         NSDictionary *userInfo = [notification userInfo];
         CGRect keyboardFrame = [[userInfo objectForKey: UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
-        [UIView animateWithDuration: 0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
@@ -403,8 +403,8 @@ static bool bInitialized = false;
         //ABCLog(2,@"Keyboard will hide for DirectoryViewController");
         //make searchCluesTableView go away
         //bring back divider bar
-        [UIView animateWithDuration: 0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
@@ -747,8 +747,8 @@ static bool bInitialized = false;
             break;
     }
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
                      {
@@ -1141,8 +1141,8 @@ static bool bInitialized = false;
 - (void)removePopupView
 {
     if (singleCalloutView) {
-        [UIView animateWithDuration:0.35
-                              delay:0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveLinear
                         animations:^
         {
@@ -1183,8 +1183,8 @@ static bool bInitialized = false;
     if (animated)
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration: 0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations: ^
         {
@@ -1206,8 +1206,8 @@ static bool bInitialized = false;
 //    }
 //
 //    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-//    [UIView animateWithDuration: 0.35
-//                          delay: 0.0
+//[UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+//                      delay:[Theme Singleton].animationDelayTimeDefault
 //                        options: UIViewAnimationOptionCurveEaseInOut
 //                     animations: ^
 //    {

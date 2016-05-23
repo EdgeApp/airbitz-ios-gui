@@ -134,8 +134,8 @@
 
         if (offset > 0)
         {
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^
                              {
@@ -152,8 +152,8 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
