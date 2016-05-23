@@ -9,6 +9,7 @@
 //    and a string.  The ribbon will animate toward the left from the given starting point and will contain the text in the string.
 
 #import "RibbonView.h"
+#import "Theme.h"
 
 @interface RibbonView ()
 {
@@ -91,8 +92,8 @@
 
 -(void)animateOnScreen
 {
-    [UIView animateWithDuration:0.25
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
@@ -144,8 +145,8 @@
 
 -(void)remove
 {
-    [UIView animateWithDuration:0.25
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
      {

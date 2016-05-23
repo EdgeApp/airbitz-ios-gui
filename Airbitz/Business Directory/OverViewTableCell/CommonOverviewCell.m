@@ -7,6 +7,7 @@
 //
 
 #import "CommonOverviewCell.h"
+#import "Theme.h"
 
 #define TAP_TIME_THRESHOLD	0.3 /* seconds */
 
@@ -149,8 +150,8 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 		frame.origin = CGPointMake(0, 0);
 		connectedViewFrame.origin.x = connectedViewFrame.size.width;
 		
-		[UIView animateWithDuration:0.35
-							  delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 		 {
@@ -189,8 +190,8 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 		frame.origin = CGPointMake(-frame.size.width, 0);
 		connectedViewFrame.origin.x = 0;
 		
-		[UIView animateWithDuration:0.35
-							  delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 						 {
@@ -218,8 +219,8 @@ static CommonOverviewCell *selectedCell; //only allow one cell at a time to be s
 		frame.origin = CGPointMake(0, 0);
 		connectedViewFrame.origin.x = connectedViewFrame.size.width;
 		
-		[UIView animateWithDuration:0.35
-							  delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options: UIViewAnimationOptionCurveEaseOut
 						 animations:^
 						 {

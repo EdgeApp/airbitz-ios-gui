@@ -79,7 +79,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 
     self.appFont = @"Lato-Regular";
 
-    self.animationDurationTimeDefault           = 0.35;     // How long the animation transition should take
+    self.animationDurationTimeDefault           = 0.15;     // How long the animation transition should take
     self.animationDelayTimeDefault              = 0.0;      // Delay until animation starts. Should always be zero
     self.animationCurveDefault                  = UIViewAnimationOptionCurveEaseOut;
 

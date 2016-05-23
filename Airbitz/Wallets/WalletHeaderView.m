@@ -7,6 +7,7 @@
 //
 
 #import "WalletHeaderView.h"
+#import "Theme.h"
 
 @interface WalletHeaderView ()
 {
@@ -55,8 +56,8 @@
     if(headerCollapsed)
     {
         headerCollapsed = NO;
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -71,8 +72,8 @@
     else
     {
         headerCollapsed = YES;
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {

@@ -641,7 +641,7 @@ MainViewController *singleton;
     {
         [singleton.backgroundView setAlpha:bvStart];
         [singleton.backgroundViewBlue setAlpha:bvbStart];
-        [UIView animateWithDuration:1.0
+        [UIView animateWithDuration:0.5
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
@@ -703,8 +703,8 @@ MainViewController *singleton;
     self.blurViewLeft.constant = -[MainViewController getLargestDimension];
     [_loginViewController.view setAlpha:1.0];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [self.view layoutIfNeeded];
@@ -745,8 +745,8 @@ MainViewController *singleton;
 
         singleton.tabBarBottom.constant = 0;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -775,8 +775,8 @@ MainViewController *singleton;
 
         singleton.navBarTop.constant = 0;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -805,8 +805,8 @@ MainViewController *singleton;
 
         singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-		[UIView animateWithDuration:0.25
-							  delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
         {
@@ -833,8 +833,8 @@ MainViewController *singleton;
 
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -1220,8 +1220,8 @@ MainViewController *singleton;
     _signUpController.leftConstraint.constant = _signUpController.view.frame.size.width;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -2324,8 +2324,8 @@ MainViewController *singleton;
 
     viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [viewController.view layoutIfNeeded];
@@ -2344,8 +2344,8 @@ MainViewController *singleton;
     [view setAlpha:0.0];
     [view.superview layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:1.0];
@@ -2369,8 +2369,8 @@ MainViewController *singleton;
     [view setOpaque:NO];
     [view.superview layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:0.0];
@@ -2398,8 +2398,8 @@ MainViewController *singleton;
     in.leftConstraint.constant = 0;
     singleton.blurViewLeft.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.20
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
@@ -2446,8 +2446,8 @@ MainViewController *singleton;
     if (animated)
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
@@ -2475,8 +2475,8 @@ MainViewController *singleton;
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
     if (withBlur)
         singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [singleton.view layoutIfNeeded];

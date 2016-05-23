@@ -438,8 +438,8 @@ static BOOL bInitialized = false;
     [MainViewController moveSelectedViewController:-self.view.frame.size.width];
     [self.view layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -737,8 +737,8 @@ static BOOL bInitialized = false;
      }
      completion:^(BOOL finished)
      {
-         [UIView animateWithDuration:0.45
-                               delay:0.0
+         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                               delay:[Theme Singleton].animationDelayTimeDefault
                              options:UIViewAnimationOptionCurveEaseInOut
                           animations:^
           {
@@ -790,8 +790,8 @@ static BOOL bInitialized = false;
 {
     if(up)
     {
-        [UIView animateWithDuration:0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
         {
@@ -814,8 +814,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [UIView animateWithDuration:0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -910,8 +910,8 @@ static BOOL bInitialized = false;
 //        [MainViewController setAlphaOfSelectedViewController:0.0];
         self.leftConstraint.constant = 0;
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -938,8 +938,8 @@ static BOOL bInitialized = false;
         [MainViewController moveSelectedViewController:0.0];
         [MainViewController setAlphaOfSelectedViewController:1.0];
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {

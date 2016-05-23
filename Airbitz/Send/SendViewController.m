@@ -713,8 +713,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		if((newUpdateTime - lastUpdateTime) > 0.5)
 		{
             dispatch_async(dispatch_get_main_queue(),^{
-                [UIView animateWithDuration:0.35
-                                      delay:0.0
+                [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                      delay:[Theme Singleton].animationDelayTimeDefault
                                     options:UIViewAnimationOptionCurveEaseInOut
                                  animations:^
                                  {
@@ -1321,8 +1321,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [Util addSubviewControllerWithConstraints:self child:_sendConfirmationViewController];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
