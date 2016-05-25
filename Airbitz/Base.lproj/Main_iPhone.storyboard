@@ -383,7 +383,7 @@
                                         <attributedString key="userComments">
                                             <fragment content="4 buttons at bottom of QR Scan screen">
                                                 <attributes>
-                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -527,15 +527,27 @@
                                                     <constraint firstAttribute="height" constant="21" id="haz-rP-Pf9"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.65098039220000004" green="0.87450980389999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROC-zS-lXG" userLabel="Change btc fee">
+                                                <rect key="frame" x="119" y="12" width="132" height="21"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="ChangeFeeButton:" destination="mXe-0d-x2m" eventType="touchUpInside" id="GYB-Ii-akj"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="UHx-LD-t4M" firstAttribute="leading" secondItem="D9Y-q9-3fh" secondAttribute="trailing" constant="3" id="1Q5-me-okx"/>
+                                            <constraint firstItem="Fic-d9-oDx" firstAttribute="top" secondItem="ROC-zS-lXG" secondAttribute="top" id="2Is-ry-9lJ"/>
                                             <constraint firstItem="D9Y-q9-3fh" firstAttribute="leading" secondItem="G2v-QN-NpV" secondAttribute="leading" constant="5" id="4uD-HS-erG"/>
+                                            <constraint firstItem="Fic-d9-oDx" firstAttribute="trailing" secondItem="ROC-zS-lXG" secondAttribute="trailing" id="B53-wf-Vcz"/>
                                             <constraint firstAttribute="centerY" secondItem="Fic-d9-oDx" secondAttribute="centerY" id="CKq-GX-4yH"/>
+                                            <constraint firstItem="Fic-d9-oDx" firstAttribute="leading" secondItem="ROC-zS-lXG" secondAttribute="leading" id="CpE-Vx-iwo"/>
                                             <constraint firstAttribute="trailing" secondItem="UHx-LD-t4M" secondAttribute="trailing" id="IBE-JG-7wR"/>
                                             <constraint firstAttribute="height" constant="45" id="QFc-cf-pCO"/>
                                             <constraint firstAttribute="bottom" secondItem="UHx-LD-t4M" secondAttribute="bottom" constant="5" id="QnD-bT-15X"/>
@@ -543,6 +555,7 @@
                                             <constraint firstAttribute="trailing" secondItem="Fic-d9-oDx" secondAttribute="trailing" constant="9" id="Vwj-YR-Uwj"/>
                                             <constraint firstItem="UHx-LD-t4M" firstAttribute="top" secondItem="G2v-QN-NpV" secondAttribute="top" constant="4" id="YhA-3K-8sS"/>
                                             <constraint firstAttribute="centerY" secondItem="UHx-LD-t4M" secondAttribute="centerY" id="atz-vD-3MX"/>
+                                            <constraint firstItem="Fic-d9-oDx" firstAttribute="bottom" secondItem="ROC-zS-lXG" secondAttribute="bottom" id="igx-Sl-x79"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdu-nu-njT" userLabel="View - USD amount">
@@ -664,7 +677,7 @@
                                         <attributedString key="userComments">
                                             <fragment content="Max button text">
                                                 <attributes>
-                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -950,7 +963,7 @@
                                         <attributedString key="userComments">
                                             <fragment content="buttons at bottom of qr code screen">
                                                 <attributes>
-                                                    <font key="NSFont" metaFont="smallSystem"/>
+                                                    <font key="NSFont" metaFont="controlContent" size="11"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>

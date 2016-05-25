@@ -366,6 +366,12 @@
 #define nameSettingsHeader                          NSLocalizedString(@"NAME", @"section header in settings table")
 #define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
+
+#define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
+#define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
+#define change_mining_fee_low                       NSLocalizedString(@"Low Fee",nil)
+#define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
+#define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
 //#define
 //#define
 //#define
