@@ -7,6 +7,7 @@
 //
 
 #import "ConfirmationSliderView.h"
+#import "Theme.h"
 
 #define CONFIRMATION_THRESHOLD	0.25	/* how far from the left the slider has to move before it's a confirmation */
 
@@ -57,7 +58,7 @@
 
 -(void)animateToOriginalPositionWithDelay:(NSTimeInterval)delay
 {
-	[UIView animateWithDuration:0.1
+	[UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
 						  delay:delay
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
@@ -126,8 +127,8 @@
 	else
 	{
 		//continue sliding to the left
-		[UIView animateWithDuration:0.1
-							  delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
+							  delay:[Theme Singleton].animationDelayTimeDefault
 							options:UIViewAnimationOptionCurveEaseInOut
 						 animations:^
 		 {

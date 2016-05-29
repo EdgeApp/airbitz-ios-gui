@@ -641,7 +641,7 @@ MainViewController *singleton;
     {
         [singleton.backgroundView setAlpha:bvStart];
         [singleton.backgroundViewBlue setAlpha:bvbStart];
-        [UIView animateWithDuration:0.5
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeVerySlow
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^

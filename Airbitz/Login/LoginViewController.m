@@ -276,7 +276,7 @@ static BOOL bInitialized = false;
         [self.view.superview layoutIfNeeded];
         self.usernameHeight.constant = _originalUsernameHeight;
         self.passwordHeight.constant = _originalPasswordHeight;
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
@@ -722,7 +722,7 @@ static BOOL bInitialized = false;
     {
         return;
     }
-    [UIView animateWithDuration:0.35
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
@@ -737,7 +737,7 @@ static BOOL bInitialized = false;
      }
      completion:^(BOOL finished)
      {
-         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
                                delay:[Theme Singleton].animationDelayTimeDefault
                              options:UIViewAnimationOptionCurveEaseInOut
                           animations:^
@@ -790,7 +790,7 @@ static BOOL bInitialized = false;
 {
     if(up)
     {
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
@@ -814,7 +814,7 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
@@ -910,7 +910,7 @@ static BOOL bInitialized = false;
 //        [MainViewController setAlphaOfSelectedViewController:0.0];
         self.leftConstraint.constant = 0;
 
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
@@ -938,7 +938,7 @@ static BOOL bInitialized = false;
         [MainViewController moveSelectedViewController:0.0];
         [MainViewController setAlphaOfSelectedViewController:1.0];
 
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
