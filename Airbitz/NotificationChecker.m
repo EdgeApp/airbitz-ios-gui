@@ -126,8 +126,13 @@ static NotificationChecker *singleton = nil;
 {
     ABCLog(2,@"ENTER getFirstUnseenNotification\n");
 
-    NSArray *arrays = @[[LocalSettings controller].notifications,
-                        [LocalSettings controller].otpNotifications];
+    NSMutableArray *arrays = [[NSMutableArray alloc] init];
+    
+    if ([LocalSettings controller].notifications)
+        [arrays addObject:[LocalSettings controller].notifications];
+    if ([LocalSettings controller].otpNotifications)
+        [arrays addObject:[LocalSettings controller].otpNotifications];
+    
     for (NSMutableArray *array in arrays) {
         int i = 0;
         for (NSDictionary *notif in array) {
