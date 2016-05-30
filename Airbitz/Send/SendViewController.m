@@ -1346,6 +1346,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
         if (ABCImportHBitsURI == dataModel)
         {
+            [MainViewController fadingAlertDismiss];
             [self showHbitsResults:address amount:amount];
         }
         else if (0 < amount)
