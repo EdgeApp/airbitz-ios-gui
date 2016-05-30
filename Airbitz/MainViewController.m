@@ -1383,14 +1383,17 @@ MainViewController *singleton;
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
     
-    if (abcAccount.arrayWallets && [wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
+    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
     {
-        if (_bShowingWalletsLoadingAlert)
+        if ([wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
         {
-            [FadingAlertView dismiss:FadingAlertDismissFast];
+            if (_bShowingWalletsLoadingAlert)
+            {
+                [FadingAlertView dismiss:FadingAlertDismissFast];
+            }
+            _bShowingWalletsLoadingAlert = NO;
+            _bDoneShowingWalletsLoadingAlert = YES;
         }
-        _bShowingWalletsLoadingAlert = NO;
-        _bDoneShowingWalletsLoadingAlert = YES;
     }
 }
 
