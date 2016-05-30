@@ -819,7 +819,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (satoshi == 0)
         {
-            if ([self.BTC_TextField.text hasPrefix:@"."] == NO)
+            if ([self.BTC_TextField.text hasPrefix:[ABCDenomination getDecimalSymbol]] == NO)
             {
                 self.USD_TextField.text = @"";
                 self.BTC_TextField.text = @"";
@@ -841,7 +841,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		double currency = [self.USD_TextField.text doubleValue];
         if (currency == 0.0)
         {
-            if ([self.USD_TextField.text hasPrefix:@"."] == NO)
+            if ([self.USD_TextField.text hasPrefix:[ABCDenomination getDecimalSymbol]] == NO)
             {
                 self.USD_TextField.text = @"";
                 self.BTC_TextField.text = @"";

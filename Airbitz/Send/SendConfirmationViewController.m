@@ -773,7 +773,10 @@
 
         currencyFees = [abcAccount.exchangeCache satoshiToCurrency:txFees currencyCode:_currency.code error:nil];
         [fiatFeeString appendString:@"+ "];
-        [fiatFeeString appendString:[NSString stringWithFormat:@"%0.2f", currencyFees]];
+        NSNumber *number = [NSNumber numberWithDouble:currencyFees];
+        NSString *string = [_numberFormatter stringFromNumber:number];
+        if (string)
+            [fiatFeeString appendString:string];
         [fiatFeeString appendString:@" "];
         [fiatFeeString appendString:_currency.code];
         
