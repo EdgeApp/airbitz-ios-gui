@@ -82,6 +82,7 @@ const int NumPromoRows              = 5;
     BOOL                                _segmentedControlUSD;
     int64_t                             _totalSatoshi;
     UIImage                             *_blankImage;
+    NSDateFormatter                     *_dateFormatter;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
@@ -166,6 +167,10 @@ const int NumPromoRows              = 5;
 
     [self.balanceViewPlaceholder addSubview:_balanceView];
     [_balanceView showBalance:NO];
+    
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
@@ -1142,8 +1147,10 @@ const int NumPromoRows              = 5;
         cell.addressLabel.textAlignment = NSTextAlignmentLeft;
         cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
         
+        NSString *formattedDateString = [_dateFormatter stringFromDate:transaction.date];
+        
         // date
-        cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
+        cell.dateLabel.text = formattedDateString;
         
         // address
         if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
