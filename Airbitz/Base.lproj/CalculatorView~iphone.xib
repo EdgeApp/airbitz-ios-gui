@@ -32,6 +32,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalculatorView">
             <connections>
                 <outlet property="buttonDone" destination="JE3-3X-s8v" id="LZa-XP-oHh"/>
+                <outlet property="decimalButton" destination="WkG-ho-3qR" id="Uek-ji-bWJ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -638,7 +639,7 @@
                     <rect key="frame" x="128" y="173" width="64" height="57"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
-                    <state key="normal" title=".">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>

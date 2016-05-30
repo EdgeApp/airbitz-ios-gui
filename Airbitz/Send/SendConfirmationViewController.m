@@ -46,6 +46,7 @@
     ABCCurrency                         *_currency;
     ABCSpend                            *_spend;
     uint64_t                            _amountSatoshi;
+    NSNumberFormatter                   *_numberFormatter;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
@@ -136,6 +137,10 @@
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
     _feeLevel = ABCSpendFeeLevelStandard;
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [_numberFormatter setMinimumFractionDigits:0];
+    [_numberFormatter setMaximumFractionDigits:2];
 
     // Should this be threaded?
     _totalSentToday = [abcAccount.currentWallet getTotalSentToday];
@@ -659,13 +664,13 @@
     {
         _amountSatoshi = [abcAccount.settings.denomination btcStringToSatoshi:self.amountBTCTextField.text];
         fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_amountSatoshi currencyCode:_currency.code error:nil];
-        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", fCurrency];
+        
+        NSNumber *num = [NSNumber numberWithDouble:fCurrency];
+        self.amountFiatTextField.text = [_numberFormatter stringFromNumber:num];
     }
     else if ((_selectedTextField == self.amountFiatTextField) && !self.bAmountImmutable && bAllowBTCUpdate)
     {
-        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-        [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSNumber *num = [nf numberFromString:self.amountFiatTextField.text];
+        NSNumber *num = [_numberFormatter numberFromString:self.amountFiatTextField.text];
         fCurrency = [num doubleValue];
 
         _amountSatoshi = [abcAccount.exchangeCache currencyToSatoshi:fCurrency currencyCode:_currency.code error:nil];

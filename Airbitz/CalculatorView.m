@@ -27,13 +27,29 @@
 	float accumulator;
 	int operation;
 	BOOL lastKeyWasOperation;
+    NSString *_decimalSymbol;
+    NSNumberFormatter *formatter;
+    NSLocale *locale;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonDone;
+@property (weak, nonatomic) IBOutlet UIButton *decimalButton;
 
 @end
 
 @implementation CalculatorView
+
+- (void) initAll;
+{
+    formatter = [[NSNumberFormatter alloc] init];
+    locale = [NSLocale autoupdatingCurrentLocale];
+    [formatter setLocale:locale];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
+    _decimalSymbol = [formatter decimalSeparator];
+    
+    [self.decimalButton setTitle:_decimalSymbol forState:UIControlStateNormal];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,6 +60,7 @@
         _calcMode = CALC_MODE_COIN;
 //        self.backgroundColor = [UIColor colorWithWhite:0.8
 //                                                 alpha:0.4];
+        [self initAll];
     }
     return self;
 }
@@ -56,6 +73,7 @@
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"CalculatorView~iphone" owner:self options:nil] objectAtIndex:0];
         _calcMode = CALC_MODE_COIN;
         [Util addSubviewWithConstraints:self child:view];
+        [self initAll];
         
     }
     return self;
@@ -83,7 +101,7 @@
 		if(sender.tag == 0)
 		{
 			//allow 0 only if current value is non-zero OR there's a decimal point
-			if(([self.textField.text intValue] != 0) || ([self.textField.text rangeOfString:@"."].location != NSNotFound))
+			if(([self.textField.text intValue] != 0) || ([self.textField.text rangeOfString:_decimalSymbol].location != NSNotFound))
 			{
 				self.textField.text = [self.textField.text stringByAppendingFormat:@"%li", (long)sender.tag];
 			}
@@ -101,9 +119,9 @@
 		}
 		else
 		{
-			if ([self.textField.text rangeOfString:@"."].location == NSNotFound)
+			if ([self.textField.text rangeOfString:_decimalSymbol].location == NSNotFound)
 			{
-				self.textField.text = [self.textField.text stringByAppendingString:@"."];
+				self.textField.text = [self.textField.text stringByAppendingString:_decimalSymbol];
 			}
 		}
 	}
@@ -153,11 +171,11 @@
 			//[self performLastOperation];
 			if(accumulator)
 			{
-                self.textField.text = [self formattedAcc:(accumulator * ([self.textField.text floatValue] / 100.0))];
+                self.textField.text = [self formattedAcc:(accumulator * ([self textFieldFloatValue] / 100.0))];
 			}
 			else
 			{
-                self.textField.text = [self formattedAcc:[self.textField.text floatValue] / 100.0];
+                self.textField.text = [self formattedAcc:[self textFieldFloatValue] / 100.0];
 			}
 			lastKeyWasOperation = YES;
 			break;
@@ -187,14 +205,16 @@
 
 - (void)loadAccumulator
 {
-	accumulator = [self.textField.text floatValue];
+	accumulator = [self textFieldFloatValue];
 }
 
 - (NSString *)formattedAcc: (float) acc
 {
     if (_calcMode == CALC_MODE_COIN)
     {
-        int64_t satoshi = [abcAccount.settings.denomination btcStringToSatoshi:[NSString stringWithFormat:@"%f", acc]];
+        NSNumber *num = [NSNumber numberWithDouble:acc];
+        NSString *string = [formatter stringFromNumber:num];
+        int64_t satoshi = [abcAccount.settings.denomination btcStringToSatoshi:string];
         if (satoshi == 0 || acc == 0.0)
             return @"";
         else
@@ -221,7 +241,7 @@
 			break;
 		case OPERATION_DIVIDE:
 			//ABCLog(2,@"Performing Divide");
-			accumulator /= [self.textField.text floatValue];
+			accumulator /= [self textFieldFloatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_EQUAL:
@@ -229,24 +249,30 @@
 			break;
 		case OPERATION_MINUS:
 			//ABCLog(2,@"Performing Minus");
-			accumulator -= [self.textField.text floatValue];
+			accumulator -= [self textFieldFloatValue];
             if (accumulator < 0) accumulator = 0;
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_MULTIPLY:
 			//ABCLog(2,@"Performing Multiply");
-			accumulator *= [self.textField.text floatValue];
+			accumulator *= [self textFieldFloatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_PLUS:
 			//ABCLog(2,@"Performing Plus");
-			accumulator += [self.textField.text floatValue];
+			accumulator += [self textFieldFloatValue];
             self.textField.text = [self formattedAcc:accumulator];
 			break;
 		case OPERATION_PERCENT:
-			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self.textField.text floatValue] / 100.0];
+			//self.textField.text = [NSString stringWithFormat:@"%.2f", [self textFieldFloatValue] / 100.0];
 			break;
 	}
+}
+
+- (double)textFieldFloatValue;
+{
+    NSNumber *num = [formatter numberFromString:self.textField.text];
+    return [num doubleValue];
 }
 
 @end
