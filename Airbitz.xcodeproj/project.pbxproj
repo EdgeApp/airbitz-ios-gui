@@ -187,7 +187,6 @@
 		DA9EE4191BC61F920063DA07 /* PopupPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEED1BC61F910063DA07 /* PopupPickerView2.m */; };
 		DA9EE41A1BC61F920063DA07 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */; };
 		DA9EE41B1BC61F920063DA07 /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */; };
-		DA9EE41C1BC61F920063DA07 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEF11BC61F910063DA07 /* PopupWheelPickerView.xib */; };
 		DA9EE41D1BC61F920063DA07 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF41BC61F910063DA07 /* AddressRequestController.m */; };
 		DA9EE41F1BC61F920063DA07 /* RecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF81BC61F910063DA07 /* RecipientViewController.m */; };
 		DA9EE4201BC61F920063DA07 /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEFA1BC61F910063DA07 /* RequestViewController.m */; };
@@ -598,7 +597,6 @@
 		DA9EF4081BC7285D0063DA07 /* icon_settings_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9C1BC61F910063DA07 /* icon_settings_dark@2x.png */; };
 		DA9EF40B1BC7285D0063DA07 /* bd_sliderbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF101BC61F910063DA07 /* bd_sliderbubble@2x.png */; };
 		DA9EF40F1BC7285D0063DA07 /* icon_category_restaurants@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF721BC61F910063DA07 /* icon_category_restaurants@3x.png */; };
-		DA9EF4101BC7285D0063DA07 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEF11BC61F910063DA07 /* PopupWheelPickerView.xib */; };
 		DA9EF4111BC7285D0063DA07 /* 1-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF001BC61F910063DA07 /* 1-bar@2x.png */; };
 		DA9EF4121BC7285D0063DA07 /* icon_bitcoin_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF611BC61F910063DA07 /* icon_bitcoin_light@2x.png */; };
 		DA9EF4131BC7285D0063DA07 /* btn_export@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF351BC61F910063DA07 /* btn_export@3x.png */; };
@@ -948,7 +946,6 @@
 		DA9EF5CF1BC729FA0063DA07 /* icon_settings_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9C1BC61F910063DA07 /* icon_settings_dark@2x.png */; };
 		DA9EF5D21BC729FA0063DA07 /* bd_sliderbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF101BC61F910063DA07 /* bd_sliderbubble@2x.png */; };
 		DA9EF5D61BC729FA0063DA07 /* icon_category_restaurants@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF721BC61F910063DA07 /* icon_category_restaurants@3x.png */; };
-		DA9EF5D71BC729FA0063DA07 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEF11BC61F910063DA07 /* PopupWheelPickerView.xib */; };
 		DA9EF5D81BC729FA0063DA07 /* 1-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF001BC61F910063DA07 /* 1-bar@2x.png */; };
 		DA9EF5D91BC729FA0063DA07 /* icon_bitcoin_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF611BC61F910063DA07 /* icon_bitcoin_light@2x.png */; };
 		DA9EF5DA1BC729FA0063DA07 /* btn_export@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF351BC61F910063DA07 /* btn_export@3x.png */; };
@@ -1214,6 +1211,9 @@
 		DABFC97E1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */; };
 		DABFC97F1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */; };
 		DABFC98C1CFBC89400104AC1 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DABFC98E1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
+		DABFC98F1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
+		DABFC9901CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
 		DAC7D2D91CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
 		DAC7D2DA1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
 		DAC7D2DB1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
@@ -1617,7 +1617,6 @@
 		DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView2.xib; sourceTree = "<group>"; };
 		DA9EDEEF1BC61F910063DA07 /* PopupWheelPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupWheelPickerView.h; sourceTree = "<group>"; };
 		DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupWheelPickerView.m; sourceTree = "<group>"; };
-		DA9EDEF11BC61F910063DA07 /* PopupWheelPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupWheelPickerView.xib; sourceTree = "<group>"; };
 		DA9EDEF31BC61F910063DA07 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
 		DA9EDEF41BC61F910063DA07 /* AddressRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRequestController.m; sourceTree = "<group>"; };
 		DA9EDEF71BC61F910063DA07 /* RecipientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipientViewController.h; sourceTree = "<group>"; };
@@ -2058,6 +2057,12 @@
 		DABFC9871CFBC3AA00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
 		DABFC9891CFBC3AB00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
 		DABFC98B1CFBC3AD00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/AccountCreate.strings; sourceTree = "<group>"; };
+		DABFC9911CFBCA2E00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PopupWheelPickerView.xib; sourceTree = "<group>"; };
+		DABFC9941CFBCA3000104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
+		DABFC9961CFBCA3100104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
+		DABFC9981CFBCA3200104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
+		DABFC99A1CFBCA3400104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
+		DABFC99C1CFBCA3500104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
 		DAC7D2D81CCCBE6000608219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DAC7D2E01CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template.html"; sourceTree = "<group>"; };
 		DAC7D2E11CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template_simple.html"; sourceTree = "<group>"; };
@@ -2584,7 +2589,7 @@
 				DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */,
 				DA9EDEEF1BC61F910063DA07 /* PopupWheelPickerView.h */,
 				DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */,
-				DA9EDEF11BC61F910063DA07 /* PopupWheelPickerView.xib */,
+				DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */,
 			);
 			path = PopupPickerView;
 			sourceTree = "<group>";
@@ -3724,7 +3729,7 @@
 				DA9EF4081BC7285D0063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EF40B1BC7285D0063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DA9EF40F1BC7285D0063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DA9EF4101BC7285D0063DA07 /* PopupWheelPickerView.xib in Resources */,
+				DABFC98F1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF4111BC7285D0063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EF4121BC7285D0063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EF4131BC7285D0063DA07 /* btn_export@3x.png in Resources */,
@@ -3991,7 +3996,7 @@
 				DA9EF5D21BC729FA0063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DABFC8D91CFBBE4C00104AC1 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EF5D61BC729FA0063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DA9EF5D71BC729FA0063DA07 /* PopupWheelPickerView.xib in Resources */,
+				DABFC9901CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF5D81BC729FA0063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EF5D91BC729FA0063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EF5DA1BC729FA0063DA07 /* btn_export@3x.png in Resources */,
@@ -4260,7 +4265,7 @@
 				DA9EE4BF1BC61F920063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EE4331BC61F920063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DA9EE4951BC61F920063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DA9EE41C1BC61F920063DA07 /* PopupWheelPickerView.xib in Resources */,
+				DABFC98E1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EE4231BC61F920063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EE4841BC61F920063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EE4581BC61F920063DA07 /* btn_export@3x.png in Resources */,
@@ -5459,6 +5464,19 @@
 				DABFC98B1CFBC3AD00104AC1 /* hi */,
 			);
 			name = AccountCreate.storyboard;
+			sourceTree = "<group>";
+		};
+		DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DABFC9911CFBCA2E00104AC1 /* Base */,
+				DABFC9941CFBCA3000104AC1 /* pt-BR */,
+				DABFC9961CFBCA3100104AC1 /* hi-IN */,
+				DABFC9981CFBCA3200104AC1 /* es-MX */,
+				DABFC99A1CFBCA3400104AC1 /* zh-Hans */,
+				DABFC99C1CFBCA3500104AC1 /* hi */,
+			);
+			name = PopupWheelPickerView.xib;
 			sourceTree = "<group>";
 		};
 		DAC7D2D71CCCBE6000608219 /* email_template_simple.html */ = {
