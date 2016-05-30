@@ -663,7 +663,11 @@
     }
     else if ((_selectedTextField == self.amountFiatTextField) && !self.bAmountImmutable && bAllowBTCUpdate)
     {
-        fCurrency = [self.amountFiatTextField.text doubleValue];
+        NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber *num = [nf numberFromString:self.amountFiatTextField.text];
+        fCurrency = [num doubleValue];
+
         _amountSatoshi = [abcAccount.exchangeCache currencyToSatoshi:fCurrency currencyCode:_currency.code error:nil];
         self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_amountSatoshi
                                                                                  withSymbol:false
