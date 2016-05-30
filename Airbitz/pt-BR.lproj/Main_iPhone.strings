@@ -170,7 +170,7 @@
 "Vcb-0y-fDf.text" = "Um aplicativo solicitou um endereço bitcoin para enviar dinheiro. Por favor, escolha uma carteira acima para receber os fundos:";
 
 /* Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY"; */
-"Vuw-Bw-dQY.normalTitle" = "Wallet Private Seed (advanced)";
+"Vuw-Bw-dQY.normalTitle" = "Chave Mestra Privada da Carteira (avançado)";
 
 /* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
 "WB0-Ox-RAw.text" = "PIN de 4 Dígitos";
