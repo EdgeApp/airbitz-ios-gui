@@ -113,6 +113,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -409,6 +410,16 @@
                                     <constraint firstAttribute="height" id="L7Y-Fa-3uo"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[do not translate]" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rls-16-YZg">
+                                <rect key="frame" x="10" y="90" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="5H4-wO-AYa"/>
+                                    <constraint firstAttribute="height" constant="300" id="RFI-hr-Hiq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -418,6 +429,7 @@
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="CRv-kb-3AU"/>
                             <constraint firstAttribute="trailing" secondItem="3Vs-Vv-LQH" secondAttribute="trailing" id="D0R-Eg-ivI"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="top" secondItem="jrj-OZ-WpR" secondAttribute="top" id="FE7-MO-dAU"/>
+                            <constraint firstItem="rls-16-YZg" firstAttribute="centerX" secondItem="of2-42-Lef" secondAttribute="centerX" id="GQi-6v-rQp"/>
                             <constraint firstAttribute="trailing" secondItem="IsP-NR-ytZ" secondAttribute="trailing" id="H3u-ks-fT0"/>
                             <constraint firstItem="IsP-NR-ytZ" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" id="JQC-lX-ebL"/>
                             <constraint firstItem="Wik-w7-rsL" firstAttribute="leading" secondItem="jrj-OZ-WpR" secondAttribute="leading" id="LEC-ps-Ftg"/>
@@ -425,6 +437,7 @@
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="top" secondItem="of2-42-Lef" secondAttribute="top" constant="64" id="OY9-2b-zt3"/>
                             <constraint firstItem="V8c-6o-ibr" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="RRh-Ip-q4X"/>
                             <constraint firstItem="g9e-kM-2rC" firstAttribute="leading" secondItem="of2-42-Lef" secondAttribute="leading" id="Rlk-dD-FSj"/>
+                            <constraint firstItem="rls-16-YZg" firstAttribute="centerY" secondItem="of2-42-Lef" secondAttribute="centerY" id="Rzb-mS-YaH"/>
                             <constraint firstItem="l7X-cf-7C6" firstAttribute="top" secondItem="3Vs-Vv-LQH" secondAttribute="bottom" id="UVN-hy-3j9"/>
                             <constraint firstAttribute="trailing" secondItem="Wik-w7-rsL" secondAttribute="trailing" id="WB1-u2-Kp5"/>
                             <constraint firstItem="cYL-n1-ybU" firstAttribute="trailing" secondItem="p3w-fU-j91" secondAttribute="trailing" id="ZGq-0v-6Xy"/>
@@ -448,6 +461,7 @@
                         <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
                         <outlet property="buttonSelector" destination="g9e-kM-2rC" id="30G-6H-VYq"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
+                        <outlet property="scanningErrorLabel" destination="rls-16-YZg" id="zRc-N9-B0l"/>
                         <outlet property="segmentedControl" destination="AOi-Wp-bVq" id="Ryr-z6-A2U"/>
                         <outlet property="tableView" destination="9C3-ej-2l9" id="sGK-l5-2nZ"/>
                         <outlet property="textUnderQRScanner" destination="3Vs-Vv-LQH" id="LjX-oc-wTP"/>

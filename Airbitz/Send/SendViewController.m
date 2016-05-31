@@ -130,6 +130,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self.buttonSelector disableButton];
 
     self.textUnderQRScanner.hidden = YES;
+    [self.scanningErrorLabel setHidden:YES];
 
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
@@ -363,21 +364,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)startQRReader
 {
     // on iOS 8, we must request permission to access the camera
-    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-            if (granted) {
-                // Permission has been granted. Use dispatch_async for any UI updating
-                // code because this block may be executed in a thread.
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self attemptToStartQRReader];
-                });
-            } else {
-                [self attemptToStartQRReader];
-            }
-        }];
-    } else {
-        [self attemptToStartQRReader];
-    }
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if(authStatus == AVAuthorizationStatusAuthorized)
+        {
+            [self.scanningErrorLabel setHidden:YES];
+        }
+        else
+        {
+            self.scanningErrorLabel.text = cameraUnavailablePleaseEnable;
+            [self.scanningErrorLabel setHidden:NO];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self attemptToStartQRReader];
+        });
+    }];
 }
 
 -(void)attemptToStartQRReader
@@ -390,17 +391,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	_readerView = [ZBarReaderView new];
     _readerView.torchMode = AVCaptureTorchModeOff;
     [self rotateZbar:[[UIApplication sharedApplication] statusBarOrientation]];
-
-    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if(authStatus == AVAuthorizationStatusAuthorized)
-    {
-        [self.scanningErrorLabel setHidden:YES];
-    }
-    else
-    {
-        self.scanningErrorLabel.text = cameraUnavailablePleaseEnable;
-        [self.scanningErrorLabel setHidden:NO];
-    }
 
 	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
