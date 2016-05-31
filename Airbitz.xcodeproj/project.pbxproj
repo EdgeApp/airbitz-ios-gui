@@ -428,7 +428,6 @@
 		DA9EE55E1BC61F930063DA07 /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0951BC61F920063DA07 /* WalletHeaderView.m */; };
 		DA9EE55F1BC61F930063DA07 /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */; };
 		DA9EE5601BC61F930063DA07 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0981BC61F920063DA07 /* WalletMakerView.m */; };
-		DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE0B41BC61F920063DA07 /* libzbar.a */; };
 		DA9EE5C01BC62F430063DA07 /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5BF1BC62F430063DA07 /* AirbitzViewController.m */; };
 		DA9EEC451BC6332E0063DA07 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5C31BC6332C0063DA07 /* DriveLib.a */; };
 		DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5C51BC6332C0063DA07 /* GDrive.m */; };
@@ -590,7 +589,6 @@
 		DA9EF3F81BC7285D0063DA07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7341BC60AA90063DA07 /* UIKit.framework */; };
 		DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */; };
 		DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72E1BC60AA90063DA07 /* Foundation.framework */; };
-		DA9EF4001BC7285D0063DA07 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE0B41BC61F920063DA07 /* libzbar.a */; };
 		DA9EF4031BC7285D0063DA07 /* icon_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF831BC61F910063DA07 /* icon_logout@2x.png */; };
 		DA9EF4041BC7285D0063DA07 /* btn_locateMe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF3B1BC61F910063DA07 /* btn_locateMe@2x.png */; };
 		DA9EF4051BC7285D0063DA07 /* icon_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF981BC61F910063DA07 /* icon_settings@2x.png */; };
@@ -939,7 +937,6 @@
 		DA9EF5BF1BC729FA0063DA07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7341BC60AA90063DA07 /* UIKit.framework */; };
 		DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */; };
 		DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED72E1BC60AA90063DA07 /* Foundation.framework */; };
-		DA9EF5C71BC729FA0063DA07 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE0B41BC61F920063DA07 /* libzbar.a */; };
 		DA9EF5CA1BC729FA0063DA07 /* icon_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF831BC61F910063DA07 /* icon_logout@2x.png */; };
 		DA9EF5CB1BC729FA0063DA07 /* btn_locateMe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF3B1BC61F910063DA07 /* btn_locateMe@2x.png */; };
 		DA9EF5CC1BC729FA0063DA07 /* icon_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF981BC61F910063DA07 /* icon_settings@2x.png */; };
@@ -1916,27 +1913,6 @@
 		DA9EE0971BC61F920063DA07 /* WalletMakerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMakerView.h; sourceTree = "<group>"; };
 		DA9EE0981BC61F920063DA07 /* WalletMakerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMakerView.m; sourceTree = "<group>"; };
 		DA9EE09A1BC61F920063DA07 /* WalletsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
-		DA9EE0A01BC61F920063DA07 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
-		DA9EE0A11BC61F920063DA07 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
-		DA9EE0A21BC61F920063DA07 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		DA9EE0A31BC61F920063DA07 /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScanner.h; sourceTree = "<group>"; };
-		DA9EE0A41BC61F920063DA07 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
-		DA9EE0A51BC61F920063DA07 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
-		DA9EE0A61BC61F920063DA07 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
-		DA9EE0A71BC61F920063DA07 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
-		DA9EE0A81BC61F920063DA07 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		DA9EE0A91BC61F920063DA07 /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
-		DA9EE0AA1BC61F920063DA07 /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
-		DA9EE0AB1BC61F920063DA07 /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
-		DA9EE0AC1BC61F920063DA07 /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
-		DA9EE0AD1BC61F920063DA07 /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
-		DA9EE0AE1BC61F920063DA07 /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
-		DA9EE0AF1BC61F920063DA07 /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
-		DA9EE0B01BC61F920063DA07 /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
-		DA9EE0B11BC61F920063DA07 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
-		DA9EE0B21BC61F920063DA07 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
-		DA9EE0B31BC61F920063DA07 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
-		DA9EE0B41BC61F920063DA07 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		DA9EE5BE1BC62F430063DA07 /* AirbitzViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirbitzViewController.h; sourceTree = "<group>"; };
 		DA9EE5BF1BC62F430063DA07 /* AirbitzViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirbitzViewController.m; sourceTree = "<group>"; };
 		DA9EE5C11BC62F6B0063DA07 /* AppGroupConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGroupConstants.h; sourceTree = "<group>"; };
@@ -2226,7 +2202,6 @@
 				DA9EF3F81BC7285D0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */,
-				DA9EF4001BC7285D0063DA07 /* libzbar.a in Frameworks */,
 				313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2257,7 +2232,6 @@
 				DA9EF5BF1BC729FA0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
-				DA9EF5C71BC729FA0063DA07 /* libzbar.a in Frameworks */,
 				662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2288,7 +2262,6 @@
 				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
 				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
-				DA9EE5631BC61F930063DA07 /* libzbar.a in Frameworks */,
 				622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3113,58 +3086,6 @@
 			path = Wallets;
 			sourceTree = "<group>";
 		};
-		DA9EE09C1BC61F920063DA07 /* ZBarSDK */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EE09D1BC61F920063DA07 /* Headers */,
-				DA9EE0B41BC61F920063DA07 /* libzbar.a */,
-			);
-			path = ZBarSDK;
-			sourceTree = "<group>";
-		};
-		DA9EE09D1BC61F920063DA07 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EE09E1BC61F920063DA07 /* ZBarSDK */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
-		DA9EE09E1BC61F920063DA07 /* ZBarSDK */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EE09F1BC61F920063DA07 /* zbar */,
-				DA9EE0A91BC61F920063DA07 /* zbar.h */,
-				DA9EE0AA1BC61F920063DA07 /* ZBarCameraSimulator.h */,
-				DA9EE0AB1BC61F920063DA07 /* ZBarCaptureReader.h */,
-				DA9EE0AC1BC61F920063DA07 /* ZBarHelpController.h */,
-				DA9EE0AD1BC61F920063DA07 /* ZBarImage.h */,
-				DA9EE0AE1BC61F920063DA07 /* ZBarImageScanner.h */,
-				DA9EE0AF1BC61F920063DA07 /* ZBarReaderController.h */,
-				DA9EE0B01BC61F920063DA07 /* ZBarReaderView.h */,
-				DA9EE0B11BC61F920063DA07 /* ZBarReaderViewController.h */,
-				DA9EE0B21BC61F920063DA07 /* ZBarSDK.h */,
-				DA9EE0B31BC61F920063DA07 /* ZBarSymbol.h */,
-			);
-			path = ZBarSDK;
-			sourceTree = "<group>";
-		};
-		DA9EE09F1BC61F920063DA07 /* zbar */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EE0A01BC61F920063DA07 /* Decoder.h */,
-				DA9EE0A11BC61F920063DA07 /* Exception.h */,
-				DA9EE0A21BC61F920063DA07 /* Image.h */,
-				DA9EE0A31BC61F920063DA07 /* ImageScanner.h */,
-				DA9EE0A41BC61F920063DA07 /* Processor.h */,
-				DA9EE0A51BC61F920063DA07 /* Scanner.h */,
-				DA9EE0A61BC61F920063DA07 /* Symbol.h */,
-				DA9EE0A71BC61F920063DA07 /* Video.h */,
-				DA9EE0A81BC61F920063DA07 /* Window.h */,
-			);
-			path = zbar;
-			sourceTree = "<group>";
-		};
 		DA9EE5C21BC6332C0063DA07 /* Google Drive */ = {
 			isa = PBXGroup;
 			children = (
@@ -3251,7 +3172,6 @@
 				DA9EE03D1BC61F920063DA07 /* TouchJSON */,
 				DA9EE04D1BC61F920063DA07 /* UIPhotoGallery */,
 				DA9EE07D1BC61F920063DA07 /* Wallets */,
-				DA9EE09C1BC61F920063DA07 /* ZBarSDK */,
 				DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */,
 				DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */,
 				DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */,

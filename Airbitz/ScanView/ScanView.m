@@ -111,10 +111,14 @@
 
     [_readerView willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.35];
 
-    if ([_readerView isDeviceAvailable]) {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(authStatus == AVAuthorizationStatusAuthorized)
+    {
         [_scanningErrorLabel setHidden:YES];
         [_flashSelector setHidden:NO];
-    } else {
+    }
+    else
+    {
         _scanningErrorLabel.text = cameraUnavailablePleaseEnable;
         [_scanningErrorLabel setHidden:NO];
         [_flashSelector setHidden:YES];

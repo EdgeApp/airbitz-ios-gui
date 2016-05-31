@@ -391,7 +391,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _readerView.torchMode = AVCaptureTorchModeOff;
     [self rotateZbar:[[UIApplication sharedApplication] statusBarOrientation]];
 
-    if ([_readerView isDeviceAvailable])
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(authStatus == AVAuthorizationStatusAuthorized)
     {
         [self.scanningErrorLabel setHidden:YES];
     }
