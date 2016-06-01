@@ -1395,6 +1395,7 @@ MainViewController *singleton;
             _bDoneShowingWalletsLoadingAlert = YES;
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
 - (void) abcAccountAccountChanged;
