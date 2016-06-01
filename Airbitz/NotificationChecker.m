@@ -222,6 +222,9 @@ static NotificationChecker *singleton = nil;
 {
     ABCLog(2,@"ENTER checkNotifications\n");
     
+    if (![LocalSettings controller].bDisclaimerViewed)
+        return;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         [self checkOtpResetPending];
         [self checkDirectoryNotifications];
