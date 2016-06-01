@@ -1631,9 +1631,13 @@ const int NumPromoRows              = 5;
             NSAssert(0, @"No wallets in balance section");
             break;
         case WALLET_SECTION_ACTIVE:
+            if (![abcAccount.arrayWallets count])
+                return cell;
             wallet = [abcAccount.arrayWallets objectAtIndex:row];
             break;
         case WALLET_SECTION_ARCHIVED:
+            if (nil == abcAccount.arrayArchivedWallets || ![abcAccount.arrayArchivedWallets count])
+                return cell;
             wallet = [abcAccount.arrayArchivedWallets objectAtIndex:row];
             break;
     }
