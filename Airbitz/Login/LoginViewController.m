@@ -72,6 +72,7 @@ typedef enum eLoginMode
 
 }
 
+@property (weak, nonatomic) IBOutlet UIButton           *fingerprintButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
@@ -221,6 +222,8 @@ static BOOL bInitialized = false;
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
 
+    if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
+        self.fingerprintButton.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -304,7 +307,7 @@ static BOOL bInitialized = false;
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
-    [self autoReloginOrTouchIDIfPossible];
+//    [self autoReloginOrTouchIDIfPossible];
 
 }
 
@@ -458,6 +461,10 @@ static BOOL bInitialized = false;
     [self.PINusernameSelector close];
     [self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
+}
+
+- (IBAction)FingerprintButton:(id)sender {
+    [self autoReloginOrTouchIDIfPossible];
 }
 
 #pragma mark - Misc Methods

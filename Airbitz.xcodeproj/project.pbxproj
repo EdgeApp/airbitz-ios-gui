@@ -46,6 +46,15 @@
 		DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
+		DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
+		DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
+		DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
+		DA4A13F71CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */; };
+		DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */; };
+		DA4A13F91CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */; };
+		DA4A13FA1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F31CFEC8400097EF31 /* fingerprint-wht@3x.png */; };
+		DA4A13FB1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F31CFEC8400097EF31 /* fingerprint-wht@3x.png */; };
+		DA4A13FC1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F31CFEC8400097EF31 /* fingerprint-wht@3x.png */; };
 		DA51EA421CCA162800C7C95F /* BrandStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51EA401CCA162800C7C95F /* BrandStrings.m */; };
 		DA51EA431CCA162800C7C95F /* BrandStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51EA401CCA162800C7C95F /* BrandStrings.m */; };
 		DA51EA481CCA16E500C7C95F /* BrandStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51EA401CCA162800C7C95F /* BrandStrings.m */; };
@@ -1393,6 +1402,9 @@
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
 		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
+		DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht.png"; sourceTree = "<group>"; };
+		DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht@2x.png"; sourceTree = "<group>"; };
+		DA4A13F31CFEC8400097EF31 /* fingerprint-wht@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht@3x.png"; sourceTree = "<group>"; };
 		DA51EA401CCA162800C7C95F /* BrandStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStrings.m; sourceTree = "<group>"; };
 		DA5549901CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		DA5549911CE7A60600CEF104 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template.html"; sourceTree = "<group>"; };
@@ -2663,6 +2675,9 @@
 				DA9102051C4A71EA00603D62 /* eyeball.png */,
 				DA9102061C4A71EA00603D62 /* eyeball@2x.png */,
 				DA9102071C4A71EA00603D62 /* eyeball@3x.png */,
+				DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */,
+				DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */,
+				DA4A13F31CFEC8400097EF31 /* fingerprint-wht@3x.png */,
 				DA9EDF4A1BC61F910063DA07 /* flash-off@2x.png */,
 				DA9EDF4B1BC61F910063DA07 /* flash-on@2x.png */,
 				DA9EDF4C1BC61F910063DA07 /* flash_off@2x.png */,
@@ -3741,6 +3756,7 @@
 				DA9EF46B1BC7285D0063DA07 /* gift_box.png in Resources */,
 				DA9EF46D1BC7285D0063DA07 /* icon_category_coffee_tea.png in Resources */,
 				DA9EF46E1BC7285D0063DA07 /* icon_account_secure@3x.png in Resources */,
+				DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */,
 				DA9EF4701BC7285D0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */,
@@ -3748,6 +3764,7 @@
 				DA9EF4731BC7285D0063DA07 /* ScanView~iphone.xib in Resources */,
 				DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */,
+				DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DA9EF4771BC7285D0063DA07 /* icon_export_email@2x.png in Resources */,
 				DA9EF4781BC7285D0063DA07 /* btn_close.png in Resources */,
 				DA9EF4791BC7285D0063DA07 /* large-digit-input@2x.png in Resources */,
@@ -3820,6 +3837,7 @@
 				DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EF4B91BC7285D0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF4BA1BC7285D0063DA07 /* icon_settings_dark.png in Resources */,
+				DA4A13FB1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
 				DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
 				DA9EF4BB1BC7285D0063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
 				DA9EF4BC1BC7285D0063DA07 /* ButtonSelectorView~iphone.xib in Resources */,
@@ -4007,6 +4025,7 @@
 				DA9EF6321BC729FA0063DA07 /* gift_box.png in Resources */,
 				DA9EF6341BC729FA0063DA07 /* icon_category_coffee_tea.png in Resources */,
 				DA9EF6351BC729FA0063DA07 /* icon_account_secure@3x.png in Resources */,
+				DA4A13F91CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */,
 				DA9EF6371BC729FA0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */,
@@ -4014,6 +4033,7 @@
 				DA9EF63A1BC729FA0063DA07 /* ScanView~iphone.xib in Resources */,
 				DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */,
+				DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DA9EF63E1BC729FA0063DA07 /* icon_export_email@2x.png in Resources */,
 				DA9EF63F1BC729FA0063DA07 /* btn_close.png in Resources */,
 				DA9EF6401BC729FA0063DA07 /* large-digit-input@2x.png in Resources */,
@@ -4086,6 +4106,7 @@
 				DA9EF6801BC729FA0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF6811BC729FA0063DA07 /* icon_settings_dark.png in Resources */,
 				DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */,
+				DA4A13FC1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
 				DA9EF6821BC729FA0063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
 				DA9EF6831BC729FA0063DA07 /* ButtonSelectorView~iphone.xib in Resources */,
 				DA9EF6841BC729FA0063DA07 /* btn_collapse_expand_black@3x.png in Resources */,
@@ -4273,6 +4294,7 @@
 				DA9EE4AB1BC61F920063DA07 /* icon_more@3x.png in Resources */,
 				DA9EE4651BC61F920063DA07 /* darken_bottom_table_cell.png in Resources */,
 				DA9EE5061BC61F920063DA07 /* glidera.html in Resources */,
+				DA4A13F71CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EE4711BC61F920063DA07 /* gift_box.png in Resources */,
 				DA9EE48A1BC61F920063DA07 /* icon_category_coffee_tea.png in Resources */,
 				DA9EE47E1BC61F920063DA07 /* icon_account_secure@3x.png in Resources */,
@@ -4280,6 +4302,7 @@
 				DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EE4C61BC61F920063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DABFC9411CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */,
+				DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EE50C1BC61F920063DA07 /* ScanView~iphone.xib in Resources */,
 				DA9EE4881BC61F920063DA07 /* icon_category_atm@2x.png in Resources */,
@@ -4352,6 +4375,7 @@
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
+				DA4A13FA1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
 				DA9EE4BE1BC61F920063DA07 /* icon_settings_dark.png in Resources */,
 				DA9EE4521BC61F920063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
 				DA9ED7D41BC61E680063DA07 /* ButtonSelectorView~iphone.xib in Resources */,
