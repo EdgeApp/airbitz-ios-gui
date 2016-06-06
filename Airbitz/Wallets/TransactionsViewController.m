@@ -1296,7 +1296,15 @@ const int NumPromoRows              = 5;
         {
             // Buy bitcoin button
             NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
-            if (SHOW_BUY_SELL &&
+            
+            NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
+
+            if (overrideURL && [overrideURL length] > 7)
+            {
+                NSURL *url = [[NSURL alloc] initWithString:overrideURL];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            else if (SHOW_BUY_SELL &&
                 ([deviceCurrency isEqualToString:@"USD"] ||
                  [deviceCurrency isEqualToString:@"CAD"] ||
                  [deviceCurrency isEqualToString:@"EUR"]))

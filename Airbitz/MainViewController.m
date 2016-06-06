@@ -173,6 +173,7 @@ MainViewController *singleton;
     self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
+    self.dictBuyBitcoinOverrideURLs = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
     self.arrayPluginBizIDs = [[NSMutableArray alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
@@ -583,6 +584,22 @@ MainViewController *singleton;
         }];
 
     }
+    
+    NSString *requestURL = [NSString stringWithFormat:@"%@/buyselloverride/", SERVER_API];
+    
+    [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        self.dictBuyBitcoinOverrideURLs = [results copy];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABCLog(1, @"Plugin Bizid Disabled");
+        
+        // Temporary fallback for now
+        [self.dictBuyBitcoinOverrideURLs setObject:@"https://ice3x.com/" forKey:@"ZAR"];
+    }];
+
 }
 
 - (void)dealloc
@@ -2113,8 +2130,20 @@ MainViewController *singleton;
 
 - (void)slideoutBuySell
 {
-    if (_selectedViewController != _buySellViewController) {
-        if ([User isLoggedIn]) {
+    // Buy bitcoin button
+    NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
+
+    NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
+    
+    if (overrideURL && [overrideURL length] > 7)
+    {
+        NSURL *url = [[NSURL alloc] initWithString:overrideURL];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else if (_selectedViewController != _buySellViewController)
+    {
+        if ([User isLoggedIn])
+        {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             _appMode = APP_MODE_MORE;
