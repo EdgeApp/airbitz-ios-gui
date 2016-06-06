@@ -1,0 +1,6 @@
+crowdin-cli download
+xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es-MX.xliff -project Airbitz.xcodeproj
+xcodebuild -importLocalizations -localizationPath Localization/Airbitz/hi-IN.xliff -project Airbitz.xcodeproj
+xcodebuild -importLocalizations -localizationPath Localization/Airbitz/pt-BR.xliff -project Airbitz.xcodeproj
+xcodebuild -importLocalizations -localizationPath Localization/Airbitz/zh-CN.xliff -project Airbitz.xcodeproj
+

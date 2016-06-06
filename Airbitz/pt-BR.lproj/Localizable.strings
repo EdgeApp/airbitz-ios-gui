@@ -170,6 +170,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Change Categories" = "Alterar Categorias";
 
 /* No comment provided by engineer. */
+"Change Mining Fee" = "Mudar taxa aplicável";
+
+/* No comment provided by engineer. */
 "Change PIN" = "Alterar PIN";
 
 /* No comment provided by engineer. */
@@ -408,6 +411,9 @@ Digite-a abaixo para certificar-se:";
 /* Hide */
 "Hide" = "Esconder";
 
+/* No comment provided by engineer. */
+"High Fee" = "Alta taxa";
+
 /* Like Airbitz popup */
 "How are you liking %@?" = "Você está gostando do %@?";
 
@@ -502,6 +508,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Logging Out" = "Logoff";
+
+/* No comment provided by engineer. */
+"Low Fee" = "Baixa taxa";
 
 /* settings text */
 "Merchant Mode" = "Modo Comerciante";
@@ -831,6 +840,9 @@ Digite-a abaixo para certificar-se:";
 "Spending Limits" = "Limites de Gastos";
 
 /* No comment provided by engineer. */
+"Standard Fee" = "Taxa padrão";
+
+/* No comment provided by engineer. */
 "Successfully Logged In" = "Logado com Sucesso";
 
 /* No comment provided by engineer. */
@@ -1051,6 +1063,9 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 
 /* Double spend status in transaction list */
 "Warning: Double Spend" = "Aviso: Gasto Dobrado";
+
+/* No comment provided by engineer. */
+"Warning: Low Fees may cause long delays in transaction confirmation" = "Aviso: Taxas baixas podem causar longos atrasos na confirmação da transação";
 
 /* RBF status in transaction list */
 "Warning: Replace by Fee Detected. Double spend likely" = "Aviso: Devoluçã por taxa detectada. Provável gasto dobrado";

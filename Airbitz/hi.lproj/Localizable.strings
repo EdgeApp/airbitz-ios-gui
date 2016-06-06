@@ -167,6 +167,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Change Categories" = "वर्ग बदलें";
 
 /* No comment provided by engineer. */
+"Change Mining Fee" = "खनन शुल्क बदलें";
+
+/* No comment provided by engineer. */
 "Change PIN" = "पिन बदलें";
 
 /* No comment provided by engineer. */
@@ -404,6 +407,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* Hide */
 "Hide" = "छुपायें";
 
+/* No comment provided by engineer. */
+"High Fee" = "उच्च शुल्क";
+
 /* Like Airbitz popup */
 "How are you liking %@?" = "आपको %@ कैसा लग रहा है?";
 
@@ -497,6 +503,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Logging Out" = "लॉगिंग आउट";
+
+/* No comment provided by engineer. */
+"Low Fee" = "निम्न शुल्क";
 
 /* settings text */
 "Merchant Mode" = "व्यापारी मोड";
@@ -824,6 +833,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Spending Limits" = "खर्च सीमा";
 
 /* No comment provided by engineer. */
+"Standard Fee" = "मानक शुल्क";
+
+/* No comment provided by engineer. */
 "Successfully Logged In" = "लॉग इन सफल";
 
 /* No comment provided by engineer. */
@@ -1035,6 +1047,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Double spend status in transaction list */
 "Warning: Double Spend" = "चेतावनी: दोहरा खर्च";
+
+/* No comment provided by engineer. */
+"Warning: Low Fees may cause long delays in transaction confirmation" = "चेतावनी: कम फीस ट्रांजेक्शन की पुष्टि में देरी का कारण बन सकता है";
 
 /* RBF status in transaction list */
 "Warning: Replace by Fee Detected. Double spend likely" = "चेतावनी:फीस से बदलाव का पता चला है| संभवतः दोहरा खर्च";

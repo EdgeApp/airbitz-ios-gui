@@ -1,8 +1,8 @@
 /* (No Commment) */
-"CFBundleDisplayName" = "${PRODUCT_NAME}";
+"CFBundleDisplayName" = "$(उत्पाद_नाम)";
 
 /* (No Commment) */
-"CFBundleName" = "${PRODUCT_NAME}";
+"CFBundleName" = "$(उत्पाद_नाम)";
 
 /* (No Commment) */
 "CFBundleShortVersionString" = "99.99.99";

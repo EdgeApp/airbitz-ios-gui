@@ -27,662 +27,662 @@
       <trans-unit id="1UK-8n-QPP.title">
         <source>Customize Toolbar…</source>
         <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1UK-8n-QPP";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Customize Toolbar…</target>
+        <target xml:lang="zh-Hans" state="translated">自定义工具栏...</target>
       </trans-unit>
       <trans-unit id="1Xt-HY-uBw.title">
         <source>Airbitz-OSX</source>
         <note>Class = "NSMenuItem"; title = "Airbitz-OSX"; ObjectID = "1Xt-HY-uBw";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Airbitz-OSX</target>
+        <target xml:lang="zh-Hans" state="translated">Airbitz OSX</target>
       </trans-unit>
       <trans-unit id="1b7-l0-nxx.title">
         <source>Find</source>
         <note>Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find</target>
+        <target xml:lang="zh-Hans" state="translated">搜寻</target>
       </trans-unit>
       <trans-unit id="1tx-W0-xDw.title">
         <source>Lower</source>
         <note>Class = "NSMenuItem"; title = "Lower"; ObjectID = "1tx-W0-xDw";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Lower</target>
+        <target xml:lang="zh-Hans" state="translated">较低</target>
       </trans-unit>
       <trans-unit id="2h7-ER-AoG.title">
         <source>Raise</source>
         <note>Class = "NSMenuItem"; title = "Raise"; ObjectID = "2h7-ER-AoG";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Raise</target>
+        <target xml:lang="zh-Hans" state="translated">提高</target>
       </trans-unit>
       <trans-unit id="2oI-Rn-ZJC.title">
         <source>Transformations</source>
         <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "2oI-Rn-ZJC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Transformations</target>
+        <target xml:lang="zh-Hans" state="translated">转换</target>
       </trans-unit>
       <trans-unit id="3IN-sU-3Bg.title">
         <source>Spelling</source>
         <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "3IN-sU-3Bg";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Spelling</target>
+        <target xml:lang="zh-Hans" state="translated">拼写</target>
       </trans-unit>
       <trans-unit id="3Om-Ey-2VK.title">
         <source>Use Default</source>
         <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "3Om-Ey-2VK";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use Default</target>
+        <target xml:lang="zh-Hans" state="translated">使用默认模式</target>
       </trans-unit>
       <trans-unit id="3rS-ZA-NoH.title">
         <source>Speech</source>
         <note>Class = "NSMenu"; title = "Speech"; ObjectID = "3rS-ZA-NoH";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Speech</target>
+        <target xml:lang="zh-Hans" state="translated">对话</target>
       </trans-unit>
       <trans-unit id="4EN-yA-p0u.title">
         <source>Find</source>
         <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "4EN-yA-p0u";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find</target>
+        <target xml:lang="zh-Hans" state="translated">搜寻</target>
       </trans-unit>
       <trans-unit id="4sb-4s-VLi.title">
         <source>Quit Airbitz-OSX</source>
         <note>Class = "NSMenuItem"; title = "Quit Airbitz-OSX"; ObjectID = "4sb-4s-VLi";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Quit Airbitz-OSX</target>
+        <target xml:lang="zh-Hans" state="translated">退出 Airbitz OSX</target>
       </trans-unit>
       <trans-unit id="5QF-Oa-p0T.title">
         <source>Edit</source>
         <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Edit</target>
+        <target xml:lang="zh-Hans" state="translated">编辑</target>
       </trans-unit>
       <trans-unit id="5Vv-lz-BsD.title">
         <source>Copy Style</source>
         <note>Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Copy Style</target>
+        <target xml:lang="zh-Hans" state="translated">拷贝风格</target>
       </trans-unit>
       <trans-unit id="5kV-Vb-QxS.title">
         <source>About Airbitz-OSX</source>
         <note>Class = "NSMenuItem"; title = "About Airbitz-OSX"; ObjectID = "5kV-Vb-QxS";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">About Airbitz-OSX</target>
+        <target xml:lang="zh-Hans" state="translated">关于 Airbitz OSX</target>
       </trans-unit>
       <trans-unit id="6dh-zS-Vam.title">
         <source>Redo</source>
         <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Redo</target>
+        <target xml:lang="zh-Hans" state="translated">重做</target>
       </trans-unit>
       <trans-unit id="8mr-sm-Yjd.title">
         <source>Writing Direction</source>
         <note>Class = "NSMenu"; title = "Writing Direction"; ObjectID = "8mr-sm-Yjd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Writing Direction</target>
+        <target xml:lang="zh-Hans" state="translated">文字编写方向</target>
       </trans-unit>
       <trans-unit id="9ic-FL-obx.title">
         <source>Substitutions</source>
         <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "9ic-FL-obx";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Substitutions</target>
+        <target xml:lang="zh-Hans" state="translated">替换</target>
       </trans-unit>
       <trans-unit id="9yt-4B-nSM.title">
         <source>Smart Copy/Paste</source>
         <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "9yt-4B-nSM";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Smart Copy/Paste</target>
+        <target xml:lang="zh-Hans" state="translated">智能拷贝/粘贴</target>
       </trans-unit>
       <trans-unit id="46P-cB-AYj.title">
         <source>Tighten</source>
         <note>Class = "NSMenuItem"; title = "Tighten"; ObjectID = "46P-cB-AYj";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Tighten</target>
+        <target xml:lang="zh-Hans" state="translated">拧紧</target>
       </trans-unit>
       <trans-unit id="78Y-hA-62v.title">
         <source>Correct Spelling Automatically</source>
         <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "78Y-hA-62v";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Correct Spelling Automatically</target>
+        <target xml:lang="zh-Hans" state="translated">自动正确化拼写</target>
       </trans-unit>
       <trans-unit id="AYu-sK-qS6.title">
         <source>Main Menu</source>
         <note>Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Main Menu</target>
+        <target xml:lang="zh-Hans" state="translated">主菜单</target>
       </trans-unit>
       <trans-unit id="BOF-NM-1cW.title">
         <source>Preferences…</source>
         <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Preferences…</target>
+        <target xml:lang="zh-Hans" state="translated">首选项...</target>
       </trans-unit>
       <trans-unit id="BgM-ve-c93.title">
         <source>	Left to Right</source>
         <note>Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "BgM-ve-c93";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Left to Right</target>
+        <target xml:lang="zh-Hans" state="translated">	左到右</target>
       </trans-unit>
       <trans-unit id="Bw7-FT-i3A.title">
         <source>Save As…</source>
         <note>Class = "NSMenuItem"; title = "Save As…"; ObjectID = "Bw7-FT-i3A";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Save As…</target>
+        <target xml:lang="zh-Hans" state="translated">另存为...</target>
       </trans-unit>
       <trans-unit id="DVo-aG-piG.title">
         <source>Close</source>
         <note>Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Close</target>
+        <target xml:lang="zh-Hans" state="translated">关闭</target>
       </trans-unit>
       <trans-unit id="Dv1-io-Yv7.title">
         <source>Spelling and Grammar</source>
         <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "Dv1-io-Yv7";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Spelling and Grammar</target>
+        <target xml:lang="zh-Hans" state="translated">拼写和语法</target>
       </trans-unit>
       <trans-unit id="F2S-fz-NVQ.title">
         <source>Help</source>
         <note>Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Help</target>
+        <target xml:lang="zh-Hans" state="translated">客服</target>
       </trans-unit>
       <trans-unit id="FKE-Sm-Kum.title">
         <source>Airbitz-OSX Help</source>
         <note>Class = "NSMenuItem"; title = "Airbitz-OSX Help"; ObjectID = "FKE-Sm-Kum";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Airbitz-OSX Help</target>
+        <target xml:lang="zh-Hans" state="translated">Airbitz OSX 的客服</target>
       </trans-unit>
       <trans-unit id="Fal-I4-PZk.title">
         <source>Text</source>
         <note>Class = "NSMenuItem"; title = "Text"; ObjectID = "Fal-I4-PZk";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Text</target>
+        <target xml:lang="zh-Hans" state="translated">文字</target>
       </trans-unit>
       <trans-unit id="FeM-D8-WVr.title">
         <source>Substitutions</source>
         <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "FeM-D8-WVr";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Substitutions</target>
+        <target xml:lang="zh-Hans" state="translated">替换</target>
       </trans-unit>
       <trans-unit id="GB9-OM-e27.title">
         <source>Bold</source>
         <note>Class = "NSMenuItem"; title = "Bold"; ObjectID = "GB9-OM-e27";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Bold</target>
+        <target xml:lang="zh-Hans" state="translated">粗体</target>
       </trans-unit>
       <trans-unit id="GEO-Iw-cKr.title">
         <source>Format</source>
         <note>Class = "NSMenu"; title = "Format"; ObjectID = "GEO-Iw-cKr";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Format</target>
+        <target xml:lang="zh-Hans" state="translated">格式</target>
       </trans-unit>
       <trans-unit id="GUa-eO-cwY.title">
         <source>Use Default</source>
         <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "GUa-eO-cwY";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use Default</target>
+        <target xml:lang="zh-Hans" state="translated">使用默认模式</target>
       </trans-unit>
       <trans-unit id="Gi5-1S-RQB.title">
         <source>Font</source>
         <note>Class = "NSMenuItem"; title = "Font"; ObjectID = "Gi5-1S-RQB";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Font</target>
+        <target xml:lang="zh-Hans" state="translated">字体</target>
       </trans-unit>
       <trans-unit id="GyU-mb-def.placeholderString">
         <source>Enter Username</source>
         <note>Class = "NSTextFieldCell"; placeholderString = "Enter Username"; ObjectID = "GyU-mb-def";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Enter Username</target>
+        <target xml:lang="zh-Hans" state="translated">输入用户名</target>
       </trans-unit>
       <trans-unit id="H1b-Si-o9J.title">
         <source>Writing Direction</source>
         <note>Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Writing Direction</target>
+        <target xml:lang="zh-Hans" state="translated">文字编写方向</target>
       </trans-unit>
       <trans-unit id="H8h-7b-M4v.title">
         <source>View</source>
         <note>Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">View</target>
+        <target xml:lang="zh-Hans" state="translated">展示</target>
       </trans-unit>
       <trans-unit id="HFQ-gK-NFA.title">
         <source>Text Replacement</source>
         <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "HFQ-gK-NFA";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Text Replacement</target>
+        <target xml:lang="zh-Hans" state="translated">替换文字</target>
       </trans-unit>
       <trans-unit id="HFo-cy-zxI.title">
         <source>Show Spelling and Grammar</source>
         <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Spelling and Grammar</target>
+        <target xml:lang="zh-Hans" state="translated">显示拼写和语法</target>
       </trans-unit>
       <trans-unit id="HyV-fh-RgO.title">
         <source>View</source>
         <note>Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">View</target>
+        <target xml:lang="zh-Hans" state="translated">展示</target>
       </trans-unit>
       <trans-unit id="I0S-gh-46l.title">
         <source>Subscript</source>
         <note>Class = "NSMenuItem"; title = "Subscript"; ObjectID = "I0S-gh-46l";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Subscript</target>
+        <target xml:lang="zh-Hans" state="translated">下标</target>
       </trans-unit>
       <trans-unit id="IAo-SY-fd9.title">
         <source>Open…</source>
         <note>Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Open…</target>
+        <target xml:lang="zh-Hans" state="translated">打开...</target>
       </trans-unit>
       <trans-unit id="IQv-IB-iLA.title">
         <source>Window</source>
         <note>Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Window</target>
+        <target xml:lang="zh-Hans" state="translated">视窗</target>
       </trans-unit>
       <trans-unit id="J5U-5w-g23.title">
         <source>Justify</source>
         <note>Class = "NSMenuItem"; title = "Justify"; ObjectID = "J5U-5w-g23";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Justify</target>
+        <target xml:lang="zh-Hans" state="translated">辩解</target>
       </trans-unit>
       <trans-unit id="J7y-lM-qPV.title">
         <source>Use None</source>
         <note>Class = "NSMenuItem"; title = "Use None"; ObjectID = "J7y-lM-qPV";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use None</target>
+        <target xml:lang="zh-Hans" state="translated">不使用任何</target>
       </trans-unit>
       <trans-unit id="KaW-ft-85H.title">
         <source>Revert to Saved</source>
         <note>Class = "NSMenuItem"; title = "Revert to Saved"; ObjectID = "KaW-ft-85H";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Revert to Saved</target>
+        <target xml:lang="zh-Hans" state="translated">恢复到已保存</target>
       </trans-unit>
       <trans-unit id="Kd2-mp-pUS.title">
         <source>Show All</source>
         <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show All</target>
+        <target xml:lang="zh-Hans" state="translated">显示全部</target>
       </trans-unit>
       <trans-unit id="LE2-aR-0XJ.title">
         <source>Bring All to Front</source>
         <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Bring All to Front</target>
+        <target xml:lang="zh-Hans" state="translated">把所有拖往前面</target>
       </trans-unit>
       <trans-unit id="LVM-kO-fVI.title">
         <source>Paste Ruler</source>
         <note>Class = "NSMenuItem"; title = "Paste Ruler"; ObjectID = "LVM-kO-fVI";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Paste Ruler</target>
+        <target xml:lang="zh-Hans" state="translated">粘贴尺度</target>
       </trans-unit>
       <trans-unit id="Lbh-J2-qVU.title">
         <source>	Left to Right</source>
         <note>Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "Lbh-J2-qVU";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Left to Right</target>
+        <target xml:lang="zh-Hans" state="translated">	从左到右</target>
       </trans-unit>
       <trans-unit id="MkV-Pr-PK5.title">
         <source>Copy Ruler</source>
         <note>Class = "NSMenuItem"; title = "Copy Ruler"; ObjectID = "MkV-Pr-PK5";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Copy Ruler</target>
+        <target xml:lang="zh-Hans" state="translated">拷贝尺度</target>
       </trans-unit>
       <trans-unit id="NMo-om-nkz.title">
         <source>Services</source>
         <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Services</target>
+        <target xml:lang="zh-Hans" state="translated">服务</target>
       </trans-unit>
       <trans-unit id="Nop-cj-93Q.title">
         <source>	Default</source>
         <note>Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "Nop-cj-93Q";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Default</target>
+        <target xml:lang="zh-Hans" state="translated">	默认</target>
       </trans-unit>
       <trans-unit id="OY7-WF-poV.title">
         <source>Minimize</source>
         <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Minimize</target>
+        <target xml:lang="zh-Hans" state="translated">最小化</target>
       </trans-unit>
       <trans-unit id="OaQ-X3-Vso.title">
         <source>Baseline</source>
         <note>Class = "NSMenuItem"; title = "Baseline"; ObjectID = "OaQ-X3-Vso";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Baseline</target>
+        <target xml:lang="zh-Hans" state="translated">底线</target>
       </trans-unit>
       <trans-unit id="Olw-nP-bQN.title">
         <source>Hide Airbitz-OSX</source>
         <note>Class = "NSMenuItem"; title = "Hide Airbitz-OSX"; ObjectID = "Olw-nP-bQN";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Hide Airbitz-OSX</target>
+        <target xml:lang="zh-Hans" state="translated">隐藏Airbitz-OSX</target>
       </trans-unit>
       <trans-unit id="OwM-mh-QMV.title">
         <source>Find Previous</source>
         <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find Previous</target>
+        <target xml:lang="zh-Hans" state="translated">查找上一个</target>
       </trans-unit>
       <trans-unit id="Oyz-dy-DGm.title">
         <source>Stop Speaking</source>
         <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "Oyz-dy-DGm";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Stop Speaking</target>
+        <target xml:lang="zh-Hans" state="translated">停止对话</target>
       </trans-unit>
       <trans-unit id="Ptp-SP-VEL.title">
         <source>Bigger</source>
         <note>Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Bigger</target>
+        <target xml:lang="zh-Hans" state="translated">更大</target>
       </trans-unit>
       <trans-unit id="Q5e-8K-NDq.title">
         <source>Show Fonts</source>
         <note>Class = "NSMenuItem"; title = "Show Fonts"; ObjectID = "Q5e-8K-NDq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Fonts</target>
+        <target xml:lang="zh-Hans" state="translated">显示字体</target>
       </trans-unit>
       <trans-unit id="R4o-n2-Eq4.title">
         <source>Zoom</source>
         <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Zoom</target>
+        <target xml:lang="zh-Hans" state="translated">缩放</target>
       </trans-unit>
       <trans-unit id="RB4-Sm-HuC.title">
         <source>	Right to Left</source>
         <note>Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "RB4-Sm-HuC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Right to Left</target>
+        <target xml:lang="zh-Hans" state="translated">	从右到左</target>
       </trans-unit>
       <trans-unit id="RKx-o9-fnj.placeholderString">
         <source>Enter Password</source>
         <note>Class = "NSSecureTextFieldCell"; placeholderString = "Enter Password"; ObjectID = "RKx-o9-fnj";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Enter Password</target>
+        <target xml:lang="zh-Hans" state="translated">输入密码</target>
       </trans-unit>
       <trans-unit id="Rqc-34-cIF.title">
         <source>Superscript</source>
         <note>Class = "NSMenuItem"; title = "Superscript"; ObjectID = "Rqc-34-cIF";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Superscript</target>
+        <target xml:lang="zh-Hans" state="translated">上标</target>
       </trans-unit>
       <trans-unit id="Ruw-6m-B2m.title">
         <source>Select All</source>
         <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Select All</target>
+        <target xml:lang="zh-Hans" state="translated">选择所有</target>
       </trans-unit>
       <trans-unit id="S0p-oC-mLd.title">
         <source>Jump to Selection</source>
         <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "S0p-oC-mLd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Jump to Selection</target>
+        <target xml:lang="zh-Hans" state="translated">跳转到选择</target>
       </trans-unit>
       <trans-unit id="Td7-aD-5lo.title">
         <source>Window</source>
         <note>Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Window</target>
+        <target xml:lang="zh-Hans" state="translated">视窗</target>
       </trans-unit>
       <trans-unit id="UEZ-Bs-lqG.title">
         <source>Capitalize</source>
         <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Capitalize</target>
+        <target xml:lang="zh-Hans" state="translated">大写</target>
       </trans-unit>
       <trans-unit id="VIY-Ag-zcb.title">
         <source>Center</source>
         <note>Class = "NSMenuItem"; title = "Center"; ObjectID = "VIY-Ag-zcb";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Center</target>
+        <target xml:lang="zh-Hans" state="translated">中心</target>
       </trans-unit>
       <trans-unit id="Vdr-fp-XzO.title">
         <source>Hide Others</source>
         <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Hide Others</target>
+        <target xml:lang="zh-Hans" state="translated">隐藏其他</target>
       </trans-unit>
       <trans-unit id="Vjx-xi-njq.title">
         <source>Italic</source>
         <note>Class = "NSMenuItem"; title = "Italic"; ObjectID = "Vjx-xi-njq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Italic</target>
+        <target xml:lang="zh-Hans" state="translated">斜体</target>
       </trans-unit>
       <trans-unit id="W48-6f-4Dl.title">
         <source>Edit</source>
         <note>Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Edit</target>
+        <target xml:lang="zh-Hans" state="translated">编辑</target>
       </trans-unit>
       <trans-unit id="WRG-CD-K1S.title">
         <source>Underline</source>
         <note>Class = "NSMenuItem"; title = "Underline"; ObjectID = "WRG-CD-K1S";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Underline</target>
+        <target xml:lang="zh-Hans" state="translated">下划线</target>
       </trans-unit>
       <trans-unit id="Was-JA-tGl.title">
         <source>New</source>
         <note>Class = "NSMenuItem"; title = "New"; ObjectID = "Was-JA-tGl";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">New</target>
+        <target xml:lang="zh-Hans" state="translated">新增功能</target>
       </trans-unit>
       <trans-unit id="WeT-3V-zwk.title">
         <source>Paste and Match Style</source>
         <note>Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "WeT-3V-zwk";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Paste and Match Style</target>
+        <target xml:lang="zh-Hans" state="translated">粘贴并匹配样式</target>
       </trans-unit>
       <trans-unit id="Xz5-n4-O0W.title">
         <source>Find…</source>
         <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "Xz5-n4-O0W";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find…</target>
+        <target xml:lang="zh-Hans" state="translated">找到...</target>
       </trans-unit>
       <trans-unit id="YEy-JH-Tfz.title">
         <source>Find and Replace…</source>
         <note>Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "YEy-JH-Tfz";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find and Replace…</target>
+        <target xml:lang="zh-Hans" state="translated">查找和替换...</target>
       </trans-unit>
       <trans-unit id="YGs-j5-SAR.title">
         <source>	Default</source>
         <note>Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "YGs-j5-SAR";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Default</target>
+        <target xml:lang="zh-Hans" state="translated">	默认</target>
       </trans-unit>
       <trans-unit id="Ynk-f8-cLZ.title">
         <source>Start Speaking</source>
         <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "Ynk-f8-cLZ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Start Speaking</target>
+        <target xml:lang="zh-Hans" state="translated">开始对话</target>
       </trans-unit>
       <trans-unit id="ZM1-6Q-yy1.title">
         <source>Align Left</source>
         <note>Class = "NSMenuItem"; title = "Align Left"; ObjectID = "ZM1-6Q-yy1";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Align Left</target>
+        <target xml:lang="zh-Hans" state="translated">左对齐</target>
       </trans-unit>
       <trans-unit id="ZvO-Gk-QUH.title">
         <source>Paragraph</source>
         <note>Class = "NSMenuItem"; title = "Paragraph"; ObjectID = "ZvO-Gk-QUH";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Paragraph</target>
+        <target xml:lang="zh-Hans" state="translated">段落</target>
       </trans-unit>
       <trans-unit id="aTl-1u-JFS.title">
         <source>Print…</source>
         <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "aTl-1u-JFS";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Print…</target>
+        <target xml:lang="zh-Hans" state="translated">打印...</target>
       </trans-unit>
       <trans-unit id="aUF-d1-5bR.title">
         <source>Window</source>
         <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Window</target>
+        <target xml:lang="zh-Hans" state="translated">视窗</target>
       </trans-unit>
       <trans-unit id="aXa-aM-Jaq.title">
         <source>Font</source>
         <note>Class = "NSMenu"; title = "Font"; ObjectID = "aXa-aM-Jaq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Font</target>
+        <target xml:lang="zh-Hans" state="translated">字体</target>
       </trans-unit>
       <trans-unit id="agt-UL-0e3.title">
         <source>Use Default</source>
         <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "agt-UL-0e3";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use Default</target>
+        <target xml:lang="zh-Hans" state="translated">使用默认模式</target>
       </trans-unit>
       <trans-unit id="bgn-CT-cEk.title">
         <source>Show Colors</source>
         <note>Class = "NSMenuItem"; title = "Show Colors"; ObjectID = "bgn-CT-cEk";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Colors</target>
+        <target xml:lang="zh-Hans" state="translated">显示颜色</target>
       </trans-unit>
       <trans-unit id="bib-Uj-vzu.title">
         <source>File</source>
         <note>Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">File</target>
+        <target xml:lang="zh-Hans" state="translated">文件</target>
       </trans-unit>
       <trans-unit id="buJ-ug-pKt.title">
         <source>Use Selection for Find</source>
         <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "buJ-ug-pKt";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use Selection for Find</target>
+        <target xml:lang="zh-Hans" state="translated">使用选项来进行搜寻</target>
       </trans-unit>
       <trans-unit id="c8a-y6-VQd.title">
         <source>Transformations</source>
         <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "c8a-y6-VQd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Transformations</target>
+        <target xml:lang="zh-Hans" state="translated">转换</target>
       </trans-unit>
       <trans-unit id="cDB-IK-hbR.title">
         <source>Use None</source>
         <note>Class = "NSMenuItem"; title = "Use None"; ObjectID = "cDB-IK-hbR";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use None</target>
+        <target xml:lang="zh-Hans" state="translated">不使用任何</target>
       </trans-unit>
       <trans-unit id="cqv-fj-IhA.title">
         <source>Selection</source>
         <note>Class = "NSMenuItem"; title = "Selection"; ObjectID = "cqv-fj-IhA";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Selection</target>
+        <target xml:lang="zh-Hans" state="translated">选项</target>
       </trans-unit>
       <trans-unit id="cwL-P1-jid.title">
         <source>Smart Links</source>
         <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "cwL-P1-jid";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Smart Links</target>
+        <target xml:lang="zh-Hans" state="translated">智能链接</target>
       </trans-unit>
       <trans-unit id="d9M-CD-aMd.title">
         <source>Make Lower Case</source>
         <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "d9M-CD-aMd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Make Lower Case</target>
+        <target xml:lang="zh-Hans" state="translated">变成小写模式</target>
       </trans-unit>
       <trans-unit id="d9c-me-L2H.title">
         <source>Text</source>
         <note>Class = "NSMenu"; title = "Text"; ObjectID = "d9c-me-L2H";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Text</target>
+        <target xml:lang="zh-Hans" state="translated">文字</target>
       </trans-unit>
       <trans-unit id="dMs-cI-mzQ.title">
         <source>File</source>
         <note>Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">File</target>
+        <target xml:lang="zh-Hans" state="translated">文件</target>
       </trans-unit>
       <trans-unit id="dRJ-4n-Yzg.title">
         <source>Undo</source>
         <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Undo</target>
+        <target xml:lang="zh-Hans" state="translated">复原</target>
       </trans-unit>
       <trans-unit id="gVA-U4-sdL.title">
         <source>Paste</source>
         <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Paste</target>
+        <target xml:lang="zh-Hans" state="translated">粘贴</target>
       </trans-unit>
       <trans-unit id="hQb-2v-fYv.title">
         <source>Smart Quotes</source>
         <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Smart Quotes</target>
+        <target xml:lang="zh-Hans" state="translated">智能引号</target>
       </trans-unit>
       <trans-unit id="hz2-CU-CR7.title">
         <source>Check Document Now</source>
         <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "hz2-CU-CR7";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Check Document Now</target>
+        <target xml:lang="zh-Hans" state="translated">现在检查文档</target>
       </trans-unit>
       <trans-unit id="hz9-B4-Xy5.title">
         <source>Services</source>
         <note>Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Services</target>
+        <target xml:lang="zh-Hans" state="translated">服务</target>
       </trans-unit>
       <trans-unit id="i1d-Er-qST.title">
         <source>Smaller</source>
         <note>Class = "NSMenuItem"; title = "Smaller"; ObjectID = "i1d-Er-qST";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Smaller</target>
+        <target xml:lang="zh-Hans" state="translated">较小</target>
       </trans-unit>
       <trans-unit id="ijk-EB-dga.title">
         <source>Baseline</source>
         <note>Class = "NSMenu"; title = "Baseline"; ObjectID = "ijk-EB-dga";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Baseline</target>
+        <target xml:lang="zh-Hans" state="translated">底线</target>
       </trans-unit>
       <trans-unit id="jBQ-r6-VK2.title">
         <source>Kern</source>
         <note>Class = "NSMenuItem"; title = "Kern"; ObjectID = "jBQ-r6-VK2";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Kern</target>
+        <target xml:lang="zh-Hans" state="translated">Kern</target>
       </trans-unit>
       <trans-unit id="jFq-tB-4Kx.title">
         <source>	Right to Left</source>
         <note>Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "jFq-tB-4Kx";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">	Right to Left</target>
+        <target xml:lang="zh-Hans" state="translated">	从右到左</target>
       </trans-unit>
       <trans-unit id="jxT-CU-nIS.title">
         <source>Format</source>
         <note>Class = "NSMenuItem"; title = "Format"; ObjectID = "jxT-CU-nIS";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Format</target>
+        <target xml:lang="zh-Hans" state="translated">格式</target>
       </trans-unit>
       <trans-unit id="mK6-2p-4JG.title">
         <source>Check Grammar With Spelling</source>
         <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Check Grammar With Spelling</target>
+        <target xml:lang="zh-Hans" state="translated">使用拼写来检查语法</target>
       </trans-unit>
       <trans-unit id="o6e-r0-MWq.title">
         <source>Ligatures</source>
         <note>Class = "NSMenuItem"; title = "Ligatures"; ObjectID = "o6e-r0-MWq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Ligatures</target>
+        <target xml:lang="zh-Hans" state="translated">连字</target>
       </trans-unit>
       <trans-unit id="oas-Oc-fiZ.title">
         <source>Open Recent</source>
         <note>Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Open Recent</target>
+        <target xml:lang="zh-Hans" state="translated">打开最近</target>
       </trans-unit>
       <trans-unit id="ogc-rX-tC1.title">
         <source>Loosen</source>
         <note>Class = "NSMenuItem"; title = "Loosen"; ObjectID = "ogc-rX-tC1";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Loosen</target>
+        <target xml:lang="zh-Hans" state="translated">放松</target>
       </trans-unit>
       <trans-unit id="pa3-QI-u2k.title">
         <source>Delete</source>
         <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Delete</target>
+        <target xml:lang="zh-Hans" state="translated">删除</target>
       </trans-unit>
       <trans-unit id="pxx-59-PXV.title">
         <source>Save…</source>
         <note>Class = "NSMenuItem"; title = "Save…"; ObjectID = "pxx-59-PXV";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Save…</target>
+        <target xml:lang="zh-Hans" state="translated">保存...</target>
       </trans-unit>
       <trans-unit id="q09-fT-Sye.title">
         <source>Find Next</source>
         <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "q09-fT-Sye";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Find Next</target>
+        <target xml:lang="zh-Hans" state="translated">搜寻下一个</target>
       </trans-unit>
       <trans-unit id="qIS-W8-SiK.title">
         <source>Page Setup…</source>
         <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "qIS-W8-SiK";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Page Setup…</target>
+        <target xml:lang="zh-Hans" state="translated">页面设置...</target>
       </trans-unit>
       <trans-unit id="rbD-Rh-wIN.title">
         <source>Check Spelling While Typing</source>
         <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "rbD-Rh-wIN";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Check Spelling While Typing</target>
+        <target xml:lang="zh-Hans" state="translated">在键入文字时进行拼写检查</target>
       </trans-unit>
       <trans-unit id="rgM-f4-ycn.title">
         <source>Smart Dashes</source>
         <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "rgM-f4-ycn";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Smart Dashes</target>
+        <target xml:lang="zh-Hans" state="translated">智能短划线</target>
       </trans-unit>
       <trans-unit id="snW-S8-Cw5.title">
         <source>Show Toolbar</source>
         <note>Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "snW-S8-Cw5";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Toolbar</target>
+        <target xml:lang="zh-Hans" state="translated">显示工具栏</target>
       </trans-unit>
       <trans-unit id="tRr-pd-1PS.title">
         <source>Data Detectors</source>
         <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "tRr-pd-1PS";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Data Detectors</target>
+        <target xml:lang="zh-Hans" state="translated">数据探测器</target>
       </trans-unit>
       <trans-unit id="tXI-mr-wws.title">
         <source>Open Recent</source>
         <note>Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Open Recent</target>
+        <target xml:lang="zh-Hans" state="translated">打开最近</target>
       </trans-unit>
       <trans-unit id="tlD-Oa-oAM.title">
         <source>Kern</source>
         <note>Class = "NSMenu"; title = "Kern"; ObjectID = "tlD-Oa-oAM";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Kern</target>
+        <target xml:lang="zh-Hans" state="translated">Kern</target>
       </trans-unit>
       <trans-unit id="uQy-DD-JDr.title">
         <source>Airbitz-OSX</source>
         <note>Class = "NSMenu"; title = "Airbitz-OSX"; ObjectID = "uQy-DD-JDr";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Airbitz-OSX</target>
+        <target xml:lang="zh-Hans" state="translated">Airbitz OSX</target>
       </trans-unit>
       <trans-unit id="uRl-iY-unG.title">
         <source>Cut</source>
         <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Cut</target>
+        <target xml:lang="zh-Hans" state="translated">切剪</target>
       </trans-unit>
       <trans-unit id="vKC-jM-MkH.title">
         <source>Paste Style</source>
         <note>Class = "NSMenuItem"; title = "Paste Style"; ObjectID = "vKC-jM-MkH";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Paste Style</target>
+        <target xml:lang="zh-Hans" state="translated">粘贴样式</target>
       </trans-unit>
       <trans-unit id="vLm-3I-IUL.title">
         <source>Show Ruler</source>
         <note>Class = "NSMenuItem"; title = "Show Ruler"; ObjectID = "vLm-3I-IUL";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Ruler</target>
+        <target xml:lang="zh-Hans" state="translated">显示尺度</target>
       </trans-unit>
       <trans-unit id="vNY-rz-j42.title">
         <source>Clear Menu</source>
         <note>Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Clear Menu</target>
+        <target xml:lang="zh-Hans" state="translated">清除菜单</target>
       </trans-unit>
       <trans-unit id="vmV-6d-7jI.title">
         <source>Make Upper Case</source>
         <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "vmV-6d-7jI";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Make Upper Case</target>
+        <target xml:lang="zh-Hans" state="translated">变成大写模式</target>
       </trans-unit>
       <trans-unit id="w0m-vy-SC9.title">
         <source>Ligatures</source>
         <note>Class = "NSMenu"; title = "Ligatures"; ObjectID = "w0m-vy-SC9";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Ligatures</target>
+        <target xml:lang="zh-Hans" state="translated">连字</target>
       </trans-unit>
       <trans-unit id="wb2-vD-lq4.title">
         <source>Align Right</source>
         <note>Class = "NSMenuItem"; title = "Align Right"; ObjectID = "wb2-vD-lq4";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Align Right</target>
+        <target xml:lang="zh-Hans" state="translated">右对齐</target>
       </trans-unit>
       <trans-unit id="wpr-3q-Mcd.title">
         <source>Help</source>
         <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Help</target>
+        <target xml:lang="zh-Hans" state="translated">客服</target>
       </trans-unit>
       <trans-unit id="x3v-GG-iWU.title">
         <source>Copy</source>
         <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Copy</target>
+        <target xml:lang="zh-Hans" state="translated">拷贝</target>
       </trans-unit>
       <trans-unit id="xQD-1f-W4t.title">
         <source>Use All</source>
         <note>Class = "NSMenuItem"; title = "Use All"; ObjectID = "xQD-1f-W4t";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Use All</target>
+        <target xml:lang="zh-Hans" state="translated">使用所有</target>
       </trans-unit>
       <trans-unit id="xrE-MZ-jX0.title">
         <source>Speech</source>
         <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "xrE-MZ-jX0";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Speech</target>
+        <target xml:lang="zh-Hans" state="translated">对话</target>
       </trans-unit>
       <trans-unit id="z6F-FW-3nz.title">
         <source>Show Substitutions</source>
         <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "z6F-FW-3nz";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show Substitutions</target>
+        <target xml:lang="zh-Hans" state="translated">显示替换</target>
       </trans-unit>
     </body>
   </file>
@@ -800,7 +800,7 @@
       <trans-unit id="2uL-vk-tLg.normalTitle">
         <source>5</source>
         <note>Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">5</target>
+        <target xml:lang="zh-Hans" state="translated">5</target>
       </trans-unit>
       <trans-unit id="Aeb-Xc-JRe.normalTitle">
         <source>-</source>
@@ -810,12 +810,12 @@
       <trans-unit id="Emr-ag-G6B.normalTitle">
         <source>8</source>
         <note>Class = "UIButton"; normalTitle = "8"; ObjectID = "Emr-ag-G6B"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">8</target>
+        <target xml:lang="zh-Hans" state="translated">8</target>
       </trans-unit>
       <trans-unit id="JE3-3X-s8v.normalTitle">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Done</target>
+        <target xml:lang="zh-Hans" state="translated">完成</target>
       </trans-unit>
       <trans-unit id="MCV-gu-4YU.normalTitle">
         <source>*</source>
@@ -825,77 +825,77 @@
       <trans-unit id="O42-ZS-u2K.normalTitle">
         <source>C</source>
         <note>Class = "UIButton"; normalTitle = "C"; ObjectID = "O42-ZS-u2K"; Note = "Calculator Clear Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">C</target>
+        <target xml:lang="zh-Hans" state="translated">C</target>
       </trans-unit>
       <trans-unit id="ORi-eH-Enh.normalTitle">
         <source>6</source>
         <note>Class = "UIButton"; normalTitle = "6"; ObjectID = "ORi-eH-Enh"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">6</target>
+        <target xml:lang="zh-Hans" state="translated">6</target>
       </trans-unit>
       <trans-unit id="P0f-iB-KJr.normalTitle">
         <source>4</source>
         <note>Class = "UIButton"; normalTitle = "4"; ObjectID = "P0f-iB-KJr"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">4</target>
+        <target xml:lang="zh-Hans" state="translated">4</target>
       </trans-unit>
       <trans-unit id="RyR-lU-hrP.normalTitle">
         <source>=</source>
         <note>Class = "UIButton"; normalTitle = "="; ObjectID = "RyR-lU-hrP"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">=</target>
+        <target xml:lang="zh-Hans" state="translated">=</target>
       </trans-unit>
       <trans-unit id="Tqz-n7-FoF.normalTitle">
         <source>9</source>
         <note>Class = "UIButton"; normalTitle = "9"; ObjectID = "Tqz-n7-FoF"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">9</target>
+        <target xml:lang="zh-Hans" state="translated">9</target>
       </trans-unit>
       <trans-unit id="V76-TG-gfn.normalTitle">
         <source>0</source>
         <note>Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">0</target>
+        <target xml:lang="zh-Hans" state="translated">0</target>
       </trans-unit>
       <trans-unit id="WkG-ho-3qR.normalTitle">
         <source>.</source>
         <note>Class = "UIButton"; normalTitle = "."; ObjectID = "WkG-ho-3qR"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">.</target>
+        <target xml:lang="zh-Hans" state="translated">.</target>
       </trans-unit>
       <trans-unit id="b8e-QF-DXa.normalTitle">
         <source>1</source>
         <note>Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">1</target>
+        <target xml:lang="zh-Hans" state="translated">1</target>
       </trans-unit>
       <trans-unit id="fTN-mi-eGB.normalTitle">
         <source>/</source>
         <note>Class = "UIButton"; normalTitle = "/"; ObjectID = "fTN-mi-eGB"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">/</target>
+        <target xml:lang="zh-Hans" state="translated">/</target>
       </trans-unit>
       <trans-unit id="hpP-b8-SWQ.normalTitle">
         <source>+</source>
         <note>Class = "UIButton"; normalTitle = "+"; ObjectID = "hpP-b8-SWQ"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">+</target>
+        <target xml:lang="zh-Hans" state="translated">+</target>
       </trans-unit>
       <trans-unit id="tNK-PX-QMO.normalTitle">
         <source>&lt; Del</source>
         <note>Class = "UIButton"; normalTitle = "&lt; Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">&lt; Del</target>
+        <target xml:lang="zh-Hans" state="translated">&lt; 删除</target>
       </trans-unit>
       <trans-unit id="vjB-0i-g2w.normalTitle">
         <source>2</source>
         <note>Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">2</target>
+        <target xml:lang="zh-Hans" state="translated">2</target>
       </trans-unit>
       <trans-unit id="wVl-D5-w0P.normalTitle">
         <source>7</source>
         <note>Class = "UIButton"; normalTitle = "7"; ObjectID = "wVl-D5-w0P"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">7</target>
+        <target xml:lang="zh-Hans" state="translated">7</target>
       </trans-unit>
       <trans-unit id="x4B-P3-CYU.normalTitle">
         <source>3</source>
         <note>Class = "UIButton"; normalTitle = "3"; ObjectID = "x4B-P3-CYU"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">3</target>
+        <target xml:lang="zh-Hans" state="translated">3</target>
       </trans-unit>
       <trans-unit id="xYy-J7-W9D.normalTitle">
         <source>%</source>
         <note>Class = "UIButton"; normalTitle = "%"; ObjectID = "xYy-J7-W9D"; Note = "Calculator Button";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">%</target>
+        <target xml:lang="zh-Hans" state="translated">%</target>
       </trans-unit>
     </body>
   </file>
@@ -907,7 +907,7 @@
       <trans-unit id="sls-ic-b1n.normalTitle">
         <source>Agree </source>
         <note>Class = "UIButton"; normalTitle = "Agree "; ObjectID = "sls-ic-b1n";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Agree </target>
+        <target xml:lang="zh-Hans" state="translated">同意 </target>
       </trans-unit>
     </body>
   </file>
@@ -1415,77 +1415,77 @@
       <trans-unit id="BCk-jF-SE5.text">
         <source>LOGOUT</source>
         <note>Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">LOGOUT</target>
+        <target xml:lang="zh-Hans" state="translated">登出</target>
       </trans-unit>
       <trans-unit id="GIG-Sd-O0c.accessibilityLabel">
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Logout</target>
+        <target xml:lang="zh-Hans" state="translated">登出</target>
       </trans-unit>
       <trans-unit id="Lwy-1d-Qgs.accessibilityLabel">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Buy or Sell</target>
+        <target xml:lang="zh-Hans" state="translated">买入或卖出</target>
       </trans-unit>
       <trans-unit id="O8N-2d-FwL.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Label</target>
+        <target xml:lang="zh-Hans" state="translated">标签</target>
       </trans-unit>
       <trans-unit id="Zac-Lf-J4y.text">
         <source>SETTINGS</source>
         <note>Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">SETTINGS</target>
+        <target xml:lang="zh-Hans" state="translated">设置</target>
       </trans-unit>
       <trans-unit id="Zu4-Fd-NGP.accessibilityLabel">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Buy or Sell</target>
+        <target xml:lang="zh-Hans" state="translated">买入或卖出</target>
       </trans-unit>
       <trans-unit id="aSM-QX-pLq.accessibilityLabel">
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Logout</target>
+        <target xml:lang="zh-Hans" state="translated">登出</target>
       </trans-unit>
       <trans-unit id="bQy-8e-q5h.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">See Strings.h</target>
+        <target xml:lang="zh-Hans" state="translated">请参阅 Strings.h</target>
       </trans-unit>
       <trans-unit id="jpu-23-4kh.accessibilityLabel">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Buy or Sell</target>
+        <target xml:lang="zh-Hans" state="translated">买入或卖出</target>
       </trans-unit>
       <trans-unit id="lr4-kO-HCW.text">
         <source>WALLETS</source>
         <note>Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">WALLETS</target>
+        <target xml:lang="zh-Hans" state="translated">钱包</target>
       </trans-unit>
       <trans-unit id="rWQ-uJ-DUX.text">
         <source>BUY / SELL BITCOIN</source>
         <note>Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">BUY / SELL BITCOIN</target>
+        <target xml:lang="zh-Hans" state="translated">买入/卖出比特币</target>
       </trans-unit>
       <trans-unit id="vsf-Ms-1Ff.accessibilityHint">
         <source>the currently logged in account</source>
         <note>Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">the currently logged in account</target>
+        <target xml:lang="zh-Hans" state="translated">目前所登录的帐户</target>
       </trans-unit>
       <trans-unit id="vsf-Ms-1Ff.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Label</target>
+        <target xml:lang="zh-Hans" state="translated">标签</target>
       </trans-unit>
       <trans-unit id="xju-3Y-EvK.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">See Strings.h</target>
+        <target xml:lang="zh-Hans" state="translated">请参阅 Strings.h</target>
       </trans-unit>
       <trans-unit id="xna-m1-9hx.accessibilityLabel">
         <source>Settings</source>
         <note>Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Settings</target>
+        <target xml:lang="zh-Hans" state="translated">设置</target>
       </trans-unit>
     </body>
   </file>
@@ -1497,87 +1497,87 @@
       <trans-unit id="DlF-tR-T08.text">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Business Name</target>
+        <target xml:lang="zh-Hans" state="translated">生意名称</target>
       </trans-unit>
       <trans-unit id="GGS-YR-zt1.normalTitle">
         <source>Shopping</source>
         <note>Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Shopping</target>
+        <target xml:lang="zh-Hans" state="translated">购物</target>
       </trans-unit>
       <trans-unit id="KxI-24-PCF.text">
         <source>Categories</source>
         <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Categories</target>
+        <target xml:lang="zh-Hans" state="translated">类别</target>
       </trans-unit>
       <trans-unit id="Sfb-cf-6wF.normalTitle">
         <source>More Categories</source>
         <note>Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">More Categories</target>
+        <target xml:lang="zh-Hans" state="translated">更多类别</target>
       </trans-unit>
       <trans-unit id="a78-ih-LDk.normalTitle">
         <source>Coffee &amp; Tea</source>
         <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Coffee &amp; Tea</target>
+        <target xml:lang="zh-Hans" state="translated">咖啡和茶</target>
       </trans-unit>
       <trans-unit id="aNa-3g-QXd.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Search</target>
+        <target xml:lang="zh-Hans" state="translated">搜索</target>
       </trans-unit>
       <trans-unit id="b1E-1G-btq.normalTitle">
         <source>Gift Cards</source>
         <note>Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Gift Cards</target>
+        <target xml:lang="zh-Hans" state="translated">礼品卡</target>
       </trans-unit>
       <trans-unit id="baO-FH-Oy4.text">
         <source>Near You</source>
         <note>Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Near You</target>
+        <target xml:lang="zh-Hans" state="translated">靠近您的</target>
       </trans-unit>
       <trans-unit id="f2g-xP-19U.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Label</target>
+        <target xml:lang="zh-Hans" state="translated">标签</target>
       </trans-unit>
       <trans-unit id="ga1-R0-wof.text">
         <source>Type BTC</source>
         <note>Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Type BTC</target>
+        <target xml:lang="zh-Hans" state="translated">键入 BTC</target>
       </trans-unit>
       <trans-unit id="heE-og-iXA.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Search</target>
+        <target xml:lang="zh-Hans" state="translated">搜索</target>
       </trans-unit>
       <trans-unit id="kTm-at-TUR.normalTitle">
         <source>Electronics</source>
         <note>Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Electronics</target>
+        <target xml:lang="zh-Hans" state="translated">电子产品</target>
       </trans-unit>
       <trans-unit id="lFC-s8-IJT.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Label</target>
+        <target xml:lang="zh-Hans" state="translated">标签</target>
       </trans-unit>
       <trans-unit id="oPG-fA-f9b.text">
         <source>leftLabel</source>
         <note>Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">leftLabel</target>
+        <target xml:lang="zh-Hans" state="translated">左标签</target>
       </trans-unit>
       <trans-unit id="oyK-ph-99S.normalTitle">
         <source>Restaurants</source>
         <note>Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Restaurants</target>
+        <target xml:lang="zh-Hans" state="translated">餐馆</target>
       </trans-unit>
       <trans-unit id="sWr-pd-hBY.normalTitle">
         <source>ATMs</source>
         <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">ATMs</target>
+        <target xml:lang="zh-Hans" state="translated">自动提款机</target>
       </trans-unit>
       <trans-unit id="wy7-Kv-3ap.text">
         <source>Address 1234</source>
         <note>Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Address 1234</target>
+        <target xml:lang="zh-Hans" state="translated">地址 1234</target>
       </trans-unit>
     </body>
   </file>
@@ -1874,7 +1874,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Change Mining Fee">
         <source>Change Mining Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Change Mining Fee</target>
+        <target xml:lang="zh-Hans" state="translated">更改挖掘费</target>
       </trans-unit>
       <trans-unit id="Change PIN">
         <source>Change PIN</source>
@@ -2275,7 +2275,7 @@ Enter it below to make sure:</source>
       <trans-unit id="High Fee">
         <source>High Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">High Fee</target>
+        <target xml:lang="zh-Hans" state="translated">高费用</target>
       </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
@@ -2440,7 +2440,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Low Fee">
         <source>Low Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Low Fee</target>
+        <target xml:lang="zh-Hans" state="translated">低费用</target>
       </trans-unit>
       <trans-unit id="Merchant Mode">
         <source>Merchant Mode</source>
@@ -2990,7 +2990,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Standard Fee</target>
+        <target xml:lang="zh-Hans" state="translated">标准费用</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -3348,7 +3348,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Warning: Low Fees may cause long delays in transaction confirmation">
         <source>Warning: Low Fees may cause long delays in transaction confirmation</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Warning: Low Fees may cause long delays in transaction confirmation</target>
+        <target xml:lang="zh-Hans" state="translated">警告 ︰ 低费用可能会导致在交易确认的时间延迟</target>
       </trans-unit>
       <trans-unit id="Warning: Replace by Fee Detected. Double spend likely">
         <source>Warning: Replace by Fee Detected. Double spend likely</source>
@@ -3495,7 +3495,7 @@ Context | Request Context</target>
       <trans-unit id="pkh-7R-foQ.text">
         <source>Password Requirements</source>
         <note>Class = "UILabel"; text = "Password Requirements"; ObjectID = "pkh-7R-foQ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Password Requirements</target>
+        <target xml:lang="zh-Hans" state="translated">密码要求</target>
       </trans-unit>
     </body>
   </file>
@@ -3507,7 +3507,24 @@ Context | Request Context</target>
       <trans-unit id="26l-9i-vHm.text">
         <source>Question</source>
         <note>Class = "UILabel"; text = "Question"; ObjectID = "26l-9i-vHm";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Question</target>
+        <target xml:lang="zh-Hans" state="translated">问题</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Airbitz/PopupPickerView/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="24.normalTitle">
+        <source>OK</source>
+        <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
+        <target xml:lang="zh-Hans" state="translated">完成</target>
+      </trans-unit>
+      <trans-unit id="25.normalTitle">
+        <source>Cancel</source>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25";</note>
+        <target xml:lang="zh-Hans" state="translated">取消</target>
       </trans-unit>
     </body>
   </file>
@@ -3519,7 +3536,7 @@ Context | Request Context</target>
       <trans-unit id="KGv-Ek-gk9.text">
         <source>Slide to confirm</source>
         <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Slide to confirm</target>
+        <target xml:lang="zh-Hans" state="translated">滑动以进行确认</target>
       </trans-unit>
     </body>
   </file>
@@ -3531,42 +3548,42 @@ Context | Request Context</target>
       <trans-unit id="0gq-ds-DJC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
         <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Your username and password are known only to you and never transmitted or stored unencrypted.</target>
+        <target xml:lang="zh-Hans" state="translated">您的用户名、 密码和PIN 只有您知道，并永远不会被传输出去或在未加密前存储起来。</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="AAt-Oh-ifI.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="D2i-9s-GAC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="DUg-At-veb.text">
         <source>myname</source>
         <note>Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">myname</target>
+        <target xml:lang="zh-Hans" state="translated">我的名字</target>
       </trans-unit>
       <trans-unit id="DgW-Gm-7l2.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="Dyh-gB-nOv.text">
         <source>You will next see a popup requesting access to your Contacts.</source>
         <note>Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">You will next see a popup requesting access to your Contacts.</target>
+        <target xml:lang="zh-Hans" state="translated">您将会看到一个弹出窗口请求通行使用您的联系人名单。</target>
       </trans-unit>
       <trans-unit id="Ehm-ti-qdD.text">
         <source>Specify your name or arbitrary nickname ie "Coinmaster".
@@ -3575,161 +3592,164 @@ This is used ONLY when sending payments or requests to others to help them ident
 
 This is never sent to Airbitz or any third party and can be changed at any time in the future.</source>
         <note>Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Specify your name or arbitrary nickname ie "Coinmaster".
+        <target xml:lang="zh-Hans" state="translated">请注明您的姓名或随意的昵称，例如“Coinmaster”。
 
-This is used ONLY when sending payments or requests to others to help them identify you.
+这仅仅只是使用在发送付款或别人在要求付款时用来帮助他们识别您。
 
-This is never sent to Airbitz or any third party and can be changed at any time in the future.</target>
+这些资料永远不会传输给Airbitz或第三方，并可在未来任何时间修改它。</target>
       </trans-unit>
       <trans-unit id="G0E-xz-b8e.text">
         <source>Set a 4 Digit PIN</source>
         <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Set a 4 Digit PIN</target>
+        <target xml:lang="zh-Hans" state="translated">设置 4 位数字的 PIN</target>
       </trans-unit>
       <trans-unit id="Gzw-pH-bAR.text">
         <source>1234</source>
         <note>Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">1234</target>
+        <target xml:lang="zh-Hans" state="translated">1234</target>
       </trans-unit>
       <trans-unit id="KSv-b6-auz.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">See Strings.h</target>
+        <target xml:lang="zh-Hans" state="translated">请参阅 Strings.h</target>
       </trans-unit>
       <trans-unit id="SsW-1b-1cv.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">See Strings.h</target>
+        <target xml:lang="zh-Hans" state="translated">请参阅 Strings.h</target>
       </trans-unit>
       <trans-unit id="Tqs-NN-dWt.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Your PIN is a 4 digit code used to do quick re-logins into your account.</target>
+        <target xml:lang="zh-Hans" state="translated">您4位数字的 PIN是用来进行快速重新登录到您的帐户所用。</target>
       </trans-unit>
       <trans-unit id="VAn-0y-asT.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">See Strings.h</target>
+        <target xml:lang="zh-Hans" state="translated">请参阅 Strings.h</target>
       </trans-unit>
       <trans-unit id="Vad-R9-M68.normalTitle">
         <source>SKIP</source>
         <note>Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">SKIP</target>
+        <target xml:lang="zh-Hans" state="translated">跳过</target>
       </trans-unit>
       <trans-unit id="W8f-q2-Sa7.normalTitle">
         <source>Show</source>
         <note>Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Show</target>
+        <target xml:lang="zh-Hans" state="translated">显示</target>
       </trans-unit>
       <trans-unit id="WkL-r2-NLT.text">
         <source>Sign Up</source>
         <note>Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Sign Up</target>
+        <target xml:lang="zh-Hans" state="translated">注册</target>
       </trans-unit>
       <trans-unit id="Wkt-fz-AEf.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Button</target>
+        <target xml:lang="zh-Hans" state="translated">按钮</target>
       </trans-unit>
       <trans-unit id="YJZ-dK-bwv.text">
         <source>Enable Camera Access</source>
         <note>Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Enable Camera Access</target>
+        <target xml:lang="zh-Hans" state="translated">启用相机功能</target>
       </trans-unit>
       <trans-unit id="bPi-8w-xQ4.text">
         <source>PIN</source>
         <note>Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">PIN</target>
+        <target xml:lang="zh-Hans" state="translated">PIN</target>
       </trans-unit>
       <trans-unit id="cng-Cv-ULC.text">
         <source>Enable Contact Access</source>
         <note>Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Enable Contact Access</target>
+        <target xml:lang="zh-Hans" state="translated">启用联系人名单功能</target>
       </trans-unit>
       <trans-unit id="dxS-14-iR5.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Your PIN is a 4 digit code used to do quick re-logins into your account.</target>
+        <target xml:lang="zh-Hans" state="translated">您4位数字的 PIN是用来进行快速重新登录到您的帐户所用。</target>
       </trans-unit>
       <trans-unit id="fCk-W4-OJJ.placeholder">
         <source>Nickname</source>
         <note>Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Nickname</target>
+        <target xml:lang="zh-Hans" state="translated">昵称</target>
       </trans-unit>
       <trans-unit id="fV9-pz-Wfn.placeholder">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Create PIN</target>
+        <target xml:lang="zh-Hans" state="translated">创建 PIN</target>
       </trans-unit>
       <trans-unit id="fnL-7h-MQL.placeholder">
         <source>Choose a Password</source>
         <note>Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Choose a Password</target>
+        <target xml:lang="zh-Hans" state="translated">选择一个密码</target>
       </trans-unit>
       <trans-unit id="hHD-NP-fM6.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="hoE-Bh-x2F.placeholder">
         <source>Re-enter Password</source>
         <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Re-enter Password</target>
+        <target xml:lang="zh-Hans" state="translated">重新输入密码</target>
       </trans-unit>
       <trans-unit id="i3b-ZH-bDm.placeholder">
         <source>Choose a Username</source>
         <note>Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Choose a Username</target>
+        <target xml:lang="zh-Hans" state="translated">请选择一个用户名</target>
       </trans-unit>
       <trans-unit id="jcU-OX-5Hj.text">
         <source>Write down and store securely</source>
         <note>Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Write down and store securely</target>
+        <target xml:lang="zh-Hans" state="translated">请把它写下来并安全地保存起来。</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">请把它写下来并安全地存储起来。</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="jgQ-ju-YiX.text">
         <source>Set a Password and PIN</source>
         <note>Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Set a Password and PIN</target>
+        <target xml:lang="zh-Hans" state="translated">设置密码和 PIN</target>
       </trans-unit>
       <trans-unit id="sJ6-mQ-mSV.text">
         <source>Username</source>
         <note>Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Username</target>
+        <target xml:lang="zh-Hans" state="translated">用户名</target>
       </trans-unit>
       <trans-unit id="tOB-4i-OVm.text">
         <source>mypassword12345</source>
         <note>Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">mypassword12345</target>
+        <target xml:lang="zh-Hans" state="translated">我的密码12345</target>
       </trans-unit>
       <trans-unit id="w3d-xe-eUq.text">
         <source>The password is used to authenticate your account and to change sensitive settings.</source>
         <note>Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">The password is used to authenticate your account and to change sensitive settings.</target>
+        <target xml:lang="zh-Hans" state="translated">这个密码是用来验证您的帐户和修改敏感设置而用的。</target>
       </trans-unit>
       <trans-unit id="wff-Il-8GU.text">
         <source>Write it Down!</source>
         <note>Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Write it Down!</target>
+        <target xml:lang="zh-Hans" state="translated">把它写下来 ！</target>
       </trans-unit>
       <trans-unit id="x6r-A5-Cxg.normalTitle">
         <source>Back</source>
         <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Back</target>
+        <target xml:lang="zh-Hans" state="translated">返回</target>
       </trans-unit>
       <trans-unit id="y2b-Sg-zfM.placeholder">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Create PIN</target>
+        <target xml:lang="zh-Hans" state="translated">创建 PIN</target>
       </trans-unit>
       <trans-unit id="z5S-Vu-MC1.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">NEXT</target>
+        <target xml:lang="zh-Hans" state="translated">下一个</target>
       </trans-unit>
       <trans-unit id="zqc-i8-gfC.text">
         <source>Password</source>
         <note>Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Password</target>
+        <target xml:lang="zh-Hans" state="translated">密码</target>
       </trans-unit>
     </body>
   </file>
@@ -3741,27 +3761,27 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="61J-35-M5b.placeholder">
         <source>Name your new wallet</source>
         <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Name your new wallet</target>
+        <target xml:lang="zh-Hans" state="translated">命名您的新钱包</target>
       </trans-unit>
       <trans-unit id="HuB-Hn-lsB.text">
         <source>Currency:</source>
         <note>Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Currency:</target>
+        <target xml:lang="zh-Hans" state="translated">货币 ︰</target>
       </trans-unit>
       <trans-unit id="Ug5-7Y-oG3.normalTitle">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">CANCEL</target>
+        <target xml:lang="zh-Hans" state="translated">取消</target>
       </trans-unit>
       <trans-unit id="VVb-in-rZz.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Button</target>
+        <target xml:lang="zh-Hans" state="translated">按钮</target>
       </trans-unit>
       <trans-unit id="bfD-1n-tCg.normalTitle">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">DONE</target>
+        <target xml:lang="zh-Hans" state="translated">完成</target>
       </trans-unit>
     </body>
   </file>
