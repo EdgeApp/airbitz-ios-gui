@@ -10,6 +10,7 @@
 #import "UIPhotoItemView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CommonTypes.h"
+#import "Theme.h"
 
 #define kDefaultSubviewGap              30
 #define kMaxSpareViews                  1
@@ -137,8 +138,9 @@
     else
         contentOffset.x = currentPage * mainScrollView.frame.size.width;
     
-    float duration = animation ? .25 : 0.0;
-    [UIView animateWithDuration:duration animations:^
+    float duration = animation ? [Theme Singleton].animationDurationTimeDefault : 0.0;
+    [UIView animateWithDuration:duration
+                     animations:^
     {
         mainScrollView.contentOffset = contentOffset;
     } completion:^(BOOL finished)
@@ -198,7 +200,8 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     mainScrollIndicatorView.tag = 1;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                     animations:^{
         mainScrollIndicatorView.alpha = 1;
     }];
     
@@ -228,7 +231,7 @@
     dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
         if (mainScrollIndicatorView.tag == 0) {
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault animations:^{
                 mainScrollIndicatorView.alpha = 0;
             }];
         }
@@ -480,7 +483,7 @@
 
 - (void)tweenBgImages
 {
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault animations:^{
         _backgroundImage.alpha = 1.0;
     }];
 }

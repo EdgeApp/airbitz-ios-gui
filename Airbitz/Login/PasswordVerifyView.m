@@ -10,6 +10,7 @@
 #import "Strings.h"
 #import "Util.h"
 #import "AB.h"
+#import "Theme.h"
 
 @interface PasswordVerifyView ()
 
@@ -48,8 +49,8 @@
 //    pv.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 //    pv.layer.masksToBounds = NO;
 	
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -68,8 +69,8 @@
 
 -(void)dismiss
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {

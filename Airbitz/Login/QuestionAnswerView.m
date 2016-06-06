@@ -7,11 +7,10 @@
 //
 
 #import "QuestionAnswerView.h"
+#import "Theme.h"
 
 
 #define QA_TABLE_HEIGHT     200.0
-
-#define QA_ANIM_TIME_SECS   0.35
 
 @interface QuestionAnswerView () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -111,8 +110,8 @@
 	
 	_originalFrame = self.frame;
 	self.answerField.enabled = NO;
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -137,8 +136,8 @@
 {
 	[self.delegate QuestionAnswerViewTableDismissed:self];
 	self.answerField.enabled = YES;
-	[UIView animateWithDuration:QA_ANIM_TIME_SECS
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -175,8 +174,8 @@
         if (_bQuestionExpanded)
         {
             _bQuestionExpanded = NO;
-            [UIView animateWithDuration:QA_ANIM_TIME_SECS
-                                  delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^
              {
@@ -195,8 +194,8 @@
 
             [self.superview bringSubviewToFront:self];
 
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^
              {
@@ -293,7 +292,7 @@
 	self.answerField.minimumCharacters = [[_dict objectForKey:@"minLength"] intValue];
 	_questionSelected = YES;
 
-    [self performSelector:@selector(notifyQuestionSelected) withObject:nil afterDelay:QA_ANIM_TIME_SECS];
+    [self performSelector:@selector(notifyQuestionSelected) withObject:nil afterDelay:[Theme Singleton].animationDurationTimeDefault];
 }
 
 @end

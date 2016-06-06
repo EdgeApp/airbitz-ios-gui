@@ -201,8 +201,8 @@
             [self.delegate slideoutWillClose:self];
         }
         if (bAnimation) {
-            [UIView animateWithDuration:0.35
-                                delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseOut
                             animations:^
             {
@@ -213,8 +213,8 @@
             {
                 
             }];
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseOut
                              animations:^
              {
@@ -237,8 +237,8 @@
             [self.delegate slideoutWillOpen:self];
         }
         if (bAnimation) {
-            [UIView animateWithDuration:0.35
-                                delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseOut
                             animations:^
             {
@@ -250,8 +250,8 @@
                 
             }];
             [self addBlockingButton:self->_parentView];
-            [UIView animateWithDuration:0.35
-                                  delay:0.0
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
                                 options:UIViewAnimationOptionCurveEaseOut
                              animations:^
              {

@@ -17,7 +17,6 @@
 #import "MainViewController.h"
 #import "Theme.h"
 
-#define KEYBOARD_APPEAR_TIME_SECS   0.3
 //#define TABLE_CELL_BACKGROUND_COLOR [UIColor colorWithRed:213.0/255.0 green:237.0/255.0 blue:249.0/255.0 alpha:1.0]
 
 
@@ -277,8 +276,8 @@
 {
     [self.textFieldRecipient resignFirstResponder];
 
-//	[UIView animateWithDuration:EXIT_ANIM_TIME_SECS
-//						  delay:0.0
+//    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+//                          delay:[Theme Singleton].animationDelayTimeDefault
 //						options:UIViewAnimationOptionCurveEaseInOut
 //					 animations:^
 //	 {
@@ -379,8 +378,8 @@
     CGRect keyboardRect;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardRect];
 
-    [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
@@ -397,8 +396,8 @@
     CGRect keyboardRect;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardRect];
 
-    [UIView animateWithDuration:KEYBOARD_APPEAR_TIME_SECS
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {

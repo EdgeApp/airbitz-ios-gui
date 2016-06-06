@@ -82,6 +82,7 @@ const int NumPromoRows              = 5;
     BOOL                                _segmentedControlUSD;
     int64_t                             _totalSatoshi;
     UIImage                             *_blankImage;
+    NSDateFormatter                     *_dateFormatter;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
@@ -167,6 +168,10 @@ const int NumPromoRows              = 5;
     [self.balanceViewPlaceholder addSubview:_balanceView];
     [_balanceView showBalance:NO];
     
+    _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
 
@@ -235,8 +240,8 @@ const int NumPromoRows              = 5;
     
     [self updateNavBar];
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
@@ -611,8 +616,8 @@ const int NumPromoRows              = 5;
 
 -(void)dismissTransactionDetails
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -765,7 +770,7 @@ const int NumPromoRows              = 5;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network");
+        ABCLog(1, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
     }];
 }
 
@@ -1142,8 +1147,10 @@ const int NumPromoRows              = 5;
         cell.addressLabel.textAlignment = NSTextAlignmentLeft;
         cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
         
+        NSString *formattedDateString = [_dateFormatter stringFromDate:transaction.date];
+        
         // date
-        cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
+        cell.dateLabel.text = formattedDateString;
         
         // address
         if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
@@ -1289,7 +1296,15 @@ const int NumPromoRows              = 5;
         {
             // Buy bitcoin button
             NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
-            if (SHOW_BUY_SELL &&
+            
+            NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
+
+            if (overrideURL && [overrideURL length] > 7)
+            {
+                NSURL *url = [[NSURL alloc] initWithString:overrideURL];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            else if (SHOW_BUY_SELL &&
                 ([deviceCurrency isEqualToString:@"USD"] ||
                  [deviceCurrency isEqualToString:@"CAD"] ||
                  [deviceCurrency isEqualToString:@"EUR"]))
@@ -1624,9 +1639,13 @@ const int NumPromoRows              = 5;
             NSAssert(0, @"No wallets in balance section");
             break;
         case WALLET_SECTION_ACTIVE:
+            if (![abcAccount.arrayWallets count])
+                return cell;
             wallet = [abcAccount.arrayWallets objectAtIndex:row];
             break;
         case WALLET_SECTION_ARCHIVED:
+            if (nil == abcAccount.arrayArchivedWallets || ![abcAccount.arrayArchivedWallets count])
+                return cell;
             wallet = [abcAccount.arrayArchivedWallets objectAtIndex:row];
             break;
     }
@@ -1732,8 +1751,8 @@ const int NumPromoRows              = 5;
     {
         _walletMakerVisible = NO;
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1761,8 +1780,8 @@ const int NumPromoRows              = 5;
         [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
         [self createBlockingButton:self.walletMakerView];
         [self.walletMakerView.textField becomeFirstResponder];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1791,8 +1810,8 @@ const int NumPromoRows              = 5;
                         action:@selector(blockingButtonHit:)
               forControlEvents:UIControlEventTouchDown];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {
@@ -1807,8 +1826,8 @@ const int NumPromoRows              = 5;
 
 - (void)removeBlockingButton
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {

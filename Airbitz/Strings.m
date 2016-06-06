@@ -213,10 +213,12 @@
 #define searchText                                  NSLocalizedString(@"Search", @"SearchBarSearch placeholder")
 #define walletExport                                NSLocalizedString(@"Wallet Export", nil)
 #define privateSeedText                             NSLocalizedString(@"Private Seed", nil)
+#define publicSeedText                              NSLocalizedString(@"Public Seed (XPub)", nil)
 #define exportWalletTransactions                    NSLocalizedString(@"Export Wallet Transactions", nil)
 #define airprintIsNotAvailable                      NSLocalizedString(@"AirPrint is not currently available", nil)
 #define walletPrivateSeed                           NSLocalizedString(@"Wallet Private Seed", nil)
 #define exportPrivateSeed                           NSLocalizedString(@"Export Private Seed", nil)
+#define exportPublicSeed                            NSLocalizedString(@"Export Public Seed (XPub)", nil)
 #define emailCancelled                              NSLocalizedString(@"Email cancelled.", nil)
 #define emailSavedToSendLater                       NSLocalizedString(@"Email saved to send later.", nil)
 #define emailSent                                   NSLocalizedString(@"Email sent.", nil)
@@ -368,7 +370,12 @@
 #define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
 #define successfullyReceivedIdentityToken           NSLocalizedString(@"Successfully received identity token from %@" ,nil)
-
+#define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
+#define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
+#define change_mining_fee_low                       NSLocalizedString(@"Low Fee",nil)
+#define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
+#define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
+#define copied_text                                 NSLocalizedString(@"Copied",nil)
 //#define
 //#define
 //#define

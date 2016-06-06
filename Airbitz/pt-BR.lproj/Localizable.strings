@@ -6,7 +6,7 @@
 
 Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
 
-Compartilhe este link para receber a receita dos usuários que instalam e usam %2$@. Você irá receber 0.25%% de todas as compras feitas com cartão de presentes dentro deste aplicativo.";
+Compartilhe este link para receber a receita dos usuários que instalam e usam %2$@. Você irá receber 0,25%% de todas as compras feitas com cartões de presente dentro deste aplicativo.";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
 "%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ solicitado via %3$@ em %4$@.";
@@ -32,7 +32,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "** Warning **" = "** Atenção **";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ATENÇÃO** Você nunca será capaz de recuperar sua senha se a esquecê-la!!";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ATENÇÃO** Você NUNCA será capaz de recuperar sua senha se a esquecê-la!!";
 
 /* No comment provided by engineer. */
 "2 Factor (Enhanced Security)" = "2 Fatores (Segurança Avançada)";
@@ -304,6 +304,9 @@ Digite-a abaixo para certificar-se:";
 "Email saved to send later." = "E-mail salvo para enviar mais tarde.";
 
 /* No comment provided by engineer. */
+"Email sent." = "E-mail enviado.";
+
+/* No comment provided by engineer. */
 "Enable" = "Habilitar";
 
 /* settings text */
@@ -364,7 +367,7 @@ Digite-a abaixo para certificar-se:";
 "Export" = "Exportar";
 
 /* No comment provided by engineer. */
-"Export Private Seed" = "Export Private Seed";
+"Export Private Seed" = "Exportar Chave Mestra Privada";
 
 /* No comment provided by engineer. */
 "Export Wallet Transactions" = "Exportar Transações da Carteira";
@@ -561,7 +564,7 @@ Digite-a abaixo para certificar-se:";
 "Not so good" = "Não é tão bom";
 
 /* No comment provided by engineer. */
-"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.";
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Nota: A configuração de moeda padrão é usada somente para novas carteiras e para mostrar o saldo total da conta. Crie uma nova carteira para alterar a moeda fiduciária mostrada em cada transação.";
 
 /* OK button text */
 "OK" = "OK";
@@ -652,7 +655,7 @@ Digite-a abaixo para certificar-se:";
 "Please enter your password to enable Touch ID" = "Por favor, digite sua senha para habilitar o Touch ID";
 
 /* No comment provided by engineer. */
-"Please have Requestor contact support" = "Please have Requestor contact support";
+"Please have Requestor contact support" = "Por favor, tenha o suporte de contato do solicitante";
 
 /* No comment provided by engineer. */
 "Please try again later or contact support" = "Por favor, tente novamente mais tarde ou contate o suporte";
@@ -667,7 +670,7 @@ Digite-a abaixo para certificar-se:";
 "Present QR code to Sender and have them scan to send you payment" = "Apresente o código QR para o Remetente e ele precisará escanear o código para lhe enviar o pagamento";
 
 /* No comment provided by engineer. */
-"Private Seed" = "Private Seed";
+"Private Seed" = "Chave Mestra Privada";
 
 /* No comment provided by engineer. */
 "QR Code Scan Failure" = "Falha no Escaneamento do Código QR";
@@ -732,16 +735,16 @@ Digite-a abaixo para certificar-se:";
 "Reset Date" = "Resetar Data";
 
 /* No comment provided by engineer. */
-"Reset requested. Please retry login after 7 days." = "Reset requested. Please retry login after 7 days.";
+"Reset requested. Please retry login after 7 days." = "Reset solicitado. Por favor, tente logar novamente após 7 dias.";
 
 /* No comment provided by engineer. */
-"Restarting watcher service" = "Restarting watcher service";
+"Restarting watcher service" = "Reiniciando o serviço do observador";
 
 /* No comment provided by engineer. */
 "Restaurants & Food Trucks" = "Restaurantes & Food Trucks";
 
 /* Income notes field for affiliate revenue */
-"Revenue share from affiliate link %@" = "Revenue share from affiliate link %@";
+"Revenue share from affiliate link %@" = "Compartilhamento de receita do link afiliado %@";
 
 /* text for textmessage/SMS */
 "SMS" = "SMS";
@@ -756,13 +759,13 @@ Digite-a abaixo para certificar-se:";
 "San Diego, California, USA" = "San Diego, Califórnia, EUA";
 
 /* Text at top of Scan Screen */
-"Scan QR to Import Private Key/Gift Card" = "Scan QR to Import Private Key/Gift Card";
+"Scan QR to Import Private Key/Gift Card" = "Escaneie o QR para importar a Chave Privada/Cartão de Presente";
 
 /* Text at top of Send screen */
 "Scan QR to Send, Import, or Login with BitID" = "Escanear o QR para enviar, importar, ou faça o Login com BitID";
 
 /* No comment provided by engineer. */
-"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Escaneie o código QR do beneficiário para enviar o pagamento ou toque em uma solicitação de bluetooth na lista abaixo";
 
 /* SearchBarSearch placeholder */
 "Search" = "Procurar";
@@ -831,7 +834,7 @@ Digite-a abaixo para certificar-se:";
 "Successfully Logged In" = "Logado com Sucesso";
 
 /* No comment provided by engineer. */
-"Sweep Funds From Private Key" = "Sweep Funds From Private Key";
+"Sweep Funds From Private Key" = "Varredura de Fundos da Chave Privada";
 
 /* Synchronizing text in confirmation textfield */
 "Synchronizing" = "Sincronizando";
@@ -843,10 +846,10 @@ Digite-a abaixo para certificar-se:";
 "Tap and hold a wallet for additional options" = "Toque e segure uma carteira para obter opções adicionais";
 
 /* No comment provided by engineer. */
-"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.";
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "O token de autenticação de dois fatores neste dispositivo é inválido. O símbolo foi mudado por um dispositivo diferente ou a hora do seu relógio está errada. Por favor, verifique o horário do relógio do seu sistema para garantir se está correto.";
 
 /* No comment provided by engineer. */
-"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@";
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "O endereço bitcoin do dispositivo conectado com:%1$@ não coincide com o endereço que foi inicialmente anunciado:%2$@";
 
 /* No comment provided by engineer. */
 "The given answers were incorrect. Please try again." = "As respostas dadas estavam incorretas. Por favor, tente novamente.";
@@ -869,13 +872,13 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "This may take a few minutes if it is the first time logging into this device." = "Isto pode demorar alguns minutos se for a primeira vez que está logando neste dispositivo.";
 
 /* Popup sessage for when a wallet is archived */
-"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "This wallet has been archived. Please select a different wallet from the [Wallets] screen";
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "Esta carteira foi arquivada. Por favor, selecione uma carteira diferente na tela [Wallets]";
 
 /* text in password verification popup */
 "Time to crack:" = "Tempo de crack:";
 
 /* Popup wallet help test */
-"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet";
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Para classificar as carteiras, toque e arraste as 3 barras à direita de uma carteira. Arraste para baixo do cabeçalho [ARCHIVE] para arquivar a carteira";
 
 /* No comment provided by engineer. */
 "To: %@" = "Para: %@";
@@ -917,7 +920,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Two Factor" = "Dois Fatores";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.";
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "A autenticação de Dois Fatores (segurança reforçada) foi habilitada de um dispositivo diferente para esta conta. Por favor, habilite a autenticação de 2 fatores por completo deste dispositivo.";
 
 /* No comment provided by engineer. */
 "Two Factor Authentication On" = "Autenticação de Dois Fatores Ligada";
@@ -930,11 +933,11 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 
 ** Warning **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Two Factor Enabled
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Dois Fatores Habilitado
 
-** Warning **
+** Aviso **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"";
+Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias para desativar o 2FA e acessar sua conta.\"";
 
 /* No comment provided by engineer. */
 "Two Factor Invalid" = "Dois Fatores Inválidos";
@@ -943,7 +946,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Two Factor Reset" = "Reset do Dois Fatores";
 
 /* No comment provided by engineer. */
-"Unable to determine two factor status" = "Unable to determine two factor status";
+"Unable to determine two factor status" = "Não é possível determinar o status dos dois fatores";
 
 /* No comment provided by engineer. */
 "Unable to import secret" = "Não é possível importar o segredo";
@@ -1027,7 +1030,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet Export" = "Exportar Carteira";
 
 /* No comment provided by engineer. */
-"Wallet Private Seed" = "Wallet Private Seed";
+"Wallet Private Seed" = "Chave Mestra Privada da Carteira";
 
 /* No comment provided by engineer. */
 "Wallet creation failed:
@@ -1047,22 +1050,22 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Aviso. Sem uma senha, você não será capaz de acessar em um novo dispositivo se esse dispositivo for perdido ou roubado, ou se esse aplicativo for desinstalado";
 
 /* Double spend status in transaction list */
-"Warning: Double Spend" = "Warning: Double Spend";
+"Warning: Double Spend" = "Aviso: Gasto Dobrado";
 
 /* RBF status in transaction list */
-"Warning: Replace by Fee Detected. Double spend likely" = "Warning: Replace by Fee Detected. Double spend likely";
+"Warning: Replace by Fee Detected. Double spend likely" = "Aviso: Devoluçã por taxa detectada. Provável gasto dobrado";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Banco de dados do observador autorizado, mas ocorreu um erro. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização";
 
 /* No comment provided by engineer. */
-"Would you like to enable TouchID for this account and device?" = "Would you like to enable TouchID for this account and device?";
+"Would you like to enable TouchID for this account and device?" = "Gostaria de habilitar o TouchID para esta conta e dispositivo?";
 
 /* No comment provided by engineer. */
-"Would you like to send funds to this address or import funds into your wallet?" = "Would you like to send funds to this address or import funds into your wallet?";
+"Would you like to send funds to this address or import funds into your wallet?" = "Gostaria de enviar fundos para este endereço ou importar os fundos para a sua carteira?";
 
 /* No comment provided by engineer. */
 "Would you like to send us some feedback?" = "Gostaria de nos enviar algum feedback?";
@@ -1093,16 +1096,16 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 /* No comment provided by engineer. */
 "You received Bitcoin!
 %@ (~%@)
-Use the Payee, Category, and Notes field to optionally tag your transaction" = "You received Bitcoin!
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "Você recebeu Bitcoin!
 %1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction";
+Use o campo de Beneficiário, Categoria e Notas, opcionalmente, para marcar sua transação";
 
 /* Camera signup screen */
 "You will next see a popup requesting access to your Camera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "You will next see a popup requesting access to your Camera.
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "Em seguida, você verá um pop-up solicitando acesso à sua Câmera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
+[[abtag APP_TITLE]] precisa disso pra escanear códigos QR para pagar pessoas e comerciantes.";
 
 /* No comment provided by engineer. */
 "You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Você recebeu Bitcoin! Nós recomendamos FORTEMENTE que você defina perguntas e respostas para Recuperação de Senha. Caso contrário, você NÃO será capaz de acessar sua conta se você esquecer sua senha.";
@@ -1118,11 +1121,11 @@ Use the Payee, Category, and Notes field to optionally tag your transaction";
 
 All tagged information is kept 100% private and encrypted by your password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] utiliza contatos para ajudar a marcar informações sobre suas transações.
 
-All tagged information is kept 100% private and encrypted by your password.
+Toda a informação marcada é mantida 100% privada e criptografada por sua senha.
 
-No one, including [[abtag APP_TITLE]], has any access to this information.";
+Ninguém, incluindo [[abtag APP_TITLE]], tem acesso a esta informação.";
 
 /* settings text */
 "bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";

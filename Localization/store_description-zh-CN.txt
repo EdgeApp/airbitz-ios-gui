@@ -1,42 +1,42 @@
-Sell, Secure, Send, and Receive Bitcoin
+出售、 安全、 发送和接收比特币
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+超强功能和简易使用的比特币钱包能够让使用者更轻松地使用比特币的private keys和更便捷手机银行功能。
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+您的资金由您亲自掌控 ！ 由Airbitz打造的应用程式，只有您能够控制资金或查询交易数据。 Airbitz 或任何第三方都不可以无法获取您的资金或数据。 您将得到完全的金融隐私权和自治比特币功能，它的简单功能设计，连奶奶级别都能应付自如。
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+我们非常注重让使用者有最佳的用户体验，所以 Airbitz 所设计的钱包提供了以下的强大功能：
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+• Airbitz 或第三方对使用者的资金，密码或交易资料完全没有任何的通行权，确保最顶级私隐措施
+• 专为美国和加拿大居民设计的购买/销售功能
+• 使用蓝牙 (BLE) 功能，而不需要扫描二维码 
+• 简单的帐号创建，只需使用登入名和密码 (无需打印 pdf 文件，抄写密码，或添加任何加密设置）
+• 钱包的自动加密备份功能，减少对云端服务器的需求量
+• 世界上最简单又安全的一触式2要素身份验证功能
+•在登录屏幕下拉用户名就能快速切换帐户
+• 跨越多种设备的同步更新
+• 层次化确定型钱包随每笔交易更换地址
+• 每个帐户使都能创建数个用户自定义的钱包（即 "度假基金"）
+• 支持多个法定货币。 为每钱包设定不同的法定货币
+• 以收款人、 类别或笔记为每笔交易进行搜索
+• 内建计算器方便换算
+• 商业模式启动更容易和畅顺的后台用户界面
+• 当检测到部分付款时，会创建一个新的二维码来请求支付剩余的余额 
+• 每日的支出限制 （当支付超过上限时将需要密码通行）
+• 超过花费限制时需要PIN
+• 只需双点击就能快速转移两个钱包之间的资金
+• 用 WIF 或 Casascius 的private keys进行资金导入
+• 分散服务器体系结构。 即使 Airbitz 服务器离线，钱包依然可以运作。
+• 启用Airbitz 商业目录来为每一笔交易自动填写商业信息，包括商业标志或照片
+• 通过通讯录的整合，自动完成收款人姓名和照片的填写
+•支持BIP 70 付款协议
+• 开放的源代码。 可到Http://github.com/Airbitz 下载
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+********* 隐私通知*********
+Airbitz 应用程序需要使用者允许程序使用设备当中的联系人列表、 位置和个人的信息。 在设备里所使用的信息将能提升使用者的体验，例如：
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1。 在进行交易后，在使用者的通讯录当中自动完成联系人的填写
+2。 在发送电邮或短信支付的请求时，会在使用者的通讯录当中自动完成联系人的填写
+3。 在交易完成后，自动完成商业名称列表的填写
+4。 通过用户设备当中的定位功能搜索附近的商家
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+所有从设备发送出去的个人信息或联络名单信息都会先被加密，并还需要经过使用者的认证（帐户名/密码）。 Airbitz或任何第三方都无权获知应用程序里的信息和资讯。

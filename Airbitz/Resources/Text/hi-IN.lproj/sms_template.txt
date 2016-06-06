@@ -1,19 +1,19 @@
 बिटकॉइन भुगतान का अनुरोध
 से:[[abtag FROM]]
 
-Please scan QR code or click on the links to pay
+क्यूआर कोड को स्कैन करने या भुगतान करने के लिए लिंक पर क्लिक करें
 
-Click to Pay
+भुगतान करने के लिए क्लिक करें
 [[abtag REDIRECT_URL]]
 
 [[abtag BITCOIN_URI]]
 
 पता: [[abtag ADDRESS]]
-Amount: [[abtag AMOUNT_BTC]] BTC
-Amount: [[abtag AMOUNT_BITS]] bits
+राशि: [[abtag AMOUNT_BTC]] बीटीसी
+राशि: [[abtag AMOUNT_BITS]] बिट्स
 
-Sent from the [[abtag APP_TITLE]] Mobile Bitcoin Wallet + Business Directory
+[[Abtag APP_TITLE]] से भेजा गया मोबाइल Bitcoin बटुआ + व्यापार निर्देशिका
 
-Download [[abtag APP_TITLE]] for iOS or Android
+[[abtag APP_TITLE]] को IOS या Android के लिए डाउनलोड करें
 [[abtag APP_DOWNLOAD_LINK]]
 

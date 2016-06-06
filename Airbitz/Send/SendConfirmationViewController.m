@@ -24,7 +24,7 @@
 
 #define REFRESH_PERIOD_SECONDS 30
 
-@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate,
+@interface SendConfirmationViewController () <UITextFieldDelegate, ConfirmationSliderViewDelegate, CalculatorViewDelegate, UIAlertViewDelegate,
                                               TransactionDetailsViewControllerDelegate, PopupPickerView2Delegate,
                                               ButtonSelector2Delegate, InfoViewDelegate>
 {
@@ -38,12 +38,15 @@
     NSString                            *_strReason;
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
+    UIAlertView                         *_changeFeeAlert;
+    ABCSpendFeeLevel                    _feeLevel;
     NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
     BOOL                                _currencyOverride;
     ABCCurrency                         *_currency;
     ABCSpend                            *_spend;
     uint64_t                            _amountSatoshi;
+    NSNumberFormatter                   *_numberFormatter;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
@@ -133,6 +136,11 @@
     
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
+    _feeLevel = ABCSpendFeeLevelStandard;
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [_numberFormatter setMinimumFractionDigits:0];
+    [_numberFormatter setMaximumFractionDigits:2];
 
     // Should this be threaded?
     _totalSentToday = [abcAccount.currentWallet getTotalSentToday];
@@ -315,6 +323,8 @@
 {
     NSError *error = nil;
     _spend = [abcAccount.currentWallet createNewSpend:&error];
+    _spend.feeLevel = _feeLevel;
+    
     if (!error)
     {
         if (_destWallet)
@@ -401,8 +411,8 @@
     [self dismissErrorMessage];
 
     [self.withdrawlPIN resignFirstResponder];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -419,6 +429,19 @@
             }
             [self dismissKeyboard];
      }];
+}
+
+- (IBAction)ChangeFeeButton:(id)sender
+{
+    // Popup fee selection
+    _changeFeeAlert = [[UIAlertView alloc]
+                       initWithTitle:change_mining_fee_popup_title
+                       message:change_mining_fee_popup_message
+                       delegate:self
+                       cancelButtonTitle:cancelButtonText
+                       otherButtonTitles:change_mining_fee_low, change_mining_fee_standard, change_mining_fee_high, nil];
+
+    [_changeFeeAlert show];
 }
 
 - (IBAction)ChangeFiatButton:(id)sender
@@ -593,8 +616,8 @@
     self.transactionDetailsController.view.frame = frame;
     
     [self.view addSubview:self.transactionDetailsController.view];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -641,11 +664,15 @@
     {
         _amountSatoshi = [abcAccount.settings.denomination btcStringToSatoshi:self.amountBTCTextField.text];
         fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_amountSatoshi currencyCode:_currency.code error:nil];
-        self.amountFiatTextField.text = [NSString stringWithFormat:@"%.2f", fCurrency];
+        
+        NSNumber *num = [NSNumber numberWithDouble:fCurrency];
+        self.amountFiatTextField.text = [_numberFormatter stringFromNumber:num];
     }
     else if ((_selectedTextField == self.amountFiatTextField) && !self.bAmountImmutable && bAllowBTCUpdate)
     {
-        fCurrency = [self.amountFiatTextField.text doubleValue];
+        NSNumber *num = [_numberFormatter numberFromString:self.amountFiatTextField.text];
+        fCurrency = [num doubleValue];
+
         _amountSatoshi = [abcAccount.exchangeCache currencyToSatoshi:fCurrency currencyCode:_currency.code error:nil];
         self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_amountSatoshi
                                                                                  withSymbol:false
@@ -746,7 +773,10 @@
 
         currencyFees = [abcAccount.exchangeCache satoshiToCurrency:txFees currencyCode:_currency.code error:nil];
         [fiatFeeString appendString:@"+ "];
-        [fiatFeeString appendString:[NSString stringWithFormat:@"%0.2f", currencyFees]];
+        NSNumber *number = [NSNumber numberWithDouble:currencyFees];
+        NSString *string = [_numberFormatter stringFromNumber:number];
+        if (string)
+            [fiatFeeString appendString:string];
         [fiatFeeString appendString:@" "];
         [fiatFeeString appendString:_currency.code];
         
@@ -1036,6 +1066,38 @@
             [self hideSendStatus];
         }
 //    });
+}
+
+#pragma mark - UIAlertView delegates
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (alertView == _changeFeeAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            return;
+        }
+        else if (1 == buttonIndex)
+        {
+            // fee low
+            ABCLog(0, @"Set fee low");
+            _feeLevel = ABCSpendFeeLevelLow;
+        }
+        else if (2 == buttonIndex)
+        {
+            // fee standard
+            ABCLog(0, @"Set fee std");
+            _feeLevel = ABCSpendFeeLevelStandard;
+        }
+        else if (3 == buttonIndex)
+        {
+            // fee high
+            ABCLog(0, @"Set fee high");
+            _feeLevel = ABCSpendFeeLevelHigh;
+        }
+        [self startCalcFees];
+    }
 }
 
 #pragma mark - GestureReconizer methods

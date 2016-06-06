@@ -86,8 +86,8 @@
 
 -(IBAction)back:(id)sender
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
@@ -266,8 +266,8 @@
 //        _activeTextField = nil;
 //    }
 //    _keyboardFrameOriginY = 0.0;
-//    [UIView animateWithDuration:0.35
-//                          delay:0.0
+//    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+//                          delay:[Theme Singleton].animationDelayTimeDefault
 //                        options:UIViewAnimationOptionCurveEaseInOut
 //                     animations:^
 //                     {

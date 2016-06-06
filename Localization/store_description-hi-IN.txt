@@ -2,41 +2,41 @@
 
 दमदार और इस्तेमाल में सरल बिटकॉइन वॉलेट अपने उपयोगकर्ताओं को बिटकॉइन गोपनीय चाबी पर पूरा नियंत्रण रखने की अनुमति देता है और मोबाइल बैंकिंग को आसान बनाता है|
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. आपको प्रदान किए गए वित्तीय गोपनीयता और बिट कॉइन स्वायत्तता सरलता से इस्तेमाल के लिए इस तरह से बनाया गया है कि आपकी दादी भी इसे संभाल सकती हैं|
+अपनी धनराशि पर नियंत्रण करें! एयरबिट्ज़ से, केवल आप ही अपने धन और उनके लेनदेन सम्बन्धी जानकारी देख सकते हैं| न तो एयरबिट्ज़ न कोई तृतीय पक्ष आपके पैसे या डेटा तक पहुँच सकते हैं। आपको प्रदान किए गए वित्तीय गोपनीयता और बिट कॉइन स्वायत्तता सरलता से इस्तेमाल के लिए इस तरह से बनाया गया है कि आपकी दादी भी इसे संभाल सकती हैं|
 
 एक अद्भुत यूजर अनुभव प्रदान करने के साथ-साथ, एयरबिट्ज़ वॉलेट निम्नलिखित शानदार कार्यक्षमता भी प्रदान करता है:
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+उपयोगकर्ता की धनराशि, चाबी, और लेनदेन के बारे में एयरबिट्ज़ या किसी तीसरे पक्ष को न कोई जानकारी, न ही पहुँच|
+• यूएस और कनाडा वासियों के लिए एकीकृत खरीद/बेच
+•ब्लूटूथ(BLE) से भुगतान, बिना क्यूआर कोड 
+•लॉग इन और पासवर्ड से एक एकदम सरल खाता निर्माण(कोई पीडीऍफ़ की प्रिंटिंग नहीं, कोई खोखले शब्द नहीं और न हीं कोई गोपनीयता की सेटिंग्स)
+•व्यर्थ पीअर-से-पीअर क्लाउड सेवर के लिए गुप्त वॉलेट बैकअप स्वतः
+दुनिया के सरलतम एवं सुरक्षित वॉलेटके लिए 1- टच 2-कारक पुष्टि
+•लॉग इन स्क्रीन के ड्रॉप डाउन से यूजरनाम से खाते किए बीच शीघ्र अदला बदली
+•सभी मोबाइल उपकरणों में मल्टी-डिवाइस तालमेल
+वर्गीकृत दृढ़ वॉलेटस के लिए प्रत्येक लेनदेन के साथ पता बदलाव
+•यूजर द्वारा निर्धारित नामों के एक ही खाते में एक से अधिक वाल्लेट्स(जैसे- "अवकाश धनराशि")
+•एक से ज्यादा फ़िएट मुद्रा समर्थन प्रत्येक वॉलेट की एक फ़िएट मुद्रा निर्धारित करें
+•लेनदेन पेयी, वर्ग और टिप्पणियों के अनुसार खोजें
+• आसान परिवर्तन के लिए अंतर्निहित कैलकुलेटर
+•व्यापारी मोड सरल और अस्थिर यूजर इंटरफ़ेस को चुपके से सक्षम कर देता है
+• आंशिक भुगतान अनुसन्धान शेष राशि के साथ एक नया QR कोड भुगतान अनुरोध बनाता है 
+• दैनिक खर्च सीमा (सीमा से अधिक खर्च करने के लिए पासवर्ड की आवश्यकता होती है)
+पिन-खर्च सीमाओं की आवश्यकता
+•वालेट्स के बीच भुगतान के लिए दो टैप वाला तीव्र युआई UI
+•WIF या Casascius निजी चाबियों से धनराशि आयात
+• विकेन्द्रीकृत सर्वर आर्किटेक्चर। वाल्लेट्स, एयरबिट्ज़ का सर्वर डाउन होने पर भी काम करते हैं|
+•व्यापारिक जानकारी, बिज़नेस लोगो/तस्वीर आदि स्वतः पूर्ण करने के लिए एयरबिट्ज़ बिज़नेस डायरेक्टरी का एकीकरण
+• पेयी का नाम और फोटो को स्वतः पूर्ण करने के लिए एड्रेस बुक के साथ एकीकरण
+• BIP 70 भुगतान प्रोटोकॉल समर्थित
+• खुला स्रोत कोड। Https://github.com/Airbitz पर उपलब्ध
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+*********गोपनीयता सूचना*********
+एयरबिट्ज़ एप्लीकेशन ने उपकरण से संपर्क सूचि, स्थान और निजी जानकारी हासिल करने की अनुमति मांगी है| ये जानकारी यूजर को इस उपकरण पर बेहतर अनुभव प्रदान करने के लिए निम्लिखित तरीकों से इस्तेमाल की जा रही है:
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1। लेनदेन के बाद यूजर की संपर्क सूची से संपर्क स्वतः पूर्ण कर लिए जाएँ
+2। ईमेल और एसएमएस भुगतान अनुरोध भेजने के लिए यूजर के एड्रेस बुक से संपर्क स्वत: पूर्ण करें
+3। लेनदेन के बाद व्यापारिक सूचि नाम स्वतः पूर्ण करे
+4। आस पास के क्षेत्र में व्यापार खोजने के लिए यूजर की भूस्थिति पता लगाना
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+यूजर की महत्वपूर्ण जानकारी(यूजरनाम/पासवर्ड) को सुरक्षित करने से पहले कोई निजी जानकारी या संपर्क सूची उपकरण से बाहर नहीं जा सकती| इस एप्लीकेशन द्वारा ली गयी जानकारी के बारे में न तो एयरबिट्ज़ और न ही कोई अन्य पक्ष जानता है|

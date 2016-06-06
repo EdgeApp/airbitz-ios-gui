@@ -69,6 +69,9 @@
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
 @property (nonatomic) CGFloat animationDurationTimeDefault;
+@property (nonatomic) CGFloat animationDurationTimeFast;
+@property (nonatomic) CGFloat animationDurationTimeSlow;
+@property (nonatomic) CGFloat animationDurationTimeVerySlow;
 @property (nonatomic) UIViewAnimationOptions animationCurveDefault;
 @property (nonatomic) CGFloat alertHoldTimeDefault;
 @property (nonatomic) CGFloat alertFadeoutTimeDefault;

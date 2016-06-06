@@ -753,8 +753,8 @@ typedef enum eRequestType
 {
     CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight] - HEADER_PADDING;
 
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
@@ -773,8 +773,8 @@ typedef enum eRequestType
 
 - (void)scrollContentViewBackToOriginalPosition
 {
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
@@ -1223,8 +1223,8 @@ typedef enum eRequestType
     _autoCompleteTable.dataSource = self;
     _autoCompleteTable.delegate = self;
     
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -1243,8 +1243,8 @@ typedef enum eRequestType
         CGRect frame = _autoCompleteTable.frame;
         frame.size.height = 0.0;
         frame.origin.y = frame.origin.y + 100;// (_originalScrollableContentFrame.origin.y - self.scrollableContentView.frame.origin.y);
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -1558,8 +1558,8 @@ typedef enum eRequestType
     [self blockUser:TRUE];
 
     // bring the picker up with it
-    [UIView animateWithDuration:0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
