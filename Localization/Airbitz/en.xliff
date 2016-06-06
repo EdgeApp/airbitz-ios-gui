@@ -690,10 +690,6 @@
         <source>0</source>
         <note>Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button";</note>
       </trans-unit>
-      <trans-unit id="WkG-ho-3qR.normalTitle">
-        <source>.</source>
-        <note>Class = "UIButton"; normalTitle = "."; ObjectID = "WkG-ho-3qR"; Note = "Calculator Button";</note>
-      </trans-unit>
       <trans-unit id="b8e-QF-DXa.normalTitle">
         <source>1</source>
         <note>Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button";</note>
@@ -751,6 +747,10 @@
       <trans-unit id="0ea-NR-Nd9.normalTitle">
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
+      </trans-unit>
+      <trans-unit id="1kz-sq-XsE.normalTitle">
+        <source>Wallet Public Seed - XPub (advanced)</source>
+        <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder">
         <source>User Name</source>
@@ -968,6 +968,10 @@
         <source>Password</source>
         <note>Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z";</note>
       </trans-unit>
+      <trans-unit id="VSd-pm-g0n.accessibilityLabel">
+        <source> </source>
+        <note>Class = "UIButton"; accessibilityLabel = " "; ObjectID = "VSd-pm-g0n";</note>
+      </trans-unit>
       <trans-unit id="Vcb-0y-fDf.text">
         <source>An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:</source>
         <note>Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf";</note>
@@ -1107,6 +1111,10 @@
       <trans-unit id="puA-fb-r0H.placeholder">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H";</note>
+      </trans-unit>
+      <trans-unit id="rls-16-YZg.text">
+        <source>[do not translate]</source>
+        <note>Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg";</note>
       </trans-unit>
       <trans-unit id="sAy-bR-lqd.title">
         <source>Menu</source>
@@ -1568,6 +1576,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Connected</source>
         <note>Popup text when BLE connects</note>
       </trans-unit>
+      <trans-unit id="Copied">
+        <source>Copied</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Copy">
         <source>Copy</source>
         <note>Copy button text</note>
@@ -1775,6 +1787,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Export Public Seed (XPub)">
+        <source>Export Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Export Wallet Transactions">
@@ -2185,6 +2201,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Private Seed">
         <source>Private Seed</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Seed (XPub)">
+        <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
