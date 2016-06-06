@@ -375,20 +375,5 @@
 #define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
 #define copied_text                                 NSLocalizedString(@"Copied",nil)
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
-
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define
-//#define
 
 
