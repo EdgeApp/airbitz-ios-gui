@@ -187,6 +187,11 @@
     [self showExportWalletOptionsWithType:WalletExportType_PrivateSeed];
 }
 
+- (IBAction)buttonPublicSeedTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_PublicSeed];
+}
+
 #pragma mark - Misc Methods
 
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
