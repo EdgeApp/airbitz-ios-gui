@@ -475,6 +475,9 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCMetaData *metaData   = parsedURI.metadata;
     
     metaData.amountFiat = [[args objectForKey:@"amountFiat"] doubleValue];
+    if (0 < [[args objectForKey:@"bizId"] longValue]) {
+        metaData.bizId = (unsigned int)[[args objectForKey:@"bizId"] longValue];
+    }
     
     [parsedURI setMetadata:metaData];
     
