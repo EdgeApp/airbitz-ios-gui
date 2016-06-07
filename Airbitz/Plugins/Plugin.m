@@ -68,7 +68,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
@@ -89,7 +90,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
 
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
@@ -110,7 +112,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
