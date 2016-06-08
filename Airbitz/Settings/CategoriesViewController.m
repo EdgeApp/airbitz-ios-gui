@@ -77,7 +77,8 @@
     _frameTableOriginal = self.tableView.frame;
 
     // load the categories
-    self.arrayCategories = [abcAccount.categories.listCategories mutableCopy];
+    NSArray *array = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
+    self.arrayCategories = [array mutableCopy];
     [self updateDisplay];
 
     // get a callback when the search changes
@@ -159,7 +160,8 @@
 
 - (IBAction)Done
 {
-    [abcAccount.categories saveCategories:self.arrayCategories];
+    NSArray *engArray = [Util categoryArrayToEnglish:[self.arrayCategories copy]];
+    [abcAccount.categories saveCategories:engArray];
     [self animatedExit];
 }
 

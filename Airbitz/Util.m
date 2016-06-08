@@ -494,5 +494,111 @@
 
 }
 
++ (NSArray *) categoryArrayLocalize:(NSArray *)array;
+{
+    NSMutableArray *outArray = [[NSMutableArray alloc] init];
+    
+    for (NSString *cat in array)
+    {
+        NSString *converted = [self categoryTextLocalize:cat];
+        [outArray addObject:converted];
+    }
+    NSArray *ret = [outArray copy];
+    return ret;
+}
+
++ (NSArray *) categoryArrayToEnglish:(NSArray *)array;
+{
+    NSMutableArray *outArray = [[NSMutableArray alloc] init];
+    
+    for (NSString *cat in array)
+    {
+        NSString *converted = [self categoryTextToEnglish:cat];
+        [outArray addObject:converted];
+    }
+    NSArray *ret = [outArray copy];
+    return ret;
+}
+
++ (NSString *) categoryTextLocalize:(NSString *)category;
+{
+    NSString *string;
+    if ([category hasPrefix:income_category_en])
+    {
+        string = [category stringByReplacingOccurrencesOfString:income_category_en
+                                                     withString:income_category
+                                                        options:0
+                                                          range:NSMakeRange(0, [income_category_en length])];
+    }
+    else if ([category hasPrefix:expense_category_en])
+    {
+        string = [category stringByReplacingOccurrencesOfString:expense_category_en
+                                                     withString:expense_category
+                                                        options:0
+                                                          range:NSMakeRange(0, [expense_category_en length])];
+    }
+    else if ([category hasPrefix:exchange_category_en])
+    {
+        string = [category stringByReplacingOccurrencesOfString:exchange_category_en
+                                                     withString:exchange_category
+                                                        options:0
+                                                          range:NSMakeRange(0, [exchange_category_en length])];
+    }
+    else if ([category hasPrefix:transfer_category_en])
+    {
+        string = [category stringByReplacingOccurrencesOfString:transfer_category_en
+                                                     withString:transfer_category
+                                                        options:0
+                                                          range:NSMakeRange(0, [transfer_category_en length])];
+    }
+    else
+    {
+        return category;
+    }
+    
+    return string;
+}
+
++ (NSString *) categoryTextToEnglish:(NSString *)category;
+{
+    NSString *string;
+    if ([category hasPrefix:income_category])
+    {
+        string = [category stringByReplacingOccurrencesOfString:income_category
+                                                     withString:income_category_en
+                                                        options:0
+                                                          range:NSMakeRange(0, [income_category length])];
+    }
+    else if ([category hasPrefix:expense_category])
+    {
+        string = [category stringByReplacingOccurrencesOfString:expense_category
+                                                     withString:expense_category_en
+                                                        options:0
+                                                          range:NSMakeRange(0, [expense_category length])];
+    }
+    else if ([category hasPrefix:exchange_category])
+    {
+        string = [category stringByReplacingOccurrencesOfString:exchange_category
+                                                     withString:exchange_category_en
+                                                        options:0
+                                                          range:NSMakeRange(0, [exchange_category length])];
+    }
+    else if ([category hasPrefix:transfer_category])
+    {
+        string = [category stringByReplacingOccurrencesOfString:transfer_category
+                                                     withString:transfer_category_en
+                                                        options:0
+                                                          range:NSMakeRange(0, [transfer_category length])];
+    }
+    else
+    {
+        return category;
+    }
+    
+    return string;
+    
+}
+
+
 @end
 

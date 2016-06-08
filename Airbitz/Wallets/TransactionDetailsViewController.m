@@ -191,9 +191,6 @@ typedef enum eRequestType
     self.buttonBlocker.hidden = YES;
     [self.scrollableContentView addSubview:self.buttonBlocker];
     
-    // update our array of categories
-//    self.arrayCategories = abcAccount.categories.listCategories;
-
     // set the keyboard return button based upon mode
     self.nameTextField.returnKeyType = (self.bOldTransaction ? UIReturnKeyDone : UIReturnKeyNext);
     self.pickerTextCategory.textField.returnKeyType = UIReturnKeyDone;
@@ -224,7 +221,10 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
-    [self.pickerTextCategory setCategories:abcAccount.categories.listCategories];
+    
+    NSArray *array = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
+    [self.pickerTextCategory setCategories:array];
+    
     self.pickerTextCategory.delegate = self;
 
     _bizId = self.transaction.metaData.bizId;
@@ -364,11 +364,11 @@ typedef enum eRequestType
     {
         if (_transactionDetailsMode == TD_MODE_SENT)
         {
-            [self setCategoryButtonText:abcStringExpenseCategory];
+            [self setCategoryButtonText:expense_category];
         }
         else if (_transactionDetailsMode == TD_MODE_RECEIVED)
         {
-            [self setCategoryButtonText:abcStringIncomeCategory];
+            [self setCategoryButtonText:income_category];
         }
     }
 
@@ -436,21 +436,21 @@ typedef enum eRequestType
 
 - (IBAction)setCategoryButtonText:(NSString *)text
 {
-    if ([text isEqual:abcStringIncomeCategory])
+    if ([text isEqual:income_category])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.3
                                                                 green:0.6
                                                                  blue:0.0
                                                                 alpha:1.0]];
     }
-    else if ([text isEqual:abcStringExpenseCategory])
+    else if ([text isEqual:expense_category])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.7
                                                                 green:0.0
                                                                  blue:0.0
                                                                 alpha:1.0]];
     }
-    else if ([text isEqual:abcStringTransferCategory])
+    else if ([text isEqual:transfer_category])
     {
         [self.categoryButton setBackgroundColor:[UIColor colorWithRed:0.0
                                                                 green:0.4
@@ -486,7 +486,8 @@ typedef enum eRequestType
     [strFullCategory appendString:self.pickerTextCategory.textField.text];
         
     // add the category if we didn't have it
-    [abcAccount.categories addCategory:strFullCategory];
+    NSString *engString = [Util categoryTextToEnglish:strFullCategory];
+    [abcAccount.categories addCategory:engString];
 
     if (![self.transaction.metaData.category isEqualToString:strFullCategory])
     {
@@ -890,13 +891,13 @@ typedef enum eRequestType
     NSString *strFourthType = exchangeCategoryColon;
 
     if (self.transactionDetailsMode == TD_MODE_RECEIVED ||
-        [self.categoryButton.titleLabel.text isEqual:abcStringIncomeCategory])
+        [self.categoryButton.titleLabel.text isEqual:income_category])
     {
         strFirstType = incomeCategoryColon;
         strSecondType = expenseCategoryColon;
     }
     
-    if ([self.categoryButton.titleLabel.text isEqual:abcStringTransferCategory])
+    if ([self.categoryButton.titleLabel.text isEqual:transfer_category])
     {
         strFirstType = transferCategoryColon;
         strSecondType = expenseCategoryColon;
@@ -904,7 +905,7 @@ typedef enum eRequestType
         strFourthType = exchangeCategoryColon;
     }
 
-    if ([self.categoryButton.titleLabel.text isEqual:abcStringExchangeCategory])
+    if ([self.categoryButton.titleLabel.text isEqual:exchange_category])
     {
         strFirstType =  exchangeCategoryColon;
         strSecondType = expenseCategoryColon;
@@ -914,10 +915,12 @@ typedef enum eRequestType
     
     NSArray *arrayTypes = @[strFirstType, strSecondType, strThirdType, strFourthType];
 
+    NSArray *arrayCategoriesCore = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
+
     // run through each type
     for (NSString *strPrefix in arrayTypes)
     {
-        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:abcAccount.categories.listCategories];
+        [self addMatchesToArray:arrayChoices forCategoryType:strPrefix withMatchesFor:strCurVal inArray:arrayCategoriesCore];
     }
 
     // add the choices constructed with the current string
@@ -1579,14 +1582,21 @@ typedef enum eRequestType
     [self setCategoryButtonText:strPrefix];
     
     // add string to categories, update arrays
-    NSInteger index = [abcAccount.categories.listCategories indexOfObject:catString];
-    if(index == NSNotFound) {
+    {
         ABCLog(2,@"ADD CATEGORY: adding category = %@", catString);
-        [abcAccount.categories addCategory:catString];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:abcAccount.categories.listCategories];
+        NSString *engString = [Util categoryTextToEnglish:catString];
+        [abcAccount.categories addCategory:engString];
+
+        NSArray *arrayCategoriesCore = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:arrayCategoriesCore];
         [array addObject:catString];
-        [abcAccount.categories saveCategories:[array sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]];
-        [pickerTextView setCategories:abcAccount.categories.listCategories];
+        
+        // Convert to english before saving categories
+        NSArray *engArray = [Util categoryArrayToEnglish:[array copy]];
+        [abcAccount.categories saveCategories:[engArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]];
+        
+        arrayCategoriesCore = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
+        [pickerTextView setCategories:arrayCategoriesCore];
         NSArray *arrayChoices = [self createNewCategoryChoices:pickerTextView.textField.text];
         [pickerTextView updateChoices:arrayChoices];
     }

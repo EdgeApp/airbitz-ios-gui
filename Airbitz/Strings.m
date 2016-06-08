@@ -154,7 +154,6 @@
 #define balanceButtonText                           NSLocalizedString(@"Balance", nil)
 #define transferToWalletText                        NSLocalizedString(@"Transfer To %@", @"To wallet transfer text")
 #define transferFromWalletText                      NSLocalizedString(@"Transfer From %@", @"From wallet transfer text")
-#define incomeAffiliateRevenue                      NSLocalizedString(@"Income:Affiliate Revenue", @"Income category for affiliate revenue")
 #define notesAffiliateRevenue                       NSLocalizedString(@"Revenue share from affiliate link %@", @"Income notes field for affiliate revenue")
 #define debugButtonText                             NSLocalizedString(@"Debug", @"debug text")
 #define getAffiliateLinkButtonText                  NSLocalizedString(@"Get Affiliate Link", @"Button text for Get Affiliate Link")
@@ -368,6 +367,7 @@
 
 #define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
 #define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
+#define affiliate_revenue                           NSLocalizedString(@"Affiliate Revenue", @"Income category for affiliate revenue")
 #define change_mining_fee_low                       NSLocalizedString(@"Low Fee",nil)
 #define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
@@ -383,5 +383,13 @@
 #define default_currency_text                       NSLocalizedString(@"Default Currency", @"settings text")
 #define default_exchange_text                       NSLocalizedString(@"Default Exchange", @"settings text")
 #define exchange_rate_data_source_text              NSLocalizedString(@"Exchange Rate Data Source",nil)
+#define income_category                             NSLocalizedString(@"Income",nil)
+#define expense_category                            NSLocalizedString(@"Expense",nil)
+#define exchange_category                           NSLocalizedString(@"Exchange",nil)
+#define transfer_category                           NSLocalizedString(@"Transfer",nil)
+#define income_category_en                          @"Income"
+#define expense_category_en                         @"Expense"
+#define exchange_category_en                        @"Exchange"
+#define transfer_category_en                        @"Transfer"
 
 
