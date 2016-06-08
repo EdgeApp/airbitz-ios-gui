@@ -1777,6 +1777,10 @@ Enter it below to make sure:</source>
         <source>Error sending SMS</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
         <source>Exchange Rate Data Source</source>
         <note>No comment provided by engineer.</note>
@@ -1784,6 +1788,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Exit">
         <source>Exit</source>
         <note>Exit button text on top left</note>
+      </trans-unit>
+      <trans-unit id="Expense">
+        <source>Expense</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
@@ -1892,6 +1900,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Importing funds from %@ into wallet...">
         <source>Importing funds from %@ into wallet...</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Income">
+        <source>Income</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Income:Affiliate Revenue">
@@ -2517,6 +2529,10 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
