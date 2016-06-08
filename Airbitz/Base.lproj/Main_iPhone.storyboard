@@ -3064,8 +3064,8 @@
                                             <constraint firstAttribute="centerX" secondItem="Q2G-61-ExK" secondAttribute="centerX" id="nta-60-8u4"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
-                                        <rect key="frame" x="27" y="161" width="320" height="258"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
+                                        <rect key="frame" x="27" y="161" width="320" height="200"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-U4-C5T" userLabel="PINCode Text Field" customClass="StylizedTextField">
                                                 <rect key="frame" x="85" y="58" width="150" height="44"/>
@@ -3149,10 +3149,10 @@
                                             <constraint firstAttribute="height" constant="20" id="zex-CZ-MrN"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt" userLabel="View - Create / Forgot">
-                                        <rect key="frame" x="28" y="316" width="320" height="107"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUp-i4-uHt" userLabel="View - Create / Forgot">
+                                        <rect key="frame" x="28" y="312" width="320" height="107"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8iz-Uc-LTS" customClass="StylizedButton">
                                                 <rect key="frame" x="35" y="20" width="251" height="44"/>
                                                 <color key="backgroundColor" red="0.1333333333" green="0.56862745100000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -3169,7 +3169,7 @@
                                                     <action selector="SignUp" destination="zLx-xG-j1m" eventType="touchUpInside" id="BMw-Co-GHv"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
                                                 <rect key="frame" x="55" y="72" width="210" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
@@ -3194,21 +3194,6 @@
                                             <constraint firstAttribute="centerX" secondItem="8iz-Uc-LTS" secondAttribute="centerX" id="n4K-cG-Yrt"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSd-pm-g0n" userLabel="Button - Fingerprint">
-                                        <rect key="frame" x="172" y="442" width="30" height="30"/>
-                                        <accessibility key="accessibilityConfiguration" label=" ">
-                                            <accessibilityTraits key="traits" button="YES"/>
-                                            <bool key="isElement" value="YES"/>
-                                        </accessibility>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="a8n-TL-whk"/>
-                                            <constraint firstAttribute="width" constant="30" id="lGu-1T-ndd"/>
-                                        </constraints>
-                                        <state key="normal" image="fingerprint-wht.png"/>
-                                        <connections>
-                                            <action selector="FingerprintButton:" destination="zLx-xG-j1m" eventType="touchUpInside" id="dPY-8G-ty8"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3224,13 +3209,10 @@
                                     <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="TAl-3p-bP9"/>
                                     <constraint firstItem="PwH-1d-Cnf" firstAttribute="leading" secondItem="eTI-9q-uu0" secondAttribute="leading" id="TwT-zr-iUz"/>
                                     <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
-                                    <constraint firstItem="VSd-pm-g0n" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BHf-E8-N2q" secondAttribute="bottom" constant="4" id="UkC-9e-qXv"/>
                                     <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
                                     <constraint firstAttribute="centerX" secondItem="bUp-i4-uHt" secondAttribute="centerX" id="Yqx-ez-xtP"/>
                                     <constraint firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="gMX-zi-xrg"/>
-                                    <constraint firstItem="bUp-i4-uHt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="4" id="jGF-Bd-eNG"/>
-                                    <constraint firstItem="VSd-pm-g0n" firstAttribute="centerX" secondItem="eTI-9q-uu0" secondAttribute="centerX" id="lGp-Fd-83u"/>
-                                    <constraint firstItem="VSd-pm-g0n" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bUp-i4-uHt" secondAttribute="bottom" constant="4" id="muQ-Wn-38R"/>
+                                    <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="4" id="jGF-Bd-eNG"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="leading" secondItem="8XB-1A-1hO" secondAttribute="trailing" id="qg6-OB-iqn"/>
                                     <constraint firstItem="8XB-1A-1hO" firstAttribute="top" secondItem="PwH-1d-Cnf" secondAttribute="bottom" constant="20" id="s0w-Ni-s53"/>
                                     <constraint firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="vy5-ZF-fZP"/>
@@ -3249,6 +3231,21 @@
                                 <state key="normal" image="ico_nav_directory_dark.png"/>
                                 <connections>
                                     <action selector="Back" destination="zLx-xG-j1m" eventType="touchUpInside" id="Dko-mN-FWJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSd-pm-g0n" userLabel="Button - Fingerprint">
+                                <rect key="frame" x="333" y="32" width="30" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label=" ">
+                                    <accessibilityTraits key="traits" button="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="a8n-TL-whk"/>
+                                    <constraint firstAttribute="width" constant="30" id="lGu-1T-ndd"/>
+                                </constraints>
+                                <state key="normal" image="fingerprint-wht.png"/>
+                                <connections>
+                                    <action selector="FingerprintButton:" destination="zLx-xG-j1m" eventType="touchUpInside" id="dPY-8G-ty8"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZe-mr-te9" userLabel="Spinner View">
@@ -3276,8 +3273,10 @@
                             <constraint firstItem="eTI-9q-uu0" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" id="BWA-Vs-TVO"/>
                             <constraint firstItem="Ypw-4p-DZr" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" constant="12" id="CkO-ck-ccS"/>
                             <constraint firstItem="eTI-9q-uu0" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" id="Gcy-9j-wjf"/>
+                            <constraint firstAttribute="trailing" secondItem="VSd-pm-g0n" secondAttribute="trailing" constant="12" id="HbS-a3-znT"/>
                             <constraint firstAttribute="trailing" secondItem="YZe-mr-te9" secondAttribute="trailing" id="HcA-CN-Rvd"/>
                             <constraint firstItem="com-9x-BkR" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="bottom" id="PNk-ZX-gye"/>
+                            <constraint firstItem="VSd-pm-g0n" firstAttribute="top" secondItem="3HA-Gy-Y0a" secondAttribute="bottom" constant="12" id="erw-Mf-mU0"/>
                             <constraint firstItem="YZe-mr-te9" firstAttribute="top" secondItem="nTP-NI-D0U" secondAttribute="top" id="fSg-Qa-vHJ"/>
                             <constraint firstItem="Ypw-4p-DZr" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" constant="12" id="q4D-Og-rCx"/>
                             <constraint firstItem="YZe-mr-te9" firstAttribute="leading" secondItem="nTP-NI-D0U" secondAttribute="leading" id="tJi-W5-G7d"/>
