@@ -447,30 +447,40 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     NSInteger maxVal = [[[ARRAY_LOGOUT objectAtIndex:0] lastObject] intValue];
     if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeSeconds] integerValue] * maxVal)
     {
-        strType = @"second";
+        if (amount == 1)
+            strType = second_text;
+        else
+            strType = seconds_text;
+        
         amount = abcAccount.settings.secondsAutoLogout;
     }
     else if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeMinutes] integerValue] * maxVal)
     {
-        strType = @"minute";
+        if (amount == 1)
+            strType = minute_text;
+        else
+            strType = minutes_text;
+        
         amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeMinutes] integerValue];
     }
     else if (abcAccount.settings.secondsAutoLogout <= [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeHours] integerValue] * maxVal)
     {
-        strType = @"hour";
+        if (amount == 1)
+            strType = hour_text;
+        else
+            strType = hours_text;
         amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeHours] integerValue];
     }
     else
     {
-        strType = @"day";
+        if (amount == 1)
+            strType = day_text;
+        else
+            strType = days_text;
         amount = abcAccount.settings.secondsAutoLogout / [[ARRAY_LOGOUT_SECONDS objectAtIndex:ABCLogoutSecondsTypeDays] integerValue];
     }
 
     [strRetVal appendFormat:@"%d %@", amount, strType];
-    if (amount != 1)
-    {
-        [strRetVal appendString:@"s"];
-    }
 
     return strRetVal;
 }
@@ -917,7 +927,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 		}
 		else if (indexPath.row == ROW_DEFAULT_CURRENCY)
 		{
-			cell.name.text = defaultCurrencyText;
+			cell.name.text = default_currency_text;
             [cell.button setTitle:abcAccount.settings.defaultCurrency.code forState:UIControlStateNormal];
 		}
 	}
@@ -925,7 +935,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		if (indexPath.row == 0)
 		{
-			cell.name.text = defaultExchangeText;
+			cell.name.text = default_exchange_text;
 		}
         [cell.button setTitle:abcAccount.settings.exchangeRateSource forState:UIControlStateNormal];
 	}
@@ -1330,7 +1340,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 //            }
             arrayPopupChoices = [ABCCurrency listCurrencyStrings];
             popupPosition = PopupPicker2Position_Full_Fading;
-            headerText = @"Default Currency";
+            headerText = default_currency_text;
 
         }
     }
@@ -1343,7 +1353,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 //            curChoice = -1;
 //        }
         arrayPopupChoices = ABCArrayExchanges;
-        headerText = @"Exchange Rate Data Source";
+        headerText = exchange_rate_data_source_text;
     }
 
     // if we are supposed to bring up a popup picker

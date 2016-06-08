@@ -63,6 +63,9 @@
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
+		DA8F2A6A1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
+		DA8F2A6B1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
+		DA8F2A6C1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
 		DA9101F21C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F31C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F41C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
@@ -397,7 +400,6 @@
 		DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EE51C1BC61F930063DA07 /* PlainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0181BC61F920063DA07 /* PlainCell.m */; };
 		DA9EE51D1BC61F930063DA07 /* RadioButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */; };
-		DA9EE51E1BC61F930063DA07 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE01B1BC61F920063DA07 /* Settings.storyboard */; };
 		DA9EE51F1BC61F930063DA07 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */; };
 		DA9EE5201BC61F930063DA07 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DA9EE5211BC61F930063DA07 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0211BC61F920063DA07 /* TextFieldCell.m */; };
@@ -756,7 +758,6 @@
 		DA9EF4CF1BC7285D0063DA07 /* Red-X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */; };
 		DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF171BC61F910063DA07 /* btn_add.png */; };
 		DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF121BC61F910063DA07 /* bitcoin_symbol@3x.png */; };
-		DA9EF4D31BC7285D0063DA07 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE01B1BC61F920063DA07 /* Settings.storyboard */; };
 		DA9EF4D41BC7285D0063DA07 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBD1BC61F920063DA07 /* UIButtonBarRefresh@2x.png */; };
 		DA9EF4D51BC7285D0063DA07 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA91BC61F920063DA07 /* icon_wallet_dark@2x.png */; };
 		DA9EF4D61BC7285D0063DA07 /* icon_request@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8C1BC61F910063DA07 /* icon_request@2x.png */; };
@@ -1104,7 +1105,6 @@
 		DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB91BC61F920063DA07 /* Red-X@2x.png */; };
 		DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF171BC61F910063DA07 /* btn_add.png */; };
 		DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF121BC61F910063DA07 /* bitcoin_symbol@3x.png */; };
-		DA9EF69A1BC729FA0063DA07 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE01B1BC61F920063DA07 /* Settings.storyboard */; };
 		DA9EF69B1BC729FA0063DA07 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFBD1BC61F920063DA07 /* UIButtonBarRefresh@2x.png */; };
 		DA9EF69C1BC729FA0063DA07 /* icon_wallet_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA91BC61F920063DA07 /* icon_wallet_dark@2x.png */; };
 		DA9EF69D1BC729FA0063DA07 /* icon_request@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8C1BC61F910063DA07 /* icon_request@2x.png */; };
@@ -1435,6 +1435,16 @@
 		DA5549AF1CE7A80400CEF104 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main.strings"; sourceTree = "<group>"; };
 		DA5549B11CE7A80900CEF104 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
 		DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
+		DA8F2A651D07E1510008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DA8F2A661D07E1550008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DA8F2A671D07E15D0008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA8F2A681D07E1610008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA8F2A691D07E1650008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
+		DA8F2A6D1D07E1F00008F7E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		DA8F2A701D07E1F30008F7E7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Settings.strings"; sourceTree = "<group>"; };
+		DA8F2A721D07E1F40008F7E7 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/Settings.strings"; sourceTree = "<group>"; };
+		DA8F2A741D07E1F60008F7E7 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Settings.strings"; sourceTree = "<group>"; };
+		DA8F2A761D07E1F70008F7E7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Settings.strings"; sourceTree = "<group>"; };
 		DA9101EF1C4964AD00603D62 /* icon_import.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_import.png; sourceTree = "<group>"; };
 		DA9101F01C4964AD00603D62 /* icon_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@2x.png"; sourceTree = "<group>"; };
 		DA9101F11C4964AD00603D62 /* icon_import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@3x.png"; sourceTree = "<group>"; };
@@ -1846,7 +1856,6 @@
 		DA9EE0181BC61F920063DA07 /* PlainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlainCell.m; sourceTree = "<group>"; };
 		DA9EE0191BC61F920063DA07 /* RadioButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButtonCell.h; sourceTree = "<group>"; };
 		DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButtonCell.m; sourceTree = "<group>"; };
-		DA9EE01B1BC61F920063DA07 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DA9EE01C1BC61F920063DA07 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EE01E1BC61F920063DA07 /* SpendingLimitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendingLimitsViewController.h; sourceTree = "<group>"; };
@@ -1957,14 +1966,6 @@
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
 		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
-		DABFC8A41CFBBDB700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DABFC8A51CFBBDB700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DABFC8A61CFBBDB700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DABFC8AC1CFBBDB900104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		DABFC8B21CFBBDBB00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main.strings; sourceTree = "<group>"; };
-		DABFC8B31CFBBDBB00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DABFC8B41CFBBDBB00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DABFC8BA1CFBBDBD00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DABFC8D21CFBBE4A00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
 		DABFC8D41CFBBE4A00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DABFC8D51CFBBE4A00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1980,11 +1981,6 @@
 		DABFC8EB1CFBBE7A00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
 		DABFC8EC1CFBBE7A00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DABFC8EE1CFBBE7A00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DABFC8FA1CFBBE9700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DABFC8FB1CFBBE9700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DABFC8FC1CFBBE9700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DABFC8FD1CFBBE9700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DABFC8FE1CFBBE9700104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		DABFC8FF1CFBBED600104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		DABFC9001CFBBEEE00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
 		DABFC9011CFBBEEE00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1996,61 +1992,51 @@
 		DABFC90D1CFBC16C00104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
 		DABFC90F1CFBC16D00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
 		DABFC9111CFBC16E00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
-		DABFC9131CFBC16F00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
 		DABFC9171CFBC1BA00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BusinessDirectory.storyboard; sourceTree = "<group>"; };
 		DABFC91A1CFBC1C000104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
 		DABFC91C1CFBC1C100104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
 		DABFC91E1CFBC1C200104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
 		DABFC9201CFBC1C400104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
-		DABFC9221CFBC1C500104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DABFC9261CFBC1EA00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PasswordVerifyView.xib; sourceTree = "<group>"; };
 		DABFC9291CFBC1ED00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
 		DABFC92B1CFBC1EE00104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
 		DABFC92D1CFBC1F000104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
 		DABFC92F1CFBC1F100104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
-		DABFC9311CFBC1F200104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
 		DABFC9351CFBC1FC00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/QuestionAnswerView~iphone.xib"; sourceTree = "<group>"; };
 		DABFC9381CFBC1FF00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC93A1CFBC20000104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC93C1CFBC20100104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC93E1CFBC20200104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DABFC9401CFBC20300104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9441CFBC21F00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/SlideoutView~iphone.xib"; sourceTree = "<group>"; };
 		DABFC9471CFBC22200104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9491CFBC22400104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC94B1CFBC22500104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC94D1CFBC22600104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DABFC94F1CFBC22800104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9531CFBC23800104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/InfoView~iphone.xib"; sourceTree = "<group>"; };
 		DABFC9561CFBC23B00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9581CFBC23D00104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC95A1CFBC23E00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC95C1CFBC23F00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DABFC95E1CFBC24100104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9621CFBC2F600104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/CalculatorView~iphone.xib"; sourceTree = "<group>"; };
 		DABFC9651CFBC2F900104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9671CFBC2FA00104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9691CFBC2FB00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC96B1CFBC2FC00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DABFC96D1CFBC2FE00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9711CFBC31A00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
 		DABFC9741CFBC31C00104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9761CFBC31D00104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9781CFBC31E00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC97A1CFBC31F00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DABFC97C1CFBC32000104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DABFC9801CFBC3A300104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountCreate.storyboard; sourceTree = "<group>"; };
 		DABFC9831CFBC3A600104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
 		DABFC9851CFBC3A900104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
 		DABFC9871CFBC3AA00104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
 		DABFC9891CFBC3AB00104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
-		DABFC98B1CFBC3AD00104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		DABFC9911CFBCA2E00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PopupWheelPickerView.xib; sourceTree = "<group>"; };
 		DABFC9941CFBCA3000104AC1 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
 		DABFC9961CFBCA3100104AC1 /* hi-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hi-IN"; path = "hi-IN.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
 		DABFC9981CFBCA3200104AC1 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
 		DABFC99A1CFBCA3400104AC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
-		DABFC99C1CFBCA3500104AC1 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
 		DAC7D2D81CCCBE6000608219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DAC7D2E01CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template.html"; sourceTree = "<group>"; };
 		DAC7D2E11CCCBEC400608219 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template_simple.html"; sourceTree = "<group>"; };
@@ -2955,7 +2941,7 @@
 				DA9EE0181BC61F920063DA07 /* PlainCell.m */,
 				DA9EE0191BC61F920063DA07 /* RadioButtonCell.h */,
 				DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */,
-				DA9EE01B1BC61F920063DA07 /* Settings.storyboard */,
+				DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */,
 				DA9EE01C1BC61F920063DA07 /* SettingsViewController.h */,
 				DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */,
 				DA9EE01E1BC61F920063DA07 /* SpendingLimitsViewController.h */,
@@ -3555,7 +3541,6 @@
 				"hi-IN",
 				"es-MX",
 				"zh-Hans",
-				hi,
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -3861,7 +3846,7 @@
 				DA9EF4CF1BC7285D0063DA07 /* Red-X@2x.png in Resources */,
 				DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */,
 				DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA9EF4D31BC7285D0063DA07 /* Settings.storyboard in Resources */,
+				DA8F2A6B1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
 				DA9EF4D41BC7285D0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA9EF4D51BC7285D0063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EF4D61BC7285D0063DA07 /* icon_request@2x.png in Resources */,
@@ -4129,7 +4114,7 @@
 				DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */,
 				DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */,
 				DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA9EF69A1BC729FA0063DA07 /* Settings.storyboard in Resources */,
+				DA8F2A6C1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
 				DA9EF69B1BC729FA0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA9EF69C1BC729FA0063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EF69D1BC729FA0063DA07 /* icon_request@2x.png in Resources */,
@@ -4401,7 +4386,7 @@
 				DA9EE4DA1BC61F920063DA07 /* Red-X@2x.png in Resources */,
 				DA9EE43A1BC61F920063DA07 /* btn_add.png in Resources */,
 				DA9EE4351BC61F920063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA9EE51E1BC61F930063DA07 /* Settings.storyboard in Resources */,
+				DA8F2A6A1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
 				DA9EE4DE1BC61F920063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA3C7A8C1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DABFC8EF1CFBBE7A00104AC1 /* Main_iPhone.strings in Resources */,
@@ -5176,6 +5161,18 @@
 			name = sms_template.txt;
 			sourceTree = "<group>";
 		};
+		DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA8F2A6D1D07E1F00008F7E7 /* Base */,
+				DA8F2A701D07E1F30008F7E7 /* pt-BR */,
+				DA8F2A721D07E1F40008F7E7 /* hi-IN */,
+				DA8F2A741D07E1F60008F7E7 /* es-MX */,
+				DA8F2A761D07E1F70008F7E7 /* zh-Hans */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
 		DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -5184,7 +5181,6 @@
 				DA5549A61CE7A78100CEF104 /* es-MX */,
 				DA5549A81CE7A78900CEF104 /* hi-IN */,
 				DA5549AA1CE7A78D00CEF104 /* pt-BR */,
-				DABFC8AC1CFBBDB900104AC1 /* hi */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -5233,7 +5229,6 @@
 				DA5549AD1CE7A80200CEF104 /* pt-BR */,
 				DA5549AF1CE7A80400CEF104 /* hi-IN */,
 				DA5549B11CE7A80900CEF104 /* es-MX */,
-				DABFC8B21CFBBDBB00104AC1 /* hi */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -5243,8 +5238,8 @@
 			children = (
 				DABFC8D21CFBBE4A00104AC1 /* zh-Hans */,
 				DABFC8EA1CFBBE7A00104AC1 /* es-MX */,
-				DABFC8FB1CFBBE9700104AC1 /* hi */,
 				DABFC9011CFBBEEE00104AC1 /* pt-BR */,
+				DA8F2A691D07E1650008F7E7 /* hi-IN */,
 			);
 			name = "Airbitz-InfoPlist.strings";
 			sourceTree = "<group>";
@@ -5254,8 +5249,8 @@
 			children = (
 				DABFC8DA1CFBBE4C00104AC1 /* zh-Hans */,
 				DABFC8EB1CFBBE7A00104AC1 /* es-MX */,
-				DABFC8FC1CFBBE9700104AC1 /* hi */,
 				DABFC9021CFBBEEE00104AC1 /* pt-BR */,
+				DA8F2A681D07E1610008F7E7 /* hi-IN */,
 			);
 			name = "Airbitz-Testnet-InfoPlist.strings";
 			sourceTree = "<group>";
@@ -5265,8 +5260,8 @@
 			children = (
 				DABFC8DF1CFBBE4D00104AC1 /* zh-Hans */,
 				DABFC8E91CFBBE7A00104AC1 /* es-MX */,
-				DABFC8FA1CFBBE9700104AC1 /* hi */,
 				DABFC9001CFBBEEE00104AC1 /* pt-BR */,
+				DA8F2A671D07E15D0008F7E7 /* hi-IN */,
 			);
 			name = "Airbitz-Develop-InfoPlist.strings";
 			sourceTree = "<group>";
@@ -5276,8 +5271,8 @@
 			children = (
 				DABFC8E61CFBBE4F00104AC1 /* zh-Hans */,
 				DABFC8EC1CFBBE7A00104AC1 /* es-MX */,
-				DABFC8FD1CFBBE9700104AC1 /* hi */,
 				DABFC9031CFBBEEE00104AC1 /* pt-BR */,
+				DA8F2A661D07E1550008F7E7 /* hi-IN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5286,9 +5281,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				DABFC8EE1CFBBE7A00104AC1 /* es-MX */,
-				DABFC8FE1CFBBE9700104AC1 /* hi */,
 				DABFC8FF1CFBBED600104AC1 /* zh-Hans */,
 				DABFC9041CFBBEEE00104AC1 /* pt-BR */,
+				DA8F2A651D07E1510008F7E7 /* hi-IN */,
 			);
 			name = Main_iPhone.strings;
 			sourceTree = "<group>";
@@ -5301,7 +5296,6 @@
 				DABFC90D1CFBC16C00104AC1 /* hi-IN */,
 				DABFC90F1CFBC16D00104AC1 /* es-MX */,
 				DABFC9111CFBC16E00104AC1 /* zh-Hans */,
-				DABFC9131CFBC16F00104AC1 /* hi */,
 			);
 			name = ConfirmationSliderView.xib;
 			sourceTree = "<group>";
@@ -5314,7 +5308,6 @@
 				DABFC91C1CFBC1C100104AC1 /* hi-IN */,
 				DABFC91E1CFBC1C200104AC1 /* es-MX */,
 				DABFC9201CFBC1C400104AC1 /* zh-Hans */,
-				DABFC9221CFBC1C500104AC1 /* hi */,
 			);
 			name = BusinessDirectory.storyboard;
 			sourceTree = "<group>";
@@ -5327,7 +5320,6 @@
 				DABFC92B1CFBC1EE00104AC1 /* hi-IN */,
 				DABFC92D1CFBC1F000104AC1 /* es-MX */,
 				DABFC92F1CFBC1F100104AC1 /* zh-Hans */,
-				DABFC9311CFBC1F200104AC1 /* hi */,
 			);
 			name = PasswordVerifyView.xib;
 			sourceTree = "<group>";
@@ -5340,7 +5332,6 @@
 				DABFC93A1CFBC20000104AC1 /* hi-IN */,
 				DABFC93C1CFBC20100104AC1 /* es-MX */,
 				DABFC93E1CFBC20200104AC1 /* zh-Hans */,
-				DABFC9401CFBC20300104AC1 /* hi */,
 			);
 			name = "QuestionAnswerView~iphone.xib";
 			sourceTree = "<group>";
@@ -5353,7 +5344,6 @@
 				DABFC9491CFBC22400104AC1 /* hi-IN */,
 				DABFC94B1CFBC22500104AC1 /* es-MX */,
 				DABFC94D1CFBC22600104AC1 /* zh-Hans */,
-				DABFC94F1CFBC22800104AC1 /* hi */,
 			);
 			name = "SlideoutView~iphone.xib";
 			sourceTree = "<group>";
@@ -5366,7 +5356,6 @@
 				DABFC9581CFBC23D00104AC1 /* hi-IN */,
 				DABFC95A1CFBC23E00104AC1 /* es-MX */,
 				DABFC95C1CFBC23F00104AC1 /* zh-Hans */,
-				DABFC95E1CFBC24100104AC1 /* hi */,
 			);
 			name = "InfoView~iphone.xib";
 			sourceTree = "<group>";
@@ -5379,7 +5368,6 @@
 				DABFC9671CFBC2FA00104AC1 /* hi-IN */,
 				DABFC9691CFBC2FB00104AC1 /* es-MX */,
 				DABFC96B1CFBC2FC00104AC1 /* zh-Hans */,
-				DABFC96D1CFBC2FE00104AC1 /* hi */,
 			);
 			name = "CalculatorView~iphone.xib";
 			sourceTree = "<group>";
@@ -5392,7 +5380,6 @@
 				DABFC9761CFBC31D00104AC1 /* hi-IN */,
 				DABFC9781CFBC31E00104AC1 /* es-MX */,
 				DABFC97A1CFBC31F00104AC1 /* zh-Hans */,
-				DABFC97C1CFBC32000104AC1 /* hi */,
 			);
 			name = "WalletMakerView~iphone.xib";
 			sourceTree = "<group>";
@@ -5405,7 +5392,6 @@
 				DABFC9851CFBC3A900104AC1 /* hi-IN */,
 				DABFC9871CFBC3AA00104AC1 /* es-MX */,
 				DABFC9891CFBC3AB00104AC1 /* zh-Hans */,
-				DABFC98B1CFBC3AD00104AC1 /* hi */,
 			);
 			name = AccountCreate.storyboard;
 			sourceTree = "<group>";
@@ -5418,7 +5404,6 @@
 				DABFC9961CFBCA3100104AC1 /* hi-IN */,
 				DABFC9981CFBCA3200104AC1 /* es-MX */,
 				DABFC99A1CFBCA3400104AC1 /* zh-Hans */,
-				DABFC99C1CFBCA3500104AC1 /* hi */,
 			);
 			name = PopupWheelPickerView.xib;
 			sourceTree = "<group>";
@@ -5440,7 +5425,6 @@
 			children = (
 				DAD6D23F1CE96039003EEA42 /* es-MX */,
 				DAD6D26E1CE96161003EEA42 /* pt-BR */,
-				DABFC8A41CFBBDB700104AC1 /* hi */,
 				DABFC8D41CFBBE4A00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -5451,7 +5435,6 @@
 			children = (
 				DAD6D2441CE9603A003EEA42 /* es-MX */,
 				DAD6D26F1CE96161003EEA42 /* pt-BR */,
-				DABFC8A51CFBBDB700104AC1 /* hi */,
 				DABFC8D51CFBBE4A00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -5462,7 +5445,6 @@
 			children = (
 				DAD6D2491CE9603A003EEA42 /* es-MX */,
 				DAD6D2701CE96161003EEA42 /* pt-BR */,
-				DABFC8A61CFBBDB700104AC1 /* hi */,
 				DABFC8D61CFBBE4B00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -5473,7 +5455,6 @@
 			children = (
 				DAD6D2581CE9603D003EEA42 /* es-MX */,
 				DAD6D27B1CE96164003EEA42 /* pt-BR */,
-				DABFC8B31CFBBDBB00104AC1 /* hi */,
 				DABFC8E11CFBBE4E00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -5484,7 +5465,6 @@
 			children = (
 				DAD6D25D1CE9603D003EEA42 /* es-MX */,
 				DAD6D27C1CE96164003EEA42 /* pt-BR */,
-				DABFC8B41CFBBDBB00104AC1 /* hi */,
 				DABFC8E21CFBBE4E00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
@@ -5495,7 +5475,6 @@
 			children = (
 				DAD6D2671CE9603F003EEA42 /* es-MX */,
 				DAD6D2821CE96165003EEA42 /* pt-BR */,
-				DABFC8BA1CFBBDBD00104AC1 /* hi */,
 				DABFC8E81CFBBE4F00104AC1 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;

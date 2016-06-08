@@ -1777,6 +1777,10 @@ Enter it below to make sure:</source>
         <source>Error sending SMS</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Exchange Rate Data Source">
+        <source>Exchange Rate Data Source</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
         <note>Exit button text on top left</note>
@@ -2796,6 +2800,18 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
         <source>closed</source>
         <note>business listings is closed</note>
       </trans-unit>
+      <trans-unit id="day">
+        <source>day</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="days">
+        <source>days</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="hour">
+        <source>hour</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="hours">
         <source>hours</source>
         <note>No comment provided by engineer.</note>
@@ -2803,6 +2819,22 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
       <trans-unit id="mBitcoin = (0.001 Bitcoin)">
         <source>mBitcoin = (0.001 Bitcoin)</source>
         <note>settings text</note>
+      </trans-unit>
+      <trans-unit id="minute">
+        <source>minute</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="minutes">
+        <source>minutes</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="second">
+        <source>second</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="seconds">
+        <source>seconds</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="▼ Choose a wallet to transfer funds to ▼">
         <source>▼ Choose a wallet to transfer funds to ▼</source>
@@ -2855,6 +2887,138 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
       <trans-unit id="KGv-Ek-gk9.text">
         <source>Slide to confirm</source>
         <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Airbitz/Settings/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="1Qx-Jp-bYp.text">
+        <source>2FA Reset Requested by another device.</source>
+        <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
+      </trans-unit>
+      <trans-unit id="3uS-L5-frK.normalTitle">
+        <source>KEEP 2FA</source>
+        <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
+      </trans-unit>
+      <trans-unit id="4md-ob-Ttv.text">
+        <source>Core Version:</source>
+        <note>Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv";</note>
+      </trans-unit>
+      <trans-unit id="9ur-p7-oPb.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb";</note>
+      </trans-unit>
+      <trans-unit id="Ag5-Xn-Vpg.normalTitle">
+        <source>Clear Watcher Cache</source>
+        <note>Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg";</note>
+      </trans-unit>
+      <trans-unit id="Bs1-Yi-SIh.normalTitle">
+        <source>Upload Log Files</source>
+        <note>Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh";</note>
+      </trans-unit>
+      <trans-unit id="GMX-G5-Rl3.text">
+        <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
+        <note>Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3";</note>
+      </trans-unit>
+      <trans-unit id="GXU-6G-OIw.placeholder">
+        <source>Current Password</source>
+        <note>Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw";</note>
+      </trans-unit>
+      <trans-unit id="Izr-Cl-Osv.text">
+        <source>Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
+Scan the QR code using this device</source>
+        <note>Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv";</note>
+      </trans-unit>
+      <trans-unit id="LAg-aY-W5b.normalTitle">
+        <source>DONE</source>
+        <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b";</note>
+      </trans-unit>
+      <trans-unit id="Myh-H6-aDd.text">
+        <source>Version:</source>
+        <note>Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd";</note>
+      </trans-unit>
+      <trans-unit id="RqX-ow-U05.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05";</note>
+      </trans-unit>
+      <trans-unit id="SXK-F7-NoK.text">
+        <source>0.1.0-mainnet</source>
+        <note>Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK";</note>
+      </trans-unit>
+      <trans-unit id="T6x-zH-xvf.text">
+        <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
+        <note>Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf";</note>
+      </trans-unit>
+      <trans-unit id="X6G-HD-WUv.placeholder">
+        <source>Search</source>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv";</note>
+      </trans-unit>
+      <trans-unit id="XJN-At-Qod.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod";</note>
+      </trans-unit>
+      <trans-unit id="Zw4-k1-a82.text">
+        <source>Mainnet</source>
+        <note>Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82";</note>
+      </trans-unit>
+      <trans-unit id="avV-bm-INd.normalTitle">
+        <source>DISABLE 2FA</source>
+        <note>Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd";</note>
+      </trans-unit>
+      <trans-unit id="bYl-WU-bNw.text">
+        <source>Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</source>
+        <note>Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw";</note>
+      </trans-unit>
+      <trans-unit id="g6f-f3-w6p.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p";</note>
+      </trans-unit>
+      <trans-unit id="h6I-iF-k15.text">
+        <source>Date</source>
+        <note>Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15";</note>
+      </trans-unit>
+      <trans-unit id="hxc-na-KPc.text">
+        <source>Two factor reset has been requested</source>
+        <note>Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc";</note>
+      </trans-unit>
+      <trans-unit id="iUa-wU-ZnQ.normalTitle">
+        <source>StylizedOutline</source>
+        <note>Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ";</note>
+      </trans-unit>
+      <trans-unit id="lqV-Y6-LKD.normalTitle">
+        <source>Request Reset</source>
+        <note>Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD";</note>
+      </trans-unit>
+      <trans-unit id="mJ9-nG-s79.text">
+        <source>Enabled</source>
+        <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
+      </trans-unit>
+      <trans-unit id="nhU-8o-H50.normalTitle">
+        <source>Button</source>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50";</note>
+      </trans-unit>
+      <trans-unit id="pX1-NU-49a.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a";</note>
+      </trans-unit>
+      <trans-unit id="pki-9D-VwL.normalTitle">
+        <source>Scan Token</source>
+        <note>Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL";</note>
+      </trans-unit>
+      <trans-unit id="qLK-qd-7qg.text">
+        <source>Network:</source>
+        <note>Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg";</note>
+      </trans-unit>
+      <trans-unit id="sZm-Gx-M8r.text">
+        <source>App Version</source>
+        <note>Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r";</note>
+      </trans-unit>
+      <trans-unit id="th1-bn-E4x.normalTitle">
+        <source>CANCEL</source>
+        <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x";</note>
       </trans-unit>
     </body>
   </file>
