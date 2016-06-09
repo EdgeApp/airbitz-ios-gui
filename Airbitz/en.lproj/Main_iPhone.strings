@@ -5,6 +5,9 @@
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "This Month";
 
+/* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
+"1kz-sq-XsE.normalTitle" = "Wallet Public Seed - XPub (advanced)";
+
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "User Name";
 
@@ -167,6 +170,9 @@
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z"; */
 "V5e-1n-K9Z.placeholder" = "Password";
 
+/* Class = "UIButton"; accessibilityLabel = " "; ObjectID = "VSd-pm-g0n"; */
+"VSd-pm-g0n.accessibilityLabel" = " ";
+
 /* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
 "Vcb-0y-fDf.text" = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:";
 
@@ -271,6 +277,9 @@
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
 "puA-fb-r0H.placeholder" = "Create PIN";
+
+/* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
+"rls-16-YZg.text" = "[do not translate]";
 
 /* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
 "sAy-bR-lqd.title" = "Menu";
