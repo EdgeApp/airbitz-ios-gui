@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
+"BCk-jF-SE5.text" = "लॉग आउट";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
+"GIG-Sd-O0c.accessibilityLabel" = "लॉग आउट";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
+"Lwy-1d-Qgs.accessibilityLabel" = "खरीदें या बेचें";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
+"O8N-2d-FwL.text" = "उपनाम";
+
+/* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
+"Zac-Lf-J4y.text" = "सेटिंग्स";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
+"Zu4-Fd-NGP.accessibilityLabel" = "खरीदें या बेचें";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
+"aSM-QX-pLq.accessibilityLabel" = "लॉग आउट";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
+"bQy-8e-q5h.text" = "Strings.h को देखें";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh"; */
+"jpu-23-4kh.accessibilityLabel" = "खरीदें या बेचें";
+
+/* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
+"lr4-kO-HCW.text" = "वाल्लेट्स";
+
+/* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
+"rWQ-uJ-DUX.text" = "खरीदें/बेचें बिटकॉइन";
+
+/* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.accessibilityHint" = "तत्कालीन लोग्डइन वाला खाता";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.text" = "उपनाम";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
+"xju-3Y-EvK.text" = "Strings.h को देखें";
+
+/* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
+"xna-m1-9hx.accessibilityLabel" = "सेटिंग्स";
+

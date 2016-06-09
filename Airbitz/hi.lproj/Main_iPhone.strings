@@ -1,0 +1,297 @@
+/* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS"; */
+"0Ma-6E-cjS.placeholder" = "तत्कालीन पासवर्ड";
+
+/* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
+"0ea-NR-Nd9.normalTitle" = "इस महीने";
+
+/* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
+"1kz-sq-XsE.normalTitle" = "Wallet Public Seed - XPub (advanced)";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
+"2cx-Qx-XQc.placeholder" = "उपयोगकर्ता का नाम";
+
+/* Class = "UILabel"; text = "Status Line 1"; ObjectID = "3A3-3d-okn"; */
+"3A3-3d-okn.text" = "स्थिति पंक्ति 1";
+
+/* Class = "UIButton"; normalTitle = "Advanced"; ObjectID = "3Py-nn-1AR"; */
+"3Py-nn-1AR.normalTitle" = "उन्नत";
+
+/* Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA"; */
+"4KX-hj-tJA.text" = "ऑफलाइन वॉलेट";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
+"4ab-Wa-eS4.placeholder" = "पासवर्ड";
+
+/* Class = "UIButton"; normalTitle = "Request"; ObjectID = "6EE-Aw-gGZ"; */
+"6EE-Aw-gGZ.normalTitle" = "अनुरोध";
+
+/* Class = "UITabBarItem"; title = "Scan"; ObjectID = "6Ey-Xn-GTe"; */
+"6Ey-Xn-GTe.title" = "परीक्षण";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6qu-Co-pyz"; */
+"6qu-Co-pyz.text" = "उपनाम";
+
+/* Class = "UILabel"; text = "BTC"; ObjectID = "7wl-Lb-K8l"; */
+"7wl-Lb-K8l.text" = "बी टी सी";
+
+/* Class = "UILabel"; text = "External Storage / Print"; ObjectID = "8Nr-wB-OaB"; */
+"8Nr-wB-OaB.text" = "बाह्य भण्डारण / प्रिंट";
+
+/* Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
+"8XB-1A-1hO.text" = "बिज़नेस डायरेक्टरी देखने के लिए घुमाएं";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
+"8iz-Uc-LTS.normalTitle" = "साइन अप";
+
+/* Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB"; */
+"51g-oU-QIB.text" = "वॉलेट आयात";
+
+/* Class = "UIButton"; normalTitle = "Last Year"; ObjectID = "90X-8Y-MEH"; */
+"90X-8Y-MEH.normalTitle" = "पिछले वर्ष";
+
+/* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
+"AOi-Wp-bVq.segmentTitles[0]" = "भेजें";
+
+/* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
+"AOi-Wp-bVq.segmentTitles[1]" = "पता";
+
+/* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[2] = "Photos"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
+"AOi-Wp-bVq.segmentTitles[2]" = "तस्वीरें";
+
+/* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
+"AOi-Wp-bVq.segmentTitles[3]" = "उजाला";
+
+/* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
+"BED-Cf-F1n.text" = "पासवर्ड में कम से कम एक बड़ा ,एक छोटा अक्षर (अंग्रेजी के) और एक अंक,कुल न्यूनतम 10 अक्षर होना आवश्यक है";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
+"Bxa-tB-mk3.text" = "फोन";
+
+/* Class = "UIButton"; normalTitle = "Last Month"; ObjectID = "CDg-O2-8UT"; */
+"CDg-O2-8UT.normalTitle" = "पिछले महीने";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "ClG-um-kmI"; */
+"ClG-um-kmI.text" = "वर्ग";
+
+/* Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
+"CuI-Tj-a8q.text" = "वॉलेट खोलने के लिए पासवर्ड दर्ज करें";
+
+/* Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9"; */
+"Det-Mr-8a9.normalTitle" = "अगला चरण";
+
+/* Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi"; */
+"Dh6-PA-WGi.text" = "टेस्ट";
+
+/* Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2"; */
+"EuE-s0-NQ2.text" = "यू एस डी";
+
+/* Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg"; */
+"GFx-1Z-kFg.text" = "से:";
+
+/* Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8"; */
+"Hba-dd-to8.text" = "(दोहरे नाम)";
+
+/* Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO"; */
+"HzM-6V-ckO.text" = "निर्यात";
+
+/* Class = "UIViewController"; title = "Request View Controller"; ObjectID = "Int-ih-AH6"; */
+"Int-ih-AH6.title" = "नियंत्रक देखने के लिए अनुरोध करें";
+
+/* Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
+"JZ8-MW-EwQ.text" = "गुप्त चाबी";
+
+/* Class = "UITextField"; placeholder = "Enter PIN"; ObjectID = "KTi-U4-C5T"; */
+"KTi-U4-C5T.placeholder" = "पिन दर्ज करें";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE"; */
+"L8T-Xw-aVE.text" = "विवरण";
+
+/* Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG"; */
+"LI5-7a-oQG.text" = "प्रारंभिक तारीख";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "LPo-UX-ZHi"; */
+"LPo-UX-ZHi.normalTitle" = "भेजें";
+
+/* Class = "UILabel"; text = "Copy Public Address"; ObjectID = "Maf-2U-Gv8"; */
+"Maf-2U-Gv8.text" = "सार्वजनिक पता कॉपी करें";
+
+/* Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU"; */
+"NBj-ek-BcU.normalTitle" = "पिछले हफ्ते";
+
+/* Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
+"PDc-Am-Qmc.text" = "सार्वजनिक पता";
+
+/* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "PI3-NW-bVF"; */
+"PI3-NW-bVF.placeholder" = "तत्कालीन पासवर्ड";
+
+/* Class = "UILabel"; text = "Sending..."; ObjectID = "PY5-r2-zeB"; */
+"PY5-r2-zeB.text" = "भेज रहे हैं...";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK"; */
+"Q2G-61-ExK.normalTitle" = "साइन इन";
+
+/* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs"; */
+"QzV-Gk-Vrs.placeholder" = "पासवर्ड दोबारा दर्ज करें";
+
+/* Class = "UIButton"; normalTitle = "Exit PIN Login"; ObjectID = "RTg-3l-g7y"; */
+"RTg-3l-g7y.normalTitle" = "पिन लॉग इन से बाहर निकलें";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "RVo-M5-ZXk"; */
+"RVo-M5-ZXk.normalTitle" = "पासवर्ड भूल गए";
+
+/* Class = "UILabel"; text = "Require PIN above amount"; ObjectID = "Rid-6B-Lv4"; */
+"Rid-6B-Lv4.text" = "उपरोक्त मूल्य के लिए पिन की आवश्यकता है";
+
+/* Class = "UIButton"; normalTitle = "This Year"; ObjectID = "RpC-BO-UBm"; */
+"RpC-BO-UBm.normalTitle" = "इस वर्ष";
+
+/* Class = "UITabBarItem"; title = "Directory"; ObjectID = "Rpq-Hp-RbG"; */
+"Rpq-Hp-RbG.title" = "डायरेक्टरी";
+
+/* Class = "UILabel"; text = "BTC"; ObjectID = "S8Q-An-svf"; */
+"S8Q-An-svf.text" = "बी टी सी";
+
+/* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "ScE-Ny-R3i"; */
+"ScE-Ny-R3i.text" = "4 अंकीय पिन";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "TJ3-SX-hen"; */
+"TJ3-SX-hen.text" = "उपनाम";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "TJm-Ie-PWq"; */
+"TJm-Ie-PWq.placeholder" = "पासवर्ड";
+
+/* Class = "UILabel"; text = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF"; ObjectID = "U2R-0A-Vdq"; */
+"U2R-0A-Vdq.text" = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF";
+
+/* Class = "UILabel"; text = "To:"; ObjectID = "Uak-ip-kgV"; */
+"Uak-ip-kgV.text" = "को:";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z"; */
+"V5e-1n-K9Z.placeholder" = "पासवर्ड";
+
+/* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
+"Vcb-0y-fDf.text" = "एक एप्प ने पैसे भेजने के लिए बिट कॉइन पते का अनुरोध किया है|कृपया पैसे पाने के लिए उपरोक्त में से एक वॉलेट चुनें:";
+
+/* Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY"; */
+"Vuw-Bw-dQY.normalTitle" = "वालेट निजी सीड(उन्नत)";
+
+/* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
+"WB0-Ox-RAw.text" = "4 अंकीय पिन";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F"; */
+"Yfp-gi-q8F.text" = "उपनाम";
+
+/* Class = "UIViewController"; title = "Wallets View Controller"; ObjectID = "ZP6-jP-fb3"; */
+"ZP6-jP-fb3.title" = "वॉलेट अवलोकन नियंत्रक";
+
+/* Class = "UITextField"; placeholder = "Private key"; ObjectID = "ZTK-Sq-FqJ"; */
+"ZTK-Sq-FqJ.placeholder" = "गुप्त चाबी";
+
+/* Class = "UILabel"; text = "Sent From:"; ObjectID = "ZW8-Za-VVy"; */
+"ZW8-Za-VVy.text" = "के द्वारा भेजा गया:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "a3J-4E-YSl"; */
+"a3J-4E-YSl.text" = "उपनाम";
+
+/* Class = "UIViewController"; title = "Send View Controller"; ObjectID = "c1q-yF-WIr"; */
+"c1q-yF-WIr.title" = "प्रेषित अवलोकन नियंत्रक";
+
+/* Class = "UILabel"; text = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj"; ObjectID = "cIH-5H-WKu"; */
+"cIH-5H-WKu.text" = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj";
+
+/* Class = "UILabel"; text = "Scan QR to Send Funds or Login with BitID"; ObjectID = "cYL-n1-ybU"; */
+"cYL-n1-ybU.text" = "पैसे भेजने के लिए क्यू आर स्कैन करें या फिर बिट आईडी से लॉग इन करें";
+
+/* Class = "UIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I"; */
+"cix-f2-i3I.normalTitle" = "इस चरण छोड़ें";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "dKh-rY-DMM"; */
+"dKh-rY-DMM.normalTitle" = "ओके";
+
+/* Class = "UILabel"; text = "End Date"; ObjectID = "dm1-b8-Vp0"; */
+"dm1-b8-Vp0.text" = "अंतिम तारीख";
+
+/* Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
+"egu-Uy-luw.placeholder" = "पिन लिखने की सीमा";
+
+/* Class = "UIButton"; normalTitle = "Transaction Info (CSV)"; ObjectID = "hOS-Gw-CqO"; */
+"hOS-Gw-CqO.normalTitle" = "ट्रांजेक्शन सम्बन्धी जानकारी (CSV)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iE3-Jv-3vs"; */
+"iE3-Jv-3vs.text" = "उपनाम";
+
+/* Class = "UILabel"; text = "Camera unavailable"; ObjectID = "iXW-st-n5q"; */
+"iXW-st-n5q.text" = "कैमरा उपलब्ध नहीं है";
+
+/* Class = "UILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe"; */
+"ifv-G8-Cxe.text" = "(दैनिक सीमा से ज्यादा के लिए पासवर्ड की जरूरत है)";
+
+/* Class = "UITabBarItem"; title = "Transactions"; ObjectID = "j3q-OI-el3"; */
+"j3q-OI-el3.title" = "ट्रांजेक्शन";
+
+/* Class = "UIViewController"; title = "Main View Controller"; ObjectID = "jDp-Og-qtC"; */
+"jDp-Og-qtC.title" = "मुख्य अवलोकन नियंत्रक";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[0] = "Copy"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[0]" = "कॉपी";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[1] = "Email"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[1]" = "ईमेल";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[2]" = "एस एम एस";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jrM-St-5IO"; */
+"jrM-St-5IO.text" = "उपनाम";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "kjs-dz-76a"; */
+"kjs-dz-76a.normalTitle" = "संचित";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB"; */
+"ltN-lB-ATB.placeholder" = "खोज";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "n7B-WE-395"; */
+"n7B-WE-395.normalTitle" = "हो गया";
+
+/* Class = "UILabel"; text = "Bitcoin Wallet"; ObjectID = "nae-d6-xoW"; */
+"nae-d6-xoW.text" = "बिट कॉइन वॉलेट";
+
+/* Class = "UITextField"; placeholder = "Daily Spend Limit"; ObjectID = "o7c-0i-ioy"; */
+"o7c-0i-ioy.placeholder" = "दैनिक खर्च सीमा";
+
+/* Class = "UILabel"; text = "Generating QR Code..."; ObjectID = "oOB-dD-cy2"; */
+"oOB-dD-cy2.text" = "क्यू आर कोड उत्पन्न हो रहा है";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "odP-aX-EhZ"; */
+"odP-aX-EhZ.normalTitle" = "रद्द";
+
+/* Class = "UIButton"; normalTitle = "Transaction Info (Quickbooks)"; ObjectID = "pIj-oW-HUW"; */
+"pIj-oW-HUW.normalTitle" = "ट्रांजेक्शन सम्बंधित जानकारी (क्विकबुक्स)";
+
+/* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
+"puA-fb-r0H.placeholder" = "पिन बनाएं";
+
+/* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
+"rls-16-YZg.text" = "[do not translate]";
+
+/* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
+"sAy-bR-lqd.title" = "मन्यू";
+
+/* Class = "UILabel"; text = "Daily Spending Limit"; ObjectID = "sgY-Eq-QTK"; */
+"sgY-Eq-QTK.text" = "दैनिक खर्च सीमा";
+
+/* Class = "UIButton"; normalTitle = "Max"; ObjectID = "shF-7X-2GL"; Note = "Max button text"; */
+"shF-7X-2GL.normalTitle" = "अधिकतम";
+
+/* Class = "UITabBarItem"; title = "Request"; ObjectID = "uTa-MB-0Sl"; */
+"uTa-MB-0Sl.title" = "अनुरोध";
+
+/* Class = "UILabel"; text = "Scan QR Code or use photo"; ObjectID = "vVZ-Kb-RwQ"; */
+"vVZ-Kb-RwQ.text" = "क्यू आर कोड स्कैन करें या फोटो इस्तेमाल करें";
+
+/* Class = "UIButton"; normalTitle = "This Week"; ObjectID = "vlP-bB-ktv"; */
+"vlP-bB-ktv.normalTitle" = "इस हफ्ते";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "x8T-QG-WiU"; */
+"x8T-QG-WiU.normalTitle" = "हो गया";
+

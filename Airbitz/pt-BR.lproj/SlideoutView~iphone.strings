@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
+"BCk-jF-SE5.text" = "SAIR";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
+"GIG-Sd-O0c.accessibilityLabel" = "Sair";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
+"Lwy-1d-Qgs.accessibilityLabel" = "Comprar ou vender";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
+"O8N-2d-FwL.text" = "Rótulo";
+
+/* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
+"Zac-Lf-J4y.text" = "CONFIGURAÇÕES";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
+"Zu4-Fd-NGP.accessibilityLabel" = "Comprar ou vender";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
+"aSM-QX-pLq.accessibilityLabel" = "Sair";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
+"bQy-8e-q5h.text" = "Ver Série.h";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh"; */
+"jpu-23-4kh.accessibilityLabel" = "Comprar ou vender";
+
+/* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
+"lr4-kO-HCW.text" = "CARTEIRAS";
+
+/* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
+"rWQ-uJ-DUX.text" = "COMPRAR / VENDER BITCOIN";
+
+/* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.accessibilityHint" = "a conta atualmente logada";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.text" = "Rótulo";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
+"xju-3Y-EvK.text" = "Ver Série.h";
+
+/* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
+"xna-m1-9hx.accessibilityLabel" = "Configurações";
+

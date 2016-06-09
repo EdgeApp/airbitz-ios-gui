@@ -1,0 +1,51 @@
+/* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
+"DlF-tR-T08.text" = "生意名称";
+
+/* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
+"GGS-YR-zt1.normalTitle" = "购物";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
+"KxI-24-PCF.text" = "类别";
+
+/* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
+"Sfb-cf-6wF.normalTitle" = "更多类别";
+
+/* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
+"a78-ih-LDk.normalTitle" = "咖啡和茶";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
+"aNa-3g-QXd.placeholder" = "搜索";
+
+/* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
+"b1E-1G-btq.normalTitle" = "礼品卡";
+
+/* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
+"baO-FH-Oy4.text" = "靠近您的";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
+"f2g-xP-19U.text" = "标签";
+
+/* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
+"ga1-R0-wof.text" = "键入 BTC";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
+"heE-og-iXA.placeholder" = "搜索";
+
+/* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
+"kTm-at-TUR.normalTitle" = "电子产品";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
+"lFC-s8-IJT.text" = "标签";
+
+/* Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b"; */
+"oPG-fA-f9b.text" = "左标签";
+
+/* Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S"; */
+"oyK-ph-99S.normalTitle" = "餐馆";
+
+/* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
+"sWr-pd-hBY.normalTitle" = "自动提款机";
+
+/* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
+"wy7-Kv-3ap.text" = "地址 1234";
+
