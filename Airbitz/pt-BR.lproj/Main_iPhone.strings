@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "Este Mês";
 
+/* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
+"1kz-sq-XsE.normalTitle" = "Wallet Public Seed - XPub (advanced)";
+
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "Nome de Usuário";
 
@@ -267,6 +270,9 @@
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
 "puA-fb-r0H.placeholder" = "Criar PIN";
+
+/* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
+"rls-16-YZg.text" = "[do not translate]";
 
 /* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
 "sAy-bR-lqd.title" = "Menu";

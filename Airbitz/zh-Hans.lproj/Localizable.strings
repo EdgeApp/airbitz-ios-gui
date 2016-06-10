@@ -65,6 +65,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Add New" = "添加";
 
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Affiliate Revenue";
+
 /* No comment provided by engineer. */
 "Affiliate link has been copied to the clipboard" = "合作伙伴链接已复制到剪贴板";
 
@@ -211,6 +214,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* Popup text when BLE connects */
 "Connected" = "连接";
+
+/* No comment provided by engineer. */
+"Copied" = "Copied";
 
 /* Copy button text */
 "Copy" = "副本";
@@ -360,14 +366,26 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Error sending SMS" = "发送短信时出现错误。";
 
+/* No comment provided by engineer. */
+"Exchange" = "Exchange";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Exchange Rate Data Source";
+
 /* Exit button text on top left */
 "Exit" = "退出";
+
+/* No comment provided by engineer. */
+"Expense" = "Expense";
 
 /* EXPORT button text for wallet export */
 "Export" = "导出";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "导出Private Seed";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Export Public Seed (XPub)";
 
 /* No comment provided by engineer. */
 "Export Wallet Transactions" = "导出钱包交易";
@@ -443,8 +461,8 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Importing funds from %@ into wallet..." = "从 %@ 将资金从导入钱包...";
 
-/* Income category for affiliate revenue */
-"Income:Affiliate Revenue" = "收入 ︰ 合作伙伴收入";
+/* No comment provided by engineer. */
+"Income" = "Income";
 
 /* No comment provided by engineer. */
 "Incorrect PIN" = "错误的 PIN";
@@ -679,6 +697,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Private Seed" = "Private Seed";
 
 /* No comment provided by engineer. */
+"Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* No comment provided by engineer. */
 "QR Code Scan Failure" = "二维码扫描失败";
 
 /* No comment provided by engineer. */
@@ -910,6 +931,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "交易记录详细信息";
 
+/* No comment provided by engineer. */
+"Transfer" = "Transfer";
+
 /* From wallet transfer text */
 "Transfer From %@" = "转送来自%@";
 
@@ -1134,12 +1158,33 @@ No one, including [[abtag APP_TITLE]], has any access to this information." = "[
 "closed" = "关闭";
 
 /* No comment provided by engineer. */
+"day" = "day";
+
+/* No comment provided by engineer. */
+"days" = "days";
+
+/* No comment provided by engineer. */
+"hour" = "hour";
+
+/* No comment provided by engineer. */
 "hours" = "小时";
 
 /* settings text */
 "mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)
  
 Context | Request Context";
+
+/* No comment provided by engineer. */
+"minute" = "minute";
+
+/* No comment provided by engineer. */
+"minutes" = "minutes";
+
+/* No comment provided by engineer. */
+"second" = "second";
+
+/* No comment provided by engineer. */
+"seconds" = "seconds";
 
 /* Header of popup in SendView from wallet to wallet transfer */
 "▼ Choose a wallet to transfer funds to ▼" = "▼选择要进行转账的钱包 ▼ ";

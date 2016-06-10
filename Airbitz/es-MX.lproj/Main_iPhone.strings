@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "Este mes";
 
+/* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
+"1kz-sq-XsE.normalTitle" = "Wallet Public Seed - XPub (advanced)";
+
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "Nombre de usuario";
 
@@ -47,7 +50,7 @@
 "90X-8Y-MEH.normalTitle" = "Año pasado";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
-"AOi-Wp-bVq.segmentTitles[0]" = "Transferir";
+"AOi-Wp-bVq.segmentTitles[0]" = "Transferencia";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[1]" = "Dirección";
@@ -267,6 +270,9 @@
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
 "puA-fb-r0H.placeholder" = "Crear PIN";
+
+/* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
+"rls-16-YZg.text" = "[do not translate]";
 
 /* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
 "sAy-bR-lqd.title" = "Menú";

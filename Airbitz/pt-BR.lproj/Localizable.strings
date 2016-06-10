@@ -67,6 +67,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 /* No comment provided by engineer. */
 "Add New" = "Adicionar Novo";
 
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Affiliate Revenue";
+
 /* No comment provided by engineer. */
 "Affiliate link has been copied to the clipboard" = "O link de afiliado foi copiado para a área de transferência";
 
@@ -213,6 +216,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 
 /* Popup text when BLE connects */
 "Connected" = "Conectado";
+
+/* No comment provided by engineer. */
+"Copied" = "Copied";
 
 /* Copy button text */
 "Copy" = "Copiar";
@@ -363,14 +369,26 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Error sending SMS" = "Erro ao enviar SMS";
 
+/* No comment provided by engineer. */
+"Exchange" = "Exchange";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Exchange Rate Data Source";
+
 /* Exit button text on top left */
 "Exit" = "Sair";
+
+/* No comment provided by engineer. */
+"Expense" = "Expense";
 
 /* EXPORT button text for wallet export */
 "Export" = "Exportar";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "Exportar Chave Mestra Privada";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Export Public Seed (XPub)";
 
 /* No comment provided by engineer. */
 "Export Wallet Transactions" = "Exportar Transações da Carteira";
@@ -446,8 +464,8 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Importing funds from %@ into wallet..." = "Importar fundos de %@ para a carteira...";
 
-/* Income category for affiliate revenue */
-"Income:Affiliate Revenue" = "Renda: Receita de Afiliados";
+/* No comment provided by engineer. */
+"Income" = "Income";
 
 /* No comment provided by engineer. */
 "Incorrect PIN" = "PIN Incorreto";
@@ -680,6 +698,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Private Seed" = "Chave Mestra Privada";
+
+/* No comment provided by engineer. */
+"Public Seed (XPub)" = "Public Seed (XPub)";
 
 /* No comment provided by engineer. */
 "QR Code Scan Failure" = "Falha no Escaneamento do Código QR";
@@ -919,6 +940,9 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 /* Transaction Details header text */
 "Transaction Details" = "Detalhes da Transação";
 
+/* No comment provided by engineer. */
+"Transfer" = "Transfer";
+
 /* From wallet transfer text */
 "Transfer From %@" = "Transferência de %@";
 
@@ -1149,10 +1173,31 @@ Ninguém, incluindo [[abtag APP_TITLE]], tem acesso a esta informação.";
 "closed" = "fechado";
 
 /* No comment provided by engineer. */
+"day" = "day";
+
+/* No comment provided by engineer. */
+"days" = "days";
+
+/* No comment provided by engineer. */
+"hour" = "hour";
+
+/* No comment provided by engineer. */
 "hours" = "horas";
 
 /* settings text */
 "mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0,001 Bitcoin)";
+
+/* No comment provided by engineer. */
+"minute" = "minute";
+
+/* No comment provided by engineer. */
+"minutes" = "minutes";
+
+/* No comment provided by engineer. */
+"second" = "second";
+
+/* No comment provided by engineer. */
+"seconds" = "seconds";
 
 /* Header of popup in SendView from wallet to wallet transfer */
 "▼ Choose a wallet to transfer funds to ▼" = "▼ Escolha uma carteira para transferir fundos ▼";

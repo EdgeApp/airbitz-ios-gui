@@ -64,6 +64,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Add New" = "Agregar nuevo";
 
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Affiliate Revenue";
+
 /* No comment provided by engineer. */
 "Affiliate link has been copied to the clipboard" = "Enlace de afiliado ha sido copiado en el portapapeles";
 
@@ -210,6 +213,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* Popup text when BLE connects */
 "Connected" = "Conectado";
+
+/* No comment provided by engineer. */
+"Copied" = "Copied";
 
 /* Copy button text */
 "Copy" = "Copia";
@@ -359,14 +365,26 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Error sending SMS" = "Error al enviar correo electrónico.";
 
+/* No comment provided by engineer. */
+"Exchange" = "Intercambio";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Exchange Rate Data Source";
+
 /* Exit button text on top left */
 "Exit" = "Salida";
+
+/* No comment provided by engineer. */
+"Expense" = "Gasto";
 
 /* EXPORT button text for wallet export */
 "Export" = "Exportar";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "Semillas de exportación privada";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Export Public Seed (XPub)";
 
 /* No comment provided by engineer. */
 "Export Wallet Transactions" = "Transacciones de la cartera de exportación";
@@ -442,8 +460,8 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Importing funds from %@ into wallet..." = "Importar fondos de %@ en la carpeta...";
 
-/* Income category for affiliate revenue */
-"Income:Affiliate Revenue" = "Ingresos: Ingresos de afiliado";
+/* No comment provided by engineer. */
+"Income" = "Ingresos";
 
 /* No comment provided by engineer. */
 "Incorrect PIN" = "PIN incorrecto";
@@ -678,6 +696,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Private Seed" = "Clave privada";
 
 /* No comment provided by engineer. */
+"Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* No comment provided by engineer. */
 "QR Code Scan Failure" = "Fallo en análisis de código QR";
 
 /* No comment provided by engineer. */
@@ -909,6 +930,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "Detalles de la transacción";
 
+/* No comment provided by engineer. */
+"Transfer" = "Transferencia";
+
 /* From wallet transfer text */
 "Transfer From %@" = "Transferencia de %@";
 
@@ -1125,10 +1149,31 @@ No one, including [[abtag APP_TITLE]], has any access to this information." = "[
 "closed" = "cerrado";
 
 /* No comment provided by engineer. */
+"day" = "día";
+
+/* No comment provided by engineer. */
+"days" = "días";
+
+/* No comment provided by engineer. */
+"hour" = "hora";
+
+/* No comment provided by engineer. */
 "hours" = "horas";
 
 /* settings text */
 "mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
+
+/* No comment provided by engineer. */
+"minute" = "minute";
+
+/* No comment provided by engineer. */
+"minutes" = "minutos";
+
+/* No comment provided by engineer. */
+"second" = "segundo";
+
+/* No comment provided by engineer. */
+"seconds" = "segundos";
 
 /* Header of popup in SendView from wallet to wallet transfer */
 "▼ Choose a wallet to transfer funds to ▼" = "▼ Elegir una cartera para transferir fondos a ▼";
