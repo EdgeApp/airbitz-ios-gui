@@ -334,12 +334,12 @@
             
             // Setup source wallet metadata
             sourceMetaData.payeeName = [NSString stringWithFormat:transferToWalletText, _destWallet.name];
-            sourceMetaData.category  = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, _destWallet.name];
+            sourceMetaData.category  = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,wallet_category, _destWallet.name];
             [_spend setMetaData:sourceMetaData];
             
             // Setup dest wallet metadata
             destMetaData.payeeName   = [NSString stringWithFormat:transferFromWalletText, abcAccount.currentWallet.name];
-            destMetaData.category    = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, abcAccount.currentWallet.name];
+            destMetaData.category    = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,wallet_category, abcAccount.currentWallet.name];
             
             [_spend addTransfer:_destWallet amount:_amountSatoshi destMeta:destMetaData];
         }

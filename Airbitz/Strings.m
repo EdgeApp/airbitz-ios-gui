@@ -391,5 +391,5 @@
 #define expense_category_en                         @"Expense"
 #define exchange_category_en                        @"Exchange"
 #define transfer_category_en                        @"Transfer"
-
+#define wallet_category                             @"Wallet"
 
