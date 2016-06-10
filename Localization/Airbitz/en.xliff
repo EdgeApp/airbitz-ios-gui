@@ -567,6 +567,425 @@
       </trans-unit>
     </body>
   </file>
+  <file original="Airbitz-OSX/Localizable.strings" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Buy Bitcoin">
+        <source>Buy Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="Airbitz-OSXTests/Info.plist" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
@@ -1364,6 +1783,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>ATM</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1388,12 +1811,28 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Affiliate link has been copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
@@ -1424,6 +1863,22 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
         <note>settings text</note>
@@ -1432,12 +1887,28 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>BITCOIN DENOMINATION</source>
         <note>section header in settings table</note>
       </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
         <note>Back button text on top left</note>
       </trans-unit>
       <trans-unit id="Balance">
         <source>Balance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="BitID Login">
@@ -1480,6 +1951,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Bluetooth payment requests are listed here. Tap on a user to send them a payment</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
         <note>Business Name or Category placeholder</note>
@@ -1512,6 +1991,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Cannot delete wallet as it contains funds. Please transfer out funds first.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
@@ -1536,6 +2023,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Change recovery questions</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
         <note>Check password button text</note>
@@ -1552,8 +2043,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Close</source>
         <note>Generic CLOSE button text</note>
       </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Complete Signup">
@@ -1580,6 +2079,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Connected</source>
         <note>Popup text when BLE connects</note>
       </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Copied">
         <source>Copied</source>
         <note>No comment provided by engineer.</note>
@@ -1598,6 +2101,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       </trans-unit>
       <trans-unit id="Creating and securing wallet">
         <source>Creating and securing wallet</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Current Location">
@@ -1660,6 +2167,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Deleting Wallet</source>
         <note>Text for popup while deleting wallet</note>
       </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Designed and Built by Airbitz in">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
@@ -1676,9 +2191,17 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Discounted Gift Cards</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Done">
@@ -1689,8 +2212,16 @@ Enter it below to make sure:</source>
         <source>Download the Airbitz wallet and save money using bitcoin</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Electronics">
         <source>Electronics</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Email">
@@ -1731,6 +2262,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Enter any notes you would like to send to our support staff">
         <source>Enter any notes you would like to send to our support staff</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Error Changing PIN">
@@ -1813,8 +2348,20 @@ Enter it below to make sure:</source>
         <source>Export Wallet Transactions</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
@@ -1825,12 +2372,32 @@ Enter it below to make sure:</source>
         <source>Fiat</source>
         <note>Fiat</note>
       </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
@@ -1841,8 +2408,16 @@ Enter it below to make sure:</source>
         <source>Get Affiliate Link</source>
         <note>Button text for Get Affiliate Link</note>
       </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Go Back">
@@ -1851,6 +2426,26 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Great job remembering your password.">
         <source>Great job remembering your password.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Help">
@@ -1865,6 +2460,38 @@ Enter it below to make sure:</source>
         <source>High Fee</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
@@ -1873,6 +2500,10 @@ Enter it below to make sure:</source>
         <source>IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)</source>
         <note>Slideout menu import private key text</note>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
@@ -1938,6 +2569,14 @@ Enter it below to make sure:</source>
         <source>Insufficient Password</source>
         <note>Title of password check popup alert</note>
       </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
         <note>No comment provided by engineer.</note>
@@ -1954,16 +2593,40 @@ Enter it below to make sure:</source>
         <source>It's great</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
       </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Loading Account...">
@@ -2002,8 +2665,32 @@ Enter it below to make sure:</source>
         <source>Message Sent</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
@@ -2038,12 +2725,20 @@ Enter it below to make sure:</source>
         <source>Name</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="New Password">
         <source>New Password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Next">
@@ -2068,6 +2763,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="No thanks">
         <source>No thanks</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Not so good">
@@ -2102,6 +2801,10 @@ Enter it below to make sure:</source>
         <source>Open 24 hours</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2116,6 +2819,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="PIN successfully changed.">
         <source>PIN successfully changed.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Partial Payment">
@@ -2162,6 +2869,26 @@ Enter it below to make sure:</source>
       <trans-unit id="Pending">
         <source>Pending</source>
         <note>Pending status in transaction list</note>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
@@ -2219,9 +2946,17 @@ Enter it below to make sure:</source>
         <source>Private Seed</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
@@ -2264,6 +2999,10 @@ Enter it below to make sure:</source>
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
@@ -2283,6 +3022,14 @@ Enter it below to make sure:</source>
       <trans-unit id="Rename Wallet">
         <source>Rename Wallet</source>
         <note>Rename Wallet popup</note>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -2312,6 +3059,10 @@ Enter it below to make sure:</source>
         <source>Restarting watcher service</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
@@ -2330,6 +3081,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="SMS sent">
         <source>SMS sent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
@@ -2356,6 +3111,10 @@ Enter it below to make sure:</source>
         <source>Select Currency</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
@@ -2375,6 +3134,14 @@ Enter it below to make sure:</source>
       <trans-unit id="Sent Bitcoin">
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
@@ -2396,6 +3163,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Share">
         <source>Share</source>
         <note>Generic SHARE button text</note>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -2426,13 +3197,29 @@ Enter it below to make sure:</source>
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
       </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -2453,6 +3240,14 @@ Enter it below to make sure:</source>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -2502,6 +3297,10 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>To: %@ ▼</source>
         <note>Top of screen wallet dropdown prefix text</note>
       </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
@@ -2526,6 +3325,14 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>TouchID: Unsupported Device</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
@@ -2542,9 +3349,17 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Transfer To %@</source>
         <note>To wallet transfer text</note>
       </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
@@ -2666,9 +3481,21 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Username must be at least %d characters.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>
