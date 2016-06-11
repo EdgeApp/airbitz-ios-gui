@@ -1684,6 +1684,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">自动提款机</target>
       </trans-unit>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">ATM Fee</target>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1717,15 +1722,35 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">合作伙伴链接已复制到剪贴板</target>
       </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Air Travel</target>
+      </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">AirPrint 目前无法使用</target>
       </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Alcohol &amp; Bars</target>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Allowance</target>
+      </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">数额太小。</target>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Amusement</target>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
         <source>An app has requested a bitcoin address to send money to.</source>
@@ -1765,6 +1790,26 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">您是否确定？您将无法使用这个钱包中的任何资金和它将来可能会收到的任何资金。</target>
       </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Arts</target>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Auto &amp; Transport</target>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Auto Insurance</target>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Auto Payment</target>
+      </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
         <note>settings text</note>
@@ -1775,6 +1820,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>section header in settings table</note>
         <target xml:lang="zh-Hans" state="translated">比特币面额</target>
       </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Baby Supplies</target>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Babysitter &amp; Daycare</target>
+      </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
         <note>Back button text on top left</note>
@@ -1784,6 +1839,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Balance</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">余额</target>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Bank Fee</target>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Bills &amp; Utilities</target>
       </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
@@ -1835,6 +1900,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">蓝牙付款的请求列在这里。点击目标用户以发送付款</target>
       </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Books</target>
+      </trans-unit>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Books &amp; Supplies</target>
+      </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
         <note>Business Name or Category placeholder</note>
@@ -1875,6 +1950,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">钱包无法被删除，因为它内含资金。请先把资金转出去。</target>
       </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Car Wash</target>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Cash &amp; ATM</target>
+      </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
@@ -1905,6 +1990,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>settings text</note>
         <target xml:lang="zh-Hans" state="translated">更改帐户复原问题</target>
       </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Charity</target>
+      </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
         <note>Check password button text</note>
@@ -1925,10 +2015,20 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Generic CLOSE button text</note>
         <target xml:lang="zh-Hans" state="translated">关闭</target>
       </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Clothing</target>
+      </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">咖啡和茶</target>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Coffee Shops</target>
       </trans-unit>
       <trans-unit id="Complete Signup">
         <source>Complete Signup</source>
@@ -1960,6 +2060,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Popup text when BLE connects</note>
         <target xml:lang="zh-Hans" state="translated">连接</target>
       </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Consulting Income</target>
+      </trans-unit>
       <trans-unit id="Copied">
         <source>Copied</source>
         <note>No comment provided by engineer.</note>
@@ -1984,6 +2089,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Creating and securing wallet</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">创建和保护钱包</target>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Credit Card Payment</target>
       </trans-unit>
       <trans-unit id="Current Location">
         <source>Current Location</source>
@@ -2060,6 +2170,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Text for popup while deleting wallet</note>
         <target xml:lang="zh-Hans" state="translated">正在删除钱包</target>
       </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Dentist</target>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Deposit to Savings</target>
+      </trans-unit>
       <trans-unit id="Designed and Built by Airbitz in">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
@@ -2080,11 +2200,21 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">折扣的礼品卡</target>
       </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Div Income</target>
+      </trans-unit>
       <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">您还记得您的密码吗？如果您的设备被丢失或被盗，或如果您卸载了应用程序，那么您将需要您的密码。 请输入它们以进行确认：</target>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Doctor</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
@@ -2096,10 +2226,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">下载 Airbitz 钱包和通过用比特币来省钱</target>
       </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Education</target>
+      </trans-unit>
       <trans-unit id="Electronics">
         <source>Electronics</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">电子产品</target>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Electronics &amp; Software</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
@@ -2150,6 +2290,11 @@ Enter it below to make sure:</source>
         <source>Enter any notes you would like to send to our support staff</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">请输入您想要发送给我们支援人员的备注</target>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Entertainment</target>
       </trans-unit>
       <trans-unit id="Error Changing PIN">
         <source>Error Changing PIN</source>
@@ -2251,10 +2396,25 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">导出钱包交易</target>
       </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Eyecare</target>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Fast Food</target>
+      </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">反馈</target>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Fees &amp; Charges</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2266,15 +2426,40 @@ Enter it below to make sure:</source>
         <note>Fiat</note>
         <target xml:lang="zh-Hans" state="translated">法定货币</target>
       </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Financial</target>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Financial Advisor</target>
+      </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="zh-Hans" state="translated">名字（自选）</target>
       </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Food &amp; Dining</target>
+      </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">来自: %@</target>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Furnishings</target>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Gas &amp; Fuel</target>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
         <source>Generating QR Code...</source>
@@ -2286,10 +2471,20 @@ Enter it below to make sure:</source>
         <note>Button text for Get Affiliate Link</note>
         <target xml:lang="zh-Hans" state="translated">获取合作伙伴链接</target>
       </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Gift</target>
+      </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">礼品卡</target>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Gifts &amp; Donations</target>
       </trans-unit>
       <trans-unit id="Go Back">
         <source>Go Back</source>
@@ -2300,6 +2495,31 @@ Enter it below to make sure:</source>
         <source>Great job remembering your password.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">您记得您的密码，真棒！</target>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Groceries</target>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Gym</target>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">HOA Dues</target>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Hair</target>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Health &amp; Fitness</target>
       </trans-unit>
       <trans-unit id="Help">
         <source>Help</source>
@@ -2316,6 +2536,46 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">高费用</target>
       </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Hobbies</target>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home</target>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home Improvement</target>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home Insurance</target>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home Phone</target>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home Services</target>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Home Supplies</target>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Hotel</target>
+      </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
@@ -2327,6 +2587,11 @@ Enter it below to make sure:</source>
         <note>Slideout menu import private key text</note>
         <target xml:lang="zh-Hans" state="translated">导入PRIVATE KEY
 ([[abtag APP_TITLE]] 礼品卡)</target>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">IRA Contribution</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
@@ -2411,6 +2676,16 @@ Enter it below to make sure:</source>
         <note>Title of password check popup alert</note>
         <target xml:lang="zh-Hans" state="translated">密码不足</target>
       </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Interest Exp</target>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Internet</target>
+      </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
         <note>No comment provided by engineer.</note>
@@ -2431,20 +2706,50 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">太棒了</target>
       </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Kids</target>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Kids Activities</target>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="zh-Hans" state="translated">姓氏 （自选）</target>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Late Fee</target>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
         <target xml:lang="zh-Hans" state="translated">待会</target>
       </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Laundry</target>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Lawn &amp; Garden</target>
+      </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">阶层</target>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Life Insurance</target>
       </trans-unit>
       <trans-unit id="Loading Account...">
         <source>Loading Account...</source>
@@ -2491,10 +2796,40 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">消息已发送</target>
       </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Misc.</target>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Mobile Phone</target>
+      </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">更多类别</target>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Mortgage &amp; Rent</target>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Mortgage Interest</target>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Movies &amp; DVDs</target>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Music</target>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
         <source>Must have at least %d characters</source>
@@ -2536,6 +2871,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">名字</target>
       </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Net Salary</target>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2545,6 +2885,11 @@ Enter it below to make sure:</source>
         <source>New Password</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">新密码</target>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Newspaper &amp; Magazines</target>
       </trans-unit>
       <trans-unit id="Next">
         <source>Next</source>
@@ -2575,6 +2920,11 @@ Enter it below to make sure:</source>
         <source>No thanks</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">不用，谢谢</target>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Not Sure</target>
       </trans-unit>
       <trans-unit id="Not so good">
         <source>Not so good</source>
@@ -2619,6 +2969,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">24小时开启</target>
       </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Other Income</target>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2638,6 +2993,11 @@ Enter it below to make sure:</source>
         <source>PIN successfully changed.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">PIN修改成功。</target>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Parking</target>
       </trans-unit>
       <trans-unit id="Partial Payment">
         <source>Partial Payment</source>
@@ -2694,6 +3054,31 @@ Enter it below to make sure:</source>
         <source>Pending</source>
         <note>Pending status in transaction list</note>
         <target xml:lang="zh-Hans" state="translated">待处理</target>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Personal Care</target>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Pet Food &amp; Supplies</target>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Pet Grooming</target>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Pets</target>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Pharmacy</target>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
@@ -2765,10 +3150,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">Private Seed</target>
       </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Property</target>
+      </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="needs-translation">Public Seed (XPub)</target>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Public Transportation</target>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
@@ -2821,6 +3216,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">推荐给您的朋友</target>
       </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Registration</target>
+      </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
@@ -2845,6 +3245,16 @@ Enter it below to make sure:</source>
         <source>Rename Wallet</source>
         <note>Rename Wallet popup</note>
         <target xml:lang="zh-Hans" state="translated">重命名钱包</target>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Rent</target>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Rental Car &amp; Taxi</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -2884,6 +3294,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">重新启动监视服务</target>
       </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Restaurants</target>
+      </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
@@ -2908,6 +3323,11 @@ Enter it below to make sure:</source>
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">短信已发送</target>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Sales</target>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
         <source>San Diego, California, USA</source>
@@ -2939,6 +3359,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">选择货币</target>
       </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Sell Bitcoin</target>
+      </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
@@ -2963,6 +3388,16 @@ Enter it below to make sure:</source>
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">发送比特币</target>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Service &amp; Parts</target>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Service Fee</target>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
@@ -2989,6 +3424,11 @@ Enter it below to make sure:</source>
         <source>Share</source>
         <note>Generic SHARE button text</note>
         <target xml:lang="zh-Hans" state="translated">分享</target>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Shopping</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -3026,15 +3466,35 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">抱歉</target>
       </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Spa &amp; Massage</target>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
         <target xml:lang="zh-Hans" state="translated">支出限额</target>
       </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Sporting Goods</target>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Sports</target>
+      </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">标准费用</target>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Student Loan</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -3060,6 +3520,16 @@ Enter it below to make sure:</source>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">点击和常按钱包来列开更多选项</target>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Tax</target>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Television</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -3120,6 +3590,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>Top of screen wallet dropdown prefix text</note>
         <target xml:lang="zh-Hans" state="translated">致： %@ ▼</target>
       </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Tolls</target>
+      </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
@@ -3150,6 +3625,16 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>settings text</note>
         <target xml:lang="zh-Hans" state="translated">TouchID: 不支援系统的设备</target>
       </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Toys</target>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Trade Commissions</target>
+      </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
@@ -3170,10 +3655,20 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>To wallet transfer text</note>
         <target xml:lang="zh-Hans" state="translated">转送致%@</target>
       </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Travel</target>
+      </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">再试一次吗？</target>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Tuition</target>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
@@ -3328,10 +3823,25 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">用户名需要至少 %d个字符</target>
       </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Utilities</target>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Vacation</target>
+      </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">正在验证地址...</target>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Vet</target>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>

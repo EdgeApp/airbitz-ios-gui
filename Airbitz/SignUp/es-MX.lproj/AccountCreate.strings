@@ -1,119 +1,117 @@
+
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
-"0gq-ds-DJC.normalTitle" = "Siguiente";
+"0gq-ds-DJC.normalTitle" = "NEXT";
 
 /* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Su nombre de usuario y contraseña son solamente conocidos para usted y nunca se transmiten ni almacenan sin cifrar";
+"4eB-ff-Ebh.text" = "Your username and password are known only to you and never transmitted or stored unencrypted.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
-"6uu-dw-ssd.normalTitle" = "Siguiente";
+"6uu-dw-ssd.normalTitle" = "NEXT";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI"; */
-"AAt-Oh-ifI.normalTitle" = "Siguiente";
+"AAt-Oh-ifI.normalTitle" = "NEXT";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC"; */
-"D2i-9s-GAC.normalTitle" = "Siguiente";
+"D2i-9s-GAC.normalTitle" = "NEXT";
 
 /* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
-"DUg-At-veb.text" = "Mi nombre";
+"DUg-At-veb.text" = "myname";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
-"DgW-Gm-7l2.normalTitle" = "Siguiente";
+"DgW-Gm-7l2.normalTitle" = "NEXT";
 
 /* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
-"Dyh-gB-nOv.text" = "A continuación, verá una ventana emergente solicitando acceso a sus contactos.";
+"Dyh-gB-nOv.text" = "You will next see a popup requesting access to your Contacts.";
 
 /* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
-"Ehm-ti-qdD.text" = "Especifique su nombre o apodo aleatorio, por ejemplo \"Coinmaster\".
-Esto se utiliza solamente cuando envíe pagos o solicitudes a otros para ayudarles a identificarle.
-Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualquier momento en el futuro.";
+"Ehm-ti-qdD.text" = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future.";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
-"G0E-xz-b8e.text" = "Establecer un PIN de 4 dígitos";
+"G0E-xz-b8e.text" = "Set a 4 Digit PIN";
 
 /* Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR"; */
 "Gzw-pH-bAR.text" = "1234";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz"; */
-"KSv-b6-auz.text" = "Ver Strings.h";
+"KSv-b6-auz.text" = "See Strings.h";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv"; */
-"SsW-1b-1cv.text" = "Ver Strings.h";
+"SsW-1b-1cv.text" = "See Strings.h";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt"; */
-"Tqs-NN-dWt.text" = "Su PIN es un código de 4 dígitos utilizado para hacer inicios de sesión rápidos en su cuenta";
+"Tqs-NN-dWt.text" = "Your PIN is a 4 digit code used to do quick re-logins into your account.";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT"; */
-"VAn-0y-asT.text" = "Ver Strings.h";
+"VAn-0y-asT.text" = "See Strings.h";
 
 /* Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68"; */
-"Vad-R9-M68.normalTitle" = "Omitir";
+"Vad-R9-M68.normalTitle" = "SKIP";
 
 /* Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7"; */
-"W8f-q2-Sa7.normalTitle" = "Mostrar";
+"W8f-q2-Sa7.normalTitle" = "Show";
 
 /* Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT"; */
-"WkL-r2-NLT.text" = "Registrarse";
+"WkL-r2-NLT.text" = "Sign Up";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf"; */
-"Wkt-fz-AEf.normalTitle" = "Botón";
+"Wkt-fz-AEf.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv"; */
-"YJZ-dK-bwv.text" = "Permitir el acceso a la cámara";
+"YJZ-dK-bwv.text" = "Enable Camera Access";
 
 /* Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4"; */
 "bPi-8w-xQ4.text" = "PIN";
 
 /* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
-"cng-Cv-ULC.text" = "Habilitar el acceso a los contactos";
+"cng-Cv-ULC.text" = "Enable Contact Access";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
-"dxS-14-iR5.text" = "Su PIN es un código de 4 dígitos utilizado para hacer inicios de sesión rápidos en su cuenta";
+"dxS-14-iR5.text" = "Your PIN is a 4 digit code used to do quick re-logins into your account.";
 
 /* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
-"fCk-W4-OJJ.placeholder" = "Apodo";
+"fCk-W4-OJJ.placeholder" = "Nickname";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn"; */
-"fV9-pz-Wfn.placeholder" = "Crear PIN";
+"fV9-pz-Wfn.placeholder" = "Create PIN";
 
 /* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL"; */
-"fnL-7h-MQL.placeholder" = "Elegir una contraseña";
+"fnL-7h-MQL.placeholder" = "Choose a Password";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6"; */
-"hHD-NP-fM6.normalTitle" = "Siguiente";
+"hHD-NP-fM6.normalTitle" = "NEXT";
 
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F"; */
-"hoE-Bh-x2F.placeholder" = "Volver a introducir contraseña";
+"hoE-Bh-x2F.placeholder" = "Re-enter Password";
 
 /* Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm"; */
-"i3b-ZH-bDm.placeholder" = "Elegir un nombre de usuario";
+"i3b-ZH-bDm.placeholder" = "Choose a Username";
 
 /* Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj"; */
-"jcU-OX-5Hj.text" = "Escribir y almacenar de forma segura";
+"jcU-OX-5Hj.text" = "Write down and store securely";
 
 /* Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX"; */
-"jgQ-ju-YiX.text" = "Establecer una contraseña y PIN";
+"jgQ-ju-YiX.text" = "Set a Password and PIN";
 
 /* Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV"; */
-"sJ6-mQ-mSV.text" = "Nombre de usuario";
+"sJ6-mQ-mSV.text" = "Username";
 
 /* Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm"; */
-"tOB-4i-OVm.text" = "micontraseña12345";
+"tOB-4i-OVm.text" = "mypassword12345";
 
 /* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
-"w3d-xe-eUq.text" = "La contraseña se utiliza para autentificar su cuenta y para cambiar configuración sensible";
+"w3d-xe-eUq.text" = "The password is used to authenticate your account and to change sensitive settings.";
 
 /* Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU"; */
-"wff-Il-8GU.text" = "Escríbalo";
+"wff-Il-8GU.text" = "Write it Down!";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg"; */
-"x6r-A5-Cxg.normalTitle" = "Atrás";
+"x6r-A5-Cxg.normalTitle" = "Back";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM"; */
-"y2b-Sg-zfM.placeholder" = "Crear PIN";
+"y2b-Sg-zfM.placeholder" = "Create PIN";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1"; */
-"z5S-Vu-MC1.normalTitle" = "Siguiente";
+"z5S-Vu-MC1.normalTitle" = "NEXT";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC"; */
-"zqc-i8-gfC.text" = "Contraseña";
-
+"zqc-i8-gfC.text" = "Password";

@@ -930,7 +930,7 @@
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
-        <target xml:lang="es-MX" state="needs-translation">Wallet Public Seed - XPub (advanced)</target>
+        <target xml:lang="es-MX" state="translated">Semilla de cartera pública - XPub (avanzado)</target>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder">
         <source>User Name</source>
@@ -1386,7 +1386,7 @@
       <trans-unit id="rls-16-YZg.text">
         <source>[do not translate]</source>
         <note>Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg";</note>
-        <target xml:lang="es-MX" state="needs-translation">[do not translate]</target>
+        <target xml:lang="es-MX" state="translated">[no traducir]</target>
       </trans-unit>
       <trans-unit id="sAy-bR-lqd.title">
         <source>Menu</source>
@@ -1692,6 +1692,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">CAJEROS AUTOMÁTICOS</target>
       </trans-unit>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cuota de cajero automático</target>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1715,22 +1720,42 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Affiliate Revenue">
         <source>Affiliate Revenue</source>
         <note>Income category for affiliate revenue</note>
-        <target xml:lang="es-MX" state="needs-translation">Affiliate Revenue</target>
+        <target xml:lang="es-MX" state="translated">Ingresos de afiliados</target>
       </trans-unit>
       <trans-unit id="Affiliate link has been copied to the clipboard">
         <source>Affiliate link has been copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Enlace de afiliado ha sido copiado en el portapapeles</target>
       </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Viaje en avión</target>
+      </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">AirPrint no está disponible actualmente</target>
       </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Alcohol y bares</target>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Tolerancia</target>
+      </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Cantidad es demasiado pequeña</target>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Entretenimiento</target>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
         <source>An app has requested a bitcoin address to send money to.</source>
@@ -1767,6 +1792,26 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">¿Estás seguro? No podrás acceder a los fondos de esta cartera y los fondos futuros que pueda recibir</target>
       </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Artes</target>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Coche y transporte</target>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Seguro de coche</target>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Pago automático</target>
+      </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
         <note>settings text</note>
@@ -1777,6 +1822,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>section header in settings table</note>
         <target xml:lang="es-MX" state="translated">DENOMINACIÓN DE BITCOIN</target>
       </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Suministros de bebé</target>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Niñera y guardería</target>
+      </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
         <note>Back button text on top left</note>
@@ -1786,6 +1841,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Balance</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Balance</target>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cuota Banco</target>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Facturas y servicios públicos</target>
       </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
@@ -1837,6 +1902,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Las solicitudes de pago de Bluetooth se enumeran aquí. Toque a un usuario enviar un pago</target>
       </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Libros</target>
+      </trans-unit>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Libros y suministros</target>
+      </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
         <note>Business Name or Category placeholder</note>
@@ -1877,6 +1952,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">No puede eliminar la carpeta ya que contiene fondos. Por favor, traslado fondos primero.</target>
       </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Lavado de coche</target>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Efectivo y Cajero automático</target>
+      </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
@@ -1907,6 +1992,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>settings text</note>
         <target xml:lang="es-MX" state="translated">Cambiar preguntas de recuperación</target>
       </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Caridad</target>
+      </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
         <note>Check password button text</note>
@@ -1927,10 +2017,20 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Generic CLOSE button text</note>
         <target xml:lang="es-MX" state="translated">Cerrar</target>
       </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Ropa</target>
+      </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Café y té</target>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cafeterías</target>
       </trans-unit>
       <trans-unit id="Complete Signup">
         <source>Complete Signup</source>
@@ -1962,10 +2062,15 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Popup text when BLE connects</note>
         <target xml:lang="es-MX" state="translated">Conectado</target>
       </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Consulta de ingresos</target>
+      </trans-unit>
       <trans-unit id="Copied">
         <source>Copied</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es-MX" state="needs-translation">Copied</target>
+        <target xml:lang="es-MX" state="translated">Copiado</target>
       </trans-unit>
       <trans-unit id="Copy">
         <source>Copy</source>
@@ -1986,6 +2091,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Creating and securing wallet</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Crear y asegurar la cuenta</target>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Pago con tarjeta de crédito</target>
       </trans-unit>
       <trans-unit id="Current Location">
         <source>Current Location</source>
@@ -2065,6 +2175,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Text for popup while deleting wallet</note>
         <target xml:lang="es-MX" state="translated">Eliminar la cartera</target>
       </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Dentista</target>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Depósito de ahorro</target>
+      </trans-unit>
       <trans-unit id="Designed and Built by Airbitz in">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
@@ -2085,11 +2205,21 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Tarjetas de regalo con descuento</target>
       </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Ingresos divididos</target>
+      </trans-unit>
       <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">¿Todavía recuerdas tu contraseña? Necesitará su contraseña si el dispositivo se pierde o si su PIN es ingresado incorrectamente 3 veces. \nEntra lo siguiente para asegurarse de que:</target>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Médico</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
@@ -2101,10 +2231,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Descargar la cartera Airbitz y ahorre dinero con bitcoin</target>
       </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Educación</target>
+      </trans-unit>
       <trans-unit id="Electronics">
         <source>Electronics</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Electrónica</target>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Electrónica y software</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
@@ -2155,6 +2295,11 @@ Enter it below to make sure:</source>
         <source>Enter any notes you would like to send to our support staff</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Ingresar notas para enviar a nuestro personal de soporte</target>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Entretenimiento</target>
       </trans-unit>
       <trans-unit id="Error Changing PIN">
         <source>Error Changing PIN</source>
@@ -2224,7 +2369,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Exchange Rate Data Source">
         <source>Exchange Rate Data Source</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es-MX" state="needs-translation">Exchange Rate Data Source</target>
+        <target xml:lang="es-MX" state="translated">Origen de datos de tipo de cambio</target>
       </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
@@ -2249,17 +2394,32 @@ Enter it below to make sure:</source>
       <trans-unit id="Export Public Seed (XPub)">
         <source>Export Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es-MX" state="needs-translation">Export Public Seed (XPub)</target>
+        <target xml:lang="es-MX" state="translated">Exportar semilla pública (XPub)</target>
       </trans-unit>
       <trans-unit id="Export Wallet Transactions">
         <source>Export Wallet Transactions</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Transacciones de la cartera de exportación</target>
       </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cuidado de los ojos</target>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Comida rápida</target>
+      </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Comentarios</target>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Tasas y cargos</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2271,15 +2431,40 @@ Enter it below to make sure:</source>
         <note>Fiat</note>
         <target xml:lang="es-MX" state="translated">Fiat</target>
       </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Financiero</target>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Asesor financiero</target>
+      </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="es-MX" state="translated">Nombre (opcional)</target>
       </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Comida y cena</target>
+      </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">De: %@</target>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Muebles</target>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Gasolina y combustible</target>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
         <source>Generating QR Code...</source>
@@ -2291,10 +2476,20 @@ Enter it below to make sure:</source>
         <note>Button text for Get Affiliate Link</note>
         <target xml:lang="es-MX" state="translated">Obtener enlace afiliado</target>
       </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Regalo</target>
+      </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Tarjetas de regalo</target>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Regalos y donaciones</target>
       </trans-unit>
       <trans-unit id="Go Back">
         <source>Go Back</source>
@@ -2305,6 +2500,31 @@ Enter it below to make sure:</source>
         <source>Great job remembering your password.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Gran trabajo al recordar tu contraseña.</target>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Alimentos</target>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Gimnasio</target>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cuotas de la HOA</target>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cabello</target>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Salud y bienestar</target>
       </trans-unit>
       <trans-unit id="Help">
         <source>Help</source>
@@ -2321,6 +2541,46 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Tasa alta</target>
       </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Pasatiempos</target>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Página de inicio</target>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Mejoras para el hogar</target>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Seguro de hogar</target>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Teléfono de casa</target>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Servicios en el hogar</target>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Artículos para el hogar</target>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Hotel</target>
+      </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
@@ -2332,6 +2592,11 @@ Enter it below to make sure:</source>
         <note>Slideout menu import private key text</note>
         <target xml:lang="es-MX" state="translated">IMPORTAR CLAVE PRIVADA
 ([[abtag APP_TITLE]] Gift Card)</target>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Contribución de IRA</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
@@ -2413,6 +2678,16 @@ Enter it below to make sure:</source>
         <note>Title of password check popup alert</note>
         <target xml:lang="es-MX" state="translated">Contraseña insuficiente.</target>
       </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Interés exponencial</target>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Internet</target>
+      </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
         <note>No comment provided by engineer.</note>
@@ -2433,20 +2708,50 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Es muy bueno</target>
       </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Niños</target>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Actividades para niños</target>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="es-MX" state="translated">Apellido (opcional)</target>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cargo por pago atrasado</target>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
         <target xml:lang="es-MX" state="translated">Más tarde</target>
       </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Servicio de lavandería</target>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Césped y jardín</target>
+      </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Nivel</target>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Seguro de vida</target>
       </trans-unit>
       <trans-unit id="Loading Account...">
         <source>Loading Account...</source>
@@ -2493,10 +2798,40 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Mensaje enviado</target>
       </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Varios</target>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Teléfono móvil</target>
+      </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Más categorías</target>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Hipoteca y alquiler</target>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Interés hipotecario</target>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Películas y DVDs</target>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Música</target>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
         <source>Must have at least %d characters</source>
@@ -2538,6 +2873,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Nombre:</target>
       </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Sueldo neto</target>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2547,6 +2887,11 @@ Enter it below to make sure:</source>
         <source>New Password</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Nueva contraseña</target>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Periódico y revistas</target>
       </trans-unit>
       <trans-unit id="Next">
         <source>Next</source>
@@ -2577,6 +2922,11 @@ Enter it below to make sure:</source>
         <source>No thanks</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">No, gracias</target>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">No estoy seguro</target>
       </trans-unit>
       <trans-unit id="Not so good">
         <source>Not so good</source>
@@ -2618,6 +2968,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Abierto las 24 horas</target>
       </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Otros ingresos</target>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2637,6 +2992,11 @@ Enter it below to make sure:</source>
         <source>PIN successfully changed.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">PIN cambiado correctamente.</target>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Estacionamiento</target>
       </trans-unit>
       <trans-unit id="Partial Payment">
         <source>Partial Payment</source>
@@ -2693,6 +3053,31 @@ Enter it below to make sure:</source>
         <source>Pending</source>
         <note>Pending status in transaction list</note>
         <target xml:lang="es-MX" state="translated">Pendiente</target>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Cuidado personal</target>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Comida y suministros para mascotas</target>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Cuidado de mascotas</target>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Mascotas</target>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Farmacia</target>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
@@ -2767,10 +3152,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Clave privada</target>
       </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Propiedad</target>
+      </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es-MX" state="needs-translation">Public Seed (XPub)</target>
+        <target xml:lang="es-MX" state="translated">Semilla pública (XPub)</target>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Transporte público</target>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
@@ -2823,6 +3218,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Explicar a su amigo</target>
       </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Registro</target>
+      </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
@@ -2847,6 +3247,16 @@ Enter it below to make sure:</source>
         <source>Rename Wallet</source>
         <note>Rename Wallet popup</note>
         <target xml:lang="es-MX" state="translated">Cambiar el nombre de carpeta</target>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Alquiler</target>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Taxi y coche de alquiler</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -2883,6 +3293,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Reiniciar servicio de vigilante</target>
       </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Restaurantes</target>
+      </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
@@ -2907,6 +3322,11 @@ Enter it below to make sure:</source>
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">SMS enviado</target>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Ventas</target>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
         <source>San Diego, California, USA</source>
@@ -2938,6 +3358,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Seleccione una moneda</target>
       </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es-MX" state="translated">Vender Bitcoin</target>
+      </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
@@ -2962,6 +3387,16 @@ Enter it below to make sure:</source>
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Bitcoin Enviados</target>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Reparación y partes</target>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Cargo por servicio</target>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
@@ -2988,6 +3423,11 @@ Enter it below to make sure:</source>
         <source>Share</source>
         <note>Generic SHARE button text</note>
         <target xml:lang="es-MX" state="translated">Compartir</target>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Comprar</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -3025,15 +3465,35 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Lo siento</target>
       </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Spa y masaje</target>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
         <target xml:lang="es-MX" state="translated">Límites de gastos</target>
       </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Artículos deportivos</target>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Deportes</target>
+      </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Tasa estándar</target>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Préstamo de estudiante</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -3062,6 +3522,16 @@ Enter it below to make sure:</source>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Toque y mantenga una cartera de opciones adicionales</target>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Impuesto</target>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Televisión</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -3122,6 +3592,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>Top of screen wallet dropdown prefix text</note>
         <target xml:lang="es-MX" state="translated">Para: %@ ▼</target>
       </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Peajes</target>
+      </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
@@ -3152,6 +3627,16 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>settings text</note>
         <target xml:lang="es-MX" state="translated">TouchID: Dispositivo no soportado</target>
       </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Juguetes</target>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Comisiones de comercio</target>
+      </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
@@ -3172,10 +3657,20 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>To wallet transfer text</note>
         <target xml:lang="es-MX" state="translated">Transferencia a %@</target>
       </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Viajes</target>
+      </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">¿Volver a intentarlo?</target>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Matrícula</target>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
@@ -3326,10 +3821,25 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Nombre de usuario debe ser al menos caracteres %d.</target>
       </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Servicios públicos</target>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Vacaciones</target>
+      </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es-MX" state="translated">Validar dirección...</target>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
+        <target xml:lang="es-MX" state="translated">Veterinario</target>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>
@@ -3539,7 +4049,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
       <trans-unit id="minute">
         <source>minute</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es-MX" state="needs-translation">minute</target>
+        <target xml:lang="es-MX" state="translated">minuto</target>
       </trans-unit>
       <trans-unit id="minutes">
         <source>minutes</source>
@@ -3624,104 +4134,103 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
       <trans-unit id="1Qx-Jp-bYp.text">
         <source>2FA Reset Requested by another device.</source>
         <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
-        <target xml:lang="es-MX" state="needs-translation">2FA Reset Requested by another device.</target>
+        <target xml:lang="es-MX" state="translated">Reinicio 2FA solicitado por otro dispositivo.</target>
       </trans-unit>
       <trans-unit id="3uS-L5-frK.normalTitle">
         <source>KEEP 2FA</source>
         <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
-        <target xml:lang="es-MX" state="needs-translation">KEEP 2FA</target>
+        <target xml:lang="es-MX" state="translated">MANTENER 2FA</target>
       </trans-unit>
       <trans-unit id="4md-ob-Ttv.text">
         <source>Core Version:</source>
         <note>Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv";</note>
-        <target xml:lang="es-MX" state="needs-translation">Core Version:</target>
+        <target xml:lang="es-MX" state="translated">Versión de la base:</target>
       </trans-unit>
       <trans-unit id="9ur-p7-oPb.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb";</note>
-        <target xml:lang="es-MX" state="needs-translation">Label</target>
+        <target xml:lang="es-MX" state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="Ag5-Xn-Vpg.normalTitle">
         <source>Clear Watcher Cache</source>
         <note>Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg";</note>
-        <target xml:lang="es-MX" state="needs-translation">Clear Watcher Cache</target>
+        <target xml:lang="es-MX" state="translated">Vaciar la caché del vigilante</target>
       </trans-unit>
       <trans-unit id="Bs1-Yi-SIh.normalTitle">
         <source>Upload Log Files</source>
         <note>Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh";</note>
-        <target xml:lang="es-MX" state="needs-translation">Upload Log Files</target>
+        <target xml:lang="es-MX" state="translated">Subir los archivos de registro</target>
       </trans-unit>
       <trans-unit id="GMX-G5-Rl3.text">
         <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
         <note>Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3";</note>
-        <target xml:lang="es-MX" state="needs-translation">Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</target>
+        <target xml:lang="es-MX" state="translated">Habilitar autenticación de 2 factores para aumentar la seguridad permitiendo solamente inicios de sesión de dispositivos previamente conectados. Añada más dispositivos escaneando el código QR a continuación después de activar 2FA</target>
       </trans-unit>
       <trans-unit id="GXU-6G-OIw.placeholder">
         <source>Current Password</source>
         <note>Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw";</note>
-        <target xml:lang="es-MX" state="needs-translation">Current Password</target>
+        <target xml:lang="es-MX" state="translated">Contraseña actual</target>
       </trans-unit>
       <trans-unit id="Izr-Cl-Osv.text">
         <source>Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
 Scan the QR code using this device</source>
         <note>Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv";</note>
-        <target xml:lang="es-MX" state="needs-translation">Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
-Scan the QR code using this device</target>
+        <target xml:lang="es-MX" state="translated">Usar el dispositivo que habilita la autentificación de 2 Factores, Vaya a Ajustes -&gt; Dos Factores. Escanear el código QR utilizando este dispositivo</target>
       </trans-unit>
       <trans-unit id="LAg-aY-W5b.normalTitle">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b";</note>
-        <target xml:lang="es-MX" state="needs-translation">DONE</target>
+        <target xml:lang="es-MX" state="translated">HECHO</target>
       </trans-unit>
       <trans-unit id="Myh-H6-aDd.text">
         <source>Version:</source>
         <note>Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd";</note>
-        <target xml:lang="es-MX" state="needs-translation">Version:</target>
+        <target xml:lang="es-MX" state="translated">Versión:</target>
       </trans-unit>
       <trans-unit id="RqX-ow-U05.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05";</note>
-        <target xml:lang="es-MX" state="needs-translation">Label</target>
+        <target xml:lang="es-MX" state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="SXK-F7-NoK.text">
         <source>0.1.0-mainnet</source>
         <note>Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK";</note>
-        <target xml:lang="es-MX" state="needs-translation">0.1.0-mainnet</target>
+        <target xml:lang="es-MX" state="translated">0.1.0-mainnet</target>
       </trans-unit>
       <trans-unit id="T6x-zH-xvf.text">
         <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
         <note>Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf";</note>
-        <target xml:lang="es-MX" state="needs-translation">This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </target>
+        <target xml:lang="es-MX" state="translated">Esta cuenta tiene autenticación de Factor 2 (2FA) habilitado. Escanear la ficha 2FA desde el dispositivo que permitió a 2FA dar acceso a este dispositivo. </target>
       </trans-unit>
       <trans-unit id="X6G-HD-WUv.placeholder">
         <source>Search</source>
         <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv";</note>
-        <target xml:lang="es-MX" state="needs-translation">Search</target>
+        <target xml:lang="es-MX" state="translated">Buscar</target>
       </trans-unit>
       <trans-unit id="XJN-At-Qod.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod";</note>
-        <target xml:lang="es-MX" state="needs-translation">Label</target>
+        <target xml:lang="es-MX" state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="Zw4-k1-a82.text">
         <source>Mainnet</source>
         <note>Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82";</note>
-        <target xml:lang="es-MX" state="needs-translation">Mainnet</target>
+        <target xml:lang="es-MX" state="translated">Mainnet</target>
       </trans-unit>
       <trans-unit id="avV-bm-INd.normalTitle">
         <source>DISABLE 2FA</source>
         <note>Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd";</note>
-        <target xml:lang="es-MX" state="needs-translation">DISABLE 2FA</target>
+        <target xml:lang="es-MX" state="translated">DESACTIVAR 2FA</target>
       </trans-unit>
       <trans-unit id="bYl-WU-bNw.text">
         <source>Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</source>
         <note>Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw";</note>
-        <target xml:lang="es-MX" state="needs-translation">Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</target>
+        <target xml:lang="es-MX" state="translated">Solicitar que la autenticación Dos Factores se apague. La solicitud se reiniciará automáticamente en 7 días si no se llevan a cabo acciones en la cuenta de usuario en dispositivos autenticados</target>
       </trans-unit>
       <trans-unit id="g6f-f3-w6p.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p";</note>
-        <target xml:lang="es-MX" state="needs-translation">Label</target>
+        <target xml:lang="es-MX" state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="h6I-iF-k15.text" approved="yes">
         <source>Date</source>
@@ -3731,52 +4240,52 @@ Scan the QR code using this device</target>
       <trans-unit id="hxc-na-KPc.text">
         <source>Two factor reset has been requested</source>
         <note>Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc";</note>
-        <target xml:lang="es-MX" state="needs-translation">Two factor reset has been requested</target>
+        <target xml:lang="es-MX" state="translated">Se ha solicitado el reinicio de Factor Dos</target>
       </trans-unit>
       <trans-unit id="iUa-wU-ZnQ.normalTitle">
         <source>StylizedOutline</source>
         <note>Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ";</note>
-        <target xml:lang="es-MX" state="needs-translation">StylizedOutline</target>
+        <target xml:lang="es-MX" state="translated">Contorno estilizado</target>
       </trans-unit>
       <trans-unit id="lqV-Y6-LKD.normalTitle">
         <source>Request Reset</source>
         <note>Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD";</note>
-        <target xml:lang="es-MX" state="needs-translation">Request Reset</target>
+        <target xml:lang="es-MX" state="translated">Solicitud de reposición</target>
       </trans-unit>
       <trans-unit id="mJ9-nG-s79.text">
         <source>Enabled</source>
         <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
-        <target xml:lang="es-MX" state="needs-translation">Enabled</target>
+        <target xml:lang="es-MX" state="translated">Habilitado</target>
       </trans-unit>
       <trans-unit id="nhU-8o-H50.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50";</note>
-        <target xml:lang="es-MX" state="needs-translation">Button</target>
+        <target xml:lang="es-MX" state="translated">Botón</target>
       </trans-unit>
       <trans-unit id="pX1-NU-49a.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a";</note>
-        <target xml:lang="es-MX" state="needs-translation">Label</target>
+        <target xml:lang="es-MX" state="translated">Etiqueta</target>
       </trans-unit>
       <trans-unit id="pki-9D-VwL.normalTitle">
         <source>Scan Token</source>
         <note>Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL";</note>
-        <target xml:lang="es-MX" state="needs-translation">Scan Token</target>
+        <target xml:lang="es-MX" state="translated">Escanear ficha</target>
       </trans-unit>
       <trans-unit id="qLK-qd-7qg.text">
         <source>Network:</source>
         <note>Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg";</note>
-        <target xml:lang="es-MX" state="needs-translation">Network:</target>
+        <target xml:lang="es-MX" state="translated">Red:</target>
       </trans-unit>
       <trans-unit id="sZm-Gx-M8r.text">
         <source>App Version</source>
         <note>Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r";</note>
-        <target xml:lang="es-MX" state="needs-translation">App Version</target>
+        <target xml:lang="es-MX" state="translated">Versión de la aplicación</target>
       </trans-unit>
       <trans-unit id="th1-bn-E4x.normalTitle">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x";</note>
-        <target xml:lang="es-MX" state="needs-translation">CANCEL</target>
+        <target xml:lang="es-MX" state="translated">Cancelar</target>
       </trans-unit>
     </body>
   </file>

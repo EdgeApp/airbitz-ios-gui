@@ -65,4 +65,7 @@ files:
   -
     source: '/Localization/store_description.txt'                                    #source files filter
     translation: '/Localization/store_description-%locale%.txt' #where translations live
+  -
+    source: '/Localization/relnotes.txt'                                    #source files filter
+    translation: '/Localization/relnotes-%locale%.txt' #where translations live
 

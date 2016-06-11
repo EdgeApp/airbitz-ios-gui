@@ -53,6 +53,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 "ATM" = "ए टी एम";
 
 /* No comment provided by engineer. */
+"ATM Fee" = "ATM Fee";
+
+/* No comment provided by engineer. */
 "Account '%@' needs a password. Account is not accessible on a new device without a password." = "'%@' खाते को पासवर्ड की जरूरत है| बिना पासवर्ड आप ये अकाउंट किसी अन्य उपकरण पर नहीं चला पाएंगे|";
 
 /* Title of account signin error alert */
@@ -71,10 +74,22 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Affiliate link has been copied to the clipboard" = "प्रसारण लिंक क्लिपबोर्ड में कॉपी कर दिया गया है";
 
 /* No comment provided by engineer. */
+"Air Travel" = "Air Travel";
+
+/* No comment provided by engineer. */
 "AirPrint is not currently available" = "एयर प्रिंट फ़िलहाल उपलब्ध नहीं है";
 
 /* No comment provided by engineer. */
+"Alcohol & Bars" = "Alcohol & Bars";
+
+/* No comment provided by engineer. */
+"Allowance" = "Allowance";
+
+/* No comment provided by engineer. */
 "Amount is too small" = "मूल्य काफी कम है";
+
+/* No comment provided by engineer. */
+"Amusement" = "Amusement";
 
 /* No comment provided by engineer. */
 "An app has requested a bitcoin address to send money to." = "एक एप्प ने पैसे भेजने के लिए इस बिट कॉइन पते का अनुरोध किया है";
@@ -97,17 +112,41 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "सचमुच?आप आगे से इस वॉलेट  में प्राप्त धन को नहीं नहीं पाएंगे";
 
+/* No comment provided by engineer. */
+"Arts" = "Arts";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Auto & Transport";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Auto Insurance";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Auto Payment";
+
 /* settings text */
 "Auto log off after" = "के बाद स्वतः लोग ऑफ";
 
 /* section header in settings table */
 "BITCOIN DENOMINATION" = "बिट कॉइन डीनोमिनेशन";
 
+/* No comment provided by engineer. */
+"Baby Supplies" = "Baby Supplies";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Babysitter & Daycare";
+
 /* Back button text on top left */
 "Back" = "पीछे";
 
 /* No comment provided by engineer. */
 "Balance" = "बकाया";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Bank Fee";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Bills & Utilities";
 
 /* No comment provided by engineer. */
 "BitID Login" = "बिट आईडी लॉग इन";
@@ -139,6 +178,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Bluetooth payment requests are listed here. Tap on a user to send them a payment" = "ब्लू टूथ भुगतान अनुरोध निम्नलिखित है| किसी यूजर को भुगतान करने के लिए उस पर क्लिक करें";
 
+/* No comment provided by engineer. */
+"Books" = "Books";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Books & Supplies";
+
 /* Business Name or Category placeholder */
 "Business Name or Category" = "व्यावसायिक नाम या वर्ग";
 
@@ -164,6 +209,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Cannot delete wallet as it contains funds. Please transfer out funds first." = "वॉलेट में पैसे शेष हैं इसलिए इसे नष्ट नहीं कर सकते| कृपया पहले पैसे निकालें|";
 
 /* No comment provided by engineer. */
+"Car Wash" = "Car Wash";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Cash & ATM";
+
+/* No comment provided by engineer. */
 "Categories" = "वर्ग";
 
 /* settings text */
@@ -181,6 +232,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* settings text */
 "Change recovery questions" = "रिकवरी प्रश्न बदलें";
 
+/* No comment provided by engineer. */
+"Charity" = "Charity";
+
 /* Check password button text */
 "Check Password" = "पासवर्ड चेक करें";
 
@@ -194,7 +248,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Close" = "बंद";
 
 /* No comment provided by engineer. */
+"Clothing" = "Clothing";
+
+/* No comment provided by engineer. */
 "Coffee & Tea" = "कॉफ़ी और चाय";
+
+/* No comment provided by engineer. */
+"Coffee Shops" = "Coffee Shops";
 
 /* No comment provided by engineer. */
 "Complete Signup" = "साइन अप पूरा करें";
@@ -215,6 +275,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Connected" = "जुड़ गए हैं";
 
 /* No comment provided by engineer. */
+"Consulting Income" = "Consulting Income";
+
+/* No comment provided by engineer. */
 "Copied" = "Copied";
 
 /* Copy button text */
@@ -228,6 +291,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* No comment provided by engineer. */
 "Creating and securing wallet" = "वॉलेट निर्माण और सुरक्षा";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Credit Card Payment";
 
 /* No comment provided by engineer. */
 "Current Location" = "तत्कालीन स्थान";
@@ -275,6 +341,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Deleting Wallet" = "वॉलेट नष्ट हो रहा है";
 
 /* No comment provided by engineer. */
+"Dentist" = "Dentist";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Deposit to Savings";
+
+/* No comment provided by engineer. */
 "Designed and Built by Airbitz in" = "एयर बिट्ज़ द्वारा डिजाईन और निर्मित";
 
 /* Directory title bar text */
@@ -287,8 +359,14 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Discounted Gift Cards" = "छूट वाले गिफ्ट कार्ड";
 
 /* No comment provided by engineer. */
+"Div Income" = "Div Income";
+
+/* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:" = "क्या आपको आपका पासवर्ड अभी भी याद् है? आपका उपकरण खो या चोरी हो जाने पर या एप्प हटाने के लिए आपको पासवर्ड की जरूरत होगी | निश्चित करने के लिए नीचे लिखे:";
+
+/* No comment provided by engineer. */
+"Doctor" = "Doctor";
 
 /* Generic DONE button text */
 "Done" = "हो गया";
@@ -297,7 +375,13 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Download the Airbitz wallet and save money using bitcoin" = "एयर बिट्ज़ वॉलेट डाउनलोड करें और बिट कॉइन इस्तेमाल करके पैसे बचाएं";
 
 /* No comment provided by engineer. */
+"Education" = "Education";
+
+/* No comment provided by engineer. */
 "Electronics" = "विद्युत";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Electronics & Software";
 
 /* text for Email */
 "Email" = "ईमेल";
@@ -328,6 +412,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Enter any notes you would like to send to our support staff" = "हमारे सहायता स्टाफ को भेजने के लिए कोई टिप्पणी लिखिए";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Entertainment";
 
 /* No comment provided by engineer. */
 "Error Changing PIN" = "पिन बदलाव में त्रुटि उत्पन्न हो गयी है";
@@ -390,7 +477,16 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Export Wallet Transactions" = "वॉलेट ट्रांजेक्शन निर्यात";
 
 /* No comment provided by engineer. */
+"Eyecare" = "Eyecare";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Fast Food";
+
+/* No comment provided by engineer. */
 "Feedback" = "टिपण्णी";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Fees & Charges";
 
 /* Fetching Payment Request popup */
 "Fetching Payment Request..." = "भुगतान अनुरोध देखा जा रहा है...";
@@ -398,11 +494,26 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* Fiat */
 "Fiat" = "फ़िएट";
 
+/* No comment provided by engineer. */
+"Financial" = "Financial";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Financial Advisor";
+
 /* settings text */
 "First Name (optional)" = "प्रथम नाम(वैकल्पिक)";
 
 /* No comment provided by engineer. */
+"Food & Dining" = "Food & Dining";
+
+/* No comment provided by engineer. */
 "From: %@" = "से:%@";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Furnishings";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Gas & Fuel";
 
 /* No comment provided by engineer. */
 "Generating QR Code..." = "क्यू आर कोड उत्पन्न हो रहा है...";
@@ -411,13 +522,34 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Get Affiliate Link" = "प्रसारण लिंक प्राप्त करें";
 
 /* No comment provided by engineer. */
+"Gift" = "Gift";
+
+/* No comment provided by engineer. */
 "Gift Cards" = "गिफ्ट कार्ड्स";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Gifts & Donations";
 
 /* Generic Go Back button text */
 "Go Back" = "वापस जाएँ";
 
 /* No comment provided by engineer. */
 "Great job remembering your password." = "अपने काफी अच्छे से पासवर्ड याद रखा है";
+
+/* No comment provided by engineer. */
+"Groceries" = "Groceries";
+
+/* No comment provided by engineer. */
+"Gym" = "Gym";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "HOA Dues";
+
+/* No comment provided by engineer. */
+"Hair" = "Hair";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Health & Fitness";
 
 /* Help button text on top right */
 "Help" = "मदद";
@@ -428,12 +560,39 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "High Fee" = "उच्च शुल्क";
 
+/* No comment provided by engineer. */
+"Hobbies" = "Hobbies";
+
+/* No comment provided by engineer. */
+"Home" = "Home";
+
+/* No comment provided by engineer. */
+"Home Improvement" = "Home Improvement";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Home Insurance";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Home Phone";
+
+/* No comment provided by engineer. */
+"Home Services" = "Home Services";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Home Supplies";
+
+/* No comment provided by engineer. */
+"Hotel" = "Hotel";
+
 /* Like Airbitz popup */
 "How are you liking %@?" = "आपको %@ कैसा लग रहा है?";
 
 /* Slideout menu import private key text */
 "IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)" = "चुप्त चाबी आयात ([[abtag APP_TITLE]] गिफ्ट कार्ड)";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "IRA Contribution";
 
 /* No comment provided by engineer. */
 "Import" = "आयात";
@@ -484,6 +643,12 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Insufficient Password" = "पासवर्ड पर्याप्त नहीं है";
 
 /* No comment provided by engineer. */
+"Interest Exp" = "Interest Exp";
+
+/* No comment provided by engineer. */
+"Internet" = "Internet";
+
+/* No comment provided by engineer. */
 "Invalid Bitcoin Address" = "बिट कॉइन पता अवैध है";
 
 /* No comment provided by engineer. */
@@ -495,14 +660,32 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "It's great" = "शाबाश";
 
+/* No comment provided by engineer. */
+"Kids" = "Kids";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Kids Activities";
+
 /* settings text */
 "Last Name (optional)" = "पिछला नाम(वैकल्पिक)";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Late Fee";
 
 /* Later button text */
 "Later" = "पिछला";
 
 /* No comment provided by engineer. */
+"Laundry" = "Laundry";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Lawn & Garden";
+
+/* No comment provided by engineer. */
 "Level" = "स्तर";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Life Insurance";
 
 /* Loading account alert text */
 "Loading Account..." = "खाता लोड हो रहा है...";
@@ -532,7 +715,25 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Message Sent" = "मैसेज भेज दिया गया है";
 
 /* No comment provided by engineer. */
+"Misc." = "Misc.";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Mobile Phone";
+
+/* No comment provided by engineer. */
 "More Categories" = "अन्य वर्ग";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Mortgage & Rent";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Mortgage Interest";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Movies & DVDs";
+
+/* No comment provided by engineer. */
+"Music" = "Music";
 
 /* No comment provided by engineer. */
 "Must have at least %d characters" = "कम से कम %d अक्षर होने चाहिए";
@@ -559,10 +760,16 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Name" = "नाम";
 
 /* No comment provided by engineer. */
+"Net Salary" = "Net Salary";
+
+/* No comment provided by engineer. */
 "New PIN" = "नया पिन";
 
 /* No comment provided by engineer. */
 "New Password" = "नया पासवर्ड";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Newspaper & Magazines";
 
 /* Next button text */
 "Next" = "अगला";
@@ -581,6 +788,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "No thanks" = "जी नहीं धन्यवाद";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Not Sure";
 
 /* No comment provided by engineer. */
 "Not so good" = "इतना भी अच्छा नहीं";
@@ -607,6 +817,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Open 24 hours" = "24 घंटे खुला";
 
 /* No comment provided by engineer. */
+"Other Income" = "Other Income";
+
+/* No comment provided by engineer. */
 "PIN" = "पिन";
 
 /* settings text */
@@ -617,6 +830,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "PIN successfully changed." = "पिन सफलतापूर्वक बदल दिया गया है";
+
+/* No comment provided by engineer. */
+"Parking" = "Parking";
 
 /* Text on partial payment */
 "Partial Payment" = "आंशिक भुगतान";
@@ -651,6 +867,21 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* Pending status in transaction list */
 "Pending" = "शेष";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Personal Care";
+
+/* expense category */
+"Pet Food & Supplies" = "Pet Food & Supplies";
+
+/* expense category */
+"Pet Grooming" = "Pet Grooming";
+
+/* expense category */
+"Pets" = "Pets";
+
+/* expense category */
+"Pharmacy" = "Pharmacy";
 
 /* No comment provided by engineer. */
 "Place Call" = "कॉल करे";
@@ -694,8 +925,14 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Private Seed" = "गुप्त सीड";
 
+/* expense category */
+"Property" = "Property";
+
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* expense category */
+"Public Transportation" = "Public Transportation";
 
 /* No comment provided by engineer. */
 "QR Code Scan Failure" = "क्यू आर स्कैन असफल";
@@ -728,6 +965,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Refer Your Friends" = "दोस्तों को बताएं";
 
+/* expense category */
+"Registration" = "Registration";
+
 /* Remaining string on Request screen */
 "Remaining..." = "शेष....";
 
@@ -742,6 +982,12 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* Rename Wallet popup */
 "Rename Wallet" = "वॉलेट का नाम दोबारा";
+
+/* No comment provided by engineer. */
+"Rent" = "Rent";
+
+/* expense category */
+"Rental Car & Taxi" = "Rental Car & Taxi";
 
 /* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "अनुरोध की पुष्टि,2 फैक्टर निष्क्रिय";
@@ -764,6 +1010,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Restarting watcher service" = "वाचर सेवा पुन: बहाल";
 
+/* expense category */
+"Restaurants" = "Restaurants";
+
 /* No comment provided by engineer. */
 "Restaurants & Food Trucks" = "रेस्तरां और फ़ूड त्ट्रक्स";
 
@@ -778,6 +1027,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "SMS sent" = "एस एम एस भेज दिया गया है";
+
+/* No comment provided by engineer. */
+"Sales" = "Sales";
 
 /* No comment provided by engineer. */
 "San Diego, California, USA" = "सेन डीगो,कैलिफ़ोर्निया,यू एस ए";
@@ -798,6 +1050,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Select Currency" = "मुद्रा चुनें";
 
 /* No comment provided by engineer. */
+"Sell Bitcoin" = "Sell Bitcoin";
+
+/* No comment provided by engineer. */
 "Send Funds to Private Key" = "गुप्त चाबी पर पैसे भेजें";
 
 /* settings text */
@@ -811,6 +1066,12 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Sent Bitcoin" = "बिट कॉइन भेज दिए गए है";
+
+/* expense category */
+"Service & Parts" = "Service & Parts";
+
+/* expense category */
+"Service Fee" = "Service Fee";
 
 /* No comment provided by engineer. */
 "Set a Password" = "पासवर्ड तय करें";
@@ -827,6 +1088,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* Generic SHARE button text */
 "Share" = "साझा";
+
+/* expense category */
+"Shopping" = "Shopping";
 
 /* Show */
 "Show" = "दिखाएँ";
@@ -850,11 +1114,23 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Sorry" = "माफ़ कीजिये";
 
+/* expense category */
+"Spa & Massage" = "Spa & Massage";
+
 /* spending limits text */
 "Spending Limits" = "खर्च सीमा";
 
+/* expense category */
+"Sporting Goods" = "Sporting Goods";
+
+/* expense category */
+"Sports" = "Sports";
+
 /* No comment provided by engineer. */
 "Standard Fee" = "मानक शुल्क";
+
+/* expense category */
+"Student Loan" = "Student Loan";
 
 /* No comment provided by engineer. */
 "Successfully Logged In" = "लॉग इन सफल";
@@ -870,6 +1146,12 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "अधिक विकल्पों के लिए वॉलेट पर क्लिक कर होल्ड करें";
+
+/* expense category */
+"Tax" = "Tax";
+
+/* expense category */
+"Television" = "Television";
 
 /* No comment provided by engineer. */
 "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "इस उपकरण पर 2 फैक्टर प्रमाणिकता अवैध है| या तो अन्य उपकरण से टोकन बदल दिया गया है| कृपया आपके सिस्टम की घड़ी से हमारा समय मिलाएं";
@@ -908,6 +1190,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Top of screen wallet dropdown prefix text */
 "To: %@ ▼" = "को:%@▼";
 
+/* expense category */
+"Tolls" = "Tolls";
+
 /* No comment provided by engineer. */
 "Touch ID" = "टचआईडी";
 
@@ -926,6 +1211,12 @@ Your username and password are known only to you and never stored unencrypted." 
 /* settings text */
 "TouchID: Unsupported Device" = "टचआईडी: उपकरण सहायक नहीं है";
 
+/* expense category */
+"Toys" = "Toys";
+
+/* expense category */
+"Trade Commissions" = "Trade Commissions";
+
 /* Transaction Details header text */
 "Transaction Details" = "ट्रांजक्शन जानकारी";
 
@@ -938,8 +1229,14 @@ Your username and password are known only to you and never stored unencrypted." 
 /* To wallet transfer text */
 "Transfer To %@" = "%@ को ट्रान्सफर";
 
+/* expense category */
+"Travel" = "Travel";
+
 /* No comment provided by engineer. */
 "Try again?" = "फिर से प्रयास?";
+
+/* expense category */
+"Tuition" = "Tuition";
 
 /* No comment provided by engineer. */
 "Two Factor" = "2 फैक्टर";
@@ -1032,8 +1329,17 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 /* No comment provided by engineer. */
 "Username must be at least %d characters." = "यूजरनाम कम से कम %d अक्षरों का होना चाहिए|";
 
+/* expense category */
+"Utilities" = "Utilities";
+
+/* expense category */
+"Vacation" = "Vacation";
+
 /* No comment provided by engineer. */
 "Validating Address..." = "पता प्रमाणित किया जा रहा है...";
+
+/* expense category */
+"Vet" = "Vet";
 
 /* title of active wallets table */
 "WALLETS" = "वाल्लेट्स";

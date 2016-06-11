@@ -1,0 +1,57 @@
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button"; */
+"2uL-vk-tLg.normalTitle" = "5";
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "Aeb-Xc-JRe"; Note = "Calculator Button"; */
+"Aeb-Xc-JRe.normalTitle" = "-";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "Emr-ag-G6B"; Note = "Calculator Button"; */
+"Emr-ag-G6B.normalTitle" = "8";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button"; */
+"JE3-3X-s8v.normalTitle" = "Done";
+
+/* Class = "UIButton"; normalTitle = "*"; ObjectID = "MCV-gu-4YU"; Note = "Calculator Button"; */
+"MCV-gu-4YU.normalTitle" = "*";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "O42-ZS-u2K"; Note = "Calculator Clear Button"; */
+"O42-ZS-u2K.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "ORi-eH-Enh"; Note = "Calculator Button"; */
+"ORi-eH-Enh.normalTitle" = "6";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "P0f-iB-KJr"; Note = "Calculator Button"; */
+"P0f-iB-KJr.normalTitle" = "4";
+
+/* Class = "UIButton"; normalTitle = "="; ObjectID = "RyR-lU-hrP"; Note = "Calculator Button"; */
+"RyR-lU-hrP.normalTitle" = "=";
+
+/* Class = "UIButton"; normalTitle = "9"; ObjectID = "Tqz-n7-FoF"; Note = "Calculator Button"; */
+"Tqz-n7-FoF.normalTitle" = "9";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button"; */
+"V76-TG-gfn.normalTitle" = "0";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button"; */
+"b8e-QF-DXa.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "/"; ObjectID = "fTN-mi-eGB"; Note = "Calculator Button"; */
+"fTN-mi-eGB.normalTitle" = "/";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "hpP-b8-SWQ"; Note = "Calculator Button"; */
+"hpP-b8-SWQ.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "< Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button"; */
+"tNK-PX-QMO.normalTitle" = "< Del";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button"; */
+"vjB-0i-g2w.normalTitle" = "2";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "wVl-D5-w0P"; Note = "Calculator Button"; */
+"wVl-D5-w0P.normalTitle" = "7";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "x4B-P3-CYU"; Note = "Calculator Button"; */
+"x4B-P3-CYU.normalTitle" = "3";
+
+/* Class = "UIButton"; normalTitle = "%"; ObjectID = "xYy-J7-W9D"; Note = "Calculator Button"; */
+"xYy-J7-W9D.normalTitle" = "%";
+

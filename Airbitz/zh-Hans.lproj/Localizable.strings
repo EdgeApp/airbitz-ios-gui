@@ -54,6 +54,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 "ATM" = "自动提款机";
 
 /* No comment provided by engineer. */
+"ATM Fee" = "ATM Fee";
+
+/* No comment provided by engineer. */
 "Account '%@' needs a password. Account is not accessible on a new device without a password." = "帐户 '%@'需要密码。如果新设备没有输入密码，那么将无法登入帐户。";
 
 /* Title of account signin error alert */
@@ -72,10 +75,22 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Affiliate link has been copied to the clipboard" = "合作伙伴链接已复制到剪贴板";
 
 /* No comment provided by engineer. */
+"Air Travel" = "Air Travel";
+
+/* No comment provided by engineer. */
 "AirPrint is not currently available" = "AirPrint 目前无法使用";
 
 /* No comment provided by engineer. */
+"Alcohol & Bars" = "Alcohol & Bars";
+
+/* No comment provided by engineer. */
+"Allowance" = "Allowance";
+
+/* No comment provided by engineer. */
 "Amount is too small" = "数额太小。";
+
+/* No comment provided by engineer. */
+"Amusement" = "Amusement";
 
 /* No comment provided by engineer. */
 "An app has requested a bitcoin address to send money to." = "有一个程序提出传送比特币地址的要求。";
@@ -98,17 +113,41 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "您是否确定？您将无法使用这个钱包中的任何资金和它将来可能会收到的任何资金。";
 
+/* No comment provided by engineer. */
+"Arts" = "Arts";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Auto & Transport";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Auto Insurance";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Auto Payment";
+
 /* settings text */
 "Auto log off after" = "自动登出时限 ︰";
 
 /* section header in settings table */
 "BITCOIN DENOMINATION" = "比特币面额";
 
+/* No comment provided by engineer. */
+"Baby Supplies" = "Baby Supplies";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Babysitter & Daycare";
+
 /* Back button text on top left */
 "Back" = "返回";
 
 /* No comment provided by engineer. */
 "Balance" = "余额";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Bank Fee";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Bills & Utilities";
 
 /* No comment provided by engineer. */
 "BitID Login" = "BitID 登入";
@@ -140,6 +179,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Bluetooth payment requests are listed here. Tap on a user to send them a payment" = "蓝牙付款的请求列在这里。点击目标用户以发送付款";
 
+/* No comment provided by engineer. */
+"Books" = "Books";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Books & Supplies";
+
 /* Business Name or Category placeholder */
 "Business Name or Category" = "生意名称或类别";
 
@@ -165,6 +210,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Cannot delete wallet as it contains funds. Please transfer out funds first." = "钱包无法被删除，因为它内含资金。请先把资金转出去。";
 
 /* No comment provided by engineer. */
+"Car Wash" = "Car Wash";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Cash & ATM";
+
+/* No comment provided by engineer. */
 "Categories" = "类别";
 
 /* settings text */
@@ -182,6 +233,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* settings text */
 "Change recovery questions" = "更改帐户复原问题";
 
+/* No comment provided by engineer. */
+"Charity" = "Charity";
+
 /* Check password button text */
 "Check Password" = "查看密码";
 
@@ -195,7 +249,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Close" = "关闭";
 
 /* No comment provided by engineer. */
+"Clothing" = "Clothing";
+
+/* No comment provided by engineer. */
 "Coffee & Tea" = "咖啡和茶";
+
+/* No comment provided by engineer. */
+"Coffee Shops" = "Coffee Shops";
 
 /* No comment provided by engineer. */
 "Complete Signup" = "注册完成";
@@ -216,6 +276,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Connected" = "连接";
 
 /* No comment provided by engineer. */
+"Consulting Income" = "Consulting Income";
+
+/* No comment provided by engineer. */
 "Copied" = "Copied";
 
 /* Copy button text */
@@ -229,6 +292,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* No comment provided by engineer. */
 "Creating and securing wallet" = "创建和保护钱包";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Credit Card Payment";
 
 /* No comment provided by engineer. */
 "Current Location" = "您目前的位置";
@@ -276,6 +342,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Deleting Wallet" = "正在删除钱包";
 
 /* No comment provided by engineer. */
+"Dentist" = "Dentist";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Deposit to Savings";
+
+/* No comment provided by engineer. */
 "Designed and Built by Airbitz in" = "由 Airbitz 设计和创造";
 
 /* Directory title bar text */
@@ -288,8 +360,14 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Discounted Gift Cards" = "折扣的礼品卡";
 
 /* No comment provided by engineer. */
+"Div Income" = "Div Income";
+
+/* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:" = "您还记得您的密码吗？如果您的设备被丢失或被盗，或如果您卸载了应用程序，那么您将需要您的密码。 请输入它们以进行确认：";
+
+/* No comment provided by engineer. */
+"Doctor" = "Doctor";
 
 /* Generic DONE button text */
 "Done" = "完成";
@@ -298,7 +376,13 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Download the Airbitz wallet and save money using bitcoin" = "下载 Airbitz 钱包和通过用比特币来省钱";
 
 /* No comment provided by engineer. */
+"Education" = "Education";
+
+/* No comment provided by engineer. */
 "Electronics" = "电子产品";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Electronics & Software";
 
 /* text for Email */
 "Email" = "电子邮件";
@@ -329,6 +413,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "Enter any notes you would like to send to our support staff" = "请输入您想要发送给我们支援人员的备注";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Entertainment";
 
 /* No comment provided by engineer. */
 "Error Changing PIN" = "更改 PIN出现错误";
@@ -391,7 +478,16 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Export Wallet Transactions" = "导出钱包交易";
 
 /* No comment provided by engineer. */
+"Eyecare" = "Eyecare";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Fast Food";
+
+/* No comment provided by engineer. */
 "Feedback" = "反馈";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Fees & Charges";
 
 /* Fetching Payment Request popup */
 "Fetching Payment Request..." = "正在获取支付请求...";
@@ -399,11 +495,26 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* Fiat */
 "Fiat" = "法定货币";
 
+/* No comment provided by engineer. */
+"Financial" = "Financial";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Financial Advisor";
+
 /* settings text */
 "First Name (optional)" = "名字（自选）";
 
 /* No comment provided by engineer. */
+"Food & Dining" = "Food & Dining";
+
+/* No comment provided by engineer. */
 "From: %@" = "来自: %@";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Furnishings";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Gas & Fuel";
 
 /* No comment provided by engineer. */
 "Generating QR Code..." = "正在生成二维码...";
@@ -412,13 +523,34 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Get Affiliate Link" = "获取合作伙伴链接";
 
 /* No comment provided by engineer. */
+"Gift" = "Gift";
+
+/* No comment provided by engineer. */
 "Gift Cards" = "礼品卡";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Gifts & Donations";
 
 /* Generic Go Back button text */
 "Go Back" = "返回";
 
 /* No comment provided by engineer. */
 "Great job remembering your password." = "您记得您的密码，真棒！";
+
+/* No comment provided by engineer. */
+"Groceries" = "Groceries";
+
+/* No comment provided by engineer. */
+"Gym" = "Gym";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "HOA Dues";
+
+/* No comment provided by engineer. */
+"Hair" = "Hair";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Health & Fitness";
 
 /* Help button text on top right */
 "Help" = "客服";
@@ -429,6 +561,30 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "High Fee" = "高费用";
 
+/* No comment provided by engineer. */
+"Hobbies" = "Hobbies";
+
+/* No comment provided by engineer. */
+"Home" = "Home";
+
+/* No comment provided by engineer. */
+"Home Improvement" = "Home Improvement";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Home Insurance";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Home Phone";
+
+/* No comment provided by engineer. */
+"Home Services" = "Home Services";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Home Supplies";
+
+/* No comment provided by engineer. */
+"Hotel" = "Hotel";
+
 /* Like Airbitz popup */
 "How are you liking %@?" = "您喜欢 %@ 吗？";
 
@@ -436,6 +592,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)" = "导入PRIVATE KEY
 ([[abtag APP_TITLE]] 礼品卡)";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "IRA Contribution";
 
 /* No comment provided by engineer. */
 "Import" = "导入";
@@ -486,6 +645,12 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Insufficient Password" = "密码不足";
 
 /* No comment provided by engineer. */
+"Interest Exp" = "Interest Exp";
+
+/* No comment provided by engineer. */
+"Internet" = "Internet";
+
+/* No comment provided by engineer. */
 "Invalid Bitcoin Address" = "无效的比特币地址";
 
 /* No comment provided by engineer. */
@@ -497,14 +662,32 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "It's great" = "太棒了";
 
+/* No comment provided by engineer. */
+"Kids" = "Kids";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Kids Activities";
+
 /* settings text */
 "Last Name (optional)" = "姓氏 （自选）";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Late Fee";
 
 /* Later button text */
 "Later" = "待会";
 
 /* No comment provided by engineer. */
+"Laundry" = "Laundry";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Lawn & Garden";
+
+/* No comment provided by engineer. */
 "Level" = "阶层";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Life Insurance";
 
 /* Loading account alert text */
 "Loading Account..." = "正在加载帐户...";
@@ -534,7 +717,25 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Message Sent" = "消息已发送";
 
 /* No comment provided by engineer. */
+"Misc." = "Misc.";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Mobile Phone";
+
+/* No comment provided by engineer. */
 "More Categories" = "更多类别";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Mortgage & Rent";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Mortgage Interest";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Movies & DVDs";
+
+/* No comment provided by engineer. */
+"Music" = "Music";
 
 /* No comment provided by engineer. */
 "Must have at least %d characters" = "必须有至少 %d 个字符";
@@ -561,10 +762,16 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Name" = "名字";
 
 /* No comment provided by engineer. */
+"Net Salary" = "Net Salary";
+
+/* No comment provided by engineer. */
 "New PIN" = "新PIN";
 
 /* No comment provided by engineer. */
 "New Password" = "新密码";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Newspaper & Magazines";
 
 /* Next button text */
 "Next" = "下一个";
@@ -583,6 +790,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "No thanks" = "不用，谢谢";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Not Sure";
 
 /* No comment provided by engineer. */
 "Not so good" = "不是很好";
@@ -609,6 +819,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Open 24 hours" = "24小时开启";
 
 /* No comment provided by engineer. */
+"Other Income" = "Other Income";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -619,6 +832,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "PIN successfully changed." = "PIN修改成功。";
+
+/* No comment provided by engineer. */
+"Parking" = "Parking";
 
 /* Text on partial payment */
 "Partial Payment" = "支付部分款项";
@@ -653,6 +869,21 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* Pending status in transaction list */
 "Pending" = "待处理";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Personal Care";
+
+/* expense category */
+"Pet Food & Supplies" = "Pet Food & Supplies";
+
+/* expense category */
+"Pet Grooming" = "Pet Grooming";
+
+/* expense category */
+"Pets" = "Pets";
+
+/* expense category */
+"Pharmacy" = "Pharmacy";
 
 /* No comment provided by engineer. */
 "Place Call" = "拨打";
@@ -696,8 +927,14 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Private Seed" = "Private Seed";
 
+/* expense category */
+"Property" = "Property";
+
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* expense category */
+"Public Transportation" = "Public Transportation";
 
 /* No comment provided by engineer. */
 "QR Code Scan Failure" = "二维码扫描失败";
@@ -730,6 +967,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Refer Your Friends" = "推荐给您的朋友";
 
+/* expense category */
+"Registration" = "Registration";
+
 /* Remaining string on Request screen */
 "Remaining..." = "剩余...";
 
@@ -744,6 +984,12 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* Rename Wallet popup */
 "Rename Wallet" = "重命名钱包";
+
+/* No comment provided by engineer. */
+"Rent" = "Rent";
+
+/* expense category */
+"Rental Car & Taxi" = "Rental Car & Taxi";
 
 /* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "请求已被确认，2要素身份验证关闭。";
@@ -766,6 +1012,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Restarting watcher service" = "重新启动监视服务";
 
+/* expense category */
+"Restaurants" = "Restaurants";
+
 /* No comment provided by engineer. */
 "Restaurants & Food Trucks" = "餐厅& 食物卡车";
 
@@ -780,6 +1029,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "SMS sent" = "短信已发送";
+
+/* No comment provided by engineer. */
+"Sales" = "Sales";
 
 /* No comment provided by engineer. */
 "San Diego, California, USA" = "圣地亚哥，加利福尼亚州，美国";
@@ -800,6 +1052,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Select Currency" = "选择货币";
 
 /* No comment provided by engineer. */
+"Sell Bitcoin" = "Sell Bitcoin";
+
+/* No comment provided by engineer. */
 "Send Funds to Private Key" = "把资金发送到Private Key";
 
 /* settings text */
@@ -813,6 +1068,12 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "Sent Bitcoin" = "发送比特币";
+
+/* expense category */
+"Service & Parts" = "Service & Parts";
+
+/* expense category */
+"Service Fee" = "Service Fee";
 
 /* No comment provided by engineer. */
 "Set a Password" = "设置密码";
@@ -829,6 +1090,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* Generic SHARE button text */
 "Share" = "分享";
+
+/* expense category */
+"Shopping" = "Shopping";
 
 /* Show */
 "Show" = "显示";
@@ -852,11 +1116,23 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Sorry" = "抱歉";
 
+/* expense category */
+"Spa & Massage" = "Spa & Massage";
+
 /* spending limits text */
 "Spending Limits" = "支出限额";
 
+/* expense category */
+"Sporting Goods" = "Sporting Goods";
+
+/* expense category */
+"Sports" = "Sports";
+
 /* No comment provided by engineer. */
 "Standard Fee" = "标准费用";
+
+/* expense category */
+"Student Loan" = "Student Loan";
 
 /* No comment provided by engineer. */
 "Successfully Logged In" = "成功登入";
@@ -872,6 +1148,12 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "点击和常按钱包来列开更多选项";
+
+/* expense category */
+"Tax" = "Tax";
+
+/* expense category */
+"Television" = "Television";
 
 /* No comment provided by engineer. */
 "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "在这个设备的2要素身份验证代币无效。这也许是代币被另一个设备修改或是您的时钟出现偏差。请检查您的系统设计以确保时钟的正确。";
@@ -910,6 +1192,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Top of screen wallet dropdown prefix text */
 "To: %@ ▼" = "致： %@ ▼";
 
+/* expense category */
+"Tolls" = "Tolls";
+
 /* No comment provided by engineer. */
 "Touch ID" = "Touch ID";
 
@@ -928,6 +1213,12 @@ Your username and password are known only to you and never stored unencrypted." 
 /* settings text */
 "TouchID: Unsupported Device" = "TouchID: 不支援系统的设备";
 
+/* expense category */
+"Toys" = "Toys";
+
+/* expense category */
+"Trade Commissions" = "Trade Commissions";
+
 /* Transaction Details header text */
 "Transaction Details" = "交易记录详细信息";
 
@@ -940,8 +1231,14 @@ Your username and password are known only to you and never stored unencrypted." 
 /* To wallet transfer text */
 "Transfer To %@" = "转送致%@";
 
+/* expense category */
+"Travel" = "Travel";
+
 /* No comment provided by engineer. */
 "Try again?" = "再试一次吗？";
+
+/* expense category */
+"Tuition" = "Tuition";
 
 /* No comment provided by engineer. */
 "Two Factor" = "2要素";
@@ -1038,8 +1335,17 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 /* No comment provided by engineer. */
 "Username must be at least %d characters." = "用户名需要至少 %d个字符";
 
+/* expense category */
+"Utilities" = "Utilities";
+
+/* expense category */
+"Vacation" = "Vacation";
+
 /* No comment provided by engineer. */
 "Validating Address..." = "正在验证地址...";
+
+/* expense category */
+"Vet" = "Vet";
 
 /* title of active wallets table */
 "WALLETS" = "钱包";

@@ -1686,6 +1686,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">ए टी एम</target>
       </trans-unit>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">ATM Fee</target>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1716,15 +1721,35 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">प्रसारण लिंक क्लिपबोर्ड में कॉपी कर दिया गया है</target>
       </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Air Travel</target>
+      </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">एयर प्रिंट फ़िलहाल उपलब्ध नहीं है</target>
       </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Alcohol &amp; Bars</target>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Allowance</target>
+      </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">मूल्य काफी कम है</target>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Amusement</target>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
         <source>An app has requested a bitcoin address to send money to.</source>
@@ -1761,6 +1786,26 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">सचमुच?आप आगे से इस वॉलेट  में प्राप्त धन को नहीं नहीं पाएंगे</target>
       </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Arts</target>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Auto &amp; Transport</target>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Auto Insurance</target>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Auto Payment</target>
+      </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
         <note>settings text</note>
@@ -1771,6 +1816,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>section header in settings table</note>
         <target xml:lang="hi" state="translated">बिट कॉइन डीनोमिनेशन</target>
       </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Baby Supplies</target>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Babysitter &amp; Daycare</target>
+      </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
         <note>Back button text on top left</note>
@@ -1780,6 +1835,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Balance</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">बकाया</target>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Bank Fee</target>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Bills &amp; Utilities</target>
       </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
@@ -1831,6 +1896,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">ब्लू टूथ भुगतान अनुरोध निम्नलिखित है| किसी यूजर को भुगतान करने के लिए उस पर क्लिक करें</target>
       </trans-unit>
+      <trans-unit id="Books">
+        <source>Books</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Books</target>
+      </trans-unit>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Books &amp; Supplies</target>
+      </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
         <note>Business Name or Category placeholder</note>
@@ -1871,6 +1946,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">वॉलेट में पैसे शेष हैं इसलिए इसे नष्ट नहीं कर सकते| कृपया पहले पैसे निकालें|</target>
       </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Car Wash</target>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Cash &amp; ATM</target>
+      </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
@@ -1901,6 +1986,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>settings text</note>
         <target xml:lang="hi" state="translated">रिकवरी प्रश्न बदलें</target>
       </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Charity</target>
+      </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
         <note>Check password button text</note>
@@ -1921,10 +2011,20 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Generic CLOSE button text</note>
         <target xml:lang="hi" state="translated">बंद</target>
       </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Clothing</target>
+      </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">कॉफ़ी और चाय</target>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Coffee Shops</target>
       </trans-unit>
       <trans-unit id="Complete Signup">
         <source>Complete Signup</source>
@@ -1956,6 +2056,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Popup text when BLE connects</note>
         <target xml:lang="hi" state="translated">जुड़ गए हैं</target>
       </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Consulting Income</target>
+      </trans-unit>
       <trans-unit id="Copied">
         <source>Copied</source>
         <note>No comment provided by engineer.</note>
@@ -1980,6 +2085,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Creating and securing wallet</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">वॉलेट निर्माण और सुरक्षा</target>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Credit Card Payment</target>
       </trans-unit>
       <trans-unit id="Current Location">
         <source>Current Location</source>
@@ -2056,6 +2166,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Text for popup while deleting wallet</note>
         <target xml:lang="hi" state="translated">वॉलेट नष्ट हो रहा है</target>
       </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Dentist</target>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Deposit to Savings</target>
+      </trans-unit>
       <trans-unit id="Designed and Built by Airbitz in">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
@@ -2076,11 +2196,21 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">छूट वाले गिफ्ट कार्ड</target>
       </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Div Income</target>
+      </trans-unit>
       <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">क्या आपको आपका पासवर्ड अभी भी याद् है? आपका उपकरण खो या चोरी हो जाने पर या एप्प हटाने के लिए आपको पासवर्ड की जरूरत होगी | निश्चित करने के लिए नीचे लिखे:</target>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Doctor</target>
       </trans-unit>
       <trans-unit id="Done">
         <source>Done</source>
@@ -2092,10 +2222,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">एयर बिट्ज़ वॉलेट डाउनलोड करें और बिट कॉइन इस्तेमाल करके पैसे बचाएं</target>
       </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Education</target>
+      </trans-unit>
       <trans-unit id="Electronics">
         <source>Electronics</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">विद्युत</target>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Electronics &amp; Software</target>
       </trans-unit>
       <trans-unit id="Email">
         <source>Email</source>
@@ -2146,6 +2286,11 @@ Enter it below to make sure:</source>
         <source>Enter any notes you would like to send to our support staff</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">हमारे सहायता स्टाफ को भेजने के लिए कोई टिप्पणी लिखिए</target>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Entertainment</target>
       </trans-unit>
       <trans-unit id="Error Changing PIN">
         <source>Error Changing PIN</source>
@@ -2247,10 +2392,25 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">वॉलेट ट्रांजेक्शन निर्यात</target>
       </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Eyecare</target>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Fast Food</target>
+      </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">टिपण्णी</target>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Fees &amp; Charges</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2262,15 +2422,40 @@ Enter it below to make sure:</source>
         <note>Fiat</note>
         <target xml:lang="hi" state="translated">फ़िएट</target>
       </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Financial</target>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Financial Advisor</target>
+      </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="hi" state="translated">प्रथम नाम(वैकल्पिक)</target>
       </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Food &amp; Dining</target>
+      </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">से:%@</target>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Furnishings</target>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Gas &amp; Fuel</target>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
         <source>Generating QR Code...</source>
@@ -2282,10 +2467,20 @@ Enter it below to make sure:</source>
         <note>Button text for Get Affiliate Link</note>
         <target xml:lang="hi" state="translated">प्रसारण लिंक प्राप्त करें</target>
       </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Gift</target>
+      </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">गिफ्ट कार्ड्स</target>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Gifts &amp; Donations</target>
       </trans-unit>
       <trans-unit id="Go Back">
         <source>Go Back</source>
@@ -2296,6 +2491,31 @@ Enter it below to make sure:</source>
         <source>Great job remembering your password.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">अपने काफी अच्छे से पासवर्ड याद रखा है</target>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Groceries</target>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Gym</target>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">HOA Dues</target>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Hair</target>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Health &amp; Fitness</target>
       </trans-unit>
       <trans-unit id="Help">
         <source>Help</source>
@@ -2312,6 +2532,46 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">उच्च शुल्क</target>
       </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Hobbies</target>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home</target>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home Improvement</target>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home Insurance</target>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home Phone</target>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home Services</target>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Home Supplies</target>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Hotel</target>
+      </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
@@ -2322,6 +2582,11 @@ Enter it below to make sure:</source>
 ([[abtag APP_TITLE]] Gift Card)</source>
         <note>Slideout menu import private key text</note>
         <target xml:lang="hi" state="translated">चुप्त चाबी आयात ([[abtag APP_TITLE]] गिफ्ट कार्ड)</target>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">IRA Contribution</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
@@ -2403,6 +2668,16 @@ Enter it below to make sure:</source>
         <note>Title of password check popup alert</note>
         <target xml:lang="hi" state="translated">पासवर्ड पर्याप्त नहीं है</target>
       </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Interest Exp</target>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Internet</target>
+      </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
         <note>No comment provided by engineer.</note>
@@ -2423,20 +2698,50 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">शाबाश</target>
       </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Kids</target>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Kids Activities</target>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="hi" state="translated">पिछला नाम(वैकल्पिक)</target>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Late Fee</target>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
         <target xml:lang="hi" state="translated">पिछला</target>
       </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Laundry</target>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Lawn &amp; Garden</target>
+      </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">स्तर</target>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Life Insurance</target>
       </trans-unit>
       <trans-unit id="Loading Account...">
         <source>Loading Account...</source>
@@ -2483,10 +2788,40 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">मैसेज भेज दिया गया है</target>
       </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Misc.</target>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Mobile Phone</target>
+      </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">अन्य वर्ग</target>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Mortgage &amp; Rent</target>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Mortgage Interest</target>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Movies &amp; DVDs</target>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Music</target>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
         <source>Must have at least %d characters</source>
@@ -2528,6 +2863,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">नाम</target>
       </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Net Salary</target>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2537,6 +2877,11 @@ Enter it below to make sure:</source>
         <source>New Password</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">नया पासवर्ड</target>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Newspaper &amp; Magazines</target>
       </trans-unit>
       <trans-unit id="Next">
         <source>Next</source>
@@ -2567,6 +2912,11 @@ Enter it below to make sure:</source>
         <source>No thanks</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">जी नहीं धन्यवाद</target>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Not Sure</target>
       </trans-unit>
       <trans-unit id="Not so good">
         <source>Not so good</source>
@@ -2608,6 +2958,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">24 घंटे खुला</target>
       </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Other Income</target>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2627,6 +2982,11 @@ Enter it below to make sure:</source>
         <source>PIN successfully changed.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">पिन सफलतापूर्वक बदल दिया गया है</target>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Parking</target>
       </trans-unit>
       <trans-unit id="Partial Payment">
         <source>Partial Payment</source>
@@ -2683,6 +3043,31 @@ Enter it below to make sure:</source>
         <source>Pending</source>
         <note>Pending status in transaction list</note>
         <target xml:lang="hi" state="translated">शेष</target>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Personal Care</target>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Pet Food &amp; Supplies</target>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Pet Grooming</target>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Pets</target>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Pharmacy</target>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
@@ -2754,10 +3139,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">गुप्त सीड</target>
       </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Property</target>
+      </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="needs-translation">Public Seed (XPub)</target>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Public Transportation</target>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
@@ -2810,6 +3205,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">दोस्तों को बताएं</target>
       </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Registration</target>
+      </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
@@ -2834,6 +3234,16 @@ Enter it below to make sure:</source>
         <source>Rename Wallet</source>
         <note>Rename Wallet popup</note>
         <target xml:lang="hi" state="translated">वॉलेट का नाम दोबारा</target>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Rent</target>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Rental Car &amp; Taxi</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -2870,6 +3280,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">वाचर सेवा पुन: बहाल</target>
       </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Restaurants</target>
+      </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
@@ -2894,6 +3309,11 @@ Enter it below to make sure:</source>
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">एस एम एस भेज दिया गया है</target>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Sales</target>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
         <source>San Diego, California, USA</source>
@@ -2925,6 +3345,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">मुद्रा चुनें</target>
       </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="hi" state="needs-translation">Sell Bitcoin</target>
+      </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
@@ -2949,6 +3374,16 @@ Enter it below to make sure:</source>
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">बिट कॉइन भेज दिए गए है</target>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Service &amp; Parts</target>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Service Fee</target>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
@@ -2975,6 +3410,11 @@ Enter it below to make sure:</source>
         <source>Share</source>
         <note>Generic SHARE button text</note>
         <target xml:lang="hi" state="translated">साझा</target>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Shopping</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -3012,15 +3452,35 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">माफ़ कीजिये</target>
       </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Spa &amp; Massage</target>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
         <target xml:lang="hi" state="translated">खर्च सीमा</target>
       </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Sporting Goods</target>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Sports</target>
+      </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">मानक शुल्क</target>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Student Loan</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -3046,6 +3506,16 @@ Enter it below to make sure:</source>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">अधिक विकल्पों के लिए वॉलेट पर क्लिक कर होल्ड करें</target>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Tax</target>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Television</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -3106,6 +3576,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>Top of screen wallet dropdown prefix text</note>
         <target xml:lang="hi" state="translated">को:%@▼</target>
       </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Tolls</target>
+      </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
@@ -3136,6 +3611,16 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>settings text</note>
         <target xml:lang="hi" state="translated">टचआईडी: उपकरण सहायक नहीं है</target>
       </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Toys</target>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Trade Commissions</target>
+      </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
@@ -3156,10 +3641,20 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>To wallet transfer text</note>
         <target xml:lang="hi" state="translated">%@ को ट्रान्सफर</target>
       </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Travel</target>
+      </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">फिर से प्रयास?</target>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Tuition</target>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
@@ -3310,10 +3805,25 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">यूजरनाम कम से कम %d अक्षरों का होना चाहिए|</target>
       </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Utilities</target>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Vacation</target>
+      </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">पता प्रमाणित किया जा रहा है...</target>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
+        <target xml:lang="hi" state="needs-translation">Vet</target>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>

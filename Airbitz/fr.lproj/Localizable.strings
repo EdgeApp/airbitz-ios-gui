@@ -1,0 +1,1512 @@
+/* No comment provided by engineer. */
+" Please choose a wallet to receive funds." = " Please choose a wallet to receive funds.";
+
+/* No comment provided by engineer. */
+"%@
+
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
+
+Share this link to receive revenue from users that install and use %2$@. You will receive 0.25%% of all gift card purchases made inside of this app.";
+
+/* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ requested via %3$@ on %4$@.";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request" = "%@ Bitcoin Request";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request from %@" = "%1$@ Bitcoin Request from %2$@";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin received. Tap for details." = "%@ Bitcoin received. Tap for details.";
+
+/* No comment provided by engineer. */
+"%@ failed:
+%@" = "%1$@ failed:
+%2$@";
+
+/* No comment provided by engineer. */
+"%@ has requested a bitcoin address to send money to." = "%@ has requested a bitcoin address to send money to.";
+
+/* ** Warning ** text on partial payment */
+"** Warning **" = "** Warning **";
+
+/* No comment provided by engineer. */
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**WARNING** You will NEVER be able to recover your password if it is forgotten!!";
+
+/* No comment provided by engineer. */
+"2 Factor (Enhanced Security)" = "2 Factor (Enhanced Security)";
+
+/* No comment provided by engineer. */
+"4 Digit PIN" = "4 Digit PIN";
+
+/* No comment provided by engineer. */
+"15-20% off Amazon" = "15-20% off Amazon";
+
+/* No comment provided by engineer. */
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "A two factor reset has been requested. If you did not create this request, login as %@ and change your password.";
+
+/* section header in settings table */
+"ACCOUNT: " = "ACCOUNT: ";
+
+/* title of archived wallets table */
+"ARCHIVE" = "ARCHIVE";
+
+/* No comment provided by engineer. */
+"ATM" = "ATM";
+
+/* No comment provided by engineer. */
+"ATM Fee" = "ATM Fee";
+
+/* No comment provided by engineer. */
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Account '%@' needs a password. Account is not accessible on a new device without a password.";
+
+/* Title of account signin error alert */
+"Account Sign Up" = "Account Sign Up";
+
+/* No comment provided by engineer. */
+"Account has no password" = "Account has no password";
+
+/* No comment provided by engineer. */
+"Add New" = "Add New";
+
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Affiliate Revenue";
+
+/* No comment provided by engineer. */
+"Affiliate link has been copied to the clipboard" = "Affiliate link has been copied to the clipboard";
+
+/* No comment provided by engineer. */
+"Air Travel" = "Air Travel";
+
+/* No comment provided by engineer. */
+"AirPrint is not currently available" = "AirPrint is not currently available";
+
+/* No comment provided by engineer. */
+"Alcohol & Bars" = "Alcohol & Bars";
+
+/* No comment provided by engineer. */
+"Allowance" = "Allowance";
+
+/* No comment provided by engineer. */
+"Amount is too small" = "Amount is too small";
+
+/* No comment provided by engineer. */
+"Amusement" = "Amusement";
+
+/* No comment provided by engineer. */
+"An app has requested a bitcoin address to send money to." = "An app has requested a bitcoin address to send money to.";
+
+/* No comment provided by engineer. */
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline";
+
+/* No comment provided by engineer. */
+"An error occurred. Possible network connection issue or incorrect username & password" = "An error occurred. Possible network connection issue or incorrect username & password";
+
+/* Warning for password recovery textfields */
+"Answers are case sensitive" = "Answers are case sensitive";
+
+/* No comment provided by engineer. */
+"Are you sure you want to call" = "Are you sure you want to call";
+
+/* No comment provided by engineer. */
+"Are you sure you want to cancel any changes you've made?" = "Are you sure you want to cancel any changes you've made?";
+
+/* No comment provided by engineer. */
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive";
+
+/* No comment provided by engineer. */
+"Arts" = "Arts";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Auto & Transport";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Auto Insurance";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Auto Payment";
+
+/* settings text */
+"Auto log off after" = "Auto log off after";
+
+/* section header in settings table */
+"BITCOIN DENOMINATION" = "BITCOIN DENOMINATION";
+
+/* No comment provided by engineer. */
+"Baby Supplies" = "Baby Supplies";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Babysitter & Daycare";
+
+/* Back button text on top left */
+"Back" = "Back";
+
+/* No comment provided by engineer. */
+"Balance" = "Balance";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Bank Fee";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Bills & Utilities";
+
+/* No comment provided by engineer. */
+"BitID Login" = "BitID Login";
+
+/* settings text */
+"Bitcoin" = "Bitcoin";
+
+/* No comment provided by engineer. */
+"Bitcoin Address or Private Key" = "Bitcoin Address or Private Key";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key" = "Bitcoin Private Key";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key with Public Address" = "Bitcoin Private Key with Public Address";
+
+/* Export wallet transactions email subject line */
+"Bitcoin Wallet Transactions" = "Bitcoin Wallet Transactions";
+
+/* No comment provided by engineer. */
+"Bitcoin address mismatch" = "Bitcoin address mismatch";
+
+/* settings text */
+"Bluetooth" = "Bluetooth";
+
+/* No comment provided by engineer. */
+"Bluetooth disconnected" = "Bluetooth disconnected";
+
+/* No comment provided by engineer. */
+"Bluetooth payment requests are listed here. Tap on a user to send them a payment" = "Bluetooth payment requests are listed here. Tap on a user to send them a payment";
+
+/* No comment provided by engineer. */
+"Books" = "Books";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Books & Supplies";
+
+/* Business Name or Category placeholder */
+"Business Name or Category" = "Business Name or Category";
+
+/* No comment provided by engineer. */
+"Buy Bitcoin" = "Buy Bitcoin";
+
+/* No comment provided by engineer. */
+"Buy/Sell Bitcoin" = "Buy/Sell Bitcoin";
+
+/* Generic CANCEL button text */
+"CANCEL" = "CANCEL";
+
+/* CHANGE button text */
+"CHANGE" = "CHANGE";
+
+/* No comment provided by engineer. */
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Camera unavailable. Please enable camera access on your phone's Privacy Settings";
+
+/* No comment provided by engineer. */
+"Can't send e-mail" = "Can't send e-mail";
+
+/* No comment provided by engineer. */
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Cannot delete wallet as it contains funds. Please transfer out funds first.";
+
+/* No comment provided by engineer. */
+"Car Wash" = "Car Wash";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Cash & ATM";
+
+/* No comment provided by engineer. */
+"Categories" = "Categories";
+
+/* settings text */
+"Change Categories" = "Change Categories";
+
+/* No comment provided by engineer. */
+"Change Mining Fee" = "Change Mining Fee";
+
+/* No comment provided by engineer. */
+"Change PIN" = "Change PIN";
+
+/* No comment provided by engineer. */
+"Change Password" = "Change Password";
+
+/* settings text */
+"Change recovery questions" = "Change recovery questions";
+
+/* No comment provided by engineer. */
+"Charity" = "Charity";
+
+/* Check password button text */
+"Check Password" = "Check Password";
+
+/* No comment provided by engineer. */
+"Checking password..." = "Checking password...";
+
+/* City, State/Province, or Country placeholder */
+"City, State/Province, or Country" = "City, State/Province, or Country";
+
+/* Generic CLOSE button text */
+"Close" = "Close";
+
+/* No comment provided by engineer. */
+"Clothing" = "Clothing";
+
+/* No comment provided by engineer. */
+"Coffee & Tea" = "Coffee & Tea";
+
+/* No comment provided by engineer. */
+"Coffee Shops" = "Coffee Shops";
+
+/* No comment provided by engineer. */
+"Complete Signup" = "Complete Signup";
+
+/* Num of confirmations in transaction list */
+"Confirmation" = "Confirmation";
+
+/* Num of confirmations in transaction list */
+"Confirmations" = "Confirmations";
+
+/* Confirmed status in transaction list */
+"Confirmed" = "Confirmed";
+
+/* No comment provided by engineer. */
+"Congratulations" = "Congratulations";
+
+/* Popup text when BLE connects */
+"Connected" = "Connected";
+
+/* No comment provided by engineer. */
+"Consulting Income" = "Consulting Income";
+
+/* No comment provided by engineer. */
+"Copied" = "Copied";
+
+/* Copy button text */
+"Copy" = "Copy";
+
+/* No comment provided by engineer. */
+"Create Wallet" = "Create Wallet";
+
+/* No comment provided by engineer. */
+"Creating and securing account" = "Creating and securing account";
+
+/* No comment provided by engineer. */
+"Creating and securing wallet" = "Creating and securing wallet";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Credit Card Payment";
+
+/* No comment provided by engineer. */
+"Current Location" = "Current Location";
+
+/* No comment provided by engineer. */
+"Current Password" = "Current Password";
+
+/* section header in settings table */
+"DEFAULT EXCHANGE RATE" = "DEFAULT EXCHANGE RATE";
+
+/* Slideout menu gift card text */
+"DISCOUNTED GIFT CARDS" = "DISCOUNTED GIFT CARDS";
+
+/* debug text */
+"Debug" = "Debug";
+
+/* No comment provided by engineer. */
+"Debug Log File" = "Debug Log File";
+
+/* Debug screen header title */
+"Debug Options" = "Debug Options";
+
+/* settings text */
+"Default Currency" = "Default Currency";
+
+/* settings text */
+"Default Exchange" = "Default Exchange";
+
+/* DELETE button text for wallet delete */
+"Delete" = "Delete";
+
+/* Delete Account With no Password Warning */
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.";
+
+/* Delete Account Warning */
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.";
+
+/* No comment provided by engineer. */
+"Delete Account" = "Delete Account";
+
+/* Delete Wallet popup */
+"Delete Wallet" = "Delete Wallet";
+
+/* Text for popup while deleting wallet */
+"Deleting Wallet" = "Deleting Wallet";
+
+/* No comment provided by engineer. */
+"Dentist" = "Dentist";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Deposit to Savings";
+
+/* No comment provided by engineer. */
+"Designed and Built by Airbitz in" = "Designed and Built by Airbitz in";
+
+/* Directory title bar text */
+"Directory" = "Directory";
+
+/* No comment provided by engineer. */
+"Disabled" = "Disabled";
+
+/* No comment provided by engineer. */
+"Discounted Gift Cards" = "Discounted Gift Cards";
+
+/* No comment provided by engineer. */
+"Div Income" = "Div Income";
+
+/* No comment provided by engineer. */
+"Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
+Enter it below to make sure:" = "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
+Enter it below to make sure:";
+
+/* No comment provided by engineer. */
+"Doctor" = "Doctor";
+
+/* Generic DONE button text */
+"Done" = "Done";
+
+/* No comment provided by engineer. */
+"Download the Airbitz wallet and save money using bitcoin" = "Download the Airbitz wallet and save money using bitcoin";
+
+/* No comment provided by engineer. */
+"Education" = "Education";
+
+/* No comment provided by engineer. */
+"Electronics" = "Electronics";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Electronics & Software";
+
+/* text for Email */
+"Email" = "Email";
+
+/* No comment provided by engineer. */
+"Email cancelled." = "Email cancelled.";
+
+/* No comment provided by engineer. */
+"Email saved to send later." = "Email saved to send later.";
+
+/* No comment provided by engineer. */
+"Email sent." = "Email sent.";
+
+/* No comment provided by engineer. */
+"Enable" = "Enable";
+
+/* settings text */
+"Enable Bluetooth in System Settings" = "Enable Bluetooth in System Settings";
+
+/* No comment provided by engineer. */
+"Enable Touch ID" = "Enable Touch ID";
+
+/* Placeholder text for Receive screen amount */
+"Enter Amount (optional)" = "Enter Amount (optional)";
+
+/* No comment provided by engineer. */
+"Enter Payee" = "Enter Payee";
+
+/* No comment provided by engineer. */
+"Enter any notes you would like to send to our support staff" = "Enter any notes you would like to send to our support staff";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Entertainment";
+
+/* No comment provided by engineer. */
+"Error Changing PIN" = "Error Changing PIN";
+
+/* No comment provided by engineer. */
+"Error Deleting Wallet" = "Error Deleting Wallet";
+
+/* No comment provided by engineer. */
+"Error Getting Wallet Count" = "Error Getting Wallet Count";
+
+/* No comment provided by engineer. */
+"Error Logging In" = "Error Logging In";
+
+/* No comment provided by engineer. */
+"Error Recovering Account" = "Error Recovering Account";
+
+/* No comment provided by engineer. */
+"Error code" = "Error code";
+
+/* No comment provided by engineer. */
+"Error desc" = "Error desc";
+
+/* No comment provided by engineer. */
+"Error during send" = "Error during send";
+
+/* No comment provided by engineer. */
+"Error importing the token at this time. Please try again." = "Error importing the token at this time. Please try again.";
+
+/* No comment provided by engineer. */
+"Error occured copying to the clipboard" = "Error occured copying to the clipboard";
+
+/* No comment provided by engineer. */
+"Error sending Email." = "Error sending Email.";
+
+/* No comment provided by engineer. */
+"Error sending SMS" = "Error sending SMS";
+
+/* No comment provided by engineer. */
+"Exchange" = "Exchange";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Exchange Rate Data Source";
+
+/* Exit button text on top left */
+"Exit" = "Exit";
+
+/* No comment provided by engineer. */
+"Expense" = "Expense";
+
+/* EXPORT button text for wallet export */
+"Export" = "Export";
+
+/* No comment provided by engineer. */
+"Export Private Seed" = "Export Private Seed";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Export Public Seed (XPub)";
+
+/* No comment provided by engineer. */
+"Export Wallet Transactions" = "Export Wallet Transactions";
+
+/* No comment provided by engineer. */
+"Eyecare" = "Eyecare";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Fast Food";
+
+/* No comment provided by engineer. */
+"Feedback" = "Feedback";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Fees & Charges";
+
+/* Fetching Payment Request popup */
+"Fetching Payment Request..." = "Fetching Payment Request...";
+
+/* Fiat */
+"Fiat" = "Fiat";
+
+/* No comment provided by engineer. */
+"Financial" = "Financial";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Financial Advisor";
+
+/* settings text */
+"First Name (optional)" = "First Name (optional)";
+
+/* No comment provided by engineer. */
+"Food & Dining" = "Food & Dining";
+
+/* No comment provided by engineer. */
+"From: %@" = "From: %@";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Furnishings";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Gas & Fuel";
+
+/* No comment provided by engineer. */
+"Generating QR Code..." = "Generating QR Code...";
+
+/* Button text for Get Affiliate Link */
+"Get Affiliate Link" = "Get Affiliate Link";
+
+/* No comment provided by engineer. */
+"Gift" = "Gift";
+
+/* No comment provided by engineer. */
+"Gift Cards" = "Gift Cards";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Gifts & Donations";
+
+/* Generic Go Back button text */
+"Go Back" = "Go Back";
+
+/* No comment provided by engineer. */
+"Great job remembering your password." = "Great job remembering your password.";
+
+/* No comment provided by engineer. */
+"Groceries" = "Groceries";
+
+/* No comment provided by engineer. */
+"Gym" = "Gym";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "HOA Dues";
+
+/* No comment provided by engineer. */
+"Hair" = "Hair";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Health & Fitness";
+
+/* Help button text on top right */
+"Help" = "Help";
+
+/* Hide */
+"Hide" = "Hide";
+
+/* No comment provided by engineer. */
+"High Fee" = "High Fee";
+
+/* No comment provided by engineer. */
+"Hobbies" = "Hobbies";
+
+/* No comment provided by engineer. */
+"Home" = "Home";
+
+/* No comment provided by engineer. */
+"Home Improvement" = "Home Improvement";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Home Insurance";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Home Phone";
+
+/* No comment provided by engineer. */
+"Home Services" = "Home Services";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Home Supplies";
+
+/* No comment provided by engineer. */
+"Hotel" = "Hotel";
+
+/* Like Airbitz popup */
+"How are you liking %@?" = "How are you liking %@?";
+
+/* Slideout menu import private key text */
+"IMPORT PRIVATE KEY
+([[abtag APP_TITLE]] Gift Card)" = "IMPORT PRIVATE KEY
+([[abtag APP_TITLE]] Gift Card)";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "IRA Contribution";
+
+/* No comment provided by engineer. */
+"Import" = "Import";
+
+/* No comment provided by engineer. */
+"Import Airbitz Gift Card" = "Import Airbitz Gift Card";
+
+/* No comment provided by engineer. */
+"Import Funds" = "Import Funds";
+
+/* No comment provided by engineer. */
+"Import Private Key" = "Import Private Key";
+
+/* No comment provided by engineer. */
+"Import failed" = "Import failed";
+
+/* No comment provided by engineer. */
+"Import failed. Private key is empty" = "Import failed. Private key is empty";
+
+/* No comment provided by engineer. */
+"Import the private key again to retry Twitter" = "Import the private key again to retry Twitter";
+
+/* No comment provided by engineer. */
+"Importing funds from %@ into wallet..." = "Importing funds from %@ into wallet...";
+
+/* No comment provided by engineer. */
+"Income" = "Income";
+
+/* No comment provided by engineer. */
+"Incorrect PIN" = "Incorrect PIN";
+
+/* No comment provided by engineer. */
+"Incorrect PIN. Please wait %.0f seconds and try again." = "Incorrect PIN. Please wait %.0f seconds and try again.";
+
+/* No comment provided by engineer. */
+"Incorrect Password" = "Incorrect Password";
+
+/* No comment provided by engineer. */
+"Incorrect Password. Try again, or change it now?" = "Incorrect Password. Try again, or change it now?";
+
+/* No comment provided by engineer. */
+"Incorrect current password" = "Incorrect current password";
+
+/* Info button text on top right */
+"Info" = "Info";
+
+/* Title of password check popup alert */
+"Insufficient Password" = "Insufficient Password";
+
+/* No comment provided by engineer. */
+"Interest Exp" = "Interest Exp";
+
+/* No comment provided by engineer. */
+"Internet" = "Internet";
+
+/* No comment provided by engineer. */
+"Invalid Bitcoin Address" = "Invalid Bitcoin Address";
+
+/* No comment provided by engineer. */
+"Invalid Bluetooth Request" = "Invalid Bluetooth Request";
+
+/* No comment provided by engineer. */
+"Invalid QR Code" = "Invalid QR Code";
+
+/* No comment provided by engineer. */
+"It's great" = "It's great";
+
+/* No comment provided by engineer. */
+"Kids" = "Kids";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Kids Activities";
+
+/* settings text */
+"Last Name (optional)" = "Last Name (optional)";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Late Fee";
+
+/* Later button text */
+"Later" = "Later";
+
+/* No comment provided by engineer. */
+"Laundry" = "Laundry";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Lawn & Garden";
+
+/* No comment provided by engineer. */
+"Level" = "Level";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Life Insurance";
+
+/* Loading account alert text */
+"Loading Account..." = "Loading Account...";
+
+/* title of wallets table balance header */
+"Loading Balance..." = "Loading Balance...";
+
+/* Loading Transactions alert text */
+"Loading Transactions..." = "Loading Transactions...";
+
+/* Loading wallets alert text */
+"Loading Wallets..." = "Loading Wallets...";
+
+/* Loading... */
+"Loading..." = "Loading...";
+
+/* No comment provided by engineer. */
+"Logging Out" = "Logging Out";
+
+/* No comment provided by engineer. */
+"Low Fee" = "Low Fee";
+
+/* settings text */
+"Merchant Mode" = "Merchant Mode";
+
+/* No comment provided by engineer. */
+"Message Sent" = "Message Sent";
+
+/* No comment provided by engineer. */
+"Misc." = "Misc.";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Mobile Phone";
+
+/* No comment provided by engineer. */
+"More Categories" = "More Categories";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Mortgage & Rent";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Mortgage Interest";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Movies & DVDs";
+
+/* No comment provided by engineer. */
+"Music" = "Music";
+
+/* No comment provided by engineer. */
+"Must have at least %d characters" = "Must have at least %d characters";
+
+/* No comment provided by engineer. */
+"Must have at least one lower case letter" = "Must have at least one lower case letter";
+
+/* No comment provided by engineer. */
+"Must have at least one number" = "Must have at least one number";
+
+/* No comment provided by engineer. */
+"Must have at least one upper case letter" = "Must have at least one upper case letter";
+
+/* Default wallet name for new accounts */
+"My Wallet" = "My Wallet";
+
+/* section header in settings table */
+"NAME" = "NAME";
+
+/* NO button text */
+"NO" = "NO";
+
+/* No comment provided by engineer. */
+"Name" = "Name";
+
+/* No comment provided by engineer. */
+"Net Salary" = "Net Salary";
+
+/* No comment provided by engineer. */
+"New PIN" = "New PIN";
+
+/* No comment provided by engineer. */
+"New Password" = "New Password";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Newspaper & Magazines";
+
+/* Next button text */
+"Next" = "Next";
+
+/* settings text */
+"Nickname / Handle (optional)" = "Nickname / Handle (optional)";
+
+/* what to display when wallet has no transactions */
+"No Transactions" = "No Transactions";
+
+/* what to display when no transactions are found in search */
+"No Transactions Found" = "No Transactions Found";
+
+/* No comment provided by engineer. */
+"No password set" = "No password set";
+
+/* No comment provided by engineer. */
+"No thanks" = "No thanks";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Not Sure";
+
+/* No comment provided by engineer. */
+"Not so good" = "Not so good";
+
+/* No comment provided by engineer. */
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.";
+
+/* OK button text */
+"OK" = "OK";
+
+/* section header in settings table */
+"OPTIONS" = "OPTIONS";
+
+/* No comment provided by engineer. */
+"On The Web" = "On The Web";
+
+/* No comment provided by engineer. */
+"Only numbers allowed in PIN" = "Only numbers allowed in PIN";
+
+/* No comment provided by engineer. */
+"Open 24" = "Open 24";
+
+/* No comment provided by engineer. */
+"Open 24 hours" = "Open 24 hours";
+
+/* No comment provided by engineer. */
+"Other Income" = "Other Income";
+
+/* No comment provided by engineer. */
+"PIN" = "PIN";
+
+/* settings text */
+"PIN Re-Login" = "PIN Re-Login";
+
+/* No comment provided by engineer. */
+"PIN must be %d digits" = "PIN must be %d digits";
+
+/* No comment provided by engineer. */
+"PIN successfully changed." = "PIN successfully changed.";
+
+/* No comment provided by engineer. */
+"Parking" = "Parking";
+
+/* Text on partial payment */
+"Partial Payment" = "Partial Payment";
+
+/* No comment provided by engineer. */
+"Password" = "Password";
+
+/* No comment provided by engineer. */
+"Password Change" = "Password Change";
+
+/* No comment provided by engineer. */
+"Password Recovery" = "Password Recovery";
+
+/* No comment provided by engineer. */
+"Password Recovery Setup" = "Password Recovery Setup";
+
+/* No comment provided by engineer. */
+"Password change failed:
+%@" = "Password change failed:
+%@";
+
+/* No comment provided by engineer. */
+"Password does not match. Re-enter password" = "Password does not match. Re-enter password";
+
+/* No comment provided by engineer. */
+"Password mismatch" = "Password mismatch";
+
+/* No comment provided by engineer. */
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!";
+
+/* Text on payment recived popup */
+"Payment received" = "Payment received";
+
+/* Pending status in transaction list */
+"Pending" = "Pending";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Personal Care";
+
+/* expense category */
+"Pet Food & Supplies" = "Pet Food & Supplies";
+
+/* expense category */
+"Pet Grooming" = "Pet Grooming";
+
+/* expense category */
+"Pets" = "Pets";
+
+/* expense category */
+"Pharmacy" = "Pharmacy";
+
+/* No comment provided by engineer. */
+"Place Call" = "Place Call";
+
+/* No comment provided by engineer. */
+"Please create a new account and transfer your funds if you forgot your password." = "Please create a new account and transfer your funds if you forgot your password.";
+
+/* No comment provided by engineer. */
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.";
+
+/* No comment provided by engineer. */
+"Please enter a User Name" = "Please enter a User Name";
+
+/* No comment provided by engineer. */
+"Please enter an amount to send" = "Please enter an amount to send";
+
+/* No comment provided by engineer. */
+"Please enter your PIN" = "Please enter your PIN";
+
+/* No comment provided by engineer. */
+"Please enter your correct password." = "Please enter your correct password.";
+
+/* No comment provided by engineer. */
+"Please enter your password to enable Touch ID" = "Please enter your password to enable Touch ID";
+
+/* No comment provided by engineer. */
+"Please have Requestor contact support" = "Please have Requestor contact support";
+
+/* No comment provided by engineer. */
+"Please try again later or contact support" = "Please try again later or contact support";
+
+/* No comment provided by engineer. */
+"Please wait %.0f seconds before retrying %@" = "Please wait %1$.0f seconds before retrying %2$@";
+
+/* No comment provided by engineer. */
+"Please wait 1 second before retrying %@" = "Please wait 1 second before retrying %@";
+
+/* No comment provided by engineer. */
+"Present QR code to Sender and have them scan to send you payment" = "Present QR code to Sender and have them scan to send you payment";
+
+/* No comment provided by engineer. */
+"Private Seed" = "Private Seed";
+
+/* expense category */
+"Property" = "Property";
+
+/* No comment provided by engineer. */
+"Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* expense category */
+"Public Transportation" = "Public Transportation";
+
+/* No comment provided by engineer. */
+"QR Code Scan Failure" = "QR Code Scan Failure";
+
+/* No comment provided by engineer. */
+"REFER YOUR FRIENDS
+(Earn Bitcoin)" = "REFER YOUR FRIENDS
+(Earn Bitcoin)";
+
+/* No comment provided by engineer. */
+"Re-enter New Password" = "Re-enter New Password";
+
+/* No comment provided by engineer. */
+"Received Bitcoin" = "Received Bitcoin";
+
+/* No comment provided by engineer. */
+"Received Funds" = "Received Funds";
+
+/* Received string on Request screen */
+"Received..." = "Received...";
+
+/* No comment provided by engineer. */
+"Recovery Password Reminder" = "Recovery Password Reminder";
+
+/* Title of recovery questions setup error alert */
+"Recovery Questions Not Set" = "Recovery Questions Not Set";
+
+/* Title of recovery questions setup complete alert */
+"Recovery Questions Set" = "Recovery Questions Set";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "Refer Your Friends";
+
+/* expense category */
+"Registration" = "Registration";
+
+/* Remaining string on Request screen */
+"Remaining..." = "Remaining...";
+
+/* No comment provided by engineer. */
+"Remember your password?" = "Remember your password?";
+
+/* No comment provided by engineer. */
+"Remind Me Later" = "Remind Me Later";
+
+/* RENAME button text for wallet rename */
+"Rename" = "Rename";
+
+/* Rename Wallet popup */
+"Rename Wallet" = "Rename Wallet";
+
+/* No comment provided by engineer. */
+"Rent" = "Rent";
+
+/* expense category */
+"Rental Car & Taxi" = "Rental Car & Taxi";
+
+/* No comment provided by engineer. */
+"Request confirmed, Two Factor off." = "Request confirmed, Two Factor off.";
+
+/* No comment provided by engineer. */
+"Request is copied to the clipboard" = "Request is copied to the clipboard";
+
+/* Requested string on Request screen */
+"Requested..." = "Requested...";
+
+/* No comment provided by engineer. */
+"Reset Cancelled" = "Reset Cancelled";
+
+/* No comment provided by engineer. */
+"Reset Date" = "Reset Date";
+
+/* No comment provided by engineer. */
+"Reset requested. Please retry login after 7 days." = "Reset requested. Please retry login after 7 days.";
+
+/* No comment provided by engineer. */
+"Restarting watcher service" = "Restarting watcher service";
+
+/* expense category */
+"Restaurants" = "Restaurants";
+
+/* No comment provided by engineer. */
+"Restaurants & Food Trucks" = "Restaurants & Food Trucks";
+
+/* Income notes field for affiliate revenue */
+"Revenue share from affiliate link %@" = "Revenue share from affiliate link %@";
+
+/* text for textmessage/SMS */
+"SMS" = "SMS";
+
+/* No comment provided by engineer. */
+"SMS cancelled" = "SMS cancelled";
+
+/* No comment provided by engineer. */
+"SMS sent" = "SMS sent";
+
+/* No comment provided by engineer. */
+"Sales" = "Sales";
+
+/* No comment provided by engineer. */
+"San Diego, California, USA" = "San Diego, California, USA";
+
+/* Text at top of Scan Screen */
+"Scan QR to Import Private Key/Gift Card" = "Scan QR to Import Private Key/Gift Card";
+
+/* Text at top of Send screen */
+"Scan QR to Send, Import, or Login with BitID" = "Scan QR to Send, Import, or Login with BitID";
+
+/* No comment provided by engineer. */
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
+
+/* SearchBarSearch placeholder */
+"Search" = "Search";
+
+/* No comment provided by engineer. */
+"Select Currency" = "Select Currency";
+
+/* No comment provided by engineer. */
+"Sell Bitcoin" = "Sell Bitcoin";
+
+/* No comment provided by engineer. */
+"Send Funds to Private Key" = "Send Funds to Private Key";
+
+/* settings text */
+"Send name on payment request" = "Send name on payment request";
+
+/* No comment provided by engineer. */
+"Send to Bitcoin Address or Import Private Key" = "Send to Bitcoin Address or Import Private Key";
+
+/* status message */
+"Sending..." = "Sending...";
+
+/* No comment provided by engineer. */
+"Sent Bitcoin" = "Sent Bitcoin";
+
+/* expense category */
+"Service & Parts" = "Service & Parts";
+
+/* expense category */
+"Service Fee" = "Service Fee";
+
+/* No comment provided by engineer. */
+"Set a Password" = "Set a Password";
+
+/* No comment provided by engineer. */
+"Set a Password and PIN" = "Set a Password and PIN";
+
+/* No comment provided by engineer. */
+"Setting recovery questions failed:
+%@" = "Setting recovery questions failed:
+%@";
+
+/* No comment provided by engineer. */
+"Settings" = "Settings";
+
+/* Generic SHARE button text */
+"Share" = "Share";
+
+/* expense category */
+"Shopping" = "Shopping";
+
+/* Show */
+"Show" = "Show";
+
+/* No comment provided by engineer. */
+"Show Balance" = "Show Balance";
+
+/* No comment provided by engineer. */
+"Sign Up" = "Sign Up";
+
+/* No comment provided by engineer. */
+"Sign-Up failed:
+%@" = "Sign-Up failed:
+%@";
+
+/* Skip button text */
+"Skip" = "Skip";
+
+/* Title of Skip this step alert */
+"Skip this step" = "Skip this step";
+
+/* No comment provided by engineer. */
+"Sorry" = "Sorry";
+
+/* expense category */
+"Spa & Massage" = "Spa & Massage";
+
+/* spending limits text */
+"Spending Limits" = "Spending Limits";
+
+/* expense category */
+"Sporting Goods" = "Sporting Goods";
+
+/* expense category */
+"Sports" = "Sports";
+
+/* No comment provided by engineer. */
+"Standard Fee" = "Standard Fee";
+
+/* expense category */
+"Student Loan" = "Student Loan";
+
+/* No comment provided by engineer. */
+"Successfully Logged In" = "Successfully Logged In";
+
+/* No comment provided by engineer. */
+"Sweep Funds From Private Key" = "Sweep Funds From Private Key";
+
+/* Synchronizing text in confirmation textfield */
+"Synchronizing" = "Synchronizing";
+
+/* Prefix of wallet balance dropdown header */
+"TOTAL: " = "TOTAL: ";
+
+/* No comment provided by engineer. */
+"Tap and hold a wallet for additional options" = "Tap and hold a wallet for additional options";
+
+/* expense category */
+"Tax" = "Tax";
+
+/* expense category */
+"Television" = "Television";
+
+/* No comment provided by engineer. */
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.";
+
+/* No comment provided by engineer. */
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@";
+
+/* No comment provided by engineer. */
+"The given answers were incorrect. Please try again." = "The given answers were incorrect. Please try again.";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "The password to this account was changed by another device. Please login using the new credentials.";
+
+/* Username Signup screen info text */
+"This is not your email or real name.
+
+This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+
+Your username and password are known only to you and never stored unencrypted." = "This is not your email or real name.
+
+This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+
+Your username and password are known only to you and never stored unencrypted.";
+
+/* Loading Wallets alert text */
+"This may take a few minutes if it is the first time logging into this device." = "This may take a few minutes if it is the first time logging into this device.";
+
+/* Popup sessage for when a wallet is archived */
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "This wallet has been archived. Please select a different wallet from the [Wallets] screen";
+
+/* text in password verification popup */
+"Time to crack:" = "Time to crack:";
+
+/* Popup wallet help test */
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet";
+
+/* No comment provided by engineer. */
+"To: %@" = "To: %@";
+
+/* Top of screen wallet dropdown prefix text */
+"To: %@ ▼" = "To: %@ ▼";
+
+/* expense category */
+"Tolls" = "Tolls";
+
+/* No comment provided by engineer. */
+"Touch ID" = "Touch ID";
+
+/* No comment provided by engineer. */
+"Touch ID Disabled" = "Touch ID Disabled";
+
+/* No comment provided by engineer. */
+"Touch ID Enabled" = "Touch ID Enabled";
+
+/* Touch ID prompt text */
+"Touch to login user" = "Touch to login user";
+
+/* settings text */
+"TouchID: Set password first" = "TouchID: Set password first";
+
+/* settings text */
+"TouchID: Unsupported Device" = "TouchID: Unsupported Device";
+
+/* expense category */
+"Toys" = "Toys";
+
+/* expense category */
+"Trade Commissions" = "Trade Commissions";
+
+/* Transaction Details header text */
+"Transaction Details" = "Transaction Details";
+
+/* No comment provided by engineer. */
+"Transfer" = "Transfer";
+
+/* From wallet transfer text */
+"Transfer From %@" = "Transfer From %@";
+
+/* To wallet transfer text */
+"Transfer To %@" = "Transfer To %@";
+
+/* expense category */
+"Travel" = "Travel";
+
+/* No comment provided by engineer. */
+"Try again?" = "Try again?";
+
+/* expense category */
+"Tuition" = "Tuition";
+
+/* No comment provided by engineer. */
+"Two Factor" = "Two Factor";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication On" = "Two Factor Authentication On";
+
+/* No comment provided by engineer. */
+"Two Factor Disabled" = "Two Factor Disabled";
+
+/* 2FA warning on enable */
+"Two Factor Enabled
+
+** Warning **
+
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Two Factor Enabled
+
+** Warning **
+
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"";
+
+/* No comment provided by engineer. */
+"Two Factor Invalid" = "Two Factor Invalid";
+
+/* No comment provided by engineer. */
+"Two Factor Reset" = "Two Factor Reset";
+
+/* No comment provided by engineer. */
+"Unable to determine two factor status" = "Unable to determine two factor status";
+
+/* No comment provided by engineer. */
+"Unable to import secret" = "Unable to import secret";
+
+/* No comment provided by engineer. */
+"Unable to import token" = "Unable to import token";
+
+/* No comment provided by engineer. */
+"Unable to save Settings" = "Unable to save Settings";
+
+/* No comment provided by engineer. */
+"Unable to scan QR code" = "Unable to scan QR code";
+
+/* No comment provided by engineer. */
+"Unable to update Settings" = "Unable to update Settings";
+
+/* No comment provided by engineer. */
+"Up to 10% off Target" = "Up to 10% off Target";
+
+/* No comment provided by engineer. */
+"Up to 20% off Starbucks" = "Up to 20% off Starbucks";
+
+/* Upload Failed */
+"Upload Failed. Please check your network connection" = "Upload Failed. Please check your network connection";
+
+/* No comment provided by engineer. */
+"Upload Image" = "Upload Image";
+
+/* No comment provided by engineer. */
+"Upload Log" = "Upload Log";
+
+/* No comment provided by engineer. */
+"Upload Log File" = "Upload Log File";
+
+/* Upload Successful fading popup */
+"Upload Successful" = "Upload Successful";
+
+/* Uploading logfile fading popup */
+"Uploading logfile. Please wait..." = "Uploading logfile. Please wait...";
+
+/* No comment provided by engineer. */
+"Use Camera" = "Use Camera";
+
+/* Touch ID [Use PIN] button */
+"Use PIN" = "Use PIN";
+
+/* Touch ID [Use Password] button */
+"Use Password" = "Use Password";
+
+/* No comment provided by engineer. */
+"Use Photo Album" = "Use Photo Album";
+
+/* settings text */
+"Use TouchID" = "Use TouchID";
+
+/* No comment provided by engineer. */
+"User Name: %@" = "User Name: %@";
+
+/* Username */
+"Username" = "Username";
+
+/* No comment provided by engineer. */
+"Username must be at least %d characters." = "Username must be at least %d characters.";
+
+/* expense category */
+"Utilities" = "Utilities";
+
+/* expense category */
+"Vacation" = "Vacation";
+
+/* No comment provided by engineer. */
+"Validating Address..." = "Validating Address...";
+
+/* expense category */
+"Vet" = "Vet";
+
+/* title of active wallets table */
+"WALLETS" = "WALLETS";
+
+/* Title of missing password notification */
+"WARNING: missing password" = "WARNING: missing password";
+
+/* Status on Request screen */
+"Waiting for Payment..." = "Waiting for Payment...";
+
+/* No comment provided by engineer. */
+"Wallet Deleted" = "Wallet Deleted";
+
+/* No comment provided by engineer. */
+"Wallet Export" = "Wallet Export";
+
+/* No comment provided by engineer. */
+"Wallet Private Seed" = "Wallet Private Seed";
+
+/* No comment provided by engineer. */
+"Wallet creation failed:
+%@" = "Wallet creation failed:
+%@";
+
+/* No comment provided by engineer. */
+"Wallet name must have at least one character" = "Wallet name must have at least one character";
+
+/* Prefix of wallet name on rename popup */
+"Wallet: " = "Wallet: ";
+
+/* No comment provided by engineer. */
+"Warning!" = "Warning!";
+
+/* No comment provided by engineer. */
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled";
+
+/* Double spend status in transaction list */
+"Warning: Double Spend" = "Warning: Double Spend";
+
+/* No comment provided by engineer. */
+"Warning: Low Fees may cause long delays in transaction confirmation" = "Warning: Low Fees may cause long delays in transaction confirmation";
+
+/* RBF status in transaction list */
+"Warning: Replace by Fee Detected. Double spend likely" = "Warning: Replace by Fee Detected. Double spend likely";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+
+/* No comment provided by engineer. */
+"Would you like to enable TouchID for this account and device?" = "Would you like to enable TouchID for this account and device?";
+
+/* No comment provided by engineer. */
+"Would you like to send funds to this address or import funds into your wallet?" = "Would you like to send funds to this address or import funds into your wallet?";
+
+/* No comment provided by engineer. */
+"Would you like to send us some feedback?" = "Would you like to send us some feedback?";
+
+/* No comment provided by engineer. */
+"Would you like to write a review in the App store?" = "Would you like to write a review in the App store?";
+
+/* No comment provided by engineer. */
+"Wrong Answers" = "Wrong Answers";
+
+/* YES button text */
+"YES" = "YES";
+
+/* No comment provided by engineer. */
+"You Received Bitcoin!
+%@ (~%@)" = "You Received Bitcoin!
+%1$@ (~%2$@)";
+
+/* No comment provided by engineer. */
+"You must answer all six questions. Make sure your answers are long enough." = "You must answer all six questions. Make sure your answers are long enough.";
+
+/* No comment provided by engineer. */
+"You must choose all six questions before proceeding." = "You must choose all six questions before proceeding.";
+
+/* No comment provided by engineer. */
+"You must enter a user name" = "You must enter a user name";
+
+/* No comment provided by engineer. */
+"You received Bitcoin!
+%@ (~%@)
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "You received Bitcoin!
+%1$@ (~%2$@)
+Use the Payee, Category, and Notes field to optionally tag your transaction";
+
+/* Camera signup screen */
+"You will next see a popup requesting access to your Camera.
+
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "You will next see a popup requesting access to your Camera.
+
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
+
+/* No comment provided by engineer. */
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
+
+/* No comment provided by engineer. */
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!";
+
+/* Start of password rules text */
+"Your password..." = "Your password...";
+
+/* Contacts signup screen */
+"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+
+All tagged information is kept 100% private and encrypted by your password.
+
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+
+All tagged information is kept 100% private and encrypted by your password.
+
+No one, including [[abtag APP_TITLE]], has any access to this information.";
+
+/* settings text */
+"bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";
+
+/* business listings is closed */
+"closed" = "closed";
+
+/* No comment provided by engineer. */
+"day" = "day";
+
+/* No comment provided by engineer. */
+"days" = "days";
+
+/* No comment provided by engineer. */
+"hour" = "hour";
+
+/* No comment provided by engineer. */
+"hours" = "hours";
+
+/* settings text */
+"mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
+
+/* No comment provided by engineer. */
+"minute" = "minute";
+
+/* No comment provided by engineer. */
+"minutes" = "minutes";
+
+/* No comment provided by engineer. */
+"second" = "second";
+
+/* No comment provided by engineer. */
+"seconds" = "seconds";
+
+/* Header of popup in SendView from wallet to wallet transfer */
+"▼ Choose a wallet to transfer funds to ▼" = "▼ Choose a wallet to transfer funds to ▼";
+

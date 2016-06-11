@@ -56,6 +56,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "ATM" = "ATM";
 
 /* No comment provided by engineer. */
+"ATM Fee" = "ATM Fee";
+
+/* No comment provided by engineer. */
 "Account '%@' needs a password. Account is not accessible on a new device without a password." = "A conta '%@' precisa de uma senha. A conta não é acessível em um novo dispositivo sem uma senha.";
 
 /* Title of account signin error alert */
@@ -74,10 +77,22 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Affiliate link has been copied to the clipboard" = "O link de afiliado foi copiado para a área de transferência";
 
 /* No comment provided by engineer. */
+"Air Travel" = "Air Travel";
+
+/* No comment provided by engineer. */
 "AirPrint is not currently available" = "O AirPrint não está atualmente disponível";
 
 /* No comment provided by engineer. */
+"Alcohol & Bars" = "Alcohol & Bars";
+
+/* No comment provided by engineer. */
+"Allowance" = "Allowance";
+
+/* No comment provided by engineer. */
 "Amount is too small" = "A quantia é muito pequena";
+
+/* No comment provided by engineer. */
+"Amusement" = "Amusement";
 
 /* No comment provided by engineer. */
 "An app has requested a bitcoin address to send money to." = "Um aplicativo solicitou um endereço bitcoin para enviar dinheiro.";
@@ -100,17 +115,41 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 /* No comment provided by engineer. */
 "Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Tem certeza? Você não será capaz de acessar quaisquer fundos nesta carteira e quaisquer fundos futuros que poderá receber";
 
+/* No comment provided by engineer. */
+"Arts" = "Arts";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Auto & Transport";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Auto Insurance";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Auto Payment";
+
 /* settings text */
 "Auto log off after" = "Logoff automátio após";
 
 /* section header in settings table */
 "BITCOIN DENOMINATION" = "DENOMINAÇÃO BITCOIN";
 
+/* No comment provided by engineer. */
+"Baby Supplies" = "Baby Supplies";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Babysitter & Daycare";
+
 /* Back button text on top left */
 "Back" = "Voltar";
 
 /* No comment provided by engineer. */
 "Balance" = "Saldo";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Bank Fee";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Bills & Utilities";
 
 /* No comment provided by engineer. */
 "BitID Login" = "Login BitID";
@@ -142,6 +181,12 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 /* No comment provided by engineer. */
 "Bluetooth payment requests are listed here. Tap on a user to send them a payment" = "As solicitações de pagamento via Bluetooth estão listadas aqui. Toque em um usuário para enviar-lhe um pagamento";
 
+/* No comment provided by engineer. */
+"Books" = "Books";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Books & Supplies";
+
 /* Business Name or Category placeholder */
 "Business Name or Category" = "Nome da Empresa ou Categoria";
 
@@ -167,6 +212,12 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Cannot delete wallet as it contains funds. Please transfer out funds first." = "Não é possível excluir a carteira, por ela contém fundos. Por favor, transfira os fundos primeiro.";
 
 /* No comment provided by engineer. */
+"Car Wash" = "Car Wash";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Cash & ATM";
+
+/* No comment provided by engineer. */
 "Categories" = "Categorias";
 
 /* settings text */
@@ -184,6 +235,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 /* settings text */
 "Change recovery questions" = "Alterar perguntas de recuperação";
 
+/* No comment provided by engineer. */
+"Charity" = "Charity";
+
 /* Check password button text */
 "Check Password" = "Verificar Senha";
 
@@ -197,7 +251,13 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Close" = "Fechar";
 
 /* No comment provided by engineer. */
+"Clothing" = "Clothing";
+
+/* No comment provided by engineer. */
 "Coffee & Tea" = "Café & Chá";
+
+/* No comment provided by engineer. */
+"Coffee Shops" = "Coffee Shops";
 
 /* No comment provided by engineer. */
 "Complete Signup" = "Registro Completo";
@@ -218,6 +278,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Connected" = "Conectado";
 
 /* No comment provided by engineer. */
+"Consulting Income" = "Consulting Income";
+
+/* No comment provided by engineer. */
 "Copied" = "Copied";
 
 /* Copy button text */
@@ -231,6 +294,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 
 /* No comment provided by engineer. */
 "Creating and securing wallet" = "Criando e protegendo a carteira";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Credit Card Payment";
 
 /* No comment provided by engineer. */
 "Current Location" = "Localização Atual";
@@ -278,6 +344,12 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Deleting Wallet" = "Deletando Carteira";
 
 /* No comment provided by engineer. */
+"Dentist" = "Dentist";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Deposit to Savings";
+
+/* No comment provided by engineer. */
 "Designed and Built by Airbitz in" = "Desenvolvido e Construído por Airbitz";
 
 /* Directory title bar text */
@@ -290,9 +362,15 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Discounted Gift Cards" = "Cartões de Presente com Desconto";
 
 /* No comment provided by engineer. */
+"Div Income" = "Div Income";
+
+/* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:" = "Ainda lembra-se da sua senha? Você vai precisar da sua senha se seu dispositivo for perdido ou roubado, ou se você desinstalar o aplicativo.
 Digite-a abaixo para certificar-se:";
+
+/* No comment provided by engineer. */
+"Doctor" = "Doctor";
 
 /* Generic DONE button text */
 "Done" = "Feito";
@@ -301,7 +379,13 @@ Digite-a abaixo para certificar-se:";
 "Download the Airbitz wallet and save money using bitcoin" = "Baixe a carteira Airbitz e economize dinheiro usando bitcoin";
 
 /* No comment provided by engineer. */
+"Education" = "Education";
+
+/* No comment provided by engineer. */
 "Electronics" = "Eletrônicos";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Electronics & Software";
 
 /* text for Email */
 "Email" = "E-mail";
@@ -332,6 +416,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Enter any notes you would like to send to our support staff" = "Digite quaisquer comentários que você gostaria de enviar para nossa equipe de suporte";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Entertainment";
 
 /* No comment provided by engineer. */
 "Error Changing PIN" = "Erro ao alterar o PIN";
@@ -394,7 +481,16 @@ Digite-a abaixo para certificar-se:";
 "Export Wallet Transactions" = "Exportar Transações da Carteira";
 
 /* No comment provided by engineer. */
+"Eyecare" = "Eyecare";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Fast Food";
+
+/* No comment provided by engineer. */
 "Feedback" = "Feedback";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Fees & Charges";
 
 /* Fetching Payment Request popup */
 "Fetching Payment Request..." = "Buscando Solicitação de Pagamento...";
@@ -402,11 +498,26 @@ Digite-a abaixo para certificar-se:";
 /* Fiat */
 "Fiat" = "Moeda Fiduciária";
 
+/* No comment provided by engineer. */
+"Financial" = "Financial";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Financial Advisor";
+
 /* settings text */
 "First Name (optional)" = "Primeiro Nome (opcional)";
 
 /* No comment provided by engineer. */
+"Food & Dining" = "Food & Dining";
+
+/* No comment provided by engineer. */
 "From: %@" = "De: %@";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Furnishings";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Gas & Fuel";
 
 /* No comment provided by engineer. */
 "Generating QR Code..." = "Gerando o Código QR...";
@@ -415,13 +526,34 @@ Digite-a abaixo para certificar-se:";
 "Get Affiliate Link" = "Obter Link Afiliado";
 
 /* No comment provided by engineer. */
+"Gift" = "Gift";
+
+/* No comment provided by engineer. */
 "Gift Cards" = "Cartões de Presente";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Gifts & Donations";
 
 /* Generic Go Back button text */
 "Go Back" = "Voltar";
 
 /* No comment provided by engineer. */
 "Great job remembering your password." = "Ótimo trabalho por lembrar da sua senha.";
+
+/* No comment provided by engineer. */
+"Groceries" = "Groceries";
+
+/* No comment provided by engineer. */
+"Gym" = "Gym";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "HOA Dues";
+
+/* No comment provided by engineer. */
+"Hair" = "Hair";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Health & Fitness";
 
 /* Help button text on top right */
 "Help" = "Ajuda";
@@ -432,6 +564,30 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "High Fee" = "Alta taxa";
 
+/* No comment provided by engineer. */
+"Hobbies" = "Hobbies";
+
+/* No comment provided by engineer. */
+"Home" = "Home";
+
+/* No comment provided by engineer. */
+"Home Improvement" = "Home Improvement";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Home Insurance";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Home Phone";
+
+/* No comment provided by engineer. */
+"Home Services" = "Home Services";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Home Supplies";
+
+/* No comment provided by engineer. */
+"Hotel" = "Hotel";
+
 /* Like Airbitz popup */
 "How are you liking %@?" = "Você está gostando do %@?";
 
@@ -439,6 +595,9 @@ Digite-a abaixo para certificar-se:";
 "IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)" = "IMPORTAR CHAVE PRIVADA
 ([[abtag APP_TITLE]] Cartão de Presente)";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "IRA Contribution";
 
 /* No comment provided by engineer. */
 "Import" = "Importar";
@@ -489,6 +648,12 @@ Digite-a abaixo para certificar-se:";
 "Insufficient Password" = "Senha Insuficiente";
 
 /* No comment provided by engineer. */
+"Interest Exp" = "Interest Exp";
+
+/* No comment provided by engineer. */
+"Internet" = "Internet";
+
+/* No comment provided by engineer. */
 "Invalid Bitcoin Address" = "Endereço Bitcoin Inválido";
 
 /* No comment provided by engineer. */
@@ -500,14 +665,32 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "It's great" = "É ótimo";
 
+/* No comment provided by engineer. */
+"Kids" = "Kids";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Kids Activities";
+
 /* settings text */
 "Last Name (optional)" = "Último Nome (opcional)";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Late Fee";
 
 /* Later button text */
 "Later" = "Depois";
 
 /* No comment provided by engineer. */
+"Laundry" = "Laundry";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Lawn & Garden";
+
+/* No comment provided by engineer. */
 "Level" = "Nível";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Life Insurance";
 
 /* Loading account alert text */
 "Loading Account..." = "Carregando Conta...";
@@ -537,7 +720,25 @@ Digite-a abaixo para certificar-se:";
 "Message Sent" = "Mensagem Enviada";
 
 /* No comment provided by engineer. */
+"Misc." = "Misc.";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Mobile Phone";
+
+/* No comment provided by engineer. */
 "More Categories" = "Mais Categorias";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Mortgage & Rent";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Mortgage Interest";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Movies & DVDs";
+
+/* No comment provided by engineer. */
+"Music" = "Music";
 
 /* No comment provided by engineer. */
 "Must have at least %d characters" = "Deve ter pelo menos %d caracteres";
@@ -564,10 +765,16 @@ Digite-a abaixo para certificar-se:";
 "Name" = "Nome";
 
 /* No comment provided by engineer. */
+"Net Salary" = "Net Salary";
+
+/* No comment provided by engineer. */
 "New PIN" = "Novo PIN";
 
 /* No comment provided by engineer. */
 "New Password" = "Nova Senha";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Newspaper & Magazines";
 
 /* Next button text */
 "Next" = "Próximo";
@@ -586,6 +793,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "No thanks" = "Não, obrigado";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Not Sure";
 
 /* No comment provided by engineer. */
 "Not so good" = "Não é tão bom";
@@ -612,6 +822,9 @@ Digite-a abaixo para certificar-se:";
 "Open 24 hours" = "Aberto 24 horas";
 
 /* No comment provided by engineer. */
+"Other Income" = "Other Income";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -622,6 +835,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "PIN successfully changed." = "PIN alterado com sucesso.";
+
+/* No comment provided by engineer. */
+"Parking" = "Parking";
 
 /* Text on partial payment */
 "Partial Payment" = "Pagamento Parcial";
@@ -656,6 +872,21 @@ Digite-a abaixo para certificar-se:";
 
 /* Pending status in transaction list */
 "Pending" = "Pendente";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Personal Care";
+
+/* expense category */
+"Pet Food & Supplies" = "Pet Food & Supplies";
+
+/* expense category */
+"Pet Grooming" = "Pet Grooming";
+
+/* expense category */
+"Pets" = "Pets";
+
+/* expense category */
+"Pharmacy" = "Pharmacy";
 
 /* No comment provided by engineer. */
 "Place Call" = "Fazer Chamada";
@@ -699,8 +930,14 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Private Seed" = "Chave Mestra Privada";
 
+/* expense category */
+"Property" = "Property";
+
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "Public Seed (XPub)";
+
+/* expense category */
+"Public Transportation" = "Public Transportation";
 
 /* No comment provided by engineer. */
 "QR Code Scan Failure" = "Falha no Escaneamento do Código QR";
@@ -734,6 +971,9 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Refer Your Friends" = "Indique Para Seus Amigos";
 
+/* expense category */
+"Registration" = "Registration";
+
 /* Remaining string on Request screen */
 "Remaining..." = "Restantes...";
 
@@ -748,6 +988,12 @@ Digite-a abaixo para certificar-se:";
 
 /* Rename Wallet popup */
 "Rename Wallet" = "Renomear Carteira";
+
+/* No comment provided by engineer. */
+"Rent" = "Rent";
+
+/* expense category */
+"Rental Car & Taxi" = "Rental Car & Taxi";
 
 /* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "Solicitação confirmada, Dois Fatores desligados.";
@@ -770,6 +1016,9 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Restarting watcher service" = "Reiniciando o serviço do observador";
 
+/* expense category */
+"Restaurants" = "Restaurants";
+
 /* No comment provided by engineer. */
 "Restaurants & Food Trucks" = "Restaurantes & Food Trucks";
 
@@ -784,6 +1033,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "SMS sent" = "SMS enviada";
+
+/* No comment provided by engineer. */
+"Sales" = "Sales";
 
 /* No comment provided by engineer. */
 "San Diego, California, USA" = "San Diego, Califórnia, EUA";
@@ -804,6 +1056,9 @@ Digite-a abaixo para certificar-se:";
 "Select Currency" = "Selecione a Moeda";
 
 /* No comment provided by engineer. */
+"Sell Bitcoin" = "Sell Bitcoin";
+
+/* No comment provided by engineer. */
 "Send Funds to Private Key" = "Enviar Fundos para a Chave Privada";
 
 /* settings text */
@@ -817,6 +1072,12 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Sent Bitcoin" = "Bitcoin Enviado";
+
+/* expense category */
+"Service & Parts" = "Service & Parts";
+
+/* expense category */
+"Service Fee" = "Service Fee";
 
 /* No comment provided by engineer. */
 "Set a Password" = "Definir uma Senha";
@@ -834,6 +1095,9 @@ Digite-a abaixo para certificar-se:";
 
 /* Generic SHARE button text */
 "Share" = "Compartilhar";
+
+/* expense category */
+"Shopping" = "Shopping";
 
 /* Show */
 "Show" = "Mostrar";
@@ -857,11 +1121,23 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Sorry" = "Desculpe";
 
+/* expense category */
+"Spa & Massage" = "Spa & Massage";
+
 /* spending limits text */
 "Spending Limits" = "Limites de Gastos";
 
+/* expense category */
+"Sporting Goods" = "Sporting Goods";
+
+/* expense category */
+"Sports" = "Sports";
+
 /* No comment provided by engineer. */
 "Standard Fee" = "Taxa padrão";
+
+/* expense category */
+"Student Loan" = "Student Loan";
 
 /* No comment provided by engineer. */
 "Successfully Logged In" = "Logado com Sucesso";
@@ -877,6 +1153,12 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "Toque e segure uma carteira para obter opções adicionais";
+
+/* expense category */
+"Tax" = "Tax";
+
+/* expense category */
+"Television" = "Television";
 
 /* No comment provided by engineer. */
 "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "O token de autenticação de dois fatores neste dispositivo é inválido. O símbolo foi mudado por um dispositivo diferente ou a hora do seu relógio está errada. Por favor, verifique o horário do relógio do seu sistema para garantir se está correto.";
@@ -919,6 +1201,9 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 /* Top of screen wallet dropdown prefix text */
 "To: %@ ▼" = "Para: %@ ▼";
 
+/* expense category */
+"Tolls" = "Tolls";
+
 /* No comment provided by engineer. */
 "Touch ID" = "Touch ID";
 
@@ -937,6 +1222,12 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 /* settings text */
 "TouchID: Unsupported Device" = "TouchID: Dispositivo Não Suportado";
 
+/* expense category */
+"Toys" = "Toys";
+
+/* expense category */
+"Trade Commissions" = "Trade Commissions";
+
 /* Transaction Details header text */
 "Transaction Details" = "Detalhes da Transação";
 
@@ -949,8 +1240,14 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 /* To wallet transfer text */
 "Transfer To %@" = "Transferir para %@";
 
+/* expense category */
+"Travel" = "Travel";
+
 /* No comment provided by engineer. */
 "Try again?" = "Tentar novamente?";
+
+/* expense category */
+"Tuition" = "Tuition";
 
 /* No comment provided by engineer. */
 "Two Factor" = "Dois Fatores";
@@ -1047,8 +1344,17 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 /* No comment provided by engineer. */
 "Username must be at least %d characters." = "O nome de usuário deve ser pelo menos %d caracteres.";
 
+/* expense category */
+"Utilities" = "Utilities";
+
+/* expense category */
+"Vacation" = "Vacation";
+
 /* No comment provided by engineer. */
 "Validating Address..." = "Validando Endereço...";
+
+/* expense category */
+"Vet" = "Vet";
 
 /* title of active wallets table */
 "WALLETS" = "CARTEIRAS";
