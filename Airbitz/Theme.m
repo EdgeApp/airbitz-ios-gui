@@ -52,6 +52,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
     self.colorTextDarkGrey = UIColorFromARGB(0xFF404040);
     self.colorTextMediumGrey = UIColorFromARGB(0xFF808080);
+    self.colorTextMediumLightGrey = UIColorFromARGB(0xFFA0A0A0);
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
     self.colorSendButton = self.colorButtonBlue;
@@ -63,6 +64,11 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorRequestTopTextField = self.colorTextBright;
     self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
     self.colorRequestBottomTextField = self.colorTextDark;
+//    self.colorTransactionsHeader = UIColorFromARGB(0xff187BC7);
+    self.colorTransactionsHeader = UIColorFromARGB(0xffB5BBC7);
+    
+    self.colorTransactionName = UIColorFromARGB(0xff1770A6);
+    self.colorTransactionNameLight = UIColorFromARGB(0xbb1770A6);
 
     self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
     self.colorBackgroundHighlight = [UIColor colorWithRed:(76.0/255.0) green:(161.0/255.0) blue:(255.0/255.0) alpha:0.25];
@@ -105,7 +111,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.fadingAlertDropdownHeight = 80;
         self.heightBLETableCells = 50;
         self.heightWalletCell = 60;
-        self.heightTransactionCell = 72;
+        self.heightTransactionCell = 65;
         self.heightPopupPicker = 50;
         self.heightMinimumForQRScanFrame = 200;
         self.elementPadding = 5; // Generic padding between elements
@@ -119,7 +125,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     }
     if (IS_MIN_IPHONE5)
     {
-        self.heightTransactionCell = 80;
         self.heightListings = 110.0;
         self.heightLoginScreenLogo = 100;
         self.heightWalletHeader = 50.0;
@@ -141,7 +146,6 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     }
     if (IS_MIN_IPHONE6_PLUS)
     {
-        self.heightTransactionCell = 85;
         self.heightWalletHeader = 55.0;
         self.heightListings = 130.0;
         self.heightSearchClues = 45.0;

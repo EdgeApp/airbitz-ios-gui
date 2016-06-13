@@ -1354,9 +1354,9 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TJ3-SX-hen" userLabel="dateLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="63" y="10" width="186" height="13"/>
+                                                    <rect key="frame" x="56" y="41" width="194" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="13" id="M5r-0D-JMD"/>
+                                                        <constraint firstAttribute="height" constant="15" id="M5r-0D-JMD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                     <color key="textColor" red="0.090196078431372548" green="0.4392156862745098" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
@@ -1365,18 +1365,18 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iE3-Jv-3vs" userLabel="nameLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="63" y="25" width="292" height="21"/>
+                                                    <rect key="frame" x="56" y="15" width="194" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="utj-aS-CbR"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                     <color key="textColor" red="0.25490196078431371" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-St-5IO" userLabel="promoLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="69" y="0.0" width="277" height="72"/>
+                                                    <rect key="frame" x="60" y="0.0" width="286" height="72"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1390,7 +1390,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3J-4E-YSl" userLabel="confLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="63" y="45" width="162" height="21"/>
+                                                    <rect key="frame" x="56" y="45" width="169" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="ERP-p2-Vdz"/>
                                                     </constraints>
@@ -1399,14 +1399,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Yfp-gi-q8F" userLabel="topAmount Label" customClass="LatoLabel">
-                                                    <rect key="frame" x="257" y="6" width="108" height="19"/>
+                                                    <rect key="frame" x="255" y="15" width="110" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="110" id="Ng9-l5-rR8"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6qu-Co-pyz" userLabel="bottomAmt Label" customClass="LatoLabel">
-                                                    <rect key="frame" x="233" y="49" width="132" height="17"/>
+                                                    <rect key="frame" x="255" y="39" width="110" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="110" id="18n-Bk-89y"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="13"/>
                                                     <color key="textColor" red="0.32549019610000002" green="0.35294117650000001" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1414,42 +1420,40 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eY0-zc-Tda" userLabel="Image View - photo">
-                                                    <rect key="frame" x="9" y="11" width="50" height="50"/>
+                                                    <rect key="frame" x="8" y="15" width="42" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="eY0-zc-Tda" secondAttribute="height" multiplier="1:1" id="76l-8e-beM"/>
+                                                        <constraint firstAttribute="width" constant="42" id="jh2-Om-olU"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="pqN-mY-o6I" secondAttribute="trailing" id="09Q-PB-owP"/>
-                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="6" id="1xW-ny-92R"/>
                                                 <constraint firstAttribute="bottom" secondItem="jrM-St-5IO" secondAttribute="bottom" id="2Hp-wn-xtn"/>
-                                                <constraint firstItem="iE3-Jv-3vs" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="4" id="3gH-9m-cwA"/>
+                                                <constraint firstItem="iE3-Jv-3vs" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="6" id="3gH-9m-cwA"/>
                                                 <constraint firstItem="jrM-St-5IO" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="5Yf-QL-as3"/>
-                                                <constraint firstAttribute="trailing" secondItem="iE3-Jv-3vs" secondAttribute="trailing" constant="20" symbolic="YES" id="5aT-uT-XBH"/>
-                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="9" id="AEi-lW-i1Y"/>
+                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" constant="8" id="AEi-lW-i1Y"/>
                                                 <constraint firstItem="pqN-mY-o6I" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" id="CSr-oh-6Gt"/>
                                                 <constraint firstAttribute="bottom" secondItem="pqN-mY-o6I" secondAttribute="bottom" id="DDn-Iq-5z5"/>
                                                 <constraint firstAttribute="trailing" secondItem="Yfp-gi-q8F" secondAttribute="trailing" constant="10" id="Evb-sK-BGY"/>
                                                 <constraint firstAttribute="trailing" secondItem="ajY-Lm-Xor" secondAttribute="trailing" constant="5" id="HxW-Sp-Yr9"/>
-                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="11" id="I81-Z3-FpV"/>
                                                 <constraint firstAttribute="trailing" secondItem="6qu-Co-pyz" secondAttribute="trailing" constant="10" id="JSS-lz-NlE"/>
-                                                <constraint firstAttribute="centerY" secondItem="iE3-Jv-3vs" secondAttribute="centerY" id="Kss-0q-bMM"/>
-                                                <constraint firstItem="6qu-Co-pyz" firstAttribute="leading" secondItem="a3J-4E-YSl" secondAttribute="trailing" constant="8" symbolic="YES" id="R7v-FB-ylm"/>
+                                                <constraint firstItem="eY0-zc-Tda" firstAttribute="centerY" secondItem="w2k-NV-yYC" secondAttribute="centerY" id="PAq-MO-tTS"/>
                                                 <constraint firstItem="ajY-Lm-Xor" firstAttribute="top" secondItem="jrM-St-5IO" secondAttribute="top" id="RnK-gW-Mss"/>
-                                                <constraint firstAttribute="bottom" secondItem="eY0-zc-Tda" secondAttribute="bottom" constant="10" id="UbC-r5-S0X"/>
+                                                <constraint firstItem="6qu-Co-pyz" firstAttribute="bottom" secondItem="TJ3-SX-hen" secondAttribute="bottom" id="SYP-kT-1Db"/>
                                                 <constraint firstItem="jrM-St-5IO" firstAttribute="leading" secondItem="eY0-zc-Tda" secondAttribute="trailing" constant="10" id="aPr-Jv-GEo"/>
-                                                <constraint firstItem="TJ3-SX-hen" firstAttribute="top" secondItem="w2k-NV-yYC" secondAttribute="top" constant="10" id="cV9-Q9-Z9X"/>
                                                 <constraint firstItem="pqN-mY-o6I" firstAttribute="leading" secondItem="w2k-NV-yYC" secondAttribute="leading" id="dea-oL-gJM"/>
+                                                <constraint firstItem="TJ3-SX-hen" firstAttribute="bottom" secondItem="eY0-zc-Tda" secondAttribute="bottom" constant="-1" id="hBK-WP-IiK"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="iE3-Jv-3vs" secondAttribute="leading" id="j31-tz-fao"/>
-                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="trailing" constant="8" symbolic="YES" id="jLO-Rp-ngq"/>
+                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="leading" secondItem="iE3-Jv-3vs" secondAttribute="trailing" constant="5" id="lZP-EL-PKy"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="leading" id="ltp-BN-I9v"/>
                                                 <constraint firstItem="ajY-Lm-Xor" firstAttribute="leading" secondItem="jrM-St-5IO" secondAttribute="trailing" constant="4" id="mVi-gW-8Hh"/>
                                                 <constraint firstItem="a3J-4E-YSl" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.2" id="mmo-NP-soB"/>
-                                                <constraint firstAttribute="bottom" secondItem="6qu-Co-pyz" secondAttribute="bottom" constant="5" id="o45-qT-3KC"/>
                                                 <constraint firstItem="ajY-Lm-Xor" firstAttribute="bottom" secondItem="jrM-St-5IO" secondAttribute="bottom" id="oW1-aN-tY5"/>
-                                                <constraint firstItem="TJ3-SX-hen" firstAttribute="trailing" secondItem="w2k-NV-yYC" secondAttribute="centerX" multiplier="1.33" id="pNG-EO-I3l"/>
+                                                <constraint firstItem="6qu-Co-pyz" firstAttribute="leading" secondItem="TJ3-SX-hen" secondAttribute="trailing" constant="5" id="sAO-UL-V5q"/>
+                                                <constraint firstItem="Yfp-gi-q8F" firstAttribute="top" secondItem="iE3-Jv-3vs" secondAttribute="top" id="xEK-xJ-KuG"/>
+                                                <constraint firstItem="iE3-Jv-3vs" firstAttribute="top" secondItem="eY0-zc-Tda" secondAttribute="top" id="xtj-gL-ZDs"/>
                                                 <constraint firstAttribute="bottom" secondItem="a3J-4E-YSl" secondAttribute="bottom" constant="5" id="yhD-HJ-2ct"/>
                                             </constraints>
                                         </tableViewCellContentView>

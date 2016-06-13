@@ -10,6 +10,6 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView        *bkgImage;
 
-- (void)setInfo:(long)index tableHeight:(long)height;
+//- (void)setInfo:(long)index tableHeight:(long)height;
 
 @end

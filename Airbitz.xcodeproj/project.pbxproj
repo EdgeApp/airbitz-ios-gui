@@ -59,6 +59,12 @@
 		DA51EA431CCA162800C7C95F /* BrandStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51EA401CCA162800C7C95F /* BrandStrings.m */; };
 		DA51EA481CCA16E500C7C95F /* BrandStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51EA401CCA162800C7C95F /* BrandStrings.m */; };
 		DA555B381CC9E36F0000CBE4 /* Airbitz-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */; };
+		DA57A0201D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
+		DA57A0211D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
+		DA57A0221D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
+		DA57A0241D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A0251D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A0261D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
 		DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB971BFF90980086AD8B /* background@2x.jpg */; };
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
@@ -1404,6 +1410,9 @@
 		DA51EA401CCA162800C7C95F /* BrandStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandStrings.m; sourceTree = "<group>"; };
 		DA5549AB1CE7A7EF00CEF104 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
+		DA57A01A1D0E7AD6005442AF /* TransactionsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsHeaderView.h; sourceTree = "<group>"; };
+		DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionsHeaderView.m; sourceTree = "<group>"; };
+		DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TransactionsHeaderView~iphone.xib"; sourceTree = "<group>"; };
 		DA8986BB1D0BE9C700796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DA8986BC1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
 		DA8986BD1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
@@ -3174,6 +3183,9 @@
 				DA9EE0941BC61F920063DA07 /* WalletHeaderView.h */,
 				DA9EE0951BC61F920063DA07 /* WalletHeaderView.m */,
 				DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */,
+				DA57A01A1D0E7AD6005442AF /* TransactionsHeaderView.h */,
+				DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */,
+				DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */,
 				DA9EE0971BC61F920063DA07 /* WalletMakerView.h */,
 				DA9EE0981BC61F920063DA07 /* WalletMakerView.m */,
 				DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */,
@@ -3936,6 +3948,7 @@
 				DA9EF4C91BC7285D0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF4CA1BC7285D0063DA07 /* 0-bars@2x.png in Resources */,
 				DA9EF4CB1BC7285D0063DA07 /* gift_box@2x.png in Resources */,
+				DA57A0251D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EF4CC1BC7285D0063DA07 /* divider@2x.png in Resources */,
 				DA9EF4CD1BC7285D0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF4CE1BC7285D0063DA07 /* icon_rightArrow@2x.png in Resources */,
@@ -4202,6 +4215,7 @@
 				DA9EF6901BC729FA0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF6911BC729FA0063DA07 /* 0-bars@2x.png in Resources */,
 				DA9EF6921BC729FA0063DA07 /* gift_box@2x.png in Resources */,
+				DA57A0261D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EF6931BC729FA0063DA07 /* divider@2x.png in Resources */,
 				DA9EF6941BC729FA0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF6951BC729FA0063DA07 /* icon_rightArrow@2x.png in Resources */,
@@ -4468,6 +4482,7 @@
 				DA9EE4EC1BC61F920063DA07 /* Lato-HairlineItalic.ttf in Resources */,
 				DA9EE4B61BC61F920063DA07 /* icon_send@2x.png in Resources */,
 				DA9EE4221BC61F920063DA07 /* 0-bars@2x.png in Resources */,
+				DA57A0241D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EE4721BC61F920063DA07 /* gift_box@2x.png in Resources */,
 				DA9EE4681BC61F920063DA07 /* divider@2x.png in Resources */,
 				DA9EE4B01BC61F920063DA07 /* icon_request@3x.png in Resources */,
@@ -4907,6 +4922,7 @@
 				DA9EF3D41BC7285D0063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EF3D51BC7285D0063DA07 /* SignUpPasswordController.m in Sources */,
 				DA9EF3D61BC7285D0063DA07 /* RibbonView.m in Sources */,
+				DA57A0211D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */,
 				DA9EF3D71BC7285D0063DA07 /* SettingsViewController.m in Sources */,
 				DA9EF3D81BC7285D0063DA07 /* DebugViewController.m in Sources */,
 				DA9EF3D91BC7285D0063DA07 /* GDrive.m in Sources */,
@@ -5045,6 +5061,7 @@
 				DA9EF59B1BC729FA0063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EF59C1BC729FA0063DA07 /* SignUpPasswordController.m in Sources */,
 				DA9EF59D1BC729FA0063DA07 /* RibbonView.m in Sources */,
+				DA57A0221D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */,
 				DA9EF59E1BC729FA0063DA07 /* SettingsViewController.m in Sources */,
 				DA9EF59F1BC729FA0063DA07 /* DebugViewController.m in Sources */,
 				DA9EF5A01BC729FA0063DA07 /* GDrive.m in Sources */,
@@ -5183,6 +5200,7 @@
 				DA9ED7EF1BC61E680063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EE52B1BC61F930063DA07 /* SignUpPasswordController.m in Sources */,
 				DA9EE0CB1BC61F920063DA07 /* RibbonView.m in Sources */,
+				DA57A0201D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */,
 				DA9EE51F1BC61F930063DA07 /* SettingsViewController.m in Sources */,
 				DA9ED7DE1BC61E680063DA07 /* DebugViewController.m in Sources */,
 				DA9EEC461BC6332F0063DA07 /* GDrive.m in Sources */,

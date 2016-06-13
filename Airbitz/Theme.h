@@ -23,6 +23,7 @@
 @property (nonatomic) UIColor *colorTextLinkOnDark;
 @property (nonatomic) UIColor *colorTextDarkGrey;
 @property (nonatomic) UIColor *colorTextMediumGrey;
+@property (nonatomic) UIColor *colorTextMediumLightGrey;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;
@@ -36,6 +37,9 @@
 @property (nonatomic) UIColor *colorButtonBlue;
 @property (nonatomic) UIColor *bdButtonBlue;
 @property (nonatomic) UIColor *colorBackgroundHighlight;
+@property (nonatomic) UIColor *colorTransactionsHeader;
+@property (nonatomic) UIColor *colorTransactionName;
+@property (nonatomic) UIColor *colorTransactionNameLight;
 
 @property (nonatomic) NSMutableArray *colorsProfileIcons;
 
