@@ -1242,9 +1242,29 @@ const int NumPromoRows              = 5;
             }
             else
             {
-                NSNumber *num = _arraySectionsStart[section];
-                transaction = self.arraySearchTransactions[[num integerValue] + row];
-                cell.transactionIndex = [num integerValue] + row;
+                if (section >= _arraySectionsStart.count)
+                {
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    bBlankCell = YES;
+                    cell.dateLabel.text = errorDescriptionText;
+                }
+                else
+                {
+                    NSNumber *num = _arraySectionsStart[section];
+                    long index = num.integerValue + row;
+                    
+                    if (index >= self.arraySearchTransactions.count)
+                    {
+                        bBlankCell = YES;
+                        cell.dateLabel.text = errorDescriptionText;
+                    }
+                    else
+                    {
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arraySearchTransactions %lu %lu %lu", num.integerValue, row, self.arraySearchTransactions.count);
+                        transaction = self.arraySearchTransactions[index];
+                        cell.transactionIndex = index;
+                    }
+                }
             }
         }
         else
@@ -1253,13 +1273,31 @@ const int NumPromoRows              = 5;
             {
                 bBlankCell = YES;
                 cell.dateLabel.text = transactionCellNoTransactionsText;
-                
             }
             else
             {
-                NSNumber *num = _arraySectionsStart[section];
-                transaction = abcAccount.currentWallet.arrayTransactions[[num integerValue] + row];
-                cell.transactionIndex = [num integerValue] + row;
+                if (section >= _arraySectionsStart.count)
+                {
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    bBlankCell = YES;
+                    cell.dateLabel.text = errorDescriptionText;
+                }
+                else
+                {
+                    NSNumber *num = _arraySectionsStart[section];
+                    long index = num.integerValue + row;
+                    if (index >= abcAccount.currentWallet.arrayTransactions.count)
+                    {
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arrayTransactions %lu %lu %lu", num.integerValue, row, abcAccount.currentWallet.arrayTransactions.count);
+                        bBlankCell = YES;
+                        cell.dateLabel.text = errorDescriptionText;
+                    }
+                    else
+                    {
+                        transaction = abcAccount.currentWallet.arrayTransactions[index];
+                        cell.transactionIndex = index;
+                    }
+                }
             }
         }
         
