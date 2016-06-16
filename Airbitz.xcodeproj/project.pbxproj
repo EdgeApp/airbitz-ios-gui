@@ -62,30 +62,73 @@
 		DA57A0201D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
 		DA57A0211D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
 		DA57A0221D0E7B7F005442AF /* TransactionsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */; };
-		DA57A0241D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
-		DA57A0251D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
-		DA57A0261D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A0D61D11E07A005442AF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D51D11E07A005442AF /* Main_iPhone.storyboard */; };
+		DA57A0D71D11E07A005442AF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D51D11E07A005442AF /* Main_iPhone.storyboard */; };
+		DA57A0D81D11E07A005442AF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D51D11E07A005442AF /* Main_iPhone.storyboard */; };
+		DA57A0DA1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D91D11E0AC005442AF /* CalculatorView~iphone.xib */; };
+		DA57A0DB1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D91D11E0AC005442AF /* CalculatorView~iphone.xib */; };
+		DA57A0DC1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0D91D11E0AC005442AF /* CalculatorView~iphone.xib */; };
+		DA57A0DE1D1203CB005442AF /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0DD1D1203CB005442AF /* InfoView~iphone.xib */; };
+		DA57A0DF1D1203CB005442AF /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0DD1D1203CB005442AF /* InfoView~iphone.xib */; };
+		DA57A0E01D1203CB005442AF /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0DD1D1203CB005442AF /* InfoView~iphone.xib */; };
+		DA57A0E21D1203E6005442AF /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0E11D1203E6005442AF /* SlideoutView~iphone.xib */; };
+		DA57A0E31D1203E6005442AF /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0E11D1203E6005442AF /* SlideoutView~iphone.xib */; };
+		DA57A0E41D1203E6005442AF /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0E11D1203E6005442AF /* SlideoutView~iphone.xib */; };
+		DA57A0FE1D1208BC005442AF /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0F71D1208BC005442AF /* PopupWheelPickerView.xib */; };
+		DA57A0FF1D1208BC005442AF /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0F71D1208BC005442AF /* PopupWheelPickerView.xib */; };
+		DA57A1001D1208BC005442AF /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A0F71D1208BC005442AF /* PopupWheelPickerView.xib */; };
+		DA57A1031D120901005442AF /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1011D120901005442AF /* PasswordVerifyView.xib */; };
+		DA57A1041D120901005442AF /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1011D120901005442AF /* PasswordVerifyView.xib */; };
+		DA57A1051D120901005442AF /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1011D120901005442AF /* PasswordVerifyView.xib */; };
+		DA57A1171D122EE1005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1151D122EE1005442AF /* ConfirmationSliderView.xib */; };
+		DA57A1181D122EE1005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1151D122EE1005442AF /* ConfirmationSliderView.xib */; };
+		DA57A1191D122EE1005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1151D122EE1005442AF /* ConfirmationSliderView.xib */; };
+		DA57A11F1D122F41005442AF /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11D1D122F41005442AF /* Settings.storyboard */; };
+		DA57A1201D122F41005442AF /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11D1D122F41005442AF /* Settings.storyboard */; };
+		DA57A1211D122F41005442AF /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11D1D122F41005442AF /* Settings.storyboard */; };
+		DA57A1221D122F41005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11E1D122F41005442AF /* ConfirmationSliderView.xib */; };
+		DA57A1231D122F41005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11E1D122F41005442AF /* ConfirmationSliderView.xib */; };
+		DA57A1241D122F41005442AF /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A11E1D122F41005442AF /* ConfirmationSliderView.xib */; };
+		DA57A1261D122F68005442AF /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1251D122F68005442AF /* AccountCreate.storyboard */; };
+		DA57A1271D122F68005442AF /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1251D122F68005442AF /* AccountCreate.storyboard */; };
+		DA57A1281D122F68005442AF /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1251D122F68005442AF /* AccountCreate.storyboard */; };
+		DA57A1321D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A12B1D122F8D005442AF /* WalletMakerView~iphone.xib */; };
+		DA57A1331D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A12B1D122F8D005442AF /* WalletMakerView~iphone.xib */; };
+		DA57A1341D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A12B1D122F8D005442AF /* WalletMakerView~iphone.xib */; };
+		DA57A1361D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1351D13099F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A1371D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1351D13099F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A1381D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1351D13099F005442AF /* TransactionsHeaderView~iphone.xib */; };
+		DA57A13A1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1391D1309C4005442AF /* WalletHeaderView~iphone.xib */; };
+		DA57A13B1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1391D1309C4005442AF /* WalletHeaderView~iphone.xib */; };
+		DA57A13C1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1391D1309C4005442AF /* WalletHeaderView~iphone.xib */; };
+		DA57A13E1D131417005442AF /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A13D1D131417005442AF /* ScanView~iphone.xib */; };
+		DA57A13F1D131417005442AF /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A13D1D131417005442AF /* ScanView~iphone.xib */; };
+		DA57A1401D131417005442AF /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A13D1D131417005442AF /* ScanView~iphone.xib */; };
+		DA57A1431D13145A005442AF /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1411D13145A005442AF /* PopupPickerView.xib */; };
+		DA57A1441D13145A005442AF /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1411D13145A005442AF /* PopupPickerView.xib */; };
+		DA57A1451D13145A005442AF /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1411D13145A005442AF /* PopupPickerView.xib */; };
+		DA57A1461D13145A005442AF /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1421D13145A005442AF /* PopupPickerView2.xib */; };
+		DA57A1471D13145A005442AF /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1421D13145A005442AF /* PopupPickerView2.xib */; };
+		DA57A1481D13145A005442AF /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1421D13145A005442AF /* PopupPickerView2.xib */; };
+		DA57A14A1D13152E005442AF /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1491D13152E005442AF /* BusinessDirectory.storyboard */; };
+		DA57A14B1D13152E005442AF /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1491D13152E005442AF /* BusinessDirectory.storyboard */; };
+		DA57A14C1D13152E005442AF /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1491D13152E005442AF /* BusinessDirectory.storyboard */; };
+		DA57A14E1D13165A005442AF /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A14D1D13165A005442AF /* Plugins.storyboard */; };
+		DA57A14F1D13165A005442AF /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A14D1D13165A005442AF /* Plugins.storyboard */; };
+		DA57A1501D13165A005442AF /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A14D1D13165A005442AF /* Plugins.storyboard */; };
+		DA57A1521D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1511D1316BD005442AF /* QuestionAnswerView~iphone.xib */; };
+		DA57A1531D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1511D1316BD005442AF /* QuestionAnswerView~iphone.xib */; };
+		DA57A1541D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1511D1316BD005442AF /* QuestionAnswerView~iphone.xib */; };
 		DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB971BFF90980086AD8B /* background@2x.jpg */; };
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
-		DA8987EE1D0BF2D100796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8987F01D0BF2D100796F3D /* InfoPlist.strings */; };
-		DA8987FC1D0BF35A00796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8987FE1D0BF35A00796F3D /* InfoPlist.strings */; };
 		DA8988061D0BF35B00796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988051D0BF35B00796F3D /* InfoPlist.strings */; };
 		DA89880D1D0BF40300796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA89880C1D0BF40300796F3D /* InfoPlist.strings */; };
-		DA89881A1D0BF50200796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA89881C1D0BF50200796F3D /* InfoPlist.strings */; };
 		DA89881E1D0BF50300796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA89881D1D0BF50300796F3D /* InfoPlist.strings */; };
-		DA89882F1D0BF5D100796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988311D0BF5D100796F3D /* InfoPlist.strings */; };
-		DA8988431D0BF5D500796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988451D0BF5D500796F3D /* InfoPlist.strings */; };
-		DA8988A61D0BF7C500796F3D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988A81D0BF7C500796F3D /* Localizable.strings */; };
-		DA8988CD1D0BF84F00796F3D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988A81D0BF7C500796F3D /* Localizable.strings */; };
-		DA8988CE1D0BF84F00796F3D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988A81D0BF7C500796F3D /* Localizable.strings */; };
 		DA8988CF1D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D01D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D11D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
-		DA8F2A6A1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
-		DA8F2A6B1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
-		DA8F2A6C1D07E1F00008F7E7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */; };
 		DA8F2CA81D094C1B0008F7E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2CA71D094C1B0008F7E7 /* InfoPlist.strings */; };
 		DA8F2CAA1D094C5A0008F7E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2CA91D094C5A0008F7E7 /* InfoPlist.strings */; };
 		DA8F2CAC1D094D0A0008F7E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8F2CAB1D094D0A0008F7E7 /* InfoPlist.strings */; };
@@ -108,9 +151,6 @@
 		DA91020E1C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
 		DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
 		DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9102071C4A71EA00603D62 /* eyeball@3x.png */; };
-		DA93DE2A1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
-		DA93DE2B1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
-		DA93DE2C1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */; };
 		DA93DE331CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
 		DA93DE341CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
 		DA93DE351CC9CB710063CD52 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DA93DE371CC9CB710063CD52 /* email_template.html */; };
@@ -148,13 +188,11 @@
 		DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED7341BC60AA90063DA07 /* UIKit.framework */; };
 		DA9ED7CD1BC61E680063DA07 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED77D1BC61E670063DA07 /* AudioController.m */; };
 		DA9ED7CF1BC61E680063DA07 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7811BC61E670063DA07 /* BalanceView.m */; };
-		DA9ED7D01BC61E680063DA07 /* BalanceView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */; };
 		DA9ED7D11BC61E680063DA07 /* BalanceView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */; };
 		DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7851BC61E670063DA07 /* BlurView.m */; };
 		DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
 		DA9ED7D41BC61E680063DA07 /* ButtonSelectorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7881BC61E670063DA07 /* ButtonSelectorView~iphone.xib */; };
 		DA9ED7D51BC61E680063DA07 /* ButtonSelectorView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED78A1BC61E670063DA07 /* ButtonSelectorView2.m */; };
-		DA9ED7D61BC61E680063DA07 /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78B1BC61E670063DA07 /* ButtonSelectorView2.xib */; };
 		DA9ED7D71BC61E680063DA07 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED78D1BC61E670063DA07 /* CalculatorView.m */; };
 		DA9ED7D91BC61E680063DA07 /* Config.h.example in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7911BC61E670063DA07 /* Config.h.example */; };
 		DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7931BC61E670063DA07 /* Contact.m */; };
@@ -207,7 +245,6 @@
 		DA9EE4061BC61F920063DA07 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC71BC61F910063DA07 /* LoginViewController.m */; };
 		DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; };
 		DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */; };
-		DA9EE40A1BC61F920063DA07 /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECF1BC61F910063DA07 /* APPINView.m */; };
 		DA9EE40C1BC61F920063DA07 /* QuestionAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED31BC61F910063DA07 /* QuestionAnswerView.m */; };
 		DA9EE40E1BC61F920063DA07 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED61BC61F910063DA07 /* SignUpViewController.m */; };
 		DA9EE40F1BC61F920063DA07 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED81BC61F910063DA07 /* User.m */; };
@@ -216,12 +253,9 @@
 		DA9EE4121BC61F920063DA07 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
 		DA9EE4131BC61F920063DA07 /* BuySellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */; };
 		DA9EE4141BC61F920063DA07 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE41BC61F910063DA07 /* Plugin.m */; };
-		DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */; };
 		DA9EE4161BC61F920063DA07 /* PluginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE71BC61F910063DA07 /* PluginViewController.m */; };
 		DA9EE4171BC61F920063DA07 /* PopupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */; };
-		DA9EE4181BC61F920063DA07 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */; };
 		DA9EE4191BC61F920063DA07 /* PopupPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEED1BC61F910063DA07 /* PopupPickerView2.m */; };
-		DA9EE41A1BC61F920063DA07 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */; };
 		DA9EE41B1BC61F920063DA07 /* PopupWheelPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */; };
 		DA9EE41D1BC61F920063DA07 /* AddressRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF41BC61F910063DA07 /* AddressRequestController.m */; };
 		DA9EE41F1BC61F920063DA07 /* RecipientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEF81BC61F910063DA07 /* RecipientViewController.m */; };
@@ -408,7 +442,6 @@
 		DA9EE5081BC61F920063DA07 /* bg_app.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFF01BC61F920063DA07 /* bg_app.jpg */; };
 		DA9EE5091BC61F920063DA07 /* bitcoin-icon-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFF11BC61F920063DA07 /* bitcoin-icon-logo.png */; };
 		DA9EE50B1BC61F920063DA07 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFF61BC61F920063DA07 /* ScanView.m */; };
-		DA9EE50C1BC61F920063DA07 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFF71BC61F920063DA07 /* ScanView~iphone.xib */; };
 		DA9EE50D1BC61F920063DA07 /* BLEScanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFA1BC61F920063DA07 /* BLEScanCell.m */; };
 		DA9EE50E1BC61F920063DA07 /* ConfirmationSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFC1BC61F920063DA07 /* ConfirmationSliderView.m */; };
 		DA9EE5101BC61F930063DA07 /* FlashSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */; };
@@ -461,7 +494,6 @@
 		DA9EE55C1BC61F930063DA07 /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0911BC61F920063DA07 /* TransactionsViewController.m */; };
 		DA9EE55D1BC61F930063DA07 /* WalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0931BC61F920063DA07 /* WalletCell.m */; };
 		DA9EE55E1BC61F930063DA07 /* WalletHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0951BC61F920063DA07 /* WalletHeaderView.m */; };
-		DA9EE55F1BC61F930063DA07 /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */; };
 		DA9EE5601BC61F930063DA07 /* WalletMakerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0981BC61F920063DA07 /* WalletMakerView.m */; };
 		DA9EE5C01BC62F430063DA07 /* AirbitzViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5BF1BC62F430063DA07 /* AirbitzViewController.m */; };
 		DA9EEC451BC6332E0063DA07 /* DriveLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EE5C31BC6332C0063DA07 /* DriveLib.a */; };
@@ -586,7 +618,6 @@
 		DA9EF3C51BC7285D0063DA07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DA9EF3C61BC7285D0063DA07 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
 		DA9EF3C71BC7285D0063DA07 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0491BC61F920063DA07 /* CJSONScanner.m */; };
-		DA9EF3C81BC7285D0063DA07 /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECF1BC61F910063DA07 /* APPINView.m */; };
 		DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
@@ -636,7 +667,6 @@
 		DA9EF4141BC7285D0063DA07 /* bd_icon_foursquare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF091BC61F910063DA07 /* bd_icon_foursquare@2x.png */; };
 		DA9EF4151BC7285D0063DA07 /* icon_category_restaurants@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF711BC61F910063DA07 /* icon_category_restaurants@2x.png */; };
 		DA9EF4171BC7285D0063DA07 /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1E1BC61F910063DA07 /* btn_add_black@3x.png */; };
-		DA9EF4181BC7285D0063DA07 /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78B1BC61E670063DA07 /* ButtonSelectorView2.xib */; };
 		DA9EF4191BC7285D0063DA07 /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0751BC61F920063DA07 /* UIPhotoGallerySliderView.xib */; };
 		DA9EF41E1BC7285D0063DA07 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD21BC61F920063DA07 /* Lato-LightItalic.ttf */; };
 		DA9EF41F1BC7285D0063DA07 /* btn_close_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF281BC61F910063DA07 /* btn_close_white@3x.png */; };
@@ -657,7 +687,6 @@
 		DA9EF4311BC7285D0063DA07 /* icon_category_electronics@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF6C1BC61F910063DA07 /* icon_category_electronics@3x.png */; };
 		DA9EF4321BC7285D0063DA07 /* btn_export_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF381BC61F910063DA07 /* btn_export_white@2x.png */; };
 		DA9EF4341BC7285D0063DA07 /* icon_logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF841BC61F910063DA07 /* icon_logout@3x.png */; };
-		DA9EF4371BC7285D0063DA07 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */; };
 		DA9EF4381BC7285D0063DA07 /* icon_wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA51BC61F910063DA07 /* icon_wallet.png */; };
 		DA9EF4391BC7285D0063DA07 /* icon_request.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8B1BC61F910063DA07 /* icon_request.png */; };
 		DA9EF43B1BC7285D0063DA07 /* icon_category_atm.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF641BC61F910063DA07 /* icon_category_atm.png */; };
@@ -671,7 +700,6 @@
 		DA9EF4441BC7285D0063DA07 /* divider.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF441BC61F910063DA07 /* divider.png */; };
 		DA9EF4451BC7285D0063DA07 /* bd_icon_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF071BC61F910063DA07 /* bd_icon_clock@2x.png */; };
 		DA9EF4471BC7285D0063DA07 /* large-digit-input_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB11BC61F920063DA07 /* large-digit-input_selected@2x.png */; };
-		DA9EF4481BC7285D0063DA07 /* BalanceView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */; };
 		DA9EF44A1BC7285D0063DA07 /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF191BC61F910063DA07 /* btn_add@3x.png */; };
 		DA9EF44B1BC7285D0063DA07 /* btn_collapse_expand_black.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF2E1BC61F910063DA07 /* btn_collapse_expand_black.png */; };
 		DA9EF44C1BC7285D0063DA07 /* btn_export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF341BC61F910063DA07 /* btn_export@2x.png */; };
@@ -689,7 +717,6 @@
 		DA9EF4591BC7285D0063DA07 /* 2-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF011BC61F910063DA07 /* 2-bars@2x.png */; };
 		DA9EF45A1BC7285D0063DA07 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD51BC61F920063DA07 /* Montserrat-Bold.ttf */; };
 		DA9EF45F1BC7285D0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 */; };
-		DA9EF4611BC7285D0063DA07 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */; };
 		DA9EF4621BC7285D0063DA07 /* icon_export_dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7B1BC61F910063DA07 /* icon_export_dropbox@2x.png */; };
 		DA9EF4631BC7285D0063DA07 /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF911BC61F910063DA07 /* icon_search@2x.png */; };
 		DA9EF4641BC7285D0063DA07 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF591BC61F910063DA07 /* icon_account_secure.png */; };
@@ -704,7 +731,6 @@
 		DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF471BC61F910063DA07 /* emboss_down@2x.png */; };
 		DA9EF4701BC7285D0063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA31BC61F910063DA07 /* icon_USD_dark@2x.png */; };
-		DA9EF4731BC7285D0063DA07 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFF71BC61F920063DA07 /* ScanView~iphone.xib */; };
 		DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF651BC61F910063DA07 /* icon_category_atm@2x.png */; };
 		DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4D1BC61F910063DA07 /* flash_on@2x.png */; };
 		DA9EF4771BC7285D0063DA07 /* icon_export_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7C1BC61F910063DA07 /* icon_export_email@2x.png */; };
@@ -726,7 +752,6 @@
 		DA9EF4891BC7285D0063DA07 /* icon_directory.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF761BC61F910063DA07 /* icon_directory.png */; };
 		DA9EF48A1BC7285D0063DA07 /* icon_category_restaurants.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF701BC61F910063DA07 /* icon_category_restaurants.png */; };
 		DA9EF48B1BC7285D0063DA07 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA81BC61F920063DA07 /* icon_wallet_dark.png */; };
-		DA9EF48C1BC7285D0063DA07 /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */; };
 		DA9EF48D1BC7285D0063DA07 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCA1BC61F920063DA07 /* Lato-Black.ttf */; };
 		DA9EF48F1BC7285D0063DA07 /* ico_nav_directory_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF571BC61F910063DA07 /* ico_nav_directory_dark@3x.png */; };
 		DA9EF4901BC7285D0063DA07 /* btn_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF3C1BC61F910063DA07 /* btn_right@2x.png */; };
@@ -757,7 +782,6 @@
 		DA9EF4B21BC7285D0063DA07 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF491BC61F910063DA07 /* enable-contacts.png */; };
 		DA9EF4B31BC7285D0063DA07 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF181BC61F910063DA07 /* btn_add@2x.png */; };
 		DA9EF4B41BC7285D0063DA07 /* icon_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF821BC61F910063DA07 /* icon_logout.png */; };
-		DA9EF4B51BC7285D0063DA07 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */; };
 		DA9EF4B61BC7285D0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 		DA9EF4B91BC7285D0063DA07 /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF991BC61F910063DA07 /* icon_settings@3x.png */; };
 		DA9EF4BA1BC7285D0063DA07 /* icon_settings_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9B1BC61F910063DA07 /* icon_settings_dark.png */; };
@@ -933,7 +957,6 @@
 		DA9EF58C1BC729FA0063DA07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
 		DA9EF58D1BC729FA0063DA07 /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
 		DA9EF58E1BC729FA0063DA07 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0491BC61F920063DA07 /* CJSONScanner.m */; };
-		DA9EF58F1BC729FA0063DA07 /* APPINView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDECF1BC61F910063DA07 /* APPINView.m */; };
 		DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE07F1BC61F920063DA07 /* CommonCell.m */; };
 		DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0161BC61F920063DA07 /* LocalSettings.m */; };
 		DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7871BC61E670063DA07 /* ButtonSelectorView.m */; };
@@ -983,7 +1006,6 @@
 		DA9EF5DB1BC729FA0063DA07 /* bd_icon_foursquare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF091BC61F910063DA07 /* bd_icon_foursquare@2x.png */; };
 		DA9EF5DC1BC729FA0063DA07 /* icon_category_restaurants@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF711BC61F910063DA07 /* icon_category_restaurants@2x.png */; };
 		DA9EF5DE1BC729FA0063DA07 /* btn_add_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF1E1BC61F910063DA07 /* btn_add_black@3x.png */; };
-		DA9EF5DF1BC729FA0063DA07 /* ButtonSelectorView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED78B1BC61E670063DA07 /* ButtonSelectorView2.xib */; };
 		DA9EF5E01BC729FA0063DA07 /* UIPhotoGallerySliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0751BC61F920063DA07 /* UIPhotoGallerySliderView.xib */; };
 		DA9EF5E51BC729FA0063DA07 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD21BC61F920063DA07 /* Lato-LightItalic.ttf */; };
 		DA9EF5E61BC729FA0063DA07 /* btn_close_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF281BC61F910063DA07 /* btn_close_white@3x.png */; };
@@ -1004,7 +1026,6 @@
 		DA9EF5F81BC729FA0063DA07 /* icon_category_electronics@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF6C1BC61F910063DA07 /* icon_category_electronics@3x.png */; };
 		DA9EF5F91BC729FA0063DA07 /* btn_export_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF381BC61F910063DA07 /* btn_export_white@2x.png */; };
 		DA9EF5FB1BC729FA0063DA07 /* icon_logout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF841BC61F910063DA07 /* icon_logout@3x.png */; };
-		DA9EF5FE1BC729FA0063DA07 /* PopupPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */; };
 		DA9EF5FF1BC729FA0063DA07 /* icon_wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA51BC61F910063DA07 /* icon_wallet.png */; };
 		DA9EF6001BC729FA0063DA07 /* icon_request.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF8B1BC61F910063DA07 /* icon_request.png */; };
 		DA9EF6021BC729FA0063DA07 /* icon_category_atm.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF641BC61F910063DA07 /* icon_category_atm.png */; };
@@ -1018,7 +1039,6 @@
 		DA9EF60B1BC729FA0063DA07 /* divider.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF441BC61F910063DA07 /* divider.png */; };
 		DA9EF60C1BC729FA0063DA07 /* bd_icon_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF071BC61F910063DA07 /* bd_icon_clock@2x.png */; };
 		DA9EF60E1BC729FA0063DA07 /* large-digit-input_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB11BC61F920063DA07 /* large-digit-input_selected@2x.png */; };
-		DA9EF60F1BC729FA0063DA07 /* BalanceView~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */; };
 		DA9EF6111BC729FA0063DA07 /* btn_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF191BC61F910063DA07 /* btn_add@3x.png */; };
 		DA9EF6121BC729FA0063DA07 /* btn_collapse_expand_black.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF2E1BC61F910063DA07 /* btn_collapse_expand_black.png */; };
 		DA9EF6131BC729FA0063DA07 /* btn_export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF341BC61F910063DA07 /* btn_export@2x.png */; };
@@ -1036,7 +1056,6 @@
 		DA9EF6201BC729FA0063DA07 /* 2-bars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF011BC61F910063DA07 /* 2-bars@2x.png */; };
 		DA9EF6211BC729FA0063DA07 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD51BC61F920063DA07 /* Montserrat-Bold.ttf */; };
 		DA9EF6261BC729FA0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 */; };
-		DA9EF6281BC729FA0063DA07 /* PopupPickerView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */; };
 		DA9EF6291BC729FA0063DA07 /* icon_export_dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7B1BC61F910063DA07 /* icon_export_dropbox@2x.png */; };
 		DA9EF62A1BC729FA0063DA07 /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF911BC61F910063DA07 /* icon_search@2x.png */; };
 		DA9EF62B1BC729FA0063DA07 /* icon_account_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF591BC61F910063DA07 /* icon_account_secure.png */; };
@@ -1051,7 +1070,6 @@
 		DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF471BC61F910063DA07 /* emboss_down@2x.png */; };
 		DA9EF6371BC729FA0063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA31BC61F910063DA07 /* icon_USD_dark@2x.png */; };
-		DA9EF63A1BC729FA0063DA07 /* ScanView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFF71BC61F920063DA07 /* ScanView~iphone.xib */; };
 		DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF651BC61F910063DA07 /* icon_category_atm@2x.png */; };
 		DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4D1BC61F910063DA07 /* flash_on@2x.png */; };
 		DA9EF63E1BC729FA0063DA07 /* icon_export_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7C1BC61F910063DA07 /* icon_export_email@2x.png */; };
@@ -1073,7 +1091,6 @@
 		DA9EF6501BC729FA0063DA07 /* icon_directory.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF761BC61F910063DA07 /* icon_directory.png */; };
 		DA9EF6511BC729FA0063DA07 /* icon_category_restaurants.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF701BC61F910063DA07 /* icon_category_restaurants.png */; };
 		DA9EF6521BC729FA0063DA07 /* icon_wallet_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA81BC61F920063DA07 /* icon_wallet_dark.png */; };
-		DA9EF6531BC729FA0063DA07 /* WalletHeaderView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */; };
 		DA9EF6541BC729FA0063DA07 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCA1BC61F920063DA07 /* Lato-Black.ttf */; };
 		DA9EF6561BC729FA0063DA07 /* ico_nav_directory_dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF571BC61F910063DA07 /* ico_nav_directory_dark@3x.png */; };
 		DA9EF6571BC729FA0063DA07 /* btn_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF3C1BC61F910063DA07 /* btn_right@2x.png */; };
@@ -1104,7 +1121,6 @@
 		DA9EF6791BC729FA0063DA07 /* enable-contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF491BC61F910063DA07 /* enable-contacts.png */; };
 		DA9EF67A1BC729FA0063DA07 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF181BC61F910063DA07 /* btn_add@2x.png */; };
 		DA9EF67B1BC729FA0063DA07 /* icon_logout.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF821BC61F910063DA07 /* icon_logout.png */; };
-		DA9EF67C1BC729FA0063DA07 /* Plugins.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */; };
 		DA9EF67D1BC729FA0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 		DA9EF6801BC729FA0063DA07 /* icon_settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF991BC61F910063DA07 /* icon_settings@3x.png */; };
 		DA9EF6811BC729FA0063DA07 /* icon_settings_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF9B1BC61F910063DA07 /* icon_settings_dark.png */; };
@@ -1198,37 +1214,7 @@
 		DABF60F11C10263A004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DABF60F61C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
 		DABF60F71C1027C1004E613B /* clevercoin.html in Resources */ = {isa = PBXBuildFile; fileRef = DABF60F01C10263A004E613B /* clevercoin.html */; };
-		DABFC9051CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9091CFBC16700104AC1 /* ConfirmationSliderView.xib */; };
-		DABFC9061CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9091CFBC16700104AC1 /* ConfirmationSliderView.xib */; };
-		DABFC9071CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9091CFBC16700104AC1 /* ConfirmationSliderView.xib */; };
-		DABFC9141CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9181CFBC1BA00104AC1 /* BusinessDirectory.storyboard */; };
-		DABFC9151CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9181CFBC1BA00104AC1 /* BusinessDirectory.storyboard */; };
-		DABFC9161CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9181CFBC1BA00104AC1 /* BusinessDirectory.storyboard */; };
-		DABFC9231CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9271CFBC1EA00104AC1 /* PasswordVerifyView.xib */; };
-		DABFC9241CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9271CFBC1EA00104AC1 /* PasswordVerifyView.xib */; };
-		DABFC9251CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9271CFBC1EA00104AC1 /* PasswordVerifyView.xib */; };
-		DABFC9321CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9361CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib */; };
-		DABFC9331CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9361CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib */; };
-		DABFC9341CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9361CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib */; };
-		DABFC9411CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9451CFBC21F00104AC1 /* SlideoutView~iphone.xib */; };
-		DABFC9421CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9451CFBC21F00104AC1 /* SlideoutView~iphone.xib */; };
-		DABFC9431CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9451CFBC21F00104AC1 /* SlideoutView~iphone.xib */; };
-		DABFC9501CFBC23800104AC1 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9541CFBC23800104AC1 /* InfoView~iphone.xib */; };
-		DABFC9511CFBC23800104AC1 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9541CFBC23800104AC1 /* InfoView~iphone.xib */; };
-		DABFC9521CFBC23800104AC1 /* InfoView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9541CFBC23800104AC1 /* InfoView~iphone.xib */; };
-		DABFC95F1CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9631CFBC2F600104AC1 /* CalculatorView~iphone.xib */; };
-		DABFC9601CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9631CFBC2F600104AC1 /* CalculatorView~iphone.xib */; };
-		DABFC9611CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9631CFBC2F600104AC1 /* CalculatorView~iphone.xib */; };
-		DABFC96E1CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */; };
-		DABFC96F1CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */; };
-		DABFC9701CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */; };
-		DABFC97D1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */; };
-		DABFC97E1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */; };
-		DABFC97F1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */; };
 		DABFC98C1CFBC89400104AC1 /* Airbitz Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DABFC98E1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
-		DABFC98F1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
-		DABFC9901CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */; };
 		DAC7D2D91CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
 		DAC7D2DA1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
 		DAC7D2DB1CCCBE6000608219 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DAC7D2D71CCCBE6000608219 /* email_template_simple.html */; };
@@ -1412,249 +1398,29 @@
 		DA555B371CC9E36F0000CBE4 /* Airbitz-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Airbitz-Info.plist"; sourceTree = "<group>"; };
 		DA57A01A1D0E7AD6005442AF /* TransactionsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsHeaderView.h; sourceTree = "<group>"; };
 		DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionsHeaderView.m; sourceTree = "<group>"; };
-		DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TransactionsHeaderView~iphone.xib"; sourceTree = "<group>"; };
-		DA8986BB1D0BE9C700796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
-		DA8986BC1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
-		DA8986BD1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986BE1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
-		DA8986BF1D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
-		DA8986C01D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Settings.strings; sourceTree = "<group>"; };
-		DA8986C11D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AccountCreate.strings; sourceTree = "<group>"; };
-		DA8986C21D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986C31D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		DA8986C41D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986C51D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986C61D0BE9C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986C81D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/email_template.html; sourceTree = "<group>"; };
-		DA8986C91D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/email_template_simple.html; sourceTree = "<group>"; };
-		DA8986CA1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info.html; sourceTree = "<group>"; };
-		DA8986CB1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_footer.html; sourceTree = "<group>"; };
-		DA8986CC1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_export_wallet.html; sourceTree = "<group>"; };
-		DA8986CD1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_export_wallet_options.html; sourceTree = "<group>"; };
-		DA8986CE1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_insufficient_funds.html; sourceTree = "<group>"; };
-		DA8986CF1D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_recipient.html; sourceTree = "<group>"; };
-		DA8986D01D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_request.html; sourceTree = "<group>"; };
-		DA8986D11D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_send.html; sourceTree = "<group>"; };
-		DA8986D21D0BE9C900796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_disclaimer.html; sourceTree = "<group>"; };
-		DA8986D31D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_send_confirmation.html; sourceTree = "<group>"; };
-		DA8986D41D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_settings.html; sourceTree = "<group>"; };
-		DA8986D51D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_spending_limits.html; sourceTree = "<group>"; };
-		DA8986D61D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_transaction_details.html; sourceTree = "<group>"; };
-		DA8986D71D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_transactions.html; sourceTree = "<group>"; };
-		DA8986D81D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/info_wallets.html; sourceTree = "<group>"; };
-		DA8986D91D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/transaction_details.html; sourceTree = "<group>"; };
-		DA8986DA1D0BE9CA00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = fr.lproj/sms_template.txt; sourceTree = "<group>"; };
-		DA8986DB1D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
-		DA8986DC1D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
-		DA8986DD1D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986DE1D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
-		DA8986DF1D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
-		DA8986E01D0BEA0100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Settings.strings; sourceTree = "<group>"; };
-		DA8986E11D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/AccountCreate.strings; sourceTree = "<group>"; };
-		DA8986E21D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986E31D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		DA8986E41D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986E51D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986E61D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986E81D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/email_template.html; sourceTree = "<group>"; };
-		DA8986E91D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/email_template_simple.html; sourceTree = "<group>"; };
-		DA8986EA1D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info.html; sourceTree = "<group>"; };
-		DA8986EB1D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_footer.html; sourceTree = "<group>"; };
-		DA8986EC1D0BEA0200796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_export_wallet.html; sourceTree = "<group>"; };
-		DA8986ED1D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_export_wallet_options.html; sourceTree = "<group>"; };
-		DA8986EE1D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_insufficient_funds.html; sourceTree = "<group>"; };
-		DA8986EF1D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_recipient.html; sourceTree = "<group>"; };
-		DA8986F01D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_request.html; sourceTree = "<group>"; };
-		DA8986F11D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_send.html; sourceTree = "<group>"; };
-		DA8986F21D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_disclaimer.html; sourceTree = "<group>"; };
-		DA8986F31D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_send_confirmation.html; sourceTree = "<group>"; };
-		DA8986F41D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_settings.html; sourceTree = "<group>"; };
-		DA8986F51D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_spending_limits.html; sourceTree = "<group>"; };
-		DA8986F61D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_transaction_details.html; sourceTree = "<group>"; };
-		DA8986F71D0BEA0300796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_transactions.html; sourceTree = "<group>"; };
-		DA8986F81D0BEA0400796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/info_wallets.html; sourceTree = "<group>"; };
-		DA8986F91D0BEA0400796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = hi; path = hi.lproj/transaction_details.html; sourceTree = "<group>"; };
-		DA8986FA1D0BEA0400796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text; name = hi; path = hi.lproj/sms_template.txt; sourceTree = "<group>"; };
-		DA8986FB1D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
-		DA8986FC1D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
-		DA8986FD1D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8986FE1D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
-		DA8986FF1D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
-		DA8987001D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Settings.strings"; sourceTree = "<group>"; };
-		DA8987011D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
-		DA8987021D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987031D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA8987041D0BEC1F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987051D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987061D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987071D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template.html"; sourceTree = "<group>"; };
-		DA8987081D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template_simple.html"; sourceTree = "<group>"; };
-		DA8987091D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info.html"; sourceTree = "<group>"; };
-		DA89870A1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_footer.html"; sourceTree = "<group>"; };
-		DA89870B1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
-		DA89870C1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
-		DA89870D1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
-		DA89870E1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_recipient.html"; sourceTree = "<group>"; };
-		DA89870F1D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_request.html"; sourceTree = "<group>"; };
-		DA8987101D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send.html"; sourceTree = "<group>"; };
-		DA8987111D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
-		DA8987121D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
-		DA8987131D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_settings.html"; sourceTree = "<group>"; };
-		DA8987141D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
-		DA8987151D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
-		DA8987161D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transactions.html"; sourceTree = "<group>"; };
-		DA8987171D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_wallets.html"; sourceTree = "<group>"; };
-		DA8987181D0BEC2000796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transaction_details.html"; sourceTree = "<group>"; };
-		DA8987191D0BEC2100796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/sms_template.txt"; sourceTree = "<group>"; };
-		DA89871A1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
-		DA89871B1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
-		DA89871C1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA89871D1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
-		DA89871E1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
-		DA89871F1D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Settings.strings"; sourceTree = "<group>"; };
-		DA8987201D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
-		DA8987211D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987221D0BEC5300796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA8987231D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987241D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987251D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987261D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template.html"; sourceTree = "<group>"; };
-		DA8987271D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template_simple.html"; sourceTree = "<group>"; };
-		DA8987281D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info.html"; sourceTree = "<group>"; };
-		DA8987291D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_footer.html"; sourceTree = "<group>"; };
-		DA89872A1D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
-		DA89872B1D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
-		DA89872C1D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
-		DA89872D1D0BEC5400796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_recipient.html"; sourceTree = "<group>"; };
-		DA89872E1D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_request.html"; sourceTree = "<group>"; };
-		DA89872F1D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send.html"; sourceTree = "<group>"; };
-		DA8987301D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
-		DA8987311D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
-		DA8987321D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_settings.html"; sourceTree = "<group>"; };
-		DA8987331D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
-		DA8987341D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
-		DA8987351D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transactions.html"; sourceTree = "<group>"; };
-		DA8987361D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_wallets.html"; sourceTree = "<group>"; };
-		DA8987371D0BEC5500796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transaction_details.html"; sourceTree = "<group>"; };
-		DA8987381D0BEC5600796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-BR"; path = "pt-BR.lproj/sms_template.txt"; sourceTree = "<group>"; };
-		DA8987391D0BEC6500796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
-		DA89873A1D0BEC6500796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
-		DA89873B1D0BEC6500796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA89873C1D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
-		DA89873D1D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
-		DA89873E1D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Settings.strings"; sourceTree = "<group>"; };
-		DA89873F1D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
-		DA8987401D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987411D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		DA8987421D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987431D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987441D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987451D0BEC6600796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template.html"; sourceTree = "<group>"; };
-		DA8987461D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template_simple.html"; sourceTree = "<group>"; };
-		DA8987471D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info.html"; sourceTree = "<group>"; };
-		DA8987481D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_footer.html"; sourceTree = "<group>"; };
-		DA8987491D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
-		DA89874A1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
-		DA89874B1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
-		DA89874C1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_recipient.html"; sourceTree = "<group>"; };
-		DA89874D1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_request.html"; sourceTree = "<group>"; };
-		DA89874E1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send.html"; sourceTree = "<group>"; };
-		DA89874F1D0BEC6700796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
-		DA8987501D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
-		DA8987511D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_settings.html"; sourceTree = "<group>"; };
-		DA8987521D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
-		DA8987531D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
-		DA8987541D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transactions.html"; sourceTree = "<group>"; };
-		DA8987551D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_wallets.html"; sourceTree = "<group>"; };
-		DA8987561D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/transaction_details.html"; sourceTree = "<group>"; };
-		DA8987571D0BEC6800796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/sms_template.txt"; sourceTree = "<group>"; };
-		DA8987CE1D0BEED600796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
-		DA8987CF1D0BEED600796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
-		DA8987D01D0BEED600796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987D11D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
-		DA8987D21D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
-		DA8987D31D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Settings.strings; sourceTree = "<group>"; };
-		DA8987D41D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AccountCreate.strings; sourceTree = "<group>"; };
-		DA8987D51D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987D61D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		DA8987D71D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987D81D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987D91D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
-		DA8987DA1D0BEED700796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/email_template.html; sourceTree = "<group>"; };
-		DA8987DB1D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info.html; sourceTree = "<group>"; };
-		DA8987DC1D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_footer.html; sourceTree = "<group>"; };
-		DA8987DD1D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_export_wallet.html; sourceTree = "<group>"; };
-		DA8987DE1D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_export_wallet_options.html; sourceTree = "<group>"; };
-		DA8987DF1D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_insufficient_funds.html; sourceTree = "<group>"; };
-		DA8987E01D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_recipient.html; sourceTree = "<group>"; };
-		DA8987E11D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_request.html; sourceTree = "<group>"; };
-		DA8987E21D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_send.html; sourceTree = "<group>"; };
-		DA8987E31D0BEEE100796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_disclaimer.html; sourceTree = "<group>"; };
-		DA8987E41D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_send_confirmation.html; sourceTree = "<group>"; };
-		DA8987E51D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_settings.html; sourceTree = "<group>"; };
-		DA8987E61D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_spending_limits.html; sourceTree = "<group>"; };
-		DA8987E71D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_transaction_details.html; sourceTree = "<group>"; };
-		DA8987E81D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_transactions.html; sourceTree = "<group>"; };
-		DA8987E91D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info_wallets.html; sourceTree = "<group>"; };
-		DA8987EA1D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/transaction_details.html; sourceTree = "<group>"; };
-		DA8987EB1D0BEEE200796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text; name = de; path = de.lproj/sms_template.txt; sourceTree = "<group>"; };
-		DA8987EF1D0BF2D100796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8987FD1D0BF35A00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988041D0BF35B00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
+		DA57A0D51D11E07A005442AF /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		DA57A0D91D11E0AC005442AF /* CalculatorView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CalculatorView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A0DD1D1203CB005442AF /* InfoView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "InfoView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A0E11D1203E6005442AF /* SlideoutView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SlideoutView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A0F71D1208BC005442AF /* PopupWheelPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupWheelPickerView.xib; sourceTree = "<group>"; };
+		DA57A1011D120901005442AF /* PasswordVerifyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordVerifyView.xib; sourceTree = "<group>"; };
+		DA57A1151D122EE1005442AF /* ConfirmationSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmationSliderView.xib; sourceTree = "<group>"; };
+		DA57A11D1D122F41005442AF /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		DA57A11E1D122F41005442AF /* ConfirmationSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmationSliderView.xib; sourceTree = "<group>"; };
+		DA57A1251D122F68005442AF /* AccountCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AccountCreate.storyboard; sourceTree = "<group>"; };
+		DA57A12B1D122F8D005442AF /* WalletMakerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A1351D13099F005442AF /* TransactionsHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "TransactionsHeaderView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A1391D1309C4005442AF /* WalletHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletHeaderView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A13D1D131417005442AF /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
+		DA57A1411D13145A005442AF /* PopupPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView.xib; sourceTree = "<group>"; };
+		DA57A1421D13145A005442AF /* PopupPickerView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView2.xib; sourceTree = "<group>"; };
+		DA57A1491D13152E005442AF /* BusinessDirectory.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BusinessDirectory.storyboard; sourceTree = "<group>"; };
+		DA57A14D1D13165A005442AF /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
+		DA57A1511D1316BD005442AF /* QuestionAnswerView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "QuestionAnswerView~iphone.xib"; sourceTree = "<group>"; };
 		DA8988051D0BF35B00796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		DA89880C1D0BF40300796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		DA89881B1D0BF50200796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		DA89881D1D0BF50300796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		DA89881F1D0BF5CC00796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988251D0BF5CE00796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA89882B1D0BF5CF00796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main.strings; sourceTree = "<group>"; };
-		DA89882C1D0BF5D000796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988301D0BF5D100796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988441D0BF5D500796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988461D0BF61A00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA89884C1D0BF61B00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988521D0BF61C00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
-		DA8988531D0BF61D00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988541D0BF61D00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988641D0BF62100796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988651D0BF66E00796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA89886B1D0BF66F00796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988711D0BF67000796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		DA8988721D0BF67100796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988731D0BF67100796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988831D0BF67500796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		DA8988841D0BF70B00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA89888A1D0BF70D00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988901D0BF70E00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		DA8988911D0BF70E00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988921D0BF70F00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988A21D0BF71300796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988A31D0BF7C300796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988A71D0BF7C500796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA8988A91D0BF7C500796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988AF1D0BF7C700796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		DA8988B01D0BF7C700796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988B11D0BF7C800796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988C11D0BF7CB00796F3D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DA8988C21D0BF84F00796F3D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA8988C31D0BF84F00796F3D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DA8988C41D0BF84F00796F3D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DA8988C51D0BF84F00796F3D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA8988C61D0BF84F00796F3D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DA8F2A6D1D07E1F00008F7E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		DA8F2BA61D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		DA8F2BA71D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
-		DA8F2BAC1D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PasswordVerifyView.strings; sourceTree = "<group>"; };
-		DA8F2BAD1D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/QuestionAnswerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8F2BAE1D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PopupWheelPickerView.strings; sourceTree = "<group>"; };
-		DA8F2BAF1D0946E80008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
-		DA8F2BB01D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
-		DA8F2BB11D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AccountCreate.strings; sourceTree = "<group>"; };
-		DA8F2BB21D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
-		DA8F2BB31D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
-		DA8F2BB41D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA8F2BB51D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
-		DA8F2BB61D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DA8F2BB71D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/email_template.html; sourceTree = "<group>"; };
 		DA8F2BB81D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA8F2BB91D0946E90008F7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/info.html; sourceTree = "<group>"; };
@@ -1683,7 +1449,6 @@
 		DA9102051C4A71EA00603D62 /* eyeball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeball.png; sourceTree = "<group>"; };
 		DA9102061C4A71EA00603D62 /* eyeball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@2x.png"; sourceTree = "<group>"; };
 		DA9102071C4A71EA00603D62 /* eyeball@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eyeball@3x.png"; sourceTree = "<group>"; };
-		DA93DE2D1CC9CB530063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		DA93DE361CC9CB710063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template.html; sourceTree = "<group>"; };
 		DA93DE3B1CC9CB740063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info.html; sourceTree = "<group>"; };
 		DA93DE401CC9CB780063CD52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info_footer.html; sourceTree = "<group>"; };
@@ -1726,7 +1491,6 @@
 		DA9ED77D1BC61E670063DA07 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
 		DA9ED7801BC61E670063DA07 /* BalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceView.h; sourceTree = "<group>"; };
 		DA9ED7811BC61E670063DA07 /* BalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceView.m; sourceTree = "<group>"; };
-		DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "BalanceView~ipad.xib"; sourceTree = "<group>"; };
 		DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "BalanceView~iphone.xib"; sourceTree = "<group>"; };
 		DA9ED7841BC61E670063DA07 /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
 		DA9ED7851BC61E670063DA07 /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
@@ -1735,7 +1499,6 @@
 		DA9ED7881BC61E670063DA07 /* ButtonSelectorView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ButtonSelectorView~iphone.xib"; sourceTree = "<group>"; };
 		DA9ED7891BC61E670063DA07 /* ButtonSelectorView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSelectorView2.h; sourceTree = "<group>"; };
 		DA9ED78A1BC61E670063DA07 /* ButtonSelectorView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonSelectorView2.m; sourceTree = "<group>"; };
-		DA9ED78B1BC61E670063DA07 /* ButtonSelectorView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonSelectorView2.xib; sourceTree = "<group>"; };
 		DA9ED78C1BC61E670063DA07 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		DA9ED78D1BC61E670063DA07 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
 		DA9ED78F1BC61E670063DA07 /* CommonTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTypes.h; sourceTree = "<group>"; };
@@ -1839,8 +1602,6 @@
 		DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PasswordRecoveryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDECA1BC61F910063DA07 /* PasswordVerifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordVerifyView.h; sourceTree = "<group>"; };
 		DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordVerifyView.m; sourceTree = "<group>"; };
-		DA9EDECE1BC61F910063DA07 /* APPINView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPINView.h; sourceTree = "<group>"; };
-		DA9EDECF1BC61F910063DA07 /* APPINView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPINView.m; sourceTree = "<group>"; };
 		DA9EDED21BC61F910063DA07 /* QuestionAnswerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionAnswerView.h; sourceTree = "<group>"; };
 		DA9EDED31BC61F910063DA07 /* QuestionAnswerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionAnswerView.m; sourceTree = "<group>"; };
 		DA9EDED51BC61F910063DA07 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -1857,15 +1618,12 @@
 		DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuySellViewController.m; sourceTree = "<group>"; };
 		DA9EDEE31BC61F910063DA07 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
 		DA9EDEE41BC61F910063DA07 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
-		DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plugins.storyboard; sourceTree = "<group>"; };
 		DA9EDEE61BC61F910063DA07 /* PluginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginViewController.h; sourceTree = "<group>"; };
 		DA9EDEE71BC61F910063DA07 /* PluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PluginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DA9EDEE91BC61F910063DA07 /* PopupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupPickerView.h; sourceTree = "<group>"; };
 		DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupPickerView.m; sourceTree = "<group>"; };
-		DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView.xib; sourceTree = "<group>"; };
 		DA9EDEEC1BC61F910063DA07 /* PopupPickerView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupPickerView2.h; sourceTree = "<group>"; };
 		DA9EDEED1BC61F910063DA07 /* PopupPickerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupPickerView2.m; sourceTree = "<group>"; };
-		DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupPickerView2.xib; sourceTree = "<group>"; };
 		DA9EDEEF1BC61F910063DA07 /* PopupWheelPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupWheelPickerView.h; sourceTree = "<group>"; };
 		DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupWheelPickerView.m; sourceTree = "<group>"; };
 		DA9EDEF31BC61F910063DA07 /* AddressRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRequestController.h; sourceTree = "<group>"; };
@@ -2057,7 +1815,6 @@
 		DA9EDFF11BC61F920063DA07 /* bitcoin-icon-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bitcoin-icon-logo.png"; sourceTree = "<group>"; };
 		DA9EDFF51BC61F920063DA07 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		DA9EDFF61BC61F920063DA07 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
-		DA9EDFF71BC61F920063DA07 /* ScanView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ScanView~iphone.xib"; sourceTree = "<group>"; };
 		DA9EDFF91BC61F920063DA07 /* BLEScanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEScanCell.h; sourceTree = "<group>"; };
 		DA9EDFFA1BC61F920063DA07 /* BLEScanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEScanCell.m; sourceTree = "<group>"; };
 		DA9EDFFB1BC61F920063DA07 /* ConfirmationSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationSliderView.h; sourceTree = "<group>"; };
@@ -2162,7 +1919,6 @@
 		DA9EE0931BC61F920063DA07 /* WalletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletCell.m; sourceTree = "<group>"; };
 		DA9EE0941BC61F920063DA07 /* WalletHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletHeaderView.h; sourceTree = "<group>"; };
 		DA9EE0951BC61F920063DA07 /* WalletHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletHeaderView.m; sourceTree = "<group>"; };
-		DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "WalletHeaderView~iphone.xib"; sourceTree = "<group>"; };
 		DA9EE0971BC61F920063DA07 /* WalletMakerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMakerView.h; sourceTree = "<group>"; };
 		DA9EE0981BC61F920063DA07 /* WalletMakerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMakerView.m; sourceTree = "<group>"; };
 		DA9EE09A1BC61F920063DA07 /* WalletsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletsViewController.h; sourceTree = "<group>"; };
@@ -2198,16 +1954,6 @@
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
 		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
-		DABFC9081CFBC16700104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConfirmationSliderView.xib; sourceTree = "<group>"; };
-		DABFC9171CFBC1BA00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BusinessDirectory.storyboard; sourceTree = "<group>"; };
-		DABFC9261CFBC1EA00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PasswordVerifyView.xib; sourceTree = "<group>"; };
-		DABFC9351CFBC1FC00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/QuestionAnswerView~iphone.xib"; sourceTree = "<group>"; };
-		DABFC9441CFBC21F00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/SlideoutView~iphone.xib"; sourceTree = "<group>"; };
-		DABFC9531CFBC23800104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/InfoView~iphone.xib"; sourceTree = "<group>"; };
-		DABFC9621CFBC2F600104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/CalculatorView~iphone.xib"; sourceTree = "<group>"; };
-		DABFC9711CFBC31A00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
-		DABFC9801CFBC3A300104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AccountCreate.storyboard; sourceTree = "<group>"; };
-		DABFC9911CFBCA2E00104AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PopupWheelPickerView.xib; sourceTree = "<group>"; };
 		DAC7D2D81CCCBE6000608219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2423,7 +2169,6 @@
 		DA9D8F6C1CC0C191006A8C0A /* Airbitz-OSXTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA8987F01D0BF2D100796F3D /* InfoPlist.strings */,
 				DA8F2CAD1D094D8C0008F7E7 /* InfoPlist.strings */,
 				DA8F2CAB1D094D0A0008F7E7 /* InfoPlist.strings */,
 				DA8F2CA91D094C5A0008F7E7 /* InfoPlist.strings */,
@@ -2437,7 +2182,6 @@
 		DA9D8F771CC0C191006A8C0A /* Airbitz-OSXUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA8988311D0BF5D100796F3D /* InfoPlist.strings */,
 				DA89881D1D0BF50300796F3D /* InfoPlist.strings */,
 				DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */,
 				DA9D8F7A1CC0C191006A8C0A /* Info.plist */,
@@ -2484,7 +2228,6 @@
 		DA9ED6EE1BC607FA0063DA07 /* Airbitz Widget */ = {
 			isa = PBXGroup;
 			children = (
-				DA8987FE1D0BF35A00796F3D /* InfoPlist.strings */,
 				DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */,
 				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
 				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
@@ -2498,7 +2241,6 @@
 			isa = PBXGroup;
 			children = (
 				DA9ED8061BC61F8F0063DA07 /* Business Details */,
-				DABFC9181CFBC1BA00104AC1 /* BusinessDirectory.storyboard */,
 				DA9ED8101BC61F8F0063DA07 /* categoryCell.h */,
 				DA9ED8111BC61F8F0063DA07 /* categoryCell.m */,
 				DA9ED8121BC61F8F0063DA07 /* DirectoryViewController.h */,
@@ -2602,26 +2344,15 @@
 				DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */,
 				DA9EDECA1BC61F910063DA07 /* PasswordVerifyView.h */,
 				DA9EDECB1BC61F910063DA07 /* PasswordVerifyView.m */,
-				DABFC9271CFBC1EA00104AC1 /* PasswordVerifyView.xib */,
-				DA9EDECD1BC61F910063DA07 /* PINRelogin */,
+				DA57A1511D1316BD005442AF /* QuestionAnswerView~iphone.xib */,
 				DA9EDED21BC61F910063DA07 /* QuestionAnswerView.h */,
 				DA9EDED31BC61F910063DA07 /* QuestionAnswerView.m */,
-				DABFC9361CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib */,
 				DA9EDED51BC61F910063DA07 /* SignUpViewController.h */,
 				DA9EDED61BC61F910063DA07 /* SignUpViewController.m */,
 				DA9EDED71BC61F910063DA07 /* User.h */,
 				DA9EDED81BC61F910063DA07 /* User.m */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		DA9EDECD1BC61F910063DA07 /* PINRelogin */ = {
-			isa = PBXGroup;
-			children = (
-				DA9EDECE1BC61F910063DA07 /* APPINView.h */,
-				DA9EDECF1BC61F910063DA07 /* APPINView.m */,
-			);
-			path = PINRelogin;
 			sourceTree = "<group>";
 		};
 		DA9EDED91BC61F910063DA07 /* PickerTextView */ = {
@@ -2638,13 +2369,13 @@
 		DA9EDEDE1BC61F910063DA07 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				DA57A14D1D13165A005442AF /* Plugins.storyboard */,
 				DA9EDEDF1BC61F910063DA07 /* BuySellCell.h */,
 				DA9EDEE01BC61F910063DA07 /* BuySellCell.m */,
 				DA9EDEE11BC61F910063DA07 /* BuySellViewController.h */,
 				DA9EDEE21BC61F910063DA07 /* BuySellViewController.m */,
 				DA9EDEE31BC61F910063DA07 /* Plugin.h */,
 				DA9EDEE41BC61F910063DA07 /* Plugin.m */,
-				DA9EDEE51BC61F910063DA07 /* Plugins.storyboard */,
 				DA9EDEE61BC61F910063DA07 /* PluginViewController.h */,
 				DA9EDEE71BC61F910063DA07 /* PluginViewController.m */,
 				34644B5A90803E3840979781 /* GiftCardViewController.h */,
@@ -2656,15 +2387,14 @@
 		DA9EDEE81BC61F910063DA07 /* PopupPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				DA57A1411D13145A005442AF /* PopupPickerView.xib */,
+				DA57A1421D13145A005442AF /* PopupPickerView2.xib */,
 				DA9EDEE91BC61F910063DA07 /* PopupPickerView.h */,
 				DA9EDEEA1BC61F910063DA07 /* PopupPickerView.m */,
-				DA9EDEEB1BC61F910063DA07 /* PopupPickerView.xib */,
 				DA9EDEEC1BC61F910063DA07 /* PopupPickerView2.h */,
 				DA9EDEED1BC61F910063DA07 /* PopupPickerView2.m */,
-				DA9EDEEE1BC61F910063DA07 /* PopupPickerView2.xib */,
 				DA9EDEEF1BC61F910063DA07 /* PopupWheelPickerView.h */,
 				DA9EDEF01BC61F910063DA07 /* PopupWheelPickerView.m */,
-				DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */,
 			);
 			path = PopupPickerView;
 			sourceTree = "<group>";
@@ -2997,9 +2727,9 @@
 		DA9EDFF41BC61F920063DA07 /* ScanView */ = {
 			isa = PBXGroup;
 			children = (
+				DA57A13D1D131417005442AF /* ScanView~iphone.xib */,
 				DA9EDFF51BC61F920063DA07 /* ScanView.h */,
 				DA9EDFF61BC61F920063DA07 /* ScanView.m */,
-				DA9EDFF71BC61F920063DA07 /* ScanView~iphone.xib */,
 			);
 			path = ScanView;
 			sourceTree = "<group>";
@@ -3011,7 +2741,6 @@
 				DA9EDFFA1BC61F920063DA07 /* BLEScanCell.m */,
 				DA9EDFFB1BC61F920063DA07 /* ConfirmationSliderView.h */,
 				DA9EDFFC1BC61F920063DA07 /* ConfirmationSliderView.m */,
-				DABFC9091CFBC16700104AC1 /* ConfirmationSliderView.xib */,
 				DA9EDFFE1BC61F920063DA07 /* FlashSelectView.h */,
 				DA9EDFFF1BC61F920063DA07 /* FlashSelectView.m */,
 				DA9EE0001BC61F920063DA07 /* SendConfirmationViewController.h */,
@@ -3045,7 +2774,6 @@
 				DA9EE0181BC61F920063DA07 /* PlainCell.m */,
 				DA9EE0191BC61F920063DA07 /* RadioButtonCell.h */,
 				DA9EE01A1BC61F920063DA07 /* RadioButtonCell.m */,
-				DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */,
 				DA9EE01C1BC61F920063DA07 /* SettingsViewController.h */,
 				DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */,
 				DA9EE01E1BC61F920063DA07 /* SpendingLimitsViewController.h */,
@@ -3065,7 +2793,6 @@
 		DA9EE0281BC61F920063DA07 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */,
 				DA9EE02A1BC61F920063DA07 /* SignUpBaseController.h */,
 				DA9EE02B1BC61F920063DA07 /* SignUpBaseController.m */,
 				DA9EE02C1BC61F920063DA07 /* SignUpCameraController.h */,
@@ -3180,15 +2907,14 @@
 				DA9EE0911BC61F920063DA07 /* TransactionsViewController.m */,
 				DA9EE0921BC61F920063DA07 /* WalletCell.h */,
 				DA9EE0931BC61F920063DA07 /* WalletCell.m */,
+				DA57A1391D1309C4005442AF /* WalletHeaderView~iphone.xib */,
 				DA9EE0941BC61F920063DA07 /* WalletHeaderView.h */,
 				DA9EE0951BC61F920063DA07 /* WalletHeaderView.m */,
-				DA9EE0961BC61F920063DA07 /* WalletHeaderView~iphone.xib */,
+				DA57A1351D13099F005442AF /* TransactionsHeaderView~iphone.xib */,
 				DA57A01A1D0E7AD6005442AF /* TransactionsHeaderView.h */,
 				DA57A01F1D0E7B7F005442AF /* TransactionsHeaderView.m */,
-				DA57A0231D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib */,
 				DA9EE0971BC61F920063DA07 /* WalletMakerView.h */,
 				DA9EE0981BC61F920063DA07 /* WalletMakerView.m */,
-				DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */,
 				DA9EE09A1BC61F920063DA07 /* WalletsViewController.h */,
 			);
 			path = Wallets;
@@ -3255,7 +2981,6 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
-				DA8988A81D0BF7C500796F3D /* Localizable.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
@@ -3277,7 +3002,16 @@
 				DA9EE04D1BC61F920063DA07 /* UIPhotoGallery */,
 				DA9EE07D1BC61F920063DA07 /* Wallets */,
 				DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */,
-				DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */,
+				DA57A1251D122F68005442AF /* AccountCreate.storyboard */,
+				DA57A1491D13152E005442AF /* BusinessDirectory.storyboard */,
+				DA57A11E1D122F41005442AF /* ConfirmationSliderView.xib */,
+				DA57A0DD1D1203CB005442AF /* InfoView~iphone.xib */,
+				DA57A0D51D11E07A005442AF /* Main_iPhone.storyboard */,
+				DA57A1011D120901005442AF /* PasswordVerifyView.xib */,
+				DA57A0F71D1208BC005442AF /* PopupWheelPickerView.xib */,
+				DA57A11D1D122F41005442AF /* Settings.storyboard */,
+				DA57A0E11D1203E6005442AF /* SlideoutView~iphone.xib */,
+				DA57A12B1D122F8D005442AF /* WalletMakerView~iphone.xib */,
 				DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */,
 				DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */,
 				DA9EE5C11BC62F6B0063DA07 /* AppGroupConstants.h */,
@@ -3285,10 +3019,9 @@
 				DA9EE5BF1BC62F430063DA07 /* AirbitzViewController.m */,
 				DA9ED77C1BC61E670063DA07 /* AudioController.h */,
 				DA9ED77D1BC61E670063DA07 /* AudioController.m */,
+				DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */,
 				DA9ED7801BC61E670063DA07 /* BalanceView.h */,
 				DA9ED7811BC61E670063DA07 /* BalanceView.m */,
-				DA9ED7821BC61E670063DA07 /* BalanceView~ipad.xib */,
-				DA9ED7831BC61E670063DA07 /* BalanceView~iphone.xib */,
 				DA9ED7841BC61E670063DA07 /* BlurView.h */,
 				DA9ED7851BC61E670063DA07 /* BlurView.m */,
 				34644A774ED9B0786711E100 /* BrandStrings.h */,
@@ -3299,10 +3032,9 @@
 				DA9ED7881BC61E670063DA07 /* ButtonSelectorView~iphone.xib */,
 				DA9ED7891BC61E670063DA07 /* ButtonSelectorView2.h */,
 				DA9ED78A1BC61E670063DA07 /* ButtonSelectorView2.m */,
-				DA9ED78B1BC61E670063DA07 /* ButtonSelectorView2.xib */,
+				DA57A0D91D11E0AC005442AF /* CalculatorView~iphone.xib */,
 				DA9ED78C1BC61E670063DA07 /* CalculatorView.h */,
 				DA9ED78D1BC61E670063DA07 /* CalculatorView.m */,
-				DABFC9631CFBC2F600104AC1 /* CalculatorView~iphone.xib */,
 				DA9ED78F1BC61E670063DA07 /* CommonTypes.h */,
 				DA9ED7901BC61E670063DA07 /* Config.h */,
 				DA9ED7911BC61E670063DA07 /* Config.h.example */,
@@ -3316,7 +3048,6 @@
 				DA9ED79B1BC61E670063DA07 /* DebugViewController.m */,
 				DA9ED79C1BC61E670063DA07 /* InfoView.h */,
 				DA9ED79D1BC61E670063DA07 /* InfoView.m */,
-				DABFC9541CFBC23800104AC1 /* InfoView~iphone.xib */,
 				DA9ED79F1BC61E680063DA07 /* LatoLabel.h */,
 				DA9ED7A01BC61E680063DA07 /* LatoLabel.m */,
 				DA9ED7A11BC61E680063DA07 /* LaunchScreen.xib */,
@@ -3332,11 +3063,11 @@
 				DA9ED7AD1BC61E680063DA07 /* NSDate+Helper.m */,
 				DA9ED7B01BC61E680063DA07 /* NSString+StripHTML.h */,
 				DA9ED7B11BC61E680063DA07 /* NSString+StripHTML.m */,
+				DA57A1151D122EE1005442AF /* ConfirmationSliderView.xib */,
 				DA9ED7B21BC61E680063DA07 /* San Diego.gpx */,
 				DA9ED7B31BC61E680063DA07 /* Server.h */,
 				DA9ED7B41BC61E680063DA07 /* SlideoutView.h */,
 				DA9ED7B51BC61E680063DA07 /* SlideoutView.m */,
-				DABFC9451CFBC21F00104AC1 /* SlideoutView~iphone.xib */,
 				34644A95F98F7C787C35866F /* Strings.h */,
 				DA49A4CA1C394AC0003196D3 /* Strings.m */,
 				DA9ED7B71BC61E680063DA07 /* StylizedButton.h */,
@@ -3379,7 +3110,6 @@
 		DAD1AD931BC6065100C648C4 /* AirbitzTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA8988451D0BF5D500796F3D /* InfoPlist.strings */,
 				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
 				DAD1AD961BC6065100C648C4 /* Info.plist */,
 			);
@@ -3389,7 +3119,6 @@
 		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA89881C1D0BF50200796F3D /* InfoPlist.strings */,
 				DA89880C1D0BF40300796F3D /* InfoPlist.strings */,
 				DA8988051D0BF35B00796F3D /* InfoPlist.strings */,
 				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
@@ -3642,12 +3371,6 @@
 			knownRegions = (
 				Base,
 				en,
-				fr,
-				hi,
-				"es-MX",
-				"pt-BR",
-				"zh-Hans",
-				de,
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -3723,7 +3446,6 @@
 				DA8F2CAE1D094D8C0008F7E7 /* InfoPlist.strings in Resources */,
 				DA8F2CAC1D094D0A0008F7E7 /* InfoPlist.strings in Resources */,
 				DA8F2CAA1D094C5A0008F7E7 /* InfoPlist.strings in Resources */,
-				DA8987EE1D0BF2D100796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3732,7 +3454,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA89881E1D0BF50300796F3D /* InfoPlist.strings in Resources */,
-				DA89882F1D0BF5D100796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3744,7 +3465,6 @@
 				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
-				DA8987FC1D0BF35A00796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3759,22 +3479,18 @@
 				DA9EF4081BC7285D0063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EF40B1BC7285D0063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DA9EF40F1BC7285D0063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DABFC98F1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF4111BC7285D0063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EF4121BC7285D0063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EF4131BC7285D0063DA07 /* btn_export@3x.png in Resources */,
 				DA9EF4141BC7285D0063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EF4151BC7285D0063DA07 /* icon_category_restaurants@2x.png in Resources */,
 				DA9EF4171BC7285D0063DA07 /* btn_add_black@3x.png in Resources */,
-				DA9EF4181BC7285D0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF4191BC7285D0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DAB5C0281C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
-				DABFC9511CFBC23800104AC1 /* InfoView~iphone.xib in Resources */,
 				DA9EF41E1BC7285D0063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EF41F1BC7285D0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF4201BC7285D0063DA07 /* write-it-down.png in Resources */,
 				DA9EF4211BC7285D0063DA07 /* drag_bar@2x.png in Resources */,
-				DA8988CD1D0BF84F00796F3D /* Localizable.strings in Resources */,
 				DA9EF4221BC7285D0063DA07 /* icon_arrow.png in Resources */,
 				DA9EF4241BC7285D0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB991BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
@@ -3794,11 +3510,10 @@
 				DA9EF4311BC7285D0063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF4321BC7285D0063DA07 /* btn_export_white@2x.png in Resources */,
-				DABFC9151CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */,
 				DA9EF4341BC7285D0063DA07 /* icon_logout@3x.png in Resources */,
-				DA9EF4371BC7285D0063DA07 /* PopupPickerView.xib in Resources */,
 				DA9EF4381BC7285D0063DA07 /* icon_wallet.png in Resources */,
 				DA9EF4391BC7285D0063DA07 /* icon_request.png in Resources */,
+				DA57A0DB1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF43B1BC7285D0063DA07 /* icon_category_atm.png in Resources */,
 				DA9EF43C1BC7285D0063DA07 /* icon_transactions@3x.png in Resources */,
@@ -3808,22 +3523,24 @@
 				DAE4CCF91CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EF4401BC7285D0063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DA9EF4411BC7285D0063DA07 /* icon_wallet@2x.png in Resources */,
+				DA57A1271D122F68005442AF /* AccountCreate.storyboard in Resources */,
 				DA9EF4421BC7285D0063DA07 /* icon_export_sdcard@2x.png in Resources */,
 				DA9EF4431BC7285D0063DA07 /* btn_slide_to_confirm@2x.png in Resources */,
 				DA9EF4441BC7285D0063DA07 /* divider.png in Resources */,
 				DA9EF4451BC7285D0063DA07 /* bd_icon_clock@2x.png in Resources */,
-				DABFC9241CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */,
 				DA9EF4471BC7285D0063DA07 /* large-digit-input_selected@2x.png in Resources */,
-				DA9EF4481BC7285D0063DA07 /* BalanceView~ipad.xib in Resources */,
 				DA9EF44A1BC7285D0063DA07 /* btn_add@3x.png in Resources */,
 				DA9EF44B1BC7285D0063DA07 /* btn_collapse_expand_black.png in Resources */,
 				DA9EF44C1BC7285D0063DA07 /* btn_export@2x.png in Resources */,
 				DA9EF44D1BC7285D0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF44E1BC7285D0063DA07 /* 5-bars@2x.png in Resources */,
+				DA57A0FF1D1208BC005442AF /* PopupWheelPickerView.xib in Resources */,
 				DAE4CD411CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EF4501BC7285D0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA9EF4511BC7285D0063DA07 /* btn_unselected@2x.png in Resources */,
+				DA57A1201D122F41005442AF /* Settings.storyboard in Resources */,
 				DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
+				DA57A1181D122EE1005442AF /* ConfirmationSliderView.xib in Resources */,
 				DA9EF4521BC7285D0063DA07 /* icon_transactions.png in Resources */,
 				DA9EF4531BC7285D0063DA07 /* btn_collapse_expand@3x.png in Resources */,
 				DA9EF4541BC7285D0063DA07 /* ico_nav_directory_dark.png in Resources */,
@@ -3835,11 +3552,10 @@
 				DA9EF4581BC7285D0063DA07 /* btn_add_black@2x.png in Resources */,
 				DA9EF4591BC7285D0063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EF45A1BC7285D0063DA07 /* Montserrat-Bold.ttf in Resources */,
-				DABFC96F1CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */,
 				DAE4CCF01CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EF45F1BC7285D0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
 				DAE4CD091CC9D8C700082868 /* info_recipient.html in Resources */,
-				DA9EF4611BC7285D0063DA07 /* PopupPickerView2.xib in Resources */,
+				DA57A1371D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EF4621BC7285D0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF4631BC7285D0063DA07 /* icon_search@2x.png in Resources */,
 				DA9EF4641BC7285D0063DA07 /* icon_account_secure.png in Resources */,
@@ -3849,20 +3565,20 @@
 				DA9EF4681BC7285D0063DA07 /* darken_bottom_table_cell.png in Resources */,
 				DA9EF4691BC7285D0063DA07 /* glidera.html in Resources */,
 				DA9EF46B1BC7285D0063DA07 /* gift_box.png in Resources */,
+				DA57A1331D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */,
 				DA9EF46D1BC7285D0063DA07 /* icon_category_coffee_tea.png in Resources */,
 				DA9EF46E1BC7285D0063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */,
 				DA9EF4701BC7285D0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */,
-				DABFC9421CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */,
-				DA9EF4731BC7285D0063DA07 /* ScanView~iphone.xib in Resources */,
 				DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */,
 				DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DA9EF4771BC7285D0063DA07 /* icon_export_email@2x.png in Resources */,
 				DA9EF4781BC7285D0063DA07 /* btn_close.png in Resources */,
 				DA9EF4791BC7285D0063DA07 /* large-digit-input@2x.png in Resources */,
+				DA57A1441D13145A005442AF /* PopupPickerView.xib in Resources */,
 				DA9EF47B1BC7285D0063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9EF47C1BC7285D0063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EF47D1BC7285D0063DA07 /* Lato-Bold.ttf in Resources */,
@@ -3870,6 +3586,7 @@
 				DA9102091C4A71EA00603D62 /* eyeball.png in Resources */,
 				DA9EF4801BC7285D0063DA07 /* icon_export_printer@2x.png in Resources */,
 				DA9EF4811BC7285D0063DA07 /* icon_directory@2x.png in Resources */,
+				DA57A1231D122F41005442AF /* ConfirmationSliderView.xib in Resources */,
 				DABF60F61C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF4821BC7285D0063DA07 /* BLE_photo@2x.png in Resources */,
 				DA9EF4831BC7285D0063DA07 /* swipe-arrow@2x.png in Resources */,
@@ -3877,12 +3594,12 @@
 				DA9EF4851BC7285D0063DA07 /* BalanceView~iphone.xib in Resources */,
 				DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */,
 				DA9EF4861BC7285D0063DA07 /* icon_more.png in Resources */,
+				DA57A0D71D11E07A005442AF /* Main_iPhone.storyboard in Resources */,
 				DA9EF4871BC7285D0063DA07 /* btn_close@2x.png in Resources */,
 				DA9EF4881BC7285D0063DA07 /* background_launch.png in Resources */,
 				DA9EF4891BC7285D0063DA07 /* icon_directory.png in Resources */,
 				DA9EF48A1BC7285D0063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EF48B1BC7285D0063DA07 /* icon_wallet_dark.png in Resources */,
-				DA9EF48C1BC7285D0063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF48D1BC7285D0063DA07 /* Lato-Black.ttf in Resources */,
 				DAE4CD2C1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EF48F1BC7285D0063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
@@ -3895,7 +3612,7 @@
 				DA9EF4961BC7285D0063DA07 /* icon_category_electronics@2x.png in Resources */,
 				DA9EF4971BC7285D0063DA07 /* DropDownAlertView.xib in Resources */,
 				DA9EF4981BC7285D0063DA07 /* White-Dot@2x.png in Resources */,
-				DABFC97E1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */,
+				DA57A14F1D13165A005442AF /* Plugins.storyboard in Resources */,
 				DA9EF49B1BC7285D0063DA07 /* icon_category_electronics.png in Resources */,
 				DA9EF49C1BC7285D0063DA07 /* gift_box@3x.png in Resources */,
 				DA9EF49E1BC7285D0063DA07 /* icon_transactions@2x.png in Resources */,
@@ -3903,13 +3620,12 @@
 				DA9EF49F1BC7285D0063DA07 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA9EF4A01BC7285D0063DA07 /* 3-bars@2x.png in Resources */,
 				DA9EF4A11BC7285D0063DA07 /* bitcoin_symbol@2x.png in Resources */,
-				DA93DE2B1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */,
 				DA9EF4A31BC7285D0063DA07 /* icon_settings.png in Resources */,
+				DA57A14B1D13152E005442AF /* BusinessDirectory.storyboard in Resources */,
 				DA9EF4A41BC7285D0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF4A51BC7285D0063DA07 /* ribbon@2x.png in Resources */,
 				DA9EF4A61BC7285D0063DA07 /* Warning_icon@2x.png in Resources */,
 				DA93DE3E1CC9CB780063CD52 /* info_footer.html in Resources */,
-				DABFC9601CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF4A81BC7285D0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF4AA1BC7285D0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */,
@@ -3921,15 +3637,16 @@
 				DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8D1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EF6E11BC730400063DA07 /* Airbitz-Develop-Info.plist in Resources */,
+				DA57A13F1D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DA9EF4B11BC7285D0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF4B21BC7285D0063DA07 /* enable-contacts.png in Resources */,
 				DA9EF4B31BC7285D0063DA07 /* btn_add@2x.png in Resources */,
 				DA9EF4B41BC7285D0063DA07 /* icon_logout.png in Resources */,
-				DA9EF4B51BC7285D0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF4B61BC7285D0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD561CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EF4B91BC7285D0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF4BA1BC7285D0063DA07 /* icon_settings_dark.png in Resources */,
+				DA57A1041D120901005442AF /* PasswordVerifyView.xib in Resources */,
 				DA4A13FB1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
 				DA91020F1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
 				DA9EF4BB1BC7285D0063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
@@ -3948,22 +3665,22 @@
 				DA9EF4C91BC7285D0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF4CA1BC7285D0063DA07 /* 0-bars@2x.png in Resources */,
 				DA9EF4CB1BC7285D0063DA07 /* gift_box@2x.png in Resources */,
-				DA57A0251D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EF4CC1BC7285D0063DA07 /* divider@2x.png in Resources */,
 				DA9EF4CD1BC7285D0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF4CE1BC7285D0063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA9EF4CF1BC7285D0063DA07 /* Red-X@2x.png in Resources */,
+				DA57A1471D13145A005442AF /* PopupPickerView2.xib in Resources */,
 				DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */,
 				DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA8F2A6B1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
+				DA57A0DF1D1203CB005442AF /* InfoView~iphone.xib in Resources */,
 				DA9EF4D41BC7285D0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA9EF4D51BC7285D0063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EF4D61BC7285D0063DA07 /* icon_request@2x.png in Resources */,
 				DA9EF4D71BC7285D0063DA07 /* password_dot@2x.png in Resources */,
 				DA9EF4D81BC7285D0063DA07 /* ico_nav_directory_dark@2x.png in Resources */,
+				DA57A1531D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF4D91BC7285D0063DA07 /* AnnotationContentView.xib in Resources */,
 				DA9EF4DA1BC7285D0063DA07 /* icon_location@2x.png in Resources */,
-				DABFC9331CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF4DC1BC7285D0063DA07 /* icon_approved.png in Resources */,
 				DA9EF4DD1BC7285D0063DA07 /* btn_collapse_expand.png in Resources */,
 				DA9EF4DE1BC7285D0063DA07 /* WalletExportQuicken.QIF in Resources */,
@@ -3982,10 +3699,12 @@
 				DA9EF4EB1BC7285D0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA91020C1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
 				DA9EF4EC1BC7285D0063DA07 /* Montserrat-Regular.ttf in Resources */,
+				DA57A0E31D1203E6005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA9EF4ED1BC7285D0063DA07 /* h_seperator@2x.png in Resources */,
 				DA9EF4EE1BC7285D0063DA07 /* icon_send.png in Resources */,
 				DA9EF4EF1BC7285D0063DA07 /* flash-on@2x.png in Resources */,
 				DA9EF4F01BC7285D0063DA07 /* btn_collapse_expand@2x.png in Resources */,
+				DA57A13B1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF4F11BC7285D0063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EF4F21BC7285D0063DA07 /* bd_icon_yelp@2x.png in Resources */,
 				DA9EF4F31BC7285D0063DA07 /* btn_export_white.png in Resources */,
@@ -4007,7 +3726,6 @@
 				DA9EF5011BC7285D0063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EF5031BC7285D0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
-				DABFC9061CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF5081BC7285D0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF5091BC7285D0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF50B1BC7285D0063DA07 /* btn_close_white.png in Resources */,
@@ -4026,22 +3744,18 @@
 				DA9EF5CF1BC729FA0063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EF5D21BC729FA0063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DA9EF5D61BC729FA0063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DABFC9901CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EF5D81BC729FA0063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EF5D91BC729FA0063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EF5DA1BC729FA0063DA07 /* btn_export@3x.png in Resources */,
 				DA9EF5DB1BC729FA0063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EF5DC1BC729FA0063DA07 /* icon_category_restaurants@2x.png in Resources */,
 				DA9EF5DE1BC729FA0063DA07 /* btn_add_black@3x.png in Resources */,
-				DA9EF5DF1BC729FA0063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EF5E01BC729FA0063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DAB5C0291C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
-				DABFC9521CFBC23800104AC1 /* InfoView~iphone.xib in Resources */,
 				DA9EF5E51BC729FA0063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EF5E61BC729FA0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF5E71BC729FA0063DA07 /* write-it-down.png in Resources */,
 				DA9EF5E81BC729FA0063DA07 /* drag_bar@2x.png in Resources */,
-				DA8988CE1D0BF84F00796F3D /* Localizable.strings in Resources */,
 				DA9EF5E91BC729FA0063DA07 /* icon_arrow.png in Resources */,
 				DA9EF5EB1BC729FA0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB9A1BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
@@ -4061,11 +3775,10 @@
 				DA9EF5F81BC729FA0063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF5F91BC729FA0063DA07 /* btn_export_white@2x.png in Resources */,
-				DABFC9161CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */,
 				DA9EF5FB1BC729FA0063DA07 /* icon_logout@3x.png in Resources */,
-				DA9EF5FE1BC729FA0063DA07 /* PopupPickerView.xib in Resources */,
 				DA9EF5FF1BC729FA0063DA07 /* icon_wallet.png in Resources */,
 				DA9EF6001BC729FA0063DA07 /* icon_request.png in Resources */,
+				DA57A0DC1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF6021BC729FA0063DA07 /* icon_category_atm.png in Resources */,
 				DA9EF6031BC729FA0063DA07 /* icon_transactions@3x.png in Resources */,
@@ -4075,22 +3788,24 @@
 				DAE4CCFA1CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EF6071BC729FA0063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DA9EF6081BC729FA0063DA07 /* icon_wallet@2x.png in Resources */,
+				DA57A1281D122F68005442AF /* AccountCreate.storyboard in Resources */,
 				DA9EF6091BC729FA0063DA07 /* icon_export_sdcard@2x.png in Resources */,
 				DA9EF60A1BC729FA0063DA07 /* btn_slide_to_confirm@2x.png in Resources */,
 				DA9EF60B1BC729FA0063DA07 /* divider.png in Resources */,
 				DA9EF60C1BC729FA0063DA07 /* bd_icon_clock@2x.png in Resources */,
-				DABFC9251CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */,
 				DA9EF60E1BC729FA0063DA07 /* large-digit-input_selected@2x.png in Resources */,
-				DA9EF60F1BC729FA0063DA07 /* BalanceView~ipad.xib in Resources */,
 				DA9EF6111BC729FA0063DA07 /* btn_add@3x.png in Resources */,
 				DA9EF6121BC729FA0063DA07 /* btn_collapse_expand_black.png in Resources */,
 				DA9EF6131BC729FA0063DA07 /* btn_export@2x.png in Resources */,
 				DA9EF6141BC729FA0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF6151BC729FA0063DA07 /* 5-bars@2x.png in Resources */,
+				DA57A1001D1208BC005442AF /* PopupWheelPickerView.xib in Resources */,
 				DA9EF6E71BC7304C0063DA07 /* Airbitz-Testnet-Info.plist in Resources */,
 				DAE4CD421CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EF6171BC729FA0063DA07 /* bd_icon_twitter@2x.png in Resources */,
+				DA57A1211D122F41005442AF /* Settings.storyboard in Resources */,
 				DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
+				DA57A1191D122EE1005442AF /* ConfirmationSliderView.xib in Resources */,
 				DA9EF6181BC729FA0063DA07 /* btn_unselected@2x.png in Resources */,
 				DA9EF6191BC729FA0063DA07 /* icon_transactions.png in Resources */,
 				DA8988D11D0BF84F00796F3D /* Airbitz.entitlements in Resources */,
@@ -4103,11 +3818,10 @@
 				DA9EF61F1BC729FA0063DA07 /* btn_add_black@2x.png in Resources */,
 				DA9EF6201BC729FA0063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EF6211BC729FA0063DA07 /* Montserrat-Bold.ttf in Resources */,
-				DABFC9701CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */,
 				DAE4CCF11CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EF6261BC729FA0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
+				DA57A1381D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DAE4CD0A1CC9D8C700082868 /* info_recipient.html in Resources */,
-				DA9EF6281BC729FA0063DA07 /* PopupPickerView2.xib in Resources */,
 				DA9EF6291BC729FA0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF62A1BC729FA0063DA07 /* icon_search@2x.png in Resources */,
 				DA9EF62B1BC729FA0063DA07 /* icon_account_secure.png in Resources */,
@@ -4116,6 +3830,7 @@
 				DA9EF62E1BC729FA0063DA07 /* icon_more@3x.png in Resources */,
 				DA9EF62F1BC729FA0063DA07 /* darken_bottom_table_cell.png in Resources */,
 				DA9EF6301BC729FA0063DA07 /* glidera.html in Resources */,
+				DA57A1341D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */,
 				DA9EF6321BC729FA0063DA07 /* gift_box.png in Resources */,
 				DA9EF6341BC729FA0063DA07 /* icon_category_coffee_tea.png in Resources */,
 				DA9EF6351BC729FA0063DA07 /* icon_account_secure@3x.png in Resources */,
@@ -4123,13 +3838,12 @@
 				DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */,
 				DA9EF6371BC729FA0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */,
-				DABFC9431CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */,
-				DA9EF63A1BC729FA0063DA07 /* ScanView~iphone.xib in Resources */,
 				DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */,
 				DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DA9EF63E1BC729FA0063DA07 /* icon_export_email@2x.png in Resources */,
 				DA9EF63F1BC729FA0063DA07 /* btn_close.png in Resources */,
+				DA57A1451D13145A005442AF /* PopupPickerView.xib in Resources */,
 				DA9EF6401BC729FA0063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EF6421BC729FA0063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9EF6431BC729FA0063DA07 /* LaunchScreen.xib in Resources */,
@@ -4137,6 +3851,7 @@
 				DA91020A1C4A71EA00603D62 /* eyeball.png in Resources */,
 				DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */,
+				DA57A1241D122F41005442AF /* ConfirmationSliderView.xib in Resources */,
 				DABF60F71C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF6481BC729FA0063DA07 /* icon_directory@2x.png in Resources */,
 				DA9EF6491BC729FA0063DA07 /* BLE_photo@2x.png in Resources */,
@@ -4144,13 +3859,13 @@
 				DA9EF64B1BC729FA0063DA07 /* bd_icon_share@2x.png in Resources */,
 				DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */,
 				DA9EF64C1BC729FA0063DA07 /* BalanceView~iphone.xib in Resources */,
+				DA57A0D81D11E07A005442AF /* Main_iPhone.storyboard in Resources */,
 				DA9EF64D1BC729FA0063DA07 /* icon_more.png in Resources */,
 				DA9EF64E1BC729FA0063DA07 /* btn_close@2x.png in Resources */,
 				DA9EF64F1BC729FA0063DA07 /* background_launch.png in Resources */,
 				DA9EF6501BC729FA0063DA07 /* icon_directory.png in Resources */,
 				DA9EF6511BC729FA0063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EF6521BC729FA0063DA07 /* icon_wallet_dark.png in Resources */,
-				DA9EF6531BC729FA0063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF6541BC729FA0063DA07 /* Lato-Black.ttf in Resources */,
 				DAE4CD2D1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EF6561BC729FA0063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
@@ -4162,8 +3877,8 @@
 				DA9EF65C1BC729FA0063DA07 /* Lato-BoldItalic.ttf in Resources */,
 				DA9EF65D1BC729FA0063DA07 /* icon_category_electronics@2x.png in Resources */,
 				DA9EF65E1BC729FA0063DA07 /* DropDownAlertView.xib in Resources */,
+				DA57A1501D13165A005442AF /* Plugins.storyboard in Resources */,
 				DA9EF65F1BC729FA0063DA07 /* White-Dot@2x.png in Resources */,
-				DABFC97F1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */,
 				DA9EF6621BC729FA0063DA07 /* icon_category_electronics.png in Resources */,
 				DA9EF6631BC729FA0063DA07 /* gift_box@3x.png in Resources */,
 				DA10BB9D1BFF90980086AD8B /* background@2x.jpg in Resources */,
@@ -4171,13 +3886,12 @@
 				DA9EF6661BC729FA0063DA07 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA9EF6671BC729FA0063DA07 /* 3-bars@2x.png in Resources */,
 				DA9EF6681BC729FA0063DA07 /* bitcoin_symbol@2x.png in Resources */,
-				DA93DE2C1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */,
+				DA57A14C1D13152E005442AF /* BusinessDirectory.storyboard in Resources */,
 				DA9EF66A1BC729FA0063DA07 /* icon_settings.png in Resources */,
 				DA9EF66B1BC729FA0063DA07 /* bg_app.jpg in Resources */,
 				DA9EF66C1BC729FA0063DA07 /* ribbon@2x.png in Resources */,
 				DA93DE3F1CC9CB780063CD52 /* info_footer.html in Resources */,
 				DA9EF66D1BC729FA0063DA07 /* Warning_icon@2x.png in Resources */,
-				DABFC9611CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */,
 				DA9EF66F1BC729FA0063DA07 /* icon_more@2x.png in Resources */,
 				DA9EF6711BC729FA0063DA07 /* icon_settings_dark@3x.png in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
@@ -4188,15 +3902,16 @@
 				DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA9EF6771BC729FA0063DA07 /* thumb@2x.png in Resources */,
+				DA57A1401D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DA9EF6781BC729FA0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF6791BC729FA0063DA07 /* enable-contacts.png in Resources */,
 				DA9EF67A1BC729FA0063DA07 /* btn_add@2x.png in Resources */,
 				DA9EF67B1BC729FA0063DA07 /* icon_logout.png in Resources */,
-				DA9EF67C1BC729FA0063DA07 /* Plugins.storyboard in Resources */,
 				DA9EF67D1BC729FA0063DA07 /* Images.xcassets in Resources */,
 				DAE4CD571CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EF6801BC729FA0063DA07 /* icon_settings@3x.png in Resources */,
 				DA9EF6811BC729FA0063DA07 /* icon_settings_dark.png in Resources */,
+				DA57A1051D120901005442AF /* PasswordVerifyView.xib in Resources */,
 				DA9102101C4A71EA00603D62 /* eyeball@3x.png in Resources */,
 				DA4A13FC1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
 				DA9EF6821BC729FA0063DA07 /* btn_collapse_expand_black@2x.png in Resources */,
@@ -4215,22 +3930,22 @@
 				DA9EF6901BC729FA0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF6911BC729FA0063DA07 /* 0-bars@2x.png in Resources */,
 				DA9EF6921BC729FA0063DA07 /* gift_box@2x.png in Resources */,
-				DA57A0261D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EF6931BC729FA0063DA07 /* divider@2x.png in Resources */,
 				DA9EF6941BC729FA0063DA07 /* icon_request@3x.png in Resources */,
 				DA9EF6951BC729FA0063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */,
+				DA57A1481D13145A005442AF /* PopupPickerView2.xib in Resources */,
 				DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */,
 				DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA8F2A6C1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
+				DA57A0E01D1203CB005442AF /* InfoView~iphone.xib in Resources */,
 				DA9EF69B1BC729FA0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA9EF69C1BC729FA0063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EF69D1BC729FA0063DA07 /* icon_request@2x.png in Resources */,
 				DA9EF69E1BC729FA0063DA07 /* password_dot@2x.png in Resources */,
 				DA9EF69F1BC729FA0063DA07 /* ico_nav_directory_dark@2x.png in Resources */,
+				DA57A1541D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF6A01BC729FA0063DA07 /* AnnotationContentView.xib in Resources */,
 				DA9EF6A11BC729FA0063DA07 /* icon_location@2x.png in Resources */,
-				DABFC9341CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF6A31BC729FA0063DA07 /* icon_approved.png in Resources */,
 				DA9EF6A41BC729FA0063DA07 /* btn_collapse_expand.png in Resources */,
 				DA9EF6A51BC729FA0063DA07 /* WalletExportQuicken.QIF in Resources */,
@@ -4249,10 +3964,12 @@
 				DA9EF6B21BC729FA0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA91020D1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
 				DA9EF6B31BC729FA0063DA07 /* Montserrat-Regular.ttf in Resources */,
+				DA57A0E41D1203E6005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA9EF6B41BC729FA0063DA07 /* h_seperator@2x.png in Resources */,
 				DA9EF6B51BC729FA0063DA07 /* icon_send.png in Resources */,
 				DA9EF6B61BC729FA0063DA07 /* flash-on@2x.png in Resources */,
 				DA9EF6B71BC729FA0063DA07 /* btn_collapse_expand@2x.png in Resources */,
+				DA57A13C1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF6B81BC729FA0063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EF6B91BC729FA0063DA07 /* bd_icon_yelp@2x.png in Resources */,
 				DA9EF6BA1BC729FA0063DA07 /* btn_export_white.png in Resources */,
@@ -4274,7 +3991,6 @@
 				DA9EF6C81BC729FA0063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EF6CA1BC729FA0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
-				DABFC9071CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */,
 				DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */,
 				DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */,
@@ -4297,17 +4013,14 @@
 				DA9EE4BF1BC61F920063DA07 /* icon_settings_dark@2x.png in Resources */,
 				DA9EE4331BC61F920063DA07 /* bd_sliderbubble@2x.png in Resources */,
 				DA9EE4951BC61F920063DA07 /* icon_category_restaurants@3x.png in Resources */,
-				DABFC98E1CFBCA2E00104AC1 /* PopupWheelPickerView.xib in Resources */,
 				DA9EE4231BC61F920063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EE4841BC61F920063DA07 /* icon_bitcoin_light@2x.png in Resources */,
 				DA9EE4581BC61F920063DA07 /* btn_export@3x.png in Resources */,
 				DA9EE42C1BC61F920063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EE4941BC61F920063DA07 /* icon_category_restaurants@2x.png in Resources */,
 				DA9EE4411BC61F920063DA07 /* btn_add_black@3x.png in Resources */,
-				DA9ED7D61BC61E680063DA07 /* ButtonSelectorView2.xib in Resources */,
 				DA9EE54E1BC61F930063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DA555B381CC9E36F0000CBE4 /* Airbitz-Info.plist in Resources */,
-				DABFC9501CFBC23800104AC1 /* InfoView~iphone.xib in Resources */,
 				DA9EE4EF1BC61F920063DA07 /* Lato-LightItalic.ttf in Resources */,
 				DA9EE44B1BC61F920063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EE4E11BC61F920063DA07 /* write-it-down.png in Resources */,
@@ -4332,15 +4045,15 @@
 				DA9EE46D1BC61F920063DA07 /* flash-off@2x.png in Resources */,
 				DA9EE48F1BC61F920063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DA9EE45B1BC61F920063DA07 /* btn_export_white@2x.png in Resources */,
-				DABFC9141CFBC1BA00104AC1 /* BusinessDirectory.storyboard in Resources */,
+				DA57A0DA1D11E0AC005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4A71BC61F920063DA07 /* icon_logout@3x.png in Resources */,
-				DA9EE4181BC61F920063DA07 /* PopupPickerView.xib in Resources */,
 				DA9EE4C81BC61F920063DA07 /* icon_wallet.png in Resources */,
 				DA9EE4AE1BC61F920063DA07 /* icon_request.png in Resources */,
 				DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EE4871BC61F920063DA07 /* icon_category_atm.png in Resources */,
 				DA9EE4C41BC61F920063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EE4981BC61F920063DA07 /* icon_category_shopping@3x.png in Resources */,
+				DA57A1261D122F68005442AF /* AccountCreate.storyboard in Resources */,
 				DA9EE49B1BC61F920063DA07 /* icon_directory@3x.png in Resources */,
 				DAE4CCF81CC9D8A000082868 /* info_export_wallet_options.html in Resources */,
 				DA9EE4E21BC61F920063DA07 /* BitcoinReceived.mp3 in Resources */,
@@ -4349,14 +4062,15 @@
 				DA9EE4611BC61F920063DA07 /* btn_slide_to_confirm@2x.png in Resources */,
 				DA9EE4671BC61F920063DA07 /* divider.png in Resources */,
 				DA9EE42A1BC61F920063DA07 /* bd_icon_clock@2x.png in Resources */,
-				DABFC9231CFBC1EA00104AC1 /* PasswordVerifyView.xib in Resources */,
 				DA9EE4D21BC61F920063DA07 /* large-digit-input_selected@2x.png in Resources */,
-				DA9ED7D01BC61E680063DA07 /* BalanceView~ipad.xib in Resources */,
 				DA9EE43C1BC61F920063DA07 /* btn_add@3x.png in Resources */,
+				DA57A0FE1D1208BC005442AF /* PopupWheelPickerView.xib in Resources */,
 				DA9EE4511BC61F920063DA07 /* btn_collapse_expand_black.png in Resources */,
 				DA9EE4571BC61F920063DA07 /* btn_export@2x.png in Resources */,
 				DA9EE4831BC61F920063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
+				DA57A11F1D122F41005442AF /* Settings.storyboard in Resources */,
 				DA9EE4271BC61F920063DA07 /* 5-bars@2x.png in Resources */,
+				DA57A1171D122EE1005442AF /* ConfirmationSliderView.xib in Resources */,
 				DAE4CD401CC9D91200082868 /* info_transaction_details.html in Resources */,
 				DA9EE4301BC61F920063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA91020E1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
@@ -4371,17 +4085,17 @@
 				DA9EE4E81BC61F920063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EE4401BC61F920063DA07 /* btn_add_black@2x.png in Resources */,
 				DA9EE4241BC61F920063DA07 /* 2-bars@2x.png in Resources */,
+				DA57A1361D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EE4F11BC61F920063DA07 /* Montserrat-Bold.ttf in Resources */,
-				DABFC96E1CFBC31A00104AC1 /* WalletMakerView~iphone.xib in Resources */,
 				DAE4CCEF1CC9D89900082868 /* info_export_wallet.html in Resources */,
 				DA9EE4E31BC61F920063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
 				DAE4CD081CC9D8C700082868 /* info_recipient.html in Resources */,
-				DA9EE41A1BC61F920063DA07 /* PopupPickerView2.xib in Resources */,
 				DA9EE49E1BC61F920063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EE4B41BC61F920063DA07 /* icon_search@2x.png in Resources */,
 				DA9EE47C1BC61F920063DA07 /* icon_account_secure.png in Resources */,
 				DA9EE42D1BC61F920063DA07 /* bd_icon_location@2x.png in Resources */,
 				DA9EE5041BC61F920063DA07 /* WalletExportPDF.pdf in Resources */,
+				DA57A1321D122F8D005442AF /* WalletMakerView~iphone.xib in Resources */,
 				DA9EE4AB1BC61F920063DA07 /* icon_more@3x.png in Resources */,
 				DA9EE4651BC61F920063DA07 /* darken_bottom_table_cell.png in Resources */,
 				DA9EE5061BC61F920063DA07 /* glidera.html in Resources */,
@@ -4392,10 +4106,9 @@
 				DA9EE46A1BC61F920063DA07 /* emboss_down@2x.png in Resources */,
 				DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EE4C61BC61F920063DA07 /* icon_USD_dark@2x.png in Resources */,
-				DABFC9411CFBC21F00104AC1 /* SlideoutView~iphone.xib in Resources */,
 				DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
-				DA9EE50C1BC61F920063DA07 /* ScanView~iphone.xib in Resources */,
+				DA57A1431D13145A005442AF /* PopupPickerView.xib in Resources */,
 				DA9EE4881BC61F920063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EE4701BC61F920063DA07 /* flash_on@2x.png in Resources */,
 				DA9EE49F1BC61F920063DA07 /* icon_export_email@2x.png in Resources */,
@@ -4403,6 +4116,7 @@
 				DA9EE4D11BC61F920063DA07 /* large-digit-input@2x.png in Resources */,
 				DA9EE4AD1BC61F920063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */,
+				DA57A1221D122F41005442AF /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4E91BC61F920063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EE4851BC61F920063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EE4A11BC61F920063DA07 /* icon_export_printer@2x.png in Resources */,
@@ -4410,6 +4124,7 @@
 				DA9EE4381BC61F920063DA07 /* BLE_photo@2x.png in Resources */,
 				DA9EE4DC1BC61F920063DA07 /* swipe-arrow@2x.png in Resources */,
 				DA9EE42F1BC61F920063DA07 /* bd_icon_share@2x.png in Resources */,
+				DA57A0D61D11E07A005442AF /* Main_iPhone.storyboard in Resources */,
 				DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */,
 				DABA012C1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
 				DA9ED7D11BC61E680063DA07 /* BalanceView~iphone.xib in Resources */,
@@ -4420,7 +4135,6 @@
 				DA9EE4991BC61F920063DA07 /* icon_directory.png in Resources */,
 				DA9EE4931BC61F920063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EE4CB1BC61F920063DA07 /* icon_wallet_dark.png in Resources */,
-				DA9EE55F1BC61F930063DA07 /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EE4E71BC61F920063DA07 /* Lato-Black.ttf in Resources */,
 				DAE4CD2B1CC9D8F900082868 /* info_send_confirmation.html in Resources */,
 				DA9EE47A1BC61F920063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
@@ -4428,25 +4142,24 @@
 				DA9EE4371BC61F920063DA07 /* BLE_Logo@2x.png in Resources */,
 				DA9EE45C1BC61F920063DA07 /* btn_export_white@3x.png in Resources */,
 				DA9EE42B1BC61F920063DA07 /* bd_icon_facebook@2x.png in Resources */,
+				DA57A14E1D13165A005442AF /* Plugins.storyboard in Resources */,
 				DA93DE381CC9CB740063CD52 /* info.html in Resources */,
 				DA9EE4EA1BC61F920063DA07 /* Lato-BoldItalic.ttf in Resources */,
 				DA9EE48E1BC61F920063DA07 /* icon_category_electronics@2x.png in Resources */,
 				DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */,
 				DA9EE4E01BC61F920063DA07 /* White-Dot@2x.png in Resources */,
-				DABFC97D1CFBC3A300104AC1 /* AccountCreate.storyboard in Resources */,
 				DA9EE48D1BC61F920063DA07 /* icon_category_electronics.png in Resources */,
 				DA9EE4731BC61F920063DA07 /* gift_box@3x.png in Resources */,
 				DA10BB9B1BFF90980086AD8B /* background@2x.jpg in Resources */,
+				DA57A14A1D13152E005442AF /* BusinessDirectory.storyboard in Resources */,
 				DA9EE4C31BC61F920063DA07 /* icon_transactions@2x.png in Resources */,
 				DA9EE4CF1BC61F920063DA07 /* img_collapseExpandBlueDown@2x.png in Resources */,
 				DA9EE4251BC61F920063DA07 /* 3-bars@2x.png in Resources */,
 				DA9EE4341BC61F920063DA07 /* bitcoin_symbol@2x.png in Resources */,
-				DA93DE2A1CC9CB530063CD52 /* Main_iPhone.storyboard in Resources */,
 				DA9EE4BA1BC61F920063DA07 /* icon_settings.png in Resources */,
 				DA9EE5081BC61F920063DA07 /* bg_app.jpg in Resources */,
 				DA9EE4DB1BC61F920063DA07 /* ribbon@2x.png in Resources */,
 				DA9EE4DF1BC61F920063DA07 /* Warning_icon@2x.png in Resources */,
-				DABFC95F1CFBC2F600104AC1 /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4AA1BC61F920063DA07 /* icon_more@2x.png in Resources */,
 				DAC7D2D91CCCBE6000608219 /* email_template_simple.html in Resources */,
 				DA9EE4C01BC61F920063DA07 /* icon_settings_dark@3x.png in Resources */,
@@ -4454,15 +4167,16 @@
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,
 				DA9EE46F1BC61F920063DA07 /* flash_off@2x.png in Resources */,
 				DA9EE4CA1BC61F920063DA07 /* icon_wallet@3x.png in Resources */,
+				DA57A13E1D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DAE4CD4E1CC9D92600082868 /* info_wallets.html in Resources */,
 				DA9EE4DD1BC61F920063DA07 /* thumb@2x.png in Resources */,
 				DA9EEC481BC6332F0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EE46C1BC61F920063DA07 /* enable-contacts.png in Resources */,
 				DA9EE43B1BC61F920063DA07 /* btn_add@2x.png in Resources */,
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
-				DA9EE4151BC61F920063DA07 /* Plugins.storyboard in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
+				DA57A1031D120901005442AF /* PasswordVerifyView.xib in Resources */,
 				DAE4CD551CC9D93000082868 /* transaction_details.html in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
 				DA4A13FA1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
@@ -4482,18 +4196,19 @@
 				DA9EE4EC1BC61F920063DA07 /* Lato-HairlineItalic.ttf in Resources */,
 				DA9EE4B61BC61F920063DA07 /* icon_send@2x.png in Resources */,
 				DA9EE4221BC61F920063DA07 /* 0-bars@2x.png in Resources */,
-				DA57A0241D0E7C2F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
 				DA9EE4721BC61F920063DA07 /* gift_box@2x.png in Resources */,
 				DA9EE4681BC61F920063DA07 /* divider@2x.png in Resources */,
 				DA9EE4B01BC61F920063DA07 /* icon_request@3x.png in Resources */,
+				DA57A1461D13145A005442AF /* PopupPickerView2.xib in Resources */,
 				DA9EE4B31BC61F920063DA07 /* icon_rightArrow@2x.png in Resources */,
 				DA91020B1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
+				DA57A0DE1D1203CB005442AF /* InfoView~iphone.xib in Resources */,
 				DA9EE4DA1BC61F920063DA07 /* Red-X@2x.png in Resources */,
 				DA9EE43A1BC61F920063DA07 /* btn_add.png in Resources */,
 				DA9EE4351BC61F920063DA07 /* bitcoin_symbol@3x.png in Resources */,
-				DA8F2A6A1D07E1F00008F7E7 /* Settings.storyboard in Resources */,
 				DA9EE4DE1BC61F920063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
 				DA3C7A8C1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
+				DA57A1521D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EE4CC1BC61F920063DA07 /* icon_wallet_dark@2x.png in Resources */,
 				DA9EE4AF1BC61F920063DA07 /* icon_request@2x.png in Resources */,
 				DA9EE4D61BC61F920063DA07 /* password_dot@2x.png in Resources */,
@@ -4501,7 +4216,6 @@
 				DA9EE0C41BC61F920063DA07 /* AnnotationContentView.xib in Resources */,
 				DABA01281C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
 				DA9EE4A41BC61F920063DA07 /* icon_location@2x.png in Resources */,
-				DABFC9321CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EE4801BC61F920063DA07 /* icon_approved.png in Resources */,
 				DA9EE44D1BC61F920063DA07 /* btn_collapse_expand.png in Resources */,
 				DA9EE5051BC61F920063DA07 /* WalletExportQuicken.QIF in Resources */,
@@ -4511,15 +4225,16 @@
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DAE4CD471CC9D91C00082868 /* info_transactions.html in Resources */,
-				DA8988A61D0BF7C500796F3D /* Localizable.strings in Resources */,
 				DA9EE49D1BC61F920063DA07 /* icon_exchange.png in Resources */,
 				DA9ED7EB1BC61E680063DA07 /* San Diego.gpx in Resources */,
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
 				DA9EE4971BC61F920063DA07 /* icon_category_shopping@2x.png in Resources */,
+				DA57A0E21D1203E6005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA9EE43D1BC61F920063DA07 /* btn_add@4x.png in Resources */,
 				DA9EE42E1BC61F920063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA9EE4F21BC61F920063DA07 /* Montserrat-Regular.ttf in Resources */,
 				DA9EE4771BC61F920063DA07 /* h_seperator@2x.png in Resources */,
+				DA57A13A1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EE4B51BC61F920063DA07 /* icon_send.png in Resources */,
 				DA9EE46E1BC61F920063DA07 /* flash-on@2x.png in Resources */,
 				DA9EE44E1BC61F920063DA07 /* btn_collapse_expand@2x.png in Resources */,
@@ -4541,7 +4256,6 @@
 				DA9EE4311BC61F920063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EE4B21BC61F920063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
-				DABFC9051CFBC16700104AC1 /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4EB1BC61F920063DA07 /* Lato-Hairline.ttf in Resources */,
 				DA9EE4D51BC61F920063DA07 /* logo_large@2x.png in Resources */,
 				DA9EE4491BC61F920063DA07 /* btn_close_white.png in Resources */,
@@ -4553,7 +4267,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8988431D0BF5D500796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4562,7 +4275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8988061D0BF35B00796F3D /* InfoPlist.strings in Resources */,
-				DA89881A1D0BF50200796F3D /* InfoPlist.strings in Resources */,
 				DA89880D1D0BF40300796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4909,7 +4621,6 @@
 				DA9EF3C51BC7285D0063DA07 /* main.m in Sources */,
 				DA9EF3C61BC7285D0063DA07 /* NotificationChecker.m in Sources */,
 				DA9EF3C71BC7285D0063DA07 /* CJSONScanner.m in Sources */,
-				DA9EF3C81BC7285D0063DA07 /* APPINView.m in Sources */,
 				DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */,
 				DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */,
@@ -5048,7 +4759,6 @@
 				DA9EF58C1BC729FA0063DA07 /* main.m in Sources */,
 				DA9EF58D1BC729FA0063DA07 /* NotificationChecker.m in Sources */,
 				DA9EF58E1BC729FA0063DA07 /* CJSONScanner.m in Sources */,
-				DA9EF58F1BC729FA0063DA07 /* APPINView.m in Sources */,
 				DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */,
 				DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */,
@@ -5187,7 +4897,6 @@
 				DAD1AD7C1BC6065100C648C4 /* main.m in Sources */,
 				DA9ED7E71BC61E680063DA07 /* NotificationChecker.m in Sources */,
 				DA9EE5331BC61F930063DA07 /* CJSONScanner.m in Sources */,
-				DA9EE40A1BC61F920063DA07 /* APPINView.m in Sources */,
 				DA9EE5531BC61F930063DA07 /* CommonCell.m in Sources */,
 				DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */,
 				DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */,
@@ -5263,120 +4972,8 @@
 			children = (
 				DA3624FD1CCBFE5400D674EF /* Base */,
 				DA8F2BC81D0946EE0008F7E7 /* en */,
-				DA8986DA1D0BE9CA00796F3D /* fr */,
-				DA8986FA1D0BEA0400796F3D /* hi */,
-				DA8987191D0BEC2100796F3D /* es-MX */,
-				DA8987381D0BEC5600796F3D /* pt-BR */,
-				DA8987571D0BEC6800796F3D /* zh-Hans */,
-				DA8987EB1D0BEEE200796F3D /* de */,
 			);
 			name = sms_template.txt;
-			sourceTree = "<group>";
-		};
-		DA8987F01D0BF2D100796F3D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8987EF1D0BF2D100796F3D /* es-MX */,
-				DA89881F1D0BF5CC00796F3D /* hi */,
-				DA8988461D0BF61A00796F3D /* pt-BR */,
-				DA8988651D0BF66E00796F3D /* zh-Hans */,
-				DA8988841D0BF70B00796F3D /* de */,
-				DA8988A31D0BF7C300796F3D /* fr */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA8987FE1D0BF35A00796F3D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8987FD1D0BF35A00796F3D /* es-MX */,
-				DA8988251D0BF5CE00796F3D /* hi */,
-				DA89884C1D0BF61B00796F3D /* pt-BR */,
-				DA89886B1D0BF66F00796F3D /* zh-Hans */,
-				DA89888A1D0BF70D00796F3D /* de */,
-				DA8988A91D0BF7C500796F3D /* fr */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA89881C1D0BF50200796F3D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA89881B1D0BF50200796F3D /* es-MX */,
-				DA89882C1D0BF5D000796F3D /* hi */,
-				DA8988531D0BF61D00796F3D /* pt-BR */,
-				DA8988721D0BF67100796F3D /* zh-Hans */,
-				DA8988911D0BF70E00796F3D /* de */,
-				DA8988B01D0BF7C700796F3D /* fr */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA8988311D0BF5D100796F3D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8988301D0BF5D100796F3D /* hi */,
-				DA8988541D0BF61D00796F3D /* pt-BR */,
-				DA8988731D0BF67100796F3D /* zh-Hans */,
-				DA8988921D0BF70F00796F3D /* de */,
-				DA8988B11D0BF7C800796F3D /* fr */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA8988451D0BF5D500796F3D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8988441D0BF5D500796F3D /* hi */,
-				DA8988641D0BF62100796F3D /* pt-BR */,
-				DA8988831D0BF67500796F3D /* zh-Hans */,
-				DA8988A21D0BF71300796F3D /* de */,
-				DA8988C11D0BF7CB00796F3D /* fr */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DA8988A81D0BF7C500796F3D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8988A71D0BF7C500796F3D /* fr */,
-				DA8988C21D0BF84F00796F3D /* de */,
-				DA8988C31D0BF84F00796F3D /* zh-Hans */,
-				DA8988C41D0BF84F00796F3D /* pt-BR */,
-				DA8988C51D0BF84F00796F3D /* hi */,
-				DA8988C61D0BF84F00796F3D /* es-MX */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		DA8F2A6E1D07E1F00008F7E7 /* Settings.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA8F2A6D1D07E1F00008F7E7 /* Base */,
-				DA8F2BB01D0946E90008F7E7 /* en */,
-				DA8986C01D0BE9C800796F3D /* fr */,
-				DA8986E01D0BEA0100796F3D /* hi */,
-				DA8987001D0BEC1F00796F3D /* es-MX */,
-				DA89871F1D0BEC5300796F3D /* pt-BR */,
-				DA89873E1D0BEC6600796F3D /* zh-Hans */,
-				DA8987D31D0BEED700796F3D /* de */,
-			);
-			name = Settings.storyboard;
-			sourceTree = "<group>";
-		};
-		DA93DE2E1CC9CB530063CD52 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA93DE2D1CC9CB530063CD52 /* Base */,
-				DA8F2BB31D0946E90008F7E7 /* en */,
-				DA8986C31D0BE9C800796F3D /* fr */,
-				DA8986E31D0BEA0200796F3D /* hi */,
-				DA8987031D0BEC1F00796F3D /* es-MX */,
-				DA8987221D0BEC5300796F3D /* pt-BR */,
-				DA8987411D0BEC6600796F3D /* zh-Hans */,
-				DA8987D61D0BEED700796F3D /* de */,
-			);
-			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		DA93DE371CC9CB710063CD52 /* email_template.html */ = {
@@ -5384,12 +4981,6 @@
 			children = (
 				DA93DE361CC9CB710063CD52 /* Base */,
 				DA8F2BB71D0946E90008F7E7 /* en */,
-				DA8986C81D0BE9C900796F3D /* fr */,
-				DA8986E81D0BEA0200796F3D /* hi */,
-				DA8987071D0BEC2000796F3D /* es-MX */,
-				DA8987261D0BEC5400796F3D /* pt-BR */,
-				DA8987451D0BEC6600796F3D /* zh-Hans */,
-				DA8987DA1D0BEED700796F3D /* de */,
 			);
 			name = email_template.html;
 			sourceTree = "<group>";
@@ -5399,12 +4990,6 @@
 			children = (
 				DA93DE3B1CC9CB740063CD52 /* Base */,
 				DA8F2BB91D0946E90008F7E7 /* en */,
-				DA8986CA1D0BE9C900796F3D /* fr */,
-				DA8986EA1D0BEA0200796F3D /* hi */,
-				DA8987091D0BEC2000796F3D /* es-MX */,
-				DA8987281D0BEC5400796F3D /* pt-BR */,
-				DA8987471D0BEC6700796F3D /* zh-Hans */,
-				DA8987DB1D0BEEE100796F3D /* de */,
 			);
 			name = info.html;
 			sourceTree = "<group>";
@@ -5414,12 +4999,6 @@
 			children = (
 				DA93DE401CC9CB780063CD52 /* Base */,
 				DA8F2BBA1D0946E90008F7E7 /* en */,
-				DA8986CB1D0BE9C900796F3D /* fr */,
-				DA8986EB1D0BEA0200796F3D /* hi */,
-				DA89870A1D0BEC2000796F3D /* es-MX */,
-				DA8987291D0BEC5400796F3D /* pt-BR */,
-				DA8987481D0BEC6700796F3D /* zh-Hans */,
-				DA8987DC1D0BEEE100796F3D /* de */,
 			);
 			name = info_footer.html;
 			sourceTree = "<group>";
@@ -5429,164 +5008,8 @@
 			children = (
 				DA5549AB1CE7A7EF00CEF104 /* Base */,
 				DA8F2BA61D0946E80008F7E7 /* en */,
-				DA8988041D0BF35B00796F3D /* es-MX */,
-				DA89882B1D0BF5CF00796F3D /* hi */,
-				DA8988521D0BF61C00796F3D /* pt-BR */,
-				DA8988711D0BF67000796F3D /* zh-Hans */,
-				DA8988901D0BF70E00796F3D /* de */,
-				DA8988AF1D0BF7C700796F3D /* fr */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DABFC9091CFBC16700104AC1 /* ConfirmationSliderView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9081CFBC16700104AC1 /* Base */,
-				DA8F2BAF1D0946E80008F7E7 /* en */,
-				DA8986BF1D0BE9C800796F3D /* fr */,
-				DA8986DF1D0BEA0100796F3D /* hi */,
-				DA8986FF1D0BEC1F00796F3D /* es-MX */,
-				DA89871E1D0BEC5300796F3D /* pt-BR */,
-				DA89873D1D0BEC6600796F3D /* zh-Hans */,
-				DA8987D21D0BEED700796F3D /* de */,
-			);
-			name = ConfirmationSliderView.xib;
-			sourceTree = "<group>";
-		};
-		DABFC9181CFBC1BA00104AC1 /* BusinessDirectory.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9171CFBC1BA00104AC1 /* Base */,
-				DA8F2BA71D0946E80008F7E7 /* en */,
-				DA8986BB1D0BE9C700796F3D /* fr */,
-				DA8986DB1D0BEA0100796F3D /* hi */,
-				DA8986FB1D0BEC1F00796F3D /* es-MX */,
-				DA89871A1D0BEC5300796F3D /* pt-BR */,
-				DA8987391D0BEC6500796F3D /* zh-Hans */,
-				DA8987CE1D0BEED600796F3D /* de */,
-			);
-			name = BusinessDirectory.storyboard;
-			sourceTree = "<group>";
-		};
-		DABFC9271CFBC1EA00104AC1 /* PasswordVerifyView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9261CFBC1EA00104AC1 /* Base */,
-				DA8F2BAC1D0946E80008F7E7 /* en */,
-				DA8986BC1D0BE9C800796F3D /* fr */,
-				DA8986DC1D0BEA0100796F3D /* hi */,
-				DA8986FC1D0BEC1F00796F3D /* es-MX */,
-				DA89871B1D0BEC5300796F3D /* pt-BR */,
-				DA89873A1D0BEC6500796F3D /* zh-Hans */,
-				DA8987CF1D0BEED600796F3D /* de */,
-			);
-			name = PasswordVerifyView.xib;
-			sourceTree = "<group>";
-		};
-		DABFC9361CFBC1FC00104AC1 /* QuestionAnswerView~iphone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9351CFBC1FC00104AC1 /* Base */,
-				DA8F2BAD1D0946E80008F7E7 /* en */,
-				DA8986BD1D0BE9C800796F3D /* fr */,
-				DA8986DD1D0BEA0100796F3D /* hi */,
-				DA8986FD1D0BEC1F00796F3D /* es-MX */,
-				DA89871C1D0BEC5300796F3D /* pt-BR */,
-				DA89873B1D0BEC6500796F3D /* zh-Hans */,
-				DA8987D01D0BEED600796F3D /* de */,
-			);
-			name = "QuestionAnswerView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DABFC9451CFBC21F00104AC1 /* SlideoutView~iphone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9441CFBC21F00104AC1 /* Base */,
-				DA8F2BB61D0946E90008F7E7 /* en */,
-				DA8986C61D0BE9C800796F3D /* fr */,
-				DA8986E61D0BEA0200796F3D /* hi */,
-				DA8987061D0BEC2000796F3D /* es-MX */,
-				DA8987251D0BEC5400796F3D /* pt-BR */,
-				DA8987441D0BEC6600796F3D /* zh-Hans */,
-				DA8987D91D0BEED700796F3D /* de */,
-			);
-			name = "SlideoutView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DABFC9541CFBC23800104AC1 /* InfoView~iphone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9531CFBC23800104AC1 /* Base */,
-				DA8F2BB51D0946E90008F7E7 /* en */,
-				DA8986C51D0BE9C800796F3D /* fr */,
-				DA8986E51D0BEA0200796F3D /* hi */,
-				DA8987051D0BEC2000796F3D /* es-MX */,
-				DA8987241D0BEC5400796F3D /* pt-BR */,
-				DA8987431D0BEC6600796F3D /* zh-Hans */,
-				DA8987D81D0BEED700796F3D /* de */,
-			);
-			name = "InfoView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DABFC9631CFBC2F600104AC1 /* CalculatorView~iphone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9621CFBC2F600104AC1 /* Base */,
-				DA8F2BB41D0946E90008F7E7 /* en */,
-				DA8986C41D0BE9C800796F3D /* fr */,
-				DA8986E41D0BEA0200796F3D /* hi */,
-				DA8987041D0BEC1F00796F3D /* es-MX */,
-				DA8987231D0BEC5400796F3D /* pt-BR */,
-				DA8987421D0BEC6600796F3D /* zh-Hans */,
-				DA8987D71D0BEED700796F3D /* de */,
-			);
-			name = "CalculatorView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DABFC9721CFBC31A00104AC1 /* WalletMakerView~iphone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9711CFBC31A00104AC1 /* Base */,
-				DA8F2BB21D0946E90008F7E7 /* en */,
-				DA8986C21D0BE9C800796F3D /* fr */,
-				DA8986E21D0BEA0200796F3D /* hi */,
-				DA8987021D0BEC1F00796F3D /* es-MX */,
-				DA8987211D0BEC5300796F3D /* pt-BR */,
-				DA8987401D0BEC6600796F3D /* zh-Hans */,
-				DA8987D51D0BEED700796F3D /* de */,
-			);
-			name = "WalletMakerView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DABFC9811CFBC3A300104AC1 /* AccountCreate.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9801CFBC3A300104AC1 /* Base */,
-				DA8F2BB11D0946E90008F7E7 /* en */,
-				DA8986C11D0BE9C800796F3D /* fr */,
-				DA8986E11D0BEA0200796F3D /* hi */,
-				DA8987011D0BEC1F00796F3D /* es-MX */,
-				DA8987201D0BEC5300796F3D /* pt-BR */,
-				DA89873F1D0BEC6600796F3D /* zh-Hans */,
-				DA8987D41D0BEED700796F3D /* de */,
-			);
-			name = AccountCreate.storyboard;
-			sourceTree = "<group>";
-		};
-		DABFC9921CFBCA2E00104AC1 /* PopupWheelPickerView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DABFC9911CFBCA2E00104AC1 /* Base */,
-				DA8F2BAE1D0946E80008F7E7 /* en */,
-				DA8986BE1D0BE9C800796F3D /* fr */,
-				DA8986DE1D0BEA0100796F3D /* hi */,
-				DA8986FE1D0BEC1F00796F3D /* es-MX */,
-				DA89871D1D0BEC5300796F3D /* pt-BR */,
-				DA89873C1D0BEC6600796F3D /* zh-Hans */,
-				DA8987D11D0BEED700796F3D /* de */,
-			);
-			name = PopupWheelPickerView.xib;
 			sourceTree = "<group>";
 		};
 		DAC7D2D71CCCBE6000608219 /* email_template_simple.html */ = {
@@ -5594,11 +5017,6 @@
 			children = (
 				DAC7D2D81CCCBE6000608219 /* Base */,
 				DA8F2BB81D0946E90008F7E7 /* en */,
-				DA8986C91D0BE9C900796F3D /* fr */,
-				DA8986E91D0BEA0200796F3D /* hi */,
-				DA8987081D0BEC2000796F3D /* es-MX */,
-				DA8987271D0BEC5400796F3D /* pt-BR */,
-				DA8987461D0BEC6700796F3D /* zh-Hans */,
 			);
 			name = email_template_simple.html;
 			sourceTree = "<group>";
@@ -5607,12 +5025,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				DAE4CCF21CC9D89900082868 /* Base */,
-				DA8986CC1D0BE9C900796F3D /* fr */,
-				DA8986EC1D0BEA0200796F3D /* hi */,
-				DA89870B1D0BEC2000796F3D /* es-MX */,
-				DA89872A1D0BEC5400796F3D /* pt-BR */,
-				DA8987491D0BEC6700796F3D /* zh-Hans */,
-				DA8987DD1D0BEEE100796F3D /* de */,
 			);
 			name = info_export_wallet.html;
 			sourceTree = "<group>";
@@ -5622,12 +5034,6 @@
 			children = (
 				DAE4CCFB1CC9D8A000082868 /* Base */,
 				DA8F2BBB1D0946ED0008F7E7 /* en */,
-				DA8986CD1D0BE9C900796F3D /* fr */,
-				DA8986ED1D0BEA0300796F3D /* hi */,
-				DA89870C1D0BEC2000796F3D /* es-MX */,
-				DA89872B1D0BEC5400796F3D /* pt-BR */,
-				DA89874A1D0BEC6700796F3D /* zh-Hans */,
-				DA8987DE1D0BEEE100796F3D /* de */,
 			);
 			name = info_export_wallet_options.html;
 			sourceTree = "<group>";
@@ -5637,12 +5043,6 @@
 			children = (
 				DAE4CD041CC9D8BB00082868 /* Base */,
 				DA8F2BBC1D0946ED0008F7E7 /* en */,
-				DA8986CE1D0BE9C900796F3D /* fr */,
-				DA8986EE1D0BEA0300796F3D /* hi */,
-				DA89870D1D0BEC2000796F3D /* es-MX */,
-				DA89872C1D0BEC5400796F3D /* pt-BR */,
-				DA89874B1D0BEC6700796F3D /* zh-Hans */,
-				DA8987DF1D0BEEE100796F3D /* de */,
 			);
 			name = info_insufficient_funds.html;
 			sourceTree = "<group>";
@@ -5652,12 +5052,6 @@
 			children = (
 				DAE4CD0B1CC9D8C700082868 /* Base */,
 				DA8F2BBD1D0946ED0008F7E7 /* en */,
-				DA8986CF1D0BE9C900796F3D /* fr */,
-				DA8986EF1D0BEA0300796F3D /* hi */,
-				DA89870E1D0BEC2000796F3D /* es-MX */,
-				DA89872D1D0BEC5400796F3D /* pt-BR */,
-				DA89874C1D0BEC6700796F3D /* zh-Hans */,
-				DA8987E01D0BEEE100796F3D /* de */,
 			);
 			name = info_recipient.html;
 			sourceTree = "<group>";
@@ -5667,12 +5061,6 @@
 			children = (
 				DAE4CD121CC9D8D100082868 /* Base */,
 				DA8F2BBE1D0946ED0008F7E7 /* en */,
-				DA8986D01D0BE9C900796F3D /* fr */,
-				DA8986F01D0BEA0300796F3D /* hi */,
-				DA89870F1D0BEC2000796F3D /* es-MX */,
-				DA89872E1D0BEC5500796F3D /* pt-BR */,
-				DA89874D1D0BEC6700796F3D /* zh-Hans */,
-				DA8987E11D0BEEE100796F3D /* de */,
 			);
 			name = info_request.html;
 			sourceTree = "<group>";
@@ -5682,12 +5070,6 @@
 			children = (
 				DAE4CD201CC9D8E700082868 /* Base */,
 				DA8F2BBF1D0946ED0008F7E7 /* en */,
-				DA8986D11D0BE9C900796F3D /* fr */,
-				DA8986F11D0BEA0300796F3D /* hi */,
-				DA8987101D0BEC2000796F3D /* es-MX */,
-				DA89872F1D0BEC5500796F3D /* pt-BR */,
-				DA89874E1D0BEC6700796F3D /* zh-Hans */,
-				DA8987E21D0BEEE100796F3D /* de */,
 			);
 			name = info_send.html;
 			sourceTree = "<group>";
@@ -5697,12 +5079,6 @@
 			children = (
 				DAE4CD271CC9D8F100082868 /* Base */,
 				DA8F2BC01D0946ED0008F7E7 /* en */,
-				DA8986D21D0BE9C900796F3D /* fr */,
-				DA8986F21D0BEA0300796F3D /* hi */,
-				DA8987111D0BEC2000796F3D /* es-MX */,
-				DA8987301D0BEC5500796F3D /* pt-BR */,
-				DA89874F1D0BEC6700796F3D /* zh-Hans */,
-				DA8987E31D0BEEE100796F3D /* de */,
 			);
 			name = info_disclaimer.html;
 			sourceTree = "<group>";
@@ -5712,12 +5088,6 @@
 			children = (
 				DAE4CD2E1CC9D8F900082868 /* Base */,
 				DA8F2BC11D0946ED0008F7E7 /* en */,
-				DA8986D31D0BE9CA00796F3D /* fr */,
-				DA8986F31D0BEA0300796F3D /* hi */,
-				DA8987121D0BEC2000796F3D /* es-MX */,
-				DA8987311D0BEC5500796F3D /* pt-BR */,
-				DA8987501D0BEC6800796F3D /* zh-Hans */,
-				DA8987E41D0BEEE200796F3D /* de */,
 			);
 			name = info_send_confirmation.html;
 			sourceTree = "<group>";
@@ -5727,12 +5097,6 @@
 			children = (
 				DAE4CD351CC9D90100082868 /* Base */,
 				DA8F2BC21D0946ED0008F7E7 /* en */,
-				DA8986D41D0BE9CA00796F3D /* fr */,
-				DA8986F41D0BEA0300796F3D /* hi */,
-				DA8987131D0BEC2000796F3D /* es-MX */,
-				DA8987321D0BEC5500796F3D /* pt-BR */,
-				DA8987511D0BEC6800796F3D /* zh-Hans */,
-				DA8987E51D0BEEE200796F3D /* de */,
 			);
 			name = info_settings.html;
 			sourceTree = "<group>";
@@ -5742,12 +5106,6 @@
 			children = (
 				DAE4CD3C1CC9D90900082868 /* Base */,
 				DA8F2BC31D0946ED0008F7E7 /* en */,
-				DA8986D51D0BE9CA00796F3D /* fr */,
-				DA8986F51D0BEA0300796F3D /* hi */,
-				DA8987141D0BEC2000796F3D /* es-MX */,
-				DA8987331D0BEC5500796F3D /* pt-BR */,
-				DA8987521D0BEC6800796F3D /* zh-Hans */,
-				DA8987E61D0BEEE200796F3D /* de */,
 			);
 			name = info_spending_limits.html;
 			sourceTree = "<group>";
@@ -5757,12 +5115,6 @@
 			children = (
 				DAE4CD431CC9D91200082868 /* Base */,
 				DA8F2BC41D0946EE0008F7E7 /* en */,
-				DA8986D61D0BE9CA00796F3D /* fr */,
-				DA8986F61D0BEA0300796F3D /* hi */,
-				DA8987151D0BEC2000796F3D /* es-MX */,
-				DA8987341D0BEC5500796F3D /* pt-BR */,
-				DA8987531D0BEC6800796F3D /* zh-Hans */,
-				DA8987E71D0BEEE200796F3D /* de */,
 			);
 			name = info_transaction_details.html;
 			sourceTree = "<group>";
@@ -5772,12 +5124,6 @@
 			children = (
 				DAE4CD4A1CC9D91C00082868 /* Base */,
 				DA8F2BC51D0946EE0008F7E7 /* en */,
-				DA8986D71D0BE9CA00796F3D /* fr */,
-				DA8986F71D0BEA0300796F3D /* hi */,
-				DA8987161D0BEC2000796F3D /* es-MX */,
-				DA8987351D0BEC5500796F3D /* pt-BR */,
-				DA8987541D0BEC6800796F3D /* zh-Hans */,
-				DA8987E81D0BEEE200796F3D /* de */,
 			);
 			name = info_transactions.html;
 			sourceTree = "<group>";
@@ -5787,12 +5133,6 @@
 			children = (
 				DAE4CD511CC9D92600082868 /* Base */,
 				DA8F2BC61D0946EE0008F7E7 /* en */,
-				DA8986D81D0BE9CA00796F3D /* fr */,
-				DA8986F81D0BEA0400796F3D /* hi */,
-				DA8987171D0BEC2000796F3D /* es-MX */,
-				DA8987361D0BEC5500796F3D /* pt-BR */,
-				DA8987551D0BEC6800796F3D /* zh-Hans */,
-				DA8987E91D0BEEE200796F3D /* de */,
 			);
 			name = info_wallets.html;
 			sourceTree = "<group>";
@@ -5802,12 +5142,6 @@
 			children = (
 				DAE4CD581CC9D93000082868 /* Base */,
 				DA8F2BC71D0946EE0008F7E7 /* en */,
-				DA8986D91D0BE9CA00796F3D /* fr */,
-				DA8986F91D0BEA0400796F3D /* hi */,
-				DA8987181D0BEC2000796F3D /* es-MX */,
-				DA8987371D0BEC5500796F3D /* pt-BR */,
-				DA8987561D0BEC6800796F3D /* zh-Hans */,
-				DA8987EA1D0BEEE200796F3D /* de */,
 			);
 			name = transaction_details.html;
 			sourceTree = "<group>";
