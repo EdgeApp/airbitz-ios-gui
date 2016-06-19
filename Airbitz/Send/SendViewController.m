@@ -1068,8 +1068,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //	else
 //	{
 //        if ([[User Singleton] offerBleHelp]) {
-//            [self showFadingAlert:NSLocalizedString(@"Bluetooth payment requests are listed here. Tap on a user to send them a payment", nil)
-//                        withDelay:FADING_HELP_DURATION];
 //        }
 //		self.scanningLabel.hidden = YES;
 //		[self.scanningSpinner stopAnimating];

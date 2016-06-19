@@ -1110,7 +1110,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-//        [self showFadingAlert:NSLocalizedString(@"Bluetooth disconnected", nil)];
         self.BLE_LogoImageView.hidden = YES;
     }
 
