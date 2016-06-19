@@ -175,8 +175,6 @@
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
-		DA8988061D0BF35B00796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA8988051D0BF35B00796F3D /* InfoPlist.strings */; };
-		DA89880D1D0BF40300796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA89880C1D0BF40300796F3D /* InfoPlist.strings */; };
 		DA89881E1D0BF50300796F3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA89881D1D0BF50300796F3D /* InfoPlist.strings */; };
 		DA8988CF1D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D01D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
@@ -548,8 +546,6 @@
 		DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */; };
 		DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 		DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
-		DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB11BC721BD0063DA07 /* Info.plist */; };
-		DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */; };
 		DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; };
 		DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; };
 		DA9EF3511BC7285D0063DA07 /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED82E1BC61F8F0063DA07 /* SMCalloutView.m */; };
@@ -1232,6 +1228,7 @@
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		DA9EF6E11BC730400063DA07 /* Airbitz-Develop-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6E01BC730400063DA07 /* Airbitz-Develop-Info.plist */; };
 		DA9EF6E71BC7304C0063DA07 /* Airbitz-Testnet-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6E61BC7304C0063DA07 /* Airbitz-Testnet-Info.plist */; };
+		DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
 		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
@@ -1431,8 +1428,6 @@
 		DA57A24B1D131D6E005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/info.html; sourceTree = "<group>"; };
 		DA57A2501D131D71005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/transaction_details.html; sourceTree = "<group>"; };
 		DA57A2551D131D74005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
-		DA8988051D0BF35B00796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		DA89880C1D0BF40300796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		DA89881D1D0BF50300796F3D /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		DA8F2CA71D094C1B0008F7E7 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		DA8F2CA91D094C5A0008F7E7 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -1451,7 +1446,6 @@
 		DA9D8F5C1CC0C191006A8C0A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DA9D8F5D1CC0C191006A8C0A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DA9D8F641CC0C191006A8C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Airbitz-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airbitz_OSXTests.m; sourceTree = "<group>"; };
 		DA9D8F6F1CC0C191006A8C0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1929,8 +1923,6 @@
 		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DA9EEFB11BC721BD0063DA07 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Airbitz.entitlements; sourceTree = "<group>"; };
 		DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
 		DA9EEFB71BC724B00063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
@@ -2118,6 +2110,7 @@
 		DAB06A511D14B28500050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/info.html; sourceTree = "<group>"; };
 		DAB06A521D14B28500050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/transaction_details.html; sourceTree = "<group>"; };
 		DAB06A531D14B28500050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text; name = de; path = de.lproj/sms_template.txt; sourceTree = "<group>"; };
+		DAB06AE51D1677ED00050098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon_full@2x.png"; sourceTree = "<group>"; };
 		DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-coffee-mug-128px@2x.png"; sourceTree = "<group>"; };
 		DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-bulls-eye-128px@2x.png"; sourceTree = "<group>"; };
@@ -2132,10 +2125,8 @@
 		DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD941BC6065100C648C4 /* AirbitzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzTests.m; sourceTree = "<group>"; };
-		DAD1AD961BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzUITests.m; sourceTree = "<group>"; };
-		DAD1ADA11BC6065100C648C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAE1BDD91CC330DD003494AB /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
 		DAE1BE351CC36C58003494AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		DAE1BE371CC36C5E003494AB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
@@ -2309,7 +2300,6 @@
 				DA9D8F5C1CC0C191006A8C0A /* ViewController.h */,
 				DA9D8F5D1CC0C191006A8C0A /* ViewController.m */,
 				DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */,
-				DA9D8F641CC0C191006A8C0A /* Info.plist */,
 				DA9D8F591CC0C191006A8C0A /* Supporting Files */,
 			);
 			path = "Airbitz-OSX";
@@ -2386,8 +2376,7 @@
 			isa = PBXGroup;
 			children = (
 				DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */,
-				DA9EEFB11BC721BD0063DA07 /* Info.plist */,
-				DA9EEFB21BC721BD0063DA07 /* MainInterface.storyboard */,
+				DAB06AE61D1677ED00050098 /* MainInterface.storyboard */,
 				DA9ED6EF1BC607FA0063DA07 /* TodayViewController.h */,
 				DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */,
 			);
@@ -3267,7 +3256,6 @@
 			isa = PBXGroup;
 			children = (
 				DAD1AD941BC6065100C648C4 /* AirbitzTests.m */,
-				DAD1AD961BC6065100C648C4 /* Info.plist */,
 			);
 			path = AirbitzTests;
 			sourceTree = "<group>";
@@ -3275,10 +3263,7 @@
 		DAD1AD9E1BC6065100C648C4 /* AirbitzUITests */ = {
 			isa = PBXGroup;
 			children = (
-				DA89880C1D0BF40300796F3D /* InfoPlist.strings */,
-				DA8988051D0BF35B00796F3D /* InfoPlist.strings */,
 				DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */,
-				DAD1ADA11BC6065100C648C4 /* Info.plist */,
 			);
 			path = AirbitzUITests;
 			sourceTree = "<group>";
@@ -3622,9 +3607,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA9EEFB31BC721BD0063DA07 /* Info.plist in Resources */,
 				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
-				DA9EEFB41BC721BD0063DA07 /* MainInterface.storyboard in Resources */,
+				DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4432,8 +4416,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8988061D0BF35B00796F3D /* InfoPlist.strings in Resources */,
-				DA89880D1D0BF40300796F3D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5543,6 +5525,14 @@
 				DAB06A531D14B28500050098 /* de */,
 			);
 			name = sms_template.txt;
+			sourceTree = "<group>";
+		};
+		DAB06AE61D1677ED00050098 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAB06AE51D1677ED00050098 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
