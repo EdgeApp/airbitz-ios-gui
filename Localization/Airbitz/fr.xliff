@@ -8,27 +8,27 @@
       <trans-unit id="Lt8-cl-BMW.text">
         <source>Scan QR</source>
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
-        <target xml:lang="fr" state="needs-translation">Scan QR</target>
+        <target xml:lang="fr" state="translated">Scanner le QR</target>
       </trans-unit>
       <trans-unit id="NiJ-rT-MKF.text">
         <source>Send</source>
         <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-        <target xml:lang="fr" state="needs-translation">Send</target>
+        <target xml:lang="fr" state="translated">Envoyer</target>
       </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
-        <target xml:lang="fr" state="needs-translation">Button</target>
+        <target xml:lang="fr" state="translated">Bouton</target>
       </trans-unit>
       <trans-unit id="gQB-TM-9HQ.text">
         <source>BitID Login</source>
         <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="fr" state="needs-translation">BitID Login</target>
+        <target xml:lang="fr" state="translated">Connexion BitID</target>
       </trans-unit>
       <trans-unit id="pzG-q0-KJ4.text">
         <source>or</source>
         <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
-        <target xml:lang="fr" state="needs-translation">or</target>
+        <target xml:lang="fr" state="translated">ou</target>
       </trans-unit>
     </body>
   </file>
@@ -40,37 +40,37 @@
       <trans-unit id="0gq-ds-DJC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-        <target xml:lang="fr" state="needs-translation">NEXT</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
         <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="fr" state="needs-translation">Your username and password are known only to you and never transmitted or stored unencrypted.</target>
+        <target xml:lang="fr" state="translated">Votre nom d’utilisateur et mot de passe sont connus uniquement par vous et ne sont jamais transmises ou stockées non chiffrée.</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
-        <target xml:lang="fr" state="needs-translation">NEXT</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="AAt-Oh-ifI.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI";</note>
-        <target xml:lang="fr" state="needs-translation">NEXT</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="D2i-9s-GAC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC";</note>
-        <target xml:lang="fr" state="needs-translation">NEXT</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="DUg-At-veb.text">
         <source>myname</source>
         <note>Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb";</note>
-        <target xml:lang="fr" state="needs-translation">myname</target>
+        <target xml:lang="fr" state="translated">monnom</target>
       </trans-unit>
       <trans-unit id="DgW-Gm-7l2.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2";</note>
-        <target xml:lang="fr" state="needs-translation">NEXT</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="Dyh-gB-nOv.text">
         <source>You will next see a popup requesting access to your Contacts.</source>
@@ -108,47 +108,47 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="SsW-1b-1cv.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv";</note>
-        <target xml:lang="fr" state="needs-translation">See Strings.h</target>
+        <target xml:lang="fr" state="translated">Voir Strings.h</target>
       </trans-unit>
       <trans-unit id="Tqs-NN-dWt.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt";</note>
-        <target xml:lang="fr" state="needs-translation">Your PIN is a 4 digit code used to do quick re-logins into your account.</target>
+        <target xml:lang="fr" state="translated">Votre PIN est un code à 4 chiffres, utilisé pour accéder rapidement à votre compte.</target>
       </trans-unit>
       <trans-unit id="VAn-0y-asT.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT";</note>
-        <target xml:lang="fr" state="needs-translation">See Strings.h</target>
+        <target xml:lang="fr" state="translated">Voir Strings.h</target>
       </trans-unit>
       <trans-unit id="Vad-R9-M68.normalTitle">
         <source>SKIP</source>
         <note>Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68";</note>
-        <target xml:lang="fr" state="needs-translation">SKIP</target>
+        <target xml:lang="fr" state="translated">SAUTER</target>
       </trans-unit>
       <trans-unit id="W8f-q2-Sa7.normalTitle">
         <source>Show</source>
         <note>Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7";</note>
-        <target xml:lang="fr" state="needs-translation">Show</target>
+        <target xml:lang="fr" state="translated">Afficher</target>
       </trans-unit>
       <trans-unit id="WkL-r2-NLT.text">
         <source>Sign Up</source>
         <note>Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT";</note>
-        <target xml:lang="fr" state="needs-translation">Sign Up</target>
+        <target xml:lang="fr" state="translated">Inscrivez-vous</target>
       </trans-unit>
       <trans-unit id="Wkt-fz-AEf.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf";</note>
-        <target xml:lang="fr" state="needs-translation">Button</target>
+        <target xml:lang="fr" state="translated">Bouton</target>
       </trans-unit>
       <trans-unit id="YJZ-dK-bwv.text">
         <source>Enable Camera Access</source>
         <note>Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv";</note>
-        <target xml:lang="fr" state="needs-translation">Enable Camera Access</target>
+        <target xml:lang="fr" state="translated">Activer Accès à la Caméra</target>
       </trans-unit>
       <trans-unit id="bPi-8w-xQ4.text">
         <source>PIN</source>
         <note>Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4";</note>
-        <target xml:lang="fr" state="needs-translation">PIN</target>
+        <target xml:lang="fr" state="translated">PIN</target>
       </trans-unit>
       <trans-unit id="cng-Cv-ULC.text">
         <source>Enable Contact Access</source>
@@ -218,17 +218,17 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="wff-Il-8GU.text">
         <source>Write it Down!</source>
         <note>Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU";</note>
-        <target xml:lang="fr" state="needs-translation">Write it Down!</target>
+        <target xml:lang="fr" state="translated">Notez-le !</target>
       </trans-unit>
       <trans-unit id="x6r-A5-Cxg.normalTitle">
         <source>Back</source>
         <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg";</note>
-        <target xml:lang="fr" state="needs-translation">Back</target>
+        <target xml:lang="fr" state="translated">Précédent</target>
       </trans-unit>
       <trans-unit id="y2b-Sg-zfM.placeholder">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM";</note>
-        <target xml:lang="fr" state="needs-translation">Create PIN</target>
+        <target xml:lang="fr" state="translated">Créer code PIN</target>
       </trans-unit>
       <trans-unit id="z5S-Vu-MC1.normalTitle">
         <source>NEXT</source>
@@ -250,37 +250,37 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="DlF-tR-T08.text">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="fr" state="needs-translation">Business Name</target>
+        <target xml:lang="fr" state="translated">Nom d’entreprise</target>
       </trans-unit>
       <trans-unit id="GGS-YR-zt1.normalTitle">
         <source>Shopping</source>
         <note>Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1";</note>
-        <target xml:lang="fr" state="needs-translation">Shopping</target>
+        <target xml:lang="fr" state="translated">Shopping</target>
       </trans-unit>
       <trans-unit id="KxI-24-PCF.text">
         <source>Categories</source>
         <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
-        <target xml:lang="fr" state="needs-translation">Categories</target>
+        <target xml:lang="fr" state="translated">Catégories</target>
       </trans-unit>
       <trans-unit id="Sfb-cf-6wF.normalTitle">
         <source>More Categories</source>
         <note>Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF";</note>
-        <target xml:lang="fr" state="needs-translation">More Categories</target>
+        <target xml:lang="fr" state="translated">Plus de catégories</target>
       </trans-unit>
       <trans-unit id="a78-ih-LDk.normalTitle">
         <source>Coffee &amp; Tea</source>
         <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
-        <target xml:lang="fr" state="needs-translation">Coffee &amp; Tea</target>
+        <target xml:lang="fr" state="translated">Café &amp; Thé</target>
       </trans-unit>
       <trans-unit id="aNa-3g-QXd.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd";</note>
-        <target xml:lang="fr" state="needs-translation">Search</target>
+        <target xml:lang="fr" state="translated">Rechercher</target>
       </trans-unit>
       <trans-unit id="b1E-1G-btq.normalTitle">
         <source>Gift Cards</source>
         <note>Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq";</note>
-        <target xml:lang="fr" state="needs-translation">Gift Cards</target>
+        <target xml:lang="fr" state="translated">Cartes-cadeaux</target>
       </trans-unit>
       <trans-unit id="baO-FH-Oy4.text">
         <source>Near You</source>
@@ -310,27 +310,27 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="lFC-s8-IJT.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="oPG-fA-f9b.text">
         <source>leftLabel</source>
         <note>Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b";</note>
-        <target xml:lang="fr" state="needs-translation">leftLabel</target>
+        <target xml:lang="fr" state="translated">Étiquette gauche</target>
       </trans-unit>
       <trans-unit id="oyK-ph-99S.normalTitle">
         <source>Restaurants</source>
         <note>Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S";</note>
-        <target xml:lang="fr" state="needs-translation">Restaurants</target>
+        <target xml:lang="fr" state="translated">Restaurants</target>
       </trans-unit>
       <trans-unit id="sWr-pd-hBY.normalTitle">
         <source>ATMs</source>
         <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
-        <target xml:lang="fr" state="needs-translation">ATMs</target>
+        <target xml:lang="fr" state="translated">GABs</target>
       </trans-unit>
       <trans-unit id="wy7-Kv-3ap.text">
         <source>Address 1234</source>
         <note>Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap";</note>
-        <target xml:lang="fr" state="needs-translation">Address 1234</target>
+        <target xml:lang="fr" state="translated">Adresse 1234</target>
       </trans-unit>
     </body>
   </file>
@@ -342,37 +342,37 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="2uL-vk-tLg.normalTitle">
         <source>5</source>
         <note>Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">5</target>
+        <target xml:lang="fr" state="translated">5</target>
       </trans-unit>
       <trans-unit id="Aeb-Xc-JRe.normalTitle">
         <source>-</source>
         <note>Class = "UIButton"; normalTitle = "-"; ObjectID = "Aeb-Xc-JRe"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">-</target>
+        <target xml:lang="fr" state="translated">-</target>
       </trans-unit>
       <trans-unit id="Emr-ag-G6B.normalTitle">
         <source>8</source>
         <note>Class = "UIButton"; normalTitle = "8"; ObjectID = "Emr-ag-G6B"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">8</target>
+        <target xml:lang="fr" state="translated">8</target>
       </trans-unit>
       <trans-unit id="JE3-3X-s8v.normalTitle">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">Done</target>
+        <target xml:lang="fr" state="translated">Effectué</target>
       </trans-unit>
       <trans-unit id="MCV-gu-4YU.normalTitle">
         <source>*</source>
         <note>Class = "UIButton"; normalTitle = "*"; ObjectID = "MCV-gu-4YU"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">*</target>
+        <target xml:lang="fr" state="translated">*</target>
       </trans-unit>
       <trans-unit id="O42-ZS-u2K.normalTitle">
         <source>C</source>
         <note>Class = "UIButton"; normalTitle = "C"; ObjectID = "O42-ZS-u2K"; Note = "Calculator Clear Button";</note>
-        <target xml:lang="fr" state="needs-translation">C</target>
+        <target xml:lang="fr" state="translated">C</target>
       </trans-unit>
       <trans-unit id="ORi-eH-Enh.normalTitle">
         <source>6</source>
         <note>Class = "UIButton"; normalTitle = "6"; ObjectID = "ORi-eH-Enh"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">6</target>
+        <target xml:lang="fr" state="translated">6</target>
       </trans-unit>
       <trans-unit id="P0f-iB-KJr.normalTitle">
         <source>4</source>
@@ -407,7 +407,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="hpP-b8-SWQ.normalTitle">
         <source>+</source>
         <note>Class = "UIButton"; normalTitle = "+"; ObjectID = "hpP-b8-SWQ"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">+</target>
+        <target xml:lang="fr" state="translated">+</target>
       </trans-unit>
       <trans-unit id="tNK-PX-QMO.normalTitle">
         <source>&lt; Del</source>
@@ -417,22 +417,22 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="vjB-0i-g2w.normalTitle">
         <source>2</source>
         <note>Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">2</target>
+        <target xml:lang="fr" state="translated">2</target>
       </trans-unit>
       <trans-unit id="wVl-D5-w0P.normalTitle">
         <source>7</source>
         <note>Class = "UIButton"; normalTitle = "7"; ObjectID = "wVl-D5-w0P"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">7</target>
+        <target xml:lang="fr" state="translated">7</target>
       </trans-unit>
       <trans-unit id="x4B-P3-CYU.normalTitle">
         <source>3</source>
         <note>Class = "UIButton"; normalTitle = "3"; ObjectID = "x4B-P3-CYU"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">3</target>
+        <target xml:lang="fr" state="translated">3</target>
       </trans-unit>
       <trans-unit id="xYy-J7-W9D.normalTitle">
         <source>%</source>
         <note>Class = "UIButton"; normalTitle = "%"; ObjectID = "xYy-J7-W9D"; Note = "Calculator Button";</note>
-        <target xml:lang="fr" state="needs-translation">%</target>
+        <target xml:lang="fr" state="translated">%</target>
       </trans-unit>
     </body>
   </file>
@@ -444,7 +444,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="KGv-Ek-gk9.text">
         <source>Slide to confirm</source>
         <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
-        <target xml:lang="fr" state="needs-translation">Slide to confirm</target>
+        <target xml:lang="fr" state="translated">Glisser pour confirmer</target>
       </trans-unit>
     </body>
   </file>
@@ -456,7 +456,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="sls-ic-b1n.normalTitle">
         <source>Agree </source>
         <note>Class = "UIButton"; normalTitle = "Agree "; ObjectID = "sls-ic-b1n";</note>
-        <target xml:lang="fr" state="needs-translation">Agree </target>
+        <target xml:lang="fr" state="translated">J'accepte </target>
       </trans-unit>
     </body>
   </file>
@@ -468,37 +468,37 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="0Ma-6E-cjS.placeholder">
         <source>Current Password</source>
         <note>Class = "UITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS";</note>
-        <target xml:lang="fr" state="needs-translation">Current Password</target>
+        <target xml:lang="fr" state="translated">Mot de passe actuel</target>
       </trans-unit>
       <trans-unit id="0ea-NR-Nd9.normalTitle">
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
-        <target xml:lang="fr" state="needs-translation">This Month</target>
+        <target xml:lang="fr" state="translated">Ce mois</target>
       </trans-unit>
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
-        <target xml:lang="fr" state="needs-translation">Wallet Public Seed - XPub (advanced)</target>
+        <target xml:lang="fr" state="translated">Porte-monnaie Public Seed - XPub (avancé)</target>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder">
         <source>User Name</source>
         <note>Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc";</note>
-        <target xml:lang="fr" state="needs-translation">User Name</target>
+        <target xml:lang="fr" state="translated">Nom d’utilisateur</target>
       </trans-unit>
       <trans-unit id="3A3-3d-okn.text">
         <source>Status Line 1</source>
         <note>Class = "UILabel"; text = "Status Line 1"; ObjectID = "3A3-3d-okn";</note>
-        <target xml:lang="fr" state="needs-translation">Status Line 1</target>
+        <target xml:lang="fr" state="translated">État Ligne 1</target>
       </trans-unit>
       <trans-unit id="3Py-nn-1AR.normalTitle">
         <source>Advanced</source>
         <note>Class = "UIButton"; normalTitle = "Advanced"; ObjectID = "3Py-nn-1AR";</note>
-        <target xml:lang="fr" state="needs-translation">Advanced</target>
+        <target xml:lang="fr" state="translated">Avancé</target>
       </trans-unit>
       <trans-unit id="4KX-hj-tJA.text">
         <source>Offline Wallet</source>
         <note>Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA";</note>
-        <target xml:lang="fr" state="needs-translation">Offline Wallet</target>
+        <target xml:lang="fr" state="translated">Portefeuille hors ligne</target>
       </trans-unit>
       <trans-unit id="4ab-Wa-eS4.placeholder">
         <source>Password</source>
@@ -533,47 +533,47 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="8XB-1A-1hO.text">
         <source>Swipe to View Business Directory</source>
         <note>Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO";</note>
-        <target xml:lang="fr" state="needs-translation">Swipe to View Business Directory</target>
+        <target xml:lang="fr" state="translated">Glisser pour Voir Répertoire d’Entreprise</target>
       </trans-unit>
       <trans-unit id="8iz-Uc-LTS.normalTitle">
         <source>Sign Up</source>
         <note>Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS";</note>
-        <target xml:lang="fr" state="needs-translation">Sign Up</target>
+        <target xml:lang="fr" state="translated">Inscrivez-vous</target>
       </trans-unit>
       <trans-unit id="51g-oU-QIB.text">
         <source>Import Wallet</source>
         <note>Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB";</note>
-        <target xml:lang="fr" state="needs-translation">Import Wallet</target>
+        <target xml:lang="fr" state="translated">Importer Portefeuille</target>
       </trans-unit>
       <trans-unit id="90X-8Y-MEH.normalTitle">
         <source>Last Year</source>
         <note>Class = "UIButton"; normalTitle = "Last Year"; ObjectID = "90X-8Y-MEH";</note>
-        <target xml:lang="fr" state="needs-translation">Last Year</target>
+        <target xml:lang="fr" state="translated">L'an dernier</target>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[0]">
         <source>Transfer</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
-        <target xml:lang="fr" state="needs-translation">Transfer</target>
+        <target xml:lang="fr" state="translated">Transfert</target>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[1]">
         <source>Address</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
-        <target xml:lang="fr" state="needs-translation">Address</target>
+        <target xml:lang="fr" state="translated">Adresse</target>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[2]">
         <source>Photos</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[2] = "Photos"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
-        <target xml:lang="fr" state="needs-translation">Photos</target>
+        <target xml:lang="fr" state="translated">Photos</target>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[3]">
         <source>Flash</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
-        <target xml:lang="fr" state="needs-translation">Flash</target>
+        <target xml:lang="fr" state="translated">Flash</target>
       </trans-unit>
       <trans-unit id="BED-Cf-F1n.text">
         <source>Password must have an upper and lower case letter, a number, and a minimum of 10 characters</source>
         <note>Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n";</note>
-        <target xml:lang="fr" state="needs-translation">Password must have an upper and lower case letter, a number, and a minimum of 10 characters</target>
+        <target xml:lang="fr" state="translated">Mot de passe doit avoir une lettre majuscule et minuscule, un nombre et un minimum de 10 caractères</target>
       </trans-unit>
       <trans-unit id="Bxa-tB-mk3.text">
         <source>Phone</source>
@@ -643,12 +643,12 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="L8T-Xw-aVE.text">
         <source>Notes</source>
         <note>Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE";</note>
-        <target xml:lang="fr" state="needs-translation">Notes</target>
+        <target xml:lang="fr" state="translated">Notes</target>
       </trans-unit>
       <trans-unit id="LI5-7a-oQG.text">
         <source>Start Date</source>
         <note>Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG";</note>
-        <target xml:lang="fr" state="needs-translation">Start Date</target>
+        <target xml:lang="fr" state="translated">Date de début</target>
       </trans-unit>
       <trans-unit id="LPo-UX-ZHi.normalTitle">
         <source>Send</source>
@@ -978,7 +978,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="pkh-7R-foQ.text">
         <source>Password Requirements</source>
         <note>Class = "UILabel"; text = "Password Requirements"; ObjectID = "pkh-7R-foQ";</note>
-        <target xml:lang="fr" state="needs-translation">Password Requirements</target>
+        <target xml:lang="fr" state="translated">Exigences du mot de passe</target>
       </trans-unit>
     </body>
   </file>
@@ -990,12 +990,12 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="24.normalTitle">
         <source>OK</source>
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
-        <target xml:lang="fr" state="needs-translation">OK</target>
+        <target xml:lang="fr" state="translated">OK</target>
       </trans-unit>
       <trans-unit id="25.normalTitle">
         <source>Cancel</source>
         <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25";</note>
-        <target xml:lang="fr" state="needs-translation">Cancel</target>
+        <target xml:lang="fr" state="translated">Annuler</target>
       </trans-unit>
     </body>
   </file>
@@ -1007,32 +1007,32 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="1Qx-Jp-bYp.text">
         <source>2FA Reset Requested by another device.</source>
         <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
-        <target xml:lang="fr" state="needs-translation">2FA Reset Requested by another device.</target>
+        <target xml:lang="fr" state="translated">Réinitialisation 2FA demandée par un autre appareil.</target>
       </trans-unit>
       <trans-unit id="3uS-L5-frK.normalTitle">
         <source>KEEP 2FA</source>
         <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
-        <target xml:lang="fr" state="needs-translation">KEEP 2FA</target>
+        <target xml:lang="fr" state="translated">MAINTENIR 2FA</target>
       </trans-unit>
       <trans-unit id="4md-ob-Ttv.text">
         <source>Core Version:</source>
         <note>Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv";</note>
-        <target xml:lang="fr" state="needs-translation">Core Version:</target>
+        <target xml:lang="fr" state="translated">Version de base :</target>
       </trans-unit>
       <trans-unit id="9ur-p7-oPb.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="Ag5-Xn-Vpg.normalTitle">
         <source>Clear Watcher Cache</source>
         <note>Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg";</note>
-        <target xml:lang="fr" state="needs-translation">Clear Watcher Cache</target>
+        <target xml:lang="fr" state="translated">Vider la Cache Watcher</target>
       </trans-unit>
       <trans-unit id="Bs1-Yi-SIh.normalTitle">
         <source>Upload Log Files</source>
         <note>Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh";</note>
-        <target xml:lang="fr" state="needs-translation">Upload Log Files</target>
+        <target xml:lang="fr" state="translated">Charger Fichiers Log</target>
       </trans-unit>
       <trans-unit id="GMX-G5-Rl3.text">
         <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
@@ -1069,47 +1069,47 @@ Scan the QR code using this device</target>
       <trans-unit id="SXK-F7-NoK.text">
         <source>0.1.0-mainnet</source>
         <note>Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK";</note>
-        <target xml:lang="fr" state="needs-translation">0.1.0-mainnet</target>
+        <target xml:lang="fr" state="translated">0.1.0-mainnet</target>
       </trans-unit>
       <trans-unit id="T6x-zH-xvf.text">
         <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
         <note>Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf";</note>
-        <target xml:lang="fr" state="needs-translation">This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </target>
+        <target xml:lang="fr" state="translated">Ce compte a 2 Facteur d’Authentification (2FA) activé. Scannez le jeton 2FA du dispositif qui a permis à 2FA de donner accès à cet appareil. </target>
       </trans-unit>
       <trans-unit id="X6G-HD-WUv.placeholder">
         <source>Search</source>
         <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv";</note>
-        <target xml:lang="fr" state="needs-translation">Search</target>
+        <target xml:lang="fr" state="translated">Rechercher</target>
       </trans-unit>
       <trans-unit id="XJN-At-Qod.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="Zw4-k1-a82.text">
         <source>Mainnet</source>
         <note>Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82";</note>
-        <target xml:lang="fr" state="needs-translation">Mainnet</target>
+        <target xml:lang="fr" state="translated">Mainnet</target>
       </trans-unit>
       <trans-unit id="avV-bm-INd.normalTitle">
         <source>DISABLE 2FA</source>
         <note>Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd";</note>
-        <target xml:lang="fr" state="needs-translation">DISABLE 2FA</target>
+        <target xml:lang="fr" state="translated">DÉSACTIVER 2FA</target>
       </trans-unit>
       <trans-unit id="bYl-WU-bNw.text">
         <source>Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</source>
         <note>Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw";</note>
-        <target xml:lang="fr" state="needs-translation">Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</target>
+        <target xml:lang="fr" state="translated">Demande de désactivation de l’authentification à Deux Facteurs. La demande sera automatiquement réinitialisée dans 7 jours si aucune action est menée par l’utilisateur du compte sur les périphériques authentifiés</target>
       </trans-unit>
       <trans-unit id="g6f-f3-w6p.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="h6I-iF-k15.text">
         <source>Date</source>
         <note>Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15";</note>
-        <target xml:lang="fr" state="needs-translation">Date</target>
+        <target xml:lang="fr" state="translated">Date</target>
       </trans-unit>
       <trans-unit id="hxc-na-KPc.text">
         <source>Two factor reset has been requested</source>
@@ -1171,37 +1171,37 @@ Scan the QR code using this device</target>
       <trans-unit id="BCk-jF-SE5.text">
         <source>LOGOUT</source>
         <note>Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5";</note>
-        <target xml:lang="fr" state="needs-translation">LOGOUT</target>
+        <target xml:lang="fr" state="translated">Déconnexion</target>
       </trans-unit>
       <trans-unit id="GIG-Sd-O0c.accessibilityLabel">
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c";</note>
-        <target xml:lang="fr" state="needs-translation">Logout</target>
+        <target xml:lang="fr" state="translated">Déconnexion</target>
       </trans-unit>
       <trans-unit id="Lwy-1d-Qgs.accessibilityLabel">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs";</note>
-        <target xml:lang="fr" state="needs-translation">Buy or Sell</target>
+        <target xml:lang="fr" state="translated">Acheter ou vendre</target>
       </trans-unit>
       <trans-unit id="O8N-2d-FwL.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="Zac-Lf-J4y.text">
         <source>SETTINGS</source>
         <note>Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y";</note>
-        <target xml:lang="fr" state="needs-translation">SETTINGS</target>
+        <target xml:lang="fr" state="translated">Paramètres</target>
       </trans-unit>
       <trans-unit id="Zu4-Fd-NGP.accessibilityLabel">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP";</note>
-        <target xml:lang="fr" state="needs-translation">Buy or Sell</target>
+        <target xml:lang="fr" state="translated">Acheter ou vendre</target>
       </trans-unit>
       <trans-unit id="aSM-QX-pLq.accessibilityLabel">
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq";</note>
-        <target xml:lang="fr" state="needs-translation">Logout</target>
+        <target xml:lang="fr" state="translated">Déconnexion</target>
       </trans-unit>
       <trans-unit id="bQy-8e-q5h.text">
         <source>See Strings.h</source>
@@ -1231,17 +1231,17 @@ Scan the QR code using this device</target>
       <trans-unit id="vsf-Ms-1Ff.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="fr" state="needs-translation">Label</target>
+        <target xml:lang="fr" state="translated">Étiquette</target>
       </trans-unit>
       <trans-unit id="xju-3Y-EvK.text">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK";</note>
-        <target xml:lang="fr" state="needs-translation">See Strings.h</target>
+        <target xml:lang="fr" state="translated">Voir Strings.h</target>
       </trans-unit>
       <trans-unit id="xna-m1-9hx.accessibilityLabel">
         <source>Settings</source>
         <note>Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx";</note>
-        <target xml:lang="fr" state="needs-translation">Settings</target>
+        <target xml:lang="fr" state="translated">Paramètres</target>
       </trans-unit>
     </body>
   </file>
@@ -1253,27 +1253,27 @@ Scan the QR code using this device</target>
       <trans-unit id="61J-35-M5b.placeholder">
         <source>Name your new wallet</source>
         <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
-        <target xml:lang="fr" state="needs-translation">Name your new wallet</target>
+        <target xml:lang="fr" state="translated">Renommez votre nouveau portefeuille</target>
       </trans-unit>
       <trans-unit id="HuB-Hn-lsB.text">
         <source>Currency:</source>
         <note>Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB";</note>
-        <target xml:lang="fr" state="needs-translation">Currency:</target>
+        <target xml:lang="fr" state="translated">Devise:</target>
       </trans-unit>
       <trans-unit id="Ug5-7Y-oG3.normalTitle">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
-        <target xml:lang="fr" state="needs-translation">CANCEL</target>
+        <target xml:lang="fr" state="translated">Annuler</target>
       </trans-unit>
       <trans-unit id="VVb-in-rZz.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz";</note>
-        <target xml:lang="fr" state="needs-translation">Button</target>
+        <target xml:lang="fr" state="translated">Bouton</target>
       </trans-unit>
       <trans-unit id="bfD-1n-tCg.normalTitle">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg";</note>
-        <target xml:lang="fr" state="needs-translation">DONE</target>
+        <target xml:lang="fr" state="translated">Effectué</target>
       </trans-unit>
     </body>
   </file>
@@ -1285,34 +1285,33 @@ Scan the QR code using this device</target>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation"> Please choose a wallet to receive funds.</target>
+        <target xml:lang="fr" state="translated"> Veuillez choisir un portefeuille pour recevoir des fonds.</target>
       </trans-unit>
       <trans-unit id="%@ / %@ requested via %@ on %@.">
         <source>%1$@ / %2$@ requested via %3$@ on %4$@.</source>
         <note>ie. $1.50 / 5 mB requested via email on Sep 16, 1976</note>
-        <target xml:lang="fr" state="needs-translation">%1$@ / %2$@ requested via %3$@ on %4$@.</target>
+        <target xml:lang="fr" state="translated">%1$@ / %2$@ demandées via %3$@ sur %4$@.</target>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request">
         <source>%@ Bitcoin Request</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">%@ Bitcoin Request</target>
+        <target xml:lang="fr" state="translated">%@ Demande de Bitcoin</target>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request from %@">
         <source>%1$@ Bitcoin Request from %2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">%1$@ Bitcoin Request from %2$@</target>
+        <target xml:lang="fr" state="translated">%1$@ Demande Bitcoin de %2$@</target>
       </trans-unit>
       <trans-unit id="%@ Bitcoin received. Tap for details.">
         <source>%@ Bitcoin received. Tap for details.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">%@ Bitcoin received. Tap for details.</target>
+        <target xml:lang="fr" state="translated">%@ Bitcoin reçu. Appuyer pour plus de détails.</target>
       </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
 %2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">%1$@ failed:
-%2$@</target>
+        <target xml:lang="fr" state="translated">%1$@ échoué: %2$@</target>
       </trans-unit>
       <trans-unit id="%@ has requested a bitcoin address to send money to.">
         <source>%@ has requested a bitcoin address to send money to.</source>
@@ -1351,47 +1350,47 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="15-20% off Amazon">
         <source>15-20% off Amazon</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">15-20% off Amazon</target>
+        <target xml:lang="fr" state="translated">15-20 % remise sur Amazon</target>
       </trans-unit>
       <trans-unit id="A two factor reset has been requested. If you did not create this request, login as %@ and change your password.">
         <source>A two factor reset has been requested. If you did not create this request, login as %@ and change your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">A two factor reset has been requested. If you did not create this request, login as %@ and change your password.</target>
+        <target xml:lang="fr" state="translated">Une réinitialisation à deux facteurs a été demandée. Si vous avez créer cette demande, connectez-vous en tant que %@ et changez votre mot de passe.</target>
       </trans-unit>
       <trans-unit id="ACCOUNT: ">
         <source>ACCOUNT: </source>
         <note>section header in settings table</note>
-        <target xml:lang="fr" state="needs-translation">ACCOUNT: </target>
+        <target xml:lang="fr" state="translated">COMPTE : </target>
       </trans-unit>
       <trans-unit id="ARCHIVE">
         <source>ARCHIVE</source>
         <note>title of archived wallets table</note>
-        <target xml:lang="fr" state="needs-translation">ARCHIVE</target>
+        <target xml:lang="fr" state="translated">ARCHIVES</target>
       </trans-unit>
       <trans-unit id="ATM">
         <source>ATM</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">ATM</target>
+        <target xml:lang="fr" state="translated">GAB</target>
       </trans-unit>
       <trans-unit id="ATM Fee">
         <source>ATM Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">ATM Fee</target>
+        <target xml:lang="fr" state="translated">Frais GAB</target>
       </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Account '%@' needs a password. Account is not accessible on a new device without a password.</target>
+        <target xml:lang="fr" state="translated">Le compte '%@' nécessite un mot de passe. Compte non accessible sur un nouvel appareil sans un mot de passe.</target>
       </trans-unit>
       <trans-unit id="Account Sign Up">
         <source>Account Sign Up</source>
         <note>Title of account signin error alert</note>
-        <target xml:lang="fr" state="needs-translation">Account Sign Up</target>
+        <target xml:lang="fr" state="translated">Inscription de Compte</target>
       </trans-unit>
       <trans-unit id="Account has no password">
         <source>Account has no password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Account has no password</target>
+        <target xml:lang="fr" state="translated">Le compte n’a aucun mot de passe</target>
       </trans-unit>
       <trans-unit id="Add New">
         <source>Add New</source>
@@ -1461,12 +1460,12 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Are you sure you want to call">
         <source>Are you sure you want to call</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Are you sure you want to call</target>
+        <target xml:lang="fr" state="translated">Êtes-vous sûr de vouloir faire un appel</target>
       </trans-unit>
       <trans-unit id="Are you sure you want to cancel any changes you've made?">
         <source>Are you sure you want to cancel any changes you've made?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Are you sure you want to cancel any changes you've made?</target>
+        <target xml:lang="fr" state="translated">Êtes-vous sûr de vouloir annuler les modifications effectuées ?</target>
       </trans-unit>
       <trans-unit id="Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive">
         <source>Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive</source>

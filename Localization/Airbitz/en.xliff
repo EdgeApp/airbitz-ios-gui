@@ -1037,7 +1037,7 @@ Scan the QR code using this device</source>
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>

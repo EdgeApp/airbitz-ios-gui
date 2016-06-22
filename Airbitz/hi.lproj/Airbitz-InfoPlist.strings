@@ -1,6 +1,6 @@
-"NSBluetoothPeripheralUsageDescription" = "Bluetooth is used to connect to others and make transactions within short distances.";
-"NSCameraUsageDescription" = "Your camera is used to scan QR codes.";
-"NSContactsUsageDescription" = "Your contact list is used to label recipients and senders.";
-"NSLocationUsageDescription" = "Your location is used to find businesses in your area.";
-"NSLocationWhenInUseUsageDescription" = "Your location is used to find businesses in your area.";
-"NSPhotoLibraryUsageDescription" = "You can select a photo of a QR code to scan.";
+"NSBluetoothPeripheralUsageDescription" = "ब्लूटूथ का प्रयोग दूसरों से जुड़ने के लिए और छोटी दूरियों के अंदर लेनदेन करने के लिए किया जाता है।";
+"NSCameraUsageDescription" = "QR कोड स्कैन करने के लिए आपके कैमरे का प्रयोग किया जाता है।";
+"NSContactsUsageDescription" = "प्राप्तकर्ताओं और प्रेषकों को वर्गीकृत करने के लिए आपकी संपर्क सूची का प्रयोग किया जाता है।";
+"NSLocationUsageDescription" = "आपके क्षेत्र में व्यवसायों का पता लगाने के लिए आपके स्थान का प्रयोग किया जाता है।";
+"NSLocationWhenInUseUsageDescription" = "आपके क्षेत्र में व्यवसायों का पता लगाने के लिए आपके स्थान का प्रयोग किया जाता है।";
+"NSPhotoLibraryUsageDescription" = "स्कैन करने के लिए आप QR कोड के चित्र का चयन कर सकते हैं।";
