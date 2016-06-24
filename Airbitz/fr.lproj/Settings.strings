@@ -63,7 +63,7 @@ Scan the QR code using this device";
 "h6I-iF-k15.text" = "Date";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "Two factor reset has been requested";
+"hxc-na-KPc.text" = "Reinitialization a Deux facteur a été requis";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";

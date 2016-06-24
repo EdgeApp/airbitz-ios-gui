@@ -1,11 +1,11 @@
 /* Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b"; */
-"61J-35-M5b.placeholder" = "अपने नए वॉलेट का नाम रखें";
+"61J-35-M5b.placeholder" = "नए वालेट का नाम तय करें";
 
 /* Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB"; */
 "HuB-Hn-lsB.text" = "मुद्रा:";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3"; */
-"Ug5-7Y-oG3.normalTitle" = "रद्द करें";
+"Ug5-7Y-oG3.normalTitle" = "रद्द";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz"; */
 "VVb-in-rZz.normalTitle" = "बटन";

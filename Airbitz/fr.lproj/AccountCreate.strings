@@ -30,7 +30,7 @@ This is used ONLY when sending payments or requests to others to help them ident
 This is never sent to Airbitz or any third party and can be changed at any time in the future.";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
-"G0E-xz-b8e.text" = "Set a 4 Digit PIN";
+"G0E-xz-b8e.text" = "Définir un code PIN à 4 chiffres";
 
 /* Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR"; */
 "Gzw-pH-bAR.text" = "1234";
@@ -72,7 +72,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
 "dxS-14-iR5.text" = "Your PIN is a 4 digit code used to do quick re-logins into your account.";
 
 /* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
-"fCk-W4-OJJ.placeholder" = "Nickname";
+"fCk-W4-OJJ.placeholder" = "Pseudo";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn"; */
 "fV9-pz-Wfn.placeholder" = "Create PIN";

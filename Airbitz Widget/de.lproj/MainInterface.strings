@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
-"Lt8-cl-BMW.text" = "Scan QR";
+"Lt8-cl-BMW.text" = "QR scannen";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF"; */
-"NiJ-rT-MKF.text" = "Send";
+"NiJ-rT-MKF.text" = "Senden";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN"; */
 "WIw-mO-3VN.normalTitle" = "Button";
@@ -11,5 +11,5 @@
 "gQB-TM-9HQ.text" = "BitID Login";
 
 /* Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4"; */
-"pzG-q0-KJ4.text" = "or";
+"pzG-q0-KJ4.text" = "oder";
 

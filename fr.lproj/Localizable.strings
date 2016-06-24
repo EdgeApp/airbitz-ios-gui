@@ -34,7 +34,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**WARNING** You will NEVER be able to recover your password if it is forgotten!!";
 
 /* No comment provided by engineer. */
-"2 Factor (Enhanced Security)" = "2 Factor (Enhanced Security)";
+"2 Factor (Enhanced Security)" = "2 Facteur (Sécurité Renforcée)";
 
 /* No comment provided by engineer. */
 "4 Digit PIN" = "4 Digit PIN";
@@ -46,25 +46,25 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "Une réinitialisation à deux facteurs a été demandée. Si vous avez créer cette demande, connectez-vous en tant que %@ et changez votre mot de passe.";
 
 /* section header in settings table */
-"ACCOUNT: " = "ACCOUNT: ";
+"ACCOUNT: " = "COMPTE: ";
 
 /* title of archived wallets table */
 "ARCHIVE" = "ARCHIVES";
 
 /* No comment provided by engineer. */
-"ATM" = "ATM";
+"ATM" = "GAB";
 
 /* No comment provided by engineer. */
-"ATM Fee" = "ATM Fee";
+"ATM Fee" = "Frais GAB";
 
 /* No comment provided by engineer. */
 "Account '%@' needs a password. Account is not accessible on a new device without a password." = "Account '%@' needs a password. Account is not accessible on a new device without a password.";
 
 /* Title of account signin error alert */
-"Account Sign Up" = "Account Sign Up";
+"Account Sign Up" = "Inscription de Compte";
 
 /* No comment provided by engineer. */
-"Account has no password" = "Account has no password";
+"Account has no password" = "Le compte n’a aucun mot de passe";
 
 /* No comment provided by engineer. */
 "Add New" = "Add New";

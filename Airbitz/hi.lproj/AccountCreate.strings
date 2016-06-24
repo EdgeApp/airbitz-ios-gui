@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
-"0gq-ds-DJC.normalTitle" = "आगे";
+"0gq-ds-DJC.normalTitle" = "अगला";
 
 /* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "आपके प्रयोगकर्ता नाम और पासवर्ड की जानकारी केवल आपको होती है और इसे कभी भी संचारित या इन्क्रिप्ट किये बिना संग्रहित नहीं किया जाता है।";
+"4eB-ff-Ebh.text" = "आपका यूजरनाम और पासवर्ड सिर्फ आपको पता रहेगा और ये सूचना न किसी को भेजी जाएगी और न ही गुप्त रूप से स्टोर की जाएगी|";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "आगे";
@@ -14,23 +14,20 @@
 "D2i-9s-GAC.normalTitle" = "आगे";
 
 /* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
-"DUg-At-veb.text" = "मेरा नाम";
+"DUg-At-veb.text" = "मायनेम";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
 "DgW-Gm-7l2.normalTitle" = "आगे";
 
 /* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
-"Dyh-gB-nOv.text" = "इसके बाद आप अपने संपर्कों के लिए एक्सेस का अनुरोध करने वाला एक पॉपअप देखेंगे।";
+"Dyh-gB-nOv.text" = "अब आप आपके संपर्क की सूचना लेने के लिए पॉपअप अनुरोध देखेंगे";
 
 /* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
-"Ehm-ti-qdD.text" = "अपना नाम या मनचाहा उपनाम जैसे \"कॉइनमास्टर\" निर्दिष्ट करें।
-
-इसे केवल दूसरों को आपको पहचानने में मदद करने के लिए भुगतान या अनुरोध भेजते समय किया जाता है। 
-
-इसे कभी भी Airbitz या किसी अन्य तृतीय पक्ष को नहीं भेजा जाता है और इसे भविष्य में किसी भी समय परिवर्तित किया जा सकता है।";
+"Ehm-ti-qdD.text" = "अपना नाम या प्रचलित निकनेम लिखें जैसे \"कॉइनमास्टर\"|
+ये केवल भुगतान अनुरोध भेजने और किसी को आपकी पहचान अनुरोध के लिए काम में लिया जाएगा|इसे एयरबिट्ज़ या किसी अन्य तीसरे पक्ष को नहीं भेजा जाएगा और इसे आप भविष्य में जब चाहें इसे बदल सकते हैं|";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
-"G0E-xz-b8e.text" = "4 अंक का पिन निर्धारित करें";
+"G0E-xz-b8e.text" = "4 अंकीय पिन तय करें";
 
 /* Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR"; */
 "Gzw-pH-bAR.text" = "1234";

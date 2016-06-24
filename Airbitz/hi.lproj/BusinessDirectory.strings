@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
-"DlF-tR-T08.text" = "व्यवसाय नाम";
+"DlF-tR-T08.text" = "व्यावसायिक नाम";
 
 /* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
 "GGS-YR-zt1.normalTitle" = "खरीदारी";
@@ -14,7 +14,7 @@
 "a78-ih-LDk.normalTitle" = "कॉफ़ी और चाय";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
-"aNa-3g-QXd.placeholder" = "खोजें";
+"aNa-3g-QXd.placeholder" = "खोज";
 
 /* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
 "b1E-1G-btq.normalTitle" = "उपहार कार्ड";

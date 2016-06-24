@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "अन्य उपकरण के द्वारा 2FA रिसेट का अनुरोध किया गया है।";
+"1Qx-Jp-bYp.text" = "अन्य उपकरण से 2FA पुनर्स्थापन का अनुरोध किया गया है|";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
 "3uS-L5-frK.normalTitle" = "2FA रखें";
@@ -17,7 +17,7 @@
 "Bs1-Yi-SIh.normalTitle" = "लॉग फाइल अपलोड करें";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "केवल पिछले लॉगइन किये गए उपकरणों से लॉगइन करने की अनुमति देकर सुरक्षा बढ़ाने के लिए 2-फैक्टर पुष्टिकरण सक्षम करें। 2FA सक्षम हो जाने के बाद नीचे दिया गया QR कोड स्कैन करके और अधिक उपकरण जोड़ें।";
+"GMX-G5-Rl3.text" = "2-फैक्टर पुष्टिकरण को सक्रिय कर केवल पिछले लोग्डइन से ही लॉग इन करने की अनुमति देकर उपकरण की सुरक्षा बढाएं|2FA सक्रिय करने के बाद नीचे दिए क्यूआर कोड को स्कैन कर और उपकरण जोड़ें|";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
 "GXU-6G-OIw.placeholder" = "वर्तमान पासवर्ड";

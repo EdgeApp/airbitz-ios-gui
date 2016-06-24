@@ -8,7 +8,7 @@
 "Lwy-1d-Qgs.accessibilityLabel" = "खरीदें या बेचें";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
-"O8N-2d-FwL.text" = "उपनाम";
+"O8N-2d-FwL.text" = "लेबल";
 
 /* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
 "Zac-Lf-J4y.text" = "सेटिंग्स";
@@ -26,7 +26,7 @@
 "jpu-23-4kh.accessibilityLabel" = "खरीदें या बेचें";
 
 /* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
-"lr4-kO-HCW.text" = "वाल्लेट्स";
+"lr4-kO-HCW.text" = "वॉलेट";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
 "rWQ-uJ-DUX.text" = "खरीदें/बेचें बिटकॉइन";
@@ -35,7 +35,7 @@
 "vsf-Ms-1Ff.accessibilityHint" = "तत्कालीन लोग्डइन वाला खाता";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
-"vsf-Ms-1Ff.text" = "उपनाम";
+"vsf-Ms-1Ff.text" = "लेबल";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
 "xju-3Y-EvK.text" = "Strings.h को देखें";

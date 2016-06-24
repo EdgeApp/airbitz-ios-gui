@@ -26,10 +26,10 @@
 "jpu-23-4kh.accessibilityLabel" = "Acheter ou vendre";
 
 /* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
-"lr4-kO-HCW.text" = "WALLETS";
+"lr4-kO-HCW.text" = "PORTEFEUILLES";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
-"rWQ-uJ-DUX.text" = "BUY / SELL BITCOIN";
+"rWQ-uJ-DUX.text" = "ACHETER / VENDRE BITCOIN";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.accessibilityHint" = "the currently logged in account";

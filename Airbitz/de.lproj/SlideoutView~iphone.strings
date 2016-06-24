@@ -5,41 +5,41 @@
 "GIG-Sd-O0c.accessibilityLabel" = "Logout";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
-"Lwy-1d-Qgs.accessibilityLabel" = "Buy or Sell";
+"Lwy-1d-Qgs.accessibilityLabel" = "Kaufen oder verkaufen";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
 "O8N-2d-FwL.text" = "Label";
 
 /* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
-"Zac-Lf-J4y.text" = "SETTINGS";
+"Zac-Lf-J4y.text" = "EINSTELLUNGEN";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
-"Zu4-Fd-NGP.accessibilityLabel" = "Buy or Sell";
+"Zu4-Fd-NGP.accessibilityLabel" = "Kaufen oder verkaufen";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
 "aSM-QX-pLq.accessibilityLabel" = "Logout";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
-"bQy-8e-q5h.text" = "See Strings.h";
+"bQy-8e-q5h.text" = "Strings.h ansehen";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh"; */
-"jpu-23-4kh.accessibilityLabel" = "Buy or Sell";
+"jpu-23-4kh.accessibilityLabel" = "Kaufen oder verkaufen";
 
 /* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
 "lr4-kO-HCW.text" = "WALLETS";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
-"rWQ-uJ-DUX.text" = "BUY / SELL BITCOIN";
+"rWQ-uJ-DUX.text" = "BITCOIN KAUFEN / VERKAUFEN";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
-"vsf-Ms-1Ff.accessibilityHint" = "the currently logged in account";
+"vsf-Ms-1Ff.accessibilityHint" = "das aktuell angemeldete Konto";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.text" = "Label";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
-"xju-3Y-EvK.text" = "See Strings.h";
+"xju-3Y-EvK.text" = "Strings.h ansehen";
 
 /* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
-"xna-m1-9hx.accessibilityLabel" = "Settings";
+"xna-m1-9hx.accessibilityLabel" = "Einstellungen";
 

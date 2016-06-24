@@ -20,13 +20,13 @@
 "4KX-hj-tJA.text" = "Portefeuille hors ligne";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
-"4ab-Wa-eS4.placeholder" = "Password";
+"4ab-Wa-eS4.placeholder" = "Mot de passe";
 
 /* Class = "UIButton"; normalTitle = "Request"; ObjectID = "6EE-Aw-gGZ"; */
 "6EE-Aw-gGZ.normalTitle" = "Request";
 
 /* Class = "UITabBarItem"; title = "Scan"; ObjectID = "6Ey-Xn-GTe"; */
-"6Ey-Xn-GTe.title" = "Scan";
+"6Ey-Xn-GTe.title" = "Scanner";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "6qu-Co-pyz"; */
 "6qu-Co-pyz.text" = "Étiquette";
@@ -65,10 +65,10 @@
 "BED-Cf-F1n.text" = "Mot de passe doit avoir une lettre majuscule et minuscule, un nombre et un minimum de 10 caractères";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
-"Bxa-tB-mk3.text" = "Phone";
+"Bxa-tB-mk3.text" = "Téléphone";
 
 /* Class = "UIButton"; normalTitle = "Last Month"; ObjectID = "CDg-O2-8UT"; */
-"CDg-O2-8UT.normalTitle" = "Last Month";
+"CDg-O2-8UT.normalTitle" = "Mois dernier";
 
 /* Class = "UILabel"; text = "Category"; ObjectID = "ClG-um-kmI"; */
 "ClG-um-kmI.text" = "Category";

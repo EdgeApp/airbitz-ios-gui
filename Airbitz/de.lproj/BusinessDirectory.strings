@@ -1,38 +1,38 @@
 /* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
-"DlF-tR-T08.text" = "Business Name";
+"DlF-tR-T08.text" = "Firmenname";
 
 /* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
-"GGS-YR-zt1.normalTitle" = "Shopping";
+"GGS-YR-zt1.normalTitle" = "Einkaufen";
 
 /* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
-"KxI-24-PCF.text" = "Categories";
+"KxI-24-PCF.text" = "Kategorien";
 
 /* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
-"Sfb-cf-6wF.normalTitle" = "More Categories";
+"Sfb-cf-6wF.normalTitle" = "Weitere Kategorien";
 
 /* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
-"a78-ih-LDk.normalTitle" = "Coffee & Tea";
+"a78-ih-LDk.normalTitle" = "Kaffee & Tee";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
-"aNa-3g-QXd.placeholder" = "Search";
+"aNa-3g-QXd.placeholder" = "Suche";
 
 /* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
-"b1E-1G-btq.normalTitle" = "Gift Cards";
+"b1E-1G-btq.normalTitle" = "Geschenkkarten";
 
 /* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
-"baO-FH-Oy4.text" = "Near You";
+"baO-FH-Oy4.text" = "In Ihrer Nähe";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
 "f2g-xP-19U.text" = "Label";
 
 /* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
-"ga1-R0-wof.text" = "Type BTC";
+"ga1-R0-wof.text" = "BTC eingeben";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
-"heE-og-iXA.placeholder" = "Search";
+"heE-og-iXA.placeholder" = "Suche";
 
 /* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
-"kTm-at-TUR.normalTitle" = "Electronics";
+"kTm-at-TUR.normalTitle" = "Elektronik";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
 "lFC-s8-IJT.text" = "Label";
@@ -44,8 +44,8 @@
 "oyK-ph-99S.normalTitle" = "Restaurants";
 
 /* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
-"sWr-pd-hBY.normalTitle" = "ATMs";
+"sWr-pd-hBY.normalTitle" = "Geldautomaten";
 
 /* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
-"wy7-Kv-3ap.text" = "Address 1234";
+"wy7-Kv-3ap.text" = "Adresse 1234";
 
