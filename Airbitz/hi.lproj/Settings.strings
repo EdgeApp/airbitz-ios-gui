@@ -1,93 +1,94 @@
-
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "2FA Reset Requested by another device.";
+"1Qx-Jp-bYp.text" = "अन्य उपकरण के द्वारा 2FA रिसेट का अनुरोध किया गया है।";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "KEEP 2FA";
+"3uS-L5-frK.normalTitle" = "2FA रखें";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
-"4md-ob-Ttv.text" = "Core Version:";
+"4md-ob-Ttv.text" = "कोर संस्करण:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
-"9ur-p7-oPb.text" = "Label";
+"9ur-p7-oPb.text" = "लेबल";
 
 /* Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg"; */
-"Ag5-Xn-Vpg.normalTitle" = "Clear Watcher Cache";
+"Ag5-Xn-Vpg.normalTitle" = "वाचर कैश हटाएं";
 
 /* Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
-"Bs1-Yi-SIh.normalTitle" = "Upload Log Files";
+"Bs1-Yi-SIh.normalTitle" = "लॉग फाइल अपलोड करें";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled";
+"GMX-G5-Rl3.text" = "केवल पिछले लॉगइन किये गए उपकरणों से लॉगइन करने की अनुमति देकर सुरक्षा बढ़ाने के लिए 2-फैक्टर पुष्टिकरण सक्षम करें। 2FA सक्षम हो जाने के बाद नीचे दिया गया QR कोड स्कैन करके और अधिक उपकरण जोड़ें।";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
-"GXU-6G-OIw.placeholder" = "Current Password";
+"GXU-6G-OIw.placeholder" = "वर्तमान पासवर्ड";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device";
+"Izr-Cl-Osv.text" = "2 फैक्टर प्रमाणीकरण सक्षम किये गए उपकरण का प्रयोग करते हुए, सेटिंग पर जाएं -> दो फैक्टर। 
+इस डिवाइस के प्रयोग से QR कोड स्कैन करें";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
-"LAg-aY-W5b.normalTitle" = "DONE";
+"LAg-aY-W5b.normalTitle" = "समाप्त";
 
 /* Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
-"Myh-H6-aDd.text" = "Version:";
+"Myh-H6-aDd.text" = "संस्करण:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05"; */
-"RqX-ow-U05.text" = "Label";
+"RqX-ow-U05.text" = "लेबल";
 
 /* Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK"; */
 "SXK-F7-NoK.text" = "0.1.0-mainnet";
 
 /* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
-"T6x-zH-xvf.text" = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. ";
+"T6x-zH-xvf.text" = "इस खाते पर 2 फैक्टर पुष्टिकरण (2FA) सक्रिय है|उस उपकरण से 2FA टोकन को स्कैन करें जो आपके लिए इस उपकरण पर 2FA सक्षम बनाए| ";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
-"X6G-HD-WUv.placeholder" = "Search";
+"X6G-HD-WUv.placeholder" = "खोजें";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod"; */
-"XJN-At-Qod.text" = "Label";
+"XJN-At-Qod.text" = "लेबल";
 
 /* Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82"; */
 "Zw4-k1-a82.text" = "Mainnet";
 
 /* Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd"; */
-"avV-bm-INd.normalTitle" = "DISABLE 2FA";
+"avV-bm-INd.normalTitle" = "2FA निष्क्रिय करें";
 
 /* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
-"bYl-WU-bNw.text" = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices";
+"bYl-WU-bNw.text" = "दो फैक्टर पुष्टिकरण को बंद करने का अनुरोध मिला है|अगर यूजर द्वारा पुष्टित उपकरण से कोई प्रतिक्रिया प्राप्त नहीं होती है तो ये अनुरोध 7 दिन में स्वतः पुनर्स्थापित हो जाएगा|";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
-"g6f-f3-w6p.text" = "Label";
+"g6f-f3-w6p.text" = "लेबल";
 
 /* Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15"; */
-"h6I-iF-k15.text" = "Date";
+"h6I-iF-k15.text" = "तिथि";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "Two factor reset has been requested";
+"hxc-na-KPc.text" = "दो फैक्टर पुनर्स्थापन का अनुरोध किया गया है|";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
 
 /* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
-"lqV-Y6-LKD.normalTitle" = "Request Reset";
+"lqV-Y6-LKD.normalTitle" = "अनुरोध पुनर्स्थापन";
 
 /* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
-"mJ9-nG-s79.text" = "Enabled";
+"mJ9-nG-s79.text" = "सक्षम";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50"; */
-"nhU-8o-H50.normalTitle" = "Button";
+"nhU-8o-H50.normalTitle" = "बटन";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a"; */
-"pX1-NU-49a.text" = "Label";
+"pX1-NU-49a.text" = "लेबल";
 
 /* Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL"; */
-"pki-9D-VwL.normalTitle" = "Scan Token";
+"pki-9D-VwL.normalTitle" = "टोकन स्कैन करें";
 
 /* Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg"; */
-"qLK-qd-7qg.text" = "Network:";
+"qLK-qd-7qg.text" = "नेटवर्क:";
 
 /* Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
-"sZm-Gx-M8r.text" = "App Version";
+"sZm-Gx-M8r.text" = "ऐप संस्करण";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x"; */
-"th1-bn-E4x.normalTitle" = "CANCEL";
+"th1-bn-E4x.normalTitle" = "रद्द करें";
+

@@ -1,12 +1,12 @@
 v 2.1.0
 
-• Add Libbitcoin/Electrum server address subscription for much improved performance and increased battery life.
-• Enable dynamic mining fee calculation
-• Add user controllable estimated mining fees (Low, Standard, High settings)
-• Fix incorrect transaction times for when transaction is received while wallet was offline
-• Fix calculator bugs
-• Add Chinese, Hindi, Spanish, and Portuguese language support
-• Add support for proper localization of numbers, times, and dates
-• Speed up new-device logins by 200%
-• Improve accuracy of transaction detection in poor network conditions
-• Add TouchID button to login screen to re-trigger TouchID popup
+• Fügen Sie Libbitcoin/Electrum Serverabonnement Adresse für deutlich verbesserte Leistung und erhöhte Batterielebensdauer hinzu.
+• Aktiviere dynamische Mining-Gebührenermittlung
+• Fügen Sie steuerbare geschätzte Mining-Nutzungsgebühren hinzu (niedrig, Standard, hohe Einstellungen)
+• Korrigieren Sie falsche Transaktionszeiten wann Transaktion empfangen wird, während Wallet offline war
+• Korriegieren Sie Rechner-Fehler
+• Fügen Sie Sprachunterstützung für Chinesisch, Hindi, Spanisch und Portugiesisch hinzu
+• Fügen Sie Unterstützung für die korrekte Lokalisierung von Zahlen, Zeiten und Terminen hinzu
+• Beschleunigen Sie Neugerät-Anmeldungen um 200 %
+• Verbesserung der Genauigkeit der Erkennung der Transaktion bei schlechten Netzwerkbedingungen
+• Fügen Sie TouchID-Button zum Login-Bildschirm um TouchID-Popup wieder auszulösen

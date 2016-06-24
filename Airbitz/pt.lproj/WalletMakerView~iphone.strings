@@ -1,4 +1,3 @@
-
 /* Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b"; */
 "61J-35-M5b.placeholder" = "Name your new wallet";
 
@@ -13,3 +12,4 @@
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg"; */
 "bfD-1n-tCg.normalTitle" = "DONE";
+

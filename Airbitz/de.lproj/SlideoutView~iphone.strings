@@ -1,4 +1,3 @@
-
 /* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
 "BCk-jF-SE5.text" = "LOGOUT";
 
@@ -43,3 +42,4 @@
 
 /* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
 "xna-m1-9hx.accessibilityLabel" = "Settings";
+

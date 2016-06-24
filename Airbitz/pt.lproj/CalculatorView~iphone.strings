@@ -1,4 +1,3 @@
-
 /* Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button"; */
 "2uL-vk-tLg.normalTitle" = "5";
 
@@ -9,7 +8,7 @@
 "Emr-ag-G6B.normalTitle" = "8";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button"; */
-"JE3-3X-s8v.normalTitle" = "Done";
+"JE3-3X-s8v.normalTitle" = "Concluído";
 
 /* Class = "UIButton"; normalTitle = "*"; ObjectID = "MCV-gu-4YU"; Note = "Calculator Button"; */
 "MCV-gu-4YU.normalTitle" = "*";
@@ -42,7 +41,7 @@
 "hpP-b8-SWQ.normalTitle" = "+";
 
 /* Class = "UIButton"; normalTitle = "< Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button"; */
-"tNK-PX-QMO.normalTitle" = "< Del";
+"tNK-PX-QMO.normalTitle" = "< Del";
 
 /* Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button"; */
 "vjB-0i-g2w.normalTitle" = "2";
@@ -55,3 +54,4 @@
 
 /* Class = "UIButton"; normalTitle = "%"; ObjectID = "xYy-J7-W9D"; Note = "Calculator Button"; */
 "xYy-J7-W9D.normalTitle" = "%";
+

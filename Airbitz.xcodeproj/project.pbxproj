@@ -1226,7 +1226,9 @@
 		DAB06AEF1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DAB06B251D171D3D00050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
 		DAB06B481D17230900050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
-		DAB06B601D1A35A700050098 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06B621D1A35A700050098 /* Localizable.strings */; };
+		DAB06B8B1D1A7F2900050098 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06B8D1D1A7F2900050098 /* Localizable.strings */; };
+		DAB06B971D1A7F4100050098 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06B8D1D1A7F2900050098 /* Localizable.strings */; };
+		DAB06B981D1A7F4100050098 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06B8D1D1A7F2900050098 /* Localizable.strings */; };
 		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
@@ -2121,7 +2123,28 @@
 		DAB06B461D1722FE00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
 		DAB06B471D17230900050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
 		DAB06B501D1A32DA00050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		DAB06B611D1A35A700050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB06B6D1D1A7E2C00050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		DAB06B731D1A7E7B00050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		DAB06B791D1A7ECA00050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		DAB06B7F1D1A7EF800050098 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainInterface.strings; sourceTree = "<group>"; };
+		DAB06B851D1A7F2800050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoView~iphone.strings"; sourceTree = "<group>"; };
+		DAB06B861D1A7F2800050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PopupWheelPickerView.strings"; sourceTree = "<group>"; };
+		DAB06B871D1A7F2800050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ConfirmationSliderView.strings"; sourceTree = "<group>"; };
+		DAB06B881D1A7F2800050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		DAB06B8C1D1A7F2900050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DAB06B8E1D1A7F2A00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PasswordVerifyView.strings"; sourceTree = "<group>"; };
+		DAB06B8F1D1A7F2A00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AccountCreate.strings"; sourceTree = "<group>"; };
+		DAB06B901D1A7F2A00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Settings.strings"; sourceTree = "<group>"; };
+		DAB06B911D1A7F2B00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
+		DAB06B921D1A7F2B00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		DAB06B931D1A7F2B00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BusinessDirectory.strings"; sourceTree = "<group>"; };
+		DAB06B941D1A7F2C00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
+		DAB06B951D1A7F2C00050098 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
+		DAB06B961D1A7F4100050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB06B991D1A7F4E00050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB06B9A1D1A7F5B00050098 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB06B9B1D1A7F6400050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAB06B9C1D1A7F7200050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon_full@2x.png"; sourceTree = "<group>"; };
 		DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-coffee-mug-128px@2x.png"; sourceTree = "<group>"; };
 		DAB5C0261C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-bulls-eye-128px@2x.png"; sourceTree = "<group>"; };
@@ -3098,7 +3121,7 @@
 		DAD1AD6E1BC6065100C648C4 = {
 			isa = PBXGroup;
 			children = (
-				DAB06B621D1A35A700050098 /* Localizable.strings */,
+				DAB06B8D1D1A7F2900050098 /* Localizable.strings */,
 				DAE1BE3E1CC37846003494AB /* Airbitz-Common */,
 				DAD1AD791BC6065100C648C4 /* Airbitz */,
 				DAD1AD931BC6065100C648C4 /* AirbitzTests */,
@@ -3641,6 +3664,7 @@
 				DA9EF4241BC7285D0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB991BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
 				DA9EF4251BC7285D0063DA07 /* enable-camera.png in Resources */,
+				DAB06B971D1A7F4100050098 /* Localizable.strings in Resources */,
 				DA9EF4261BC7285D0063DA07 /* icon_approved@2x.png in Resources */,
 				DA57A2261D131D5A005442AF /* info_send_confirmation.html in Resources */,
 				DA9101F61C4964AD00603D62 /* icon_import@2x.png in Resources */,
@@ -3906,6 +3930,7 @@
 				DA9EF5EB1BC729FA0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB9A1BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
 				DA9EF5EC1BC729FA0063DA07 /* enable-camera.png in Resources */,
+				DAB06B981D1A7F4100050098 /* Localizable.strings in Resources */,
 				DA9EF5ED1BC729FA0063DA07 /* icon_approved@2x.png in Resources */,
 				DA57A2271D131D5A005442AF /* info_send_confirmation.html in Resources */,
 				DA9101F71C4964AD00603D62 /* icon_import@2x.png in Resources */,
@@ -4370,7 +4395,7 @@
 				DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA57A22F1D131D5F005442AF /* info_settings.html in Resources */,
 				DA9EE4E41BC61F920063DA07 /* BitcoinSent.mp3 in Resources */,
-				DAB06B601D1A35A700050098 /* Localizable.strings in Resources */,
+				DAB06B8B1D1A7F2900050098 /* Localizable.strings in Resources */,
 				DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
@@ -5120,6 +5145,7 @@
 				DAB06A1C1D14B24D00050098 /* fr */,
 				DAB06A3A1D14B28300050098 /* de */,
 				DAB06B2B1D17221B00050098 /* zh */,
+				DAB06B921D1A7F2B00050098 /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -5134,6 +5160,7 @@
 				DAB06A181D14B24D00050098 /* fr */,
 				DAB06A361D14B28300050098 /* de */,
 				DAB06B271D17221A00050098 /* zh */,
+				DAB06B8F1D1A7F2A00050098 /* zh-Hans */,
 			);
 			name = AccountCreate.storyboard;
 			sourceTree = "<group>";
@@ -5148,6 +5175,7 @@
 				DAB06A191D14B24D00050098 /* fr */,
 				DAB06A371D14B28300050098 /* de */,
 				DAB06B281D17221A00050098 /* zh */,
+				DAB06B931D1A7F2B00050098 /* zh-Hans */,
 			);
 			name = BusinessDirectory.storyboard;
 			sourceTree = "<group>";
@@ -5162,6 +5190,7 @@
 				DAB06A1A1D14B24D00050098 /* fr */,
 				DAB06A381D14B28300050098 /* de */,
 				DAB06B291D17221A00050098 /* zh */,
+				DAB06B871D1A7F2800050098 /* zh-Hans */,
 			);
 			name = ConfirmationSliderView.xib;
 			sourceTree = "<group>";
@@ -5176,6 +5205,7 @@
 				DAB06A1B1D14B24D00050098 /* fr */,
 				DAB06A391D14B28300050098 /* de */,
 				DAB06B2A1D17221A00050098 /* zh */,
+				DAB06B851D1A7F2800050098 /* zh-Hans */,
 			);
 			name = "InfoView~iphone.xib";
 			sourceTree = "<group>";
@@ -5190,6 +5220,7 @@
 				DAB06A1D1D14B24D00050098 /* fr */,
 				DAB06A3B1D14B28300050098 /* de */,
 				DAB06B2C1D17221B00050098 /* zh */,
+				DAB06B8E1D1A7F2A00050098 /* zh-Hans */,
 			);
 			name = PasswordVerifyView.xib;
 			sourceTree = "<group>";
@@ -5204,6 +5235,7 @@
 				DAB06A1E1D14B24E00050098 /* fr */,
 				DAB06A3C1D14B28300050098 /* de */,
 				DAB06B2D1D17221B00050098 /* zh */,
+				DAB06B861D1A7F2800050098 /* zh-Hans */,
 			);
 			name = PopupWheelPickerView.xib;
 			sourceTree = "<group>";
@@ -5218,6 +5250,7 @@
 				DAB06A1F1D14B24E00050098 /* fr */,
 				DAB06A3D1D14B28300050098 /* de */,
 				DAB06B2E1D17221B00050098 /* zh */,
+				DAB06B901D1A7F2A00050098 /* zh-Hans */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -5232,6 +5265,7 @@
 				DAB06A201D14B24E00050098 /* fr */,
 				DAB06A3E1D14B28300050098 /* de */,
 				DAB06B2F1D17221B00050098 /* zh */,
+				DAB06B941D1A7F2C00050098 /* zh-Hans */,
 			);
 			name = "SlideoutView~iphone.xib";
 			sourceTree = "<group>";
@@ -5246,6 +5280,7 @@
 				DAB06A211D14B24E00050098 /* fr */,
 				DAB06A3F1D14B28300050098 /* de */,
 				DAB06B301D17221B00050098 /* zh */,
+				DAB06B911D1A7F2B00050098 /* zh-Hans */,
 			);
 			name = "WalletMakerView~iphone.xib";
 			sourceTree = "<group>";
@@ -5260,6 +5295,7 @@
 				DAB06A221D14B24E00050098 /* fr */,
 				DAB06A401D14B28300050098 /* de */,
 				DAB06B311D17221B00050098 /* zh */,
+				DAB06B951D1A7F2C00050098 /* zh-Hans */,
 			);
 			name = "CalculatorView~iphone.xib";
 			sourceTree = "<group>";
@@ -5535,6 +5571,11 @@
 				DAB06AE51D1677ED00050098 /* Base */,
 				DAB06B321D17223500050098 /* zh */,
 				DAB06B501D1A32DA00050098 /* es */,
+				DAB06B6D1D1A7E2C00050098 /* hi */,
+				DAB06B731D1A7E7B00050098 /* pt */,
+				DAB06B791D1A7ECA00050098 /* de */,
+				DAB06B7F1D1A7EF800050098 /* fr */,
+				DAB06B881D1A7F2800050098 /* zh-Hans */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -5581,10 +5622,15 @@
 			name = "Airbitz-Testnet-InfoPlist.strings";
 			sourceTree = "<group>";
 		};
-		DAB06B621D1A35A700050098 /* Localizable.strings */ = {
+		DAB06B8D1D1A7F2900050098 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DAB06B611D1A35A700050098 /* es */,
+				DAB06B8C1D1A7F2900050098 /* zh-Hans */,
+				DAB06B961D1A7F4100050098 /* de */,
+				DAB06B991D1A7F4E00050098 /* es */,
+				DAB06B9A1D1A7F5B00050098 /* fr */,
+				DAB06B9B1D1A7F6400050098 /* hi */,
+				DAB06B9C1D1A7F7200050098 /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

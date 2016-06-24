@@ -40,12 +40,18 @@
       <trans-unit id="0gq-ds-DJC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-        <target xml:lang="hi" state="translated">आगे</target>
+        <target xml:lang="hi" state="translated">अगला</target>
+        <alt-trans>
+          <target xml:lang="hi">आगे</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
         <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="hi" state="translated">आपके प्रयोगकर्ता नाम और पासवर्ड की जानकारी केवल आपको होती है और इसे कभी भी संचारित या इन्क्रिप्ट किये बिना संग्रहित नहीं किया जाता है।</target>
+        <target xml:lang="hi" state="translated">आपका यूजरनाम और पासवर्ड सिर्फ आपको पता रहेगा और ये सूचना न किसी को भेजी जाएगी और न ही गुप्त रूप से स्टोर की जाएगी|</target>
+        <alt-trans>
+          <target xml:lang="hi">आपके प्रयोगकर्ता नाम और पासवर्ड की जानकारी केवल आपको होती है और इसे कभी भी संचारित या इन्क्रिप्ट किये बिना संग्रहित नहीं किया जाता है।</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle">
         <source>NEXT</source>
@@ -65,7 +71,10 @@
       <trans-unit id="DUg-At-veb.text">
         <source>myname</source>
         <note>Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb";</note>
-        <target xml:lang="hi" state="translated">मेरा नाम</target>
+        <target xml:lang="hi" state="translated">मायनेम</target>
+        <alt-trans>
+          <target xml:lang="hi">मेरा नाम</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="DgW-Gm-7l2.normalTitle">
         <source>NEXT</source>
@@ -75,7 +84,10 @@
       <trans-unit id="Dyh-gB-nOv.text">
         <source>You will next see a popup requesting access to your Contacts.</source>
         <note>Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv";</note>
-        <target xml:lang="hi" state="translated">इसके बाद आप अपने संपर्कों के लिए एक्सेस का अनुरोध करने वाला एक पॉपअप देखेंगे।</target>
+        <target xml:lang="hi" state="translated">अब आप आपके संपर्क की सूचना लेने के लिए पॉपअप अनुरोध देखेंगे</target>
+        <alt-trans>
+          <target xml:lang="hi">इसके बाद आप अपने संपर्कों के लिए एक्सेस का अनुरोध करने वाला एक पॉपअप देखेंगे।</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Ehm-ti-qdD.text">
         <source>Specify your name or arbitrary nickname ie "Coinmaster".
@@ -84,16 +96,23 @@ This is used ONLY when sending payments or requests to others to help them ident
 
 This is never sent to Airbitz or any third party and can be changed at any time in the future.</source>
         <note>Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD";</note>
-        <target xml:lang="hi" state="translated">अपना नाम या मनचाहा उपनाम जैसे "कॉइनमास्टर" निर्दिष्ट करें।
+        <target xml:lang="hi" state="translated">अपना नाम या प्रचलित निकनेम लिखें जैसे "कॉइनमास्टर"|
+ये केवल भुगतान अनुरोध भेजने और किसी को आपकी पहचान अनुरोध के लिए काम में लिया जाएगा|इसे एयरबिट्ज़ या किसी अन्य तीसरे पक्ष को नहीं भेजा जाएगा और इसे आप भविष्य में जब चाहें इसे बदल सकते हैं|</target>
+        <alt-trans>
+          <target xml:lang="hi">अपना नाम या मनचाहा उपनाम जैसे "कॉइनमास्टर" निर्दिष्ट करें।
 
 इसे केवल दूसरों को आपको पहचानने में मदद करने के लिए भुगतान या अनुरोध भेजते समय किया जाता है। 
 
 इसे कभी भी Airbitz या किसी अन्य तृतीय पक्ष को नहीं भेजा जाता है और इसे भविष्य में किसी भी समय परिवर्तित किया जा सकता है।</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="G0E-xz-b8e.text">
         <source>Set a 4 Digit PIN</source>
         <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
-        <target xml:lang="hi" state="translated">4 अंक का पिन निर्धारित करें</target>
+        <target xml:lang="hi" state="translated">4 अंकीय पिन तय करें</target>
+        <alt-trans>
+          <target xml:lang="hi">4 अंक का पिन निर्धारित करें</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Gzw-pH-bAR.text">
         <source>1234</source>
@@ -250,7 +269,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="DlF-tR-T08.text">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="hi" state="translated">व्यवसाय नाम</target>
+        <target xml:lang="hi" state="translated">व्यावसायिक नाम</target>
+        <alt-trans>
+          <target xml:lang="hi">व्यवसाय नाम</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="GGS-YR-zt1.normalTitle">
         <source>Shopping</source>
@@ -275,7 +297,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="aNa-3g-QXd.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd";</note>
-        <target xml:lang="hi" state="translated">खोजें</target>
+        <target xml:lang="hi" state="translated">खोज</target>
+        <alt-trans>
+          <target xml:lang="hi">खोजें</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="b1E-1G-btq.normalTitle">
         <source>Gift Cards</source>
@@ -993,7 +1018,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="24.normalTitle">
         <source>OK</source>
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
-        <target xml:lang="hi" state="translated">ठीक है</target>
+        <target xml:lang="hi" state="translated">ओके</target>
+        <alt-trans>
+          <target xml:lang="hi">ठीक है</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="25.normalTitle">
         <source>Cancel</source>
@@ -1010,7 +1038,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="1Qx-Jp-bYp.text">
         <source>2FA Reset Requested by another device.</source>
         <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
-        <target xml:lang="hi" state="translated">अन्य उपकरण के द्वारा 2FA रिसेट का अनुरोध किया गया है।</target>
+        <target xml:lang="hi" state="translated">अन्य उपकरण से 2FA पुनर्स्थापन का अनुरोध किया गया है|</target>
+        <alt-trans>
+          <target xml:lang="hi">अन्य उपकरण के द्वारा 2FA रिसेट का अनुरोध किया गया है।</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="3uS-L5-frK.normalTitle">
         <source>KEEP 2FA</source>
@@ -1040,7 +1071,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="GMX-G5-Rl3.text">
         <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
         <note>Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3";</note>
-        <target xml:lang="hi" state="translated">केवल पिछले लॉगइन किये गए उपकरणों से लॉगइन करने की अनुमति देकर सुरक्षा बढ़ाने के लिए 2-फैक्टर पुष्टिकरण सक्षम करें। 2FA सक्षम हो जाने के बाद नीचे दिया गया QR कोड स्कैन करके और अधिक उपकरण जोड़ें।</target>
+        <target xml:lang="hi" state="translated">2-फैक्टर पुष्टिकरण को सक्रिय कर केवल पिछले लोग्डइन से ही लॉग इन करने की अनुमति देकर उपकरण की सुरक्षा बढाएं|2FA सक्रिय करने के बाद नीचे दिए क्यूआर कोड को स्कैन कर और उपकरण जोड़ें|</target>
+        <alt-trans>
+          <target xml:lang="hi">केवल पिछले लॉगइन किये गए उपकरणों से लॉगइन करने की अनुमति देकर सुरक्षा बढ़ाने के लिए 2-फैक्टर पुष्टिकरण सक्षम करें। 2FA सक्षम हो जाने के बाद नीचे दिया गया QR कोड स्कैन करके और अधिक उपकरण जोड़ें।</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="GXU-6G-OIw.placeholder">
         <source>Current Password</source>
@@ -1189,7 +1223,10 @@ Scan the QR code using this device</source>
       <trans-unit id="O8N-2d-FwL.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL";</note>
-        <target xml:lang="hi" state="translated">उपनाम</target>
+        <target xml:lang="hi" state="translated">लेबल</target>
+        <alt-trans>
+          <target xml:lang="hi">उपनाम</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Zac-Lf-J4y.text">
         <source>SETTINGS</source>
@@ -1219,7 +1256,10 @@ Scan the QR code using this device</source>
       <trans-unit id="lr4-kO-HCW.text">
         <source>WALLETS</source>
         <note>Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW";</note>
-        <target xml:lang="hi" state="translated">वाल्लेट्स</target>
+        <target xml:lang="hi" state="translated">वॉलेट</target>
+        <alt-trans>
+          <target xml:lang="hi">वाल्लेट्स</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="rWQ-uJ-DUX.text">
         <source>BUY / SELL BITCOIN</source>
@@ -1234,7 +1274,10 @@ Scan the QR code using this device</source>
       <trans-unit id="vsf-Ms-1Ff.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="hi" state="translated">उपनाम</target>
+        <target xml:lang="hi" state="translated">लेबल</target>
+        <alt-trans>
+          <target xml:lang="hi">उपनाम</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="xju-3Y-EvK.text">
         <source>See Strings.h</source>
@@ -1256,7 +1299,10 @@ Scan the QR code using this device</source>
       <trans-unit id="61J-35-M5b.placeholder">
         <source>Name your new wallet</source>
         <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
-        <target xml:lang="hi" state="translated">अपने नए वॉलेट का नाम रखें</target>
+        <target xml:lang="hi" state="translated">नए वालेट का नाम तय करें</target>
+        <alt-trans>
+          <target xml:lang="hi">अपने नए वॉलेट का नाम रखें</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="HuB-Hn-lsB.text">
         <source>Currency:</source>
@@ -1266,7 +1312,10 @@ Scan the QR code using this device</source>
       <trans-unit id="Ug5-7Y-oG3.normalTitle">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
-        <target xml:lang="hi" state="translated">रद्द करें</target>
+        <target xml:lang="hi" state="translated">रद्द</target>
+        <alt-trans>
+          <target xml:lang="hi">रद्द करें</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="VVb-in-rZz.normalTitle">
         <source>Button</source>
@@ -1280,7 +1329,7 @@ Scan the QR code using this device</source>
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz/Localizable.strings" source-language="en" datatype="plaintext" target-language="hi">
+  <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="hi">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
@@ -1474,7 +1523,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive">
         <source>Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">क्या आप सुनिश्चित हैं? आप इस वॉलेट में उपलब्ध कोई भी धनराशि और भविष्य में प्राप्त होने वाली कोई भी धनराशि प्राप्त करने में सक्षम नहीं होंगे</target>
+        <target xml:lang="hi" state="translated">सचमुच? आप आगे से इस वॉलेट में प्राप्त धन को नहीं नहीं पाएंगे|</target>
       </trans-unit>
       <trans-unit id="Arts">
         <source>Arts</source>
@@ -1509,7 +1558,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Baby Supplies">
         <source>Baby Supplies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">बच्चे की आपूर्तियाँ</target>
+        <target xml:lang="hi" state="translated">शिशु आपूर्तियाँ</target>
       </trans-unit>
       <trans-unit id="Babysitter &amp; Daycare">
         <source>Babysitter &amp; Daycare</source>
@@ -1585,9 +1634,6 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Books &amp; Supplies</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="hi" state="translated">किताबें और आपूर्तियाँ</target>
-        <alt-trans>
-          <target xml:lang="hi">किताबें &amp; आपूर्तियाँ</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
@@ -1702,7 +1748,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">कॉफ़ी और चाय</target>
+        <target xml:lang="hi" state="translated">कॉफ़ी &amp; चाय</target>
       </trans-unit>
       <trans-unit id="Coffee Shops">
         <source>Coffee Shops</source>
@@ -1822,7 +1868,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Delete">
         <source>Delete</source>
         <note>DELETE button text for wallet delete</note>
-        <target xml:lang="hi" state="translated">नष्ट</target>
+        <target xml:lang="hi" state="translated">हटाएं</target>
       </trans-unit>
       <trans-unit id="Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.">
         <source>Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.</source>
@@ -2028,7 +2074,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Error sending Email.">
         <source>Error sending Email.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">ईमेल भेजने में में परेशानी हो रही है</target>
+        <target xml:lang="hi" state="translated">शराब और बार</target>
       </trans-unit>
       <trans-unit id="Error sending SMS">
         <source>Error sending SMS</source>
@@ -2053,7 +2099,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Expense">
         <source>Expense</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">खर्च</target>
+        <target xml:lang="hi" state="translated">खर्च:</target>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
@@ -2093,7 +2139,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Fees &amp; Charges">
         <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">शुल्क &amp; प्रभार</target>
+        <target xml:lang="hi" state="translated">शुल्क और प्रभार</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2279,7 +2325,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Import Airbitz Gift Card">
         <source>Import Airbitz Gift Card</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">एयर बिट्ज़ उपहार कार्ड आयात करें</target>
+        <target xml:lang="hi" state="translated">Airbitz उपहार कार्ड आयात करें</target>
       </trans-unit>
       <trans-unit id="Import Funds">
         <source>Import Funds</source>
@@ -2314,7 +2360,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Income">
         <source>Income</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">आय</target>
+        <target xml:lang="hi" state="translated">आय:</target>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
         <source>Incorrect PIN</source>
@@ -2740,12 +2786,12 @@ Enter it below to make sure:</source>
       <trans-unit id="Pet Grooming">
         <source>Pet Grooming</source>
         <note>expense category</note>
-        <target xml:lang="hi" state="translated">पालतू सौंदर्य</target>
+        <target xml:lang="hi" state="translated">पालतू पशु देखरेख</target>
       </trans-unit>
       <trans-unit id="Pets">
         <source>Pets</source>
         <note>expense category</note>
-        <target xml:lang="hi" state="translated">पालतू जानवर</target>
+        <target xml:lang="hi" state="translated">पालतू पशु</target>
       </trans-unit>
       <trans-unit id="Pharmacy">
         <source>Pharmacy</source>
@@ -3061,7 +3107,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Service &amp; Parts">
         <source>Service &amp; Parts</source>
         <note>expense category</note>
-        <target xml:lang="hi" state="translated">सेवा &amp; भाग</target>
+        <target xml:lang="hi" state="translated">सेवा और भाग</target>
       </trans-unit>
       <trans-unit id="Service Fee">
         <source>Service Fee</source>
@@ -3088,7 +3134,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Settings">
         <source>Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">सेटिंग</target>
+        <target xml:lang="hi" state="translated">सेटिंग्स</target>
       </trans-unit>
       <trans-unit id="Share">
         <source>Share</source>
@@ -3140,9 +3186,6 @@ Enter it below to make sure:</source>
         <source>Spa &amp; Massage</source>
         <note>expense category</note>
         <target xml:lang="hi" state="translated">स्पा और मालिश</target>
-        <alt-trans>
-          <target xml:lang="hi">स्पा &amp; मालिश</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
@@ -3275,7 +3318,7 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">टच आईडी</target>
+        <target xml:lang="hi" state="translated">निजी कुंजी/उपहार कार्ड आयात करने के लिए QR स्कैन करें</target>
       </trans-unit>
       <trans-unit id="Touch ID Disabled">
         <source>Touch ID Disabled</source>
@@ -3340,7 +3383,7 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">दोबारा प्रयास करें?</target>
+        <target xml:lang="hi" state="translated">फिर कोशिश करो?</target>
       </trans-unit>
       <trans-unit id="Tuition">
         <source>Tuition</source>
@@ -3448,7 +3491,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Upload Log File">
         <source>Upload Log File</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="translated">लॉग फाइल अपलोड करें</target>
+        <target xml:lang="hi" state="translated">लॉग फाइल उपलोड करें</target>
       </trans-unit>
       <trans-unit id="Upload Successful">
         <source>Upload Successful</source>
@@ -3483,7 +3526,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Use TouchID">
         <source>Use TouchID</source>
         <note>settings text</note>
-        <target xml:lang="hi" state="translated">TouchID प्रयोग करें</target>
+        <target xml:lang="hi" state="translated">टचआईडी इस्तेमाल कीजिये</target>
       </trans-unit>
       <trans-unit id="User Name: %@">
         <source>User Name: %@</source>
@@ -3564,7 +3607,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Wallet: ">
         <source>Wallet: </source>
         <note>Prefix of wallet name on rename popup</note>
-        <target xml:lang="hi" state="translated">वॉलेट: </target>
+        <target xml:lang="hi" state="translated">वॉलेट </target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>

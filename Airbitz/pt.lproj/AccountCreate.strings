@@ -1,4 +1,3 @@
-
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "NEXT";
 
@@ -24,7 +23,11 @@
 "Dyh-gB-nOv.text" = "You will next see a popup requesting access to your Contacts.";
 
 /* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
-"Ehm-ti-qdD.text" = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future.";
+"Ehm-ti-qdD.text" = "Specify your name or arbitrary nickname ie \"Coinmaster\".
+
+This is used ONLY when sending payments or requests to others to help them identify you.
+
+This is never sent to Airbitz or any third party and can be changed at any time in the future.";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
 "G0E-xz-b8e.text" = "Set a 4 Digit PIN";
@@ -115,3 +118,4 @@
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC"; */
 "zqc-i8-gfC.text" = "Password";
+
