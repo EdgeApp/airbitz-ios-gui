@@ -565,7 +565,7 @@
             [_spend signTx:^(ABCUnsentTx *unsentTx) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:nil unsentTx:unsentTx];
             } error:^(NSError *error) {
-                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
+                [self txSendFailed:error];
             }];
         }
         else
@@ -573,7 +573,7 @@
             [_spend signBroadcastAndSave:^(ABCTransaction *transaction) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:transaction unsentTx:nil];
             } error:^(NSError *error) {
-                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
+                [self txSendFailed:error];
             }];
         }
     }
@@ -636,7 +636,7 @@
         _alert = nil;
     }
     NSString *title = params[0];
-    NSString *message = params[1];
+    NSString *message = [NSString stringWithFormat:@"%@\n\n%@", params[1], params[2]];
     _alert = [[UIAlertView alloc]
                             initWithTitle:title
                             message:message
@@ -1049,16 +1049,16 @@
     });
 }
 
-- (void)txSendFailed:(NSString *)errorString
+- (void)txSendFailed:(NSError *)error;
 {
     NSString *title = errorDuringSend;
-    NSArray *params = [NSArray arrayWithObjects: title, errorString, nil];
+    NSArray *params = [NSArray arrayWithObjects: title, error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];
 //    dispatch_async(dispatch_get_main_queue(), ^(void) {
         [_confirmationSlider resetIn:1.0];
         if (_bAdvanceToTx) {
             [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
         } else {
-            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withUnsentTx:)]) {
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:transaction:withUnsentTx:)]) {
                 [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO transaction:nil withUnsentTx:nil];
             } else {
                 [self.delegate sendConfirmationViewControllerDidFinish:self];
