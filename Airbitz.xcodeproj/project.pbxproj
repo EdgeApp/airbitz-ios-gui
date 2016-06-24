@@ -1382,6 +1382,65 @@
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
+		DA49024E1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DA49024F1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/email_template.html"; sourceTree = "<group>"; };
+		DA4902501D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DA4902511D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DA4902521D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DA4902531D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DA4902541D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DA4902551D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DA4902561D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_request.html"; sourceTree = "<group>"; };
+		DA4902571D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DA4902581D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_send.html"; sourceTree = "<group>"; };
+		DA4902591D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DA49025A1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DA49025B1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DA49025C1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DA49025D1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DA49025E1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/info.html"; sourceTree = "<group>"; };
+		DA49025F1D1D0A9400F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "es-MX"; path = "es-MX.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DA4902641D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DA4902651D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/email_template.html"; sourceTree = "<group>"; };
+		DA4902661D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DA4902671D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DA4902681D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DA4902691D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DA49026A1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DA49026B1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DA49026C1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_request.html"; sourceTree = "<group>"; };
+		DA49026D1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DA49026E1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_send.html"; sourceTree = "<group>"; };
+		DA49026F1D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DA4902701D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DA4902711D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DA4902721D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DA4902731D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DA4902741D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info.html"; sourceTree = "<group>"; };
+		DA4902751D1D0AE100F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DA4902761D1D0C6000F34324 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DA4902771D1D0C6A00F34324 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-BR"; path = "pt-BR.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DA4902781D1D0C7500F34324 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DA4902791D1D0C8100F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-CN"; path = "zh-CN.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DA49027A1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DA49027B1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/email_template.html"; sourceTree = "<group>"; };
+		DA49027C1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DA49027D1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DA49027E1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DA49027F1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DA4902801D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DA4902811D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DA4902821D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_request.html"; sourceTree = "<group>"; };
+		DA4902831D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DA4902841D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_send.html"; sourceTree = "<group>"; };
+		DA4902851D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DA4902861D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DA4902871D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DA4902881D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DA4902891D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DA49028A1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info.html"; sourceTree = "<group>"; };
+		DA49028B1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/transaction_details.html"; sourceTree = "<group>"; };
+		DA49028C1D1D0DF600F34324 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text; name = zh; path = zh.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
 		DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht.png"; sourceTree = "<group>"; };
 		DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht@2x.png"; sourceTree = "<group>"; };
@@ -1433,6 +1492,24 @@
 		DA7A75F91D1CFA3A0028D221 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA7A75FA1D1CFA410028D221 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA7A75FB1D1CFA490028D221 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA7A76261D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template_simple.html"; sourceTree = "<group>"; };
+		DA7A76271D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/email_template.html"; sourceTree = "<group>"; };
+		DA7A76281D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
+		DA7A76291D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet_options.html"; sourceTree = "<group>"; };
+		DA7A762A1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_export_wallet.html"; sourceTree = "<group>"; };
+		DA7A762B1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_footer.html"; sourceTree = "<group>"; };
+		DA7A762C1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_insufficient_funds.html"; sourceTree = "<group>"; };
+		DA7A762D1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_recipient.html"; sourceTree = "<group>"; };
+		DA7A762E1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_request.html"; sourceTree = "<group>"; };
+		DA7A762F1D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send_confirmation.html"; sourceTree = "<group>"; };
+		DA7A76301D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_send.html"; sourceTree = "<group>"; };
+		DA7A76311D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_settings.html"; sourceTree = "<group>"; };
+		DA7A76321D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_spending_limits.html"; sourceTree = "<group>"; };
+		DA7A76331D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transaction_details.html"; sourceTree = "<group>"; };
+		DA7A76341D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_transactions.html"; sourceTree = "<group>"; };
+		DA7A76351D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info_wallets.html"; sourceTree = "<group>"; };
+		DA7A76361D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/info.html"; sourceTree = "<group>"; };
+		DA7A76371D1D06F00028D221 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/transaction_details.html"; sourceTree = "<group>"; };
 		DA9101EF1C4964AD00603D62 /* icon_import.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_import.png; sourceTree = "<group>"; };
 		DA9101F01C4964AD00603D62 /* icon_import@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@2x.png"; sourceTree = "<group>"; };
 		DA9101F11C4964AD00603D62 /* icon_import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_import@3x.png"; sourceTree = "<group>"; };
@@ -3546,6 +3623,9 @@
 				de,
 				zh,
 				"zh-Hans",
+				"es-MX",
+				"pt-BR",
+				"zh-CN",
 			);
 			mainGroup = DAD1AD6E1BC6065100C648C4;
 			productRefGroup = DAD1AD781BC6065100C648C4 /* Products */;
@@ -5311,6 +5391,10 @@
 				DAB06A231D14B24E00050098 /* fr */,
 				DAB06A411D14B28300050098 /* de */,
 				DAB06B331D17226700050098 /* zh */,
+				DA7A76261D1D06F00028D221 /* zh-Hans */,
+				DA49024E1D1D0A9400F34324 /* es-MX */,
+				DA4902641D1D0AE100F34324 /* pt-BR */,
+				DA49027A1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = email_template_simple.html;
 			sourceTree = "<group>";
@@ -5325,6 +5409,10 @@
 				DAB06A241D14B24E00050098 /* fr */,
 				DAB06A421D14B28400050098 /* de */,
 				DAB06B341D17226700050098 /* zh */,
+				DA7A76271D1D06F00028D221 /* zh-Hans */,
+				DA49024F1D1D0A9400F34324 /* es-MX */,
+				DA4902651D1D0AE100F34324 /* pt-BR */,
+				DA49027B1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = email_template.html;
 			sourceTree = "<group>";
@@ -5339,6 +5427,10 @@
 				DAB06A251D14B24E00050098 /* fr */,
 				DAB06A431D14B28400050098 /* de */,
 				DAB06B351D17226700050098 /* zh */,
+				DA7A76281D1D06F00028D221 /* zh-Hans */,
+				DA4902501D1D0A9400F34324 /* es-MX */,
+				DA4902661D1D0AE100F34324 /* pt-BR */,
+				DA49027C1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_disclaimer.html;
 			sourceTree = "<group>";
@@ -5353,6 +5445,10 @@
 				DAB06A261D14B24E00050098 /* fr */,
 				DAB06A441D14B28400050098 /* de */,
 				DAB06B361D17226700050098 /* zh */,
+				DA7A76291D1D06F00028D221 /* zh-Hans */,
+				DA4902511D1D0A9400F34324 /* es-MX */,
+				DA4902671D1D0AE100F34324 /* pt-BR */,
+				DA49027D1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_export_wallet_options.html;
 			sourceTree = "<group>";
@@ -5367,6 +5463,10 @@
 				DAB06A271D14B24E00050098 /* fr */,
 				DAB06A451D14B28400050098 /* de */,
 				DAB06B371D17226700050098 /* zh */,
+				DA7A762A1D1D06F00028D221 /* zh-Hans */,
+				DA4902521D1D0A9400F34324 /* es-MX */,
+				DA4902681D1D0AE100F34324 /* pt-BR */,
+				DA49027E1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_export_wallet.html;
 			sourceTree = "<group>";
@@ -5381,6 +5481,10 @@
 				DAB06A281D14B24E00050098 /* fr */,
 				DAB06A461D14B28400050098 /* de */,
 				DAB06B381D17226700050098 /* zh */,
+				DA7A762B1D1D06F00028D221 /* zh-Hans */,
+				DA4902531D1D0A9400F34324 /* es-MX */,
+				DA4902691D1D0AE100F34324 /* pt-BR */,
+				DA49027F1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_footer.html;
 			sourceTree = "<group>";
@@ -5395,6 +5499,10 @@
 				DAB06A291D14B24F00050098 /* fr */,
 				DAB06A471D14B28400050098 /* de */,
 				DAB06B391D17226700050098 /* zh */,
+				DA7A762C1D1D06F00028D221 /* zh-Hans */,
+				DA4902541D1D0A9400F34324 /* es-MX */,
+				DA49026A1D1D0AE100F34324 /* pt-BR */,
+				DA4902801D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_insufficient_funds.html;
 			sourceTree = "<group>";
@@ -5409,6 +5517,10 @@
 				DAB06A2A1D14B24F00050098 /* fr */,
 				DAB06A481D14B28400050098 /* de */,
 				DAB06B3A1D17226700050098 /* zh */,
+				DA7A762D1D1D06F00028D221 /* zh-Hans */,
+				DA4902551D1D0A9400F34324 /* es-MX */,
+				DA49026B1D1D0AE100F34324 /* pt-BR */,
+				DA4902811D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_recipient.html;
 			sourceTree = "<group>";
@@ -5423,6 +5535,10 @@
 				DAB06A2B1D14B24F00050098 /* fr */,
 				DAB06A491D14B28400050098 /* de */,
 				DAB06B3B1D17226700050098 /* zh */,
+				DA7A762E1D1D06F00028D221 /* zh-Hans */,
+				DA4902561D1D0A9400F34324 /* es-MX */,
+				DA49026C1D1D0AE100F34324 /* pt-BR */,
+				DA4902821D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_request.html;
 			sourceTree = "<group>";
@@ -5437,6 +5553,10 @@
 				DAB06A2C1D14B24F00050098 /* fr */,
 				DAB06A4A1D14B28400050098 /* de */,
 				DAB06B3C1D17226700050098 /* zh */,
+				DA7A762F1D1D06F00028D221 /* zh-Hans */,
+				DA4902571D1D0A9400F34324 /* es-MX */,
+				DA49026D1D1D0AE100F34324 /* pt-BR */,
+				DA4902831D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_send_confirmation.html;
 			sourceTree = "<group>";
@@ -5451,6 +5571,10 @@
 				DAB06A2D1D14B24F00050098 /* fr */,
 				DAB06A4B1D14B28400050098 /* de */,
 				DAB06B3D1D17226700050098 /* zh */,
+				DA7A76301D1D06F00028D221 /* zh-Hans */,
+				DA4902581D1D0A9400F34324 /* es-MX */,
+				DA49026E1D1D0AE100F34324 /* pt-BR */,
+				DA4902841D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_send.html;
 			sourceTree = "<group>";
@@ -5465,6 +5589,10 @@
 				DAB06A2E1D14B24F00050098 /* fr */,
 				DAB06A4C1D14B28400050098 /* de */,
 				DAB06B3E1D17226700050098 /* zh */,
+				DA7A76311D1D06F00028D221 /* zh-Hans */,
+				DA4902591D1D0A9400F34324 /* es-MX */,
+				DA49026F1D1D0AE100F34324 /* pt-BR */,
+				DA4902851D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_settings.html;
 			sourceTree = "<group>";
@@ -5479,6 +5607,10 @@
 				DAB06A2F1D14B24F00050098 /* fr */,
 				DAB06A4D1D14B28400050098 /* de */,
 				DAB06B3F1D17226700050098 /* zh */,
+				DA7A76321D1D06F00028D221 /* zh-Hans */,
+				DA49025A1D1D0A9400F34324 /* es-MX */,
+				DA4902701D1D0AE100F34324 /* pt-BR */,
+				DA4902861D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_spending_limits.html;
 			sourceTree = "<group>";
@@ -5493,6 +5625,10 @@
 				DAB06A301D14B24F00050098 /* fr */,
 				DAB06A4E1D14B28500050098 /* de */,
 				DAB06B401D17226700050098 /* zh */,
+				DA7A76331D1D06F00028D221 /* zh-Hans */,
+				DA49025B1D1D0A9400F34324 /* es-MX */,
+				DA4902711D1D0AE100F34324 /* pt-BR */,
+				DA4902871D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_transaction_details.html;
 			sourceTree = "<group>";
@@ -5507,6 +5643,10 @@
 				DAB06A311D14B24F00050098 /* fr */,
 				DAB06A4F1D14B28500050098 /* de */,
 				DAB06B411D17226700050098 /* zh */,
+				DA7A76341D1D06F00028D221 /* zh-Hans */,
+				DA49025C1D1D0A9400F34324 /* es-MX */,
+				DA4902721D1D0AE100F34324 /* pt-BR */,
+				DA4902881D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_transactions.html;
 			sourceTree = "<group>";
@@ -5521,6 +5661,10 @@
 				DAB06A321D14B24F00050098 /* fr */,
 				DAB06A501D14B28500050098 /* de */,
 				DAB06B421D17226700050098 /* zh */,
+				DA7A76351D1D06F00028D221 /* zh-Hans */,
+				DA49025D1D1D0A9400F34324 /* es-MX */,
+				DA4902731D1D0AE100F34324 /* pt-BR */,
+				DA4902891D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info_wallets.html;
 			sourceTree = "<group>";
@@ -5535,6 +5679,10 @@
 				DAB06A331D14B25000050098 /* fr */,
 				DAB06A511D14B28500050098 /* de */,
 				DAB06B431D17226700050098 /* zh */,
+				DA7A76361D1D06F00028D221 /* zh-Hans */,
+				DA49025E1D1D0A9400F34324 /* es-MX */,
+				DA4902741D1D0AE100F34324 /* pt-BR */,
+				DA49028A1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = info.html;
 			sourceTree = "<group>";
@@ -5549,6 +5697,10 @@
 				DAB06A341D14B25000050098 /* fr */,
 				DAB06A521D14B28500050098 /* de */,
 				DAB06B441D17226700050098 /* zh */,
+				DA7A76371D1D06F00028D221 /* zh-Hans */,
+				DA49025F1D1D0A9400F34324 /* es-MX */,
+				DA4902751D1D0AE100F34324 /* pt-BR */,
+				DA49028B1D1D0D3900F34324 /* zh-CN */,
 			);
 			name = transaction_details.html;
 			sourceTree = "<group>";
@@ -5562,6 +5714,11 @@
 				DAB06A171D14B23B00050098 /* hi */,
 				DAB06A351D14B25000050098 /* fr */,
 				DAB06A531D14B28500050098 /* de */,
+				DA4902761D1D0C6000F34324 /* es-MX */,
+				DA4902771D1D0C6A00F34324 /* pt-BR */,
+				DA4902781D1D0C7500F34324 /* zh-Hans */,
+				DA4902791D1D0C8100F34324 /* zh-CN */,
+				DA49028C1D1D0DF600F34324 /* zh */,
 			);
 			name = sms_template.txt;
 			sourceTree = "<group>";

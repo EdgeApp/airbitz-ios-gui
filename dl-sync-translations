@@ -1,3 +1,11 @@
 crowdin-cli download
-xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es.xliff -project Airbitz.xcodeproj
+#xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es.xliff -project Airbitz.xcodeproj
+cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-Hans.lproj/
+cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-CN.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-MX.lproj/
+cp -a Airbitz/Resources/html/pt.lproj/ Airbitz/Resources/html/pt-BR.lproj/
+cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-Hans.lproj/
+cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-CN.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-MX.lproj/
+cp -a Airbitz/Resources/Text/pt.lproj/ Airbitz/Resources/Text/pt-BR.lproj/
 
