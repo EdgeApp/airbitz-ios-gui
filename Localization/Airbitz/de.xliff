@@ -158,57 +158,57 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="dxS-14-iR5.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5";</note>
-        <target xml:lang="de" state="needs-translation">Your PIN is a 4 digit code used to do quick re-logins into your account.</target>
+        <target xml:lang="de" state="translated">Ihre PIN ist ein 4-stelliger Code und wird verwendet, um sich schnell wieder in Ihr Konto einzuloggen.</target>
       </trans-unit>
       <trans-unit id="fCk-W4-OJJ.placeholder">
         <source>Nickname</source>
         <note>Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ";</note>
-        <target xml:lang="de" state="needs-translation">Nickname</target>
+        <target xml:lang="de" state="translated">Spitzname</target>
       </trans-unit>
       <trans-unit id="fV9-pz-Wfn.placeholder">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn";</note>
-        <target xml:lang="de" state="needs-translation">Create PIN</target>
+        <target xml:lang="de" state="translated">PIN erstellen</target>
       </trans-unit>
       <trans-unit id="fnL-7h-MQL.placeholder">
         <source>Choose a Password</source>
         <note>Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL";</note>
-        <target xml:lang="de" state="needs-translation">Choose a Password</target>
+        <target xml:lang="de" state="translated">Wählen Sie ein Passwort</target>
       </trans-unit>
       <trans-unit id="hHD-NP-fM6.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6";</note>
-        <target xml:lang="de" state="needs-translation">NEXT</target>
+        <target xml:lang="de" state="translated">WEITER</target>
       </trans-unit>
       <trans-unit id="hoE-Bh-x2F.placeholder">
         <source>Re-enter Password</source>
         <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F";</note>
-        <target xml:lang="de" state="needs-translation">Re-enter Password</target>
+        <target xml:lang="de" state="translated">Passwort wiederholen</target>
       </trans-unit>
       <trans-unit id="i3b-ZH-bDm.placeholder">
         <source>Choose a Username</source>
         <note>Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm";</note>
-        <target xml:lang="de" state="needs-translation">Choose a Username</target>
+        <target xml:lang="de" state="translated">Wählen Sie einen Benutzernamen</target>
       </trans-unit>
       <trans-unit id="jcU-OX-5Hj.text">
         <source>Write down and store securely</source>
         <note>Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj";</note>
-        <target xml:lang="de" state="needs-translation">Write down and store securely</target>
+        <target xml:lang="de" state="translated">Notieren und sicher aufbewahren</target>
       </trans-unit>
       <trans-unit id="jgQ-ju-YiX.text">
         <source>Set a Password and PIN</source>
         <note>Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX";</note>
-        <target xml:lang="de" state="needs-translation">Set a Password and PIN</target>
+        <target xml:lang="de" state="translated">Legen Sie ein Kennwort und PIN fest</target>
       </trans-unit>
       <trans-unit id="sJ6-mQ-mSV.text">
         <source>Username</source>
         <note>Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV";</note>
-        <target xml:lang="de" state="needs-translation">Username</target>
+        <target xml:lang="de" state="translated">Benutzername</target>
       </trans-unit>
       <trans-unit id="tOB-4i-OVm.text">
         <source>mypassword12345</source>
         <note>Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm";</note>
-        <target xml:lang="de" state="needs-translation">mypassword12345</target>
+        <target xml:lang="de" state="translated">mypassword12345</target>
       </trans-unit>
       <trans-unit id="w3d-xe-eUq.text">
         <source>The password is used to authenticate your account and to change sensitive settings.</source>
@@ -578,62 +578,65 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="Bxa-tB-mk3.text">
         <source>Phone</source>
         <note>Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3";</note>
-        <target xml:lang="de" state="needs-translation">Phone</target>
+        <target xml:lang="de" state="translated">Telefon</target>
       </trans-unit>
       <trans-unit id="CDg-O2-8UT.normalTitle">
         <source>Last Month</source>
         <note>Class = "UIButton"; normalTitle = "Last Month"; ObjectID = "CDg-O2-8UT";</note>
-        <target xml:lang="de" state="needs-translation">Last Month</target>
+        <target xml:lang="de" state="translated">Letzter Monat</target>
       </trans-unit>
       <trans-unit id="ClG-um-kmI.text">
         <source>Category</source>
         <note>Class = "UILabel"; text = "Category"; ObjectID = "ClG-um-kmI";</note>
-        <target xml:lang="de" state="needs-translation">Category</target>
+        <target xml:lang="de" state="translated">Kategorie</target>
       </trans-unit>
       <trans-unit id="CuI-Tj-a8q.text">
         <source>Enter password to decode wallet</source>
         <note>Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q";</note>
-        <target xml:lang="de" state="needs-translation">Enter password to decode wallet</target>
+        <target xml:lang="de" state="translated">Geben Sie Kennwort ein, um die Wallet zu entschlüsseln</target>
       </trans-unit>
       <trans-unit id="Det-Mr-8a9.normalTitle">
         <source>Next Step</source>
         <note>Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9";</note>
-        <target xml:lang="de" state="needs-translation">Next Step</target>
+        <target xml:lang="de" state="translated">Nächster Schritt</target>
       </trans-unit>
       <trans-unit id="Dh6-PA-WGi.text">
         <source>Test</source>
         <note>Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi";</note>
-        <target xml:lang="de" state="needs-translation">Test</target>
+        <target xml:lang="de" state="translated">Test</target>
       </trans-unit>
       <trans-unit id="EuE-s0-NQ2.text">
         <source>USD</source>
         <note>Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2";</note>
-        <target xml:lang="de" state="needs-translation">USD</target>
+        <target xml:lang="de" state="translated">US-DOLLAR</target>
       </trans-unit>
       <trans-unit id="GFx-1Z-kFg.text">
         <source>From:</source>
         <note>Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg";</note>
-        <target xml:lang="de" state="needs-translation">From:</target>
+        <target xml:lang="de" state="translated">Von:</target>
       </trans-unit>
       <trans-unit id="Hba-dd-to8.text">
         <source>(Duplicate Names)</source>
         <note>Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8";</note>
-        <target xml:lang="de" state="needs-translation">(Duplicate Names)</target>
+        <target xml:lang="de" state="translated">(Doppelte Namen)</target>
       </trans-unit>
       <trans-unit id="HzM-6V-ckO.text">
         <source>Export</source>
         <note>Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO";</note>
-        <target xml:lang="de" state="needs-translation">Export</target>
+        <target xml:lang="de" state="translated">Exportieren</target>
+        <alt-trans>
+          <target xml:lang="de">Export</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Int-ih-AH6.title">
         <source>Request View Controller</source>
         <note>Class = "UIViewController"; title = "Request View Controller"; ObjectID = "Int-ih-AH6";</note>
-        <target xml:lang="de" state="needs-translation">Request View Controller</target>
+        <target xml:lang="de" state="translated">View-Controller anfragen</target>
       </trans-unit>
       <trans-unit id="JZ8-MW-EwQ.text">
         <source>PRIVATE KEY</source>
         <note>Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ";</note>
-        <target xml:lang="de" state="needs-translation">PRIVATE KEY</target>
+        <target xml:lang="de" state="translated">PRIVATER SCHLÜSSEL</target>
       </trans-unit>
       <trans-unit id="KTi-U4-C5T.placeholder">
         <source>Enter PIN</source>
@@ -1119,47 +1122,50 @@ Scan the QR code using this device</target>
       <trans-unit id="iUa-wU-ZnQ.normalTitle">
         <source>StylizedOutline</source>
         <note>Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ";</note>
-        <target xml:lang="de" state="needs-translation">StylizedOutline</target>
+        <target xml:lang="de" state="translated">StylizedOutline</target>
       </trans-unit>
       <trans-unit id="lqV-Y6-LKD.normalTitle">
         <source>Request Reset</source>
         <note>Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD";</note>
-        <target xml:lang="de" state="needs-translation">Request Reset</target>
+        <target xml:lang="de" state="translated">Anfrage-Reset</target>
       </trans-unit>
       <trans-unit id="mJ9-nG-s79.text">
         <source>Enabled</source>
         <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
-        <target xml:lang="de" state="needs-translation">Enabled</target>
+        <target xml:lang="de" state="translated">Aktiviert</target>
       </trans-unit>
       <trans-unit id="nhU-8o-H50.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50";</note>
-        <target xml:lang="de" state="needs-translation">Button</target>
+        <target xml:lang="de" state="translated">Button</target>
       </trans-unit>
       <trans-unit id="pX1-NU-49a.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a";</note>
-        <target xml:lang="de" state="needs-translation">Label</target>
+        <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
       <trans-unit id="pki-9D-VwL.normalTitle">
         <source>Scan Token</source>
         <note>Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL";</note>
-        <target xml:lang="de" state="needs-translation">Scan Token</target>
+        <target xml:lang="de" state="translated">Token scannen</target>
+        <alt-trans>
+          <target xml:lang="de">Scan-Token</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="qLK-qd-7qg.text">
         <source>Network:</source>
         <note>Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg";</note>
-        <target xml:lang="de" state="needs-translation">Network:</target>
+        <target xml:lang="de" state="translated">Netzwerk:</target>
       </trans-unit>
       <trans-unit id="sZm-Gx-M8r.text">
         <source>App Version</source>
         <note>Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r";</note>
-        <target xml:lang="de" state="needs-translation">App Version</target>
+        <target xml:lang="de" state="translated">App-Version</target>
       </trans-unit>
       <trans-unit id="th1-bn-E4x.normalTitle">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x";</note>
-        <target xml:lang="de" state="needs-translation">CANCEL</target>
+        <target xml:lang="de" state="translated">ABBRECHEN</target>
       </trans-unit>
     </body>
   </file>
@@ -1405,52 +1411,52 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
       <trans-unit id="Add New">
         <source>Add New</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Add New</target>
+        <target xml:lang="de" state="translated">Neu hinzufügen</target>
       </trans-unit>
       <trans-unit id="Affiliate Revenue">
         <source>Affiliate Revenue</source>
         <note>Income category for affiliate revenue</note>
-        <target xml:lang="de" state="needs-translation">Affiliate Revenue</target>
+        <target xml:lang="de" state="translated">Affiliate-Einnahmen</target>
       </trans-unit>
       <trans-unit id="Affiliate link has been copied to the clipboard">
         <source>Affiliate link has been copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Affiliate link has been copied to the clipboard</target>
+        <target xml:lang="de" state="translated">Affiliate-Link kopiert in Zwischenablage</target>
       </trans-unit>
       <trans-unit id="Air Travel">
         <source>Air Travel</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Air Travel</target>
+        <target xml:lang="de" state="translated">Flugreise</target>
       </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">AirPrint is not currently available</target>
+        <target xml:lang="de" state="translated">AirPrint ist derzeit nicht verfügbar</target>
       </trans-unit>
       <trans-unit id="Alcohol &amp; Bars">
         <source>Alcohol &amp; Bars</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Alcohol &amp; Bars</target>
+        <target xml:lang="de" state="translated">Alkohol &amp; Bars</target>
       </trans-unit>
       <trans-unit id="Allowance">
         <source>Allowance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Allowance</target>
+        <target xml:lang="de" state="translated">Bewilling</target>
       </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Amount is too small</target>
+        <target xml:lang="de" state="translated">Betrag zu klein</target>
       </trans-unit>
       <trans-unit id="Amusement">
         <source>Amusement</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Amusement</target>
+        <target xml:lang="de" state="translated">Vergnügen</target>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
         <source>An app has requested a bitcoin address to send money to.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">An app has requested a bitcoin address to send money to.</target>
+        <target xml:lang="de" state="translated">Eine App beantragt eine Bitcoin-Adresse um Geld zu senden.</target>
       </trans-unit>
       <trans-unit id="An error occurred. Please check your network connection. You may also exit PIN login and use your username &amp; password to login offline">
         <source>An error occurred. Please check your network connection. You may also exit PIN login and use your username &amp; password to login offline</source>
@@ -3147,88 +3153,91 @@ Enter it below to make sure:</target>
         <source>Sign-Up failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Sign-Up failed:
+        <target xml:lang="de" state="translated">Registrierung fehlgeschlagen:
 %@</target>
+        <alt-trans>
+          <target xml:lang="de">Registrierung fehlgeschlagen:%@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Skip">
         <source>Skip</source>
         <note>Skip button text</note>
-        <target xml:lang="de" state="needs-translation">Skip</target>
+        <target xml:lang="de" state="translated">Überspringen</target>
       </trans-unit>
       <trans-unit id="Skip this step">
         <source>Skip this step</source>
         <note>Title of Skip this step alert</note>
-        <target xml:lang="de" state="needs-translation">Skip this step</target>
+        <target xml:lang="de" state="translated">Überspringen Sie diesen Schritt</target>
       </trans-unit>
       <trans-unit id="Sorry">
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Sorry</target>
+        <target xml:lang="de" state="translated">Entschuldigung</target>
       </trans-unit>
       <trans-unit id="Spa &amp; Massage">
         <source>Spa &amp; Massage</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Spa &amp; Massage</target>
+        <target xml:lang="de" state="translated">Spa &amp; Massage</target>
       </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
-        <target xml:lang="de" state="needs-translation">Spending Limits</target>
+        <target xml:lang="de" state="translated">Ausgabelimits</target>
       </trans-unit>
       <trans-unit id="Sporting Goods">
         <source>Sporting Goods</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Sporting Goods</target>
+        <target xml:lang="de" state="translated">Sportartikel</target>
       </trans-unit>
       <trans-unit id="Sports">
         <source>Sports</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Sports</target>
+        <target xml:lang="de" state="translated">Sport</target>
       </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Standard Fee</target>
+        <target xml:lang="de" state="translated">Standardgebühr</target>
       </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Student Loan</target>
+        <target xml:lang="de" state="translated">Studentendarlehen</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Successfully Logged In</target>
+        <target xml:lang="de" state="translated">Erfolgreich angemeldet</target>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Sweep Funds From Private Key</target>
+        <target xml:lang="de" state="translated">Fonds vom Privatschlüssel streichen</target>
       </trans-unit>
       <trans-unit id="Synchronizing">
         <source>Synchronizing</source>
         <note>Synchronizing text in confirmation textfield</note>
-        <target xml:lang="de" state="needs-translation">Synchronizing</target>
+        <target xml:lang="de" state="translated">Synchronisieren</target>
       </trans-unit>
       <trans-unit id="TOTAL: ">
         <source>TOTAL: </source>
         <note>Prefix of wallet balance dropdown header</note>
-        <target xml:lang="de" state="needs-translation">TOTAL: </target>
+        <target xml:lang="de" state="translated">GESAMT: </target>
       </trans-unit>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Tap and hold a wallet for additional options</target>
+        <target xml:lang="de" state="translated">Tippen Sie und halten Sie eine Wallet für Zusatzoptionen fest</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Tax</target>
+        <target xml:lang="de" state="translated">Steuer</target>
       </trans-unit>
       <trans-unit id="Television">
         <source>Television</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Television</target>
+        <target xml:lang="de" state="translated">Fernsehen</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -3286,97 +3295,100 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="To: %@">
         <source>To: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">To: %@</target>
+        <target xml:lang="de" state="translated">An: %@</target>
       </trans-unit>
       <trans-unit id="To: %@ ▼">
         <source>To: %@ ▼</source>
         <note>Top of screen wallet dropdown prefix text</note>
-        <target xml:lang="de" state="needs-translation">To: %@ ▼</target>
+        <target xml:lang="de" state="translated">An: %@ ▼</target>
       </trans-unit>
       <trans-unit id="Tolls">
         <source>Tolls</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Tolls</target>
+        <target xml:lang="de" state="translated">Maut</target>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Touch ID</target>
+        <target xml:lang="de" state="translated">Touch-ID</target>
       </trans-unit>
       <trans-unit id="Touch ID Disabled">
         <source>Touch ID Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Touch ID Disabled</target>
+        <target xml:lang="de" state="translated">Touch-ID deaktiviert</target>
       </trans-unit>
       <trans-unit id="Touch ID Enabled">
         <source>Touch ID Enabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Touch ID Enabled</target>
+        <target xml:lang="de" state="translated">Touch-ID aktiviert</target>
       </trans-unit>
       <trans-unit id="Touch to login user">
         <source>Touch to login user</source>
         <note>Touch ID prompt text</note>
-        <target xml:lang="de" state="needs-translation">Touch to login user</target>
+        <target xml:lang="de" state="translated">Tippen um einzuloggen</target>
       </trans-unit>
       <trans-unit id="TouchID: Set password first">
         <source>TouchID: Set password first</source>
         <note>settings text</note>
-        <target xml:lang="de" state="needs-translation">TouchID: Set password first</target>
+        <target xml:lang="de" state="translated">TouchID: Zuerst Passwort festlegen</target>
       </trans-unit>
       <trans-unit id="TouchID: Unsupported Device">
         <source>TouchID: Unsupported Device</source>
         <note>settings text</note>
-        <target xml:lang="de" state="needs-translation">TouchID: Unsupported Device</target>
+        <target xml:lang="de" state="translated">TouchID: Nicht unterstütztes Gerät</target>
       </trans-unit>
       <trans-unit id="Toys">
         <source>Toys</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Toys</target>
+        <target xml:lang="de" state="translated">Spielzeug</target>
       </trans-unit>
       <trans-unit id="Trade Commissions">
         <source>Trade Commissions</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Trade Commissions</target>
+        <target xml:lang="de" state="translated">Handelskommissionen</target>
       </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
-        <target xml:lang="de" state="needs-translation">Transaction Details</target>
+        <target xml:lang="de" state="translated">Details der Transaktion</target>
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Transfer</target>
+        <target xml:lang="de" state="translated">Transfer</target>
       </trans-unit>
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
         <note>From wallet transfer text</note>
-        <target xml:lang="de" state="needs-translation">Transfer From %@</target>
+        <target xml:lang="de" state="translated">Transfer von %@</target>
+        <alt-trans>
+          <target xml:lang="de">Übertragen von %@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Transfer To %@">
         <source>Transfer To %@</source>
         <note>To wallet transfer text</note>
-        <target xml:lang="de" state="needs-translation">Transfer To %@</target>
+        <target xml:lang="de" state="translated">Transfer an %@</target>
       </trans-unit>
       <trans-unit id="Travel">
         <source>Travel</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Travel</target>
+        <target xml:lang="de" state="translated">Reisen</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Try again?</target>
+        <target xml:lang="de" state="translated">Wiederholen?</target>
       </trans-unit>
       <trans-unit id="Tuition">
         <source>Tuition</source>
         <note>expense category</note>
-        <target xml:lang="de" state="needs-translation">Tuition</target>
+        <target xml:lang="de" state="translated">Nachhilfe</target>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Two Factor</target>
+        <target xml:lang="de" state="translated">Zwei-Faktor</target>
       </trans-unit>
       <trans-unit id="Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.">
         <source>Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.</source>
@@ -3464,42 +3476,45 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Upload Image">
         <source>Upload Image</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Upload Image</target>
+        <target xml:lang="de" state="translated">Bild hochladen</target>
       </trans-unit>
       <trans-unit id="Upload Log">
         <source>Upload Log</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Upload Log</target>
+        <target xml:lang="de" state="translated">Log hochladen</target>
       </trans-unit>
       <trans-unit id="Upload Log File">
         <source>Upload Log File</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Upload Log File</target>
+        <target xml:lang="de" state="translated">Log-Datei hochladen</target>
       </trans-unit>
       <trans-unit id="Upload Successful">
         <source>Upload Successful</source>
         <note>Upload Successful fading popup</note>
-        <target xml:lang="de" state="needs-translation">Upload Successful</target>
+        <target xml:lang="de" state="translated">Upload erfolgreich</target>
       </trans-unit>
       <trans-unit id="Uploading logfile. Please wait...">
         <source>Uploading logfile. Please wait...</source>
         <note>Uploading logfile fading popup</note>
-        <target xml:lang="de" state="needs-translation">Uploading logfile. Please wait...</target>
+        <target xml:lang="de" state="translated">Log-Datei hochladen. Bitte warten...</target>
       </trans-unit>
       <trans-unit id="Use Camera">
         <source>Use Camera</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Use Camera</target>
+        <target xml:lang="de" state="translated">Kamera verwenden</target>
       </trans-unit>
       <trans-unit id="Use PIN">
         <source>Use PIN</source>
         <note>Touch ID [Use PIN] button</note>
-        <target xml:lang="de" state="needs-translation">Use PIN</target>
+        <target xml:lang="de" state="translated">PIN verwenden</target>
+        <alt-trans>
+          <target xml:lang="de">Verwendung PIN</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Use Password">
         <source>Use Password</source>
         <note>Touch ID [Use Password] button</note>
-        <target xml:lang="de" state="needs-translation">Use Password</target>
+        <target xml:lang="de" state="translated">Kennwort verwenden</target>
       </trans-unit>
       <trans-unit id="Use Photo Album">
         <source>Use Photo Album</source>
