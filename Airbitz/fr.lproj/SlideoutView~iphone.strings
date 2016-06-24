@@ -1,45 +1,45 @@
 /* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
-"BCk-jF-SE5.text" = "LOGOUT";
+"BCk-jF-SE5.text" = "Déconnexion";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
-"GIG-Sd-O0c.accessibilityLabel" = "Logout";
+"GIG-Sd-O0c.accessibilityLabel" = "Déconnexion";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
-"Lwy-1d-Qgs.accessibilityLabel" = "Buy or Sell";
+"Lwy-1d-Qgs.accessibilityLabel" = "Acheter ou vendre";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
-"O8N-2d-FwL.text" = "Label";
+"O8N-2d-FwL.text" = "Étiquette";
 
 /* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
-"Zac-Lf-J4y.text" = "SETTINGS";
+"Zac-Lf-J4y.text" = "Paramètres";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
-"Zu4-Fd-NGP.accessibilityLabel" = "Buy or Sell";
+"Zu4-Fd-NGP.accessibilityLabel" = "Acheter ou vendre";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
-"aSM-QX-pLq.accessibilityLabel" = "Logout";
+"aSM-QX-pLq.accessibilityLabel" = "Déconnexion";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
-"bQy-8e-q5h.text" = "See Strings.h";
+"bQy-8e-q5h.text" = "Voir Strings.h";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh"; */
-"jpu-23-4kh.accessibilityLabel" = "Buy or Sell";
+"jpu-23-4kh.accessibilityLabel" = "Acheter ou vendre";
 
 /* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
-"lr4-kO-HCW.text" = "WALLETS";
+"lr4-kO-HCW.text" = "PORTEFEUILLES";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
-"rWQ-uJ-DUX.text" = "BUY / SELL BITCOIN";
+"rWQ-uJ-DUX.text" = "ACHETER / VENDRE BITCOIN";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.accessibilityHint" = "the currently logged in account";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
-"vsf-Ms-1Ff.text" = "Label";
+"vsf-Ms-1Ff.text" = "Étiquette";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
-"xju-3Y-EvK.text" = "See Strings.h";
+"xju-3Y-EvK.text" = "Voir Strings.h";
 
 /* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
-"xna-m1-9hx.accessibilityLabel" = "Settings";
+"xna-m1-9hx.accessibilityLabel" = "Paramètres";
 

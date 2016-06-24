@@ -205,7 +205,14 @@
 #define coffeeAndTea                                NSLocalizedString(@"Coffee & Tea", nil)
 #define giftCards                                   NSLocalizedString(@"Gift Cards", nil)
 #define electronicsText                             NSLocalizedString(@"Electronics", nil)
-#define shoppingText                                NSLocalizedString(@"Electronics", nil)
+#define shoppingText                                NSLocalizedString(@"Shopping", nil)
+#define atmSearchString                             NSLocalizedString(@"ATM" ,nil)
+#define restaurantsAndFoodTrucks_en                 @"Restaurants & Food Trucks"
+#define coffeeAndTea_en                             @"Coffee & Tea"
+#define giftCards_en                                @"Gift Cards"
+#define electronicsText_en                          @"Electronics"
+#define shoppingText_en                             @"Shopping"
+#define atmSearchString_en                          @"ATM"
 #define businessNameOrCategory                      NSLocalizedString(@"Business Name or Category", @"Business Name or Category placeholder")
 #define searchText                                  NSLocalizedString(@"Search", @"SearchBarSearch placeholder")
 #define walletExport                                NSLocalizedString(@"Wallet Export", nil)
@@ -236,7 +243,6 @@
 #define moreCategoriesText                          NSLocalizedString(@"More Categories", @"")
 #define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
 #define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
-#define atmSearchString                             NSLocalizedString(@"ATM" ,nil)
 #define warningExclamationText                      NSLocalizedString(@"Warning!", nil)
 #define aboutToExitPasswordRecovery                 NSLocalizedString(@"Warning!", nil)
 #define skipThisStepText                            NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")

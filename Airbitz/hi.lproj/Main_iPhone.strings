@@ -1,11 +1,11 @@
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS"; */
-"0Ma-6E-cjS.placeholder" = "तत्कालीन पासवर्ड";
+"0Ma-6E-cjS.placeholder" = "वर्तमान पासवर्ड";
 
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "इस महीने";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
-"1kz-sq-XsE.normalTitle" = "Wallet Public Seed - XPub (advanced)";
+"1kz-sq-XsE.normalTitle" = "वॉलेट पब्लिक सीड - XPub (उन्नत)";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "उपयोगकर्ता का नाम";

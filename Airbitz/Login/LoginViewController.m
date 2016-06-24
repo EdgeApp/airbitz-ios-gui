@@ -22,7 +22,6 @@
 #import "LocalSettings.h"
 #import "MainViewController.h"
 #import "ButtonSelectorView.h"
-#import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
 #import "SettingsViewController.h"
@@ -39,7 +38,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
+    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -394,15 +393,6 @@ static BOOL bInitialized = false;
     _tempPin = nil;
     _tempPassword = nil;
     [super viewWillDisappear:animated];
-}
-
-#pragma mark - APPINViewDelegate Methods
-
-- (void)PINCodeView:(APPINView *)view didEnterPIN:(NSString *)PINCode
-{
-    [view resignFirstResponder];
-    [self showSpinner:YES];
-    [self SignInPIN:PINCode];
 }
 
 - (void)didReceiveMemoryWarning
