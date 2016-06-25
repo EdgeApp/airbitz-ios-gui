@@ -623,7 +623,7 @@ typedef enum eRequestType
                                    baseUrl, self.transaction.txid, self.transaction.txid];
     unsigned long confirmations = 0;
     if (self.transaction.height)
-        confirmations = (unsigned long) self.transaction.wallet.blockHeight - self.transaction.height;
+        confirmations = (unsigned long) self.transaction.wallet.blockHeight - self.transaction.height + 1;
     else
         confirmations = 0;
     
