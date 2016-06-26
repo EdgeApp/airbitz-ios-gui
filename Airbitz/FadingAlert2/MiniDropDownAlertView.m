@@ -122,7 +122,12 @@ static BOOL bInitialized = NO;
                          singleton.frame = frame;
                          [singleton removeFromSuperview];
                          if (singleton.delegate)
-                             [singleton.delegate dropDownAlertDismissed];
+                         {
+                             if ([singleton.delegate respondsToSelector:@selector(miniDropDownAlertDismissed)])
+                             {
+                                 [singleton.delegate miniDropDownAlertDismissed];
+                             }
+                         }
                      }];
 }
 

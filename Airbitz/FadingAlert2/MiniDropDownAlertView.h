@@ -23,6 +23,6 @@
 @required
 
 @optional
--(void)dropDownAlertDismissed;
+-(void)miniDropDownAlertDismissed;
 
 @end
