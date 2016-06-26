@@ -49,6 +49,7 @@
 @property (nonatomic) NSString *appFont;
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
+@property (nonatomic) CGFloat fadingAlertMiniDropdownHeight;
 @property (nonatomic) CGFloat buttonFontSize;
 @property (nonatomic) CGFloat elementPadding;
 @property (nonatomic) CGFloat heightListings;

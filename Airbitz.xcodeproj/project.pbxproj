@@ -43,6 +43,12 @@
 		DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
+		DA4902961D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4902941D1F3BEC00F34324 /* MiniDropDownAlertView.m */; };
+		DA4902971D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4902941D1F3BEC00F34324 /* MiniDropDownAlertView.m */; };
+		DA4902981D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4902941D1F3BEC00F34324 /* MiniDropDownAlertView.m */; };
+		DA4902991D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
+		DA49029A1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
+		DA49029B1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
 		DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
@@ -277,7 +283,6 @@
 		DA9EE0D01BC61F920063DA07 /* FadingAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8381BC61F8F0063DA07 /* FadingAlertView.m */; };
 		DA9EE0D11BC61F920063DA07 /* DropDownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED83B1BC61F8F0063DA07 /* DropDownAlertView.m */; };
 		DA9EE0D21BC61F920063DA07 /* DropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */; };
-		DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */; };
 		DA9EE4061BC61F920063DA07 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC71BC61F910063DA07 /* LoginViewController.m */; };
 		DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEC91BC61F910063DA07 /* PasswordRecoveryViewController.m */; };
@@ -764,7 +769,6 @@
 		DA9EF46D1BC7285D0063DA07 /* icon_category_coffee_tea.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF671BC61F910063DA07 /* icon_category_coffee_tea.png */; };
 		DA9EF46E1BC7285D0063DA07 /* icon_account_secure@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5B1BC61F910063DA07 /* icon_account_secure@3x.png */; };
 		DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF471BC61F910063DA07 /* emboss_down@2x.png */; };
-		DA9EF4701BC7285D0063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA31BC61F910063DA07 /* icon_USD_dark@2x.png */; };
 		DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF651BC61F910063DA07 /* icon_category_atm@2x.png */; };
 		DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4D1BC61F910063DA07 /* flash_on@2x.png */; };
@@ -1103,7 +1107,6 @@
 		DA9EF6341BC729FA0063DA07 /* icon_category_coffee_tea.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF671BC61F910063DA07 /* icon_category_coffee_tea.png */; };
 		DA9EF6351BC729FA0063DA07 /* icon_account_secure@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5B1BC61F910063DA07 /* icon_account_secure@3x.png */; };
 		DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF471BC61F910063DA07 /* emboss_down@2x.png */; };
-		DA9EF6371BC729FA0063DA07 /* FadingAlertDropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */; };
 		DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFA31BC61F910063DA07 /* icon_USD_dark@2x.png */; };
 		DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF651BC61F910063DA07 /* icon_category_atm@2x.png */; };
 		DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF4D1BC61F910063DA07 /* flash_on@2x.png */; };
@@ -1441,6 +1444,9 @@
 		DA49028A1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/info.html"; sourceTree = "<group>"; };
 		DA49028B1D1D0D3900F34324 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-CN"; path = "zh-CN.lproj/transaction_details.html"; sourceTree = "<group>"; };
 		DA49028C1D1D0DF600F34324 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text; name = zh; path = zh.lproj/sms_template.txt; sourceTree = "<group>"; };
+		DA4902931D1F3BEC00F34324 /* MiniDropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniDropDownAlertView.h; sourceTree = "<group>"; };
+		DA4902941D1F3BEC00F34324 /* MiniDropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniDropDownAlertView.m; sourceTree = "<group>"; };
+		DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiniDropDownAlertView.xib; sourceTree = "<group>"; };
 		DA49A4CA1C394AC0003196D3 /* Strings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
 		DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht.png"; sourceTree = "<group>"; };
 		DA4A13F21CFEC8400097EF31 /* fingerprint-wht@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fingerprint-wht@2x.png"; sourceTree = "<group>"; };
@@ -1655,7 +1661,6 @@
 		DA9ED83A1BC61F8F0063DA07 /* DropDownAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownAlertView.h; sourceTree = "<group>"; };
 		DA9ED83B1BC61F8F0063DA07 /* DropDownAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownAlertView.m; sourceTree = "<group>"; };
 		DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownAlertView.xib; sourceTree = "<group>"; };
-		DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertDropDownView.xib; sourceTree = "<group>"; };
 		DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FadingAlertViewNew.xib; sourceTree = "<group>"; };
 		DA9EDEC61BC61F910063DA07 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DA9EDEC71BC61F910063DA07 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LoginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -2576,10 +2581,12 @@
 		DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */ = {
 			isa = PBXGroup;
 			children = (
+				DA4902931D1F3BEC00F34324 /* MiniDropDownAlertView.h */,
+				DA4902941D1F3BEC00F34324 /* MiniDropDownAlertView.m */,
+				DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */,
 				DA9ED83A1BC61F8F0063DA07 /* DropDownAlertView.h */,
 				DA9ED83B1BC61F8F0063DA07 /* DropDownAlertView.m */,
 				DA9ED83C1BC61F8F0063DA07 /* DropDownAlertView.xib */,
-				DA9ED83D1BC61F8F0063DA07 /* FadingAlertDropDownView.xib */,
 				DA9ED83E1BC61F8F0063DA07 /* FadingAlertViewNew.xib */,
 			);
 			path = FadingAlert2;
@@ -3822,7 +3829,6 @@
 				DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */,
 				DA57A2171D131D52005442AF /* info_insufficient_funds.html in Resources */,
-				DA9EF4701BC7285D0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */,
@@ -3937,6 +3943,7 @@
 				DA9EF4DA1BC7285D0063DA07 /* icon_location@2x.png in Resources */,
 				DA9EF4DC1BC7285D0063DA07 /* icon_approved.png in Resources */,
 				DA9EF4DD1BC7285D0063DA07 /* btn_collapse_expand.png in Resources */,
+				DA49029A1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
 				DA9EF4DE1BC7285D0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA57A1FE1D131D43005442AF /* email_template.html in Resources */,
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
@@ -4089,7 +4096,6 @@
 				DA4A13F91CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA57A2181D131D52005442AF /* info_insufficient_funds.html in Resources */,
 				DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */,
-				DA9EF6371BC729FA0063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */,
@@ -4203,6 +4209,7 @@
 				DA9EF6A11BC729FA0063DA07 /* icon_location@2x.png in Resources */,
 				DA9EF6A31BC729FA0063DA07 /* icon_approved.png in Resources */,
 				DA9EF6A41BC729FA0063DA07 /* btn_collapse_expand.png in Resources */,
+				DA49029B1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
 				DA9EF6A51BC729FA0063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA57A1FF1D131D43005442AF /* email_template.html in Resources */,
 				DA9EF6A71BC729FA0063DA07 /* FadingAlertViewNew.xib in Resources */,
@@ -4354,7 +4361,6 @@
 				DA57A2161D131D52005442AF /* info_insufficient_funds.html in Resources */,
 				DA9EE47E1BC61F920063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA9EE46A1BC61F920063DA07 /* emboss_down@2x.png in Resources */,
-				DA9EE0D31BC61F920063DA07 /* FadingAlertDropDownView.xib in Resources */,
 				DA9EE4C61BC61F920063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
@@ -4485,6 +4491,7 @@
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
 				DA9EE4971BC61F920063DA07 /* icon_category_shopping@2x.png in Resources */,
 				DA57A1E91D131C94005442AF /* SlideoutView~iphone.xib in Resources */,
+				DA4902991D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
 				DA9EE43D1BC61F920063DA07 /* btn_add@4x.png in Resources */,
 				DA9EE42E1BC61F920063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DA9EE4F21BC61F920063DA07 /* Montserrat-Regular.ttf in Resources */,
@@ -4862,6 +4869,7 @@
 				DA9EF3BC1BC7285D0063DA07 /* NSString+StripHTML.m in Sources */,
 				DA9EF3BD1BC7285D0063DA07 /* StylizedTextField2.m in Sources */,
 				DA9EF3BE1BC7285D0063DA07 /* PopupPickerView.m in Sources */,
+				DA4902971D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */,
 				DA9EF3BF1BC7285D0063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9EF3C01BC7285D0063DA07 /* InfoView.m in Sources */,
 				DA9EF3C21BC7285D0063DA07 /* SignUpBaseController.m in Sources */,
@@ -5000,6 +5008,7 @@
 				DA9EF5831BC729FA0063DA07 /* NSString+StripHTML.m in Sources */,
 				DA9EF5841BC729FA0063DA07 /* StylizedTextField2.m in Sources */,
 				DA9EF5851BC729FA0063DA07 /* PopupPickerView.m in Sources */,
+				DA4902981D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */,
 				DA9EF5861BC729FA0063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9EF5871BC729FA0063DA07 /* InfoView.m in Sources */,
 				DA9EF5891BC729FA0063DA07 /* SignUpBaseController.m in Sources */,
@@ -5138,6 +5147,7 @@
 				DA9ED7EA1BC61E680063DA07 /* NSString+StripHTML.m in Sources */,
 				DA9ED7F11BC61E680063DA07 /* StylizedTextField2.m in Sources */,
 				DA9EE4171BC61F920063DA07 /* PopupPickerView.m in Sources */,
+				DA4902961D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */,
 				DA9EE5311BC61F930063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9ED7DF1BC61E680063DA07 /* InfoView.m in Sources */,
 				DA9EE5261BC61F930063DA07 /* SignUpBaseController.m in Sources */,

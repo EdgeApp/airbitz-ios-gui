@@ -109,6 +109,7 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
         self.heightWalletHeader = 44.0;
         self.heightSearchClues = 35.0;
         self.fadingAlertDropdownHeight = 80;
+        self.fadingAlertMiniDropdownHeight = 20;
         self.heightBLETableCells = 50;
         self.heightWalletCell = 60;
         self.heightTransactionCell = 65;

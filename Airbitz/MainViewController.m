@@ -39,6 +39,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
+#import "MiniDropDownAlertView.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
@@ -161,6 +162,7 @@ MainViewController *singleton;
     [User initAll];
     [Theme initAll];
     [DropDownAlertView initAll];
+    [MiniDropDownAlertView initAll];
     [FadingAlertView initAll];
 
     singleton = self;
@@ -1361,31 +1363,55 @@ MainViewController *singleton;
     NSString *walletsLoading;
     if (_bDoneShowingWalletsLoadingAlert) return;
     
+    BOOL useDropDown;
+    
     if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingAccountText,
-                          loadingWalletsNewDeviceText];
+        walletsLoading = [NSString stringWithFormat:@"%@",
+                          loadingAccountText];
+        useDropDown = YES;
     }
     else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+        walletsLoading = [NSString stringWithFormat:@"%@ %d of %d",
                           loadingWalletsText,
                           abcAccount.numWalletsLoaded + 1,
-                          abcAccount.numTotalWallets,
-                          loadingWalletsNewDeviceText];
+                          abcAccount.numTotalWallets];
+        useDropDown = YES;
     }
     else
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingTransactionsText,
-                          loadingWalletsNewDeviceText];
+        walletsLoading = [NSString stringWithFormat:@"%@",
+                          loadingTransactionsText];
+        useDropDown = YES;
     }
     
     if (_bShowingWalletsLoadingAlert)
-        [MainViewController fadingAlertUpdate:walletsLoading];
+    {
+        if (useDropDown)
+        {
+            [MiniDropDownAlertView update:walletsLoading];
+        }
+        else
+        {
+            [MainViewController fadingAlertUpdate:walletsLoading];
+        }
+
+    }
     else
-        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    {
+        if (useDropDown)
+        {
+            [MiniDropDownAlertView create:self.view
+                                  message:walletsLoading
+                                 holdTime:FADING_ALERT_HOLD_TIME_FOREVER
+                             withDelegate:nil];
+        }
+        else
+        {
+            [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+    }
     
     _bShowingWalletsLoadingAlert = YES;
 }
@@ -1407,6 +1433,7 @@ MainViewController *singleton;
             if (_bShowingWalletsLoadingAlert)
             {
                 [FadingAlertView dismiss:FadingAlertDismissFast];
+                [MiniDropDownAlertView dismiss:NO];
             }
             _bShowingWalletsLoadingAlert = NO;
             _bDoneShowingWalletsLoadingAlert = YES;
@@ -2229,6 +2256,7 @@ MainViewController *singleton;
                        abcAccount = nil;
                        
                        [FadingAlertView dismiss:FadingAlertDismissFast];
+                       [MiniDropDownAlertView dismiss:NO];
                    }];
 }
 
