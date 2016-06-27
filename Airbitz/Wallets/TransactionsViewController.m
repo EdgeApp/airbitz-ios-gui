@@ -574,11 +574,7 @@ const int NumPromoRows              = 5;
     [_balanceView finishedLoading];
     [_balanceView showBalance:![LocalSettings controller].hideBalance];
     
-    _totalSatoshi = 0.0;
-    for(ABCTransaction * tx in abcAccount.currentWallet.arrayTransactions)
-    {
-        _totalSatoshi += tx.amountSatoshi;
-    }
+    _totalSatoshi = abcAccount.currentWallet.balance;
     _balanceView.topAmount.text = [abcAccount.settings.denomination satoshiToBTCString:_totalSatoshi];
 
     double fCurrency;
