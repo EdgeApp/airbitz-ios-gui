@@ -8,6 +8,7 @@
 
 #import "UIPhotoItemView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Theme.h"
 
 #define kMaxZoomingScale            8
 
@@ -375,7 +376,7 @@
         return;
     }
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault animations:^{
         CGRect frame = self.frame;
         frame.origin.y = superViewFrame.size.height - (!hide)*self.frame.size.height;
         self.frame = frame;

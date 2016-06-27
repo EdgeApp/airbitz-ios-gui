@@ -187,6 +187,11 @@
     [self showExportWalletOptionsWithType:WalletExportType_PrivateSeed];
 }
 
+- (IBAction)buttonPublicSeedTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_PublicSeed];
+}
+
 #pragma mark - Misc Methods
 
 - (void)showExportWalletOptionsWithType:(tWalletExportType)type
@@ -264,8 +269,8 @@
 
 - (void)animatedExit
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {

@@ -39,6 +39,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DropDownAlertView.h"
+#import "MiniDropDownAlertView.h"
 #import "Server.h"
 #import "Location.h"
 #import "CJSONDeserializer.h"
@@ -161,6 +162,7 @@ MainViewController *singleton;
     [User initAll];
     [Theme initAll];
     [DropDownAlertView initAll];
+    [MiniDropDownAlertView initAll];
     [FadingAlertView initAll];
 
     singleton = self;
@@ -173,6 +175,7 @@ MainViewController *singleton;
     self.dictAddresses = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizName = [[NSMutableDictionary alloc] init];
     self.dictBizIds = [[NSMutableDictionary alloc] init];
+    self.dictBuyBitcoinOverrideURLs = [[NSMutableDictionary alloc] init];
     self.dictImageURLFromBizID = [[NSMutableDictionary alloc] init];
     self.arrayPluginBizIDs = [[NSMutableArray alloc] init];
     self.arrayNearBusinesses = [[NSMutableArray alloc] init];
@@ -583,6 +586,22 @@ MainViewController *singleton;
         }];
 
     }
+    
+    NSString *requestURL = [NSString stringWithFormat:@"%@/buyselloverride/", SERVER_API];
+    
+    [self.afmanager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *results = (NSDictionary *)responseObject;
+        
+        self.dictBuyBitcoinOverrideURLs = [results copy];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ABCLog(1, @"Plugin Bizid Disabled");
+        
+        // Temporary fallback for now
+        [self.dictBuyBitcoinOverrideURLs setObject:@"https://ice3x.com/" forKey:@"ZAR"];
+    }];
+
 }
 
 - (void)dealloc
@@ -641,7 +660,7 @@ MainViewController *singleton;
     {
         [singleton.backgroundView setAlpha:bvStart];
         [singleton.backgroundViewBlue setAlpha:bvbStart];
-        [UIView animateWithDuration:1.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeVerySlow
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
@@ -703,8 +722,8 @@ MainViewController *singleton;
     self.blurViewLeft.constant = -[MainViewController getLargestDimension];
     [_loginViewController.view setAlpha:1.0];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [self.view layoutIfNeeded];
@@ -745,8 +764,8 @@ MainViewController *singleton;
 
         singleton.tabBarBottom.constant = 0;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -775,8 +794,8 @@ MainViewController *singleton;
 
         singleton.navBarTop.constant = 0;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -805,8 +824,8 @@ MainViewController *singleton;
 
         singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-		[UIView animateWithDuration:0.25
-							  delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
         {
@@ -833,8 +852,8 @@ MainViewController *singleton;
 
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.25
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                          animations:^
                          {
@@ -1220,8 +1239,8 @@ MainViewController *singleton;
     _signUpController.leftConstraint.constant = _signUpController.view.frame.size.width;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -1344,31 +1363,55 @@ MainViewController *singleton;
     NSString *walletsLoading;
     if (_bDoneShowingWalletsLoadingAlert) return;
     
+    BOOL useDropDown;
+    
     if (!abcAccount.arrayWallets || abcAccount.arrayWallets.count == 0)
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingAccountText,
-                          loadingWalletsNewDeviceText];
+        walletsLoading = [NSString stringWithFormat:@"%@",
+                          loadingAccountText];
+        useDropDown = YES;
     }
     else if (!abcAccount.bAllWalletsLoaded && abcAccount.arrayWallets && abcAccount.numTotalWallets > 0)
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%d of %d\n\n%@",
+        walletsLoading = [NSString stringWithFormat:@"%@ %d of %d",
                           loadingWalletsText,
                           abcAccount.numWalletsLoaded + 1,
-                          abcAccount.numTotalWallets,
-                          loadingWalletsNewDeviceText];
+                          abcAccount.numTotalWallets];
+        useDropDown = YES;
     }
     else
     {
-        walletsLoading = [NSString stringWithFormat:@"%@\n\n%@",
-                          loadingTransactionsText,
-                          loadingWalletsNewDeviceText];
+        walletsLoading = [NSString stringWithFormat:@"%@",
+                          loadingTransactionsText];
+        useDropDown = YES;
     }
     
     if (_bShowingWalletsLoadingAlert)
-        [MainViewController fadingAlertUpdate:walletsLoading];
+    {
+        if (useDropDown)
+        {
+            [MiniDropDownAlertView update:walletsLoading];
+        }
+        else
+        {
+            [MainViewController fadingAlertUpdate:walletsLoading];
+        }
+
+    }
     else
-        [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    {
+        if (useDropDown)
+        {
+            [MiniDropDownAlertView create:self.view
+                                  message:walletsLoading
+                                 holdTime:FADING_ALERT_HOLD_TIME_FOREVER
+                             withDelegate:nil];
+        }
+        else
+        {
+            [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+        }
+    }
     
     _bShowingWalletsLoadingAlert = YES;
 }
@@ -1383,15 +1426,20 @@ MainViewController *singleton;
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
     
-    if (abcAccount.arrayWallets && [wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
+    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
     {
-        if (_bShowingWalletsLoadingAlert)
+        if ([wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
         {
-            [FadingAlertView dismiss:FadingAlertDismissFast];
+            if (_bShowingWalletsLoadingAlert)
+            {
+                [FadingAlertView dismiss:FadingAlertDismissFast];
+                [MiniDropDownAlertView dismiss:NO];
+            }
+            _bShowingWalletsLoadingAlert = NO;
+            _bDoneShowingWalletsLoadingAlert = YES;
         }
-        _bShowingWalletsLoadingAlert = NO;
-        _bDoneShowingWalletsLoadingAlert = YES;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
 - (void) abcAccountAccountChanged;
@@ -2109,8 +2157,20 @@ MainViewController *singleton;
 
 - (void)slideoutBuySell
 {
-    if (_selectedViewController != _buySellViewController) {
-        if ([User isLoggedIn]) {
+    // Buy bitcoin button
+    NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
+
+    NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
+    
+    if (overrideURL && [overrideURL length] > 7)
+    {
+        NSURL *url = [[NSURL alloc] initWithString:overrideURL];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else if (_selectedViewController != _buySellViewController)
+    {
+        if ([User isLoggedIn])
+        {
             [MainViewController animateSwapViewControllers:_buySellViewController out:_selectedViewController];
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
             _appMode = APP_MODE_MORE;
@@ -2196,6 +2256,7 @@ MainViewController *singleton;
                        abcAccount = nil;
                        
                        [FadingAlertView dismiss:FadingAlertDismissFast];
+                       [MiniDropDownAlertView dismiss:NO];
                    }];
 }
 
@@ -2324,8 +2385,8 @@ MainViewController *singleton;
 
     viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [viewController.view layoutIfNeeded];
@@ -2344,8 +2405,8 @@ MainViewController *singleton;
     [view setAlpha:0.0];
     [view.superview layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:1.0];
@@ -2369,8 +2430,8 @@ MainViewController *singleton;
     [view setOpaque:NO];
     [view.superview layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [view setAlpha:0.0];
@@ -2398,8 +2459,8 @@ MainViewController *singleton;
     in.leftConstraint.constant = 0;
     singleton.blurViewLeft.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [UIView animateWithDuration:0.20
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
                      {
@@ -2446,8 +2507,8 @@ MainViewController *singleton;
     if (animated)
     {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
@@ -2475,8 +2536,8 @@ MainViewController *singleton;
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
     if (withBlur)
         singleton.blurViewLeft.constant = [MainViewController getLargestDimension];
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          [singleton.view layoutIfNeeded];

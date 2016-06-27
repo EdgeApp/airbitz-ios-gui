@@ -10,6 +10,7 @@
 #import "PopupPickerView.h"
 #import "MainViewController.h"
 #import "Util.h"
+#import "Theme.h"
 
 #define DEFAULT_WIDTH           330
 
@@ -123,7 +124,9 @@ CGRect keyboardFrame;
 	{
 		duration = 0.35;
 	}
-	[UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
+                        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
 		 CGRect frame = self.frame;

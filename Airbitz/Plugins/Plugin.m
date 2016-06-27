@@ -68,7 +68,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
@@ -89,7 +90,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
 
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
@@ -110,7 +112,8 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if ([[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
+        if (AIRBITZ_DEVELOP ||
+            [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
@@ -147,23 +150,23 @@ static NSMutableArray *giftCardPlugins;
                        };
         [buySellPlugins addObject:plugin];
 
-        plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.clevercoin";
-        plugin.provider = @"clevercoin";
-        plugin.country = @"EUR";
-        plugin.sourceFile = @"clevercoin";
-        plugin.sourceExtension = @"html";
-        plugin.imageFile = @"plugin_icon_euro";
-        plugin.name = @"Europe (EUR)";
-        plugin.env = @{
-                    @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
-                    @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
-                    @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
-                    @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
-                    @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
-                    };
-        [buySellPlugins addObject:plugin];
+//        plugin = [[Plugin alloc] init];
+//        plugin.pluginId = @"com.clevercoin";
+//        plugin.provider = @"clevercoin";
+//        plugin.country = @"EUR";
+//        plugin.sourceFile = @"clevercoin";
+//        plugin.sourceExtension = @"html";
+//        plugin.imageFile = @"plugin_icon_euro";
+//        plugin.name = @"Europe (EUR)";
+//        plugin.env = @{
+//                    @"SANDBOX": (isTestnet ? @"true" : @"false"),
+//                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
+//                    @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
+//                    @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
+//                    @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
+//                    @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
+//                    };
+//        [buySellPlugins addObject:plugin];
         
         bInitialized = YES;
     }

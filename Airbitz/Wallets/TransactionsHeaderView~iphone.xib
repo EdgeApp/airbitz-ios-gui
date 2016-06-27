@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="N7s-Lf-JN5" customClass="TransactionsHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="294" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G0M-5s-QO6">
+                    <rect key="frame" x="0.0" y="0.0" width="294" height="20"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kk-Hg-VIb">
+                            <rect key="frame" x="8" y="0.0" width="278" height="20"/>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.70980392156862748" green="0.73333333333333328" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="6kk-Hg-VIb" firstAttribute="top" secondItem="G0M-5s-QO6" secondAttribute="top" id="IUY-7q-Gqn"/>
+                        <constraint firstItem="6kk-Hg-VIb" firstAttribute="leading" secondItem="G0M-5s-QO6" secondAttribute="leading" constant="8" id="PJg-33-HOP"/>
+                        <constraint firstAttribute="bottom" secondItem="6kk-Hg-VIb" secondAttribute="bottom" id="Voo-ga-9cS"/>
+                        <constraint firstAttribute="trailing" secondItem="6kk-Hg-VIb" secondAttribute="trailing" constant="8" id="iXc-7C-Lwr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="G0M-5s-QO6" firstAttribute="leading" secondItem="N7s-Lf-JN5" secondAttribute="leading" id="Hcg-KD-nGm"/>
+                <constraint firstItem="G0M-5s-QO6" firstAttribute="top" secondItem="N7s-Lf-JN5" secondAttribute="top" id="JfP-Xu-5Q9"/>
+                <constraint firstAttribute="trailing" secondItem="G0M-5s-QO6" secondAttribute="trailing" id="v4z-cw-GvF"/>
+                <constraint firstAttribute="bottom" secondItem="G0M-5s-QO6" secondAttribute="bottom" id="zZ4-MU-JJg"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="mainView" destination="G0M-5s-QO6" id="DG8-5s-DUK"/>
+                <outlet property="titleLabel" destination="6kk-Hg-VIb" id="n1t-fG-DVa"/>
+            </connections>
+        </view>
+    </objects>
+</document>

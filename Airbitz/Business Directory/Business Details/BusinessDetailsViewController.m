@@ -612,7 +612,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			else
 			{
 				[dayString appendString:open24Text];
-                [hoursString appendString:hoursText];
+                [hoursString appendString:hours_text];
                 [hoursString appendString:@"\n"];
 			}
             NSInteger leftLines = [[dayString componentsSeparatedByCharactersInSet:

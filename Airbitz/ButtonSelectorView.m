@@ -9,6 +9,7 @@
 #import "ButtonSelectorView.h"
 #import "StylizedButton.h"
 #import "Util.h"
+#import "Theme.h"
 
 #define TABLE_ROW_HEIGHT	37.0
 
@@ -110,8 +111,8 @@
 		self.button.selected = YES;
 
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-		[UIView animateWithDuration:0.25
-							  delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
 							options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						 animations:^
 		 {
@@ -161,8 +162,8 @@
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	//make the table expand from the bottom of the button
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -217,8 +218,8 @@
 
 	//shrink the table up under the button, then animate the button back to original size
 	self.button.selected = NO;
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -239,8 +240,8 @@
 					 completion:^(BOOL finished)
 	 {
 		 //animate button back to original size
-		 [UIView animateWithDuration:0.25
-							   delay:0.0
+         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                               delay:[Theme Singleton].animationDelayTimeDefault
 							 options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 						  animations:^
 		  {

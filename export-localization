@@ -1,0 +1,2 @@
+xcodebuild -exportLocalizations -localizationPath Localization/Airbitz/ -project Airbitz.xcodeproj 
+

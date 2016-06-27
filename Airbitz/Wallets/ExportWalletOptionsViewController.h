@@ -17,7 +17,8 @@ typedef enum eWalletExportType
     WalletExportType_Quicken,
     WalletExportType_Quickbooks,
     WalletExportType_PDF,
-    WalletExportType_PrivateSeed
+    WalletExportType_PrivateSeed,
+    WalletExportType_PublicSeed
 } tWalletExportType;
 
 @protocol ExportWalletOptionsViewControllerDelegate;

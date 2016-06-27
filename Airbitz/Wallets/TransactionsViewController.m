@@ -28,6 +28,7 @@
 #import "LocalSettings.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
+#import "TransactionsHeaderView.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -67,6 +68,7 @@ const int NumPromoRows              = 5;
     UIAlertView                         *deleteAlert;
     UIAlertView                         *deleteAlertWarning;
 
+    NSCalendar                          *_cal;
     BOOL                                _archiveCollapsed;
     BOOL                                _showRunningBalance;
     CGRect                              _transactionTableStartFrame;
@@ -82,6 +84,11 @@ const int NumPromoRows              = 5;
     BOOL                                _segmentedControlUSD;
     int64_t                             _totalSatoshi;
     UIImage                             *_blankImage;
+    NSDateFormatter                     *_dateFormatterDate;
+    NSDateFormatter                     *_dateFormatterTime;
+    NSMutableArray                      *_arraySections;
+    NSMutableArray                      *_arraySectionsStart;
+    NSMutableArray                      *_arraySectionsTitle;
 }
 
 @property (nonatomic, weak) IBOutlet WalletMakerView    *walletMakerView;
@@ -163,9 +170,20 @@ const int NumPromoRows              = 5;
     _bShowingWalletsLoadingAlert = NO;
     _balanceView = [BalanceView CreateWithDelegate:self];
     _showRunningBalance = [LocalSettings controller].showRunningBalance;
+    _arraySections = [[NSMutableArray alloc] init];
+    _arraySectionsStart = [[NSMutableArray alloc] init];
+    _arraySectionsTitle = [[NSMutableArray alloc] init];
 
     [self.balanceViewPlaceholder addSubview:_balanceView];
     [_balanceView showBalance:NO];
+    
+    _dateFormatterDate = [[NSDateFormatter alloc] init];
+    [_dateFormatterDate setDateStyle:NSDateFormatterMediumStyle];
+    [_dateFormatterDate setTimeStyle:NSDateFormatterNoStyle];
+    
+    _dateFormatterTime = [[NSDateFormatter alloc] init];
+    [_dateFormatterTime setDateStyle:NSDateFormatterNoStyle];
+    [_dateFormatterTime setTimeStyle:NSDateFormatterShortStyle];
     
     txSearchQueue = [[NSOperationQueue alloc] init];
     [txSearchQueue setMaxConcurrentOperationCount:1];
@@ -235,8 +253,8 @@ const int NumPromoRows              = 5;
     
     [self updateNavBar];
 
-    [UIView animateWithDuration: 0.35
-                          delay: 0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations: ^
     {
@@ -342,9 +360,74 @@ const int NumPromoRows              = 5;
         [self.tableView reloadData];
         [self updateBalanceView];
         [self updateWalletsView];
+        [self updateTransactionSections];
 
     }
 
+}
+
+- (void)updateTransactionSections
+{
+    NSArray *array;
+    _arraySections = [[NSMutableArray alloc] init];
+    _arraySectionsStart = [[NSMutableArray alloc] init];
+    _arraySectionsTitle = [[NSMutableArray alloc] init];
+    int currentSectionStart = 0;
+    
+    if ([self searchEnabled])
+        array = self.arraySearchTransactions;
+    else
+        array = abcAccount.currentWallet.arrayTransactions;
+    
+    if (!array || array.count == 0)
+        return;
+    
+    ABCTransaction *previousTransaction = nil;
+    int i;
+    
+    for (i = 0; i < [array count]; i++)
+    {
+        if (previousTransaction == nil)
+        {
+            previousTransaction = array[i];
+            continue;
+        }
+        
+        // If the current transaction has the same date as previous, then eliminate header
+        NSDate *date = ((ABCTransaction *) array[i]).date;
+        NSDateComponents *components = [[NSCalendar currentCalendar]
+                                        components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                        fromDate:date];
+        NSInteger currentDay = [components day];
+        NSInteger currentMonth = [components month];
+        
+        date = ((ABCTransaction *) array[i - 1]).date;
+        components = [[NSCalendar currentCalendar]
+                      components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                      fromDate:date];
+        NSInteger previousDay = [components day];
+        NSInteger previousMonth = [components month];
+        
+        if (currentDay != previousDay ||
+            currentMonth != previousMonth)
+        {
+            // Create a new section. _arraySections is an array indexed by section number with the
+            // number of rows in the section as the array value.
+            [_arraySections addObject:[NSNumber numberWithInt:(i - currentSectionStart)]];
+            [_arraySectionsStart addObject:[NSNumber numberWithInt:currentSectionStart]];
+            
+            NSString *formattedDateString = [_dateFormatterDate stringFromDate:date];
+            [_arraySectionsTitle addObject:formattedDateString];
+            currentSectionStart = i;
+        }
+    }
+    
+    // One last section for the remaining transactions
+    [_arraySections addObject:[NSNumber numberWithInt:(i - currentSectionStart)]];
+    [_arraySectionsStart addObject:[NSNumber numberWithInt:currentSectionStart]];
+    NSDate *date = ((ABCTransaction *) array[currentSectionStart]).date;
+    NSString *formattedDateString = [_dateFormatterDate stringFromDate:date];
+    [_arraySectionsTitle addObject:formattedDateString];
 }
 
 -(void)updateWalletsView
@@ -611,8 +694,8 @@ const int NumPromoRows              = 5;
 
 -(void)dismissTransactionDetails
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -650,6 +733,7 @@ const int NumPromoRows              = 5;
             dispatch_async(dispatch_get_main_queue(),^{
                 [self.arraySearchTransactions removeAllObjects];
                 self.arraySearchTransactions = arraySearchTransactions;
+                [self updateTransactionSections];
                 [self.tableView reloadData];
             });
 
@@ -657,6 +741,7 @@ const int NumPromoRows              = 5;
     }
     else if (![self searchEnabled])
     {
+        [self updateTransactionSections];
         [self.tableView reloadData];
     }
 }
@@ -765,7 +850,7 @@ const int NumPromoRows              = 5;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network");
+        ABCLog(1, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
     }];
 }
 
@@ -885,6 +970,10 @@ const int NumPromoRows              = 5;
         }
 
     }
+    else if (tableView == self.tableView)
+    {
+        return 20;
+    }
     return 0;
 }
 
@@ -907,6 +996,19 @@ const int NumPromoRows              = 5;
 
         }
     }
+    else if (tableView == self.tableView)
+    {
+        TransactionsHeaderView *view;
+        
+        view = [self getHeaderViewForTableView:self.tableView];
+        
+        if (section == _arraySectionsTitle.count)
+            return nil;
+        else
+            view.titleLabel.text = _arraySectionsTitle[section];
+        
+        return view;
+    }
     return nil;
 }
 
@@ -916,7 +1018,17 @@ const int NumPromoRows              = 5;
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == self.tableView)
-        return 1;
+    {
+        if ([self searchEnabled])
+        {
+            return [_arraySections count];
+        }
+        else
+        {
+            // Add one extra section for the Promo rows
+            return [_arraySections count] + 1;
+        }
+    }
     else
         return 3;
 }
@@ -925,24 +1037,23 @@ const int NumPromoRows              = 5;
 {
     if (tableView == self.tableView)
     {
-//        if (_totalSatoshi == 0 &&
-//            [self.arraySearchTransactions count] == 0)
-//        {
-//            return 2;
-//        }
         if ([self searchEnabled])
         {
-            if (self.arraySearchTransactions.count == 0)
-                return 1;
-            else
-                return self.arraySearchTransactions.count;
+            NSNumber *num = _arraySections[section];
+            return [num integerValue];
         }
         else
         {
-//            if (0 == abcAccount.currentWallet.arrayTransactions.count)
-//                return 1;
-//            else
-                return abcAccount.currentWallet.arrayTransactions.count + NumPromoRows;
+            if (_arraySections.count == section)
+            {
+                return NumPromoRows;
+            }
+            else
+            {
+                NSNumber *num = _arraySections[section];
+                return [num integerValue];
+            }
+            
         }
     }
     else // self.walletsTable
@@ -1008,7 +1119,41 @@ const int NumPromoRows              = 5;
     return cell;
 }
 
+- (TransactionsHeaderView *)getHeaderViewForTableView:(UITableView *)tableView
+{
+    UITableViewHeaderFooterView *hfv = nil;
+    static NSString *cellIdentifier = @"HeaderView";
+    TransactionsHeaderView *view = nil;
+    
+    hfv = [tableView dequeueReusableHeaderFooterViewWithIdentifier:cellIdentifier];
+    if (nil == hfv)
+    {
+        view = [TransactionsHeaderView CreateWithTitle:loadingBalanceDotDotDot];
+        hfv = (UITableViewHeaderFooterView *) view;
+    }
+    return (TransactionsHeaderView *)hfv;
+}
 
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+//{
+//    if (tableView == self.tableView)
+//    {
+//        // Set the text color of our header/footer text.
+////        UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+//        
+//        // Set the background color of our header/footer.
+////        [header.contentView setBackgroundColor:[Theme Singleton].colorTransactionsHeader];
+////        header.tintColor = [Theme Singleton].colorTransactionsHeader;
+////        header.contentView.tintColor = [Theme Singleton].colorTransactionsHeader;
+////        
+////        header.backgroundView.backgroundColor = [Theme Singleton].colorTransactionsHeader;
+//        
+//        // You can also do this to set the background color of our header/footer,
+//        //    but the gradients/other effects will be retained.
+//        // view.tintColor = [UIColor blackColor];
+//    }
+//}
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.walletsTable)
@@ -1017,7 +1162,8 @@ const int NumPromoRows              = 5;
     }
     
     UITableViewCell *finalCell;
-    NSInteger row = [indexPath row];
+    NSInteger row = indexPath.row;
+    NSInteger section = indexPath.section;
     {
         TransactionCell *cell;
         ABCWallet *wallet = abcAccount.currentWallet;
@@ -1025,72 +1171,100 @@ const int NumPromoRows              = 5;
         
         // wallet cell
         cell = [self getTransactionCellForTableView:tableView];
-        [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
         
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         
         ABCTransaction *transaction = NULL;
         BOOL bBlankCell = NO;
-        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexBuyBitcoin)
+        
+        if (section == _arraySections.count)
         {
-            cell.promoLabel.text = buyBitcoinButton;
-            cell.imagePhoto.image = self.imageReceive;
-            backgroundColor = [Theme Singleton].colorRequestButton;
+            // This is the Promo section
+            cell.dateLabel.text = @"";
             
-            bBlankCell = YES;
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexImportGiftCard)
-        {
-            if (AIRBITZ)
+            if (row == PromoIndexBuyBitcoin)
             {
-                cell.promoLabel.text = importAirbitzGiftCardButton;
-                cell.imagePhoto.image = [UIImage imageNamed:@"logo_icon_full.png"];
-                backgroundColor = [UIColor clearColor];
-            }
-            else
-            {
-                cell.promoLabel.text = importPrivateKeyButton;
+                cell.promoLabel.text = buyBitcoinButton;
                 cell.imagePhoto.image = self.imageReceive;
                 backgroundColor = [Theme Singleton].colorRequestButton;
+                
+                bBlankCell = YES;
             }
-            bBlankCell = YES;
-}
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex20offStarbucks)
-        {
-            cell.promoLabel.text = upTo20OffStarbucksButton;
-            NSURLRequest *urlRequest = [self imageRequestForBizID:StarbucksBizID];
-            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
-            backgroundColor = [UIColor clearColor];
-            bBlankCell = YES;
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex10offTarget)
-        {
-            cell.promoLabel.text = upTo10OffTargetButton;
-            NSURLRequest *urlRequest = [self imageRequestForBizID:TargetBizID];
-            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
-            backgroundColor = [UIColor clearColor];
-            
-            bBlankCell = YES;
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex15to20offAmazon)
-        {
-            cell.promoLabel.text = upTo15to20OffAmazonButton;
-            NSURLRequest *urlRequest = [self imageRequestForBizID:AmazonBizID];
-            [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
-            backgroundColor = [UIColor clearColor];
-            
-            bBlankCell = YES;
+            else if (row == PromoIndexImportGiftCard)
+            {
+                if (AIRBITZ)
+                {
+                    cell.promoLabel.text = importAirbitzGiftCardButton;
+                    cell.imagePhoto.image = [UIImage imageNamed:@"logo_icon_full.png"];
+                    backgroundColor = [UIColor clearColor];
+                }
+                else
+                {
+                    cell.promoLabel.text = importPrivateKeyButton;
+                    cell.imagePhoto.image = self.imageReceive;
+                    backgroundColor = [Theme Singleton].colorRequestButton;
+                }
+                bBlankCell = YES;
+            }
+            else if (row == PromoIndex20offStarbucks)
+            {
+                cell.promoLabel.text = upTo20OffStarbucksButton;
+                NSURLRequest *urlRequest = [self imageRequestForBizID:StarbucksBizID];
+                [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
+                backgroundColor = [UIColor clearColor];
+                bBlankCell = YES;
+            }
+            else if (row == PromoIndex10offTarget)
+            {
+                cell.promoLabel.text = upTo10OffTargetButton;
+                NSURLRequest *urlRequest = [self imageRequestForBizID:TargetBizID];
+                [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
+                backgroundColor = [UIColor clearColor];
+                
+                bBlankCell = YES;
+            }
+            else if (row == PromoIndex15to20offAmazon)
+            {
+                cell.promoLabel.text = upTo15to20OffAmazonButton;
+                NSURLRequest *urlRequest = [self imageRequestForBizID:AmazonBizID];
+                [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
+                backgroundColor = [UIColor clearColor];
+                
+                bBlankCell = YES;
+            }
         }
         else if ([self searchEnabled])
         {
             if ([self.arraySearchTransactions count] == 0)
             {
                 bBlankCell = YES;
-                cell.addressLabel.text = transactionCellNoTransactionsFoundText;
+                cell.dateLabel.text = transactionCellNoTransactionsFoundText;
             }
             else
             {
-                transaction = [self.arraySearchTransactions objectAtIndex:indexPath.row];
+                if (section >= _arraySectionsStart.count)
+                {
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    bBlankCell = YES;
+                    cell.dateLabel.text = errorDescriptionText;
+                }
+                else
+                {
+                    NSNumber *num = _arraySectionsStart[section];
+                    long index = num.integerValue + row;
+                    
+                    if (index >= self.arraySearchTransactions.count)
+                    {
+                        bBlankCell = YES;
+                        cell.dateLabel.text = errorDescriptionText;
+                    }
+                    else
+                    {
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arraySearchTransactions %lu %lu %lu", num.integerValue, row, self.arraySearchTransactions.count);
+                        transaction = self.arraySearchTransactions[index];
+                        cell.transactionIndex = index;
+                    }
+                }
             }
         }
         else
@@ -1098,15 +1272,37 @@ const int NumPromoRows              = 5;
             if ([abcAccount.currentWallet.arrayTransactions count] == 0)
             {
                 bBlankCell = YES;
-                cell.addressLabel.text = transactionCellNoTransactionsText;
-                
+                cell.dateLabel.text = transactionCellNoTransactionsText;
             }
             else
             {
-                transaction = [abcAccount.currentWallet.arrayTransactions objectAtIndex:indexPath.row];
+                if (section >= _arraySectionsStart.count)
+                {
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    bBlankCell = YES;
+                    cell.dateLabel.text = errorDescriptionText;
+                }
+                else
+                {
+                    NSNumber *num = _arraySectionsStart[section];
+                    long index = num.integerValue + row;
+                    if (index >= abcAccount.currentWallet.arrayTransactions.count)
+                    {
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arrayTransactions %lu %lu %lu", num.integerValue, row, abcAccount.currentWallet.arrayTransactions.count);
+                        bBlankCell = YES;
+                        cell.dateLabel.text = errorDescriptionText;
+                    }
+                    else
+                    {
+                        transaction = abcAccount.currentWallet.arrayTransactions[index];
+                        cell.transactionIndex = index;
+                    }
+                }
             }
         }
         
+        cell.confirmationLabel.text = @"";
+
         //
         // if this is an empty table, generate a blank cell
         //
@@ -1115,8 +1311,9 @@ const int NumPromoRows              = 5;
             cell.promoLabel.textColor = [Theme Singleton].colorTextDark;
             cell.promoLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
             cell.addressLabel.text = @"";
-            cell.confirmationLabel.text = @"";
-            cell.dateLabel.text = @"";
+//            cell.dateLabel.text = @"";
+            cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+
             cell.amountLabel.text = @"";
             cell.balanceLabel.text = @"";
 //            cell.imagePhoto.image = nil;
@@ -1142,20 +1339,23 @@ const int NumPromoRows              = 5;
         cell.addressLabel.textAlignment = NSTextAlignmentLeft;
         cell.confirmationLabel.textAlignment = NSTextAlignmentLeft;
         
+        NSString *formattedDateString = [_dateFormatterTime stringFromDate:transaction.date];
+        
         // date
-        cell.dateLabel.text = [NSDate stringForDisplayFromDate:transaction.date prefixed:NO alwaysDisplayTime:YES];
+        cell.dateLabel.text = formattedDateString;
+        cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
         
         // address
         if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
         {
             cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListName];
-            cell.addressLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+            cell.addressLabel.textColor = [Theme Singleton].colorTransactionName;
             cell.addressLabel.text = transaction.metaData.payeeName;
         }
         else
         {
             cell.addressLabel.font = [UIFont fontWithName:AppFontItalic size:[Theme Singleton].fontSizeTxListName];
-            cell.addressLabel.textColor = [Theme Singleton].colorTextMediumGrey;
+            cell.addressLabel.textColor = [Theme Singleton].colorTransactionNameLight;
             if (transaction.amountSatoshi < 0)
                 cell.addressLabel.text = sentBitcoinText;
             else
@@ -1166,9 +1366,8 @@ const int NumPromoRows              = 5;
         if ([self searchEnabled])
         {
             // confirmation becomes category
-            cell.confirmationLabel.text = transaction.metaData.category;
-            cell.confirmationLabel.textColor = COLOR_BALANCE;
-            
+            cell.dateLabel.text = transaction.metaData.category;
+            cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
         }
         else
         {
@@ -1182,42 +1381,42 @@ const int NumPromoRows              = 5;
             
             if (blockHeight <= 0)
             {
-                cell.confirmationLabel.text = synchronizingText;
-                cell.confirmationLabel.textColor = COLOR_BALANCE;
+                cell.dateLabel.text = synchronizingText;
+                cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
             }
             else if (confirmations <= 0)
             {
                 if (transaction.isReplaceByFee)
                 {
-                    cell.confirmationLabel.text = warningRBFText;
-                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                    cell.dateLabel.text = warningRBFText;
+                    cell.dateLabel.textColor = COLOR_NEGATIVE;
                 }
                 else if (transaction.isDoubleSpend)
                 {
-                    cell.confirmationLabel.text = doubleSpendText;
-                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                    cell.dateLabel.text = doubleSpendText;
+                    cell.dateLabel.textColor = COLOR_NEGATIVE;
                 }
                 else
                 {
-                    cell.confirmationLabel.text = pendingText;
-                    cell.confirmationLabel.textColor = COLOR_NEGATIVE;
+                    cell.dateLabel.text = pendingText;
+                    cell.dateLabel.textColor = COLOR_NEGATIVE;
                 }
             }
-            else if (confirmations == 1)
-            {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationText];
-                cell.confirmationLabel.textColor = COLOR_POSITIVE;
-            }
-            else if (confirmations >= ABCConfirmedConfirmationCount)
-            {
-                cell.confirmationLabel.textColor = COLOR_POSITIVE;
-                cell.confirmationLabel.text = confirmedText;
-            }
-            else
-            {
-                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationsText];
-                cell.confirmationLabel.textColor = COLOR_POSITIVE;
-            }
+//            else if (confirmations == 1)
+//            {
+//                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationText];
+//                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+//            }
+//            else if (confirmations >= ABCConfirmedConfirmationCount)
+//            {
+//                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+//                cell.confirmationLabel.text = @"";
+//            }
+//            else
+//            {
+//                cell.confirmationLabel.text = [NSString stringWithFormat:@"%lu %@", confirmations, confirmationsText];
+//                cell.confirmationLabel.textColor = COLOR_POSITIVE;
+//            }
             
         }
         
@@ -1285,52 +1484,65 @@ const int NumPromoRows              = 5;
         TransactionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         
         [self resignAllResponders];
-        if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexBuyBitcoin)
+        
+        if (indexPath.section == _arraySections.count)
         {
-            // Buy bitcoin button
-            NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
-            if (SHOW_BUY_SELL &&
-                ([deviceCurrency isEqualToString:@"USD"] ||
-                 [deviceCurrency isEqualToString:@"CAD"] ||
-                 [deviceCurrency isEqualToString:@"EUR"]))
+            if (indexPath.row == PromoIndexBuyBitcoin)
             {
-                [MainViewController launchBuySell];
+                // Buy bitcoin button
+                NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
+                
+                NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
+                
+                if (overrideURL && [overrideURL length] > 7)
+                {
+                    NSURL *url = [[NSURL alloc] initWithString:overrideURL];
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+                else if (SHOW_BUY_SELL &&
+                         ([deviceCurrency isEqualToString:@"USD"] ||
+                          [deviceCurrency isEqualToString:@"CAD"] ||
+                          [deviceCurrency isEqualToString:@"EUR"]))
+                {
+                    [MainViewController launchBuySell];
+                }
+                else
+                {
+                    [MainViewController launchDirectoryATM];
+                }
             }
-            else
+            else if (indexPath.row == PromoIndexImportGiftCard)
             {
-                [MainViewController launchDirectoryATM];
+                // Import Gift Card
+                [MainViewController launchSend];
             }
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndexImportGiftCard)
-        {
-            // Import Gift Card
-            [MainViewController launchSend];
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex20offStarbucks)
-        {
-            // 20% off button
-            [MainViewController launchGiftCard];
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex10offTarget)
-        {
-            // 10% off button
-            [MainViewController launchGiftCard];
-        }
-        else if (indexPath.row == abcAccount.currentWallet.arrayTransactions.count + PromoIndex15to20offAmazon)
-        {
-            // Amazon button
-            NSURL *url = [[NSURL alloc] initWithString:@"http://bit.ly/AirbitzPurse"];
-            [[UIApplication sharedApplication] openURL:url];
+            else if (indexPath.row == PromoIndex20offStarbucks)
+            {
+                // 20% off button
+                [MainViewController launchGiftCard];
+            }
+            else if (indexPath.row == PromoIndex10offTarget)
+            {
+                // 10% off button
+                [MainViewController launchGiftCard];
+            }
+            else if (indexPath.row == PromoIndex15to20offAmazon)
+            {
+                // Amazon button
+                NSURL *url = [[NSURL alloc] initWithString:@"http://bit.ly/AirbitzPurse"];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            
         }
         else if ([self searchEnabled])
         {
             if ([self.arraySearchTransactions count] > 0)
-                [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:indexPath.row] cell:cell];
+                [self launchTransactionDetailsWithTransaction:[self.arraySearchTransactions objectAtIndex:cell.transactionIndex] cell:cell];
         }
         else
         {
             if ([abcAccount.currentWallet.arrayTransactions count] > 0)
-                [self launchTransactionDetailsWithTransaction:[abcAccount.currentWallet.arrayTransactions objectAtIndex:indexPath.row] cell:cell];
+                [self launchTransactionDetailsWithTransaction:[abcAccount.currentWallet.arrayTransactions objectAtIndex:cell.transactionIndex] cell:cell];
         }
     }
     else
@@ -1609,7 +1821,6 @@ const int NumPromoRows              = 5;
 
     //wallet cell
     cell = [self getWalletCellForTableView:tableView];
-    [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
 
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
@@ -1624,9 +1835,13 @@ const int NumPromoRows              = 5;
             NSAssert(0, @"No wallets in balance section");
             break;
         case WALLET_SECTION_ACTIVE:
+            if (![abcAccount.arrayWallets count])
+                return cell;
             wallet = [abcAccount.arrayWallets objectAtIndex:row];
             break;
         case WALLET_SECTION_ARCHIVED:
+            if (nil == abcAccount.arrayArchivedWallets || ![abcAccount.arrayArchivedWallets count])
+                return cell;
             wallet = [abcAccount.arrayArchivedWallets objectAtIndex:row];
             break;
     }
@@ -1732,8 +1947,8 @@ const int NumPromoRows              = 5;
     {
         _walletMakerVisible = NO;
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1761,8 +1976,8 @@ const int NumPromoRows              = 5;
         [[self.walletMakerView superview] bringSubviewToFront:self.walletMakerView];
         [self createBlockingButton:self.walletMakerView];
         [self.walletMakerView.textField becomeFirstResponder];
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^
                          {
@@ -1791,8 +2006,8 @@ const int NumPromoRows              = 5;
                         action:@selector(blockingButtonHit:)
               forControlEvents:UIControlEventTouchDown];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {
@@ -1807,8 +2022,8 @@ const int NumPromoRows              = 5;
 
 - (void)removeBlockingButton
 {
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveLinear
                      animations:^
                      {
