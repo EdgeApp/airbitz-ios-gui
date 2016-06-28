@@ -1,7 +1,7 @@
 Bitcoin Zahlungsanfrage
 Von: [[abtag FROM]]
 
-Bitte scannen Sie QR-Code oder klicken Sie auf die Links um zu bezahlen
+Bitte scannen Sie den QR-Code oder klicken Sie auf die Links um zu bezahlen
 
 Klicken um zu bezahlen
 [[abtag REDIRECT_URL]]

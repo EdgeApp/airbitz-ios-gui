@@ -4,9 +4,7 @@
 /* No comment provided by engineer. */
 "%@
 
-Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
-
-Share this link to receive revenue from users that install and use %2$@. You will receive 0.25%% of all gift card purchases made inside of this app.";
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@ partager ce lien pour recevoir des recettes des utilisateurs qui installent et utilisent %2$@. Vous recevrez des 0.25%% de tous achats par carte cadeau effectué à partir de cet appli.";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
 "%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ demandées via %3$@ sur %4$@.";
@@ -25,19 +23,19 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 %@" = "%1$@ échoué: %2$@";
 
 /* No comment provided by engineer. */
-"%@ has requested a bitcoin address to send money to." = "%@ has requested a bitcoin address to send money to.";
+"%@ has requested a bitcoin address to send money to." = "%@ a demandé une adresse bitcoin à qui envoyer de l’argent.";
 
 /* ** Warning ** text on partial payment */
-"** Warning **" = "** Warning **";
+"** Warning **" = "** Avertissement **";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**WARNING** You will NEVER be able to recover your password if it is forgotten!!";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "** AVERTISSEMENT ** vous ne serez JAMAIS en mesure de récupérer votre mot de passe si vous l'oubliez!!";
 
 /* No comment provided by engineer. */
 "2 Factor (Enhanced Security)" = "2 Facteur (Sécurité Renforcée)";
 
 /* No comment provided by engineer. */
-"4 Digit PIN" = "4 Digit PIN";
+"4 Digit PIN" = "Code PIN à 4 chiffres";
 
 /* No comment provided by engineer. */
 "15-20% off Amazon" = "15-20 % remise sur Amazon";
@@ -58,7 +56,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "ATM Fee" = "Frais GAB";
 
 /* No comment provided by engineer. */
-"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Account '%@' needs a password. Account is not accessible on a new device without a password.";
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Le compte '%@' nécessite un mot de passe. Le compte inaccessible sur un nouvel appareil sans un mot de passe.";
 
 /* Title of account signin error alert */
 "Account Sign Up" = "Inscription de Compte";
@@ -67,19 +65,19 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Account has no password" = "Le compte n’a aucun mot de passe";
 
 /* No comment provided by engineer. */
-"Add New" = "Add New";
+"Add New" = "Ajouter nouveau";
 
 /* Income category for affiliate revenue */
-"Affiliate Revenue" = "Affiliate Revenue";
+"Affiliate Revenue" = "Revenu d’affiliation";
 
 /* No comment provided by engineer. */
-"Affiliate link has been copied to the clipboard" = "Affiliate link has been copied to the clipboard";
+"Affiliate link has been copied to the clipboard" = "Lien d’affiliation a été copiée au presse-papiers";
 
 /* No comment provided by engineer. */
 "Air Travel" = "Transport aérien";
 
 /* No comment provided by engineer. */
-"AirPrint is not currently available" = "AirPrint is not currently available";
+"AirPrint is not currently available" = "AirPrint est actuellement indisponible";
 
 /* No comment provided by engineer. */
 "Alcohol & Bars" = "Alcool & Bars";
@@ -88,22 +86,22 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Allowance" = "Allocation";
 
 /* No comment provided by engineer. */
-"Amount is too small" = "Amount is too small";
+"Amount is too small" = "Le montant est trop petit";
 
 /* No comment provided by engineer. */
 "Amusement" = "Amusement";
 
 /* No comment provided by engineer. */
-"An app has requested a bitcoin address to send money to." = "An app has requested a bitcoin address to send money to.";
+"An app has requested a bitcoin address to send money to." = "Une application a demandé une adresse bitcoin au quelle envoyer de l’argent.";
 
 /* No comment provided by engineer. */
-"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline";
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "Une erreur s’est produite. Veuillez vérifier votre connexion réseau. Vous pouvez également annuler la connexion PIN et utiliser votre nom d’utilisateur & mot de passe pour vous connecter en mode hors connexion";
 
 /* No comment provided by engineer. */
-"An error occurred. Possible network connection issue or incorrect username & password" = "An error occurred. Possible network connection issue or incorrect username & password";
+"An error occurred. Possible network connection issue or incorrect username & password" = "Une erreur s’est produite. Possibilité d'un problème de connexion ou mauvais nom d’utilisateur & mot de passe";
 
 /* Warning for password recovery textfields */
-"Answers are case sensitive" = "Answers are case sensitive";
+"Answers are case sensitive" = "Les réponses sont sensibles à la casse";
 
 /* No comment provided by engineer. */
 "Are you sure you want to call" = "Êtes-vous sûr de vouloir faire un appel";
@@ -112,43 +110,43 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Are you sure you want to cancel any changes you've made?" = "Êtes-vous sûr de vouloir annuler les modifications effectuées ?";
 
 /* No comment provided by engineer. */
-"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive";
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Es-vous sûr? Vous ne pourrez plus accéder à des fonds dans ce portefeuille et tous les futurs fonds qu’il pourrait recevoir";
 
 /* No comment provided by engineer. */
 "Arts" = "Arts";
 
 /* No comment provided by engineer. */
-"Auto & Transport" = "Auto & Transport";
+"Auto & Transport" = "Automobile & Transports";
 
 /* No comment provided by engineer. */
-"Auto Insurance" = "Auto Insurance";
+"Auto Insurance" = "Assurance auto";
 
 /* No comment provided by engineer. */
-"Auto Payment" = "Auto Payment";
+"Auto Payment" = "Paiement Auto";
 
 /* settings text */
-"Auto log off after" = "Auto log off after";
+"Auto log off after" = "Déconnexion auto après";
 
 /* section header in settings table */
-"BITCOIN DENOMINATION" = "BITCOIN DENOMINATION";
+"BITCOIN DENOMINATION" = "VALEUR BITCOIN";
 
 /* No comment provided by engineer. */
-"Baby Supplies" = "Baby Supplies";
+"Baby Supplies" = "Fournitures pour bébé";
 
 /* No comment provided by engineer. */
-"Babysitter & Daycare" = "Babysitter & Daycare";
+"Babysitter & Daycare" = "Baby-sitter & Crèche";
 
 /* Back button text on top left */
-"Back" = "Back";
+"Back" = "Précédent";
 
 /* No comment provided by engineer. */
-"Balance" = "Balance";
+"Balance" = "Solde";
 
 /* No comment provided by engineer. */
-"Bank Fee" = "Bank Fee";
+"Bank Fee" = "Frais Banquaire";
 
 /* No comment provided by engineer. */
-"Bills & Utilities" = "Bills & Utilities";
+"Bills & Utilities" = "Factures & Services";
 
 /* No comment provided by engineer. */
 "BitID Login" = "Connexion BitID";
@@ -157,55 +155,55 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Bitcoin" = "Bitcoin";
 
 /* No comment provided by engineer. */
-"Bitcoin Address or Private Key" = "Bitcoin Address or Private Key";
+"Bitcoin Address or Private Key" = "Adresse Bitcoin ou Clé Privée";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key" = "Bitcoin Private Key";
+"Bitcoin Private Key" = "Clé Privée Bitcoin";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key with Public Address" = "Bitcoin Private Key with Public Address";
+"Bitcoin Private Key with Public Address" = "Clé Privée Bitcoin avec Adresse Publique";
 
 /* Export wallet transactions email subject line */
-"Bitcoin Wallet Transactions" = "Bitcoin Wallet Transactions";
+"Bitcoin Wallet Transactions" = "Transaction de portefeuille Bitcoin";
 
 /* No comment provided by engineer. */
-"Bitcoin address mismatch" = "Bitcoin address mismatch";
+"Bitcoin address mismatch" = "Décalage d’adresse Bitcoin";
 
 /* settings text */
 "Bluetooth" = "Bluetooth";
 
 /* No comment provided by engineer. */
-"Books" = "Books";
+"Books" = "Livres";
 
 /* No comment provided by engineer. */
-"Books & Supplies" = "Books & Supplies";
+"Books & Supplies" = "Livres et fournitures";
 
 /* Business Name or Category placeholder */
-"Business Name or Category" = "Business Name or Category";
+"Business Name or Category" = "Nom du business ou catégorie";
 
 /* No comment provided by engineer. */
-"Buy Bitcoin" = "Buy Bitcoin";
+"Buy Bitcoin" = "Acheter Bitcoin";
 
 /* No comment provided by engineer. */
-"Buy/Sell Bitcoin" = "Buy/Sell Bitcoin";
+"Buy/Sell Bitcoin" = "Achat/vente Bitcoin";
 
 /* Generic CANCEL button text */
 "CANCEL" = "Annuler";
 
 /* CHANGE button text */
-"CHANGE" = "CHANGE";
+"CHANGE" = "CHANGER";
 
 /* No comment provided by engineer. */
-"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Camera unavailable. Please enable camera access on your phone's Privacy Settings";
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Appareil photo non disponible. Veillez permettre l'accès à la caméra sur les paramètres de confidentialité de votre téléphone";
 
 /* No comment provided by engineer. */
-"Can't send e-mail" = "Can't send e-mail";
+"Can't send e-mail" = "Impossible d’envoyer Courriel";
 
 /* No comment provided by engineer. */
-"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Cannot delete wallet as it contains funds. Please transfer out funds first.";
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Impossible de supprimer le portefeuille car il contient des fonds. Virez tout d’abord les fonds.";
 
 /* No comment provided by engineer. */
-"Car Wash" = "Car Wash";
+"Car Wash" = "Lave-auto";
 
 /* No comment provided by engineer. */
 "Cash & ATM" = "Cash & ATM";
@@ -214,46 +212,46 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Categories" = "Catégories";
 
 /* settings text */
-"Change Categories" = "Change Categories";
+"Change Categories" = "Changer de catégorie";
 
 /* No comment provided by engineer. */
-"Change Mining Fee" = "Change Mining Fee";
+"Change Mining Fee" = "Changer frais de mines";
 
 /* No comment provided by engineer. */
-"Change PIN" = "Change PIN";
+"Change PIN" = "Changer PIN";
 
 /* No comment provided by engineer. */
-"Change Password" = "Change Password";
+"Change Password" = "Changer mot de passe";
 
 /* settings text */
-"Change recovery questions" = "Change recovery questions";
+"Change recovery questions" = "Changer questions de récupération";
 
 /* No comment provided by engineer. */
-"Charity" = "Charity";
+"Charity" = "Charité";
 
 /* Check password button text */
-"Check Password" = "Check Password";
+"Check Password" = "Vérifier le mot de passe";
 
 /* No comment provided by engineer. */
-"Checking password..." = "Checking password...";
+"Checking password..." = "Vérification du mot de passe...";
 
 /* City, State/Province, or Country placeholder */
-"City, State/Province, or Country" = "City, State/Province, or Country";
+"City, State/Province, or Country" = "Ville, État/Province, ou Pays";
 
 /* Generic CLOSE button text */
-"Close" = "Close";
+"Close" = "Fermer";
 
 /* No comment provided by engineer. */
-"Clothing" = "Clothing";
+"Clothing" = "Vêtements";
 
 /* No comment provided by engineer. */
 "Coffee & Tea" = "Café & Thé";
 
 /* No comment provided by engineer. */
-"Coffee Shops" = "Coffee Shops";
+"Coffee Shops" = "Cafés-restaurants";
 
 /* No comment provided by engineer. */
-"Complete Signup" = "Complete Signup";
+"Complete Signup" = "Compléter Inscription";
 
 /* Num of confirmations in transaction list */
 "Confirmation" = "Confirmation";
@@ -262,168 +260,168 @@ Share this link to receive revenue from users that install and use %2$@. You wil
 "Confirmations" = "Confirmations";
 
 /* Confirmed status in transaction list */
-"Confirmed" = "Confirmed";
+"Confirmed" = "Confirmé";
 
 /* No comment provided by engineer. */
-"Congratulations" = "Congratulations";
+"Congratulations" = "Félicitations";
 
 /* Popup text when BLE connects */
-"Connected" = "Connected";
+"Connected" = "Connecté";
 
 /* No comment provided by engineer. */
-"Consulting Income" = "Consulting Income";
+"Consulting Income" = "Consultation de revenu";
 
 /* No comment provided by engineer. */
-"Copied" = "Copied";
+"Copied" = "Copié";
 
 /* Copy button text */
-"Copy" = "Copy";
+"Copy" = "Copier";
 
 /* No comment provided by engineer. */
-"Create Wallet" = "Create Wallet";
+"Create Wallet" = "Créer Porte-monnaie";
 
 /* No comment provided by engineer. */
-"Creating and securing account" = "Creating and securing account";
+"Creating and securing account" = "Création et sécurisation du compte";
 
 /* No comment provided by engineer. */
-"Creating and securing wallet" = "Creating and securing wallet";
+"Creating and securing wallet" = "Création et sécurisation du porte-monnaie";
 
 /* No comment provided by engineer. */
-"Credit Card Payment" = "Credit Card Payment";
+"Credit Card Payment" = "Paiement par Carte de Crédit";
 
 /* No comment provided by engineer. */
-"Current Location" = "Current Location";
+"Current Location" = "Emplacement Actuel";
 
 /* No comment provided by engineer. */
 "Current Password" = "Mot de passe actuel";
 
 /* section header in settings table */
-"DEFAULT EXCHANGE RATE" = "DEFAULT EXCHANGE RATE";
+"DEFAULT EXCHANGE RATE" = "TAUX DE CHANGE PAR DÉFAUT";
 
 /* Slideout menu gift card text */
-"DISCOUNTED GIFT CARDS" = "DISCOUNTED GIFT CARDS";
+"DISCOUNTED GIFT CARDS" = "CARTES-CADEAUX PRIX RÉDUIT";
 
 /* debug text */
-"Debug" = "Debug";
+"Debug" = "Débogage";
 
 /* No comment provided by engineer. */
-"Debug Log File" = "Debug Log File";
+"Debug Log File" = "Débogage Fichier Journal";
 
 /* Debug screen header title */
-"Debug Options" = "Debug Options";
+"Debug Options" = "Options de Débogage";
 
 /* settings text */
-"Default Currency" = "Default Currency";
+"Default Currency" = "Devise par défaut";
 
 /* settings text */
-"Default Exchange" = "Default Exchange";
+"Default Exchange" = "Échange Par défaut";
 
 /* DELETE button text for wallet delete */
-"Delete" = "Delete";
+"Delete" = "Supprimer";
 
 /* Delete Account With no Password Warning */
-"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.";
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Supprimer '%@' sur cet appareil? Ce compte n’a aucun mot de passe et NE POURRA ÊTRE RÉCUPÉRABLE récupérable si vous le supprimez.";
 
 /* Delete Account Warning */
-"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days.";
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Supprimer '%@' sur cet appareil ? Cela désactivera l’accès par code PIN. Si 2FA est activé sur ce compte, ce dispositif ne pourra se connecter sans une réinitialisation du 2FA qui dure 7 jours.";
 
 /* No comment provided by engineer. */
-"Delete Account" = "Delete Account";
+"Delete Account" = "Supprimer Compte";
 
 /* Delete Wallet popup */
-"Delete Wallet" = "Delete Wallet";
+"Delete Wallet" = "Supprimer le Porte-monnaie";
 
 /* Text for popup while deleting wallet */
-"Deleting Wallet" = "Deleting Wallet";
+"Deleting Wallet" = "Suppression de Porte-monnaie";
 
 /* No comment provided by engineer. */
-"Dentist" = "Dentist";
+"Dentist" = "Dentiste";
 
 /* No comment provided by engineer. */
-"Deposit to Savings" = "Deposit to Savings";
+"Deposit to Savings" = "Dépôt d’épargne";
 
 /* No comment provided by engineer. */
-"Designed and Built by Airbitz in" = "Designed and Built by Airbitz in";
+"Designed and Built by Airbitz in" = "Conçu et Construit par Airbitz en";
 
 /* Directory title bar text */
-"Directory" = "Directory";
+"Directory" = "Annuaire";
 
 /* No comment provided by engineer. */
-"Disabled" = "Disabled";
+"Disabled" = "Désactivé";
 
 /* No comment provided by engineer. */
-"Discounted Gift Cards" = "Discounted Gift Cards";
+"Discounted Gift Cards" = "Cartes-cadeaux prix Réduit";
 
 /* No comment provided by engineer. */
-"Div Income" = "Div Income";
+"Div Income" = "Revenu de Div";
 
 /* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
-Enter it below to make sure:" = "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
-Enter it below to make sure:";
+Enter it below to make sure:" = "Vous vous rappelez encore votre mot de passe ? Vous aurez besoin de votre mot de passe si votre appareil est perdu ou volé, ou si vous désinstallez l’application, 
+Entrez-le ci-dessous pour en être sur:";
 
 /* No comment provided by engineer. */
-"Doctor" = "Doctor";
+"Doctor" = "Médecin";
 
 /* Generic DONE button text */
 "Done" = "Effectué";
 
 /* No comment provided by engineer. */
-"Download the Airbitz wallet and save money using bitcoin" = "Download the Airbitz wallet and save money using bitcoin";
+"Download the Airbitz wallet and save money using bitcoin" = "Télécharger le porte-monnaie Airbitz et économiser de l’argent à l’aide de bitcoin";
 
 /* No comment provided by engineer. */
-"Education" = "Education";
+"Education" = "Éducation";
 
 /* No comment provided by engineer. */
-"Electronics" = "Electronics";
+"Electronics" = "Électronique";
 
 /* No comment provided by engineer. */
-"Electronics & Software" = "Electronics & Software";
+"Electronics & Software" = "Electronique & Logiciel";
 
 /* text for Email */
-"Email" = "Email";
+"Email" = "E-mail";
 
 /* No comment provided by engineer. */
-"Email cancelled." = "Email cancelled.";
+"Email cancelled." = "Email annulé.";
 
 /* No comment provided by engineer. */
-"Email saved to send later." = "Email saved to send later.";
+"Email saved to send later." = "E-mail enregistré pour envoyer plus tard.";
 
 /* No comment provided by engineer. */
-"Email sent." = "Email sent.";
+"Email sent." = "E-mail envoyé.";
 
 /* No comment provided by engineer. */
-"Enable" = "Enable";
+"Enable" = "Activer";
 
 /* settings text */
-"Enable Bluetooth in System Settings" = "Enable Bluetooth in System Settings";
+"Enable Bluetooth in System Settings" = "Activer Bluetooth dans paramètres du système";
 
 /* No comment provided by engineer. */
-"Enable Touch ID" = "Enable Touch ID";
+"Enable Touch ID" = "Activation de la Touche ID";
 
 /* Placeholder text for Receive screen amount */
-"Enter Amount (optional)" = "Enter Amount (optional)";
+"Enter Amount (optional)" = "Entrez le montant (optionnel)";
 
 /* No comment provided by engineer. */
-"Enter Payee" = "Enter Payee";
+"Enter Payee" = "Saisir le bénéficiaire";
 
 /* No comment provided by engineer. */
-"Enter any notes you would like to send to our support staff" = "Enter any notes you would like to send to our support staff";
+"Enter any notes you would like to send to our support staff" = "Entrez des notes que vous souhaitez envoyer à notre personnel de soutien";
 
 /* No comment provided by engineer. */
-"Entertainment" = "Entertainment";
+"Entertainment" = "Divertissement";
 
 /* No comment provided by engineer. */
-"Error Changing PIN" = "Error Changing PIN";
+"Error Changing PIN" = "Erreur changement de PIN";
 
 /* No comment provided by engineer. */
-"Error Deleting Wallet" = "Error Deleting Wallet";
+"Error Deleting Wallet" = "Erreur suppression du portefeuille";
 
 /* No comment provided by engineer. */
-"Error Getting Wallet Count" = "Error Getting Wallet Count";
+"Error Getting Wallet Count" = "Erreur pendant la compte du portefeuille";
 
 /* No comment provided by engineer. */
-"Error Logging In" = "Error Logging In";
+"Error Logging In" = "Erreur de connexion";
 
 /* No comment provided by engineer. */
 "Error Recovering Account" = "Error Recovering Account";
@@ -435,7 +433,7 @@ Enter it below to make sure:";
 "Error desc" = "Error desc";
 
 /* No comment provided by engineer. */
-"Error during send" = "Error during send";
+"Error during send" = "Erreur lors de l’envoi";
 
 /* No comment provided by engineer. */
 "Error importing the token at this time. Please try again." = "Error importing the token at this time. Please try again.";
@@ -462,7 +460,7 @@ Enter it below to make sure:";
 "Expense" = "Expense";
 
 /* EXPORT button text for wallet export */
-"Export" = "Export";
+"Export" = "Exporter";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "Export Private Seed";
@@ -498,7 +496,7 @@ Enter it below to make sure:";
 "Financial Advisor" = "Financial Advisor";
 
 /* settings text */
-"First Name (optional)" = "First Name (optional)";
+"First Name (optional)" = "Prénom (facultatif)";
 
 /* No comment provided by engineer. */
 "Food & Dining" = "Food & Dining";
@@ -513,7 +511,7 @@ Enter it below to make sure:";
 "Gas & Fuel" = "Gas & Fuel";
 
 /* No comment provided by engineer. */
-"Generating QR Code..." = "Generating QR Code...";
+"Generating QR Code..." = "Génération de Code QR...";
 
 /* Button text for Get Affiliate Link */
 "Get Affiliate Link" = "Get Affiliate Link";
@@ -549,7 +547,7 @@ Enter it below to make sure:";
 "Health & Fitness" = "Health & Fitness";
 
 /* Help button text on top right */
-"Help" = "Help";
+"Help" = "Aide";
 
 /* Hide */
 "Hide" = "Hide";
@@ -599,7 +597,7 @@ Enter it below to make sure:";
 "Import Airbitz Gift Card" = "Import Airbitz Gift Card";
 
 /* No comment provided by engineer. */
-"Import Funds" = "Import Funds";
+"Import Funds" = "Importer des fonds";
 
 /* No comment provided by engineer. */
 "Import Private Key" = "Import Private Key";
@@ -647,7 +645,7 @@ Enter it below to make sure:";
 "Internet" = "Internet";
 
 /* No comment provided by engineer. */
-"Invalid Bitcoin Address" = "Invalid Bitcoin Address";
+"Invalid Bitcoin Address" = "Adresse Bitcoin non valide";
 
 /* No comment provided by engineer. */
 "Invalid Bluetooth Request" = "Invalid Bluetooth Request";
@@ -665,7 +663,7 @@ Enter it below to make sure:";
 "Kids Activities" = "Kids Activities";
 
 /* settings text */
-"Last Name (optional)" = "Last Name (optional)";
+"Last Name (optional)" = "Noms (facultatif)";
 
 /* No comment provided by engineer. */
 "Late Fee" = "Late Fee";
@@ -692,13 +690,13 @@ Enter it below to make sure:";
 "Loading Balance..." = "Loading Balance...";
 
 /* Loading Transactions alert text */
-"Loading Transactions..." = "Loading Transactions...";
+"Loading Transactions..." = "Opérations de chargement...";
 
 /* Loading wallets alert text */
 "Loading Wallets..." = "Loading Wallets...";
 
 /* Loading... */
-"Loading..." = "Loading...";
+"Loading..." = "Chargement...";
 
 /* No comment provided by engineer. */
 "Logging Out" = "Logging Out";
@@ -707,7 +705,7 @@ Enter it below to make sure:";
 "Low Fee" = "Low Fee";
 
 /* settings text */
-"Merchant Mode" = "Merchant Mode";
+"Merchant Mode" = "Mode marchand";
 
 /* No comment provided by engineer. */
 "Message Sent" = "Message Sent";
@@ -746,10 +744,10 @@ Enter it below to make sure:";
 "Must have at least one upper case letter" = "Must have at least one upper case letter";
 
 /* Default wallet name for new accounts */
-"My Wallet" = "My Wallet";
+"My Wallet" = "Mon portefeuille";
 
 /* section header in settings table */
-"NAME" = "NAME";
+"NAME" = "NOM";
 
 /* NO button text */
 "NO" = "NO";
@@ -761,10 +759,10 @@ Enter it below to make sure:";
 "Net Salary" = "Net Salary";
 
 /* No comment provided by engineer. */
-"New PIN" = "New PIN";
+"New PIN" = "Nouveau code NIP";
 
 /* No comment provided by engineer. */
-"New Password" = "New Password";
+"New Password" = "Nouveau mot de passe";
 
 /* No comment provided by engineer. */
 "Newspaper & Magazines" = "Newspaper & Magazines";
@@ -776,7 +774,7 @@ Enter it below to make sure:";
 "Nickname / Handle (optional)" = "Nickname / Handle (optional)";
 
 /* what to display when wallet has no transactions */
-"No Transactions" = "No Transactions";
+"No Transactions" = "Aucune transaction";
 
 /* what to display when no transactions are found in search */
 "No Transactions Found" = "No Transactions Found";
@@ -800,7 +798,7 @@ Enter it below to make sure:";
 "OK" = "OK";
 
 /* section header in settings table */
-"OPTIONS" = "OPTIONS";
+"OPTIONS" = "Options";
 
 /* No comment provided by engineer. */
 "On The Web" = "On The Web";
@@ -836,7 +834,7 @@ Enter it below to make sure:";
 "Partial Payment" = "Partial Payment";
 
 /* No comment provided by engineer. */
-"Password" = "Password";
+"Password" = "Mot de passe";
 
 /* No comment provided by engineer. */
 "Password Change" = "Password Change";
@@ -901,7 +899,7 @@ Enter it below to make sure:";
 "Please enter your PIN" = "Please enter your PIN";
 
 /* No comment provided by engineer. */
-"Please enter your correct password." = "Please enter your correct password.";
+"Please enter your correct password." = "Veuillez entrer votre correct mot de passe.";
 
 /* No comment provided by engineer. */
 "Please enter your password to enable Touch ID" = "Please enter your password to enable Touch ID";
@@ -922,7 +920,7 @@ Enter it below to make sure:";
 "Present QR code to Sender and have them scan to send you payment" = "Present QR code to Sender and have them scan to send you payment";
 
 /* No comment provided by engineer. */
-"Private Seed" = "Private Seed";
+"Private Seed" = "Privé";
 
 /* expense category */
 "Property" = "Property";
@@ -942,7 +940,7 @@ Enter it below to make sure:";
 (Earn Bitcoin)";
 
 /* No comment provided by engineer. */
-"Re-enter New Password" = "Re-enter New Password";
+"Re-enter New Password" = "Entrez à nouveau le nouveau mot de passe";
 
 /* No comment provided by engineer. */
 "Received Bitcoin" = "Received Bitcoin";
@@ -960,7 +958,7 @@ Enter it below to make sure:";
 "Recovery Questions Not Set" = "Recovery Questions Not Set";
 
 /* Title of recovery questions setup complete alert */
-"Recovery Questions Set" = "Recovery Questions Set";
+"Recovery Questions Set" = "Ensemble des Questions de récupération";
 
 /* No comment provided by engineer. */
 "Refer Your Friends" = "Refer Your Friends";
@@ -978,10 +976,10 @@ Enter it below to make sure:";
 "Remind Me Later" = "Remind Me Later";
 
 /* RENAME button text for wallet rename */
-"Rename" = "Rename";
+"Rename" = "Renommer";
 
 /* Rename Wallet popup */
-"Rename Wallet" = "Rename Wallet";
+"Rename Wallet" = "Renommer le portefeuille";
 
 /* No comment provided by engineer. */
 "Rent" = "Rent";
@@ -1044,7 +1042,7 @@ Enter it below to make sure:";
 "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
 
 /* SearchBarSearch placeholder */
-"Search" = "Search";
+"Search" = "Rechercher";
 
 /* No comment provided by engineer. */
 "Select Currency" = "Select Currency";
@@ -1056,13 +1054,13 @@ Enter it below to make sure:";
 "Send Funds to Private Key" = "Send Funds to Private Key";
 
 /* settings text */
-"Send name on payment request" = "Send name on payment request";
+"Send name on payment request" = "Envoyer nom sur demande de paiement";
 
 /* No comment provided by engineer. */
 "Send to Bitcoin Address or Import Private Key" = "Send to Bitcoin Address or Import Private Key";
 
 /* status message */
-"Sending..." = "Sending...";
+"Sending..." = "Envoi...";
 
 /* No comment provided by engineer. */
 "Sent Bitcoin" = "Sent Bitcoin";
@@ -1085,7 +1083,7 @@ Enter it below to make sure:";
 %@";
 
 /* No comment provided by engineer. */
-"Settings" = "Settings";
+"Settings" = "Paramètres";
 
 /* Generic SHARE button text */
 "Share" = "Share";
@@ -1097,10 +1095,10 @@ Enter it below to make sure:";
 "Show" = "Show";
 
 /* No comment provided by engineer. */
-"Show Balance" = "Show Balance";
+"Show Balance" = "Voir Solde";
 
 /* No comment provided by engineer. */
-"Sign Up" = "Sign Up";
+"Sign Up" = "Inscrivez-vous";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
@@ -1111,7 +1109,7 @@ Enter it below to make sure:";
 "Skip" = "Skip";
 
 /* Title of Skip this step alert */
-"Skip this step" = "Skip this step";
+"Skip this step" = "Ignorez cette étape";
 
 /* No comment provided by engineer. */
 "Sorry" = "Sorry";
@@ -1120,7 +1118,7 @@ Enter it below to make sure:";
 "Spa & Massage" = "Spa & Massage";
 
 /* spending limits text */
-"Spending Limits" = "Spending Limits";
+"Spending Limits" = "Limites de dépenses";
 
 /* expense category */
 "Sporting Goods" = "Sporting Goods";
@@ -1138,13 +1136,13 @@ Enter it below to make sure:";
 "Successfully Logged In" = "Successfully Logged In";
 
 /* No comment provided by engineer. */
-"Sweep Funds From Private Key" = "Sweep Funds From Private Key";
+"Sweep Funds From Private Key" = "Balayage des fonds de la clé privée";
 
 /* Synchronizing text in confirmation textfield */
 "Synchronizing" = "Synchronizing";
 
 /* Prefix of wallet balance dropdown header */
-"TOTAL: " = "TOTAL: ";
+"TOTAL: " = "TOTAL : ";
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "Tap and hold a wallet for additional options";
@@ -1224,10 +1222,10 @@ Your username and password are known only to you and never stored unencrypted.";
 "Trade Commissions" = "Trade Commissions";
 
 /* Transaction Details header text */
-"Transaction Details" = "Transaction Details";
+"Transaction Details" = "Détails de la transaction";
 
 /* No comment provided by engineer. */
-"Transfer" = "Transfer";
+"Transfer" = "Transfert";
 
 /* From wallet transfer text */
 "Transfer From %@" = "Transfer From %@";
@@ -1352,10 +1350,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Vet" = "Vet";
 
 /* title of active wallets table */
-"WALLETS" = "WALLETS";
+"WALLETS" = "PORTEFEUILLES";
 
 /* Title of missing password notification */
-"WARNING: missing password" = "WARNING: missing password";
+"WARNING: missing password" = "ATTENTION : mot de passe absent";
 
 /* Status on Request screen */
 "Waiting for Payment..." = "Waiting for Payment...";
@@ -1414,7 +1412,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Would you like to write a review in the App store?" = "Would you like to write a review in the App store?";
 
 /* No comment provided by engineer. */
-"Wrong Answers" = "Wrong Answers";
+"Wrong Answers" = "Mauvaises réponses";
 
 /* YES button text */
 "YES" = "YES";
@@ -1428,7 +1426,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "You must answer all six questions. Make sure your answers are long enough." = "You must answer all six questions. Make sure your answers are long enough.";
 
 /* No comment provided by engineer. */
-"You must choose all six questions before proceeding." = "You must choose all six questions before proceeding.";
+"You must choose all six questions before proceeding." = "Vous devez choisir toutes les six questions avant de continuer.";
 
 /* No comment provided by engineer. */
 "You must enter a user name" = "You must enter a user name";
@@ -1448,10 +1446,10 @@ Use the Payee, Category, and Notes field to optionally tag your transaction";
 [[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Vous avez reçu Bitcoin ! Nous vous recommandons vivement la mise en place des questions / réponses pour la recuperation du mot de passe. Sinon, vous ne serez pas en mesure d’accéder à votre compte si votre mot de passe est oublié.";
 
 /* No comment provided by engineer. */
-"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!";
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Vos questions de récupération de mot de passe et les réponses sont maintenant mis en place.  Lorsque vous récupérez votre mot de passe, vos réponses doivent correspondre exactement. ** N’OUBLIEZ PAS VOTRE MOT DE PASSE ET LES RÉPONSES DE RÉCUPÉRATION ** VOTRE COMPTE NE PEUT ÊTRE RÉCUPÉRÉ SANS EUX!!";
 
 /* Start of password rules text */
 "Your password..." = "Your password...";
@@ -1468,7 +1466,7 @@ All tagged information is kept 100% private and encrypted by your password.
 No one, including [[abtag APP_TITLE]], has any access to this information.";
 
 /* settings text */
-"bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";
+"bits = (0.000001 Bitcoin)" = "bits = (0,000001 Bitcoin)";
 
 /* business listings is closed */
 "closed" = "closed";
@@ -1486,7 +1484,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.";
 "hours" = "hours";
 
 /* settings text */
-"mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
+"mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0,001 Bitcoin)";
 
 /* No comment provided by engineer. */
 "minute" = "minute";

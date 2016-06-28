@@ -20,14 +20,12 @@
 "DgW-Gm-7l2.normalTitle" = "Suivant";
 
 /* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
-"Dyh-gB-nOv.text" = "You will next see a popup requesting access to your Contacts.";
+"Dyh-gB-nOv.text" = "Vous verrez ensuite une fenêtre popup demandant l’accès à vos Contacts.";
 
 /* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
-"Ehm-ti-qdD.text" = "Specify your name or arbitrary nickname ie \"Coinmaster\".
-
-This is used ONLY when sending payments or requests to others to help them identify you.
-
-This is never sent to Airbitz or any third party and can be changed at any time in the future.";
+"Ehm-ti-qdD.text" = "Indiquez votre nom ou Pseudo arbitraire, c-a-d « Coinmaster ». 
+Ceci est employé UNIQUEMENT en envoyant des paiements ou des demandes à d’autres pour les aider à vous identifier. 
+Ceci n’est jamais envoyé à Airbitz ou tout autre partie tiers et peut être modifié à tout moment dans l’avenir.";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
 "G0E-xz-b8e.text" = "Définir un code PIN à 4 chiffres";
@@ -66,43 +64,43 @@ This is never sent to Airbitz or any third party and can be changed at any time 
 "bPi-8w-xQ4.text" = "PIN";
 
 /* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
-"cng-Cv-ULC.text" = "Enable Contact Access";
+"cng-Cv-ULC.text" = "Activer l'accès aux contacts";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
-"dxS-14-iR5.text" = "Your PIN is a 4 digit code used to do quick re-logins into your account.";
+"dxS-14-iR5.text" = "Votre PIN est un code à 4 chiffres, utilisé pour accéder rapidement à votre compte.";
 
 /* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
 "fCk-W4-OJJ.placeholder" = "Pseudo";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn"; */
-"fV9-pz-Wfn.placeholder" = "Create PIN";
+"fV9-pz-Wfn.placeholder" = "Créer code PIN";
 
 /* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL"; */
-"fnL-7h-MQL.placeholder" = "Choose a Password";
+"fnL-7h-MQL.placeholder" = "Choisissez un mot de passe";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6"; */
 "hHD-NP-fM6.normalTitle" = "Suivant";
 
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F"; */
-"hoE-Bh-x2F.placeholder" = "Re-enter Password";
+"hoE-Bh-x2F.placeholder" = "Entrez à nouveau le mot de passe";
 
 /* Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm"; */
-"i3b-ZH-bDm.placeholder" = "Choose a Username";
+"i3b-ZH-bDm.placeholder" = "Choisissez un nom d’utilisateur";
 
 /* Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj"; */
-"jcU-OX-5Hj.text" = "Write down and store securely";
+"jcU-OX-5Hj.text" = "Noter et stocker en toute sécurité";
 
 /* Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX"; */
-"jgQ-ju-YiX.text" = "Set a Password and PIN";
+"jgQ-ju-YiX.text" = "Définir un mot de passe et code PIN";
 
 /* Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV"; */
-"sJ6-mQ-mSV.text" = "Username";
+"sJ6-mQ-mSV.text" = "Nom d’utilisateur";
 
 /* Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm"; */
-"tOB-4i-OVm.text" = "mypassword12345";
+"tOB-4i-OVm.text" = "monmotdepasse12345";
 
 /* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
-"w3d-xe-eUq.text" = "The password is used to authenticate your account and to change sensitive settings.";
+"w3d-xe-eUq.text" = "Le mot de passe est utilisé pour authentifier votre compte et modifier les paramètres sensibles.";
 
 /* Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU"; */
 "wff-Il-8GU.text" = "Notez-le !";
@@ -117,5 +115,5 @@ This is never sent to Airbitz or any third party and can be changed at any time 
 "z5S-Vu-MC1.normalTitle" = "Suivant";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC"; */
-"zqc-i8-gfC.text" = "Password";
+"zqc-i8-gfC.text" = "Mot de passe";
 

@@ -32,7 +32,7 @@
 "rWQ-uJ-DUX.text" = "ACHETER / VENDRE BITCOIN";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
-"vsf-Ms-1Ff.accessibilityHint" = "the currently logged in account";
+"vsf-Ms-1Ff.accessibilityHint" = "le compte actuellement connecté";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.text" = "Étiquette";

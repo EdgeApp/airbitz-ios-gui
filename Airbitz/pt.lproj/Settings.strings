@@ -1,94 +1,93 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "2FA Reset Requested by another device.";
+"1Qx-Jp-bYp.text" = "Solicitação de Reset dos 2FA por outro dispositivo.";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "KEEP 2FA";
+"3uS-L5-frK.normalTitle" = "MANTER 2FA";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
-"4md-ob-Ttv.text" = "Core Version:";
+"4md-ob-Ttv.text" = "Versão do Núcleo:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
-"9ur-p7-oPb.text" = "Label";
+"9ur-p7-oPb.text" = "Rótulo";
 
 /* Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg"; */
-"Ag5-Xn-Vpg.normalTitle" = "Clear Watcher Cache";
+"Ag5-Xn-Vpg.normalTitle" = "Limpar o Cache do Observador";
 
 /* Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
-"Bs1-Yi-SIh.normalTitle" = "Upload Log Files";
+"Bs1-Yi-SIh.normalTitle" = "Carregar Arquivos de Log";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled";
+"GMX-G5-Rl3.text" = "Habilite a autenticação de 2 Fatores para aumentar a segurança, permitindo apenas logins de usuários previamente registrados nos dispositivos. Adicione mais dispositivos escaneando o código QR abaixo depois que é o 2FA estiver habilitado";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
-"GXU-6G-OIw.placeholder" = "Current Password";
+"GXU-6G-OIw.placeholder" = "Senha Atual";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. 
-Scan the QR code using this device";
+"Izr-Cl-Osv.text" = "No dispositivo que habilitou a autenticação por 2 fatores, clique em Configurações -> Dois Fatores. Digitalize o código QR usando este dispositivo";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
-"LAg-aY-W5b.normalTitle" = "DONE";
+"LAg-aY-W5b.normalTitle" = "CONCLUÍDO";
 
 /* Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
-"Myh-H6-aDd.text" = "Version:";
+"Myh-H6-aDd.text" = "Versão:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05"; */
-"RqX-ow-U05.text" = "Label";
+"RqX-ow-U05.text" = "Rótulo";
 
 /* Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK"; */
 "SXK-F7-NoK.text" = "0.1.0-mainnet";
 
 /* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
-"T6x-zH-xvf.text" = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. ";
+"T6x-zH-xvf.text" = "Esta conta tem autenticação de 2 fatores (2FA) habilitada. Escaneie o token 2FA do dispositivo que habilitou o 2FA para dar acesso a este dispositivo. ";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
-"X6G-HD-WUv.placeholder" = "Search";
+"X6G-HD-WUv.placeholder" = "Pesquisar";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod"; */
-"XJN-At-Qod.text" = "Label";
+"XJN-At-Qod.text" = "Rótulo";
 
 /* Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82"; */
 "Zw4-k1-a82.text" = "Mainnet";
 
 /* Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd"; */
-"avV-bm-INd.normalTitle" = "DISABLE 2FA";
+"avV-bm-INd.normalTitle" = "DESATIVAR 2FA";
 
 /* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
-"bYl-WU-bNw.text" = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices";
+"bYl-WU-bNw.text" = "Solicite a ativação da autenticação de Dois Fatores. A solicitação será automaticamente resetada em 7 dias se o usuário da conta não tomar medidas nos dispositivos autenticados";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
-"g6f-f3-w6p.text" = "Label";
+"g6f-f3-w6p.text" = "Rótulo";
 
 /* Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15"; */
-"h6I-iF-k15.text" = "Date";
+"h6I-iF-k15.text" = "Data";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "Two factor reset has been requested";
+"hxc-na-KPc.text" = "O reset de dois fatores foi requisitado";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
 
 /* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
-"lqV-Y6-LKD.normalTitle" = "Request Reset";
+"lqV-Y6-LKD.normalTitle" = "Solicitação de Reset";
 
 /* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
-"mJ9-nG-s79.text" = "Enabled";
+"mJ9-nG-s79.text" = "Habilitado";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50"; */
-"nhU-8o-H50.normalTitle" = "Button";
+"nhU-8o-H50.normalTitle" = "Botão";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a"; */
-"pX1-NU-49a.text" = "Label";
+"pX1-NU-49a.text" = "Rótulo";
 
 /* Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL"; */
-"pki-9D-VwL.normalTitle" = "Scan Token";
+"pki-9D-VwL.normalTitle" = "Digitalizar Token";
 
 /* Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg"; */
-"qLK-qd-7qg.text" = "Network:";
+"qLK-qd-7qg.text" = "Rede:";
 
 /* Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
-"sZm-Gx-M8r.text" = "App Version";
+"sZm-Gx-M8r.text" = "Versão do App";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x"; */
-"th1-bn-E4x.normalTitle" = "CANCEL";
+"th1-bn-E4x.normalTitle" = "CANCELAR";
 

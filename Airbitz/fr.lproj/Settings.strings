@@ -17,14 +17,13 @@
 "Bs1-Yi-SIh.normalTitle" = "Charger Fichiers Log";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled";
+"GMX-G5-Rl3.text" = "Activer l’authentification à 2 Facteur à fin de renforcer la sécurité en autorisant uniquement les connexions des dispositifs précédemment connectés. Ajouter plus d’appareils en scannant le code QR ci-dessous après que 2FA est activé";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
 "GXU-6G-OIw.placeholder" = "Mot de passe actuel";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. 
-Scan the QR code using this device";
+"Izr-Cl-Osv.text" = "À l’aide de l’appareil qui a activé l’Authentification à 2 Facteur, allez dans Paramètres -> Deux Facteur. Scanner le code QR à partir de cet appareil";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
 "LAg-aY-W5b.normalTitle" = "Effectué";
@@ -69,10 +68,10 @@ Scan the QR code using this device";
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
 
 /* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
-"lqV-Y6-LKD.normalTitle" = "Request Reset";
+"lqV-Y6-LKD.normalTitle" = "Demande de réinitialisation";
 
 /* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
-"mJ9-nG-s79.text" = "Enabled";
+"mJ9-nG-s79.text" = "Activé";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50"; */
 "nhU-8o-H50.normalTitle" = "Bouton";
@@ -81,13 +80,13 @@ Scan the QR code using this device";
 "pX1-NU-49a.text" = "Étiquette";
 
 /* Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL"; */
-"pki-9D-VwL.normalTitle" = "Scan Token";
+"pki-9D-VwL.normalTitle" = "Scanner Jeton";
 
 /* Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg"; */
-"qLK-qd-7qg.text" = "Network:";
+"qLK-qd-7qg.text" = "Réseau :";
 
 /* Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
-"sZm-Gx-M8r.text" = "App Version";
+"sZm-Gx-M8r.text" = "Version de l’appli";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x"; */
 "th1-bn-E4x.normalTitle" = "Annuler";

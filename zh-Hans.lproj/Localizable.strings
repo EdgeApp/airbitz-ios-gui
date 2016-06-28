@@ -87,7 +87,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Allowance" = "津贴";
 
 /* No comment provided by engineer. */
-"Amount is too small" = "Amount is too small";
+"Amount is too small" = "数额太小。";
 
 /* No comment provided by engineer. */
 "Amusement" = "娱乐";
@@ -228,7 +228,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Change recovery questions" = "更改帐户复原问题";
 
 /* No comment provided by engineer. */
-"Charity" = "Charity";
+"Charity" = "慈善机构";
 
 /* Check password button text */
 "Check Password" = "查看密码";
@@ -541,7 +541,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "HOA Dues" = "HOA 会费";
 
 /* No comment provided by engineer. */
-"Hair" = "Hair";
+"Hair" = "头发";
 
 /* No comment provided by engineer. */
 "Health & Fitness" = "健康 & 健身";
@@ -559,7 +559,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Hobbies" = "爱好";
 
 /* No comment provided by engineer. */
-"Home" = "Home";
+"Home" = "首页";
 
 /* No comment provided by engineer. */
 "Home Improvement" = "家庭装修";
