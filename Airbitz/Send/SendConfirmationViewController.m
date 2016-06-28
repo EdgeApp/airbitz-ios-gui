@@ -656,8 +656,17 @@
         [_alert dismissWithClickedButtonIndex:1 animated:NO];
         _alert = nil;
     }
+    
     NSString *title = params[0];
-    NSString *message = [NSString stringWithFormat:@"%@\n\n%@", params[1], params[2]];
+    NSString *msg2;
+    unsigned long code = (unsigned long) [((NSNumber *) params[1]) integerValue];
+    
+    if ([params[2] isEqualToString:params[3]])
+        msg2 = @"";
+    else
+        msg2 = params[3];
+    
+    NSString *message = [NSString stringWithFormat:@"Error Code:%lu\n\n%@\n\n%@", code, params[2], msg2];
     _alert = [[UIAlertView alloc]
                             initWithTitle:title
                             message:message
@@ -1073,7 +1082,7 @@
 - (void)txSendFailed:(NSError *)error;
 {
     NSString *title = errorDuringSend;
-    NSArray *params = [NSArray arrayWithObjects: title, error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];
+    NSArray *params = [NSArray arrayWithObjects: title, [NSNumber numberWithInteger:error.code], error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];
 //    dispatch_async(dispatch_get_main_queue(), ^(void) {
         [_confirmationSlider resetIn:1.0];
         if (_bAdvanceToTx) {
