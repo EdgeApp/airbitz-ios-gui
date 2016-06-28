@@ -221,6 +221,7 @@ typedef enum eRequestType
     self.pickerTextCategory.textField.textColor = [UIColor whiteColor];
     self.pickerTextCategory.textField.tintColor = [UIColor whiteColor];
     [self.pickerTextCategory setTopMostView:self.view];
+    [self.pickerTextCategory useContrainstForTextField];
     
     NSArray *array = [Util categoryArrayLocalize:abcAccount.categories.listCategories];
     [self.pickerTextCategory setCategories:array];

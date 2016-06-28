@@ -114,23 +114,6 @@
     self.textField = [[StylizedTextField alloc] initWithFrame:frame];
     [self addSubview:self.textField];
     
-    
-    NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    
-    [self.textField setTranslatesAutoresizingMaskIntoConstraints:NO];
-    UIView *childView = self.textField;
-    UIView *parentView = self;
-    
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
-    
-    [parentView addConstraints:constraints];
-    [parentView layoutIfNeeded];
-
-    
-
     self.cropPointTop = -1;
     self.cropPointBottom = -1;
 
@@ -148,6 +131,23 @@
     [self configTextField];
     
     _roundedAndShadowed = NO;
+}
+
+- (void)useContrainstForTextField;
+{
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    
+    [self.textField setTranslatesAutoresizingMaskIntoConstraints:NO];
+    UIView *childView = self.textField;
+    UIView *parentView = self;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(childView, parentView);
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[childView]-0-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [parentView addConstraints:constraints];
+    [parentView layoutIfNeeded];
 }
 
 - (void)setRoundedAndShadowed:(Boolean)rounded
