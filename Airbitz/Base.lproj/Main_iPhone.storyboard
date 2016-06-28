@@ -1051,6 +1051,15 @@
                                             <constraint firstAttribute="height" id="Get-1y-G6d"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5c-Fh-rIw" userLabel="TextFieldLine">
+                                        <rect key="frame" x="67" y="50" width="150" height="1"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="dVh-LG-AVu"/>
+                                            <constraint firstAttribute="height" constant="1" id="pNk-5N-66F"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1067,6 +1076,7 @@
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
                                     <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
+                                    <constraint firstItem="i5c-Fh-rIw" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="65" id="Ejw-ZT-lLc"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" id="Hpq-yy-IZs"/>
@@ -1077,6 +1087,7 @@
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtQ-SU-6iS" secondAttribute="bottom" constant="8" symbolic="YES" id="Pab-mx-fWu"/>
                                     <constraint firstItem="TZ4-b5-fQ5" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="trailing" constant="22" id="PgA-8r-2P1"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="QWc-yL-Ry2"/>
+                                    <constraint firstItem="i5c-Fh-rIw" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" constant="50" id="Rv6-pl-hWy"/>
                                     <constraint firstItem="tx5-Cj-bnM" firstAttribute="centerY" secondItem="TZ4-b5-fQ5" secondAttribute="centerY" id="Udv-7d-aNS"/>
                                     <constraint firstItem="dY3-MX-MNV" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="65" id="W6D-Zr-p4f"/>
                                     <constraint firstItem="CiQ-7I-S7U" firstAttribute="top" secondItem="dY3-MX-MNV" secondAttribute="top" id="WkI-Rk-9ou"/>
@@ -1140,7 +1151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-739" y="-987.5"/>
+            <point key="canvasLocation" x="-739.5" y="-989"/>
         </scene>
         <!--Airbitz View Controller-->
         <scene sceneID="hWx-JX-ZaM">
