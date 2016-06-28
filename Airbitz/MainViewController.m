@@ -1678,6 +1678,8 @@ MainViewController *singleton;
         _txDetailsController = nil;
         [MainViewController showNavBarAnimated:YES];
         [MainViewController showTabBarAnimated:YES];
+        
+        [self.selectedViewController forceUpdateNavBar];
     }];
 }
 
