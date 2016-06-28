@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
 
+@property (weak, nonatomic) IBOutlet UIButton               *addressButton;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2    *walletSelector;
@@ -251,6 +252,7 @@
     {
         // This is a wallet to wallet transfer
         self.addressLabel.text = self.destWallet.name;
+        self.addressButton.enabled = false;
     }
     else if (self.paymentRequest)
     {
@@ -264,9 +266,13 @@
             self.addressLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.paymentRequest.merchant, self.paymentRequest.domain];
         else
             self.addressLabel.text = self.paymentRequest.domain;
+        self.addressButton.enabled = false;
     }
     else if (self.parsedURI && self.parsedURI.address)
     {
+        self.addressLabel.textColor = [Theme Singleton].colorTextLink;
+        self.addressButton.enabled = true;
+        
         // This is a standard bitcoin address/URI
         if (self.parsedURI.metadata && self.parsedURI.metadata.payeeName)
             self.addressLabel.text = [NSString stringWithFormat:@"%@ (%@...)",
@@ -387,6 +393,21 @@
 }
 
 #pragma mark - Actions Methods
+
+- (IBAction)TouchAddressButton:(id)sender
+{
+    NSMutableString *baseUrl = [[NSMutableString alloc] init];
+    if ([abc isTestNet]) {
+        [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
+    } else {
+        [baseUrl appendString:@"https://insight.bitpay.com/"];
+    }
+    NSString *urlString = [NSString stringWithFormat:@"%@/address/%@",
+                           baseUrl, _parsedURI.address];
+
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 - (IBAction)info:(id) sender
 {
@@ -747,9 +768,9 @@
     _maxAmountButton.selected = NO;
     if (_maxAmount > 0 && _maxAmount == _amountSatoshi)
     {
-        color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
-        colorConversionLabel = [UIColor colorWithRed:255/255.0f green:180/255.0f blue:80/255.0f alpha:1.0f];
-        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFFfca600) ];
+        color = [Theme Singleton].colorButtonOrangeLight;
+        colorConversionLabel = [Theme Singleton].colorButtonOrangeDark;
+        [_maxAmountButton setBackgroundColor:[Theme Singleton].colorButtonOrange];
     }
     else
     {

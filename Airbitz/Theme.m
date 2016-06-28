@@ -55,6 +55,10 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorTextMediumLightGrey = UIColorFromARGB(0xFFA0A0A0);
     self.colorButtonGreen = UIColorFromARGB(0xff80C342);
     self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
+    self.colorButtonOrange = UIColorFromARGB(0xFFfca600);
+    self.colorButtonOrangeLight = UIColorFromARGB(0xFFfec822);
+    self.colorButtonOrangeDark = UIColorFromARGB(0xFFdaa400);
+    
     self.colorSendButton = self.colorButtonBlue;
     self.colorRequestButton = self.colorButtonGreen;
 
