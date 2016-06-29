@@ -1640,7 +1640,7 @@ MainViewController *singleton;
 
     [_requestViewController resetViews];
 
-    [MainViewController fadingAlert:message];
+    [MainViewController fadingAlert:message holdTime:[Theme Singleton].alertHoldTimePaymentReceived];
 }
 
 - (void)launchViewSweep:(NSNotification *)notification
