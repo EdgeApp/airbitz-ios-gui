@@ -778,7 +778,7 @@
     if (_maxAmount > 0 && _maxAmount == _amountSatoshi)
     {
         color = [Theme Singleton].colorButtonOrangeLight;
-        colorConversionLabel = [Theme Singleton].colorButtonOrangeDark;
+        colorConversionLabel = [UIColor darkGrayColor];
         [_maxAmountButton setBackgroundColor:[Theme Singleton].colorButtonOrange];
     }
     else
