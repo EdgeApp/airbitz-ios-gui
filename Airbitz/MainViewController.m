@@ -1618,7 +1618,7 @@ MainViewController *singleton;
     currency = fabs(transaction.metaData.amountFiat);
     
     satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code error:nil];
-    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false cropDecimals:YES];
+    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:true cropDecimals:YES];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {
