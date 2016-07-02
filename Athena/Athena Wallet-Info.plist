@@ -72,6 +72,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>99999999-99</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
