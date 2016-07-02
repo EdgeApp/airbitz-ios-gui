@@ -130,6 +130,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self.buttonSelector disableButton];
 
     self.textUnderQRScanner.hidden = YES;
+    [self.scanningErrorLabel setHidden:YES];
 
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
@@ -363,21 +364,21 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 -(void)startQRReader
 {
     // on iOS 8, we must request permission to access the camera
-    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-            if (granted) {
-                // Permission has been granted. Use dispatch_async for any UI updating
-                // code because this block may be executed in a thread.
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self attemptToStartQRReader];
-                });
-            } else {
-                [self attemptToStartQRReader];
-            }
-        }];
-    } else {
-        [self attemptToStartQRReader];
-    }
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if(authStatus == AVAuthorizationStatusAuthorized)
+        {
+            [self.scanningErrorLabel setHidden:YES];
+        }
+        else
+        {
+            self.scanningErrorLabel.text = cameraUnavailablePleaseEnable;
+            [self.scanningErrorLabel setHidden:NO];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self attemptToStartQRReader];
+        });
+    }];
 }
 
 -(void)attemptToStartQRReader
@@ -390,16 +391,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	_readerView = [ZBarReaderView new];
     _readerView.torchMode = AVCaptureTorchModeOff;
     [self rotateZbar:[[UIApplication sharedApplication] statusBarOrientation]];
-
-    if ([_readerView isDeviceAvailable])
-    {
-        [self.scanningErrorLabel setHidden:YES];
-    }
-    else
-    {
-        self.scanningErrorLabel.text = cameraUnavailablePleaseEnable;
-        [self.scanningErrorLabel setHidden:NO];
-    }
 
 	[self.view insertSubview:_readerView belowSubview:self.scanFrame];
 	_readerView.frame = self.scanFrame.frame;
@@ -713,8 +704,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 		if((newUpdateTime - lastUpdateTime) > 0.5)
 		{
             dispatch_async(dispatch_get_main_queue(),^{
-                [UIView animateWithDuration:0.35
-                                      delay:0.0
+                [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                      delay:[Theme Singleton].animationDelayTimeDefault
                                     options:UIViewAnimationOptionCurveEaseInOut
                                  animations:^
                                  {
@@ -1077,8 +1068,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 //	else
 //	{
 //        if ([[User Singleton] offerBleHelp]) {
-//            [self showFadingAlert:NSLocalizedString(@"Bluetooth payment requests are listed here. Tap on a user to send them a payment", nil)
-//                        withDelay:FADING_HELP_DURATION];
 //        }
 //		self.scanningLabel.hidden = YES;
 //		[self.scanningSpinner stopAnimating];
@@ -1321,8 +1310,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [Util addSubviewControllerWithConstraints:self child:_sendConfirmationViewController];
 	
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {
@@ -1346,6 +1335,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     } complete:^(ABCImportDataModel dataModel, NSString *address, ABCTransaction *transaction, uint64_t amount) {
         if (ABCImportHBitsURI == dataModel)
         {
+            [MainViewController fadingAlertDismiss];
             [self showHbitsResults:address amount:amount];
         }
         else if (0 < amount)

@@ -8,6 +8,7 @@
 
 #import "UIPhotoGalleryViewController.h"
 #import "CommonTypes.h"
+#import "Theme.h"
 
 @interface UIPhotoGalleryViewController () {
     BOOL statusBarHidden;
@@ -169,7 +170,7 @@
 - (void)photoGallery:(UIPhotoGalleryView *)photoGallery didTapAtIndex:(NSInteger)index {
     controlViewHidden = !controlViewHidden;
     
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault animations:^{
         CGRect frame = topView.frame;
         frame.origin.y = (-controlViewHidden)*frame.size.height;
         topView.frame = frame;

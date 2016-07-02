@@ -111,6 +111,12 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     
     bool bDidNotification = [self showNotificationsFromBackgroundFetch];
 
+    if (abc)
+    {
+        [abc enterForeground];
+        [abc enterBackground];
+    }
+    
     if (bDidNotification)
     {
         ABCLog(2,@"EXIT performFetch() NewData...\n");

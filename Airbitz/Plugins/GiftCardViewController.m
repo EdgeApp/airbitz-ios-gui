@@ -103,7 +103,6 @@
     }
     plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
 
-    [cell setInfo:row tableHeight:[tableView numberOfRowsInSection:indexPath.section]];
     cell.text.text = plugin.name;
     cell.text.textColor = plugin.textColor;
     cell.imageView.image = [UIImage imageNamed:plugin.imageFile];

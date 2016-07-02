@@ -175,7 +175,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
                         NSString *affiliateURL = [results objectForKey:@"affiliate_link"];
 
                         receiveAddress.metaData.payeeName = appTitle;
-                        receiveAddress.metaData.category  = incomeAffiliateRevenue;
+                        receiveAddress.metaData.category  = [NSString stringWithFormat:@"%@:%@", abcStringIncomeCategory, affiliate_revenue];
                         receiveAddress.metaData.notes     = [NSString stringWithFormat:notesAffiliateRevenue, affiliateURL];
                         [receiveAddress modifyRequestWithDetails];
                         [receiveAddress finalizeRequest];

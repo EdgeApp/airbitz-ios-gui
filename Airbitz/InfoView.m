@@ -9,6 +9,7 @@
 #import "DarkenView.h"
 #import "Util.h"
 #import "MainViewController.h"
+#import "Theme.h"
 
 @interface InfoView () <UIWebViewDelegate, UIScrollViewDelegate>
 {
@@ -110,8 +111,8 @@ static NSString *currentHtml = nil;
 	self.contentView.layer.cornerRadius = 7.0;
 
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	[UIView animateWithDuration:0.25
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {
@@ -119,8 +120,8 @@ static NSString *currentHtml = nil;
 	 }
 	 completion:^(BOOL finished)
 	 {
-		 [UIView animateWithDuration:0.15
-							   delay:0.0
+         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                               delay:[Theme Singleton].animationDelayTimeDefault
 							 options:UIViewAnimationOptionCurveEaseIn
 						  animations:^
 		  {
@@ -129,8 +130,8 @@ static NSString *currentHtml = nil;
 		  }
 		 completion:^(BOOL finished)
 		  {
-			  [UIView animateWithDuration:0.15
-									delay:0.0
+              [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                    delay:[Theme Singleton].animationDelayTimeDefault
 								  options:UIViewAnimationOptionCurveEaseOut
 							   animations:^
 			   {
@@ -178,8 +179,8 @@ static NSString *currentHtml = nil;
 
 -(IBAction)Done:(UIButton *)sender
 {
-	[UIView animateWithDuration:0.25
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveLinear
 					 animations:^
 	 {

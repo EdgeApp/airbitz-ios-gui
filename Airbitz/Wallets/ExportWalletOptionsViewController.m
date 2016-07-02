@@ -30,7 +30,8 @@
                                     @[@2, @3],          /* Quicken */\
                                     @[@2, @3],          /* Quickbooks */\
                                     @[@0, @2, @5],  /* PDF */\
-                                    @[@0, @5]                   /* PrivateSeed */\
+                                    @[@0, @5],                   /* PrivateSeed */\
+                                    @[@0, @2, @3, @5]                   /* PublicSeed */\
                                 ]
 #define ARRAY_NAMES_FOR_OPTIONS @[@"AirPrint", @"Save to SD card", @"Email", @"Google Drive", @"Dropbox", @"View"]
 #define ARRAY_IMAGES_FOR_OPTIONS @[@"icon_export_printer", @"icon_export_sdcard", @"icon_export_email", @"icon_export_google", @"icon_export_dropbox", @"icon_export_view"]
@@ -56,13 +57,14 @@ typedef enum eExportOption
 
 @interface ExportWalletOptionsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate,
                                                  ExportWalletPDFViewControllerDelegate, GDriveDelegate, FadingAlertViewDelegate,
-                                                 UIGestureRecognizerDelegate, ButtonSelector2Delegate, UITextFieldDelegate>
+                                                 UIGestureRecognizerDelegate, ButtonSelector2Delegate, UITextFieldDelegate, UIAlertViewDelegate>
 {
 	GDrive                              *drive;
     MFMailComposeViewController         *_mailComposer;
     BOOL                                bWalletListDropped;
     tDatePeriod                         _datePeriod; // chosen with the 3 buttons
     BOOL                                _bDatePickerFrom;
+    UIAlertView                         *_showKeyAlert;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                     *viewPassword;
@@ -137,7 +139,8 @@ typedef enum eExportOption
     [self.fromDateTime setWithDate:[NSDate dateWithTimeIntervalSince1970:0]];
     [self.toDateTime setWithDate:[NSDate date]];
     
-    if (WalletExportType_PrivateSeed == self.type)
+    if (WalletExportType_PrivateSeed == self.type ||
+        WalletExportType_PublicSeed == self.type)
     {
         self.dateSelectorHeight.constant = 0;
         self.dateSelectorView.hidden = YES;
@@ -174,7 +177,7 @@ typedef enum eExportOption
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:false enable:true action:@selector(buttonInfoTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
     [self updateViews:nil];
     [self updateDateDisplay];
@@ -227,6 +230,24 @@ typedef enum eExportOption
 
 }
 
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (_showKeyAlert == alertView)
+    {
+        if (1 == buttonIndex)
+        {
+            UIPasteboard *pb = [UIPasteboard generalPasteboard];
+            NSString *message = [alertView message];
+            if (pb)
+            {
+                [pb setString:message];
+                [MainViewController fadingAlert:copied_text];
+            }
+        }
+    }
+}
 
 #pragma mark - Keyboard Notifications
 
@@ -426,15 +447,19 @@ typedef enum eExportOption
         if (dataExport == nil)
             return;
 
-        if (self.type == WalletExportType_PrivateSeed)
+        if (self.type == WalletExportType_PrivateSeed ||
+            self.type == WalletExportType_PublicSeed)
         {
 
-            NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
+            NSString *strSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
             NSMutableString *strBody = [[NSMutableString alloc] init];
             [strBody appendFormat:@"%@%@\n\n", walletNameHeaderText, abcAccount.currentWallet.name];
-            [strBody appendString:privateSeedText];
+            if (self.type == WalletExportType_PrivateSeed)
+                [strBody appendString:privateSeedText];
+            else
+                [strBody appendString:publicSeedText];
             [strBody appendString:@":\n"];
-            [strBody appendString:strPrivateSeed];
+            [strBody appendString:strSeed];
             [strBody appendString:@"\n\n"];
 
             UISimpleTextPrintFormatter *textFormatter = [[UISimpleTextPrintFormatter alloc] initWithText:strBody];
@@ -557,8 +582,8 @@ typedef enum eExportOption
         self.exportWalletPDFViewController.view.frame = frame;
         [self.view addSubview:self.exportWalletPDFViewController.view];
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -570,17 +595,23 @@ typedef enum eExportOption
          }];
     }
     
-    else if (self.type == WalletExportType_PrivateSeed)
+    else if (self.type == WalletExportType_PrivateSeed ||
+             self.type == WalletExportType_PublicSeed)
     {
-        NSString *strPrivateSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
+        NSString *strSeed = [[NSString alloc] initWithData:dataExport encoding:NSUTF8StringEncoding];
+        NSString *seedTitle;
+        
+        if (self.type == WalletExportType_PrivateSeed)
+            seedTitle = privateSeedText;
+        else
+            seedTitle = publicSeedText;
 
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:walletPrivateSeed
-                                    message:strPrivateSeed
-                                   delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        _showKeyAlert = [[UIAlertView alloc] initWithTitle:seedTitle
+                                                   message:strSeed
+                                                  delegate:self
+                                         cancelButtonTitle:okButtonText
+                                         otherButtonTitles:copyButtonText, nil];
+        [_showKeyAlert show];
     } 
     else 
     {
@@ -688,6 +719,30 @@ typedef enum eExportOption
         }
         break;
 
+        case WalletExportType_PublicSeed:
+        {
+            NSMutableString *str = [[NSMutableString alloc] init];
+            
+            NSError *error = [abcAccount.currentWallet exportWalletXPub:str];
+            if (!error)
+            {
+                dataExport = [str dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            else
+            {
+                NSString *title;
+                title = exportPrivateSeed;
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:title
+                                      message:error.userInfo[NSLocalizedDescriptionKey]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+            
+        break;
         default:
             ABCLog(2,@"Unknown export option");
             break;
@@ -719,6 +774,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_PrivateSeed:
+        case WalletExportType_PublicSeed:
             strSuffix = @"txt";
             break;
 
@@ -753,6 +809,7 @@ typedef enum eExportOption
             break;
 
         case WalletExportType_PrivateSeed:
+        case WalletExportType_PublicSeed:
             strMimeType = @"text/plain";
             break;
 

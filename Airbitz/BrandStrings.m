@@ -62,5 +62,21 @@
 
 #endif
 
+#ifndef AIRBITZ
+#define AIRBITZ 0
+#endif
+
+#ifndef RACKWALLET
+#define RACKWALLET 0
+#endif
+
+#ifndef ATHENA
+#define ATHENA 0
+#endif
+
+#ifndef COINSOURCE
+#define COINSOURCE 0
+#endif
+
 
 

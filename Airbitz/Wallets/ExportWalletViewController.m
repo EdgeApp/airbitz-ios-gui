@@ -105,7 +105,7 @@
 - (void)updateNavBar;
 {
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 }
 
 
@@ -159,7 +159,7 @@
 - (void)buttonInfoTouched
 {
     [self dismissPopupPicker];
-    [InfoView CreateWithHTML:@"infoExportWallet" forView:self.view];
+    [InfoView CreateWithHTML:@"info_export_wallet" forView:self.view];
 }
 
 - (IBAction)buttonCSVTouched:(id)sender
@@ -185,6 +185,11 @@
 - (IBAction)buttonPrivateSeedTouched:(id)sender
 {
     [self showExportWalletOptionsWithType:WalletExportType_PrivateSeed];
+}
+
+- (IBAction)buttonPublicSeedTouched:(id)sender
+{
+    [self showExportWalletOptionsWithType:WalletExportType_PublicSeed];
 }
 
 #pragma mark - Misc Methods
@@ -264,8 +269,8 @@
 
 - (void)animatedExit
 {
-	[UIView animateWithDuration:0.35
-						  delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^
 	 {

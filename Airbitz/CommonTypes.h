@@ -10,6 +10,8 @@
 
 #ifdef AIRBITZ_DEVELOP
 #define AIRBITZ_URI_PREFIX @"airbitz-develop"
+#else
+#define AIRBITZ_DEVELOP 0
 #endif
 
 #ifdef AIRBITZ_TESTNET
@@ -86,9 +88,6 @@ static NSString *kTimerStart = @"start";
 #define KEYBOARD_HEIGHT     216
 
 #define DOLLAR_CURRENCY_NUM	840
-
-#define ENTER_ANIM_TIME_SECS    0.35                    // duration when animating a view controller as it slides on screen
-#define EXIT_ANIM_TIME_SECS     ENTER_ANIM_TIME_SECS    // duration when animating a view controller as it slides off screen to reveal the calling view
 
 static unsigned int StarbucksBizID =        11131;
 static unsigned int TargetBizID =           11132;

@@ -23,6 +23,7 @@
 @property (nonatomic) UIColor *colorTextLinkOnDark;
 @property (nonatomic) UIColor *colorTextDarkGrey;
 @property (nonatomic) UIColor *colorTextMediumGrey;
+@property (nonatomic) UIColor *colorTextMediumLightGrey;
 @property (nonatomic) UIColor *colorSendButton;
 @property (nonatomic) UIColor *colorRequestButton;
 @property (nonatomic) UIColor *colorSendButtonDisabled;
@@ -34,8 +35,14 @@
 @property (nonatomic) UIColor *colorRequestBottomTextField;
 @property (nonatomic) UIColor *colorButtonGreen;
 @property (nonatomic) UIColor *colorButtonBlue;
+@property (nonatomic) UIColor *colorButtonOrange;
+@property (nonatomic) UIColor *colorButtonOrangeDark;
+@property (nonatomic) UIColor *colorButtonOrangeLight;
 @property (nonatomic) UIColor *bdButtonBlue;
 @property (nonatomic) UIColor *colorBackgroundHighlight;
+@property (nonatomic) UIColor *colorTransactionsHeader;
+@property (nonatomic) UIColor *colorTransactionName;
+@property (nonatomic) UIColor *colorTransactionNameLight;
 
 @property (nonatomic) NSMutableArray *colorsProfileIcons;
 
@@ -45,6 +52,7 @@
 @property (nonatomic) NSString *appFont;
 
 @property (nonatomic) CGFloat fadingAlertDropdownHeight;
+@property (nonatomic) CGFloat fadingAlertMiniDropdownHeight;
 @property (nonatomic) CGFloat buttonFontSize;
 @property (nonatomic) CGFloat elementPadding;
 @property (nonatomic) CGFloat heightListings;
@@ -69,6 +77,9 @@
 
 @property (nonatomic) CGFloat animationDelayTimeDefault;
 @property (nonatomic) CGFloat animationDurationTimeDefault;
+@property (nonatomic) CGFloat animationDurationTimeFast;
+@property (nonatomic) CGFloat animationDurationTimeSlow;
+@property (nonatomic) CGFloat animationDurationTimeVerySlow;
 @property (nonatomic) UIViewAnimationOptions animationCurveDefault;
 @property (nonatomic) CGFloat alertHoldTimeDefault;
 @property (nonatomic) CGFloat alertFadeoutTimeDefault;

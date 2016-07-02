@@ -1,0 +1,42 @@
+Vendez, Sécurisez, Envoyez et Recevez du Bitcoin
+
+Porte-monnaie Bitcoin puissant et facile à utiliser, permettant aux utilisateurs de contrôler facilement leurs propres clés privées bitcoin avec la familiarité et la facilité des services bancaires mobiles.
+
+Prenez le contrôle de vos fonds ! Avec Airbitz, vous êtes SEUL à avoir accès à vos fonds ou données de transaction. Airbitz ainsi que tout autre partie tierce ont aucune possibilité d'accéder à votre argent ou données. Vous obtenez la confidentialité et autonomie financière pour laquelle Bitcoin a été conçu avec la facilité d’utilisation que même grand-mère pourrait gérer.
+
+En mettant l’accent sur la prestation d’une excellent expérience utilisateur, le porte-monnaie d'Airbitz fournit les fonctionnalités suivantes :
+
+• Zéro connaissance & zéro accès aux fonds, clés ou données de transaction de l’utilisateur par Airbitz ou des parties tierces
+• Integrated buy/sell for US and Canada residents
+• Pay using Bluetooth (BLE) without needing QR codes 
+• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
+• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
+• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
+• Quickly switch accounts with username drop down on login screens
+• Multi-device synchronization across all mobile devices
+• Hierarchical Deterministic wallets with changing addresses per transaction
+• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
+• Multiple fiat currency support. Assign a fiat currency per wallet
+• Search transactions by payee, category, or notes
+• Built in calculator for easy conversions
+• Merchant Mode enabling easy and fluid UI behind the counter
+• Partial payment detection creates a new QR code payment request with remaining balance 
+• Daily spending limits (require password to spend above limit)
+• PIN-requiring spending limits
+• Two-tap quick UI to transfer funds between wallets
+• Import funds from WIF or Casascius private keys
+• Decentralized server architecture. Wallets work even if Airbitz servers are down.
+• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
+• Integration with address book to auto-complete payee name and photo
+• BIP 70 Payment Protocol Support
+• Open-source code. Available on http://github.com/Airbitz
+
+********* Privacy Notice *********
+The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+
+1. Autocomplete contacts from the user's address book after a transaction
+2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
+3. Autocomplete business listings names after a transaction
+4. Geolocate user's device to find nearby businesses
+
+No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.

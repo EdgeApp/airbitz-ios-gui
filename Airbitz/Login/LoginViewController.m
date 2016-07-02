@@ -22,7 +22,6 @@
 #import "LocalSettings.h"
 #import "MainViewController.h"
 #import "ButtonSelectorView.h"
-#import "APPINView.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
 #import "SettingsViewController.h"
@@ -39,7 +38,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, APPINViewDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
+    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -72,6 +71,7 @@ typedef enum eLoginMode
 
 }
 
+@property (weak, nonatomic) IBOutlet UIButton           *fingerprintButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
@@ -221,6 +221,8 @@ static BOOL bInitialized = false;
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
 
+    if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
+        self.fingerprintButton.hidden = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -276,7 +278,7 @@ static BOOL bInitialized = false;
         [self.view.superview layoutIfNeeded];
         self.usernameHeight.constant = _originalUsernameHeight;
         self.passwordHeight.constant = _originalPasswordHeight;
-        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
                               delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
@@ -304,7 +306,7 @@ static BOOL bInitialized = false;
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
-    [self autoReloginOrTouchIDIfPossible];
+//    [self autoReloginOrTouchIDIfPossible];
 
 }
 
@@ -393,15 +395,6 @@ static BOOL bInitialized = false;
     [super viewWillDisappear:animated];
 }
 
-#pragma mark - APPINViewDelegate Methods
-
-- (void)PINCodeView:(APPINView *)view didEnterPIN:(NSString *)PINCode
-{
-    [view resignFirstResponder];
-    [self showSpinner:YES];
-    [self SignInPIN:PINCode];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -438,8 +431,8 @@ static BOOL bInitialized = false;
     [MainViewController moveSelectedViewController:-self.view.frame.size.width];
     [self.view layoutIfNeeded];
 
-    [UIView animateWithDuration:0.35
-                          delay:0.0
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
      {
@@ -458,6 +451,10 @@ static BOOL bInitialized = false;
     [self.PINusernameSelector close];
     [self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
+}
+
+- (IBAction)FingerprintButton:(id)sender {
+    [self autoReloginOrTouchIDIfPossible];
 }
 
 #pragma mark - Misc Methods
@@ -722,7 +719,7 @@ static BOOL bInitialized = false;
     {
         return;
     }
-    [UIView animateWithDuration:0.35
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
                           delay:delay
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^
@@ -737,8 +734,8 @@ static BOOL bInitialized = false;
      }
      completion:^(BOOL finished)
      {
-         [UIView animateWithDuration:0.45
-                               delay:0.0
+         [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
+                               delay:[Theme Singleton].animationDelayTimeDefault
                              options:UIViewAnimationOptionCurveEaseInOut
                           animations:^
           {
@@ -790,8 +787,8 @@ static BOOL bInitialized = false;
 {
     if(up)
     {
-        [UIView animateWithDuration:0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
         {
@@ -814,8 +811,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [UIView animateWithDuration:0.35
-                              delay: 0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeFast
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -910,8 +907,8 @@ static BOOL bInitialized = false;
 //        [MainViewController setAlphaOfSelectedViewController:0.0];
         self.leftConstraint.constant = 0;
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -938,8 +935,8 @@ static BOOL bInitialized = false;
         [MainViewController moveSelectedViewController:0.0];
         [MainViewController setAlphaOfSelectedViewController:1.0];
 
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeSlow
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
          {
@@ -1226,7 +1223,7 @@ static BOOL bInitialized = false;
 - (void)deleteAccountPopup:(NSString *)acct;
 {
     NSString *warningText;
-    if ([abcAccount accountHasPassword])
+    if ([abc accountHasPassword:acct error:nil])
         warningText = deleteAccountWarning;
     else
         warningText = deleteAccountNoPasswordWarningText;

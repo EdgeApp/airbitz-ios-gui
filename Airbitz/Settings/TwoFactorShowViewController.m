@@ -178,7 +178,9 @@
         if (_viewQRCodeFrame.hidden) {
             _viewQRCodeFrame.hidden = NO;
             _viewQRCodeFrame.alpha = 0;
-            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveLinear animations:^ {
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
+                                options:UIViewAnimationOptionCurveLinear animations:^ {
                 _viewQRCodeFrame.alpha = 1.0;
             } completion:^(BOOL finished) {
             }];
@@ -186,7 +188,9 @@
     } else {
         if (!_viewQRCodeFrame.hidden) {
             _viewQRCodeFrame.alpha = 1;
-            [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveLinear animations:^ {
+            [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                                  delay:[Theme Singleton].animationDelayTimeDefault
+                                options:UIViewAnimationOptionCurveLinear animations:^ {
                 _viewQRCodeFrame.alpha = 0;
             } completion:^(BOOL finished) {
                 _viewQRCodeFrame.hidden = YES;

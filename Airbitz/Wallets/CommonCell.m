@@ -29,16 +29,16 @@
 //    [self setBackground:selected];
 }
 
-- (void)setInfo:(long)index tableHeight:(long)height
-{
-    row = index;
-    tableHeight = height;
-
-    [self setBackground:NO];
-}
-
-- (void)setBackground:(BOOL)selected
-{
+//- (void)setInfo:(long)index tableHeight:(long)height
+//{
+//    row = index;
+//    tableHeight = height;
+//
+//    [self setBackground:NO];
+//}
+//
+//- (void)setBackground:(BOOL)selected
+//{
 //    if (selected) {
 //        if (row == 0) {
 //            if (row == tableHeight) {
@@ -64,6 +64,6 @@
 //            _bkgImage.image = [UIImage imageNamed:@"bd_cell_middle"];
 //        }
 //    }
-}
+//}
 
 @end

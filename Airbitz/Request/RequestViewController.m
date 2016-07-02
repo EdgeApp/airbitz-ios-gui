@@ -311,8 +311,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)changeCalculator:(BOOL)animate show:(BOOL)bShow
 {
     if (animate) {
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
@@ -699,8 +699,8 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (void)changeTopField:(BOOL)bFiat animate:(BOOL)animate
 {
     if (animate) {
-        [UIView animateWithDuration:0.35
-                              delay:0.0
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
@@ -819,7 +819,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (satoshi == 0)
         {
-            if ([self.BTC_TextField.text hasPrefix:@"."] == NO)
+            if ([self.BTC_TextField.text hasPrefix:[ABCDenomination getDecimalSymbol]] == NO)
             {
                 self.USD_TextField.text = @"";
                 self.BTC_TextField.text = @"";
@@ -841,7 +841,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 		double currency = [self.USD_TextField.text doubleValue];
         if (currency == 0.0)
         {
-            if ([self.USD_TextField.text hasPrefix:@"."] == NO)
+            if ([self.USD_TextField.text hasPrefix:[ABCDenomination getDecimalSymbol]] == NO)
             {
                 self.USD_TextField.text = @"";
                 self.BTC_TextField.text = @"";
@@ -1110,7 +1110,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
-//        [self showFadingAlert:NSLocalizedString(@"Bluetooth disconnected", nil)];
         self.BLE_LogoImageView.hidden = YES;
     }
 

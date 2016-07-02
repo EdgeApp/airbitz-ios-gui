@@ -10096,120 +10096,229 @@ function _bridge() {
   Airbitz._denomListener = null;
   Airbitz._bridge = _bridge();
 
-  Airbitz.buffer = '';
-  Airbitz.bufferClear = function() {
-    Airbitz.buffer = '';
-  };
-  Airbitz.bufferAdd = function(s) {
-    Airbitz.buffer += s;
-  };
-
-
+  /**
+   * Returns a bitid address for the given uri and message
+   * @return {string} bitid address
+   */
   Airbitz.core.bitidAddress = function(uri, message) {
     return Airbitz._bridge.bitidAddress(uri, message);
   };
 
+  /**
+   * Returns a bitid signature for the given uri and message
+   * @return {string} bitid signature
+   */
   Airbitz.core.bitidSignature = function(uri, message) {
     return Airbitz._bridge.bitidSignature(uri, message);
   };
 
-  // Options has callback functions success and error.
+  /**
+   * Returns the user's currently selected wallet
+   * @return {object} a wallet
+   */
   Airbitz.core.selectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
 
+  /**
+   * Returns a list of the wallets for this account, included archived wallets
+   * @return {object} an array of wallets
+   */
   Airbitz.core.wallets = function(options) {
     Airbitz._bridge.wallets(options);
   };
 
+  /**
+   * Create a receive request from the provided wallet.
+   * @param {object} wallet - the wallet object
+   * @return {object} an object with an address and requestId
+   */
   Airbitz.core.createReceiveRequest = function(wallet, options) {
     Airbitz._bridge.createReceiveRequest(wallet, options);
   };
 
+  /**
+   * Finalizing a request marks the address as used and it will not be used for
+   * future requests. The metadata will also be written for this address.  This
+   * is useful so that when a future payment comes in, the metadata can be
+   * auto-populated.
+   * @return true if the request was successfully finalized.
+   * @param {object} wallet - the wallet object
+   * @param {string} requestId - the bitcoin address to finalize
+   */
   Airbitz.core.finalizeRequest = function(wallet, requestId) {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
-  // Takes a spend request and sends user to send confirmation screen to spend.
+  /**
+   * Request that the user spends.
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
+  /**
+   * Request that the user spends to 2 outputs.
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {string} toAddress2 - the recipient address
+   * @param {number} amountSatoshi2 - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
     Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
   };
 
-  // Takes a spend request and sends user to send confirmation screen to sign a tx.
+  /**
+   * Rquest that the user creates and signs a transaction
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSign = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSign(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
-  // Broadcast a raw tx
+  /**
+   * Broadcast a transaction to the bitcoin network.
+   * @param {object} the wallet object
+   * @param {string} the raw hex to be saved to the database
+   */
   Airbitz.core.broadcastTx = function(wallet, rawtx) {
     Airbitz._bridge.broadcastTx(wallet, tx);
   };
 
-  // Save a raw tx
+  /**
+   * Save the transaction to transaction database This should only be called if
+   * the transaction has been successfully broadcasted, either by using
+   * #Airbitz.core.broadcastTx or by a third party.
+   * @param {object} the wallet object
+   * @param {string} the raw hex to be saved to the database
+   */
   Airbitz.core.saveTx = function(wallet, rawtx) {
     Airbitz._bridge.saveTx(wallet, rawtx);
   };
 
+  /**
+   * Launches the native OS's camera or file browser so the user can select a
+   * file. The options.success callback will be triggered when complete.
+   */
   Airbitz.core.requestFile = function(options) {
     Airbitz._bridge.requestFile(options);
   };
 
+  /**
+   * Securely persist data into the Airbitz core. Only the current plugin will
+   * have access to that data.
+   * @param {string} key - the key to access the data in the future
+   * @param {object} data - the data to write, which will be encrypted and backed up
+   */
   Airbitz.core.writeData = function(key, data) {
     Airbitz._bridge.writeData(key, JSON.stringify(data));
   };
 
-  // Clears all data stored by the plugin.
+  /**
+   * Clear all data in the Airbitz core, for the current plugin.
+   */
   Airbitz.core.clearData = function() {
     Airbitz._bridge.clearData();
   };
 
-  // Retrives data for a JSON key stored for the plugin.
+  /**
+   * Read the securely stored data from disk.
+   * @param {string} key - the key to access the data.
+   */
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
+  /**
+   * There is affiliate data only if the account was installed via an affiliate
+   * link.
+   * @return {object} dictionary of affiliate data
+   */
   Airbitz.core.getAffiliateInfo = function() {
     var data = Airbitz._bridge.getAffiliateInfo();
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
+  /**
+   * Get the user's currently selected BTC denomination. It can be BTC, mBTC or
+   * bits.
+   * @return {string} a denomination string
+   */
   Airbitz.core.getBtcDenomination = function() {
     return Airbitz._bridge.getBtcDenomination();
   }
 
+  /**
+   * Convert satoshis to a fiat currency value.
+   * @param {number} satoshis - the satoshi to convert
+   * @param {number} currencyNum - the ISO 3166 currency code
+   * @return {number} the converted fiat value
+   */
   Airbitz.core.satoshiToCurrency = function(satoshi, currencyNum) {
     return Airbitz._bridge.satoshiToCurrency(satoshi, currencyNum);
   }
 
+  /**
+   * Convert a fiat currency value to a satoshi value.
+   * @param {number} currency - the fiat currency to convert
+   * @param {number} currencyNum - the ISO 3166 currency code
+   * @return {number} the converted satoshi value
+   */
   Airbitz.core.currencyToSatoshi = function(currency, currencyNum) {
     return Airbitz._bridge.currencyToSatoshi(currency, currencyNum);
   }
 
+  /**
+   * Formats satoshis to display to the user. This uses the user's BTC
+   * denomination to format including the correct code and symbol.
+   * @param {number} satoshi - the satoshi value to format
+   * @param {boolean} withSymbol - whether to include a currency symbol when formatting
+   * @return {string} the formatted satoshi value in either BTC, mBTC or bits.
+   */
   Airbitz.core.formatSatoshi = function(satoshi, withSymbol) {
     return Airbitz._bridge.formatSatoshi(satoshi, withSymbol);
   }
 
+  /**
+   * Formats currencies to display to the user. This uses the user's BTC
+   * denomination to format including the correct code and symbol.
+   * @param {number} currency - the satoshi value to format
+   * @param {boolean} withSymbol - whether to include a currency symbol when formatting
+   * @return {string} the formatted satoshi value in either BTC, mBTC or bits.
+   */
   Airbitz.core.formatCurrency = function(currency, currencyNum, withSymbol) {
     return Airbitz._bridge.formatCurrency(currency, currencyNum, withSymbol);
   }
 
+  /**
+   * Fetch a configuration value. These are set in the native code, before the
+   * webview is every loaded.
+   * @param {key} key - the configuration key to fetch a value for
+   * @return {string}
+   */
   Airbitz.config.get = function(key) {
     return Airbitz._bridge.getConfig(key);
   };
 
-  /* Callback is called when wallet is changed AND every time plugin is created.
-  ** Callback is provided wallet as parameter.
-  */
+  /**
+   * Callback is called when wallet is changed AND every time plugin is created.
+   * @param {function} callback - a function that will be called when the user
+   * changes their currently selected wallet.
+   */
   Airbitz.core.setWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
-  //
   Airbitz._bridge.walletChanged = function(newWallet) {
     if (Airbitz._walletListener) {
       var j = JSON.parse(newWallet);
@@ -10219,6 +10328,11 @@ function _bridge() {
     }
   };
 
+  /**
+   * Callback is called when the user has changed their BTC denomination.
+   * @param {function} callback - a function that will be called when the user
+   * changes their BTC denomination.
+   */
   Airbitz.core.setDenominationChangeListener = function(callback) {
     Airbitz._denomListener = callback;
   };
@@ -10232,6 +10346,11 @@ function _bridge() {
     }
   };
 
+  /**
+   * Removes an exchange rate listener for a currency number
+   * @param {number} currencyNum - the currency number
+   * @param {function} callback - the callback to remove
+   */
   Airbitz.core.removeExchangeRateListener = function(currencyNum, callback) {
     var i = Airbitz._listeners[currencyNum].indexOf(callback);
     Airbitz._listeners[currencyNum].splice(i, 1);
@@ -10245,6 +10364,12 @@ function _bridge() {
     }
   };
 
+  /**
+   * Add an exchange rate listener that will be called when the exchange rate
+   * is updated.
+   * @param {number} currencyNum - the currency number
+   * @param {function} callback - the callback to respond to exchange rate updes
+   */
   Airbitz.core.addExchangeRateListener = function(currencyNum, callback) {
     if (!Airbitz._listeners[currencyNum]) {
       Airbitz._listeners[currencyNum] = [];
@@ -10252,57 +10377,104 @@ function _bridge() {
     Airbitz._listeners[currencyNum].push(callback);
   };
 
-  Airbitz.core.removeExchangeRateListener = function(currencyNum, callback) {
-    var i = Airbitz._listeners[currencyNum].indexOf(callback);
-    Airbitz._listeners[currencyNum].splice(i, 1);
-  };
-
+  /**
+   * Launches a native alert dialog.
+   * @param {string} title - the dialog title
+   * @param {string} message - the message body of the dialog
+   */
   Airbitz.ui.showAlert = function(title, message, options) {
     Airbitz._bridge.showAlert(title, message, options || {});
   };
 
+  /**
+   * Hide an alerts that are currently displayed.
+   */
   Airbitz.ui.hideAlert = function(title, message, options) {
     Airbitz._bridge.hideAlert();
   };
 
+  /**
+   * Set the title of the current view. This updates the native apps titlebar.
+   * @param {string} title - the title string
+   */
   Airbitz.ui.title = function(s) {
     Airbitz._bridge.title(s);
   };
 
+  /**
+   * Log messages to the ABC core at a particular level.
+   * @param {number} level - ERROR = 0, WARNING = 1, INFO = 2, DEBUG = 3;
+   */
   Airbitz.ui.debugLevel = function(level, text) {
     Airbitz._bridge.debugLevel(level, text);
   };
 
-  Airbitz.ui.showNavBar = function() {
-    Airbitz._bridge.showNavBar();
-  };
-
-  Airbitz.ui.hideNavBar = function() {
-    Airbitz._bridge.hideNavBar();
-  };
-
+  /**
+   * Go back in the navigation stack. 
+   */
   Airbitz.ui.back = function() {
     Airbitz._bridge.back();
   };
 
+  /**
+   * Exit the plugin. This pops the current fragment or view controller of the
+   * stack and destroys the webview.
+   */
   Airbitz.ui.exit = function() {
     Airbitz._bridge.exit();
   };
 
+  /**
+   * Launch an external web page or application.
+   * @param {string} uri - the uri or url to open in a different app.
+   */
+  Airbitz.ui.launchExternal = function(uri) {
+    Airbitz._bridge.launchExternal(uri);
+  };
+
+
+  /**
+   * Clear the naviation stack. Helpful when overriding the behavior of the
+   * back button.
+   */
   Airbitz.ui.navStackClear = function() {
     Airbitz._bridge.navStackClear();
   };
 
+  /**
+   * Push a new URL onto the nav stack.
+   */
   Airbitz.ui.navStackPush = function(path) {
     Airbitz._bridge.navStackPush(path);
   };
 
+  /**
+   * Pop a URL off the nav stack.
+   */
   Airbitz.ui.navStackPop = function() {
     Airbitz._bridge.navStackPop();
   };
 
-  Airbitz.ui.launchExternal = function(uri) {
-    Airbitz._bridge.launchExternal(uri);
+  /**
+   * @deprecated Airbitz no longer supports this behavior.
+   */
+  Airbitz.ui.showNavBar = function() {
+    Airbitz._bridge.showNavBar();
+  };
+
+  /**
+   * @deprecated Airbitz no longer supports this behavior.
+   */
+  Airbitz.ui.hideNavBar = function() {
+    Airbitz._bridge.hideNavBar();
+  };
+
+  Airbitz.buffer = '';
+  Airbitz.bufferClear = function() {
+    Airbitz.buffer = '';
+  };
+  Airbitz.bufferAdd = function(s) {
+    Airbitz.buffer += s;
   };
 
 })(this);
@@ -16472,9 +16644,11 @@ var first_load = 1;
 var force_refresh = 1;
 var min_price_rate = 1;
 var refund_enabled = 0;
-var new_account = false;
-var affiliate_address;
-var affiliate_fee_percent;
+var affiliate_address = null;
+var affiliate_fee_percent = 0;
+
+// TODO: get this number from the core
+var DUST = 4000;
 
 // Purchases over this amount are given a popup warning as 1 confirmation is required
 // before card is available
@@ -16571,6 +16745,12 @@ function logStats(event, brand, amount) {
     s['user'] = Account.username.substr(Account.username.length - 8);
     s['brand'] = brand;
     s['usd'] = amount;
+    if (affiliate_address && affiliate_address.length >= 8) {
+        s['afaddr'] = affiliate_address.substr(affiliate_address.length - 8);
+    } else {
+        s['afaddr'] = "none";
+    }
+
     $.ajax({
         headers: {
             'Content-Type' : 'application/json',
@@ -16666,7 +16846,9 @@ var Account = {
             Airbitz.ui.exit();
         });
         var affiliateInfo = Airbitz.core.getAffiliateInfo();
-        if (affiliateInfo["affiliate_address"].length > 20) {
+        if (affiliateInfo
+              && affiliateInfo["affiliate_address"] 
+              && affiliateInfo["affiliate_address"].length > 20) {
             for (var ic in affiliateInfo["objects"]) {
                 if (affiliateInfo["objects"][ic]["key"] == "gift_card_affiliate_fee") {
                     affiliate_address = affiliateInfo["affiliate_address"];
@@ -17100,8 +17282,14 @@ var Account = {
             if (large_value_threshold < denomination) {
                 Airbitz.ui.showAlert("High Value Card", "You are purchasing a card over $50 in value. This requires one bitcoin network confirmation before your card will be available and may take over 10 minutes.");
             }
+            var affiliateAmount = amt*affiliate_fee_percent;
+            var tmpAddress = affiliate_address;
+            if (affiliateAmount <= DUST) {
+              affiliateAmount = 0;
+              tmpAddress = null;
+            }
             Airbitz.core.requestSpend2(Account.abWallet,
-                    toAddr, amt, affiliate_address, amt*affiliate_fee_percent, 0, {
+                    toAddr, amt, tmpAddress, affiliateAmount, 0, {
                         label: brand,
                         category: category,
                         notes: brand + " $" + String(denomination) + " gift card.",
@@ -17211,7 +17399,6 @@ function main() {
       user.exists.resolve();
   } else {
       user.create();
-      new_account = true;
   }
   $.when(user.exists).done(function(data) {
       user.login();
@@ -17249,18 +17436,25 @@ function main() {
           }
       });
 
+      var withdrawal_address = Airbitz.core.readData("withdrawal-address");
+
       // If this is a new account. Set an initial refund address in case any purchases get botched
-      if (new_account) {
+      if (!withdrawal_address || withdrawal_address.length < 20) {
           createAddress(Account.abWallet, brand, 0, 0, category, "Refunded " + brand + " gift card.",
               function(data) {
                   Account.updateWAddr(data["address"], function() {
+                      Airbitz.ui.debugLevel(1,"Setting withdrawal address:" + data["address"]);
+                      Airbitz.core.writeData("withdrawal-address", data["address"])
                   }, function() {
+                      Airbitz.ui.debugLevel(1,"WARNING: could not set withdrawal address");
+                      Airbitz.ui.debugLevel(1,data);
                   });
               }, function(data) {
                   Airbitz.ui.debugLevel(1,data);
               });
+      } else {
+          Airbitz.ui.debugLevel(1,"Withdrawal address already set:" + withdrawal_address);
       }
-
 
       Airbitz.ui.debugLevel(1,"Updating UI");
       Airbitz.ui.hideAlert();

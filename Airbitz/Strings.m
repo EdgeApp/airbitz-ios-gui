@@ -154,7 +154,6 @@
 #define balanceButtonText                           NSLocalizedString(@"Balance", nil)
 #define transferToWalletText                        NSLocalizedString(@"Transfer To %@", @"To wallet transfer text")
 #define transferFromWalletText                      NSLocalizedString(@"Transfer From %@", @"From wallet transfer text")
-#define incomeAffiliateRevenue                      NSLocalizedString(@"Income:Affiliate Revenue", @"Income category for affiliate revenue")
 #define notesAffiliateRevenue                       NSLocalizedString(@"Revenue share from affiliate link %@", @"Income notes field for affiliate revenue")
 #define debugButtonText                             NSLocalizedString(@"Debug", @"debug text")
 #define getAffiliateLinkButtonText                  NSLocalizedString(@"Get Affiliate Link", @"Button text for Get Affiliate Link")
@@ -165,8 +164,6 @@
 #define messageSentText                             NSLocalizedString(@"Message Sent", nil)
 #define answersAreCaseSensitiveText                 NSLocalizedString(@"Answers are case sensitive", @"Warning for password recovery textfields")
 #define autoLogoffAfterText                         NSLocalizedString(@"Auto log off after", @"settings text")
-#define defaultCurrencyText                         NSLocalizedString(@"Default Currency", @"settings text")
-#define defaultExchangeText                         NSLocalizedString(@"Default Exchange", @"settings text")
 #define buyBitcoinButton                            NSLocalizedString(@"Buy Bitcoin",nil)
 #define importAirbitzGiftCardButton                 NSLocalizedString(@"Import Airbitz Gift Card",nil)
 #define upTo20OffStarbucksButton                    NSLocalizedString(@"Up to 20% off Starbucks",nil)
@@ -208,15 +205,24 @@
 #define coffeeAndTea                                NSLocalizedString(@"Coffee & Tea", nil)
 #define giftCards                                   NSLocalizedString(@"Gift Cards", nil)
 #define electronicsText                             NSLocalizedString(@"Electronics", nil)
-#define shoppingText                                NSLocalizedString(@"Electronics", nil)
+#define shoppingText                                NSLocalizedString(@"Shopping", nil)
+#define atmSearchString                             NSLocalizedString(@"ATM" ,nil)
+#define restaurantsAndFoodTrucks_en                 @"Restaurants & Food Trucks"
+#define coffeeAndTea_en                             @"Coffee & Tea"
+#define giftCards_en                                @"Gift Cards"
+#define electronicsText_en                          @"Electronics"
+#define shoppingText_en                             @"Shopping"
+#define atmSearchString_en                          @"ATM"
 #define businessNameOrCategory                      NSLocalizedString(@"Business Name or Category", @"Business Name or Category placeholder")
 #define searchText                                  NSLocalizedString(@"Search", @"SearchBarSearch placeholder")
 #define walletExport                                NSLocalizedString(@"Wallet Export", nil)
 #define privateSeedText                             NSLocalizedString(@"Private Seed", nil)
+#define publicSeedText                              NSLocalizedString(@"Public Seed (XPub)", nil)
 #define exportWalletTransactions                    NSLocalizedString(@"Export Wallet Transactions", nil)
 #define airprintIsNotAvailable                      NSLocalizedString(@"AirPrint is not currently available", nil)
 #define walletPrivateSeed                           NSLocalizedString(@"Wallet Private Seed", nil)
 #define exportPrivateSeed                           NSLocalizedString(@"Export Private Seed", nil)
+#define exportPublicSeed                            NSLocalizedString(@"Export Public Seed (XPub)", nil)
 #define emailCancelled                              NSLocalizedString(@"Email cancelled.", nil)
 #define emailSavedToSendLater                       NSLocalizedString(@"Email saved to send later.", nil)
 #define emailSent                                   NSLocalizedString(@"Email sent.", nil)
@@ -237,7 +243,6 @@
 #define moreCategoriesText                          NSLocalizedString(@"More Categories", @"")
 #define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
 #define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
-#define atmSearchString                             NSLocalizedString(@"ATM" ,nil)
 #define warningExclamationText                      NSLocalizedString(@"Warning!", nil)
 #define aboutToExitPasswordRecovery                 NSLocalizedString(@"Warning!", nil)
 #define skipThisStepText                            NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")
@@ -339,7 +344,6 @@
 #define usernameFormatString                        NSLocalizedString(@"User Name: %@" ,nil)
 #define open24HoursText                             NSLocalizedString(@"Open 24 hours" ,nil)
 #define open24Text                                  NSLocalizedString(@"Open 24" ,nil)
-#define hoursText                                   NSLocalizedString(@"hours" ,nil)
 #define toFormatString                              NSLocalizedString(@"To: %@" ,nil)
 #define walletCreateFailedFormatString              NSLocalizedString(@"Wallet creation failed:\n%@" ,nil)
 #define unableToSaveSettings                        NSLocalizedString(@"Unable to save Settings", nil)
@@ -366,20 +370,32 @@
 #define nameSettingsHeader                          NSLocalizedString(@"NAME", @"section header in settings table")
 #define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
-//#define
-//#define
-//#define
-//#define
-//#define
-//#define
 
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define  NSLocalizedString( ,nil)
-//#define
-//#define
-
+#define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
+#define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
+#define affiliate_revenue                           NSLocalizedString(@"Affiliate Revenue", @"Income category for affiliate revenue")
+#define change_mining_fee_low                       NSLocalizedString(@"Low Fee",nil)
+#define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
+#define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
+#define copied_text                                 NSLocalizedString(@"Copied",nil)
+#define second_text                                 NSLocalizedString(@"second",nil)
+#define seconds_text                                NSLocalizedString(@"seconds",nil)
+#define minute_text                                 NSLocalizedString(@"minute",nil)
+#define minutes_text                                NSLocalizedString(@"minutes",nil)
+#define hour_text                                   NSLocalizedString(@"hour",nil)
+#define hours_text                                  NSLocalizedString(@"hours",nil)
+#define day_text                                    NSLocalizedString(@"day",nil)
+#define days_text                                   NSLocalizedString(@"days",nil)
+#define default_currency_text                       NSLocalizedString(@"Default Currency", @"settings text")
+#define default_exchange_text                       NSLocalizedString(@"Default Exchange", @"settings text")
+#define exchange_rate_data_source_text              NSLocalizedString(@"Exchange Rate Data Source",nil)
+#define income_category                             NSLocalizedString(@"Income",nil)
+#define expense_category                            NSLocalizedString(@"Expense",nil)
+#define exchange_category                           NSLocalizedString(@"Exchange",nil)
+#define transfer_category                           NSLocalizedString(@"Transfer",nil)
+#define income_category_en                          @"Income"
+#define expense_category_en                         @"Expense"
+#define exchange_category_en                        @"Exchange"
+#define transfer_category_en                        @"Transfer"
+#define wallet_category                             @"Wallet"
 

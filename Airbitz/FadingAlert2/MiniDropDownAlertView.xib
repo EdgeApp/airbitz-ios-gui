@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Mini Drop Down Alert View" customClass="DropDownAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+            <subviews>
+                <view alpha="0.80000000000000004" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="OYT-Tf-r4L" userLabel="AlertGroup">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                    <subviews>
+                        <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="2is-5E-X7J" userLabel="Message" customClass="LatoLabel">
+                            <rect key="frame" x="4" y="0.0" width="312" height="20"/>
+                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="2is-5E-X7J" secondAttribute="bottom" id="In1-2K-5pO"/>
+                        <constraint firstItem="2is-5E-X7J" firstAttribute="leading" secondItem="OYT-Tf-r4L" secondAttribute="leading" constant="4" id="JXH-F4-QSK"/>
+                        <constraint firstItem="2is-5E-X7J" firstAttribute="top" secondItem="OYT-Tf-r4L" secondAttribute="top" id="TbY-5b-Nyp"/>
+                        <constraint firstAttribute="trailing" secondItem="2is-5E-X7J" secondAttribute="trailing" constant="4" id="Xr7-AO-sph"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="OYT-Tf-r4L" secondAttribute="centerX" id="0TW-Xh-kzy"/>
+                <constraint firstAttribute="centerY" secondItem="OYT-Tf-r4L" secondAttribute="centerY" id="1Ky-bz-xOK"/>
+                <constraint firstAttribute="bottom" secondItem="OYT-Tf-r4L" secondAttribute="bottom" id="KNa-Zc-Het"/>
+                <constraint firstAttribute="trailing" secondItem="OYT-Tf-r4L" secondAttribute="trailing" id="MXM-dd-ISs"/>
+                <constraint firstItem="OYT-Tf-r4L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TUQ-mf-qom"/>
+                <constraint firstItem="OYT-Tf-r4L" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="b2Y-Cy-2iI"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="alertGroupView" destination="OYT-Tf-r4L" id="e7F-eC-bG9"/>
+                <outlet property="messageText" destination="2is-5E-X7J" id="S3l-0s-YVV"/>
+            </connections>
+            <point key="canvasLocation" x="136" y="73"/>
+        </view>
+    </objects>
+</document>
