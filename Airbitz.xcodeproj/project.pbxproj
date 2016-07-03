@@ -1429,7 +1429,7 @@
 		DAC531A31D273DF0008D9773 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2291D131D5A005442AF /* info_send_confirmation.html */; };
 		DAC531A41D273DF0008D9773 /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DAC531A51D273DF0008D9773 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
-		DAC531A61D273DF0008D9773 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2561D131D74005442AF /* sms_template.txt */; };
+		DAC531A61D273DF0008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC531A71D273DF0008D9773 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
 		DAC531A81D273DF0008D9773 /* icon_approved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5E1BC61F910063DA07 /* icon_approved@2x.png */; };
 		DAC531A91D273DF0008D9773 /* btn_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF231BC61F910063DA07 /* btn_close@3x.png */; };
@@ -1622,7 +1622,7 @@
 		DAC532681D273DF0008D9773 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DAC532691D273DF0008D9773 /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */; };
 		DAC5326A1D273DF0008D9773 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; };
-		DAC5326B1D273DF0008D9773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4977791D226054006521D2 /* Localizable.strings */; };
+		DAC5326B1D273DF0008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC5326C1D273DF0008D9773 /* bitCoinAnnotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF131BC61F910063DA07 /* bitCoinAnnotation@2x.png */; };
 		DAC5326D1D273DF0008D9773 /* icon_category_coffee_tea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF691BC61F910063DA07 /* icon_category_coffee_tea@3x.png */; };
 		DAC5326E1D273DF0008D9773 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7A1BC61F910063DA07 /* icon_exchange.png */; };
@@ -1849,7 +1849,7 @@
 		DAC5337E1D27422A008D9773 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2291D131D5A005442AF /* info_send_confirmation.html */; };
 		DAC5337F1D27422A008D9773 /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DAC533801D27422A008D9773 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
-		DAC533811D27422A008D9773 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2561D131D74005442AF /* sms_template.txt */; };
+		DAC533811D27422A008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC533821D27422A008D9773 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
 		DAC533831D27422A008D9773 /* icon_approved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5E1BC61F910063DA07 /* icon_approved@2x.png */; };
 		DAC533841D27422A008D9773 /* btn_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF231BC61F910063DA07 /* btn_close@3x.png */; };
@@ -2043,7 +2043,7 @@
 		DAC534491D27422A008D9773 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DAC5344A1D27422A008D9773 /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */; };
 		DAC5344B1D27422A008D9773 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; };
-		DAC5344C1D27422A008D9773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4977791D226054006521D2 /* Localizable.strings */; };
+		DAC5344C1D27422A008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC5344D1D27422A008D9773 /* bitCoinAnnotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF131BC61F910063DA07 /* bitCoinAnnotation@2x.png */; };
 		DAC5344E1D27422A008D9773 /* icon_category_coffee_tea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF691BC61F910063DA07 /* icon_category_coffee_tea@3x.png */; };
 		DAC5344F1D27422A008D9773 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7A1BC61F910063DA07 /* icon_exchange.png */; };
@@ -2264,7 +2264,7 @@
 		DAC535621D274575008D9773 /* info_send_confirmation.html in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2291D131D5A005442AF /* info_send_confirmation.html */; };
 		DAC535631D274575008D9773 /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DAC535641D274575008D9773 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
-		DAC535651D274575008D9773 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA57A2561D131D74005442AF /* sms_template.txt */; };
+		DAC535651D274575008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC535661D274575008D9773 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
 		DAC535671D274575008D9773 /* icon_approved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5E1BC61F910063DA07 /* icon_approved@2x.png */; };
 		DAC535681D274575008D9773 /* btn_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF231BC61F910063DA07 /* btn_close@3x.png */; };
@@ -2458,7 +2458,7 @@
 		DAC5362D1D274575008D9773 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DAC5362E1D274575008D9773 /* BitcoinSent.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFC41BC61F920063DA07 /* BitcoinSent.mp3 */; };
 		DAC5362F1D274575008D9773 /* QR-bracket.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB71BC724B00063DA07 /* QR-bracket.png */; };
-		DAC536301D274575008D9773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA4977791D226054006521D2 /* Localizable.strings */; };
+		DAC536301D274575008D9773 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DAC536311D274575008D9773 /* bitCoinAnnotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF131BC61F910063DA07 /* bitCoinAnnotation@2x.png */; };
 		DAC536331D274575008D9773 /* icon_category_coffee_tea@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF691BC61F910063DA07 /* icon_category_coffee_tea@3x.png */; };
 		DAC536341D274575008D9773 /* icon_exchange.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF7A1BC61F910063DA07 /* icon_exchange.png */; };
@@ -3578,6 +3578,9 @@
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
 		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
+		DAC261B31D28871A005CFC1D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DAC261B81D28872A005CFC1D /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-PR"; path = "es-PR.lproj/sms_template.txt"; sourceTree = "<group>"; };
+		DAC261B91D28873E005CFC1D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = fr.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DAC532961D273DF0008D9773 /* Rackwallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rackwallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC5329D1D273F5E008D9773 /* info_disclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info_disclaimer.html; sourceTree = "<group>"; };
 		DAC532A01D273F94008D9773 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
@@ -3606,9 +3609,6 @@
 		DAC5368B1D274D29008D9773 /* Athena Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Athena Wallet-Info.plist"; sourceTree = "<group>"; };
 		DAC5368D1D274DBC008D9773 /* Rack Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rack Wallet-Info.plist"; sourceTree = "<group>"; };
 		DAC5368F1D274DD3008D9773 /* Coinsource Wallet-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Coinsource Wallet-Info.plist"; sourceTree = "<group>"; };
-		DAC261B31D28871A005CFC1D /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-MX"; path = "es-MX.lproj/sms_template.txt"; sourceTree = "<group>"; };
-		DAC261B81D28872A005CFC1D /* es-PR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "es-PR"; path = "es-PR.lproj/sms_template.txt"; sourceTree = "<group>"; };
-		DAC261B91D28873E005CFC1D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text; name = fr; path = fr.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DAD1AD771BC6065100C648C4 /* Airbitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airbitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD7B1BC6065100C648C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DAD1AD7D1BC6065100C648C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -5192,6 +5192,11 @@
 					};
 					DAC532C81D27422A008D9773 = {
 						DevelopmentTeam = 7NK7GC2KG5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					DAC534AC1D274575008D9773 = {
 						DevelopmentTeam = KLD6Y8933F;
@@ -5896,7 +5901,7 @@
 				DAC531A31D273DF0008D9773 /* info_send_confirmation.html in Resources */,
 				DAC531A41D273DF0008D9773 /* plugin_icon_homedepot@2x.png in Resources */,
 				DAC531A51D273DF0008D9773 /* Lato-Italic.ttf in Resources */,
-				DAC531A61D273DF0008D9773 /* sms_template.txt in Resources */,
+				DAC531A61D273DF0008D9773 /* (null) in Resources */,
 				DAC531A71D273DF0008D9773 /* enable-camera.png in Resources */,
 				DAC531A81D273DF0008D9773 /* icon_approved@2x.png in Resources */,
 				DAC531A91D273DF0008D9773 /* btn_close@3x.png in Resources */,
@@ -6096,7 +6101,7 @@
 				DAC532681D273DF0008D9773 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DAC532691D273DF0008D9773 /* BitcoinSent.mp3 in Resources */,
 				DAC5326A1D273DF0008D9773 /* QR-bracket.png in Resources */,
-				DAC5326B1D273DF0008D9773 /* Localizable.strings in Resources */,
+				DAC5326B1D273DF0008D9773 /* (null) in Resources */,
 				DAC5326C1D273DF0008D9773 /* bitCoinAnnotation@2x.png in Resources */,
 				DAC5326D1D273DF0008D9773 /* icon_category_coffee_tea@3x.png in Resources */,
 				DAC5326E1D273DF0008D9773 /* icon_exchange.png in Resources */,
@@ -6162,7 +6167,7 @@
 				DAC5337E1D27422A008D9773 /* info_send_confirmation.html in Resources */,
 				DAC5337F1D27422A008D9773 /* plugin_icon_homedepot@2x.png in Resources */,
 				DAC533801D27422A008D9773 /* Lato-Italic.ttf in Resources */,
-				DAC533811D27422A008D9773 /* sms_template.txt in Resources */,
+				DAC533811D27422A008D9773 /* (null) in Resources */,
 				DAC533821D27422A008D9773 /* enable-camera.png in Resources */,
 				DAC533831D27422A008D9773 /* icon_approved@2x.png in Resources */,
 				DAC533841D27422A008D9773 /* btn_close@3x.png in Resources */,
@@ -6364,7 +6369,7 @@
 				DAC534491D27422A008D9773 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DAC5344A1D27422A008D9773 /* BitcoinSent.mp3 in Resources */,
 				DAC5344B1D27422A008D9773 /* QR-bracket.png in Resources */,
-				DAC5344C1D27422A008D9773 /* Localizable.strings in Resources */,
+				DAC5344C1D27422A008D9773 /* (null) in Resources */,
 				DAC5344D1D27422A008D9773 /* bitCoinAnnotation@2x.png in Resources */,
 				DAC5344E1D27422A008D9773 /* icon_category_coffee_tea@3x.png in Resources */,
 				DAC5344F1D27422A008D9773 /* icon_exchange.png in Resources */,
@@ -6431,7 +6436,7 @@
 				DAC535621D274575008D9773 /* info_send_confirmation.html in Resources */,
 				DAC535631D274575008D9773 /* plugin_icon_homedepot@2x.png in Resources */,
 				DAC535641D274575008D9773 /* Lato-Italic.ttf in Resources */,
-				DAC535651D274575008D9773 /* sms_template.txt in Resources */,
+				DAC535651D274575008D9773 /* (null) in Resources */,
 				DAC535661D274575008D9773 /* enable-camera.png in Resources */,
 				DAC535671D274575008D9773 /* icon_approved@2x.png in Resources */,
 				DAC535681D274575008D9773 /* btn_close@3x.png in Resources */,
@@ -6632,7 +6637,7 @@
 				DAC5362E1D274575008D9773 /* BitcoinSent.mp3 in Resources */,
 				DAC536791D2745AA008D9773 /* logo@2x.png in Resources */,
 				DAC5362F1D274575008D9773 /* QR-bracket.png in Resources */,
-				DAC536301D274575008D9773 /* Localizable.strings in Resources */,
+				DAC536301D274575008D9773 /* (null) in Resources */,
 				DAC536311D274575008D9773 /* bitCoinAnnotation@2x.png in Resources */,
 				DAC536331D274575008D9773 /* icon_category_coffee_tea@3x.png in Resources */,
 				DAC536341D274575008D9773 /* icon_exchange.png in Resources */,
@@ -9256,7 +9261,6 @@
 			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Coinsource";
-				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9295,7 +9299,6 @@
 			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Coinsource";
-				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
