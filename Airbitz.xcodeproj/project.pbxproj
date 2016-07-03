@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D86A497CAEEA5EA38657D0D /* libPods-Athena.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */; };
 		313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -22,6 +23,7 @@
 		34644DCDB063C438DFE4F489 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
 		622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */; };
 		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
+		873045B809544078D323ED4D /* libPods-Rackwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */; };
 		DA10BB981BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
 		DA10BB991BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
 		DA10BB9A1BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
@@ -49,10 +51,6 @@
 		DA4902991D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
 		DA49029A1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
 		DA49029B1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
-		DA4977831D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
-		DA4977841D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
-		DA4977851D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
-		DA4977861D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
@@ -1228,8 +1226,6 @@
 		DAB06AE91D16D01800050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
 		DAB06AEC1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
 		DAB06AEF1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
-		DAB06B251D171D3D00050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
-		DAB06B481D17230900050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
 		DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
 		DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
 		DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
@@ -2516,6 +2512,7 @@
 		DAE1BE4B1CC3801F003494AB /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
 		DAE1BE4C1CC3816A003494AB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED81BC61F910063DA07 /* User.m */; };
 		DAE1BE4D1CC381C1003494AB /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
+		ED3B5D95C369E5F034F6BCFF /* libPods-Coinsource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */; };
 		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
@@ -2600,6 +2597,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.release.xcconfig"; sourceTree = "<group>"; };
 		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpPINController.m; sourceTree = "<group>"; };
@@ -2616,10 +2614,16 @@
 		526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Coinsource.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; };
 		71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		980BD847C02C3AD60A5DCE71 /* Pods-Rackwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.debug.xcconfig"; sourceTree = "<group>"; };
+		A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.debug.xcconfig"; sourceTree = "<group>"; };
+		B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.release.xcconfig"; sourceTree = "<group>"; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; };
+		D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.release.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.release.xcconfig"; sourceTree = "<group>"; };
+		D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Athena.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA05AC4E1D28852600474082 /* de-LU */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "de-LU"; path = "de-LU.lproj/email_template_simple.html"; sourceTree = "<group>"; };
 		DA05AC4F1D28852600474082 /* de-LU */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "de-LU"; path = "de-LU.lproj/email_template.html"; sourceTree = "<group>"; };
 		DA05AC501D28852600474082 /* de-LU */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "de-LU"; path = "de-LU.lproj/info_disclaimer.html"; sourceTree = "<group>"; };
@@ -3614,6 +3618,8 @@
 		DAE1BE451CC37883003494AB /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = "Airbitz-Common/MainController.h"; sourceTree = "<group>"; };
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; };
+		E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.debug.xcconfig"; sourceTree = "<group>"; };
+		ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rackwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3737,6 +3743,7 @@
 				DAC531871D273DF0008D9773 /* HockeySDK.framework in Frameworks */,
 				DAC531881D273DF0008D9773 /* Foundation.framework in Frameworks */,
 				DAC531891D273DF0008D9773 /* libPods-Airbitz.a in Frameworks */,
+				873045B809544078D323ED4D /* libPods-Rackwallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3767,6 +3774,7 @@
 				DAC533641D27422A008D9773 /* HockeySDK.framework in Frameworks */,
 				DAC533651D27422A008D9773 /* Foundation.framework in Frameworks */,
 				DAC533661D27422A008D9773 /* libPods-Airbitz.a in Frameworks */,
+				ED3B5D95C369E5F034F6BCFF /* libPods-Coinsource.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3797,6 +3805,7 @@
 				DAC535481D274575008D9773 /* HockeySDK.framework in Frameworks */,
 				DAC535491D274575008D9773 /* Foundation.framework in Frameworks */,
 				DAC5354A1D274575008D9773 /* libPods-Airbitz.a in Frameworks */,
+				0D86A497CAEEA5EA38657D0D /* libPods-Athena.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3858,6 +3867,12 @@
 				4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */,
 				487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */,
 				2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */,
+				A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */,
+				D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */,
+				E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */,
+				B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */,
+				980BD847C02C3AD60A5DCE71 /* Pods-Rackwallet.debug.xcconfig */,
+				1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3932,6 +3947,9 @@
 				526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */,
 				5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */,
 				71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */,
+				D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */,
+				58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */,
+				ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -5377,7 +5395,6 @@
 				DA57A1F41D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF43B1BC7285D0063DA07 /* icon_category_atm.png in Resources */,
-				DAB06B251D171D3D00050098 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EF43C1BC7285D0063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EF43D1BC7285D0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DAC532C11D274019008D9773 /* logo_icon@2x.png in Resources */,
@@ -5554,7 +5571,6 @@
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF4E11BC7285D0063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EF4E21BC7285D0063DA07 /* QR-bracket.png in Resources */,
-				DA4977861D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EF4E31BC7285D0063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EF4E41BC7285D0063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DA57A2301D131D5F005442AF /* info_settings.html in Resources */,
@@ -5644,7 +5660,6 @@
 				DA57A1F51D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF6021BC729FA0063DA07 /* icon_category_atm.png in Resources */,
-				DAB06B481D17230900050098 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EF6031BC729FA0063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EF6041BC729FA0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DAC532BD1D274019008D9773 /* logo_icon@2x.png in Resources */,
@@ -5716,7 +5731,6 @@
 				DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */,
 				DA57A1D21D131C76005442AF /* ConfirmationSliderView.xib in Resources */,
-				DA4977841D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DABF60F71C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF6481BC729FA0063DA07 /* icon_directory@2x.png in Resources */,
 				DA9EF6491BC729FA0063DA07 /* BLE_photo@2x.png in Resources */,
@@ -6884,14 +6898,12 @@
 				DA9EE5051BC61F920063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA57A22F1D131D5F005442AF /* info_settings.html in Resources */,
-				DA4977851D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EE4E41BC61F920063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DA9EE49D1BC61F920063DA07 /* icon_exchange.png in Resources */,
 				DA9ED7EB1BC61E680063DA07 /* San Diego.gpx in Resources */,
-				DA4977831D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
 				DA9EE4971BC61F920063DA07 /* icon_category_shopping@2x.png in Resources */,
 				DA57A1E91D131C94005442AF /* SlideoutView~iphone.xib in Resources */,
@@ -7117,7 +7129,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAC532901D273DF0008D9773 /* 📦 Copy Pods Resources */ = {
@@ -7132,7 +7144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAC532C91D27422A008D9773 /* 📦 Check Pods Manifest.lock */ = {
@@ -7162,7 +7174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAC534721D27422A008D9773 /* 📦 Copy Pods Resources */ = {
@@ -7177,7 +7189,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAC534AD1D274575008D9773 /* 📦 Check Pods Manifest.lock */ = {
@@ -7207,7 +7219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Athena/Pods-Athena-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DAC536551D274575008D9773 /* 📦 Copy Pods Resources */ = {
@@ -7222,7 +7234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Athena/Pods-Athena-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB1F9F1B010317F8520994B9 /* 📦 Copy Pods Resources */ = {
@@ -9164,7 +9176,7 @@
 		};
 		DAC532941D273DF0008D9773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
+			baseConfigurationReference = 980BD847C02C3AD60A5DCE71 /* Pods-Rackwallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RackWallet";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -9175,7 +9187,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "RACKWALLET=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"RACKWALLET=1",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9202,7 +9217,7 @@
 		};
 		DAC532951D273DF0008D9773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
+			baseConfigurationReference = 1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RackWallet";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -9213,7 +9228,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "RACKWALLET=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"RACKWALLET=1",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9240,7 +9258,7 @@
 		};
 		DAC534741D27422A008D9773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
+			baseConfigurationReference = E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Coinsource";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -9251,7 +9269,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "COINSOURCE=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COINSOURCE=1",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9278,7 +9299,7 @@
 		};
 		DAC534751D27422A008D9773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
+			baseConfigurationReference = B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Coinsource";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -9289,7 +9310,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "COINSOURCE=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COINSOURCE=1",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9316,7 +9340,7 @@
 		};
 		DAC536571D274575008D9773 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
+			baseConfigurationReference = A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Athena";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -9328,7 +9352,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "ATHENA=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ATHENA=1",
+					"$(inherited)",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9355,7 +9382,7 @@
 		};
 		DAC536581D274575008D9773 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
+			baseConfigurationReference = D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Athena";
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
@@ -9367,7 +9394,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = "ATHENA=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ATHENA=1",
+					"$(inherited)",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

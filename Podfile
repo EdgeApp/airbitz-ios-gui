@@ -28,6 +28,21 @@ target "Airbitz-Testnet" do
     import_pods_ios
 end
 
+target "Athena" do
+    import_pods
+    import_pods_ios
+end
+
+target "Coinsource" do
+    import_pods
+    import_pods_ios
+end
+
+target "Rackwallet" do
+    import_pods
+    import_pods_ios
+end
+
 target 'Airbitz-OSX' do
     platform :osx, '10.9'
     import_pods
