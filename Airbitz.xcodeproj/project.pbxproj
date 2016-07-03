@@ -9343,7 +9343,6 @@
 			baseConfigurationReference = A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Athena";
-				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -9385,7 +9384,6 @@
 			baseConfigurationReference = D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Athena";
-				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
