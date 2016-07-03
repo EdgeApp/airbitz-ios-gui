@@ -564,6 +564,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Home" = "घर";
 
 /* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "होम डिपो (15% तक की छूट)";
+
+/* No comment provided by engineer. */
 "Home Improvement" = "गृह सुधार";
 
 /* No comment provided by engineer. */
@@ -1127,6 +1130,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Standard Fee" = "मानक शुल्क";
 
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "स्टारबक्स (20% तक की छूट)";
+
 /* expense category */
 "Student Loan" = "छात्र ऋण";
 
@@ -1144,6 +1150,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "अधिक विकल्पों के लिए वॉलेट पर क्लिक कर होल्ड करें";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "लक्ष्य (10% तक की छूट)";
 
 /* expense category */
 "Tax" = "कर";
@@ -1270,6 +1279,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Two Factor Reset" = "दो फैक्टर रिसेट";
 
 /* No comment provided by engineer. */
+"USA and Canada" = "संयुक्त राज्य अमेरिका और कनाडा";
+
+/* No comment provided by engineer. */
 "Unable to determine two factor status" = "दो फैक्टर की स्थिति पता करने में अक्षम";
 
 /* No comment provided by engineer. */
@@ -1376,6 +1388,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet: " = "वॉलेट ";
 
 /* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "वालमार्ट(10% तक की छूट)";
+
+/* No comment provided by engineer. */
 "Warning!" = "चेतावनी!";
 
 /* No comment provided by engineer. */
@@ -1395,6 +1410,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "वाचर डेटाबेस हट गया। ब्लॉकचेन इंफो दोबारा सिंक करने के लिए कृपया कुछ मिनट का समय दें। सिंक के दौरान लेनदेन और शेष राशि गलत दिखाई दे सकते हैं";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "होल फूड्स(10% तक की छूट)";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "क्या आप इस खाते और उपकरण के लिए TouchID सक्षम करना चाहते हैं?";

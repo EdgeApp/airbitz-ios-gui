@@ -169,6 +169,12 @@
 #define upTo20OffStarbucksButton                    NSLocalizedString(@"Up to 20% off Starbucks",nil)
 #define upTo10OffTargetButton                       NSLocalizedString(@"Up to 10% off Target",nil)
 #define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)
+#define starbucks_20_percent_off                    NSLocalizedString(@"Starbucks (Up to 20% Off)", nil)
+#define target_10_percent_off                       NSLocalizedString(@"Target (Up to 10% Off)", nil)
+#define homedepot_15_percent_off                    NSLocalizedString(@"Home Depot (Up to 15% Off)", nil)
+#define walmart_10_percent_off                      NSLocalizedString(@"Walmart (Up to 10% Off)", nil)
+#define wholefoods_10_percent_off                   NSLocalizedString(@"Whole Foods (Up to 10% Off)", nil)
+
 #define importPrivateKeyButton                      NSLocalizedString(@"Import Private Key", nil)
 #define debugOptionsTitle                           NSLocalizedString(@"Debug Options", @"Debug screen header title")
 #define restartingWatcherServiceText                NSLocalizedString(@"Restarting watcher service", nil)
@@ -370,7 +376,7 @@
 #define nameSettingsHeader                          NSLocalizedString(@"NAME", @"section header in settings table")
 #define optionsSettingsHeader                       NSLocalizedString(@"OPTIONS", @"section header in settings table")
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
-
+#define usa_and_canada_text                         NSLocalizedString(@"USA and Canada", nil)
 #define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
 #define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
 #define affiliate_revenue                           NSLocalizedString(@"Affiliate Revenue", @"Income category for affiliate revenue")
@@ -399,3 +405,7 @@
 #define transfer_category_en                        @"Transfer"
 #define wallet_category                             @"Wallet"
 
+#define category_home_improvement                   NSLocalizedString(@"Home Improvement", nil)
+#define category_groceries                          NSLocalizedString(@"Groceries", nil)
+#define category_coffee_shops                       NSLocalizedString(@"Coffee Shops", nil)
+#define category_shopping                           NSLocalizedString(@"Shopping", @"expense category")

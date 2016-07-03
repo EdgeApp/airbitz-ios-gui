@@ -143,7 +143,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Cash & ATM", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Charity", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Clothing", nil)]];
-        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Coffee Shops", nil)]];
+        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, category_coffee_shops]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Credit Card Payment", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Dentist", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Deposit to Savings", nil)]];
@@ -161,14 +161,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Gas & Fuel", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Gift", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Gifts & Donations", nil)]];
-        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Groceries", nil)]];
+        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, category_groceries]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Gym", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Hair", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Health & Fitness", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"HOA Dues", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Hobbies", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Home", nil)]];
-        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Home Improvement", nil)]];
+        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, category_home_improvement]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Home Insurance", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Home Phone", nil)]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Home Services", nil)]];
@@ -204,7 +204,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Restaurants", @"expense category")]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Service & Parts", @"expense category")]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Service Fee", @"expense category")]];
-        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Shopping", @"expense category")]];
+        [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, category_shopping]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Spa & Massage", @"expense category")]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Sporting Goods", @"expense category")]];
         [arrayCategories addObject:[NSString stringWithFormat:@"%@:%@",abcStringExpenseCategory, NSLocalizedString(@"Sports", @"expense category")]];

@@ -42,6 +42,7 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
 	self.titleLabel.alpha = 1.0;
              self.dragbarView.hidden = true;
              self.dividerbarView.hidden = false;

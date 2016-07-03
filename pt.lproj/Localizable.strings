@@ -565,6 +565,9 @@ Digite-a abaixo para certificar-se:";
 "Home" = "Home";
 
 /* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "Home Depot (Até 15% de Desconto)";
+
+/* No comment provided by engineer. */
 "Home Improvement" = "Home Improvement";
 
 /* No comment provided by engineer. */
@@ -1130,6 +1133,9 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Standard Fee" = "Taxa padrão";
 
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "Starbucks (Até 20% de Desconto)";
+
 /* expense category */
 "Student Loan" = "Student Loan";
 
@@ -1147,6 +1153,9 @@ Digite-a abaixo para certificar-se:";
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "Toque e segure uma carteira para obter opções adicionais";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target (Até 10% de Desconto)";
 
 /* expense category */
 "Tax" = "Tax";
@@ -1273,6 +1282,9 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Two Factor Reset" = "Reset do Dois Fatores";
 
 /* No comment provided by engineer. */
+"USA and Canada" = "EUA e Canadá";
+
+/* No comment provided by engineer. */
 "Unable to determine two factor status" = "Não é possível determinar o status dos dois fatores";
 
 /* No comment provided by engineer. */
@@ -1380,6 +1392,9 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Wallet: " = "Carteira: ";
 
 /* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart (Até 10% de Desconto)";
+
+/* No comment provided by engineer. */
 "Warning!" = "Aviso!";
 
 /* No comment provided by engineer. */
@@ -1399,6 +1414,9 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "Whole Foods (Até 10% de Desconto)";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "Gostaria de habilitar o TouchID para esta conta e dispositivo?";

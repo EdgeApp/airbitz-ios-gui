@@ -118,6 +118,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+
 	[self initMyVariables];
 }
 
