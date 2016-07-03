@@ -1999,17 +1999,20 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Error Recovering Account">
         <source>Error Recovering Account</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error Recovering Account</target>
+        <target xml:lang="fr" state="translated">Erreur pendant la récupération du compte</target>
       </trans-unit>
       <trans-unit id="Error code">
         <source>Error code</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error code</target>
+        <target xml:lang="fr" state="translated">Erreur de code</target>
+        <alt-trans>
+          <target xml:lang="fr">Code d’erreur</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Error desc">
         <source>Error desc</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error desc</target>
+        <target xml:lang="fr" state="translated">Erreur desc</target>
       </trans-unit>
       <trans-unit id="Error during send">
         <source>Error during send</source>
@@ -2019,102 +2022,102 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Error importing the token at this time. Please try again.">
         <source>Error importing the token at this time. Please try again.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error importing the token at this time. Please try again.</target>
+        <target xml:lang="fr" state="translated">Erreur lors de l’importation du jeton en ce moment. S’il vous plaît essayer à nouveau.</target>
       </trans-unit>
       <trans-unit id="Error occured copying to the clipboard">
         <source>Error occured copying to the clipboard</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error occured copying to the clipboard</target>
+        <target xml:lang="fr" state="translated">Erreur lors de la copie à le presse-papiers</target>
       </trans-unit>
       <trans-unit id="Error sending Email.">
         <source>Error sending Email.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error sending Email.</target>
+        <target xml:lang="fr" state="translated">Erreur lors de l’envoi d’Email.</target>
       </trans-unit>
       <trans-unit id="Error sending SMS">
         <source>Error sending SMS</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Error sending SMS</target>
+        <target xml:lang="fr" state="translated">Erreur d’envoi de SMS</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Exchange</target>
+        <target xml:lang="fr" state="translated">Echange</target>
       </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
         <source>Exchange Rate Data Source</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Exchange Rate Data Source</target>
+        <target xml:lang="fr" state="translated">Source de données de taux de change</target>
       </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
         <note>Exit button text on top left</note>
-        <target xml:lang="fr" state="needs-translation">Exit</target>
+        <target xml:lang="fr" state="translated">Sortir</target>
       </trans-unit>
       <trans-unit id="Expense">
         <source>Expense</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Expense</target>
+        <target xml:lang="fr" state="translated">Dépense</target>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
         <note>EXPORT button text for wallet export</note>
-        <target xml:lang="fr" state="translated">Exporter</target>
+        <target xml:lang="fr" state="translated">Export</target>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Export Private Seed</target>
+        <target xml:lang="fr" state="translated">Exporter des semences privées</target>
       </trans-unit>
       <trans-unit id="Export Public Seed (XPub)">
         <source>Export Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Export Public Seed (XPub)</target>
+        <target xml:lang="fr" state="translated">Exportation de semences Public (XPub)</target>
       </trans-unit>
       <trans-unit id="Export Wallet Transactions">
         <source>Export Wallet Transactions</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Export Wallet Transactions</target>
+        <target xml:lang="fr" state="translated">Export des transactions de portefeuille</target>
       </trans-unit>
       <trans-unit id="Eyecare">
         <source>Eyecare</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Eyecare</target>
+        <target xml:lang="fr" state="translated">Soins des yeux</target>
       </trans-unit>
       <trans-unit id="Fast Food">
         <source>Fast Food</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Fast Food</target>
+        <target xml:lang="fr" state="translated">Restauration rapide</target>
       </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Feedback</target>
+        <target xml:lang="fr" state="translated">Remarque</target>
       </trans-unit>
       <trans-unit id="Fees &amp; Charges">
         <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Fees &amp; Charges</target>
+        <target xml:lang="fr" state="translated">Honoraires &amp; frais</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
         <note>Fetching Payment Request popup</note>
-        <target xml:lang="fr" state="needs-translation">Fetching Payment Request...</target>
+        <target xml:lang="fr" state="translated">Récupération de demande de paiement...</target>
       </trans-unit>
       <trans-unit id="Fiat">
         <source>Fiat</source>
         <note>Fiat</note>
-        <target xml:lang="fr" state="needs-translation">Fiat</target>
+        <target xml:lang="fr" state="translated">Consentement</target>
       </trans-unit>
       <trans-unit id="Financial">
         <source>Financial</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Financial</target>
+        <target xml:lang="fr" state="translated">Financier</target>
       </trans-unit>
       <trans-unit id="Financial Advisor">
         <source>Financial Advisor</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Financial Advisor</target>
+        <target xml:lang="fr" state="translated">Conseillers financiers</target>
       </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
@@ -2124,37 +2127,37 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Food &amp; Dining">
         <source>Food &amp; Dining</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Food &amp; Dining</target>
+        <target xml:lang="fr" state="translated">Nouriture &amp; manger</target>
       </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">From: %@</target>
+        <target xml:lang="fr" state="translated">%@</target>
       </trans-unit>
       <trans-unit id="Furnishings">
         <source>Furnishings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Furnishings</target>
+        <target xml:lang="fr" state="translated">Ameublement</target>
       </trans-unit>
       <trans-unit id="Gas &amp; Fuel">
         <source>Gas &amp; Fuel</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Gas &amp; Fuel</target>
+        <target xml:lang="fr" state="translated">Gaz &amp; carburant</target>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
         <source>Generating QR Code...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="translated">Génération de Code QR...</target>
+        <target xml:lang="fr" state="translated">Génération du Code QR...</target>
       </trans-unit>
       <trans-unit id="Get Affiliate Link">
         <source>Get Affiliate Link</source>
         <note>Button text for Get Affiliate Link</note>
-        <target xml:lang="fr" state="needs-translation">Get Affiliate Link</target>
+        <target xml:lang="fr" state="translated">Obtenir le lien d’affiliation</target>
       </trans-unit>
       <trans-unit id="Gift">
         <source>Gift</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Gift</target>
+        <target xml:lang="fr" state="translated">Cadeau</target>
       </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
@@ -2164,42 +2167,42 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Gifts &amp; Donations">
         <source>Gifts &amp; Donations</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Gifts &amp; Donations</target>
+        <target xml:lang="fr" state="translated">Cadeaux &amp; dons</target>
       </trans-unit>
       <trans-unit id="Go Back">
         <source>Go Back</source>
         <note>Generic Go Back button text</note>
-        <target xml:lang="fr" state="needs-translation">Go Back</target>
+        <target xml:lang="fr" state="translated">Retour</target>
       </trans-unit>
       <trans-unit id="Great job remembering your password.">
         <source>Great job remembering your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Great job remembering your password.</target>
+        <target xml:lang="fr" state="translated">Super boulot, se souvenir de votre mot de passe.</target>
       </trans-unit>
       <trans-unit id="Groceries">
         <source>Groceries</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Groceries</target>
+        <target xml:lang="fr" state="translated">Épicerie</target>
       </trans-unit>
       <trans-unit id="Gym">
         <source>Gym</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Gym</target>
+        <target xml:lang="fr" state="translated">Gym</target>
       </trans-unit>
       <trans-unit id="HOA Dues">
         <source>HOA Dues</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">HOA Dues</target>
+        <target xml:lang="fr" state="translated">Cotisation HOA</target>
       </trans-unit>
       <trans-unit id="Hair">
         <source>Hair</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Hair</target>
+        <target xml:lang="fr" state="translated">Cheveux</target>
       </trans-unit>
       <trans-unit id="Health &amp; Fitness">
         <source>Health &amp; Fitness</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Health &amp; Fitness</target>
+        <target xml:lang="fr" state="translated">Santé &amp; Fitness</target>
       </trans-unit>
       <trans-unit id="Help">
         <source>Help</source>
@@ -2209,79 +2212,78 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Hide">
         <source>Hide</source>
         <note>Hide</note>
-        <target xml:lang="fr" state="needs-translation">Hide</target>
+        <target xml:lang="fr" state="translated">Caché</target>
       </trans-unit>
       <trans-unit id="High Fee">
         <source>High Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">High Fee</target>
+        <target xml:lang="fr" state="translated">Frais élevés</target>
       </trans-unit>
       <trans-unit id="Hobbies">
         <source>Hobbies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Hobbies</target>
+        <target xml:lang="fr" state="translated">Loisirs</target>
       </trans-unit>
       <trans-unit id="Home">
         <source>Home</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home</target>
+        <target xml:lang="fr" state="translated">Domicile</target>
       </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home Improvement</target>
+        <target xml:lang="fr" state="translated">Bricolage</target>
       </trans-unit>
       <trans-unit id="Home Insurance">
         <source>Home Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home Insurance</target>
+        <target xml:lang="fr" state="translated">Assurance d'habitation</target>
       </trans-unit>
       <trans-unit id="Home Phone">
         <source>Home Phone</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home Phone</target>
+        <target xml:lang="fr" state="translated">Téléphone résidentiel</target>
       </trans-unit>
       <trans-unit id="Home Services">
         <source>Home Services</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home Services</target>
+        <target xml:lang="fr" state="translated">Services à domicile</target>
       </trans-unit>
       <trans-unit id="Home Supplies">
         <source>Home Supplies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Home Supplies</target>
+        <target xml:lang="fr" state="translated">Fournitures de maison</target>
       </trans-unit>
       <trans-unit id="Hotel">
         <source>Hotel</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Hotel</target>
+        <target xml:lang="fr" state="translated">Hôtel</target>
       </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
-        <target xml:lang="fr" state="needs-translation">How are you liking %@?</target>
+        <target xml:lang="fr" state="translated">Comment vous aimé %@ ?</target>
       </trans-unit>
       <trans-unit id="IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)">
         <source>IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)</source>
         <note>Slideout menu import private key text</note>
-        <target xml:lang="fr" state="needs-translation">IMPORT PRIVATE KEY
-([[abtag APP_TITLE]] Gift Card)</target>
+        <target xml:lang="fr" state="translated">Importation de clé privée ([[abtag APP_TITLE]] carte-cadeau)</target>
       </trans-unit>
       <trans-unit id="IRA Contribution">
         <source>IRA Contribution</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">IRA Contribution</target>
+        <target xml:lang="fr" state="translated">Contribution de l’IRA</target>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import</target>
+        <target xml:lang="fr" state="translated">Importer</target>
       </trans-unit>
       <trans-unit id="Import Airbitz Gift Card">
         <source>Import Airbitz Gift Card</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import Airbitz Gift Card</target>
+        <target xml:lang="fr" state="translated">Importation du cadeau Airbitz</target>
       </trans-unit>
       <trans-unit id="Import Funds">
         <source>Import Funds</source>
@@ -2291,57 +2293,57 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Import Private Key">
         <source>Import Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import Private Key</target>
+        <target xml:lang="fr" state="translated">Importation de clé privée</target>
       </trans-unit>
       <trans-unit id="Import failed">
         <source>Import failed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import failed</target>
+        <target xml:lang="fr" state="translated">L'import a échoué</target>
       </trans-unit>
       <trans-unit id="Import failed. Private key is empty">
         <source>Import failed. Private key is empty</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import failed. Private key is empty</target>
+        <target xml:lang="fr" state="translated">Échec de l’importation. La clé privée est vide</target>
       </trans-unit>
       <trans-unit id="Import the private key again to retry Twitter">
         <source>Import the private key again to retry Twitter</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Import the private key again to retry Twitter</target>
+        <target xml:lang="fr" state="translated">Importer la clé privée à nouveau pour réessayer Twitter</target>
       </trans-unit>
       <trans-unit id="Importing funds from %@ into wallet...">
         <source>Importing funds from %@ into wallet...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Importing funds from %@ into wallet...</target>
+        <target xml:lang="fr" state="translated">Importation des fonds de %@ au portefeuille...</target>
       </trans-unit>
       <trans-unit id="Income">
         <source>Income</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Income</target>
+        <target xml:lang="fr" state="translated">Revenu</target>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
         <source>Incorrect PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Incorrect PIN</target>
+        <target xml:lang="fr" state="translated">Code PIN incorect</target>
       </trans-unit>
       <trans-unit id="Incorrect PIN. Please wait %.0f seconds and try again.">
         <source>Incorrect PIN. Please wait %.0f seconds and try again.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Incorrect PIN. Please wait %.0f seconds and try again.</target>
+        <target xml:lang="fr" state="translated">Code PIN incorrect. S’il vous plaît attendez %.0f secondes et réessayez.</target>
       </trans-unit>
       <trans-unit id="Incorrect Password">
         <source>Incorrect Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Incorrect Password</target>
+        <target xml:lang="fr" state="translated">Mot de pase incorrect</target>
       </trans-unit>
       <trans-unit id="Incorrect Password. Try again, or change it now?">
         <source>Incorrect Password. Try again, or change it now?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Incorrect Password. Try again, or change it now?</target>
+        <target xml:lang="fr" state="translated">Mot de passe incorrect. Réessayez ou changer maintenant ?</target>
       </trans-unit>
       <trans-unit id="Incorrect current password">
         <source>Incorrect current password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Incorrect current password</target>
+        <target xml:lang="fr" state="translated">Mot de passe actuel incorrect</target>
       </trans-unit>
       <trans-unit id="Info">
         <source>Info</source>
@@ -2351,17 +2353,17 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Insufficient Password">
         <source>Insufficient Password</source>
         <note>Title of password check popup alert</note>
-        <target xml:lang="fr" state="needs-translation">Insufficient Password</target>
+        <target xml:lang="fr" state="translated">Mot de passe insuffisante</target>
       </trans-unit>
       <trans-unit id="Interest Exp">
         <source>Interest Exp</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Interest Exp</target>
+        <target xml:lang="fr" state="translated">Intérêt Exp</target>
       </trans-unit>
       <trans-unit id="Internet">
         <source>Internet</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Internet</target>
+        <target xml:lang="fr" state="translated">Internet</target>
       </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
@@ -2371,75 +2373,72 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Invalid Bluetooth Request">
         <source>Invalid Bluetooth Request</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Invalid Bluetooth Request</target>
+        <target xml:lang="fr" state="translated">Requête non valide de Bluetooth</target>
       </trans-unit>
       <trans-unit id="Invalid QR Code">
         <source>Invalid QR Code</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Invalid QR Code</target>
+        <target xml:lang="fr" state="translated">Invalid Code QR</target>
       </trans-unit>
       <trans-unit id="It's great">
         <source>It's great</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">It's great</target>
+        <target xml:lang="fr" state="translated">C’est génial</target>
       </trans-unit>
       <trans-unit id="Kids">
         <source>Kids</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Kids</target>
+        <target xml:lang="fr" state="translated">Enfants</target>
       </trans-unit>
       <trans-unit id="Kids Activities">
         <source>Kids Activities</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Kids Activities</target>
+        <target xml:lang="fr" state="translated">Activités d'enfants</target>
       </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
         <target xml:lang="fr" state="translated">Noms (facultatif)</target>
-        <alt-trans>
-          <target xml:lang="fr">Prénom (facultatif)</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Late Fee">
         <source>Late Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Late Fee</target>
+        <target xml:lang="fr" state="translated">Frais de retard</target>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
-        <target xml:lang="fr" state="needs-translation">Later</target>
+        <target xml:lang="fr" state="translated">Plus tard</target>
       </trans-unit>
       <trans-unit id="Laundry">
         <source>Laundry</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Laundry</target>
+        <target xml:lang="fr" state="translated">Lessive</target>
       </trans-unit>
       <trans-unit id="Lawn &amp; Garden">
         <source>Lawn &amp; Garden</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Lawn &amp; Garden</target>
+        <target xml:lang="fr" state="translated">Pelouse &amp; jardin</target>
       </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Level</target>
+        <target xml:lang="fr" state="translated">Niveau</target>
       </trans-unit>
       <trans-unit id="Life Insurance">
         <source>Life Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Life Insurance</target>
+        <target xml:lang="fr" state="translated">Assurance-vie</target>
       </trans-unit>
       <trans-unit id="Loading Account...">
         <source>Loading Account...</source>
         <note>Loading account alert text</note>
-        <target xml:lang="fr" state="needs-translation">Loading Account...</target>
+        <target xml:lang="fr" state="translated">Chargement du compte...</target>
       </trans-unit>
       <trans-unit id="Loading Balance...">
         <source>Loading Balance...</source>
         <note>title of wallets table balance header</note>
-        <target xml:lang="fr" state="needs-translation">Loading Balance...</target>
+        <target xml:lang="fr" state="translated">Chargement d’équilibre...</target>
       </trans-unit>
       <trans-unit id="Loading Transactions...">
         <source>Loading Transactions...</source>
@@ -2449,7 +2448,7 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Loading Wallets...">
         <source>Loading Wallets...</source>
         <note>Loading wallets alert text</note>
-        <target xml:lang="fr" state="needs-translation">Loading Wallets...</target>
+        <target xml:lang="fr" state="translated">Chargement des portefeuilles...</target>
       </trans-unit>
       <trans-unit id="Loading...">
         <source>Loading...</source>
@@ -2459,12 +2458,12 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Logging Out">
         <source>Logging Out</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Logging Out</target>
+        <target xml:lang="fr" state="translated">Déconnexion en cours</target>
       </trans-unit>
       <trans-unit id="Low Fee">
         <source>Low Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Low Fee</target>
+        <target xml:lang="fr" state="translated">Des frais modiques</target>
       </trans-unit>
       <trans-unit id="Merchant Mode">
         <source>Merchant Mode</source>
@@ -2474,62 +2473,62 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Message Sent">
         <source>Message Sent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Message Sent</target>
+        <target xml:lang="fr" state="translated">Message envoyé</target>
       </trans-unit>
       <trans-unit id="Misc.">
         <source>Misc.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Misc.</target>
+        <target xml:lang="fr" state="translated">Misc.</target>
       </trans-unit>
       <trans-unit id="Mobile Phone">
         <source>Mobile Phone</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Mobile Phone</target>
+        <target xml:lang="fr" state="translated">Téléphone portable</target>
       </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">More Categories</target>
+        <target xml:lang="fr" state="translated">Autres catégories</target>
       </trans-unit>
       <trans-unit id="Mortgage &amp; Rent">
         <source>Mortgage &amp; Rent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Mortgage &amp; Rent</target>
+        <target xml:lang="fr" state="translated">Prêt hypothécaire &amp; location</target>
       </trans-unit>
       <trans-unit id="Mortgage Interest">
         <source>Mortgage Interest</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Mortgage Interest</target>
+        <target xml:lang="fr" state="translated">Intérêts hypothécaires</target>
       </trans-unit>
       <trans-unit id="Movies &amp; DVDs">
         <source>Movies &amp; DVDs</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Movies &amp; DVDs</target>
+        <target xml:lang="fr" state="translated">Films &amp; DVD</target>
       </trans-unit>
       <trans-unit id="Music">
         <source>Music</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Music</target>
+        <target xml:lang="fr" state="translated">Music</target>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
         <source>Must have at least %d characters</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Must have at least %d characters</target>
+        <target xml:lang="fr" state="translated">Doit avoir au moins %d caractères</target>
       </trans-unit>
       <trans-unit id="Must have at least one lower case letter">
         <source>Must have at least one lower case letter</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Must have at least one lower case letter</target>
+        <target xml:lang="fr" state="translated">Doit avoir au moins une lettre minuscule</target>
       </trans-unit>
       <trans-unit id="Must have at least one number">
         <source>Must have at least one number</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Must have at least one number</target>
+        <target xml:lang="fr" state="translated">Doit avoir au moins un numéro</target>
       </trans-unit>
       <trans-unit id="Must have at least one upper case letter">
         <source>Must have at least one upper case letter</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Must have at least one upper case letter</target>
+        <target xml:lang="fr" state="translated">Doit avoir au moins une lettre majuscule</target>
       </trans-unit>
       <trans-unit id="My Wallet">
         <source>My Wallet</source>
@@ -2544,17 +2543,17 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="NO">
         <source>NO</source>
         <note>NO button text</note>
-        <target xml:lang="fr" state="needs-translation">NO</target>
+        <target xml:lang="fr" state="translated">NON</target>
       </trans-unit>
       <trans-unit id="Name">
         <source>Name</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Name</target>
+        <target xml:lang="fr" state="translated">Nom</target>
       </trans-unit>
       <trans-unit id="Net Salary">
         <source>Net Salary</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Net Salary</target>
+        <target xml:lang="fr" state="translated">Salaire net</target>
       </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
@@ -2569,17 +2568,17 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Newspaper &amp; Magazines">
         <source>Newspaper &amp; Magazines</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Newspaper &amp; Magazines</target>
+        <target xml:lang="fr" state="translated">Journaux &amp; Magazines</target>
       </trans-unit>
       <trans-unit id="Next">
         <source>Next</source>
         <note>Next button text</note>
-        <target xml:lang="fr" state="needs-translation">Next</target>
+        <target xml:lang="fr" state="translated">Suivant</target>
       </trans-unit>
       <trans-unit id="Nickname / Handle (optional)">
         <source>Nickname / Handle (optional)</source>
         <note>settings text</note>
-        <target xml:lang="fr" state="needs-translation">Nickname / Handle (optional)</target>
+        <target xml:lang="fr" state="translated">Pseudonyme / poignée (facultatif)</target>
       </trans-unit>
       <trans-unit id="No Transactions">
         <source>No Transactions</source>
@@ -2589,32 +2588,32 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="No Transactions Found">
         <source>No Transactions Found</source>
         <note>what to display when no transactions are found in search</note>
-        <target xml:lang="fr" state="needs-translation">No Transactions Found</target>
+        <target xml:lang="fr" state="translated">Aucune transaction trouvée</target>
       </trans-unit>
       <trans-unit id="No password set">
         <source>No password set</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">No password set</target>
+        <target xml:lang="fr" state="translated">Aucun mot de passe fixé</target>
       </trans-unit>
       <trans-unit id="No thanks">
         <source>No thanks</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">No thanks</target>
+        <target xml:lang="fr" state="translated">Non merci</target>
       </trans-unit>
       <trans-unit id="Not Sure">
         <source>Not Sure</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Not Sure</target>
+        <target xml:lang="fr" state="translated">Pas sûr</target>
       </trans-unit>
       <trans-unit id="Not so good">
         <source>Not so good</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Not so good</target>
+        <target xml:lang="fr" state="translated">Pas très bon</target>
       </trans-unit>
       <trans-unit id="Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.">
         <source>Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.</target>
+        <target xml:lang="fr" state="translated">Remarque : Paramètre de devise par défaut est utilisé uniquement pour les nouveaux portefeuilles et de montrer le solde du compte. Créer un nouveau portefeuille pour changer la monnaie fiat montrée lors de chaque transaction.</target>
       </trans-unit>
       <trans-unit id="OK">
         <source>OK</source>
@@ -2629,57 +2628,60 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="On The Web">
         <source>On The Web</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">On The Web</target>
+        <target xml:lang="fr" state="translated">Sur le web</target>
       </trans-unit>
       <trans-unit id="Only numbers allowed in PIN">
         <source>Only numbers allowed in PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Only numbers allowed in PIN</target>
+        <target xml:lang="fr" state="translated">Seuls les numéros autorisés en PIN</target>
       </trans-unit>
       <trans-unit id="Open 24">
         <source>Open 24</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Open 24</target>
+        <target xml:lang="fr" state="translated">Ouvrir 24</target>
       </trans-unit>
       <trans-unit id="Open 24 hours">
         <source>Open 24 hours</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Open 24 hours</target>
+        <target xml:lang="fr" state="translated">Ouvert 24 heures</target>
       </trans-unit>
       <trans-unit id="Other Income">
         <source>Other Income</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Other Income</target>
+        <target xml:lang="fr" state="translated">Autres revenus</target>
       </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">PIN</target>
+        <target xml:lang="fr" state="translated">PIN</target>
       </trans-unit>
       <trans-unit id="PIN Re-Login">
         <source>PIN Re-Login</source>
         <note>settings text</note>
-        <target xml:lang="fr" state="needs-translation">PIN Re-Login</target>
+        <target xml:lang="fr" state="translated">Reconnexion PIN</target>
       </trans-unit>
       <trans-unit id="PIN must be %d digits">
         <source>PIN must be %d digits</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">PIN must be %d digits</target>
+        <target xml:lang="fr" state="translated">Code PIN doit être %d chiffres</target>
       </trans-unit>
       <trans-unit id="PIN successfully changed.">
         <source>PIN successfully changed.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">PIN successfully changed.</target>
+        <target xml:lang="fr" state="translated">PIN modifié avec succès.</target>
       </trans-unit>
       <trans-unit id="Parking">
         <source>Parking</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Parking</target>
+        <target xml:lang="fr" state="translated">Parking</target>
+        <alt-trans>
+          <target xml:lang="fr">Stationnement</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Partial Payment">
         <source>Partial Payment</source>
         <note>Text on partial payment</note>
-        <target xml:lang="fr" state="needs-translation">Partial Payment</target>
+        <target xml:lang="fr" state="translated">Paiement partiel</target>
       </trans-unit>
       <trans-unit id="Password">
         <source>Password</source>
@@ -2689,104 +2691,103 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Password Change">
         <source>Password Change</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password Change</target>
+        <target xml:lang="fr" state="translated">Mot De Passe Changé</target>
       </trans-unit>
       <trans-unit id="Password Recovery">
         <source>Password Recovery</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password Recovery</target>
+        <target xml:lang="fr" state="translated">Récupération du mot de passe</target>
       </trans-unit>
       <trans-unit id="Password Recovery Setup">
         <source>Password Recovery Setup</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password Recovery Setup</target>
+        <target xml:lang="fr" state="translated">Installation de récupération de mot de passe</target>
       </trans-unit>
       <trans-unit id="Password change failed:\n%@">
         <source>Password change failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password change failed:
-%@</target>
+        <target xml:lang="fr" state="translated">Echec de changement du mot de passe :%@</target>
       </trans-unit>
       <trans-unit id="Password does not match. Re-enter password">
         <source>Password does not match. Re-enter password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password does not match. Re-enter password</target>
+        <target xml:lang="fr" state="translated">Mot de passe ne correspond pas. Ré-entrez le mot de passe</target>
       </trans-unit>
       <trans-unit id="Password mismatch">
         <source>Password mismatch</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password mismatch</target>
+        <target xml:lang="fr" state="translated">Mots de passe différents</target>
       </trans-unit>
       <trans-unit id="Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!">
         <source>Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!</target>
+        <target xml:lang="fr" state="translated">Mot de passe modifié avec succès. N’OUBLIEZ PAS VOTRE MOT DE PASSE OU DE RÉPONSES DE RÉCUPÉRATION ! ILS NE PEUVENT PAS ÊTRE RÉCUPÉRÉS !</target>
       </trans-unit>
       <trans-unit id="Payment received">
         <source>Payment received</source>
         <note>Text on payment recived popup</note>
-        <target xml:lang="fr" state="needs-translation">Payment received</target>
+        <target xml:lang="fr" state="translated">Payement reçu</target>
       </trans-unit>
       <trans-unit id="Pending">
         <source>Pending</source>
         <note>Pending status in transaction list</note>
-        <target xml:lang="fr" state="needs-translation">Pending</target>
+        <target xml:lang="fr" state="translated">En cours</target>
       </trans-unit>
       <trans-unit id="Personal Care">
         <source>Personal Care</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Personal Care</target>
+        <target xml:lang="fr" state="translated">Soins personnels</target>
       </trans-unit>
       <trans-unit id="Pet Food &amp; Supplies">
         <source>Pet Food &amp; Supplies</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Pet Food &amp; Supplies</target>
+        <target xml:lang="fr" state="translated">Aliment pour animaux familiers &amp; Fournitures</target>
       </trans-unit>
       <trans-unit id="Pet Grooming">
         <source>Pet Grooming</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Pet Grooming</target>
+        <target xml:lang="fr" state="translated">Toilettage d’animaux</target>
       </trans-unit>
       <trans-unit id="Pets">
         <source>Pets</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Pets</target>
+        <target xml:lang="fr" state="translated">Animaux</target>
       </trans-unit>
       <trans-unit id="Pharmacy">
         <source>Pharmacy</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Pharmacy</target>
+        <target xml:lang="fr" state="translated">Pharmacie</target>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Place Call</target>
+        <target xml:lang="fr" state="translated">S’il vous plaît appeler</target>
       </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please create a new account and transfer your funds if you forgot your password.</target>
+        <target xml:lang="fr" state="translated">Veuillez créer un nouveau compte et transférer vos fonds si vous avez oublié votre mot de passe.</target>
       </trans-unit>
       <trans-unit id="Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.">
         <source>Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.</target>
+        <target xml:lang="fr" state="translated">Veuillez créer un mot de passe pour ce compte, ou vous ne serez pas en mesure de récupérer votre compte si votre appareil est perdu ou volé.</target>
       </trans-unit>
       <trans-unit id="Please enter a User Name">
         <source>Please enter a User Name</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please enter a User Name</target>
+        <target xml:lang="fr" state="translated">Veuillez entrer un nom d’utilisateur</target>
       </trans-unit>
       <trans-unit id="Please enter an amount to send">
         <source>Please enter an amount to send</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please enter an amount to send</target>
+        <target xml:lang="fr" state="translated">Veuillez entrer un montant à envoyer</target>
       </trans-unit>
       <trans-unit id="Please enter your PIN">
         <source>Please enter your PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please enter your PIN</target>
+        <target xml:lang="fr" state="translated">Veuillez entrer votre code PIN</target>
       </trans-unit>
       <trans-unit id="Please enter your correct password.">
         <source>Please enter your correct password.</source>
@@ -2796,32 +2797,32 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Please enter your password to enable Touch ID">
         <source>Please enter your password to enable Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please enter your password to enable Touch ID</target>
+        <target xml:lang="fr" state="translated">Veuillez entrer votre mot de passe pour activer Touch ID</target>
       </trans-unit>
       <trans-unit id="Please have Requestor contact support">
         <source>Please have Requestor contact support</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please have Requestor contact support</target>
+        <target xml:lang="fr" state="translated">S’il vous plaît veuillez avoir le contact du support technique</target>
       </trans-unit>
       <trans-unit id="Please try again later or contact support">
         <source>Please try again later or contact support</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please try again later or contact support</target>
+        <target xml:lang="fr" state="translated">Veuillez réessayer ultérieurement ou contacter le support</target>
       </trans-unit>
       <trans-unit id="Please wait %.0f seconds before retrying %@">
         <source>Please wait %1$.0f seconds before retrying %2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please wait %1$.0f seconds before retrying %2$@</target>
+        <target xml:lang="fr" state="translated">Veuillez patienter %1$.0f secondes avant une nouvelle tentative de %2$@</target>
       </trans-unit>
       <trans-unit id="Please wait 1 second before retrying %@">
         <source>Please wait 1 second before retrying %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Please wait 1 second before retrying %@</target>
+        <target xml:lang="fr" state="translated">Veuillez patienter 1 seconde avant une nouvelle tentative de %@</target>
       </trans-unit>
       <trans-unit id="Present QR code to Sender and have them scan to send you payment">
         <source>Present QR code to Sender and have them scan to send you payment</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Present QR code to Sender and have them scan to send you payment</target>
+        <target xml:lang="fr" state="translated">Présenter le code QR à l’expéditeur et les analyser pour vous envoyer le paiement</target>
       </trans-unit>
       <trans-unit id="Private Seed">
         <source>Private Seed</source>
@@ -2831,29 +2832,28 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Property">
         <source>Property</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Property</target>
+        <target xml:lang="fr" state="translated">Propriété</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Public Seed (XPub)</target>
+        <target xml:lang="fr" state="translated">Graine de public (XPub)</target>
       </trans-unit>
       <trans-unit id="Public Transportation">
         <source>Public Transportation</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Public Transportation</target>
+        <target xml:lang="fr" state="translated">Transport public</target>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">QR Code Scan Failure</target>
+        <target xml:lang="fr" state="translated">Echec du Code QR du Scanner</target>
       </trans-unit>
       <trans-unit id="REFER YOUR FRIENDS\n(Earn Bitcoin)">
         <source>REFER YOUR FRIENDS
 (Earn Bitcoin)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">REFER YOUR FRIENDS
-(Earn Bitcoin)</target>
+        <target xml:lang="fr" state="translated">Parrainez vos amis (gagnez Bitcoin)</target>
       </trans-unit>
       <trans-unit id="Re-enter New Password">
         <source>Re-enter New Password</source>
@@ -2863,27 +2863,27 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Received Bitcoin">
         <source>Received Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Received Bitcoin</target>
+        <target xml:lang="fr" state="translated">Bitcoin reçu</target>
       </trans-unit>
       <trans-unit id="Received Funds">
         <source>Received Funds</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Received Funds</target>
+        <target xml:lang="fr" state="translated">Fonds reçus</target>
       </trans-unit>
       <trans-unit id="Received...">
         <source>Received...</source>
         <note>Received string on Request screen</note>
-        <target xml:lang="fr" state="needs-translation">Received...</target>
+        <target xml:lang="fr" state="translated">Reçu ...</target>
       </trans-unit>
       <trans-unit id="Recovery Password Reminder">
         <source>Recovery Password Reminder</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Recovery Password Reminder</target>
+        <target xml:lang="fr" state="translated">Rappel de récupération du mot de passe</target>
       </trans-unit>
       <trans-unit id="Recovery Questions Not Set">
         <source>Recovery Questions Not Set</source>
         <note>Title of recovery questions setup error alert</note>
-        <target xml:lang="fr" state="needs-translation">Recovery Questions Not Set</target>
+        <target xml:lang="fr" state="translated">Questions de récupération non définie</target>
       </trans-unit>
       <trans-unit id="Recovery Questions Set">
         <source>Recovery Questions Set</source>
@@ -2893,27 +2893,27 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Refer Your Friends</target>
+        <target xml:lang="fr" state="translated">Parainez vos amis</target>
       </trans-unit>
       <trans-unit id="Registration">
         <source>Registration</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Registration</target>
+        <target xml:lang="fr" state="translated">Souscription</target>
       </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
-        <target xml:lang="fr" state="needs-translation">Remaining...</target>
+        <target xml:lang="fr" state="translated">Restant...</target>
       </trans-unit>
       <trans-unit id="Remember your password?">
         <source>Remember your password?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Remember your password?</target>
+        <target xml:lang="fr" state="translated">Se souvenir de son mot de passe?</target>
       </trans-unit>
       <trans-unit id="Remind Me Later">
         <source>Remind Me Later</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Remind Me Later</target>
+        <target xml:lang="fr" state="translated">Me le rappeler ultérieurement</target>
       </trans-unit>
       <trans-unit id="Rename">
         <source>Rename</source>
@@ -2928,62 +2928,62 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Rent">
         <source>Rent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Rent</target>
+        <target xml:lang="fr" state="translated">Louer</target>
       </trans-unit>
       <trans-unit id="Rental Car &amp; Taxi">
         <source>Rental Car &amp; Taxi</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Rental Car &amp; Taxi</target>
+        <target xml:lang="fr" state="translated">Location de voiture &amp; Taxi</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Request confirmed, Two Factor off.</target>
+        <target xml:lang="fr" state="translated">Demande confirmée, Annulation de deux facteurs.</target>
       </trans-unit>
       <trans-unit id="Request is copied to the clipboard">
         <source>Request is copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Request is copied to the clipboard</target>
+        <target xml:lang="fr" state="translated">Demande est copié dans la presse-papier</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
         <note>Requested string on Request screen</note>
-        <target xml:lang="fr" state="needs-translation">Requested...</target>
+        <target xml:lang="fr" state="translated">Demandé...</target>
       </trans-unit>
       <trans-unit id="Reset Cancelled">
         <source>Reset Cancelled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Reset Cancelled</target>
+        <target xml:lang="fr" state="translated">Remise annulé</target>
       </trans-unit>
       <trans-unit id="Reset Date">
         <source>Reset Date</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Reset Date</target>
+        <target xml:lang="fr" state="translated">Remise de Date</target>
       </trans-unit>
       <trans-unit id="Reset requested. Please retry login after 7 days.">
         <source>Reset requested. Please retry login after 7 days.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Reset requested. Please retry login after 7 days.</target>
+        <target xml:lang="fr" state="translated">Remise demandé. S’il vous plaît réessayer l'inscription après 7 jours.</target>
       </trans-unit>
       <trans-unit id="Restarting watcher service">
         <source>Restarting watcher service</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Restarting watcher service</target>
+        <target xml:lang="fr" state="translated">Redémarage du service guetteur</target>
       </trans-unit>
       <trans-unit id="Restaurants">
         <source>Restaurants</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Restaurants</target>
+        <target xml:lang="fr" state="translated">Restaurants</target>
       </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Restaurants &amp; Food Trucks</target>
+        <target xml:lang="fr" state="translated">Restaurants &amp; Transports alimentaires</target>
       </trans-unit>
       <trans-unit id="Revenue share from affiliate link %@">
         <source>Revenue share from affiliate link %@</source>
         <note>Income notes field for affiliate revenue</note>
-        <target xml:lang="fr" state="needs-translation">Revenue share from affiliate link %@</target>
+        <target xml:lang="fr" state="translated">Part des revenus du lien d’affiliation %@</target>
       </trans-unit>
       <trans-unit id="SMS">
         <source>SMS</source>
@@ -2993,37 +2993,37 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="SMS cancelled">
         <source>SMS cancelled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">SMS cancelled</target>
+        <target xml:lang="fr" state="translated">SMS annulé</target>
       </trans-unit>
       <trans-unit id="SMS sent">
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">SMS sent</target>
+        <target xml:lang="fr" state="translated">SMS envoyé</target>
       </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Sales</target>
+        <target xml:lang="fr" state="translated">Ventes</target>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
         <source>San Diego, California, USA</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">San Diego, California, USA</target>
+        <target xml:lang="fr" state="translated">San Diego, Californie, Etats-Unis</target>
       </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
         <note>Text at top of Scan Screen</note>
-        <target xml:lang="fr" state="needs-translation">Scan QR to Import Private Key/Gift Card</target>
+        <target xml:lang="fr" state="translated">Scannez le QR pour l'importation de la clé privé/carte cadeau</target>
       </trans-unit>
       <trans-unit id="Scan QR to Send, Import, or Login with BitID">
         <source>Scan QR to Send, Import, or Login with BitID</source>
         <note>Text at top of Send screen</note>
-        <target xml:lang="fr" state="needs-translation">Scan QR to Send, Import, or Login with BitID</target>
+        <target xml:lang="fr" state="translated">Scannez le QR pour envoyer, Import, ou de vous connecter avec BitID</target>
       </trans-unit>
       <trans-unit id="Scan the QR code of payee to send payment or tap on a bluetooth request from the list below">
         <source>Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</target>
+        <target xml:lang="fr" state="translated">Scanner le code QR du bénéficiaire pour envoyer le paiement ou taper sur une demande de bluetooth dans la liste ci-dessous</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
@@ -3033,17 +3033,17 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Select Currency">
         <source>Select Currency</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Select Currency</target>
+        <target xml:lang="fr" state="translated">Choisir la devise</target>
       </trans-unit>
       <trans-unit id="Sell Bitcoin">
         <source>Sell Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Sell Bitcoin</target>
+        <target xml:lang="fr" state="translated">Vendre des Bitcoins</target>
       </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Send Funds to Private Key</target>
+        <target xml:lang="fr" state="translated">Envoyer des fonds à la clé privée</target>
       </trans-unit>
       <trans-unit id="Send name on payment request">
         <source>Send name on payment request</source>
@@ -3053,7 +3053,7 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Send to Bitcoin Address or Import Private Key">
         <source>Send to Bitcoin Address or Import Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Send to Bitcoin Address or Import Private Key</target>
+        <target xml:lang="fr" state="translated">Envoyer à l’adresse Bitcoin ou importer la clé privé</target>
       </trans-unit>
       <trans-unit id="Sending...">
         <source>Sending...</source>
@@ -3063,34 +3063,33 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Sent Bitcoin">
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Sent Bitcoin</target>
+        <target xml:lang="fr" state="translated">Bitcoin envoyé</target>
       </trans-unit>
       <trans-unit id="Service &amp; Parts">
         <source>Service &amp; Parts</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Service &amp; Parts</target>
+        <target xml:lang="fr" state="translated">Service &amp; et pièces</target>
       </trans-unit>
       <trans-unit id="Service Fee">
         <source>Service Fee</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Service Fee</target>
+        <target xml:lang="fr" state="translated">Frais de service</target>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Set a Password</target>
+        <target xml:lang="fr" state="translated">Définir un mot de passe</target>
       </trans-unit>
       <trans-unit id="Set a Password and PIN">
         <source>Set a Password and PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Set a Password and PIN</target>
+        <target xml:lang="fr" state="translated">Définir un mot de passe et code PIN</target>
       </trans-unit>
       <trans-unit id="Setting recovery questions failed:\n%@">
         <source>Setting recovery questions failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Setting recovery questions failed:
-%@</target>
+        <target xml:lang="fr" state="translated">Définition des questions de récupération a échoué :%@</target>
       </trans-unit>
       <trans-unit id="Settings">
         <source>Settings</source>
@@ -3100,17 +3099,17 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Share">
         <source>Share</source>
         <note>Generic SHARE button text</note>
-        <target xml:lang="fr" state="needs-translation">Share</target>
+        <target xml:lang="fr" state="translated">Partager</target>
       </trans-unit>
       <trans-unit id="Shopping">
         <source>Shopping</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Shopping</target>
+        <target xml:lang="fr" state="translated">Achats</target>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
         <note>Show</note>
-        <target xml:lang="fr" state="needs-translation">Show</target>
+        <target xml:lang="fr" state="translated">Afficher</target>
       </trans-unit>
       <trans-unit id="Show Balance">
         <source>Show Balance</source>
@@ -3126,13 +3125,12 @@ Entrez-le ci-dessous pour en être sur:</target>
         <source>Sign-Up failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Sign-Up failed:
-%@</target>
+        <target xml:lang="fr" state="translated">Échec de l’inscription :%@</target>
       </trans-unit>
       <trans-unit id="Skip">
         <source>Skip</source>
         <note>Skip button text</note>
-        <target xml:lang="fr" state="needs-translation">Skip</target>
+        <target xml:lang="fr" state="translated">Passer</target>
       </trans-unit>
       <trans-unit id="Skip this step">
         <source>Skip this step</source>
@@ -3142,12 +3140,12 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Sorry">
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Sorry</target>
+        <target xml:lang="fr" state="translated">Désolé</target>
       </trans-unit>
       <trans-unit id="Spa &amp; Massage">
         <source>Spa &amp; Massage</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Spa &amp; Massage</target>
+        <target xml:lang="fr" state="translated">Spa &amp; Massage</target>
       </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
@@ -3157,27 +3155,27 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Sporting Goods">
         <source>Sporting Goods</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Sporting Goods</target>
+        <target xml:lang="fr" state="translated">Articles de sport</target>
       </trans-unit>
       <trans-unit id="Sports">
         <source>Sports</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Sports</target>
+        <target xml:lang="fr" state="translated">Sports</target>
       </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Standard Fee</target>
+        <target xml:lang="fr" state="translated">Frais standard</target>
       </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Student Loan</target>
+        <target xml:lang="fr" state="translated">Prêt d'étudiant</target>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Successfully Logged In</target>
+        <target xml:lang="fr" state="translated">Connexion réussie</target>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
@@ -3187,7 +3185,7 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Synchronizing">
         <source>Synchronizing</source>
         <note>Synchronizing text in confirmation textfield</note>
-        <target xml:lang="fr" state="needs-translation">Synchronizing</target>
+        <target xml:lang="fr" state="translated">Synchronisation</target>
       </trans-unit>
       <trans-unit id="TOTAL: ">
         <source>TOTAL: </source>
@@ -3197,37 +3195,37 @@ Entrez-le ci-dessous pour en être sur:</target>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Tap and hold a wallet for additional options</target>
+        <target xml:lang="fr" state="translated">Appuyez et maintenez un portefeuille pour d’options supplémentaires</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Tax</target>
+        <target xml:lang="fr" state="translated">Impôt</target>
       </trans-unit>
       <trans-unit id="Television">
         <source>Television</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Television</target>
+        <target xml:lang="fr" state="translated">Télévision</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</target>
+        <target xml:lang="fr" state="translated">Les deuxfacteurs du jeton d’authentification sur cet appareil n’est pas valide. Soit le jeton a été changé par un autre périphérique ou votre horloge est biaisé. S’il vous plaît vérifier votre temps de système pour s’assurer que c’est correct.</target>
       </trans-unit>
       <trans-unit id="The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@">
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</target>
+        <target xml:lang="fr" state="translated">L’adresse bitcoin du périphérique que vous avez utilisé pour vous connectez :%1$@ ne correspond pas à l’adresse qui a été annoncé au départ :%2$@</target>
       </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">The given answers were incorrect. Please try again.</target>
+        <target xml:lang="fr" state="translated">Les réponses donnés sont incorrectes. Veuillez essayer de nouveau.</target>
       </trans-unit>
       <trans-unit id="The password to this account was changed by another device. Please login using the new credentials.">
         <source>The password to this account was changed by another device. Please login using the new credentials.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">The password to this account was changed by another device. Please login using the new credentials.</target>
+        <target xml:lang="fr" state="translated">Le mot de passe pour ce compte a été modifié par un autre appareil. Connecter vous en utilisant les nouvelles informations d’identification.</target>
       </trans-unit>
       <trans-unit id="This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.">
         <source>This is not your email or real name.
@@ -3236,86 +3234,89 @@ This is the username to login into your [[abtag APP_TITLE]] account on this and 
 
 Your username and password are known only to you and never stored unencrypted.</source>
         <note>Username Signup screen info text</note>
-        <target xml:lang="fr" state="needs-translation">This is not your email or real name.
+        <target xml:lang="fr" state="translated">Ce n’est pas votre email ou nom réel. 
 
-This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+Voici le nom d’utilisateur pour ouvrir une session dans votre [[abtag APP_TITLE]] compte là-dessus et d’autres dispositifs. 
 
-Your username and password are known only to you and never stored unencrypted.</target>
+Votre nom d’utilisateur et mot de passe sont connus uniquement par vous et ne jamais stockées non chiffrée.</target>
       </trans-unit>
       <trans-unit id="This may take a few minutes if it is the first time logging into this device.">
         <source>This may take a few minutes if it is the first time logging into this device.</source>
         <note>Loading Wallets alert text</note>
-        <target xml:lang="fr" state="needs-translation">This may take a few minutes if it is the first time logging into this device.</target>
+        <target xml:lang="fr" state="translated">Cela peut prendre quelques minutes si c’est la première fois d'enrégistrement dans cet appareil.</target>
       </trans-unit>
       <trans-unit id="This wallet has been archived. Please select a different wallet from the [Wallets] screen">
         <source>This wallet has been archived. Please select a different wallet from the [Wallets] screen</source>
         <note>Popup sessage for when a wallet is archived</note>
-        <target xml:lang="fr" state="needs-translation">This wallet has been archived. Please select a different wallet from the [Wallets] screen</target>
+        <target xml:lang="fr" state="translated">Ce portefeuille a été archivé. S’il vous plaît sélectionner un portefeuille différent sur l’écran de [Wallets]</target>
       </trans-unit>
       <trans-unit id="Time to crack:">
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
-        <target xml:lang="fr" state="needs-translation">Time to crack:</target>
+        <target xml:lang="fr" state="translated">Temps à craquer :</target>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
         <note>Popup wallet help test</note>
-        <target xml:lang="fr" state="needs-translation">To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</target>
+        <target xml:lang="fr" state="translated">Pour trier les portefeuilles, appuyez sur et faites glisser les 3 barres vers la droite d’un portefeuille. Faites glisser sous l’en-tête de [ARCHIVE] pour archiver le porte-monnaie</target>
       </trans-unit>
       <trans-unit id="To: %@">
         <source>To: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">To: %@</target>
+        <target xml:lang="fr" state="translated">A: %@</target>
+        <alt-trans>
+          <target xml:lang="fr">À: %@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="To: %@ ▼">
         <source>To: %@ ▼</source>
         <note>Top of screen wallet dropdown prefix text</note>
-        <target xml:lang="fr" state="needs-translation">To: %@ ▼</target>
+        <target xml:lang="fr" state="translated">A : %@ ▼</target>
       </trans-unit>
       <trans-unit id="Tolls">
         <source>Tolls</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Tolls</target>
+        <target xml:lang="fr" state="translated">Péages</target>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Touch ID</target>
+        <target xml:lang="fr" state="translated">Touch ID</target>
       </trans-unit>
       <trans-unit id="Touch ID Disabled">
         <source>Touch ID Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Touch ID Disabled</target>
+        <target xml:lang="fr" state="translated">Touch ID désactivée</target>
       </trans-unit>
       <trans-unit id="Touch ID Enabled">
         <source>Touch ID Enabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Touch ID Enabled</target>
+        <target xml:lang="fr" state="translated">Touch ID activé</target>
       </trans-unit>
       <trans-unit id="Touch to login user">
         <source>Touch to login user</source>
         <note>Touch ID prompt text</note>
-        <target xml:lang="fr" state="needs-translation">Touch to login user</target>
+        <target xml:lang="fr" state="translated">Toucher l’utilisateur</target>
       </trans-unit>
       <trans-unit id="TouchID: Set password first">
         <source>TouchID: Set password first</source>
         <note>settings text</note>
-        <target xml:lang="fr" state="needs-translation">TouchID: Set password first</target>
+        <target xml:lang="fr" state="translated">TouchID : D’abord définir le mot de passe</target>
       </trans-unit>
       <trans-unit id="TouchID: Unsupported Device">
         <source>TouchID: Unsupported Device</source>
         <note>settings text</note>
-        <target xml:lang="fr" state="needs-translation">TouchID: Unsupported Device</target>
+        <target xml:lang="fr" state="translated">TouchID : Appareil non pris en charge</target>
       </trans-unit>
       <trans-unit id="Toys">
         <source>Toys</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Toys</target>
+        <target xml:lang="fr" state="translated">Jouets</target>
       </trans-unit>
       <trans-unit id="Trade Commissions">
         <source>Trade Commissions</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Trade Commissions</target>
+        <target xml:lang="fr" state="translated">Délégations commerciales</target>
       </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
@@ -3330,47 +3331,47 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
         <note>From wallet transfer text</note>
-        <target xml:lang="fr" state="needs-translation">Transfer From %@</target>
+        <target xml:lang="fr" state="translated">Transfert de %@</target>
       </trans-unit>
       <trans-unit id="Transfer To %@">
         <source>Transfer To %@</source>
         <note>To wallet transfer text</note>
-        <target xml:lang="fr" state="needs-translation">Transfer To %@</target>
+        <target xml:lang="fr" state="translated">Transfert à %@</target>
       </trans-unit>
       <trans-unit id="Travel">
         <source>Travel</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Travel</target>
+        <target xml:lang="fr" state="translated">Voyage</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Try again?</target>
+        <target xml:lang="fr" state="translated">Réessayer ?</target>
       </trans-unit>
       <trans-unit id="Tuition">
         <source>Tuition</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Tuition</target>
+        <target xml:lang="fr" state="translated">Frais de scolarité</target>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor</target>
+        <target xml:lang="fr" state="translated">Deux facteurs</target>
       </trans-unit>
       <trans-unit id="Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.">
         <source>Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device.</target>
+        <target xml:lang="fr" state="translated">Authentification à deux facteurs (sécurité accrue) a été activé à partir d’un périphérique différent pour ce compte. S’il vous plaît permetter l’authentification à 2 facteurs pour l’accès complet de ce dispositif.</target>
       </trans-unit>
       <trans-unit id="Two Factor Authentication On">
         <source>Two Factor Authentication On</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Authentication On</target>
+        <target xml:lang="fr" state="translated">Authentification à deux facteurs allumer</target>
       </trans-unit>
       <trans-unit id="Two Factor Disabled">
         <source>Two Factor Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Disabled</target>
+        <target xml:lang="fr" state="translated">Deux facteur désactivée</target>
       </trans-unit>
       <trans-unit id="Two Factor Enabled\n\n** Warning **\n\nIf you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.&quot;">
         <source>Two Factor Enabled
@@ -3379,151 +3380,157 @@ Your username and password are known only to you and never stored unencrypted.</
 
 If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account."</source>
         <note>2FA warning on enable</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Enabled
+        <target xml:lang="fr" state="translated">Deux facteur activé 
 
-** Warning **
+** Avertissement ** 
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account."</target>
+Si vous perdez votre périphérique ou désinstallez l’application, il faudra 7 jours pour désactiver 2FA et accéder à votre compte. "</target>
       </trans-unit>
       <trans-unit id="Two Factor Invalid">
         <source>Two Factor Invalid</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Invalid</target>
+        <target xml:lang="fr" state="translated">Deux facteurs non valide</target>
       </trans-unit>
       <trans-unit id="Two Factor Reset">
         <source>Two Factor Reset</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Two Factor Reset</target>
+        <target xml:lang="fr" state="translated">Deux facteurs réinitialiser</target>
       </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to determine two factor status</target>
+        <target xml:lang="fr" state="translated">Impossible de déterminer le statut de deux facteur</target>
       </trans-unit>
       <trans-unit id="Unable to import secret">
         <source>Unable to import secret</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to import secret</target>
+        <target xml:lang="fr" state="translated">Impossible d’importer le secret</target>
       </trans-unit>
       <trans-unit id="Unable to import token">
         <source>Unable to import token</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to import token</target>
+        <target xml:lang="fr" state="translated">Impossible d’importer le jeton</target>
       </trans-unit>
       <trans-unit id="Unable to save Settings">
         <source>Unable to save Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to save Settings</target>
+        <target xml:lang="fr" state="translated">Impossible d’enregistrer les paramètres</target>
       </trans-unit>
       <trans-unit id="Unable to scan QR code">
         <source>Unable to scan QR code</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to scan QR code</target>
+        <target xml:lang="fr" state="translated">Impossible de scanner le code QR</target>
       </trans-unit>
       <trans-unit id="Unable to update Settings">
         <source>Unable to update Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Unable to update Settings</target>
+        <target xml:lang="fr" state="translated">Impossible de mettre à jour les paramètres</target>
       </trans-unit>
       <trans-unit id="Up to 10% off Target">
         <source>Up to 10% off Target</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Up to 10% off Target</target>
+        <target xml:lang="fr" state="translated">Jusqu'à 10 % sur Target</target>
+        <alt-trans>
+          <target xml:lang="fr">Jusqu'à 10 % sur la cible</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Up to 20% off Starbucks">
         <source>Up to 20% off Starbucks</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Up to 20% off Starbucks</target>
+        <target xml:lang="fr" state="translated">Jusqu'à 20 % sur Starbucks</target>
       </trans-unit>
       <trans-unit id="Upload Failed. Please check your network connection">
         <source>Upload Failed. Please check your network connection</source>
         <note>Upload Failed</note>
-        <target xml:lang="fr" state="needs-translation">Upload Failed. Please check your network connection</target>
+        <target xml:lang="fr" state="translated">Echec de téléchargement. S’il vous plaît vérifiez votre connexion réseau</target>
       </trans-unit>
       <trans-unit id="Upload Image">
         <source>Upload Image</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Upload Image</target>
+        <target xml:lang="fr" state="translated">Importer une image</target>
       </trans-unit>
       <trans-unit id="Upload Log">
         <source>Upload Log</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Upload Log</target>
+        <target xml:lang="fr" state="translated">Télécharger Log</target>
+        <alt-trans>
+          <target xml:lang="fr">Télécharger le journal</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Upload Log File">
         <source>Upload Log File</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Upload Log File</target>
+        <target xml:lang="fr" state="translated">Télécharger le Fichier Log</target>
       </trans-unit>
       <trans-unit id="Upload Successful">
         <source>Upload Successful</source>
         <note>Upload Successful fading popup</note>
-        <target xml:lang="fr" state="needs-translation">Upload Successful</target>
+        <target xml:lang="fr" state="translated">Téléchargement réussi</target>
       </trans-unit>
       <trans-unit id="Uploading logfile. Please wait...">
         <source>Uploading logfile. Please wait...</source>
         <note>Uploading logfile fading popup</note>
-        <target xml:lang="fr" state="needs-translation">Uploading logfile. Please wait...</target>
+        <target xml:lang="fr" state="translated">Téléchargement du fichier log. Veuillez patienter...</target>
       </trans-unit>
       <trans-unit id="Use Camera">
         <source>Use Camera</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Use Camera</target>
+        <target xml:lang="fr" state="translated">Utiliser la caméra</target>
       </trans-unit>
       <trans-unit id="Use PIN">
         <source>Use PIN</source>
         <note>Touch ID [Use PIN] button</note>
-        <target xml:lang="fr" state="needs-translation">Use PIN</target>
+        <target xml:lang="fr" state="translated">Utiliser PIN</target>
       </trans-unit>
       <trans-unit id="Use Password">
         <source>Use Password</source>
         <note>Touch ID [Use Password] button</note>
-        <target xml:lang="fr" state="needs-translation">Use Password</target>
+        <target xml:lang="fr" state="translated">Utiliser mot de passe</target>
       </trans-unit>
       <trans-unit id="Use Photo Album">
         <source>Use Photo Album</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Use Photo Album</target>
+        <target xml:lang="fr" state="translated">Utiliser album photo</target>
       </trans-unit>
       <trans-unit id="Use TouchID">
         <source>Use TouchID</source>
         <note>settings text</note>
-        <target xml:lang="fr" state="needs-translation">Use TouchID</target>
+        <target xml:lang="fr" state="translated">Utiliser Touch ID</target>
       </trans-unit>
       <trans-unit id="User Name: %@">
         <source>User Name: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">User Name: %@</target>
+        <target xml:lang="fr" state="translated">Nom d’utilisateur : %@</target>
       </trans-unit>
       <trans-unit id="Username">
         <source>Username</source>
         <note>Username</note>
-        <target xml:lang="fr" state="needs-translation">Username</target>
+        <target xml:lang="fr" state="translated">Nom d’utilisateur</target>
       </trans-unit>
       <trans-unit id="Username must be at least %d characters.">
         <source>Username must be at least %d characters.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Username must be at least %d characters.</target>
+        <target xml:lang="fr" state="translated">Nom d’utilisateur doit être au moins %d caractères.</target>
       </trans-unit>
       <trans-unit id="Utilities">
         <source>Utilities</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Utilities</target>
+        <target xml:lang="fr" state="translated">Services</target>
       </trans-unit>
       <trans-unit id="Vacation">
         <source>Vacation</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Vacation</target>
+        <target xml:lang="fr" state="translated">Vacances</target>
       </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Validating Address...</target>
+        <target xml:lang="fr" state="translated">Validation des adresses...</target>
       </trans-unit>
       <trans-unit id="Vet">
         <source>Vet</source>
         <note>expense category</note>
-        <target xml:lang="fr" state="needs-translation">Vet</target>
+        <target xml:lang="fr" state="translated">EFP</target>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>
@@ -3538,94 +3545,93 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Waiting for Payment...">
         <source>Waiting for Payment...</source>
         <note>Status on Request screen</note>
-        <target xml:lang="fr" state="needs-translation">Waiting for Payment...</target>
+        <target xml:lang="fr" state="translated">En attente de paiement...</target>
       </trans-unit>
       <trans-unit id="Wallet Deleted">
         <source>Wallet Deleted</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Wallet Deleted</target>
+        <target xml:lang="fr" state="translated">Portefeuilles supprimé</target>
       </trans-unit>
       <trans-unit id="Wallet Export">
         <source>Wallet Export</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Wallet Export</target>
+        <target xml:lang="fr" state="translated">Exportation du portefeuille</target>
       </trans-unit>
       <trans-unit id="Wallet Private Seed">
         <source>Wallet Private Seed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Wallet Private Seed</target>
+        <target xml:lang="fr" state="translated">Graine privé du portefeuille</target>
       </trans-unit>
       <trans-unit id="Wallet creation failed:\n%@">
         <source>Wallet creation failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Wallet creation failed:
-%@</target>
+        <target xml:lang="fr" state="translated">Création de portefeuille échoué :%@</target>
       </trans-unit>
       <trans-unit id="Wallet name must have at least one character">
         <source>Wallet name must have at least one character</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Wallet name must have at least one character</target>
+        <target xml:lang="fr" state="translated">Nom du portefeuille doit avoir au moins un caractère</target>
       </trans-unit>
       <trans-unit id="Wallet: ">
         <source>Wallet: </source>
         <note>Prefix of wallet name on rename popup</note>
-        <target xml:lang="fr" state="needs-translation">Wallet: </target>
+        <target xml:lang="fr" state="translated">Porte-feuille: </target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Warning!</target>
+        <target xml:lang="fr" state="translated">Avertissement!</target>
       </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</target>
+        <target xml:lang="fr" state="translated">Mise en garde. Sans un mot de passe, vous ne serez pas capable de vous connectez sur un nouvel appareil si cet appareil est perdu ou volé, ou si cette application est désinstallée</target>
       </trans-unit>
       <trans-unit id="Warning: Double Spend">
         <source>Warning: Double Spend</source>
         <note>Double spend status in transaction list</note>
-        <target xml:lang="fr" state="needs-translation">Warning: Double Spend</target>
+        <target xml:lang="fr" state="translated">Avertissement : Double dépense</target>
       </trans-unit>
       <trans-unit id="Warning: Low Fees may cause long delays in transaction confirmation">
         <source>Warning: Low Fees may cause long delays in transaction confirmation</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Warning: Low Fees may cause long delays in transaction confirmation</target>
+        <target xml:lang="fr" state="translated">Avertissement : Frais peu élevés peuvent entraîner de longs retards dans la confirmation de la transaction</target>
       </trans-unit>
       <trans-unit id="Warning: Replace by Fee Detected. Double spend likely">
         <source>Warning: Replace by Fee Detected. Double spend likely</source>
         <note>RBF status in transaction list</note>
-        <target xml:lang="fr" state="needs-translation">Warning: Replace by Fee Detected. Double spend likely</target>
+        <target xml:lang="fr" state="translated">Attention : Remplacer par détectection de frais. Probablement double dépense</target>
       </trans-unit>
       <trans-unit id="Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync">
         <source>Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
-        <target xml:lang="fr" state="needs-translation">Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</target>
+        <target xml:lang="fr" state="translated">Base de données effacée mais une erreur s’est produite. Attendez quelques minutes pour la resynchronisation de l'info blockchain. Les transactions et soldes peuvent être inexacts lors de la synchronisation</target>
       </trans-unit>
       <trans-unit id="Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync">
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
-        <target xml:lang="fr" state="needs-translation">Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</target>
+        <target xml:lang="fr" state="translated">La base de donnée Watcher effacée. Attendez quelques minutes pour la resynchronisation de l'info blockchain. Les Transactions et soldes peuvent être inexacts lors de la synchronisation</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Would you like to enable TouchID for this account and device?</target>
+        <target xml:lang="fr" state="translated">Souhaitez vous activer la TouchID pour ce compte et le dispositif ?</target>
       </trans-unit>
       <trans-unit id="Would you like to send funds to this address or import funds into your wallet?">
         <source>Would you like to send funds to this address or import funds into your wallet?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Would you like to send funds to this address or import funds into your wallet?</target>
+        <target xml:lang="fr" state="translated">Souhaitez vous envoyer des fonds à cette adresse ou importer des fonds dans votre portefeuille ?</target>
       </trans-unit>
       <trans-unit id="Would you like to send us some feedback?">
         <source>Would you like to send us some feedback?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Would you like to send us some feedback?</target>
+        <target xml:lang="fr" state="translated">Souhaitez vous nous envoyer des commentaires ?</target>
       </trans-unit>
       <trans-unit id="Would you like to write a review in the App store?">
         <source>Would you like to write a review in the App store?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">Would you like to write a review in the App store?</target>
+        <target xml:lang="fr" state="translated">Souhaitez vous écrire un commentaire sur l’Application store ?</target>
       </trans-unit>
       <trans-unit id="Wrong Answers">
         <source>Wrong Answers</source>
@@ -3635,19 +3641,18 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="YES">
         <source>YES</source>
         <note>YES button text</note>
-        <target xml:lang="fr" state="needs-translation">YES</target>
+        <target xml:lang="fr" state="translated">OUI</target>
       </trans-unit>
       <trans-unit id="You Received Bitcoin!\n%@ (~%@)">
         <source>You Received Bitcoin!
 %1$@ (~%2$@)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">You Received Bitcoin!
-%1$@ (~%2$@)</target>
+        <target xml:lang="fr" state="translated">Vous avez reçu Bitcoin !%1$@ (~%2$@)</target>
       </trans-unit>
       <trans-unit id="You must answer all six questions. Make sure your answers are long enough.">
         <source>You must answer all six questions. Make sure your answers are long enough.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">You must answer all six questions. Make sure your answers are long enough.</target>
+        <target xml:lang="fr" state="translated">Vous devez répondre à toutes les six questions. Assurez-vous que vos réponses sont assez longs.</target>
       </trans-unit>
       <trans-unit id="You must choose all six questions before proceeding.">
         <source>You must choose all six questions before proceeding.</source>
@@ -3657,25 +3662,22 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="You must enter a user name">
         <source>You must enter a user name</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">You must enter a user name</target>
+        <target xml:lang="fr" state="translated">Vous devez saisir un nom d'utilisateur</target>
       </trans-unit>
       <trans-unit id="You received Bitcoin!\n%@ (~%@)\nUse the Payee, Category, and Notes field to optionally tag your transaction">
         <source>You received Bitcoin!
 %1$@ (~%2$@)
 Use the Payee, Category, and Notes field to optionally tag your transaction</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">You received Bitcoin!
-%1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction</target>
+        <target xml:lang="fr" state="translated">Vous avez reçu Bitcoin !%1$@ (~%2$@) 
+utilisez le champ Payee, catégorie et Notes pour marquer éventuellement votre transaction</target>
       </trans-unit>
       <trans-unit id="You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.">
         <source>You will next see a popup requesting access to your Camera.
 
 [[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.</source>
         <note>Camera signup screen</note>
-        <target xml:lang="fr" state="needs-translation">You will next see a popup requesting access to your Camera.
-
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.</target>
+        <target xml:lang="fr" state="translated">Vous verrez ensuite une page demandant l’accès à votre caméra. [[abtag APP_TITLE]] a besoin de cela pour scanner des codes QR pour payer les gens et les commerçants.</target>
       </trans-unit>
       <trans-unit id="You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
         <source>You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
@@ -3690,7 +3692,7 @@ Use the Payee, Category, and Notes field to optionally tag your transaction</tar
       <trans-unit id="Your password...">
         <source>Your password...</source>
         <note>Start of password rules text</note>
-        <target xml:lang="fr" state="needs-translation">Your password...</target>
+        <target xml:lang="fr" state="translated">Votre mot de passe ...</target>
       </trans-unit>
       <trans-unit id="[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.">
         <source>[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
@@ -3699,11 +3701,7 @@ All tagged information is kept 100% private and encrypted by your password.
 
 No one, including [[abtag APP_TITLE]], has any access to this information.</source>
         <note>Contacts signup screen</note>
-        <target xml:lang="fr" state="needs-translation">[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
-
-All tagged information is kept 100% private and encrypted by your password.
-
-No one, including [[abtag APP_TITLE]], has any access to this information.</target>
+        <target xml:lang="fr" state="translated">[[abtag APP_TITLE]] utilise les contacts pour les informations concernant vos tag transactions. Tous les renseignements marqués sont conservés à 100 % privé et crypté par votre mot de passe. Personne, y compris [[abtag APP_TITLE]], n’a aucun accès à cette information.</target>
       </trans-unit>
       <trans-unit id="bits = (0.000001 Bitcoin)">
         <source>bits = (0.000001 Bitcoin)</source>
@@ -3713,27 +3711,27 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="closed">
         <source>closed</source>
         <note>business listings is closed</note>
-        <target xml:lang="fr" state="needs-translation">closed</target>
+        <target xml:lang="fr" state="translated">fermé</target>
       </trans-unit>
       <trans-unit id="day">
         <source>day</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">day</target>
+        <target xml:lang="fr" state="translated">jour</target>
       </trans-unit>
       <trans-unit id="days">
         <source>days</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">days</target>
+        <target xml:lang="fr" state="translated">jours</target>
       </trans-unit>
       <trans-unit id="hour">
         <source>hour</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">hour</target>
+        <target xml:lang="fr" state="translated">heure</target>
       </trans-unit>
       <trans-unit id="hours">
         <source>hours</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">hours</target>
+        <target xml:lang="fr" state="translated">heures</target>
       </trans-unit>
       <trans-unit id="mBitcoin = (0.001 Bitcoin)">
         <source>mBitcoin = (0.001 Bitcoin)</source>
@@ -3743,27 +3741,27 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="minute">
         <source>minute</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">minute</target>
+        <target xml:lang="fr" state="translated">minute</target>
       </trans-unit>
       <trans-unit id="minutes">
         <source>minutes</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">minutes</target>
+        <target xml:lang="fr" state="translated">minutes</target>
       </trans-unit>
       <trans-unit id="second">
         <source>second</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">second</target>
+        <target xml:lang="fr" state="translated">seconde</target>
       </trans-unit>
       <trans-unit id="seconds">
         <source>seconds</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="fr" state="needs-translation">seconds</target>
+        <target xml:lang="fr" state="translated">secondes</target>
       </trans-unit>
       <trans-unit id="▼ Choose a wallet to transfer funds to ▼">
         <source>▼ Choose a wallet to transfer funds to ▼</source>
         <note>Header of popup in SendView from wallet to wallet transfer</note>
-        <target xml:lang="fr" state="needs-translation">▼ Choose a wallet to transfer funds to ▼</target>
+        <target xml:lang="fr" state="translated">▼ Choisir un portefeuille pour transférer des fonds à ▼</target>
       </trans-unit>
     </body>
   </file>

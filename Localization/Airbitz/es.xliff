@@ -3406,7 +3406,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Up to 10% off Target">
         <source>Up to 10% off Target</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="translated">Hasta el 10%</target>
+        <target xml:lang="es" state="translated">Hasta el 10% de Target</target>
+        <alt-trans>
+          <target xml:lang="es">Hasta el 10%</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Up to 20% off Starbucks">
         <source>Up to 20% off Starbucks</source>

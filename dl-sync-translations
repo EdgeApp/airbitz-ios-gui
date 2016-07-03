@@ -1,11 +1,310 @@
 crowdin-cli download
 #xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es.xliff -project Airbitz.xcodeproj
+
+mkdir Airbitz/Resources/html/zh-Hans.lproj/
+mkdir Airbitz/Resources/html/zh-CN.lproj/
+mkdir Airbitz/Resources/html/es-MX.lproj/
+mkdir Airbitz/Resources/html/es-AR.lproj/
+mkdir Airbitz/Resources/html/es-BO.lproj/
+mkdir Airbitz/Resources/html/es-IC.lproj/
+mkdir Airbitz/Resources/html/es-EA.lproj/
+mkdir Airbitz/Resources/html/es-CL.lproj/
+mkdir Airbitz/Resources/html/es-CO.lproj/
+mkdir Airbitz/Resources/html/es-CR.lproj/
+mkdir Airbitz/Resources/html/es-CU.lproj/
+mkdir Airbitz/Resources/html/es-DO.lproj/
+mkdir Airbitz/Resources/html/es-EC.lproj/
+mkdir Airbitz/Resources/html/es-SV.lproj/
+mkdir Airbitz/Resources/html/es-GQ.lproj/
+mkdir Airbitz/Resources/html/es-GT.lproj/
+mkdir Airbitz/Resources/html/es-HN.lproj/
+mkdir Airbitz/Resources/html/es-419.lproj/
+mkdir Airbitz/Resources/html/es-NI.lproj/
+mkdir Airbitz/Resources/html/es-PA.lproj/
+mkdir Airbitz/Resources/html/es-PY.lproj/
+mkdir Airbitz/Resources/html/es-PE.lproj/
+mkdir Airbitz/Resources/html/es-PH.lproj/
+mkdir Airbitz/Resources/html/es-PR.lproj/
+mkdir Airbitz/Resources/html/pt-BR.lproj/
+mkdir Airbitz/Resources/html/de-AT.lproj/
+mkdir Airbitz/Resources/html/de-BE.lproj/
+mkdir Airbitz/Resources/html/de-LI.lproj/
+mkdir Airbitz/Resources/html/de-LU.lproj/
+mkdir Airbitz/Resources/html/de-CH.lproj/
+mkdir Airbitz/Resources/html/fr-DZ.lproj/
+mkdir Airbitz/Resources/html/fr-BE.lproj/
+mkdir Airbitz/Resources/html/fr-BJ.lproj/
+mkdir Airbitz/Resources/html/fr-BF.lproj/
+mkdir Airbitz/Resources/html/fr-BI.lproj/
+mkdir Airbitz/Resources/html/fr-CM.lproj/
+mkdir Airbitz/Resources/html/fr-CA.lproj/
+mkdir Airbitz/Resources/html/fr-CF.lproj/
+mkdir Airbitz/Resources/html/fr-TD.lproj/
+mkdir Airbitz/Resources/html/fr-KM.lproj/
+mkdir Airbitz/Resources/html/fr-CG.lproj/
+mkdir Airbitz/Resources/html/fr-CD.lproj/
+mkdir Airbitz/Resources/html/fr-CI.lproj/
+mkdir Airbitz/Resources/html/fr-DJ.lproj/
+mkdir Airbitz/Resources/html/fr-GQ.lproj/
+mkdir Airbitz/Resources/html/fr-GF.lproj/
+mkdir Airbitz/Resources/html/fr-PF.lproj/
+mkdir Airbitz/Resources/html/fr-GA.lproj/
+mkdir Airbitz/Resources/html/fr-GP.lproj/
+mkdir Airbitz/Resources/html/fr-GN.lproj/
+mkdir Airbitz/Resources/html/fr-HT.lproj/
+mkdir Airbitz/Resources/html/fr-LU.lproj/
+mkdir Airbitz/Resources/html/fr-MG.lproj/
+mkdir Airbitz/Resources/html/fr-MR.lproj/
+mkdir Airbitz/Resources/html/fr-MU.lproj/
+mkdir Airbitz/Resources/html/fr-YT.lproj/
+mkdir Airbitz/Resources/html/fr-MC.lproj/
+mkdir Airbitz/Resources/html/fr-MA.lproj/
+mkdir Airbitz/Resources/html/fr-NC.lproj/
+mkdir Airbitz/Resources/html/fr-NE.lproj/
+mkdir Airbitz/Resources/html/fr-RE.lproj/
+mkdir Airbitz/Resources/html/fr-RW.lproj/
+mkdir Airbitz/Resources/html/fr-SN.lproj/
+mkdir Airbitz/Resources/html/fr-SC.lproj/
+mkdir Airbitz/Resources/html/fr-BL.lproj/
+mkdir Airbitz/Resources/html/fr-MF.lproj/
+mkdir Airbitz/Resources/html/fr-PM.lproj/
+mkdir Airbitz/Resources/html/fr-CH.lproj/
+mkdir Airbitz/Resources/html/fr-SY.lproj/
+mkdir Airbitz/Resources/html/fr-TG.lproj/
+mkdir Airbitz/Resources/html/fr-TN.lproj/
+mkdir Airbitz/Resources/html/fr-VU.lproj/
+mkdir Airbitz/Resources/html/fr-WF.lproj/
+
+mkdir Airbitz/Resources/Text/zh-Hans.lproj/
+mkdir Airbitz/Resources/Text/zh-CN.lproj/
+mkdir Airbitz/Resources/Text/es-MX.lproj/
+mkdir Airbitz/Resources/Text/es-AR.lproj/
+mkdir Airbitz/Resources/Text/es-BO.lproj/
+mkdir Airbitz/Resources/Text/es-IC.lproj/
+mkdir Airbitz/Resources/Text/es-EA.lproj/
+mkdir Airbitz/Resources/Text/es-CL.lproj/
+mkdir Airbitz/Resources/Text/es-CO.lproj/
+mkdir Airbitz/Resources/Text/es-CR.lproj/
+mkdir Airbitz/Resources/Text/es-CU.lproj/
+mkdir Airbitz/Resources/Text/es-DO.lproj/
+mkdir Airbitz/Resources/Text/es-EC.lproj/
+mkdir Airbitz/Resources/Text/es-SV.lproj/
+mkdir Airbitz/Resources/Text/es-GQ.lproj/
+mkdir Airbitz/Resources/Text/es-GT.lproj/
+mkdir Airbitz/Resources/Text/es-HN.lproj/
+mkdir Airbitz/Resources/Text/es-419.lproj/
+mkdir Airbitz/Resources/Text/es-NI.lproj/
+mkdir Airbitz/Resources/Text/es-PA.lproj/
+mkdir Airbitz/Resources/Text/es-PY.lproj/
+mkdir Airbitz/Resources/Text/es-PE.lproj/
+mkdir Airbitz/Resources/Text/es-PH.lproj/
+mkdir Airbitz/Resources/Text/es-PR.lproj/
+mkdir Airbitz/Resources/Text/pt-BR.lproj/
+mkdir Airbitz/Resources/Text/de-AT.lproj/
+mkdir Airbitz/Resources/Text/de-BE.lproj/
+mkdir Airbitz/Resources/Text/de-LI.lproj/
+mkdir Airbitz/Resources/Text/de-LU.lproj/
+mkdir Airbitz/Resources/Text/de-CH.lproj/
+mkdir Airbitz/Resources/Text/fr-DZ.lproj/
+mkdir Airbitz/Resources/Text/fr-BE.lproj/
+mkdir Airbitz/Resources/Text/fr-BJ.lproj/
+mkdir Airbitz/Resources/Text/fr-BF.lproj/
+mkdir Airbitz/Resources/Text/fr-BI.lproj/
+mkdir Airbitz/Resources/Text/fr-CM.lproj/
+mkdir Airbitz/Resources/Text/fr-CA.lproj/
+mkdir Airbitz/Resources/Text/fr-CF.lproj/
+mkdir Airbitz/Resources/Text/fr-TD.lproj/
+mkdir Airbitz/Resources/Text/fr-KM.lproj/
+mkdir Airbitz/Resources/Text/fr-CG.lproj/
+mkdir Airbitz/Resources/Text/fr-CD.lproj/
+mkdir Airbitz/Resources/Text/fr-CI.lproj/
+mkdir Airbitz/Resources/Text/fr-DJ.lproj/
+mkdir Airbitz/Resources/Text/fr-GQ.lproj/
+mkdir Airbitz/Resources/Text/fr-GF.lproj/
+mkdir Airbitz/Resources/Text/fr-PF.lproj/
+mkdir Airbitz/Resources/Text/fr-GA.lproj/
+mkdir Airbitz/Resources/Text/fr-GP.lproj/
+mkdir Airbitz/Resources/Text/fr-GN.lproj/
+mkdir Airbitz/Resources/Text/fr-HT.lproj/
+mkdir Airbitz/Resources/Text/fr-LU.lproj/
+mkdir Airbitz/Resources/Text/fr-MG.lproj/
+mkdir Airbitz/Resources/Text/fr-MR.lproj/
+mkdir Airbitz/Resources/Text/fr-MU.lproj/
+mkdir Airbitz/Resources/Text/fr-YT.lproj/
+mkdir Airbitz/Resources/Text/fr-MC.lproj/
+mkdir Airbitz/Resources/Text/fr-MA.lproj/
+mkdir Airbitz/Resources/Text/fr-NC.lproj/
+mkdir Airbitz/Resources/Text/fr-NE.lproj/
+mkdir Airbitz/Resources/Text/fr-RE.lproj/
+mkdir Airbitz/Resources/Text/fr-RW.lproj/
+mkdir Airbitz/Resources/Text/fr-SN.lproj/
+mkdir Airbitz/Resources/Text/fr-SC.lproj/
+mkdir Airbitz/Resources/Text/fr-BL.lproj/
+mkdir Airbitz/Resources/Text/fr-MF.lproj/
+mkdir Airbitz/Resources/Text/fr-PM.lproj/
+mkdir Airbitz/Resources/Text/fr-CH.lproj/
+mkdir Airbitz/Resources/Text/fr-SY.lproj/
+mkdir Airbitz/Resources/Text/fr-TG.lproj/
+mkdir Airbitz/Resources/Text/fr-TN.lproj/
+mkdir Airbitz/Resources/Text/fr-VU.lproj/
+mkdir Airbitz/Resources/Text/fr-WF.lproj/
+
+# html files
+
 cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-Hans.lproj/
 cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-CN.lproj/
+
 cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-MX.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-AR.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-BO.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-IC.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-EA.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-CL.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-CO.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-CR.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-CU.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-DO.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-EC.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-SV.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-GQ.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-GT.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-HN.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-419.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-NI.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-PA.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-PY.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-PE.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-PH.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-PR.lproj/
+
 cp -a Airbitz/Resources/html/pt.lproj/ Airbitz/Resources/html/pt-BR.lproj/
+
+cp -a Airbitz/Resources/html/de.lproj/ Airbitz/Resources/html/de-AT.lproj/
+cp -a Airbitz/Resources/html/de.lproj/ Airbitz/Resources/html/de-BE.lproj/
+cp -a Airbitz/Resources/html/de.lproj/ Airbitz/Resources/html/de-LI.lproj/
+cp -a Airbitz/Resources/html/de.lproj/ Airbitz/Resources/html/de-LU.lproj/
+cp -a Airbitz/Resources/html/de.lproj/ Airbitz/Resources/html/de-CH.lproj/
+
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-DZ.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-BE.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-BJ.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-BF.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-BI.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CM.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CA.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CF.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-TD.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-KM.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CG.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CD.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CI.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-DJ.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-GQ.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-GF.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-PF.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-GA.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-GP.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-GN.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-HT.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-LU.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MG.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MR.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MU.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-YT.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MC.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MA.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-NC.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-NE.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-RE.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-RW.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-SN.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-SC.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-BL.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-MF.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-PM.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CH.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-SY.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-TG.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-TN.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-VU.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-WF.lproj/
+
+# Text files
+
 cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-Hans.lproj/
 cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-CN.lproj/
+
 cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-MX.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-AR.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-BO.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-IC.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-EA.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-CL.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-CO.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-CR.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-CU.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-DO.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-EC.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-SV.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-GQ.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-GT.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-HN.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-419.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-NI.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-PA.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-PY.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-PE.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-PH.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-PR.lproj/
+
 cp -a Airbitz/Resources/Text/pt.lproj/ Airbitz/Resources/Text/pt-BR.lproj/
 
+cp -a Airbitz/Resources/Text/de.lproj/ Airbitz/Resources/Text/de-AT.lproj/
+cp -a Airbitz/Resources/Text/de.lproj/ Airbitz/Resources/Text/de-BE.lproj/
+cp -a Airbitz/Resources/Text/de.lproj/ Airbitz/Resources/Text/de-LI.lproj/
+cp -a Airbitz/Resources/Text/de.lproj/ Airbitz/Resources/Text/de-LU.lproj/
+cp -a Airbitz/Resources/Text/de.lproj/ Airbitz/Resources/Text/de-CH.lproj/
+
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-DZ.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-BE.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-BJ.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-BF.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-BI.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CM.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CA.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CF.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-TD.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-KM.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CG.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CD.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CI.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-DJ.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-GQ.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-GF.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-PF.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-GA.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-GP.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-GN.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-HT.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-LU.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MG.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MR.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MU.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-YT.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MC.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MA.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-NC.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-NE.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-RE.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-RW.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-SN.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-SC.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-BL.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-MF.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-PM.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CH.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-SY.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-TG.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-TN.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-VU.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-WF.lproj/
