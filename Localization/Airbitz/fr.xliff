@@ -2229,6 +2229,11 @@ Entrez-le ci-dessous pour en être sur:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="fr" state="translated">Domicile</target>
       </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="needs-translation">Home Depot (Up to 15% Off)</target>
+      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>No comment provided by engineer.</note>
@@ -3167,6 +3172,11 @@ Entrez-le ci-dessous pour en être sur:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="fr" state="translated">Frais standard</target>
       </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="needs-translation">Starbucks (Up to 20% Off)</target>
+      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3196,6 +3206,11 @@ Entrez-le ci-dessous pour en être sur:</target>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="fr" state="translated">Appuyez et maintenez un portefeuille pour d’options supplémentaires</target>
+      </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="needs-translation">Target (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -3396,6 +3411,12 @@ Si vous perdez votre périphérique ou désinstallez l’application, il faudra 
         <note>No comment provided by engineer.</note>
         <target xml:lang="fr" state="translated">Deux facteurs réinitialiser</target>
       </trans-unit>
+      <trans-unit id="USA and Canada">
+        <source>USA and Canada</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="translated">Etats-Unis et Canada
+	</target>
+      </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
         <note>No comment provided by engineer.</note>
@@ -3578,6 +3599,11 @@ Si vous perdez votre périphérique ou désinstallez l’application, il faudra 
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="fr" state="translated">Porte-feuille: </target>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="needs-translation">Walmart (Up to 10% Off)</target>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3612,6 +3638,11 @@ Si vous perdez votre périphérique ou désinstallez l’application, il faudra 
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="fr" state="translated">La base de donnée Watcher effacée. Attendez quelques minutes pour la resynchronisation de l'info blockchain. Les Transactions et soldes peuvent être inexacts lors de la synchronisation</target>
+      </trans-unit>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="fr" state="needs-translation">Whole Foods (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>

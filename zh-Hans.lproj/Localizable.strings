@@ -562,6 +562,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Home" = "首页";
 
 /* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "Home Depot （高达 15%的折扣)";
+
+/* No comment provided by engineer. */
 "Home Improvement" = "家庭装修";
 
 /* No comment provided by engineer. */
@@ -1125,6 +1128,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Standard Fee" = "标准费用";
 
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "星巴克 （高达 20%的折扣)";
+
 /* expense category */
 "Student Loan" = "助学贷款";
 
@@ -1142,6 +1148,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "点击和常按钱包来列开更多选项";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target （高达10%的折扣)";
 
 /* expense category */
 "Tax" = "税收";
@@ -1264,6 +1273,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Two Factor Reset" = "2要素重置";
 
 /* No comment provided by engineer. */
+"USA and Canada" = "美国和加拿大";
+
+/* No comment provided by engineer. */
 "Unable to determine two factor status" = "无法确认2要素的状态";
 
 /* No comment provided by engineer. */
@@ -1370,6 +1382,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet: " = "钱包 ";
 
 /* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart （高达 10%的折扣)";
+
+/* No comment provided by engineer. */
 "Warning!" = "警告 ！";
 
 /* No comment provided by engineer. */
@@ -1389,6 +1404,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "守望者数据库已被清除。请允许几分钟重新同步 blockchain 的信息。所显示的交易记录和余额可能在同步期间时不准确";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "Whole Foods （高达 10%的折扣)";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "您想要为此帐户和设备启用 TouchID 吗？";

@@ -2220,6 +2220,11 @@ Enter it below to make sure:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="needs-translation">Home</target>
       </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Home Depot (Up to 15% Off)</target>
+      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>No comment provided by engineer.</note>
@@ -3160,6 +3165,11 @@ Enter it below to make sure:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="needs-translation">Standard Fee</target>
       </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Starbucks (Up to 20% Off)</target>
+      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3189,6 +3199,11 @@ Enter it below to make sure:</target>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="needs-translation">Tap and hold a wallet for additional options</target>
+      </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Target (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -3386,6 +3401,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="needs-translation">Two Factor Reset</target>
       </trans-unit>
+      <trans-unit id="USA and Canada">
+        <source>USA and Canada</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">USA and Canada</target>
+      </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
         <note>No comment provided by engineer.</note>
@@ -3563,6 +3583,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="ja" state="needs-translation">Wallet: </target>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Walmart (Up to 10% Off)</target>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3597,6 +3622,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="ja" state="needs-translation">Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</target>
+      </trans-unit>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Whole Foods (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>

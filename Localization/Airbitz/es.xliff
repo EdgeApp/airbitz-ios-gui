@@ -2216,6 +2216,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Hogar</target>
       </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Home Depot (hasta 15% de descuento)</target>
+      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>No comment provided by engineer.</note>
@@ -3152,6 +3157,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Tarifas estándar</target>
       </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Starbucks (hasta un 20% de descuento)</target>
+      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3181,6 +3191,11 @@ Enter it below to make sure:</source>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Toque y presione una cartera para opciones adicionales</target>
+      </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Target (hasta un 10% de descuento)</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -3373,6 +3388,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="es" state="translated">Reposición de dos factores</target>
       </trans-unit>
+      <trans-unit id="USA and Canada">
+        <source>USA and Canada</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Estados Unidos y Canadá</target>
+      </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
         <note>No comment provided by engineer.</note>
@@ -3552,6 +3572,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="es" state="translated">Cartera: </target>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Walmart (hasta un 10% de descuento)</target>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3586,6 +3611,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="es" state="translated">La base Watcher fue eliminada. Por favor espere unos minutos para la resincronización de la información del blockchain. Los saldos y operaciones pueden ser inexactos durante la sincronización</target>
+      </trans-unit>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="translated">Whole Foods (hasta un 10% de descuento)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>

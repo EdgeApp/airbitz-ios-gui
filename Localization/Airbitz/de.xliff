@@ -2327,6 +2327,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Zuhause</target>
       </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Home Depot (Up to 15% Off)</target>
+      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>No comment provided by engineer.</note>
@@ -3321,6 +3326,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Standardgebühr</target>
       </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Starbucks (Up to 20% Off)</target>
+      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3350,6 +3360,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Tippen Sie und halten Sie eine Wallet für Zusatzoptionen fest</target>
+      </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Target (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -3571,6 +3586,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Zwei-Faktor-Reset</target>
       </trans-unit>
+      <trans-unit id="USA and Canada">
+        <source>USA and Canada</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="translated">USA und Kanada</target>
+      </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
         <note>No comment provided by engineer.</note>
@@ -3754,6 +3774,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="de" state="translated">Wallet: </target>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Walmart (Up to 10% Off)</target>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3797,6 +3822,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <alt-trans>
           <target xml:lang="de">Watcher-Datenbank gelöscht. Bitte erlauben Sie ein paar Minuten für die Resync-Blockchain-Info. Buchungen und Salden können während der Synchronisierung ungenau sein</target>
         </alt-trans>
+      </trans-unit>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Whole Foods (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>

@@ -561,6 +561,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Home" = "Hogar";
 
 /* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "Home Depot (hasta 15% de descuento)";
+
+/* No comment provided by engineer. */
 "Home Improvement" = "Mejoras para el Hogar";
 
 /* No comment provided by engineer. */
@@ -1124,6 +1127,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Standard Fee" = "Tarifas estándar";
 
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "Starbucks (hasta un 20% de descuento)";
+
 /* expense category */
 "Student Loan" = "Préstamo Estudiantil";
 
@@ -1141,6 +1147,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "Toque y presione una cartera para opciones adicionales";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target (hasta un 10% de descuento)";
 
 /* expense category */
 "Tax" = "Impuesto";
@@ -1259,6 +1268,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Two Factor Reset" = "Reposición de dos factores";
 
 /* No comment provided by engineer. */
+"USA and Canada" = "Estados Unidos y Canadá";
+
+/* No comment provided by engineer. */
 "Unable to determine two factor status" = "No se puede determinar que dos factor de estado";
 
 /* No comment provided by engineer. */
@@ -1365,6 +1377,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet: " = "Cartera: ";
 
 /* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart (hasta un 10% de descuento)";
+
+/* No comment provided by engineer. */
 "Warning!" = "¡ Advertencia!";
 
 /* No comment provided by engineer. */
@@ -1384,6 +1399,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "La base Watcher fue eliminada. Por favor espere unos minutos para la resincronización de la información del blockchain. Los saldos y operaciones pueden ser inexactos durante la sincronización";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "Whole Foods (hasta un 10% de descuento)";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "¿Desea activar el TouchID para esta cuenta y dispositivo?";
