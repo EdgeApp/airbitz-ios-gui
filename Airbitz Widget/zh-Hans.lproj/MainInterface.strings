@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
-"Lt8-cl-BMW.text" = "Scan QR";
+"Lt8-cl-BMW.text" = "扫描 QR";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF"; */
 "NiJ-rT-MKF.text" = "发送";
@@ -11,5 +11,5 @@
 "gQB-TM-9HQ.text" = "BitID 登入";
 
 /* Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4"; */
-"pzG-q0-KJ4.text" = "or";
+"pzG-q0-KJ4.text" = "或";
 

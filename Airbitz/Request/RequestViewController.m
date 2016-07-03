@@ -165,7 +165,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 -(void)awakeFromNib
 {
-	
+    [super awakeFromNib];
 }
 
 -(void)viewWillAppear:(BOOL)animated

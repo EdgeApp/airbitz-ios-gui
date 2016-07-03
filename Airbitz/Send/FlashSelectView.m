@@ -31,6 +31,8 @@
 
 -(void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     flashOff = [UIImage imageNamed:@"flash-off"];
     flashOn = [UIImage imageNamed:@"flash-on"];
 	_buttonImage = [[UIImageView alloc] initWithFrame:self.bounds];

@@ -2,7 +2,7 @@
 "BCk-jF-SE5.text" = "SAIR";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
-"GIG-Sd-O0c.accessibilityLabel" = "Sair";
+"GIG-Sd-O0c.accessibilityLabel" = "Logout";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
 "Lwy-1d-Qgs.accessibilityLabel" = "Comprar ou vender";

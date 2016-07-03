@@ -1386,34 +1386,37 @@ MainViewController *singleton;
         useDropDown = YES;
     }
     
-    if (_bShowingWalletsLoadingAlert)
+    if ([User isLoggedIn])
     {
-        if (useDropDown)
+        if (_bShowingWalletsLoadingAlert)
         {
-            [MiniDropDownAlertView update:walletsLoading];
+            if (useDropDown)
+            {
+                [MiniDropDownAlertView update:walletsLoading];
+            }
+            else
+            {
+                [MainViewController fadingAlertUpdate:walletsLoading];
+            }
+            
         }
         else
         {
-            [MainViewController fadingAlertUpdate:walletsLoading];
+            if (useDropDown)
+            {
+                [MiniDropDownAlertView create:self.view
+                                      message:walletsLoading
+                                     holdTime:FADING_ALERT_HOLD_TIME_FOREVER
+                                 withDelegate:nil];
+            }
+            else
+            {
+                [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+            }
         }
-
+        
+        _bShowingWalletsLoadingAlert = YES;
     }
-    else
-    {
-        if (useDropDown)
-        {
-            [MiniDropDownAlertView create:self.view
-                                  message:walletsLoading
-                                 holdTime:FADING_ALERT_HOLD_TIME_FOREVER
-                             withDelegate:nil];
-        }
-        else
-        {
-            [MainViewController fadingAlert:walletsLoading holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-        }
-    }
-    
-    _bShowingWalletsLoadingAlert = YES;
 }
 
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
@@ -1618,7 +1621,7 @@ MainViewController *singleton;
     currency = fabs(transaction.metaData.amountFiat);
     
     satoshi = [abcAccount.exchangeCache currencyToSatoshi:currency currencyCode:wallet.currency.code error:nil];
-    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:false cropDecimals:YES];
+    coin = [abcAccount.settings.denomination satoshiToBTCString:satoshi withSymbol:true cropDecimals:YES];
 
     if (receiveCount <= 2 && ([LocalSettings controller].bMerchantMode == false))
     {
@@ -1640,7 +1643,7 @@ MainViewController *singleton;
 
     [_requestViewController resetViews];
 
-    [MainViewController fadingAlert:message];
+    [MainViewController fadingAlert:message holdTime:[Theme Singleton].alertHoldTimePaymentReceived];
 }
 
 - (void)launchViewSweep:(NSNotification *)notification
@@ -1678,6 +1681,8 @@ MainViewController *singleton;
         _txDetailsController = nil;
         [MainViewController showNavBarAnimated:YES];
         [MainViewController showTabBarAnimated:YES];
+        
+        [self.selectedViewController forceUpdateNavBar];
     }];
 }
 

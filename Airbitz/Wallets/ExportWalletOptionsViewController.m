@@ -177,7 +177,7 @@ typedef enum eExportOption
 {
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:false enable:true action:@selector(buttonInfoTouched) fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 
     [self updateViews:nil];
     [self updateDateDisplay];

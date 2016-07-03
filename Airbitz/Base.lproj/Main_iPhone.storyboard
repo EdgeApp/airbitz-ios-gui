@@ -348,17 +348,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-fU-j91" userLabel="Top BlurView" customClass="BlurView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="fxj-vv-ZSu"/>
+                                    <constraint firstAttribute="height" constant="45" id="fxj-vv-ZSu"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID">
-                                <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID">
+                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -497,7 +497,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNY-oK-5F5" userLabel="View - Main">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="To:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-ip-kgV" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uak-ip-kgV" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="67" width="55" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="d1k-CA-qWq"/>
@@ -508,7 +508,7 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-fU-Gvx" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-fU-Gvx" customClass="LatoLabel">
                                         <rect key="frame" x="83" y="67" width="217" height="22"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -516,7 +516,20 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2v-QN-NpV" userLabel="View - bitcoin amount">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agG-Re-yEp" userLabel="Address Button">
+                                        <rect key="frame" x="83" y="67" width="150" height="22"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="SAm-8N-WE8"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="TouchAddressButton:" destination="mXe-0d-x2m" eventType="touchUpInside" id="ton-Gq-mrR"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2v-QN-NpV" userLabel="View - bitcoin amount">
                                         <rect key="frame" x="30" y="117" width="260" height="45"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="D9Y-q9-3fh" customClass="LatoLabel">
@@ -573,7 +586,7 @@
                                             <constraint firstItem="Fic-d9-oDx" firstAttribute="bottom" secondItem="ROC-zS-lXG" secondAttribute="bottom" id="igx-Sl-x79"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pdu-nu-njT" userLabel="View - USD amount">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pdu-nu-njT" userLabel="View - USD amount">
                                         <rect key="frame" x="30" y="163" width="260" height="45"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aWm-mP-gxj" userLabel="Stylized Text Field - USD" customClass="StylizedTextField">
@@ -630,7 +643,7 @@
                                             <constraint firstItem="HKk-4P-SL1" firstAttribute="top" secondItem="kcd-qy-Jjm" secondAttribute="top" id="llx-ZT-Weo"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-Dw-7XD" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-Dw-7XD" customClass="LatoLabel">
                                         <rect key="frame" x="30" y="92" width="189" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="189" id="PjA-fT-mWx"/>
@@ -642,7 +655,7 @@
                                         <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScE-Ny-R3i" customClass="LatoLabel">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 Digit PIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScE-Ny-R3i" customClass="LatoLabel">
                                         <rect key="frame" x="30" y="227" width="107" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="107" id="YoA-lH-Tun"/>
@@ -652,7 +665,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U0G-cH-iZC" userLabel="Stylized Text Field - PIN" customClass="StylizedTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U0G-cH-iZC" userLabel="Stylized Text Field - PIN" customClass="StylizedTextField">
                                         <rect key="frame" x="159" y="221" width="131" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="131" id="23L-BA-24Y"/>
@@ -662,7 +675,7 @@
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Zm-fv-MBe" userLabel="View - slide to confirm">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Zm-fv-MBe" userLabel="View - slide to confirm">
                                         <rect key="frame" x="31" y="291" width="258" height="48"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -677,7 +690,7 @@
                                             <constraint firstAttribute="height" constant="229" id="wzL-wT-O1t"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shF-7X-2GL" customClass="StylizedButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shF-7X-2GL" customClass="StylizedButton">
                                         <rect key="frame" x="245" y="92" width="45" height="20"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.76470595600000002" blue="0.2588235438" alpha="1" colorSpace="deviceRGB"/>
                                         <constraints>
@@ -738,6 +751,7 @@
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="top" secondItem="shF-7X-2GL" secondAttribute="bottom" constant="5" id="Jkf-kn-Cev"/>
                                     <constraint firstItem="Uak-ip-kgV" firstAttribute="top" secondItem="aNY-oK-5F5" secondAttribute="top" constant="67" id="K3h-6Z-7My"/>
                                     <constraint firstAttribute="bottom" secondItem="PdV-8v-hr7" secondAttribute="bottom" constant="40" id="KWV-nE-k6G"/>
+                                    <constraint firstItem="agG-Re-yEp" firstAttribute="top" secondItem="nLx-fU-Gvx" secondAttribute="top" id="N1n-5S-3Zs"/>
                                     <constraint firstAttribute="trailing" secondItem="G2v-QN-NpV" secondAttribute="trailing" constant="30" id="TDo-qf-NKE"/>
                                     <constraint firstAttribute="centerX" secondItem="9Zm-fv-MBe" secondAttribute="centerX" id="TRV-Mh-u3M"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="trailing" secondItem="pdu-nu-njT" secondAttribute="trailing" id="XCS-0J-igy"/>
@@ -748,10 +762,12 @@
                                     <constraint firstAttribute="trailing" secondItem="PdV-8v-hr7" secondAttribute="trailing" id="dIm-yI-VnD"/>
                                     <constraint firstItem="ScE-Ny-R3i" firstAttribute="top" secondItem="pdu-nu-njT" secondAttribute="bottom" constant="19" id="ebb-Ei-2Hl"/>
                                     <constraint firstItem="U0G-cH-iZC" firstAttribute="top" secondItem="pdu-nu-njT" secondAttribute="bottom" constant="13" id="fNT-R4-PkZ"/>
+                                    <constraint firstItem="agG-Re-yEp" firstAttribute="leading" secondItem="nLx-fU-Gvx" secondAttribute="leading" id="gio-if-r3c"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="leading" secondItem="aNY-oK-5F5" secondAttribute="leading" constant="30" id="l3J-a0-zkT"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="leading" secondItem="pdu-nu-njT" secondAttribute="leading" id="oM6-Qb-Omp"/>
                                     <constraint firstItem="pdu-nu-njT" firstAttribute="trailing" secondItem="U0G-cH-iZC" secondAttribute="trailing" id="pdV-zq-uVW"/>
                                     <constraint firstItem="9aX-Dw-7XD" firstAttribute="top" secondItem="nLx-fU-Gvx" secondAttribute="bottom" constant="3" id="rRv-iY-zrH"/>
+                                    <constraint firstItem="agG-Re-yEp" firstAttribute="bottom" secondItem="nLx-fU-Gvx" secondAttribute="bottom" id="vj2-KH-cNW"/>
                                     <constraint firstItem="G2v-QN-NpV" firstAttribute="height" secondItem="pdu-nu-njT" secondAttribute="height" id="vnW-ex-3de"/>
                                     <constraint firstAttribute="trailing" secondItem="nLx-fU-Gvx" secondAttribute="trailing" constant="20" id="zOC-Ix-TbR"/>
                                 </constraints>
@@ -771,6 +787,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="addressButton" destination="agG-Re-yEp" id="kWe-bc-Jkv"/>
                         <outlet property="addressLabel" destination="nLx-fU-Gvx" id="8V1-iN-Kce"/>
                         <outlet property="amountBTCLabel" destination="Fic-d9-oDx" id="0zi-c0-bPK"/>
                         <outlet property="amountBTCSymbol" destination="D9Y-q9-3fh" id="4PF-OZ-Wpa"/>
@@ -987,7 +1004,7 @@
                                             <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="valueChanged" id="Yi0-Sn-AYh"/>
                                         </connections>
                                     </segmentedControl>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" misplaced="YES" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
                                         <rect key="frame" x="20" y="333" width="335" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="d6r-Ou-4zx"/>
@@ -1034,6 +1051,15 @@
                                             <constraint firstAttribute="height" id="Get-1y-G6d"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5c-Fh-rIw" userLabel="TextFieldLine">
+                                        <rect key="frame" x="67" y="50" width="150" height="1"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="dVh-LG-AVu"/>
+                                            <constraint firstAttribute="height" constant="1" id="pNk-5N-66F"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1050,6 +1076,7 @@
                                     <constraint firstItem="2Po-w8-mEf" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" id="9x4-jx-Knd"/>
                                     <constraint firstAttribute="trailing" secondItem="FS5-S0-Rqp" secondAttribute="trailing" id="Bpf-7g-eiN"/>
                                     <constraint firstAttribute="trailing" secondItem="2Po-w8-mEf" secondAttribute="trailing" id="CdR-tB-b9W"/>
+                                    <constraint firstItem="i5c-Fh-rIw" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="65" id="Ejw-ZT-lLc"/>
                                     <constraint firstItem="FS5-S0-Rqp" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" id="FlS-Fz-ggc"/>
                                     <constraint firstAttribute="trailing" secondItem="jwC-1c-veH" secondAttribute="trailing" constant="10" id="HK4-g1-B8z"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="top" secondItem="MRG-UO-gcm" secondAttribute="bottom" constant="8" id="Hpq-yy-IZs"/>
@@ -1060,6 +1087,7 @@
                                     <constraint firstItem="jlL-oE-aWy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtQ-SU-6iS" secondAttribute="bottom" constant="8" symbolic="YES" id="Pab-mx-fWu"/>
                                     <constraint firstItem="TZ4-b5-fQ5" firstAttribute="leading" secondItem="MRG-UO-gcm" secondAttribute="trailing" constant="22" id="PgA-8r-2P1"/>
                                     <constraint firstItem="3A3-3d-okn" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="20" symbolic="YES" id="QWc-yL-Ry2"/>
+                                    <constraint firstItem="i5c-Fh-rIw" firstAttribute="top" secondItem="wtl-WY-3kv" secondAttribute="top" constant="50" id="Rv6-pl-hWy"/>
                                     <constraint firstItem="tx5-Cj-bnM" firstAttribute="centerY" secondItem="TZ4-b5-fQ5" secondAttribute="centerY" id="Udv-7d-aNS"/>
                                     <constraint firstItem="dY3-MX-MNV" firstAttribute="leading" secondItem="wtl-WY-3kv" secondAttribute="leading" constant="65" id="W6D-Zr-p4f"/>
                                     <constraint firstItem="CiQ-7I-S7U" firstAttribute="top" secondItem="dY3-MX-MNV" secondAttribute="top" id="WkI-Rk-9ou"/>
@@ -1123,7 +1151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bB-r5-X2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-739" y="-987.5"/>
+            <point key="canvasLocation" x="-739.5" y="-989"/>
         </scene>
         <!--Airbitz View Controller-->
         <scene sceneID="hWx-JX-ZaM">
@@ -1346,7 +1374,7 @@
                                         <rect key="frame" x="0.0" y="232" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VE0-S6-Hzh" id="w2k-NV-yYC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-mY-o6I" userLabel="View -white frost">
@@ -1488,7 +1516,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="355" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mhi-jw-aaR" id="vKv-Bo-lvH" userLabel="Content View - Wallet">
-                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-nP-HJx" userLabel="Wallet Name" customClass="LatoLabel">
@@ -2995,11 +3023,10 @@
                                             <constraint firstAttribute="width" secondItem="LqE-iy-sKS" secondAttribute="height" multiplier="104:53" id="wTC-p4-vpe"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
-                                        <rect key="frame" x="95" y="134" width="186" height="27"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitcoin Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="nae-d6-xoW" customClass="LatoLabel">
+                                        <rect key="frame" x="20" y="134" width="335" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="6J0-O3-MAp"/>
-                                            <constraint firstAttribute="width" constant="186" id="8zF-39-Abo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <color key="textColor" red="0.10588235294117647" green="0.43529411764705883" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
@@ -3071,7 +3098,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHf-E8-N2q" userLabel="View - PIN and Username">
                                         <rect key="frame" x="27" y="161" width="320" height="200"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-U4-C5T" userLabel="PINCode Text Field" customClass="StylizedTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter PIN" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-U4-C5T" userLabel="PINCode Text Field" customClass="StylizedTextField">
                                                 <rect key="frame" x="85" y="58" width="150" height="44"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <constraints>
@@ -3173,7 +3200,7 @@
                                                     <action selector="SignUp" destination="zLx-xG-j1m" eventType="touchUpInside" id="BMw-Co-GHv"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
                                                 <rect key="frame" x="55" y="72" width="210" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
@@ -3203,18 +3230,18 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="8XB-1A-1hO" secondAttribute="bottom" constant="20" symbolic="YES" id="524-9z-4e0"/>
                                     <constraint firstItem="LqE-iy-sKS" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" constant="20" symbolic="YES" id="6iW-d6-Qv9"/>
+                                    <constraint firstAttribute="trailing" secondItem="nae-d6-xoW" secondAttribute="trailing" constant="20" symbolic="YES" id="80c-6f-G3C"/>
                                     <constraint firstAttribute="trailing" secondItem="PwH-1d-Cnf" secondAttribute="trailing" id="8Oo-6I-9FC"/>
                                     <constraint firstItem="PwH-1d-Cnf" firstAttribute="top" secondItem="eTI-9q-uu0" secondAttribute="top" id="9Du-lx-I5x"/>
                                     <constraint firstItem="kpH-FO-ztL" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="AnO-5K-GCi"/>
-                                    <constraint firstItem="nae-d6-xoW" firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="DX0-zg-toi"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="centerY" secondItem="8XB-1A-1hO" secondAttribute="centerY" id="HhJ-C4-KBO"/>
                                     <constraint firstItem="nae-d6-xoW" firstAttribute="top" secondItem="LqE-iy-sKS" secondAttribute="bottom" constant="8" symbolic="YES" id="NZO-G9-2kT"/>
                                     <constraint firstAttribute="centerX" secondItem="BHf-E8-N2q" secondAttribute="centerX" id="Orr-nz-wcl"/>
                                     <constraint firstItem="BHf-E8-N2q" firstAttribute="top" secondItem="nae-d6-xoW" secondAttribute="bottom" id="TAl-3p-bP9"/>
                                     <constraint firstItem="PwH-1d-Cnf" firstAttribute="leading" secondItem="eTI-9q-uu0" secondAttribute="leading" id="TwT-zr-iUz"/>
                                     <constraint firstAttribute="centerX" secondItem="8XB-1A-1hO" secondAttribute="centerX" id="UZF-mI-uqs"/>
-                                    <constraint firstAttribute="centerX" secondItem="nae-d6-xoW" secondAttribute="centerX" id="Wg7-nU-ecP"/>
                                     <constraint firstAttribute="centerX" secondItem="bUp-i4-uHt" secondAttribute="centerX" id="Yqx-ez-xtP"/>
+                                    <constraint firstItem="nae-d6-xoW" firstAttribute="leading" secondItem="eTI-9q-uu0" secondAttribute="leading" constant="20" symbolic="YES" id="aTp-t3-27g"/>
                                     <constraint firstAttribute="centerX" secondItem="LqE-iy-sKS" secondAttribute="centerX" id="gMX-zi-xrg"/>
                                     <constraint firstItem="bUp-i4-uHt" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="bottom" constant="4" id="jGF-Bd-eNG"/>
                                     <constraint firstItem="jLL-vF-Vbd" firstAttribute="leading" secondItem="8XB-1A-1hO" secondAttribute="trailing" id="qg6-OB-iqn"/>

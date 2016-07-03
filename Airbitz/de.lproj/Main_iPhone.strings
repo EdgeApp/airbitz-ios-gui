@@ -62,43 +62,43 @@
 "AOi-Wp-bVq.segmentTitles[3]" = "Blitz";
 
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
-"BED-Cf-F1n.text" = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters";
+"BED-Cf-F1n.text" = "Passwort muss einen Groß- und Kleinbuchstaben, eine Zahl und mindestens 10 Zeichen haben";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
-"Bxa-tB-mk3.text" = "Phone";
+"Bxa-tB-mk3.text" = "Telefon";
 
 /* Class = "UIButton"; normalTitle = "Last Month"; ObjectID = "CDg-O2-8UT"; */
-"CDg-O2-8UT.normalTitle" = "Last Month";
+"CDg-O2-8UT.normalTitle" = "Letzter Monat";
 
 /* Class = "UILabel"; text = "Category"; ObjectID = "ClG-um-kmI"; */
-"ClG-um-kmI.text" = "Category";
+"ClG-um-kmI.text" = "Kategorie";
 
 /* Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
-"CuI-Tj-a8q.text" = "Enter password to decode wallet";
+"CuI-Tj-a8q.text" = "Geben Sie Kennwort ein, um die Wallet zu entschlüsseln";
 
 /* Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9"; */
-"Det-Mr-8a9.normalTitle" = "Next Step";
+"Det-Mr-8a9.normalTitle" = "Nächster Schritt";
 
 /* Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi"; */
 "Dh6-PA-WGi.text" = "Test";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2"; */
-"EuE-s0-NQ2.text" = "USD";
+"EuE-s0-NQ2.text" = "US-DOLLAR";
 
 /* Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg"; */
-"GFx-1Z-kFg.text" = "From:";
+"GFx-1Z-kFg.text" = "Von:";
 
 /* Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8"; */
-"Hba-dd-to8.text" = "(Duplicate Names)";
+"Hba-dd-to8.text" = "(Doppelte Namen)";
 
 /* Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO"; */
-"HzM-6V-ckO.text" = "Export";
+"HzM-6V-ckO.text" = "Exportieren";
 
 /* Class = "UIViewController"; title = "Request View Controller"; ObjectID = "Int-ih-AH6"; */
-"Int-ih-AH6.title" = "Request View Controller";
+"Int-ih-AH6.title" = "View-Controller anfragen";
 
 /* Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
-"JZ8-MW-EwQ.text" = "PRIVATE KEY";
+"JZ8-MW-EwQ.text" = "PRIVATER SCHLÜSSEL";
 
 /* Class = "UITextField"; placeholder = "Enter PIN"; ObjectID = "KTi-U4-C5T"; */
 "KTi-U4-C5T.placeholder" = "PIN eingeben";
@@ -170,7 +170,7 @@
 "V5e-1n-K9Z.placeholder" = "Passwort";
 
 /* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
-"Vcb-0y-fDf.text" = "Eine App beantragt eine Bitcoin-Adresse um Geld zu senden. Bitte wählen Sie eine Wallet von oben, um Gelder zu erhalten:";
+"Vcb-0y-fDf.text" = "Eine App beantragt eine Bitcoin-Adresse um Geld zu senden. Bitte wählen Sie eine Wallet von oben aus, um Gelder zu erhalten:";
 
 /* Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY"; */
 "Vuw-Bw-dQY.normalTitle" = "Wallet Privatseed (fortgeschritten)";
@@ -200,7 +200,7 @@
 "cIH-5H-WKu.text" = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj";
 
 /* Class = "UILabel"; text = "Scan QR to Send Funds or Login with BitID"; ObjectID = "cYL-n1-ybU"; */
-"cYL-n1-ybU.text" = "Scannen des QR um Fonds zu senden oder loggen Sie sich mit BitID ein";
+"cYL-n1-ybU.text" = "QR scannen um Gelder zu senden oder mit BitID einloggen";
 
 /* Class = "UIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I"; */
 "cix-f2-i3I.normalTitle" = "Überspringen Sie diesen Schritt";

@@ -105,7 +105,7 @@
 - (void)updateNavBar;
 {
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 }
 
 
@@ -159,7 +159,7 @@
 - (void)buttonInfoTouched
 {
     [self dismissPopupPicker];
-    [InfoView CreateWithHTML:@"infoExportWallet" forView:self.view];
+    [InfoView CreateWithHTML:@"info_export_wallet" forView:self.view];
 }
 
 - (IBAction)buttonCSVTouched:(id)sender
