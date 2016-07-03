@@ -1946,7 +1946,6 @@ static bool bInitialized = false;
 
         self.dividerViewTop.constant = tfoy + thvfsh - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
 //        self.dividerViewTop.constant = tfoy + thvfsh - offset;
-        CGFloat dvt = self.dividerViewTop.constant;
         
 //        self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
         ABCLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);
