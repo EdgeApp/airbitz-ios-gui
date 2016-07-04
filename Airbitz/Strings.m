@@ -395,17 +395,18 @@
 #define default_currency_text                       NSLocalizedString(@"Default Currency", @"settings text")
 #define default_exchange_text                       NSLocalizedString(@"Default Exchange", @"settings text")
 #define exchange_rate_data_source_text              NSLocalizedString(@"Exchange Rate Data Source",nil)
-#define income_category                             NSLocalizedString(@"Income",nil)
-#define expense_category                            NSLocalizedString(@"Expense",nil)
-#define exchange_category                           NSLocalizedString(@"Exchange",nil)
-#define transfer_category                           NSLocalizedString(@"Transfer",nil)
+#define income_category                             NSLocalizedString(@"Income",@"Prefix of list of income categories")
+#define expense_category                            NSLocalizedString(@"Expense",@"Prefix of list of expense categories")
+#define exchange_category                           NSLocalizedString(@"Exchange",@"Prefix of list of financial exchange categories. Such as converting from one currency to another")
+#define transfer_category                           NSLocalizedString(@"Transfer",@"Financial transaction that moves money from one account to another")
 #define income_category_en                          @"Income"
 #define expense_category_en                         @"Expense"
 #define exchange_category_en                        @"Exchange"
 #define transfer_category_en                        @"Transfer"
 #define wallet_category                             @"Wallet"
 
-#define category_home_improvement                   NSLocalizedString(@"Home Improvement", nil)
-#define category_groceries                          NSLocalizedString(@"Groceries", nil)
-#define category_coffee_shops                       NSLocalizedString(@"Coffee Shops", nil)
+#define category_home_improvement                   NSLocalizedString(@"Home Improvement", @"expense category")
+#define category_groceries                          NSLocalizedString(@"Groceries", @"expense category")
+#define category_coffee_shops                       NSLocalizedString(@"Coffee Shops", @"expense category")
 #define category_shopping                           NSLocalizedString(@"Shopping", @"expense category")
+#define export_from_text                            NSLocalizedString(@"Export From:", @"Prompt asking which wallet to export from")
