@@ -553,6 +553,11 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Send
             [self doProcessParsedURI:_parsedURI];
         }
+        else
+        {
+            // Cancel
+            [self startQRReader];
+        }
     }
     else if (_bitidAlert == alertView)
     {
@@ -569,10 +574,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                     {
                         [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                     }
-
+                    [self startQRReader];
 
                 });
             });
+        }
+        else
+        {
+            [self startQRReader];
         }
     }
 }
@@ -1337,6 +1346,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         {
             [MainViewController fadingAlertDismiss];
             [self showHbitsResults:address amount:amount];
+            NSString *txid = transaction.txid;
+            if (txid && [txid length] && amount > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIEW_SWEEP_TX
+                                                                    object:nil
+                                                                  userInfo:@{KEY_TX_DETAILS_EXITED_WALLET_UUID:abcAccount.currentWallet.uuid,
+                                                                             KEY_TX_DETAILS_EXITED_TX_ID:txid}];
+            }
         }
         else if (0 < amount)
         {
@@ -1351,14 +1368,10 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
-            if (ABCImportHBitsURI == dataModel)
-            {
-                [self showHbitsResults:address amount:amount];
-            }
-            else
             [MainViewController fadingAlert:importFailedPrivateKeyEmpty];
         }
-
+        [self startQRReader];
+        
     } error:^(NSError *error) {
         NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n%@: %d\n\n%@: %@", importFailedText, errorCodeText, (int) error.code, errorDescriptionText, error.userInfo[NSLocalizedDescriptionKey]];
         [MainViewController fadingAlert:errorMessage];
@@ -1582,6 +1595,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)processURI:(NSString *)uriString;
 {
     NSError *error;
+    
+    [self stopQRReader];
+
     _parsedURI = [ABCUtil parseURI:uriString error:&error];
 
     if (_parsedURI)
@@ -1623,6 +1639,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
             || [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
+                [self stopQRReader];
+
                 UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
                 _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
                 _addressRequestController.url = uri;
@@ -1638,6 +1656,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     
     // Did not get successfully processed. Throw error
     [MainViewController fadingAlert:invalidQRCode holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+    [self startQRReader];
 }
 
 -(void)AddressRequestControllerDone:(AddressRequestController *)vc
@@ -1767,6 +1786,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 [self updateState];
                 break;
         }
+        [self startQRReader];
     }];
     [self presentViewController:slComposerSheet animated:YES completion:nil];
 }
@@ -1828,6 +1848,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             ABCLog(1, @"*** ERROR Connecting to Network: showHbitsResults");
+            NSString *message;
+            if (amount == 0)
+                message = importFailedPrivateKeyEmpty;
+            else
+                message = messenger_server_error_funds_imported;
+            
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:network_error_text
+                                  message:message
+                                  delegate:nil
+                                  cancelButtonTitle:okButtonText
+                                  otherButtonTitles:nil];
+            [alert show];
         }];
     }
 }
