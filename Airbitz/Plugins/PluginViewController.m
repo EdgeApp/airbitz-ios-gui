@@ -632,7 +632,7 @@ static const NSString *PROTOCOL = @"bridge://";
     UIImage *scaledImage = [self imageWithImage:image scaledToSize:CGSizeMake(newWidth, newHeight)];
     
     NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(scaledImage, 0.5)];
-    NSString *encodedString = [imgData base64Encoding];
+    NSString *encodedString = [imgData base64EncodedStringWithOptions:0];
     
     int SLICE_SIZE = 500;
     size_t len = [encodedString length];
