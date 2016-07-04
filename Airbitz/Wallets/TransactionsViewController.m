@@ -1240,7 +1240,7 @@ const int NumPromoRows              = 5;
             {
                 if (section >= _arraySectionsStart.count)
                 {
-                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", (long) section, (unsigned long)_arraySectionsStart.count);
                     bBlankCell = YES;
                     cell.dateLabel.text = errorDescriptionText;
                 }
@@ -1256,7 +1256,7 @@ const int NumPromoRows              = 5;
                     }
                     else
                     {
-                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arraySearchTransactions %lu %lu %lu", num.integerValue, row, self.arraySearchTransactions.count);
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arraySearchTransactions %lu %lu %lu", (unsigned long)num.integerValue, (long) row, (unsigned long)self.arraySearchTransactions.count);
                         transaction = self.arraySearchTransactions[index];
                         cell.transactionIndex = index;
                     }
@@ -1274,7 +1274,7 @@ const int NumPromoRows              = 5;
             {
                 if (section >= _arraySectionsStart.count)
                 {
-                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", section, _arraySectionsStart.count);
+                    ABCLog(1, @"Error. TransactionsViewController section out of bounds of _arraySectionsStart %lu %lu", (long)section, (unsigned long)_arraySectionsStart.count);
                     bBlankCell = YES;
                     cell.dateLabel.text = errorDescriptionText;
                 }
@@ -1284,7 +1284,7 @@ const int NumPromoRows              = 5;
                     long index = num.integerValue + row;
                     if (index >= abcAccount.currentWallet.arrayTransactions.count)
                     {
-                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arrayTransactions %lu %lu %lu", num.integerValue, row, abcAccount.currentWallet.arrayTransactions.count);
+                        ABCLog(1, @"Error. TransactionsViewController num+row out of bounds of arrayTransactions %lu %lu %lu", (long)num.integerValue, (long)row, (unsigned long)abcAccount.currentWallet.arrayTransactions.count);
                         bBlankCell = YES;
                         cell.dateLabel.text = errorDescriptionText;
                     }
