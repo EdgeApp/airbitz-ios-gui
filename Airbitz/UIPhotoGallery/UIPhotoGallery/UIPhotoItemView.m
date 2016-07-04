@@ -391,8 +391,14 @@
     CGSize captionSize;
     
     if (plainText)
-        captionSize = [plainText sizeWithFont:captionFont
-                            constrainedToSize:CGSizeMake(frame.size.width, MAXFLOAT)];
+    {
+        CGRect textRect = [plainText boundingRectWithSize:CGSizeMake(frame.size.width, MAXFLOAT)
+                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:captionFont}
+                                             context:nil];
+        
+        captionSize = textRect.size;
+    }
     else
         captionSize = [attributedText size];
     
