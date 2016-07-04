@@ -3395,7 +3395,7 @@
 		DABA01271C111982008702AB /* plugin_icon_coffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_coffee@2x.png"; sourceTree = "<group>"; };
 		DABA012B1C111D59008702AB /* plugin_icon_target@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_target@2x.png"; sourceTree = "<group>"; };
 		DABF60F01C10263A004E613B /* clevercoin.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = clevercoin.html; sourceTree = "<group>"; };
-		DAC532961D273DF0008D9773 /* Rackwallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rackwallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAC532961D273DF0008D9773 /* Rack Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rack Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC5329D1D273F5E008D9773 /* info_disclaimer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info_disclaimer.html; sourceTree = "<group>"; };
 		DAC532A01D273F94008D9773 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DAC532A11D273F94008D9773 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
@@ -3403,14 +3403,14 @@
 		DAC532A41D273F94008D9773 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		DAC532A61D273F94008D9773 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DAC532A71D273F94008D9773 /* logo_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_large@2x.png"; sourceTree = "<group>"; };
-		DAC534761D27422A008D9773 /* Coinsource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coinsource.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAC534761D27422A008D9773 /* Coinsource Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coinsource Wallet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC5347A1D274293008D9773 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DAC5347B1D274293008D9773 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DAC5347C1D274293008D9773 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_launch.png; sourceTree = "<group>"; };
 		DAC534821D274293008D9773 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		DAC534841D274293008D9773 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_icon@2x.png"; sourceTree = "<group>"; };
 		DAC534851D274293008D9773 /* logo_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_large@2x.png"; sourceTree = "<group>"; };
-		DAC536591D274575008D9773 /* Athena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Athena.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAC536591D274575008D9773 /* Athena Bitcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Athena Bitcoin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC536601D2745AA008D9773 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DAC536611D2745AA008D9773 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DAC536621D2745AA008D9773 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_launch.png; sourceTree = "<group>"; };
@@ -4747,9 +4747,9 @@
 				DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */,
 				DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */,
 				DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */,
-				DAC532961D273DF0008D9773 /* Rackwallet.app */,
-				DAC534761D27422A008D9773 /* Coinsource.app */,
-				DAC536591D274575008D9773 /* Athena.app */,
+				DAC532961D273DF0008D9773 /* Rack Wallet.app */,
+				DAC534761D27422A008D9773 /* Coinsource Wallet.app */,
+				DAC536591D274575008D9773 /* Athena Bitcoin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5041,7 +5041,7 @@
 			);
 			name = Rackwallet;
 			productName = Airbitz;
-			productReference = DAC532961D273DF0008D9773 /* Rackwallet.app */;
+			productReference = DAC532961D273DF0008D9773 /* Rack Wallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DAC532C81D27422A008D9773 /* Coinsource */ = {
@@ -5061,7 +5061,7 @@
 			);
 			name = Coinsource;
 			productName = Airbitz;
-			productReference = DAC534761D27422A008D9773 /* Coinsource.app */;
+			productReference = DAC534761D27422A008D9773 /* Coinsource Wallet.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DAC534AC1D274575008D9773 /* Athena */ = {
@@ -5081,7 +5081,7 @@
 			);
 			name = Athena;
 			productName = Airbitz;
-			productReference = DAC536591D274575008D9773 /* Athena.app */;
+			productReference = DAC536591D274575008D9773 /* Athena Bitcoin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DAD1AD761BC6065100C648C4 /* Airbitz */ = {
@@ -9189,7 +9189,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinbtm.rackwallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Rack Wallet";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -9230,7 +9230,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinbtm.rackwallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Rack Wallet";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -9271,7 +9271,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinsource.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coinsource Wallet";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -9312,7 +9312,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coinsource.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Coinsource Wallet";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -9353,7 +9353,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -9394,7 +9394,7 @@
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.athenabitcoin.wallet;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Athena Bitcoin";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
