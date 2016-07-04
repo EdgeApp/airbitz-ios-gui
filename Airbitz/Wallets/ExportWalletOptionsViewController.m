@@ -203,7 +203,7 @@ typedef enum eExportOption
         self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@", abcAccount.currentWallet.name];
+        walletName = [NSString stringWithFormat:@"%@ %@",export_from_text, abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitle:self title:walletName];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))
