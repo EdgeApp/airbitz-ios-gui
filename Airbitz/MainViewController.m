@@ -44,6 +44,7 @@
 #import "CJSONDeserializer.h"
 #import "AppGroupConstants.h"
 #import "Affiliate.h"
+#import "Plugin.h"
 
 typedef enum eRequestType
 {
@@ -579,8 +580,11 @@ MainViewController *singleton;
                 ABCLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
                 [self.arrayPluginBizIDs addObject:numBizId];
             }
+            [Plugin initAll];
+
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             ABCLog(1, @"Plugin Bizid Disabled");
+            [Plugin initAll];
         }];
 
     }
