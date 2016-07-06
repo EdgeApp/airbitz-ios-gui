@@ -24,14 +24,14 @@
 #elif RACKWALLET
 
 #define appTitle                @"Rack Wallet"
-#define appHomepage             @"http://coinbtm.com"
-#define supportEmail            @"support@coinbtm.com"
-#define supportPhone            @"+1-708-298-4547"
+#define appHomepage             @"http://rackwallet.com"
+#define supportEmail            @"support@rackwallet.com"
+#define supportPhone            @"+1-708-294-3371"
 #define appStoreLink            @"https://itunes.apple.com/us/app/rack-wallet/id1067132601"
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.coinbtm.rackwallet"
-#define appDownloadLink         @"http://coinbtm.com/app"
+#define appDownloadLink         @"http://rackwallet.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2015/12/rack-logo-wht-100w.png"
-#define appDesignedBy           NSLocalizedString(@"Designed by CoinBTM in",nil)
+#define appDesignedBy           NSLocalizedString(@"Designed by Rack Ltd in",nil)
 #define appCompanyLocation      NSLocalizedString(@"New York, New York, USA", nil)
 
 #elif ATHENA
