@@ -132,7 +132,7 @@
 
 #define SHOW_BUY_SELL                                   0
 #define SHOW_AFFILIATE                                  0
-#define LOCKED_SEARCH_CATEGORY                          0
+#define LOCKED_SEARCH_CATEGORY                          1
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
 #endif
