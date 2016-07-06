@@ -162,44 +162,50 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
                     // Get an address from the Core
                     ABCReceiveAddress *receiveAddress = [abcAccount.currentWallet createNewReceiveAddress];
 
-                    NSDictionary *params = @{
-                            @"bitid_address" : bitidSignature.address,
-                            @"bitid_signature" : bitidSignature.signature,
-                            @"bitid_url" : bitiduri,
-                            @"payment_address" : receiveAddress.address
-                    };
-
-                    [self.afmanager POST:AffiliatesRegister parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
-                    {
-                        NSDictionary *results = (NSDictionary *) responseObject;
-                        NSString *affiliateURL = [results objectForKey:@"affiliate_link"];
-
-                        receiveAddress.metaData.payeeName = appTitle;
-                        receiveAddress.metaData.category  = [NSString stringWithFormat:@"%@:%@", abcStringIncomeCategory, affiliate_revenue];
-                        receiveAddress.metaData.notes     = [NSString stringWithFormat:notesAffiliateRevenue, affiliateURL];
-                        [receiveAddress modifyRequestWithDetails];
-                        [receiveAddress finalizeRequest];
-
-                        // Save link in data store
-                        NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:AffiliateLinkDataStoreKey withValue:affiliateURL];
-
-                        if (!error2)
-                        {
-                            if (completionHandler) completionHandler(affiliateURL);
-                        }
-                        else
-                        {
-                            if (errorHandler) errorHandler();
-                        }
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+                    if (!receiveAddress)
                     {
                         if (errorHandler) errorHandler();
-                    }];
-
+                    }
+                    else
+                    {
+                        NSDictionary *params = @{
+                                                 @"bitid_address" : bitidSignature.address,
+                                                 @"bitid_signature" : bitidSignature.signature,
+                                                 @"bitid_url" : bitiduri,
+                                                 @"payment_address" : receiveAddress.address
+                                                 };
+                        
+                        [self.afmanager POST:AffiliatesRegister parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject)
+                         {
+                             NSDictionary *results = (NSDictionary *) responseObject;
+                             NSString *affiliateURL = [results objectForKey:@"affiliate_link"];
+                             
+                             receiveAddress.metaData.payeeName = appTitle;
+                             receiveAddress.metaData.category  = [NSString stringWithFormat:@"%@:%@", abcStringIncomeCategory, affiliate_revenue];
+                             receiveAddress.metaData.notes     = [NSString stringWithFormat:notesAffiliateRevenue, affiliateURL];
+                             [receiveAddress modifyRequestWithDetails];
+                             [receiveAddress finalizeRequest];
+                             
+                             // Save link in data store
+                             NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:AffiliateLinkDataStoreKey withValue:affiliateURL];
+                             
+                             if (!error2)
+                             {
+                                 if (completionHandler) completionHandler(affiliateURL);
+                             }
+                             else
+                             {
+                                 if (errorHandler) errorHandler();
+                             }
+                         } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+                         {
+                             if (errorHandler) errorHandler();
+                         }];
+                    }
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            ABCLog(1, @"Error getting affiliate bitid URI");
+            ABCLog(1, @"Error registering affiliate bitid URI");
             if (errorHandler) errorHandler();
         }];
     });

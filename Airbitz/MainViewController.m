@@ -2180,9 +2180,8 @@ MainViewController *singleton;
         
         [_affiliateAlert show];
      } error:^{
-         
+         [MainViewController fadingAlert:error_creating_affiliate_link];
      }];
-
 }
 
 - (void)slideoutImport
