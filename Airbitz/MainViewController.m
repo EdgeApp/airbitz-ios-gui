@@ -1425,8 +1425,8 @@ MainViewController *singleton;
 {
     if (!wallet)
         ABCLog(1, @"abcAccountWalletLoaded:wallet == NULL");
-    
-    ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
+    else
+        ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
     
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
