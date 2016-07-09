@@ -600,8 +600,6 @@ MainViewController *singleton;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ABCLog(1, @"Plugin Bizid Disabled");
         
-        // Temporary fallback for now
-        [self.dictBuyBitcoinOverrideURLs setObject:@"https://ice3x.com/" forKey:@"ZAR"];
     }];
 
 }
