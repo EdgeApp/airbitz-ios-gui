@@ -998,7 +998,7 @@ const int NumPromoRows              = 5;
         
         view = [self getHeaderViewForTableView:self.tableView];
         
-        if (section == _arraySectionsTitle.count)
+        if (section >= _arraySectionsTitle.count)
             return nil;
         else
             view.titleLabel.text = _arraySectionsTitle[section];

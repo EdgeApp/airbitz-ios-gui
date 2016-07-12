@@ -600,8 +600,6 @@ MainViewController *singleton;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ABCLog(1, @"Plugin Bizid Disabled");
         
-        // Temporary fallback for now
-        [self.dictBuyBitcoinOverrideURLs setObject:@"https://ice3x.com/" forKey:@"ZAR"];
     }];
 
 }
@@ -1425,8 +1423,8 @@ MainViewController *singleton;
 {
     if (!wallet)
         ABCLog(1, @"abcAccountWalletLoaded:wallet == NULL");
-    
-    ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
+    else
+        ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
     
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
@@ -2180,9 +2178,8 @@ MainViewController *singleton;
         
         [_affiliateAlert show];
      } error:^{
-         
+         [MainViewController fadingAlert:error_creating_affiliate_link];
      }];
-
 }
 
 - (void)slideoutImport

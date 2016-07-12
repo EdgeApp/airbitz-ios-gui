@@ -412,3 +412,5 @@
 #define export_from_text                            NSLocalizedString(@"Export From:", @"Prompt asking which wallet to export from")
 #define network_error_text                          NSLocalizedString(@"Network Error", @"")
 #define messenger_server_error_funds_imported       NSLocalizedString(@"Funds successfully imported, but error connecting to messenger server. Try again later", @"")
+#define error_creating_affiliate_link               NSLocalizedString(@"Error creating affiliate link. Please try again later", @"")
+
