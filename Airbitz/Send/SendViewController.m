@@ -82,6 +82,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     ABCParsedURI                    *_parsedURI;
     NSString                        *_privateKeyURI;
     NSString                        *_tweet;
+    NSMutableArray                  *_kycTokenKeys;
+    BOOL                            _bitidSParam;
+    BOOL                            _bitidProvidingKYCToken;
 }
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
@@ -564,11 +567,42 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (buttonIndex > 0)
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                NSError *error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
+                NSError *error = nil;
+                if (!_bitidSParam)
+                    error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
+                else
+                {
+                    if (_kycTokenKeys)
+                    {
+                        NSMutableString *callbackURL = [[NSMutableString alloc] init];
+                        
+                        [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[buttonIndex-1] data:callbackURL];
+                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
+                    }
+                    else
+                    {
+                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:@""];
+                    }
+                }
+                
                 dispatch_async(dispatch_get_main_queue(),^{
                     if (!error)
                     {
-                        [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                        if (_bitidProvidingKYCToken)
+                        {
+                            NSString *message = [NSString stringWithFormat:provideIdentityTokenText, _parsedURI.bitIDDomain];
+                            
+                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                        }
+                        else if(_kycTokenKeys)
+                        {
+                            NSString *message = [NSString stringWithFormat:@"%@ %@", successfullyLoggedInWithIdentityToken, _kycTokenKeys[buttonIndex-1]];
+                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                        }
+                        else
+                        {
+                            [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];                            
+                        }
                     }
                     else
                     {
@@ -1604,12 +1638,118 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (_parsedURI.bitIDURI)
         {
-            _bitidAlert = [[UIAlertView alloc]
-                           initWithTitle:bitIDLogin
-                           message:_parsedURI.bitIDDomain
-                           delegate:self
-                           cancelButtonTitle:noButtonText
-                           otherButtonTitles:yesButtonText,nil];
+            NSString *bitidRequestString = @"";
+            _bitidSParam = NO;
+            
+            if (_parsedURI.bitidKYCProvider)
+            {
+                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, provideIdentityTokenText];
+                _bitidSParam = YES;
+                _bitidProvidingKYCToken = YES;
+            }
+            else
+            {
+                _bitidProvidingKYCToken = NO;
+            }
+            
+            if (_parsedURI.bitidKYCRequest)
+            {
+                _bitidSParam = YES;
+                
+                _kycTokenKeys = [[NSMutableArray alloc] init];
+                [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
+                if ([_kycTokenKeys count] > 0)
+                {
+                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityToken];
+                }
+                else
+                {
+                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityTokenButNone];
+                    _kycTokenKeys = nil;
+                }
+            }
+            else
+            {
+                _kycTokenKeys = nil;
+            }
+
+            if (_parsedURI.bitidPaymentAddress)
+            {
+                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestPaymentAddress];
+                _bitidSParam = YES;
+            }
+            
+            NSString *message = _parsedURI.bitIDDomain;
+            
+            if (_bitidSParam)
+            {
+                message = [NSString stringWithFormat:@"%@\n%@\n\n%@", message, wouldLikeToColon, bitidRequestString];
+            }
+            
+            if (_parsedURI.bitidKYCRequest)
+            {
+                if (_kycTokenKeys)
+                {
+                    int count = (int)[_kycTokenKeys count];
+                    
+                    if (count == 1)
+                    {
+                        
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
+                    }
+                    else if (count == 2)
+                    {
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+                                       nil];
+                        
+                    }
+                    else
+                    {
+                        // Only support a max of 3 tokens for now
+                        _bitidAlert = [[UIAlertView alloc]
+                                       initWithTitle:bitIDLogin
+                                       message:message
+                                       delegate:self
+                                       cancelButtonTitle:noButtonText
+                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
+                                       nil];
+                    }
+                    
+                }
+                else
+                {
+                    _bitidAlert = [[UIAlertView alloc]
+                                   initWithTitle:bitIDLogin
+                                   message:message
+                                   delegate:self
+                                   cancelButtonTitle:cancelButtonText
+                                   otherButtonTitles:nil];
+                }
+                
+            }
+            else
+            {
+                _bitidAlert = [[UIAlertView alloc]
+                               initWithTitle:bitIDLogin
+                               message:message
+                               delegate:self
+                               cancelButtonTitle:noButtonText
+                               otherButtonTitles:yesButtonText,nil];
+                
+            }
             [_bitidAlert show];
             return;
         }
