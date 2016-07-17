@@ -596,7 +596,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         }
                         else if(_kycTokenKeys)
                         {
-                            NSString *message = [NSString stringWithFormat:@"%@ %@", successfullyLoggedInWithIdentityToken, _kycTokenKeys[buttonIndex-1]];
+                            NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[buttonIndex-1]];
                             [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                         }
                         else

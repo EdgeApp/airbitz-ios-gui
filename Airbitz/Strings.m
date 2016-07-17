@@ -340,7 +340,6 @@
 #define createWalletText                            NSLocalizedString(@"Create Wallet", nil)
 #define cameraUnavailablePleaseEnable               NSLocalizedString(@"Camera unavailable. Please enable camera access on your phone's Privacy Settings", @"")
 #define successfullyLoggedIn                        NSLocalizedString(@"Successfully Logged In",nil)
-#define successfullyLoggedInWithIdentityToken       NSLocalizedString(@"Successfully Logged In With Identity Token",nil)
 #define errorLoggingIn                              NSLocalizedString(@"Error Logging In",nil)
 #define invalidBluetoothRequest                     NSLocalizedString(@"Invalid Bluetooth Request", nil)
 #define pleaseHaveRequestorContactSupport           NSLocalizedString(@"Please have Requestor contact support", nil)
@@ -422,4 +421,5 @@
 #define network_error_text                          NSLocalizedString(@"Network Error", @"")
 #define messenger_server_error_funds_imported       NSLocalizedString(@"Funds successfully imported, but error connecting to messenger server. Try again later", @"")
 #define error_creating_affiliate_link               NSLocalizedString(@"Error creating affiliate link. Please try again later", @"")
+#define successfully_verified_identity              NSLocalizedString(@"Successfully Verified Identity",nil)
 
