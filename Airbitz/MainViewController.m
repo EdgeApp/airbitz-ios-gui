@@ -22,7 +22,6 @@
 #import "TwoFactorScanViewController.h"
 #import "BuySellViewController.h"
 #import "GiftCardViewController.h"
-#import "AddressRequestController.h"
 #import "BlurView.h"
 #import "User.h"
 #import "Config.h"
@@ -45,6 +44,7 @@
 #import "CJSONDeserializer.h"
 #import "AppGroupConstants.h"
 #import "Affiliate.h"
+#import "Plugin.h"
 
 typedef enum eRequestType
 {
@@ -69,12 +69,11 @@ typedef enum eAppMode
 @interface MainViewController () <UITabBarDelegate,RequestViewControllerDelegate, SettingsViewControllerDelegate,
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
-                                  TwoFactorScanViewControllerDelegate, AddressRequestControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
+                                  TwoFactorScanViewControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
                                   MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,ABCAccountDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
-	AddressRequestController    *_addressRequestController;
 	TransactionsViewController       *_transactionsViewController;
     SendViewController          *_importViewController;
     SendViewController          *_sendViewController;
@@ -581,8 +580,11 @@ MainViewController *singleton;
                 ABCLog(1, @"Plugin Bizid Enabled: %u", (unsigned int) [numBizId integerValue]);
                 [self.arrayPluginBizIDs addObject:numBizId];
             }
+            [Plugin initAll];
+
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             ABCLog(1, @"Plugin Bizid Disabled");
+            [Plugin initAll];
         }];
 
     }
@@ -598,8 +600,6 @@ MainViewController *singleton;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         ABCLog(1, @"Plugin Bizid Disabled");
         
-        // Temporary fallback for now
-        [self.dictBuyBitcoinOverrideURLs setObject:@"https://ice3x.com/" forKey:@"ZAR"];
     }];
 
 }
@@ -1423,8 +1423,8 @@ MainViewController *singleton;
 {
     if (!wallet)
         ABCLog(1, @"abcAccountWalletLoaded:wallet == NULL");
-    
-    ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
+    else
+        ABCLog(1, @"abcAccountWalletLoaded UUID=%@", wallet.uuid);
     
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
@@ -1983,87 +1983,34 @@ MainViewController *singleton;
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if ([uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] && [uri.host isEqualToString:@"plugin"]) {
-        if ([User isLoggedIn]) {
+    if (![User isLoggedIn]) {
+        _uri = uri;
+    }
+    else
+    {
+        if ([uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] && [uri.host isEqualToString:@"plugin"])
+        {
             NSArray *cs = [uri.path pathComponents];
-            if ([cs count] == 3) {
+            if ([cs count] == 3)
+            {
                 [self launchBuySell:cs[2] provider:cs[1] uri:uri];
             }
-        } else {
-            _uri = uri;
         }
-    } else if ([uri.scheme isEqualToString:@"bitcoin"] ||
-               [uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] ||
-               [uri.scheme isEqualToString:@"bitid"]) {
-        if ([User isLoggedIn]) {
+        else
+        {
             self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
             _appMode = APP_MODE_SEND;
             [self launchViewControllerBasedOnAppMode];
-
-            if ([uri.host isEqual:@"sendqr"] || [uri.path isEqual:@"/sendqr"])
-            {
-                [_sendViewController resetViews];
-                self.tabBar.selectedItem = self.tabBar.items[APP_MODE_SEND];
-                _appMode = APP_MODE_SEND;
-                [self launchViewControllerBasedOnAppMode];
-            }
-            else
+            
+            // sendqr is the URI called from the widget to launch the app in Scan mode. No
+            // extra processing necessary
+            if (!([uri.host isEqual:@"sendqr"] || [uri.path isEqual:@"/sendqr"]))
             {
                 [_sendViewController resetViews];
                 [_sendViewController processURI:[uri absoluteString]];
             }
-        } else {
-            _uri = uri;
-
-        }
-    } else if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
-               || [uri.host isEqualToString:@"x-callback-url"]) {
-        if ([User isLoggedIn]) {
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-            _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
-            _addressRequestController.url = uri;
-            _addressRequestController.delegate = self;
-            [Util animateController:_addressRequestController parentController:self];
-            [MainViewController showTabBarAnimated:YES];
-            [MainViewController showNavBarAnimated:YES];
-
-            _uri = nil;
-        } else {
-            _uri = uri;
         }
     }
-    else if([uri.scheme isEqualToString:@"hbits"])
-    {
-        if ([User isLoggedIn])
-        {
-            _importViewController.bImportMode = YES;
-            if (_selectedViewController != _importViewController)
-            {
-                [MainViewController animateSwapViewControllers:_importViewController out:_selectedViewController];
-            }
-            self.tabBar.selectedItem = self.tabBar.items[APP_MODE_MORE];
-            _appMode = APP_MODE_MORE;
-            [slideoutView showSlideout:NO];
-            [_importViewController resetViews];
-            [_importViewController processURI:[uri absoluteString]];
-        }
-        else
-        {
-            _uri = uri;
-        }
-
-    }
-}
-
--(void)AddressRequestControllerDone:(AddressRequestController *)vc
-{
-    [Util animateOut:_addressRequestController parentController:self complete:^(void) {
-        _addressRequestController = nil;
-    }];
-    _uri = nil;
-    [MainViewController showTabBarAnimated:NO];
-    [MainViewController showNavBarAnimated:NO];
-
 }
 
 - (void)resetViews
@@ -2231,9 +2178,8 @@ MainViewController *singleton;
         
         [_affiliateAlert show];
      } error:^{
-         
+         [MainViewController fadingAlert:error_creating_affiliate_link];
      }];
-
 }
 
 - (void)slideoutImport

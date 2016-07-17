@@ -1666,6 +1666,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         [MainViewController changeNavBarOwner:self];
         [self setupNavBar];
         [self updateViews:nil];
+        [self startQRReader];
     }];
     
 }

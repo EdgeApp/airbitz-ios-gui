@@ -1205,7 +1205,11 @@ static BOOL bInitialized = false;
     NSError *error = [abc deleteLocalAccount:account];
     if (!error)
     {
-        [self updateUsernameSelector:[abc getLastAccessedAccount]];
+        NSString *username = [abc getLastAccessedAccount];
+        [self updateUsernameSelector:username];
+        
+        if (!username)
+            [self buttonLoginWithPasswordTouched:nil];
     }
     else
     {
