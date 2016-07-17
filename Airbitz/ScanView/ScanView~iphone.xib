@@ -102,6 +102,6 @@
     </objects>
     <resources>
         <image name="BLE_Button.png" width="50" height="50"/>
-        <image name="btn_album.png" width="17" height="17"/>
+        <image name="btn_album.png" width="36" height="36"/>
     </resources>
 </document>

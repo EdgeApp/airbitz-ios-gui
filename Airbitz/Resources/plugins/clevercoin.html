@@ -1450,120 +1450,229 @@ function _bridge() {
   Airbitz._denomListener = null;
   Airbitz._bridge = _bridge();
 
-  Airbitz.buffer = '';
-  Airbitz.bufferClear = function() {
-    Airbitz.buffer = '';
-  };
-  Airbitz.bufferAdd = function(s) {
-    Airbitz.buffer += s;
-  };
-
-
+  /**
+   * Returns a bitid address for the given uri and message
+   * @return {string} bitid address
+   */
   Airbitz.core.bitidAddress = function(uri, message) {
     return Airbitz._bridge.bitidAddress(uri, message);
   };
 
+  /**
+   * Returns a bitid signature for the given uri and message
+   * @return {string} bitid signature
+   */
   Airbitz.core.bitidSignature = function(uri, message) {
     return Airbitz._bridge.bitidSignature(uri, message);
   };
 
-  // Options has callback functions success and error.
+  /**
+   * Returns the user's currently selected wallet
+   * @return {object} a wallet
+   */
   Airbitz.core.selectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
 
+  /**
+   * Returns a list of the wallets for this account, included archived wallets
+   * @return {object} an array of wallets
+   */
   Airbitz.core.wallets = function(options) {
     Airbitz._bridge.wallets(options);
   };
 
+  /**
+   * Create a receive request from the provided wallet.
+   * @param {object} wallet - the wallet object
+   * @return {object} an object with an address and requestId
+   */
   Airbitz.core.createReceiveRequest = function(wallet, options) {
     Airbitz._bridge.createReceiveRequest(wallet, options);
   };
 
+  /**
+   * Finalizing a request marks the address as used and it will not be used for
+   * future requests. The metadata will also be written for this address.  This
+   * is useful so that when a future payment comes in, the metadata can be
+   * auto-populated.
+   * @return true if the request was successfully finalized.
+   * @param {object} wallet - the wallet object
+   * @param {string} requestId - the bitcoin address to finalize
+   */
   Airbitz.core.finalizeRequest = function(wallet, requestId) {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
-  // Takes a spend request and sends user to send confirmation screen to spend.
+  /**
+   * Request that the user spends.
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
+  /**
+   * Request that the user spends to 2 outputs.
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {string} toAddress2 - the recipient address
+   * @param {number} amountSatoshi2 - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
     Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
   };
 
-  // Takes a spend request and sends user to send confirmation screen to sign a tx.
+  /**
+   * Rquest that the user creates and signs a transaction
+   * @param {object} wallet - the wallet object
+   * @param {string} toAddress - the recipient address
+   * @param {number} amountSatoshi - how many satoshis to spend
+   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
+   */
   Airbitz.core.requestSign = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
     Airbitz._bridge.requestSign(wallet, toAddress, amountSatoshi, amountFiat, options);
   };
 
-  // Broadcast a raw tx
+  /**
+   * Broadcast a transaction to the bitcoin network.
+   * @param {object} the wallet object
+   * @param {string} the raw hex to be saved to the database
+   */
   Airbitz.core.broadcastTx = function(wallet, rawtx) {
     Airbitz._bridge.broadcastTx(wallet, tx);
   };
 
-  // Save a raw tx
+  /**
+   * Save the transaction to transaction database This should only be called if
+   * the transaction has been successfully broadcasted, either by using
+   * #Airbitz.core.broadcastTx or by a third party.
+   * @param {object} the wallet object
+   * @param {string} the raw hex to be saved to the database
+   */
   Airbitz.core.saveTx = function(wallet, rawtx) {
     Airbitz._bridge.saveTx(wallet, rawtx);
   };
 
+  /**
+   * Launches the native OS's camera or file browser so the user can select a
+   * file. The options.success callback will be triggered when complete.
+   */
   Airbitz.core.requestFile = function(options) {
     Airbitz._bridge.requestFile(options);
   };
 
+  /**
+   * Securely persist data into the Airbitz core. Only the current plugin will
+   * have access to that data.
+   * @param {string} key - the key to access the data in the future
+   * @param {object} data - the data to write, which will be encrypted and backed up
+   */
   Airbitz.core.writeData = function(key, data) {
     Airbitz._bridge.writeData(key, JSON.stringify(data));
   };
 
-  // Clears all data stored by the plugin.
+  /**
+   * Clear all data in the Airbitz core, for the current plugin.
+   */
   Airbitz.core.clearData = function() {
     Airbitz._bridge.clearData();
   };
 
-  // Retrives data for a JSON key stored for the plugin.
+  /**
+   * Read the securely stored data from disk.
+   * @param {string} key - the key to access the data.
+   */
   Airbitz.core.readData = function(key) {
     var data = Airbitz._bridge.readData(key);
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
+  /**
+   * There is affiliate data only if the account was installed via an affiliate
+   * link.
+   * @return {object} dictionary of affiliate data
+   */
   Airbitz.core.getAffiliateInfo = function() {
     var data = Airbitz._bridge.getAffiliateInfo();
     return (data && data !== 'undefined') ? JSON.parse(data) : null;
   };
 
+  /**
+   * Get the user's currently selected BTC denomination. It can be BTC, mBTC or
+   * bits.
+   * @return {string} a denomination string
+   */
   Airbitz.core.getBtcDenomination = function() {
     return Airbitz._bridge.getBtcDenomination();
   }
 
+  /**
+   * Convert satoshis to a fiat currency value.
+   * @param {number} satoshis - the satoshi to convert
+   * @param {number} currencyNum - the ISO 3166 currency code
+   * @return {number} the converted fiat value
+   */
   Airbitz.core.satoshiToCurrency = function(satoshi, currencyNum) {
     return Airbitz._bridge.satoshiToCurrency(satoshi, currencyNum);
   }
 
+  /**
+   * Convert a fiat currency value to a satoshi value.
+   * @param {number} currency - the fiat currency to convert
+   * @param {number} currencyNum - the ISO 3166 currency code
+   * @return {number} the converted satoshi value
+   */
   Airbitz.core.currencyToSatoshi = function(currency, currencyNum) {
     return Airbitz._bridge.currencyToSatoshi(currency, currencyNum);
   }
 
+  /**
+   * Formats satoshis to display to the user. This uses the user's BTC
+   * denomination to format including the correct code and symbol.
+   * @param {number} satoshi - the satoshi value to format
+   * @param {boolean} withSymbol - whether to include a currency symbol when formatting
+   * @return {string} the formatted satoshi value in either BTC, mBTC or bits.
+   */
   Airbitz.core.formatSatoshi = function(satoshi, withSymbol) {
     return Airbitz._bridge.formatSatoshi(satoshi, withSymbol);
   }
 
+  /**
+   * Formats currencies to display to the user. This uses the user's BTC
+   * denomination to format including the correct code and symbol.
+   * @param {number} currency - the satoshi value to format
+   * @param {boolean} withSymbol - whether to include a currency symbol when formatting
+   * @return {string} the formatted satoshi value in either BTC, mBTC or bits.
+   */
   Airbitz.core.formatCurrency = function(currency, currencyNum, withSymbol) {
     return Airbitz._bridge.formatCurrency(currency, currencyNum, withSymbol);
   }
 
+  /**
+   * Fetch a configuration value. These are set in the native code, before the
+   * webview is every loaded.
+   * @param {key} key - the configuration key to fetch a value for
+   * @return {string}
+   */
   Airbitz.config.get = function(key) {
     return Airbitz._bridge.getConfig(key);
   };
 
-  /* Callback is called when wallet is changed AND every time plugin is created.
-  ** Callback is provided wallet as parameter.
-  */
+  /**
+   * Callback is called when wallet is changed AND every time plugin is created.
+   * @param {function} callback - a function that will be called when the user
+   * changes their currently selected wallet.
+   */
   Airbitz.core.setWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
-  //
   Airbitz._bridge.walletChanged = function(newWallet) {
     if (Airbitz._walletListener) {
       var j = JSON.parse(newWallet);
@@ -1573,6 +1682,11 @@ function _bridge() {
     }
   };
 
+  /**
+   * Callback is called when the user has changed their BTC denomination.
+   * @param {function} callback - a function that will be called when the user
+   * changes their BTC denomination.
+   */
   Airbitz.core.setDenominationChangeListener = function(callback) {
     Airbitz._denomListener = callback;
   };
@@ -1586,6 +1700,11 @@ function _bridge() {
     }
   };
 
+  /**
+   * Removes an exchange rate listener for a currency number
+   * @param {number} currencyNum - the currency number
+   * @param {function} callback - the callback to remove
+   */
   Airbitz.core.removeExchangeRateListener = function(currencyNum, callback) {
     var i = Airbitz._listeners[currencyNum].indexOf(callback);
     Airbitz._listeners[currencyNum].splice(i, 1);
@@ -1599,6 +1718,12 @@ function _bridge() {
     }
   };
 
+  /**
+   * Add an exchange rate listener that will be called when the exchange rate
+   * is updated.
+   * @param {number} currencyNum - the currency number
+   * @param {function} callback - the callback to respond to exchange rate updes
+   */
   Airbitz.core.addExchangeRateListener = function(currencyNum, callback) {
     if (!Airbitz._listeners[currencyNum]) {
       Airbitz._listeners[currencyNum] = [];
@@ -1606,57 +1731,104 @@ function _bridge() {
     Airbitz._listeners[currencyNum].push(callback);
   };
 
-  Airbitz.core.removeExchangeRateListener = function(currencyNum, callback) {
-    var i = Airbitz._listeners[currencyNum].indexOf(callback);
-    Airbitz._listeners[currencyNum].splice(i, 1);
-  };
-
+  /**
+   * Launches a native alert dialog.
+   * @param {string} title - the dialog title
+   * @param {string} message - the message body of the dialog
+   */
   Airbitz.ui.showAlert = function(title, message, options) {
     Airbitz._bridge.showAlert(title, message, options || {});
   };
 
+  /**
+   * Hide an alerts that are currently displayed.
+   */
   Airbitz.ui.hideAlert = function(title, message, options) {
     Airbitz._bridge.hideAlert();
   };
 
+  /**
+   * Set the title of the current view. This updates the native apps titlebar.
+   * @param {string} title - the title string
+   */
   Airbitz.ui.title = function(s) {
     Airbitz._bridge.title(s);
   };
 
+  /**
+   * Log messages to the ABC core at a particular level.
+   * @param {number} level - ERROR = 0, WARNING = 1, INFO = 2, DEBUG = 3;
+   */
   Airbitz.ui.debugLevel = function(level, text) {
     Airbitz._bridge.debugLevel(level, text);
   };
 
-  Airbitz.ui.showNavBar = function() {
-    Airbitz._bridge.showNavBar();
-  };
-
-  Airbitz.ui.hideNavBar = function() {
-    Airbitz._bridge.hideNavBar();
-  };
-
+  /**
+   * Go back in the navigation stack. 
+   */
   Airbitz.ui.back = function() {
     Airbitz._bridge.back();
   };
 
+  /**
+   * Exit the plugin. This pops the current fragment or view controller of the
+   * stack and destroys the webview.
+   */
   Airbitz.ui.exit = function() {
     Airbitz._bridge.exit();
   };
 
+  /**
+   * Launch an external web page or application.
+   * @param {string} uri - the uri or url to open in a different app.
+   */
+  Airbitz.ui.launchExternal = function(uri) {
+    Airbitz._bridge.launchExternal(uri);
+  };
+
+
+  /**
+   * Clear the naviation stack. Helpful when overriding the behavior of the
+   * back button.
+   */
   Airbitz.ui.navStackClear = function() {
     Airbitz._bridge.navStackClear();
   };
 
+  /**
+   * Push a new URL onto the nav stack.
+   */
   Airbitz.ui.navStackPush = function(path) {
     Airbitz._bridge.navStackPush(path);
   };
 
+  /**
+   * Pop a URL off the nav stack.
+   */
   Airbitz.ui.navStackPop = function() {
     Airbitz._bridge.navStackPop();
   };
 
-  Airbitz.ui.launchExternal = function(uri) {
-    Airbitz._bridge.launchExternal(uri);
+  /**
+   * @deprecated Airbitz no longer supports this behavior.
+   */
+  Airbitz.ui.showNavBar = function() {
+    Airbitz._bridge.showNavBar();
+  };
+
+  /**
+   * @deprecated Airbitz no longer supports this behavior.
+   */
+  Airbitz.ui.hideNavBar = function() {
+    Airbitz._bridge.hideNavBar();
+  };
+
+  Airbitz.buffer = '';
+  Airbitz.bufferClear = function() {
+    Airbitz.buffer = '';
+  };
+  Airbitz.bufferAdd = function(s) {
+    Airbitz.buffer += s;
   };
 
 })(this);
@@ -9138,7 +9310,7 @@ var CleverCoin = (function () {
         var signatureParameters = {};
         var nonceArray = _microtime().split(' ');
         var nonce = nonceArray[1] + _pad(nonceArray[0].substring(2,6),6);
-        
+
         headers['X-CleverAPI-Key'] = signatureParameters['X-CleverAPI-Key'] = key;
         headers['X-CleverAPI-Nonce'] = signatureParameters['X-CleverAPI-Nonce'] = nonce;
         signatureParameters['X-CleverAPI-Request'] = method + ' ' + path;
@@ -9371,6 +9543,19 @@ var CleverCoin = (function () {
 
     depositSepa: function(callback) {
       return this._request(true, '/euro/deposit/sepa', {
+        'callback': callback
+      });
+    },
+
+    withdrawalSepa: function(amount, iban, sepaDescription, callback) {
+      var data = {
+        'amount': amount,
+        'toIBAN': iban,
+        'sepadescription': sepaDescription
+      };
+      return this._request(true, '/euro/withdrawal', {
+        'method': 'POST',
+        'data': data,
         'callback': callback
       });
     },
@@ -9616,7 +9801,7 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
       $scope.order.paymentMethod = {"name":"Wallet","lockDuration":0,"type":"pull"};
     } else {
       Airbitz.ui.title('Sell Bitcoin');
-      // $scope.order.paymentMethod = {"name":"Wallet","lockDuration":1,"type":"pull"};
+       $scope.order.paymentMethod = {"name":"DirectDeposit","lockDuration":1,"type":"pull"};
     }
 
     Prices.setBuyQty(1).then(function() {
@@ -9638,7 +9823,10 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     };
     $scope.next = function() {
       if ($scope.order.orderFiatInput < 1.0) {
-        Airbitz.ui.showAlert('', 'Orders must be greater than 1 Euro.');
+        Airbitz.ui.showAlert('', 'Buy orders must be greater than 1 Euro.');
+      } else if($scope.order.orderAction == 'sell' && $scope.order.orderFiatInput < 10.0)
+      {
+        Airbitz.ui.showAlert('', 'Sell orders must be greater than 10 Euro.');
       } else {
         Airbitz.ui.showAlert('', 'Requesting quote...', { 'showSpinner': true });
         var $amount = 0;
@@ -9646,16 +9834,16 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
 
         // Check if Euro value has not more than 2 digits
         var $pattern = /^\d(\.\d{1,2})?$/;
-        if ($pattern.test($scope.order.orderFiatInput)) {  //buy as Euros
+        if ($pattern.test($scope.order.orderFiatInput)) {  //buy/sell as Euros
           $amount = parseFloat($scope.order.orderFiatInput).toFixed(2);
           $currency = "EUR"
         }
-        else  // buy as Bitcoins
+        else  // buy/sell as Bitcoins
         {
           $amount = parseFloat($scope.order.orderBtcInput).toFixed(8);
           $currency = "BTC"
         }
-        DataFactory.requestBuy($amount, $currency, $scope.order.paymentMethod.name).then(function(data) {
+        DataFactory.requestExchange($amount, $currency, $scope.order.paymentMethod.name).then(function(data) {
           Airbitz.ui.hideAlert();
           $scope.order.quote = data;
           $state.go("reviewOrder");
@@ -9684,8 +9872,10 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
           $state.go('orderReceipt');
         }, Error.reject);
       } else {
-        Airbitz.ui.showAlert('', 'Executing sell...', { 'showSpinner': true });
-        DataFactory.sell(order.orderBtcInput, order.paymentMethod.name).then(function(data) {
+        UserFactory.fetchBanks();
+        var banks = UserFactory.getBanks();
+        var iban = banks[0].IBAN;
+        DataFactory.confirmSell(order.quote.linkOrCode, order.quote.toPay, order.quote.amount, iban).then(function(data) {
           Airbitz.ui.showAlert('Sold Bitcoin', 'You sold bitcoin!');
           $state.go('orderReceipt');
         }, Error.reject);
@@ -9774,13 +9964,19 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
       Airbitz.ui.showAlert('', 'Creating account...', {
         'showSpinner': true
       });
-      UserFactory.registerUser($scope.account.firstName, $scope.account.email, $scope.account.password).then(function() {
-        Airbitz.ui.showAlert('', 'Account created...');
+
+      UserFactory.requestLink($scope.account.email).then(function() {
+        Airbitz.ui.showAlert('', 'Account connected...');
         $state.go('pendingActivation');
       }, function(e) {
-        console.log(e);
-        var msg = 'Unable to signup at this time.\n' + Error.errorMap(e);
-        Airbitz.ui.showAlert('Error', msg);
+        UserFactory.registerUser($scope.account.firstName, $scope.account.email, $scope.account.password).then(function() {
+          Airbitz.ui.showAlert('', 'Account created...');
+          $state.go('pendingActivation');
+        }, function(e) {
+          console.log(e);
+          var msg = 'Unable to signup at this time.\n' + Error.errorMap(e);
+          Airbitz.ui.showAlert('Error', msg);
+        });
       });
     };
   }
@@ -9837,11 +10033,11 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     // set variables that might be cached locally to make sure they load faster if available
     $scope.account = UserFactory.getUserAccount();
     $scope.userStatus = UserFactory.getUserAccountStatus();
-    // $scope.banks = UserFactory.getBanks();
+    $scope.banks = UserFactory.getBanks();
     $scope.wallets = UserFactory.getWallets();
 
     var showOpts = function(s) {
-      $scope.showOptions = !s.userCanTransact; // || $scope.banks.length == 0;
+      $scope.showOptions = !s.userCanTransact || $scope.banks.length == 0;
     };
     showOpts($scope.account);
 
@@ -9858,6 +10054,10 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
       return UserFactory.fetchUserAccountStatus().then(function(b) {
         $scope.userStatus = b;
       });
+    }).then(function() {
+       return UserFactory.fetchBanks(function(b) {
+         $scope.banks = b;
+     });
     }).then(function() {
       return UserFactory.fetchWallets(function(b) {
         $scope.wallets = b;
@@ -9908,10 +10108,6 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
         counter++;
         msg += '<h5><strong>' + counter + "</strong>. Please verify your address.</h5>";
       }
-      // if ($scope.banks.length == 0) {
-      //   counter++;
-      //   msg += '<h5><strong>' + counter + "</strong>. Please add a bank account.</h5>";
-      // }
       if (msg !== '') {
         msg = '<h4 style="margin-top: 0;">To Buy or Sell Bitcoin:</h4>' + msg;
       }
@@ -9919,7 +10115,14 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
     };
 
     $scope.userInformation = function() {
-      if ($scope.account.userCanTransact) {
+      UserFactory.fetchAccount();
+      var account = UserFactory.getUserAccount();
+      if ($scope.account.verificationState == "Verified" || $scope.account.verificationProgressState == "Verified") {
+        Airbitz.ui.showAlert('', 'User information have already been verified. Cannot be resubmitted.');
+      //if ($scope.account.verificationState == "Verified") {
+//      if ($scope.account.verified) {
+  //    if (["Verified"].indexOf($scope.account.verificationState) > -1) {
+      } else if (account.verificationProgressState == "Exported") {
         Airbitz.ui.showAlert('', 'User information has been submitted. Cannot be resubmitted.');
       } else if($scope.account.requiredDataSupplied) {
         Airbitz.ui.showAlert('', 'User information has already been submitted.');
@@ -9962,7 +10165,18 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
       $state.go('exchangeOrder', {'orderAction': 'buy'});
     };
     $scope.sell = function() {
-      Airbitz.ui.showAlert('', 'Sell is coming soon!');
+      UserFactory.fetchBanks();
+      var banks = UserFactory.getBanks();
+      if (banks.length == 0) {
+        Airbitz.ui.showAlert('', 'Please add a bank account.');
+        return;
+      }
+      if (!banks[0].verified) {
+        Airbitz.ui.showAlert('', 'Please wait until your bank account is verified.');
+        return;
+      }
+      DataFactory.getOrder(true);
+      $state.go('exchangeOrder', {'orderAction': 'sell'});
     };
     $scope.showAccountOptions = function() {
       $scope.showOptions = !$scope.showOptions;
@@ -9971,8 +10185,10 @@ b;b+=4)K?(A?(G=300032,d=c[0]-1413257819,h=d-150054599<<0,g=d+24177077<<0):(G=704
 
   function userInformationController($scope, $state, Error, UserFactory) {
     Airbitz.ui.title('User Information');
-    $scope.date = new Date();
-    $scope.date.setYear($scope.date.getYear() - 18 );
+    $scope.maxDate = new Date();
+    $scope.maxDate.setYear($scope.maxDate.getYear() - 18 );
+    $scope.minDate = new Date();
+    $scope.minDate.setYear($scope.minDate.getYear() - 100 );
     $scope.account = UserFactory.getUserAccount();
     $scope.countries = UserFactory.getCountries();
     $scope.supportedCountries = UserFactory.getSupportedCountries();
@@ -10477,7 +10693,7 @@ var app = angular.module('app.core', [
     var redirectUri = Airbitz.config.get('REDIRECT_URI');
     factory.registerUser = function(name, email, password) {
       var d = $q.defer();
-      var mailTitle = 'Welcome to Airbitz on Clevercoin';
+      var mailTitle = 'Welcome to Airbitz on CleverCoin';
       var mailMessage = [ 'Dear %1$s,<br /><br />',
         'You have created an account at CleverCoin with this e-mail address (%2$s). Welcome!<br />',
         'Click the button below to activate your account.<br /><br />',
@@ -10515,7 +10731,21 @@ var app = angular.module('app.core', [
     factory.requestLink = function(email) {
       var d = $q.defer();
       CcFactory.requestLink(email, redirectUri, function(_, c, b) {
-        (c >= 200 && c <= 300) ? d.resolve(b) : d.reject(b);
+        console.log(JSON.stringify(b));
+        if (c >= 200 && c <= 300) {
+          var account = factory.getUserAccount();
+          account.name = name;
+          account.email = email;
+          account.isSignedIn = true;
+          account.key = b.key;
+          account.secret = b.secret;
+          CcFactory.clientKey = account.key;
+          CcFactory.clientSecret = account.secret;
+          Airbitz.core.writeData('account', account);
+          d.resolve(b);
+        } else {
+          d.reject(b);
+        }
       });
       return d.promise;
     };
@@ -10604,7 +10834,9 @@ var app = angular.module('app.core', [
             account.surname = b.surname || account.surname;
             account.email = b.email || account.email;
             account.verificationState = b.verificationState || account.verificationState;
-            account.userCanTransact = account.verificationState == "Verified";
+            account.verificationProgressState = b.verificationProgressState || account.verificationProgressState;
+            account.userCanTransact = (account.verificationState == "Verified") && (account.verificationProgressState == "Verified");
+            account.requiredDataSupplied = b.requiredDataSupplied;
             account.gender = b.gender || account.gender;
             if (b.birthday) {
               var arr = b.birthday.split("-");
@@ -10898,19 +11130,19 @@ var app = angular.module('app.core', [
       return d.promise;
     };
 
-    factory.requestBuy = function(qty, currency, paymentMethod) {
+    factory.requestExchange = function(qty, currency, paymentMethod) {
       var d = $q.defer();
       var uri = Airbitz.config.get('REDIRECT_URI');
       var wallet = Airbitz.currentWallet;
-      createAddress(wallet, 'CleverCoin', 0, 0, 'Exchange:CleverCoin', '', function(request) {
-        var address = request['address'];
-        CcFactory.quote('bid', qty, currency, paymentMethod, uri, '', address, function(e, r, b) {
+      if (paymentMethod == "DirectDeposit") // sell
+      {
+        CcFactory.quote('ask', qty, currency, paymentMethod, uri, '', '', function(e, r, b) {
           if (r == 200) {
             if (true && !b.fees) {
               // TODO: once CC fixes fees, remove this
               // var quoted = Prices.currentBuy.btcPrice;
               var quoted = b.btcPrice / 1.01;
-              var diff = b.toPay - b.amount * quoted;
+              var diff = b.amount - b.toPay * quoted;
               b.fee = diff;
               b.btcPrice = quoted;
             }
@@ -10921,9 +11153,30 @@ var app = angular.module('app.core', [
             d.reject(b);
           }
         });
-      }, function() {
-        Airbitz.ui.alert('Unable to create a receive address. Please try again later.');
-      });
+      } else{ // buy
+        createAddress(wallet, 'CleverCoin', 0, 0, 'Exchange:Buy Bitcoin', '', function(request) {
+          var address = request['address'];
+          CcFactory.quote('bid', qty, currency, paymentMethod, uri, '', address, function(e, r, b) {
+            if (r == 200) {
+              if (true && !b.fees) {
+                // TODO: once CC fixes fees, remove this
+                // var quoted = Prices.currentBuy.btcPrice;
+                var quoted = b.btcPrice / 1.01;
+                var diff = b.toPay - b.amount * quoted;
+                b.fee = diff;
+                b.btcPrice = quoted;
+              }
+              b.amount = Math.abs(b.amount);
+              b.expires = new Date(b.expires * 1000);
+              d.resolve(b);
+            } else {
+              d.reject(b);
+            }
+          });
+        }, function() {
+          Airbitz.ui.alert('Unable to create a receive address. Please try again later.');
+        });
+      }
       return d.promise;
     }
 
@@ -10941,11 +11194,36 @@ var app = angular.module('app.core', [
       return d.promise;
     };
 
-    factory.sell = function(qty, paymentMethod) {
+    factory.confirmSell = function(linkOrCode, amountBtc, amountFiat, iban) {
+      var notes = formatNotes("Sold", amountFiat);
       var wallet = Airbitz.currentWallet;
       var d = $q.defer();
-      CcFactory.quote('ask', qty, 'BTC', paymentMethod, uri, '', null, function(e, r, b) {
-        r == 200 ? d.resolve(b) : d.reject(b);
+
+      Airbitz.core.requestSpend(wallet, linkOrCode, btcToSatoshi(amountBtc), amountFiat, {
+          label: 'CleverCoin',
+          category: 'Exchange:Sell Bitcoin',
+          bizId: ExchangeFactory.bizId,
+          notes: notes,
+          success: function(res) {
+            if (res && res.back) {
+                d.reject({"code": "IgnoreAction"});
+            } else {
+                CcFactory.withdrawalSepa(amountFiat, iban, "CleverCoin Sell",function(e, r, b) {
+                if (r == 200) {
+                    var order = factory.getOrder(false);
+                    StatsFactory.recordEvent('sell', b, amountFiat);
+                    d.resolve(b);
+                } else {
+                    d.reject(b);
+                }
+                });
+                d.resolve({'sellAddress': linkOrCode,
+                            'signedTx': res});
+            }
+          },
+          error: function() {
+          d.reject({"code": "9999", "message": "Error during send"});
+          }
       });
       return d.promise;
     };
@@ -11519,11 +11797,13 @@ module.run(['$templateCache', function($templateCache) {
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Amount</td>\n' +
-    '          <td>{{ order.quote.amount || 0 | formatBtc }} </td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'buy\' }}">{{ order.quote.amount || 0 | formatBtc }} </td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'sell\' }}">{{ order.quote.amount || 0 | roundFiat }}  {{ exchange.currency }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Cost </td>\n' +
-    '          <td>{{ order.quote.toPay || 0 | roundFiat }} {{ exchange.currency }}</td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'buy\' }}">{{ order.quote.toPay || 0 | roundFiat }} {{ exchange.currency }}</td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'sell\' }}">{{ order.quote.toPay || 0 | formatBtc }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>BTC Price</td>\n' +
@@ -11595,11 +11875,13 @@ module.run(['$templateCache', function($templateCache) {
     '      <tbody>\n' +
     '        <tr>\n' +
     '          <td>Amount</td>\n' +
-    '          <td>{{ order.quote.amount || 0 | formatBtc }} </td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'buy\' }}">{{ order.quote.amount || 0 | formatBtc }} </td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'sell\' }}">{{ order.quote.amount || 0 | roundFiat }}  {{ exchange.currency }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>Cost</td>\n' +
-    '          <td>{{ order.quote.toPay || 0 | roundFiat }} {{ exchange.currency }}</td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'buy\' }}">{{ order.quote.toPay || 0 | roundFiat }} {{ exchange.currency }}</td>\n' +
+    '          <td ng-show="{{ order.orderAction === \'sell\' }}">{{ order.quote.toPay || 0 | formatBtc }}</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '          <td>BTC Price</td>\n' +
@@ -11726,8 +12008,8 @@ module.run(['$templateCache', function($templateCache) {
     '        <span class="list-group-item-heading">User Information</span>\n' +
     '        <p class="list-group-item-text">Tap to edit</p>\n' +
     '        <label class="status label label-outline pull-right"\n' +
-    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 || account.userCanTransact)}">\n' +
-    '               {{ (account.termsAgreedVersion == 1 || account.userCanTransact) | statusFilter }}</label>\n' +
+    '               ng-class="{\'label-success\': (account.termsAgreedVersion == 1 && account.userCanTransact)}">\n' +
+    '               {{ (account.termsAgreedVersion == 1 && account.userCanTransact) | statusFilter }}</label>\n' +
     '      </li>\n' +
     '      <li ng-if="showOptions" ng-click="identity()" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '        <span class="list-group-item-heading">Verify Identity</span>\n' +
@@ -11741,7 +12023,6 @@ module.run(['$templateCache', function($templateCache) {
     '        <label class="status label label-outline pull-right {{userStatus.userAddressState | stateClassFilter }}">\n' +
     '          {{ userStatus.userAddressState | stateFilter }}</label>\n' +
     '      </li>\n' +
-    '      <!--\n' +
     '      <li ng-if="showOptions" data-ng-repeat="bank in banks" class="ng-trans ng-trans-scale-up easeOutBack list-group-item">\n' +
     '          <span class="list-group-item-heading">Bank Account</span>\n' +
     '          <p class="list-group-item-text">{{ bank.bank }} {{ bank.IBAN }}</p>\n' +
@@ -11753,7 +12034,6 @@ module.run(['$templateCache', function($templateCache) {
     '        <p class="list-group-item-text">Tap to Add</p>\n' +
     '        <label class="status label label-outline pull-right">{{ false | statusFilter }}</label>\n' +
     '      </li>\n' +
-    '      -->\n' +
     '    </ul>\n' +
     '  </div>\n' +
     '</div>\n' +
@@ -12008,7 +12288,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="form-group col-xs-12">\n' +
     '      <label for="inputBankCountry" class="">Bank Country</label>\n' +
     '      <select\n' +
-    '        ng-options="o.name for o in countries"\n' +
+    '        ng-options="o.name for o in supportedCountries"\n' +
     '        ng-model="bankcountryObject" class="form-control"\n' +
     '        id="inputBankCountry" name="bankcountry" required="" />\n' +
     '        <option value="">Select a country</option>\n' +
@@ -12048,7 +12328,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '    <div class="col-xs-6 no-pad">\n' +
     '      <button type="button"\n' +
-    '        ng-click="save()" \n' +
+    '        ng-click="save()"\n' +
     '        ng-disabled="form.$invalid || bankstatement.length == 0"\n' +
     '        class="btn btn-lg btn-block btn-success">Save</button>\n' +
     '    </div>\n' +
@@ -12676,7 +12956,9 @@ module.run(['$templateCache', function($templateCache) {
     '            autocorrect="off"\n' +
     '            autocomplete="off"\n' +
     '            required=""\n' +
-    '            max="{{date | date:\'yyyy-MM-dd\'}}" />\n' +
+    '            max="{{maxDate | date:\'yyyy-MM-dd\'}}"\n' +
+    '            min="{{minDate | date:\'yyyy-MM-dd\'}}"\n' +
+    '            />\n' +
     '      <div class="input-error" ng-show="form.$submitted || form.birthday.$touched">\n' +
     '        <span ng-show="form.birthday.$error.required" class="label label-danger">Required</span>\n' +
     '      </div>\n' +

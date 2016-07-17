@@ -1,4 +1,3 @@
-
 /* Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button"; */
 "2uL-vk-tLg.normalTitle" = "5";
 
@@ -9,7 +8,7 @@
 "Emr-ag-G6B.normalTitle" = "8";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button"; */
-"JE3-3X-s8v.normalTitle" = "Done";
+"JE3-3X-s8v.normalTitle" = "完成";
 
 /* Class = "UIButton"; normalTitle = "*"; ObjectID = "MCV-gu-4YU"; Note = "Calculator Button"; */
 "MCV-gu-4YU.normalTitle" = "*";
@@ -32,9 +31,6 @@
 /* Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button"; */
 "V76-TG-gfn.normalTitle" = "0";
 
-/* Class = "UIButton"; normalTitle = "."; ObjectID = "WkG-ho-3qR"; Note = "Calculator Button"; */
-"WkG-ho-3qR.normalTitle" = ".";
-
 /* Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button"; */
 "b8e-QF-DXa.normalTitle" = "1";
 
@@ -45,7 +41,7 @@
 "hpP-b8-SWQ.normalTitle" = "+";
 
 /* Class = "UIButton"; normalTitle = "< Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button"; */
-"tNK-PX-QMO.normalTitle" = "< Del";
+"tNK-PX-QMO.normalTitle" = "< 删除";
 
 /* Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button"; */
 "vjB-0i-g2w.normalTitle" = "2";
@@ -58,3 +54,4 @@
 
 /* Class = "UIButton"; normalTitle = "%"; ObjectID = "xYy-J7-W9D"; Note = "Calculator Button"; */
 "xYy-J7-W9D.normalTitle" = "%";
+

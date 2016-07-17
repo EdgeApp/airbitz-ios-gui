@@ -1,0 +1,34 @@
+crowdin-cli download
+#xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es.xliff -project Airbitz.xcodeproj
+
+mkdir Airbitz/Resources/html/zh-Hans.lproj/
+mkdir Airbitz/Resources/html/zh-CN.lproj/
+mkdir Airbitz/Resources/html/es-MX.lproj/
+mkdir Airbitz/Resources/html/es-419.lproj/
+mkdir Airbitz/Resources/html/pt-BR.lproj/
+mkdir Airbitz/Resources/html/fr-CA.lproj/
+
+mkdir Airbitz/Resources/Text/zh-Hans.lproj/
+mkdir Airbitz/Resources/Text/zh-CN.lproj/
+mkdir Airbitz/Resources/Text/es-MX.lproj/
+mkdir Airbitz/Resources/Text/es-419.lproj/
+mkdir Airbitz/Resources/Text/pt-BR.lproj/
+mkdir Airbitz/Resources/Text/fr-CA.lproj/
+
+# html files
+
+cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-Hans.lproj/
+cp -a Airbitz/Resources/html/zh.lproj/ Airbitz/Resources/html/zh-CN.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-MX.lproj/
+cp -a Airbitz/Resources/html/es.lproj/ Airbitz/Resources/html/es-419.lproj/
+cp -a Airbitz/Resources/html/pt.lproj/ Airbitz/Resources/html/pt-BR.lproj/
+cp -a Airbitz/Resources/html/fr.lproj/ Airbitz/Resources/html/fr-CA.lproj/
+
+# Text files
+
+cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-Hans.lproj/
+cp -a Airbitz/Resources/Text/zh.lproj/ Airbitz/Resources/Text/zh-CN.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-MX.lproj/
+cp -a Airbitz/Resources/Text/es.lproj/ Airbitz/Resources/Text/es-419.lproj/
+cp -a Airbitz/Resources/Text/pt.lproj/ Airbitz/Resources/Text/pt-BR.lproj/
+cp -a Airbitz/Resources/Text/fr.lproj/ Airbitz/Resources/Text/fr-CA.lproj/

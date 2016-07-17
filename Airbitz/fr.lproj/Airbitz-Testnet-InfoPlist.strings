@@ -1,0 +1,6 @@
+"NSBluetoothPeripheralUsageDescription" = "Le Bluetooth est utilisé pour se connecter au autres et effectuer des opérations de courtes distances.";
+"NSCameraUsageDescription" = "Votre caméra est utilisé pour scanner les codes QR.";
+"NSContactsUsageDescription" = "Votre liste de contacts est utilisé pour indiquer les destinataires et les expéditeurs.";
+"NSLocationUsageDescription" = "Votre emplacement est utilisé pour trouver des entreprises dans votre région.";
+"NSLocationWhenInUseUsageDescription" = "Votre emplacement est utilisé pour trouver des entreprises dans votre région.";
+"NSPhotoLibraryUsageDescription" = "Vous pouvez sélectionner une photo d’un code QR à scanner.";

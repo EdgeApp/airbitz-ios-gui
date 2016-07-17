@@ -18,4 +18,9 @@
 
 @implementation AirbitzViewController
 
+- (void)forceUpdateNavBar;
+{
+    
+}
+
 @end

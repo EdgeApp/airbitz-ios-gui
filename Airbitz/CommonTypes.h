@@ -10,6 +10,8 @@
 
 #ifdef AIRBITZ_DEVELOP
 #define AIRBITZ_URI_PREFIX @"airbitz-develop"
+#else
+#define AIRBITZ_DEVELOP 0
 #endif
 
 #ifdef AIRBITZ_TESTNET

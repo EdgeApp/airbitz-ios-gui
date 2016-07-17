@@ -105,7 +105,7 @@
 - (void)updateNavBar;
 {
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(buttonBackTouched) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched) fromObject:self];
 }
 
 
@@ -159,7 +159,7 @@
 - (void)buttonInfoTouched
 {
     [self dismissPopupPicker];
-    [InfoView CreateWithHTML:@"infoExportWallet" forView:self.view];
+    [InfoView CreateWithHTML:@"info_export_wallet" forView:self.view];
 }
 
 - (IBAction)buttonCSVTouched:(id)sender
@@ -225,7 +225,7 @@
         self.buttonSelector.selectedItemIndex = abcAccount.currentWalletIndex;
 
         NSString *walletName;
-        walletName = [NSString stringWithFormat:@"Export From: %@ ▼", abcAccount.currentWallet.name];
+        walletName = [NSString stringWithFormat:@"%@ %@ ▼",export_from_text, abcAccount.currentWallet.name];
 
         [MainViewController changeNavBarTitleWithButton:self title:walletName action:@selector(didTapTitle:) fromObject:self];
         if (!([abcAccount.arrayWallets containsObject:abcAccount.currentWallet]))

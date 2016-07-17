@@ -512,7 +512,7 @@ static bool bInitialized = false;
 
 - (void)launchATMSearch;
 {
-    self.searchBarSearch.text = atmSearchString;
+    self.searchBarSearch.text = atmSearchString_en;
     self.searchBarLocation.text = @"";
     [self transitionMode:DIRECTORY_MODE_MAP];
 }
@@ -523,12 +523,12 @@ static bool bInitialized = false;
     switch (sender.tag)
     {
         case TAG_CATEGORY_RESTAURANTS:
-            self.searchBarSearch.text = restaurantsAndFoodTrucks;
+            self.searchBarSearch.text = restaurantsAndFoodTrucks_en;
             self.searchBarLocation.text = @"";
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
         case TAG_CATEGORY_COFFEE:
-            self.searchBarSearch.text = coffeeAndTea;
+            self.searchBarSearch.text = coffeeAndTea_en;
             self.searchBarLocation.text = @"";
             [self transitionMode:DIRECTORY_MODE_MAP];
             break;
@@ -536,17 +536,17 @@ static bool bInitialized = false;
             [self launchATMSearch];
             break;
         case TAG_CATEGORY_GIFTCARDS:
-            self.searchBarSearch.text = giftCards;
+            self.searchBarSearch.text = giftCards_en;
             self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_ELECTRONICS:
-            self.searchBarSearch.text = electronicsText;
+            self.searchBarSearch.text = electronicsText_en;
             self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
         case TAG_CATEGORY_SHOPPING:
-            self.searchBarSearch.text = shoppingText;
+            self.searchBarSearch.text = shoppingText_en;
             self.searchBarLocation.text = onTheWebString;
             [self transitionMode:DIRECTORY_MODE_ON_THE_WEB_LISTING];
             break;
@@ -1946,7 +1946,6 @@ static bool bInitialized = false;
 
         self.dividerViewTop.constant = tfoy + thvfsh - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
 //        self.dividerViewTop.constant = tfoy + thvfsh - offset;
-        CGFloat dvt = self.dividerViewTop.constant;
         
 //        self.dividerViewTop.constant = self.tableView.frame.origin.y + self.tableView.tableHeaderView.frame.size.height - DIVIDER_BAR_TRANSPARENT_AREA_HEIGHT - offset;
         ABCLog(2,@"position non-control divider coords: %f <- %f %f %f\n", self.dividerViewTop.constant, offset, self.tableView.frame.origin.y, self.tableView.tableHeaderView.frame.size.height);

@@ -76,7 +76,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                             <state key="normal" title="Agree ">
-                                <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="IAgreeButton:" destination="0sA-bv-uep" eventType="touchUpInside" id="Cqs-NV-rb4"/>

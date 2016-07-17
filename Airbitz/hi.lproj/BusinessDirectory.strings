@@ -1,0 +1,51 @@
+/* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
+"DlF-tR-T08.text" = "व्यावसायिक नाम";
+
+/* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
+"GGS-YR-zt1.normalTitle" = "खरीदारी";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
+"KxI-24-PCF.text" = "वर्ग";
+
+/* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
+"Sfb-cf-6wF.normalTitle" = "अन्य वर्ग";
+
+/* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
+"a78-ih-LDk.normalTitle" = "कॉफ़ी और चाय";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
+"aNa-3g-QXd.placeholder" = "खोज";
+
+/* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
+"b1E-1G-btq.normalTitle" = "उपहार कार्ड";
+
+/* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
+"baO-FH-Oy4.text" = "आपके पास";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
+"f2g-xP-19U.text" = "लेबल";
+
+/* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
+"ga1-R0-wof.text" = "BTC टाइप करें";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
+"heE-og-iXA.placeholder" = "खोजें";
+
+/* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
+"kTm-at-TUR.normalTitle" = "विद्युत";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
+"lFC-s8-IJT.text" = "लेबल";
+
+/* Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b"; */
+"oPG-fA-f9b.text" = "बायाँलेबल";
+
+/* Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S"; */
+"oyK-ph-99S.normalTitle" = "रेस्टोरेंट";
+
+/* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
+"sWr-pd-hBY.normalTitle" = "एटीएम";
+
+/* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
+"wy7-Kv-3ap.text" = "पता 1234";
+

@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
 @property (weak, nonatomic) IBOutlet UIView                 *viewDisplayArea;
 
+@property (weak, nonatomic) IBOutlet UIButton               *addressButton;
 @property (weak, nonatomic) IBOutlet UIImageView            *imageTopEmboss;
 @property (weak, nonatomic) IBOutlet UILabel                *labelSendFromTitle;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2    *walletSelector;
@@ -251,6 +252,7 @@
     {
         // This is a wallet to wallet transfer
         self.addressLabel.text = self.destWallet.name;
+        self.addressButton.enabled = false;
     }
     else if (self.paymentRequest)
     {
@@ -264,9 +266,13 @@
             self.addressLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.paymentRequest.merchant, self.paymentRequest.domain];
         else
             self.addressLabel.text = self.paymentRequest.domain;
+        self.addressButton.enabled = false;
     }
     else if (self.parsedURI && self.parsedURI.address)
     {
+        self.addressLabel.textColor = [Theme Singleton].colorTextLink;
+        self.addressButton.enabled = true;
+        
         // This is a standard bitcoin address/URI
         if (self.parsedURI.metadata && self.parsedURI.metadata.payeeName)
             self.addressLabel.text = [NSString stringWithFormat:@"%@ (%@...)",
@@ -334,12 +340,12 @@
             
             // Setup source wallet metadata
             sourceMetaData.payeeName = [NSString stringWithFormat:transferToWalletText, _destWallet.name];
-            sourceMetaData.category  = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, _destWallet.name];
+            sourceMetaData.category  = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,wallet_category, _destWallet.name];
             [_spend setMetaData:sourceMetaData];
             
             // Setup dest wallet metadata
             destMetaData.payeeName   = [NSString stringWithFormat:transferFromWalletText, abcAccount.currentWallet.name];
-            destMetaData.category    = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,abcStringWalletSubCategory, abcAccount.currentWallet.name];
+            destMetaData.category    = [NSString stringWithFormat:@"%@:%@:%@",abcStringTransferCategory,wallet_category, abcAccount.currentWallet.name];
             
             [_spend addTransfer:_destWallet amount:_amountSatoshi destMeta:destMetaData];
         }
@@ -387,6 +393,21 @@
 }
 
 #pragma mark - Actions Methods
+
+- (IBAction)TouchAddressButton:(id)sender
+{
+    NSMutableString *baseUrl = [[NSMutableString alloc] init];
+    if ([abc isTestNet]) {
+        [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
+    } else {
+        [baseUrl appendString:@"https://insight.bitpay.com/"];
+    }
+    NSString *urlString = [NSString stringWithFormat:@"%@/address/%@",
+                           baseUrl, _parsedURI.address];
+
+    NSURL *url = [[NSURL alloc] initWithString:urlString];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 - (IBAction)info:(id) sender
 {
@@ -565,7 +586,7 @@
             [_spend signTx:^(ABCUnsentTx *unsentTx) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:nil unsentTx:unsentTx];
             } error:^(NSError *error) {
-                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
+                [self txSendFailed:error];
             }];
         }
         else
@@ -573,7 +594,7 @@
             [_spend signBroadcastAndSave:^(ABCTransaction *transaction) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:transaction unsentTx:nil];
             } error:^(NSError *error) {
-                [self txSendFailed:error.userInfo[NSLocalizedDescriptionKey]];
+                [self txSendFailed:error];
             }];
         }
     }
@@ -635,8 +656,17 @@
         [_alert dismissWithClickedButtonIndex:1 animated:NO];
         _alert = nil;
     }
+    
     NSString *title = params[0];
-    NSString *message = params[1];
+    NSString *msg2;
+    unsigned long code = (unsigned long) [((NSNumber *) params[1]) integerValue];
+    
+    if ([params[2] isEqualToString:params[3]])
+        msg2 = @"";
+    else
+        msg2 = params[3];
+    
+    NSString *message = [NSString stringWithFormat:@"Error Code:%lu\n\n%@\n\n%@", code, params[2], msg2];
     _alert = [[UIAlertView alloc]
                             initWithTitle:title
                             message:message
@@ -747,9 +777,9 @@
     _maxAmountButton.selected = NO;
     if (_maxAmount > 0 && _maxAmount == _amountSatoshi)
     {
-        color = [UIColor colorWithRed:255/255.0f green:166/255.0f blue:52/255.0f alpha:1.0f];
-        colorConversionLabel = [UIColor colorWithRed:255/255.0f green:180/255.0f blue:80/255.0f alpha:1.0f];
-        [_maxAmountButton setBackgroundColor:UIColorFromARGB(0xFFfca600) ];
+        color = [Theme Singleton].colorButtonOrangeLight;
+        colorConversionLabel = [UIColor darkGrayColor];
+        [_maxAmountButton setBackgroundColor:[Theme Singleton].colorButtonOrange];
     }
     else
     {
@@ -1049,16 +1079,16 @@
     });
 }
 
-- (void)txSendFailed:(NSString *)errorString
+- (void)txSendFailed:(NSError *)error;
 {
     NSString *title = errorDuringSend;
-    NSArray *params = [NSArray arrayWithObjects: title, errorString, nil];
+    NSArray *params = [NSArray arrayWithObjects: title, [NSNumber numberWithInteger:error.code], error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];
 //    dispatch_async(dispatch_get_main_queue(), ^(void) {
         [_confirmationSlider resetIn:1.0];
         if (_bAdvanceToTx) {
             [self performSelectorOnMainThread:@selector(failedToSend:) withObject:params waitUntilDone:FALSE];
         } else {
-            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:withUnsentTx:)]) {
+            if ([self.delegate respondsToSelector:@selector(sendConfirmationViewControllerDidFinish:withBack:withError:transaction:withUnsentTx:)]) {
                 [self.delegate sendConfirmationViewControllerDidFinish:self withBack:NO withError:NO transaction:nil withUnsentTx:nil];
             } else {
                 [self.delegate sendConfirmationViewControllerDidFinish:self];

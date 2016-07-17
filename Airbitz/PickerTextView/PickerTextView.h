@@ -37,6 +37,8 @@
 - (void)dismissPopupPicker;
 - (void)createPopupPicker;
 - (void)setRoundedAndShadowed:(Boolean)rounded;
+- (void)useContrainstForTextField;
+
 
 @end
 

@@ -26,6 +26,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
 	//prevent ugly gray box from appearing behind cell when selected
 	self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.6];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];

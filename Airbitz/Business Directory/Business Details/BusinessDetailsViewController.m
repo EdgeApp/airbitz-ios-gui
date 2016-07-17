@@ -142,8 +142,22 @@ typedef NS_ENUM(NSUInteger, CellType) {
         BD_CommonCell *commonCell = [self getCommonCellForTableView:self.tableView];
         
         //calculate height of details cell
-        CGSize size = [ [self.businessDetails objectForKey:@"description"] sizeWithFont:commonCell.leftLabel.font constrainedToSize:CGSizeMake(detailsLabelWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-        detailsCellHeight = size.height + 28.0;
+        NSString *plainText = [self.businessDetails objectForKey:@"description"];
+
+        if (plainText && commonCell)
+        {
+            CGRect textRect = [plainText boundingRectWithSize:CGSizeMake(detailsLabelWidth, 9999)
+                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes:@{NSFontAttributeName:commonCell.leftLabel.font}
+                                                      context:nil];
+            CGSize size = textRect.size;
+            
+            detailsCellHeight = size.height + 28.0;
+        }
+        else
+        {
+            detailsCellHeight = 28.0;
+        }
         
         [self.tableView reloadData];
         
@@ -612,7 +626,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 			else
 			{
 				[dayString appendString:open24Text];
-                [hoursString appendString:hoursText];
+                [hoursString appendString:hours_text];
                 [hoursString appendString:@"\n"];
 			}
             NSInteger leftLines = [[dayString componentsSeparatedByCharactersInSet:

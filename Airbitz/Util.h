@@ -26,13 +26,13 @@
                          blue:((float)((rgbValue & 0x000000FF) >>  0))/255.0 \
                         alpha:((float)((rgbValue & 0xFF000000) >> 24))/255.0]
 
-#define expenseCategoryColon    [NSString stringWithFormat:@"%@:", abcStringExpenseCategory]
-#define incomeCategoryColon     [NSString stringWithFormat:@"%@:", abcStringIncomeCategory]
-#define transferCategoryColon   [NSString stringWithFormat:@"%@:", abcStringTransferCategory]
-#define exchangeCategoryColon   [NSString stringWithFormat:@"%@:", abcStringExchangeCategory]
+#define expenseCategoryColon    [NSString stringWithFormat:@"%@:", expense_category]
+#define incomeCategoryColon     [NSString stringWithFormat:@"%@:", income_category]
+#define transferCategoryColon   [NSString stringWithFormat:@"%@:", transfer_category]
+#define exchangeCategoryColon   [NSString stringWithFormat:@"%@:", exchange_category]
 
 #define ARRAY_CATEGORY_PREFIXES         @[expenseCategoryColon,incomeCategoryColon,transferCategoryColon,exchangeCategoryColon]
-#define ARRAY_CATEGORY_PREFIXES_NOCOLON @[abcStringExpenseCategory,abcStringIncomeCategory,abcStringTransferCategory,abcStringExchangeCategory]
+#define ARRAY_CATEGORY_PREFIXES_NOCOLON @[expense_category,income_category,transfer_category,exchange_category]
 
 @interface Util : NSObject
 
@@ -61,6 +61,12 @@
 + (NSArray *)addSubviewWithConstraints:(UIView *)parentView child:(UIView *)childView;
 + (void)replaceHtmlTags:(NSString **) strContent;
 + (NSString *)checkPasswordResultsMessage:(ABCPasswordRuleResult *)result;
++ (NSArray *) categoryArrayLocalize:(NSArray *)array;
++ (NSArray *) categoryArrayToEnglish:(NSArray *)array;
++ (NSString *) categoryTextLocalize:(NSString *)category;
++ (NSString *) categoryTextToEnglish:(NSString *)category;
+
+
 #define printTimerStart() \
 ABCLog(0, @"*** %s:%d Timer START %lf", __FUNCTION__, __LINE__, [[NSDate date] timeIntervalSince1970])
 

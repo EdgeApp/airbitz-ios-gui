@@ -219,7 +219,7 @@
     [bottomView removeFromSuperview];
     
     if (_dataSource && [_dataSource respondsToSelector:@selector(customBottomViewForGalleryViewController:)]) {
-        bottomView = [_dataSource customBottomViewForGalleryViewController:self];
+        bottomView = (UIView<UIPhotoGalleryBottomViewDelegate> *) [_dataSource customBottomViewForGalleryViewController:self];
         bottomView.frame = CGRectMake(0, self.view.frame.size.height-bottomView.frame.size.height, bottomView.frame.size.width, bottomView.frame.size.height);
         [self.view addSubview:bottomView];
         return;
@@ -242,7 +242,7 @@
                                                                action:@selector(btnNextPressed)];
     [bottomViewBar setItems:@[btnPrev, flexSpace, btnNext] animated:YES];
     
-    bottomView = [[UIView alloc] initWithFrame:
+    bottomView = (UIView<UIPhotoGalleryBottomViewDelegate> *) [[UIView alloc] initWithFrame:
                   CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
     bottomView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     [bottomView addSubview:bottomViewBar];

@@ -1,0 +1,51 @@
+/* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
+"DlF-tR-T08.text" = "Nome da Empresa";
+
+/* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
+"GGS-YR-zt1.normalTitle" = "Shopping";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
+"KxI-24-PCF.text" = "Categorias";
+
+/* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
+"Sfb-cf-6wF.normalTitle" = "Mais Categorias";
+
+/* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
+"a78-ih-LDk.normalTitle" = "Café e Chá";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
+"aNa-3g-QXd.placeholder" = "Pesquisar";
+
+/* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
+"b1E-1G-btq.normalTitle" = "Cartões de Presente";
+
+/* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
+"baO-FH-Oy4.text" = "Perto de Você";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
+"f2g-xP-19U.text" = "Rótulo";
+
+/* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
+"ga1-R0-wof.text" = "Digitar BTC";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
+"heE-og-iXA.placeholder" = "Pesquisar";
+
+/* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
+"kTm-at-TUR.normalTitle" = "Eletrônicos";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
+"lFC-s8-IJT.text" = "Rótulo";
+
+/* Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b"; */
+"oPG-fA-f9b.text" = "rótulodaesquerda";
+
+/* Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S"; */
+"oyK-ph-99S.normalTitle" = "Restaurants";
+
+/* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
+"sWr-pd-hBY.normalTitle" = "Caixas eletrônicos";
+
+/* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
+"wy7-Kv-3ap.text" = "Endereço 1234";
+

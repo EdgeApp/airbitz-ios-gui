@@ -1,643 +1,271 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
-  <file original="Airbitz Widget/Info.plist" source-language="en" datatype="plaintext">
+  <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="CFBundleDisplayName">
-        <source>Airbitz Widget</source>
+      <trans-unit id="Lt8-cl-BMW.text">
+        <source>Scan QR</source>
+        <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
       </trans-unit>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+      <trans-unit id="NiJ-rT-MKF.text">
+        <source>Send</source>
+        <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.8.6</source>
+      <trans-unit id="WIw-mO-3VN.normalTitle">
+        <source>Button</source>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
+      </trans-unit>
+      <trans-unit id="gQB-TM-9HQ.text">
+        <source>BitID Login</source>
+        <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
+      </trans-unit>
+      <trans-unit id="pzG-q0-KJ4.text">
+        <source>or</source>
+        <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz-OSX/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext">
+  <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="1UK-8n-QPP.title">
-        <source>Customize Toolbar…</source>
-        <note>Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1UK-8n-QPP";</note>
-      </trans-unit>
-      <trans-unit id="1Xt-HY-uBw.title">
-        <source>Airbitz-OSX</source>
-        <note>Class = "NSMenuItem"; title = "Airbitz-OSX"; ObjectID = "1Xt-HY-uBw";</note>
-      </trans-unit>
-      <trans-unit id="1b7-l0-nxx.title">
-        <source>Find</source>
-        <note>Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx";</note>
-      </trans-unit>
-      <trans-unit id="1tx-W0-xDw.title">
-        <source>Lower</source>
-        <note>Class = "NSMenuItem"; title = "Lower"; ObjectID = "1tx-W0-xDw";</note>
-      </trans-unit>
-      <trans-unit id="2h7-ER-AoG.title">
-        <source>Raise</source>
-        <note>Class = "NSMenuItem"; title = "Raise"; ObjectID = "2h7-ER-AoG";</note>
-      </trans-unit>
-      <trans-unit id="2oI-Rn-ZJC.title">
-        <source>Transformations</source>
-        <note>Class = "NSMenuItem"; title = "Transformations"; ObjectID = "2oI-Rn-ZJC";</note>
-      </trans-unit>
-      <trans-unit id="3IN-sU-3Bg.title">
-        <source>Spelling</source>
-        <note>Class = "NSMenu"; title = "Spelling"; ObjectID = "3IN-sU-3Bg";</note>
-      </trans-unit>
-      <trans-unit id="3Om-Ey-2VK.title">
-        <source>Use Default</source>
-        <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "3Om-Ey-2VK";</note>
-      </trans-unit>
-      <trans-unit id="3rS-ZA-NoH.title">
-        <source>Speech</source>
-        <note>Class = "NSMenu"; title = "Speech"; ObjectID = "3rS-ZA-NoH";</note>
-      </trans-unit>
-      <trans-unit id="4EN-yA-p0u.title">
-        <source>Find</source>
-        <note>Class = "NSMenuItem"; title = "Find"; ObjectID = "4EN-yA-p0u";</note>
-      </trans-unit>
-      <trans-unit id="4sb-4s-VLi.title">
-        <source>Quit Airbitz-OSX</source>
-        <note>Class = "NSMenuItem"; title = "Quit Airbitz-OSX"; ObjectID = "4sb-4s-VLi";</note>
-      </trans-unit>
-      <trans-unit id="5QF-Oa-p0T.title">
-        <source>Edit</source>
-        <note>Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T";</note>
-      </trans-unit>
-      <trans-unit id="5Vv-lz-BsD.title">
-        <source>Copy Style</source>
-        <note>Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD";</note>
-      </trans-unit>
-      <trans-unit id="5kV-Vb-QxS.title">
-        <source>About Airbitz-OSX</source>
-        <note>Class = "NSMenuItem"; title = "About Airbitz-OSX"; ObjectID = "5kV-Vb-QxS";</note>
-      </trans-unit>
-      <trans-unit id="6dh-zS-Vam.title">
-        <source>Redo</source>
-        <note>Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam";</note>
-      </trans-unit>
-      <trans-unit id="8mr-sm-Yjd.title">
-        <source>Writing Direction</source>
-        <note>Class = "NSMenu"; title = "Writing Direction"; ObjectID = "8mr-sm-Yjd";</note>
-      </trans-unit>
-      <trans-unit id="9ic-FL-obx.title">
-        <source>Substitutions</source>
-        <note>Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "9ic-FL-obx";</note>
-      </trans-unit>
-      <trans-unit id="9yt-4B-nSM.title">
-        <source>Smart Copy/Paste</source>
-        <note>Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "9yt-4B-nSM";</note>
-      </trans-unit>
-      <trans-unit id="46P-cB-AYj.title">
-        <source>Tighten</source>
-        <note>Class = "NSMenuItem"; title = "Tighten"; ObjectID = "46P-cB-AYj";</note>
-      </trans-unit>
-      <trans-unit id="78Y-hA-62v.title">
-        <source>Correct Spelling Automatically</source>
-        <note>Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "78Y-hA-62v";</note>
-      </trans-unit>
-      <trans-unit id="AYu-sK-qS6.title">
-        <source>Main Menu</source>
-        <note>Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6";</note>
-      </trans-unit>
-      <trans-unit id="BOF-NM-1cW.title">
-        <source>Preferences…</source>
-        <note>Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW";</note>
-      </trans-unit>
-      <trans-unit id="BgM-ve-c93.title">
-        <source>	Left to Right</source>
-        <note>Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "BgM-ve-c93";</note>
-      </trans-unit>
-      <trans-unit id="Bw7-FT-i3A.title">
-        <source>Save As…</source>
-        <note>Class = "NSMenuItem"; title = "Save As…"; ObjectID = "Bw7-FT-i3A";</note>
-      </trans-unit>
-      <trans-unit id="DVo-aG-piG.title">
-        <source>Close</source>
-        <note>Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG";</note>
-      </trans-unit>
-      <trans-unit id="Dv1-io-Yv7.title">
-        <source>Spelling and Grammar</source>
-        <note>Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "Dv1-io-Yv7";</note>
-      </trans-unit>
-      <trans-unit id="F2S-fz-NVQ.title">
-        <source>Help</source>
-        <note>Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ";</note>
-      </trans-unit>
-      <trans-unit id="FKE-Sm-Kum.title">
-        <source>Airbitz-OSX Help</source>
-        <note>Class = "NSMenuItem"; title = "Airbitz-OSX Help"; ObjectID = "FKE-Sm-Kum";</note>
-      </trans-unit>
-      <trans-unit id="Fal-I4-PZk.title">
-        <source>Text</source>
-        <note>Class = "NSMenuItem"; title = "Text"; ObjectID = "Fal-I4-PZk";</note>
-      </trans-unit>
-      <trans-unit id="FeM-D8-WVr.title">
-        <source>Substitutions</source>
-        <note>Class = "NSMenu"; title = "Substitutions"; ObjectID = "FeM-D8-WVr";</note>
-      </trans-unit>
-      <trans-unit id="GB9-OM-e27.title">
-        <source>Bold</source>
-        <note>Class = "NSMenuItem"; title = "Bold"; ObjectID = "GB9-OM-e27";</note>
-      </trans-unit>
-      <trans-unit id="GEO-Iw-cKr.title">
-        <source>Format</source>
-        <note>Class = "NSMenu"; title = "Format"; ObjectID = "GEO-Iw-cKr";</note>
-      </trans-unit>
-      <trans-unit id="GUa-eO-cwY.title">
-        <source>Use Default</source>
-        <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "GUa-eO-cwY";</note>
-      </trans-unit>
-      <trans-unit id="Gi5-1S-RQB.title">
-        <source>Font</source>
-        <note>Class = "NSMenuItem"; title = "Font"; ObjectID = "Gi5-1S-RQB";</note>
-      </trans-unit>
-      <trans-unit id="GyU-mb-def.placeholderString">
-        <source>Enter Username</source>
-        <note>Class = "NSTextFieldCell"; placeholderString = "Enter Username"; ObjectID = "GyU-mb-def";</note>
-      </trans-unit>
-      <trans-unit id="H1b-Si-o9J.title">
-        <source>Writing Direction</source>
-        <note>Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J";</note>
-      </trans-unit>
-      <trans-unit id="H8h-7b-M4v.title">
-        <source>View</source>
-        <note>Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v";</note>
-      </trans-unit>
-      <trans-unit id="HFQ-gK-NFA.title">
-        <source>Text Replacement</source>
-        <note>Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "HFQ-gK-NFA";</note>
-      </trans-unit>
-      <trans-unit id="HFo-cy-zxI.title">
-        <source>Show Spelling and Grammar</source>
-        <note>Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI";</note>
-      </trans-unit>
-      <trans-unit id="HyV-fh-RgO.title">
-        <source>View</source>
-        <note>Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO";</note>
-      </trans-unit>
-      <trans-unit id="I0S-gh-46l.title">
-        <source>Subscript</source>
-        <note>Class = "NSMenuItem"; title = "Subscript"; ObjectID = "I0S-gh-46l";</note>
-      </trans-unit>
-      <trans-unit id="IAo-SY-fd9.title">
-        <source>Open…</source>
-        <note>Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9";</note>
-      </trans-unit>
-      <trans-unit id="IQv-IB-iLA.title">
-        <source>Window</source>
-        <note>Class = "NSWindow"; title = "Window"; ObjectID = "IQv-IB-iLA";</note>
-      </trans-unit>
-      <trans-unit id="J5U-5w-g23.title">
-        <source>Justify</source>
-        <note>Class = "NSMenuItem"; title = "Justify"; ObjectID = "J5U-5w-g23";</note>
-      </trans-unit>
-      <trans-unit id="J7y-lM-qPV.title">
-        <source>Use None</source>
-        <note>Class = "NSMenuItem"; title = "Use None"; ObjectID = "J7y-lM-qPV";</note>
-      </trans-unit>
-      <trans-unit id="KaW-ft-85H.title">
-        <source>Revert to Saved</source>
-        <note>Class = "NSMenuItem"; title = "Revert to Saved"; ObjectID = "KaW-ft-85H";</note>
-      </trans-unit>
-      <trans-unit id="Kd2-mp-pUS.title">
-        <source>Show All</source>
-        <note>Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS";</note>
-      </trans-unit>
-      <trans-unit id="LE2-aR-0XJ.title">
-        <source>Bring All to Front</source>
-        <note>Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ";</note>
-      </trans-unit>
-      <trans-unit id="LVM-kO-fVI.title">
-        <source>Paste Ruler</source>
-        <note>Class = "NSMenuItem"; title = "Paste Ruler"; ObjectID = "LVM-kO-fVI";</note>
-      </trans-unit>
-      <trans-unit id="Lbh-J2-qVU.title">
-        <source>	Left to Right</source>
-        <note>Class = "NSMenuItem"; title = "\tLeft to Right"; ObjectID = "Lbh-J2-qVU";</note>
-      </trans-unit>
-      <trans-unit id="MkV-Pr-PK5.title">
-        <source>Copy Ruler</source>
-        <note>Class = "NSMenuItem"; title = "Copy Ruler"; ObjectID = "MkV-Pr-PK5";</note>
-      </trans-unit>
-      <trans-unit id="NMo-om-nkz.title">
-        <source>Services</source>
-        <note>Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz";</note>
-      </trans-unit>
-      <trans-unit id="Nop-cj-93Q.title">
-        <source>	Default</source>
-        <note>Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "Nop-cj-93Q";</note>
-      </trans-unit>
-      <trans-unit id="OY7-WF-poV.title">
-        <source>Minimize</source>
-        <note>Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV";</note>
-      </trans-unit>
-      <trans-unit id="OaQ-X3-Vso.title">
-        <source>Baseline</source>
-        <note>Class = "NSMenuItem"; title = "Baseline"; ObjectID = "OaQ-X3-Vso";</note>
-      </trans-unit>
-      <trans-unit id="Olw-nP-bQN.title">
-        <source>Hide Airbitz-OSX</source>
-        <note>Class = "NSMenuItem"; title = "Hide Airbitz-OSX"; ObjectID = "Olw-nP-bQN";</note>
-      </trans-unit>
-      <trans-unit id="OwM-mh-QMV.title">
-        <source>Find Previous</source>
-        <note>Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV";</note>
-      </trans-unit>
-      <trans-unit id="Oyz-dy-DGm.title">
-        <source>Stop Speaking</source>
-        <note>Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "Oyz-dy-DGm";</note>
-      </trans-unit>
-      <trans-unit id="Ptp-SP-VEL.title">
-        <source>Bigger</source>
-        <note>Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL";</note>
-      </trans-unit>
-      <trans-unit id="Q5e-8K-NDq.title">
-        <source>Show Fonts</source>
-        <note>Class = "NSMenuItem"; title = "Show Fonts"; ObjectID = "Q5e-8K-NDq";</note>
-      </trans-unit>
-      <trans-unit id="R4o-n2-Eq4.title">
-        <source>Zoom</source>
-        <note>Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4";</note>
-      </trans-unit>
-      <trans-unit id="RB4-Sm-HuC.title">
-        <source>	Right to Left</source>
-        <note>Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "RB4-Sm-HuC";</note>
-      </trans-unit>
-      <trans-unit id="RKx-o9-fnj.placeholderString">
-        <source>Enter Password</source>
-        <note>Class = "NSSecureTextFieldCell"; placeholderString = "Enter Password"; ObjectID = "RKx-o9-fnj";</note>
-      </trans-unit>
-      <trans-unit id="Rqc-34-cIF.title">
-        <source>Superscript</source>
-        <note>Class = "NSMenuItem"; title = "Superscript"; ObjectID = "Rqc-34-cIF";</note>
-      </trans-unit>
-      <trans-unit id="Ruw-6m-B2m.title">
-        <source>Select All</source>
-        <note>Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m";</note>
-      </trans-unit>
-      <trans-unit id="S0p-oC-mLd.title">
-        <source>Jump to Selection</source>
-        <note>Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "S0p-oC-mLd";</note>
-      </trans-unit>
-      <trans-unit id="Td7-aD-5lo.title">
-        <source>Window</source>
-        <note>Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo";</note>
-      </trans-unit>
-      <trans-unit id="UEZ-Bs-lqG.title">
-        <source>Capitalize</source>
-        <note>Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG";</note>
-      </trans-unit>
-      <trans-unit id="VIY-Ag-zcb.title">
-        <source>Center</source>
-        <note>Class = "NSMenuItem"; title = "Center"; ObjectID = "VIY-Ag-zcb";</note>
-      </trans-unit>
-      <trans-unit id="Vdr-fp-XzO.title">
-        <source>Hide Others</source>
-        <note>Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO";</note>
-      </trans-unit>
-      <trans-unit id="Vjx-xi-njq.title">
-        <source>Italic</source>
-        <note>Class = "NSMenuItem"; title = "Italic"; ObjectID = "Vjx-xi-njq";</note>
-      </trans-unit>
-      <trans-unit id="W48-6f-4Dl.title">
-        <source>Edit</source>
-        <note>Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl";</note>
-      </trans-unit>
-      <trans-unit id="WRG-CD-K1S.title">
-        <source>Underline</source>
-        <note>Class = "NSMenuItem"; title = "Underline"; ObjectID = "WRG-CD-K1S";</note>
-      </trans-unit>
-      <trans-unit id="Was-JA-tGl.title">
-        <source>New</source>
-        <note>Class = "NSMenuItem"; title = "New"; ObjectID = "Was-JA-tGl";</note>
-      </trans-unit>
-      <trans-unit id="WeT-3V-zwk.title">
-        <source>Paste and Match Style</source>
-        <note>Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "WeT-3V-zwk";</note>
-      </trans-unit>
-      <trans-unit id="Xz5-n4-O0W.title">
-        <source>Find…</source>
-        <note>Class = "NSMenuItem"; title = "Find…"; ObjectID = "Xz5-n4-O0W";</note>
-      </trans-unit>
-      <trans-unit id="YEy-JH-Tfz.title">
-        <source>Find and Replace…</source>
-        <note>Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "YEy-JH-Tfz";</note>
-      </trans-unit>
-      <trans-unit id="YGs-j5-SAR.title">
-        <source>	Default</source>
-        <note>Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "YGs-j5-SAR";</note>
-      </trans-unit>
-      <trans-unit id="Ynk-f8-cLZ.title">
-        <source>Start Speaking</source>
-        <note>Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "Ynk-f8-cLZ";</note>
-      </trans-unit>
-      <trans-unit id="ZM1-6Q-yy1.title">
-        <source>Align Left</source>
-        <note>Class = "NSMenuItem"; title = "Align Left"; ObjectID = "ZM1-6Q-yy1";</note>
-      </trans-unit>
-      <trans-unit id="ZvO-Gk-QUH.title">
-        <source>Paragraph</source>
-        <note>Class = "NSMenuItem"; title = "Paragraph"; ObjectID = "ZvO-Gk-QUH";</note>
-      </trans-unit>
-      <trans-unit id="aTl-1u-JFS.title">
-        <source>Print…</source>
-        <note>Class = "NSMenuItem"; title = "Print…"; ObjectID = "aTl-1u-JFS";</note>
-      </trans-unit>
-      <trans-unit id="aUF-d1-5bR.title">
-        <source>Window</source>
-        <note>Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR";</note>
-      </trans-unit>
-      <trans-unit id="aXa-aM-Jaq.title">
-        <source>Font</source>
-        <note>Class = "NSMenu"; title = "Font"; ObjectID = "aXa-aM-Jaq";</note>
-      </trans-unit>
-      <trans-unit id="agt-UL-0e3.title">
-        <source>Use Default</source>
-        <note>Class = "NSMenuItem"; title = "Use Default"; ObjectID = "agt-UL-0e3";</note>
-      </trans-unit>
-      <trans-unit id="bgn-CT-cEk.title">
-        <source>Show Colors</source>
-        <note>Class = "NSMenuItem"; title = "Show Colors"; ObjectID = "bgn-CT-cEk";</note>
-      </trans-unit>
-      <trans-unit id="bib-Uj-vzu.title">
-        <source>File</source>
-        <note>Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu";</note>
-      </trans-unit>
-      <trans-unit id="buJ-ug-pKt.title">
-        <source>Use Selection for Find</source>
-        <note>Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "buJ-ug-pKt";</note>
-      </trans-unit>
-      <trans-unit id="c8a-y6-VQd.title">
-        <source>Transformations</source>
-        <note>Class = "NSMenu"; title = "Transformations"; ObjectID = "c8a-y6-VQd";</note>
-      </trans-unit>
-      <trans-unit id="cDB-IK-hbR.title">
-        <source>Use None</source>
-        <note>Class = "NSMenuItem"; title = "Use None"; ObjectID = "cDB-IK-hbR";</note>
-      </trans-unit>
-      <trans-unit id="cqv-fj-IhA.title">
-        <source>Selection</source>
-        <note>Class = "NSMenuItem"; title = "Selection"; ObjectID = "cqv-fj-IhA";</note>
-      </trans-unit>
-      <trans-unit id="cwL-P1-jid.title">
-        <source>Smart Links</source>
-        <note>Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "cwL-P1-jid";</note>
-      </trans-unit>
-      <trans-unit id="d9M-CD-aMd.title">
-        <source>Make Lower Case</source>
-        <note>Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "d9M-CD-aMd";</note>
-      </trans-unit>
-      <trans-unit id="d9c-me-L2H.title">
-        <source>Text</source>
-        <note>Class = "NSMenu"; title = "Text"; ObjectID = "d9c-me-L2H";</note>
-      </trans-unit>
-      <trans-unit id="dMs-cI-mzQ.title">
-        <source>File</source>
-        <note>Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ";</note>
-      </trans-unit>
-      <trans-unit id="dRJ-4n-Yzg.title">
-        <source>Undo</source>
-        <note>Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg";</note>
-      </trans-unit>
-      <trans-unit id="gVA-U4-sdL.title">
-        <source>Paste</source>
-        <note>Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL";</note>
-      </trans-unit>
-      <trans-unit id="hQb-2v-fYv.title">
-        <source>Smart Quotes</source>
-        <note>Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv";</note>
-      </trans-unit>
-      <trans-unit id="hz2-CU-CR7.title">
-        <source>Check Document Now</source>
-        <note>Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "hz2-CU-CR7";</note>
-      </trans-unit>
-      <trans-unit id="hz9-B4-Xy5.title">
-        <source>Services</source>
-        <note>Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5";</note>
-      </trans-unit>
-      <trans-unit id="i1d-Er-qST.title">
-        <source>Smaller</source>
-        <note>Class = "NSMenuItem"; title = "Smaller"; ObjectID = "i1d-Er-qST";</note>
-      </trans-unit>
-      <trans-unit id="ijk-EB-dga.title">
-        <source>Baseline</source>
-        <note>Class = "NSMenu"; title = "Baseline"; ObjectID = "ijk-EB-dga";</note>
-      </trans-unit>
-      <trans-unit id="jBQ-r6-VK2.title">
-        <source>Kern</source>
-        <note>Class = "NSMenuItem"; title = "Kern"; ObjectID = "jBQ-r6-VK2";</note>
-      </trans-unit>
-      <trans-unit id="jFq-tB-4Kx.title">
-        <source>	Right to Left</source>
-        <note>Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "jFq-tB-4Kx";</note>
-      </trans-unit>
-      <trans-unit id="jxT-CU-nIS.title">
-        <source>Format</source>
-        <note>Class = "NSMenuItem"; title = "Format"; ObjectID = "jxT-CU-nIS";</note>
-      </trans-unit>
-      <trans-unit id="mK6-2p-4JG.title">
-        <source>Check Grammar With Spelling</source>
-        <note>Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG";</note>
-      </trans-unit>
-      <trans-unit id="o6e-r0-MWq.title">
-        <source>Ligatures</source>
-        <note>Class = "NSMenuItem"; title = "Ligatures"; ObjectID = "o6e-r0-MWq";</note>
-      </trans-unit>
-      <trans-unit id="oas-Oc-fiZ.title">
-        <source>Open Recent</source>
-        <note>Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ";</note>
-      </trans-unit>
-      <trans-unit id="ogc-rX-tC1.title">
-        <source>Loosen</source>
-        <note>Class = "NSMenuItem"; title = "Loosen"; ObjectID = "ogc-rX-tC1";</note>
-      </trans-unit>
-      <trans-unit id="pa3-QI-u2k.title">
-        <source>Delete</source>
-        <note>Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k";</note>
-      </trans-unit>
-      <trans-unit id="pxx-59-PXV.title">
-        <source>Save…</source>
-        <note>Class = "NSMenuItem"; title = "Save…"; ObjectID = "pxx-59-PXV";</note>
-      </trans-unit>
-      <trans-unit id="q09-fT-Sye.title">
-        <source>Find Next</source>
-        <note>Class = "NSMenuItem"; title = "Find Next"; ObjectID = "q09-fT-Sye";</note>
-      </trans-unit>
-      <trans-unit id="qIS-W8-SiK.title">
-        <source>Page Setup…</source>
-        <note>Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "qIS-W8-SiK";</note>
-      </trans-unit>
-      <trans-unit id="rbD-Rh-wIN.title">
-        <source>Check Spelling While Typing</source>
-        <note>Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "rbD-Rh-wIN";</note>
-      </trans-unit>
-      <trans-unit id="rgM-f4-ycn.title">
-        <source>Smart Dashes</source>
-        <note>Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "rgM-f4-ycn";</note>
-      </trans-unit>
-      <trans-unit id="snW-S8-Cw5.title">
-        <source>Show Toolbar</source>
-        <note>Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "snW-S8-Cw5";</note>
-      </trans-unit>
-      <trans-unit id="tRr-pd-1PS.title">
-        <source>Data Detectors</source>
-        <note>Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "tRr-pd-1PS";</note>
-      </trans-unit>
-      <trans-unit id="tXI-mr-wws.title">
-        <source>Open Recent</source>
-        <note>Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws";</note>
-      </trans-unit>
-      <trans-unit id="tlD-Oa-oAM.title">
-        <source>Kern</source>
-        <note>Class = "NSMenu"; title = "Kern"; ObjectID = "tlD-Oa-oAM";</note>
-      </trans-unit>
-      <trans-unit id="uQy-DD-JDr.title">
-        <source>Airbitz-OSX</source>
-        <note>Class = "NSMenu"; title = "Airbitz-OSX"; ObjectID = "uQy-DD-JDr";</note>
-      </trans-unit>
-      <trans-unit id="uRl-iY-unG.title">
-        <source>Cut</source>
-        <note>Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG";</note>
-      </trans-unit>
-      <trans-unit id="vKC-jM-MkH.title">
-        <source>Paste Style</source>
-        <note>Class = "NSMenuItem"; title = "Paste Style"; ObjectID = "vKC-jM-MkH";</note>
-      </trans-unit>
-      <trans-unit id="vLm-3I-IUL.title">
-        <source>Show Ruler</source>
-        <note>Class = "NSMenuItem"; title = "Show Ruler"; ObjectID = "vLm-3I-IUL";</note>
-      </trans-unit>
-      <trans-unit id="vNY-rz-j42.title">
-        <source>Clear Menu</source>
-        <note>Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42";</note>
-      </trans-unit>
-      <trans-unit id="vmV-6d-7jI.title">
-        <source>Make Upper Case</source>
-        <note>Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "vmV-6d-7jI";</note>
-      </trans-unit>
-      <trans-unit id="w0m-vy-SC9.title">
-        <source>Ligatures</source>
-        <note>Class = "NSMenu"; title = "Ligatures"; ObjectID = "w0m-vy-SC9";</note>
-      </trans-unit>
-      <trans-unit id="wb2-vD-lq4.title">
-        <source>Align Right</source>
-        <note>Class = "NSMenuItem"; title = "Align Right"; ObjectID = "wb2-vD-lq4";</note>
-      </trans-unit>
-      <trans-unit id="wpr-3q-Mcd.title">
-        <source>Help</source>
-        <note>Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd";</note>
-      </trans-unit>
-      <trans-unit id="x3v-GG-iWU.title">
-        <source>Copy</source>
-        <note>Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU";</note>
-      </trans-unit>
-      <trans-unit id="xQD-1f-W4t.title">
-        <source>Use All</source>
-        <note>Class = "NSMenuItem"; title = "Use All"; ObjectID = "xQD-1f-W4t";</note>
-      </trans-unit>
-      <trans-unit id="xrE-MZ-jX0.title">
-        <source>Speech</source>
-        <note>Class = "NSMenuItem"; title = "Speech"; ObjectID = "xrE-MZ-jX0";</note>
-      </trans-unit>
-      <trans-unit id="z6F-FW-3nz.title">
-        <source>Show Substitutions</source>
-        <note>Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "z6F-FW-3nz";</note>
+      <trans-unit id="0gq-ds-DJC.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
+      </trans-unit>
+      <trans-unit id="4eB-ff-Ebh.text">
+        <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
+        <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
+      </trans-unit>
+      <trans-unit id="6uu-dw-ssd.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
+      </trans-unit>
+      <trans-unit id="AAt-Oh-ifI.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI";</note>
+      </trans-unit>
+      <trans-unit id="D2i-9s-GAC.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC";</note>
+      </trans-unit>
+      <trans-unit id="DUg-At-veb.text">
+        <source>myname</source>
+        <note>Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb";</note>
+      </trans-unit>
+      <trans-unit id="DgW-Gm-7l2.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2";</note>
+      </trans-unit>
+      <trans-unit id="Dyh-gB-nOv.text">
+        <source>You will next see a popup requesting access to your Contacts.</source>
+        <note>Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv";</note>
+      </trans-unit>
+      <trans-unit id="Ehm-ti-qdD.text">
+        <source>Specify your name or arbitrary nickname ie "Coinmaster".
+
+This is used ONLY when sending payments or requests to others to help them identify you.
+
+This is never sent to Airbitz or any third party and can be changed at any time in the future.</source>
+        <note>Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD";</note>
+      </trans-unit>
+      <trans-unit id="G0E-xz-b8e.text">
+        <source>Set a 4 Digit PIN</source>
+        <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
+      </trans-unit>
+      <trans-unit id="Gzw-pH-bAR.text">
+        <source>1234</source>
+        <note>Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR";</note>
+      </trans-unit>
+      <trans-unit id="KSv-b6-auz.text">
+        <source>See Strings.h</source>
+        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz";</note>
+      </trans-unit>
+      <trans-unit id="SsW-1b-1cv.text">
+        <source>See Strings.h</source>
+        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv";</note>
+      </trans-unit>
+      <trans-unit id="Tqs-NN-dWt.text">
+        <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
+        <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt";</note>
+      </trans-unit>
+      <trans-unit id="VAn-0y-asT.text">
+        <source>See Strings.h</source>
+        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT";</note>
+      </trans-unit>
+      <trans-unit id="Vad-R9-M68.normalTitle">
+        <source>SKIP</source>
+        <note>Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68";</note>
+      </trans-unit>
+      <trans-unit id="W8f-q2-Sa7.normalTitle">
+        <source>Show</source>
+        <note>Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7";</note>
+      </trans-unit>
+      <trans-unit id="WkL-r2-NLT.text">
+        <source>Sign Up</source>
+        <note>Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT";</note>
+      </trans-unit>
+      <trans-unit id="Wkt-fz-AEf.normalTitle">
+        <source>Button</source>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf";</note>
+      </trans-unit>
+      <trans-unit id="YJZ-dK-bwv.text">
+        <source>Enable Camera Access</source>
+        <note>Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv";</note>
+      </trans-unit>
+      <trans-unit id="bPi-8w-xQ4.text">
+        <source>PIN</source>
+        <note>Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4";</note>
+      </trans-unit>
+      <trans-unit id="cng-Cv-ULC.text">
+        <source>Enable Contact Access</source>
+        <note>Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC";</note>
+      </trans-unit>
+      <trans-unit id="dxS-14-iR5.text">
+        <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
+        <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5";</note>
+      </trans-unit>
+      <trans-unit id="fCk-W4-OJJ.placeholder">
+        <source>Nickname</source>
+        <note>Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ";</note>
+      </trans-unit>
+      <trans-unit id="fV9-pz-Wfn.placeholder">
+        <source>Create PIN</source>
+        <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn";</note>
+      </trans-unit>
+      <trans-unit id="fnL-7h-MQL.placeholder">
+        <source>Choose a Password</source>
+        <note>Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL";</note>
+      </trans-unit>
+      <trans-unit id="hHD-NP-fM6.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6";</note>
+      </trans-unit>
+      <trans-unit id="hoE-Bh-x2F.placeholder">
+        <source>Re-enter Password</source>
+        <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F";</note>
+      </trans-unit>
+      <trans-unit id="i3b-ZH-bDm.placeholder">
+        <source>Choose a Username</source>
+        <note>Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm";</note>
+      </trans-unit>
+      <trans-unit id="jcU-OX-5Hj.text">
+        <source>Write down and store securely</source>
+        <note>Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj";</note>
+      </trans-unit>
+      <trans-unit id="jgQ-ju-YiX.text">
+        <source>Set a Password and PIN</source>
+        <note>Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX";</note>
+      </trans-unit>
+      <trans-unit id="sJ6-mQ-mSV.text">
+        <source>Username</source>
+        <note>Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV";</note>
+      </trans-unit>
+      <trans-unit id="tOB-4i-OVm.text">
+        <source>mypassword12345</source>
+        <note>Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm";</note>
+      </trans-unit>
+      <trans-unit id="w3d-xe-eUq.text">
+        <source>The password is used to authenticate your account and to change sensitive settings.</source>
+        <note>Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq";</note>
+      </trans-unit>
+      <trans-unit id="wff-Il-8GU.text">
+        <source>Write it Down!</source>
+        <note>Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU";</note>
+      </trans-unit>
+      <trans-unit id="x6r-A5-Cxg.normalTitle">
+        <source>Back</source>
+        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg";</note>
+      </trans-unit>
+      <trans-unit id="y2b-Sg-zfM.placeholder">
+        <source>Create PIN</source>
+        <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM";</note>
+      </trans-unit>
+      <trans-unit id="z5S-Vu-MC1.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1";</note>
+      </trans-unit>
+      <trans-unit id="zqc-i8-gfC.text">
+        <source>Password</source>
+        <note>Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz-OSX/Info.plist" source-language="en" datatype="plaintext">
+  <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+      <trans-unit id="DlF-tR-T08.text">
+        <source>Business Name</source>
+        <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.0</source>
+      <trans-unit id="GGS-YR-zt1.normalTitle">
+        <source>Shopping</source>
+        <note>Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1";</note>
       </trans-unit>
-      <trans-unit id="NSHumanReadableCopyright">
-        <source>Copyright © 2016 Airbitz. All rights reserved.</source>
+      <trans-unit id="KxI-24-PCF.text">
+        <source>Categories</source>
+        <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz-OSXTests/Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+      <trans-unit id="Sfb-cf-6wF.normalTitle">
+        <source>More Categories</source>
+        <note>Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.0</source>
+      <trans-unit id="a78-ih-LDk.normalTitle">
+        <source>Coffee &amp; Tea</source>
+        <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz-OSXUITests/Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
+      <trans-unit id="aNa-3g-QXd.placeholder">
+        <source>Search</source>
+        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.0</source>
+      <trans-unit id="b1E-1G-btq.normalTitle">
+        <source>Gift Cards</source>
+        <note>Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq";</note>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Airbitz-Develop-Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleDisplayName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="baO-FH-Oy4.text">
+        <source>Near You</source>
+        <note>Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4";</note>
       </trans-unit>
-      <trans-unit id="CFBundleName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="f2g-xP-19U.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>99.99.99</source>
+      <trans-unit id="ga1-R0-wof.text">
+        <source>Type BTC</source>
+        <note>Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof";</note>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Airbitz-Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleDisplayName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="heE-og-iXA.placeholder">
+        <source>Search</source>
+        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA";</note>
       </trans-unit>
-      <trans-unit id="CFBundleName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="kTm-at-TUR.normalTitle">
+        <source>Electronics</source>
+        <note>Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>99.99.99</source>
+      <trans-unit id="lFC-s8-IJT.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT";</note>
       </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Airbitz-Testnet-Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleDisplayName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="oPG-fA-f9b.text">
+        <source>leftLabel</source>
+        <note>Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b";</note>
       </trans-unit>
-      <trans-unit id="CFBundleName">
-        <source>${PRODUCT_NAME}</source>
+      <trans-unit id="oyK-ph-99S.normalTitle">
+        <source>Restaurants</source>
+        <note>Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S";</note>
       </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>99.99.99</source>
+      <trans-unit id="sWr-pd-hBY.normalTitle">
+        <source>ATMs</source>
+        <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
+      </trans-unit>
+      <trans-unit id="wy7-Kv-3ap.text">
+        <source>Address 1234</source>
+        <note>Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap";</note>
       </trans-unit>
     </body>
   </file>
@@ -690,10 +318,6 @@
         <source>0</source>
         <note>Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button";</note>
       </trans-unit>
-      <trans-unit id="WkG-ho-3qR.normalTitle">
-        <source>.</source>
-        <note>Class = "UIButton"; normalTitle = "."; ObjectID = "WkG-ho-3qR"; Note = "Calculator Button";</note>
-      </trans-unit>
       <trans-unit id="b8e-QF-DXa.normalTitle">
         <source>1</source>
         <note>Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button";</note>
@@ -728,6 +352,17 @@
       </trans-unit>
     </body>
   </file>
+  <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="KGv-Ek-gk9.text">
+        <source>Slide to confirm</source>
+        <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
@@ -751,6 +386,10 @@
       <trans-unit id="0ea-NR-Nd9.normalTitle">
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
+      </trans-unit>
+      <trans-unit id="1kz-sq-XsE.normalTitle">
+        <source>Wallet Public Seed - XPub (advanced)</source>
+        <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder">
         <source>User Name</source>
@@ -968,6 +607,10 @@
         <source>Password</source>
         <note>Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z";</note>
       </trans-unit>
+      <trans-unit id="VSd-pm-g0n.accessibilityLabel">
+        <source> </source>
+        <note>Class = "UIButton"; accessibilityLabel = " "; ObjectID = "VSd-pm-g0n";</note>
+      </trans-unit>
       <trans-unit id="Vcb-0y-fDf.text">
         <source>An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:</source>
         <note>Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf";</note>
@@ -1108,6 +751,10 @@
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H";</note>
       </trans-unit>
+      <trans-unit id="rls-16-YZg.text">
+        <source>[do not translate]</source>
+        <note>Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg";</note>
+      </trans-unit>
       <trans-unit id="sAy-bR-lqd.title">
         <source>Menu</source>
         <note>Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd";</note>
@@ -1135,6 +782,164 @@
       <trans-unit id="x8T-QG-WiU.normalTitle">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "x8T-QG-WiU";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="pkh-7R-foQ.text">
+        <source>Password Requirements</source>
+        <note>Class = "UILabel"; text = "Password Requirements"; ObjectID = "pkh-7R-foQ";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="24.normalTitle">
+        <source>OK</source>
+        <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
+      </trans-unit>
+      <trans-unit id="25.normalTitle">
+        <source>Cancel</source>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+    </header>
+    <body>
+      <trans-unit id="1Qx-Jp-bYp.text">
+        <source>2FA Reset Requested by another device.</source>
+        <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
+      </trans-unit>
+      <trans-unit id="3uS-L5-frK.normalTitle">
+        <source>KEEP 2FA</source>
+        <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
+      </trans-unit>
+      <trans-unit id="4md-ob-Ttv.text">
+        <source>Core Version:</source>
+        <note>Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv";</note>
+      </trans-unit>
+      <trans-unit id="9ur-p7-oPb.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb";</note>
+      </trans-unit>
+      <trans-unit id="Ag5-Xn-Vpg.normalTitle">
+        <source>Clear Watcher Cache</source>
+        <note>Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg";</note>
+      </trans-unit>
+      <trans-unit id="Bs1-Yi-SIh.normalTitle">
+        <source>Upload Log Files</source>
+        <note>Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh";</note>
+      </trans-unit>
+      <trans-unit id="GMX-G5-Rl3.text">
+        <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
+        <note>Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3";</note>
+      </trans-unit>
+      <trans-unit id="GXU-6G-OIw.placeholder">
+        <source>Current Password</source>
+        <note>Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw";</note>
+      </trans-unit>
+      <trans-unit id="Izr-Cl-Osv.text">
+        <source>Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
+Scan the QR code using this device</source>
+        <note>Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv";</note>
+      </trans-unit>
+      <trans-unit id="LAg-aY-W5b.normalTitle">
+        <source>DONE</source>
+        <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b";</note>
+      </trans-unit>
+      <trans-unit id="Myh-H6-aDd.text">
+        <source>Version:</source>
+        <note>Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd";</note>
+      </trans-unit>
+      <trans-unit id="RqX-ow-U05.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05";</note>
+      </trans-unit>
+      <trans-unit id="SXK-F7-NoK.text">
+        <source>0.1.0-mainnet</source>
+        <note>Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK";</note>
+      </trans-unit>
+      <trans-unit id="T6x-zH-xvf.text">
+        <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
+        <note>Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf";</note>
+      </trans-unit>
+      <trans-unit id="X6G-HD-WUv.placeholder">
+        <source>Search</source>
+        <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv";</note>
+      </trans-unit>
+      <trans-unit id="XJN-At-Qod.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod";</note>
+      </trans-unit>
+      <trans-unit id="Zw4-k1-a82.text">
+        <source>Mainnet</source>
+        <note>Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82";</note>
+      </trans-unit>
+      <trans-unit id="avV-bm-INd.normalTitle">
+        <source>DISABLE 2FA</source>
+        <note>Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd";</note>
+      </trans-unit>
+      <trans-unit id="bYl-WU-bNw.text">
+        <source>Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</source>
+        <note>Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw";</note>
+      </trans-unit>
+      <trans-unit id="g6f-f3-w6p.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p";</note>
+      </trans-unit>
+      <trans-unit id="h6I-iF-k15.text">
+        <source>Date</source>
+        <note>Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15";</note>
+      </trans-unit>
+      <trans-unit id="hxc-na-KPc.text">
+        <source>Two factor reset has been requested</source>
+        <note>Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc";</note>
+      </trans-unit>
+      <trans-unit id="iUa-wU-ZnQ.normalTitle">
+        <source>StylizedOutline</source>
+        <note>Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ";</note>
+      </trans-unit>
+      <trans-unit id="lqV-Y6-LKD.normalTitle">
+        <source>Request Reset</source>
+        <note>Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD";</note>
+      </trans-unit>
+      <trans-unit id="mJ9-nG-s79.text">
+        <source>Enabled</source>
+        <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
+      </trans-unit>
+      <trans-unit id="nhU-8o-H50.normalTitle">
+        <source>Button</source>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50";</note>
+      </trans-unit>
+      <trans-unit id="pX1-NU-49a.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a";</note>
+      </trans-unit>
+      <trans-unit id="pki-9D-VwL.normalTitle">
+        <source>Scan Token</source>
+        <note>Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL";</note>
+      </trans-unit>
+      <trans-unit id="qLK-qd-7qg.text">
+        <source>Network:</source>
+        <note>Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg";</note>
+      </trans-unit>
+      <trans-unit id="sZm-Gx-M8r.text">
+        <source>App Version</source>
+        <note>Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r";</note>
+      </trans-unit>
+      <trans-unit id="th1-bn-E4x.normalTitle">
+        <source>CANCEL</source>
+        <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x";</note>
       </trans-unit>
     </body>
   </file>
@@ -1205,82 +1010,34 @@
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz/Business Directory/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext">
+  <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="DlF-tR-T08.text">
-        <source>Business Name</source>
-        <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
+      <trans-unit id="61J-35-M5b.placeholder">
+        <source>Name your new wallet</source>
+        <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
       </trans-unit>
-      <trans-unit id="GGS-YR-zt1.normalTitle">
-        <source>Shopping</source>
-        <note>Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1";</note>
+      <trans-unit id="HuB-Hn-lsB.text">
+        <source>Currency:</source>
+        <note>Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB";</note>
       </trans-unit>
-      <trans-unit id="KxI-24-PCF.text">
-        <source>Categories</source>
-        <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
+      <trans-unit id="Ug5-7Y-oG3.normalTitle">
+        <source>CANCEL</source>
+        <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
       </trans-unit>
-      <trans-unit id="Sfb-cf-6wF.normalTitle">
-        <source>More Categories</source>
-        <note>Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF";</note>
+      <trans-unit id="VVb-in-rZz.normalTitle">
+        <source>Button</source>
+        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz";</note>
       </trans-unit>
-      <trans-unit id="a78-ih-LDk.normalTitle">
-        <source>Coffee &amp; Tea</source>
-        <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
-      </trans-unit>
-      <trans-unit id="aNa-3g-QXd.placeholder">
-        <source>Search</source>
-        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd";</note>
-      </trans-unit>
-      <trans-unit id="b1E-1G-btq.normalTitle">
-        <source>Gift Cards</source>
-        <note>Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq";</note>
-      </trans-unit>
-      <trans-unit id="baO-FH-Oy4.text">
-        <source>Near You</source>
-        <note>Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4";</note>
-      </trans-unit>
-      <trans-unit id="f2g-xP-19U.text">
-        <source>Label</source>
-        <note>Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U";</note>
-      </trans-unit>
-      <trans-unit id="ga1-R0-wof.text">
-        <source>Type BTC</source>
-        <note>Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof";</note>
-      </trans-unit>
-      <trans-unit id="heE-og-iXA.placeholder">
-        <source>Search</source>
-        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA";</note>
-      </trans-unit>
-      <trans-unit id="kTm-at-TUR.normalTitle">
-        <source>Electronics</source>
-        <note>Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR";</note>
-      </trans-unit>
-      <trans-unit id="lFC-s8-IJT.text">
-        <source>Label</source>
-        <note>Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT";</note>
-      </trans-unit>
-      <trans-unit id="oPG-fA-f9b.text">
-        <source>leftLabel</source>
-        <note>Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b";</note>
-      </trans-unit>
-      <trans-unit id="oyK-ph-99S.normalTitle">
-        <source>Restaurants</source>
-        <note>Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S";</note>
-      </trans-unit>
-      <trans-unit id="sWr-pd-hBY.normalTitle">
-        <source>ATMs</source>
-        <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
-      </trans-unit>
-      <trans-unit id="wy7-Kv-3ap.text">
-        <source>Address 1234</source>
-        <note>Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap";</note>
+      <trans-unit id="bfD-1n-tCg.normalTitle">
+        <source>DONE</source>
+        <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg";</note>
       </trans-unit>
     </body>
   </file>
-  <file original="Airbitz/Localizable.strings" source-language="en" datatype="plaintext">
+  <file original="Localizable.strings" source-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
@@ -1356,6 +1113,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>ATM</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="ATM Fee">
+        <source>ATM Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1372,16 +1133,36 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Add New</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Affiliate Revenue">
+        <source>Affiliate Revenue</source>
+        <note>Income category for affiliate revenue</note>
+      </trans-unit>
       <trans-unit id="Affiliate link has been copied to the clipboard">
         <source>Affiliate link has been copied to the clipboard</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Air Travel">
+        <source>Air Travel</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Alcohol &amp; Bars">
+        <source>Alcohol &amp; Bars</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Allowance">
+        <source>Allowance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Amusement">
+        <source>Amusement</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
@@ -1412,6 +1193,22 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Arts">
+        <source>Arts</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto &amp; Transport">
+        <source>Auto &amp; Transport</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Insurance">
+        <source>Auto Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Auto Payment">
+        <source>Auto Payment</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
         <note>settings text</note>
@@ -1420,12 +1217,28 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>BITCOIN DENOMINATION</source>
         <note>section header in settings table</note>
       </trans-unit>
+      <trans-unit id="Baby Supplies">
+        <source>Baby Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Babysitter &amp; Daycare">
+        <source>Babysitter &amp; Daycare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
         <note>Back button text on top left</note>
       </trans-unit>
       <trans-unit id="Balance">
         <source>Balance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bank Fee">
+        <source>Bank Fee</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Bills &amp; Utilities">
+        <source>Bills &amp; Utilities</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="BitID Login">
@@ -1460,12 +1273,12 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Bluetooth</source>
         <note>settings text</note>
       </trans-unit>
-      <trans-unit id="Bluetooth disconnected">
-        <source>Bluetooth disconnected</source>
+      <trans-unit id="Books">
+        <source>Books</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Bluetooth payment requests are listed here. Tap on a user to send them a payment">
-        <source>Bluetooth payment requests are listed here. Tap on a user to send them a payment</source>
+      <trans-unit id="Books &amp; Supplies">
+        <source>Books &amp; Supplies</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Business Name or Category">
@@ -1500,6 +1313,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Cannot delete wallet as it contains funds. Please transfer out funds first.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Car Wash">
+        <source>Car Wash</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cash &amp; ATM">
+        <source>Cash &amp; ATM</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
@@ -1524,6 +1345,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Change recovery questions</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Charity">
+        <source>Charity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
         <note>Check password button text</note>
@@ -1540,8 +1365,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Close</source>
         <note>Generic CLOSE button text</note>
       </trans-unit>
+      <trans-unit id="Clothing">
+        <source>Clothing</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Coffee Shops">
+        <source>Coffee Shops</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Complete Signup">
@@ -1568,6 +1401,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Connected</source>
         <note>Popup text when BLE connects</note>
       </trans-unit>
+      <trans-unit id="Consulting Income">
+        <source>Consulting Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Copied">
+        <source>Copied</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Copy">
         <source>Copy</source>
         <note>Copy button text</note>
@@ -1582,6 +1423,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       </trans-unit>
       <trans-unit id="Creating and securing wallet">
         <source>Creating and securing wallet</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Credit Card Payment">
+        <source>Credit Card Payment</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Current Location">
@@ -1644,6 +1489,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Deleting Wallet</source>
         <note>Text for popup while deleting wallet</note>
       </trans-unit>
+      <trans-unit id="Dentist">
+        <source>Dentist</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deposit to Savings">
+        <source>Deposit to Savings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Designed and Built by Airbitz in">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
@@ -1660,9 +1513,17 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Discounted Gift Cards</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Div Income">
+        <source>Div Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Doctor">
+        <source>Doctor</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Done">
@@ -1673,8 +1534,16 @@ Enter it below to make sure:</source>
         <source>Download the Airbitz wallet and save money using bitcoin</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Education">
+        <source>Education</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Electronics">
         <source>Electronics</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Electronics &amp; Software">
+        <source>Electronics &amp; Software</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Email">
@@ -1715,6 +1584,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Enter any notes you would like to send to our support staff">
         <source>Enter any notes you would like to send to our support staff</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Entertainment">
+        <source>Entertainment</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Error Changing PIN">
@@ -1765,9 +1638,21 @@ Enter it below to make sure:</source>
         <source>Error sending SMS</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Exchange">
+        <source>Exchange</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Exchange Rate Data Source">
+        <source>Exchange Rate Data Source</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
         <note>Exit button text on top left</note>
+      </trans-unit>
+      <trans-unit id="Expense">
+        <source>Expense</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
@@ -1777,12 +1662,28 @@ Enter it below to make sure:</source>
         <source>Export Private Seed</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Export Public Seed (XPub)">
+        <source>Export Public Seed (XPub)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Export Wallet Transactions">
         <source>Export Wallet Transactions</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Eyecare">
+        <source>Eyecare</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fast Food">
+        <source>Fast Food</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fees &amp; Charges">
+        <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
@@ -1793,12 +1694,32 @@ Enter it below to make sure:</source>
         <source>Fiat</source>
         <note>Fiat</note>
       </trans-unit>
+      <trans-unit id="Financial">
+        <source>Financial</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Financial Advisor">
+        <source>Financial Advisor</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Food &amp; Dining">
+        <source>Food &amp; Dining</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Furnishings">
+        <source>Furnishings</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gas &amp; Fuel">
+        <source>Gas &amp; Fuel</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Generating QR Code...">
@@ -1809,8 +1730,16 @@ Enter it below to make sure:</source>
         <source>Get Affiliate Link</source>
         <note>Button text for Get Affiliate Link</note>
       </trans-unit>
+      <trans-unit id="Gift">
+        <source>Gift</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Gift Cards">
         <source>Gift Cards</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gifts &amp; Donations">
+        <source>Gifts &amp; Donations</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Go Back">
@@ -1819,6 +1748,26 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Great job remembering your password.">
         <source>Great job remembering your password.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Groceries">
+        <source>Groceries</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Gym">
+        <source>Gym</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="HOA Dues">
+        <source>HOA Dues</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hair">
+        <source>Hair</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Health &amp; Fitness">
+        <source>Health &amp; Fitness</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Help">
@@ -1833,6 +1782,42 @@ Enter it below to make sure:</source>
         <source>High Fee</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Hobbies">
+        <source>Hobbies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home">
+        <source>Home</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Improvement">
+        <source>Home Improvement</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Insurance">
+        <source>Home Insurance</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Phone">
+        <source>Home Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Services">
+        <source>Home Services</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Home Supplies">
+        <source>Home Supplies</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hotel">
+        <source>Hotel</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="How are you liking %@?">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
@@ -1841,6 +1826,10 @@ Enter it below to make sure:</source>
         <source>IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] Gift Card)</source>
         <note>Slideout menu import private key text</note>
+      </trans-unit>
+      <trans-unit id="IRA Contribution">
+        <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
@@ -1874,9 +1863,9 @@ Enter it below to make sure:</source>
         <source>Importing funds from %@ into wallet...</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Income:Affiliate Revenue">
-        <source>Income:Affiliate Revenue</source>
-        <note>Income category for affiliate revenue</note>
+      <trans-unit id="Income">
+        <source>Income</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
         <source>Incorrect PIN</source>
@@ -1906,6 +1895,14 @@ Enter it below to make sure:</source>
         <source>Insufficient Password</source>
         <note>Title of password check popup alert</note>
       </trans-unit>
+      <trans-unit id="Interest Exp">
+        <source>Interest Exp</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Internet">
+        <source>Internet</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
         <note>No comment provided by engineer.</note>
@@ -1922,16 +1919,40 @@ Enter it below to make sure:</source>
         <source>It's great</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Kids">
+        <source>Kids</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Kids Activities">
+        <source>Kids Activities</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
+      </trans-unit>
+      <trans-unit id="Late Fee">
+        <source>Late Fee</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Later">
         <source>Later</source>
         <note>Later button text</note>
       </trans-unit>
+      <trans-unit id="Laundry">
+        <source>Laundry</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Lawn &amp; Garden">
+        <source>Lawn &amp; Garden</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Life Insurance">
+        <source>Life Insurance</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Loading Account...">
@@ -1970,8 +1991,32 @@ Enter it below to make sure:</source>
         <source>Message Sent</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Misc.">
+        <source>Misc.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mobile Phone">
+        <source>Mobile Phone</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="More Categories">
         <source>More Categories</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage &amp; Rent">
+        <source>Mortgage &amp; Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Mortgage Interest">
+        <source>Mortgage Interest</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Movies &amp; DVDs">
+        <source>Movies &amp; DVDs</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Music">
+        <source>Music</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Must have at least %d characters">
@@ -2006,12 +2051,20 @@ Enter it below to make sure:</source>
         <source>Name</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Net Salary">
+        <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="New Password">
         <source>New Password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Newspaper &amp; Magazines">
+        <source>Newspaper &amp; Magazines</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Next">
@@ -2036,6 +2089,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="No thanks">
         <source>No thanks</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Not Sure">
+        <source>Not Sure</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Not so good">
@@ -2070,6 +2127,10 @@ Enter it below to make sure:</source>
         <source>Open 24 hours</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Other Income">
+        <source>Other Income</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2084,6 +2145,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="PIN successfully changed.">
         <source>PIN successfully changed.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Parking">
+        <source>Parking</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Partial Payment">
@@ -2130,6 +2195,26 @@ Enter it below to make sure:</source>
       <trans-unit id="Pending">
         <source>Pending</source>
         <note>Pending status in transaction list</note>
+      </trans-unit>
+      <trans-unit id="Personal Care">
+        <source>Personal Care</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Pet Food &amp; Supplies">
+        <source>Pet Food &amp; Supplies</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pet Grooming">
+        <source>Pet Grooming</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pets">
+        <source>Pets</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Pharmacy">
+        <source>Pharmacy</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Place Call">
         <source>Place Call</source>
@@ -2187,6 +2272,18 @@ Enter it below to make sure:</source>
         <source>Private Seed</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Property">
+        <source>Property</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Public Seed (XPub)">
+        <source>Public Seed (XPub)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Public Transportation">
+        <source>Public Transportation</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
         <note>No comment provided by engineer.</note>
@@ -2228,6 +2325,10 @@ Enter it below to make sure:</source>
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
@@ -2247,6 +2348,14 @@ Enter it below to make sure:</source>
       <trans-unit id="Rename Wallet">
         <source>Rename Wallet</source>
         <note>Rename Wallet popup</note>
+      </trans-unit>
+      <trans-unit id="Rent">
+        <source>Rent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Rental Car &amp; Taxi">
+        <source>Rental Car &amp; Taxi</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -2276,6 +2385,10 @@ Enter it below to make sure:</source>
         <source>Restarting watcher service</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Restaurants">
+        <source>Restaurants</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Restaurants &amp; Food Trucks">
         <source>Restaurants &amp; Food Trucks</source>
         <note>No comment provided by engineer.</note>
@@ -2294,6 +2407,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="SMS sent">
         <source>SMS sent</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Sales">
+        <source>Sales</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="San Diego, California, USA">
@@ -2320,6 +2437,10 @@ Enter it below to make sure:</source>
         <source>Select Currency</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Sell Bitcoin">
+        <source>Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
@@ -2339,6 +2460,14 @@ Enter it below to make sure:</source>
       <trans-unit id="Sent Bitcoin">
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Service &amp; Parts">
+        <source>Service &amp; Parts</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Service Fee">
+        <source>Service Fee</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
@@ -2360,6 +2489,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Share">
         <source>Share</source>
         <note>Generic SHARE button text</note>
+      </trans-unit>
+      <trans-unit id="Shopping">
+        <source>Shopping</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Show">
         <source>Show</source>
@@ -2390,13 +2523,33 @@ Enter it below to make sure:</source>
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Spa &amp; Massage">
+        <source>Spa &amp; Massage</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
       </trans-unit>
+      <trans-unit id="Sporting Goods">
+        <source>Sporting Goods</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Sports">
+        <source>Sports</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Standard Fee">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Student Loan">
+        <source>Student Loan</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
@@ -2417,6 +2570,18 @@ Enter it below to make sure:</source>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tax">
+        <source>Tax</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Television">
+        <source>Television</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -2466,6 +2631,10 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>To: %@ ▼</source>
         <note>Top of screen wallet dropdown prefix text</note>
       </trans-unit>
+      <trans-unit id="Tolls">
+        <source>Tolls</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
@@ -2490,9 +2659,21 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>TouchID: Unsupported Device</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="Toys">
+        <source>Toys</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Trade Commissions">
+        <source>Trade Commissions</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Transaction Details">
         <source>Transaction Details</source>
         <note>Transaction Details header text</note>
+      </trans-unit>
+      <trans-unit id="Transfer">
+        <source>Transfer</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
@@ -2502,9 +2683,17 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Transfer To %@</source>
         <note>To wallet transfer text</note>
       </trans-unit>
+      <trans-unit id="Travel">
+        <source>Travel</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tuition">
+        <source>Tuition</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Two Factor">
         <source>Two Factor</source>
@@ -2536,6 +2725,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       </trans-unit>
       <trans-unit id="Two Factor Reset">
         <source>Two Factor Reset</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="USA and Canada">
+        <source>USA and Canada</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Unable to determine two factor status">
@@ -2626,9 +2819,21 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Username must be at least %d characters.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Utilities">
+        <source>Utilities</source>
+        <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Vacation">
+        <source>Vacation</source>
+        <note>expense category</note>
+      </trans-unit>
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Vet">
+        <source>Vet</source>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="WALLETS">
         <source>WALLETS</source>
@@ -2667,6 +2872,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Wallet: </source>
         <note>Prefix of wallet name on rename popup</note>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -2694,6 +2903,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync">
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
+      </trans-unit>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
@@ -2776,6 +2989,18 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
         <source>closed</source>
         <note>business listings is closed</note>
       </trans-unit>
+      <trans-unit id="day">
+        <source>day</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="days">
+        <source>days</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="hour">
+        <source>hour</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="hours">
         <source>hours</source>
         <note>No comment provided by engineer.</note>
@@ -2784,277 +3009,25 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</sour
         <source>mBitcoin = (0.001 Bitcoin)</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="minute">
+        <source>minute</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="minutes">
+        <source>minutes</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="second">
+        <source>second</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="seconds">
+        <source>seconds</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="▼ Choose a wallet to transfer funds to ▼">
         <source>▼ Choose a wallet to transfer funds to ▼</source>
         <note>Header of popup in SendView from wallet to wallet transfer</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Login/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="pkh-7R-foQ.text">
-        <source>Password Requirements</source>
-        <note>Class = "UILabel"; text = "Password Requirements"; ObjectID = "pkh-7R-foQ";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Login/Base.lproj/QuestionAnswerView~iphone.xib" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="26l-9i-vHm.text">
-        <source>Question</source>
-        <note>Class = "UILabel"; text = "Question"; ObjectID = "26l-9i-vHm";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/PopupPickerView/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="24.normalTitle">
-        <source>OK</source>
-        <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
-      </trans-unit>
-      <trans-unit id="25.normalTitle">
-        <source>Cancel</source>
-        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Send/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="KGv-Ek-gk9.text">
-        <source>Slide to confirm</source>
-        <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/SignUp/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="0gq-ds-DJC.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-      </trans-unit>
-      <trans-unit id="4eB-ff-Ebh.text">
-        <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
-        <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-      </trans-unit>
-      <trans-unit id="6uu-dw-ssd.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
-      </trans-unit>
-      <trans-unit id="AAt-Oh-ifI.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI";</note>
-      </trans-unit>
-      <trans-unit id="D2i-9s-GAC.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC";</note>
-      </trans-unit>
-      <trans-unit id="DUg-At-veb.text">
-        <source>myname</source>
-        <note>Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb";</note>
-      </trans-unit>
-      <trans-unit id="DgW-Gm-7l2.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2";</note>
-      </trans-unit>
-      <trans-unit id="Dyh-gB-nOv.text">
-        <source>You will next see a popup requesting access to your Contacts.</source>
-        <note>Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv";</note>
-      </trans-unit>
-      <trans-unit id="Ehm-ti-qdD.text">
-        <source>Specify your name or arbitrary nickname ie "Coinmaster".
-
-This is used ONLY when sending payments or requests to others to help them identify you.
-
-This is never sent to Airbitz or any third party and can be changed at any time in the future.</source>
-        <note>Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD";</note>
-      </trans-unit>
-      <trans-unit id="G0E-xz-b8e.text">
-        <source>Set a 4 Digit PIN</source>
-        <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
-      </trans-unit>
-      <trans-unit id="Gzw-pH-bAR.text">
-        <source>1234</source>
-        <note>Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR";</note>
-      </trans-unit>
-      <trans-unit id="KSv-b6-auz.text">
-        <source>See Strings.h</source>
-        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz";</note>
-      </trans-unit>
-      <trans-unit id="SsW-1b-1cv.text">
-        <source>See Strings.h</source>
-        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv";</note>
-      </trans-unit>
-      <trans-unit id="Tqs-NN-dWt.text">
-        <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
-        <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt";</note>
-      </trans-unit>
-      <trans-unit id="VAn-0y-asT.text">
-        <source>See Strings.h</source>
-        <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT";</note>
-      </trans-unit>
-      <trans-unit id="Vad-R9-M68.normalTitle">
-        <source>SKIP</source>
-        <note>Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68";</note>
-      </trans-unit>
-      <trans-unit id="W8f-q2-Sa7.normalTitle">
-        <source>Show</source>
-        <note>Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7";</note>
-      </trans-unit>
-      <trans-unit id="WkL-r2-NLT.text">
-        <source>Sign Up</source>
-        <note>Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT";</note>
-      </trans-unit>
-      <trans-unit id="Wkt-fz-AEf.normalTitle">
-        <source>Button</source>
-        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf";</note>
-      </trans-unit>
-      <trans-unit id="YJZ-dK-bwv.text">
-        <source>Enable Camera Access</source>
-        <note>Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv";</note>
-      </trans-unit>
-      <trans-unit id="bPi-8w-xQ4.text">
-        <source>PIN</source>
-        <note>Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4";</note>
-      </trans-unit>
-      <trans-unit id="cng-Cv-ULC.text">
-        <source>Enable Contact Access</source>
-        <note>Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC";</note>
-      </trans-unit>
-      <trans-unit id="dxS-14-iR5.text">
-        <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
-        <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5";</note>
-      </trans-unit>
-      <trans-unit id="fCk-W4-OJJ.placeholder">
-        <source>Nickname</source>
-        <note>Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ";</note>
-      </trans-unit>
-      <trans-unit id="fV9-pz-Wfn.placeholder">
-        <source>Create PIN</source>
-        <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn";</note>
-      </trans-unit>
-      <trans-unit id="fnL-7h-MQL.placeholder">
-        <source>Choose a Password</source>
-        <note>Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL";</note>
-      </trans-unit>
-      <trans-unit id="hHD-NP-fM6.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6";</note>
-      </trans-unit>
-      <trans-unit id="hoE-Bh-x2F.placeholder">
-        <source>Re-enter Password</source>
-        <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F";</note>
-      </trans-unit>
-      <trans-unit id="i3b-ZH-bDm.placeholder">
-        <source>Choose a Username</source>
-        <note>Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm";</note>
-      </trans-unit>
-      <trans-unit id="jcU-OX-5Hj.text">
-        <source>Write down and store securely</source>
-        <note>Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj";</note>
-      </trans-unit>
-      <trans-unit id="jgQ-ju-YiX.text">
-        <source>Set a Password and PIN</source>
-        <note>Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX";</note>
-      </trans-unit>
-      <trans-unit id="sJ6-mQ-mSV.text">
-        <source>Username</source>
-        <note>Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV";</note>
-      </trans-unit>
-      <trans-unit id="tOB-4i-OVm.text">
-        <source>mypassword12345</source>
-        <note>Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm";</note>
-      </trans-unit>
-      <trans-unit id="w3d-xe-eUq.text">
-        <source>The password is used to authenticate your account and to change sensitive settings.</source>
-        <note>Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq";</note>
-      </trans-unit>
-      <trans-unit id="wff-Il-8GU.text">
-        <source>Write it Down!</source>
-        <note>Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU";</note>
-      </trans-unit>
-      <trans-unit id="x6r-A5-Cxg.normalTitle">
-        <source>Back</source>
-        <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg";</note>
-      </trans-unit>
-      <trans-unit id="y2b-Sg-zfM.placeholder">
-        <source>Create PIN</source>
-        <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM";</note>
-      </trans-unit>
-      <trans-unit id="z5S-Vu-MC1.normalTitle">
-        <source>NEXT</source>
-        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1";</note>
-      </trans-unit>
-      <trans-unit id="zqc-i8-gfC.text">
-        <source>Password</source>
-        <note>Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="Airbitz/Wallets/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="61J-35-M5b.placeholder">
-        <source>Name your new wallet</source>
-        <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
-      </trans-unit>
-      <trans-unit id="HuB-Hn-lsB.text">
-        <source>Currency:</source>
-        <note>Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB";</note>
-      </trans-unit>
-      <trans-unit id="Ug5-7Y-oG3.normalTitle">
-        <source>CANCEL</source>
-        <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
-      </trans-unit>
-      <trans-unit id="VVb-in-rZz.normalTitle">
-        <source>Button</source>
-        <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz";</note>
-      </trans-unit>
-      <trans-unit id="bfD-1n-tCg.normalTitle">
-        <source>DONE</source>
-        <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg";</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="AirbitzTests/Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-      </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.0</source>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="AirbitzUITests/Info.plist" source-language="en" datatype="plaintext">
-    <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
-    </header>
-    <body>
-      <trans-unit id="CFBundleName">
-        <source>$(PRODUCT_NAME)</source>
-      </trans-unit>
-      <trans-unit id="CFBundleShortVersionString">
-        <source>1.0</source>
       </trans-unit>
     </body>
   </file>
