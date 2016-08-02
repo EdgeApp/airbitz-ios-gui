@@ -66,8 +66,8 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
-                @"requestSpend":NSStringFromSelector(@selector(requestSpend:)),
-               @"requestSpend2":NSStringFromSelector(@selector(requestSpend2:)),
+                     @"createSpendRequest":NSStringFromSelector(@selector(createSpendRequest:)),
+                     @"createSpendRequest2":NSStringFromSelector(@selector(createSpendRequest2:)),
                  @"requestSign":NSStringFromSelector(@selector(requestSign:)),
                  @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
                       @"saveTx":NSStringFromSelector(@selector(saveTx:)),
@@ -504,12 +504,12 @@ static const NSString *PROTOCOL = @"bridge://";
     [Util animateController:_sendConfirmationViewController parentController:self];
 }
 
-- (void)requestSpend:(NSDictionary *)params
+- (void)createSpendRequest:(NSDictionary *)params
 {
     [self launchSpendConfirmation:params signOnly:NO];
 }
 
-- (void)requestSpend2:(NSDictionary *)params
+- (void)createSpendRequest2:(NSDictionary *)params
 {
     [self launchSpendConfirmation:params signOnly:NO];
 }
