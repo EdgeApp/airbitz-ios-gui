@@ -46,7 +46,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    abc = [[AirbitzCore alloc] init:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
+    abc = [AirbitzCore makeABCContext:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
@@ -244,7 +244,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         // Popup notification if user has accounts with no passwords
         //
         NSMutableArray *arrayAccounts = [[NSMutableArray alloc] init];
-        [abc listLocalAccounts:arrayAccounts];
+        [abc listUsernames:arrayAccounts];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];

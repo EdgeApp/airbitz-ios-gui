@@ -164,67 +164,81 @@
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
                     // NOTE: userNameTextField is repurposed for current password
-                    [abcAccount changePassword:self.passwordTextField.text complete:^
+                    [abcAccount changePassword:self.passwordTextField.text callback:^(NSError *error)
                     {
-                        [self changePasswordComplete:YES errorMessage:nil];
-                    } error:^(NSError *error)
-                    {
-                        [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        if (!error)
+                        {
+                            [self changePasswordComplete:YES errorMessage:nil];
+                        }
+                        else
+                        {                            
+                            [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        }
                     }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    [abcAccount changePassword:self.passwordTextField.text complete:^{
-                         [abcAccount changePIN:self.pinTextField.text complete:^
-                          {
-                              [self blockUser:NO];
-                              [self changePasswordComplete:YES errorMessage:nil];
-                          } error:^(NSError *error)
-                          {
-                              [self blockUser:NO];
-                              [self.activityView stopAnimating];
-                              
-                              UIAlertView *alert = [[UIAlertView alloc]
-                                                    initWithTitle:self.titleString
-                                                    message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                             self.titleString,
-                                                             error]
-                                                    delegate:nil
-                                                    cancelButtonTitle:okButtonText
-                                                    otherButtonTitles:nil];
-                              [alert show];
-                              [self changePasswordComplete:YES errorMessage:nil];
-                          }];
-                     } error:^(NSError *error)
-                     {
-                         [self blockUser:NO];
-                         [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
-                     }];
+                    [abcAccount changePassword:self.passwordTextField.text callback:^(NSError *error){
+                        if (!error)
+                        {
+                            [abcAccount changePIN:self.pinTextField.text callback:^(NSError *error) {
+                                [self blockUser:NO];
+                                if (!error)
+                                {
+                                    [self changePasswordComplete:YES errorMessage:nil];
+                                }
+                                else
+                                {
+                                    [self.activityView stopAnimating];
+                                    
+                                    UIAlertView *alert = [[UIAlertView alloc]
+                                                          initWithTitle:self.titleString
+                                                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                                                   self.titleString,
+                                                                   error]
+                                                          delegate:nil
+                                                          cancelButtonTitle:okButtonText
+                                                          otherButtonTitles:nil];
+                                    [alert show];
+                                    [self changePasswordComplete:YES errorMessage:nil];
+                                }
+                            }];
+                            
+                        }
+                        else
+                        {
+                            [self blockUser:NO];
+                            [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        }
+                    }];
                 }
                 else
                 {
                     [self blockUser:YES];
-                    [abcAccount changePIN:self.pinTextField.text complete:^
-                     {
-                         // no callback on this one so tell them it was a success
-                         UIAlertView *alert = [[UIAlertView alloc]
-                                               initWithTitle:pinSuccessfullyChanged
-                                               message:nil
-                                               delegate:self
-                                               cancelButtonTitle:okButtonText
-                                               otherButtonTitles:nil];
-                         [alert show];
-                     } error:^(NSError *error)
-                     {
-                         // no callback on this one so tell them it was a success
-                         UIAlertView *alert = [[UIAlertView alloc]
-                                               initWithTitle:errorChangingPIN
-                                               message:error.userInfo[NSLocalizedDescriptionKey]
-                                               delegate:self
-                                               cancelButtonTitle:okButtonText
-                                               otherButtonTitles:nil];
-                         [alert show];
+                    [abcAccount changePIN:self.pinTextField.text callback:^(NSError *error) {
+                        if (!error)
+                        {
+                            // no callback on this one so tell them it was a success
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                                  initWithTitle:pinSuccessfullyChanged
+                                                  message:nil
+                                                  delegate:self
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+                            [alert show];
+                        }
+                        else
+                        {
+                            // no callback on this one so tell them it was a success
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                                  initWithTitle:errorChangingPIN
+                                                  message:error.userInfo[NSLocalizedDescriptionKey]
+                                                  delegate:self
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+                            [alert show];
+                        }
                      }];
                 }
             }

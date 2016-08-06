@@ -65,7 +65,7 @@
     NSError *error;
     NSString *str = [NSString stringWithFormat:@"Attempting to log into account: %@", _usernameTextField.stringValue];
     [_infoTextLabel setStringValue:str];
-    abcAccount = [abc passwordLogin:_usernameTextField.stringValue password:_passwordTextField.stringValue delegate:self error:&error];
+    abcAccount = [abc loginWithPassword:_usernameTextField.stringValue password:_passwordTextField.stringValue delegate:self error:&error];
     
     if (abcAccount && abcAccount.name)
     {

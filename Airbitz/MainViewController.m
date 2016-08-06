@@ -624,11 +624,11 @@ MainViewController *singleton;
 //    self.backgroundView.image = [Theme Singleton].backgroundLogin;
 
     if (firstLaunch) {
-        bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
+        bool exists = [abc pinLoginEnabled:[abc getLastAccessedAccount] error:nil];
         [self showLogin:NO withPIN:exists];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            bool exists = [abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil];
+            bool exists = [abc pinLoginEnabled:[abc getLastAccessedAccount] error:nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self showLogin:YES withPIN:exists];
             });

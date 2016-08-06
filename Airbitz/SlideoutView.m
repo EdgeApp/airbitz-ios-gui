@@ -544,7 +544,7 @@
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listLocalAccounts:self.arrayAccounts];
+    NSError *error = [abc listUsernames:self.arrayAccounts];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];

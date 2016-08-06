@@ -1272,7 +1272,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
     {
-        [abcAccount pinLoginSetup:theSwitch.on];
+        [abcAccount enablePINLogin:theSwitch.on];
         
         // update the display by reloading the table
         [self.tableView reloadData];

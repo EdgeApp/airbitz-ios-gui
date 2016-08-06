@@ -530,35 +530,36 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-        [abc passwordLogin:self.usernameSelector.textField.text
-           password:self.passwordTextField.text
-           delegate:[MainViewController Singleton]
-                otp:nil
-           complete:^(ABCAccount *account)
-         {
-             [self signInComplete:account newAccount:NO];
-         }
-              error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
-         {
-             [self showSpinner:NO];
-             
-             if (ABCConditionCodeInvalidOTP == error.code)
-             {
-                 [MainViewController showBackground:NO animate:YES];
-                 [self launchTwoFactorMenu:resetDate token:resetToken];
-             }
-             else if (ABCConditionCodeError == error.code)
-             {
-                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
-                 [MainViewController showBackground:NO animate:YES];
-             }
-             else
-             {
-                 [MainViewController showBackground:NO animate:YES];
-                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
-             }
-         }];
-
+        [abc loginWithPassword:self.usernameSelector.textField.text
+                      password:self.passwordTextField.text
+                      delegate:[MainViewController Singleton]
+                           otp:nil callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self signInComplete:account newAccount:NO];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                
+                if (ABCConditionCodeInvalidOTP == error.code)
+                {
+                    [MainViewController showBackground:NO animate:YES];
+                    [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
+                }
+                else if (ABCConditionCodeError == error.code)
+                {
+                    [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
+                    [MainViewController showBackground:NO animate:YES];
+                }
+                else
+                {
+                    [MainViewController showBackground:NO animate:YES];
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+                }
+            }
+        }];
     }
 }
 
@@ -1100,22 +1101,25 @@ static BOOL bInitialized = false;
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         // Perform the two factor sign in
-        [abc passwordLogin:self.usernameSelector.textField.text
-           password:self.passwordTextField.text
-           delegate:[MainViewController Singleton]
-                otp:secret
-           complete:^(ABCAccount *account)
-         {
-             [self signInComplete:account newAccount:NO];
-         }
-         error:^(NSError *error, NSDate *date, NSString *resetToken)
-         {
-             [self showSpinner:NO];
-             if (ABCConditionCodeError == error.code)
-                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
-             else
-                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
-         }];
+        [abc loginWithPassword:self.usernameSelector.textField.text
+                      password:self.passwordTextField.text
+                      delegate:[MainViewController Singleton]
+                           otp:secret
+                      callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self signInComplete:account newAccount:NO];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                if (ABCConditionCodeError == error.code)
+                    [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
+                else
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+            }
+        }];
     }];
 }
 
@@ -1167,7 +1171,7 @@ static BOOL bInitialized = false;
 {
     if (!self.arrayAccounts)
         self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listLocalAccounts:self.arrayAccounts];
+    NSError *error = [abc listUsernames:self.arrayAccounts];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -1184,7 +1188,7 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc accountHasPINLogin:account error:nil])
+    if([abc pinLoginEnabled:account error:nil])
     {
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
@@ -1466,7 +1470,7 @@ static BOOL bInitialized = false;
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil])
+    if([abc pinLoginEnabled:[abc getLastAccessedAccount] error:nil])
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];
