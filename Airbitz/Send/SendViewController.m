@@ -567,7 +567,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         if (buttonIndex > 0)
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                NSError *error = nil;
+                ABCError *error = nil;
                 if (!_bitidSParam)
                     error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
                 else
@@ -1406,7 +1406,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         [self startQRReader];
         
-    } error:^(NSError *error) {
+    } error:^(ABCError *error) {
         NSString *errorMessage = [NSString stringWithFormat:@"%@\n\n%@: %d\n\n%@: %@", importFailedText, errorCodeText, (int) error.code, errorDescriptionText, error.userInfo[NSLocalizedDescriptionKey]];
         [MainViewController fadingAlert:errorMessage];
 
@@ -1628,7 +1628,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)processURI:(NSString *)uriString;
 {
-    NSError *error;
+    ABCError *error;
     
     [self stopQRReader];
 
@@ -1846,7 +1846,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 {
                     [self stopQRReader];
                     [MainViewController fadingAlert:fetchingPaymentRequestText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT notify:^{
-                        NSError *error = nil;
+                        ABCError *error = nil;
                         ABCPaymentRequest *paymentRequest = [parsedURI getPaymentRequest:&error];
                         
                         if (!error)

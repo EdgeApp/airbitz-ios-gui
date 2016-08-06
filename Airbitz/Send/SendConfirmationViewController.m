@@ -327,7 +327,7 @@
 
 - (void)buildSpend
 {
-    NSError *error = nil;
+    ABCError *error = nil;
     _spend = [abcAccount.currentWallet createNewSpend:&error];
     _spend.feeLevel = _feeLevel;
     
@@ -511,7 +511,7 @@
                 [self dismissKeyboard];
             }
 
-        } error:^(NSError *error) {
+        } error:^(ABCError *error) {
             
         }];
     }
@@ -585,7 +585,7 @@
         {
             [_spend signTx:^(ABCUnsentTx *unsentTx) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:nil unsentTx:unsentTx];
-            } error:^(NSError *error) {
+            } error:^(ABCError *error) {
                 [self txSendFailed:error];
             }];
         }
@@ -593,7 +593,7 @@
         {
             [_spend signBroadcastAndSave:^(ABCTransaction *transaction) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:transaction unsentTx:nil];
-            } error:^(NSError *error) {
+            } error:^(ABCError *error) {
                 [self txSendFailed:error];
             }];
         }
@@ -766,7 +766,7 @@
     [self buildSpend];
     [_spend getFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees+_amountSatoshi2 error:NO errorString:nil];
-    } error:^(NSError *error) {
+    } error:^(ABCError *error) {
         [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
     }];
 }
@@ -1079,7 +1079,7 @@
     });
 }
 
-- (void)txSendFailed:(NSError *)error;
+- (void)txSendFailed:(ABCError *)error;
 {
     NSString *title = errorDuringSend;
     NSArray *params = [NSArray arrayWithObjects: title, [NSNumber numberWithInteger:error.code], error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];

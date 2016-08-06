@@ -98,7 +98,7 @@
     [abc requestOTPReset:_username token:_resetToken complete:^
      {
          [MainViewController fadingAlert:resetRequestedText];
-     } error:^(NSError *error)
+     } error:^(ABCError *error)
      {
          [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
      }];

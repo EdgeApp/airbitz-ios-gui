@@ -250,7 +250,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)saveSettings
 {
-    NSError *error = [abcAccount.settings saveSettings];
+    ABCError *error = [abcAccount.settings saveSettings];
     // update the settings in the core
 
     if (error)

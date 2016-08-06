@@ -106,7 +106,7 @@
     bool on = NO;
     long timeout = 0;
     
-    NSError *error = [abcAccount getOTPDetails:&on
+    ABCError *error = [abcAccount getOTPDetails:&on
                                        timeout:&timeout];
     
     if (!error) {
@@ -201,7 +201,7 @@
 
 - (void)checkRequest
 {
-    NSError *error = nil;
+    ABCError *error = nil;
     BOOL pending = [abc hasOTPResetPending:abcAccount.name error:&error];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -296,7 +296,7 @@
 
 - (BOOL)switchTwoFactor:(BOOL)on
 {
-    NSError *error;
+    ABCError *error;
     if (on) {
         error = [abcAccount enableOTP:OTP_RESET_DELAY];
         if (!error)
@@ -355,7 +355,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount disableOTP];
+            ABCError *error = [abcAccount disableOTP];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {
                     [MainViewController fadingAlert:requestConfirmedTwoFactorOff];
@@ -390,7 +390,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount cancelOTPResetRequest];
+            ABCError *error = [abcAccount cancelOTPResetRequest];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {

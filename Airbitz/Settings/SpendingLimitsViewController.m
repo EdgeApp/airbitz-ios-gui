@@ -240,7 +240,7 @@
             abcAccount.settings.bSpendRequirePin = false;
         }
         [[User Singleton] saveLocalSettings];
-        NSError *error = [abcAccount.settings saveSettings];
+        ABCError *error = [abcAccount.settings saveSettings];
         if (error)
         {
             UIAlertView *alert =

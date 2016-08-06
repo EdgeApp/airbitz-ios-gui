@@ -125,7 +125,7 @@
 
 - (BOOL)storeSecret
 {
-    NSError *error = [abcAccount setOTPKey:_secret];
+    ABCError *error = [abcAccount setupOTPKey:_secret];
     return !error;
 }
 

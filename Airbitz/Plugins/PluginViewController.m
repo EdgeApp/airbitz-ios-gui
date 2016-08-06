@@ -523,7 +523,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    NSError *error;
+    ABCError *error;
     if (_unsentTx &&
         [_unsentTx.base16 isEqualToString:[args objectForKey:@"rawTx"]])
     {
@@ -541,7 +541,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    NSError *error;
+    ABCError *error;
     if (_unsentTx &&
         [_unsentTx.base16 isEqualToString:[args objectForKey:@"rawTx"]])
     {
@@ -666,7 +666,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
     ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
-    NSError *error = nil;
+    ABCError *error = nil;
     ABCReceiveAddress *receiveAddress = [wallet createNewReceiveAddress:&error];
     
     receiveAddress.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
@@ -703,7 +703,7 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCWallet *wallet = [abcAccount getWallet:uuid];
     ABCReceiveAddress *receiveAddress = [wallet getReceiveAddress:[args objectForKey:@"requestId"]];
     
-    NSError *error = [receiveAddress finalizeRequest];
+    ABCError *error = [receiveAddress finalizeRequest];
     
     if (!error) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -761,7 +761,7 @@ static const NSString *PROTOCOL = @"bridge://";
 //    NSDictionary *args = [params objectForKey:@"args"];
 //            
 //    double currency;
-//    NSError *error = nil;
+//    ABCError *error = nil;
 //
 //    currency = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
 //                                    currency:[[args objectForKey:@"currencyNum"] intValue]
@@ -780,7 +780,7 @@ static const NSString *PROTOCOL = @"bridge://";
 //    NSDictionary *args = [params objectForKey:@"args"];
 //
 //    int64_t satoshis;
-//    NSError *error = nil;
+//    ABCError *error = nil;
 //    satoshis = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
 //                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
 //                                       error:&error];
