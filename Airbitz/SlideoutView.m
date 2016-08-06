@@ -48,7 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
-@property (nonatomic, strong) NSMutableArray                *arrayAccounts;
+@property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 //@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
@@ -542,9 +542,8 @@
 
 - (void)getAllAccounts
 {
-    if (!self.arrayAccounts)
-        self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listUsernames:self.arrayAccounts];
+    NSError *error;
+    self.arrayAccounts = [abc listUsernames:&error];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];

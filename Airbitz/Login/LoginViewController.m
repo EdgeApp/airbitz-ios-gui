@@ -96,7 +96,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
 @property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
-@property (nonatomic, strong)           NSMutableArray      *arrayAccounts;
+@property (nonatomic, strong)           NSArray             *arrayAccounts;
 @property (nonatomic, strong)           NSArray             *otherAccounts;
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
@@ -1169,9 +1169,8 @@ static BOOL bInitialized = false;
 
 - (void)getAllAccounts
 {
-    if (!self.arrayAccounts)
-        self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listUsernames:self.arrayAccounts];
+    NSError *error;
+    self.arrayAccounts = [abc listUsernames:&error];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];

@@ -243,8 +243,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
         //
         // Popup notification if user has accounts with no passwords
         //
-        NSMutableArray *arrayAccounts = [[NSMutableArray alloc] init];
-        [abc listUsernames:arrayAccounts];
+        NSArray *arrayAccounts = [abc listUsernames:nil];
         BOOL bDidNoPasswordNotification = false;
 
         [LocalSettings loadAll];
