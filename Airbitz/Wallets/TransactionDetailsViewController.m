@@ -9,7 +9,7 @@
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
 #import "ABCTxInOut.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "User.h"
 #import "NSDate+Helper.h"
 #import "InfoView.h"

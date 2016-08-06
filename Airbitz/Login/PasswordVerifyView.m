@@ -90,7 +90,7 @@
 {
 	_password = password;
 	
-    ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.password];
+    ABCPasswordRuleResult *result = [ABCContext checkPasswordRules:self.password];
     
 //    if (result)
 		
@@ -170,7 +170,7 @@
     i++;
     label = (UILabel *)[self viewWithTag:i + 20];
     imageView = (UIImageView *)[self viewWithTag:i + 10];
-    if(label) label.text = [NSString stringWithFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+    if(label) label.text = [NSString stringWithFormat:mustHaveMoreCharacters, [ABCContext getMinimumPasswordLength]];
     if(imageView) {
         if (result.tooShort)
             imageView.image = [UIImage imageNamed:@"White-Dot"];

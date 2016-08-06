@@ -3,7 +3,7 @@
 #import "TwoFactorMenuViewController.h"
 #import "NotificationChecker.h"
 #import "MinCharTextField.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Util.h"
 #import "User.h"
 #import "MainViewController.h"
@@ -79,7 +79,7 @@
 {
     _passwordTextField.text = @"";
     _passwordTextField.delegate = self;
-    _passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    _passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     if (![abcAccount accountHasPassword]) {

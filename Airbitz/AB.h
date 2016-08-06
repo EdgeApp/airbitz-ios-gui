@@ -4,12 +4,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "ABCAccount.h"
 
-@class AirbitzCore;
+@class ABCContext;
 @class ABCAccount;
 
-extern AirbitzCore *abc;
+extern ABCContext *abc;
 extern ABCAccount *abcAccount;
 

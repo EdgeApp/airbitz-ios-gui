@@ -14,7 +14,7 @@
 #import "LatoLabel.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
@@ -76,13 +76,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.userNameTextField.delegate = self;
-    self.userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
+    self.userNameTextField.minimumCharacters = [ABCContext getMinimumUsernamedLength];
 	self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
 	self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
+	self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     if (self.strUserName)
     {
         self.userNameTextField.text = self.strUserName;
@@ -416,7 +416,7 @@
     // if we are signing up for a new account or changing our password
     if ((_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
+        ABCPasswordRuleResult *result = [ABCContext checkPasswordRules:self.passwordTextField.text];
         
         if (!result.passed)
         {
@@ -458,28 +458,28 @@
     // if we are signing up for a new account
     if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
+        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [ABCContext getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                            self.titleString,
-                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [AirbitzCore getMinimumUsernamedLength]]]
+                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [ABCContext getMinimumUsernamedLength]]]
                                   delegate:nil
                                   cancelButtonTitle:okButtonText
                                   otherButtonTitles:nil];
             [alert show];
         }
         // if the pin isn't long enough
-        else if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
+        else if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                            self.titleString,
-                                           [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
+                                           [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [ABCContext getMinimumPINLength]]]
                                   delegate:nil
                                   cancelButtonTitle:okButtonText
                                   otherButtonTitles:nil];

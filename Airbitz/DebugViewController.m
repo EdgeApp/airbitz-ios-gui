@@ -8,7 +8,7 @@
 
 #import "DebugViewController.h"
 #import "User.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
 #import "Theme.h"

@@ -55,11 +55,11 @@
     [super viewDidLoad];
     
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     self.pinTextField.delegate = self;
-    self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
+    self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = signupText;
@@ -206,7 +206,7 @@
 
     BOOL bNewPasswordFieldsAreValid = YES;
     {
-        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
+        ABCPasswordRuleResult *result = [ABCContext checkPasswordRules:self.passwordTextField.text];
         
         if (!result.passed)
         {
@@ -249,14 +249,14 @@
     BOOL valid = YES;
     {
         // if the pin isn't long enough
-        if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
+        if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
+                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [ABCContext getMinimumPINLength]]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];

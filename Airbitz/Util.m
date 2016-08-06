@@ -347,7 +347,7 @@
     }
     if (result.tooShort)
     {
-        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [ABCContext getMinimumPasswordLength]];
         [checkResultsMessage appendString:@"\n"];
     }
     

@@ -27,7 +27,7 @@
 #import "Config.h"
 #import "Util.h"
 #import "Theme.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "AudioController.h"

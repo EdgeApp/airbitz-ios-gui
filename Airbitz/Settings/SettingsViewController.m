@@ -25,7 +25,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Theme.h"
 #import "MainViewController.h"
 #import "PopupPickerView.h"

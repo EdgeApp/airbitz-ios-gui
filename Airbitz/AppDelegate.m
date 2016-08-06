@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "User.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "CommonTypes.h"
 #import "PopupPickerView.h"
 #import "Plugin.h"
@@ -46,7 +46,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     [AudioController initAll];
 
-    abc = [AirbitzCore makeABCContext:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
+    abc = [ABCContext makeABCContext:AIRBITZ_CORE_API_KEY hbits:HIDDENBITZ_KEY];
 
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;

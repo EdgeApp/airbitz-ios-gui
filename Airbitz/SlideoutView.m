@@ -8,7 +8,7 @@
 
 #import "SlideoutView.h"
 #import "PickerTextView.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "User.h"
 #import "LocalSettings.h"
 #import "Util.h"

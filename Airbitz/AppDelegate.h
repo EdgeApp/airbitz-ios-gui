@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

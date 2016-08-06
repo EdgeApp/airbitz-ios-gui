@@ -4,7 +4,7 @@
 #import "ScanView.h"
 #import "User.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "MainViewController.h"
 #import "Theme.h"
 #import "FadingAlertView.h"

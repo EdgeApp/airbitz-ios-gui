@@ -38,7 +38,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "ZBarSDK.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "TransferService.h"
 #import "BLEScanCell.h"
 #import "Contact.h"

@@ -12,7 +12,7 @@
 #import "User.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "SignUpViewController.h"
 #import "CommonTypes.h"
 #import "MainViewController.h"
@@ -102,7 +102,7 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [AirbitzCore listRecoveryQuestionChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
+        [ABCContext listRecoveryQuestionChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
 
             self.arrayCategoryString = arrayCategoryString;
             self.arrayCategoryNumeric = arrayCategoryNumeric;

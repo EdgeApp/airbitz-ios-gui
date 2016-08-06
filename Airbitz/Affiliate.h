@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 
 @interface Affiliate : NSObject
 
