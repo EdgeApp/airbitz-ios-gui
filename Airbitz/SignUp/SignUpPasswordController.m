@@ -150,25 +150,28 @@
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
-                            complete:^(ABCAccount *account)
+              callback:^(ABCError *error, ABCAccount *account)
      {
-         [FadingAlertView dismiss:FadingAlertDismissFast];
-         self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-         self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-         account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
-         [account.settings saveSettings];
-         Affiliate *affiliate = [Affiliate alloc];
-         [affiliate copyLocalAffiliateInfoToAccount:account];
-         [User login:account];
-         [MainViewController createFirstWallet];
-
-         [super next];
-     }
-                 error:^(NSError *error)
-     {
-         [FadingAlertView create:self.view
-                         message:error.userInfo[NSLocalizedDescriptionKey]
-                        holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+         if (!error)
+         {
+             [FadingAlertView dismiss:FadingAlertDismissFast];
+             self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+             self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+             account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
+             [account.settings saveSettings];
+             Affiliate *affiliate = [Affiliate alloc];
+             [affiliate copyLocalAffiliateInfoToAccount:account];
+             [User login:account];
+             [MainViewController createFirstWallet];
+             
+             [super next];
+         }
+         else
+         {
+             [FadingAlertView create:self.view
+                             message:error.userInfo[NSLocalizedDescriptionKey]
+                            holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+         }
      }];
 }
 
