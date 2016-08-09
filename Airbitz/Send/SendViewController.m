@@ -52,6 +52,7 @@
 #import "PopupPickerView2.h"
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
+#import "SSOViewController.h"
 
 typedef enum eScanMode
 {
@@ -61,12 +62,13 @@ typedef enum eScanMode
 static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 @interface SendViewController () <SendConfirmationViewControllerDelegate, UIAlertViewDelegate,FlashSelectViewDelegate, UITextFieldDelegate, PopupPickerView2Delegate,ButtonSelector2Delegate, CBCentralManagerDelegate, CBPeripheralDelegate
- ,ZBarReaderDelegate, ZBarReaderViewDelegate, AddressRequestControllerDelegate
+ ,ZBarReaderDelegate, ZBarReaderViewDelegate, AddressRequestControllerDelegate, SSOViewControllerDelegate
 >
 {
 	ZBarReaderView                  *_readerView;
     ZBarReaderController            *_readerPicker;
-	SendConfirmationViewController  *_sendConfirmationViewController;
+    SendConfirmationViewController  *_sendConfirmationViewController;
+    SSOViewController               *_ssoViewController;
     AddressRequestController        *_addressRequestController;
 
 	NSTimeInterval					lastUpdateTime;	//used to remove BLE devices from table when they're no longer around
@@ -77,14 +79,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     UIAlertView                     *typeAddressAlertView;
     UIAlertView                     *_sweptAlert;
     UIAlertView                     *_tweetAlert;
-    UIAlertView                     *_bitidAlert;
+//    UIAlertView                     *_bitidAlert;
     UIAlertView                     *_privateKeyAlert;
     ABCParsedURI                    *_parsedURI;
     NSString                        *_privateKeyURI;
     NSString                        *_tweet;
-    NSMutableArray                  *_kycTokenKeys;
-    BOOL                            _bitidSParam;
-    BOOL                            _bitidProvidingKYCToken;
+//    NSMutableArray                  *_kycTokenKeys;
+//    BOOL                            _bitidSParam;
+//    BOOL                            _bitidProvidingKYCToken;
 }
 @property (weak, nonatomic)     IBOutlet UIImageView            *scanFrame;
 @property (nonatomic, strong)   IBOutlet ButtonSelectorView2    *buttonSelector;
@@ -562,62 +564,62 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [self startQRReader];
         }
     }
-    else if (_bitidAlert == alertView)
-    {
-        if (buttonIndex > 0)
-        {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                ABCError *error = nil;
-                if (!_bitidSParam)
-                    error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
-                else
-                {
-                    if (_kycTokenKeys)
-                    {
-                        NSMutableString *callbackURL = [[NSMutableString alloc] init];
-                        
-                        [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[buttonIndex-1] data:callbackURL];
-                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
-                    }
-                    else
-                    {
-                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:@""];
-                    }
-                }
-                
-                dispatch_async(dispatch_get_main_queue(),^{
-                    if (!error)
-                    {
-                        if (_bitidProvidingKYCToken)
-                        {
-                            NSString *message = [NSString stringWithFormat:provideIdentityTokenText, _parsedURI.bitIDDomain];
-                            
-                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                        }
-                        else if(_kycTokenKeys)
-                        {
-                            NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[buttonIndex-1]];
-                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                        }
-                        else
-                        {
-                            [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];                            
-                        }
-                    }
-                    else
-                    {
-                        [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                    }
-                    [self startQRReader];
-
-                });
-            });
-        }
-        else
-        {
-            [self startQRReader];
-        }
-    }
+//    else if (_bitidAlert == alertView)
+//    {
+//        if (buttonIndex > 0)
+//        {
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+//                ABCError *error = nil;
+//                if (!_bitidSParam)
+//                    error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
+//                else
+//                {
+//                    if (_kycTokenKeys)
+//                    {
+//                        NSMutableString *callbackURL = [[NSMutableString alloc] init];
+//
+//                        [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[buttonIndex-1] data:callbackURL];
+//                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
+//                    }
+//                    else
+//                    {
+//                        error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:@""];
+//                    }
+//                }
+//
+//                dispatch_async(dispatch_get_main_queue(),^{
+//                    if (!error)
+//                    {
+//                        if (_bitidProvidingKYCToken)
+//                        {
+//                            NSString *message = [NSString stringWithFormat:provideIdentityTokenText, _parsedURI.bitIDDomain];
+//
+//                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+//                        }
+//                        else if(_kycTokenKeys)
+//                        {
+//                            NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[buttonIndex-1]];
+//                            [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+//                        }
+//                        else
+//                        {
+//                            [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+//                        }
+//                    }
+//                    else
+//                    {
+//                        [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+//                    }
+//                    [self startQRReader];
+//
+//                });
+//            });
+//        }
+//        else
+//        {
+//            [self startQRReader];
+//        }
+//    }
 }
 
 
@@ -1332,6 +1334,33 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
+- (void)showSSOViewController:(ABCParsedURI *)parsedURI
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+    _ssoViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SSOViewController"];
+
+    _ssoViewController.delegate            = self;
+    _ssoViewController.parsedURI           = parsedURI;
+
+    [_readerView stop];
+
+    [Util addSubviewControllerWithConstraints:self child:_ssoViewController];
+
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                          delay:[Theme Singleton].animationDelayTimeDefault
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^
+                     {
+                         _ssoViewController.view.frame = self.view.bounds;
+                     }
+                     completion:^(BOOL finished)
+                     {
+                         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                     }];
+}
+
+// if bToIsUUID NO, then it is assumed the strTo is an address
 - (void)showSendConfirmationTo:(ABCParsedURI *)parsedURI
                     destWallet:(ABCWallet *)destWallet
                 paymentRequest:(ABCPaymentRequest *)paymentRequest
@@ -1567,6 +1596,28 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [self updateViews:nil];
 }
 
+- (void)SSOViewControllerDone:(SSOViewController *)controller
+{
+    [_readerView start];
+    [self startQRReader];
+    
+    //[self startCameraScanner:nil];
+    [_ssoViewController.view removeFromSuperview];
+    [_ssoViewController removeFromParentViewController];
+    _ssoViewController = nil;
+    
+    scanMode = SCAN_MODE_UNINITIALIZED;
+    if ([LocalSettings controller].bDisableBLE == NO) {
+        [self enableAll];
+    }
+    
+    [self enableTableSelection];
+    [MainViewController changeNavBarOwner:self];
+    [self setupNavBar];
+    [self updateViews:nil];
+}
+
+
 #pragma mark - ButtonSelectorView2 delegates
 
 - (void)ButtonSelector2:(ButtonSelectorView2 *)view selectedItem:(int)itemIndex
@@ -1638,119 +1689,123 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (_parsedURI.bitIDURI)
         {
-            NSString *bitidRequestString = @"";
-            _bitidSParam = NO;
-            
-            if (_parsedURI.bitidKYCProvider)
-            {
-                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, provideIdentityTokenText];
-                _bitidSParam = YES;
-                _bitidProvidingKYCToken = YES;
-            }
-            else
-            {
-                _bitidProvidingKYCToken = NO;
-            }
-            
-            if (_parsedURI.bitidKYCRequest)
-            {
-                _bitidSParam = YES;
-                
-                _kycTokenKeys = [[NSMutableArray alloc] init];
-                [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
-                if ([_kycTokenKeys count] > 0)
-                {
-                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityToken];
-                }
-                else
-                {
-                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityTokenButNone];
-                    _kycTokenKeys = nil;
-                }
-            }
-            else
-            {
-                _kycTokenKeys = nil;
-            }
+            // Launch SSOViewController
+            [self showSSOViewController:_parsedURI];
 
-            if (_parsedURI.bitidPaymentAddress)
-            {
-                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestPaymentAddress];
-                _bitidSParam = YES;
-            }
-            
-            NSString *message = _parsedURI.bitIDDomain;
-            
-            if (_bitidSParam)
-            {
-                message = [NSString stringWithFormat:@"%@\n%@\n\n%@", message, wouldLikeToColon, bitidRequestString];
-            }
-            
-            if (_parsedURI.bitidKYCRequest)
-            {
-                if (_kycTokenKeys)
-                {
-                    int count = (int)[_kycTokenKeys count];
-                    
-                    if (count == 1)
-                    {
-                        
-                        _bitidAlert = [[UIAlertView alloc]
-                                       initWithTitle:bitIDLogin
-                                       message:message
-                                       delegate:self
-                                       cancelButtonTitle:noButtonText
-                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
-                    }
-                    else if (count == 2)
-                    {
-                        _bitidAlert = [[UIAlertView alloc]
-                                       initWithTitle:bitIDLogin
-                                       message:message
-                                       delegate:self
-                                       cancelButtonTitle:noButtonText
-                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-                                       nil];
-                        
-                    }
-                    else
-                    {
-                        // Only support a max of 3 tokens for now
-                        _bitidAlert = [[UIAlertView alloc]
-                                       initWithTitle:bitIDLogin
-                                       message:message
-                                       delegate:self
-                                       cancelButtonTitle:noButtonText
-                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
-                                       nil];
-                    }
-                    
-                }
-                else
-                {
-                    _bitidAlert = [[UIAlertView alloc]
-                                   initWithTitle:bitIDLogin
-                                   message:message
-                                   delegate:self
-                                   cancelButtonTitle:cancelButtonText
-                                   otherButtonTitles:nil];
-                }
-                
-            }
-            else
-            {
-                _bitidAlert = [[UIAlertView alloc]
-                               initWithTitle:bitIDLogin
-                               message:message
-                               delegate:self
-                               cancelButtonTitle:noButtonText
-                               otherButtonTitles:yesButtonText,nil];
-                
-            }
-            [_bitidAlert show];
+
+//            NSString *bitidRequestString = @"";
+//            _bitidSParam = NO;
+//
+//            if (_parsedURI.bitidKYCProvider)
+//            {
+//                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, provideIdentityTokenText];
+//                _bitidSParam = YES;
+//                _bitidProvidingKYCToken = YES;
+//            }
+//            else
+//            {
+//                _bitidProvidingKYCToken = NO;
+//            }
+//
+//            if (_parsedURI.bitidKYCRequest)
+//            {
+//                _bitidSParam = YES;
+//
+//                _kycTokenKeys = [[NSMutableArray alloc] init];
+//                [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
+//                if ([_kycTokenKeys count] > 0)
+//                {
+//                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityToken];
+//                }
+//                else
+//                {
+//                    bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityTokenButNone];
+//                    _kycTokenKeys = nil;
+//                }
+//            }
+//            else
+//            {
+//                _kycTokenKeys = nil;
+//            }
+//
+//            if (_parsedURI.bitidPaymentAddress)
+//            {
+//                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestPaymentAddress];
+//                _bitidSParam = YES;
+//            }
+//
+//            NSString *message = _parsedURI.bitIDDomain;
+//
+//            if (_bitidSParam)
+//            {
+//                message = [NSString stringWithFormat:@"%@\n%@\n\n%@", message, wouldLikeToColon, bitidRequestString];
+//            }
+//
+//            if (_parsedURI.bitidKYCRequest)
+//            {
+//                if (_kycTokenKeys)
+//                {
+//                    int count = (int)[_kycTokenKeys count];
+//
+//                    if (count == 1)
+//                    {
+//
+//                        _bitidAlert = [[UIAlertView alloc]
+//                                       initWithTitle:bitIDLogin
+//                                       message:message
+//                                       delegate:self
+//                                       cancelButtonTitle:noButtonText
+//                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
+//                    }
+//                    else if (count == 2)
+//                    {
+//                        _bitidAlert = [[UIAlertView alloc]
+//                                       initWithTitle:bitIDLogin
+//                                       message:message
+//                                       delegate:self
+//                                       cancelButtonTitle:noButtonText
+//                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+//                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+//                                       nil];
+//
+//                    }
+//                    else
+//                    {
+//                        // Only support a max of 3 tokens for now
+//                        _bitidAlert = [[UIAlertView alloc]
+//                                       initWithTitle:bitIDLogin
+//                                       message:message
+//                                       delegate:self
+//                                       cancelButtonTitle:noButtonText
+//                                       otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
+//                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
+//                                       [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
+//                                       nil];
+//                    }
+//
+//                }
+//                else
+//                {
+//                    _bitidAlert = [[UIAlertView alloc]
+//                                   initWithTitle:bitIDLogin
+//                                   message:message
+//                                   delegate:self
+//                                   cancelButtonTitle:cancelButtonText
+//                                   otherButtonTitles:nil];
+//                }
+//
+//            }
+//            else
+//            {
+//                _bitidAlert = [[UIAlertView alloc]
+//                               initWithTitle:bitIDLogin
+//                               message:message
+//                               delegate:self
+//                               cancelButtonTitle:noButtonText
+//                               otherButtonTitles:yesButtonText,nil];
+//
+//            }
+//            [_bitidAlert show];
             return;
         }
         else if (_parsedURI.privateKey)

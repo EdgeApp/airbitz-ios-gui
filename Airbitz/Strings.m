@@ -25,6 +25,7 @@
 #define laterButtonText                             NSLocalizedString(@"Later", @"Later button text")
 #define noButtonText                                NSLocalizedString(@"NO", @"NO button text")
 #define yesButtonText                               NSLocalizedString(@"YES", @"YES button text")
+#define loginButtonText                             NSLocalizedString(@"LOGIN", @"LOGIN button text")
 #define changeButtonText                            NSLocalizedString(@"CHANGE", @"CHANGE button text")
 #define checkPasswordButtonText                     NSLocalizedString(@"Check Password", @"Check password button text")
 #define walletBalanceHeaderText                     NSLocalizedString(@"TOTAL: ", @"Prefix of wallet balance dropdown header")
@@ -389,7 +390,7 @@
 #define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token\n" ,nil)
 #define requestYourIdentityTokenButNone             NSLocalizedString(@"Request your Identity Token but you don't have any\n" ,nil)
 #define requestPaymentAddress                       NSLocalizedString(@"Request a Payment Address\n" ,nil)
-#define wouldLikeToColon                            NSLocalizedString(@"Would like to:" ,nil)
+#define wouldLikeToColon                            NSLocalizedString(@"This site would like to:" ,nil)
 #define provideIdentityTokenText                    NSLocalizedString(@"Provide an Identity Token\n" ,nil)
 
 #define second_text                                 NSLocalizedString(@"second",nil)
