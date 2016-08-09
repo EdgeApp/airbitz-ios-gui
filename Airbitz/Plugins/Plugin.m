@@ -140,6 +140,21 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
+        {
+            plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"com.bitrefill.widget";
+            plugin.provider = @"bitrefill";
+            plugin.sourceFile = @"bitrefill";
+            plugin.sourceExtension = @"html";
+            plugin.imageFile = @"plugin_icon_usd";
+            plugin.name = @"Topup Prepaid SIM";
+            plugin.env = @{
+                           @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                           @"API_KEY": @"ABC123"
+                           };
+            [buySellPlugins addObject:plugin];
+        }
+        
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"glidera";
