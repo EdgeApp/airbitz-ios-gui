@@ -45,6 +45,7 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
+    BOOL                            _bDisallowTouchID;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
     SignUpManager                   *_signupManager;
@@ -343,7 +344,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [self autoReloginOrTouchIDIfPossible];
+        if (!_bDisallowTouchID)
+            [self autoReloginOrTouchIDIfPossible];
     }
     
 }
@@ -586,14 +588,15 @@ static BOOL bInitialized = false;
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
-    [self launchRecoverPopup:self.usernameSelector.textField.text recoveryToken:nil];
+    [self launchRecoveryPopup:self.usernameSelector.textField.text recoveryToken:nil];
 }
 
-- (void) launchRecoverPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
+- (void) launchRecoveryPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
 {
     if (recoveryToken)
         _recoveryToken = recoveryToken;
     
+    _bDisallowTouchID = YES;
     _recoverPasswordAlert = [[UIAlertView alloc] initWithTitle:passwordRecoveryText
                                                      message:enter_username_to_recover
                                                     delegate:self
@@ -1402,6 +1405,7 @@ static BOOL bInitialized = false;
             UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
             [self recoverPassword:textField.text];
         }
+        _bDisallowTouchID = NO;
     }
     else if (alertView == _passwordCheckAlert)
     {

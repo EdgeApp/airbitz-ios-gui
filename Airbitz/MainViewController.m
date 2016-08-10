@@ -2012,12 +2012,11 @@ MainViewController *singleton;
             else
             {
                 // Launch recovery view from LoginViewController
-                [_loginViewController launchRecoverPopup:nil recoveryToken:token];
+                [_loginViewController launchRecoveryPopup:nil recoveryToken:token];
             }
         }
     }
-
-    if (![User isLoggedIn])
+    else if (![User isLoggedIn])
     {
         _uri = uri;
     }
