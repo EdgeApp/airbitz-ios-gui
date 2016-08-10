@@ -630,12 +630,16 @@ static BOOL bInitialized = false;
         _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 
         _passwordRecoveryController.delegate = self;
+//        _passwordRecoveryController.mode = PassRecovMode_Change;
         _passwordRecoveryController.mode = PassRecovMode_Recover;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
         _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
+        _passwordRecoveryController.numQABlocks = NUM_QUESTION_ANSWER_BLOCKS;
 
         [MainViewController showNavBarAnimated:YES];
-        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
+        [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
+        [MainViewController animateSlideIn:_passwordRecoveryController];
+//        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
     }
     else
     {

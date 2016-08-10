@@ -304,6 +304,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
+    _passwordRecoveryController.numQABlocks = NUM_QUESTION_ANSWER_BLOCKS;
 
     [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
     [MainViewController animateSlideIn:_passwordRecoveryController];

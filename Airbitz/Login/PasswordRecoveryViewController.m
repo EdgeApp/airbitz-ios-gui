@@ -18,8 +18,9 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "ABCUtil.h"
+#import "PopupWheelPickerView.h"
 
-#define NUM_QUESTION_ANSWER_BLOCKS	6
+//#define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      120
 #define RECOVER_STARTING_Y_POSITION 75
 
@@ -42,10 +43,13 @@ typedef enum eAlertType
 	tAlertType              _alertType;
     TwoFactorMenuViewController *_tfaMenuViewController;
     NSString                    *_secret;
+    QuestionAnswerView          *_activeQAView;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint         *contentViewHeight;
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
-@property (nonatomic, strong)          UIButton                   *completeSignupButton;
+@property (weak, nonatomic) IBOutlet UIView                     *contentView;
+@property (nonatomic, strong)          UIButton                 *completeSignupButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonSkip;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
 @property (weak, nonatomic) IBOutlet LatoLabel                  *labelTitle;
@@ -54,6 +58,7 @@ typedef enum eAlertType
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;
 @property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
 
+@property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) SignUpViewController  *signUpController;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
 @property (nonatomic, strong) NSMutableArray        *arrayCategoryString;
@@ -88,15 +93,9 @@ typedef enum eAlertType
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    // set up our user blocking button
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    self.spinnerView.hidden = YES;
-    [self.view addSubview:self.buttonBlocker];
-
+}
+-(void)viewDidAppear:(BOOL)animated
+{
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
         // get the questions
@@ -109,6 +108,8 @@ typedef enum eAlertType
             self.arrayCategoryMust = arrayCategoryMust;
 
             [self getPasswordRecoveryQuestionsComplete];
+            if (self.passwordView.hidden == NO)
+                [self.passwordField becomeFirstResponder];
 
         } error:^(NSError *error)
         {
@@ -131,14 +132,13 @@ typedef enum eAlertType
     }
 
     [self updateDisplayForMode:_mode];
+    if (self.passwordView.hidden == NO)
+        [self.passwordField becomeFirstResponder];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-}
 
--(void)viewWillAppear:(BOOL)animated
-{
     [MainViewController changeNavBarOwner:self];
     [self updateViews];
 }
@@ -197,7 +197,7 @@ typedef enum eAlertType
 
 - (BOOL)isFormDirty
 {
-    for (UIView *view in self.scrollView.subviews) {
+    for (UIView *view in self.contentView.subviews) {
         if ([view isKindOfClass:[QuestionAnswerView class]]) {
             QuestionAnswerView *qaView = (QuestionAnswerView *)view;
             if ((self.mode != PassRecovMode_Recover) && (qaView.questionSelected == YES)) {
@@ -222,7 +222,7 @@ typedef enum eAlertType
 	NSMutableString *answers = [[NSMutableString alloc] init];
 
 	int count = 0;
-	for (UIView *view in self.scrollView.subviews)
+	for (UIView *view in self.contentView.subviews)
 	{
 		if ([view isKindOfClass:[QuestionAnswerView class]])
 		{
@@ -495,7 +495,7 @@ typedef enum eAlertType
     QuestionAnswerView *retVal = NULL;
 
     // look through all our subviews
-    for (id subview in self.scrollView.subviews)
+    for (id subview in self.contentView.subviews)
     {
         // if this is a the right kind of view
         if ([subview isMemberOfClass:[QuestionAnswerView class]])
@@ -580,44 +580,36 @@ typedef enum eAlertType
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-	if (_activeTextField)
-	{
-		//Get KeyboardFrame (in Window coordinates)
-		NSDictionary *userInfo = [notification userInfo];
-		CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-		
-		CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
-		
-		//get textfield frame in window coordinates
-		CGRect textFieldFrame = [_activeTextField.superview convertRect:_activeTextField.frame toView:self.view];
-		
-		//calculate offset
-		float distanceToMove = (textFieldFrame.origin.y + textFieldFrame.size.height + 20.0) - ownFrame.origin.y;
-		
-		if (distanceToMove > 0)
-		{
-			//need to scroll
-			//ABCLog(2,@"Scrolling %f", distanceToMove);
-			CGPoint curContentOffset = self.scrollView.contentOffset;
-			curContentOffset.y += distanceToMove;
-			[self.scrollView setContentOffset:curContentOffset animated:YES];
-		}
-		CGSize size = _defaultContentSize;
-		size.height += keyboardFrame.size.height;
-		self.scrollView.contentSize = size;
-	}
-	
+    NSDictionary* info = [notification userInfo];
+    CGRect kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbRect.size.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbRect.size.height;
+    if (!CGRectContainsPoint(aRect, _activeTextField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:_activeTextField.frame animated:YES];
+    }
+    if (_activeQAView)
+        [_activeQAView dismissPopupPicker];
+    _activeQAView = nil;
+    
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	if (_activeTextField)
-	{
-		//ABCLog(2,@"Keyboard will hide for Login View Controller");
-
-		_activeTextField = nil;
-	}
-	self.scrollView.contentSize = _defaultContentSize;
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+//	if (_activeTextField)
+//	{
+//		//ABCLog(2,@"Keyboard will hide for Login View Controller");
+//
+//		_activeTextField = nil;
+//	}
+//	self.scrollView.contentSize = _defaultContentSize;
 }
 
 #pragma mark - ABC Callbacks
@@ -638,13 +630,13 @@ typedef enum eAlertType
             posY = QA_STARTING_Y_POSITION;
         }
         
-		CGSize size = self.scrollView.contentSize;
+		CGSize size = self.contentView.frame.size;
 		size.height = posY;
 		
 		//add QA blocks
-		for(int i = 0; i < NUM_QUESTION_ANSWER_BLOCKS; i++)
+		for(int i = 0; i < self.numQABlocks; i++)
 		{
-			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.scrollView withDelegate:self];
+			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.contentView withDelegate:self];
 
             if (self.mode == PassRecovMode_Recover)
             {
@@ -656,14 +648,14 @@ typedef enum eAlertType
             }
 			
 			CGRect frame = qav.frame;
-			frame.origin.x = (self.scrollView.frame.size.width - frame.size.width ) / 2;
+			frame.origin.x = (self.contentView.frame.size.width - frame.size.width ) / 2;
 			frame.origin.y = posY;
 			qav.frame = frame;
 			
 			qav.tag = i;
 			//qav.alpha = 0.5;
 
-            if (i == (NUM_QUESTION_ANSWER_BLOCKS - 1))
+            if (i == (self.numQABlocks - 1))
             {
                 qav.answerField.returnKeyType = UIReturnKeyDone;
                 qav.isLastQuestion = YES;
@@ -679,6 +671,9 @@ typedef enum eAlertType
 			posY += frame.size.height;
 		}
 
+//        [self.passwordView removeFromSuperview];
+//        [self.contentView addSubview:self.passwordView];
+        
         //position complete Signup button below QA views
         self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [self updateDisplayForMode:self.mode];
@@ -689,7 +684,7 @@ typedef enum eAlertType
         self.completeSignupButton.enabled = YES;
         [self.completeSignupButton addTarget:self action:@selector(CompleteSignup) forControlEvents:UIControlEventTouchDown];
 
-        [self.scrollView addSubview:self.completeSignupButton];
+        [self.contentView addSubview:self.completeSignupButton];
         CGRect btnFrame = self.completeSignupButton.frame;
 		btnFrame.origin.y = posY;
         btnFrame.origin.x = 0;
@@ -712,7 +707,7 @@ typedef enum eAlertType
         }
 		
 		self.scrollView.contentSize = size;
-		_defaultContentSize = size;
+        self.contentViewHeight.constant = size.height;
     }
 }
 
@@ -722,63 +717,34 @@ typedef enum eAlertType
 {
     if (textField == _passwordField) {
         [_passwordField resignFirstResponder];
-
-        QuestionAnswerView *viewNext = NULL;
-        viewNext = [self findQAViewWithTag:0];
-        if (viewNext != NULL) {
-            [viewNext presentQuestionChoices];
-        }
     }
     return NO;
 }
 
 #pragma mark - QuestionAnswerView delegates
 
-- (void)QuestionAnswerView:(QuestionAnswerView *)view tablePresentedWithFrame:(CGRect)frame
+- (void)QuestionAnswerView:(QuestionAnswerView *)view;
 {
-	//programmatically scroll scrollView so that frame is entirely on screen
-	//Increase contentSize if necessary
-	self.scrollView.scrollEnabled = NO;
-	
-	//close any other open QAView tables
-	for (UIView *qaView in self.scrollView.subviews)
-	{
-		if([qaView isKindOfClass:[QuestionAnswerView class]])
-		{
-			if(qaView != view)
-			{
-				[((QuestionAnswerView *)qaView) closeTable];
-			}
-		}
-	}
-	
-	//populate available questions
-	if (view.tag < 2)
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
-	}
-	else if (view.tag < 4)
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
-	}
-	else
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryMust];
-	}
-
-    CGSize contentSize = self.scrollView.contentSize;
-	
-	if ((frame.origin.y + frame.size.height) > self.scrollView.contentSize.height)
-	{
-		contentSize.height = frame.origin.y + frame.size.height;
-		self.scrollView.contentSize = contentSize;
-	}
+    if (_activeTextField)
+        [_activeTextField resignFirstResponder];
+    [_passwordField resignFirstResponder];
+    _activeTextField = nil;
+    _activeQAView = view;
     
-    CGFloat questionsHeight = [view.availableQuestions count] * QA_TABLE_ROW_HEIGHT;
-	if ((frame.origin.y + frame.size.height + questionsHeight) > (self.scrollView.contentOffset.y + self.scrollView.frame.size.height))
-	{
-		[self.scrollView setContentOffset:CGPointMake(0, frame.origin.y + frame.size.height + questionsHeight - self.scrollView.frame.size.height) animated:YES];
-	}
+    //populate available questions
+    if (view.tag < 2)
+    {
+        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
+    }
+    else if (view.tag < 4)
+    {
+        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
+    }
+    else
+    {
+        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryMust];
+    }
+
 }
 
 - (void)QuestionAnswerViewTableDismissed:(QuestionAnswerView *)view
@@ -795,6 +761,7 @@ typedef enum eAlertType
 
     // place the cursor in the answer
     [view.answerField becomeFirstResponder];
+    _activeQAView = nil;
 }
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField
@@ -809,6 +776,10 @@ typedef enum eAlertType
 
     viewNext = [self findQAViewWithTag:view.tag + 1];
 
+    if (_activeTextField)
+        [_activeTextField resignFirstResponder];
+    _activeTextField = nil;
+
     if (viewNext != NULL)
     {
         if (self.mode == PassRecovMode_Recover)
@@ -818,7 +789,7 @@ typedef enum eAlertType
         }
         else
         {
-            [viewNext presentQuestionChoices];
+//            [viewNext presentQuestionChoices];
         }
     }
 }
