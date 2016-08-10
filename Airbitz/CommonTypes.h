@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 #define FADING_HELP_DELAY                   5.0
 
 #define NUM_QUESTION_ANSWER_BLOCKS	6
+#define NUM_QUESTION_ANSWER_BLOCKS_RC2	2
 
 #define OTP_RESET_DELAY (60 * 60 * 24 * 7)
 

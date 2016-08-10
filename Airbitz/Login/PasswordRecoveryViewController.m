@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
@@ -34,7 +35,7 @@ typedef enum eAlertType
 } tAlertType;
 
 @interface PasswordRecoveryViewController ()
-    <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate,
+    <UIScrollViewDelegate, QuestionAnswerViewDelegate, MFMailComposeViewControllerDelegate, SignUpViewControllerDelegate,
      UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
 //	float                   _completeButtonToEmbossImageDistance;
@@ -44,6 +45,7 @@ typedef enum eAlertType
     TwoFactorMenuViewController *_tfaMenuViewController;
     NSString                    *_secret;
     QuestionAnswerView          *_activeQAView;
+    NSString                    *_recoveryToken;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint         *contentViewHeight;
@@ -57,6 +59,9 @@ typedef enum eAlertType
 @property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;
 @property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
+@property (nonatomic, strong)        UIAlertView                *saveTokenAlert;
+@property (nonatomic, strong)        UIAlertView                *sendEmailAlert;
+
 
 @property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) SignUpViewController  *signUpController;
@@ -424,28 +429,60 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount setupRecoveryQuestions:strQuestions answers:strAnswers complete:^(void) {
-        [self blockUser:NO];
-        [self showSpinner:NO];
-        _alertType = ALERT_TYPE_SETUP_COMPLETE;
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:recoveryQuestionsSet
-                              message:recoveryQuestionsSetWarning
-                              delegate:self
-                              cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                              otherButtonTitles:okButtonText, nil];
-        [alert show];
-    } error: ^(NSError *error) {
-        [self blockUser:NO];
-        [self showSpinner:NO];
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:recoveryQuestionsNotSet
-                              message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
-                              delegate:nil
-                              cancelButtonTitle:okButtonText
-                              otherButtonTitles:nil];
-        [alert show];
-    }];
+    if (self.useRecovery2)
+    {
+        [abcAccount setupRecoveryQuestions2:strQuestions answers:strAnswers callback:^(ABCError *error, NSString *recoveryToken) {
+            [self blockUser:NO];
+            [self showSpinner:NO];
+            if (error)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:recoveryQuestionsNotSet
+                                      message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                _recoveryToken = recoveryToken;
+                // Generate alert letting user know they need to send token to themselves
+                self.saveTokenAlert = [[UIAlertView alloc]
+                                       initWithTitle:save_recovery_token_popup
+                                       message:save_recovery_token_popup_message
+                                       delegate:self
+                                       cancelButtonTitle:cancelButtonText
+                                       otherButtonTitles:emailText,nil];
+                [self.saveTokenAlert show];
+            }
+        }];
+    }
+    else
+    {
+        [abcAccount setupRecoveryQuestions:strQuestions answers:strAnswers complete:^(void) {
+            [self blockUser:NO];
+            [self showSpinner:NO];
+            _alertType = ALERT_TYPE_SETUP_COMPLETE;
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:recoveryQuestionsSet
+                          message:recoveryQuestionsSetWarning
+                         delegate:self
+                cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
+                otherButtonTitles:okButtonText, nil];
+            [alert show];
+        } error: ^(NSError *error) {
+            [self blockUser:NO];
+            [self showSpinner:NO];
+            UIAlertView *alert = [[UIAlertView alloc]
+                    initWithTitle:recoveryQuestionsNotSet
+                          message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                         delegate:nil
+                cancelButtonTitle:okButtonText
+                otherButtonTitles:nil];
+            [alert show];
+        }];
+    }
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -547,11 +584,27 @@ typedef enum eAlertType
     [self.delegate passwordRecoveryViewControllerDidFinish:self];
 }
 
-#pragma mark - AlertView delegates
+#pragma mark - UIAlertView delegates
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	if (_alertType == ALERT_TYPE_SETUP_COMPLETE)
+    if (alertView == self.sendEmailAlert)
+    {
+        // Call exit
+        [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
+    }
+    if (alertView == self.saveTokenAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            [MainViewController fadingAlert:recoveryQuestionsNotSet];
+        }
+        else if (1 == buttonIndex)
+        {
+            // Email to themselves
+            [self sendTokenEMail];
+        }
+    } else if (_alertType == ALERT_TYPE_SETUP_COMPLETE)
 	{
 		if ((buttonIndex == 1) || (_mode == PassRecovMode_Change))
 		{
@@ -612,7 +665,114 @@ typedef enum eAlertType
 //	self.scrollView.contentSize = _defaultContentSize;
 }
 
-#pragma mark - ABC Callbacks
+#pragma mark - MFMailComposeViewController Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = save_recovery_token_popup;
+    NSString *strMsg = nil;
+    BOOL    success = NO;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = emailCancelled;
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = emailSavedToSendLater;
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = emailSent;
+            success = YES;
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = errorSendingEmail;
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    
+    if (success)
+    {        
+        _sendEmailAlert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                     message:strMsg
+                                                    delegate:self
+                                           cancelButtonTitle:okButtonText
+                                           otherButtonTitles:nil];
+        [_sendEmailAlert show];
+    }
+    else
+    {
+        [MainViewController fadingAlert:[NSString stringWithFormat:@"%@\n\n%@", strTitle, strMsg]];
+    }
+    
+}
+
+
+#pragma mark - Misc
+
+- (void)sendTokenEMail
+{
+    
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        
+        
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        
+        NSString *obfuscatedUsername = abcAccount.name;
+        unsigned long acctlen = [abcAccount.name length];
+        if (acctlen <= 3)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 1, 1) withString:@"*"];
+        }
+        else if(acctlen <= 6)
+        {            
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 2, 2) withString:@"**"];
+        }
+        else if(acctlen <= 9)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 3, 3) withString:@"***"];
+        }
+        else if(acctlen <= 12)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 4, 4) withString:@"****"];
+        }
+        else
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 5, 5) withString:@"*****"];
+        }
+        
+        NSString *subject = [NSString stringWithFormat:recovery_token_email_subject, appTitle];
+        
+        [mailComposer setSubject:subject];
+        
+        NSString *content = [NSString stringWithFormat:recovery_token_email_body, appTitle, obfuscatedUsername, _recoveryToken, _recoveryToken];
+        [mailComposer setMessageBody:content isHTML:YES];
+        
+        mailComposer.mailComposeDelegate = self;
+        
+        [self presentViewController:mailComposer animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:cantSendEmailText
+                                                       delegate:nil
+                                              cancelButtonTitle:okButtonText
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
 
 - (void)getPasswordRecoveryQuestionsComplete
 {
