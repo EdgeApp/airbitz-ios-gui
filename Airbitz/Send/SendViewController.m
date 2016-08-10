@@ -1775,8 +1775,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
     {
         NSURL *uri = [NSURL URLWithString:uriString];
+        NSString *vendorRetString = [NSString stringWithFormat:@"%@-ret", [MainViewController Singleton].appUrlPrefix];
         
-        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
+        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:vendorRetString]
             || [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
                 [self stopQRReader];

@@ -14,6 +14,7 @@
 @interface LoginViewController : AirbitzViewController
 
 + (void)setModePIN:(BOOL)enable;
+- (void) launchRecoverPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken;
 
 @property (assign) id<LoginViewControllerDelegate> delegate;
 

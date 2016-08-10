@@ -8,20 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef AIRBITZ_DEVELOP
-#define AIRBITZ_URI_PREFIX @"airbitz-develop"
-#else
-#define AIRBITZ_DEVELOP 0
-#endif
-
-#ifdef AIRBITZ_TESTNET
-#define AIRBITZ_URI_PREFIX @"airbitz-testnet"
-#endif
-
-#ifndef AIRBITZ_URI_PREFIX
-#define AIRBITZ_URI_PREFIX @"airbitz"
-#endif
-
 #define BITCOIN_URI_SCHEME @"bitcoin"
 
 #define READER_VIEW_TAG     99999999

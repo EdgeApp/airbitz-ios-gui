@@ -425,5 +425,8 @@
 #define save_recovery_token_popup                   NSLocalizedString(@"Save Recovery Token", @"Title of recovery email popup")
 #define save_recovery_token_popup_message           NSLocalizedString(@"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. We recommend emailing it to yourself.", @"Message of recovery token popup")
 #define recovery_token_email_subject                NSLocalizedString(@"%@ Recovery Token", @"\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet")
-#define recovery_token_email_body                   NSLocalizedString(@"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n<br><br><a href=\"airbitz:recovery/%@\">airbitz:recovery/%@</a>", nil)
-
+#define recovery_token_email_body                   NSLocalizedString(@"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n<br><br>%@", nil)
+#define enter_username_to_recover                   NSLocalizedString(@"Please enter the username of the account to recover", nil)
+#define recovery_not_setup                          NSLocalizedString(@"Recovery was not setup or was done on another device. If recovery was setup, you should have emailed yourself a recovery token with a link. Please find the email and click on the link from this device to initiate recovery.", nil)
+#define recovery_token_invalid                      NSLocalizedString(@"Incorrect username for this recovery token. Please try a different username or use a different recovery token link.", nil)
+#define logout_before_recovery                      NSLocalizedString(@"Please logout of current account before attempting password recovery", nil)

@@ -35,6 +35,9 @@ typedef enum eNavBarSide
 @property (nonatomic, strong)        NSMutableDictionary    *dictBuyBitcoinOverrideURLs;
 @property (nonatomic, strong)        NSMutableArray         *arrayPluginBizIDs;
 @property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
+@property                            BOOL                   developBuild;
+@property (nonatomic, strong)        NSString               *appUrlPrefix;
+
 
 + (MainViewController *)Singleton;
 

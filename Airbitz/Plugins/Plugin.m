@@ -8,6 +8,7 @@
 #import "MainViewController.h"
 #import "CommonTypes.h"
 #import "Strings.h"
+#import "BrandStrings.h"
 
 @interface Plugin ()
 @end
@@ -71,7 +72,7 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
         {
             plugin = [[Plugin alloc] init];
@@ -94,7 +95,7 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
 
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
         {
             plugin = [[Plugin alloc] init];
@@ -117,7 +118,7 @@ static NSMutableArray *giftCardPlugins;
             [giftCardPlugins addObject:plugin];
         }
         
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
         {
             plugin = [[Plugin alloc] init];
@@ -151,7 +152,7 @@ static NSMutableArray *giftCardPlugins;
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-                       @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", AIRBITZ_URI_PREFIX, plugin.country],
+                       @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", [MainViewController Singleton].appUrlPrefix, plugin.country],
                        @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                        };
         [buySellPlugins addObject:plugin];
@@ -166,7 +167,7 @@ static NSMutableArray *giftCardPlugins;
 //        plugin.name = @"Europe (EUR)";
 //        plugin.env = @{
 //                    @"SANDBOX": (isTestnet ? @"true" : @"false"),
-//                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
+//                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", [MainViewController Singleton].appUrlPrefix, plugin.country],
 //                    @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
 //                    @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
 //                    @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,

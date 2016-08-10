@@ -63,8 +63,10 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
     UIAlertView                     *_deleteAccountAlert;
+    UIAlertView                     *_recoverPasswordAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
+    NSString                        *_recoveryToken;
     BOOL                            _bNewDeviceLogin;
     
 
@@ -584,32 +586,95 @@ static BOOL bInitialized = false;
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
+    [self launchRecoverPopup:self.usernameSelector.textField.text recoveryToken:nil];
+}
+
+- (void) launchRecoverPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
+{
+    if (recoveryToken)
+        _recoveryToken = recoveryToken;
+    
+    _recoverPasswordAlert = [[UIAlertView alloc] initWithTitle:passwordRecoveryText
+                                                     message:enter_username_to_recover
+                                                    delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:nextButtonText, nil];
+    _recoverPasswordAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    if ([username length])
+    {
+        UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+        textField.text = username;
+    }
+    [_recoverPasswordAlert show];
+}
+
+- (void)recoverPassword:(NSString *)username
+{
     [self dismissErrorMessage];
     [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
     // if they have a username
-    if ([self.usernameSelector.textField.text length])
+    if (username)
     {
-        [self showSpinner:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            NSError *error;
-            NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
-                                                                     error:&error];
-            NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [self showSpinner:NO];
-                _bSuccess = !!arrayQuestions;
-                _strReason = error.userInfo[NSLocalizedDescriptionKey];
-                [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
+        ABCError *error;
+        NSString *recoveryToken;
+        
+        // Check if recovery token was passed in via URL
+        if (_recoveryToken)
+        {
+            recoveryToken = _recoveryToken;
+            _recoveryToken = nil;
+        }
+        
+        if (!recoveryToken)
+        {
+            // Second check to see if user has a recovery2 token on the device
+            recoveryToken = [abc getLocalRecoveryToken:username error:&error];
+        }
+        
+        if (!recoveryToken)
+        {
+            // Try to get token from iOS Keychain
+        }
+        if (recoveryToken)
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecoveryQuestionsWithRecoveryToken:username
+                                                                       recoveryToken:recoveryToken
+                                                                               error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recovery2:YES error:error];
+                });
             });
-        });
+        }
+        else
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+                                                                         error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recovery2:NO error:error];
+                });
+            });
+        }
+        
     }
     else
     {
         [MainViewController fadingAlert:pleaseEnterAUsername];
     }
 }
+
+
 
 - (IBAction)buttonLoginWithPasswordTouched:(id)sender
 {
@@ -621,20 +686,19 @@ static BOOL bInitialized = false;
 }
 
 
-- (void)launchQuestionRecovery:(NSArray *)params
+- (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recovery2:(BOOL)recovery2 error:(ABCError *)error;
 {
-    if (_bSuccess && [params count] > 0)
+    if (arrayQuestions)
     {
-        NSArray *arrayQuestions = params[0];
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 
         _passwordRecoveryController.delegate = self;
-//        _passwordRecoveryController.mode = PassRecovMode_Change;
         _passwordRecoveryController.mode = PassRecovMode_Recover;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
-        _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
-        _passwordRecoveryController.numQABlocks = NUM_QUESTION_ANSWER_BLOCKS;
+        _passwordRecoveryController.strUserName = username;
+        _passwordRecoveryController.numQABlocks = (int)[arrayQuestions count];
+        _passwordRecoveryController.useRecovery2 = recovery2;
 
         [MainViewController showNavBarAnimated:YES];
         [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
@@ -643,7 +707,19 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [MainViewController fadingAlert:_strReason];
+        if (error)
+            [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+        else
+        {
+            if (recovery2)
+            {
+                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];                
+            }
+            else
+            {
+                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+        }
     }
 }
 
@@ -1318,6 +1394,14 @@ static BOOL bInitialized = false;
         }
 
         return;
+    }
+    else if (alertView == _recoverPasswordAlert)
+    {
+        if (1 == buttonIndex)
+        {
+            UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+            [self recoverPassword:textField.text];
+        }
     }
     else if (alertView == _passwordCheckAlert)
     {
