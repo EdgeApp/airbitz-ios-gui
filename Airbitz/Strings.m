@@ -423,7 +423,7 @@
 #define error_creating_affiliate_link               NSLocalizedString(@"Error creating affiliate link. Please try again later", @"")
 #define successfully_verified_identity              NSLocalizedString(@"Successfully Verified Identity",nil)
 #define save_recovery_token_popup                   NSLocalizedString(@"Save Recovery Token", @"Title of recovery email popup")
-#define save_recovery_token_popup_message           NSLocalizedString(@"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. We recommend emailing it to yourself.", @"Message of recovery token popup")
+#define save_recovery_token_popup_message           NSLocalizedString(@"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.", @"Message of recovery token popup")
 #define recovery_token_email_subject                NSLocalizedString(@"%@ Recovery Token", @"\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet")
 #define recovery_token_email_body                   NSLocalizedString(@"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n<br><br>%@", nil)
 #define enter_username_to_recover                   NSLocalizedString(@"Please enter the username of the account to recover", nil)
@@ -431,4 +431,6 @@
 #define recovery_token_invalid                      NSLocalizedString(@"Incorrect username for this recovery token. Please try a different username or use a different recovery token link.", nil)
 #define logout_before_recovery                      NSLocalizedString(@"Please logout of current account before attempting password recovery", nil)
 #define recovery_successful                         NSLocalizedString(@"Recovery Successful\n\nPlease change your password and PIN", nil)
+#define invalid_email                               NSLocalizedString(@"Invalid Email", nil)
+
 

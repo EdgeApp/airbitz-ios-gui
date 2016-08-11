@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define BITCOIN_URI_SCHEME @"bitcoin"
+#define DataStorePersonalInfoFolder @"ABPersonalInfo"
+#define DataStorePersonalInfo_Email @"email"
 
 #define READER_VIEW_TAG     99999999
 

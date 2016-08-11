@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
@@ -463,14 +464,7 @@ typedef enum eAlertType
             else
             {
                 _recoveryToken = recoveryToken;
-                // Generate alert letting user know they need to send token to themselves
-                self.saveTokenAlert = [[UIAlertView alloc]
-                                       initWithTitle:save_recovery_token_popup
-                                       message:save_recovery_token_popup_message
-                                       delegate:self
-                                       cancelButtonTitle:cancelButtonText
-                                       otherButtonTitles:emailText,nil];
-                [self.saveTokenAlert show];
+                [self launchSaveTokenAlert:save_recovery_token_popup];
             }
         }];
     }
@@ -499,6 +493,35 @@ typedef enum eAlertType
             [alert show];
         }];
     }
+}
+
+- (void) launchSaveTokenAlert:(NSString *)title;
+{
+    // Check if the dataStore has the user's email. If so prepopulate it.
+    NSMutableString *email = [[NSMutableString alloc] init];
+    ABCError *error = [abcAccount.dataStore dataRead:DataStorePersonalInfoFolder withKey:DataStorePersonalInfo_Email data:email];
+
+    NSString *emailStr = nil;
+    if (!error)
+    {
+        emailStr = [NSString stringWithString:email];
+    }
+    
+    // Generate alert letting user know they need to send token to themselves
+    self.saveTokenAlert = [[UIAlertView alloc]
+                           initWithTitle:title
+                           message:save_recovery_token_popup_message
+                           delegate:self
+                           cancelButtonTitle:cancelButtonText
+                           otherButtonTitles:emailText,nil];
+    self.saveTokenAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    if (email && [email length])
+    {
+        UITextField *textField = [self.saveTokenAlert textFieldAtIndex:0];
+        textField.text = email;
+    }
+
+    [self.saveTokenAlert show];
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -617,8 +640,20 @@ typedef enum eAlertType
         }
         else if (1 == buttonIndex)
         {
-            // Email to themselves
-            [self sendTokenEMail];
+            UITextField *textField = [self.saveTokenAlert textFieldAtIndex:0];
+
+            if ([self stringIsValidEmail:textField.text])
+            {
+                // Save the email in the dataStore incase we need it in the future.
+                [abcAccount.dataStore dataWrite:DataStorePersonalInfoFolder withKey:DataStorePersonalInfo_Email withValue:textField.text];
+                
+                // Email to themselves
+                [self sendTokenEMail:textField.text];
+            }
+            else
+            {
+                [self launchSaveTokenAlert:invalid_email];
+            }
         }
     } else if (_alertType == ALERT_TYPE_SETUP_COMPLETE)
 	{
@@ -735,14 +770,11 @@ typedef enum eAlertType
 
 #pragma mark - Misc
 
-- (void)sendTokenEMail
+- (void)sendTokenEMail:(NSString *)emailAddress
 {
-    
     // if mail is available
     if ([MFMailComposeViewController canSendMail])
     {
-        
-        
         MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
         
         NSString *obfuscatedUsername = abcAccount.name;
@@ -771,6 +803,7 @@ typedef enum eAlertType
         NSString *subject = [NSString stringWithFormat:recovery_token_email_subject, appTitle];
         
         [mailComposer setSubject:subject];
+        [mailComposer setToRecipients:@[emailAddress]];
         
         NSString *htmlLink = [NSString stringWithFormat:@"<a href=\"%@://recovery?token=%@\">%@://recovery?token=%@</a>",
                               [MainViewController Singleton].appUrlPrefix,
@@ -794,6 +827,16 @@ typedef enum eAlertType
                                               otherButtonTitles:nil];
         [alert show];
     }
+}
+
+-(BOOL) stringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
 }
 
 - (void)getPasswordRecoveryQuestionsComplete
