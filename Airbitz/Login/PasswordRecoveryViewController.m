@@ -464,28 +464,6 @@ typedef enum eAlertType
     }
     else
     {
-        [abcAccount setupRecoveryQuestions:strQuestions answers:strAnswers complete:^(void) {
-            [self blockUser:NO];
-            [self showSpinner:NO];
-            _alertType = ALERT_TYPE_SETUP_COMPLETE;
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:recoveryQuestionsSet
-                          message:recoveryQuestionsSetWarning
-                         delegate:self
-                cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                otherButtonTitles:okButtonText, nil];
-            [alert show];
-        } error: ^(NSError *error) {
-            [self blockUser:NO];
-            [self showSpinner:NO];
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:recoveryQuestionsNotSet
-                          message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
-                         delegate:nil
-                cancelButtonTitle:okButtonText
-                otherButtonTitles:nil];
-            [alert show];
-        }];
     }
 }
 

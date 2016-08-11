@@ -706,7 +706,7 @@ static BOOL bInitialized = false;
     }
     else
     {
-        if (error)
+        if (error && error.code != ABCConditionCodeNoRecoveryQuestions)
             [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
         else
         {
@@ -716,7 +716,12 @@ static BOOL bInitialized = false;
             }
             else
             {
-                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                    [MainViewController fadingAlert:recovery_not_setup2 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        [MainViewController fadingAlert:recovery_not_setup3 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        }];
+                    }];
+                }];
             }
         }
     }
