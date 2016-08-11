@@ -430,3 +430,5 @@
 #define recovery_not_setup                          NSLocalizedString(@"Recovery was not setup or was done on another device. If recovery was setup, you should have emailed yourself a recovery token with a link. Please find the email and click on the link from this device to initiate recovery.", nil)
 #define recovery_token_invalid                      NSLocalizedString(@"Incorrect username for this recovery token. Please try a different username or use a different recovery token link.", nil)
 #define logout_before_recovery                      NSLocalizedString(@"Please logout of current account before attempting password recovery", nil)
+#define recovery_successful                         NSLocalizedString(@"Recovery Successful\n\nPlease change your password and PIN", nil)
+

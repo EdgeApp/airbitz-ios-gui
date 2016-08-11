@@ -338,37 +338,53 @@ typedef enum eAlertType
 {
     [self showSpinner:YES];
 
-    [abc recoveryLogin:self.strUserName
-                           answers:strAnswers
-                          delegate:[MainViewController Singleton]
-                               otp:_secret
-                          complete:^(ABCAccount *account)
+    if (self.recoveryToken)
     {
-        [self showSpinner:NO];
-        [User login:account];
-        [self bringUpSignUpViewWithAnswers:strAnswers];
-    } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
+        [abc loginWithRecoveryToken:self.strUserName
+                            answers:strAnswers
+                      recoveryToken:self.recoveryToken
+                           delegate:[MainViewController Singleton]
+                                otp:_secret
+                           callback:^(ABCError *error, ABCAccount *account) {
+                               [self showSpinner:NO];
+                               [User login:account];
+                               [self bringUpSignUpViewWithAnswers:strAnswers];
+                               [MainViewController fadingAlert:recovery_successful holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                           }];
+    }
+    else
     {
-        [self showSpinner:NO];
-        if (ABCConditionCodeInvalidOTP == error.code)
-        {
-            [self launchTwoFactorMenu:resetDate token:resetToken];
-        }
-        else
-        {
-            // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
-            // Core should change to set error to OK but change validAnswers -paul
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:wrongAnswersText
-                                  message:givenAnswersAreIncorrect
-                                  delegate:nil
-                                  cancelButtonTitle:okButtonText
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-
-    }];
-
+        [abc recoveryLogin:self.strUserName
+                   answers:strAnswers
+                  delegate:[MainViewController Singleton]
+                       otp:_secret
+                  complete:^(ABCAccount *account)
+         {
+             [self showSpinner:NO];
+             [User login:account];
+             [self bringUpSignUpViewWithAnswers:strAnswers];
+         } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
+         {
+             [self showSpinner:NO];
+             if (ABCConditionCodeInvalidOTP == error.code)
+             {
+                 [self launchTwoFactorMenu:resetDate token:resetToken];
+             }
+             else
+             {
+                 // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
+                 // Core should change to set error to OK but change validAnswers -paul
+                 UIAlertView *alert = [[UIAlertView alloc]
+                                       initWithTitle:wrongAnswersText
+                                       message:givenAnswersAreIncorrect
+                                       delegate:nil
+                                       cancelButtonTitle:okButtonText
+                                       otherButtonTitles:nil];
+                 [alert show];
+             }
+             
+         }];
+    }
 }
 
 - (void)launchTwoFactorMenu:(NSDate *)resetDate token:(NSString *)resetToken;

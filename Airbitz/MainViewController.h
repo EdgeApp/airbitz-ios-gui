@@ -12,6 +12,7 @@
 #import "AirbitzViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "FadingAlertView.h"
 #import "AB.h"
 
 

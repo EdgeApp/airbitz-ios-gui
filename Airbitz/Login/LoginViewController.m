@@ -651,7 +651,7 @@ static BOOL bInitialized = false;
                                                                                error:&error];
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     [self showSpinner:NO];
-                    [self launchQuestionRecovery:username questions:arrayQuestions recovery2:YES error:error];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:recoveryToken error:error];
                 });
             });
         }
@@ -665,7 +665,7 @@ static BOOL bInitialized = false;
                                                                          error:&error];
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     [self showSpinner:NO];
-                    [self launchQuestionRecovery:username questions:arrayQuestions recovery2:NO error:error];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:nil error:error];
                 });
             });
         }
@@ -689,7 +689,7 @@ static BOOL bInitialized = false;
 }
 
 
-- (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recovery2:(BOOL)recovery2 error:(ABCError *)error;
+- (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recoveryToken:(NSString *)recoveryToken error:(ABCError *)error;
 {
     if (arrayQuestions)
     {
@@ -701,7 +701,8 @@ static BOOL bInitialized = false;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
         _passwordRecoveryController.strUserName = username;
         _passwordRecoveryController.numQABlocks = (int)[arrayQuestions count];
-        _passwordRecoveryController.useRecovery2 = recovery2;
+        _passwordRecoveryController.useRecovery2 = !!recoveryToken;
+        _passwordRecoveryController.recoveryToken = recoveryToken;
 
         [MainViewController showNavBarAnimated:YES];
         [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
@@ -714,9 +715,9 @@ static BOOL bInitialized = false;
             [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
         else
         {
-            if (recovery2)
+            if (recoveryToken)
             {
-                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];                
+                [MainViewController fadingAlert:recovery_token_invalid holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
             }
             else
             {
