@@ -250,7 +250,7 @@
 #define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
 #define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
 #define warningExclamationText                      NSLocalizedString(@"Warning!", nil)
-#define aboutToExitPasswordRecovery                 NSLocalizedString(@"Warning!", nil)
+#define aboutToExitPasswordRecovery                 NSLocalizedString(@"You are about to exit password recovery setup. Your chosen questions and answers have not been saved.", nil)
 #define skipThisStepText                            NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")
 #define warningYouWillNeverBeAbleToRecover          NSLocalizedString(@"**WARNING** You will NEVER be able to recover your password if it is forgotten!!", @"")
 #define completeSignupText                          NSLocalizedString(@"Complete Signup", @"")

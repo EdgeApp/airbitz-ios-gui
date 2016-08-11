@@ -635,11 +635,6 @@ static BOOL bInitialized = false;
             // Second check to see if user has a recovery2 token on the device
             recoveryToken = [abc getLocalRecoveryToken:username error:&error];
         }
-        
-        if (!recoveryToken)
-        {
-            // Try to get token from iOS Keychain
-        }
         if (recoveryToken)
         {
             // Next check if they have recovery1 set on the server
