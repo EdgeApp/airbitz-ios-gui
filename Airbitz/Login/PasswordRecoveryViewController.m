@@ -67,9 +67,7 @@ typedef enum eAlertType
 @property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) SignUpViewController  *signUpController;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryString;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryNumeric;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryMust;
+@property (nonatomic, strong) NSArray               *arrayQuestionChoices;
 @property (nonatomic, strong) NSMutableArray        *arrayChosenQuestions;
 
 @end
@@ -89,9 +87,6 @@ typedef enum eAlertType
 {
     [super viewDidLoad];
     
-	self.arrayCategoryString	= [[NSMutableArray alloc] init];
-	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
-	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
 	//ABCLog(2,@"Adding keyboard notification");
@@ -107,30 +102,29 @@ typedef enum eAlertType
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [ABCContext listRecoveryQuestionChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
-
-            self.arrayCategoryString = arrayCategoryString;
-            self.arrayCategoryNumeric = arrayCategoryNumeric;
-            self.arrayCategoryMust = arrayCategoryMust;
-
-            [self getPasswordRecoveryQuestionsComplete];
-            if (self.passwordView.hidden == NO)
-                [self.passwordField becomeFirstResponder];
-
-        } error:^(NSError *error)
+        
+        [ABCContext listRecoveryQuestionChoices:^(ABCError *error, NSArray *arrayQuestions)
         {
-            self.arrayCategoryString = nil;
-            self.arrayCategoryNumeric = nil;
-            self.arrayCategoryMust = nil;
-
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:self.labelTitle.text
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
-                         delegate:nil
-                cancelButtonTitle:okButtonText
-                otherButtonTitles:nil];
-            [alert show];
+            if (!error)
+            {
+                self.arrayQuestionChoices = arrayQuestions;
+                [self getPasswordRecoveryQuestionsComplete];
+                if (self.passwordView.hidden == NO)
+                    [self.passwordField becomeFirstResponder];
+            }
+            else
+            {
+                self.arrayQuestionChoices = nil;
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:self.labelTitle.text
+                                      message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
         }];
+        
     }
     else
     {
@@ -957,19 +951,7 @@ typedef enum eAlertType
     _activeQAView = view;
     
     //populate available questions
-    if (view.tag < 2)
-    {
-        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
-    }
-    else if (view.tag < 4)
-    {
-        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
-    }
-    else
-    {
-        view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryMust];
-    }
-
+    view.availableQuestions = [self prunedQuestionsFor:self.arrayQuestionChoices];
 }
 
 - (void)QuestionAnswerViewTableDismissed:(QuestionAnswerView *)view
