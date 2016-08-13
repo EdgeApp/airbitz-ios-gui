@@ -777,12 +777,16 @@ typedef enum eAlertType
         [mailComposer setSubject:subject];
         [mailComposer setToRecipients:@[emailAddress]];
         
-        NSString *htmlLink = [NSString stringWithFormat:@"<a href=\"%@://recovery?token=%@\">%@://recovery?token=%@</a>",
-                              [MainViewController Singleton].appUrlPrefix,
-                              _recoveryToken,
-                              [MainViewController Singleton].appUrlPrefix,
-                              _recoveryToken];
+        NSString *iosLink = [NSString stringWithFormat:@"iOS<br>\n<a href=\"%@://recovery?token=%@\">%@://recovery?token=%@</a>",
+                             [MainViewController Singleton].appUrlPrefix,
+                             _recoveryToken,
+                             [MainViewController Singleton].appUrlPrefix,
+                             _recoveryToken];
+        NSString *androidLink = [NSString stringWithFormat:@"Android<br>\n<a href=\"https://recovery.airbitz.co/recovery?token=%@\">https://recovery.airbitz.co/recovery?token=%@</a>", _recoveryToken, _recoveryToken];
 
+
+        NSString *htmlLink = [NSString stringWithFormat:@"%@<br><br>\n\n%@", iosLink, androidLink];
+        
         NSString *content = [NSString stringWithFormat:recovery_token_email_body, appTitle, obfuscatedUsername, htmlLink];
         [mailComposer setMessageBody:content isHTML:YES];
         
