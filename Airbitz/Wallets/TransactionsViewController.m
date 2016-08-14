@@ -55,7 +55,7 @@ const int PromoIndexImportGiftCard  = 1;
 const int PromoIndex20offStarbucks  = 2;
 const int PromoIndex10offTarget     = 3;
 const int PromoIndex15to20offAmazon = 4;
-const int NumPromoRows              = 5;
+const int NumPromoRows              = 2;
 
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
