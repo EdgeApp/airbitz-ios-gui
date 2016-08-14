@@ -216,7 +216,6 @@ MainViewController *singleton;
                                                              selector:@selector(checkReachabilityNotification:)
                                                              userInfo:nil
                                                               repeats:YES];
-    _bReachabilityGood = YES;
 }
 
 - (void) checkReachabilityNotification:(id)object
