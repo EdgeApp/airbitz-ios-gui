@@ -380,6 +380,7 @@
 #define defaultExchangeRateHeader                   NSLocalizedString(@"DEFAULT EXCHANGE RATE", @"section header in settings table")
 #define successfullyReceivedIdentityToken           NSLocalizedString(@"Successfully received identity token from %@" ,nil)
 #define usa_and_canada_text                         NSLocalizedString(@"USA and Canada", nil)
+#define usa_text                                    NSLocalizedString(@"USA", nil)
 #define change_mining_fee_popup_title               NSLocalizedString(@"Change Mining Fee",nil)
 #define change_mining_fee_popup_message             NSLocalizedString(@"Warning: Low Fees may cause long delays in transaction confirmation",nil)
 #define affiliate_revenue                           NSLocalizedString(@"Affiliate Revenue", @"Income category for affiliate revenue")

@@ -147,7 +147,7 @@ static NSMutableArray *giftCardPlugins;
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
         plugin.imageFile = @"plugin_icon_usd";
-        plugin.name = usa_and_canada_text;
+        plugin.name = usa_text;
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
