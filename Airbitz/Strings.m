@@ -424,4 +424,4 @@
 #define messenger_server_error_funds_imported       NSLocalizedString(@"Funds successfully imported, but error connecting to messenger server. Try again later", @"")
 #define error_creating_affiliate_link               NSLocalizedString(@"Error creating affiliate link. Please try again later", @"")
 #define successfully_verified_identity              NSLocalizedString(@"Successfully Verified Identity",nil)
-
+#define trouble_connecting_to_network               NSLocalizedString(@"Trouble connecting to network",nil)

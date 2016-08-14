@@ -6,6 +6,7 @@
 #import "MainViewController.h"
 #import "BlurView.h"
 #import "LatoLabel.h"
+#import "FadingAlertView.h"
 
 @interface MiniDropDownAlertView ()
 {
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *parentView;
 @property (weak, nonatomic) IBOutlet UIView *alertGroupView;
 @property (nonatomic, weak) IBOutlet UILabel *messageText;
+@property (nonatomic)                BOOL       showing;
 
 @end
 
@@ -70,10 +72,11 @@ static BOOL bInitialized = NO;
     singleton.messageText.text = message;
 
     singleton.messageText.hidden = NO;
+    singleton.showing = YES;
 
-    if (!holdTime)
+    if (FADING_ALERT_HOLD_TIME_DEFAULT == holdTime)
         holdTime = [Theme Singleton].alertHoldTimeDefault;
-
+    
     [parentView addSubview:singleton];
 
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
@@ -86,7 +89,8 @@ static BOOL bInitialized = NO;
                          singleton.frame = frame;
                      }
                      completion:^(BOOL finished) {
-                         [NSTimer scheduledTimerWithTimeInterval:holdTime target:singleton selector:@selector(dismiss) userInfo:nil repeats:NO];
+                         if (FADING_ALERT_HOLD_TIME_FOREVER < holdTime)
+                             [NSTimer scheduledTimerWithTimeInterval:holdTime target:singleton selector:@selector(dismiss) userInfo:nil repeats:NO];
 
                      }];
     return;
@@ -100,6 +104,11 @@ static BOOL bInitialized = NO;
 + (void)update:(NSString *)message;
 {
     singleton.messageText.text = message;
+}
+
++ (BOOL)checkShowing;
+{
+    return singleton.showing;
 }
 
 + (void)dismiss:(BOOL)bNow
@@ -120,6 +129,7 @@ static BOOL bInitialized = NO;
                          CGRect frame = singleton.frame;
                          frame.origin.y = -[MainViewController getSafeOffscreenOffset:frame.size.height];
                          singleton.frame = frame;
+                         singleton.showing = NO;
                          [singleton removeFromSuperview];
                          if (singleton.delegate)
                          {

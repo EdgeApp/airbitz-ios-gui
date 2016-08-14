@@ -45,6 +45,8 @@
 #import "AppGroupConstants.h"
 #import "Affiliate.h"
 #import "Plugin.h"
+#import "Reachability.h"
+
 
 typedef enum eRequestType
 {
@@ -103,11 +105,11 @@ typedef enum eAppMode
     BOOL                        _bShowingWalletsLoadingAlert;
     BOOL                        _bDoneShowingWalletsLoadingAlert;
 
-
     CGRect                      _closedSlideoutFrame;
     SlideoutView                *slideoutView;
     FadingAlertView             *fadingAlertView;
-    NSTimer                     *updateExchangeRateTimer;
+    NSTimer                     *_updateExchangeRateTimer;
+    NSTimer                     *_checkReachabilityTimer;
     
     UIAlertView                     *_affiliateAlert;
     NSString                        *_affiliateURL;
@@ -201,13 +203,45 @@ MainViewController *singleton;
     
 #define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
     
-    updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
+    _updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
                                                      target:self
                                                    selector:@selector(sendUpdateExchangeNotification:)
                                                    userInfo:nil
                                                     repeats:YES];
+    
+#define CHECK_REACHABILITY_REFRESH_INTERVAL_SECONDS 3
 
+    _checkReachabilityTimer = [NSTimer scheduledTimerWithTimeInterval:CHECK_REACHABILITY_REFRESH_INTERVAL_SECONDS
+                                                               target:self
+                                                             selector:@selector(checkReachabilityNotification:)
+                                                             userInfo:nil
+                                                              repeats:YES];
+    _bReachabilityGood = YES;
 }
+
+- (void) checkReachabilityNotification:(id)object
+{
+    if (!_bShowingWalletsLoadingAlert)
+    {
+        Reachability *reachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus internetStatus = [reachability currentReachabilityStatus];
+        if (internetStatus == NotReachable)
+        {
+            if (![MiniDropDownAlertView checkShowing])
+            {
+                [MiniDropDownAlertView create:self.view
+                                      message:trouble_connecting_to_network
+                                     holdTime:FADING_ALERT_HOLD_TIME_FOREVER
+                                 withDelegate:nil];                
+            }
+        }
+        else
+        {
+            [MiniDropDownAlertView dismiss:NO];
+        }
+    }
+}
+
 
 - (void) sendUpdateExchangeNotification:(id)object
 {
