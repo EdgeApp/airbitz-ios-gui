@@ -11,6 +11,7 @@
 #import "WalletHeaderView.h"
 #import "Plugin.h"
 #import "Util.h"
+#import "LocalSettings.h"
 
 @interface GiftCardViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
@@ -54,8 +55,16 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
+    [MainViewController changeNavBarTitle:self title:spend_bitcoin_plugin_text];
     _pluginTable.editing = NO;
+    
+    if ([[LocalSettings controller] offerPluginsHelp])
+    {
+        NSString *txt = [NSString stringWithFormat:plugin_popup_notice, appTitle];
+        [MainViewController fadingAlertHelpPopup:txt];
+    }
+    
+
 }
 
 #pragma mark - UITableView
@@ -184,7 +193,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
+    [MainViewController changeNavBarTitle:self title:spend_bitcoin_plugin_text];
     [Util animateOut:controller parentController:self complete:^(void) {
         [self resetViews];
         _pluginViewController = nil;

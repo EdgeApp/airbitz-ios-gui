@@ -60,7 +60,9 @@
 #define twoFactorText                               NSLocalizedString(@"Two Factor", nil)
 #define importText                                  NSLocalizedString(@"Import", nil)
 #define buySellText                                 NSLocalizedString(@"Buy/Sell Bitcoin", nil)
-#define discountedGiftCardsText                     NSLocalizedString(@"Discounted Gift Cards", nil)
+#define spend_bitcoin_plugin_text                   NSLocalizedString(@"Spend Bitcoin (Plugins)", nil)
+#define plugin_popup_notice                         NSLocalizedString(@"The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.",nil)
+
 #define passwordRecoveryText                        NSLocalizedString(@"Password Recovery", nil)
 #define passwordMismatchText                        NSLocalizedString(@"Password does not match. Re-enter password", @"")
 #define defaultCurrencyInfoText                     NSLocalizedString(@"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.", nil)
@@ -97,7 +99,7 @@
 #define signupCameraText                            NSLocalizedString(@"You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.",@"Camera signup screen")
 #define signupContactsText                          NSLocalizedString(@"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.",@"Contacts signup screen")
 #define importPrivateKeyText                        NSLocalizedString(@"IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)", @"Slideout menu import private key text")
-#define giftCardText                                NSLocalizedString(@"DISCOUNTED GIFT CARDS", @"Slideout menu gift card text")
+#define spend_bitcoin_text_label                    NSLocalizedString(@"SPEND BITCOIN (Plugins)", @"Slideout menu spend text")
 #define bitcoinWalletTransactionsText               NSLocalizedString(@"Bitcoin Wallet Transactions", @"Export wallet transactions email subject line")
 #define accountsNeedsPasswordNotificationTitle      NSLocalizedString(@"WARNING: missing password", @"Title of missing password notification")
 #define accountsNeedsPasswordNotificationMessage    NSLocalizedString(@"Account '%@' needs a password. Account is not accessible on a new device without a password.", nil)
@@ -169,11 +171,11 @@
 #define upTo20OffStarbucksButton                    NSLocalizedString(@"Up to 20% off Starbucks",nil)
 #define upTo10OffTargetButton                       NSLocalizedString(@"Up to 10% off Target",nil)
 #define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)
-#define starbucks_20_percent_off                    NSLocalizedString(@"Starbucks (Up to 20% Off)", nil)
-#define target_10_percent_off                       NSLocalizedString(@"Target (Up to 10% Off)", nil)
-#define homedepot_15_percent_off                    NSLocalizedString(@"Home Depot (Up to 15% Off)", nil)
-#define walmart_10_percent_off                      NSLocalizedString(@"Walmart (Up to 10% Off)", nil)
-#define wholefoods_10_percent_off                   NSLocalizedString(@"Whole Foods (Up to 10% Off)", nil)
+#define starbucks_20_percent_off                    @"Fold (Starbucks Cards)"
+#define target_10_percent_off                       @"Fold (Target Cards)"
+#define homedepot_15_percent_off                    @"Fold (Home Depot Cards)"
+#define walmart_10_percent_off                      @"Fold (Walmart Cards)"
+#define wholefoods_10_percent_off                   @"Fold (Whole Foods Cards)"
 
 #define importPrivateKeyButton                      NSLocalizedString(@"Import Private Key", nil)
 #define debugOptionsTitle                           NSLocalizedString(@"Debug Options", @"Debug screen header title")
