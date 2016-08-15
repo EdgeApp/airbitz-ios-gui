@@ -130,25 +130,48 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    UIApplication*    app = [UIApplication sharedApplication];
+    
     [LocalSettings saveAll];
 
     bgNotificationTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [self bgNotificationCleanup];
     }];
 
-    if ([User isLoggedIn])
-    {
-        [abc enterBackground];
-        bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
-            [self bgLogoutCleanup];
-        }];
-    }
+    // Start the long-running task and return immediately.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if ([User isLoggedIn])
+        {
+            // Do the work associated with the task.
+
+            NSTimeInterval time;
+            do
+            {
+                time = [app backgroundTimeRemaining];
+                NSLog(@"Started background task timeremaining = %f", [app backgroundTimeRemaining]);
+                [NSThread sleepForTimeInterval:0.5f];
+                if (bgNotificationTask == UIBackgroundTaskInvalid)
+                {
+                    break;
+                }
+            }
+            while (time > 10);
+            
+            if (bgNotificationTask != UIBackgroundTaskInvalid)
+            {
+                [abc enterBackground];
+                [self bgNotificationCleanup];
+            }
+        }
+        
+    });
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self bgNotificationCleanup];
-    [self bgLogoutCleanup];
     [abc enterForeground];
     if (![self isAppActive] && !abcAccount)
     {
@@ -170,11 +193,11 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 }
 
-- (void)bgLogoutCleanup
-{
-    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
-    bgLogoutTask = UIBackgroundTaskInvalid;
-}
+//- (void)bgLogoutCleanup
+//{
+//    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
+//    bgLogoutTask = UIBackgroundTaskInvalid;
+//}
 
 - (void)bgNotificationCleanup
 {
