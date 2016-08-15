@@ -39,6 +39,7 @@
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
     UIAlertView                         *_changeFeeAlert;
+    UIAlertView                         *_tryPubAddressAlert;
     ABCSpendFeeLevel                    _feeLevel;
     NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
@@ -47,6 +48,7 @@
     ABCSpend                            *_spend;
     uint64_t                            _amountSatoshi;
     NSNumberFormatter                   *_numberFormatter;
+    ABCError                            *_sendError;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
@@ -594,7 +596,24 @@
             [_spend signBroadcastAndSave:^(ABCTransaction *transaction) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:transaction unsentTx:nil];
             } error:^(ABCError *error) {
-                [self txSendFailed:error];
+                if (_paymentRequest && _parsedURI.address)
+                {
+                    [self hideSendStatus];
+                    NSString *message = [NSString stringWithFormat:error_connecting_to_payment_processor, _parsedURI.address];
+                    // Ask user if they want to try sending to the plain bitcoin address
+                    _tryPubAddressAlert = [[UIAlertView alloc]
+                                           initWithTitle:errorDuringSend
+                                           message:message
+                                           delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:send_button_text, nil];
+                    [_tryPubAddressAlert show];
+                    _sendError = error;
+                }
+                else
+                {
+                    [self txSendFailed:error];
+                }
             }];
         }
     }
@@ -1127,6 +1146,19 @@
             _feeLevel = ABCSpendFeeLevelHigh;
         }
         [self startCalcFees];
+    }
+    else if (alertView == _tryPubAddressAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            [self txSendFailed:_sendError];
+        }
+        else if (1 == buttonIndex)
+        {
+            _paymentRequest = nil;
+            [self buildSpend];
+            [self initiateSendRequest];
+        }
     }
 }
 

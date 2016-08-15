@@ -19,6 +19,7 @@
 #define renameButtonText                            NSLocalizedString(@"Rename", @"RENAME button text for wallet rename")
 #define deleteButtonText                            NSLocalizedString(@"Delete", @"DELETE button text for wallet delete")
 #define okButtonText                                NSLocalizedString(@"OK", @"OK button text")
+#define send_button_text                            NSLocalizedString(@"SEND", @"SEND button text")
 #define copyButtonText                              NSLocalizedString(@"Copy", @"Copy button text")
 #define skipButtonText                              NSLocalizedString(@"Skip", @"Skip button text")
 #define nextButtonText                              NSLocalizedString(@"Next", @"Next button text")
@@ -426,3 +427,4 @@
 #define error_creating_affiliate_link               NSLocalizedString(@"Error creating affiliate link. Please try again later", @"")
 #define successfully_verified_identity              NSLocalizedString(@"Successfully Verified Identity",nil)
 #define trouble_connecting_to_network               NSLocalizedString(@"Trouble connecting to network",nil)
+#define error_connecting_to_payment_processor       NSLocalizedString(@"Error connecting to payment processor. Send directly to bitcoin address\n\n%@",nil)
