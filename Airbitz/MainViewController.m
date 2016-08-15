@@ -1522,6 +1522,9 @@ MainViewController *singleton;
 {
     if (wallet) _strWalletUUID = wallet.uuid;
     _strTxID = transaction.txid;
+    NSString *title = receivedFundsText;
+    NSString *amtString = [abcAccount.settings.denomination satoshiToBTCString:transaction.amountSatoshi withSymbol:YES cropDecimals:YES];
+    NSString *msg = [NSString stringWithFormat:bitcoinReceivedTapText, amtString];
 
     /* If showing QR code, launch receiving screen*/
     if (_selectedViewController == _requestViewController 
@@ -1539,15 +1542,12 @@ MainViewController *singleton;
         {
             [self handleReceiveFromQR:_strWalletUUID withTx:_strTxID];
         }
-
+        [self receiveBitcoinLocalNotification:title message:msg];
     }
     // Prevent displaying multiple alerts
     else if (_receivedAlert == nil)
     {
         if (transaction && transaction.amountSatoshi >= 0) {
-            NSString *title = receivedFundsText;
-            NSString *amtString = [abcAccount.settings.denomination satoshiToBTCString:transaction.amountSatoshi withSymbol:YES cropDecimals:YES];
-            NSString *msg = [NSString stringWithFormat:bitcoinReceivedTapText, amtString];
             [[AudioController controller] playReceived];
             _receivedAlert = [[UIAlertView alloc]
                               initWithTitle:title
@@ -1562,8 +1562,10 @@ MainViewController *singleton;
                 if (_receivedAlert)
                 {
                     [_receivedAlert dismissWithClickedButtonIndex:0 animated:YES];
+                    _receivedAlert = nil;
                 }
             });
+            [self receiveBitcoinLocalNotification:title message:msg];
         }
     }
 
@@ -1574,6 +1576,23 @@ MainViewController *singleton;
     {
         [self updateWidgetQRCode];
     }
+}
+
+- (void)receiveBitcoinLocalNotification:(NSString *)title message:(NSString *)message
+{
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    
+    if ([localNotif respondsToSelector:@selector((setAlertTitle:))])
+    {
+        [localNotif setAlertTitle:title];
+    }
+    [localNotif setAlertBody:message];
+    [localNotif setSoundName:@"BitcoinReceived.mp3"];
+    
+    // fire the notification now
+    [localNotif setFireDate:[NSDate date]];
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+
 }
 
 - (void)abcAccountOTPRequired;
