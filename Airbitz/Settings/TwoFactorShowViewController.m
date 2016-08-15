@@ -29,8 +29,9 @@
 @property (nonatomic, weak) IBOutlet UIView                  *loadingSpinner;
 @property (nonatomic, weak) IBOutlet UILabel                 *onOffLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *requestSpinner;
+@property (weak, nonatomic) IBOutlet UILabel                    *showQRLabel;
 
-@property (nonatomic)                BOOL                    bNoImportButton;
+@property (nonatomic)                BOOL                       bNoImportButton;
 
 @end
 
@@ -56,6 +57,10 @@
     CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
     _scrollView.contentSize = size;
     [self initUI];
+    self.showQRLabel.text = show_qr_code;
+    self.showQRLabel.hidden = NO;
+    self.qrCodeImageView.hidden = YES;
+    [self.showQRLabel setTextColor:[Theme Singleton].colorTextLink];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -224,6 +229,31 @@
 }
 
 #pragma mark - Action Methods
+- (IBAction)showQRButtonTapped:(id)sender
+{
+    if (self.qrCodeImageView.hidden == YES)
+    {
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:UIViewAnimationOptionCurveLinear animations:^
+        {
+                                self.qrCodeImageView.hidden = NO;
+                                self.showQRLabel.hidden = YES;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:UIViewAnimationOptionCurveLinear animations:^
+        {
+            self.qrCodeImageView.hidden = YES;
+            self.showQRLabel.hidden = NO;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
 
 - (IBAction)switchFlipped:(UISwitch *)uiSwitch
 {

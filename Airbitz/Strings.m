@@ -428,3 +428,5 @@
 #define successfully_verified_identity              NSLocalizedString(@"Successfully Verified Identity",nil)
 #define trouble_connecting_to_network               NSLocalizedString(@"Trouble connecting to network",nil)
 #define error_connecting_to_payment_processor       NSLocalizedString(@"Error connecting to payment processor. Send directly to bitcoin address\n\n%@",nil)
+#define show_qr_code                                NSLocalizedString(@"Show QR Code",nil)
+

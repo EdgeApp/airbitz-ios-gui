@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -899,15 +899,35 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-4C-W4Y">
                                                 <rect key="frame" x="8" y="8" width="164" height="164"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-4h-BJe" userLabel="Show QR Label">
+                                                <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfS-Fu-sUu">
+                                                <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                <connections>
+                                                    <action selector="showQRButtonTapped:" destination="Ydf-KI-RbJ" eventType="touchUpInside" id="h9Q-Oq-oGz"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="DfS-Fu-sUu" secondAttribute="trailing" constant="8" id="B6f-WU-d3C"/>
                                             <constraint firstItem="aRf-4C-W4Y" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="IDQ-YX-c2d"/>
+                                            <constraint firstItem="c0b-4h-BJe" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="OAg-lM-UvC"/>
                                             <constraint firstItem="aRf-4C-W4Y" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="SB0-X5-hFF"/>
                                             <constraint firstAttribute="trailing" secondItem="aRf-4C-W4Y" secondAttribute="trailing" constant="8" id="ZmS-8v-uay"/>
+                                            <constraint firstAttribute="trailing" secondItem="c0b-4h-BJe" secondAttribute="trailing" constant="8" id="be9-c4-l33"/>
+                                            <constraint firstItem="DfS-Fu-sUu" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="bus-0K-G0c"/>
                                             <constraint firstAttribute="width" secondItem="Hu4-Fk-wPE" secondAttribute="height" multiplier="1:1" id="fM6-CL-cz2"/>
+                                            <constraint firstItem="DfS-Fu-sUu" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="fbi-AL-A9A"/>
+                                            <constraint firstAttribute="bottom" secondItem="DfS-Fu-sUu" secondAttribute="bottom" constant="8" id="fvN-6O-Ub8"/>
                                             <constraint firstAttribute="width" constant="180" id="lgg-Nm-Mzu"/>
                                             <constraint firstAttribute="bottom" secondItem="aRf-4C-W4Y" secondAttribute="bottom" constant="8" id="lny-Yq-HBh"/>
+                                            <constraint firstItem="c0b-4h-BJe" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="niG-L8-Sys"/>
+                                            <constraint firstAttribute="bottom" secondItem="c0b-4h-BJe" secondAttribute="bottom" constant="8" id="wP8-yx-O6I"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ2-WG-JQn" userLabel="View -reset requested">
@@ -1047,6 +1067,7 @@
                         <outlet property="qrCodeImageView" destination="aRf-4C-W4Y" id="idN-J7-iXF"/>
                         <outlet property="requestSpinner" destination="cXH-jU-wGs" id="YRV-19-wyh"/>
                         <outlet property="requestView" destination="WZ2-WG-JQn" id="kbe-Aq-RfQ"/>
+                        <outlet property="showQRLabel" destination="c0b-4h-BJe" id="VZd-Yg-Xss"/>
                         <outlet property="tfaEnabledSwitch" destination="sbQ-rp-aif" id="S8A-Fd-ej2"/>
                         <outlet property="viewQRCodeFrame" destination="Hu4-Fk-wPE" id="fbs-Li-dMe"/>
                     </connections>
