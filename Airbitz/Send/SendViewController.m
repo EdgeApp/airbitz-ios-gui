@@ -1856,6 +1856,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         }
                         else
                         {
+                            if (parsedURI.address)
+                                [self processPubAddress:parsedURI];
                             NSString *errorString = [NSString stringWithFormat:@"%@\n\n%@",
                                                      error.userInfo[NSLocalizedDescriptionKey],
                                                      error.userInfo[NSLocalizedFailureReasonErrorKey]];
@@ -1867,11 +1869,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 }
                 else if (parsedURI.address)
                 {
-                    [MainViewController fadingAlert:validatingAddressText
-                                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-                    [self stopQRReader];
-                    [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
-                    [MainViewController fadingAlertDismiss];
+                    [self processPubAddress:parsedURI];
                 }
             }
             else
@@ -1880,6 +1878,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
         });
     });
+}
+
+- (void)processPubAddress:(ABCParsedURI *)parsedURI
+{
+    [MainViewController fadingAlert:validatingAddressText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [self stopQRReader];
+    [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
+    [MainViewController fadingAlertDismiss];
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
