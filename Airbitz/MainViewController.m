@@ -201,6 +201,19 @@ MainViewController *singleton;
     [self.afmanager.requestSerializer setValue:[LocalSettings controller].clientID forHTTPHeaderField:@"X-Client-ID"];
     [self.afmanager.requestSerializer setTimeoutInterval:10];
     
+    self.appUrlPrefix = appURI;
+    self.developBuild = NO;
+    
+#ifdef AIRBITZ_DEVELOP
+    self.appUrlPrefix = [NSString stringWithFormat:@"%@-develop", appURI];
+    self.developBuild = YES;
+#endif
+    
+#ifdef AIRBITZ_TESTNET
+    self.appUrlPrefix = [NSString stringWithFormat:@"%@-testnet", appURI];
+    self.developBuild = NO;
+#endif
+    
 #define EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS 60
     
     _updateExchangeRateTimer = [NSTimer scheduledTimerWithTimeInterval:EXCHANGE_RATE_REFRESH_INTERVAL_SECONDS
@@ -2035,12 +2048,33 @@ MainViewController *singleton;
 
 - (void)processBitcoinURI:(NSURL *)uri
 {
-    if (![User isLoggedIn]) {
+    if ([uri.scheme isEqualToString:self.appUrlPrefix] && [uri.host isEqualToString:@"recovery"])
+    {
+        NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:uri
+                                                    resolvingAgainstBaseURL:NO];
+        NSArray *queryItems = urlComponents.queryItems;
+        NSString *token = [self valueForKey:@"token"
+                             fromQueryItems:queryItems];
+        if (token)
+        {
+            if ([User isLoggedIn])
+            {
+                [MainViewController fadingAlert:logout_before_recovery holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            else
+            {
+                // Launch recovery view from LoginViewController
+                [_loginViewController launchRecoveryPopup:nil recoveryToken:token];
+            }
+        }
+    }
+    else if (![User isLoggedIn])
+    {
         _uri = uri;
     }
     else
     {
-        if ([uri.scheme isEqualToString:AIRBITZ_URI_PREFIX] && [uri.host isEqualToString:@"plugin"])
+        if ([uri.scheme isEqualToString:self.appUrlPrefix] && [uri.host isEqualToString:@"plugin"])
         {
             NSArray *cs = [uri.path pathComponents];
             if ([cs count] == 3)
@@ -2063,6 +2097,16 @@ MainViewController *singleton;
             }
         }
     }
+}
+
+- (NSString *)valueForKey:(NSString *)key
+           fromQueryItems:(NSArray *)queryItems
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
+    NSURLQueryItem *queryItem = [[queryItems
+                                  filteredArrayUsingPredicate:predicate]
+                                 firstObject];
+    return queryItem.value;
 }
 
 - (void)resetViews
@@ -2602,6 +2646,11 @@ MainViewController *singleton;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
 {
     [FadingAlertView create:singleton.view message:message holdTime:holdTime notify:cb];
+}
+
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb complete:(void(^)(void))complete;
+{
+    [FadingAlertView create:singleton.view message:message holdTime:holdTime notify:cb complete:complete];
 }
 
 + (void)fadingAlertUpdate:(NSString *)message

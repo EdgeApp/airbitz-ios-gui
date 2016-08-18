@@ -1277,6 +1277,9 @@
 		DAE5464B1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
 		DAE5464C1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
 		DAE5464D1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
+		DAE951601D5C02230060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
+		DAE951651D5C022F0060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
+		DAE951661D5C02380060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
 		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
@@ -2290,6 +2293,7 @@
 		DAE1BE451CC37883003494AB /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = "Airbitz-Common/MainController.h"; sourceTree = "<group>"; };
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DAE5464A1D29F6780065F926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
+		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 /* End PBXFileReference section */
@@ -2331,6 +2335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE951651D5C022F0060501F /* AddressBook.framework in Frameworks */,
 				DA9EF3DB1BC7285D0063DA07 /* libiconv.tbd in Frameworks */,
 				DA9EF3DD1BC7285D0063DA07 /* AudioToolbox.framework in Frameworks */,
 				DA9EF3DE1BC7285D0063DA07 /* Social.framework in Frameworks */,
@@ -2361,6 +2366,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE951661D5C02380060501F /* AddressBook.framework in Frameworks */,
 				DA9EF5A21BC729FA0063DA07 /* libiconv.tbd in Frameworks */,
 				DA9EF5A41BC729FA0063DA07 /* AudioToolbox.framework in Frameworks */,
 				DA9EF5A51BC729FA0063DA07 /* Social.framework in Frameworks */,
@@ -2391,6 +2397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE951601D5C02230060501F /* AddressBook.framework in Frameworks */,
 				DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */,
 				DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */,
 				DA9EEF9F1BC63D040063DA07 /* Social.framework in Frameworks */,
@@ -2490,6 +2497,7 @@
 		DA9ED6EB1BC607FA0063DA07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAE9515F1D5C02230060501F /* AddressBook.framework */,
 				DAE1BE371CC36C5E003494AB /* libiconv.tbd */,
 				DAE1BE351CC36C58003494AB /* libc++.tbd */,
 				DAE1BDD91CC330DD003494AB /* libcurl.a */,

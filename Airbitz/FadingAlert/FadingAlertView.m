@@ -23,7 +23,7 @@
 @property (nonatomic, weak) IBOutlet UIView             *activityIndicator;
 @property (nonatomic)       CGFloat                     holdTime;
 @property (nonatomic, weak) NSTimer                     *dismissTimer;
-
+@property (nonatomic, strong)        void               (^complete)(void);
 
 // Old Stuff. Deprecated
 @property (nonatomic, weak) IBOutlet UIView *alertGroup;
@@ -80,7 +80,17 @@ static UIView *alert;
     [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:nil notify:cb];
 }
 
++ (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb complete:(void(^)(void))complete;
+{
+    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:nil notify:cb complete:(void(^)(void))complete];
+}
+
 + (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb
+{
+    [FadingAlertView create:parentView message:message image:nil line1:nil line2:nil line3:nil holdTime:holdTime withDelegate:delegate notify:cb complete:nil];
+}
+
++ (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb complete:(void(^)(void))complete
 {
     // Before anything else. Dismiss any previous alerts and kill the timer
     // Do this first so it calls the previous delegate
@@ -96,6 +106,7 @@ static UIView *alert;
     singleton.blurView.alpha = 0;
     singleton.clipsToBounds = YES;
     singleton.holdTime          = holdTime;
+    singleton.complete          = complete;
 
     singleton.connectedPhoto.image = image;
     singleton.connectedLine1.text = line1;
@@ -186,6 +197,7 @@ static UIView *alert;
         [singleton removeFromSuperview];
         if (singleton.delegate)
             [singleton.delegate fadingAlertDismissed];
+        if (singleton.complete) singleton.complete();
     }
     else
     {
@@ -210,6 +222,7 @@ static UIView *alert;
                              [singleton removeFromSuperview];
                              if (singleton.delegate)
                                  [singleton.delegate fadingAlertDismissed];
+                             if (singleton.complete) singleton.complete();
                          }];
     }
 }

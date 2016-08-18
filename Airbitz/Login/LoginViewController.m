@@ -45,6 +45,7 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
+    BOOL                            _bDisallowTouchID;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
     SignUpManager                   *_signupManager;
@@ -63,8 +64,10 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
     UIAlertView                     *_deleteAccountAlert;
+    UIAlertView                     *_recoverPasswordAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
+    NSString                        *_recoveryToken;
     BOOL                            _bNewDeviceLogin;
     
 
@@ -341,7 +344,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [self autoReloginOrTouchIDIfPossible];
+        if (!_bDisallowTouchID)
+            [self autoReloginOrTouchIDIfPossible];
     }
     
 }
@@ -584,32 +588,91 @@ static BOOL bInitialized = false;
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
+    [self launchRecoveryPopup:self.usernameSelector.textField.text recoveryToken:nil];
+}
+
+- (void) launchRecoveryPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
+{
+    if (recoveryToken)
+        _recoveryToken = recoveryToken;
+    
+    _bDisallowTouchID = YES;
+    _recoverPasswordAlert = [[UIAlertView alloc] initWithTitle:passwordRecoveryText
+                                                     message:enter_username_to_recover
+                                                    delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:nextButtonText, nil];
+    _recoverPasswordAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    if ([username length])
+    {
+        UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+        textField.text = username;
+    }
+    [_recoverPasswordAlert show];
+}
+
+- (void)recoverPassword:(NSString *)username
+{
     [self dismissErrorMessage];
     [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
     // if they have a username
-    if ([self.usernameSelector.textField.text length])
+    if (username)
     {
-        [self showSpinner:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            NSError *error;
-            NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
-                                                                     error:&error];
-            NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [self showSpinner:NO];
-                _bSuccess = !!arrayQuestions;
-                _strReason = error.userInfo[NSLocalizedDescriptionKey];
-                [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
+        ABCError *error;
+        NSString *recoveryToken;
+        
+        // Check if recovery token was passed in via URL
+        if (_recoveryToken)
+        {
+            recoveryToken = _recoveryToken;
+            _recoveryToken = nil;
+        }
+        
+        if (!recoveryToken)
+        {
+            // Second check to see if user has a recovery2 token on the device
+            recoveryToken = [abc getLocalRecoveryToken:username error:&error];
+        }
+        if (recoveryToken)
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecovery2Questions:username
+                                                       recoveryToken:recoveryToken
+                                                               error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:recoveryToken error:error];
+                });
             });
-        });
+        }
+        else
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+                                                                         error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:nil error:error];
+                });
+            });
+        }
+        
     }
     else
     {
         [MainViewController fadingAlert:pleaseEnterAUsername];
     }
 }
+
+
 
 - (IBAction)buttonLoginWithPasswordTouched:(id)sender
 {
@@ -621,25 +684,46 @@ static BOOL bInitialized = false;
 }
 
 
-- (void)launchQuestionRecovery:(NSArray *)params
+- (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recoveryToken:(NSString *)recoveryToken error:(ABCError *)error;
 {
-    if (_bSuccess && [params count] > 0)
+    if (!error && arrayQuestions)
     {
-        NSArray *arrayQuestions = params[0];
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 
         _passwordRecoveryController.delegate = self;
         _passwordRecoveryController.mode = PassRecovMode_Recover;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
-        _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
+        _passwordRecoveryController.strUserName = username;
+        _passwordRecoveryController.numQABlocks = (int)[arrayQuestions count];
+        _passwordRecoveryController.useRecovery2 = !!recoveryToken;
+        _passwordRecoveryController.recoveryToken = recoveryToken;
 
         [MainViewController showNavBarAnimated:YES];
-        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
+        [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
+        [MainViewController animateSlideIn:_passwordRecoveryController];
+//        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
     }
     else
     {
-        [MainViewController fadingAlert:_strReason];
+        if (error && error.code != ABCConditionCodeNoRecoveryQuestions)
+            [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+        else
+        {
+            if (recoveryToken)
+            {
+                [MainViewController fadingAlert:recovery_token_invalid holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            else
+            {
+                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                    [MainViewController fadingAlert:recovery_not_setup2 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        [MainViewController fadingAlert:recovery_not_setup3 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        }];
+                    }];
+                }];
+            }
+        }
     }
 }
 
@@ -1314,6 +1398,15 @@ static BOOL bInitialized = false;
         }
 
         return;
+    }
+    else if (alertView == _recoverPasswordAlert)
+    {
+        if (1 == buttonIndex)
+        {
+            UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+            [self recoverPassword:textField.text];
+        }
+        _bDisallowTouchID = NO;
     }
     else if (alertView == _passwordCheckAlert)
     {
