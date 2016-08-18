@@ -641,9 +641,9 @@ static BOOL bInitialized = false;
             [self showSpinner:YES];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 ABCError *error;
-                NSArray *arrayQuestions = [abc getRecoveryQuestionsWithRecoveryToken:username
-                                                                       recoveryToken:recoveryToken
-                                                                               error:&error];
+                NSArray *arrayQuestions = [abc getRecovery2Questions:username
+                                                       recoveryToken:recoveryToken
+                                                               error:&error];
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     [self showSpinner:NO];
                     [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:recoveryToken error:error];
@@ -686,7 +686,7 @@ static BOOL bInitialized = false;
 
 - (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recoveryToken:(NSString *)recoveryToken error:(ABCError *)error;
 {
-    if (arrayQuestions)
+    if (!error && arrayQuestions)
     {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];

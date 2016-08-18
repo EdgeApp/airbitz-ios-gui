@@ -219,7 +219,9 @@ typedef enum eAlertType
 	BOOL allQuestionsSelected = YES;
 	BOOL allAnswersValid = YES;
 	NSMutableString *questions = [[NSMutableString alloc] init];
-	NSMutableString *answers = [[NSMutableString alloc] init];
+    NSMutableString *answers = [[NSMutableString alloc] init];
+    NSMutableArray *arrayQuestions = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayAnswers = [[NSMutableArray alloc] init];
 
 	int count = 0;
 	for (UIView *view in self.contentView.subviews)
@@ -247,6 +249,8 @@ typedef enum eAlertType
 				}
 				[questions appendString:[qaView question]];
 				[answers appendString:[qaView answer]];
+                [arrayQuestions addObject:[qaView question]];
+                [arrayAnswers addObject:[qaView answer]];
 			}
             count++;
 		}
@@ -257,11 +261,14 @@ typedef enum eAlertType
 		{
             if (self.mode == PassRecovMode_Recover)
             {
-                [self recoverWithAnswers:answers];
+                [self recoverWithAnswers:answers array:[arrayAnswers copy]];
             }
             else
             {
-                [self commitQuestions:questions andAnswersToABC:answers];
+                [self commitQuestions:questions
+                      andAnswersToABC:answers
+                       arrayQuestions:[arrayQuestions copy]
+                         arrayAnswers:[arrayAnswers copy]];
             }
 		}
 		else
@@ -329,23 +336,48 @@ typedef enum eAlertType
     }
 }
 
-- (void)recoverWithAnswers:(NSString *)strAnswers
+- (void)recoverWithAnswers:(NSString *)strAnswers array:(NSArray *)arrayAnswers
 {
     [self showSpinner:YES];
 
     if (self.recoveryToken)
     {
-        [abc loginWithRecoveryToken:self.strUserName
-                            answers:strAnswers
+        [abc loginWithRecovery2:self.strUserName
+                            answers:arrayAnswers
                       recoveryToken:self.recoveryToken
                            delegate:[MainViewController Singleton]
                                 otp:_secret
-                           callback:^(ABCError *error, ABCAccount *account) {
-                               [self showSpinner:NO];
-                               [User login:account];
-                               [self bringUpSignUpViewWithAnswers:strAnswers];
-                               [MainViewController fadingAlert:recovery_successful holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                           }];
+                           callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self showSpinner:NO];
+                [User login:account];
+                [self bringUpSignUpViewWithAnswers:strAnswers];
+                [MainViewController fadingAlert:recovery_successful holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                if (ABCConditionCodeInvalidOTP == error.code)
+                {
+                    [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
+                }
+                else
+                {
+                    // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
+                    // Core should change to set error to OK but change validAnswers -paul
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle:wrongAnswersText
+                                          message:givenAnswersAreIncorrect
+                                          delegate:nil
+                                          cancelButtonTitle:okButtonText
+                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+
+            }
+        }];
     }
     else
     {
@@ -420,7 +452,10 @@ typedef enum eAlertType
     }];
 }
 
-- (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
+- (void)commitQuestions:(NSString *)strQuestions
+        andAnswersToABC:(NSString *)strAnswers
+         arrayQuestions:(NSArray *)arrayQuestions
+           arrayAnswers:(NSArray *)arrayAnswers;
 {
     // Check Password
     if (self.mode == PassRecovMode_Change) {
@@ -442,7 +477,7 @@ typedef enum eAlertType
 
     if (self.useRecovery2)
     {
-        [abcAccount setupRecoveryQuestions2:strQuestions answers:strAnswers callback:^(ABCError *error, NSString *recoveryToken) {
+        [abcAccount setupRecovery2Questions:arrayQuestions answers:arrayAnswers callback:^(ABCError *error, NSString *recoveryToken) {
             [self blockUser:NO];
             [self showSpinner:NO];
             if (error)
