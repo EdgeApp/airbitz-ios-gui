@@ -15,6 +15,7 @@
 @property (nonatomic, copy)     NSString        *sourceFile;
 @property (nonatomic, copy)     NSString        *sourceExtension;
 @property (nonatomic, copy)     NSString        *imageFile;
+@property (nonatomic, copy)     NSString        *imageUrl;
 @property (nonatomic, strong)   UIColor         *backgroundColor;
 @property (nonatomic, strong)   UIColor         *textColor;
 @property (nonatomic, copy)     NSDictionary    *env;
@@ -22,6 +23,6 @@
 + (void)initAll;
 + (void)freeAll;
 + (NSArray *)getBuySellPlugins;
-+ (NSArray *)getGiftCardPlugins;
++ (NSArray *)getGeneralPlugins;
 
 @end

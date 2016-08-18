@@ -172,12 +172,11 @@
 #define upTo20OffStarbucksButton                    NSLocalizedString(@"Up to 20% off Starbucks",nil)
 #define upTo10OffTargetButton                       NSLocalizedString(@"Up to 10% off Target",nil)
 #define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)
-#define starbucks_20_percent_off                    @"Fold (Starbucks Cards)"
-#define target_10_percent_off                       @"Fold (Target Cards)"
-#define homedepot_15_percent_off                    @"Fold (Home Depot Cards)"
-#define walmart_10_percent_off                      @"Fold (Walmart Cards)"
-#define wholefoods_10_percent_off                   @"Fold (Whole Foods Cards)"
-
+#define starbucks_20_percent_off                    NSLocalizedString(@"Starbucks (Up to 20% Off)", nil)
+#define target_10_percent_off                       NSLocalizedString(@"Target (Up to 10% Off)", nil)
+#define homedepot_15_percent_off                    NSLocalizedString(@"Home Depot (Up to 15% Off)", nil)
+#define walmart_10_percent_off                      NSLocalizedString(@"Walmart (Up to 10% Off)", nil)
+#define wholefoods_10_percent_off                   NSLocalizedString(@"Whole Foods (Up to 10% Off)", nil)
 #define importPrivateKeyButton                      NSLocalizedString(@"Import Private Key", nil)
 #define debugOptionsTitle                           NSLocalizedString(@"Debug Options", @"Debug screen header title")
 #define restartingWatcherServiceText                NSLocalizedString(@"Restarting watcher service", nil)
@@ -441,4 +440,5 @@
 #define logout_before_recovery                      NSLocalizedString(@"Please logout of current account before attempting password recovery", nil)
 #define recovery_successful                         NSLocalizedString(@"Recovery Successful\n\nPlease change your password and PIN", nil)
 #define invalid_email                               NSLocalizedString(@"Invalid Email", nil)
+#define buy_sell_bank_usa                           NSLocalizedString(@"Buy/Sell with Bank Account (USA)", nil)
 

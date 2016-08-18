@@ -21,7 +21,7 @@
 #import "TransactionDetailsViewController.h"
 #import "TwoFactorScanViewController.h"
 #import "BuySellViewController.h"
-#import "GiftCardViewController.h"
+#import "PluginListViewController.h"
 #import "BlurView.h"
 #import "User.h"
 #import "Config.h"
@@ -72,7 +72,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, BuySellViewControllerDelegate,GiftCardViewControllerDelegate,ABCAccountDelegate>
+                                  MFMailComposeViewControllerDelegate, ABCAccountDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -82,7 +82,7 @@ typedef enum eAppMode
 	LoginViewController         *_loginViewController;
 	SettingsViewController      *_settingsViewController;
 	BuySellViewController       *_buySellViewController;
-    GiftCardViewController      *_giftCardViewController;
+    PluginListViewController *_giftCardViewController;
     TransactionDetailsViewController *_txDetailsController;
     TwoFactorScanViewController      *_tfaScanViewController;
     SignUpViewController            *_signUpController;
@@ -487,7 +487,7 @@ MainViewController *singleton;
 	_buySellViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"BuySellViewController"];
     _buySellViewController.delegate = self;
 
-    _giftCardViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"GiftCardViewController"];
+    _giftCardViewController = [pluginStoryboard instantiateViewControllerWithIdentifier:@"PluginListViewController"];
     _giftCardViewController.delegate = self;
 
     if (slideoutView)
