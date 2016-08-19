@@ -150,7 +150,7 @@ static NSMutableArray *giftCardPlugins;
             plugin.name = @"Topup Prepaid SIM";
             plugin.env = @{
                            @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                           @"API_KEY": @"ABC123"
+                           @"API_KEY": BITREFILL_API_KEY
                            };
             [buySellPlugins addObject:plugin];
         }
