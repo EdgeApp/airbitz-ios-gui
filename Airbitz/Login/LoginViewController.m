@@ -633,7 +633,7 @@ static BOOL bInitialized = false;
         if (!recoveryToken)
         {
             // Second check to see if user has a recovery2 token on the device
-            recoveryToken = [abc getLocalRecoveryToken:username error:&error];
+            recoveryToken = [abc getRecovery2Token:username error:&error];
         }
         if (recoveryToken)
         {

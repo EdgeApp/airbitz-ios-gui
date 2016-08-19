@@ -61,6 +61,7 @@ typedef enum eAlertType
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;
 @property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
 @property (nonatomic, strong)        UIAlertView                *saveTokenAlert;
+@property (nonatomic, strong)        UIAlertView                *disableRecoveryAlert;
 @property (nonatomic, strong)        UIAlertView                *sendEmailAlert;
 
 
@@ -99,6 +100,13 @@ typedef enum eAlertType
 {
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
+        if (self.mode == PassRecovMode_Change)
+        {
+            // If recovery is enabled, ask user if they'd like to disable it.
+            if ([abc getRecovery2Token:abcAccount.name error:nil])
+                [self launchDisableRecoveryAlert];
+        }
+        
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
@@ -502,6 +510,18 @@ typedef enum eAlertType
     }
 }
 
+- (void) launchDisableRecoveryAlert;
+{
+    // If user already has questions set, popup offering to disable.
+    self.disableRecoveryAlert = [[UIAlertView alloc]
+                                 initWithTitle:disable_recovery_popup_title
+                                 message:disable_recovery_popup_message
+                                 delegate:self
+                                 cancelButtonTitle:cancelButtonText
+                                 otherButtonTitles:disable_text,nil];
+    [self.disableRecoveryAlert show];
+}
+
 - (void) launchSaveTokenAlert:(NSString *)title;
 {
     // Check if the dataStore has the user's email. If so prepopulate it.
@@ -634,12 +654,27 @@ typedef enum eAlertType
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (alertView == self.sendEmailAlert)
+    if (alertView == self.disableRecoveryAlert)
+    {
+        if (0 == buttonIndex)
+        {
+        }
+        else if (1 == buttonIndex)
+        {
+            ABCError *error = [abcAccount disableRecovery2];
+            if (error)
+                [MainViewController fadingAlert:error_disabling_recovery];
+            else
+                [MainViewController fadingAlert:recovery_disabled];
+        }
+        
+    }
+    else if (alertView == self.sendEmailAlert)
     {
         // Call exit
         [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
     }
-    if (alertView == self.saveTokenAlert)
+    else if (alertView == self.saveTokenAlert)
     {
         if (0 == buttonIndex)
         {
