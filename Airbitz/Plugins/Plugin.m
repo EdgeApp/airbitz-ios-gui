@@ -31,6 +31,21 @@ static NSMutableArray *generalPlugins;
         Plugin *plugin;
         {
             plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"com.bitrefill.widget";
+            plugin.provider = @"Bitrefill";
+            plugin.sourceFile = @"bitrefill";
+            plugin.sourceExtension = @"html";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/Bitrefill-logo-300x300.png";
+            plugin.name = @"Topup Prepaid Mobile SIM";
+            plugin.env = @{
+                           @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                           @"API_KEY": BITREFILL_API_KEY
+                           };
+            [generalPlugins addObject:plugin];
+        }
+        
+        {
+            plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
             plugin.provider = @"Fold";
             plugin.country = @"US";
@@ -140,21 +155,6 @@ static NSMutableArray *generalPlugins;
             [generalPlugins addObject:plugin];
         }
         
-        {
-            plugin = [[Plugin alloc] init];
-            plugin.pluginId = @"com.bitrefill.widget";
-            plugin.provider = @"bitrefill";
-            plugin.sourceFile = @"bitrefill";
-            plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_usd";
-            plugin.name = @"Topup Prepaid SIM";
-            plugin.env = @{
-                           @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                           @"API_KEY": BITREFILL_API_KEY
-                           };
-            [buySellPlugins addObject:plugin];
-        }
-        
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"Glidera";
@@ -171,24 +171,6 @@ static NSMutableArray *generalPlugins;
                        };
         [buySellPlugins addObject:plugin];
 
-//        plugin = [[Plugin alloc] init];
-//        plugin.pluginId = @"com.clevercoin";
-//        plugin.provider = @"clevercoin";
-//        plugin.country = @"EUR";
-//        plugin.sourceFile = @"clevercoin";
-//        plugin.sourceExtension = @"html";
-//        plugin.imageFile = @"plugin_icon_euro";
-//        plugin.name = @"Europe (EUR)";
-//        plugin.env = @{
-//                    @"SANDBOX": (isTestnet ? @"true" : @"false"),
-//                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", [MainViewController Singleton].appUrlPrefix, plugin.country],
-//                    @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
-//                    @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
-//                    @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
-//                    @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
-//                    };
-//        [buySellPlugins addObject:plugin];
-        
         bInitialized = YES;
     }
 }
