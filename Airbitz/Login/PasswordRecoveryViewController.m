@@ -47,6 +47,7 @@ typedef enum eAlertType
     NSString                    *_secret;
     QuestionAnswerView          *_activeQAView;
     NSString                    *_recoveryToken;
+    BOOL                        _viewHasAppeared;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint         *contentViewHeight;
@@ -100,7 +101,7 @@ typedef enum eAlertType
 {
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
-        if (self.mode == PassRecovMode_Change)
+        if (self.mode == PassRecovMode_Change && !_viewHasAppeared)
         {
             // If recovery is enabled, ask user if they'd like to disable it.
             if ([abc getRecovery2Token:abcAccount.name error:nil])
@@ -149,6 +150,7 @@ typedef enum eAlertType
 
     [MainViewController changeNavBarOwner:self];
     [self updateViews];
+    _viewHasAppeared = YES;
 }
 
 -(void)updateViews
