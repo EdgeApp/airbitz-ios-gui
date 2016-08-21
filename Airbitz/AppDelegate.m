@@ -159,9 +159,9 @@ UIBackgroundTaskIdentifier bgNotificationTask;
             }
             while (time > 10);
 
-            [abc startSuspend];
             if (bgNotificationTask != UIBackgroundTaskInvalid)
             {
+                [abc startSuspend];
                 [self bgNotificationCleanup];
             }
         }
