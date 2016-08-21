@@ -133,6 +133,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     UIApplication*    app = [UIApplication sharedApplication];
     
     [LocalSettings saveAll];
+    [abc enterBackground];
 
     bgNotificationTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [self bgNotificationCleanup];
@@ -157,10 +158,10 @@ UIBackgroundTaskIdentifier bgNotificationTask;
                 }
             }
             while (time > 10);
-            
+
+            [abc startSuspend];
             if (bgNotificationTask != UIBackgroundTaskInvalid)
             {
-                [abc enterBackground];
                 [self bgNotificationCleanup];
             }
         }
