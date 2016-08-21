@@ -153,18 +153,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if([LocalSettings controller].bDisableBLE == NO)
     {
-        // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
-        NSTimeInterval curTime = CACurrentMediaTime();
-        if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
         {
-            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+            // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+            NSTimeInterval curTime = CACurrentMediaTime();
+//            if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+//            {
+//                _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+//            }
+//            else
+            {
+                _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
+            }
+            lastCentralBLEPowerOffNotificationTime = curTime;
+            [self startBLE];
         }
-        else
-        {
-            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
-        }
-        lastCentralBLEPowerOffNotificationTime = curTime;
-        [self startBLE];
     }
 }
 
