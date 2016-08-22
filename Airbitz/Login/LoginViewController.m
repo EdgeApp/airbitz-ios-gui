@@ -593,6 +593,10 @@ static BOOL bInitialized = false;
 
 - (void) launchRecoveryPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
 {
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.PINTextField resignFirstResponder]; 
+    
     if (recoveryToken)
         _recoveryToken = recoveryToken;
     
