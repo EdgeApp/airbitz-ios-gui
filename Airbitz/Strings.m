@@ -175,6 +175,7 @@
 #define upTo20OffStarbucksButton                    NSLocalizedString(@"Up to 20% off Starbucks",nil)
 #define upTo10OffTargetButton                       NSLocalizedString(@"Up to 10% off Target",nil)
 #define upTo15to20OffAmazonButton                   NSLocalizedString(@"15-20% off Amazon",nil)
+#define mobile_phone_topups                         NSLocalizedString(@"Buy Mobile Phone Topups", nil)
 #define starbucks_20_percent_off                    NSLocalizedString(@"Starbucks (Up to 20% Off)", nil)
 #define target_10_percent_off                       NSLocalizedString(@"Target (Up to 10% Off)", nil)
 #define homedepot_15_percent_off                    NSLocalizedString(@"Home Depot (Up to 15% Off)", nil)
