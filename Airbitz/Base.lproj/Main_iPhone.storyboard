@@ -119,6 +119,8 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -4106,6 +4108,78 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qnf-vn-RNn">
                                         <rect key="frame" x="0.0" y="269" width="320" height="112"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PluginCell" rowHeight="72" id="YPg-5V-KDy" userLabel="PluginCell" customClass="PluginCell">
+                                                <rect key="frame" x="0.0" y="28" width="320" height="72"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YPg-5V-KDy" id="IeY-D4-Vqz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfk-fn-TnF" userLabel="View -white frost">
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </view>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AkB-cD-ba5" userLabel="topLabel" customClass="LatoLabel">
+                                                            <rect key="frame" x="69" y="16" width="40" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="9e0-ox-As7"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                            <color key="textColor" red="0.25490196079999999" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
+                                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gJp-Ct-Vol" userLabel="bottomLabel" customClass="LatoLabel">
+                                                            <rect key="frame" x="81" y="45" width="29" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="7Up-y4-tsr"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                            <color key="textColor" red="0.090196078430000007" green="0.43921568630000002" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
+                                                            <size key="shadowOffset" width="0.0" height="1"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="Px4-tO-djL" userLabel="right button image">
+                                                            <rect key="frame" x="295" y="25" width="20" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="S6X-CB-Rqt"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="gCr-eW-vTI" userLabel="Image View - photo">
+                                                            <rect key="frame" x="8" y="13" width="46" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="gCr-eW-vTI" secondAttribute="height" multiplier="1:1" id="ZbB-iW-rq9"/>
+                                                                <constraint firstAttribute="width" constant="46" id="xUg-8r-LbS"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="gJp-Ct-Vol" firstAttribute="bottom" secondItem="gCr-eW-vTI" secondAttribute="bottom" constant="-3" id="0vH-mQ-WQe"/>
+                                                        <constraint firstItem="gfk-fn-TnF" firstAttribute="leading" secondItem="IeY-D4-Vqz" secondAttribute="leading" id="4AH-A1-K6k"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gfk-fn-TnF" secondAttribute="trailing" id="Bda-Wb-Cdb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="gfk-fn-TnF" secondAttribute="bottom" id="Fth-Q0-C8N"/>
+                                                        <constraint firstItem="AkB-cD-ba5" firstAttribute="top" secondItem="gCr-eW-vTI" secondAttribute="top" constant="3" id="JAd-Cx-11Y"/>
+                                                        <constraint firstItem="gJp-Ct-Vol" firstAttribute="leading" secondItem="AkB-cD-ba5" secondAttribute="leading" id="OXV-Qw-xTJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Px4-tO-djL" secondAttribute="trailing" constant="5" id="Y4C-BX-3uM"/>
+                                                        <constraint firstItem="gCr-eW-vTI" firstAttribute="centerY" secondItem="IeY-D4-Vqz" secondAttribute="centerY" id="a9x-eF-VvM"/>
+                                                        <constraint firstItem="AkB-cD-ba5" firstAttribute="leading" secondItem="gCr-eW-vTI" secondAttribute="trailing" constant="15" id="anR-ck-MNe"/>
+                                                        <constraint firstItem="Px4-tO-djL" firstAttribute="centerY" secondItem="IeY-D4-Vqz" secondAttribute="centerY" id="bgA-O6-oko"/>
+                                                        <constraint firstItem="gfk-fn-TnF" firstAttribute="top" secondItem="IeY-D4-Vqz" secondAttribute="top" id="kIN-g7-t4M"/>
+                                                        <constraint firstItem="gCr-eW-vTI" firstAttribute="leading" secondItem="IeY-D4-Vqz" secondAttribute="leading" constant="8" id="tWY-Tr-vf1"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="bottomLabel" destination="gJp-Ct-Vol" id="G2H-gq-NVC"/>
+                                                    <outlet property="image" destination="gCr-eW-vTI" id="r8Z-9t-QjW"/>
+                                                    <outlet property="topLabel" destination="AkB-cD-ba5" id="kt2-4r-EZu"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fIc-tl-4vn" userLabel="App Name or Site">
                                         <rect key="frame" x="20" y="119" width="280" height="35"/>

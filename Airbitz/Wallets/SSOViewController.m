@@ -11,12 +11,15 @@
 #import "StylizedButton.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
+#import "PluginCell.h"
 
-@interface SSOViewController ()
+@interface SSOViewController () <UITableViewDelegate, UITableViewDataSource>
 {
     BOOL                            _bitidSParam;
     BOOL                            _bitidProvidingKYCToken;
     NSMutableArray                  *_kycTokenKeys;
+    UIImage                         *_blankImage;
+    int                             _kycTokenIndex;
 
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView    *spinnerView;
@@ -44,8 +47,11 @@
 {
     [super viewDidLoad];
     [self.spinnerView startAnimating];
-
-
+    self.ssoTableView.delegate = self;
+    self.ssoTableView.dataSource = self;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
+    _blankImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 - (void)viewDidUnload
@@ -93,7 +99,11 @@
             _bitidSParam = YES;
             
             _kycTokenKeys = [[NSMutableArray alloc] init];
-            [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
+//            [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
+            // XXX testing only
+            [_kycTokenKeys addObject:@"bitpos.me"];
+            [_kycTokenKeys addObject:@"optus.com.au"];
+            [_kycTokenKeys addObject:@"airbitz.co"];
             if ([_kycTokenKeys count] > 0)
             {
                 descriptionText = [NSString stringWithFormat:@"• %@", requestYourIdentityToken];
@@ -244,14 +254,14 @@
             error = [abcAccount bitidLogin:_parsedURI.bitIDURI];
         else
         {
-//            if (_kycTokenKeys)
-//            {
-//                NSMutableString *callbackURL = [[NSMutableString alloc] init];
-//                
-//                [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[buttonIndex-1] data:callbackURL];
-//                error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
-//            }
-//            else
+            if (_kycTokenKeys)
+            {
+                NSMutableString *callbackURL = [[NSMutableString alloc] init];
+                
+                [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[_kycTokenIndex] data:callbackURL];
+                error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
+            }
+            else
             {
                 error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:@""];
             }
@@ -260,28 +270,27 @@
         dispatch_async(dispatch_get_main_queue(),^{
             if (!error)
             {
-//                if (_bitidProvidingKYCToken)
-//                {
-//                    NSString *message = [NSString stringWithFormat:provideIdentityTokenText, _parsedURI.bitIDDomain];
-//                    
-//                    [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-//                }
-//                else if(_kycTokenKeys)
-//                {
-//                    NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[buttonIndex-1]];
-//                    [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-//                }
-//                else
+                if (_bitidProvidingKYCToken)
+                {
+                    NSString *message = [NSString stringWithFormat:identity_token_created_and_saved, _parsedURI.bitIDDomain];
+                    
+                    [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                }
+                else if(_kycTokenKeys)
+                {
+                    NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[_kycTokenIndex]];
+                    [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                }
+                else
                 {
                     [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                    [self Done];
                 }
             }
             else
             {
                 [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                [self Done];
             }
+            [self Done];
             
         });
     });
@@ -316,5 +325,76 @@
         }
     }
 }
+
+#pragma mark - UITableView delegates
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (_kycTokenKeys && _kycTokenKeys.count > 0)
+        return [_kycTokenKeys count];
+    else
+        return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55.0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"PluginCell";
+    
+    PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[PluginCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.topLabel.text = _kycTokenKeys[indexPath.row];
+    cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+    
+    cell.bottomLabel.text = @"";
+    cell.image.image = _blankImage;
+    
+//    if (plugin.imageUrl)
+//    {
+//        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:plugin.imageUrl]
+//                                                      cachePolicy:NSURLRequestReturnCacheDataElseLoad
+//                                                  timeoutInterval:60];
+//        
+//        [cell.image setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
+//    }
+//    else
+//    {
+//        cell.image.image = [UIImage imageNamed:plugin.imageFile];
+//    }
+    
+//    cell.image.layer.shadowColor = [UIColor blackColor].CGColor;
+//    cell.image.layer.shadowOpacity = 0.5;
+//    cell.image.layer.shadowRadius = 10;
+//    cell.image.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
+    bgColorView.layer.masksToBounds = YES;
+    cell.selectedBackgroundView = bgColorView;
+//    cell.backgroundColor = plugin.backgroundColor;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    _kycTokenIndex = indexPath.row;
+    [self Login:nil];
+}
+
 
 @end

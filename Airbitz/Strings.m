@@ -400,11 +400,12 @@
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
 #define copied_text                                 NSLocalizedString(@"Copied",nil)
 
-#define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token" ,nil)
+#define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token. Please select one below" ,nil)
 #define requestYourIdentityTokenButNone             NSLocalizedString(@"Request your Identity Token but you don't have any" ,nil)
 #define requestPaymentAddress                       NSLocalizedString(@"Request a Payment Address" ,nil)
 #define wouldLikeToColon                            NSLocalizedString(@"This site would like to:" ,nil)
 #define provideIdentityTokenText                    NSLocalizedString(@"Provide an Identity Token" ,nil)
+#define identity_token_created_and_saved            NSLocalizedString(@"Identity token from [%@] created and saved", nil)
 
 #define second_text                                 NSLocalizedString(@"second",nil)
 #define seconds_text                                NSLocalizedString(@"seconds",nil)
