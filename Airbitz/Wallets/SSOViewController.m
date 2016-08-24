@@ -69,65 +69,65 @@
 
 - (void) generateViewText;
 {
-    NSString *bitidRequestString = @"";
+    NSString *descriptionText = @"";
     _bitidSParam = NO;
     
     if (_parsedURI.bitIDURI)
     {
-        self.headerLabel.text = bitIDLogin;
         self.appNameLabel.text = [_parsedURI.bitIDDomain stringByReplacingOccurrencesOfString:@"https://" withString:@""];
-        [self.loginButton.layer setName:loginButtonText];
-        [self.cancelButton.layer setName:cancelButtonText];
+        self.appNameLabel.text = [self.appNameLabel.text stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+        [self.cancelButton setTitle:cancelButtonText forState:UIControlStateNormal];
         
         if (_parsedURI.bitidKYCProvider)
         {
-            bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, provideIdentityTokenText];
+            self.headerLabel.text = bitIDIdentity;
+            descriptionText = [NSString stringWithFormat:@"• %@", provideIdentityTokenText];
             _bitidSParam = YES;
             _bitidProvidingKYCToken = YES;
+            [self.loginButton setTitle:accept_button_text forState:UIControlStateNormal];
         }
-        else
+        else if (_parsedURI.bitidKYCRequest)
         {
+            self.headerLabel.text = bitIDIdentity;
             _bitidProvidingKYCToken = NO;
-        }
-        
-        if (_parsedURI.bitidKYCRequest)
-        {
             _bitidSParam = YES;
             
             _kycTokenKeys = [[NSMutableArray alloc] init];
             [abcAccount.dataStore dataListKeys:@"Identities" keys:_kycTokenKeys];
             if ([_kycTokenKeys count] > 0)
             {
-                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityToken];
+                descriptionText = [NSString stringWithFormat:@"• %@", requestYourIdentityToken];
+                [self.loginButton setTitle:approve_button_text forState:UIControlStateNormal];
             }
             else
             {
-                bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestYourIdentityTokenButNone];
+                descriptionText = [NSString stringWithFormat:@"• %@", requestYourIdentityTokenButNone];
                 _kycTokenKeys = nil;
+                self.loginButton.hidden = YES;
+                [self.cancelButton setTitle:backButtonText forState:UIControlStateNormal];
             }
         }
         else
         {
             _kycTokenKeys = nil;
-            if (!_bitidProvidingKYCToken)
-            {
-                // Standard BitID Login
-                bitidRequestString = NSLocalizedString(@"Please verify the domain above and tap LOGIN to authenticate with this site", nil);
-            }
-        }
-        
-        if (_bitidSParam)
-        {
-            bitidRequestString = [NSString stringWithFormat:@"\n\n%@\n\n%@", wouldLikeToColon, bitidRequestString];
+            // Standard BitID Login
+            self.headerLabel.text = bitIDLogin;
+            descriptionText = NSLocalizedString(@"Please verify the domain above and tap LOGIN to authenticate with this site", nil);
+            [self.loginButton setTitle:loginButtonText forState:UIControlStateNormal];
         }
         
         if (_parsedURI.bitidPaymentAddress)
         {
-            bitidRequestString = [NSString stringWithFormat:@"%@%@", bitidRequestString, requestPaymentAddress];
+            descriptionText = [NSString stringWithFormat:@"%@\n• %@", descriptionText, requestPaymentAddress];
             _bitidSParam = YES;
         }
         
-        self.descriptionTextView.text = bitidRequestString;
+        if (_bitidSParam)
+        {
+            descriptionText = [NSString stringWithFormat:@"%@\n\n%@", wouldLikeToColon, descriptionText];
+        }
+        
+        self.descriptionTextView.text = descriptionText;
         
 //        if (_parsedURI.bitidKYCRequest)
 //        {
@@ -200,7 +200,7 @@
 
 - (void)setupNavBar
 {
-    [MainViewController changeNavBarTitle:self title:transactionDetailsHeaderText];
+    [MainViewController changeNavBarTitle:self title:airbitzEdgeLogin];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
 }
