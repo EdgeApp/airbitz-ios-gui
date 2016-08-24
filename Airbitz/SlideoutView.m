@@ -118,7 +118,7 @@
 //        NSString *tempText = importPrivateKeyText;
 //        [Util replaceHtmlTags:&tempText];
         self.affiliateLabel.text = referYourFriendsAndGetRevenue;
-        self.giftCardTextLabel.text = giftCardText;
+        self.giftCardTextLabel.text = spend_bitcoin_text_label;
         
         int numHidden = 0;
         

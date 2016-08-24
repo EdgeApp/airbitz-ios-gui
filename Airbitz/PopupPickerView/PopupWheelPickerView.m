@@ -340,6 +340,8 @@
     label.opaque = NO;
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [Theme Singleton].colorTextDark;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.numberOfLines = 2;
     label.font = [UIFont fontWithName:[Theme Singleton].appFont size:18];
     [label setTextAlignment:NSTextAlignmentCenter];
 
@@ -348,6 +350,10 @@
     return label;
 }
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 60;
+}
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
     CGFloat retVal = 0;

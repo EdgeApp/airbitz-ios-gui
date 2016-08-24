@@ -3,18 +3,20 @@
 //  AirBitz
 //
 
-#import "GiftCardViewController.h"
+#import "PluginListViewController.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "BuySellCell.h"
+#import "PluginCell.h"
 #import "PluginViewController.h"
 #import "WalletHeaderView.h"
 #import "Plugin.h"
 #import "Util.h"
+#import "LocalSettings.h"
 
-@interface GiftCardViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
+@interface PluginListViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
     PluginViewController *_pluginViewController;
+    UIImage                 *_blankImage;
 }
 
 @property (nonatomic, strong) WalletHeaderView    *buySellHeaderView;
@@ -23,9 +25,10 @@
 @property (nonatomic, weak) IBOutlet UIButton     *backButton;
 @property (nonatomic, weak) IBOutlet UITableView  *pluginTable;
 
+
 @end
 
-@implementation GiftCardViewController
+@implementation PluginListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +47,11 @@
                                                    [MainViewController getFooterHeight],0)];
 
     _backButton.hidden = YES;
-
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
+    _blankImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     [Plugin initAll];
 }
 
@@ -54,8 +61,16 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
+    [MainViewController changeNavBarTitle:self title:spend_bitcoin_plugin_text];
     _pluginTable.editing = NO;
+    
+    if ([[LocalSettings controller] offerPluginsHelp])
+    {
+        NSString *txt = [NSString stringWithFormat:plugin_popup_notice, appTitle];
+        [MainViewController fadingAlertHelpPopup:txt];
+    }
+    
+
 }
 
 #pragma mark - UITableView
@@ -77,7 +92,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[Plugin getGiftCardPlugins] count];
+    return [[Plugin getGeneralPlugins] count];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,19 +108,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"BuySellCell";
+    static NSString *CellIdentifier = @"PluginCell";
     NSInteger row = [indexPath row];
     Plugin *plugin;
  
-    BuySellCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[BuySellCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PluginCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
+    plugin = [[Plugin getGeneralPlugins] objectAtIndex:row];
 
-    cell.text.text = plugin.name;
-    cell.text.textColor = plugin.textColor;
-    cell.imageView.image = [UIImage imageNamed:plugin.imageFile];
+    cell.topLabel.text = plugin.name;
+    cell.bottomLabel.text = plugin.provider;
+    
+    if (plugin.imageUrl)
+    {
+        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:plugin.imageUrl]
+                                                      cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                  timeoutInterval:60];
+        
+        [cell.image setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
+    }
+    else
+    {
+        cell.image.image = [UIImage imageNamed:plugin.imageFile];
+    }
+
+    cell.image.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.image.layer.shadowOpacity = 0.5;
+    cell.image.layer.shadowRadius = 10;
+    cell.image.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -124,7 +156,7 @@
     NSInteger row = [indexPath row];
     Plugin *plugin;
     
-    plugin = [[Plugin getGiftCardPlugins] objectAtIndex:row];
+    plugin = [[Plugin getGeneralPlugins] objectAtIndex:row];
     
     [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -141,7 +173,7 @@
     }
     if (nil == plugin)
     {
-        for (Plugin *p in [Plugin getGiftCardPlugins]) {
+        for (Plugin *p in [Plugin getGeneralPlugins]) {
             if ([provider isEqualToString:p.provider]
                 && [country isEqualToString:p.country]) {
                 plugin = p;
@@ -184,7 +216,7 @@
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
-    [MainViewController changeNavBarTitle:self title:discountedGiftCardsText];
+    [MainViewController changeNavBarTitle:self title:spend_bitcoin_plugin_text];
     [Util animateOut:controller parentController:self complete:^(void) {
         [self resetViews];
         _pluginViewController = nil;

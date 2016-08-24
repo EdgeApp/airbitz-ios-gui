@@ -19,7 +19,6 @@
 #import <SDWebImage/SDImageCache.h>
 #import "NotificationChecker.h"
 #import "NSString+StripHTML.h"
-#import "Reachability.h"
 #import "Util.h"
 #import "Config.h"
 #import "Theme.h"
@@ -54,14 +53,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     // Set background fetch in seconds
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
-
-    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
-    [reachability startNotifier];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                            selector:@selector(reachabilityDidChange:)
-                                                name:kReachabilityChangedNotification
-                                            object:nil];
-    
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     
 #if (!AIRBITZ_IOS_DEBUG) || (0 == AIRBITZ_IOS_DEBUG)
@@ -139,25 +130,49 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    UIApplication*    app = [UIApplication sharedApplication];
+    
     [LocalSettings saveAll];
+    [abc enterBackground];
 
     bgNotificationTask = [application beginBackgroundTaskWithExpirationHandler:^{
         [self bgNotificationCleanup];
     }];
 
-    if ([User isLoggedIn])
-    {
-        [abc enterBackground];
-        bgLogoutTask = [application beginBackgroundTaskWithExpirationHandler:^{
-            [self bgLogoutCleanup];
-        }];
-    }
+    // Start the long-running task and return immediately.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if ([User isLoggedIn])
+        {
+            // Do the work associated with the task.
+
+            NSTimeInterval time;
+            do
+            {
+                time = [app backgroundTimeRemaining];
+                NSLog(@"Started background task timeremaining = %f", [app backgroundTimeRemaining]);
+                [NSThread sleepForTimeInterval:0.5f];
+                if (bgNotificationTask == UIBackgroundTaskInvalid)
+                {
+                    break;
+                }
+            }
+            while (time > 10);
+
+            if (bgNotificationTask != UIBackgroundTaskInvalid)
+            {
+                [abc startSuspend];
+                [self bgNotificationCleanup];
+            }
+        }
+        
+    });
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self bgNotificationCleanup];
-    [self bgLogoutCleanup];
     [abc enterForeground];
     if (![self isAppActive] && !abcAccount)
     {
@@ -179,11 +194,11 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
 }
 
-- (void)bgLogoutCleanup
-{
-    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
-    bgLogoutTask = UIBackgroundTaskInvalid;
-}
+//- (void)bgLogoutCleanup
+//{
+//    [[UIApplication sharedApplication] endBackgroundTask:bgLogoutTask];
+//    bgLogoutTask = UIBackgroundTaskInvalid;
+//}
 
 - (void)bgNotificationCleanup
 {
@@ -299,16 +314,6 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     if ([NotificationChecker haveNotifications])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NOTIFICATION_RECEIVED object:self];
-    }
-}
-
-#pragma mark - Notification handlers
-
-- (void)reachabilityDidChange:(NSNotification *)notification
-{
-    Reachability *reachability = (Reachability *)[notification object];
-    if ([reachability isReachable]) {
-        [abc setConnectivity:YES];
     }
 }
 

@@ -1,12 +1,12 @@
 //
-//  BuySellCell.m
+//  PluginCell.m
 //  AirBitz
 //
 
-#import "BuySellCell.h"
+#import "PluginCell.h"
 #import "CommonTypes.h"
 
-@implementation BuySellCell
+@implementation PluginCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

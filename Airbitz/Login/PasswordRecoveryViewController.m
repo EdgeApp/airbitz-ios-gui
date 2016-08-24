@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 AirBitz. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
 #import "QuestionAnswerView.h"
@@ -18,8 +20,9 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "ABCUtil.h"
+#import "PopupWheelPickerView.h"
 
-#define NUM_QUESTION_ANSWER_BLOCKS	6
+//#define NUM_QUESTION_ANSWER_BLOCKS	6
 #define QA_STARTING_Y_POSITION      120
 #define RECOVER_STARTING_Y_POSITION 75
 
@@ -33,7 +36,7 @@ typedef enum eAlertType
 } tAlertType;
 
 @interface PasswordRecoveryViewController ()
-    <UIScrollViewDelegate, QuestionAnswerViewDelegate, SignUpViewControllerDelegate,
+    <UIScrollViewDelegate, QuestionAnswerViewDelegate, MFMailComposeViewControllerDelegate, SignUpViewControllerDelegate,
      UIAlertViewDelegate, UIGestureRecognizerDelegate, TwoFactorMenuViewControllerDelegate>
 {
 //	float                   _completeButtonToEmbossImageDistance;
@@ -42,10 +45,15 @@ typedef enum eAlertType
 	tAlertType              _alertType;
     TwoFactorMenuViewController *_tfaMenuViewController;
     NSString                    *_secret;
+    QuestionAnswerView          *_activeQAView;
+    NSString                    *_recoveryToken;
+    BOOL                        _viewHasAppeared;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint         *contentViewHeight;
 @property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
-@property (nonatomic, strong)          UIButton                   *completeSignupButton;
+@property (weak, nonatomic) IBOutlet UIView                     *contentView;
+@property (nonatomic, strong)          UIButton                 *completeSignupButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonSkip;
 @property (weak, nonatomic) IBOutlet UIButton                   *buttonBack;
 @property (weak, nonatomic) IBOutlet LatoLabel                  *labelTitle;
@@ -53,12 +61,15 @@ typedef enum eAlertType
 @property (nonatomic, weak) IBOutlet UIView                     *spinnerView;
 @property (nonatomic, weak) IBOutlet UIView                     *passwordView;
 @property (nonatomic, weak) IBOutlet StylizedTextField          *passwordField;
+@property (nonatomic, strong)        UIAlertView                *saveTokenAlert;
+@property (nonatomic, strong)        UIAlertView                *disableRecoveryAlert;
+@property (nonatomic, strong)        UIAlertView                *sendEmailAlert;
 
+
+@property (nonatomic, strong) PopupWheelPickerView  *popupWheelPicker;
 @property (nonatomic, strong) SignUpViewController  *signUpController;
 @property (nonatomic, strong) UIButton              *buttonBlocker;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryString;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryNumeric;
-@property (nonatomic, strong) NSMutableArray        *arrayCategoryMust;
+@property (nonatomic, strong) NSArray               *arrayQuestionChoices;
 @property (nonatomic, strong) NSMutableArray        *arrayChosenQuestions;
 
 @end
@@ -78,9 +89,6 @@ typedef enum eAlertType
 {
     [super viewDidLoad];
     
-	self.arrayCategoryString	= [[NSMutableArray alloc] init];
-	self.arrayCategoryNumeric	= [[NSMutableArray alloc] init];
-	self.arrayCategoryMust      = [[NSMutableArray alloc] init];
 	self.arrayChosenQuestions	= [[NSMutableArray alloc] init];
 
 	//ABCLog(2,@"Adding keyboard notification");
@@ -88,42 +96,44 @@ typedef enum eAlertType
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    // set up our user blocking button
-    self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.buttonBlocker.backgroundColor = [UIColor clearColor];
-    [self.buttonBlocker addTarget:self action:@selector(buttonBlockerTouched:) forControlEvents:UIControlEventTouchUpInside];
-    self.buttonBlocker.frame = self.view.bounds;
-    self.buttonBlocker.hidden = YES;
-    self.spinnerView.hidden = YES;
-    [self.view addSubview:self.buttonBlocker];
-
+}
+-(void)viewDidAppear:(BOOL)animated
+{
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))
     {
+        if (self.mode == PassRecovMode_Change && !_viewHasAppeared)
+        {
+            // If recovery is enabled, ask user if they'd like to disable it.
+            if ([abc getRecovery2Token:abcAccount.name error:nil])
+                [self launchDisableRecoveryAlert];
+        }
+        
         // get the questions
         [self blockUser:YES];
         [self showSpinner:YES];
-        [ABCContext listRecoveryQuestionChoices:^(NSMutableArray *arrayCategoryString, NSMutableArray *arrayCategoryNumeric, NSMutableArray *arrayCategoryMust) {
-
-            self.arrayCategoryString = arrayCategoryString;
-            self.arrayCategoryNumeric = arrayCategoryNumeric;
-            self.arrayCategoryMust = arrayCategoryMust;
-
-            [self getPasswordRecoveryQuestionsComplete];
-
-        } error:^(NSError *error)
+        
+        [ABCContext listRecoveryQuestionChoices:^(ABCError *error, NSArray *arrayQuestions)
         {
-            self.arrayCategoryString = nil;
-            self.arrayCategoryNumeric = nil;
-            self.arrayCategoryMust = nil;
-
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:self.labelTitle.text
-                          message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
-                         delegate:nil
-                cancelButtonTitle:okButtonText
-                otherButtonTitles:nil];
-            [alert show];
+            if (!error)
+            {
+                self.arrayQuestionChoices = arrayQuestions;
+                [self getPasswordRecoveryQuestionsComplete];
+                if (self.passwordView.hidden == NO)
+                    [self.passwordField becomeFirstResponder];
+            }
+            else
+            {
+                self.arrayQuestionChoices = nil;
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:self.labelTitle.text
+                                      message:[NSString stringWithFormat:@"%@ failed:\n%@", self.labelTitle.text, error.userInfo[NSLocalizedDescriptionKey]]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
         }];
+        
     }
     else
     {
@@ -131,16 +141,16 @@ typedef enum eAlertType
     }
 
     [self updateDisplayForMode:_mode];
+    if (self.passwordView.hidden == NO)
+        [self.passwordField becomeFirstResponder];
 
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
-}
 
--(void)viewWillAppear:(BOOL)animated
-{
     [MainViewController changeNavBarOwner:self];
     [self updateViews];
+    _viewHasAppeared = YES;
 }
 
 -(void)updateViews
@@ -197,7 +207,7 @@ typedef enum eAlertType
 
 - (BOOL)isFormDirty
 {
-    for (UIView *view in self.scrollView.subviews) {
+    for (UIView *view in self.contentView.subviews) {
         if ([view isKindOfClass:[QuestionAnswerView class]]) {
             QuestionAnswerView *qaView = (QuestionAnswerView *)view;
             if ((self.mode != PassRecovMode_Recover) && (qaView.questionSelected == YES)) {
@@ -219,10 +229,12 @@ typedef enum eAlertType
 	BOOL allQuestionsSelected = YES;
 	BOOL allAnswersValid = YES;
 	NSMutableString *questions = [[NSMutableString alloc] init];
-	NSMutableString *answers = [[NSMutableString alloc] init];
+    NSMutableString *answers = [[NSMutableString alloc] init];
+    NSMutableArray *arrayQuestions = [[NSMutableArray alloc] init];
+    NSMutableArray *arrayAnswers = [[NSMutableArray alloc] init];
 
 	int count = 0;
-	for (UIView *view in self.scrollView.subviews)
+	for (UIView *view in self.contentView.subviews)
 	{
 		if ([view isKindOfClass:[QuestionAnswerView class]])
 		{
@@ -247,6 +259,8 @@ typedef enum eAlertType
 				}
 				[questions appendString:[qaView question]];
 				[answers appendString:[qaView answer]];
+                [arrayQuestions addObject:[qaView question]];
+                [arrayAnswers addObject:[qaView answer]];
 			}
             count++;
 		}
@@ -257,11 +271,14 @@ typedef enum eAlertType
 		{
             if (self.mode == PassRecovMode_Recover)
             {
-                [self recoverWithAnswers:answers];
+                [self recoverWithAnswers:answers array:[arrayAnswers copy]];
             }
             else
             {
-                [self commitQuestions:questions andAnswersToABC:answers];
+                [self commitQuestions:questions
+                      andAnswersToABC:answers
+                       arrayQuestions:[arrayQuestions copy]
+                         arrayAnswers:[arrayAnswers copy]];
             }
 		}
 		else
@@ -329,41 +346,82 @@ typedef enum eAlertType
     }
 }
 
-- (void)recoverWithAnswers:(NSString *)strAnswers
+- (void)recoverWithAnswers:(NSString *)strAnswers array:(NSArray *)arrayAnswers
 {
     [self showSpinner:YES];
 
-    [abc recoveryLogin:self.strUserName
-                           answers:strAnswers
-                          delegate:[MainViewController Singleton]
-                               otp:_secret
-                          complete:^(ABCAccount *account)
+    if (self.recoveryToken)
     {
-        [self showSpinner:NO];
-        [User login:account];
-        [self bringUpSignUpViewWithAnswers:strAnswers];
-    } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
+        [abc loginWithRecovery2:self.strUserName
+                            answers:arrayAnswers
+                      recoveryToken:self.recoveryToken
+                           delegate:[MainViewController Singleton]
+                                otp:_secret
+                           callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self showSpinner:NO];
+                [User login:account];
+                [self bringUpSignUpViewWithAnswers:strAnswers];
+                [MainViewController fadingAlert:recovery_successful holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                if (ABCConditionCodeInvalidOTP == error.code)
+                {
+                    [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
+                }
+                else
+                {
+                    // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
+                    // Core should change to set error to OK but change validAnswers -paul
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle:wrongAnswersText
+                                          message:givenAnswersAreIncorrect
+                                          delegate:nil
+                                          cancelButtonTitle:okButtonText
+                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+
+            }
+        }];
+    }
+    else
     {
-        [self showSpinner:NO];
-        if (ABCConditionCodeInvalidOTP == error.code)
-        {
-            [self launchTwoFactorMenu:resetDate token:resetToken];
-        }
-        else
-        {
-            // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
-            // Core should change to set error to OK but change validAnswers -paul
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:wrongAnswersText
-                                  message:givenAnswersAreIncorrect
-                                  delegate:nil
-                                  cancelButtonTitle:okButtonText
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-
-    }];
-
+        [abc recoveryLogin:self.strUserName
+                   answers:strAnswers
+                  delegate:[MainViewController Singleton]
+                       otp:_secret
+                  complete:^(ABCAccount *account)
+         {
+             [self showSpinner:NO];
+             [User login:account];
+             [self bringUpSignUpViewWithAnswers:strAnswers];
+         } error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
+         {
+             [self showSpinner:NO];
+             if (ABCConditionCodeInvalidOTP == error.code)
+             {
+                 [self launchTwoFactorMenu:resetDate token:resetToken];
+             }
+             else
+             {
+                 // XXX Not a good assumption, but if we get ANY error, assume it's because answers are wrong.
+                 // Core should change to set error to OK but change validAnswers -paul
+                 UIAlertView *alert = [[UIAlertView alloc]
+                                       initWithTitle:wrongAnswersText
+                                       message:givenAnswersAreIncorrect
+                                       delegate:nil
+                                       cancelButtonTitle:okButtonText
+                                       otherButtonTitles:nil];
+                 [alert show];
+             }
+             
+         }];
+    }
 }
 
 - (void)launchTwoFactorMenu:(NSDate *)resetDate token:(NSString *)resetToken;
@@ -404,7 +462,10 @@ typedef enum eAlertType
     }];
 }
 
-- (void)commitQuestions:(NSString *)strQuestions andAnswersToABC:(NSString *)strAnswers
+- (void)commitQuestions:(NSString *)strQuestions
+        andAnswersToABC:(NSString *)strAnswers
+         arrayQuestions:(NSArray *)arrayQuestions
+           arrayAnswers:(NSArray *)arrayAnswers;
 {
     // Check Password
     if (self.mode == PassRecovMode_Change) {
@@ -424,28 +485,72 @@ typedef enum eAlertType
     [self blockUser:YES];
     [self showSpinner:YES];
 
-    [abcAccount setupRecoveryQuestions:strQuestions answers:strAnswers complete:^(void) {
-        [self blockUser:NO];
-        [self showSpinner:NO];
-        _alertType = ALERT_TYPE_SETUP_COMPLETE;
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:recoveryQuestionsSet
-                              message:recoveryQuestionsSetWarning
-                              delegate:self
-                              cancelButtonTitle:(_mode == PassRecovMode_SignUp ? backButtonText : nil)
-                              otherButtonTitles:okButtonText, nil];
-        [alert show];
-    } error: ^(NSError *error) {
-        [self blockUser:NO];
-        [self showSpinner:NO];
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:recoveryQuestionsNotSet
-                              message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
-                              delegate:nil
-                              cancelButtonTitle:okButtonText
-                              otherButtonTitles:nil];
-        [alert show];
-    }];
+    if (self.useRecovery2)
+    {
+        [abcAccount setupRecovery2Questions:arrayQuestions answers:arrayAnswers callback:^(ABCError *error, NSString *recoveryToken) {
+            [self blockUser:NO];
+            [self showSpinner:NO];
+            if (error)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle:recoveryQuestionsNotSet
+                                      message:[NSString stringWithFormat:setRecoveryQuestionsFailed, error.userInfo[NSLocalizedDescriptionKey]]
+                                      delegate:nil
+                                      cancelButtonTitle:okButtonText
+                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                _recoveryToken = recoveryToken;
+                [self launchSaveTokenAlert:save_recovery_token_popup];
+            }
+        }];
+    }
+    else
+    {
+    }
+}
+
+- (void) launchDisableRecoveryAlert;
+{
+    // If user already has questions set, popup offering to disable.
+    self.disableRecoveryAlert = [[UIAlertView alloc]
+                                 initWithTitle:disable_recovery_popup_title
+                                 message:disable_recovery_popup_message
+                                 delegate:self
+                                 cancelButtonTitle:cancelButtonText
+                                 otherButtonTitles:disable_text,nil];
+    [self.disableRecoveryAlert show];
+}
+
+- (void) launchSaveTokenAlert:(NSString *)title;
+{
+    // Check if the dataStore has the user's email. If so prepopulate it.
+    NSMutableString *email = [[NSMutableString alloc] init];
+    ABCError *error = [abcAccount.dataStore dataRead:DataStorePersonalInfoFolder withKey:DataStorePersonalInfo_Email data:email];
+
+    NSString *emailStr = nil;
+    if (!error)
+    {
+        emailStr = [NSString stringWithString:email];
+    }
+    
+    // Generate alert letting user know they need to send token to themselves
+    self.saveTokenAlert = [[UIAlertView alloc]
+                           initWithTitle:title
+                           message:save_recovery_token_popup_message
+                           delegate:self
+                           cancelButtonTitle:cancelButtonText
+                           otherButtonTitles:emailText,nil];
+    self.saveTokenAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    if (email && [email length])
+    {
+        UITextField *textField = [self.saveTokenAlert textFieldAtIndex:0];
+        textField.text = email;
+    }
+
+    [self.saveTokenAlert show];
 }
 
 - (NSArray *)prunedQuestionsFor:(NSArray *)questions
@@ -495,7 +600,7 @@ typedef enum eAlertType
     QuestionAnswerView *retVal = NULL;
 
     // look through all our subviews
-    for (id subview in self.scrollView.subviews)
+    for (id subview in self.contentView.subviews)
     {
         // if this is a the right kind of view
         if ([subview isMemberOfClass:[QuestionAnswerView class]])
@@ -547,11 +652,54 @@ typedef enum eAlertType
     [self.delegate passwordRecoveryViewControllerDidFinish:self];
 }
 
-#pragma mark - AlertView delegates
+#pragma mark - UIAlertView delegates
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	if (_alertType == ALERT_TYPE_SETUP_COMPLETE)
+    if (alertView == self.disableRecoveryAlert)
+    {
+        if (0 == buttonIndex)
+        {
+        }
+        else if (1 == buttonIndex)
+        {
+            ABCError *error = [abcAccount disableRecovery2];
+            if (error)
+                [MainViewController fadingAlert:error_disabling_recovery];
+            else
+                [MainViewController fadingAlert:recovery_disabled];
+        }
+        
+    }
+    else if (alertView == self.sendEmailAlert)
+    {
+        // Call exit
+        [self performSelector:@selector(exit) withObject:nil afterDelay:0.0];
+    }
+    else if (alertView == self.saveTokenAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            [MainViewController fadingAlert:recoveryQuestionsNotSet];
+        }
+        else if (1 == buttonIndex)
+        {
+            UITextField *textField = [self.saveTokenAlert textFieldAtIndex:0];
+
+            if ([self stringIsValidEmail:textField.text])
+            {
+                // Save the email in the dataStore incase we need it in the future.
+                [abcAccount.dataStore dataWrite:DataStorePersonalInfoFolder withKey:DataStorePersonalInfo_Email withValue:textField.text];
+                
+                // Email to themselves
+                [self sendTokenEMail:textField.text];
+            }
+            else
+            {
+                [self launchSaveTokenAlert:invalid_email];
+            }
+        }
+    } else if (_alertType == ALERT_TYPE_SETUP_COMPLETE)
 	{
 		if ((buttonIndex == 1) || (_mode == PassRecovMode_Change))
 		{
@@ -580,47 +728,164 @@ typedef enum eAlertType
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-	if (_activeTextField)
-	{
-		//Get KeyboardFrame (in Window coordinates)
-		NSDictionary *userInfo = [notification userInfo];
-		CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-		
-		CGRect ownFrame = [self.view.window convertRect:keyboardFrame toView:self.view];
-		
-		//get textfield frame in window coordinates
-		CGRect textFieldFrame = [_activeTextField.superview convertRect:_activeTextField.frame toView:self.view];
-		
-		//calculate offset
-		float distanceToMove = (textFieldFrame.origin.y + textFieldFrame.size.height + 20.0) - ownFrame.origin.y;
-		
-		if (distanceToMove > 0)
-		{
-			//need to scroll
-			//ABCLog(2,@"Scrolling %f", distanceToMove);
-			CGPoint curContentOffset = self.scrollView.contentOffset;
-			curContentOffset.y += distanceToMove;
-			[self.scrollView setContentOffset:curContentOffset animated:YES];
-		}
-		CGSize size = _defaultContentSize;
-		size.height += keyboardFrame.size.height;
-		self.scrollView.contentSize = size;
-	}
-	
+    NSDictionary* info = [notification userInfo];
+    CGRect kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbRect.size.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbRect.size.height;
+    if (!CGRectContainsPoint(aRect, _activeTextField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:_activeTextField.frame animated:YES];
+    }
+    if (_activeQAView)
+        [_activeQAView dismissPopupPicker];
+    _activeQAView = nil;
+    
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	if (_activeTextField)
-	{
-		//ABCLog(2,@"Keyboard will hide for Login View Controller");
-
-		_activeTextField = nil;
-	}
-	self.scrollView.contentSize = _defaultContentSize;
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+//	if (_activeTextField)
+//	{
+//		//ABCLog(2,@"Keyboard will hide for Login View Controller");
+//
+//		_activeTextField = nil;
+//	}
+//	self.scrollView.contentSize = _defaultContentSize;
 }
 
-#pragma mark - ABC Callbacks
+#pragma mark - MFMailComposeViewController Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = save_recovery_token_popup;
+    NSString *strMsg = nil;
+    BOOL    success = NO;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = emailCancelled;
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = emailSavedToSendLater;
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = emailSent;
+            success = YES;
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = errorSendingEmail;
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    
+    if (success)
+    {        
+        _sendEmailAlert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                     message:strMsg
+                                                    delegate:self
+                                           cancelButtonTitle:okButtonText
+                                           otherButtonTitles:nil];
+        [_sendEmailAlert show];
+    }
+    else
+    {
+        [MainViewController fadingAlert:[NSString stringWithFormat:@"%@\n\n%@", strTitle, strMsg]];
+    }
+    
+}
+
+
+#pragma mark - Misc
+
+- (void)sendTokenEMail:(NSString *)emailAddress
+{
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+        
+        NSString *obfuscatedUsername = abcAccount.name;
+        unsigned long acctlen = [abcAccount.name length];
+        if (acctlen <= 3)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 1, 1) withString:@"*"];
+        }
+        else if(acctlen <= 6)
+        {            
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 2, 2) withString:@"**"];
+        }
+        else if(acctlen <= 9)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 3, 3) withString:@"***"];
+        }
+        else if(acctlen <= 12)
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 4, 4) withString:@"****"];
+        }
+        else
+        {
+            obfuscatedUsername = [obfuscatedUsername stringByReplacingCharactersInRange:NSMakeRange(acctlen - 5, 5) withString:@"*****"];
+        }
+        
+        NSString *subject = [NSString stringWithFormat:recovery_token_email_subject, appTitle];
+        
+        [mailComposer setSubject:subject];
+        [mailComposer setToRecipients:@[emailAddress]];
+        
+        NSString *iosLink = [NSString stringWithFormat:@"iOS<br>\n<a href=\"%@://recovery?token=%@\">%@://recovery?token=%@</a>",
+                             [MainViewController Singleton].appUrlPrefix,
+                             _recoveryToken,
+                             [MainViewController Singleton].appUrlPrefix,
+                             _recoveryToken];
+        NSString *androidLink = [NSString stringWithFormat:@"Android<br>\n<a href=\"https://recovery.airbitz.co/recovery?token=%@\">https://recovery.airbitz.co/recovery?token=%@</a>", _recoveryToken, _recoveryToken];
+
+
+        NSString *htmlLink = [NSString stringWithFormat:@"%@<br><br>\n\n%@", iosLink, androidLink];
+        
+        NSString *content = [NSString stringWithFormat:recovery_token_email_body, appTitle, obfuscatedUsername, htmlLink];
+        [mailComposer setMessageBody:content isHTML:YES];
+        
+        mailComposer.mailComposeDelegate = self;
+        
+        [self presentViewController:mailComposer animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:cantSendEmailText
+                                                       delegate:nil
+                                              cancelButtonTitle:okButtonText
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(BOOL) stringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
 
 - (void)getPasswordRecoveryQuestionsComplete
 {
@@ -638,13 +903,13 @@ typedef enum eAlertType
             posY = QA_STARTING_Y_POSITION;
         }
         
-		CGSize size = self.scrollView.contentSize;
+		CGSize size = self.contentView.frame.size;
 		size.height = posY;
 		
 		//add QA blocks
-		for(int i = 0; i < NUM_QUESTION_ANSWER_BLOCKS; i++)
+		for(int i = 0; i < self.numQABlocks; i++)
 		{
-			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.scrollView withDelegate:self];
+			QuestionAnswerView *qav = [QuestionAnswerView CreateInsideView:self.contentView withDelegate:self];
 
             if (self.mode == PassRecovMode_Recover)
             {
@@ -656,14 +921,14 @@ typedef enum eAlertType
             }
 			
 			CGRect frame = qav.frame;
-			frame.origin.x = (self.scrollView.frame.size.width - frame.size.width ) / 2;
+			frame.origin.x = (self.contentView.frame.size.width - frame.size.width ) / 2;
 			frame.origin.y = posY;
 			qav.frame = frame;
 			
 			qav.tag = i;
 			//qav.alpha = 0.5;
 
-            if (i == (NUM_QUESTION_ANSWER_BLOCKS - 1))
+            if (i == (self.numQABlocks - 1))
             {
                 qav.answerField.returnKeyType = UIReturnKeyDone;
                 qav.isLastQuestion = YES;
@@ -679,6 +944,9 @@ typedef enum eAlertType
 			posY += frame.size.height;
 		}
 
+//        [self.passwordView removeFromSuperview];
+//        [self.contentView addSubview:self.passwordView];
+        
         //position complete Signup button below QA views
         self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [self updateDisplayForMode:self.mode];
@@ -689,7 +957,7 @@ typedef enum eAlertType
         self.completeSignupButton.enabled = YES;
         [self.completeSignupButton addTarget:self action:@selector(CompleteSignup) forControlEvents:UIControlEventTouchDown];
 
-        [self.scrollView addSubview:self.completeSignupButton];
+        [self.contentView addSubview:self.completeSignupButton];
         CGRect btnFrame = self.completeSignupButton.frame;
 		btnFrame.origin.y = posY;
         btnFrame.origin.x = 0;
@@ -712,7 +980,7 @@ typedef enum eAlertType
         }
 		
 		self.scrollView.contentSize = size;
-		_defaultContentSize = size;
+        self.contentViewHeight.constant = size.height;
     }
 }
 
@@ -722,63 +990,22 @@ typedef enum eAlertType
 {
     if (textField == _passwordField) {
         [_passwordField resignFirstResponder];
-
-        QuestionAnswerView *viewNext = NULL;
-        viewNext = [self findQAViewWithTag:0];
-        if (viewNext != NULL) {
-            [viewNext presentQuestionChoices];
-        }
     }
     return NO;
 }
 
 #pragma mark - QuestionAnswerView delegates
 
-- (void)QuestionAnswerView:(QuestionAnswerView *)view tablePresentedWithFrame:(CGRect)frame
+- (void)QuestionAnswerView:(QuestionAnswerView *)view;
 {
-	//programmatically scroll scrollView so that frame is entirely on screen
-	//Increase contentSize if necessary
-	self.scrollView.scrollEnabled = NO;
-	
-	//close any other open QAView tables
-	for (UIView *qaView in self.scrollView.subviews)
-	{
-		if([qaView isKindOfClass:[QuestionAnswerView class]])
-		{
-			if(qaView != view)
-			{
-				[((QuestionAnswerView *)qaView) closeTable];
-			}
-		}
-	}
-	
-	//populate available questions
-	if (view.tag < 2)
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryString];
-	}
-	else if (view.tag < 4)
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryNumeric];
-	}
-	else
-	{
-		view.availableQuestions = [self prunedQuestionsFor:self.arrayCategoryMust];
-	}
-
-    CGSize contentSize = self.scrollView.contentSize;
-	
-	if ((frame.origin.y + frame.size.height) > self.scrollView.contentSize.height)
-	{
-		contentSize.height = frame.origin.y + frame.size.height;
-		self.scrollView.contentSize = contentSize;
-	}
+    if (_activeTextField)
+        [_activeTextField resignFirstResponder];
+    [_passwordField resignFirstResponder];
+    _activeTextField = nil;
+    _activeQAView = view;
     
-    CGFloat questionsHeight = [view.availableQuestions count] * QA_TABLE_ROW_HEIGHT;
-	if ((frame.origin.y + frame.size.height + questionsHeight) > (self.scrollView.contentOffset.y + self.scrollView.frame.size.height))
-	{
-		[self.scrollView setContentOffset:CGPointMake(0, frame.origin.y + frame.size.height + questionsHeight - self.scrollView.frame.size.height) animated:YES];
-	}
+    //populate available questions
+    view.availableQuestions = [self prunedQuestionsFor:self.arrayQuestionChoices];
 }
 
 - (void)QuestionAnswerViewTableDismissed:(QuestionAnswerView *)view
@@ -795,6 +1022,7 @@ typedef enum eAlertType
 
     // place the cursor in the answer
     [view.answerField becomeFirstResponder];
+    _activeQAView = nil;
 }
 
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField
@@ -809,6 +1037,10 @@ typedef enum eAlertType
 
     viewNext = [self findQAViewWithTag:view.tag + 1];
 
+    if (_activeTextField)
+        [_activeTextField resignFirstResponder];
+    _activeTextField = nil;
+
     if (viewNext != NULL)
     {
         if (self.mode == PassRecovMode_Recover)
@@ -818,7 +1050,7 @@ typedef enum eAlertType
         }
         else
         {
-            [viewNext presentQuestionChoices];
+//            [viewNext presentQuestionChoices];
         }
     }
 }

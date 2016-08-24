@@ -51,10 +51,12 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
 @property (nonatomic, assign) NSInteger sendViewCount;
 @property (nonatomic, assign) NSInteger bleViewCount;
 @property (nonatomic, assign) NSInteger walletsViewCount;
+@property (nonatomic, assign) NSInteger pluginsViewCount;
 @property (nonatomic) BOOL notifiedSend;
 @property (nonatomic) BOOL notifiedRequest;
 @property (nonatomic) BOOL notifiedBle;
 @property (nonatomic) BOOL notifiedWallet;
+@property (nonatomic) BOOL notifiedPlugins;
 
 @end
 
@@ -263,6 +265,12 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     return [self offerHelp:&_walletsViewCount
                thisSession:&_notifiedWallet];
 }
+- (BOOL)offerPluginsHelp
+{
+    return [self offerHelp:&_pluginsViewCount
+               thisSession:&_notifiedPlugins];
+}
+
 - (BOOL)offerHelp:(NSInteger *)value thisSession:(BOOL *)session
 {
     if (*session) {

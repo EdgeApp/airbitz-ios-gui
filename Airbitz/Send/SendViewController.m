@@ -155,18 +155,20 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
     if([LocalSettings controller].bDisableBLE == NO)
     {
-        // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
-        NSTimeInterval curTime = CACurrentMediaTime();
-        if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
         {
-            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+            // Start up the CBCentralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+            NSTimeInterval curTime = CACurrentMediaTime();
+//            if((curTime - lastCentralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+//            {
+//                _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+//            }
+//            else
+            {
+                _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
+            }
+            lastCentralBLEPowerOffNotificationTime = curTime;
+            [self startBLE];
         }
-        else
-        {
-            _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @(NO)}];
-        }
-        lastCentralBLEPowerOffNotificationTime = curTime;
-        [self startBLE];
     }
 }
 
@@ -1830,8 +1832,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     else
     {
         NSURL *uri = [NSURL URLWithString:uriString];
+        NSString *vendorRetString = [NSString stringWithFormat:@"%@-ret", [MainViewController Singleton].appUrlPrefix];
         
-        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:@"airbitz-ret"]
+        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:vendorRetString]
             || [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
                 [self stopQRReader];
@@ -1911,6 +1914,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         }
                         else
                         {
+                            if (parsedURI.address)
+                                [self processPubAddress:parsedURI];
                             NSString *errorString = [NSString stringWithFormat:@"%@\n\n%@",
                                                      error.userInfo[NSLocalizedDescriptionKey],
                                                      error.userInfo[NSLocalizedFailureReasonErrorKey]];
@@ -1922,11 +1927,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 }
                 else if (parsedURI.address)
                 {
-                    [MainViewController fadingAlert:validatingAddressText
-                                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
-                    [self stopQRReader];
-                    [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
-                    [MainViewController fadingAlertDismiss];
+                    [self processPubAddress:parsedURI];
                 }
             }
             else
@@ -1935,6 +1936,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
         });
     });
+}
+
+- (void)processPubAddress:(ABCParsedURI *)parsedURI
+{
+    [MainViewController fadingAlert:validatingAddressText
+                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER];
+    [self stopQRReader];
+    [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:nil];
+    [MainViewController fadingAlertDismiss];
 }
 
 - (void)PopupPickerView2Cancelled:(PopupPickerView2 *)view userData:(id)data
