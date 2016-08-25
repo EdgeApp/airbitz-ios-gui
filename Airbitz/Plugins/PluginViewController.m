@@ -8,7 +8,7 @@
 #import "Config.h"
 #import "User.h"
 #import "FadingAlertView.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "SendConfirmationViewController.h"
 #import "MainViewController.h"
 #import "Theme.h"
@@ -66,8 +66,8 @@ static const NSString *PROTOCOL = @"bridge://";
                      @"selectedWallet":NSStringFromSelector(@selector(selectedWallet:)),
                      @"wallets":NSStringFromSelector(@selector(wallets:)),
         @"createReceiveRequest":NSStringFromSelector(@selector(createReceiveRequest:)),
-                @"requestSpend":NSStringFromSelector(@selector(requestSpend:)),
-               @"requestSpend2":NSStringFromSelector(@selector(requestSpend2:)),
+                     @"createSpendRequest":NSStringFromSelector(@selector(createSpendRequest:)),
+                     @"createSpendRequest2":NSStringFromSelector(@selector(createSpendRequest2:)),
                  @"requestSign":NSStringFromSelector(@selector(requestSign:)),
                  @"broadcastTx":NSStringFromSelector(@selector(broadcastTx:)),
                       @"saveTx":NSStringFromSelector(@selector(saveTx:)),
@@ -363,7 +363,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    ABCBitIDSignature *bitid = [abcAccount bitidSign:uri message:msg];
+    ABCBitIDSignature *bitid = [abcAccount signBitIDRequest:uri message:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.address]];
 }
@@ -373,7 +373,7 @@ static const NSString *PROTOCOL = @"bridge://";
     NSDictionary *args = [params objectForKey:@"args"];
     NSString *uri = [args objectForKey:@"uri"];
     NSString *msg = [args objectForKey:@"message"];
-    ABCBitIDSignature *bitid = [abcAccount bitidSign:uri message:msg];
+    ABCBitIDSignature *bitid = [abcAccount signBitIDRequest:uri message:msg];
 
     [self setJsResults:[params objectForKey:@"cbid"] withArgs:[self jsonResult:bitid.signature]];
 }
@@ -504,12 +504,12 @@ static const NSString *PROTOCOL = @"bridge://";
     [Util animateController:_sendConfirmationViewController parentController:self];
 }
 
-- (void)requestSpend:(NSDictionary *)params
+- (void)createSpendRequest:(NSDictionary *)params
 {
     [self launchSpendConfirmation:params signOnly:NO];
 }
 
-- (void)requestSpend2:(NSDictionary *)params
+- (void)createSpendRequest2:(NSDictionary *)params
 {
     [self launchSpendConfirmation:params signOnly:NO];
 }
@@ -523,7 +523,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    NSError *error;
+    ABCError *error;
     if (_unsentTx &&
         [_unsentTx.base16 isEqualToString:[args objectForKey:@"rawTx"]])
     {
@@ -541,7 +541,7 @@ static const NSString *PROTOCOL = @"bridge://";
 {
     NSString *cbid = [params objectForKey:@"cbid"];
     NSDictionary *args = [params objectForKey:@"args"];
-    NSError *error;
+    ABCError *error;
     if (_unsentTx &&
         [_unsentTx.base16 isEqualToString:[args objectForKey:@"rawTx"]])
     {
@@ -632,7 +632,7 @@ static const NSString *PROTOCOL = @"bridge://";
     UIImage *scaledImage = [self imageWithImage:image scaledToSize:CGSizeMake(newWidth, newHeight)];
     
     NSData *imgData = [NSData dataWithData:UIImageJPEGRepresentation(scaledImage, 0.5)];
-    NSString *encodedString = [imgData base64Encoding];
+    NSString *encodedString = [imgData base64EncodedStringWithOptions:0];
     
     int SLICE_SIZE = 500;
     size_t len = [encodedString length];
@@ -666,7 +666,7 @@ static const NSString *PROTOCOL = @"bridge://";
 
     ABCWallet *wallet = [abcAccount getWallet:[args objectForKey:@"id"]];
 
-    NSError *error = nil;
+    ABCError *error = nil;
     ABCReceiveAddress *receiveAddress = [wallet createNewReceiveAddress:&error];
     
     receiveAddress.amountSatoshi = [[args objectForKey:@"amountSatoshi"] longValue];
@@ -703,7 +703,7 @@ static const NSString *PROTOCOL = @"bridge://";
     ABCWallet *wallet = [abcAccount getWallet:uuid];
     ABCReceiveAddress *receiveAddress = [wallet getReceiveAddress:[args objectForKey:@"requestId"]];
     
-    NSError *error = [receiveAddress finalizeRequest];
+    ABCError *error = [receiveAddress finalizeRequest];
     
     if (!error) {
         [self setJsResults:cbid withArgs:[self jsonSuccess]];
@@ -761,7 +761,7 @@ static const NSString *PROTOCOL = @"bridge://";
 //    NSDictionary *args = [params objectForKey:@"args"];
 //            
 //    double currency;
-//    NSError *error = nil;
+//    ABCError *error = nil;
 //
 //    currency = [abcAccount satoshiToCurrency:[[args objectForKey:@"satoshi"] longValue]
 //                                    currency:[[args objectForKey:@"currencyNum"] intValue]
@@ -780,7 +780,7 @@ static const NSString *PROTOCOL = @"bridge://";
 //    NSDictionary *args = [params objectForKey:@"args"];
 //
 //    int64_t satoshis;
-//    NSError *error = nil;
+//    ABCError *error = nil;
 //    satoshis = [abcAccount currencyToSatoshi:[[args objectForKey:@"currency"] doubleValue]
 //                                 currencyNum:[[args objectForKey:@"currencyNum"] intValue]
 //                                       error:&error];

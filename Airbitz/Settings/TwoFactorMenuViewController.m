@@ -4,7 +4,7 @@
 #import "MinCharTextField.h"
 #import "ScanView.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "NSDate+Helper.h"
 #import "MainViewController.h"
 #import "Theme.h"
@@ -95,13 +95,13 @@
 
 - (IBAction)Reset:(id)sender
 {
-    [abc requestOTPReset:_username token:_resetToken complete:^
-     {
-         [MainViewController fadingAlert:resetRequestedText];
-     } error:^(NSError *error)
-     {
-         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
-     }];
+    [abc requestOTPReset:_username token:_resetToken callback:^(ABCError *error)
+    {
+        if (!error)
+            [MainViewController fadingAlert:resetRequestedText];
+        else
+            [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+    }];
 }
 
 - (void)twoFactorScanViewControllerDone:(TwoFactorScanViewController *)controller withBackButton:(BOOL)bBack

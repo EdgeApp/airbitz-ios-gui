@@ -13,7 +13,7 @@
 #import "CalculatorView.h"
 #import "SendStatusViewController.h"
 #import "TransactionDetailsViewController.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Util.h"
 #import "AudioController.h"
 #import "MainViewController.h"
@@ -39,6 +39,7 @@
     int                                 _callbackTimestamp;
     UIAlertView                         *_alert;
     UIAlertView                         *_changeFeeAlert;
+    UIAlertView                         *_tryPubAddressAlert;
     ABCSpendFeeLevel                    _feeLevel;
     NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
@@ -47,6 +48,7 @@
     ABCSpend                            *_spend;
     uint64_t                            _amountSatoshi;
     NSNumberFormatter                   *_numberFormatter;
+    ABCError                            *_sendError;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keypadViewBottom;
@@ -327,7 +329,7 @@
 
 - (void)buildSpend
 {
-    NSError *error = nil;
+    ABCError *error = nil;
     _spend = [abcAccount.currentWallet createNewSpend:&error];
     _spend.feeLevel = _feeLevel;
     
@@ -511,7 +513,7 @@
                 [self dismissKeyboard];
             }
 
-        } error:^(NSError *error) {
+        } error:^(ABCError *error) {
             
         }];
     }
@@ -585,7 +587,7 @@
         {
             [_spend signTx:^(ABCUnsentTx *unsentTx) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:nil unsentTx:unsentTx];
-            } error:^(NSError *error) {
+            } error:^(ABCError *error) {
                 [self txSendFailed:error];
             }];
         }
@@ -593,8 +595,25 @@
         {
             [_spend signBroadcastAndSave:^(ABCTransaction *transaction) {
                 [self txSendSuccess:abcAccount.currentWallet withTx:transaction unsentTx:nil];
-            } error:^(NSError *error) {
-                [self txSendFailed:error];
+            } error:^(ABCError *error) {
+                if (_paymentRequest && _parsedURI.address)
+                {
+                    [self hideSendStatus];
+                    NSString *message = [NSString stringWithFormat:error_connecting_to_payment_processor, _parsedURI.address];
+                    // Ask user if they want to try sending to the plain bitcoin address
+                    _tryPubAddressAlert = [[UIAlertView alloc]
+                                           initWithTitle:errorDuringSend
+                                           message:message
+                                           delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:send_button_text, nil];
+                    [_tryPubAddressAlert show];
+                    _sendError = error;
+                }
+                else
+                {
+                    [self txSendFailed:error];
+                }
             }];
         }
     }
@@ -766,7 +785,7 @@
     [self buildSpend];
     [_spend getFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees+_amountSatoshi2 error:NO errorString:nil];
-    } error:^(NSError *error) {
+    } error:^(ABCError *error) {
         [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
     }];
 }
@@ -1079,7 +1098,7 @@
     });
 }
 
-- (void)txSendFailed:(NSError *)error;
+- (void)txSendFailed:(ABCError *)error;
 {
     NSString *title = errorDuringSend;
     NSArray *params = [NSArray arrayWithObjects: title, [NSNumber numberWithInteger:error.code], error.userInfo[NSLocalizedDescriptionKey], error.userInfo[NSLocalizedFailureReasonErrorKey],nil];
@@ -1127,6 +1146,19 @@
             _feeLevel = ABCSpendFeeLevelHigh;
         }
         [self startCalcFees];
+    }
+    else if (alertView == _tryPubAddressAlert)
+    {
+        if (0 == buttonIndex)
+        {
+            [self txSendFailed:_sendError];
+        }
+        else if (1 == buttonIndex)
+        {
+            _paymentRequest = nil;
+            [self buildSpend];
+            [self initiateSendRequest];
+        }
     }
 }
 

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "AudioController.h"
 #import "LocalSettings.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Config.h"
 #import "AB.h"
 #import "Reachability.h"

@@ -8,21 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef AIRBITZ_DEVELOP
-#define AIRBITZ_URI_PREFIX @"airbitz-develop"
-#else
-#define AIRBITZ_DEVELOP 0
-#endif
-
-#ifdef AIRBITZ_TESTNET
-#define AIRBITZ_URI_PREFIX @"airbitz-testnet"
-#endif
-
-#ifndef AIRBITZ_URI_PREFIX
-#define AIRBITZ_URI_PREFIX @"airbitz"
-#endif
-
 #define BITCOIN_URI_SCHEME @"bitcoin"
+#define DataStorePersonalInfoFolder @"ABPersonalInfo"
+#define DataStorePersonalInfo_Email @"email"
 
 #define READER_VIEW_TAG     99999999
 
@@ -50,6 +38,9 @@ typedef NS_ENUM(NSUInteger, RequestState) {
 #define ERROR_MESSAGE_FADE_DISMISS          0.1
 #define FADING_HELP_DURATION                1.0
 #define FADING_HELP_DELAY                   5.0
+
+#define NUM_QUESTION_ANSWER_BLOCKS	6
+#define NUM_QUESTION_ANSWER_BLOCKS_RC2	2
 
 #define OTP_RESET_DELAY (60 * 60 * 24 * 7)
 

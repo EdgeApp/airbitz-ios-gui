@@ -12,6 +12,7 @@
 #import "AirbitzViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "FadingAlertView.h"
 #import "AB.h"
 
 
@@ -35,6 +36,9 @@ typedef enum eNavBarSide
 @property (nonatomic, strong)        NSMutableDictionary    *dictBuyBitcoinOverrideURLs;
 @property (nonatomic, strong)        NSMutableArray         *arrayPluginBizIDs;
 @property (nonatomic, strong)        NSMutableArray         *arrayNearBusinesses; // businesses that match distance criteria
+@property                            BOOL                   developBuild;
+@property (nonatomic, strong)        NSString               *appUrlPrefix;
+
 
 + (MainViewController *)Singleton;
 
@@ -95,6 +99,7 @@ typedef enum eNavBarSide
 + (void)fadingAlert:(NSString *)message;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime;
 + (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
++ (void)fadingAlert:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb complete:(void(^)(void))complete;
 + (void)fadingAlertUpdate:(NSString *)message;
 + (void)fadingAlertDismiss;
 

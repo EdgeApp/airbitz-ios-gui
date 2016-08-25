@@ -55,11 +55,11 @@
     [super viewDidLoad];
     
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     self.pinTextField.delegate = self;
-    self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
+    self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = signupText;
@@ -150,25 +150,28 @@
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
-                            complete:^(ABCAccount *account)
+              callback:^(ABCError *error, ABCAccount *account)
      {
-         [FadingAlertView dismiss:FadingAlertDismissFast];
-         self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
-         self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
-         account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
-         [account.settings saveSettings];
-         Affiliate *affiliate = [Affiliate alloc];
-         [affiliate copyLocalAffiliateInfoToAccount:account];
-         [User login:account];
-         [MainViewController createFirstWallet];
-
-         [super next];
-     }
-                 error:^(NSError *error)
-     {
-         [FadingAlertView create:self.view
-                         message:error.userInfo[NSLocalizedDescriptionKey]
-                        holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+         if (!error)
+         {
+             [FadingAlertView dismiss:FadingAlertDismissFast];
+             self.manager.strPassword = [NSString stringWithFormat:@"%@",self.passwordTextField.text];
+             self.manager.strPIN = [NSString stringWithFormat:@"%@",self.pinTextField.text];
+             account.settings.denomination = [ABCDenomination getDenominationForMultiplier:DefaultBTCDenominationMultiplier];
+             [account.settings saveSettings];
+             Affiliate *affiliate = [Affiliate alloc];
+             [affiliate copyLocalAffiliateInfoToAccount:account];
+             [User login:account];
+             [MainViewController createFirstWallet];
+             
+             [super next];
+         }
+         else
+         {
+             [FadingAlertView create:self.view
+                             message:error.userInfo[NSLocalizedDescriptionKey]
+                            holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
+         }
      }];
 }
 
@@ -203,7 +206,7 @@
 
     BOOL bNewPasswordFieldsAreValid = YES;
     {
-        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
+        ABCPasswordRuleResult *result = [ABCContext checkPasswordRules:self.passwordTextField.text];
         
         if (!result.passed)
         {
@@ -246,14 +249,14 @@
     BOOL valid = YES;
     {
         // if the pin isn't long enough
-        if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
+        if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
+                                                             [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [ABCContext getMinimumPINLength]]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];

@@ -10,7 +10,7 @@
 #import "User.h"
 #import "CommonTypes.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "ButtonSelectorView2.h"
 #import "PopupPickerView.h"
 #import "MainViewController.h"

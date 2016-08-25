@@ -7,7 +7,7 @@
 //
 
 #import "MainController.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "User.h"
 #import "Config.h"
 #import "LocalSettings.h"

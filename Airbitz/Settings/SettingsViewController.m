@@ -25,7 +25,7 @@
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Theme.h"
 #import "MainViewController.h"
 #import "PopupPickerView.h"
@@ -250,7 +250,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)saveSettings
 {
-    NSError *error = [abcAccount.settings saveSettings];
+    ABCError *error = [abcAccount.settings saveSettings];
     // update the settings in the core
 
     if (error)
@@ -304,6 +304,8 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 	_passwordRecoveryController.delegate = self;
 	_passwordRecoveryController.mode = PassRecovMode_Change;
+    _passwordRecoveryController.useRecovery2 = YES;
+    _passwordRecoveryController.numQABlocks = NUM_QUESTION_ANSWER_BLOCKS_RC2;
 
     [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
     [MainViewController animateSlideIn:_passwordRecoveryController];
@@ -1272,7 +1274,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
     {
-        [abcAccount pinLoginSetup:theSwitch.on];
+        [abcAccount enablePINLogin:theSwitch.on];
         
         // update the display by reloading the table
         [self.tableView reloadData];

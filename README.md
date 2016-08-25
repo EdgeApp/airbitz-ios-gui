@@ -22,6 +22,10 @@ Uncomment the following line from 'airbitz-ios-gui/Podfile'
 
     pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz"
     
+If you want to use the 'develop' build of `airbitz-core` with functionality of the next release. Use this line instead
+
+    pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz"
+
 Comment out the following line
 
     pod 'AirbitzCore', :path => '../airbitz-core-objc/'

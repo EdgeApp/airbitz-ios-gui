@@ -18,7 +18,7 @@
 #import "CalculatorView.h"
 #import "ButtonSelectorView2.h"
 #import "User.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Util.h"
 #import "InfoView.h"
 #import "LocalSettings.h"
@@ -652,17 +652,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         if (![LocalSettings controller].bDisableBLE)
         {
-            // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
-            NSTimeInterval curTime = CACurrentMediaTime();
-            if ((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
-            {
-                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey : @(YES)}];
-            }
-            else
+//            // Start up the CBPeripheralManager.  Warn if settings BLE is on but device BLE is off (but only once every 24 hours)
+//            NSTimeInterval curTime = CACurrentMediaTime();
+//            if ((curTime - lastPeripheralBLEPowerOffNotificationTime) > 86400.0) //24 hours
+//            {
+//                _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey : @(YES)}];
+//            }
+//            else
             {
                 _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey : @(NO)}];
             }
-            lastPeripheralBLEPowerOffNotificationTime = curTime;
         }
 
     }                                 error:^(NSError *error)

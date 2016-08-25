@@ -8,7 +8,7 @@
 
 #import "SlideoutView.h"
 #import "PickerTextView.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "User.h"
 #import "LocalSettings.h"
 #import "Util.h"
@@ -48,7 +48,7 @@
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
 
-@property (nonatomic, strong) NSMutableArray                *arrayAccounts;
+@property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 //@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
@@ -118,7 +118,7 @@
 //        NSString *tempText = importPrivateKeyText;
 //        [Util replaceHtmlTags:&tempText];
         self.affiliateLabel.text = referYourFriendsAndGetRevenue;
-        self.giftCardTextLabel.text = giftCardText;
+        self.giftCardTextLabel.text = spend_bitcoin_text_label;
         
         int numHidden = 0;
         
@@ -542,9 +542,8 @@
 
 - (void)getAllAccounts
 {
-    if (!self.arrayAccounts)
-        self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listLocalAccounts:self.arrayAccounts];
+    NSError *error;
+    self.arrayAccounts = [abc listUsernames:&error];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
