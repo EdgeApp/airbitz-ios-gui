@@ -356,7 +356,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55.0;
+    return 60.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -459,20 +459,23 @@
     {
         NSArray *repos = _reposIndexed[row];
         NSMutableArray *arrayText = [[NSMutableArray alloc] init];
+        NSMutableArray *arrayBottomText = [[NSMutableArray alloc] init];
         
         if (repos && repos.count)
         {
             for (ABCWallet *w in repos)
             {
                 [arrayText addObject:w.name];
+                [arrayBottomText addObject:[abcAccount.settings.denomination satoshiToBTCString:w.balance withSymbol:YES cropDecimals:YES]];
             }
             [arrayText addObject:create_new_text];
+            [arrayBottomText addObject:@""];
             
             // Popup alert to choose one of the repos
             [UtilityTableViewController launchUtilityTableViewController:self
                                                               cellHeight:55.0
                                                             arrayTopText:[arrayText copy]
-                                                         arrayBottomText:nil
+                                                         arrayBottomText:[arrayBottomText copy]
                                                           arrayImageUrls:nil
                                                               arrayImage:nil
                                                                 callback:^(int selectedIndex)
