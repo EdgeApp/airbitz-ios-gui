@@ -91,7 +91,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-Zi-H7P" userLabel="topLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="69" y="16" width="40" height="21"/>
+                                                    <rect key="frame" x="69" y="16" width="218" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Fg9-c9-drB"/>
                                                     </constraints>
@@ -101,8 +101,8 @@
                                                     <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1x9-1M-FGk" userLabel="bottomLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="81" y="42" width="28.5" height="18"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1x9-1M-FGk" userLabel="bottomLabel" customClass="LatoLabel">
+                                                    <rect key="frame" x="69" y="38" width="218" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="xYz-2M-nkp"/>
                                                     </constraints>
@@ -133,6 +133,8 @@
                                                 <constraint firstItem="fWN-n4-4Bs" firstAttribute="leading" secondItem="BVe-Gd-TeE" secondAttribute="leading" id="AuX-nH-K2W"/>
                                                 <constraint firstItem="1x9-1M-FGk" firstAttribute="leading" secondItem="wWY-Zi-H7P" secondAttribute="leading" id="JAp-Qv-Mkr"/>
                                                 <constraint firstItem="1x9-1M-FGk" firstAttribute="bottom" secondItem="Mvj-mJ-6Zk" secondAttribute="bottom" constant="-3" id="Nfu-we-HwZ"/>
+                                                <constraint firstItem="69a-2W-inU" firstAttribute="leading" secondItem="1x9-1M-FGk" secondAttribute="trailing" constant="8" id="RkI-aN-FFD"/>
+                                                <constraint firstItem="69a-2W-inU" firstAttribute="leading" secondItem="wWY-Zi-H7P" secondAttribute="trailing" constant="8" id="b0L-CY-2Vb"/>
                                                 <constraint firstItem="Mvj-mJ-6Zk" firstAttribute="centerY" secondItem="BVe-Gd-TeE" secondAttribute="centerY" id="cQC-4f-yNI"/>
                                                 <constraint firstItem="wWY-Zi-H7P" firstAttribute="leading" secondItem="Mvj-mJ-6Zk" secondAttribute="trailing" constant="15" id="gAY-i8-C0X"/>
                                                 <constraint firstAttribute="trailing" secondItem="fWN-n4-4Bs" secondAttribute="trailing" id="n4G-9T-5Na"/>
@@ -199,7 +201,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zMk-I1-f6D" userLabel="topLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="69" y="16" width="40" height="21"/>
+                                                    <rect key="frame" x="69" y="16" width="218" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="XO4-LE-pHw"/>
                                                     </constraints>
@@ -210,7 +212,7 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cqs-Kq-293" userLabel="bottomLabel" customClass="LatoLabel">
-                                                    <rect key="frame" x="81" y="45" width="28.5" height="15"/>
+                                                    <rect key="frame" x="69" y="38" width="218" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="0qC-7x-5t2"/>
                                                     </constraints>
@@ -238,6 +240,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Mji-4S-LU8" secondAttribute="trailing" id="0KZ-O6-XsP"/>
                                                 <constraint firstAttribute="bottom" secondItem="Mji-4S-LU8" secondAttribute="bottom" id="3Op-Kr-YSA"/>
+                                                <constraint firstItem="7JS-nt-Slf" firstAttribute="leading" secondItem="zMk-I1-f6D" secondAttribute="trailing" constant="8" id="9sA-Ml-iBM"/>
                                                 <constraint firstItem="Cqs-Kq-293" firstAttribute="leading" secondItem="zMk-I1-f6D" secondAttribute="leading" id="9xm-dK-0L0"/>
                                                 <constraint firstItem="7JS-nt-Slf" firstAttribute="centerY" secondItem="ewa-45-wx3" secondAttribute="centerY" id="BrT-J7-HM9"/>
                                                 <constraint firstAttribute="trailing" secondItem="7JS-nt-Slf" secondAttribute="trailing" constant="5" id="Ggc-sD-fQP"/>
