@@ -159,6 +159,7 @@
 #define bitcoinPrivateKeyText                       NSLocalizedString(@"Bitcoin Private Key with Public Address", nil)
 #define bitIDLogin                                  NSLocalizedString(@"BitID Login", nil)
 #define bitIDIdentity                               NSLocalizedString(@"BitID Identity", nil)
+#define edge_login                                  NSLocalizedString(@"Edge Login", nil)
 #define wouldYouLikeToSendOrImport                  NSLocalizedString(@"Would you like to send funds to this address or import funds into your wallet?", nil)
 #define importFunds                                 NSLocalizedString(@"Import Funds",nil)
 #define sendFundsToPrivateKey                       NSLocalizedString(@"Send Funds to Private Key",nil)
@@ -406,6 +407,7 @@
 #define wouldLikeToColon                            NSLocalizedString(@"This site would like to:" ,nil)
 #define provideIdentityTokenText                    NSLocalizedString(@"Provide an Identity Token" ,nil)
 #define identity_token_created_and_saved            NSLocalizedString(@"Identity token from [%@] created and saved", nil)
+#define create_new_text                             NSLocalizedString(@"Create new", nil)
 
 #define second_text                                 NSLocalizedString(@"second",nil)
 #define seconds_text                                NSLocalizedString(@"seconds",nil)

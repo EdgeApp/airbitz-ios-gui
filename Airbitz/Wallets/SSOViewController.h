@@ -21,6 +21,7 @@ typedef enum eSSOMode
 
 @property (assign)            id<SSOViewControllerDelegate>     delegate;
 @property (nonatomic, strong)        ABCParsedURI               *parsedURI;
+@property (nonatomic, strong)        ABCEdgeLoginInfo           *edgeLoginInfo;
 @property (nonatomic, assign)        tSSOMode                   ssoMode;
 
 @end

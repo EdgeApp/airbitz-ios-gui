@@ -1336,13 +1336,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 // if bToIsUUID NO, then it is assumed the strTo is an address
-- (void)showSSOViewController:(ABCParsedURI *)parsedURI
+- (void)showSSOViewController:(ABCParsedURI *)parsedURI edgeLoginRequest:(ABCEdgeLoginInfo *)edgeLoginInfo;
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     _ssoViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SSOViewController"];
 
-    _ssoViewController.delegate            = self;
-    _ssoViewController.parsedURI           = parsedURI;
+    _ssoViewController.delegate             = self;
+    _ssoViewController.parsedURI            = parsedURI;
+    _ssoViewController.edgeLoginInfo        = edgeLoginInfo;
 
     [_readerView stop];
 
@@ -1684,15 +1685,33 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     ABCError *error;
     
     [self stopQRReader];
+    abcDebugLog(0, uriString);
 
     _parsedURI = [ABCUtil parseURI:uriString error:&error];
+    if (!_parsedURI)
+    {
+        if (uriString.length == 10 && [self isBase32:uriString])
+        {
+            [abcAccount getEdgeLoginRequest:uriString callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
+                if (!error)
+                {
+                    [self showSSOViewController:nil edgeLoginRequest:info];
+                }
+                else
+                {
+                    [MainViewController fadingAlert:@"Invalid Edge Login Request"];
+                }
+            }];
+            return;
+        }
+    }
 
     if (_parsedURI)
     {
         if (_parsedURI.bitIDURI)
         {
             // Launch SSOViewController
-            [self showSSOViewController:_parsedURI];
+            [self showSSOViewController:_parsedURI edgeLoginRequest:nil];
 
 
 //            NSString *bitidRequestString = @"";
@@ -1838,16 +1857,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             || [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
                 [self stopQRReader];
-
-                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-                _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
-                _addressRequestController.url = uri;
-                _addressRequestController.delegate = self;
                 
-                [MainViewController animateView:_addressRequestController withBlur:YES];
-                [MainViewController showTabBarAnimated:YES];
-                [MainViewController showNavBarAnimated:YES];
-                return;
+                {
+                    
+                    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+                    _addressRequestController = [mainStoryboard instantiateViewControllerWithIdentifier:@"AddressRequestController"];
+                    _addressRequestController.url = uri;
+                    _addressRequestController.delegate = self;
+                    
+                    [MainViewController animateView:_addressRequestController withBlur:YES];
+                    [MainViewController showTabBarAnimated:YES];
+                    [MainViewController showNavBarAnimated:YES];
+                    return;
+                }
             }
         }
     }
@@ -1855,6 +1877,15 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     // Did not get successfully processed. Throw error
     [MainViewController fadingAlert:invalidQRCode holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
     [self startQRReader];
+}
+
+- (BOOL) isBase32:(NSString *)string
+{
+    NSError *error;
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"^[A-Z2-7]$" options:0 error:&error];
+    NSArray* matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+    
+    return !!matches;
 }
 
 -(void)AddressRequestControllerDone:(AddressRequestController *)vc

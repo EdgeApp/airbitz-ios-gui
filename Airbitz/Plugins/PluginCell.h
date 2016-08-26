@@ -10,6 +10,7 @@
 @property (weak, nonatomic) IBOutlet LatoLabel *topLabel;
 @property (weak, nonatomic) IBOutlet LatoLabel *bottomLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UIImageView *rightImage;
 
 
 @end

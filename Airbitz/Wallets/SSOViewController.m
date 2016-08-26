@@ -12,6 +12,7 @@
 #import "Theme.h"
 #import "FadingAlertView.h"
 #import "PluginCell.h"
+#import "UtilityTableViewController.h"
 
 @interface SSOViewController () <UITableViewDelegate, UITableViewDataSource>
 {
@@ -19,7 +20,12 @@
     BOOL                            _bitidProvidingKYCToken;
     NSMutableArray                  *_kycTokenKeys;
     UIImage                         *_blankImage;
-    int                             _kycTokenIndex;
+    int                             _selectedTableIndex;
+    int                             _tableNumRows;
+    NSMutableArray                  *_reposToUseIndex;
+    
+    // 2 dim array. 1st are repoTypes index. 2nd dim are list of repos for that type
+    NSMutableArray                  *_reposIndexed;
 
 }
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView    *spinnerView;
@@ -29,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UIButton                   *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *cancelButton;
 @property (weak, nonatomic) IBOutlet UITableView                *ssoTableView;
+@property (weak, nonatomic) IBOutlet UIImageView                *topImageLogo;
+
+
 
 @end
 
@@ -49,6 +58,10 @@
     [self.spinnerView startAnimating];
     self.ssoTableView.delegate = self;
     self.ssoTableView.dataSource = self;
+    
+    _reposToUseIndex = [[NSMutableArray alloc] init];
+    _reposIndexed = [[NSMutableArray alloc] init];
+    
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
     _blankImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -78,7 +91,53 @@
     NSString *descriptionText = @"";
     _bitidSParam = NO;
     
-    if (_parsedURI.bitIDURI)
+    if (_edgeLoginInfo)
+    {
+        if (_edgeLoginInfo.requestorImageUrl)
+        {
+            self.headerLabel.hidden = YES;
+                NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:_edgeLoginInfo.requestorImageUrl]
+                                                              cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                          timeoutInterval:60];
+            
+            [self.topImageLogo setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
+            
+            self.topImageLogo.layer.shadowColor = [UIColor blackColor].CGColor;
+            self.topImageLogo.layer.shadowOpacity = 0.5;
+            self.topImageLogo.layer.shadowRadius = 10;
+            self.topImageLogo.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+        }
+        else
+        {
+            self.topImageLogo.hidden = YES;
+            self.headerLabel.text = edge_login;
+        }
+        self.appNameLabel.text = _edgeLoginInfo.requestor;
+        [self.cancelButton setTitle:cancelButtonText forState:UIControlStateNormal];
+        [self.loginButton setTitle:accept_button_text forState:UIControlStateNormal];
+        
+        self.descriptionTextView.text = NSLocalizedString(@"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.", nil);
+        _tableNumRows = (int) _edgeLoginInfo.repoTypes.count;
+        
+        for (int i = 0; i < _edgeLoginInfo.repoTypes.count; i++)
+        {
+            NSString *s = _edgeLoginInfo.repoTypes[i];
+            NSArray *array = [abcAccount getEdgeLoginRepos:s];
+            
+            if (array)
+            {
+                [_reposIndexed addObject:array];
+                [_reposToUseIndex addObject: [NSNumber numberWithInt:0]];
+            }
+            else
+            {
+                [_reposToUseIndex addObject: [NSNumber numberWithInt:-1]];
+                [_reposIndexed addObject:@[]];
+            }
+        }
+
+    }
+    else if (_parsedURI.bitIDURI)
     {
         self.appNameLabel.text = [_parsedURI.bitIDDomain stringByReplacingOccurrencesOfString:@"https://" withString:@""];
         self.appNameLabel.text = [self.appNameLabel.text stringByReplacingOccurrencesOfString:@"http://" withString:@""];
@@ -126,6 +185,8 @@
             [self.loginButton setTitle:loginButtonText forState:UIControlStateNormal];
         }
         
+        _tableNumRows = (int) _kycTokenKeys.count;
+        
         if (_parsedURI.bitidPaymentAddress)
         {
             descriptionText = [NSString stringWithFormat:@"%@\n• %@", descriptionText, requestPaymentAddress];
@@ -138,72 +199,8 @@
         }
         
         self.descriptionTextView.text = descriptionText;
+        [self.ssoTableView reloadData];
         
-//        if (_parsedURI.bitidKYCRequest)
-//        {
-//            if (_kycTokenKeys)
-//            {
-//                int count = (int)[_kycTokenKeys count];
-//                
-//                if (count == 1)
-//                {
-//                    
-//                    _bitidAlert = [[UIAlertView alloc]
-//                                   initWithTitle:bitIDLogin
-//                                   message:message
-//                                   delegate:self
-//                                   cancelButtonTitle:noButtonText
-//                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]",  _kycTokenKeys[0]],nil];
-//                }
-//                else if (count == 2)
-//                {
-//                    _bitidAlert = [[UIAlertView alloc]
-//                                   initWithTitle:bitIDLogin
-//                                   message:message
-//                                   delegate:self
-//                                   cancelButtonTitle:noButtonText
-//                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-//                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-//                                   nil];
-//                    
-//                }
-//                else
-//                {
-//                    // Only support a max of 3 tokens for now
-//                    _bitidAlert = [[UIAlertView alloc]
-//                                   initWithTitle:bitIDLogin
-//                                   message:message
-//                                   delegate:self
-//                                   cancelButtonTitle:noButtonText
-//                                   otherButtonTitles:[NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[0]],
-//                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[1]],
-//                                   [NSString stringWithFormat:@"Use ID token [%@]", _kycTokenKeys[2]],
-//                                   nil];
-//                }
-//                
-//            }
-//            else
-//            {
-//                
-//                _bitidAlert = [[UIAlertView alloc]
-//                               initWithTitle:bitIDLogin
-//                               message:message
-//                               delegate:self
-//                               cancelButtonTitle:cancelButtonText
-//                               otherButtonTitles:nil];
-//            }
-//            
-//        }
-//        else
-//        {
-//            _bitidAlert = [[UIAlertView alloc]
-//                           initWithTitle:bitIDLogin
-//                           message:message
-//                           delegate:self
-//                           cancelButtonTitle:noButtonText
-//                           otherButtonTitles:yesButtonText,nil];
-//            
-//        }
     }
 
 }
@@ -247,6 +244,22 @@
 - (IBAction)Login:(id)sender
 {
     self.spinnerView.hidden = NO;
+    if (_edgeLoginInfo)
+    {
+        [abcAccount approveEdgeLoginRequest:_edgeLoginInfo.token callback:^(ABCError *error) {
+            if (error)
+            {
+                
+            }
+            else
+            {
+                [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [self Done];
+            }
+
+        }];
+        return;
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         ABCError *error = nil;
@@ -258,7 +271,7 @@
             {
                 NSMutableString *callbackURL = [[NSMutableString alloc] init];
                 
-                [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[_kycTokenIndex] data:callbackURL];
+                [abcAccount.dataStore dataRead:@"Identities" withKey:_kycTokenKeys[_selectedTableIndex] data:callbackURL];
                 error = [abcAccount bitidLoginMeta:_parsedURI.bitIDURI kycURI:[NSString stringWithString:callbackURL]];
             }
             else
@@ -278,7 +291,7 @@
                 }
                 else if(_kycTokenKeys)
                 {
-                    NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[_kycTokenIndex]];
+                    NSString *message = [NSString stringWithFormat:@"%@ %@", successfully_verified_identity, _kycTokenKeys[_selectedTableIndex]];
                     [MainViewController fadingAlert:message holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
                 }
                 else
@@ -301,6 +314,10 @@
 }
 
 - (IBAction)Deny:(id)sender {
+    if (_edgeLoginInfo)
+    {
+        [abcAccount deleteEdgeLoginRequest:_edgeLoginInfo.token];
+    }
     [self Done];
 }
 
@@ -334,10 +351,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_kycTokenKeys && _kycTokenKeys.count > 0)
-        return [_kycTokenKeys count];
-    else
-        return 0;
+    return _tableNumRows;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -348,53 +362,128 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PluginCell";
+    int row = (int) indexPath.row;
     
     PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[PluginCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+
+    if (_edgeLoginInfo)
+    {
+        cell.topLabel.text = _edgeLoginInfo.repoNames[row];
+        cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+
+        NSArray *repos = _reposIndexed[row];
+        
+        if (repos && repos.count)
+        {
+            NSNumber *index = _reposToUseIndex[row];
+            if (index && index.intValue >= 0)
+            {
+                cell.bottomLabel.text = [NSString stringWithFormat:@"\"%@\" or choose", ((ABCWallet *)repos[index.intValue]).name];
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            }
+            else
+            {
+                cell.bottomLabel.text = create_new_text;
+                cell.rightImage.hidden = YES;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+        }
+        else
+        {
+            cell.bottomLabel.text = create_new_text;
+            cell.rightImage.hidden = YES;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cell.image.image = _blankImage;
+        
+        NSString *imageUrl = nil;
+        
+        NSString *s = _edgeLoginInfo.repoTypes[indexPath.row];
+        
+        if ([s isEqualToString:@"account:repo:com.augur"])
+            imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/augur_logo_100.png";
+        else if ([s isEqualToString:@"account:repo:city.arcade"])
+            imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/ACLOGOnt-1.png";
+        else if ([s isEqualToString:@"wallet:repo:ethereum"])
+            imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/EthereumIcon-100w.png";
+        else if ([s isEqualToString:@"wallet:repo:bitcoin"])
+            imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/bitcoin-logo-02.png";
+        
+        if (imageUrl)
+        {
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]
+                                                          cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                      timeoutInterval:60];
+            
+            [cell.image setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
+        }
+        
+        cell.image.layer.shadowColor = [UIColor blackColor].CGColor;
+        cell.image.layer.shadowOpacity = 0.5;
+        cell.image.layer.shadowRadius = 10;
+        cell.image.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+    }
+    else if (_kycTokenKeys)
+    {
+        cell.topLabel.text = _kycTokenKeys[indexPath.row];
+        cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+        
+        cell.bottomLabel.text = @"";
+        cell.image.image = _blankImage;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        
+    }
     
-    cell.topLabel.text = _kycTokenKeys[indexPath.row];
-    cell.topLabel.textColor = [Theme Singleton].colorTextDark;
-    
-    cell.bottomLabel.text = @"";
-    cell.image.image = _blankImage;
-    
-//    if (plugin.imageUrl)
-//    {
-//        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:plugin.imageUrl]
-//                                                      cachePolicy:NSURLRequestReturnCacheDataElseLoad
-//                                                  timeoutInterval:60];
-//        
-//        [cell.image setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
-//    }
-//    else
-//    {
-//        cell.image.image = [UIImage imageNamed:plugin.imageFile];
-//    }
-    
-//    cell.image.layer.shadowColor = [UIColor blackColor].CGColor;
-//    cell.image.layer.shadowOpacity = 0.5;
-//    cell.image.layer.shadowRadius = 10;
-//    cell.image.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
     bgColorView.layer.masksToBounds = YES;
     cell.selectedBackgroundView = bgColorView;
-//    cell.backgroundColor = plugin.backgroundColor;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _kycTokenIndex = indexPath.row;
-    [self Login:nil];
+    int row = (int) indexPath.row;
+    if (_kycTokenKeys)
+    {
+        _selectedTableIndex = (int) indexPath.row;
+        [self Login:nil];
+    }
+    else
+    {
+        NSArray *repos = _reposIndexed[row];
+        NSMutableArray *arrayText = [[NSMutableArray alloc] init];
+        
+        if (repos && repos.count)
+        {
+            for (ABCWallet *w in repos)
+            {
+                [arrayText addObject:w.name];
+            }
+            [arrayText addObject:create_new_text];
+            
+            // Popup alert to choose one of the repos
+            [UtilityTableViewController launchUtilityTableViewController:self
+                                                              cellHeight:55.0
+                                                            arrayTopText:[arrayText copy]
+                                                         arrayBottomText:nil
+                                                          arrayImageUrls:nil
+                                                              arrayImage:nil
+                                                                callback:^(int selectedIndex)
+            {
+                if (selectedIndex <= arrayText.count)
+                    _reposToUseIndex[row] = [NSNumber numberWithInt:-1];
+                else
+                    _reposToUseIndex[row] = [NSNumber numberWithInt:selectedIndex];
+            }];
+        }
+    }
 }
-
 
 @end

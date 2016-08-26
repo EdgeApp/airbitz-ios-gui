@@ -20,9 +20,9 @@
 		34644BA757EFF80569B02240 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		34644D40356AA8C0D8E15A4C /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
 		34644D9C4171CC241B6B1609 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
+		34644DCDB063C438DFE4F489 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		34644E64D77421AA50F21575 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
 		34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
-		34644DCDB063C438DFE4F489 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */; };
 		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
@@ -1214,6 +1214,9 @@
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
 		DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
+		DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
+		DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DADFAC2A1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2B1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2C1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
@@ -1373,15 +1376,15 @@
 		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SignUpPINController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		3464461B2934DE866F461CF6 /* SSOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOViewController.m; sourceTree = "<group>"; };
 		346445D195B1F9C065B7CDBC /* PluginListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginListViewController.m; sourceTree = "<group>"; };
+		3464461B2934DE866F461CF6 /* SSOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOViewController.m; sourceTree = "<group>"; };
 		346446DF3DCE81998F436046 /* Affiliate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Affiliate.m; sourceTree = "<group>"; };
 		3464482EF1B9232A7ED8A342 /* Affiliate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Affiliate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		346448867CF607DEED6BA49C /* AB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AB.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		34644A774ED9B0786711E100 /* BrandStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandStrings.h; sourceTree = "<group>"; };
 		34644A95F98F7C787C35866F /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
-		34644D1324098851616413EC /* SSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewController.h; sourceTree = "<group>"; };
 		34644B5A90803E3840979781 /* PluginListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginListViewController.h; sourceTree = "<group>"; };
+		34644D1324098851616413EC /* SSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewController.h; sourceTree = "<group>"; };
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AB.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
@@ -2124,6 +2127,8 @@
 		DAD1AD941BC6065100C648C4 /* AirbitzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzTests.m; sourceTree = "<group>"; };
 		DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirbitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirbitzUITests.m; sourceTree = "<group>"; };
+		DAD4B5DF1D70065E00C1E320 /* UtilityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityTableViewController.h; sourceTree = "<group>"; };
+		DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityTableViewController.m; sourceTree = "<group>"; };
 		DAD84F831D29F6C100CA5DB5 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-CN"; path = "zh-CN.lproj/sms_template.txt"; sourceTree = "<group>"; };
 		DAD84F881D29F6C700CA5DB5 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-BR"; path = "pt-BR.lproj/sms_template.txt"; sourceTree = "<group>"; };
 		DAD84F891D29F6CE00CA5DB5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/sms_template.txt"; sourceTree = "<group>"; };
@@ -3409,6 +3414,8 @@
 				DA9ED7C81BC61E680063DA07 /* UIImage+Colorize.m */,
 				DA9ED7C91BC61E680063DA07 /* Util.h */,
 				DA9ED7CA1BC61E680063DA07 /* Util.m */,
+				DAD4B5DF1D70065E00C1E320 /* UtilityTableViewController.h */,
+				DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */,
 				DAD1AD7A1BC6065100C648C4 /* Supporting Files */,
 				346448867CF607DEED6BA49C /* AB.m */,
 				34644D19B9AA8C31AD9453F3 /* AB.h */,
@@ -4974,6 +4981,7 @@
 				3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */,
 				34644D9C4171CC241B6B1609 /* AB.m in Sources */,
 				34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */,
+				DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */,
 				34644D40356AA8C0D8E15A4C /* SSOViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5114,6 +5122,7 @@
 				346444E4A468604A4B66F175 /* SignUpPINController.m in Sources */,
 				3464491590D9099322E3B5CE /* AB.m in Sources */,
 				3464490D4883ED4ADC6E6A18 /* Affiliate.m in Sources */,
+				DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */,
 				34644E64D77421AA50F21575 /* SSOViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5254,6 +5263,7 @@
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
 				346442FF5C0981D87A7C8AB0 /* AB.m in Sources */,
 				34644BA757EFF80569B02240 /* Affiliate.m in Sources */,
+				DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */,
 				34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
