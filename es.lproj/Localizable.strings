@@ -18,6 +18,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "%@ Bitcoin received. Tap for details." = "%@ Bitcoin recibido. Pulse para obtener más información.";
 
+/* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
+"%@ Recovery Token" = "%@ Recuperación de ficha";
+
 /* No comment provided by engineer. */
 "%@ failed:
 %@" = "%1$@ error:%2$@";
@@ -235,6 +238,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Checking password..." = "Revisando contraseña...";
 
+/* No comment provided by engineer. */
+"Choose a Question" = "Escoja una pregunta";
+
 /* City, State/Province, or Country placeholder */
 "City, State/Province, or Country" = "Ciudad, Estado/Provincia, o País";
 
@@ -247,7 +253,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Coffee & Tea" = "Café y Té";
 
-/* No comment provided by engineer. */
+/* expense category */
 "Coffee Shops" = "Cafeteras";
 
 /* No comment provided by engineer. */
@@ -298,9 +304,6 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "TIPO DE CAMBIO PREDETERMINADO";
 
-/* Slideout menu gift card text */
-"DISCOUNTED GIFT CARDS" = "TARJETAS DE REGALO CON DESCUENTO";
-
 /* debug text */
 "Debug" = "Depurar";
 
@@ -348,9 +351,6 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* No comment provided by engineer. */
 "Disabled" = "Deshabilitado";
-
-/* No comment provided by engineer. */
-"Discounted Gift Cards" = "Tarjetas de regalo con descuento";
 
 /* No comment provided by engineer. */
 "Div Income" = "Dividir Ingreso";
@@ -429,6 +429,16 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Error code" = "Código de error";
 
 /* No comment provided by engineer. */
+"Error connecting to payment processor. Send directly to bitcoin address
+
+%@" = "Error al conectarse al procesador del pago. Enviar directamente a la dirección de bitcoin.
+
+%@";
+
+/* No comment provided by engineer. */
+"Error creating affiliate link. Please try again later" = "Error en la creación de afiliación de link. Por favor tratar otra vez mas tarde";
+
+/* No comment provided by engineer. */
 "Error desc" = "Error desc";
 
 /* No comment provided by engineer. */
@@ -446,7 +456,7 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Error sending SMS" = "Error al enviar SMS";
 
-/* No comment provided by engineer. */
+/* Prefix of list of financial exchange categories. Such as converting from one currency to another */
 "Exchange" = "Intercambio";
 
 /* No comment provided by engineer. */
@@ -455,11 +465,14 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* Exit button text on top left */
 "Exit" = "Salida";
 
-/* No comment provided by engineer. */
+/* Prefix of list of expense categories */
 "Expense" = "Gasto";
 
 /* EXPORT button text for wallet export */
 "Export" = "Exportar";
+
+/* Prompt asking which wallet to export from */
+"Export From:" = "Exportar desde:";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "Semillas de exportación privada";
@@ -504,6 +517,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "From: %@" = "De: %@";
 
 /* No comment provided by engineer. */
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Fondos importados exitosamente, pero error al conectarse con el servidor de mensajes. tratar otra vez mas tarde";
+
+/* No comment provided by engineer. */
 "Furnishings" = "Mobiliario";
 
 /* No comment provided by engineer. */
@@ -530,7 +546,7 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Great job remembering your password." = "Muy buen trabajo al recordar su contraseña.";
 
-/* No comment provided by engineer. */
+/* expense category */
 "Groceries" = "Comestibles";
 
 /* No comment provided by engineer. */
@@ -560,10 +576,7 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Home" = "Hogar";
 
-/* No comment provided by engineer. */
-"Home Depot (Up to 15% Off)" = "Home Depot (hasta 15% de descuento)";
-
-/* No comment provided by engineer. */
+/* expense category */
 "Home Improvement" = "Mejoras para el Hogar";
 
 /* No comment provided by engineer. */
@@ -593,6 +606,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "IRA Contribution" = "Contribuciones IRA";
 
 /* No comment provided by engineer. */
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "Si la recuperación fue establecida, usted debió haber enviado por email una recuperación de ficha con un link";
+
+/* No comment provided by engineer. */
 "Import" = "Importar";
 
 /* No comment provided by engineer. */
@@ -616,7 +632,7 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Importing funds from %@ into wallet..." = "Importar fondos de %@ en la cartera...";
 
-/* No comment provided by engineer. */
+/* Prefix of list of income categories */
 "Income" = "Ingresos";
 
 /* No comment provided by engineer. */
@@ -633,6 +649,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* No comment provided by engineer. */
 "Incorrect current password" = "Contraseña actual incorrecta";
+
+/* No comment provided by engineer. */
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Nombre de usuario incorrecto para esta recuperación de ficha. Por favor tratar un nombre de usuario diferente o usar un link diferente de recuperación de ficha.";
 
 /* Info button text on top right */
 "Info" = "Información";
@@ -651,6 +670,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* No comment provided by engineer. */
 "Invalid Bluetooth Request" = "Solicitud de Bluetooth no Válida";
+
+/* No comment provided by engineer. */
+"Invalid Email" = "Email inválido";
 
 /* No comment provided by engineer. */
 "Invalid QR Code" = "Código QR inválido";
@@ -759,6 +781,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* No comment provided by engineer. */
 "Net Salary" = "Salario Neta";
+
+/* No comment provided by engineer. */
+"Network Error" = "Error de red";
 
 /* No comment provided by engineer. */
 "New PIN" = "Nuevo PIN";
@@ -885,6 +910,13 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Place Call" = "Realizar llamada";
 
 /* No comment provided by engineer. */
+"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
+
+<br><br>%@" = "Por favor hacer click en el link de abajo desde un dispositivo móvil con %1$@ instalado para iniciar recuperación de cuenta por nombre de usuario [%2$@]
+
+<br><br>%3$@";
+
+/* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "Por favor cree una nueva cuenta y transfiera tus fondos si olvidó su contraseña.";
 
 /* No comment provided by engineer. */
@@ -897,6 +929,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Please enter an amount to send" = "Por favor ingrese una cantidad a enviar";
 
 /* No comment provided by engineer. */
+"Please enter the username of the account to recover" = "Por favor introduzca el nombre de usuario de la cuenta para recuperar";
+
+/* No comment provided by engineer. */
 "Please enter your PIN" = "Por favor, ingrese su PIN";
 
 /* No comment provided by engineer. */
@@ -906,7 +941,13 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Please enter your password to enable Touch ID" = "Escriba la contraseña para habilitar el Touch ID";
 
 /* No comment provided by engineer. */
+"Please find the email and click on the link from this device to initiate recovery" = "Por favor encontrar el email y hacer click en el link desde este dispositivo para iniciar recuperacion";
+
+/* No comment provided by engineer. */
 "Please have Requestor contact support" = "Por favor pida a un solicitante que contacte a soporte";
+
+/* No comment provided by engineer. */
+"Please logout of current account before attempting password recovery" = "Por favor salir de la actual cuenta antes de intentar la recuperación de contraseña";
 
 /* No comment provided by engineer. */
 "Please try again later or contact support" = "Por favor Inténtalo más tarde o póngase en contacto con soporte";
@@ -925,6 +966,11 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* expense category */
 "Property" = "Property";
+
+/* No comment provided by engineer. */
+"Provide an Identity Token
+" = "Proporcionar una identificación de ficha
+";
 
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "Semilla pública (XPub)";
@@ -961,6 +1007,16 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Recovery Questions Set" = "Conjunto de preguntas de recuperación";
 
 /* No comment provided by engineer. */
+"Recovery Successful
+
+Please change your password and PIN" = "Recuperación Exitosa
+
+Por favor cambiar su contraseña y PIN";
+
+/* No comment provided by engineer. */
+"Recovery was not setup or was done on another device" = "La recuperación no fue establecida o fue hecha en otro dispositivo";
+
+/* No comment provided by engineer. */
 "Refer Your Friends" = "Explicar a su amigo";
 
 /* expense category */
@@ -988,10 +1044,25 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Rental Car & Taxi" = "Alquiler de Autos & Taxi";
 
 /* No comment provided by engineer. */
+"Request a Payment Address
+" = "Solicitar una Dirección de Pago
+";
+
+/* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "Solicitud, confirmó dos factores.";
 
 /* No comment provided by engineer. */
 "Request is copied to the clipboard" = "Solicitud se copia en el portapapeles";
+
+/* No comment provided by engineer. */
+"Request your Identity Token
+" = "Solicitar su ficha de identidad
+";
+
+/* No comment provided by engineer. */
+"Request your Identity Token but you don't have any
+" = "Solicitar su ficha de identidad pero usted no tiene ninguna
+";
 
 /* Requested string on Request screen */
 "Requested..." = "Solicita...";
@@ -1017,6 +1088,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* Income notes field for affiliate revenue */
 "Revenue share from affiliate link %@" = "Participación en los ingresos de afiliados link %@";
 
+/* SEND button text */
+"SEND" = "ENVIAR";
+
 /* text for textmessage/SMS */
 "SMS" = "SMS";
 
@@ -1026,11 +1100,17 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "SMS sent" = "SMS enviado";
 
+/* Slideout menu spend text */
+"SPEND BITCOIN (Plugins)" = "GASTAR BITCOIN (Plugins)";
+
 /* No comment provided by engineer. */
 "Sales" = "Ventas";
 
 /* No comment provided by engineer. */
 "San Diego, California, USA" = "San Diego, California, USA";
+
+/* Title of recovery email popup */
+"Save Recovery Token" = "Guardar ficha de recuperación";
 
 /* Text at top of Scan Screen */
 "Scan QR to Import Private Key/Gift Card" = "Escanear el QR para importación privado tarjeta de clave de regalo";
@@ -1097,6 +1177,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 "Show Balance" = "Mostrar saldo";
 
 /* No comment provided by engineer. */
+"Show QR Code" = "Mostrar código QR";
+
+/* No comment provided by engineer. */
 "Sign Up" = "Registrarse";
 
 /* No comment provided by engineer. */
@@ -1115,6 +1198,9 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* expense category */
 "Spa & Massage" = "Spa & Masajes";
 
+/* No comment provided by engineer. */
+"Spend Bitcoin (Plugins)" = "Gastar Bitcoin (Plugins)";
+
 /* spending limits text */
 "Spending Limits" = "Límites de gastos";
 
@@ -1127,14 +1213,17 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Standard Fee" = "Tarifas estándar";
 
-/* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "Starbucks (hasta un 20% de descuento)";
-
 /* expense category */
 "Student Loan" = "Préstamo Estudiantil";
 
 /* No comment provided by engineer. */
 "Successfully Logged In" = "Inicio de sesión exitoso";
+
+/* No comment provided by engineer. */
+"Successfully Verified Identity" = "Identificación verificada exitosamente";
+
+/* No comment provided by engineer. */
+"Successfully received identity token from %@" = "Ficha de identificación exitosamente recibido desde %@";
 
 /* No comment provided by engineer. */
 "Sweep Funds From Private Key" = "Pasar fondos de la clave privada";
@@ -1148,9 +1237,6 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "Toque y presione una cartera para opciones adicionales";
 
-/* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "Target (hasta un 10% de descuento)";
-
 /* expense category */
 "Tax" = "Impuesto";
 
@@ -1162,6 +1248,13 @@ Enter it below to make sure:" = "¿Todavía recuerdas tu contraseña? Necesitar�
 
 /* No comment provided by engineer. */
 "The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "La dirección bitcoin del dispositivo conectado con:%1$@ no coincide con la dirección que inicialmente fue anunciada:%2$@";
+
+/* No comment provided by engineer. */
+"The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers." = "Los siguientes servicios no son proporcionados por %@.
+
+Para problemas y comentarios, por favor contactar a los respectivos proveedores del servicio.";
 
 /* No comment provided by engineer. */
 "The given answers were incorrect. Please try again." = "Las respuestas proporcionadas fueron incorrectas. Por favor, inténtelo de nuevo.";
@@ -1184,6 +1277,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* text in password verification popup */
 "Time to crack:" = "Tiempo para Infiltrarse:";
+
+/* Message of recovery token popup */
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "Para completar la configuración de recuperación de cuenta usted DEBE guardar una ficha de recuperación de cuenta. Esto será requerido para recuperar su cuenta además de su nombre de usuario y preguntas de recuperación. Por favor introduzca su email abajo para enviarse usted mismo la ficha de recuperación.";
 
 /* Popup wallet help test */
 "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Para ordenar las carters, toque y arrastre las 3 barras a la derecha de una cartera. Arrastre debajo del encabezado [ARCHIVE] para archivar la cartera";
@@ -1224,7 +1320,7 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "Detalles de la transacción";
 
-/* No comment provided by engineer. */
+/* Financial transaction that moves money from one account to another */
 "Transfer" = "Transferir";
 
 /* From wallet transfer text */
@@ -1235,6 +1331,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* expense category */
 "Travel" = "Viajes";
+
+/* No comment provided by engineer. */
+"Trouble connecting to network" = "Problema al conectar con la red";
 
 /* No comment provided by engineer. */
 "Try again?" = "¿Volver a intentarlo?";
@@ -1266,6 +1365,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* No comment provided by engineer. */
 "Two Factor Reset" = "Reposición de dos factores";
+
+/* No comment provided by engineer. */
+"USA" = "EE.UU";
 
 /* No comment provided by engineer. */
 "USA and Canada" = "Estados Unidos y Canadá";
@@ -1377,9 +1479,6 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet: " = "Cartera: ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "Walmart (hasta un 10% de descuento)";
-
-/* No comment provided by engineer. */
 "Warning!" = "¡ Advertencia!";
 
 /* No comment provided by engineer. */
@@ -1401,7 +1500,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "La base Watcher fue eliminada. Por favor espere unos minutos para la resincronización de la información del blockchain. Los saldos y operaciones pueden ser inexactos durante la sincronización";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "Whole Foods (hasta un 10% de descuento)";
+"Would like to:" = "Le gustaría:";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "¿Desea activar el TouchID para esta cuenta y dispositivo?";
@@ -1426,10 +1525,13 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 %@ (~%@)" = "Recibió Bitcoin!%1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You must answer all six questions. Make sure your answers are long enough." = "Debe responder las seis preguntas. Asegúrese de que sus respuestas sean lo suficientemente largas.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "Usted esta apunto de salir de la configuración de recuperación de contraseña. Sus preguntas seleccionadas no han sido guardadas.";
 
 /* No comment provided by engineer. */
-"You must choose all six questions before proceeding." = "Debe elegir por lo menos seis preguntas antes de continuar.";
+"You must answer all questions. Make sure your answers are long enough." = "Usted debe responder todas las preguntas. Asegúrese que su respuestas son suficientemente larga.";
+
+/* No comment provided by engineer. */
+"You must choose a question for all selections before proceeding." = "Usted debe escoger una pregunta para todas las selecciones antes de proceder.";
 
 /* No comment provided by engineer. */
 "You must enter a user name" = "Debe introducir un nombre de usuario";

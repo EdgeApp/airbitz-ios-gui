@@ -2,7 +2,7 @@
 "0gq-ds-DJC.normalTitle" = "下一个";
 
 /* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "您的用户名、 密码和PIN 只有您知道，并永远不会被传输出去或在未加密前存储起来。";
+"4eB-ff-Ebh.text" = "您的用户名和密码只有您知道，绝不会被传输出去或未经加密保存。";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "下一个";

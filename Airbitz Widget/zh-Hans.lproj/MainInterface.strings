@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
-"Lt8-cl-BMW.text" = "扫描 QR";
+"Lt8-cl-BMW.text" = "扫描二维码【QR】";
 
 /* Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF"; */
 "NiJ-rT-MKF.text" = "发送";

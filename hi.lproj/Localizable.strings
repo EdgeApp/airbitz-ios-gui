@@ -20,6 +20,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "%@ Bitcoin received. Tap for details." = "%@ बिटकॉइन प्राप्त हुआ। विवरण के लिए टैप करें।";
 
+/* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
+"%@ Recovery Token" = "%@ Recovery Token";
+
 /* No comment provided by engineer. */
 "%@ failed:
 %@" = "%1$@ विफल: 
@@ -238,6 +241,9 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Checking password..." = "पासवर्ड चेक हो रहा है....";
 
+/* No comment provided by engineer. */
+"Choose a Question" = "Choose a Question";
+
 /* City, State/Province, or Country placeholder */
 "City, State/Province, or Country" = "शहर, राज्य/केंद्र शासित, या देश";
 
@@ -250,7 +256,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Coffee & Tea" = "कॉफ़ी & चाय";
 
-/* No comment provided by engineer. */
+/* expense category */
 "Coffee Shops" = "कॉफी शॉप";
 
 /* No comment provided by engineer. */
@@ -301,9 +307,6 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "तय विनियमन दर";
 
-/* Slideout menu gift card text */
-"DISCOUNTED GIFT CARDS" = "छूट वाले गिफ्ट कार्ड्स";
-
 /* debug text */
 "Debug" = "त्रुटि रहित";
 
@@ -351,9 +354,6 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* No comment provided by engineer. */
 "Disabled" = "निष्क्रिय";
-
-/* No comment provided by engineer. */
-"Discounted Gift Cards" = "छूट वाले गिफ्ट कार्ड";
 
 /* No comment provided by engineer. */
 "Div Income" = "लाभांश आय";
@@ -432,6 +432,16 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Error code" = "कोड त्रुटि";
 
 /* No comment provided by engineer. */
+"Error connecting to payment processor. Send directly to bitcoin address
+
+%@" = "Error connecting to payment processor. Send directly to bitcoin address
+
+%@";
+
+/* No comment provided by engineer. */
+"Error creating affiliate link. Please try again later" = "Error creating affiliate link. Please try again later";
+
+/* No comment provided by engineer. */
 "Error desc" = "डेस्क त्रुटि";
 
 /* No comment provided by engineer. */
@@ -449,7 +459,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Error sending SMS" = "एस एम एस भेजने में परेशानी हो रही है";
 
-/* No comment provided by engineer. */
+/* Prefix of list of financial exchange categories. Such as converting from one currency to another */
 "Exchange" = "विनिमय";
 
 /* No comment provided by engineer. */
@@ -458,11 +468,14 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* Exit button text on top left */
 "Exit" = "बाहर";
 
-/* No comment provided by engineer. */
+/* Prefix of list of expense categories */
 "Expense" = "खर्च:";
 
 /* EXPORT button text for wallet export */
 "Export" = "निर्यात";
+
+/* Prompt asking which wallet to export from */
+"Export From:" = "Export From:";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "निजी सीड निर्यात";
@@ -507,6 +520,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "From: %@" = "से:%@";
 
 /* No comment provided by engineer. */
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Funds successfully imported, but error connecting to messenger server. Try again later";
+
+/* No comment provided by engineer. */
 "Furnishings" = "सामान";
 
 /* No comment provided by engineer. */
@@ -533,7 +549,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Great job remembering your password." = "अपने काफी अच्छे से पासवर्ड याद रखा है";
 
-/* No comment provided by engineer. */
+/* expense category */
 "Groceries" = "राशन";
 
 /* No comment provided by engineer. */
@@ -563,10 +579,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Home" = "घर";
 
-/* No comment provided by engineer. */
-"Home Depot (Up to 15% Off)" = "होम डिपो (15% तक की छूट)";
-
-/* No comment provided by engineer. */
+/* expense category */
 "Home Improvement" = "गृह सुधार";
 
 /* No comment provided by engineer. */
@@ -595,6 +608,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "IRA Contribution" = "IRA योगदान";
 
 /* No comment provided by engineer. */
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "If recovery was setup, you should have emailed yourself a recovery token with a link";
+
+/* No comment provided by engineer. */
 "Import" = "आयात";
 
 /* No comment provided by engineer. */
@@ -618,7 +634,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Importing funds from %@ into wallet..." = "%@ से वॉलेट में पैसे आ रहे हैं...";
 
-/* No comment provided by engineer. */
+/* Prefix of list of income categories */
 "Income" = "आय:";
 
 /* No comment provided by engineer. */
@@ -635,6 +651,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Incorrect current password" = "तत्काल्लें पासवर्ड गलत है";
+
+/* No comment provided by engineer. */
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Incorrect username for this recovery token. Please try a different username or use a different recovery token link.";
 
 /* Info button text on top right */
 "Info" = "सूचना";
@@ -653,6 +672,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Invalid Bluetooth Request" = "ब्लूटूथ अनुरोध अवैध है";
+
+/* No comment provided by engineer. */
+"Invalid Email" = "Invalid Email";
 
 /* No comment provided by engineer. */
 "Invalid QR Code" = "क्यू आर कोड अवैध है";
@@ -761,6 +783,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "Net Salary" = "सकल आय";
+
+/* No comment provided by engineer. */
+"Network Error" = "Network Error";
 
 /* No comment provided by engineer. */
 "New PIN" = "नया पिन";
@@ -887,6 +912,13 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Place Call" = "कॉल करे";
 
 /* No comment provided by engineer. */
+"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
+
+<br><br>%@" = "Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+<br><br>%3$@";
+
+/* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "अगर आप पासवर्ड भूल गए हैं तो नया खाता बनाये और पैसे ट्रान्सफर कर लें|";
 
 /* No comment provided by engineer. */
@@ -899,6 +931,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Please enter an amount to send" = "भेजने के लिए राशि लिखें";
 
 /* No comment provided by engineer. */
+"Please enter the username of the account to recover" = "Please enter the username of the account to recover";
+
+/* No comment provided by engineer. */
 "Please enter your PIN" = "पिन लिखें";
 
 /* No comment provided by engineer. */
@@ -908,7 +943,13 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Please enter your password to enable Touch ID" = "टचआईडी सक्रिय करने के लिए पासवर्ड लिखें";
 
 /* No comment provided by engineer. */
+"Please find the email and click on the link from this device to initiate recovery" = "Please find the email and click on the link from this device to initiate recovery";
+
+/* No comment provided by engineer. */
 "Please have Requestor contact support" = "रेकुएस्टर संपर्क सहायता लें";
+
+/* No comment provided by engineer. */
+"Please logout of current account before attempting password recovery" = "Please logout of current account before attempting password recovery";
 
 /* No comment provided by engineer. */
 "Please try again later or contact support" = "कृपया बाद में फिर से प्रयास करें या सहायता के लिए संपर्क करें";
@@ -927,6 +968,11 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* expense category */
 "Property" = "संपत्ति";
+
+/* No comment provided by engineer. */
+"Provide an Identity Token
+" = "Provide an Identity Token
+";
 
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "पब्लिक सीड (XPub)";
@@ -963,6 +1009,16 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Recovery Questions Set" = "रिकवरी प्रश्न सेट";
 
 /* No comment provided by engineer. */
+"Recovery Successful
+
+Please change your password and PIN" = "Recovery Successful
+
+Please change your password and PIN";
+
+/* No comment provided by engineer. */
+"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+
+/* No comment provided by engineer. */
 "Refer Your Friends" = "अपने दोस्तों को बताएं";
 
 /* expense category */
@@ -990,10 +1046,25 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Rental Car & Taxi" = "किराये की कार और टैक्सी";
 
 /* No comment provided by engineer. */
+"Request a Payment Address
+" = "Request a Payment Address
+";
+
+/* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "अनुरोध की पुष्टि हो गयी, दो फैक्टर बंद है।";
 
 /* No comment provided by engineer. */
 "Request is copied to the clipboard" = "अनुरोध क्लिपबोर्ड पर कॉपी हो गया है";
+
+/* No comment provided by engineer. */
+"Request your Identity Token
+" = "Request your Identity Token
+";
+
+/* No comment provided by engineer. */
+"Request your Identity Token but you don't have any
+" = "Request your Identity Token but you don't have any
+";
 
 /* Requested string on Request screen */
 "Requested..." = "अनुरोधित...";
@@ -1019,6 +1090,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* Income notes field for affiliate revenue */
 "Revenue share from affiliate link %@" = "संबद्ध लिंक %@ से आय साझाकरण";
 
+/* SEND button text */
+"SEND" = "भेजें";
+
 /* text for textmessage/SMS */
 "SMS" = "संदेश";
 
@@ -1028,11 +1102,17 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "SMS sent" = "संदेश भेजा गया";
 
+/* Slideout menu spend text */
+"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+
 /* No comment provided by engineer. */
 "Sales" = "बिक्री";
 
 /* No comment provided by engineer. */
 "San Diego, California, USA" = "सैन डिएगो, कैलिफोर्निया, संयुक्त राज्य अमरीका";
+
+/* Title of recovery email popup */
+"Save Recovery Token" = "Save Recovery Token";
 
 /* Text at top of Scan Screen */
 "Scan QR to Import Private Key/Gift Card" = "निजी कुंजी/उपहार कार्ड आयात करने के लिए QR स्कैन करें";
@@ -1100,6 +1180,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Show Balance" = "बकाया दिखाएँ";
 
 /* No comment provided by engineer. */
+"Show QR Code" = "Show QR Code";
+
+/* No comment provided by engineer. */
 "Sign Up" = "साइन अप";
 
 /* No comment provided by engineer. */
@@ -1118,6 +1201,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* expense category */
 "Spa & Massage" = "स्पा और मालिश";
 
+/* No comment provided by engineer. */
+"Spend Bitcoin (Plugins)" = "Spend Bitcoin (Plugins)";
+
 /* spending limits text */
 "Spending Limits" = "खर्च सीमा";
 
@@ -1130,14 +1216,17 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Standard Fee" = "मानक शुल्क";
 
-/* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "स्टारबक्स (20% तक की छूट)";
-
 /* expense category */
 "Student Loan" = "छात्र ऋण";
 
 /* No comment provided by engineer. */
 "Successfully Logged In" = "लॉग इन सफल";
+
+/* No comment provided by engineer. */
+"Successfully Verified Identity" = "Successfully Verified Identity";
+
+/* No comment provided by engineer. */
+"Successfully received identity token from %@" = "Successfully received identity token from %@";
 
 /* No comment provided by engineer. */
 "Sweep Funds From Private Key" = "गुप्त चाबी से पैसे निकालें";
@@ -1151,9 +1240,6 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "अधिक विकल्पों के लिए वॉलेट पर क्लिक कर होल्ड करें";
 
-/* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "लक्ष्य (10% तक की छूट)";
-
 /* expense category */
 "Tax" = "कर";
 
@@ -1165,6 +1251,13 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* No comment provided by engineer. */
 "The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "आपके उपकरण का बिट कॉइन पता जो आपने %1$@ से जोड़ा है पहले वाले पते से मेल नहीं खाता:%2$@";
+
+/* No comment provided by engineer. */
+"The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.";
 
 /* No comment provided by engineer. */
 "The given answers were incorrect. Please try again." = "दिए गए जवाब गलत हैं|कृपया दोबारा कोशिश करें";
@@ -1191,6 +1284,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* text in password verification popup */
 "Time to crack:" = "खोलने का समय:";
+
+/* Message of recovery token popup */
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
 
 /* Popup wallet help test */
 "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "वॉलेट क्रमबद्ध करने के लिए, वॉलेट के दाएं तरफ 3 रेखाओं को टैप और ड्रैग करें। वॉलेट आर्काइव करने के लिए [ARCHIVE] हेडर नीचे ड्रैग करें";
@@ -1231,7 +1327,7 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "लेनदेन विवरण";
 
-/* No comment provided by engineer. */
+/* Financial transaction that moves money from one account to another */
 "Transfer" = "हस्तांतरण";
 
 /* From wallet transfer text */
@@ -1242,6 +1338,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* expense category */
 "Travel" = "यात्रा";
+
+/* No comment provided by engineer. */
+"Trouble connecting to network" = "Trouble connecting to network";
 
 /* No comment provided by engineer. */
 "Try again?" = "फिर कोशिश करो?";
@@ -1277,6 +1376,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* No comment provided by engineer. */
 "Two Factor Reset" = "दो फैक्टर रिसेट";
+
+/* No comment provided by engineer. */
+"USA" = "USA";
 
 /* No comment provided by engineer. */
 "USA and Canada" = "संयुक्त राज्य अमेरिका और कनाडा";
@@ -1388,9 +1490,6 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet: " = "वॉलेट ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "वालमार्ट(10% तक की छूट)";
-
-/* No comment provided by engineer. */
 "Warning!" = "चेतावनी!";
 
 /* No comment provided by engineer. */
@@ -1412,7 +1511,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "वाचर डेटाबेस हट गया। ब्लॉकचेन इंफो दोबारा सिंक करने के लिए कृपया कुछ मिनट का समय दें। सिंक के दौरान लेनदेन और शेष राशि गलत दिखाई दे सकते हैं";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "होल फूड्स(10% तक की छूट)";
+"Would like to:" = "Would like to:";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "क्या आप इस खाते और उपकरण के लिए TouchID सक्षम करना चाहते हैं?";
@@ -1438,10 +1537,13 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 %1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You must answer all six questions. Make sure your answers are long enough." = "आपके लिए सभी छह प्रश्नों का उत्तर देना आवश्यक है। आपके उत्तर पर्याप्त लंबे होने चाहिए।";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
 
 /* No comment provided by engineer. */
-"You must choose all six questions before proceeding." = "आगे बढ़ने से पहले आपके लिए सभी छह प्रश्नों का चयन करना आवश्यक है।";
+"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+
+/* No comment provided by engineer. */
+"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
 
 /* No comment provided by engineer. */
 "You must enter a user name" = "आपके लिए प्रयोगकर्ता नाम डालना आवश्यक है";

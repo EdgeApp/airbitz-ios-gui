@@ -10,15 +10,15 @@
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
         <target xml:lang="de" state="translated">QR scannen</target>
       </trans-unit>
-      <trans-unit id="NiJ-rT-MKF.text">
+      <trans-unit id="NiJ-rT-MKF.text" approved="yes">
         <source>Send</source>
         <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-        <target xml:lang="de" state="translated">Senden</target>
+        <target xml:lang="de">Senden</target>
       </trans-unit>
-      <trans-unit id="WIw-mO-3VN.normalTitle">
+      <trans-unit id="WIw-mO-3VN.normalTitle" approved="yes">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
-        <target xml:lang="de" state="translated">Button</target>
+        <target xml:lang="de">Button</target>
       </trans-unit>
       <trans-unit id="gQB-TM-9HQ.text">
         <source>BitID Login</source>
@@ -42,10 +42,10 @@
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
         <target xml:lang="de" state="translated">WEITER</target>
       </trans-unit>
-      <trans-unit id="4eB-ff-Ebh.text">
+      <trans-unit id="4eB-ff-Ebh.text" approved="yes">
         <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="de" state="translated">Ihr Benutzername, Passwort und Ihre Pin sind nur Ihnen bekannt und werden nie übertragen oder unverschlüsselt gespeichert.</target>
+        <target xml:lang="de">Ihr Benutzername, Passwort und Ihre Pin sind nur Ihnen bekannt und werden nie übertragen oder unverschlüsselt gespeichert.</target>
         <alt-trans>
           <target xml:lang="de">Ihr Benutzername, Passwort und PIN sind nur Ihnen bekannt und nie übertragen oder unverschlüsselt gespeichert.</target>
         </alt-trans>
@@ -108,20 +108,20 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
         <target xml:lang="de" state="translated">Legen Sie eine 4-stellige PIN fest</target>
       </trans-unit>
-      <trans-unit id="Gzw-pH-bAR.text">
+      <trans-unit id="Gzw-pH-bAR.text" approved="yes">
         <source>1234</source>
         <note>Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR";</note>
-        <target xml:lang="de" state="translated">1234</target>
+        <target xml:lang="de">1234</target>
       </trans-unit>
-      <trans-unit id="KSv-b6-auz.text">
+      <trans-unit id="KSv-b6-auz.text" approved="yes">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz";</note>
-        <target xml:lang="de" state="translated">Strings.h ansehen</target>
+        <target xml:lang="de">Strings.h ansehen</target>
       </trans-unit>
-      <trans-unit id="SsW-1b-1cv.text">
+      <trans-unit id="SsW-1b-1cv.text" approved="yes">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv";</note>
-        <target xml:lang="de" state="translated">Strings.h ansehen</target>
+        <target xml:lang="de">Strings.h ansehen</target>
       </trans-unit>
       <trans-unit id="Tqs-NN-dWt.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
@@ -131,15 +131,15 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
           <target xml:lang="de">Ihre PIN ist ein 4-stelliger Code und wird verwendet, um sich schnell wieder in Ihr Konto einzuloggen.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="VAn-0y-asT.text">
+      <trans-unit id="VAn-0y-asT.text" approved="yes">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT";</note>
-        <target xml:lang="de" state="translated">Strings.h ansehen</target>
+        <target xml:lang="de">Strings.h ansehen</target>
       </trans-unit>
-      <trans-unit id="Vad-R9-M68.normalTitle">
+      <trans-unit id="Vad-R9-M68.normalTitle" approved="yes">
         <source>SKIP</source>
         <note>Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68";</note>
-        <target xml:lang="de" state="translated">ÜBERSPRINGEN</target>
+        <target xml:lang="de">ÜBERSPRINGEN</target>
       </trans-unit>
       <trans-unit id="W8f-q2-Sa7.normalTitle">
         <source>Show</source>
@@ -189,10 +189,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn";</note>
         <target xml:lang="de" state="translated">PIN erstellen</target>
       </trans-unit>
-      <trans-unit id="fnL-7h-MQL.placeholder">
+      <trans-unit id="fnL-7h-MQL.placeholder" approved="yes">
         <source>Choose a Password</source>
         <note>Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL";</note>
-        <target xml:lang="de" state="translated">Wählen Sie ein Passwort</target>
+        <target xml:lang="de">Wählen Sie ein Passwort</target>
       </trans-unit>
       <trans-unit id="hHD-NP-fM6.normalTitle">
         <source>NEXT</source>
@@ -204,25 +204,25 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F";</note>
         <target xml:lang="de" state="translated">Passwort wiederholen</target>
       </trans-unit>
-      <trans-unit id="i3b-ZH-bDm.placeholder">
+      <trans-unit id="i3b-ZH-bDm.placeholder" approved="yes">
         <source>Choose a Username</source>
         <note>Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm";</note>
-        <target xml:lang="de" state="translated">Wählen Sie einen Benutzernamen</target>
+        <target xml:lang="de">Wählen Sie einen Benutzernamen</target>
       </trans-unit>
-      <trans-unit id="jcU-OX-5Hj.text">
+      <trans-unit id="jcU-OX-5Hj.text" approved="yes">
         <source>Write down and store securely</source>
         <note>Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj";</note>
-        <target xml:lang="de" state="translated">Notieren und sicher aufbewahren</target>
+        <target xml:lang="de">Notieren und sicher aufbewahren</target>
       </trans-unit>
       <trans-unit id="jgQ-ju-YiX.text">
         <source>Set a Password and PIN</source>
         <note>Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX";</note>
         <target xml:lang="de" state="translated">Legen Sie ein Kennwort und PIN fest</target>
       </trans-unit>
-      <trans-unit id="sJ6-mQ-mSV.text">
+      <trans-unit id="sJ6-mQ-mSV.text" approved="yes">
         <source>Username</source>
         <note>Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV";</note>
-        <target xml:lang="de" state="translated">Benutzername</target>
+        <target xml:lang="de">Benutzername</target>
       </trans-unit>
       <trans-unit id="tOB-4i-OVm.text">
         <source>mypassword12345</source>
@@ -237,30 +237,30 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
           <target xml:lang="de">Das Kennwort wird verwendet, um Ihr Konto zu authentifizieren und sensible Einstellungen zu ändern.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="wff-Il-8GU.text">
+      <trans-unit id="wff-Il-8GU.text" approved="yes">
         <source>Write it Down!</source>
         <note>Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU";</note>
-        <target xml:lang="de" state="translated">Schreiben Sie es auf!</target>
+        <target xml:lang="de">Schreiben Sie es auf!</target>
       </trans-unit>
-      <trans-unit id="x6r-A5-Cxg.normalTitle">
+      <trans-unit id="x6r-A5-Cxg.normalTitle" approved="yes">
         <source>Back</source>
         <note>Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg";</note>
-        <target xml:lang="de" state="translated">Zurück</target>
+        <target xml:lang="de">Zurück</target>
       </trans-unit>
-      <trans-unit id="y2b-Sg-zfM.placeholder">
+      <trans-unit id="y2b-Sg-zfM.placeholder" approved="yes">
         <source>Create PIN</source>
         <note>Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM";</note>
-        <target xml:lang="de" state="translated">PIN erstellen</target>
+        <target xml:lang="de">PIN erstellen</target>
       </trans-unit>
       <trans-unit id="z5S-Vu-MC1.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1";</note>
         <target xml:lang="de" state="translated">WEITER</target>
       </trans-unit>
-      <trans-unit id="zqc-i8-gfC.text">
+      <trans-unit id="zqc-i8-gfC.text" approved="yes">
         <source>Password</source>
         <note>Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC";</note>
-        <target xml:lang="de" state="translated">Passwort</target>
+        <target xml:lang="de">Passwort</target>
       </trans-unit>
     </body>
   </file>
@@ -269,30 +269,30 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="DlF-tR-T08.text">
+      <trans-unit id="DlF-tR-T08.text" approved="yes">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="de" state="translated">Firmenname</target>
+        <target xml:lang="de">Firmenname</target>
       </trans-unit>
-      <trans-unit id="GGS-YR-zt1.normalTitle">
+      <trans-unit id="GGS-YR-zt1.normalTitle" approved="yes">
         <source>Shopping</source>
         <note>Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1";</note>
-        <target xml:lang="de" state="translated">Einkaufen</target>
+        <target xml:lang="de">Einkaufen</target>
       </trans-unit>
-      <trans-unit id="KxI-24-PCF.text">
+      <trans-unit id="KxI-24-PCF.text" approved="yes">
         <source>Categories</source>
         <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
-        <target xml:lang="de" state="translated">Kategorien</target>
+        <target xml:lang="de">Kategorien</target>
       </trans-unit>
-      <trans-unit id="Sfb-cf-6wF.normalTitle">
+      <trans-unit id="Sfb-cf-6wF.normalTitle" approved="yes">
         <source>More Categories</source>
         <note>Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF";</note>
-        <target xml:lang="de" state="translated">Weitere Kategorien</target>
+        <target xml:lang="de">Weitere Kategorien</target>
       </trans-unit>
-      <trans-unit id="a78-ih-LDk.normalTitle">
+      <trans-unit id="a78-ih-LDk.normalTitle" approved="yes">
         <source>Coffee &amp; Tea</source>
         <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
-        <target xml:lang="de" state="translated">Kaffee &amp; Tee</target>
+        <target xml:lang="de">Kaffee &amp; Tee</target>
       </trans-unit>
       <trans-unit id="aNa-3g-QXd.placeholder">
         <source>Search</source>
@@ -314,20 +314,20 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="ga1-R0-wof.text">
+      <trans-unit id="ga1-R0-wof.text" approved="yes">
         <source>Type BTC</source>
         <note>Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof";</note>
-        <target xml:lang="de" state="translated">BTC eingeben</target>
+        <target xml:lang="de">BTC eingeben</target>
       </trans-unit>
-      <trans-unit id="heE-og-iXA.placeholder">
+      <trans-unit id="heE-og-iXA.placeholder" approved="yes">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA";</note>
-        <target xml:lang="de" state="translated">Suche</target>
+        <target xml:lang="de">Suche</target>
       </trans-unit>
-      <trans-unit id="kTm-at-TUR.normalTitle">
+      <trans-unit id="kTm-at-TUR.normalTitle" approved="yes">
         <source>Electronics</source>
         <note>Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR";</note>
-        <target xml:lang="de" state="translated">Elektronik</target>
+        <target xml:lang="de">Elektronik</target>
       </trans-unit>
       <trans-unit id="lFC-s8-IJT.text">
         <source>Label</source>
@@ -339,15 +339,15 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b";</note>
         <target xml:lang="de" state="translated">leftLabel</target>
       </trans-unit>
-      <trans-unit id="oyK-ph-99S.normalTitle">
+      <trans-unit id="oyK-ph-99S.normalTitle" approved="yes">
         <source>Restaurants</source>
         <note>Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S";</note>
-        <target xml:lang="de" state="translated">Restaurants</target>
+        <target xml:lang="de">Restaurants</target>
       </trans-unit>
-      <trans-unit id="sWr-pd-hBY.normalTitle">
+      <trans-unit id="sWr-pd-hBY.normalTitle" approved="yes">
         <source>ATMs</source>
         <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
-        <target xml:lang="de" state="translated">Geldautomaten</target>
+        <target xml:lang="de">Geldautomaten</target>
       </trans-unit>
       <trans-unit id="wy7-Kv-3ap.text">
         <source>Address 1234</source>
@@ -361,30 +361,30 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="2uL-vk-tLg.normalTitle">
+      <trans-unit id="2uL-vk-tLg.normalTitle" approved="yes">
         <source>5</source>
         <note>Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">5</target>
+        <target xml:lang="de">5</target>
       </trans-unit>
-      <trans-unit id="Aeb-Xc-JRe.normalTitle">
+      <trans-unit id="Aeb-Xc-JRe.normalTitle" approved="yes">
         <source>-</source>
         <note>Class = "UIButton"; normalTitle = "-"; ObjectID = "Aeb-Xc-JRe"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">-</target>
+        <target xml:lang="de">-</target>
       </trans-unit>
-      <trans-unit id="Emr-ag-G6B.normalTitle">
+      <trans-unit id="Emr-ag-G6B.normalTitle" approved="yes">
         <source>8</source>
         <note>Class = "UIButton"; normalTitle = "8"; ObjectID = "Emr-ag-G6B"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">8</target>
+        <target xml:lang="de">8</target>
       </trans-unit>
-      <trans-unit id="JE3-3X-s8v.normalTitle">
+      <trans-unit id="JE3-3X-s8v.normalTitle" approved="yes">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">Fertig</target>
+        <target xml:lang="de">Fertig</target>
       </trans-unit>
-      <trans-unit id="MCV-gu-4YU.normalTitle">
+      <trans-unit id="MCV-gu-4YU.normalTitle" approved="yes">
         <source>*</source>
         <note>Class = "UIButton"; normalTitle = "*"; ObjectID = "MCV-gu-4YU"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">*</target>
+        <target xml:lang="de">*</target>
       </trans-unit>
       <trans-unit id="O42-ZS-u2K.normalTitle">
         <source>C</source>
@@ -401,45 +401,45 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UIButton"; normalTitle = "4"; ObjectID = "P0f-iB-KJr"; Note = "Calculator Button";</note>
         <target xml:lang="de" state="translated">4</target>
       </trans-unit>
-      <trans-unit id="RyR-lU-hrP.normalTitle">
+      <trans-unit id="RyR-lU-hrP.normalTitle" approved="yes">
         <source>=</source>
         <note>Class = "UIButton"; normalTitle = "="; ObjectID = "RyR-lU-hrP"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">=</target>
+        <target xml:lang="de">=</target>
       </trans-unit>
-      <trans-unit id="Tqz-n7-FoF.normalTitle">
+      <trans-unit id="Tqz-n7-FoF.normalTitle" approved="yes">
         <source>9</source>
         <note>Class = "UIButton"; normalTitle = "9"; ObjectID = "Tqz-n7-FoF"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">9</target>
+        <target xml:lang="de">9</target>
       </trans-unit>
-      <trans-unit id="V76-TG-gfn.normalTitle">
+      <trans-unit id="V76-TG-gfn.normalTitle" approved="yes">
         <source>0</source>
         <note>Class = "UIButton"; normalTitle = "0"; ObjectID = "V76-TG-gfn"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">0</target>
+        <target xml:lang="de">0</target>
       </trans-unit>
-      <trans-unit id="b8e-QF-DXa.normalTitle">
+      <trans-unit id="b8e-QF-DXa.normalTitle" approved="yes">
         <source>1</source>
         <note>Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">1</target>
+        <target xml:lang="de">1</target>
       </trans-unit>
-      <trans-unit id="fTN-mi-eGB.normalTitle">
+      <trans-unit id="fTN-mi-eGB.normalTitle" approved="yes">
         <source>/</source>
         <note>Class = "UIButton"; normalTitle = "/"; ObjectID = "fTN-mi-eGB"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">/</target>
+        <target xml:lang="de">/</target>
       </trans-unit>
-      <trans-unit id="hpP-b8-SWQ.normalTitle">
+      <trans-unit id="hpP-b8-SWQ.normalTitle" approved="yes">
         <source>+</source>
         <note>Class = "UIButton"; normalTitle = "+"; ObjectID = "hpP-b8-SWQ"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">+</target>
+        <target xml:lang="de">+</target>
       </trans-unit>
       <trans-unit id="tNK-PX-QMO.normalTitle">
         <source>&lt; Del</source>
         <note>Class = "UIButton"; normalTitle = "&lt; Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button";</note>
         <target xml:lang="de" state="translated">&lt; Del</target>
       </trans-unit>
-      <trans-unit id="vjB-0i-g2w.normalTitle">
+      <trans-unit id="vjB-0i-g2w.normalTitle" approved="yes">
         <source>2</source>
         <note>Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button";</note>
-        <target xml:lang="de" state="translated">2</target>
+        <target xml:lang="de">2</target>
       </trans-unit>
       <trans-unit id="wVl-D5-w0P.normalTitle">
         <source>7</source>
@@ -475,10 +475,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="sls-ic-b1n.normalTitle">
+      <trans-unit id="sls-ic-b1n.normalTitle" approved="yes">
         <source>Agree </source>
         <note>Class = "UIButton"; normalTitle = "Agree "; ObjectID = "sls-ic-b1n";</note>
-        <target xml:lang="de" state="translated">Zustimmen </target>
+        <target xml:lang="de">Zustimmen </target>
       </trans-unit>
     </body>
   </file>
@@ -492,25 +492,25 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UITextField"; placeholder = "Current Password"; ObjectID = "0Ma-6E-cjS";</note>
         <target xml:lang="de" state="translated">Aktuelles Kennwort</target>
       </trans-unit>
-      <trans-unit id="0ea-NR-Nd9.normalTitle">
+      <trans-unit id="0ea-NR-Nd9.normalTitle" approved="yes">
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
-        <target xml:lang="de" state="translated">In diesem Monat</target>
+        <target xml:lang="de">In diesem Monat</target>
       </trans-unit>
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
         <target xml:lang="de" state="translated">Wallet öffentlicher Seed - XPub (fortgeschritten)</target>
       </trans-unit>
-      <trans-unit id="2cx-Qx-XQc.placeholder">
+      <trans-unit id="2cx-Qx-XQc.placeholder" approved="yes">
         <source>User Name</source>
         <note>Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc";</note>
-        <target xml:lang="de" state="translated">Benutzername</target>
+        <target xml:lang="de">Benutzername</target>
       </trans-unit>
-      <trans-unit id="3A3-3d-okn.text">
+      <trans-unit id="3A3-3d-okn.text" approved="yes">
         <source>Status Line 1</source>
         <note>Class = "UILabel"; text = "Status Line 1"; ObjectID = "3A3-3d-okn";</note>
-        <target xml:lang="de" state="translated">Statuszeile 1</target>
+        <target xml:lang="de">Statuszeile 1</target>
       </trans-unit>
       <trans-unit id="3Py-nn-1AR.normalTitle">
         <source>Advanced</source>
@@ -542,35 +542,35 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Label"; ObjectID = "6qu-Co-pyz";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="7wl-Lb-K8l.text">
+      <trans-unit id="7wl-Lb-K8l.text" approved="yes">
         <source>BTC</source>
         <note>Class = "UILabel"; text = "BTC"; ObjectID = "7wl-Lb-K8l";</note>
-        <target xml:lang="de" state="translated">BTC</target>
+        <target xml:lang="de">BTC</target>
       </trans-unit>
-      <trans-unit id="8Nr-wB-OaB.text">
+      <trans-unit id="8Nr-wB-OaB.text" approved="yes">
         <source>External Storage / Print</source>
         <note>Class = "UILabel"; text = "External Storage / Print"; ObjectID = "8Nr-wB-OaB";</note>
-        <target xml:lang="de" state="translated">Externer Speicher / Ausdruck</target>
+        <target xml:lang="de">Externer Speicher / Ausdruck</target>
       </trans-unit>
       <trans-unit id="8XB-1A-1hO.text">
         <source>Swipe to View Business Directory</source>
         <note>Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO";</note>
         <target xml:lang="de" state="translated">Streichen um Branchenverzeichnis anzusehen</target>
       </trans-unit>
-      <trans-unit id="8iz-Uc-LTS.normalTitle">
+      <trans-unit id="8iz-Uc-LTS.normalTitle" approved="yes">
         <source>Sign Up</source>
         <note>Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS";</note>
-        <target xml:lang="de" state="translated">Registrieren</target>
+        <target xml:lang="de">Registrieren</target>
       </trans-unit>
-      <trans-unit id="51g-oU-QIB.text">
+      <trans-unit id="51g-oU-QIB.text" approved="yes">
         <source>Import Wallet</source>
         <note>Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB";</note>
-        <target xml:lang="de" state="translated">Wallet importieren</target>
+        <target xml:lang="de">Wallet importieren</target>
       </trans-unit>
-      <trans-unit id="90X-8Y-MEH.normalTitle">
+      <trans-unit id="90X-8Y-MEH.normalTitle" approved="yes">
         <source>Last Year</source>
         <note>Class = "UIButton"; normalTitle = "Last Year"; ObjectID = "90X-8Y-MEH";</note>
-        <target xml:lang="de" state="translated">Letztes Jahr</target>
+        <target xml:lang="de">Letztes Jahr</target>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[0]">
         <source>Transfer</source>
@@ -617,35 +617,35 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q";</note>
         <target xml:lang="de" state="translated">Geben Sie Kennwort ein, um die Wallet zu entschlüsseln</target>
       </trans-unit>
-      <trans-unit id="Det-Mr-8a9.normalTitle">
+      <trans-unit id="Det-Mr-8a9.normalTitle" approved="yes">
         <source>Next Step</source>
         <note>Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9";</note>
-        <target xml:lang="de" state="translated">Nächster Schritt</target>
+        <target xml:lang="de">Nächster Schritt</target>
       </trans-unit>
-      <trans-unit id="Dh6-PA-WGi.text">
+      <trans-unit id="Dh6-PA-WGi.text" approved="yes">
         <source>Test</source>
         <note>Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi";</note>
-        <target xml:lang="de" state="translated">Test</target>
+        <target xml:lang="de">Test</target>
       </trans-unit>
       <trans-unit id="EuE-s0-NQ2.text">
         <source>USD</source>
         <note>Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2";</note>
         <target xml:lang="de" state="translated">US-DOLLAR</target>
       </trans-unit>
-      <trans-unit id="GFx-1Z-kFg.text">
+      <trans-unit id="GFx-1Z-kFg.text" approved="yes">
         <source>From:</source>
         <note>Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg";</note>
-        <target xml:lang="de" state="translated">Von:</target>
+        <target xml:lang="de">Von:</target>
       </trans-unit>
-      <trans-unit id="Hba-dd-to8.text">
+      <trans-unit id="Hba-dd-to8.text" approved="yes">
         <source>(Duplicate Names)</source>
         <note>Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8";</note>
-        <target xml:lang="de" state="translated">(Doppelte Namen)</target>
+        <target xml:lang="de">(Doppelte Namen)</target>
       </trans-unit>
-      <trans-unit id="HzM-6V-ckO.text">
+      <trans-unit id="HzM-6V-ckO.text" approved="yes">
         <source>Export</source>
         <note>Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO";</note>
-        <target xml:lang="de" state="translated">Exportieren</target>
+        <target xml:lang="de">Exportieren</target>
         <alt-trans>
           <target xml:lang="de">Export</target>
         </alt-trans>
@@ -660,20 +660,20 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ";</note>
         <target xml:lang="de" state="translated">PRIVATER SCHLÜSSEL</target>
       </trans-unit>
-      <trans-unit id="KTi-U4-C5T.placeholder">
+      <trans-unit id="KTi-U4-C5T.placeholder" approved="yes">
         <source>Enter PIN</source>
         <note>Class = "UITextField"; placeholder = "Enter PIN"; ObjectID = "KTi-U4-C5T";</note>
-        <target xml:lang="de" state="translated">PIN eingeben</target>
+        <target xml:lang="de">PIN eingeben</target>
       </trans-unit>
-      <trans-unit id="L8T-Xw-aVE.text">
+      <trans-unit id="L8T-Xw-aVE.text" approved="yes">
         <source>Notes</source>
         <note>Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE";</note>
-        <target xml:lang="de" state="translated">Notizen</target>
+        <target xml:lang="de">Notizen</target>
       </trans-unit>
-      <trans-unit id="LI5-7a-oQG.text">
+      <trans-unit id="LI5-7a-oQG.text" approved="yes">
         <source>Start Date</source>
         <note>Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG";</note>
-        <target xml:lang="de" state="translated">Startdatum</target>
+        <target xml:lang="de">Startdatum</target>
       </trans-unit>
       <trans-unit id="LPo-UX-ZHi.normalTitle">
         <source>Send</source>
@@ -685,10 +685,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Copy Public Address"; ObjectID = "Maf-2U-Gv8";</note>
         <target xml:lang="de" state="translated">Öffentliche Adresse kopieren</target>
       </trans-unit>
-      <trans-unit id="NBj-ek-BcU.normalTitle">
+      <trans-unit id="NBj-ek-BcU.normalTitle" approved="yes">
         <source>Last Week</source>
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
-        <target xml:lang="de" state="translated">Letzte Woche</target>
+        <target xml:lang="de">Letzte Woche</target>
       </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text">
         <source>PUBLIC ADDRESS</source>
@@ -792,10 +792,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY";</note>
         <target xml:lang="de" state="translated">Wallet Privatseed (fortgeschritten)</target>
       </trans-unit>
-      <trans-unit id="WB0-Ox-RAw.text">
+      <trans-unit id="WB0-Ox-RAw.text" approved="yes">
         <source>4 Digit PIN</source>
         <note>Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw";</note>
-        <target xml:lang="de" state="translated">4-stellige PIN</target>
+        <target xml:lang="de">4-stellige PIN</target>
       </trans-unit>
       <trans-unit id="Yfp-gi-q8F.text">
         <source>Label</source>
@@ -816,10 +816,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UITextField"; placeholder = "Private key"; ObjectID = "ZTK-Sq-FqJ";</note>
         <target xml:lang="de" state="translated">Privater Schlüssel</target>
       </trans-unit>
-      <trans-unit id="ZW8-Za-VVy.text">
+      <trans-unit id="ZW8-Za-VVy.text" approved="yes">
         <source>Sent From:</source>
         <note>Class = "UILabel"; text = "Sent From:"; ObjectID = "ZW8-Za-VVy";</note>
-        <target xml:lang="de" state="translated">Gesendet von:</target>
+        <target xml:lang="de">Gesendet von:</target>
       </trans-unit>
       <trans-unit id="a3J-4E-YSl.text">
         <source>Label</source>
@@ -847,20 +847,20 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
           <target xml:lang="de">Scannen des QR um Fonds zu senden oder loggen Sie sich mit BitID ein</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="cix-f2-i3I.normalTitle">
+      <trans-unit id="cix-f2-i3I.normalTitle" approved="yes">
         <source>Skip This Step</source>
         <note>Class = "UIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I";</note>
-        <target xml:lang="de" state="translated">Überspringen Sie diesen Schritt</target>
+        <target xml:lang="de">Überspringen Sie diesen Schritt</target>
       </trans-unit>
       <trans-unit id="dKh-rY-DMM.normalTitle">
         <source>OK</source>
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "dKh-rY-DMM";</note>
         <target xml:lang="de" state="translated">Okay</target>
       </trans-unit>
-      <trans-unit id="dm1-b8-Vp0.text">
+      <trans-unit id="dm1-b8-Vp0.text" approved="yes">
         <source>End Date</source>
         <note>Class = "UILabel"; text = "End Date"; ObjectID = "dm1-b8-Vp0";</note>
-        <target xml:lang="de" state="translated">Enddatum</target>
+        <target xml:lang="de">Enddatum</target>
       </trans-unit>
       <trans-unit id="egu-Uy-luw.placeholder">
         <source>PIN Spending Limit</source>
@@ -877,20 +877,20 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UILabel"; text = "Label"; ObjectID = "iE3-Jv-3vs";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="iXW-st-n5q.text">
+      <trans-unit id="iXW-st-n5q.text" approved="yes">
         <source>Camera unavailable</source>
         <note>Class = "UILabel"; text = "Camera unavailable"; ObjectID = "iXW-st-n5q";</note>
-        <target xml:lang="de" state="translated">Kamera nicht verfügbar</target>
+        <target xml:lang="de">Kamera nicht verfügbar</target>
       </trans-unit>
       <trans-unit id="ifv-G8-Cxe.text">
         <source>(Requires password above daily limit)</source>
         <note>Class = "UILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe";</note>
         <target xml:lang="de" state="translated">(Erfordert Passwort über tägliches Limit)</target>
       </trans-unit>
-      <trans-unit id="j3q-OI-el3.title">
+      <trans-unit id="j3q-OI-el3.title" approved="yes">
         <source>Transactions</source>
         <note>Class = "UITabBarItem"; title = "Transactions"; ObjectID = "j3q-OI-el3";</note>
-        <target xml:lang="de" state="translated">Transaktionen</target>
+        <target xml:lang="de">Transaktionen</target>
       </trans-unit>
       <trans-unit id="jDp-Og-qtC.title">
         <source>Main View Controller</source>
@@ -902,35 +902,35 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[0] = "Copy"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
         <target xml:lang="de" state="translated">Kopie</target>
       </trans-unit>
-      <trans-unit id="jlL-oE-aWy.segmentTitles[1]">
+      <trans-unit id="jlL-oE-aWy.segmentTitles[1]" approved="yes">
         <source>Email</source>
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[1] = "Email"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
-        <target xml:lang="de" state="translated">E-Mail</target>
+        <target xml:lang="de">E-Mail</target>
       </trans-unit>
-      <trans-unit id="jlL-oE-aWy.segmentTitles[2]">
+      <trans-unit id="jlL-oE-aWy.segmentTitles[2]" approved="yes">
         <source>SMS</source>
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
-        <target xml:lang="de" state="translated">SMS</target>
+        <target xml:lang="de">SMS</target>
       </trans-unit>
       <trans-unit id="jrM-St-5IO.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "jrM-St-5IO";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="kjs-dz-76a.normalTitle">
+      <trans-unit id="kjs-dz-76a.normalTitle" approved="yes">
         <source>Save</source>
         <note>Class = "UIButton"; normalTitle = "Save"; ObjectID = "kjs-dz-76a";</note>
-        <target xml:lang="de" state="translated">Speichern</target>
+        <target xml:lang="de">Speichern</target>
       </trans-unit>
       <trans-unit id="ltN-lB-ATB.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB";</note>
         <target xml:lang="de" state="translated">Suche</target>
       </trans-unit>
-      <trans-unit id="n7B-WE-395.normalTitle">
+      <trans-unit id="n7B-WE-395.normalTitle" approved="yes">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "n7B-WE-395";</note>
-        <target xml:lang="de" state="translated">Fertig</target>
+        <target xml:lang="de">Fertig</target>
       </trans-unit>
       <trans-unit id="nae-d6-xoW.text">
         <source>Bitcoin Wallet</source>
@@ -1026,10 +1026,10 @@ Dies wird niemals an Airbitz oder einer dritten Partei gesendet und kann jederze
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
         <target xml:lang="de" state="translated">Okay</target>
       </trans-unit>
-      <trans-unit id="25.normalTitle">
+      <trans-unit id="25.normalTitle" approved="yes">
         <source>Cancel</source>
         <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25";</note>
-        <target xml:lang="de" state="translated">Abbrechen</target>
+        <target xml:lang="de">Abbrechen</target>
       </trans-unit>
     </body>
   </file>
@@ -1095,25 +1095,25 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
 Scannen Sie den QR-Code mit diesem Gerät</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="LAg-aY-W5b.normalTitle">
+      <trans-unit id="LAg-aY-W5b.normalTitle" approved="yes">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b";</note>
-        <target xml:lang="de" state="translated">FERTIG</target>
+        <target xml:lang="de">FERTIG</target>
       </trans-unit>
-      <trans-unit id="Myh-H6-aDd.text">
+      <trans-unit id="Myh-H6-aDd.text" approved="yes">
         <source>Version:</source>
         <note>Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd";</note>
-        <target xml:lang="de" state="translated">Version:</target>
+        <target xml:lang="de">Version:</target>
       </trans-unit>
       <trans-unit id="RqX-ow-U05.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="SXK-F7-NoK.text">
+      <trans-unit id="SXK-F7-NoK.text" approved="yes">
         <source>0.1.0-mainnet</source>
         <note>Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK";</note>
-        <target xml:lang="de" state="translated">0.1.0-mainnet</target>
+        <target xml:lang="de">0.1.0-mainnet</target>
       </trans-unit>
       <trans-unit id="T6x-zH-xvf.text">
         <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
@@ -1123,10 +1123,10 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
           <target xml:lang="de">Dieses Konto verfügt über 2-Faktor-Authentifizierung (2FA) aktiviert. Scannen Sie das 2FA Token aus dem Gerät, die 2FA, Zugang zu diesem Gerät aktiviert. </target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="X6G-HD-WUv.placeholder">
+      <trans-unit id="X6G-HD-WUv.placeholder" approved="yes">
         <source>Search</source>
         <note>Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv";</note>
-        <target xml:lang="de" state="translated">Suche</target>
+        <target xml:lang="de">Suche</target>
       </trans-unit>
       <trans-unit id="XJN-At-Qod.text">
         <source>Label</source>
@@ -1181,38 +1181,38 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
         <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
         <target xml:lang="de" state="translated">Aktiviert</target>
       </trans-unit>
-      <trans-unit id="nhU-8o-H50.normalTitle">
+      <trans-unit id="nhU-8o-H50.normalTitle" approved="yes">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50";</note>
-        <target xml:lang="de" state="translated">Button</target>
+        <target xml:lang="de">Button</target>
       </trans-unit>
       <trans-unit id="pX1-NU-49a.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="pki-9D-VwL.normalTitle">
+      <trans-unit id="pki-9D-VwL.normalTitle" approved="yes">
         <source>Scan Token</source>
         <note>Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL";</note>
-        <target xml:lang="de" state="translated">Token scannen</target>
+        <target xml:lang="de">Token scannen</target>
         <alt-trans>
           <target xml:lang="de">Scan-Token</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="qLK-qd-7qg.text">
+      <trans-unit id="qLK-qd-7qg.text" approved="yes">
         <source>Network:</source>
         <note>Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg";</note>
-        <target xml:lang="de" state="translated">Netzwerk:</target>
+        <target xml:lang="de">Netzwerk:</target>
       </trans-unit>
-      <trans-unit id="sZm-Gx-M8r.text">
+      <trans-unit id="sZm-Gx-M8r.text" approved="yes">
         <source>App Version</source>
         <note>Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r";</note>
-        <target xml:lang="de" state="translated">App-Version</target>
+        <target xml:lang="de">App-Version</target>
       </trans-unit>
-      <trans-unit id="th1-bn-E4x.normalTitle">
+      <trans-unit id="th1-bn-E4x.normalTitle" approved="yes">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x";</note>
-        <target xml:lang="de" state="translated">ABBRECHEN</target>
+        <target xml:lang="de">ABBRECHEN</target>
       </trans-unit>
     </body>
   </file>
@@ -1231,20 +1231,20 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c";</note>
         <target xml:lang="de" state="translated">Logout</target>
       </trans-unit>
-      <trans-unit id="Lwy-1d-Qgs.accessibilityLabel">
+      <trans-unit id="Lwy-1d-Qgs.accessibilityLabel" approved="yes">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs";</note>
-        <target xml:lang="de" state="translated">Kaufen oder verkaufen</target>
+        <target xml:lang="de">Kaufen oder verkaufen</target>
       </trans-unit>
       <trans-unit id="O8N-2d-FwL.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="Zac-Lf-J4y.text">
+      <trans-unit id="Zac-Lf-J4y.text" approved="yes">
         <source>SETTINGS</source>
         <note>Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y";</note>
-        <target xml:lang="de" state="translated">EINSTELLUNGEN</target>
+        <target xml:lang="de">EINSTELLUNGEN</target>
       </trans-unit>
       <trans-unit id="Zu4-Fd-NGP.accessibilityLabel">
         <source>Buy or Sell</source>
@@ -1261,40 +1261,40 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h";</note>
         <target xml:lang="de" state="translated">Strings.h ansehen</target>
       </trans-unit>
-      <trans-unit id="jpu-23-4kh.accessibilityLabel">
+      <trans-unit id="jpu-23-4kh.accessibilityLabel" approved="yes">
         <source>Buy or Sell</source>
         <note>Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh";</note>
-        <target xml:lang="de" state="translated">Kaufen oder verkaufen</target>
+        <target xml:lang="de">Kaufen oder verkaufen</target>
       </trans-unit>
-      <trans-unit id="lr4-kO-HCW.text">
+      <trans-unit id="lr4-kO-HCW.text" approved="yes">
         <source>WALLETS</source>
         <note>Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW";</note>
-        <target xml:lang="de" state="translated">WALLETS</target>
+        <target xml:lang="de">WALLETS</target>
       </trans-unit>
-      <trans-unit id="rWQ-uJ-DUX.text">
+      <trans-unit id="rWQ-uJ-DUX.text" approved="yes">
         <source>BUY / SELL BITCOIN</source>
         <note>Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX";</note>
-        <target xml:lang="de" state="translated">BITCOIN KAUFEN / VERKAUFEN</target>
+        <target xml:lang="de">BITCOIN KAUFEN / VERKAUFEN</target>
       </trans-unit>
-      <trans-unit id="vsf-Ms-1Ff.accessibilityHint">
+      <trans-unit id="vsf-Ms-1Ff.accessibilityHint" approved="yes">
         <source>the currently logged in account</source>
         <note>Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="de" state="translated">das aktuell angemeldete Konto</target>
+        <target xml:lang="de">das aktuell angemeldete Konto</target>
       </trans-unit>
       <trans-unit id="vsf-Ms-1Ff.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff";</note>
         <target xml:lang="de" state="translated">Label</target>
       </trans-unit>
-      <trans-unit id="xju-3Y-EvK.text">
+      <trans-unit id="xju-3Y-EvK.text" approved="yes">
         <source>See Strings.h</source>
         <note>Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK";</note>
-        <target xml:lang="de" state="translated">Strings.h ansehen</target>
+        <target xml:lang="de">Strings.h ansehen</target>
       </trans-unit>
-      <trans-unit id="xna-m1-9hx.accessibilityLabel">
+      <trans-unit id="xna-m1-9hx.accessibilityLabel" approved="yes">
         <source>Settings</source>
         <note>Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx";</note>
-        <target xml:lang="de" state="translated">Einstellungen</target>
+        <target xml:lang="de">Einstellungen</target>
       </trans-unit>
     </body>
   </file>
@@ -1303,25 +1303,25 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="61J-35-M5b.placeholder">
+      <trans-unit id="61J-35-M5b.placeholder" approved="yes">
         <source>Name your new wallet</source>
         <note>Class = "UITextField"; placeholder = "Name your new wallet"; ObjectID = "61J-35-M5b";</note>
-        <target xml:lang="de" state="translated">Benennen Sie Ihre neue Wallet</target>
+        <target xml:lang="de">Benennen Sie Ihre neue Wallet</target>
       </trans-unit>
-      <trans-unit id="HuB-Hn-lsB.text">
+      <trans-unit id="HuB-Hn-lsB.text" approved="yes">
         <source>Currency:</source>
         <note>Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB";</note>
-        <target xml:lang="de" state="translated">Währung:</target>
+        <target xml:lang="de">Währung:</target>
       </trans-unit>
-      <trans-unit id="Ug5-7Y-oG3.normalTitle">
+      <trans-unit id="Ug5-7Y-oG3.normalTitle" approved="yes">
         <source>CANCEL</source>
         <note>Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3";</note>
-        <target xml:lang="de" state="translated">ABBRECHEN</target>
+        <target xml:lang="de">ABBRECHEN</target>
       </trans-unit>
-      <trans-unit id="VVb-in-rZz.normalTitle">
+      <trans-unit id="VVb-in-rZz.normalTitle" approved="yes">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "VVb-in-rZz";</note>
-        <target xml:lang="de" state="translated">Button</target>
+        <target xml:lang="de">Button</target>
       </trans-unit>
       <trans-unit id="bfD-1n-tCg.normalTitle">
         <source>DONE</source>
@@ -1360,6 +1360,11 @@ Scannen Sie den QR-Code mit diesem Gerät</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">%@ Bitcoin erhalten. Tippen Sie für Details.</target>
       </trans-unit>
+      <trans-unit id="%@ Recovery Token">
+        <source>%@ Recovery Token</source>
+        <note>\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet</note>
+        <target xml:lang="de" state="needs-translation">%@ Recovery Token</target>
+      </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
 %2$@</source>
@@ -1386,10 +1391,10 @@ Teilen Sie diesen Link, um Einnahmen von Benutzern zu erhalten, die %2$@ install
 Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nstallieren und verwenden. 0.25%% aller Geschenkkarteneinkäufe innerhalb dieser App erhalten Sie hier.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="** Warning **">
+      <trans-unit id="** Warning **" approved="yes">
         <source>** Warning **</source>
         <note>** Warning ** text on partial payment</note>
-        <target xml:lang="de" state="translated">** Warnung **</target>
+        <target xml:lang="de">** Warnung **</target>
       </trans-unit>
       <trans-unit id="**WARNING** You will NEVER be able to recover your password if it is forgotten!!">
         <source>**WARNING** You will NEVER be able to recover your password if it is forgotten!!</source>
@@ -1399,38 +1404,38 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
           <target xml:lang="de">**WARNUNG** Sie werden NIE in der Lage sein, Ihr Passwort wiederherzustellen, wenn es vergessen wird!!</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="2 Factor (Enhanced Security)">
+      <trans-unit id="2 Factor (Enhanced Security)" approved="yes">
         <source>2 Factor (Enhanced Security)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">2-Faktor (erhöhte Sicherheit)</target>
+        <target xml:lang="de">2-Faktor (erhöhte Sicherheit)</target>
       </trans-unit>
-      <trans-unit id="4 Digit PIN">
+      <trans-unit id="4 Digit PIN" approved="yes">
         <source>4 Digit PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">4-stellige PIN</target>
+        <target xml:lang="de">4-stellige PIN</target>
       </trans-unit>
-      <trans-unit id="15-20% off Amazon">
+      <trans-unit id="15-20% off Amazon" approved="yes">
         <source>15-20% off Amazon</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">15% - 20 % Rabatt auf Amazon</target>
+        <target xml:lang="de">15% - 20 % Rabatt auf Amazon</target>
       </trans-unit>
       <trans-unit id="A two factor reset has been requested. If you did not create this request, login as %@ and change your password.">
         <source>A two factor reset has been requested. If you did not create this request, login as %@ and change your password.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Ein Zwei-Faktor-Reset wurde angefordert. Wenn Sie diese Anforderung nicht erstellt haben, melden Sie sich als %@ an und ändern Sie Ihr Passwort.</target>
       </trans-unit>
-      <trans-unit id="ACCOUNT: ">
+      <trans-unit id="ACCOUNT: " approved="yes">
         <source>ACCOUNT: </source>
         <note>section header in settings table</note>
-        <target xml:lang="de" state="translated">KONTO: </target>
+        <target xml:lang="de">KONTO: </target>
         <alt-trans>
           <target xml:lang="de">KONTO </target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="ARCHIVE">
+      <trans-unit id="ARCHIVE" approved="yes">
         <source>ARCHIVE</source>
         <note>title of archived wallets table</note>
-        <target xml:lang="de" state="translated">ARCHIV</target>
+        <target xml:lang="de">ARCHIV</target>
       </trans-unit>
       <trans-unit id="ATM">
         <source>ATM</source>
@@ -1486,25 +1491,25 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Flugreise</target>
       </trans-unit>
-      <trans-unit id="AirPrint is not currently available">
+      <trans-unit id="AirPrint is not currently available" approved="yes">
         <source>AirPrint is not currently available</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">AirPrint ist derzeit nicht verfügbar</target>
+        <target xml:lang="de">AirPrint ist derzeit nicht verfügbar</target>
       </trans-unit>
-      <trans-unit id="Alcohol &amp; Bars">
+      <trans-unit id="Alcohol &amp; Bars" approved="yes">
         <source>Alcohol &amp; Bars</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Alkohol &amp; Bars</target>
+        <target xml:lang="de">Alkohol &amp; Bars</target>
       </trans-unit>
       <trans-unit id="Allowance">
         <source>Allowance</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Bewilling</target>
       </trans-unit>
-      <trans-unit id="Amount is too small">
+      <trans-unit id="Amount is too small" approved="yes">
         <source>Amount is too small</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Betrag zu klein</target>
+        <target xml:lang="de">Betrag zu klein</target>
       </trans-unit>
       <trans-unit id="Amusement">
         <source>Amusement</source>
@@ -1516,10 +1521,10 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Eine App beantragt eine Bitcoin-Adresse um Geld zu senden.</target>
       </trans-unit>
-      <trans-unit id="An error occurred. Please check your network connection. You may also exit PIN login and use your username &amp; password to login offline">
+      <trans-unit id="An error occurred. Please check your network connection. You may also exit PIN login and use your username &amp; password to login offline" approved="yes">
         <source>An error occurred. Please check your network connection. You may also exit PIN login and use your username &amp; password to login offline</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung. Sie können auch die PIN-Anmeldung beenden und Ihren Benutzernamen sowie Ihr Passwort für den Offline-Login verwenden</target>
+        <target xml:lang="de">Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung. Sie können auch die PIN-Anmeldung beenden und Ihren Benutzernamen sowie Ihr Passwort für den Offline-Login verwenden</target>
         <alt-trans>
           <target xml:lang="de">Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Netzwerkverbindung. Sie können auch die PIN-Anmeldung beenden und Ihren Benutzernamen sowie Passwort für den Offline-Login verwenden</target>
         </alt-trans>
@@ -1537,15 +1542,15 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>Warning for password recovery textfields</note>
         <target xml:lang="de" state="translated">Antworten in Groß-/Kleinschreibung</target>
       </trans-unit>
-      <trans-unit id="Are you sure you want to call">
+      <trans-unit id="Are you sure you want to call" approved="yes">
         <source>Are you sure you want to call</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Sind Sie sicher, dass Sie anrufen möchten</target>
+        <target xml:lang="de">Sind Sie sicher, dass Sie anrufen möchten</target>
       </trans-unit>
-      <trans-unit id="Are you sure you want to cancel any changes you've made?">
+      <trans-unit id="Are you sure you want to cancel any changes you've made?" approved="yes">
         <source>Are you sure you want to cancel any changes you've made?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Sind Sie sicher, dass Sie alle vorgenommenen Änderungen widerrufen möchten?</target>
+        <target xml:lang="de">Sind Sie sicher, dass Sie alle vorgenommenen Änderungen widerrufen möchten?</target>
         <alt-trans>
           <target xml:lang="de">Sind Sie sicher, dass Sie alle vorgenommenen Änderungen abbrechen möchten?</target>
         </alt-trans>
@@ -1558,25 +1563,25 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
           <target xml:lang="de">Bist du sicher? Sie werden nicht in der Lage sein, Zugriff auf alle Gelder in dieser Wallet und künftigen Beträge zu haben, die Sie erhalten können</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Arts">
+      <trans-unit id="Arts" approved="yes">
         <source>Arts</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kunst</target>
+        <target xml:lang="de">Kunst</target>
       </trans-unit>
-      <trans-unit id="Auto &amp; Transport">
+      <trans-unit id="Auto &amp; Transport" approved="yes">
         <source>Auto &amp; Transport</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Auto &amp; Transport</target>
+        <target xml:lang="de">Auto &amp; Transport</target>
       </trans-unit>
-      <trans-unit id="Auto Insurance">
+      <trans-unit id="Auto Insurance" approved="yes">
         <source>Auto Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Autoversicherung</target>
+        <target xml:lang="de">Autoversicherung</target>
       </trans-unit>
-      <trans-unit id="Auto Payment">
+      <trans-unit id="Auto Payment" approved="yes">
         <source>Auto Payment</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Automatische Zahlung</target>
+        <target xml:lang="de">Automatische Zahlung</target>
       </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
@@ -1658,40 +1663,40 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>settings text</note>
         <target xml:lang="de" state="translated">Bluetooth</target>
       </trans-unit>
-      <trans-unit id="Books">
+      <trans-unit id="Books" approved="yes">
         <source>Books</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bücher</target>
+        <target xml:lang="de">Bücher</target>
       </trans-unit>
-      <trans-unit id="Books &amp; Supplies">
+      <trans-unit id="Books &amp; Supplies" approved="yes">
         <source>Books &amp; Supplies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bücher &amp; Zubehör</target>
+        <target xml:lang="de">Bücher &amp; Zubehör</target>
       </trans-unit>
-      <trans-unit id="Business Name or Category">
+      <trans-unit id="Business Name or Category" approved="yes">
         <source>Business Name or Category</source>
         <note>Business Name or Category placeholder</note>
-        <target xml:lang="de" state="translated">Firmenname oder Kategorie</target>
+        <target xml:lang="de">Firmenname oder Kategorie</target>
       </trans-unit>
-      <trans-unit id="Buy Bitcoin">
+      <trans-unit id="Buy Bitcoin" approved="yes">
         <source>Buy Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitcoin kaufen</target>
+        <target xml:lang="de">Bitcoin kaufen</target>
       </trans-unit>
-      <trans-unit id="Buy/Sell Bitcoin">
+      <trans-unit id="Buy/Sell Bitcoin" approved="yes">
         <source>Buy/Sell Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitcoin kaufen / verkaufen </target>
+        <target xml:lang="de">Bitcoin kaufen / verkaufen </target>
       </trans-unit>
-      <trans-unit id="CANCEL">
+      <trans-unit id="CANCEL" approved="yes">
         <source>CANCEL</source>
         <note>Generic CANCEL button text</note>
-        <target xml:lang="de" state="translated">ABBRECHEN</target>
+        <target xml:lang="de">ABBRECHEN</target>
       </trans-unit>
-      <trans-unit id="CHANGE">
+      <trans-unit id="CHANGE" approved="yes">
         <source>CHANGE</source>
         <note>CHANGE button text</note>
-        <target xml:lang="de" state="translated">ÄNDERN</target>
+        <target xml:lang="de">ÄNDERN</target>
         <alt-trans>
           <target xml:lang="de">ÄNDERUNG</target>
         </alt-trans>
@@ -1704,10 +1709,10 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
           <target xml:lang="de">Kamera nicht verfügbar. Bitte aktivieren Sie Kamerazugriff unter Privatsphäre-Einstellungen Ihres Telefons</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Can't send e-mail">
+      <trans-unit id="Can't send e-mail" approved="yes">
         <source>Can't send e-mail</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">E-Mail kann nicht gesendet werden.</target>
+        <target xml:lang="de">E-Mail kann nicht gesendet werden.</target>
       </trans-unit>
       <trans-unit id="Cannot delete wallet as it contains funds. Please transfer out funds first.">
         <source>Cannot delete wallet as it contains funds. Please transfer out funds first.</source>
@@ -1717,45 +1722,45 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
           <target xml:lang="de">Wallet kann nicht gelöscht werden, da diese Fonds enthält. Bitte überweisen Sie Fond zuerst.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Car Wash">
+      <trans-unit id="Car Wash" approved="yes">
         <source>Car Wash</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Autowäsche</target>
+        <target xml:lang="de">Autowäsche</target>
       </trans-unit>
-      <trans-unit id="Cash &amp; ATM">
+      <trans-unit id="Cash &amp; ATM" approved="yes">
         <source>Cash &amp; ATM</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bargeld &amp; GAA</target>
+        <target xml:lang="de">Bargeld &amp; GAA</target>
       </trans-unit>
-      <trans-unit id="Categories">
+      <trans-unit id="Categories" approved="yes">
         <source>Categories</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kategorien</target>
+        <target xml:lang="de">Kategorien</target>
       </trans-unit>
-      <trans-unit id="Change Categories">
+      <trans-unit id="Change Categories" approved="yes">
         <source>Change Categories</source>
         <note>settings text</note>
-        <target xml:lang="de" state="translated">Kategorien ändern</target>
+        <target xml:lang="de">Kategorien ändern</target>
       </trans-unit>
       <trans-unit id="Change Mining Fee">
         <source>Change Mining Fee</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Mining-Gebühr ändern</target>
       </trans-unit>
-      <trans-unit id="Change PIN">
+      <trans-unit id="Change PIN" approved="yes">
         <source>Change PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">PIN ändern</target>
+        <target xml:lang="de">PIN ändern</target>
       </trans-unit>
-      <trans-unit id="Change Password">
+      <trans-unit id="Change Password" approved="yes">
         <source>Change Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort ändern</target>
+        <target xml:lang="de">Passwort ändern</target>
       </trans-unit>
-      <trans-unit id="Change recovery questions">
+      <trans-unit id="Change recovery questions" approved="yes">
         <source>Change recovery questions</source>
         <note>settings text</note>
-        <target xml:lang="de" state="translated">Wiederherstellungsfragen ändern</target>
+        <target xml:lang="de">Wiederherstellungsfragen ändern</target>
       </trans-unit>
       <trans-unit id="Charity">
         <source>Charity</source>
@@ -1767,40 +1772,45 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>Check password button text</note>
         <target xml:lang="de" state="translated">Kennwort überprüfen</target>
       </trans-unit>
-      <trans-unit id="Checking password...">
+      <trans-unit id="Checking password..." approved="yes">
         <source>Checking password...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort wird überprüft...</target>
+        <target xml:lang="de">Passwort wird überprüft...</target>
+      </trans-unit>
+      <trans-unit id="Choose a Question">
+        <source>Choose a Question</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Choose a Question</target>
       </trans-unit>
       <trans-unit id="City, State/Province, or Country">
         <source>City, State/Province, or Country</source>
         <note>City, State/Province, or Country placeholder</note>
         <target xml:lang="de" state="translated">Stadt, Bundesland/Kanton oder Land</target>
       </trans-unit>
-      <trans-unit id="Close">
+      <trans-unit id="Close" approved="yes">
         <source>Close</source>
         <note>Generic CLOSE button text</note>
-        <target xml:lang="de" state="translated">Schließen</target>
+        <target xml:lang="de">Schließen</target>
       </trans-unit>
-      <trans-unit id="Clothing">
+      <trans-unit id="Clothing" approved="yes">
         <source>Clothing</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kleidung</target>
+        <target xml:lang="de">Kleidung</target>
       </trans-unit>
-      <trans-unit id="Coffee &amp; Tea">
+      <trans-unit id="Coffee &amp; Tea" approved="yes">
         <source>Coffee &amp; Tea</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kaffee &amp; Tee</target>
+        <target xml:lang="de">Kaffee &amp; Tee</target>
       </trans-unit>
       <trans-unit id="Coffee Shops">
         <source>Coffee Shops</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="de" state="translated">Café</target>
       </trans-unit>
-      <trans-unit id="Complete Signup">
+      <trans-unit id="Complete Signup" approved="yes">
         <source>Complete Signup</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Vollständige Registrierung</target>
+        <target xml:lang="de">Vollständige Registrierung</target>
       </trans-unit>
       <trans-unit id="Confirmation">
         <source>Confirmation</source>
@@ -1877,11 +1887,6 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>section header in settings table</note>
         <target xml:lang="de" state="translated">STANDARD-WECHSELKURS</target>
       </trans-unit>
-      <trans-unit id="DISCOUNTED GIFT CARDS">
-        <source>DISCOUNTED GIFT CARDS</source>
-        <note>Slideout menu gift card text</note>
-        <target xml:lang="de" state="translated">ERMÄßIGTE GESCHANKKARTEN</target>
-      </trans-unit>
       <trans-unit id="Debug">
         <source>Debug</source>
         <note>debug text</note>
@@ -1892,10 +1897,10 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Debug Log-Datei</target>
       </trans-unit>
-      <trans-unit id="Debug Options">
+      <trans-unit id="Debug Options" approved="yes">
         <source>Debug Options</source>
         <note>Debug screen header title</note>
-        <target xml:lang="de" state="translated">Debug Optionen</target>
+        <target xml:lang="de">Debug Optionen</target>
       </trans-unit>
       <trans-unit id="Default Currency">
         <source>Default Currency</source>
@@ -1907,10 +1912,10 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
         <note>settings text</note>
         <target xml:lang="de" state="translated">Standard-Austausch</target>
       </trans-unit>
-      <trans-unit id="Delete">
+      <trans-unit id="Delete" approved="yes">
         <source>Delete</source>
         <note>DELETE button text for wallet delete</note>
-        <target xml:lang="de" state="translated">Löschen</target>
+        <target xml:lang="de">Löschen</target>
       </trans-unit>
       <trans-unit id="Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.">
         <source>Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it.</source>
@@ -1925,159 +1930,151 @@ Teilen Sie diesen Link, um die Einnahmen von Benutzern zu erhalten, die %2$@ nst
           <target xml:lang="de">"%@" auf diesem Gerät löschen? Dieses sperrt Zugang via PIN. Wenn 2FA auf diesem Konto aktiviert ist, wird dieses Gerät nicht angemeldet, ohne ein 2FA-Reset, der 7 Tage dauert.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Delete Account">
+      <trans-unit id="Delete Account" approved="yes">
         <source>Delete Account</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Konto löschen</target>
+        <target xml:lang="de">Konto löschen</target>
       </trans-unit>
       <trans-unit id="Delete Wallet">
         <source>Delete Wallet</source>
         <note>Delete Wallet popup</note>
         <target xml:lang="de" state="translated">Wallet löschen?</target>
       </trans-unit>
-      <trans-unit id="Deleting Wallet">
+      <trans-unit id="Deleting Wallet" approved="yes">
         <source>Deleting Wallet</source>
         <note>Text for popup while deleting wallet</note>
-        <target xml:lang="de" state="translated">Lösche Wallet</target>
+        <target xml:lang="de">Lösche Wallet</target>
       </trans-unit>
-      <trans-unit id="Dentist">
+      <trans-unit id="Dentist" approved="yes">
         <source>Dentist</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Zahnarzt</target>
+        <target xml:lang="de">Zahnarzt</target>
       </trans-unit>
       <trans-unit id="Deposit to Savings">
         <source>Deposit to Savings</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Auf Ersparnisse einzahlen</target>
       </trans-unit>
-      <trans-unit id="Designed and Built by Airbitz in">
+      <trans-unit id="Designed and Built by Airbitz in" approved="yes">
         <source>Designed and Built by Airbitz in</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Entworfen und erstellt von Airbitz in</target>
+        <target xml:lang="de">Entworfen und erstellt von Airbitz in</target>
       </trans-unit>
-      <trans-unit id="Directory">
+      <trans-unit id="Directory" approved="yes">
         <source>Directory</source>
         <note>Directory title bar text</note>
-        <target xml:lang="de" state="translated">Verzeichnis</target>
+        <target xml:lang="de">Verzeichnis</target>
       </trans-unit>
-      <trans-unit id="Disabled">
+      <trans-unit id="Disabled" approved="yes">
         <source>Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Deaktiviert</target>
-      </trans-unit>
-      <trans-unit id="Discounted Gift Cards">
-        <source>Discounted Gift Cards</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Ermäßigte Geschenkkarten</target>
-        <alt-trans>
-          <target xml:lang="de">Ermäßigte Karten</target>
-        </alt-trans>
+        <target xml:lang="de">Deaktiviert</target>
       </trans-unit>
       <trans-unit id="Div Income">
         <source>Div Income</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Div Einkommen</target>
       </trans-unit>
-      <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:">
+      <trans-unit id="Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.\nEnter it below to make sure:" approved="yes">
         <source>Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
 Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Erinnern Sie sich noch an Ihr Passwort? Sie benötigen Ihr Passwort, wenn das Gerät verloren gehen sollte oder gestohlen wird oder aber wenn Sie die App deinstallieren.
+        <target xml:lang="de">Erinnern Sie sich noch an Ihr Passwort? Sie benötigen Ihr Passwort, wenn das Gerät verloren gehen sollte oder gestohlen wird oder aber wenn Sie die App deinstallieren.
 Geben Sie es unten zur Überprüfung ein:</target>
         <alt-trans>
           <target xml:lang="de">Erinnern Sie sich noch an Ihr Passwort? Sie benötigen Ihr Passwort, wenn das Gerät verloren geht oder gestohlen wird oder wenn Sie die App deinstallieren.
 Geben Sie es unten zur Überprüfung ein:</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Doctor">
+      <trans-unit id="Doctor" approved="yes">
         <source>Doctor</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Doktor</target>
+        <target xml:lang="de">Doktor</target>
       </trans-unit>
-      <trans-unit id="Done">
+      <trans-unit id="Done" approved="yes">
         <source>Done</source>
         <note>Generic DONE button text</note>
-        <target xml:lang="de" state="translated">Fertig</target>
+        <target xml:lang="de">Fertig</target>
       </trans-unit>
       <trans-unit id="Download the Airbitz wallet and save money using bitcoin">
         <source>Download the Airbitz wallet and save money using bitcoin</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Download der Airbitz Wallet und sparen Sie Geld mit bitcoin</target>
       </trans-unit>
-      <trans-unit id="Education">
+      <trans-unit id="Education" approved="yes">
         <source>Education</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Ausbildung</target>
+        <target xml:lang="de">Ausbildung</target>
       </trans-unit>
-      <trans-unit id="Electronics">
+      <trans-unit id="Electronics" approved="yes">
         <source>Electronics</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Elektronik</target>
+        <target xml:lang="de">Elektronik</target>
       </trans-unit>
-      <trans-unit id="Electronics &amp; Software">
+      <trans-unit id="Electronics &amp; Software" approved="yes">
         <source>Electronics &amp; Software</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Elektronik &amp; Software</target>
+        <target xml:lang="de">Elektronik &amp; Software</target>
       </trans-unit>
-      <trans-unit id="Email">
+      <trans-unit id="Email" approved="yes">
         <source>Email</source>
         <note>text for Email</note>
-        <target xml:lang="de" state="translated">E-Mail</target>
+        <target xml:lang="de">E-Mail</target>
       </trans-unit>
-      <trans-unit id="Email cancelled.">
+      <trans-unit id="Email cancelled." approved="yes">
         <source>Email cancelled.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">E-Mail abgebrochen.</target>
+        <target xml:lang="de">E-Mail abgebrochen.</target>
       </trans-unit>
       <trans-unit id="Email saved to send later.">
         <source>Email saved to send later.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">E-Mail gespeichert, um später zu senden.</target>
       </trans-unit>
-      <trans-unit id="Email sent.">
+      <trans-unit id="Email sent." approved="yes">
         <source>Email sent.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">E-Mail gesendet.</target>
+        <target xml:lang="de">E-Mail gesendet.</target>
       </trans-unit>
-      <trans-unit id="Enable">
+      <trans-unit id="Enable" approved="yes">
         <source>Enable</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Aktivieren</target>
+        <target xml:lang="de">Aktivieren</target>
       </trans-unit>
-      <trans-unit id="Enable Bluetooth in System Settings">
+      <trans-unit id="Enable Bluetooth in System Settings" approved="yes">
         <source>Enable Bluetooth in System Settings</source>
         <note>settings text</note>
-        <target xml:lang="de" state="translated">Aktivieren Sie Bluetooth in den Systemeinstellungen</target>
+        <target xml:lang="de">Aktivieren Sie Bluetooth in den Systemeinstellungen</target>
       </trans-unit>
-      <trans-unit id="Enable Touch ID">
+      <trans-unit id="Enable Touch ID" approved="yes">
         <source>Enable Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Touch-ID aktivieren</target>
+        <target xml:lang="de">Touch-ID aktivieren</target>
       </trans-unit>
       <trans-unit id="Enter Amount (optional)">
         <source>Enter Amount (optional)</source>
         <note>Placeholder text for Receive screen amount</note>
         <target xml:lang="de" state="translated">Menge eingeben (optional)</target>
       </trans-unit>
-      <trans-unit id="Enter Payee">
+      <trans-unit id="Enter Payee" approved="yes">
         <source>Enter Payee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Empfänger eingeben</target>
+        <target xml:lang="de">Empfänger eingeben</target>
       </trans-unit>
       <trans-unit id="Enter any notes you would like to send to our support staff">
         <source>Enter any notes you would like to send to our support staff</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Geben Sie Hinweise, die Sie an unsere Supportmitarbeiter senden möchten</target>
       </trans-unit>
-      <trans-unit id="Entertainment">
+      <trans-unit id="Entertainment" approved="yes">
         <source>Entertainment</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Unterhaltung</target>
+        <target xml:lang="de">Unterhaltung</target>
       </trans-unit>
-      <trans-unit id="Error Changing PIN">
+      <trans-unit id="Error Changing PIN" approved="yes">
         <source>Error Changing PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler beim PIN-Wechsel</target>
+        <target xml:lang="de">Fehler beim PIN-Wechsel</target>
       </trans-unit>
       <trans-unit id="Error Deleting Wallet">
         <source>Error Deleting Wallet</source>
@@ -2089,30 +2086,44 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler bei Wallet-Zählung</target>
       </trans-unit>
-      <trans-unit id="Error Logging In">
+      <trans-unit id="Error Logging In" approved="yes">
         <source>Error Logging In</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler beim Einloggen</target>
+        <target xml:lang="de">Fehler beim Einloggen</target>
       </trans-unit>
-      <trans-unit id="Error Recovering Account">
+      <trans-unit id="Error Recovering Account" approved="yes">
         <source>Error Recovering Account</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler bei Kontowiederherstellung</target>
+        <target xml:lang="de">Fehler bei Kontowiederherstellung</target>
       </trans-unit>
       <trans-unit id="Error code">
         <source>Error code</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehlercode</target>
       </trans-unit>
+      <trans-unit id="Error connecting to payment processor. Send directly to bitcoin address\n\n%@">
+        <source>Error connecting to payment processor. Send directly to bitcoin address
+
+%@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Error connecting to payment processor. Send directly to bitcoin address
+
+%@</target>
+      </trans-unit>
+      <trans-unit id="Error creating affiliate link. Please try again later">
+        <source>Error creating affiliate link. Please try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Error creating affiliate link. Please try again later</target>
+      </trans-unit>
       <trans-unit id="Error desc">
         <source>Error desc</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler desc</target>
       </trans-unit>
-      <trans-unit id="Error during send">
+      <trans-unit id="Error during send" approved="yes">
         <source>Error during send</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler beim Senden</target>
+        <target xml:lang="de">Fehler beim Senden</target>
       </trans-unit>
       <trans-unit id="Error importing the token at this time. Please try again.">
         <source>Error importing the token at this time. Please try again.</source>
@@ -2124,19 +2135,19 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fehler in die Zwischenablage zu kopieren</target>
       </trans-unit>
-      <trans-unit id="Error sending Email.">
+      <trans-unit id="Error sending Email." approved="yes">
         <source>Error sending Email.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler beim Senden von E-Mail.</target>
+        <target xml:lang="de">Fehler beim Senden von E-Mail.</target>
       </trans-unit>
-      <trans-unit id="Error sending SMS">
+      <trans-unit id="Error sending SMS" approved="yes">
         <source>Error sending SMS</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fehler beim Senden von SMS</target>
+        <target xml:lang="de">Fehler beim Senden von SMS</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of financial exchange categories. Such as converting from one currency to another</note>
         <target xml:lang="de" state="translated">Austausch</target>
       </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
@@ -2144,23 +2155,28 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Wechselkurs-Datenquelle</target>
       </trans-unit>
-      <trans-unit id="Exit">
+      <trans-unit id="Exit" approved="yes">
         <source>Exit</source>
         <note>Exit button text on top left</note>
-        <target xml:lang="de" state="translated">Beenden</target>
+        <target xml:lang="de">Beenden</target>
         <alt-trans>
           <target xml:lang="de">Ausfahrt</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="Expense">
         <source>Expense</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of expense categories</note>
         <target xml:lang="de" state="translated">Kosten</target>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
         <note>EXPORT button text for wallet export</note>
         <target xml:lang="de" state="translated">Exportieren</target>
+      </trans-unit>
+      <trans-unit id="Export From:">
+        <source>Export From:</source>
+        <note>Prompt asking which wallet to export from</note>
+        <target xml:lang="de" state="needs-translation">Export From:</target>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
@@ -2232,6 +2248,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Von: %@</target>
       </trans-unit>
+      <trans-unit id="Funds successfully imported, but error connecting to messenger server. Try again later">
+        <source>Funds successfully imported, but error connecting to messenger server. Try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Funds successfully imported, but error connecting to messenger server. Try again later</target>
+      </trans-unit>
       <trans-unit id="Furnishings">
         <source>Furnishings</source>
         <note>No comment provided by engineer.</note>
@@ -2279,7 +2300,7 @@ Geben Sie es unten zur Überprüfung ein:</target>
       </trans-unit>
       <trans-unit id="Groceries">
         <source>Groceries</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="de" state="translated">Lebensmittel</target>
       </trans-unit>
       <trans-unit id="Gym">
@@ -2302,50 +2323,45 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Gesundheit &amp; Fitness</target>
       </trans-unit>
-      <trans-unit id="Help">
+      <trans-unit id="Help" approved="yes">
         <source>Help</source>
         <note>Help button text on top right</note>
-        <target xml:lang="de" state="translated">Hilfe</target>
+        <target xml:lang="de">Hilfe</target>
       </trans-unit>
-      <trans-unit id="Hide">
+      <trans-unit id="Hide" approved="yes">
         <source>Hide</source>
         <note>Hide</note>
-        <target xml:lang="de" state="translated">Ausblenden</target>
+        <target xml:lang="de">Ausblenden</target>
       </trans-unit>
-      <trans-unit id="High Fee">
+      <trans-unit id="High Fee" approved="yes">
         <source>High Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hohe Gebühr</target>
+        <target xml:lang="de">Hohe Gebühr</target>
       </trans-unit>
-      <trans-unit id="Hobbies">
+      <trans-unit id="Hobbies" approved="yes">
         <source>Hobbies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hobbys</target>
+        <target xml:lang="de">Hobbys</target>
       </trans-unit>
       <trans-unit id="Home">
         <source>Home</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Zuhause</target>
       </trans-unit>
-      <trans-unit id="Home Depot (Up to 15% Off)">
-        <source>Home Depot (Up to 15% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Home Depot (Up to 15% Off)</target>
-      </trans-unit>
-      <trans-unit id="Home Improvement">
+      <trans-unit id="Home Improvement" approved="yes">
         <source>Home Improvement</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hausverbesserung</target>
+        <note>expense category</note>
+        <target xml:lang="de">Hausverbesserung</target>
       </trans-unit>
-      <trans-unit id="Home Insurance">
+      <trans-unit id="Home Insurance" approved="yes">
         <source>Home Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hausversicherung</target>
+        <target xml:lang="de">Hausversicherung</target>
       </trans-unit>
-      <trans-unit id="Home Phone">
+      <trans-unit id="Home Phone" approved="yes">
         <source>Home Phone</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Haustelefon</target>
+        <target xml:lang="de">Haustelefon</target>
       </trans-unit>
       <trans-unit id="Home Services">
         <source>Home Services</source>
@@ -2357,15 +2373,15 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Hauszubehör</target>
       </trans-unit>
-      <trans-unit id="Hotel">
+      <trans-unit id="Hotel" approved="yes">
         <source>Hotel</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hotel</target>
+        <target xml:lang="de">Hotel</target>
       </trans-unit>
-      <trans-unit id="How are you liking %@?">
+      <trans-unit id="How are you liking %@?" approved="yes">
         <source>How are you liking %@?</source>
         <note>Like Airbitz popup</note>
-        <target xml:lang="de" state="translated">Wie finden Sie %@?</target>
+        <target xml:lang="de">Wie finden Sie %@?</target>
       </trans-unit>
       <trans-unit id="IMPORT PRIVATE KEY\n([[abtag APP_TITLE]] Gift Card)">
         <source>IMPORT PRIVATE KEY
@@ -2374,15 +2390,20 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <target xml:lang="de" state="translated">IMPORT PRIVATE KEY
 ([[abtag APP_TITLE]] GESCHENKKARTE)</target>
       </trans-unit>
-      <trans-unit id="IRA Contribution">
+      <trans-unit id="IRA Contribution" approved="yes">
         <source>IRA Contribution</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">IRA Beitrag</target>
+        <target xml:lang="de">IRA Beitrag</target>
       </trans-unit>
-      <trans-unit id="Import">
+      <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
+        <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">If recovery was setup, you should have emailed yourself a recovery token with a link</target>
+      </trans-unit>
+      <trans-unit id="Import" approved="yes">
         <source>Import</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Importieren</target>
+        <target xml:lang="de">Importieren</target>
       </trans-unit>
       <trans-unit id="Import Airbitz Gift Card">
         <source>Import Airbitz Gift Card</source>
@@ -2422,25 +2443,25 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Importieren von Fonds aus %@  in Wallet...</target>
       </trans-unit>
-      <trans-unit id="Income">
+      <trans-unit id="Income" approved="yes">
         <source>Income</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Einkommen</target>
+        <note>Prefix of list of income categories</note>
+        <target xml:lang="de">Einkommen</target>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
         <source>Incorrect PIN</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Falsche PIN</target>
       </trans-unit>
-      <trans-unit id="Incorrect PIN. Please wait %.0f seconds and try again.">
+      <trans-unit id="Incorrect PIN. Please wait %.0f seconds and try again." approved="yes">
         <source>Incorrect PIN. Please wait %.0f seconds and try again.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">PIN ist ungültig. Bitte warten Sie %.0f Sekunden und versuchen Sie es erneut...</target>
+        <target xml:lang="de">PIN ist ungültig. Bitte warten Sie %.0f Sekunden und versuchen Sie es erneut...</target>
       </trans-unit>
-      <trans-unit id="Incorrect Password">
+      <trans-unit id="Incorrect Password" approved="yes">
         <source>Incorrect Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Falsches Passwort</target>
+        <target xml:lang="de">Falsches Passwort</target>
       </trans-unit>
       <trans-unit id="Incorrect Password. Try again, or change it now?">
         <source>Incorrect Password. Try again, or change it now?</source>
@@ -2452,10 +2473,15 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Falsches momentanes Passwort.</target>
       </trans-unit>
-      <trans-unit id="Info">
+      <trans-unit id="Incorrect username for this recovery token. Please try a different username or use a different recovery token link.">
+        <source>Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</target>
+      </trans-unit>
+      <trans-unit id="Info" approved="yes">
         <source>Info</source>
         <note>Info button text on top right</note>
-        <target xml:lang="de" state="translated">Info</target>
+        <target xml:lang="de">Info</target>
       </trans-unit>
       <trans-unit id="Insufficient Password">
         <source>Insufficient Password</source>
@@ -2467,10 +2493,10 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Zinsaufwand</target>
       </trans-unit>
-      <trans-unit id="Internet">
+      <trans-unit id="Internet" approved="yes">
         <source>Internet</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Internet</target>
+        <target xml:lang="de">Internet</target>
       </trans-unit>
       <trans-unit id="Invalid Bitcoin Address">
         <source>Invalid Bitcoin Address</source>
@@ -2482,10 +2508,15 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Ungültige Bluetooth-Anforderung</target>
       </trans-unit>
-      <trans-unit id="Invalid QR Code">
+      <trans-unit id="Invalid Email">
+        <source>Invalid Email</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Invalid Email</target>
+      </trans-unit>
+      <trans-unit id="Invalid QR Code" approved="yes">
         <source>Invalid QR Code</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Ungültiger QR-Code</target>
+        <target xml:lang="de">Ungültiger QR-Code</target>
         <alt-trans>
           <target xml:lang="de">Ungültige QR-Code</target>
         </alt-trans>
@@ -2495,78 +2526,78 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Es ist toll</target>
       </trans-unit>
-      <trans-unit id="Kids">
+      <trans-unit id="Kids" approved="yes">
         <source>Kids</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kinder</target>
+        <target xml:lang="de">Kinder</target>
       </trans-unit>
-      <trans-unit id="Kids Activities">
+      <trans-unit id="Kids Activities" approved="yes">
         <source>Kids Activities</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kinderaktivitäten</target>
+        <target xml:lang="de">Kinderaktivitäten</target>
       </trans-unit>
-      <trans-unit id="Last Name (optional)">
+      <trans-unit id="Last Name (optional)" approved="yes">
         <source>Last Name (optional)</source>
         <note>settings text</note>
-        <target xml:lang="de" state="translated">Nachname (optional)</target>
+        <target xml:lang="de">Nachname (optional)</target>
       </trans-unit>
       <trans-unit id="Late Fee">
         <source>Late Fee</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Späte Gebühr</target>
       </trans-unit>
-      <trans-unit id="Later">
+      <trans-unit id="Later" approved="yes">
         <source>Later</source>
         <note>Later button text</note>
-        <target xml:lang="de" state="translated">Später</target>
+        <target xml:lang="de">Später</target>
       </trans-unit>
-      <trans-unit id="Laundry">
+      <trans-unit id="Laundry" approved="yes">
         <source>Laundry</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Wäsche</target>
+        <target xml:lang="de">Wäsche</target>
       </trans-unit>
-      <trans-unit id="Lawn &amp; Garden">
+      <trans-unit id="Lawn &amp; Garden" approved="yes">
         <source>Lawn &amp; Garden</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Rasen &amp; Garten</target>
+        <target xml:lang="de">Rasen &amp; Garten</target>
       </trans-unit>
       <trans-unit id="Level">
         <source>Level</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Ebene</target>
       </trans-unit>
-      <trans-unit id="Life Insurance">
+      <trans-unit id="Life Insurance" approved="yes">
         <source>Life Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Lebensversicherung</target>
+        <target xml:lang="de">Lebensversicherung</target>
       </trans-unit>
-      <trans-unit id="Loading Account...">
+      <trans-unit id="Loading Account..." approved="yes">
         <source>Loading Account...</source>
         <note>Loading account alert text</note>
-        <target xml:lang="de" state="translated">Konto wird geladen...</target>
+        <target xml:lang="de">Konto wird geladen...</target>
       </trans-unit>
-      <trans-unit id="Loading Balance...">
+      <trans-unit id="Loading Balance..." approved="yes">
         <source>Loading Balance...</source>
         <note>title of wallets table balance header</note>
-        <target xml:lang="de" state="translated">Guthaben wird geladen...</target>
+        <target xml:lang="de">Guthaben wird geladen...</target>
         <alt-trans>
           <target xml:lang="de">Balance wird geladen...</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Loading Transactions...">
+      <trans-unit id="Loading Transactions..." approved="yes">
         <source>Loading Transactions...</source>
         <note>Loading Transactions alert text</note>
-        <target xml:lang="de" state="translated">Transaktionen werden geladen...</target>
+        <target xml:lang="de">Transaktionen werden geladen...</target>
       </trans-unit>
-      <trans-unit id="Loading Wallets...">
+      <trans-unit id="Loading Wallets..." approved="yes">
         <source>Loading Wallets...</source>
         <note>Loading wallets alert text</note>
-        <target xml:lang="de" state="translated">Wallets wird geladen...</target>
+        <target xml:lang="de">Wallets wird geladen...</target>
       </trans-unit>
-      <trans-unit id="Loading...">
+      <trans-unit id="Loading..." approved="yes">
         <source>Loading...</source>
         <note>Loading...</note>
-        <target xml:lang="de" state="translated">Wird geladen...</target>
+        <target xml:lang="de">Wird geladen...</target>
       </trans-unit>
       <trans-unit id="Logging Out">
         <source>Logging Out</source>
@@ -2671,6 +2702,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Nettogehalt</target>
       </trans-unit>
+      <trans-unit id="Network Error">
+        <source>Network Error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Network Error</target>
+      </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2724,25 +2760,25 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Nicht sicher</target>
       </trans-unit>
-      <trans-unit id="Not so good">
+      <trans-unit id="Not so good" approved="yes">
         <source>Not so good</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Nicht so gut</target>
+        <target xml:lang="de">Nicht so gut</target>
       </trans-unit>
-      <trans-unit id="Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.">
+      <trans-unit id="Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." approved="yes">
         <source>Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Hinweis: Standardwährungseinstellung ist nur für neue Wallets und zeigen das Gesamtsaldo des Kontos an. Erstellen Sie eine neue digitale Wallet, um die Fiat-Währung zu ändern, die bei jeder Transaktion gezeigt wird.</target>
+        <target xml:lang="de">Hinweis: Standardwährungseinstellung ist nur für neue Wallets und zeigen das Gesamtsaldo des Kontos an. Erstellen Sie eine neue digitale Wallet, um die Fiat-Währung zu ändern, die bei jeder Transaktion gezeigt wird.</target>
       </trans-unit>
       <trans-unit id="OK">
         <source>OK</source>
         <note>OK button text</note>
         <target xml:lang="de" state="translated">Okay</target>
       </trans-unit>
-      <trans-unit id="OPTIONS">
+      <trans-unit id="OPTIONS" approved="yes">
         <source>OPTIONS</source>
         <note>section header in settings table</note>
-        <target xml:lang="de" state="translated">OPTIONEN</target>
+        <target xml:lang="de">OPTIONEN</target>
       </trans-unit>
       <trans-unit id="On The Web">
         <source>On The Web</source>
@@ -2759,55 +2795,55 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">24 geöffnet</target>
       </trans-unit>
-      <trans-unit id="Open 24 hours">
+      <trans-unit id="Open 24 hours" approved="yes">
         <source>Open 24 hours</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">24 Stunden geöffnet</target>
+        <target xml:lang="de">24 Stunden geöffnet</target>
       </trans-unit>
-      <trans-unit id="Other Income">
+      <trans-unit id="Other Income" approved="yes">
         <source>Other Income</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Sonstige Erträge</target>
+        <target xml:lang="de">Sonstige Erträge</target>
       </trans-unit>
-      <trans-unit id="PIN">
+      <trans-unit id="PIN" approved="yes">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">PIN</target>
+        <target xml:lang="de">PIN</target>
       </trans-unit>
       <trans-unit id="PIN Re-Login">
         <source>PIN Re-Login</source>
         <note>settings text</note>
         <target xml:lang="de" state="translated">PIN Re-Login</target>
       </trans-unit>
-      <trans-unit id="PIN must be %d digits">
+      <trans-unit id="PIN must be %d digits" approved="yes">
         <source>PIN must be %d digits</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">PIN muss %d stellig sein.</target>
+        <target xml:lang="de">PIN muss %d stellig sein.</target>
       </trans-unit>
-      <trans-unit id="PIN successfully changed.">
+      <trans-unit id="PIN successfully changed." approved="yes">
         <source>PIN successfully changed.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">PIN erfolgreich geändert.</target>
+        <target xml:lang="de">PIN erfolgreich geändert.</target>
       </trans-unit>
       <trans-unit id="Parking">
         <source>Parking</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Parkplatz</target>
       </trans-unit>
-      <trans-unit id="Partial Payment">
+      <trans-unit id="Partial Payment" approved="yes">
         <source>Partial Payment</source>
         <note>Text on partial payment</note>
-        <target xml:lang="de" state="translated">Teilzahlung</target>
+        <target xml:lang="de">Teilzahlung</target>
       </trans-unit>
-      <trans-unit id="Password">
+      <trans-unit id="Password" approved="yes">
         <source>Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort</target>
+        <target xml:lang="de">Passwort</target>
       </trans-unit>
-      <trans-unit id="Password Change">
+      <trans-unit id="Password Change" approved="yes">
         <source>Password Change</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort ändern</target>
+        <target xml:lang="de">Passwort ändern</target>
       </trans-unit>
       <trans-unit id="Password Recovery">
         <source>Password Recovery</source>
@@ -2826,63 +2862,72 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <target xml:lang="de" state="translated">Änderung des Kennworts fehlgeschlagen:
 %@</target>
       </trans-unit>
-      <trans-unit id="Password does not match. Re-enter password">
+      <trans-unit id="Password does not match. Re-enter password" approved="yes">
         <source>Password does not match. Re-enter password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort stimmt nicht überein. Passwort erneut eingeben</target>
+        <target xml:lang="de">Passwort stimmt nicht überein. Passwort erneut eingeben</target>
       </trans-unit>
       <trans-unit id="Password mismatch">
         <source>Password mismatch</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Passwort-Diskrepanz</target>
       </trans-unit>
-      <trans-unit id="Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!">
+      <trans-unit id="Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" approved="yes">
         <source>Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Passwort erfolgreich geändert. VERGESSEN SIE IHR PASSWORT ODER IHRE WIEDERHERSTELLUNGSANTWORTEN NICHT! SIE KÖNNEN NICHT WIEDERHERGESTELLT WERDEN!</target>
+        <target xml:lang="de">Passwort erfolgreich geändert. VERGESSEN SIE IHR PASSWORT ODER IHRE WIEDERHERSTELLUNGSANTWORTEN NICHT! SIE KÖNNEN NICHT WIEDERHERGESTELLT WERDEN!</target>
         <alt-trans>
           <target xml:lang="de">Passwort erfolgreich geändert. VERGESSEN SIE NICHT IHR PASSWORT ODER IHRE WIEDERHERSTELLUNGSANTWORTEN! SIE KÖNNEN NICHT WIEDERHERGESTELLT WERDEN!</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Payment received">
+      <trans-unit id="Payment received" approved="yes">
         <source>Payment received</source>
         <note>Text on payment recived popup</note>
-        <target xml:lang="de" state="translated">Zahlung erhalten</target>
+        <target xml:lang="de">Zahlung erhalten</target>
       </trans-unit>
       <trans-unit id="Pending">
         <source>Pending</source>
         <note>Pending status in transaction list</note>
         <target xml:lang="de" state="translated">Ausstehend</target>
       </trans-unit>
-      <trans-unit id="Personal Care">
+      <trans-unit id="Personal Care" approved="yes">
         <source>Personal Care</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Persönliche Betreuung</target>
+        <target xml:lang="de">Persönliche Betreuung</target>
       </trans-unit>
-      <trans-unit id="Pet Food &amp; Supplies">
+      <trans-unit id="Pet Food &amp; Supplies" approved="yes">
         <source>Pet Food &amp; Supplies</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Tiernahrung &amp; Zubehör</target>
+        <target xml:lang="de">Tiernahrung &amp; Zubehör</target>
       </trans-unit>
-      <trans-unit id="Pet Grooming">
+      <trans-unit id="Pet Grooming" approved="yes">
         <source>Pet Grooming</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Haustiersalon</target>
+        <target xml:lang="de">Haustiersalon</target>
       </trans-unit>
-      <trans-unit id="Pets">
+      <trans-unit id="Pets" approved="yes">
         <source>Pets</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Haustiere</target>
+        <target xml:lang="de">Haustiere</target>
       </trans-unit>
       <trans-unit id="Pharmacy">
         <source>Pharmacy</source>
         <note>expense category</note>
         <target xml:lang="de" state="translated">Pharmazie</target>
       </trans-unit>
-      <trans-unit id="Place Call">
+      <trans-unit id="Place Call" approved="yes">
         <source>Place Call</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Anruf tätigen</target>
+        <target xml:lang="de">Anruf tätigen</target>
+      </trans-unit>
+      <trans-unit id="Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n&lt;br&gt;&lt;br&gt;%@">
+        <source>Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</target>
       </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
@@ -2900,20 +2945,25 @@ Geben Sie es unten zur Überprüfung ein:</target>
           <target xml:lang="de">Bitte erstellen Sie ein Kennwort für dieses Konto oder Sie werden nicht in der Lage sein, Ihr Konto wiederherzustellen, wenn das Gerät verloren geht oder gestohlen wird.</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Please enter a User Name">
+      <trans-unit id="Please enter a User Name" approved="yes">
         <source>Please enter a User Name</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitte geben Sie einen Benutzernamen ein</target>
+        <target xml:lang="de">Bitte geben Sie einen Benutzernamen ein</target>
       </trans-unit>
       <trans-unit id="Please enter an amount to send">
         <source>Please enter an amount to send</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Bitte geben Sie den abzusendenden Betrag ein</target>
       </trans-unit>
-      <trans-unit id="Please enter your PIN">
+      <trans-unit id="Please enter the username of the account to recover">
+        <source>Please enter the username of the account to recover</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Please enter the username of the account to recover</target>
+      </trans-unit>
+      <trans-unit id="Please enter your PIN" approved="yes">
         <source>Please enter your PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitte geben Sie Ihre PIN ein</target>
+        <target xml:lang="de">Bitte geben Sie Ihre PIN ein</target>
         <alt-trans>
           <target xml:lang="de">Bitte geben Sie Ihre 4-stellige PIN ein</target>
         </alt-trans>
@@ -2928,15 +2978,25 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Bitte geben Sie Ihr Passwort ein, um Touch ID zu aktivieren</target>
       </trans-unit>
+      <trans-unit id="Please find the email and click on the link from this device to initiate recovery">
+        <source>Please find the email and click on the link from this device to initiate recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Please find the email and click on the link from this device to initiate recovery</target>
+      </trans-unit>
       <trans-unit id="Please have Requestor contact support">
         <source>Please have Requestor contact support</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Bitte lassen Sie den Anforderer den Support kontaktieren</target>
       </trans-unit>
-      <trans-unit id="Please try again later or contact support">
+      <trans-unit id="Please logout of current account before attempting password recovery">
+        <source>Please logout of current account before attempting password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Please logout of current account before attempting password recovery</target>
+      </trans-unit>
+      <trans-unit id="Please try again later or contact support" approved="yes">
         <source>Please try again later or contact support</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support</target>
+        <target xml:lang="de">Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Support</target>
       </trans-unit>
       <trans-unit id="Please wait %.0f seconds before retrying %@">
         <source>Please wait %1$.0f seconds before retrying %2$@</source>
@@ -2963,15 +3023,22 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>expense category</note>
         <target xml:lang="de" state="translated">Eigentum</target>
       </trans-unit>
+      <trans-unit id="Provide an Identity Token\n">
+        <source>Provide an Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Provide an Identity Token
+</target>
+      </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Wallet öffentlicher Seed (XPub)</target>
       </trans-unit>
-      <trans-unit id="Public Transportation">
+      <trans-unit id="Public Transportation" approved="yes">
         <source>Public Transportation</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Öffentliche Verkehrsmittel</target>
+        <target xml:lang="de">Öffentliche Verkehrsmittel</target>
       </trans-unit>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
@@ -2984,11 +3051,11 @@ Geben Sie es unten zur Überprüfung ein:</target>
           <target xml:lang="de">QR-Code Scan-Fehler</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="REFER YOUR FRIENDS\n(Earn Bitcoin)">
+      <trans-unit id="REFER YOUR FRIENDS\n(Earn Bitcoin)" approved="yes">
         <source>REFER YOUR FRIENDS
 (Earn Bitcoin)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">LADEN SIE IHRE FREUNDE EIN
+        <target xml:lang="de">LADEN SIE IHRE FREUNDE EIN
 (Bitcoins verdienen)</target>
       </trans-unit>
       <trans-unit id="Re-enter New Password">
@@ -3031,6 +3098,20 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <source>Recovery Questions Set</source>
         <note>Title of recovery questions setup complete alert</note>
         <target xml:lang="de" state="translated">Wiederherstellungs-Fragen gesetzt</target>
+      </trans-unit>
+      <trans-unit id="Recovery Successful\n\nPlease change your password and PIN">
+        <source>Recovery Successful
+
+Please change your password and PIN</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Recovery Successful
+
+Please change your password and PIN</target>
+      </trans-unit>
+      <trans-unit id="Recovery was not setup or was done on another device">
+        <source>Recovery was not setup or was done on another device</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Recovery was not setup or was done on another device</target>
       </trans-unit>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
@@ -3080,6 +3161,13 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>expense category</note>
         <target xml:lang="de" state="translated">Mietwagen &amp; Taxi</target>
       </trans-unit>
+      <trans-unit id="Request a Payment Address\n">
+        <source>Request a Payment Address
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Request a Payment Address
+</target>
+      </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
@@ -3089,6 +3177,20 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <source>Request is copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Anfrage wird in die Zwischenablage kopiert</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token but you don't have any\n">
+        <source>Request your Identity Token but you don't have any
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Request your Identity Token but you don't have any
+</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token\n">
+        <source>Request your Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Request your Identity Token
+</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
@@ -3130,33 +3232,48 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>Income notes field for affiliate revenue</note>
         <target xml:lang="de" state="translated">Anteil an den Erlösen aus Affiliate-Link %@</target>
       </trans-unit>
-      <trans-unit id="SMS">
+      <trans-unit id="SEND" approved="yes">
+        <source>SEND</source>
+        <note>SEND button text</note>
+        <target xml:lang="de">SENDEN</target>
+      </trans-unit>
+      <trans-unit id="SMS" approved="yes">
         <source>SMS</source>
         <note>text for textmessage/SMS</note>
-        <target xml:lang="de" state="translated">SMS</target>
+        <target xml:lang="de">SMS</target>
       </trans-unit>
-      <trans-unit id="SMS cancelled">
+      <trans-unit id="SMS cancelled" approved="yes">
         <source>SMS cancelled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">SMS abgebrochen</target>
+        <target xml:lang="de">SMS abgebrochen</target>
         <alt-trans>
           <target xml:lang="de">SMS abgesagt</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="SMS sent">
+      <trans-unit id="SMS sent" approved="yes">
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">SMS gesendet</target>
+        <target xml:lang="de">SMS gesendet</target>
+      </trans-unit>
+      <trans-unit id="SPEND BITCOIN (Plugins)">
+        <source>SPEND BITCOIN (Plugins)</source>
+        <note>Slideout menu spend text</note>
+        <target xml:lang="de" state="needs-translation">SPEND BITCOIN (Plugins)</target>
       </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Verkäufe</target>
       </trans-unit>
-      <trans-unit id="San Diego, California, USA">
+      <trans-unit id="San Diego, California, USA" approved="yes">
         <source>San Diego, California, USA</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">San Diego, Kalifornien, USA</target>
+        <target xml:lang="de">San Diego, Kalifornien, USA</target>
+      </trans-unit>
+      <trans-unit id="Save Recovery Token">
+        <source>Save Recovery Token</source>
+        <note>Title of recovery email popup</note>
+        <target xml:lang="de" state="needs-translation">Save Recovery Token</target>
       </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
@@ -3181,15 +3298,15 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>SearchBarSearch placeholder</note>
         <target xml:lang="de" state="translated">Suche</target>
       </trans-unit>
-      <trans-unit id="Select Currency">
+      <trans-unit id="Select Currency" approved="yes">
         <source>Select Currency</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Wählen Sie eine Währung</target>
+        <target xml:lang="de">Wählen Sie eine Währung</target>
       </trans-unit>
-      <trans-unit id="Sell Bitcoin">
+      <trans-unit id="Sell Bitcoin" approved="yes">
         <source>Sell Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bitcoin verkaufen</target>
+        <target xml:lang="de">Bitcoin verkaufen</target>
       </trans-unit>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
@@ -3206,20 +3323,20 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Senden Sie an Bitcoin-Adresse oder importieren Sie privaten Schlüssel</target>
       </trans-unit>
-      <trans-unit id="Sending...">
+      <trans-unit id="Sending..." approved="yes">
         <source>Sending...</source>
         <note>status message</note>
-        <target xml:lang="de" state="translated">Wird gesendet...</target>
+        <target xml:lang="de">Wird gesendet...</target>
       </trans-unit>
-      <trans-unit id="Sent Bitcoin">
+      <trans-unit id="Sent Bitcoin" approved="yes">
         <source>Sent Bitcoin</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Gesendete Bitcoins</target>
+        <target xml:lang="de">Gesendete Bitcoins</target>
       </trans-unit>
-      <trans-unit id="Service &amp; Parts">
+      <trans-unit id="Service &amp; Parts" approved="yes">
         <source>Service &amp; Parts</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Service &amp; Teile</target>
+        <target xml:lang="de">Service &amp; Teile</target>
       </trans-unit>
       <trans-unit id="Service Fee">
         <source>Service Fee</source>
@@ -3246,135 +3363,145 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <target xml:lang="de" state="translated">Fehler beim Festlegen der Wiederherstellungfragen:
 %@</target>
       </trans-unit>
-      <trans-unit id="Settings">
+      <trans-unit id="Settings" approved="yes">
         <source>Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Einstellungen</target>
+        <target xml:lang="de">Einstellungen</target>
       </trans-unit>
       <trans-unit id="Share">
         <source>Share</source>
         <note>Generic SHARE button text</note>
         <target xml:lang="de" state="translated">Freigeben</target>
       </trans-unit>
-      <trans-unit id="Shopping">
+      <trans-unit id="Shopping" approved="yes">
         <source>Shopping</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Einkaufen</target>
+        <target xml:lang="de">Einkaufen</target>
       </trans-unit>
-      <trans-unit id="Show">
+      <trans-unit id="Show" approved="yes">
         <source>Show</source>
         <note>Show</note>
-        <target xml:lang="de" state="translated">Zeigen</target>
+        <target xml:lang="de">Zeigen</target>
       </trans-unit>
-      <trans-unit id="Show Balance">
+      <trans-unit id="Show Balance" approved="yes">
         <source>Show Balance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Saldo anzeigen</target>
+        <target xml:lang="de">Saldo anzeigen</target>
       </trans-unit>
-      <trans-unit id="Sign Up">
+      <trans-unit id="Show QR Code">
+        <source>Show QR Code</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Show QR Code</target>
+      </trans-unit>
+      <trans-unit id="Sign Up" approved="yes">
         <source>Sign Up</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Registrieren</target>
+        <target xml:lang="de">Registrieren</target>
       </trans-unit>
-      <trans-unit id="Sign-Up failed:\n%@">
+      <trans-unit id="Sign-Up failed:\n%@" approved="yes">
         <source>Sign-Up failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Registrierung fehlgeschlagen:
+        <target xml:lang="de">Registrierung fehlgeschlagen:
 %@</target>
         <alt-trans>
           <target xml:lang="de">Registrierung fehlgeschlagen:%@</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Skip">
+      <trans-unit id="Skip" approved="yes">
         <source>Skip</source>
         <note>Skip button text</note>
-        <target xml:lang="de" state="translated">Überspringen</target>
+        <target xml:lang="de">Überspringen</target>
       </trans-unit>
-      <trans-unit id="Skip this step">
+      <trans-unit id="Skip this step" approved="yes">
         <source>Skip this step</source>
         <note>Title of Skip this step alert</note>
-        <target xml:lang="de" state="translated">Überspringen Sie diesen Schritt</target>
+        <target xml:lang="de">Überspringen Sie diesen Schritt</target>
       </trans-unit>
       <trans-unit id="Sorry">
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Entschuldigung</target>
       </trans-unit>
-      <trans-unit id="Spa &amp; Massage">
+      <trans-unit id="Spa &amp; Massage" approved="yes">
         <source>Spa &amp; Massage</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Spa &amp; Massage</target>
+        <target xml:lang="de">Spa &amp; Massage</target>
       </trans-unit>
-      <trans-unit id="Spending Limits">
+      <trans-unit id="Spend Bitcoin (Plugins)">
+        <source>Spend Bitcoin (Plugins)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Spend Bitcoin (Plugins)</target>
+      </trans-unit>
+      <trans-unit id="Spending Limits" approved="yes">
         <source>Spending Limits</source>
         <note>spending limits text</note>
-        <target xml:lang="de" state="translated">Ausgabelimits</target>
+        <target xml:lang="de">Ausgabelimits</target>
       </trans-unit>
-      <trans-unit id="Sporting Goods">
+      <trans-unit id="Sporting Goods" approved="yes">
         <source>Sporting Goods</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Sportartikel</target>
+        <target xml:lang="de">Sportartikel</target>
       </trans-unit>
-      <trans-unit id="Sports">
+      <trans-unit id="Sports" approved="yes">
         <source>Sports</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Sport</target>
+        <target xml:lang="de">Sport</target>
       </trans-unit>
-      <trans-unit id="Standard Fee">
+      <trans-unit id="Standard Fee" approved="yes">
         <source>Standard Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Standardgebühr</target>
+        <target xml:lang="de">Standardgebühr</target>
       </trans-unit>
-      <trans-unit id="Starbucks (Up to 20% Off)">
-        <source>Starbucks (Up to 20% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Starbucks (Up to 20% Off)</target>
-      </trans-unit>
-      <trans-unit id="Student Loan">
+      <trans-unit id="Student Loan" approved="yes">
         <source>Student Loan</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Studentendarlehen</target>
+        <target xml:lang="de">Studentendarlehen</target>
       </trans-unit>
-      <trans-unit id="Successfully Logged In">
+      <trans-unit id="Successfully Logged In" approved="yes">
         <source>Successfully Logged In</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Erfolgreich angemeldet</target>
+        <target xml:lang="de">Erfolgreich angemeldet</target>
+      </trans-unit>
+      <trans-unit id="Successfully Verified Identity">
+        <source>Successfully Verified Identity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Successfully Verified Identity</target>
+      </trans-unit>
+      <trans-unit id="Successfully received identity token from %@">
+        <source>Successfully received identity token from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Successfully received identity token from %@</target>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Fonds vom Privatschlüssel streichen</target>
       </trans-unit>
-      <trans-unit id="Synchronizing">
+      <trans-unit id="Synchronizing" approved="yes">
         <source>Synchronizing</source>
         <note>Synchronizing text in confirmation textfield</note>
-        <target xml:lang="de" state="translated">Synchronisieren</target>
+        <target xml:lang="de">Synchronisieren</target>
       </trans-unit>
-      <trans-unit id="TOTAL: ">
+      <trans-unit id="TOTAL: " approved="yes">
         <source>TOTAL: </source>
         <note>Prefix of wallet balance dropdown header</note>
-        <target xml:lang="de" state="translated">GESAMT: </target>
+        <target xml:lang="de">GESAMT: </target>
       </trans-unit>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Tippen Sie und halten Sie eine Wallet für Zusatzoptionen fest</target>
       </trans-unit>
-      <trans-unit id="Target (Up to 10% Off)">
-        <source>Target (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Target (Up to 10% Off)</target>
-      </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
         <target xml:lang="de" state="translated">Steuer</target>
       </trans-unit>
-      <trans-unit id="Television">
+      <trans-unit id="Television" approved="yes">
         <source>Television</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Fernsehen</target>
+        <target xml:lang="de">Fernsehen</target>
       </trans-unit>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
@@ -3391,6 +3518,15 @@ Geben Sie es unten zur Überprüfung ein:</target>
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Die Bitcoin-Adresse des Geräts mit dem Sie verbunden sind:%1$@ entspricht nicht der Adresse, die zunächst angekündigt wurde:%2$@</target>
+      </trans-unit>
+      <trans-unit id="The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.">
+        <source>The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</target>
       </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
@@ -3439,6 +3575,11 @@ Ihr Benutzername und Passwort ist nur Ihnen bekannt und wird nie unverschlüssel
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
         <target xml:lang="de" state="translated">Zeit zu knacken:</target>
+      </trans-unit>
+      <trans-unit id="To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.">
+        <source>To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</source>
+        <note>Message of recovery token popup</note>
+        <target xml:lang="de" state="needs-translation">To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</target>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
@@ -3507,7 +3648,7 @@ Ihr Benutzername und Passwort ist nur Ihnen bekannt und wird nie unverschlüssel
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <note>No comment provided by engineer.</note>
+        <note>Financial transaction that moves money from one account to another</note>
         <target xml:lang="de" state="translated">Transfer</target>
       </trans-unit>
       <trans-unit id="Transfer From %@">
@@ -3527,6 +3668,11 @@ Ihr Benutzername und Passwort ist nur Ihnen bekannt und wird nie unverschlüssel
         <source>Travel</source>
         <note>expense category</note>
         <target xml:lang="de" state="translated">Reisen</target>
+      </trans-unit>
+      <trans-unit id="Trouble connecting to network">
+        <source>Trouble connecting to network</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">Trouble connecting to network</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -3576,20 +3722,25 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
           <target xml:lang="de">Zwei-Faktor-fähigen ** Warnung ** Wenn Sie Ihr Gerät verlieren oder die app deinstallieren, es dauert 7 Tage deaktivieren 2FA und Zugriff auf Ihr Konto. "</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Two Factor Invalid">
+      <trans-unit id="Two Factor Invalid" approved="yes">
         <source>Two Factor Invalid</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Zwei-Faktor ungültig</target>
+        <target xml:lang="de">Zwei-Faktor ungültig</target>
       </trans-unit>
       <trans-unit id="Two Factor Reset">
         <source>Two Factor Reset</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Zwei-Faktor-Reset</target>
       </trans-unit>
-      <trans-unit id="USA and Canada">
+      <trans-unit id="USA">
+        <source>USA</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">USA</target>
+      </trans-unit>
+      <trans-unit id="USA and Canada" approved="yes">
         <source>USA and Canada</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">USA und Kanada</target>
+        <target xml:lang="de">USA und Kanada</target>
       </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
@@ -3601,15 +3752,15 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Geheimnis kann nicht importiert werden</target>
       </trans-unit>
-      <trans-unit id="Unable to import token">
+      <trans-unit id="Unable to import token" approved="yes">
         <source>Unable to import token</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Token kann nicht importiert werden</target>
+        <target xml:lang="de">Token kann nicht importiert werden</target>
       </trans-unit>
-      <trans-unit id="Unable to save Settings">
+      <trans-unit id="Unable to save Settings" approved="yes">
         <source>Unable to save Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Einstellungen können nicht gespeichert werden</target>
+        <target xml:lang="de">Einstellungen können nicht gespeichert werden</target>
       </trans-unit>
       <trans-unit id="Unable to scan QR code">
         <source>Unable to scan QR code</source>
@@ -3619,10 +3770,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
           <target xml:lang="de">QR-Code Scannen nicht möglich</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Unable to update Settings">
+      <trans-unit id="Unable to update Settings" approved="yes">
         <source>Unable to update Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Einstellungen können nicht aktualisiert werden</target>
+        <target xml:lang="de">Einstellungen können nicht aktualisiert werden</target>
       </trans-unit>
       <trans-unit id="Up to 10% off Target">
         <source>Up to 10% off Target</source>
@@ -3634,45 +3785,45 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Bis zu 20 % Rabatt auf Starbucks</target>
       </trans-unit>
-      <trans-unit id="Upload Failed. Please check your network connection">
+      <trans-unit id="Upload Failed. Please check your network connection" approved="yes">
         <source>Upload Failed. Please check your network connection</source>
         <note>Upload Failed</note>
-        <target xml:lang="de" state="translated">Upload ist fehlgeschlagen. Bitte überprüfen Sie die Netzwerkverbindung.</target>
+        <target xml:lang="de">Upload ist fehlgeschlagen. Bitte überprüfen Sie die Netzwerkverbindung.</target>
       </trans-unit>
-      <trans-unit id="Upload Image">
+      <trans-unit id="Upload Image" approved="yes">
         <source>Upload Image</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Bild hochladen</target>
+        <target xml:lang="de">Bild hochladen</target>
       </trans-unit>
-      <trans-unit id="Upload Log">
+      <trans-unit id="Upload Log" approved="yes">
         <source>Upload Log</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Log hochladen</target>
+        <target xml:lang="de">Log hochladen</target>
       </trans-unit>
-      <trans-unit id="Upload Log File">
+      <trans-unit id="Upload Log File" approved="yes">
         <source>Upload Log File</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Log-Datei hochladen</target>
+        <target xml:lang="de">Log-Datei hochladen</target>
       </trans-unit>
-      <trans-unit id="Upload Successful">
+      <trans-unit id="Upload Successful" approved="yes">
         <source>Upload Successful</source>
         <note>Upload Successful fading popup</note>
-        <target xml:lang="de" state="translated">Upload erfolgreich</target>
+        <target xml:lang="de">Upload erfolgreich</target>
       </trans-unit>
       <trans-unit id="Uploading logfile. Please wait...">
         <source>Uploading logfile. Please wait...</source>
         <note>Uploading logfile fading popup</note>
         <target xml:lang="de" state="translated">Log-Datei hochladen. Bitte warten...</target>
       </trans-unit>
-      <trans-unit id="Use Camera">
+      <trans-unit id="Use Camera" approved="yes">
         <source>Use Camera</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Kamera verwenden</target>
+        <target xml:lang="de">Kamera verwenden</target>
       </trans-unit>
-      <trans-unit id="Use PIN">
+      <trans-unit id="Use PIN" approved="yes">
         <source>Use PIN</source>
         <note>Touch ID [Use PIN] button</note>
-        <target xml:lang="de" state="translated">PIN verwenden</target>
+        <target xml:lang="de">PIN verwenden</target>
         <alt-trans>
           <target xml:lang="de">Verwendung PIN</target>
         </alt-trans>
@@ -3682,70 +3833,70 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Touch ID [Use Password] button</note>
         <target xml:lang="de" state="translated">Kennwort verwenden</target>
       </trans-unit>
-      <trans-unit id="Use Photo Album">
+      <trans-unit id="Use Photo Album" approved="yes">
         <source>Use Photo Album</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Fotoalbum verwenden</target>
+        <target xml:lang="de">Fotoalbum verwenden</target>
       </trans-unit>
       <trans-unit id="Use TouchID">
         <source>Use TouchID</source>
         <note>settings text</note>
         <target xml:lang="de" state="translated">Verwenden Sie TouchID</target>
       </trans-unit>
-      <trans-unit id="User Name: %@">
+      <trans-unit id="User Name: %@" approved="yes">
         <source>User Name: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Benutzername: %@</target>
+        <target xml:lang="de">Benutzername: %@</target>
       </trans-unit>
-      <trans-unit id="Username">
+      <trans-unit id="Username" approved="yes">
         <source>Username</source>
         <note>Username</note>
-        <target xml:lang="de" state="translated">Benutzername</target>
+        <target xml:lang="de">Benutzername</target>
       </trans-unit>
       <trans-unit id="Username must be at least %d characters.">
         <source>Username must be at least %d characters.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Benutzernamen müssen mindestens %d Zeichen lang sein.</target>
       </trans-unit>
-      <trans-unit id="Utilities">
+      <trans-unit id="Utilities" approved="yes">
         <source>Utilities</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Zubehör</target>
+        <target xml:lang="de">Zubehör</target>
       </trans-unit>
-      <trans-unit id="Vacation">
+      <trans-unit id="Vacation" approved="yes">
         <source>Vacation</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Urlaub</target>
+        <target xml:lang="de">Urlaub</target>
       </trans-unit>
-      <trans-unit id="Validating Address...">
+      <trans-unit id="Validating Address..." approved="yes">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Adresse wird überprüft...</target>
+        <target xml:lang="de">Adresse wird überprüft...</target>
       </trans-unit>
-      <trans-unit id="Vet">
+      <trans-unit id="Vet" approved="yes">
         <source>Vet</source>
         <note>expense category</note>
-        <target xml:lang="de" state="translated">Tierarzt</target>
+        <target xml:lang="de">Tierarzt</target>
       </trans-unit>
-      <trans-unit id="WALLETS">
+      <trans-unit id="WALLETS" approved="yes">
         <source>WALLETS</source>
         <note>title of active wallets table</note>
-        <target xml:lang="de" state="translated">WALLETS</target>
+        <target xml:lang="de">WALLETS</target>
       </trans-unit>
-      <trans-unit id="WARNING: missing password">
+      <trans-unit id="WARNING: missing password" approved="yes">
         <source>WARNING: missing password</source>
         <note>Title of missing password notification</note>
-        <target xml:lang="de" state="translated">WARNUNG: fehlendes Passwort</target>
+        <target xml:lang="de">WARNUNG: fehlendes Passwort</target>
       </trans-unit>
-      <trans-unit id="Waiting for Payment...">
+      <trans-unit id="Waiting for Payment..." approved="yes">
         <source>Waiting for Payment...</source>
         <note>Status on Request screen</note>
-        <target xml:lang="de" state="translated">Warten auf Zahlung...</target>
+        <target xml:lang="de">Warten auf Zahlung...</target>
       </trans-unit>
-      <trans-unit id="Wallet Deleted">
+      <trans-unit id="Wallet Deleted" approved="yes">
         <source>Wallet Deleted</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Wallet gelöscht</target>
+        <target xml:lang="de">Wallet gelöscht</target>
       </trans-unit>
       <trans-unit id="Wallet Export">
         <source>Wallet Export</source>
@@ -3769,20 +3920,15 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Wallet-Name muss mindestens ein Zeichen enthalten.</target>
       </trans-unit>
-      <trans-unit id="Wallet: ">
+      <trans-unit id="Wallet: " approved="yes">
         <source>Wallet: </source>
         <note>Prefix of wallet name on rename popup</note>
-        <target xml:lang="de" state="translated">Wallet: </target>
+        <target xml:lang="de">Wallet: </target>
       </trans-unit>
-      <trans-unit id="Walmart (Up to 10% Off)">
-        <source>Walmart (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Walmart (Up to 10% Off)</target>
-      </trans-unit>
-      <trans-unit id="Warning!">
+      <trans-unit id="Warning!" approved="yes">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Warnung!</target>
+        <target xml:lang="de">Warnung!</target>
       </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
@@ -3797,10 +3943,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Double spend status in transaction list</note>
         <target xml:lang="de" state="translated">Warnung: Doppelte Ausgabe</target>
       </trans-unit>
-      <trans-unit id="Warning: Low Fees may cause long delays in transaction confirmation">
+      <trans-unit id="Warning: Low Fees may cause long delays in transaction confirmation" approved="yes">
         <source>Warning: Low Fees may cause long delays in transaction confirmation</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Warnung: Niedrige Gebühren verursachen Verspätungen in Transaktionsbestätigung</target>
+        <target xml:lang="de">Warnung: Niedrige Gebühren verursachen Verspätungen in Transaktionsbestätigung</target>
       </trans-unit>
       <trans-unit id="Warning: Replace by Fee Detected. Double spend likely">
         <source>Warning: Replace by Fee Detected. Double spend likely</source>
@@ -3823,10 +3969,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
           <target xml:lang="de">Watcher-Datenbank gelöscht. Bitte erlauben Sie ein paar Minuten für die Resync-Blockchain-Info. Buchungen und Salden können während der Synchronisierung ungenau sein</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="Whole Foods (Up to 10% Off)">
-        <source>Whole Foods (Up to 10% Off)</source>
+      <trans-unit id="Would like to:">
+        <source>Would like to:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="needs-translation">Whole Foods (Up to 10% Off)</target>
+        <target xml:lang="de" state="needs-translation">Would like to:</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
@@ -3838,20 +3984,20 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="de" state="translated">Möchten Sie Geld an diese Adresse senden oder importieren Sie Fonds in Ihrer Brieftasche?</target>
       </trans-unit>
-      <trans-unit id="Would you like to send us some feedback?">
+      <trans-unit id="Would you like to send us some feedback?" approved="yes">
         <source>Would you like to send us some feedback?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Möchten Sie uns Feedback senden?</target>
+        <target xml:lang="de">Möchten Sie uns Feedback senden?</target>
       </trans-unit>
-      <trans-unit id="Would you like to write a review in the App store?">
+      <trans-unit id="Would you like to write a review in the App store?" approved="yes">
         <source>Would you like to write a review in the App store?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Möchten Sie einen Kommentar im App Store hinterlassen?</target>
+        <target xml:lang="de">Möchten Sie einen Kommentar im App Store hinterlassen?</target>
       </trans-unit>
-      <trans-unit id="Wrong Answers">
+      <trans-unit id="Wrong Answers" approved="yes">
         <source>Wrong Answers</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Falsche Antworten</target>
+        <target xml:lang="de">Falsche Antworten</target>
       </trans-unit>
       <trans-unit id="YES">
         <source>YES</source>
@@ -3865,15 +4011,20 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <target xml:lang="de" state="translated">Sie erhielten Bitcoins!
 %1$@ (~%2$@)</target>
       </trans-unit>
-      <trans-unit id="You must answer all six questions. Make sure your answers are long enough.">
-        <source>You must answer all six questions. Make sure your answers are long enough.</source>
+      <trans-unit id="You are about to exit password recovery setup. Your chosen questions and answers have not been saved.">
+        <source>You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Sie müssen alle sechs Fragen beantworten.  Stellen Sie sicher, dass Ihre Antworten lang genug sind.</target>
+        <target xml:lang="de" state="needs-translation">You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</target>
       </trans-unit>
-      <trans-unit id="You must choose all six questions before proceeding.">
-        <source>You must choose all six questions before proceeding.</source>
+      <trans-unit id="You must answer all questions. Make sure your answers are long enough.">
+        <source>You must answer all questions. Make sure your answers are long enough.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="de" state="translated">Wählen Sie alle sechs Fragen, bevor Sie fortfahren.</target>
+        <target xml:lang="de" state="needs-translation">You must answer all questions. Make sure your answers are long enough.</target>
+      </trans-unit>
+      <trans-unit id="You must choose a question for all selections before proceeding.">
+        <source>You must choose a question for all selections before proceeding.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="de" state="needs-translation">You must choose a question for all selections before proceeding.</target>
       </trans-unit>
       <trans-unit id="You must enter a user name">
         <source>You must enter a user name</source>

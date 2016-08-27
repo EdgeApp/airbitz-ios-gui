@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "24"; */
-"24.normalTitle" = "完成";
+"24.normalTitle" = "确定";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "25"; */
 "25.normalTitle" = "取消";
