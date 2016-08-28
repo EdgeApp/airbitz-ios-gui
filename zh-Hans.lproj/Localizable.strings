@@ -7,7 +7,7 @@
 Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@请分享这个链接，当有人安装和使用 %2$s 时就能够赚钱收入。您将收到在这个应用程序里所购买的所有礼品卡的 0.25%%。";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
-"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ 请求通过 %3$@ 的 %4$@。";
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ 请求通过 %3$@ 于 %4$@。";
 
 /* No comment provided by engineer. */
 "%@ Bitcoin Request" = "%@ 的比特币请求";

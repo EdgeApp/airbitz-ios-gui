@@ -3402,10 +3402,10 @@ Please change your password and PIN</source>
         <note>expense category</note>
         <target xml:lang="ru" state="translated">Телевидение</target>
       </trans-unit>
-      <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
+      <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." approved="yes">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Токен двухфакторной аутентификации на этом устройстве неверен. Либо токен был сменен другим устройством, либо системные часы рассинхронизировались. Пожалуйста, проверьте установленное в системе время.</target>
+        <target xml:lang="ru">Токен двухфакторной аутентификации на этом устройстве неверен. Либо токен был сменен другим устройством, либо системные часы рассинхронизировались. Пожалуйста, проверьте установленное в системе время.</target>
       </trans-unit>
       <trans-unit id="The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@">
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>

@@ -40,12 +40,12 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="0gq-ds-DJC.normalTitle" approved="yes">
+      <trans-unit id="0gq-ds-DJC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-        <target xml:lang="zh-Hans">下一个</target>
+        <target xml:lang="zh-Hans" state="translated">下一步</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">下一步</target>
+          <target xml:lang="zh-Hans">下一个</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
@@ -59,9 +59,9 @@
       <trans-unit id="6uu-dw-ssd.normalTitle" approved="yes">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
-        <target xml:lang="zh-Hans">下一个</target>
+        <target xml:lang="zh-Hans">下一步</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">下一步</target>
+          <target xml:lang="zh-Hans">下一个</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="AAt-Oh-ifI.normalTitle" approved="yes">
@@ -262,9 +262,9 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="DlF-tR-T08.text" approved="yes">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="zh-Hans">生意名称</target>
+        <target xml:lang="zh-Hans">商业名称</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">商业名称</target>
+          <target xml:lang="zh-Hans">生意名称</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="GGS-YR-zt1.normalTitle" approved="yes">
@@ -493,9 +493,9 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="1kz-sq-XsE.normalTitle" approved="yes">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
-        <target xml:lang="zh-Hans">钱包 Public Seed-XPub （高级）</target>
+        <target xml:lang="zh-Hans">钱包公钥 - XPub（高级）</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">钱包公钥 - XPub（高级）</target>
+          <target xml:lang="zh-Hans">钱包 Public Seed-XPub （高级）</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder" approved="yes">
@@ -1036,9 +1036,9 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="3uS-L5-frK.normalTitle" approved="yes">
         <source>KEEP 2FA</source>
         <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
-        <target xml:lang="zh-Hans">保存 2FA</target>
+        <target xml:lang="zh-Hans">保存二元认证【2FA】</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">保存二元认证【2FA】</target>
+          <target xml:lang="zh-Hans">保存 2FA</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="4md-ob-Ttv.text">
@@ -1316,9 +1316,9 @@ Scan the QR code using this device</source>
       <trans-unit id="%@ / %@ requested via %@ on %@." approved="yes">
         <source>%1$@ / %2$@ requested via %3$@ on %4$@.</source>
         <note>ie. $1.50 / 5 mB requested via email on Sep 16, 1976</note>
-        <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 的 %4$@。</target>
+        <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 于 %4$@。</target>
         <alt-trans>
-          <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 于 %4$@。</target>
+          <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 的 %4$@。</target>
         </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request" approved="yes">
