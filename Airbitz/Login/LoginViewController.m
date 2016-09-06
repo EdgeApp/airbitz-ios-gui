@@ -1619,6 +1619,48 @@ static BOOL bInitialized = false;
 {
 }
 
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = appTitle;
+    NSString *strMsg = nil;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = emailCancelled;
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = emailSavedToSendLater;
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = emailSent;
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = errorSendingEmail;
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:okButtonText
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 #pragma mark - ButtonSelectorView delegates
 
