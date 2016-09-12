@@ -26,6 +26,7 @@
 #import "FadingAlertView.h"
 #import "SettingsViewController.h"
 #import "InfoView.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef enum eLoginMode
 {
@@ -38,7 +39,7 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
+    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -322,7 +323,7 @@ static BOOL bInitialized = false;
                                                      message:message
                                                     delegate:self
                                            cancelButtonTitle:cancelButtonText
-                                           otherButtonTitles:uploadLogText, nil];
+                                           otherButtonTitles:uploadLogText, emailLoginPackage, nil];
     _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [_uploadLogAlert show];
 }
@@ -1497,6 +1498,10 @@ static BOOL bInitialized = false;
                 [self assignFirstResponder];
             }];
         }
+        else if (2 == buttonIndex)
+        {
+            [self sendLoginPackageEmail];
+        }
         [self assignFirstResponder];
     }
     else if (_deleteAccountAlert == alertView)
@@ -1511,6 +1516,60 @@ static BOOL bInitialized = false;
         }
     }
 }
+
+- (void)sendLoginPackageEmail
+{
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        NSString *username =  self.usernameSelector.textField.text;
+        
+        if (!username || username.length < 3)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:enter_username_in_login_screen
+                                                           delegate:nil
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            ABCError *error;
+            NSString *package = [abc getLoginPackage:username error:&error];
+            
+            if (error)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:error.userInfo[NSLocalizedDescriptionKey]
+                                                               delegate:nil
+                                                      cancelButtonTitle:okButtonText
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+                NSString *subject = [NSString stringWithFormat:@"%@ %@", appTitle, loginPackage];
+                [mailComposer setSubject:subject];
+                [mailComposer setMessageBody:package isHTML:NO];
+                mailComposer.mailComposeDelegate = self;
+                [self presentViewController:mailComposer animated:YES completion:nil];
+            }
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:cantSendEmailText
+                                                       delegate:nil
+                                              cancelButtonTitle:okButtonText
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
 
 - (void)resignAllResponders
 {
@@ -1559,6 +1618,48 @@ static BOOL bInitialized = false;
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
 }
+
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = appTitle;
+    NSString *strMsg = nil;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = emailCancelled;
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = emailSavedToSendLater;
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = emailSent;
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = errorSendingEmail;
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:okButtonText
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 #pragma mark - ButtonSelectorView delegates

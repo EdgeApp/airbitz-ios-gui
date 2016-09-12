@@ -1,12 +1,26 @@
+v 2.2.0
+
+We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+
+In addition:
+
+• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
+• Fixed TouchID occasionally not recognizing touches
+• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
+• Background notifications of incoming funds if app is recently backgrounded
+• Fallback public address for failed BIP70 payment protocol transactions 
+• Improved language translations
+• Show small dropdown when unable to connect to network
+
 v 2.1.0
 
-• Ajouter un abonnement au serveur d'adresse Libbitcoin/Electrum pour une performance beaucoup améliorer et une augmentation de vie de la batterie.
-• Activer le calcul des droits miniers dynamique
-• Ajouter les redevances minières estimées contrôlables (basse, Standard, vif)
-• Corriger le temps de transaction erronée pour quand la transaction est reçue pendant que le porte-monnaie était hors ligne
-• Résoudre les bogues de calculatrice
-• Ajouter la prise en charge linguistique Chinois, Hindi, Espagnol et Portugais
-• Ajouter prise en charge pour une localisation appropriée des numéros, heures et dates
-• Accélérer les connexions du nouveau appareil de 200 %
-• Améliorer la précision de la détection de transaction dans des mauvaises conditions de réseau
-• Ajouter le bouton TouchID à l’écran de connexion pour réactiver la fenêtre contextuelle TouchID
+• Ajout d'un abonnement au serveur d'adresse Libbitcoin/Electrum pour des performances améliorées et une augmentation de vie de la batterie.
+• Activation d'un calcul dynamique des frais miniers
+• Ajout d'un contrôle utilisateur des frais miniers estimés (paramètres bas, normal, haut)
+• Correction du temps erroné de transaction lorsque qu'une transaction est reçue alors que le portefeuille est déconnecté
+• Résolution des bogues de calculatrice
+• Prise en charge linguistique du Chinois, Hindi, Espagnol et Portugais
+• Prise en charge d'un localisation linguistique appropriée pour les numéros, heures et dates
+• Accélération de 200 % des connexions des nouveaux appareils
+• Amélioration de la précision de détection des transactions dans de mauvaises conditions de réseau
+• Ajout du bouton TouchID à l’écran de connexion pour réactiver la fenêtre contextuelle TouchID

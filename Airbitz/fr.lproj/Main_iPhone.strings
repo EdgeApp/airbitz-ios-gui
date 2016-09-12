@@ -5,7 +5,7 @@
 "0ea-NR-Nd9.normalTitle" = "Ce mois";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
-"1kz-sq-XsE.normalTitle" = "Porte-monnaie Public Seed - XPub (avancé)";
+"1kz-sq-XsE.normalTitle" = "Portefeuille Public Seed - XPub (avancé)";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "Nom d’utilisateur";
@@ -23,7 +23,7 @@
 "4ab-Wa-eS4.placeholder" = "Mot de passe";
 
 /* Class = "UIButton"; normalTitle = "Request"; ObjectID = "6EE-Aw-gGZ"; */
-"6EE-Aw-gGZ.normalTitle" = "Demande";
+"6EE-Aw-gGZ.normalTitle" = "Demander";
 
 /* Class = "UITabBarItem"; title = "Scan"; ObjectID = "6Ey-Xn-GTe"; */
 "6Ey-Xn-GTe.title" = "Scanner";
@@ -134,7 +134,7 @@
 "QzV-Gk-Vrs.placeholder" = "Entrez à nouveau le mot de passe";
 
 /* Class = "UIButton"; normalTitle = "Exit PIN Login"; ObjectID = "RTg-3l-g7y"; */
-"RTg-3l-g7y.normalTitle" = "Quitter connexion PIN";
+"RTg-3l-g7y.normalTitle" = "Quitter la connexion PIN";
 
 /* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "RVo-M5-ZXk"; */
 "RVo-M5-ZXk.normalTitle" = "Mot de passe oublié";
@@ -284,7 +284,7 @@
 "shF-7X-2GL.normalTitle" = "Max";
 
 /* Class = "UITabBarItem"; title = "Request"; ObjectID = "uTa-MB-0Sl"; */
-"uTa-MB-0Sl.title" = "Demande";
+"uTa-MB-0Sl.title" = "Demander";
 
 /* Class = "UILabel"; text = "Scan QR Code or use photo"; ObjectID = "vVZ-Kb-RwQ"; */
 "vVZ-Kb-RwQ.text" = "Scanner le Code QR ou utiliser photo";

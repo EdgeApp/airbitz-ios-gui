@@ -36,7 +36,7 @@ static NSMutableArray *generalPlugins;
             plugin.sourceFile = @"bitrefill";
             plugin.sourceExtension = @"html";
             plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/Bitrefill-logo-300x300.png";
-            plugin.name = @"Topup Prepaid Mobile SIM";
+            plugin.name = mobile_phone_topups;
             plugin.env = @{
                            @"SANDBOX": (isTestnet ? @"true" : @"false"),
                            @"API_KEY": BITREFILL_API_KEY

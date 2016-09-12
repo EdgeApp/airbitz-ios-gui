@@ -1,42 +1,42 @@
-Sell, Secure, Send, and Receive Bitcoin
+Продавайте, храните, отправляйте и получайте биткойны
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+Простой в использовании биткойн-кошелек с широкими возможностями позволяет своим пользователям легко контролировать приватные ключи своих биткойнов и пользоваться ими так же легко и просто, как мобильным банковским клиентом.
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+Получите контроль над своими средствами! С Airbitz доступ к Вашим средства и информация о переводах будут только у ВАС. Ни Airbitz, ни какая-либо третья сторона не смогут получить доступ к Вашим средствам или данным. Вы получите тайну финансовых операций и автономность, для которых биткойны и создавались, с легкостью использования, доступной даже бабушкам.
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+Сфокусированный на предоставление пользователю потрясающего опыта, кошелек Airbitz предоставляет следующий набор великолепных функций:
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+• Нулевые знания и невозможность доступа к средствам пользователя, его ключам или данным о переводах как со стороны Airbitz, так и с любой третьей стороны
+• Интегрированная купля-продажа для резидентов США и Канады
+• Оплата с использованием Bluetooth (BLE) без помощи QR-кодов 
+• Простое создание учетной записи, использующей только имя пользователя и пароль (не требует печати PDF-файлов, заполнения от руки кодовых фраз или настройки шифрования)
+• Автоматическое создание зашифрованных резервных копий кошельков на выделенных пиринговых облачных серверах
+• Двухфакторная аутентификация в одно касание - самое простое и изящное решение для защиты кошелька в мире
+• Быстрое переключение между учетными записями через выпадающий список на экране входа
+• Синхронизация между различными мобильными устройствами
+• Иерархически определенные кошельки, изменяющие адрес для каждого перевода
+• Учетная запись объединяет несколько кошельков с определяемыми пользователем названиями (например, "Деньги на отпуск")
+• Поддержка нескольких валют. Вы можете задать свою валюту каждому кошельку
+• Поиск переводов по получателю, категории или примечаниям
+• Встроенный калькулятор для легкого расчета валютной конверсии
+• Режим магазина предоставляет легкий и доступный пользовательский интерфейс для ведения торговли
+• Определение частичных платежей позволяет создавать QR-коды для запросов на платеж с учетом оставшегося баланса 
+• Дневные пределы трат (с паролем для их превышения)
+• Пределы трат, контролируемые PIN-кодом
+• Пользовательский интерфейс для быстрого перевода средств между кошельками в два клика
+• Импорт средств через приватные ключи WIF или Casascius
+• Децентрализованная архитектура сервера. Кошельки работают даже если сервера Airbitz лежат.
+• Интеграция с деловыми каталогами Airbitz позволяет автоматически заполнять деловую информацию для переводов, включая логотипы и фото
+• Интеграция со списком контактов позволяет автоматически заполнять имя получателя платежа и его фото
+• Поддержка платежного протокола BIP 70
+• Открытый исходный код. Доступен по адресу https://github.com/Airbitz
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+********* 	Уведомление о порядке обращения с личной информацией *********
+Приложение Airbitz требует доступа к списку контактов на устройстве, геопозиционированию и личной информации. Эта информация используется, чтобы обеспечить пользователю наиболее удобные условия работы следующим образом:
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1. Автозаполнение контактов из списка контактов пользователя после перевода
+2. Автозаполнение контактов из адресной книги пользователя для отправления запросов на платеж по электронной почте или посредством SMS-сообщений
+3. Автозаполнение деловых справочников после перевода
+4. Использование геопозиционирования на устройстве пользователя для поиска близлежащих компаний
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+Ни личная информация, ни список контактов никогда не передаются без шифрования с использованием регистрационных данных пользователя (имя пользователя и пароль). Ни Airbitz, ни какая-либо третья сторона не имеют доступа к передаваемой приложением информации.
