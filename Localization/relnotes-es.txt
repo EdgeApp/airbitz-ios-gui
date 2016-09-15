@@ -1,3 +1,17 @@
+v 2.2.0
+
+Nosotros solo hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un email. Nunca se preocupe por olvidar su contraseña otra vez
+
+Además:
+
+Integración de Bitrefill plugin lo cual permite a usuarios comprar las mejores mobile desde mas de 600 portadores en 143 países
+TouchID reparado ocasionalmente no reconocía toques
+Cuentas archivadas ahora toman menos recursos por no consultar la red o sincronizar datos de transacción
+notificación de antecedentes de fondos entrante si la app esta recientemente en segundo plano
+recurrir direcciones publicas por falla BIP70 protocolo de pago de transacciones 
+Mejoras en traducción de idiomas
+muestra un pequeño menu desplegable cuando no puede conectarse a la red
+
 v 2.1.0
 
 • Añadir suscripción de dirección de servidor Libbitcoin/Electrum para mucho mejor rendimiento y mayor duración de la batería.
@@ -5,8 +19,8 @@ v 2.1.0
 • Añadir tarifas de minado estimadas controlables por el usuario (ajustes Bajo, Estándar, Alto)
 • Arreglar tiempos de transacción incorrectos para cuando la transacción se recibe mientras la cartera estaba fuera de línea
 • Corregir errores de calculadora
-• Añadir soporte para idioma chino, hindú, español y portugués
-• Añadir soporte para la correcta localización de números, horas y fechas
+• Añadir ayuda en idioma Chino, Indio, Español y Portugués
+• Añadir soporte para la localización apropiada de números, horas y fechas
 • Acelera los inicios de sesión en un nuevo dispositivo en un 200%
-• Mejorar la precisión en la detección de la transacción en condiciones de red pobres
+• Mejorar la precisión en la detección de la transacción en pobres condiciones de red
 • Añadir botón TouchID a pantalla de inicio de sesión para volver a desencadenar una ventana emergente de TouchID

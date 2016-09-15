@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "来自另一个设备的2FA 重置请求。";
+"1Qx-Jp-bYp.text" = "来自另一个装置的二元认证【2FA】重置请求";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "保存 2FA";
+"3uS-L5-frK.normalTitle" = "保存二元认证【2FA】";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
 "4md-ob-Ttv.text" = "核心版本 ︰";

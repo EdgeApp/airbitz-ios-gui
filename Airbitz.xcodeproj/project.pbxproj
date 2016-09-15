@@ -38,11 +38,11 @@
 		DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
+		DA26CE981D72489D00051F41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA26CE911D72489D00051F41 /* Localizable.strings */; };
+		DA26CE991D72489D00051F41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA26CE911D72489D00051F41 /* Localizable.strings */; };
+		DA26CE9A1D72489D00051F41 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA26CE911D72489D00051F41 /* Localizable.strings */; };
 		DA3508311D67670B00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3508321D67670C00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
-		DA3C75BC1D288FF100119510 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3C75B51D288FF100119510 /* Localizable.strings */; };
-		DA3C75BD1D288FF100119510 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3C75B51D288FF100119510 /* Localizable.strings */; };
-		DA3C75BE1D288FF100119510 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3C75B51D288FF100119510 /* Localizable.strings */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -58,10 +58,6 @@
 		DA4902991D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
 		DA49029A1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
 		DA49029B1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA4902951D1F3BEC00F34324 /* MiniDropDownAlertView.xib */; };
-		DA4977831D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
-		DA4977841D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
-		DA4977851D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
-		DA4977861D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
 		DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F51CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
 		DA4A13F61CFEC8400097EF31 /* fingerprint-wht.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4A13F11CFEC8400097EF31 /* fingerprint-wht.png */; };
@@ -1180,11 +1176,6 @@
 		DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
-		DAB06AE91D16D01800050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
-		DAB06AEC1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */; };
-		DAB06AEF1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */; };
-		DAB06B251D171D3D00050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
-		DAB06B481D17230900050098 /* Airbitz-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */; };
 		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
@@ -1473,12 +1464,12 @@
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
-		DA3C75B61D288FF100119510 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
-		DA3C75B71D288FF100119510 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA3C75B81D288FF100119510 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA3C75B91D288FF100119510 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA3C75BA1D288FF100119510 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		DA3C75BB1D288FF100119510 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DA26CE921D72489D00051F41 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = SOURCE_ROOT; };
+		DA26CE931D72489D00051F41 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DA26CE941D72489D00051F41 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DA26CE951D72489D00051F41 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DA26CE961D72489D00051F41 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DA26CE971D72489D00051F41 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -2061,24 +2052,6 @@
 		DAB06A3F1D14B28300050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DAB06A401D14B28300050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DAB06AE51D1677ED00050098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		DAB06AE81D16D01800050098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AEB1D16D02100050098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AEE1D16D02A00050098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = "Base.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF01D16D04000050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF11D16D04300050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = "pt.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF31D16D04400050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF41D16D04500050098 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF51D16D04600050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF61D16D04900050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF81D16D04C00050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = "pt.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AF91D16D04E00050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AFA1D16D04E00050098 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AFB1D16D04F00050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AFC1D16D05300050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AFD1D16D05400050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = "pt.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06AFF1D16D05600050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = "hi.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06B001D16D05700050098 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "fr.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06B011D16D05800050098 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "de.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
 		DAB06B271D17221A00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		DAB06B281D17221A00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DAB06B291D17221A00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
@@ -2091,9 +2064,6 @@
 		DAB06B301D17221B00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DAB06B311D17221B00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DAB06B321D17223500050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		DAB06B451D1722F400050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/Airbitz-Develop-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06B461D1722FE00050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/Airbitz-InfoPlist.strings"; sourceTree = "<group>"; };
-		DAB06B471D17230900050098 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = "zh.lproj/Airbitz-Testnet-InfoPlist.strings"; sourceTree = "<group>"; };
 		DAB06B501D1A32DA00050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		DAB06B6D1D1A7E2C00050098 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		DAB06B731D1A7E7B00050098 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -3305,11 +3275,8 @@
 		DAD1AD791BC6065100C648C4 /* Airbitz */ = {
 			isa = PBXGroup;
 			children = (
-				DA3C75B51D288FF100119510 /* Localizable.strings */,
+				DA26CE911D72489D00051F41 /* Localizable.strings */,
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
-				DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */,
-				DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */,
-				DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
@@ -3848,7 +3815,6 @@
 				DA57A1F41D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF43B1BC7285D0063DA07 /* icon_category_atm.png in Resources */,
-				DAB06B251D171D3D00050098 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EF43C1BC7285D0063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EF43D1BC7285D0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF43E1BC7285D0063DA07 /* icon_directory@3x.png in Resources */,
@@ -3967,7 +3933,6 @@
 				DAE5464C1D29F6780065F926 /* sms_template.txt in Resources */,
 				DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA9EF4B01BC7285D0063DA07 /* thumb@2x.png in Resources */,
-				DA3C75BD1D288FF100119510 /* Localizable.strings in Resources */,
 				DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8D1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
 				DA57A13F1D131417005442AF /* ScanView~iphone.xib in Resources */,
@@ -4011,7 +3976,6 @@
 				DA9EF4D61BC7285D0063DA07 /* icon_request@2x.png in Resources */,
 				DA9EF4D71BC7285D0063DA07 /* password_dot@2x.png in Resources */,
 				DA9EF4D81BC7285D0063DA07 /* ico_nav_directory_dark@2x.png in Resources */,
-				DAB06AEC1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DA57A1531D1316BD005442AF /* QuestionAnswerView~iphone.xib in Resources */,
 				DA9EF4D91BC7285D0063DA07 /* AnnotationContentView.xib in Resources */,
 				DA9EF4DA1BC7285D0063DA07 /* icon_location@2x.png in Resources */,
@@ -4022,7 +3986,6 @@
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF4E11BC7285D0063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EF4E21BC7285D0063DA07 /* QR-bracket.png in Resources */,
-				DA4977861D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EF4E31BC7285D0063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EF4E41BC7285D0063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DA9EF4E61BC7285D0063DA07 /* icon_exchange.png in Resources */,
@@ -4031,6 +3994,7 @@
 				DA9EF4E91BC7285D0063DA07 /* icon_category_shopping@2x.png in Resources */,
 				DADFAC5E1D29F59C006798D5 /* transaction_details.html in Resources */,
 				DABA012D1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
+				DA26CE991D72489D00051F41 /* Localizable.strings in Resources */,
 				DA9EF4EA1BC7285D0063DA07 /* btn_add@4x.png in Resources */,
 				DA9EF4EB1BC7285D0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DADFAC2E1D29F59C006798D5 /* email_template.html in Resources */,
@@ -4116,7 +4080,6 @@
 				DA57A1F51D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF6021BC729FA0063DA07 /* icon_category_atm.png in Resources */,
-				DAB06B481D17230900050098 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EF6031BC729FA0063DA07 /* icon_transactions@3x.png in Resources */,
 				DA9EF6041BC729FA0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF6051BC729FA0063DA07 /* icon_directory@3x.png in Resources */,
@@ -4124,7 +4087,6 @@
 				DA9EF6071BC729FA0063DA07 /* BitcoinReceived.mp3 in Resources */,
 				DADFAC4D1D29F59C006798D5 /* info_settings.html in Resources */,
 				DA9EF6081BC729FA0063DA07 /* icon_wallet@2x.png in Resources */,
-				DAB06AEF1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA57A1C81D131C6E005442AF /* AccountCreate.storyboard in Resources */,
 				DA9EF6091BC729FA0063DA07 /* icon_export_sdcard@2x.png in Resources */,
 				DA9EF60A1BC729FA0063DA07 /* btn_slide_to_confirm@2x.png in Resources */,
@@ -4188,7 +4150,6 @@
 				DA9EF6461BC729FA0063DA07 /* icon_bitcoin_symbol.png in Resources */,
 				DA9EF6471BC729FA0063DA07 /* icon_export_printer@2x.png in Resources */,
 				DA57A1D21D131C76005442AF /* ConfirmationSliderView.xib in Resources */,
-				DA4977841D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DABF60F71C1027C1004E613B /* clevercoin.html in Resources */,
 				DA9EF6481BC729FA0063DA07 /* icon_directory@2x.png in Resources */,
 				DA9EF6491BC729FA0063DA07 /* BLE_photo@2x.png in Resources */,
@@ -4235,7 +4196,6 @@
 				DAE5464D1D29F6780065F926 /* sms_template.txt in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
 				DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */,
-				DA3C75BE1D288FF100119510 /* Localizable.strings in Resources */,
 				DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
@@ -4299,6 +4259,7 @@
 				DA9EF6B01BC729FA0063DA07 /* icon_category_shopping@2x.png in Resources */,
 				DADFAC5F1D29F59C006798D5 /* transaction_details.html in Resources */,
 				DABA012E1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
+				DA26CE9A1D72489D00051F41 /* Localizable.strings in Resources */,
 				DA9EF6B11BC729FA0063DA07 /* btn_add@4x.png in Resources */,
 				DA9EF6B21BC729FA0063DA07 /* bd_icon_phone@2x.png in Resources */,
 				DADFAC2F1D29F59C006798D5 /* email_template.html in Resources */,
@@ -4384,7 +4345,6 @@
 				DA57A1F31D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4A71BC61F920063DA07 /* icon_logout@3x.png in Resources */,
 				DA9EE4C81BC61F920063DA07 /* icon_wallet.png in Resources */,
-				DAB06AE91D16D01800050098 /* Airbitz-InfoPlist.strings in Resources */,
 				DA9EE4AE1BC61F920063DA07 /* icon_request.png in Resources */,
 				DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EE4871BC61F920063DA07 /* icon_category_atm.png in Resources */,
@@ -4504,7 +4464,6 @@
 				DAE5464B1D29F6780065F926 /* sms_template.txt in Resources */,
 				DA9102081C4A71EA00603D62 /* eyeball.png in Resources */,
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,
-				DA3C75BC1D288FF100119510 /* Localizable.strings in Resources */,
 				DA9EE46F1BC61F920063DA07 /* flash_off@2x.png in Resources */,
 				DA9EE4CA1BC61F920063DA07 /* icon_wallet@3x.png in Resources */,
 				DA57A13E1D131417005442AF /* ScanView~iphone.xib in Resources */,
@@ -4559,15 +4518,14 @@
 				DA9EE44D1BC61F920063DA07 /* btn_collapse_expand.png in Resources */,
 				DA9EE5051BC61F920063DA07 /* WalletExportQuicken.QIF in Resources */,
 				DA9EE0D41BC61F920063DA07 /* FadingAlertViewNew.xib in Resources */,
-				DA4977851D226054006521D2 /* Airbitz-Testnet-InfoPlist.strings in Resources */,
 				DA9EE4E41BC61F920063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EEFB81BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DA9EE4361BC61F920063DA07 /* bitCoinAnnotation@2x.png in Resources */,
 				DA9EE48C1BC61F920063DA07 /* icon_category_coffee_tea@3x.png in Resources */,
 				DA9EE49D1BC61F920063DA07 /* icon_exchange.png in Resources */,
 				DA9ED7EB1BC61E680063DA07 /* San Diego.gpx in Resources */,
+				DA26CE981D72489D00051F41 /* Localizable.strings in Resources */,
 				DADFAC5D1D29F59C006798D5 /* transaction_details.html in Resources */,
-				DA4977831D226054006521D2 /* Airbitz-Develop-InfoPlist.strings in Resources */,
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
 				DA9EE4971BC61F920063DA07 /* icon_category_shopping@2x.png in Resources */,
 				DADFAC2D1D29F59C006798D5 /* email_template.html in Resources */,
@@ -5315,15 +5273,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DA3C75B51D288FF100119510 /* Localizable.strings */ = {
+		DA26CE911D72489D00051F41 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA3C75B61D288FF100119510 /* zh-Hans */,
-				DA3C75B71D288FF100119510 /* hi */,
-				DA3C75B81D288FF100119510 /* es */,
-				DA3C75B91D288FF100119510 /* de */,
-				DA3C75BA1D288FF100119510 /* pt */,
-				DA3C75BB1D288FF100119510 /* fr */,
+				DA26CE921D72489D00051F41 /* zh-Hans */,
+				DA26CE931D72489D00051F41 /* de */,
+				DA26CE941D72489D00051F41 /* es */,
+				DA26CE951D72489D00051F41 /* hi */,
+				DA26CE961D72489D00051F41 /* fr */,
+				DA26CE971D72489D00051F41 /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5506,48 +5464,6 @@
 				DAB06B881D1A7F2800050098 /* zh-Hans */,
 			);
 			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
-		DAB06AE71D16D01800050098 /* Airbitz-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAB06AE81D16D01800050098 /* Base */,
-				DAB06AF01D16D04000050098 /* es */,
-				DAB06AF11D16D04300050098 /* pt */,
-				DAB06AF31D16D04400050098 /* hi */,
-				DAB06AF41D16D04500050098 /* fr */,
-				DAB06AF51D16D04600050098 /* de */,
-				DAB06B461D1722FE00050098 /* zh */,
-			);
-			name = "Airbitz-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		DAB06AEA1D16D02100050098 /* Airbitz-Develop-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAB06AEB1D16D02100050098 /* Base */,
-				DAB06AF61D16D04900050098 /* es */,
-				DAB06AF81D16D04C00050098 /* pt */,
-				DAB06AF91D16D04E00050098 /* hi */,
-				DAB06AFA1D16D04E00050098 /* fr */,
-				DAB06AFB1D16D04F00050098 /* de */,
-				DAB06B451D1722F400050098 /* zh */,
-			);
-			name = "Airbitz-Develop-InfoPlist.strings";
-			sourceTree = "<group>";
-		};
-		DAB06AED1D16D02A00050098 /* Airbitz-Testnet-InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAB06AEE1D16D02A00050098 /* Base */,
-				DAB06AFC1D16D05300050098 /* es */,
-				DAB06AFD1D16D05400050098 /* pt */,
-				DAB06AFF1D16D05600050098 /* hi */,
-				DAB06B001D16D05700050098 /* fr */,
-				DAB06B011D16D05800050098 /* de */,
-				DAB06B471D17230900050098 /* zh */,
-			);
-			name = "Airbitz-Testnet-InfoPlist.strings";
 			sourceTree = "<group>";
 		};
 		DADFAC061D29F59C006798D5 /* email_template_simple.html */ = {

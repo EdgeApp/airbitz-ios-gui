@@ -1308,6 +1308,11 @@ Scan the QR code using this device</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">%@ Bitcoin rebebido. Toque para obter detalhes.</target>
       </trans-unit>
+      <trans-unit id="%@ Recovery Token">
+        <source>%@ Recovery Token</source>
+        <note>\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet</note>
+        <target xml:lang="pt" state="needs-translation">%@ Recovery Token</target>
+      </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
 %2$@</source>
@@ -1679,6 +1684,11 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Verificando senha...</target>
       </trans-unit>
+      <trans-unit id="Choose a Question">
+        <source>Choose a Question</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Choose a Question</target>
+      </trans-unit>
       <trans-unit id="City, State/Province, or Country">
         <source>City, State/Province, or Country</source>
         <note>City, State/Province, or Country placeholder</note>
@@ -1701,7 +1711,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
       </trans-unit>
       <trans-unit id="Coffee Shops">
         <source>Coffee Shops</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="pt" state="translated">Coffee Shops</target>
       </trans-unit>
       <trans-unit id="Complete Signup">
@@ -1784,11 +1794,6 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
         <note>section header in settings table</note>
         <target xml:lang="pt" state="translated">TAXA DE CÂMBIO PADRÃO</target>
       </trans-unit>
-      <trans-unit id="DISCOUNTED GIFT CARDS">
-        <source>DISCOUNTED GIFT CARDS</source>
-        <note>Slideout menu gift card text</note>
-        <target xml:lang="pt" state="translated">CARTÕES DE PRESENTE DESCONTADOS</target>
-      </trans-unit>
       <trans-unit id="Debug">
         <source>Debug</source>
         <note>debug text</note>
@@ -1868,11 +1873,6 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
         <source>Disabled</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Desativado</target>
-      </trans-unit>
-      <trans-unit id="Discounted Gift Cards">
-        <source>Discounted Gift Cards</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Cartões de Presente com Desconto</target>
       </trans-unit>
       <trans-unit id="Div Income">
         <source>Div Income</source>
@@ -2001,6 +2001,20 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Erro de código</target>
       </trans-unit>
+      <trans-unit id="Error connecting to payment processor. Send directly to bitcoin address\n\n%@">
+        <source>Error connecting to payment processor. Send directly to bitcoin address
+
+%@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Error connecting to payment processor. Send directly to bitcoin address
+
+%@</target>
+      </trans-unit>
+      <trans-unit id="Error creating affiliate link. Please try again later">
+        <source>Error creating affiliate link. Please try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Error creating affiliate link. Please try again later</target>
+      </trans-unit>
       <trans-unit id="Error desc">
         <source>Error desc</source>
         <note>No comment provided by engineer.</note>
@@ -2033,7 +2047,7 @@ Digite-a abaixo para certificar-se:</target>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of financial exchange categories. Such as converting from one currency to another</note>
         <target xml:lang="pt" state="translated">Troca</target>
       </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
@@ -2048,13 +2062,18 @@ Digite-a abaixo para certificar-se:</target>
       </trans-unit>
       <trans-unit id="Expense">
         <source>Expense</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of expense categories</note>
         <target xml:lang="pt" state="translated">Despesa</target>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
         <note>EXPORT button text for wallet export</note>
         <target xml:lang="pt" state="translated">Exportar</target>
+      </trans-unit>
+      <trans-unit id="Export From:">
+        <source>Export From:</source>
+        <note>Prompt asking which wallet to export from</note>
+        <target xml:lang="pt" state="needs-translation">Export From:</target>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
@@ -2126,6 +2145,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">De: %@</target>
       </trans-unit>
+      <trans-unit id="Funds successfully imported, but error connecting to messenger server. Try again later">
+        <source>Funds successfully imported, but error connecting to messenger server. Try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Funds successfully imported, but error connecting to messenger server. Try again later</target>
+      </trans-unit>
       <trans-unit id="Furnishings">
         <source>Furnishings</source>
         <note>No comment provided by engineer.</note>
@@ -2173,7 +2197,7 @@ Digite-a abaixo para certificar-se:</target>
       </trans-unit>
       <trans-unit id="Groceries">
         <source>Groceries</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="pt" state="translated">Groceries</target>
       </trans-unit>
       <trans-unit id="Gym">
@@ -2221,14 +2245,9 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Home</target>
       </trans-unit>
-      <trans-unit id="Home Depot (Up to 15% Off)">
-        <source>Home Depot (Up to 15% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Home Depot (Até 15% de Desconto)</target>
-      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="pt" state="translated">Home Improvement</target>
       </trans-unit>
       <trans-unit id="Home Insurance">
@@ -2273,6 +2292,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Contribuição para fundo de pensão</target>
       </trans-unit>
+      <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
+        <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">If recovery was setup, you should have emailed yourself a recovery token with a link</target>
+      </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>No comment provided by engineer.</note>
@@ -2315,7 +2339,7 @@ Digite-a abaixo para certificar-se:</target>
       </trans-unit>
       <trans-unit id="Income">
         <source>Income</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of income categories</note>
         <target xml:lang="pt" state="translated">Renda</target>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
@@ -2342,6 +2366,11 @@ Digite-a abaixo para certificar-se:</target>
         <source>Incorrect current password</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Senha atual incorreta</target>
+      </trans-unit>
+      <trans-unit id="Incorrect username for this recovery token. Please try a different username or use a different recovery token link.">
+        <source>Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</target>
       </trans-unit>
       <trans-unit id="Info">
         <source>Info</source>
@@ -2372,6 +2401,11 @@ Digite-a abaixo para certificar-se:</target>
         <source>Invalid Bluetooth Request</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Solicitação de Bluetooth Inválida</target>
+      </trans-unit>
+      <trans-unit id="Invalid Email">
+        <source>Invalid Email</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Invalid Email</target>
       </trans-unit>
       <trans-unit id="Invalid QR Code">
         <source>Invalid QR Code</source>
@@ -2552,6 +2586,11 @@ Digite-a abaixo para certificar-se:</target>
         <source>Net Salary</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Net Salary</target>
+      </trans-unit>
+      <trans-unit id="Network Error">
+        <source>Network Error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Network Error</target>
       </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
@@ -2759,6 +2798,15 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Fazer Chamada</target>
       </trans-unit>
+      <trans-unit id="Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n&lt;br&gt;&lt;br&gt;%@">
+        <source>Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</target>
+      </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
@@ -2779,6 +2827,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Por favor, digite uma quantia para enviar</target>
       </trans-unit>
+      <trans-unit id="Please enter the username of the account to recover">
+        <source>Please enter the username of the account to recover</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Please enter the username of the account to recover</target>
+      </trans-unit>
       <trans-unit id="Please enter your PIN">
         <source>Please enter your PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2794,10 +2847,20 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Por favor, digite sua senha para habilitar o Touch ID</target>
       </trans-unit>
+      <trans-unit id="Please find the email and click on the link from this device to initiate recovery">
+        <source>Please find the email and click on the link from this device to initiate recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Please find the email and click on the link from this device to initiate recovery</target>
+      </trans-unit>
       <trans-unit id="Please have Requestor contact support">
         <source>Please have Requestor contact support</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Por favor, entre em contato com o suporte do solicitante</target>
+      </trans-unit>
+      <trans-unit id="Please logout of current account before attempting password recovery">
+        <source>Please logout of current account before attempting password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Please logout of current account before attempting password recovery</target>
       </trans-unit>
       <trans-unit id="Please try again later or contact support">
         <source>Please try again later or contact support</source>
@@ -2828,6 +2891,13 @@ Digite-a abaixo para certificar-se:</target>
         <source>Property</source>
         <note>expense category</note>
         <target xml:lang="pt" state="translated">Property</target>
+      </trans-unit>
+      <trans-unit id="Provide an Identity Token\n">
+        <source>Provide an Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Provide an Identity Token
+</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
@@ -2886,6 +2956,20 @@ Digite-a abaixo para certificar-se:</target>
         <note>Title of recovery questions setup complete alert</note>
         <target xml:lang="pt" state="translated">Perguntas de Recuperação Definidas</target>
       </trans-unit>
+      <trans-unit id="Recovery Successful\n\nPlease change your password and PIN">
+        <source>Recovery Successful
+
+Please change your password and PIN</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Recovery Successful
+
+Please change your password and PIN</target>
+      </trans-unit>
+      <trans-unit id="Recovery was not setup or was done on another device">
+        <source>Recovery was not setup or was done on another device</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Recovery was not setup or was done on another device</target>
+      </trans-unit>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
@@ -2931,6 +3015,13 @@ Digite-a abaixo para certificar-se:</target>
         <note>expense category</note>
         <target xml:lang="pt" state="translated">Rental Car &amp; Taxi</target>
       </trans-unit>
+      <trans-unit id="Request a Payment Address\n">
+        <source>Request a Payment Address
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Request a Payment Address
+</target>
+      </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
@@ -2940,6 +3031,20 @@ Digite-a abaixo para certificar-se:</target>
         <source>Request is copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Pedido copiado para a área de transferência</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token but you don't have any\n">
+        <source>Request your Identity Token but you don't have any
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Request your Identity Token but you don't have any
+</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token\n">
+        <source>Request your Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Request your Identity Token
+</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
@@ -2981,6 +3086,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>Income notes field for affiliate revenue</note>
         <target xml:lang="pt" state="translated">Compartilhamento de receita do link afiliado %@</target>
       </trans-unit>
+      <trans-unit id="SEND" approved="yes">
+        <source>SEND</source>
+        <note>SEND button text</note>
+        <target xml:lang="pt">ENVIAR</target>
+      </trans-unit>
       <trans-unit id="SMS">
         <source>SMS</source>
         <note>text for textmessage/SMS</note>
@@ -2996,6 +3106,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">SMS enviada</target>
       </trans-unit>
+      <trans-unit id="SPEND BITCOIN (Plugins)">
+        <source>SPEND BITCOIN (Plugins)</source>
+        <note>Slideout menu spend text</note>
+        <target xml:lang="pt" state="needs-translation">SPEND BITCOIN (Plugins)</target>
+      </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
         <note>No comment provided by engineer.</note>
@@ -3005,6 +3120,11 @@ Digite-a abaixo para certificar-se:</target>
         <source>San Diego, California, USA</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">San Diego, Califórnia, EUA</target>
+      </trans-unit>
+      <trans-unit id="Save Recovery Token">
+        <source>Save Recovery Token</source>
+        <note>Title of recovery email popup</note>
+        <target xml:lang="pt" state="needs-translation">Save Recovery Token</target>
       </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
@@ -3113,6 +3233,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Mostrar o Saldo</target>
       </trans-unit>
+      <trans-unit id="Show QR Code">
+        <source>Show QR Code</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Show QR Code</target>
+      </trans-unit>
       <trans-unit id="Sign Up">
         <source>Sign Up</source>
         <note>No comment provided by engineer.</note>
@@ -3144,6 +3269,11 @@ Digite-a abaixo para certificar-se:</target>
         <note>expense category</note>
         <target xml:lang="pt" state="translated">Spa &amp; Massage</target>
       </trans-unit>
+      <trans-unit id="Spend Bitcoin (Plugins)">
+        <source>Spend Bitcoin (Plugins)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Spend Bitcoin (Plugins)</target>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
@@ -3167,11 +3297,6 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Taxa padrão</target>
       </trans-unit>
-      <trans-unit id="Starbucks (Up to 20% Off)">
-        <source>Starbucks (Up to 20% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Starbucks (Até 20% de Desconto)</target>
-      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3181,6 +3306,16 @@ Digite-a abaixo para certificar-se:</target>
         <source>Successfully Logged In</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Logado com Sucesso</target>
+      </trans-unit>
+      <trans-unit id="Successfully Verified Identity">
+        <source>Successfully Verified Identity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Successfully Verified Identity</target>
+      </trans-unit>
+      <trans-unit id="Successfully received identity token from %@">
+        <source>Successfully received identity token from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Successfully received identity token from %@</target>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
@@ -3202,11 +3337,6 @@ Digite-a abaixo para certificar-se:</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Toque e segure uma carteira para obter opções adicionais</target>
       </trans-unit>
-      <trans-unit id="Target (Up to 10% Off)">
-        <source>Target (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Target (Até 10% de Desconto)</target>
-      </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
@@ -3226,6 +3356,15 @@ Digite-a abaixo para certificar-se:</target>
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">O endereço bitcoin do dispositivo conectado com:%1$@ não coincide com o endereço que foi inicialmente anunciado:%2$@</target>
+      </trans-unit>
+      <trans-unit id="The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.">
+        <source>The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</target>
       </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
@@ -3264,6 +3403,11 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
         <target xml:lang="pt" state="translated">Tempo de crack:</target>
+      </trans-unit>
+      <trans-unit id="To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.">
+        <source>To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</source>
+        <note>Message of recovery token popup</note>
+        <target xml:lang="pt" state="needs-translation">To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</target>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
@@ -3332,7 +3476,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <note>No comment provided by engineer.</note>
+        <note>Financial transaction that moves money from one account to another</note>
         <target xml:lang="pt" state="translated">Transferir</target>
       </trans-unit>
       <trans-unit id="Transfer From %@">
@@ -3349,6 +3493,11 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
         <source>Travel</source>
         <note>expense category</note>
         <target xml:lang="pt" state="translated">Travel</target>
+      </trans-unit>
+      <trans-unit id="Trouble connecting to network">
+        <source>Trouble connecting to network</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">Trouble connecting to network</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -3403,10 +3552,15 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
         <note>No comment provided by engineer.</note>
         <target xml:lang="pt" state="translated">Reset do Dois Fatores</target>
       </trans-unit>
-      <trans-unit id="USA and Canada">
+      <trans-unit id="USA">
+        <source>USA</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">USA</target>
+      </trans-unit>
+      <trans-unit id="USA and Canada" approved="yes">
         <source>USA and Canada</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">EUA e Canadá</target>
+        <target xml:lang="pt">EUA e Canadá</target>
       </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
@@ -3585,11 +3739,6 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="pt" state="translated">Carteira: </target>
       </trans-unit>
-      <trans-unit id="Walmart (Up to 10% Off)">
-        <source>Walmart (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Walmart (Até 10% de Desconto)</target>
-      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3625,10 +3774,10 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="pt" state="translated">Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização</target>
       </trans-unit>
-      <trans-unit id="Whole Foods (Up to 10% Off)">
-        <source>Whole Foods (Up to 10% Off)</source>
+      <trans-unit id="Would like to:">
+        <source>Would like to:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Whole Foods (Até 10% de Desconto)</target>
+        <target xml:lang="pt" state="needs-translation">Would like to:</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
@@ -3667,15 +3816,20 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
         <target xml:lang="pt" state="translated">Você Recebeu Bitcoin!
 %1$@ (~%2$@)</target>
       </trans-unit>
-      <trans-unit id="You must answer all six questions. Make sure your answers are long enough.">
-        <source>You must answer all six questions. Make sure your answers are long enough.</source>
+      <trans-unit id="You are about to exit password recovery setup. Your chosen questions and answers have not been saved.">
+        <source>You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Você deve responder todas as seis perguntas. Certifique-se que suas respostas são longas o suficiente.</target>
+        <target xml:lang="pt" state="needs-translation">You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</target>
       </trans-unit>
-      <trans-unit id="You must choose all six questions before proceeding.">
-        <source>You must choose all six questions before proceeding.</source>
+      <trans-unit id="You must answer all questions. Make sure your answers are long enough.">
+        <source>You must answer all questions. Make sure your answers are long enough.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="translated">Você deve escolher todas as seis perguntas antes de prosseguir.</target>
+        <target xml:lang="pt" state="needs-translation">You must answer all questions. Make sure your answers are long enough.</target>
+      </trans-unit>
+      <trans-unit id="You must choose a question for all selections before proceeding.">
+        <source>You must choose a question for all selections before proceeding.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="pt" state="needs-translation">You must choose a question for all selections before proceeding.</target>
       </trans-unit>
       <trans-unit id="You must enter a user name">
         <source>You must enter a user name</source>

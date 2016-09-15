@@ -8,7 +8,10 @@
       <trans-unit id="Lt8-cl-BMW.text">
         <source>Scan QR</source>
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
-        <target xml:lang="zh-Hans" state="translated">扫描 QR</target>
+        <target xml:lang="zh-Hans" state="translated">扫描二维码【QR】</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">扫描 QR</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="NiJ-rT-MKF.text" approved="yes">
         <source>Send</source>
@@ -37,20 +40,29 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
     </header>
     <body>
-      <trans-unit id="0gq-ds-DJC.normalTitle" approved="yes">
+      <trans-unit id="0gq-ds-DJC.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
-        <target xml:lang="zh-Hans">下一个</target>
+        <target xml:lang="zh-Hans" state="translated">下一步</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">下一个</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
         <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="zh-Hans" state="translated">您的用户名、 密码和PIN 只有您知道，并永远不会被传输出去或在未加密前存储起来。</target>
+        <target xml:lang="zh-Hans" state="translated">您的用户名和密码只有您知道，绝不会被传输出去或未经加密保存。</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">您的用户名、 密码和PIN 只有您知道，并永远不会被传输出去或在未加密前存储起来。</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle" approved="yes">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd";</note>
-        <target xml:lang="zh-Hans">下一个</target>
+        <target xml:lang="zh-Hans">下一步</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">下一个</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="AAt-Oh-ifI.normalTitle" approved="yes">
         <source>NEXT</source>
@@ -250,7 +262,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="DlF-tR-T08.text" approved="yes">
         <source>Business Name</source>
         <note>Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08";</note>
-        <target xml:lang="zh-Hans">生意名称</target>
+        <target xml:lang="zh-Hans">商业名称</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">生意名称</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="GGS-YR-zt1.normalTitle" approved="yes">
         <source>Shopping</source>
@@ -478,7 +493,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="1kz-sq-XsE.normalTitle" approved="yes">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
-        <target xml:lang="zh-Hans">钱包 Public Seed-XPub （高级）</target>
+        <target xml:lang="zh-Hans">钱包公钥 - XPub（高级）</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">钱包 Public Seed-XPub （高级）</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder" approved="yes">
         <source>User Name</source>
@@ -990,7 +1008,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="24.normalTitle">
         <source>OK</source>
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
-        <target xml:lang="zh-Hans" state="translated">完成</target>
+        <target xml:lang="zh-Hans" state="translated">确定</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">完成</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="25.normalTitle" approved="yes">
         <source>Cancel</source>
@@ -1007,12 +1028,18 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="1Qx-Jp-bYp.text">
         <source>2FA Reset Requested by another device.</source>
         <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
-        <target xml:lang="zh-Hans" state="translated">来自另一个设备的2FA 重置请求。</target>
+        <target xml:lang="zh-Hans" state="translated">来自另一个装置的二元认证【2FA】重置请求</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">来自另一个设备的2FA 重置请求。</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="3uS-L5-frK.normalTitle" approved="yes">
         <source>KEEP 2FA</source>
         <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
-        <target xml:lang="zh-Hans">保存 2FA</target>
+        <target xml:lang="zh-Hans">保存二元认证【2FA】</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">保存 2FA</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4md-ob-Ttv.text">
         <source>Core Version:</source>
@@ -1289,7 +1316,10 @@ Scan the QR code using this device</source>
       <trans-unit id="%@ / %@ requested via %@ on %@." approved="yes">
         <source>%1$@ / %2$@ requested via %3$@ on %4$@.</source>
         <note>ie. $1.50 / 5 mB requested via email on Sep 16, 1976</note>
-        <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 的 %4$@。</target>
+        <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 于 %4$@。</target>
+        <alt-trans>
+          <target xml:lang="zh-Hans">%1$@ / %2$@ 请求通过 %3$@ 的 %4$@。</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request" approved="yes">
         <source>%@ Bitcoin Request</source>
@@ -1305,6 +1335,11 @@ Scan the QR code using this device</source>
         <source>%@ Bitcoin received. Tap for details.</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">%@ 收到比特币。请点击查看有关详细信息。</target>
+      </trans-unit>
+      <trans-unit id="%@ Recovery Token">
+        <source>%@ Recovery Token</source>
+        <note>\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet</note>
+        <target xml:lang="zh-Hans" state="needs-translation">%@ Recovery Token</target>
       </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
@@ -1675,6 +1710,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">正在检查密码......</target>
       </trans-unit>
+      <trans-unit id="Choose a Question">
+        <source>Choose a Question</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Choose a Question</target>
+      </trans-unit>
       <trans-unit id="City, State/Province, or Country">
         <source>City, State/Province, or Country</source>
         <note>City, State/Province, or Country placeholder</note>
@@ -1697,7 +1737,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       </trans-unit>
       <trans-unit id="Coffee Shops">
         <source>Coffee Shops</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">咖啡厅</target>
       </trans-unit>
       <trans-unit id="Complete Signup">
@@ -1780,11 +1820,6 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>section header in settings table</note>
         <target xml:lang="zh-Hans" state="translated">默认汇率</target>
       </trans-unit>
-      <trans-unit id="DISCOUNTED GIFT CARDS">
-        <source>DISCOUNTED GIFT CARDS</source>
-        <note>Slideout menu gift card text</note>
-        <target xml:lang="zh-Hans" state="translated">折扣的礼品卡</target>
-      </trans-unit>
       <trans-unit id="Debug">
         <source>Debug</source>
         <note>debug text</note>
@@ -1864,11 +1899,6 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Disabled</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">禁用</target>
-      </trans-unit>
-      <trans-unit id="Discounted Gift Cards">
-        <source>Discounted Gift Cards</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">折扣的礼品卡</target>
       </trans-unit>
       <trans-unit id="Div Income">
         <source>Div Income</source>
@@ -1996,6 +2026,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">代码出现错误</target>
       </trans-unit>
+      <trans-unit id="Error connecting to payment processor. Send directly to bitcoin address\n\n%@">
+        <source>Error connecting to payment processor. Send directly to bitcoin address
+
+%@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Error connecting to payment processor. Send directly to bitcoin address
+
+%@</target>
+      </trans-unit>
+      <trans-unit id="Error creating affiliate link. Please try again later">
+        <source>Error creating affiliate link. Please try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Error creating affiliate link. Please try again later</target>
+      </trans-unit>
       <trans-unit id="Error desc">
         <source>Error desc</source>
         <note>No comment provided by engineer.</note>
@@ -2028,7 +2072,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of financial exchange categories. Such as converting from one currency to another</note>
         <target xml:lang="zh-Hans" state="translated">兑换</target>
         <alt-trans>
           <target xml:lang="zh-Hans">转换 ︰</target>
@@ -2046,13 +2090,18 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Expense">
         <source>Expense</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of expense categories</note>
         <target xml:lang="zh-Hans" state="translated">支出</target>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
         <note>EXPORT button text for wallet export</note>
         <target xml:lang="zh-Hans" state="translated">导出</target>
+      </trans-unit>
+      <trans-unit id="Export From:">
+        <source>Export From:</source>
+        <note>Prompt asking which wallet to export from</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Export From:</target>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
@@ -2124,6 +2173,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">来自: %@</target>
       </trans-unit>
+      <trans-unit id="Funds successfully imported, but error connecting to messenger server. Try again later">
+        <source>Funds successfully imported, but error connecting to messenger server. Try again later</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Funds successfully imported, but error connecting to messenger server. Try again later</target>
+      </trans-unit>
       <trans-unit id="Furnishings">
         <source>Furnishings</source>
         <note>No comment provided by engineer.</note>
@@ -2171,7 +2225,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Groceries">
         <source>Groceries</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">杂货</target>
       </trans-unit>
       <trans-unit id="Gym">
@@ -2219,14 +2273,9 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">首页</target>
       </trans-unit>
-      <trans-unit id="Home Depot (Up to 15% Off)">
-        <source>Home Depot (Up to 15% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Home Depot （高达 15%的折扣)</target>
-      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">家庭装修</target>
       </trans-unit>
       <trans-unit id="Home Insurance">
@@ -2271,6 +2320,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">IRA的贡献</target>
       </trans-unit>
+      <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
+        <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">If recovery was setup, you should have emailed yourself a recovery token with a link</target>
+      </trans-unit>
       <trans-unit id="Import">
         <source>Import</source>
         <note>No comment provided by engineer.</note>
@@ -2313,7 +2367,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Income">
         <source>Income</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of income categories</note>
         <target xml:lang="zh-Hans" state="translated">收入</target>
         <alt-trans>
           <target xml:lang="zh-Hans">收入 ︰</target>
@@ -2344,6 +2398,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">当前密码不正确。</target>
       </trans-unit>
+      <trans-unit id="Incorrect username for this recovery token. Please try a different username or use a different recovery token link.">
+        <source>Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</target>
+      </trans-unit>
       <trans-unit id="Info">
         <source>Info</source>
         <note>Info button text on top right</note>
@@ -2373,6 +2432,11 @@ Enter it below to make sure:</source>
         <source>Invalid Bluetooth Request</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">无效的蓝牙请求</target>
+      </trans-unit>
+      <trans-unit id="Invalid Email">
+        <source>Invalid Email</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Invalid Email</target>
       </trans-unit>
       <trans-unit id="Invalid QR Code">
         <source>Invalid QR Code</source>
@@ -2553,6 +2617,11 @@ Enter it below to make sure:</source>
         <source>Net Salary</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">薪金净额</target>
+      </trans-unit>
+      <trans-unit id="Network Error">
+        <source>Network Error</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Network Error</target>
       </trans-unit>
       <trans-unit id="New PIN">
         <source>New PIN</source>
@@ -2760,6 +2829,15 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">拨打</target>
       </trans-unit>
+      <trans-unit id="Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n&lt;br&gt;&lt;br&gt;%@">
+        <source>Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</target>
+      </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
@@ -2780,6 +2858,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">请输入要发送的金额</target>
       </trans-unit>
+      <trans-unit id="Please enter the username of the account to recover">
+        <source>Please enter the username of the account to recover</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Please enter the username of the account to recover</target>
+      </trans-unit>
       <trans-unit id="Please enter your PIN">
         <source>Please enter your PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2795,10 +2878,20 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">请输入您的密码来启动Touch ID</target>
       </trans-unit>
+      <trans-unit id="Please find the email and click on the link from this device to initiate recovery">
+        <source>Please find the email and click on the link from this device to initiate recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Please find the email and click on the link from this device to initiate recovery</target>
+      </trans-unit>
       <trans-unit id="Please have Requestor contact support">
         <source>Please have Requestor contact support</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">请让请求者与客服部门联系</target>
+      </trans-unit>
+      <trans-unit id="Please logout of current account before attempting password recovery">
+        <source>Please logout of current account before attempting password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Please logout of current account before attempting password recovery</target>
       </trans-unit>
       <trans-unit id="Please try again later or contact support">
         <source>Please try again later or contact support</source>
@@ -2829,6 +2922,13 @@ Enter it below to make sure:</source>
         <source>Property</source>
         <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">地产</target>
+      </trans-unit>
+      <trans-unit id="Provide an Identity Token\n">
+        <source>Provide an Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Provide an Identity Token
+</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
@@ -2886,6 +2986,20 @@ Enter it below to make sure:</source>
         <note>Title of recovery questions setup complete alert</note>
         <target xml:lang="zh-Hans" state="translated">帐户复原问题已设置</target>
       </trans-unit>
+      <trans-unit id="Recovery Successful\n\nPlease change your password and PIN">
+        <source>Recovery Successful
+
+Please change your password and PIN</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Recovery Successful
+
+Please change your password and PIN</target>
+      </trans-unit>
+      <trans-unit id="Recovery was not setup or was done on another device">
+        <source>Recovery was not setup or was done on another device</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Recovery was not setup or was done on another device</target>
+      </trans-unit>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
@@ -2931,6 +3045,13 @@ Enter it below to make sure:</source>
         <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">出租车 &amp; 的士</target>
       </trans-unit>
+      <trans-unit id="Request a Payment Address\n">
+        <source>Request a Payment Address
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Request a Payment Address
+</target>
+      </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
@@ -2940,6 +3061,20 @@ Enter it below to make sure:</source>
         <source>Request is copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">请求已被复制到剪贴板中</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token but you don't have any\n">
+        <source>Request your Identity Token but you don't have any
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Request your Identity Token but you don't have any
+</target>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token\n">
+        <source>Request your Identity Token
+</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Request your Identity Token
+</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
@@ -2981,6 +3116,11 @@ Enter it below to make sure:</source>
         <note>Income notes field for affiliate revenue</note>
         <target xml:lang="zh-Hans" state="translated">从合作伙伴链接 %@ 所收到的收入</target>
       </trans-unit>
+      <trans-unit id="SEND" approved="yes">
+        <source>SEND</source>
+        <note>SEND button text</note>
+        <target xml:lang="zh-Hans">发送</target>
+      </trans-unit>
       <trans-unit id="SMS">
         <source>SMS</source>
         <note>text for textmessage/SMS</note>
@@ -2996,6 +3136,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">短信已发送</target>
       </trans-unit>
+      <trans-unit id="SPEND BITCOIN (Plugins)">
+        <source>SPEND BITCOIN (Plugins)</source>
+        <note>Slideout menu spend text</note>
+        <target xml:lang="zh-Hans" state="needs-translation">SPEND BITCOIN (Plugins)</target>
+      </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
         <note>No comment provided by engineer.</note>
@@ -3005,6 +3150,11 @@ Enter it below to make sure:</source>
         <source>San Diego, California, USA</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">圣地亚哥，加利福尼亚州，美国</target>
+      </trans-unit>
+      <trans-unit id="Save Recovery Token">
+        <source>Save Recovery Token</source>
+        <note>Title of recovery email popup</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Save Recovery Token</target>
       </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
@@ -3112,6 +3262,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">显示余额</target>
       </trans-unit>
+      <trans-unit id="Show QR Code">
+        <source>Show QR Code</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Show QR Code</target>
+      </trans-unit>
       <trans-unit id="Sign Up">
         <source>Sign Up</source>
         <note>No comment provided by engineer.</note>
@@ -3143,6 +3298,11 @@ Enter it below to make sure:</source>
         <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">水疗 &amp; 按摩</target>
       </trans-unit>
+      <trans-unit id="Spend Bitcoin (Plugins)">
+        <source>Spend Bitcoin (Plugins)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">花费比特币 (插件)</target>
+      </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
         <note>spending limits text</note>
@@ -3163,11 +3323,6 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">标准费用</target>
       </trans-unit>
-      <trans-unit id="Starbucks (Up to 20% Off)">
-        <source>Starbucks (Up to 20% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">星巴克 （高达 20%的折扣)</target>
-      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3177,6 +3332,16 @@ Enter it below to make sure:</source>
         <source>Successfully Logged In</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">成功登入</target>
+      </trans-unit>
+      <trans-unit id="Successfully Verified Identity">
+        <source>Successfully Verified Identity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Successfully Verified Identity</target>
+      </trans-unit>
+      <trans-unit id="Successfully received identity token from %@">
+        <source>Successfully received identity token from %@</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Successfully received identity token from %@</target>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
@@ -3198,11 +3363,6 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">点击和常按钱包来列开更多选项</target>
       </trans-unit>
-      <trans-unit id="Target (Up to 10% Off)">
-        <source>Target (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Target （高达10%的折扣)</target>
-      </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
@@ -3222,6 +3382,15 @@ Enter it below to make sure:</source>
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">您想要连接的%1$@ 设备的比特币地址和之前所广播的%2$@地址不符合</target>
+      </trans-unit>
+      <trans-unit id="The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.">
+        <source>The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</target>
       </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
@@ -3256,6 +3425,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
         <target xml:lang="zh-Hans" state="translated">拆开的时间：</target>
+      </trans-unit>
+      <trans-unit id="To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.">
+        <source>To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</source>
+        <note>Message of recovery token popup</note>
+        <target xml:lang="zh-Hans" state="needs-translation">To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</target>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
@@ -3324,7 +3498,7 @@ Your username and password are known only to you and never stored unencrypted.</
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <note>No comment provided by engineer.</note>
+        <note>Financial transaction that moves money from one account to another</note>
         <target xml:lang="zh-Hans" state="translated">转换</target>
       </trans-unit>
       <trans-unit id="Transfer From %@">
@@ -3341,6 +3515,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Travel</source>
         <note>expense category</note>
         <target xml:lang="zh-Hans" state="translated">旅行</target>
+      </trans-unit>
+      <trans-unit id="Trouble connecting to network">
+        <source>Trouble connecting to network</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Trouble connecting to network</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -3394,6 +3573,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Two Factor Reset</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">2要素重置</target>
+      </trans-unit>
+      <trans-unit id="USA">
+        <source>USA</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">美国</target>
       </trans-unit>
       <trans-unit id="USA and Canada" approved="yes">
         <source>USA and Canada</source>
@@ -3576,11 +3760,6 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="zh-Hans" state="translated">钱包 </target>
       </trans-unit>
-      <trans-unit id="Walmart (Up to 10% Off)">
-        <source>Walmart (Up to 10% Off)</source>
-        <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Walmart （高达 10%的折扣)</target>
-      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3616,10 +3795,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="zh-Hans" state="translated">守望者数据库已被清除。请允许几分钟重新同步 blockchain 的信息。所显示的交易记录和余额可能在同步期间时不准确</target>
       </trans-unit>
-      <trans-unit id="Whole Foods (Up to 10% Off)">
-        <source>Whole Foods (Up to 10% Off)</source>
+      <trans-unit id="Would like to:">
+        <source>Would like to:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">Whole Foods （高达 10%的折扣)</target>
+        <target xml:lang="zh-Hans" state="needs-translation">Would like to:</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
@@ -3657,15 +3836,20 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">您收到了比特币 ！ %1$@ (~%2$@)</target>
       </trans-unit>
-      <trans-unit id="You must answer all six questions. Make sure your answers are long enough.">
-        <source>You must answer all six questions. Make sure your answers are long enough.</source>
+      <trans-unit id="You are about to exit password recovery setup. Your chosen questions and answers have not been saved.">
+        <source>You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">您必须回答所有的六个问题。 请确保您的答案符合字数长度。</target>
+        <target xml:lang="zh-Hans" state="needs-translation">You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</target>
       </trans-unit>
-      <trans-unit id="You must choose all six questions before proceeding.">
-        <source>You must choose all six questions before proceeding.</source>
+      <trans-unit id="You must answer all questions. Make sure your answers are long enough.">
+        <source>You must answer all questions. Make sure your answers are long enough.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="translated">在进行下一步骤前，您必须选择所有的六个问题。</target>
+        <target xml:lang="zh-Hans" state="needs-translation">You must answer all questions. Make sure your answers are long enough.</target>
+      </trans-unit>
+      <trans-unit id="You must choose a question for all selections before proceeding.">
+        <source>You must choose a question for all selections before proceeding.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">You must choose a question for all selections before proceeding.</target>
       </trans-unit>
       <trans-unit id="You must enter a user name">
         <source>You must enter a user name</source>
