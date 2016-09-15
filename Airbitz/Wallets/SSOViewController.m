@@ -246,10 +246,11 @@
     self.spinnerView.hidden = NO;
     if (_edgeLoginInfo)
     {
-        [abcAccount approveEdgeLoginRequest:_edgeLoginInfo.token callback:^(ABCError *error) {
+        [abcAccount approveEdgeLoginRequest:_edgeLoginInfo callback:^(ABCError *error) {
             if (error)
             {
-                
+                [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                [self Done];
             }
             else
             {

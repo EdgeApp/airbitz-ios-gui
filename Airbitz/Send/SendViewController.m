@@ -1690,7 +1690,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     _parsedURI = [ABCUtil parseURI:uriString error:&error];
     if (!_parsedURI)
     {
-        if (uriString.length == 10 && [self isBase32:uriString])
+        if ((uriString.length == 8) && [self isBase32:uriString])
         {
             [abcAccount getEdgeLoginRequest:uriString callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
                 if (!error)
@@ -1700,6 +1700,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 else
                 {
                     [MainViewController fadingAlert:@"Invalid Edge Login Request"];
+                    [self startQRReader];
                 }
             }];
             return;
