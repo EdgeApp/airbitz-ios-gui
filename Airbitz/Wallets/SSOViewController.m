@@ -246,18 +246,21 @@
     self.spinnerView.hidden = NO;
     if (_edgeLoginInfo)
     {
-        [abcAccount approveEdgeLoginRequest:_edgeLoginInfo callback:^(ABCError *error) {
-            if (error)
-            {
-                [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                [self Done];
-            }
-            else
-            {
-                [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
-                [self Done];
-            }
-
+        [MainViewController fadingAlert:approving_login_text holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
+            
+            [abcAccount approveEdgeLoginRequest:_edgeLoginInfo callback:^(ABCError *error) {
+                if (error)
+                {
+                    [MainViewController fadingAlert:errorLoggingIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                    [self Done];
+                }
+                else
+                {
+                    [MainViewController fadingAlert:successfullyLoggedIn holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+                    [self Done];
+                }
+                
+            }];
         }];
         return;
     }

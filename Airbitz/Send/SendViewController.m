@@ -1692,16 +1692,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if ((uriString.length == 8) && [self isBase32:uriString])
         {
-            [abcAccount getEdgeLoginRequest:uriString callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
-                if (!error)
-                {
-                    [self showSSOViewController:nil edgeLoginRequest:info];
-                }
-                else
-                {
-                    [MainViewController fadingAlert:@"Invalid Edge Login Request"];
-                    [self startQRReader];
-                }
+            [MainViewController fadingAlert:fetching_login_request holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
+                [abcAccount getEdgeLoginRequest:uriString callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
+                    [MainViewController fadingAlertDismiss];
+                    if (!error)
+                    {
+                        [self showSSOViewController:nil edgeLoginRequest:info];
+                    }
+                    else
+                    {
+                        [MainViewController fadingAlert:@"Invalid Edge Login Request"];
+                        [self startQRReader];
+                    }
+                }];
             }];
             return;
         }
