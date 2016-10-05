@@ -411,6 +411,8 @@
             imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/augur_logo_100.png";
         else if ([s isEqualToString:@"account:repo:city.arcade"])
             imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/ACLOGOnt-1.png";
+        else if ([s isEqualToString:@"account:repo:com.mydomain.myapp"])
+            imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/10/GenericEdgeLoginIcon.png";
         else if ([s isEqualToString:@"wallet:repo:ethereum"])
             imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/EthereumIcon-100w.png";
         else if ([s isEqualToString:@"wallet:repo:bitcoin"])
