@@ -847,7 +847,7 @@ const int NumPromoRows              = 3;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
+        ABCLog(2, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
     }];
 }
 
