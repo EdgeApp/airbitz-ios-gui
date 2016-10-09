@@ -46,6 +46,8 @@
 
     NSString *emailSupportTemplate = [NSString stringWithFormat:@"<a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
     NSString *phoneSupportTemplate = [NSString stringWithFormat:@"<a href=\"tel:%@\">%@</a>", supportPhone, supportPhone];
+    NSString *telegramSupportTemplate = [NSString stringWithFormat:@"<a href=\"https://telegram.airbitz.co\">Telegram</a>"];
+    NSString *slackSupportTemplate = [NSString stringWithFormat:@"<a href=\"https://slack.airbitz.co\">Slack</a>"];
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
                                    @"[[abtag APP_TITLE]]",
@@ -60,6 +62,8 @@
                                    @"[[abtag APP_VERSION]]",
                                    @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
                                    @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag TELEGRAM_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag SLACK_SUPPORT_TEMPLATE]]",
                                    @"[[abtag INFO_FOOTER]]",
                                    nil];
 
@@ -76,6 +80,8 @@
                                    versionbuild,
                                    emailSupportTemplate,
                                    phoneSupportTemplate,
+                                   telegramSupportTemplate,
+                                   slackSupportTemplate,
                                    footerContent,
                                    nil];
 
