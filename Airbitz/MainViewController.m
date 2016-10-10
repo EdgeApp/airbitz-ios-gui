@@ -2449,15 +2449,15 @@ MainViewController *singleton;
 + (void)animateSlideIn:(AirbitzViewController *)viewController
 {
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
-    [viewController.view layoutIfNeeded];
+    [viewController.view.superview layoutIfNeeded];
 
-    viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         [viewController.view layoutIfNeeded];
+                         viewController.leftConstraint.constant = 0;
+                         [viewController.view.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];
