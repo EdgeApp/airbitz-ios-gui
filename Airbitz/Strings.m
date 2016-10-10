@@ -283,7 +283,7 @@
 #define amountRequestedString                       NSLocalizedString(@"Requested...", @"Requested string on Request screen")
 #define amountRemainingString                       NSLocalizedString(@"Remaining...", @"Remaining string on Request screen")
 #define amountReceivedString                        NSLocalizedString(@"Received...", @"Received string on Request screen")
-#define enterAmountOptionalText                     NSLocalizedString(@"Enter Amount (optional)", "Placeholder text for Receive screen amount")
+#define enterAmountOptionalText                     NSLocalizedString(@"  Amount", "Placeholder text for Receive screen amount text field")
 #define connectedText                               NSLocalizedString(@"Connected", "Popup text when BLE connects")
 #define warningWithAsterisks                        NSLocalizedString(@"** Warning **", @"** Warning ** text on partial payment")
 #define partialPaymentText                          NSLocalizedString(@"Partial Payment", @"Text on partial payment")
