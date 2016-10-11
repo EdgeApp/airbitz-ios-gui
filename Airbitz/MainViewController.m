@@ -1464,6 +1464,40 @@ MainViewController *singleton;
         _bShowingWalletsLoadingAlert = YES;
     }
 }
+- (void) abcAccountWalletAddressesChecked:(ABCWallet *)wallet;
+{
+    if (!wallet)
+        ABCLog(1, @"abcAccountWalletAddressesChecked:wallet == NULL");
+    else
+        ABCLog(1, @"abcAccountWalletAddressesChecked UUID=%@", wallet.uuid);
+    
+    if (!abcAccount.arrayWallets)
+        ABCLog(1, @"abcAccountWalletAddressesChecked:Assertion Failed. arrayWallet == NULL");
+    
+    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
+    {
+        // If all wallets in account have addressesChecked set then remove the "Loading Transactions..." dropdown
+        BOOL allAddressesChecked = YES;
+        for (ABCWallet *w in abcAccount.arrayWallets)
+        {
+            if (!w.addressesChecked)
+            {
+                allAddressesChecked = NO;
+                break;
+            }
+        }
+        if (allAddressesChecked)
+        {
+            if (_bShowingWalletsLoadingAlert)
+            {
+                [FadingAlertView dismiss:FadingAlertDismissFast];
+                [MiniDropDownAlertView dismiss:NO];
+            }
+            _bShowingWalletsLoadingAlert = NO;
+            _bDoneShowingWalletsLoadingAlert = YES;
+        }
+    }
+}
 
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
@@ -1475,19 +1509,6 @@ MainViewController *singleton;
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
     
-    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
-    {
-        if ([wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
-        {
-            if (_bShowingWalletsLoadingAlert)
-            {
-                [FadingAlertView dismiss:FadingAlertDismissFast];
-                [MiniDropDownAlertView dismiss:NO];
-            }
-            _bShowingWalletsLoadingAlert = NO;
-            _bDoneShowingWalletsLoadingAlert = YES;
-        }
-    }
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
@@ -2428,15 +2449,15 @@ MainViewController *singleton;
 + (void)animateSlideIn:(AirbitzViewController *)viewController
 {
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
-    [viewController.view layoutIfNeeded];
+    [viewController.view.superview layoutIfNeeded];
 
-    viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         [viewController.view layoutIfNeeded];
+                         viewController.leftConstraint.constant = 0;
+                         [viewController.view.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];

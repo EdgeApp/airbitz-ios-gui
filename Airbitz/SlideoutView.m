@@ -207,7 +207,7 @@
                             animations:^
             {
                 self.leftConstraint.constant = -0;
-                [self layoutIfNeeded];
+                [self.superview layoutIfNeeded];
             }
                             completion:^(BOOL finished)
             {
@@ -219,6 +219,7 @@
                              animations:^
              {
                  _blockingButton.alpha = 0;
+                 [self.superview layoutIfNeeded];
              }
                              completion:^(BOOL finished)
              {
@@ -243,7 +244,7 @@
                             animations:^
             {
                 self.leftConstraint.constant = -self.frame.size.width;
-                [self layoutIfNeeded];
+                [self.superview layoutIfNeeded];
             }
                             completion:^(BOOL finished)
             {
@@ -256,6 +257,7 @@
                              animations:^
              {
                  _blockingButton.alpha = 0.5;
+                 [self.superview layoutIfNeeded];
              }
                              completion:^(BOOL finished)
              {
