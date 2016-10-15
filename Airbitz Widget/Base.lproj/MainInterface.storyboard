@@ -21,12 +21,12 @@
                         <viewControllerLayoutGuide type="bottom" id="6Gm-zh-9lQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="311" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hU2-5r-woL" userLabel="Right View container">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BitID Login" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQB-TM-9HQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login or Send" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="gQB-TM-9HQ">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="lar-3h-jbI"/>
                                         </constraints>
@@ -34,62 +34,43 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NiJ-rT-MKF">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="xJL-d2-5gJ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lt8-cl-BMW">
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Jb3-J2-zGN"/>
-                                            <constraint firstAttribute="height" constant="30" id="voO-xq-SCn"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzG-q0-KJ4">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="1xv-YJ-i5b"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIw-mO-3VN">
+                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIw-mO-3VN">
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="TSF-LC-Rxc"/>
                                             <constraint firstAttribute="height" constant="60" id="yZp-uq-t36"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="QR-bracket.png">
+                                        <state key="normal" title="Button" image="barcode-bracket.png">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="ButtonScanQR:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="cIm-mv-9Li"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Lt8-cl-BMW">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="voO-xq-SCn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="NiJ-rT-MKF" firstAttribute="top" secondItem="pzG-q0-KJ4" secondAttribute="bottom" constant="2" id="9Eo-CW-v1f"/>
-                                    <constraint firstItem="Lt8-cl-BMW" firstAttribute="top" secondItem="WIw-mO-3VN" secondAttribute="bottom" constant="1" id="A2d-Et-p84"/>
-                                    <constraint firstAttribute="centerX" secondItem="NiJ-rT-MKF" secondAttribute="centerX" id="AMl-qa-oSX"/>
-                                    <constraint firstAttribute="centerX" secondItem="Lt8-cl-BMW" secondAttribute="centerX" id="InY-ux-VjU"/>
+                                    <constraint firstItem="Lt8-cl-BMW" firstAttribute="leading" secondItem="hU2-5r-woL" secondAttribute="leading" constant="20" id="8NX-B9-JFK"/>
+                                    <constraint firstItem="gQB-TM-9HQ" firstAttribute="leading" secondItem="hU2-5r-woL" secondAttribute="leading" constant="7" id="DEz-bf-XpN"/>
                                     <constraint firstAttribute="centerX" secondItem="WIw-mO-3VN" secondAttribute="centerX" id="Psp-Fu-hfT"/>
-                                    <constraint firstItem="pzG-q0-KJ4" firstAttribute="top" secondItem="gQB-TM-9HQ" secondAttribute="bottom" constant="2" id="RYf-GK-VQV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lt8-cl-BMW" secondAttribute="trailing" constant="20" id="Qai-xN-PoP"/>
                                     <constraint firstItem="gQB-TM-9HQ" firstAttribute="top" secondItem="hU2-5r-woL" secondAttribute="top" id="SSY-Kl-0Oa"/>
-                                    <constraint firstAttribute="centerX" secondItem="gQB-TM-9HQ" secondAttribute="centerX" id="VBc-TP-2S7"/>
+                                    <constraint firstItem="WIw-mO-3VN" firstAttribute="centerY" secondItem="hU2-5r-woL" secondAttribute="centerY" id="Yd3-eu-XYe"/>
                                     <constraint firstAttribute="bottom" secondItem="Lt8-cl-BMW" secondAttribute="bottom" id="apd-yz-U3E"/>
-                                    <constraint firstAttribute="centerX" secondItem="pzG-q0-KJ4" secondAttribute="centerX" id="fIs-yB-PZ7"/>
+                                    <constraint firstAttribute="trailing" secondItem="gQB-TM-9HQ" secondAttribute="trailing" constant="7" id="oow-0M-AoZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JQ-IL-Z40" userLabel="QR Background View">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="IRB-Fr-uDr"/>
                                     <constraint firstAttribute="width" constant="180" id="hcQ-LI-QkX"/>
                                 </constraints>
                             </view>
@@ -118,6 +99,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Z1F-d1-zBa" secondAttribute="trailing" constant="20" symbolic="YES" id="2ai-fI-cNK"/>
                             <constraint firstItem="7JQ-IL-Z40" firstAttribute="bottom" secondItem="4bu-cP-g7s" secondAttribute="bottom" constant="8" id="6AG-Ee-5LV"/>
+                            <constraint firstItem="A4q-0O-uN1" firstAttribute="top" secondItem="7JQ-IL-Z40" secondAttribute="bottom" constant="5" id="Cp2-5L-CtZ"/>
                             <constraint firstAttribute="trailing" secondItem="A4q-0O-uN1" secondAttribute="trailing" constant="20" symbolic="YES" id="Dty-CS-px2"/>
                             <constraint firstAttribute="bottom" secondItem="Z1F-d1-zBa" secondAttribute="bottom" constant="6" id="Fec-bp-ECu"/>
                             <constraint firstAttribute="trailing" secondItem="hU2-5r-woL" secondAttribute="trailing" id="I8l-eY-Nlq"/>
@@ -130,7 +112,7 @@
                             <constraint firstAttribute="bottom" secondItem="A4q-0O-uN1" secondAttribute="bottom" constant="24" id="er6-Lf-hon"/>
                             <constraint firstItem="7JQ-IL-Z40" firstAttribute="trailing" secondItem="4bu-cP-g7s" secondAttribute="trailing" constant="8" id="iDc-gt-nSM"/>
                             <constraint firstItem="7JQ-IL-Z40" firstAttribute="top" secondItem="4bu-cP-g7s" secondAttribute="top" constant="-8" id="lY9-rz-A4i"/>
-                            <constraint firstItem="hU2-5r-woL" firstAttribute="bottom" secondItem="7JQ-IL-Z40" secondAttribute="bottom" id="nGI-zP-SIK"/>
+                            <constraint firstItem="A4q-0O-uN1" firstAttribute="top" secondItem="hU2-5r-woL" secondAttribute="bottom" constant="5" id="tdZ-zg-had"/>
                             <constraint firstItem="7JQ-IL-Z40" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" symbolic="YES" id="wkN-AP-5h9"/>
                         </constraints>
                     </view>
@@ -139,12 +121,13 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="250"/>
+                    <size key="freeformSize" width="311" height="250"/>
                     <connections>
                         <outlet property="accountLabel" destination="Z1F-d1-zBa" id="K5C-Bj-tFT"/>
                         <outlet property="addressLabel" destination="A4q-0O-uN1" id="xcu-pl-uOo"/>
                         <outlet property="qrCodeImage" destination="4bu-cP-g7s" id="hol-vh-Att"/>
                         <outlet property="qrViewBackground" destination="7JQ-IL-Z40" id="zjj-um-8Wt"/>
+                        <outlet property="scanButton" destination="WIw-mO-3VN" id="WGv-K8-bDq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +136,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="QR-bracket.png" width="280" height="280"/>
+        <image name="barcode-bracket.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

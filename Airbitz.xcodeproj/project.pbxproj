@@ -1280,6 +1280,10 @@
 		DAE951601D5C02230060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
 		DAE951651D5C022F0060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
 		DAE951661D5C02380060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
+		DAF024C11DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
+		DAF024C21DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
+		DAF024C31DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
+		DAF024C41DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
 		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
@@ -2278,6 +2282,7 @@
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DAE5464A1D29F6780065F926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-bracket@2x.png"; sourceTree = "<group>"; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 /* End PBXFileReference section */
@@ -2730,6 +2735,7 @@
 				DA10BB971BFF90980086AD8B /* background@2x.jpg */,
 				DA9EDF051BC61F910063DA07 /* background_launch.png */,
 				DA9EDF071BC61F910063DA07 /* bd_icon_clock@2x.png */,
+				DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */,
 				DA9EDF081BC61F910063DA07 /* bd_icon_facebook@2x.png */,
 				DA9EDF091BC61F910063DA07 /* bd_icon_foursquare@2x.png */,
 				DA9EDF0A1BC61F910063DA07 /* bd_icon_location@2x.png */,
@@ -3773,6 +3779,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF024C41DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */,
 				DA9EEFB91BC724B00063DA07 /* QR-bracket.png in Resources */,
 				DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */,
 				DA9EEFB01BC70E0C0063DA07 /* Images.xcassets in Resources */,
@@ -3995,6 +4002,7 @@
 				DA9EF4DD1BC7285D0063DA07 /* btn_collapse_expand.png in Resources */,
 				DA49029A1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
 				DA9EF4DE1BC7285D0063DA07 /* WalletExportQuicken.QIF in Resources */,
+				DAF024C21DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */,
 				DA9EF4E01BC7285D0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF4E11BC7285D0063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EF4E21BC7285D0063DA07 /* QR-bracket.png in Resources */,
@@ -4260,6 +4268,7 @@
 				DA9EF6A41BC729FA0063DA07 /* btn_collapse_expand.png in Resources */,
 				DA49029B1D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
 				DA9EF6A51BC729FA0063DA07 /* WalletExportQuicken.QIF in Resources */,
+				DAF024C31DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */,
 				DA9EF6A71BC729FA0063DA07 /* FadingAlertViewNew.xib in Resources */,
 				DA9EF6A81BC729FA0063DA07 /* BitcoinSent.mp3 in Resources */,
 				DA9EF6A91BC729FA0063DA07 /* QR-bracket.png in Resources */,
@@ -4525,6 +4534,7 @@
 				DA9EE4791BC61F920063DA07 /* ico_nav_directory_dark@2x.png in Resources */,
 				DA9EE0C41BC61F920063DA07 /* AnnotationContentView.xib in Resources */,
 				DABA01281C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
+				DAF024C11DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */,
 				DA9EE4A41BC61F920063DA07 /* icon_location@2x.png in Resources */,
 				DA9EE4801BC61F920063DA07 /* icon_approved.png in Resources */,
 				DA9EE44D1BC61F920063DA07 /* btn_collapse_expand.png in Resources */,

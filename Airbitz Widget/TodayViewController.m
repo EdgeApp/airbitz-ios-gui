@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *qrCodeImage;
-@property (weak, nonatomic) IBOutlet UIImageView *scanButton;
 @property (weak, nonatomic) IBOutlet UIView *qrViewBackground;
+@property (weak, nonatomic) IBOutlet UIButton *scanButton;
 
 @end
 
@@ -36,6 +36,10 @@
     self.qrViewBackground.layer.cornerRadius = 8;
     self.qrViewBackground.layer.masksToBounds = YES;
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+    [self.extensionContext setWidgetLargestAvailableDisplayMode:NCWidgetDisplayModeExpanded];
+
+    _scanButton.clipsToBounds = YES;
+    _scanButton.layer.cornerRadius = 4.0f;
 }
 
 - (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize{
