@@ -35,9 +35,16 @@
     self.preferredContentSize = CGSizeMake(0, 250);
     self.qrViewBackground.layer.cornerRadius = 8;
     self.qrViewBackground.layer.masksToBounds = YES;
-
+    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 }
 
+- (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize{
+    if (activeDisplayMode == NCWidgetDisplayModeCompact) {
+        self.preferredContentSize = maxSize;
+    }
+    else
+        self.preferredContentSize = CGSizeMake(0, 250);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
