@@ -1,3 +1,12 @@
+v 2.3.0
+
+Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+
+• Improved libbitcoin/electrum server selection by using most responsive and lowest latency servers. 
+• Fix iOS 10 UI issues
+• Fix iOS 10 crash on accounts with lots of wallets
+• Improve Scrypt parameter calculations for stronger security on faster devices
+
 v 2.2.0
 
 We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
