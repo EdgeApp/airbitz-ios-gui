@@ -1495,17 +1495,18 @@ MainViewController *singleton;
     
     if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
     {
-        // If all wallets in account have addressesChecked set then remove the "Loading Transactions..." dropdown
-        BOOL allAddressesChecked = YES;
-        for (ABCWallet *w in abcAccount.arrayWallets)
+        // If at least wallet [0] in account has addressesChecked set then remove the "Loading Transactions..." dropdown
+        BOOL removeAlert = NO;
+//        for (ABCWallet *w in abcAccount.arrayWallets)
+        if ([((ABCWallet *)abcAccount.arrayWallets[0]).uuid isEqualToString:wallet.uuid])
         {
-            if (!w.addressesChecked)
+//            if (!w.addressesChecked)
             {
-                allAddressesChecked = NO;
-                break;
+                removeAlert = YES;
+//                break;
             }
         }
-        if (allAddressesChecked)
+        if (removeAlert)
         {
             if (_bShowingWalletsLoadingAlert)
             {
