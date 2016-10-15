@@ -90,6 +90,7 @@ typedef enum eAppMode
     UIAlertView                 *_passwordChangeAlert;
     UIAlertView                 *_passwordCheckAlert;
     UIAlertView                 *_passwordSetAlert;
+    UIAlertView                 *_pinSetAlert;
     UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_otpSkewAlert;
@@ -1247,6 +1248,9 @@ MainViewController *singleton;
         _uri = nil;
     } else if (![abcAccount accountHasPassword] && !bNewAccount) {
         [self showPasswordSetAlert];
+    } else if (![abcAccount hasPIN]) {
+        // Offer to have the user create a PIN
+        [self showPinSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
     } else {
@@ -1317,6 +1321,21 @@ MainViewController *singleton;
         otherButtonTitles:okButtonText, nil];
     [_passwordSetAlert show];
 }
+
+- (void)showPinSetAlert
+{
+    NSString *title = no_pin_set_text;
+    NSString *message = create_pin_for_account_text;
+    // show password reminder test
+    _pinSetAlert = [[UIAlertView alloc]
+                    initWithTitle:title
+                    message:message
+                    delegate:self
+                    cancelButtonTitle:skipButtonText
+                    otherButtonTitles:okButtonText, nil];
+    [_pinSetAlert show];
+}
+
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
@@ -1476,17 +1495,18 @@ MainViewController *singleton;
     
     if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
     {
-        // If all wallets in account have addressesChecked set then remove the "Loading Transactions..." dropdown
-        BOOL allAddressesChecked = YES;
-        for (ABCWallet *w in abcAccount.arrayWallets)
+        // If at least wallet [0] in account has addressesChecked set then remove the "Loading Transactions..." dropdown
+        BOOL removeAlert = NO;
+//        for (ABCWallet *w in abcAccount.arrayWallets)
+        if ([((ABCWallet *)abcAccount.arrayWallets[0]).uuid isEqualToString:wallet.uuid])
         {
-            if (!w.addressesChecked)
+//            if (!w.addressesChecked)
             {
-                allAddressesChecked = NO;
-                break;
+                removeAlert = YES;
+//                break;
             }
         }
-        if (allAddressesChecked)
+        if (removeAlert)
         {
             if (_bShowingWalletsLoadingAlert)
             {
@@ -1821,6 +1841,14 @@ MainViewController *singleton;
             [self launchChangePassword];
         }
     }
+    else if (_pinSetAlert == alertView)
+    {
+        _pinSetAlert = nil;
+        if (buttonIndex == 0) {
+        } else {
+            [self launchChangePin];
+        }
+    }
     else if (_userReviewAlert == alertView)
     {
         if(buttonIndex == 0) // No, send an email to support
@@ -2027,6 +2055,13 @@ MainViewController *singleton;
     [self switchToSettingsView:_settingsViewController];
     [_settingsViewController resetViews];
     [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
+}
+
+- (void)launchChangePin
+{
+    [self switchToSettingsView:_settingsViewController];
+    [_settingsViewController resetViews];
+    [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePIN];
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification

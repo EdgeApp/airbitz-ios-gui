@@ -156,7 +156,7 @@
         if ([self newPasswordFieldsAreValid] == YES)
         {
             // check the username and pin field
-            if ([self fieldsAreValid] == YES)
+            if ([self pinFieldIsValid] == YES)
             {
                 if (_mode == SignUpMode_ChangePassword ||
                     _mode == SignUpMode_ChangePasswordNoVerify)
@@ -352,7 +352,7 @@
         [self.buttonNextStep setTitle:doneButtonText forState:UIControlStateNormal];
         self.pinTextField.placeholder = newPINText;
         self.userNameTextField.placeholder = currentPasswordText;
-        self.userNameTextField.hidden = ![abcAccount accountHasPassword];
+        self.userNameTextField.hidden = ![abcAccount accountHasPassword] || ![abcAccount hasPIN];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
@@ -377,10 +377,17 @@
 {
     BOOL bUserNameFieldIsValid = YES;
 
-    if (_mode == SignUpMode_ChangePasswordNoVerify
-            || (![abcAccount accountHasPassword]
-                && (_mode == SignUpMode_ChangePassword
-                    || _mode == SignUpMode_ChangePIN)))
+    if (_mode == SignUpMode_ChangePasswordNoVerify)
+    {
+        bUserNameFieldIsValid = YES;
+    }
+    else if (![abcAccount accountHasPassword]
+            && (_mode == SignUpMode_ChangePassword || _mode == SignUpMode_ChangePIN))
+    {
+        bUserNameFieldIsValid = YES;
+    }
+    else if (![abcAccount hasPIN]
+             && (_mode == SignUpMode_ChangePIN))
     {
         bUserNameFieldIsValid = YES;
     }
@@ -451,28 +458,31 @@
 // returns YES if field is good
 // if the field is bad, an appropriate message box is displayed
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
-- (BOOL)fieldsAreValid
+- (BOOL)pinFieldIsValid
 {
     BOOL valid = YES;
 
     // if we are signing up for a new account
-    if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+//    if (_mode == SignUpMode_ChangePasswordUsingAnswers)
+//    {
+//        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [ABCContext getMinimumUsernamedLength])
+//        {
+//            valid = NO;
+//            UIAlertView *alert = [[UIAlertView alloc]
+//                                  initWithTitle:self.titleString
+//                                  message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
+//                                           self.titleString,
+//                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [ABCContext getMinimumUsernamedLength]]]
+//                                  delegate:nil
+//                                  cancelButtonTitle:okButtonText
+//                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }
+    if (_mode == SignUpMode_ChangePIN)
     {
-        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [ABCContext getMinimumUsernamedLength])
-        {
-            valid = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.titleString
-                                  message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
-                                           self.titleString,
-                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [ABCContext getMinimumUsernamedLength]]]
-                                  delegate:nil
-                                  cancelButtonTitle:okButtonText
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
         // if the pin isn't long enough
-        else if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
+        if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
