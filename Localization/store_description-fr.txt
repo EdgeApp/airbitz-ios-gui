@@ -16,7 +16,7 @@ En mettant l’accent sur la prestation d’une excellente expérience utilisate
 • Synchronisation à plusieurs appareil sur tous les appareils mobiles
 • Portefeuilles déterministes hiérarchique qui changent d'adresses par transaction
 • Des multiples portefeuilles par compte avec des simple nom de portefeuille défini par l’utilisateur (c-à-d. « Fonds de vacances »)
-• Support de multiples devises fiduciaire. Attribuer une devise fiduciaire par portefeuille
+• Support de multiples devises fiduciaire. Attribuer une devise fiduciaire par porte-monnaie
 • Les opérations de recherche par bénéficiaire, catégorie ou notes
 • Calculatrice intégrée pour faciliter les conversions
 • Mode Marchand permettant un interface utilisateur simple et fluide derrière le comptoir

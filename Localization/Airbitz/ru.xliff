@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
@@ -34,7 +34,7 @@
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -244,7 +244,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -336,7 +336,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -438,7 +438,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -450,7 +450,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
@@ -462,7 +462,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -474,6 +474,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
         <target xml:lang="ru" state="translated">За текущий месяц</target>
+      </trans-unit>
+      <trans-unit id="0s2-OO-yBM.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM";</note>
+        <target xml:lang="ru" state="needs-translation">Label</target>
       </trans-unit>
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
@@ -569,6 +574,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>Flash</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
         <target xml:lang="ru" state="translated">Флэш</target>
+      </trans-unit>
+      <trans-unit id="AkB-cD-ba5.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5";</note>
+        <target xml:lang="ru" state="needs-translation">Label</target>
       </trans-unit>
       <trans-unit id="BED-Cf-F1n.text">
         <source>Password must have an upper and lower case letter, a number, and a minimum of 10 characters</source>
@@ -688,6 +698,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <note>Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK";</note>
         <target xml:lang="ru" state="translated">Войти</target>
       </trans-unit>
+      <trans-unit id="QwV-te-soN.normalTitle">
+        <source>Cancel</source>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QwV-te-soN";</note>
+        <target xml:lang="ru" state="translated">Отмена</target>
+      </trans-unit>
       <trans-unit id="QzV-Gk-Vrs.placeholder">
         <source>Re-enter Password</source>
         <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs";</note>
@@ -772,6 +787,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <note>Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw";</note>
         <target xml:lang="ru" state="translated">4хзначный PIN</target>
       </trans-unit>
+      <trans-unit id="XJt-5y-Q5y.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "XJt-5y-Q5y";</note>
+        <target xml:lang="ru" state="needs-translation">Label</target>
+      </trans-unit>
       <trans-unit id="Yfp-gi-q8F.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F";</note>
@@ -836,6 +856,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <note>Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw";</note>
         <target xml:lang="ru" state="translated">Защищенный PIN-кодом лимит трат</target>
       </trans-unit>
+      <trans-unit id="gJp-Ct-Vol.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol";</note>
+        <target xml:lang="ru" state="needs-translation">Label</target>
+      </trans-unit>
       <trans-unit id="hOS-Gw-CqO.normalTitle">
         <source>Transaction Info (CSV)</source>
         <note>Class = "UIButton"; normalTitle = "Transaction Info (CSV)"; ObjectID = "hOS-Gw-CqO";</note>
@@ -895,6 +920,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB";</note>
         <target xml:lang="ru" state="translated">Поиск</target>
+      </trans-unit>
+      <trans-unit id="mxS-jU-qS2.normalTitle">
+        <source>Login</source>
+        <note>Class = "UIButton"; normalTitle = "Login"; ObjectID = "mxS-jU-qS2";</note>
+        <target xml:lang="ru" state="needs-translation">Login</target>
       </trans-unit>
       <trans-unit id="n7B-WE-395.normalTitle">
         <source>Done</source>
@@ -975,7 +1005,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -987,7 +1017,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -1004,7 +1034,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -1174,7 +1204,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1256,7 +1286,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1288,7 +1318,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="ru">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id=" Please choose a wallet to receive funds.">
@@ -1398,6 +1428,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Комиссия банкомата</target>
       </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <note>ACCEPT button text</note>
+        <target xml:lang="ru" state="needs-translation">Accept</target>
+      </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
@@ -1481,6 +1516,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Warning for password recovery textfields</note>
         <target xml:lang="ru" state="translated">Ответы чувствительны к регистру</target>
       </trans-unit>
+      <trans-unit id="Approve">
+        <source>Approve</source>
+        <note>APPROVE button text</note>
+        <target xml:lang="ru" state="needs-translation">Approve</target>
+      </trans-unit>
+      <trans-unit id="Approving Login...">
+        <source>Approving Login...</source>
+        <note>Approving Login popup</note>
+        <target xml:lang="ru" state="needs-translation">Approving Login...</target>
+      </trans-unit>
       <trans-unit id="Are you sure you want to call">
         <source>Are you sure you want to call</source>
         <note>No comment provided by engineer.</note>
@@ -1559,6 +1604,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Счета &amp; коммунальные услуги</target>
       </trans-unit>
+      <trans-unit id="BitID Identity">
+        <source>BitID Identity</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">BitID Identity</target>
+      </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
         <note>No comment provided by engineer.</note>
@@ -1626,6 +1676,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Buy/Sell Bitcoin</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Купить / продать биткойны</target>
+      </trans-unit>
+      <trans-unit id="Buy/Sell with Bank Account (USA)">
+        <source>Buy/Sell with Bank Account (USA)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Buy/Sell with Bank Account (USA)</target>
       </trans-unit>
       <trans-unit id="CANCEL">
         <source>CANCEL</source>
@@ -1787,6 +1842,11 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Создать кошелек</target>
       </trans-unit>
+      <trans-unit id="Create new">
+        <source>Create new</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Create new</target>
+      </trans-unit>
       <trans-unit id="Creating and securing account">
         <source>Creating and securing account</source>
         <note>No comment provided by engineer.</note>
@@ -1895,6 +1955,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>Directory title bar text</note>
         <target xml:lang="ru" state="translated">Каталог</target>
       </trans-unit>
+      <trans-unit id="Disable">
+        <source>Disable</source>
+        <note>Disable as in to disable a feature</note>
+        <target xml:lang="ru" state="needs-translation">Disable</target>
+      </trans-unit>
+      <trans-unit id="Disable Recovery?">
+        <source>Disable Recovery?</source>
+        <note>Title of recovery popup</note>
+        <target xml:lang="ru" state="needs-translation">Disable Recovery?</target>
+      </trans-unit>
       <trans-unit id="Disabled">
         <source>Disabled</source>
         <note>No comment provided by engineer.</note>
@@ -1930,6 +2000,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Скачайте кошелек Airbitz и экономьте деньги, используя биткойны</target>
       </trans-unit>
+      <trans-unit id="Edge Login">
+        <source>Edge Login</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Edge Login</target>
+      </trans-unit>
       <trans-unit id="Education">
         <source>Education</source>
         <note>No comment provided by engineer.</note>
@@ -1949,6 +2024,11 @@ Enter it below to make sure:</source>
         <source>Email</source>
         <note>text for Email</note>
         <target xml:lang="ru" state="translated">Электронная почта</target>
+      </trans-unit>
+      <trans-unit id="Email Login Package">
+        <source>Email Login Package</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Email Login Package</target>
       </trans-unit>
       <trans-unit id="Email cancelled.">
         <source>Email cancelled.</source>
@@ -2049,6 +2129,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Описание ошибки</target>
       </trans-unit>
+      <trans-unit id="Error disabling recovery">
+        <source>Error disabling recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Error disabling recovery</target>
+      </trans-unit>
       <trans-unit id="Error during send">
         <source>Error during send</source>
         <note>No comment provided by engineer.</note>
@@ -2138,6 +2223,11 @@ Enter it below to make sure:</source>
         <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Платежи &amp; расходы</target>
+      </trans-unit>
+      <trans-unit id="Fetching Login Request...">
+        <source>Fetching Login Request...</source>
+        <note>Fetching Login Request popup</note>
+        <target xml:lang="ru" state="needs-translation">Fetching Login Request...</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2274,6 +2364,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Дом</target>
       </trans-unit>
+      <trans-unit id="Home Depot (Up to 15% Off)">
+        <source>Home Depot (Up to 15% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Home Depot (Up to 15% Off)</target>
+      </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
         <note>expense category</note>
@@ -2320,6 +2415,11 @@ Enter it below to make sure:</source>
         <source>IRA Contribution</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Отчисления в пенсионный фонд</target>
+      </trans-unit>
+      <trans-unit id="Identity token from [%@] created and saved">
+        <source>Identity token from [%@] created and saved</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Identity token from [%@] created and saved</target>
       </trans-unit>
       <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
         <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
@@ -2459,6 +2559,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Мероприятия для детей</target>
       </trans-unit>
+      <trans-unit id="LOGIN">
+        <source>LOGIN</source>
+        <note>LOGIN button text</note>
+        <target xml:lang="ru" state="needs-translation">LOGIN</target>
+      </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
         <note>settings text</note>
@@ -2523,6 +2628,11 @@ Enter it below to make sure:</source>
         <source>Logging Out</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Выход</target>
+      </trans-unit>
+      <trans-unit id="Login Package">
+        <source>Login Package</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Login Package</target>
       </trans-unit>
       <trans-unit id="Low Fee">
         <source>Low Fee</source>
@@ -2858,6 +2968,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Пожалуйста, введите имя пользователя</target>
       </trans-unit>
+      <trans-unit id="Please enter a username at the login screen">
+        <source>Please enter a username at the login screen</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Please enter a username at the login screen</target>
+      </trans-unit>
       <trans-unit id="Please enter an amount to send">
         <source>Please enter an amount to send</source>
         <note>No comment provided by engineer.</note>
@@ -2903,6 +3018,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Пожалуйста, попробуйте позже или свяжитесь со службой технической поддержки</target>
       </trans-unit>
+      <trans-unit id="Please verify the domain above and tap LOGIN to authenticate with this site">
+        <source>Please verify the domain above and tap LOGIN to authenticate with this site</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Please verify the domain above and tap LOGIN to authenticate with this site</target>
+      </trans-unit>
       <trans-unit id="Please wait %.0f seconds before retrying %@">
         <source>Please wait %1$.0f seconds before retrying %2$@</source>
         <note>No comment provided by engineer.</note>
@@ -2934,12 +3054,10 @@ Enter it below to make sure:</source>
         <note>expense category</note>
         <target xml:lang="ru" state="translated">Собственность</target>
       </trans-unit>
-      <trans-unit id="Provide an Identity Token\n">
-        <source>Provide an Identity Token
-</source>
+      <trans-unit id="Provide an Identity Token">
+        <source>Provide an Identity Token</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Предоставьте идентификационный токен
-</target>
+        <target xml:lang="ru" state="needs-translation">Provide an Identity Token</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
@@ -2982,6 +3100,11 @@ Enter it below to make sure:</source>
         <source>Received...</source>
         <note>Received string on Request screen</note>
         <target xml:lang="ru" state="translated">Получение...</target>
+      </trans-unit>
+      <trans-unit id="Recovery Disabled">
+        <source>Recovery Disabled</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Recovery Disabled</target>
       </trans-unit>
       <trans-unit id="Recovery Password Reminder">
         <source>Recovery Password Reminder</source>
@@ -3060,12 +3183,10 @@ Please change your password and PIN</source>
         <note>expense category</note>
         <target xml:lang="ru" state="translated">Аренда машин &amp; такси</target>
       </trans-unit>
-      <trans-unit id="Request a Payment Address\n">
-        <source>Request a Payment Address
-</source>
+      <trans-unit id="Request a Payment Address">
+        <source>Request a Payment Address</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Запрос адреса для получения платежа
-</target>
+        <target xml:lang="ru" state="needs-translation">Request a Payment Address</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -3077,19 +3198,15 @@ Please change your password and PIN</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Запрос скопирован в буфер обмена</target>
       </trans-unit>
-      <trans-unit id="Request your Identity Token but you don't have any\n">
-        <source>Request your Identity Token but you don't have any
-</source>
+      <trans-unit id="Request your Identity Token but you don't have any">
+        <source>Request your Identity Token but you don't have any</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">У Вас был запрошен идентификационный токен, но Вы его не предоставили
-</target>
+        <target xml:lang="ru" state="needs-translation">Request your Identity Token but you don't have any</target>
       </trans-unit>
-      <trans-unit id="Request your Identity Token\n">
-        <source>Request your Identity Token
-</source>
+      <trans-unit id="Request your Identity Token. Please select one below">
+        <source>Request your Identity Token. Please select one below</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Запрос Вашего идентификационного токена
-</target>
+        <target xml:lang="ru" state="needs-translation">Request your Identity Token. Please select one below</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
@@ -3179,18 +3296,15 @@ Please change your password and PIN</source>
         <note>Text at top of Scan Screen</note>
         <target xml:lang="ru" state="translated">Отсканируйте QR-код для импорта приватного ключа или подарочной карты</target>
       </trans-unit>
-      <trans-unit id="Scan QR to Send, Import, or Login with BitID">
-        <source>Scan QR to Send, Import, or Login with BitID</source>
-        <note>Text at top of Send screen</note>
-        <target xml:lang="ru" state="translated">Отсканируйте QR-код для отправки средств, импорта или входа с использованием BitID</target>
-        <alt-trans>
-          <target xml:lang="ru">Отсканируйте QR-код до отправки, импорта или входа с использованием BitID</target>
-        </alt-trans>
-      </trans-unit>
       <trans-unit id="Scan the QR code of payee to send payment or tap on a bluetooth request from the list below">
         <source>Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Отсканируйте QR-код получателя платежа для осуществления перевода или нажмите на Bluetooth-запрос в списке ниже</target>
+      </trans-unit>
+      <trans-unit id="Scan to Send, Import, or Edge Login">
+        <source>Scan to Send, Import, or Edge Login</source>
+        <note>Text at top of Send screen</note>
+        <target xml:lang="ru" state="needs-translation">Scan to Send, Import, or Edge Login</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
@@ -3349,6 +3463,11 @@ Please change your password and PIN</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Средняя комиссия</target>
       </trans-unit>
+      <trans-unit id="Starbucks (Up to 20% Off)">
+        <source>Starbucks (Up to 20% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Starbucks (Up to 20% Off)</target>
+      </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
         <note>expense category</note>
@@ -3392,6 +3511,11 @@ Please change your password and PIN</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Нажмите и удерживайте кошелек для дополнительных опций</target>
       </trans-unit>
+      <trans-unit id="Target (Up to 10% Off)">
+        <source>Target (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Target (Up to 10% Off)</target>
+      </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
         <note>expense category</note>
@@ -3431,6 +3555,16 @@ For issues and feedback, please contact the respective service providers.</sourc
         <note>No comment provided by engineer.</note>
         <target xml:lang="ru" state="translated">Пароль к этой учетной записи был изменен на другом устройстве. Пожалуйста, войдите, используя новые регистрационные данные.</target>
       </trans-unit>
+      <trans-unit id="This account already has password recovery setup. Would you like to disable it?">
+        <source>This account already has password recovery setup. Would you like to disable it?</source>
+        <note>Title of recovery popup message</note>
+        <target xml:lang="ru" state="needs-translation">This account already has password recovery setup. Would you like to disable it?</target>
+      </trans-unit>
+      <trans-unit id="This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.">
+        <source>This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</target>
+      </trans-unit>
       <trans-unit id="This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.">
         <source>This is not your email or real name.
 
@@ -3448,6 +3582,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>This may take a few minutes if it is the first time logging into this device.</source>
         <note>Loading Wallets alert text</note>
         <target xml:lang="ru" state="translated">Это может занять несколько минут при первом входе на данном устройстве.</target>
+      </trans-unit>
+      <trans-unit id="This site would like to:">
+        <source>This site would like to:</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">This site would like to:</target>
       </trans-unit>
       <trans-unit id="This wallet has been archived. Please select a different wallet from the [Wallets] screen">
         <source>This wallet has been archived. Please select a different wallet from the [Wallets] screen</source>
@@ -3483,6 +3622,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Tolls</source>
         <note>expense category</note>
         <target xml:lang="ru" state="translated">Таможенные сборы</target>
+      </trans-unit>
+      <trans-unit id="Top Up Prepaid Phones">
+        <source>Top Up Prepaid Phones</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Top Up Prepaid Phones</target>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
@@ -3806,6 +3950,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Prefix of wallet name on rename popup</note>
         <target xml:lang="ru" state="translated">Кошелек: </target>
       </trans-unit>
+      <trans-unit id="Walmart (Up to 10% Off)">
+        <source>Walmart (Up to 10% Off)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ru" state="needs-translation">Walmart (Up to 10% Off)</target>
+      </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
@@ -3844,10 +3993,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="ru" state="translated">База данных службы мониторинга очищена. Пожалуйста, подождите несколько минут для ре-синхронизации информации с распределенной базой данных. Отображение переводов и баланса во время синхронизации может быть некорректным</target>
       </trans-unit>
-      <trans-unit id="Would like to:">
-        <source>Would like to:</source>
+      <trans-unit id="Whole Foods (Up to 10% Off)">
+        <source>Whole Foods (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ru" state="translated">Я хотел бы:</target>
+        <target xml:lang="ru" state="needs-translation">Whole Foods (Up to 10% Off)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
