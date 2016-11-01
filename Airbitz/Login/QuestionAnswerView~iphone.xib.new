@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lt6-zy-QuE" customClass="QuestionAnswerView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="5" id="qNM-WB-Nz1" customClass="MinCharTextField">
+                    <rect key="frame" x="0.0" y="58" width="300" height="35"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="lt6-zy-QuE" id="VQj-yl-ueF"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Wi-YF-cPh" customClass="StylizedButton">
+                    <rect key="frame" x="0.0" y="7" width="300" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="btn_big_blue2_dark.png"/>
+                    <state key="highlighted" backgroundImage="btn_big_blue2_dark.png"/>
+                    <connections>
+                        <action selector="QuestionButton" destination="lt6-zy-QuE" eventType="touchUpInside" id="96Y-a5-vY6"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" id="26l-9i-vHm">
+                    <rect key="frame" x="8" y="7" width="284" height="39"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="answerField" destination="qNM-WB-Nz1" id="U87-Kk-2L6"/>
+                <outlet property="labelQuestion" destination="26l-9i-vHm" id="Ujt-oy-i1r"/>
+                <outlet property="questionButtonBig" destination="6Wi-YF-cPh" id="esN-JI-8yl"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_big_blue2_dark.png" width="252" height="38"/>
+    </resources>
+</document>

@@ -9858,14 +9858,16 @@ function _native(functionName, cbid, args, block) {
   if (args) {
     data.args = args;
   }
-  return openUrl(b, "bridge://" + JSON.stringify(data), cbid);
+  return openUrl(b, "bridge://airbitz.co/" + JSON.stringify(data), cbid);
 }
 
 function openUrl(block, url, cbid) {
   var frame = document.createElement("IFRAME");
   frame.setAttribute("src", url);
+  // frame.setAttribute("src", "htt://go+lf");
   document.documentElement.appendChild(frame);
   frame.parentNode.removeChild(frame);
+  // window.location = url
   if (block) {
     var ret = null;
     if (Airbitz._results[cbid]) {
@@ -9925,17 +9927,17 @@ function _bridge() {
       _native('finalizeRequest', cbid, options);
     },
 
-    requestSpend: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+    createSpendRequest: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
       var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
       options['amountSatoshi'] = amountSatoshi;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
-      _native('requestSpend', cbid, options);
+      _native('createSpendRequest', cbid, options);
     },
 
-    requestSpend2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+    createSpendRequest2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
       var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
@@ -9944,7 +9946,7 @@ function _bridge() {
       options['amountSatoshi2'] = amountSatoshi2;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
-      _native('requestSpend2', cbid, options);
+      _native('createSpendRequest2', cbid, options);
     },
 
     requestSign: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
@@ -10116,7 +10118,7 @@ function _bridge() {
    * Returns the user's currently selected wallet
    * @return {object} a wallet
    */
-  Airbitz.core.selectedWallet = function(options) {
+  Airbitz.core.getSelectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
 
@@ -10146,7 +10148,7 @@ function _bridge() {
    * @param {object} wallet - the wallet object
    * @param {string} requestId - the bitcoin address to finalize
    */
-  Airbitz.core.finalizeRequest = function(wallet, requestId) {
+  Airbitz.core.finalizeReceiveRequest = function(wallet, requestId) {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
@@ -10157,8 +10159,8 @@ function _bridge() {
    * @param {number} amountSatoshi - how many satoshis to spend
    * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
-  Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
-    Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
+  Airbitz.core.createSpendRequest = function(wallet, toAddress, amountSatoshi, options) {
+    Airbitz._bridge.createSpendRequest(wallet, toAddress, amountSatoshi, 0, options);
   };
 
   /**
@@ -10170,8 +10172,8 @@ function _bridge() {
    * @param {number} amountSatoshi2 - how many satoshis to spend
    * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
-  Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
-    Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
+  Airbitz.core.createSpendRequest2 = function(wallet, toAddress, amountSatoshi, toAddress2, options) {
+    Airbitz._bridge.createSpendRequest2(wallet, toAddress, amountSatoshi, toAddress2, 0, options);
   };
 
   /**
@@ -10315,7 +10317,7 @@ function _bridge() {
    * @param {function} callback - a function that will be called when the user
    * changes their currently selected wallet.
    */
-  Airbitz.core.setWalletChangeListener = function(callback) {
+  Airbitz.core.setupWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
@@ -16726,7 +16728,7 @@ var createAddress = function(wallet, label, amountSatoshi, amountFiat,
         amountFiat: amountFiat,
         bizId: parseInt(bizId),
         success: function(data) {
-            Airbitz.core.finalizeRequest(wallet, data["requestId"]);
+            Airbitz.core.finalizeReceiveRequest(wallet, data["requestId"]);
             resolve(data);
         },
         error: reject
@@ -17288,7 +17290,7 @@ var Account = {
               affiliateAmount = 0;
               tmpAddress = null;
             }
-            Airbitz.core.requestSpend2(Account.abWallet,
+            Airbitz.core.createSpendRequest2(Account.abWallet,
                     toAddr, amt, tmpAddress, affiliateAmount, 0, {
                         label: brand,
                         category: category,
@@ -17382,7 +17384,7 @@ Card.prototype.mockBal = function(bal) {
 // Main
 var user = Object.create(Account);
 
-Airbitz.core.setWalletChangeListener(updateWallet);
+Airbitz.core.setupWalletChangeListener(updateWallet);
 Account.username = Airbitz.core.readData("fold-username");
 Account.pass = Airbitz.core.readData("fold-pass");
 Airbitz.ui.showAlert('', 'Loading account...', {
@@ -17428,33 +17430,33 @@ function main() {
       Account.setLoadingCard();
 
 //      Account.logRefunds();
-      Airbitz.core.selectedWallet({
-          success: updateWallet,
+      Airbitz.core.getSelectedWallet({
+          success: function(wallet) {
+            updateWallet(wallet);
+            var withdrawal_address = Airbitz.core.readData("withdrawal-address");
+
+            // If this is a new account. Set an initial refund address in case any purchases get botched
+            if (!withdrawal_address || withdrawal_address.length < 20) {
+                createAddress(Account.abWallet, brand, 0, 0, category, "Refunded " + brand + " gift card.", function(data) {
+                    Account.updateWAddr(data["address"], function() {
+                        Airbitz.ui.debugLevel(1,"Setting withdrawal address:" + data["address"]);
+                        Airbitz.core.writeData("withdrawal-address", data["address"]);
+                    }, function() {
+                        Airbitz.ui.debugLevel(1,"WARNING: could not set withdrawal address");
+                        Airbitz.ui.debugLevel(1,data);
+                    });
+                }, function(data) {
+                    Airbitz.ui.debugLevel(1,data);
+                });
+            } else {
+                Airbitz.ui.debugLevel(1,"Withdrawal address already set:" + withdrawal_address);
+            }
+          },
           error: function() {
               Airbitz.ui.debugLevel(1,"Could not get selected wallet");
               Airbitz.ui.showAlert("Wallet Error", "Error could not select wallet.");
           }
       });
-
-      var withdrawal_address = Airbitz.core.readData("withdrawal-address");
-
-      // If this is a new account. Set an initial refund address in case any purchases get botched
-      if (!withdrawal_address || withdrawal_address.length < 20) {
-          createAddress(Account.abWallet, brand, 0, 0, category, "Refunded " + brand + " gift card.",
-              function(data) {
-                  Account.updateWAddr(data["address"], function() {
-                      Airbitz.ui.debugLevel(1,"Setting withdrawal address:" + data["address"]);
-                      Airbitz.core.writeData("withdrawal-address", data["address"])
-                  }, function() {
-                      Airbitz.ui.debugLevel(1,"WARNING: could not set withdrawal address");
-                      Airbitz.ui.debugLevel(1,data);
-                  });
-              }, function(data) {
-                  Airbitz.ui.debugLevel(1,data);
-              });
-      } else {
-          Airbitz.ui.debugLevel(1,"Withdrawal address already set:" + withdrawal_address);
-      }
 
       Airbitz.ui.debugLevel(1,"Updating UI");
       Airbitz.ui.hideAlert();

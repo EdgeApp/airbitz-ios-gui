@@ -27,7 +27,9 @@ typedef enum {
 + (void)create:(UIView *)parentView message:(NSString *)message;
 + (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime;
 + (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb;
++ (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime notify:(void(^)(void))cb complete:(void(^)(void))complete;
 + (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb;
++ (void)create:(UIView *)parentView message:(NSString *)message image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<FadingAlertViewDelegate>)delegate notify:(void(^)(void))cb complete:(void(^)(void))complete;
 + (void)update:(NSString *)message;
 + (void)dismiss:(eFadingAlertDismissType)dismissType;
 

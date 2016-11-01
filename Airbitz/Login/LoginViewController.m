@@ -12,12 +12,12 @@
 #import "User.h"
 #import "StylizedTextField.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Config.h"
 #import "SignUpManager.h"
 #import "PasswordRecoveryViewController.h"
 #import "TwoFactorMenuViewController.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "CommonTypes.h"
 #import "LocalSettings.h"
 #import "MainViewController.h"
@@ -26,6 +26,7 @@
 #import "FadingAlertView.h"
 #import "SettingsViewController.h"
 #import "InfoView.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
 typedef enum eLoginMode
 {
@@ -38,13 +39,14 @@ typedef enum eLoginMode
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
 @interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate >
+    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
+    BOOL                            _bDisallowTouchID;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
     SignUpManager                   *_signupManager;
@@ -63,8 +65,10 @@ typedef enum eLoginMode
     UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
     UIAlertView                     *_deleteAccountAlert;
+    UIAlertView                     *_recoverPasswordAlert;
     NSString                        *_tempPassword;
     NSString                        *_tempPin;
+    NSString                        *_recoveryToken;
     BOOL                            _bNewDeviceLogin;
     
 
@@ -96,7 +100,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
 @property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
-@property (nonatomic, strong)           NSMutableArray      *arrayAccounts;
+@property (nonatomic, strong)           NSArray             *arrayAccounts;
 @property (nonatomic, strong)           NSArray             *otherAccounts;
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
@@ -319,7 +323,7 @@ static BOOL bInitialized = false;
                                                      message:message
                                                     delegate:self
                                            cancelButtonTitle:cancelButtonText
-                                           otherButtonTitles:uploadLogText, nil];
+                                           otherButtonTitles:uploadLogText, emailLoginPackage, nil];
     _uploadLogAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [_uploadLogAlert show];
 }
@@ -341,7 +345,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        [self autoReloginOrTouchIDIfPossible];
+        if (!_bDisallowTouchID)
+            [self autoReloginOrTouchIDIfPossible];
     }
     
 }
@@ -530,35 +535,36 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-        [abc passwordLogin:self.usernameSelector.textField.text
-           password:self.passwordTextField.text
-           delegate:[MainViewController Singleton]
-                otp:nil
-           complete:^(ABCAccount *account)
-         {
-             [self signInComplete:account newAccount:NO];
-         }
-              error:^(NSError *error, NSDate *resetDate, NSString *resetToken)
-         {
-             [self showSpinner:NO];
-             
-             if (ABCConditionCodeInvalidOTP == error.code)
-             {
-                 [MainViewController showBackground:NO animate:YES];
-                 [self launchTwoFactorMenu:resetDate token:resetToken];
-             }
-             else if (ABCConditionCodeError == error.code)
-             {
-                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
-                 [MainViewController showBackground:NO animate:YES];
-             }
-             else
-             {
-                 [MainViewController showBackground:NO animate:YES];
-                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
-             }
-         }];
-
+        [abc loginWithPassword:self.usernameSelector.textField.text
+                      password:self.passwordTextField.text
+                      delegate:[MainViewController Singleton]
+                           otp:nil callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self signInComplete:account newAccount:NO];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                
+                if (ABCConditionCodeInvalidOTP == error.code)
+                {
+                    [MainViewController showBackground:NO animate:YES];
+                    [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
+                }
+                else if (ABCConditionCodeError == error.code)
+                {
+                    [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
+                    [MainViewController showBackground:NO animate:YES];
+                }
+                else
+                {
+                    [MainViewController showBackground:NO animate:YES];
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+                }
+            }
+        }];
     }
 }
 
@@ -583,32 +589,95 @@ static BOOL bInitialized = false;
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
+    [self launchRecoveryPopup:self.usernameSelector.textField.text recoveryToken:nil];
+}
+
+- (void) launchRecoveryPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
+{
+    [self.usernameSelector.textField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.PINTextField resignFirstResponder]; 
+    
+    if (recoveryToken)
+        _recoveryToken = recoveryToken;
+    
+    _bDisallowTouchID = YES;
+    _recoverPasswordAlert = [[UIAlertView alloc] initWithTitle:passwordRecoveryText
+                                                     message:enter_username_to_recover
+                                                    delegate:self
+                                           cancelButtonTitle:cancelButtonText
+                                           otherButtonTitles:nextButtonText, nil];
+    _recoverPasswordAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    if ([username length])
+    {
+        UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+        textField.text = username;
+    }
+    [_recoverPasswordAlert show];
+}
+
+- (void)recoverPassword:(NSString *)username
+{
     [self dismissErrorMessage];
     [self.usernameSelector.textField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
     // if they have a username
-    if ([self.usernameSelector.textField.text length])
+    if (username)
     {
-        [self showSpinner:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-            NSError *error;
-            NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
-                                                                     error:&error];
-            NSArray *params = [NSArray arrayWithObjects:arrayQuestions, nil];
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [self showSpinner:NO];
-                _bSuccess = !!arrayQuestions;
-                _strReason = error.userInfo[NSLocalizedDescriptionKey];
-                [self performSelectorOnMainThread:@selector(launchQuestionRecovery:) withObject:params waitUntilDone:NO];
+        ABCError *error;
+        NSString *recoveryToken;
+        
+        // Check if recovery token was passed in via URL
+        if (_recoveryToken)
+        {
+            recoveryToken = _recoveryToken;
+            _recoveryToken = nil;
+        }
+        
+        if (!recoveryToken)
+        {
+            // Second check to see if user has a recovery2 token on the device
+            recoveryToken = [abc getRecovery2Token:username error:&error];
+        }
+        if (recoveryToken)
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecovery2Questions:username
+                                                       recoveryToken:recoveryToken
+                                                               error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:recoveryToken error:error];
+                });
             });
-        });
+        }
+        else
+        {
+            // Next check if they have recovery1 set on the server
+            [self showSpinner:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+                ABCError *error;
+                NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+                                                                         error:&error];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self showSpinner:NO];
+                    [self launchQuestionRecovery:username questions:arrayQuestions recoveryToken:nil error:error];
+                });
+            });
+        }
+        
     }
     else
     {
         [MainViewController fadingAlert:pleaseEnterAUsername];
     }
 }
+
+
 
 - (IBAction)buttonLoginWithPasswordTouched:(id)sender
 {
@@ -620,25 +689,46 @@ static BOOL bInitialized = false;
 }
 
 
-- (void)launchQuestionRecovery:(NSArray *)params
+- (void)launchQuestionRecovery:(NSString *)username questions:(NSArray *)arrayQuestions recoveryToken:(NSString *)recoveryToken error:(ABCError *)error;
 {
-    if (_bSuccess && [params count] > 0)
+    if (!error && arrayQuestions)
     {
-        NSArray *arrayQuestions = params[0];
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
         _passwordRecoveryController = [mainStoryboard instantiateViewControllerWithIdentifier:@"PasswordRecoveryViewController"];
 
         _passwordRecoveryController.delegate = self;
         _passwordRecoveryController.mode = PassRecovMode_Recover;
         _passwordRecoveryController.arrayQuestions = arrayQuestions;
-        _passwordRecoveryController.strUserName = self.usernameSelector.textField.text;
+        _passwordRecoveryController.strUserName = username;
+        _passwordRecoveryController.numQABlocks = (int)[arrayQuestions count];
+        _passwordRecoveryController.useRecovery2 = !!recoveryToken;
+        _passwordRecoveryController.recoveryToken = recoveryToken;
 
         [MainViewController showNavBarAnimated:YES];
-        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
+        [Util addSubviewControllerWithConstraints:self child:_passwordRecoveryController];
+        [MainViewController animateSlideIn:_passwordRecoveryController];
+//        [MainViewController animateView:_passwordRecoveryController withBlur:NO];
     }
     else
     {
-        [MainViewController fadingAlert:_strReason];
+        if (error && error.code != ABCConditionCodeNoRecoveryQuestions)
+            [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+        else
+        {
+            if (recoveryToken)
+            {
+                [MainViewController fadingAlert:recovery_token_invalid holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP];
+            }
+            else
+            {
+                [MainViewController fadingAlert:recovery_not_setup holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                    [MainViewController fadingAlert:recovery_not_setup2 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        [MainViewController fadingAlert:recovery_not_setup3 holdTime:FADING_ALERT_HOLD_TIME_FOREVER_ALLOW_TAP notify:nil complete:^{
+                        }];
+                    }];
+                }];
+            }
+        }
     }
 }
 
@@ -1100,22 +1190,25 @@ static BOOL bInitialized = false;
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         // Perform the two factor sign in
-        [abc passwordLogin:self.usernameSelector.textField.text
-           password:self.passwordTextField.text
-           delegate:[MainViewController Singleton]
-                otp:secret
-           complete:^(ABCAccount *account)
-         {
-             [self signInComplete:account newAccount:NO];
-         }
-         error:^(NSError *error, NSDate *date, NSString *resetToken)
-         {
-             [self showSpinner:NO];
-             if (ABCConditionCodeError == error.code)
-                 [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
-             else
-                 [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
-         }];
+        [abc loginWithPassword:self.usernameSelector.textField.text
+                      password:self.passwordTextField.text
+                      delegate:[MainViewController Singleton]
+                           otp:secret
+                      callback:^(ABCError *error, ABCAccount *account)
+        {
+            if (!error)
+            {
+                [self signInComplete:account newAccount:NO];
+            }
+            else
+            {
+                [self showSpinner:NO];
+                if (ABCConditionCodeError == error.code)
+                    [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
+                else
+                    [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
+            }
+        }];
     }];
 }
 
@@ -1165,9 +1258,8 @@ static BOOL bInitialized = false;
 
 - (void)getAllAccounts
 {
-    if (!self.arrayAccounts)
-        self.arrayAccounts = [[NSMutableArray alloc] init];
-    NSError *error = [abc listLocalAccounts:self.arrayAccounts];
+    NSError *error;
+    self.arrayAccounts = [abc listUsernames:&error];
     if (error)
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -1184,7 +1276,7 @@ static BOOL bInitialized = false;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc accountHasPINLogin:account error:nil])
+    if([abc pinLoginEnabled:account error:nil])
     {
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
@@ -1312,6 +1404,15 @@ static BOOL bInitialized = false;
 
         return;
     }
+    else if (alertView == _recoverPasswordAlert)
+    {
+        if (1 == buttonIndex)
+        {
+            UITextField *textField = [_recoverPasswordAlert textFieldAtIndex:0];
+            [self recoverPassword:textField.text];
+        }
+        _bDisallowTouchID = NO;
+    }
     else if (alertView == _passwordCheckAlert)
     {
         if (0 == buttonIndex)
@@ -1397,6 +1498,10 @@ static BOOL bInitialized = false;
                 [self assignFirstResponder];
             }];
         }
+        else if (2 == buttonIndex)
+        {
+            [self sendLoginPackageEmail];
+        }
         [self assignFirstResponder];
     }
     else if (_deleteAccountAlert == alertView)
@@ -1411,6 +1516,60 @@ static BOOL bInitialized = false;
         }
     }
 }
+
+- (void)sendLoginPackageEmail
+{
+    // if mail is available
+    if ([MFMailComposeViewController canSendMail])
+    {
+        NSString *username =  self.usernameSelector.textField.text;
+        
+        if (!username || username.length < 3)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:enter_username_in_login_screen
+                                                           delegate:nil
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else
+        {
+            ABCError *error;
+            NSString *package = [abc getLoginPackage:username error:&error];
+            
+            if (error)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:error.userInfo[NSLocalizedDescriptionKey]
+                                                               delegate:nil
+                                                      cancelButtonTitle:okButtonText
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+                NSString *subject = [NSString stringWithFormat:@"%@ %@", appTitle, loginPackage];
+                [mailComposer setSubject:subject];
+                [mailComposer setMessageBody:package isHTML:NO];
+                mailComposer.mailComposeDelegate = self;
+                [self presentViewController:mailComposer animated:YES completion:nil];
+            }
+        }
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:cantSendEmailText
+                                                       delegate:nil
+                                              cancelButtonTitle:okButtonText
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
 
 - (void)resignAllResponders
 {
@@ -1460,13 +1619,55 @@ static BOOL bInitialized = false;
 {
 }
 
+#pragma mark - Mail Compose Delegate Methods
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *strTitle = appTitle;
+    NSString *strMsg = nil;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            strMsg = emailCancelled;
+            break;
+            
+        case MFMailComposeResultSaved:
+            strMsg = emailSavedToSendLater;
+            break;
+            
+        case MFMailComposeResultSent:
+            strMsg = emailSent;
+            break;
+            
+        case MFMailComposeResultFailed:
+        {
+            strTitle = errorSendingEmail;
+            strMsg = [error localizedDescription];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle
+                                                    message:strMsg
+                                                   delegate:nil
+                                          cancelButtonTitle:okButtonText
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+    [[controller presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 #pragma mark - ButtonSelectorView delegates
 
 - (void)ButtonSelector:(ButtonSelectorView *)view selectedItem:(int)itemIndex
 {
     [abc setLastAccessedAccount:[self.otherAccounts objectAtIndex:itemIndex]];
-    if([abc accountHasPINLogin:[abc getLastAccessedAccount] error:nil])
+    if([abc pinLoginEnabled:[abc getLastAccessedAccount] error:nil])
     {
         [self updateUsernameSelector:[abc getLastAccessedAccount]];
         [self autoReloginOrTouchIDIfPossible];

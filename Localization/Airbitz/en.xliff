@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
@@ -29,7 +29,7 @@
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -196,7 +196,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -271,7 +271,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -354,7 +354,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -365,7 +365,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
@@ -376,7 +376,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -386,6 +386,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="0ea-NR-Nd9.normalTitle">
         <source>This Month</source>
         <note>Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9";</note>
+      </trans-unit>
+      <trans-unit id="0s2-OO-yBM.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM";</note>
       </trans-unit>
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
@@ -462,6 +466,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="AOi-Wp-bVq.segmentTitles[3]">
         <source>Flash</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
+      </trans-unit>
+      <trans-unit id="AkB-cD-ba5.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5";</note>
       </trans-unit>
       <trans-unit id="BED-Cf-F1n.text">
         <source>Password must have an upper and lower case letter, a number, and a minimum of 10 characters</source>
@@ -555,6 +563,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>Sign In</source>
         <note>Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK";</note>
       </trans-unit>
+      <trans-unit id="QwV-te-soN.normalTitle">
+        <source>Cancel</source>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QwV-te-soN";</note>
+      </trans-unit>
       <trans-unit id="QzV-Gk-Vrs.placeholder">
         <source>Re-enter Password</source>
         <note>Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs";</note>
@@ -623,6 +635,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>4 Digit PIN</source>
         <note>Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw";</note>
       </trans-unit>
+      <trans-unit id="XJt-5y-Q5y.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "XJt-5y-Q5y";</note>
+      </trans-unit>
       <trans-unit id="Yfp-gi-q8F.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F";</note>
@@ -675,6 +691,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>PIN Spending Limit</source>
         <note>Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw";</note>
       </trans-unit>
+      <trans-unit id="gJp-Ct-Vol.text">
+        <source>Label</source>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol";</note>
+      </trans-unit>
       <trans-unit id="hOS-Gw-CqO.normalTitle">
         <source>Transaction Info (CSV)</source>
         <note>Class = "UIButton"; normalTitle = "Transaction Info (CSV)"; ObjectID = "hOS-Gw-CqO";</note>
@@ -722,6 +742,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="ltN-lB-ATB.placeholder">
         <source>Search</source>
         <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB";</note>
+      </trans-unit>
+      <trans-unit id="mxS-jU-qS2.normalTitle">
+        <source>Login</source>
+        <note>Class = "UIButton"; normalTitle = "Login"; ObjectID = "mxS-jU-qS2";</note>
       </trans-unit>
       <trans-unit id="n7B-WE-395.normalTitle">
         <source>Done</source>
@@ -787,7 +811,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -798,7 +822,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -813,7 +837,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -945,7 +969,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1012,7 +1036,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1039,7 +1063,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="7.3.1" build-num="7D1012"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
     </header>
     <body>
       <trans-unit id=" Please choose a wallet to receive funds.">
@@ -1061,6 +1085,10 @@ Scan the QR code using this device</source>
       <trans-unit id="%@ Bitcoin received. Tap for details.">
         <source>%@ Bitcoin received. Tap for details.</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="%@ Recovery Token">
+        <source>%@ Recovery Token</source>
+        <note>\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet</note>
       </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
@@ -1116,6 +1144,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="ATM Fee">
         <source>ATM Fee</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Accept">
+        <source>Accept</source>
+        <note>ACCEPT button text</note>
       </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
@@ -1181,6 +1213,14 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Answers are case sensitive</source>
         <note>Warning for password recovery textfields</note>
       </trans-unit>
+      <trans-unit id="Approve">
+        <source>Approve</source>
+        <note>APPROVE button text</note>
+      </trans-unit>
+      <trans-unit id="Approving Login...">
+        <source>Approving Login...</source>
+        <note>Approving Login popup</note>
+      </trans-unit>
       <trans-unit id="Are you sure you want to call">
         <source>Are you sure you want to call</source>
         <note>No comment provided by engineer.</note>
@@ -1241,6 +1281,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Bills &amp; Utilities</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="BitID Identity">
+        <source>BitID Identity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
         <note>No comment provided by engineer.</note>
@@ -1291,6 +1335,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       </trans-unit>
       <trans-unit id="Buy/Sell Bitcoin">
         <source>Buy/Sell Bitcoin</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Buy/Sell with Bank Account (USA)">
+        <source>Buy/Sell with Bank Account (USA)</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="CANCEL">
@@ -1357,6 +1405,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Checking password...</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Choose a Question">
+        <source>Choose a Question</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="City, State/Province, or Country">
         <source>City, State/Province, or Country</source>
         <note>City, State/Province, or Country placeholder</note>
@@ -1375,7 +1427,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       </trans-unit>
       <trans-unit id="Coffee Shops">
         <source>Coffee Shops</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Complete Signup">
         <source>Complete Signup</source>
@@ -1417,6 +1469,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Create Wallet</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Create new">
+        <source>Create new</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Creating and securing account">
         <source>Creating and securing account</source>
         <note>No comment provided by engineer.</note>
@@ -1440,10 +1496,6 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="DEFAULT EXCHANGE RATE">
         <source>DEFAULT EXCHANGE RATE</source>
         <note>section header in settings table</note>
-      </trans-unit>
-      <trans-unit id="DISCOUNTED GIFT CARDS">
-        <source>DISCOUNTED GIFT CARDS</source>
-        <note>Slideout menu gift card text</note>
       </trans-unit>
       <trans-unit id="Debug">
         <source>Debug</source>
@@ -1505,12 +1557,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>Directory</source>
         <note>Directory title bar text</note>
       </trans-unit>
+      <trans-unit id="Disable">
+        <source>Disable</source>
+        <note>Disable as in to disable a feature</note>
+      </trans-unit>
+      <trans-unit id="Disable Recovery?">
+        <source>Disable Recovery?</source>
+        <note>Title of recovery popup</note>
+      </trans-unit>
       <trans-unit id="Disabled">
         <source>Disabled</source>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Discounted Gift Cards">
-        <source>Discounted Gift Cards</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Div Income">
@@ -1534,6 +1590,10 @@ Enter it below to make sure:</source>
         <source>Download the Airbitz wallet and save money using bitcoin</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Edge Login">
+        <source>Edge Login</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Education">
         <source>Education</source>
         <note>No comment provided by engineer.</note>
@@ -1549,6 +1609,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Email">
         <source>Email</source>
         <note>text for Email</note>
+      </trans-unit>
+      <trans-unit id="Email Login Package">
+        <source>Email Login Package</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Email cancelled.">
         <source>Email cancelled.</source>
@@ -1614,8 +1678,22 @@ Enter it below to make sure:</source>
         <source>Error code</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Error connecting to payment processor. Send directly to bitcoin address\n\n%@">
+        <source>Error connecting to payment processor. Send directly to bitcoin address
+
+%@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error creating affiliate link. Please try again later">
+        <source>Error creating affiliate link. Please try again later</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Error desc">
         <source>Error desc</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error disabling recovery">
+        <source>Error disabling recovery</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Error during send">
@@ -1640,7 +1718,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Exchange">
         <source>Exchange</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of financial exchange categories. Such as converting from one currency to another</note>
       </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
         <source>Exchange Rate Data Source</source>
@@ -1652,11 +1730,15 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Expense">
         <source>Expense</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of expense categories</note>
       </trans-unit>
       <trans-unit id="Export">
         <source>Export</source>
         <note>EXPORT button text for wallet export</note>
+      </trans-unit>
+      <trans-unit id="Export From:">
+        <source>Export From:</source>
+        <note>Prompt asking which wallet to export from</note>
       </trans-unit>
       <trans-unit id="Export Private Seed">
         <source>Export Private Seed</source>
@@ -1686,6 +1768,10 @@ Enter it below to make sure:</source>
         <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Fetching Login Request...">
+        <source>Fetching Login Request...</source>
+        <note>Fetching Login Request popup</note>
+      </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
         <note>Fetching Payment Request popup</note>
@@ -1712,6 +1798,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="From: %@">
         <source>From: %@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Funds successfully imported, but error connecting to messenger server. Try again later">
+        <source>Funds successfully imported, but error connecting to messenger server. Try again later</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Furnishings">
@@ -1752,7 +1842,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Groceries">
         <source>Groceries</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Gym">
         <source>Gym</source>
@@ -1796,7 +1886,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
-        <note>No comment provided by engineer.</note>
+        <note>expense category</note>
       </trans-unit>
       <trans-unit id="Home Insurance">
         <source>Home Insurance</source>
@@ -1829,6 +1919,14 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="IRA Contribution">
         <source>IRA Contribution</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Identity token from [%@] created and saved">
+        <source>Identity token from [%@] created and saved</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
+        <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Import">
@@ -1865,7 +1963,7 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Income">
         <source>Income</source>
-        <note>No comment provided by engineer.</note>
+        <note>Prefix of list of income categories</note>
       </trans-unit>
       <trans-unit id="Incorrect PIN">
         <source>Incorrect PIN</source>
@@ -1885,6 +1983,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Incorrect current password">
         <source>Incorrect current password</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Incorrect username for this recovery token. Please try a different username or use a different recovery token link.">
+        <source>Incorrect username for this recovery token. Please try a different username or use a different recovery token link.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Info">
@@ -1911,6 +2013,10 @@ Enter it below to make sure:</source>
         <source>Invalid Bluetooth Request</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Invalid Email">
+        <source>Invalid Email</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Invalid QR Code">
         <source>Invalid QR Code</source>
         <note>No comment provided by engineer.</note>
@@ -1926,6 +2032,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Kids Activities">
         <source>Kids Activities</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="LOGIN">
+        <source>LOGIN</source>
+        <note>LOGIN button text</note>
       </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
@@ -1977,6 +2087,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Logging Out">
         <source>Logging Out</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Login Package">
+        <source>Login Package</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Low Fee">
@@ -2053,6 +2167,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Net Salary">
         <source>Net Salary</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Network Error">
+        <source>Network Error</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="New PIN">
@@ -2220,6 +2338,12 @@ Enter it below to make sure:</source>
         <source>Place Call</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]\n\n&lt;br&gt;&lt;br&gt;%@">
+        <source>Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+
+&lt;br&gt;&lt;br&gt;%3$@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
@@ -2232,8 +2356,16 @@ Enter it below to make sure:</source>
         <source>Please enter a User Name</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Please enter a username at the login screen">
+        <source>Please enter a username at the login screen</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Please enter an amount to send">
         <source>Please enter an amount to send</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please enter the username of the account to recover">
+        <source>Please enter the username of the account to recover</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Please enter your PIN">
@@ -2248,12 +2380,24 @@ Enter it below to make sure:</source>
         <source>Please enter your password to enable Touch ID</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Please find the email and click on the link from this device to initiate recovery">
+        <source>Please find the email and click on the link from this device to initiate recovery</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Please have Requestor contact support">
         <source>Please have Requestor contact support</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Please logout of current account before attempting password recovery">
+        <source>Please logout of current account before attempting password recovery</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Please try again later or contact support">
         <source>Please try again later or contact support</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please verify the domain above and tap LOGIN to authenticate with this site">
+        <source>Please verify the domain above and tap LOGIN to authenticate with this site</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Please wait %.0f seconds before retrying %@">
@@ -2275,6 +2419,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Property">
         <source>Property</source>
         <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Provide an Identity Token">
+        <source>Provide an Identity Token</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
@@ -2309,6 +2457,10 @@ Enter it below to make sure:</source>
         <source>Received...</source>
         <note>Received string on Request screen</note>
       </trans-unit>
+      <trans-unit id="Recovery Disabled">
+        <source>Recovery Disabled</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Recovery Password Reminder">
         <source>Recovery Password Reminder</source>
         <note>No comment provided by engineer.</note>
@@ -2320,6 +2472,16 @@ Enter it below to make sure:</source>
       <trans-unit id="Recovery Questions Set">
         <source>Recovery Questions Set</source>
         <note>Title of recovery questions setup complete alert</note>
+      </trans-unit>
+      <trans-unit id="Recovery Successful\n\nPlease change your password and PIN">
+        <source>Recovery Successful
+
+Please change your password and PIN</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Recovery was not setup or was done on another device">
+        <source>Recovery was not setup or was done on another device</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
@@ -2357,12 +2519,24 @@ Enter it below to make sure:</source>
         <source>Rental Car &amp; Taxi</source>
         <note>expense category</note>
       </trans-unit>
+      <trans-unit id="Request a Payment Address">
+        <source>Request a Payment Address</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Request is copied to the clipboard">
         <source>Request is copied to the clipboard</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token but you don't have any">
+        <source>Request your Identity Token but you don't have any</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Request your Identity Token. Please select one below">
+        <source>Request your Identity Token. Please select one below</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Requested...">
@@ -2397,6 +2571,10 @@ Enter it below to make sure:</source>
         <source>Revenue share from affiliate link %@</source>
         <note>Income notes field for affiliate revenue</note>
       </trans-unit>
+      <trans-unit id="SEND">
+        <source>SEND</source>
+        <note>SEND button text</note>
+      </trans-unit>
       <trans-unit id="SMS">
         <source>SMS</source>
         <note>text for textmessage/SMS</note>
@@ -2409,6 +2587,10 @@ Enter it below to make sure:</source>
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="SPEND BITCOIN (Plugins)">
+        <source>SPEND BITCOIN (Plugins)</source>
+        <note>Slideout menu spend text</note>
+      </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
         <note>No comment provided by engineer.</note>
@@ -2417,17 +2599,21 @@ Enter it below to make sure:</source>
         <source>San Diego, California, USA</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Save Recovery Token">
+        <source>Save Recovery Token</source>
+        <note>Title of recovery email popup</note>
+      </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
         <note>Text at top of Scan Screen</note>
       </trans-unit>
-      <trans-unit id="Scan QR to Send, Import, or Login with BitID">
-        <source>Scan QR to Send, Import, or Login with BitID</source>
-        <note>Text at top of Send screen</note>
-      </trans-unit>
       <trans-unit id="Scan the QR code of payee to send payment or tap on a bluetooth request from the list below">
         <source>Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</source>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Scan to Send, Import, or Edge Login">
+        <source>Scan to Send, Import, or Edge Login</source>
+        <note>Text at top of Send screen</note>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
@@ -2502,6 +2688,10 @@ Enter it below to make sure:</source>
         <source>Show Balance</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Show QR Code">
+        <source>Show QR Code</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Sign Up">
         <source>Sign Up</source>
         <note>No comment provided by engineer.</note>
@@ -2526,6 +2716,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Spa &amp; Massage">
         <source>Spa &amp; Massage</source>
         <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Spend Bitcoin (Plugins)">
+        <source>Spend Bitcoin (Plugins)</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Spending Limits">
         <source>Spending Limits</source>
@@ -2553,6 +2747,14 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Successfully Logged In">
         <source>Successfully Logged In</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Successfully Verified Identity">
+        <source>Successfully Verified Identity</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Successfully received identity token from %@">
+        <source>Successfully received identity token from %@</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
@@ -2591,12 +2793,26 @@ Enter it below to make sure:</source>
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.">
+        <source>The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="The password to this account was changed by another device. Please login using the new credentials.">
         <source>The password to this account was changed by another device. Please login using the new credentials.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This account already has password recovery setup. Would you like to disable it?">
+        <source>This account already has password recovery setup. Would you like to disable it?</source>
+        <note>Title of recovery popup message</note>
+      </trans-unit>
+      <trans-unit id="This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.">
+        <source>This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.">
@@ -2611,6 +2827,10 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>This may take a few minutes if it is the first time logging into this device.</source>
         <note>Loading Wallets alert text</note>
       </trans-unit>
+      <trans-unit id="This site would like to:">
+        <source>This site would like to:</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="This wallet has been archived. Please select a different wallet from the [Wallets] screen">
         <source>This wallet has been archived. Please select a different wallet from the [Wallets] screen</source>
         <note>Popup sessage for when a wallet is archived</note>
@@ -2618,6 +2838,10 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Time to crack:">
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
+      </trans-unit>
+      <trans-unit id="To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.">
+        <source>To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</source>
+        <note>Message of recovery token popup</note>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
@@ -2634,6 +2858,10 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Tolls">
         <source>Tolls</source>
         <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Top Up Prepaid Phones">
+        <source>Top Up Prepaid Phones</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
@@ -2673,7 +2901,7 @@ Your username and password are known only to you and never stored unencrypted.</
       </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
-        <note>No comment provided by engineer.</note>
+        <note>Financial transaction that moves money from one account to another</note>
       </trans-unit>
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
@@ -2686,6 +2914,10 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Travel">
         <source>Travel</source>
         <note>expense category</note>
+      </trans-unit>
+      <trans-unit id="Trouble connecting to network">
+        <source>Trouble connecting to network</source>
+        <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -2725,6 +2957,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       </trans-unit>
       <trans-unit id="Two Factor Reset">
         <source>Two Factor Reset</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="USA">
+        <source>USA</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="USA and Canada">
@@ -2937,12 +3173,16 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 %1$@ (~%2$@)</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="You must answer all six questions. Make sure your answers are long enough.">
-        <source>You must answer all six questions. Make sure your answers are long enough.</source>
+      <trans-unit id="You are about to exit password recovery setup. Your chosen questions and answers have not been saved.">
+        <source>You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="You must choose all six questions before proceeding.">
-        <source>You must choose all six questions before proceeding.</source>
+      <trans-unit id="You must answer all questions. Make sure your answers are long enough.">
+        <source>You must answer all questions. Make sure your answers are long enough.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="You must choose a question for all selections before proceeding.">
+        <source>You must choose a question for all selections before proceeding.</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="You must enter a user name">

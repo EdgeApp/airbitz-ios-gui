@@ -9,7 +9,7 @@
 #import <AddressBook/AddressBook.h>
 #import "TransactionDetailsViewController.h"
 #import "ABCTxInOut.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "User.h"
 #import "NSDate+Helper.h"
 #import "InfoView.h"
@@ -376,6 +376,16 @@ typedef enum eRequestType
     [self setupNavBar];
 
     [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+    
+    // Disable textfields for archived wallet.
+    if (self.transaction.wallet.archived)
+    {
+        self.nameTextField.enabled = NO;
+        self.fiatTextField.enabled = NO;
+        self.categoryButton.enabled = NO;
+        self.pickerTextCategory.textField.enabled = NO;
+        self.notesTextView.editable = NO;
+    }
 
 }
 

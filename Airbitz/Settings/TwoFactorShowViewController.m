@@ -3,7 +3,7 @@
 #import "TwoFactorMenuViewController.h"
 #import "NotificationChecker.h"
 #import "MinCharTextField.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "Util.h"
 #import "User.h"
 #import "MainViewController.h"
@@ -29,8 +29,9 @@
 @property (nonatomic, weak) IBOutlet UIView                  *loadingSpinner;
 @property (nonatomic, weak) IBOutlet UILabel                 *onOffLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *requestSpinner;
+@property (weak, nonatomic) IBOutlet UILabel                    *showQRLabel;
 
-@property (nonatomic)                BOOL                    bNoImportButton;
+@property (nonatomic)                BOOL                       bNoImportButton;
 
 @end
 
@@ -56,6 +57,10 @@
     CGSize size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
     _scrollView.contentSize = size;
     [self initUI];
+    self.showQRLabel.text = show_qr_code;
+    self.showQRLabel.hidden = NO;
+    self.qrCodeImageView.hidden = YES;
+    [self.showQRLabel setTextColor:[Theme Singleton].colorTextLink];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -79,7 +84,7 @@
 {
     _passwordTextField.text = @"";
     _passwordTextField.delegate = self;
-    _passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    _passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
     _passwordTextField.delegate = self;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
     if (![abcAccount accountHasPassword]) {
@@ -106,7 +111,7 @@
     bool on = NO;
     long timeout = 0;
     
-    NSError *error = [abcAccount getOTPDetails:&on
+    ABCError *error = [abcAccount getOTPDetails:&on
                                        timeout:&timeout];
     
     if (!error) {
@@ -201,7 +206,7 @@
 
 - (void)checkRequest
 {
-    NSError *error = nil;
+    ABCError *error = nil;
     BOOL pending = [abc hasOTPResetPending:abcAccount.name error:&error];
     
     dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -224,6 +229,31 @@
 }
 
 #pragma mark - Action Methods
+- (IBAction)showQRButtonTapped:(id)sender
+{
+    if (self.qrCodeImageView.hidden == YES)
+    {
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:UIViewAnimationOptionCurveLinear animations:^
+        {
+                                self.qrCodeImageView.hidden = NO;
+                                self.showQRLabel.hidden = YES;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
+                              delay:[Theme Singleton].animationDelayTimeDefault
+                            options:UIViewAnimationOptionCurveLinear animations:^
+        {
+            self.qrCodeImageView.hidden = YES;
+            self.showQRLabel.hidden = NO;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
 
 - (IBAction)switchFlipped:(UISwitch *)uiSwitch
 {
@@ -296,7 +326,7 @@
 
 - (BOOL)switchTwoFactor:(BOOL)on
 {
-    NSError *error;
+    ABCError *error;
     if (on) {
         error = [abcAccount enableOTP:OTP_RESET_DELAY];
         if (!error)
@@ -355,7 +385,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount disableOTP];
+            ABCError *error = [abcAccount disableOTP];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {
                     [MainViewController fadingAlert:requestConfirmedTwoFactorOff];
@@ -390,7 +420,7 @@
     BOOL authenticated = [object boolValue];
     if (authenticated) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-            NSError *error = [abcAccount cancelOTPResetRequest];
+            ABCError *error = [abcAccount cancelOTPResetRequest];
             
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 if (!error) {

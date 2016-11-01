@@ -22,6 +22,10 @@ typedef enum ePassRecovMode
 
 @property (assign)              id<PasswordRecoveryViewControllerDelegate>  delegate;
 @property (nonatomic, assign)   tPassRecovMode                              mode;
+@property (nonatomic, assign)   int                                         numQABlocks;
+@property (nonatomic, assign)   int                                         numSelfQuestionBlocks;
+@property (nonatomic, assign)   BOOL                                        useRecovery2;
+@property (nonatomic, copy)     NSString                                    *recoveryToken;    // used for recover2 only
 @property (nonatomic, strong)   NSArray                                     *arrayQuestions; // used for recover only
 @property (nonatomic, copy)     NSString                                    *strUserName;    // used for recover only
 

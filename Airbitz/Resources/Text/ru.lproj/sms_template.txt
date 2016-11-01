@@ -1,0 +1,19 @@
+Запрос платежа в биткойн
+От: [[abtag FROM]]
+
+Пожалуйста, отсканируйте QR-код или нажмите на ссылку для совершения платежа
+
+Нажмите, чтобы оплатить
+[[abtag REDIRECT_URL]]
+
+[[abtag BITCOIN_URI]]
+
+Адрес: [[abtag ADDRESS]]
+Сумма: [[abtag AMOUNT_BTC]] BTC
+Сумма: [[abtag AMOUNT_BITS]] bits
+
+Отправлено из мобильного биткойн-кошелька и делового каталога [[abtag APP_TITLE]]
+
+Загрузить [[abtag APP_TITLE]] для iOS и Android
+[[abtag APP_DOWNLOAD_LINK]]
+

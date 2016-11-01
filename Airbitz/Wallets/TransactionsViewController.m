@@ -11,7 +11,7 @@
 #import "BalanceView.h"
 #import "TransactionCell.h"
 #import "ABCTransaction.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "NSDate+Helper.h"
 #import "TransactionDetailsViewController.h"
 #import "Util.h"
@@ -52,10 +52,11 @@
 
 const int PromoIndexBuyBitcoin      = 0;
 const int PromoIndexImportGiftCard  = 1;
+const int PromoIndexBitrefill       = 2;
 const int PromoIndex20offStarbucks  = 2;
 const int PromoIndex10offTarget     = 3;
 const int PromoIndex15to20offAmazon = 4;
-const int NumPromoRows              = 5;
+const int NumPromoRows              = 3;
 
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
@@ -846,7 +847,7 @@ const int NumPromoRows              = 5;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
+        ABCLog(2, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
     }];
 }
 
@@ -1200,6 +1201,15 @@ const int NumPromoRows              = 5;
                     cell.imagePhoto.image = self.imageReceive;
                     backgroundColor = [Theme Singleton].colorRequestButton;
                 }
+                bBlankCell = YES;
+            }
+            else if (row == PromoIndexBitrefill)
+            {
+                cell.promoLabel.text = mobile_phone_topups;
+                NSURL *url = [NSURL URLWithString:@"https://airbitz.co/go/wp-content/uploads/2016/08/Bitrefill-logo-300x300.png"];
+                NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+                [cell.imagePhoto setImageWithURLRequest:urlRequest placeholderImage:_blankImage success:nil failure:nil];
+                backgroundColor = [UIColor clearColor];
                 bBlankCell = YES;
             }
             else if (row == PromoIndex20offStarbucks)
@@ -1612,11 +1622,11 @@ const int NumPromoRows              = 5;
         }
         else if (buttonIndex == 2)
         {
-            if (longTapWallet.balance > 0)
-            {
-                [MainViewController fadingAlert:deleteWalletHasFunds];
-            }
-            else
+//            if (longTapWallet.balance > 0)
+//            {
+//                [MainViewController fadingAlert:deleteWalletHasFunds];
+//            }
+//            else
             {
                 // Do Delete popup
                 deleteAlert =[[UIAlertView alloc ] initWithTitle:deleteWalletText

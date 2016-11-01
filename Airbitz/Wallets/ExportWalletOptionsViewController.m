@@ -13,7 +13,7 @@
 #import "InfoView.h"
 #import "User.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "ExportWalletOptionsCell.h"
 #import "CommonTypes.h"
 #import "GDrive.h"
@@ -113,7 +113,7 @@ typedef enum eExportOption
     // Do any additional setup after loading the view.
 
     self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
 
     self.arrayChoices = [ARRAY_CHOICES_FOR_TYPES objectAtIndex:(NSUInteger) self.type];
 

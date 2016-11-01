@@ -14,7 +14,7 @@
 #import "LatoLabel.h"
 #import "LatoLabel.h"
 #import "Util.h"
-#import "AirbitzCore.h"
+#import "ABCContext.h"
 #import "MinCharTextField.h"
 #import "CommonTypes.h"
 #import "FadingAlertView.h"
@@ -76,13 +76,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	self.userNameTextField.delegate = self;
-    self.userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
+    self.userNameTextField.minimumCharacters = [ABCContext getMinimumUsernamedLength];
 	self.passwordTextField.delegate = self;
-    self.passwordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
 	self.reenterPasswordTextField.delegate = self;
-    self.reenterPasswordTextField.minimumCharacters = [AirbitzCore getMinimumPasswordLength];
+    self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
 	self.pinTextField.delegate = self;
-	self.pinTextField.minimumCharacters = [AirbitzCore getMinimumPINLength];
+	self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     if (self.strUserName)
     {
         self.userNameTextField.text = self.strUserName;
@@ -156,7 +156,7 @@
         if ([self newPasswordFieldsAreValid] == YES)
         {
             // check the username and pin field
-            if ([self fieldsAreValid] == YES)
+            if ([self pinFieldIsValid] == YES)
             {
                 if (_mode == SignUpMode_ChangePassword ||
                     _mode == SignUpMode_ChangePasswordNoVerify)
@@ -164,67 +164,81 @@
                     [self blockUser:YES];
                     // We post this to the Data Sync queue, so password is updated in between sync's
                     // NOTE: userNameTextField is repurposed for current password
-                    [abcAccount changePassword:self.passwordTextField.text complete:^
+                    [abcAccount changePassword:self.passwordTextField.text callback:^(NSError *error)
                     {
-                        [self changePasswordComplete:YES errorMessage:nil];
-                    } error:^(NSError *error)
-                    {
-                        [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        if (!error)
+                        {
+                            [self changePasswordComplete:YES errorMessage:nil];
+                        }
+                        else
+                        {                            
+                            [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        }
                     }];
                 }
                 else if (_mode == SignUpMode_ChangePasswordUsingAnswers)
                 {
                     [self blockUser:YES];
-                    [abcAccount changePassword:self.passwordTextField.text complete:^{
-                         [abcAccount changePIN:self.pinTextField.text complete:^
-                          {
-                              [self blockUser:NO];
-                              [self changePasswordComplete:YES errorMessage:nil];
-                          } error:^(NSError *error)
-                          {
-                              [self blockUser:NO];
-                              [self.activityView stopAnimating];
-                              
-                              UIAlertView *alert = [[UIAlertView alloc]
-                                                    initWithTitle:self.titleString
-                                                    message:[NSString stringWithFormat:@"%@ failed:\n%@",
-                                                             self.titleString,
-                                                             error]
-                                                    delegate:nil
-                                                    cancelButtonTitle:okButtonText
-                                                    otherButtonTitles:nil];
-                              [alert show];
-                              [self changePasswordComplete:YES errorMessage:nil];
-                          }];
-                     } error:^(NSError *error)
-                     {
-                         [self blockUser:NO];
-                         [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
-                     }];
+                    [abcAccount changePassword:self.passwordTextField.text callback:^(NSError *error){
+                        if (!error)
+                        {
+                            [abcAccount changePIN:self.pinTextField.text callback:^(NSError *error) {
+                                [self blockUser:NO];
+                                if (!error)
+                                {
+                                    [self changePasswordComplete:YES errorMessage:nil];
+                                }
+                                else
+                                {
+                                    [self.activityView stopAnimating];
+                                    
+                                    UIAlertView *alert = [[UIAlertView alloc]
+                                                          initWithTitle:self.titleString
+                                                          message:[NSString stringWithFormat:@"%@ failed:\n%@",
+                                                                   self.titleString,
+                                                                   error]
+                                                          delegate:nil
+                                                          cancelButtonTitle:okButtonText
+                                                          otherButtonTitles:nil];
+                                    [alert show];
+                                    [self changePasswordComplete:YES errorMessage:nil];
+                                }
+                            }];
+                            
+                        }
+                        else
+                        {
+                            [self blockUser:NO];
+                            [self changePasswordComplete:NO errorMessage:error.userInfo[NSLocalizedDescriptionKey]];
+                        }
+                    }];
                 }
                 else
                 {
                     [self blockUser:YES];
-                    [abcAccount changePIN:self.pinTextField.text complete:^
-                     {
-                         // no callback on this one so tell them it was a success
-                         UIAlertView *alert = [[UIAlertView alloc]
-                                               initWithTitle:pinSuccessfullyChanged
-                                               message:nil
-                                               delegate:self
-                                               cancelButtonTitle:okButtonText
-                                               otherButtonTitles:nil];
-                         [alert show];
-                     } error:^(NSError *error)
-                     {
-                         // no callback on this one so tell them it was a success
-                         UIAlertView *alert = [[UIAlertView alloc]
-                                               initWithTitle:errorChangingPIN
-                                               message:error.userInfo[NSLocalizedDescriptionKey]
-                                               delegate:self
-                                               cancelButtonTitle:okButtonText
-                                               otherButtonTitles:nil];
-                         [alert show];
+                    [abcAccount changePIN:self.pinTextField.text callback:^(NSError *error) {
+                        if (!error)
+                        {
+                            // no callback on this one so tell them it was a success
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                                  initWithTitle:pinSuccessfullyChanged
+                                                  message:nil
+                                                  delegate:self
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+                            [alert show];
+                        }
+                        else
+                        {
+                            // no callback on this one so tell them it was a success
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                                  initWithTitle:errorChangingPIN
+                                                  message:error.userInfo[NSLocalizedDescriptionKey]
+                                                  delegate:self
+                                                  cancelButtonTitle:okButtonText
+                                                  otherButtonTitles:nil];
+                            [alert show];
+                        }
                      }];
                 }
             }
@@ -338,7 +352,7 @@
         [self.buttonNextStep setTitle:doneButtonText forState:UIControlStateNormal];
         self.pinTextField.placeholder = newPINText;
         self.userNameTextField.placeholder = currentPasswordText;
-        self.userNameTextField.hidden = ![abcAccount accountHasPassword];
+        self.userNameTextField.hidden = ![abcAccount accountHasPassword] || ![abcAccount hasPIN];
 
         self.labelPIN.hidden = NO;
         self.pinTextField.hidden = NO;
@@ -363,10 +377,17 @@
 {
     BOOL bUserNameFieldIsValid = YES;
 
-    if (_mode == SignUpMode_ChangePasswordNoVerify
-            || (![abcAccount accountHasPassword]
-                && (_mode == SignUpMode_ChangePassword
-                    || _mode == SignUpMode_ChangePIN)))
+    if (_mode == SignUpMode_ChangePasswordNoVerify)
+    {
+        bUserNameFieldIsValid = YES;
+    }
+    else if (![abcAccount accountHasPassword]
+            && (_mode == SignUpMode_ChangePassword || _mode == SignUpMode_ChangePIN))
+    {
+        bUserNameFieldIsValid = YES;
+    }
+    else if (![abcAccount hasPIN]
+             && (_mode == SignUpMode_ChangePIN))
     {
         bUserNameFieldIsValid = YES;
     }
@@ -402,7 +423,7 @@
     // if we are signing up for a new account or changing our password
     if ((_mode == SignUpMode_ChangePassword) || (_mode == SignUpMode_ChangePasswordNoVerify) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
     {
-        ABCPasswordRuleResult *result = [AirbitzCore checkPasswordRules:self.passwordTextField.text];
+        ABCPasswordRuleResult *result = [ABCContext checkPasswordRules:self.passwordTextField.text];
         
         if (!result.passed)
         {
@@ -437,35 +458,38 @@
 // returns YES if field is good
 // if the field is bad, an appropriate message box is displayed
 // note: this function is aware of the 'mode' of the view controller and will check and display appropriately
-- (BOOL)fieldsAreValid
+- (BOOL)pinFieldIsValid
 {
     BOOL valid = YES;
 
     // if we are signing up for a new account
-    if ((_mode == SignUpMode_ChangePIN) || (_mode == SignUpMode_ChangePasswordUsingAnswers))
+//    if (_mode == SignUpMode_ChangePasswordUsingAnswers)
+//    {
+//        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [ABCContext getMinimumUsernamedLength])
+//        {
+//            valid = NO;
+//            UIAlertView *alert = [[UIAlertView alloc]
+//                                  initWithTitle:self.titleString
+//                                  message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
+//                                           self.titleString,
+//                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [ABCContext getMinimumUsernamedLength]]]
+//                                  delegate:nil
+//                                  cancelButtonTitle:okButtonText
+//                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }
+    if (_mode == SignUpMode_ChangePIN)
     {
-        if ([abcAccount accountHasPassword] && self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
-        {
-            valid = NO;
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:self.titleString
-                                  message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
-                                           self.titleString,
-                                           [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [AirbitzCore getMinimumUsernamedLength]]]
-                                  delegate:nil
-                                  cancelButtonTitle:okButtonText
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
         // if the pin isn't long enough
-        else if (self.pinTextField.text.length < [AirbitzCore getMinimumPINLength])
+        if (self.pinTextField.text.length < [ABCContext getMinimumPINLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:self.titleString
                                   message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                            self.titleString,
-                                           [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [AirbitzCore getMinimumPINLength]]]
+                                           [NSString stringWithFormat:pingMustBeXXXDigitsFormatString, [ABCContext getMinimumPINLength]]]
                                   delegate:nil
                                   cancelButtonTitle:okButtonText
                                   otherButtonTitles:nil];

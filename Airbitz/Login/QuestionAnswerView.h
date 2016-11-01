@@ -29,13 +29,14 @@
 - (NSString *)answer;
 - (void)presentQuestionChoices;
 - (void)disableSelecting;
+- (void)dismissPopupPicker;
 
 @end
 
 @protocol QuestionAnswerViewDelegate <NSObject>
 
 @required
-- (void)QuestionAnswerView:(QuestionAnswerView *)view tablePresentedWithFrame:(CGRect)frame;
+- (void)QuestionAnswerView:(QuestionAnswerView *)view;
 - (void)QuestionAnswerViewTableDismissed:(QuestionAnswerView *)view;
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectQuestion:(NSDictionary *)question oldQuestion:(NSString *)oldQuestion; //dict contains 'question' and 'minLength'
 - (void)QuestionAnswerView:(QuestionAnswerView *)view didSelectAnswerField:(UITextField *)textField;

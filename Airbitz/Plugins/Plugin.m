@@ -8,6 +8,7 @@
 #import "MainViewController.h"
 #import "CommonTypes.h"
 #import "Strings.h"
+#import "BrandStrings.h"
 
 @interface Plugin ()
 @end
@@ -16,7 +17,7 @@
 
 static BOOL bInitialized = NO;
 static NSMutableArray *buySellPlugins;
-static NSMutableArray *giftCardPlugins;
+static NSMutableArray *generalPlugins;
 
 + (void)initAll
 {
@@ -25,18 +26,32 @@ static NSMutableArray *giftCardPlugins;
         bool isTestnet = [abc isTestNet];
 
         buySellPlugins = [[NSMutableArray alloc] init];
-        giftCardPlugins = [[NSMutableArray alloc] init];
+        generalPlugins = [[NSMutableArray alloc] init];
 
         Plugin *plugin;
-
+        {
+            plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"com.bitrefill.widget";
+            plugin.provider = @"Bitrefill";
+            plugin.sourceFile = @"bitrefill";
+            plugin.sourceExtension = @"html";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/Bitrefill-logo-300x300.png";
+            plugin.name = mobile_phone_topups;
+            plugin.env = @{
+                           @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                           @"API_KEY": BITREFILL_API_KEY
+                           };
+            [generalPlugins addObject:plugin];
+        }
+        
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
-            plugin.provider = @"foldapp";
+            plugin.provider = @"Fold";
             plugin.country = @"US";
             plugin.sourceFile = @"foldapp";
             plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_coffee";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/starbucks_logo2.png";
             plugin.name = starbucks_20_percent_off;
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
@@ -47,17 +62,17 @@ static NSMutableArray *giftCardPlugins;
                            @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
                                          expense_category_en, @"%3A", category_coffee_shops],
                            };
-            [giftCardPlugins addObject:plugin];
+            [generalPlugins addObject:plugin];
         }
         
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
-            plugin.provider = @"foldapp";
+            plugin.provider = @"Fold";
             plugin.country = @"US";
             plugin.sourceFile = @"foldapp";
             plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_target";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/target_logo.png";
             plugin.name = target_10_percent_off;
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
@@ -68,19 +83,19 @@ static NSMutableArray *giftCardPlugins;
                            @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
                                          expense_category_en, @"%3A", category_shopping],
                            };
-            [giftCardPlugins addObject:plugin];
+            [generalPlugins addObject:plugin];
         }
         
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11139]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
-            plugin.provider = @"foldapp";
+            plugin.provider = @"Fold";
             plugin.country = @"US";
             plugin.sourceFile = @"foldapp";
             plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_wholefoods";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2015/12/Whole-Foods-Market-128px.png";
             plugin.name = wholefoods_10_percent_off;
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
@@ -91,19 +106,19 @@ static NSMutableArray *giftCardPlugins;
                            @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
                                          expense_category_en, @"%3A", category_groceries],
                            };
-            [giftCardPlugins addObject:plugin];
+            [generalPlugins addObject:plugin];
         }
 
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11140]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
-            plugin.provider = @"foldapp";
+            plugin.provider = @"Fold";
             plugin.country = @"US";
             plugin.sourceFile = @"foldapp";
             plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_walmart";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/walmart-logo0.jpg";
             plugin.name = walmart_10_percent_off;
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
@@ -114,19 +129,19 @@ static NSMutableArray *giftCardPlugins;
                            @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
                                          expense_category_en, @"%3A", category_shopping],
                            };
-            [giftCardPlugins addObject:plugin];
+            [generalPlugins addObject:plugin];
         }
         
-        if (AIRBITZ_DEVELOP ||
+        if ([MainViewController Singleton].developBuild ||
             [[MainViewController Singleton].arrayPluginBizIDs containsObject:[NSNumber numberWithInt:11141]])
         {
             plugin = [[Plugin alloc] init];
             plugin.pluginId = @"com.foldapp";
-            plugin.provider = @"foldapp";
+            plugin.provider = @"Fold";
             plugin.country = @"US";
             plugin.sourceFile = @"foldapp";
             plugin.sourceExtension = @"html";
-            plugin.imageFile = @"plugin_icon_homedepot";
+            plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2015/12/Home-Depot-square-128px.png";
             plugin.name = homedepot_15_percent_off;
             plugin.env = @{
                            @"API-TOKEN": FOLD_API_KEY,
@@ -137,43 +152,25 @@ static NSMutableArray *giftCardPlugins;
                            @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
                                          expense_category_en, @"%3A", category_home_improvement],
                            };
-            [giftCardPlugins addObject:plugin];
+            [generalPlugins addObject:plugin];
         }
         
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
-        plugin.provider = @"glidera";
+        plugin.provider = @"Glidera";
         plugin.country = @"US";
         plugin.sourceFile = @"glidera";
         plugin.sourceExtension = @"html";
-        plugin.imageFile = @"plugin_icon_usd";
-        plugin.name = usa_and_canada_text;
+        plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2016/08/Screen-Shot-2016-08-18-at-1.36.56-AM.png";
+        plugin.name = buy_sell_bank_usa;
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
-                       @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", AIRBITZ_URI_PREFIX, plugin.country],
+                       @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/glidera/%@/", [MainViewController Singleton].appUrlPrefix, plugin.country],
                        @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                        };
         [buySellPlugins addObject:plugin];
 
-//        plugin = [[Plugin alloc] init];
-//        plugin.pluginId = @"com.clevercoin";
-//        plugin.provider = @"clevercoin";
-//        plugin.country = @"EUR";
-//        plugin.sourceFile = @"clevercoin";
-//        plugin.sourceExtension = @"html";
-//        plugin.imageFile = @"plugin_icon_euro";
-//        plugin.name = @"Europe (EUR)";
-//        plugin.env = @{
-//                    @"SANDBOX": (isTestnet ? @"true" : @"false"),
-//                    @"REDIRECT_URI": [NSString stringWithFormat:@"%@://plugin/clevercoin/%@/", AIRBITZ_URI_PREFIX, plugin.country],
-//                    @"CLEVERCOIN_API_KEY": CLEVERCOIN_API_KEY,
-//                    @"CLEVERCOIN_API_LABEL": CLEVERCOIN_API_LABEL,
-//                    @"CLEVERCOIN_API_SECRET": CLEVERCOIN_API_SECRET,
-//                    @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
-//                    };
-//        [buySellPlugins addObject:plugin];
-        
         bInitialized = YES;
     }
 }
@@ -182,9 +179,9 @@ static NSMutableArray *giftCardPlugins;
 {
 }
 
-+ (NSArray *)getGiftCardPlugins
++ (NSArray *)getGeneralPlugins
 {
-    return giftCardPlugins;
+    return generalPlugins;
 }
 
 + (NSArray *)getBuySellPlugins

@@ -6,7 +6,7 @@
 #import "BuySellViewController.h"
 #import "MainViewController.h"
 #import "Theme.h"
-#import "BuySellCell.h"
+#import "PluginCell.h"
 #import "PluginViewController.h"
 #import "WalletHeaderView.h"
 #import "Plugin.h"
@@ -15,6 +15,7 @@
 @interface BuySellViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
     PluginViewController *_pluginViewController;
+    UIImage                 *_blankImage;
 }
 
 @property (nonatomic, strong) WalletHeaderView    *buySellHeaderView;
@@ -44,6 +45,10 @@
                                                    [MainViewController getFooterHeight],0)];
 
     _backButton.hidden = YES;
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
+    _blankImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
     [Plugin initAll];
 }
@@ -93,19 +98,38 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"BuySellCell";
+    static NSString *CellIdentifier = @"PluginCell";
     NSInteger row = [indexPath row];
     Plugin *plugin;
  
-    BuySellCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PluginCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[BuySellCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[PluginCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
 
-    cell.text.text = plugin.name;
-    cell.text.textColor = plugin.textColor;
-    cell.imageView.image = [UIImage imageNamed:plugin.imageFile];
+    cell.topLabel.text = plugin.name;
+    cell.topLabel.textColor = plugin.textColor;
+    
+    cell.bottomLabel.text = plugin.provider;
+    
+    if (plugin.imageUrl)
+    {
+        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:plugin.imageUrl]
+                                                      cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                  timeoutInterval:60];
+        
+        [cell.image setImageWithURLRequest:imageRequest placeholderImage:_blankImage success:nil failure:nil];
+    }
+    else
+    {
+        cell.image.image = [UIImage imageNamed:plugin.imageFile];
+    }
+    
+    cell.image.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.image.layer.shadowOpacity = 0.5;
+    cell.image.layer.shadowRadius = 10;
+    cell.image.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -141,7 +165,7 @@
     }
     if (nil == plugin)
     {
-        for (Plugin *p in [Plugin getGiftCardPlugins]) {
+        for (Plugin *p in [Plugin getGeneralPlugins]) {
             if ([provider isEqualToString:p.provider]
                 && [country isEqualToString:p.country]) {
                 plugin = p;

@@ -5,7 +5,7 @@
 "0ea-NR-Nd9.normalTitle" = "本月";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
-"1kz-sq-XsE.normalTitle" = "钱包 Public Seed-XPub （高级）";
+"1kz-sq-XsE.normalTitle" = "钱包公钥 - XPub（高级）";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "用户名称";

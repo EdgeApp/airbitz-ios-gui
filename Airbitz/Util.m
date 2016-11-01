@@ -47,6 +47,17 @@
     NSString *emailSupportTemplate = [NSString stringWithFormat:@"<a href=\"mailto:%@?subject=Support&nbsp;Requested&body=%@%@%@%@\">%@</a>", supportEmail, platform, platformString, osVersionString, airbitzVersion, supportEmail];
     NSString *phoneSupportTemplate = [NSString stringWithFormat:@"<a href=\"tel:%@\">%@</a>", supportPhone, supportPhone];
 
+    NSString *telegramSupportTemplate = @"";
+    if (supportTelegram.length > 2)
+    {
+            telegramSupportTemplate = [NSString stringWithFormat:@"<a href=\"%@\">Telegram</a>", supportTelegram];
+    }
+    NSString *slackSupportTemplate = @"";
+    if (supportSlack.length > 2)
+    {
+        slackSupportTemplate = [NSString stringWithFormat:@"<a href=\"%@\">Slack</a>", supportSlack];
+    }
+
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
                                    @"[[abtag APP_TITLE]]",
                                    @"[[abtag APP_STORE_LINK]]",
@@ -60,6 +71,8 @@
                                    @"[[abtag APP_VERSION]]",
                                    @"[[abtag EMAIL_SUPPORT_TEMPLATE]]",
                                    @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag TELEGRAM_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag SLACK_SUPPORT_TEMPLATE]]",
                                    @"[[abtag INFO_FOOTER]]",
                                    nil];
 
@@ -76,6 +89,8 @@
                                    versionbuild,
                                    emailSupportTemplate,
                                    phoneSupportTemplate,
+                                   telegramSupportTemplate,
+                                   slackSupportTemplate,
                                    footerContent,
                                    nil];
 
@@ -347,7 +362,7 @@
     }
     if (result.tooShort)
     {
-        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [AirbitzCore getMinimumPasswordLength]];
+        [checkResultsMessage appendFormat:mustHaveMoreCharacters, [ABCContext getMinimumPasswordLength]];
         [checkResultsMessage appendString:@"\n"];
     }
     

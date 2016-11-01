@@ -48,6 +48,7 @@
 - (BOOL)offerSendHelp;
 - (BOOL)offerBleHelp;
 - (BOOL)offerWalletHelp;
+- (BOOL)offerPluginsHelp;
 
 @end
 

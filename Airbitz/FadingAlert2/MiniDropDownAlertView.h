@@ -15,6 +15,7 @@
 + (void)create:(UIView *)parentView message:(NSString *)message holdTime:(CGFloat)holdTime withDelegate:(id<MiniDropDownAlertViewDelegate>)delegate;
 + (void)update:(NSString *)message;
 + (void)dismiss:(BOOL)bNow;
++ (BOOL)checkShowing;
 
 @end
 

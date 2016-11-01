@@ -22,6 +22,10 @@ Uncomment the following line from 'airbitz-ios-gui/Podfile'
 
     pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz"
     
+If you want to use the 'develop' build of `airbitz-core` with functionality of the next release. Use this line instead
+
+    pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz"
+
 Comment out the following line
 
     pod 'AirbitzCore', :path => '../airbitz-core-objc/'
@@ -29,10 +33,16 @@ Comment out the following line
 Install the pods
 
     pod install
+    
+Due to a bug in Cocoapods, you may need to also run 
 
-Fire up the xcode project
+    xcproj touch
+    
+This will clear up the project file which gets corrupted by pod install turning the ASCII format into XML
 
-    open airbitz-ios-gui/AirBitz.xcworkspace
+Next fire up the xcode project
+
+    open airbitz-ios-gui/Airbitz.xcworkspace
 
 Once in xcode you can run Command-R to run it in an emulator.
 

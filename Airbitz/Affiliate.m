@@ -104,7 +104,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
 {
     NSMutableString *affiliateInfo = [[NSMutableString alloc] init];
     
-    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateInfoDataStoreKey data:affiliateInfo];
+    ABCError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateInfoDataStoreKey data:affiliateInfo];
     
     if (!error)
     {
@@ -128,7 +128,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
     // Try to see if we have a link saved in the datastore
     NSMutableString *data = [[NSMutableString alloc] init];
     
-    NSError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateLinkDataStoreKey data:data];
+    ABCError *error = [abcAccount.dataStore dataRead:AffiliateDataStore withKey:AffiliateLinkDataStoreKey data:data];
 
     if (!error && [data length] > 0)
     {
@@ -152,7 +152,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
             }
             else
             {
-                ABCBitIDSignature *bitidSignature = [abcAccount bitidSign:bitiduri message:bitiduri];
+                ABCBitIDSignature *bitidSignature = [abcAccount signBitIDRequest:bitiduri message:bitiduri];
                 if (!bitidSignature)
                 {
                     if (errorHandler) errorHandler();
@@ -187,7 +187,7 @@ NSString *AffiliateInfoDataStoreKey = @"affiliate_info";
                              [receiveAddress finalizeRequest];
                              
                              // Save link in data store
-                             NSError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:AffiliateLinkDataStoreKey withValue:affiliateURL];
+                             ABCError *error2 = [abcAccount.dataStore dataWrite:AffiliateDataStore withKey:AffiliateLinkDataStoreKey withValue:affiliateURL];
                              
                              if (!error2)
                              {

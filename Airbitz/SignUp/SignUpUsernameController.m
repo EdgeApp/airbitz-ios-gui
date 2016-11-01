@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
 	_userNameTextField.delegate = self;
-    _userNameTextField.minimumCharacters = [AirbitzCore getMinimumUsernamedLength];
+    _userNameTextField.minimumCharacters = [ABCContext getMinimumUsernamedLength];
 
     self.labelString = signupText;
 
@@ -110,7 +110,7 @@
         // check the username and pin field
         if ([self fieldsAreValid] == YES) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-                NSError *error = [abc isUsernameAvailable:self.userNameTextField.text];
+                ABCError *error = [abc usernameAvailable:self.userNameTextField.text];
 
                 if (!error)
                 {
@@ -192,14 +192,14 @@
 
     // if we are signing up for a new account
     {
-        if (self.userNameTextField.text.length < [AirbitzCore getMinimumUsernamedLength])
+        if (self.userNameTextField.text.length < [ABCContext getMinimumUsernamedLength])
         {
             valid = NO;
             UIAlertView *alert = [[UIAlertView alloc]
                     initWithTitle:self.labelString
                           message:[NSString stringWithFormat:pinOrPasswordCheckFailedFormatString,
                                                              self.labelString,
-                                                             [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [AirbitzCore getMinimumUsernamedLength]]]
+                                                             [NSString stringWithFormat:usernameMustBeAtLeastXXXCharacters, [ABCContext getMinimumUsernamedLength]]]
                          delegate:nil
                 cancelButtonTitle:okButtonText
                 otherButtonTitles:nil];

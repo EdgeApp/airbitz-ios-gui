@@ -1212,14 +1212,16 @@ function _native(functionName, cbid, args, block) {
   if (args) {
     data.args = args;
   }
-  return openUrl(b, "bridge://" + JSON.stringify(data), cbid);
+  return openUrl(b, "bridge://airbitz.co/" + JSON.stringify(data), cbid);
 }
 
 function openUrl(block, url, cbid) {
   var frame = document.createElement("IFRAME");
   frame.setAttribute("src", url);
+  // frame.setAttribute("src", "htt://go+lf");
   document.documentElement.appendChild(frame);
   frame.parentNode.removeChild(frame);
+  // window.location = url
   if (block) {
     var ret = null;
     if (Airbitz._results[cbid]) {
@@ -1279,17 +1281,17 @@ function _bridge() {
       _native('finalizeRequest', cbid, options);
     },
 
-    requestSpend: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
+    createSpendRequest: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
       var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
       options['amountSatoshi'] = amountSatoshi;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
-      _native('requestSpend', cbid, options);
+      _native('createSpendRequest', cbid, options);
     },
 
-    requestSpend2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
+    createSpendRequest2: function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
       var options = options || {};
       options['id'] = wallet.id;
       options['toAddress'] = toAddress;
@@ -1298,7 +1300,7 @@ function _bridge() {
       options['amountSatoshi2'] = amountSatoshi2;
       options['amountFiat'] = amountFiat;
       var cbid = createCallback(options);
-      _native('requestSpend2', cbid, options);
+      _native('createSpendRequest2', cbid, options);
     },
 
     requestSign: function(wallet, toAddress, amountSatoshi, amountFiat, options) {
@@ -1470,7 +1472,7 @@ function _bridge() {
    * Returns the user's currently selected wallet
    * @return {object} a wallet
    */
-  Airbitz.core.selectedWallet = function(options) {
+  Airbitz.core.getSelectedWallet = function(options) {
     Airbitz._bridge.selectedWallet(options);
   };
 
@@ -1500,7 +1502,7 @@ function _bridge() {
    * @param {object} wallet - the wallet object
    * @param {string} requestId - the bitcoin address to finalize
    */
-  Airbitz.core.finalizeRequest = function(wallet, requestId) {
+  Airbitz.core.finalizeReceiveRequest = function(wallet, requestId) {
     Airbitz._bridge.finalizeRequest(wallet, requestId);
   },
 
@@ -1511,8 +1513,8 @@ function _bridge() {
    * @param {number} amountSatoshi - how many satoshis to spend
    * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
-  Airbitz.core.requestSpend = function(wallet, toAddress, amountSatoshi, amountFiat, options) {
-    Airbitz._bridge.requestSpend(wallet, toAddress, amountSatoshi, amountFiat, options);
+  Airbitz.core.createSpendRequest = function(wallet, toAddress, amountSatoshi, options) {
+    Airbitz._bridge.createSpendRequest(wallet, toAddress, amountSatoshi, 0, options);
   };
 
   /**
@@ -1524,8 +1526,8 @@ function _bridge() {
    * @param {number} amountSatoshi2 - how many satoshis to spend
    * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
-  Airbitz.core.requestSpend2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options) {
-    Airbitz._bridge.requestSpend2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, amountFiat, options);
+  Airbitz.core.createSpendRequest2 = function(wallet, toAddress, amountSatoshi, toAddress2, options) {
+    Airbitz._bridge.createSpendRequest2(wallet, toAddress, amountSatoshi, toAddress2, 0, options);
   };
 
   /**
@@ -1669,7 +1671,7 @@ function _bridge() {
    * @param {function} callback - a function that will be called when the user
    * changes their currently selected wallet.
    */
-  Airbitz.core.setWalletChangeListener = function(callback) {
+  Airbitz.core.setupWalletChangeListener = function(callback) {
     Airbitz._walletListener = callback;
   };
 
@@ -11010,7 +11012,7 @@ var app = angular.module('app.core', [
 
     factory.getSelectedWallet = function() {
       return $q(function(resolve, reject) {
-        Airbitz.core.selectedWallet({
+        Airbitz.core.getSelectedWallet({
           success: resolve,
           error: reject
         });
@@ -11199,7 +11201,7 @@ var app = angular.module('app.core', [
       var wallet = Airbitz.currentWallet;
       var d = $q.defer();
 
-      Airbitz.core.requestSpend(wallet, linkOrCode, btcToSatoshi(amountBtc), amountFiat, {
+      Airbitz.core.createSpendRequest(wallet, linkOrCode, btcToSatoshi(amountBtc), {
           label: 'CleverCoin',
           category: 'Exchange:Sell Bitcoin',
           bizId: ExchangeFactory.bizId,
@@ -11451,7 +11453,7 @@ run(['$rootScope', 'DataFactory', function ($rootScope, DataFactory) {
     Airbitz.currentWallet = newWallet;
     $rootScope.currentWallet = newWallet;
   });
-  Airbitz.core.setWalletChangeListener(function(newWallet) {
+  Airbitz.core.setupWalletChangeListener(function(newWallet) {
     $rootScope.$apply(function() {
       Airbitz.currentWallet = newWallet;
       $rootScope.currentWallet = newWallet;
