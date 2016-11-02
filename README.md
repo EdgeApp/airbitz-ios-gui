@@ -33,10 +33,16 @@ Comment out the following line
 Install the pods
 
     pod install
+    
+Due to a bug in Cocoapods, you may need to also run 
 
-Fire up the xcode project
+    xcproj touch
+    
+This will clear up the project file which gets corrupted by pod install turning the ASCII format into XML
 
-    open airbitz-ios-gui/AirBitz.xcworkspace
+Next fire up the xcode project
+
+    open airbitz-ios-gui/Airbitz.xcworkspace
 
 Once in xcode you can run Command-R to run it in an emulator.
 

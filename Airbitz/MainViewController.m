@@ -90,6 +90,7 @@ typedef enum eAppMode
     UIAlertView                 *_passwordChangeAlert;
     UIAlertView                 *_passwordCheckAlert;
     UIAlertView                 *_passwordSetAlert;
+    UIAlertView                 *_pinSetAlert;
     UIAlertView                 *_passwordIncorrectAlert;
     UIAlertView                 *_otpRequiredAlert;
     UIAlertView                 *_otpSkewAlert;
@@ -1247,6 +1248,9 @@ MainViewController *singleton;
         _uri = nil;
     } else if (![abcAccount accountHasPassword] && !bNewAccount) {
         [self showPasswordSetAlert];
+    } else if (![abcAccount hasPIN]) {
+        // Offer to have the user create a PIN
+        [self showPinSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
     } else {
@@ -1317,6 +1321,21 @@ MainViewController *singleton;
         otherButtonTitles:okButtonText, nil];
     [_passwordSetAlert show];
 }
+
+- (void)showPinSetAlert
+{
+    NSString *title = no_pin_set_text;
+    NSString *message = create_pin_for_account_text;
+    // show password reminder test
+    _pinSetAlert = [[UIAlertView alloc]
+                    initWithTitle:title
+                    message:message
+                    delegate:self
+                    cancelButtonTitle:skipButtonText
+                    otherButtonTitles:okButtonText, nil];
+    [_pinSetAlert show];
+}
+
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
 {
@@ -1464,6 +1483,41 @@ MainViewController *singleton;
         _bShowingWalletsLoadingAlert = YES;
     }
 }
+- (void) abcAccountWalletAddressesChecked:(ABCWallet *)wallet;
+{
+    if (!wallet)
+        ABCLog(1, @"abcAccountWalletAddressesChecked:wallet == NULL");
+    else
+        ABCLog(1, @"abcAccountWalletAddressesChecked UUID=%@", wallet.uuid);
+    
+    if (!abcAccount.arrayWallets)
+        ABCLog(1, @"abcAccountWalletAddressesChecked:Assertion Failed. arrayWallet == NULL");
+    
+    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
+    {
+        // If at least wallet [0] in account has addressesChecked set then remove the "Loading Transactions..." dropdown
+        BOOL removeAlert = NO;
+//        for (ABCWallet *w in abcAccount.arrayWallets)
+        if ([((ABCWallet *)abcAccount.arrayWallets[0]).uuid isEqualToString:wallet.uuid])
+        {
+//            if (!w.addressesChecked)
+            {
+                removeAlert = YES;
+//                break;
+            }
+        }
+        if (removeAlert)
+        {
+            if (_bShowingWalletsLoadingAlert)
+            {
+                [FadingAlertView dismiss:FadingAlertDismissFast];
+                [MiniDropDownAlertView dismiss:NO];
+            }
+            _bShowingWalletsLoadingAlert = NO;
+            _bDoneShowingWalletsLoadingAlert = YES;
+        }
+    }
+}
 
 - (void) abcAccountWalletLoaded:(ABCWallet *)wallet;
 {
@@ -1475,19 +1529,6 @@ MainViewController *singleton;
     if (!abcAccount.arrayWallets)
         ABCLog(1, @"abcAccountWalletLoaded:Assertion Failed. arrayWallet == NULL");
     
-    if (abcAccount.arrayWallets && abcAccount.arrayWallets[0] && wallet)
-    {
-        if ([wallet.uuid isEqualToString:((ABCWallet *)abcAccount.arrayWallets[0]).uuid])
-        {
-            if (_bShowingWalletsLoadingAlert)
-            {
-                [FadingAlertView dismiss:FadingAlertDismissFast];
-                [MiniDropDownAlertView dismiss:NO];
-            }
-            _bShowingWalletsLoadingAlert = NO;
-            _bDoneShowingWalletsLoadingAlert = YES;
-        }
-    }
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_WALLETS_CHANGED object:self userInfo:nil];
 }
 
@@ -1800,6 +1841,14 @@ MainViewController *singleton;
             [self launchChangePassword];
         }
     }
+    else if (_pinSetAlert == alertView)
+    {
+        _pinSetAlert = nil;
+        if (buttonIndex == 0) {
+        } else {
+            [self launchChangePin];
+        }
+    }
     else if (_userReviewAlert == alertView)
     {
         if(buttonIndex == 0) // No, send an email to support
@@ -2006,6 +2055,13 @@ MainViewController *singleton;
     [self switchToSettingsView:_settingsViewController];
     [_settingsViewController resetViews];
     [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePassword];
+}
+
+- (void)launchChangePin
+{
+    [self switchToSettingsView:_settingsViewController];
+    [_settingsViewController resetViews];
+    [_settingsViewController bringUpSignUpViewInMode:SignUpMode_ChangePIN];
 }
 
 - (void)launchRecoveryQuestions:(NSNotification *)notification
@@ -2428,15 +2484,15 @@ MainViewController *singleton;
 + (void)animateSlideIn:(AirbitzViewController *)viewController
 {
     viewController.leftConstraint.constant = [MainViewController getLargestDimension];
-    [viewController.view layoutIfNeeded];
+    [viewController.view.superview layoutIfNeeded];
 
-    viewController.leftConstraint.constant = 0;
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         [viewController.view layoutIfNeeded];
+                         viewController.leftConstraint.constant = 0;
+                         [viewController.view.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
                          [[UIApplication sharedApplication] endIgnoringInteractionEvents];

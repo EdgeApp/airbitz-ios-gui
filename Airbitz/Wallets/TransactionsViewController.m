@@ -847,7 +847,7 @@ const int NumPromoRows              = 3;
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        ABCLog(1, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
+        ABCLog(2, @"*** ERROR Connecting to Network: getBizDetailsForBizID bizid=%u", bizID);
     }];
 }
 
@@ -1622,11 +1622,11 @@ const int NumPromoRows              = 3;
         }
         else if (buttonIndex == 2)
         {
-            if (longTapWallet.balance > 0)
-            {
-                [MainViewController fadingAlert:deleteWalletHasFunds];
-            }
-            else
+//            if (longTapWallet.balance > 0)
+//            {
+//                [MainViewController fadingAlert:deleteWalletHasFunds];
+//            }
+//            else
             {
                 // Do Delete popup
                 deleteAlert =[[UIAlertView alloc ] initWithTitle:deleteWalletText

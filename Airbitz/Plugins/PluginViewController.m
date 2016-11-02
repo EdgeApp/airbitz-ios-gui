@@ -18,7 +18,7 @@
 #import "ABCSpend.h"
 #import "MainViewController.h"
 
-static const NSString *PROTOCOL = @"bridge://";
+static const NSString *PROTOCOL = @"bridge://airbitz.co/";
 
 @interface PluginViewController () <UIWebViewDelegate, ButtonSelector2Delegate, SendConfirmationViewControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UIAlertViewDelegate>
 {
