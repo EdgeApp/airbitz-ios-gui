@@ -3438,13 +3438,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9D8F851CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSX" */;
 			buildPhases = (
-				0EF999E02DE12E9F3996B6EC /* 📦 Check Pods Manifest.lock */,
+				0EF999E02DE12E9F3996B6EC /* [CP] Check Pods Manifest.lock */,
 				8098D09DC906C087001E94A0 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9D8F501CC0C191006A8C0A /* Sources */,
 				DA9D8F511CC0C191006A8C0A /* Frameworks */,
 				DA9D8F521CC0C191006A8C0A /* Resources */,
-				F736412B2F002033811E3ECD /* uD83DuDCE6 Embed Pods Frameworks */,
-				EB1F9F1B010317F8520994B9 /* uD83DuDCE6 Copy Pods Resources */,
+				F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */,
+				EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */,
 				4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */,
 				AA20A8E95F2846F43DCC4CD0 /* 📦 Copy Pods Resources */,
 			);
@@ -3514,13 +3514,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF5101BC7285D0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Develop" */;
 			buildPhases = (
-				46B0B9D5591E42E896DB53E0 /* 📦 Check Pods Manifest.lock */,
+				46B0B9D5591E42E896DB53E0 /* [CP] Check Pods Manifest.lock */,
 				A4A2902C0CC41F6230966708 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9EF3501BC7285D0063DA07 /* Sources */,
 				DA9EF3DA1BC7285D0063DA07 /* Frameworks */,
 				DA9EF4021BC7285D0063DA07 /* Resources */,
-				C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */,
-				77521873930B17B23434AFD3 /* uD83DuDCE6 Copy Pods Resources */,
+				C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */,
+				77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */,
 				E4AB2D4B32648E8C3AEB7904 /* 📦 Embed Pods Frameworks */,
 				304C82C1076D8CA8C89E01B8 /* 📦 Copy Pods Resources */,
 			);
@@ -3537,13 +3537,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF6D51BC729FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */;
 			buildPhases = (
-				36185E2FCBC1542FB7BEE6E1 /* 📦 Check Pods Manifest.lock */,
+				36185E2FCBC1542FB7BEE6E1 /* [CP] Check Pods Manifest.lock */,
 				07AA425DC801DD902C371688 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9EF5171BC729FA0063DA07 /* Sources */,
 				DA9EF5A11BC729FA0063DA07 /* Frameworks */,
 				DA9EF5C91BC729FA0063DA07 /* Resources */,
-				148495570A5C654A9580E66E /* uD83DuDCE6 Embed Pods Frameworks */,
-				362598A803D456F4E4BF374A /* uD83DuDCE6 Copy Pods Resources */,
+				148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */,
+				362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */,
 				656EB90AAC0A5CD7943330A3 /* 📦 Embed Pods Frameworks */,
 				2EC4A662EF02880A27A5993B /* 📦 Copy Pods Resources */,
 			);
@@ -3560,13 +3560,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAD1ADA41BC6065100C648C4 /* Build configuration list for PBXNativeTarget "Airbitz" */;
 			buildPhases = (
-				C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */,
+				C782C142C05CBA2C42285091 /* [CP] Check Pods Manifest.lock */,
 				84E4F0AEEF0E1054D0334101 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DAD1AD731BC6065100C648C4 /* Sources */,
 				DAD1AD741BC6065100C648C4 /* Frameworks */,
 				DAD1AD751BC6065100C648C4 /* Resources */,
-				AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */,
-				0AF405240848F7D4E657A31C /* uD83DuDCE6 Copy Pods Resources */,
+				AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */,
+				0AF405240848F7D4E657A31C /* [CP] Copy Pods Resources */,
 				DABFC98D1CFBC89400104AC1 /* Embed App Extensions */,
 				4D1411765C8B62805AE86C22 /* 📦 Embed Pods Frameworks */,
 				3B3AF4AE172796DA27F53DF5 /* 📦 Copy Pods Resources */,
@@ -3639,7 +3639,7 @@
 					};
 					DA9ED6E91BC607FA0063DA07 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = G5LQ7MERPK;
+						DevelopmentTeam = 6RV5CH2XTD;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3647,14 +3647,14 @@
 						};
 					};
 					DA9EF34C1BC7285D0063DA07 = {
-						DevelopmentTeam = G5LQ7MERPK;
+						DevelopmentTeam = 6RV5CH2XTD;
 					};
 					DA9EF5151BC729FA0063DA07 = {
-						DevelopmentTeam = G5LQ7MERPK;
+						DevelopmentTeam = 6RV5CH2XTD;
 					};
 					DAD1AD761BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = G5LQ7MERPK;
+						DevelopmentTeam = 6RV5CH2XTD;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -3663,10 +3663,12 @@
 					};
 					DAD1AD8F1BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6RV5CH2XTD;
 						TestTargetID = DAD1AD761BC6065100C648C4;
 					};
 					DAD1AD9A1BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6RV5CH2XTD;
 						TestTargetID = DAD1AD761BC6065100C648C4;
 					};
 				};
@@ -4616,14 +4618,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		0AF405240848F7D4E657A31C /* uD83DuDCE6 Copy Pods Resources */ = {
+		0AF405240848F7D4E657A31C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4631,29 +4633,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0EF999E02DE12E9F3996B6EC /* 📦 Check Pods Manifest.lock */ = {
+		0EF999E02DE12E9F3996B6EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		148495570A5C654A9580E66E /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4691,29 +4693,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		36185E2FCBC1542FB7BEE6E1 /* 📦 Check Pods Manifest.lock */ = {
+		36185E2FCBC1542FB7BEE6E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		362598A803D456F4E4BF374A /* uD83DuDCE6 Copy Pods Resources */ = {
+		362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4736,19 +4738,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		46B0B9D5591E42E896DB53E0 /* 📦 Check Pods Manifest.lock */ = {
+		46B0B9D5591E42E896DB53E0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */ = {
@@ -4796,14 +4798,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		77521873930B17B23434AFD3 /* uD83DuDCE6 Copy Pods Resources */ = {
+		77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4871,14 +4873,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4886,29 +4888,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */ = {
+		C782C142C05CBA2C42285091 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4931,14 +4933,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB1F9F1B010317F8520994B9 /* uD83DuDCE6 Copy Pods Resources */ = {
+		EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4946,14 +4948,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F736412B2F002033811E3ECD /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6066,7 +6068,7 @@
 					"$(PROJECT_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.Airbitz-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -6087,7 +6089,7 @@
 					"$(PROJECT_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.Airbitz-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -6165,9 +6167,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6179,9 +6182,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Airbitz Widget/Airbitz Widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6196,6 +6200,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6224,7 +6229,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.develop;
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6239,6 +6244,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6267,7 +6273,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.develop;
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6282,6 +6288,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6310,7 +6317,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6325,6 +6332,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6353,7 +6361,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6454,6 +6462,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6480,7 +6489,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6495,6 +6504,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6521,7 +6531,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6531,6 +6541,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
@@ -6543,6 +6554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
@@ -6554,6 +6566,7 @@
 		DAD1ADAB1BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;
@@ -6566,6 +6579,7 @@
 		DAD1ADAC1BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;

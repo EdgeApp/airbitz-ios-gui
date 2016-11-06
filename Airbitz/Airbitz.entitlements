@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.co.airbitz.airbitz</string>
+		<string>group.com.rommelrico.airbitz</string>
 	</array>
 </dict>
 </plist>

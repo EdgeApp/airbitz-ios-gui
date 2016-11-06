@@ -4,6 +4,7 @@ def import_pods
     pod 'Reachability', '~>3.2'
     pod "AFNetworking", "~> 2.0"
     #pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz"
+    #pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz"
     pod 'AirbitzCore', :path => '../airbitz-core-objc/'
 end
 
