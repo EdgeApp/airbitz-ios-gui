@@ -732,6 +732,8 @@
     self.amountFiatSymbol.text = _currency.symbol;
     self.amountFiatLabel.text = _currency.code;
     self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+    if (!self.conversionLabel.text)
+        self.conversionLabel.text = exchange_rate_loading;
 
     [self checkAuthorization];
     [self startCalcFees];
@@ -774,6 +776,8 @@
     if (_amountSatoshi == 0)
     {
         self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+        if (!self.conversionLabel.text)
+            self.conversionLabel.text = exchange_rate_loading;
         self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
@@ -832,6 +836,8 @@
         self.amountBTCLabel.text = coinFeeString;
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+        if (!self.conversionLabel.text)
+            self.conversionLabel.text = exchange_rate_loading;
 
         self.helpButton.hidden = YES;
         self.conversionLabel.layer.shadowOpacity = 0.0f;
