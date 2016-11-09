@@ -164,6 +164,8 @@
             [self.accountPicker setRoundedAndShadowed:NO];
 
             self.conversionText.text = [abcAccount createExchangeRateString:abcAccount.settings.defaultCurrency includeCurrencyCode:YES];
+            if (!self.conversionText.text)
+                self.conversionText.text = exchange_rate_loading;
 
             self.accountText.text = abcAccount.name;
             [self.accountButton setAccessibilityLabel:abcAccount.name];
