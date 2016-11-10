@@ -28,9 +28,6 @@
 		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
 		873045B809544078D323ED4D /* libPods-Rackwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
-		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
-		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
-		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB981BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
 		DA10BB991BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
 		DA10BB9A1BFF90980086AD8B /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB961BFF90980086AD8B /* background-fade@2x.jpg */; };
@@ -137,6 +134,9 @@
 		DA8988CF1D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D01D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D11D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
+		DA90C0651DD4F89400237E21 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
+		DA90C06A1DD4F89500237E21 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
+		DA90C06B1DD4F89500237E21 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA9101F21C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F31C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
 		DA9101F41C4964AD00603D62 /* icon_import.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101EF1C4964AD00603D62 /* icon_import.png */; };
@@ -1172,9 +1172,6 @@
 		DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
-		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
-		DAB5C0201C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
-		DAB5C0211C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
 		DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
 		DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
 		DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
@@ -1237,7 +1234,7 @@
 		DAC531131D273DF0008D9773 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */; };
 		DAC531141D273DF0008D9773 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */; };
 		DAC531151D273DF0008D9773 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0421BC61F920063DA07 /* CDataScanner_Extensions.m */; };
-		DAC531161D273DF0008D9773 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
+		DAC531161D273DF0008D9773 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* PluginCell.m */; };
 		DAC531171D273DF0008D9773 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DAC531181D273DF0008D9773 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
 		DAC531191D273DF0008D9773 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
@@ -1325,7 +1322,7 @@
 		DAC5316B1D273DF0008D9773 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */; };
 		DAC5316C1D273DF0008D9773 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79B1BC61E670063DA07 /* DebugViewController.m */; };
 		DAC5316D1D273DF0008D9773 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5C51BC6332C0063DA07 /* GDrive.m */; };
-		DAC5316E1D273DF0008D9773 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		DAC5316E1D273DF0008D9773 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		DAC5316F1D273DF0008D9773 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		DAC531701D273DF0008D9773 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		DAC531711D273DF0008D9773 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
@@ -1653,7 +1650,7 @@
 		DAC532F01D27422A008D9773 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */; };
 		DAC532F11D27422A008D9773 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */; };
 		DAC532F21D27422A008D9773 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0421BC61F920063DA07 /* CDataScanner_Extensions.m */; };
-		DAC532F31D27422A008D9773 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
+		DAC532F31D27422A008D9773 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* PluginCell.m */; };
 		DAC532F41D27422A008D9773 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DAC532F51D27422A008D9773 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
 		DAC532F61D27422A008D9773 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
@@ -1741,7 +1738,7 @@
 		DAC533481D27422A008D9773 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */; };
 		DAC533491D27422A008D9773 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79B1BC61E670063DA07 /* DebugViewController.m */; };
 		DAC5334A1D27422A008D9773 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5C51BC6332C0063DA07 /* GDrive.m */; };
-		DAC5334B1D27422A008D9773 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		DAC5334B1D27422A008D9773 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		DAC5334C1D27422A008D9773 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		DAC5334D1D27422A008D9773 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		DAC5334E1D27422A008D9773 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
@@ -2063,7 +2060,7 @@
 		DAC534D41D274575008D9773 /* SendConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0011BC61F920063DA07 /* SendConfirmationViewController.m */; };
 		DAC534D51D274575008D9773 /* ExportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0871BC61F920063DA07 /* ExportWalletViewController.m */; };
 		DAC534D61D274575008D9773 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE0421BC61F920063DA07 /* CDataScanner_Extensions.m */; };
-		DAC534D71D274575008D9773 /* BuySellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* BuySellCell.m */; };
+		DAC534D71D274575008D9773 /* PluginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDEE01BC61F910063DA07 /* PluginCell.m */; };
 		DAC534D81D274575008D9773 /* SpendingLimitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */; };
 		DAC534D91D274575008D9773 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8131BC61F8F0063DA07 /* DirectoryViewController.m */; };
 		DAC534DA1D274575008D9773 /* BD_CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED8081BC61F8F0063DA07 /* BD_CommonCell.m */; };
@@ -2151,7 +2148,7 @@
 		DAC5352C1D274575008D9773 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE01D1BC61F920063DA07 /* SettingsViewController.m */; };
 		DAC5352D1D274575008D9773 /* DebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED79B1BC61E670063DA07 /* DebugViewController.m */; };
 		DAC5352E1D274575008D9773 /* GDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EE5C51BC6332C0063DA07 /* GDrive.m */; };
-		DAC5352F1D274575008D9773 /* GiftCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* GiftCardViewController.m */; };
+		DAC5352F1D274575008D9773 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		DAC535301D274575008D9773 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		DAC535311D274575008D9773 /* AB.m in Sources */ = {isa = PBXBuildFile; fileRef = 346448867CF607DEED6BA49C /* AB.m */; };
 		DAC535321D274575008D9773 /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
@@ -2446,6 +2443,9 @@
 		DAD1AD7F1BC6065100C648C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7E1BC6065100C648C4 /* AppDelegate.m */; };
 		DAD1AD951BC6065100C648C4 /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
 		DAD1ADA01BC6065100C648C4 /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
+		DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
+		DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DAD84F961D29FC1E00CA5DB5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DAD84F971D29FC1E00CA5DB5 /* email_template.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC081D29F59C006798D5 /* email_template.html */; };
 		DAD84F981D29FC1E00CA5DB5 /* info_disclaimer.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC0A1D29F59C006798D5 /* info_disclaimer.html */; };
@@ -2503,9 +2503,6 @@
 		DAD84FCC1D29FC2F00CA5DB5 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
 		DAD84FCD1D29FC3000CA5DB5 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
 		DAD84FCE1D29FC3100CA5DB5 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
-		DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
-		DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
-		DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DADFAC2A1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2B1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2C1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
@@ -2572,10 +2569,6 @@
 		DAE1BE4B1CC3801F003494AB /* NotificationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7AA1BC61E680063DA07 /* NotificationChecker.m */; };
 		DAE1BE4C1CC3816A003494AB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9EDED81BC61F910063DA07 /* User.m */; };
 		DAE1BE4D1CC381C1003494AB /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
-		ED3B5D95C369E5F034F6BCFF /* libPods-Coinsource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */; };
-		DAE5464B1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
-		DAE5464C1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
-		DAE5464D1D29F6780065F926 /* sms_template.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAE546491D29F6780065F926 /* sms_template.txt */; };
 		DAE951601D5C02230060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
 		DAE951651D5C022F0060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
 		DAE951661D5C02380060501F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE9515F1D5C02230060501F /* AddressBook.framework */; };
@@ -2583,6 +2576,7 @@
 		DAF024C21DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
 		DAF024C31DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
 		DAF024C41DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
+		ED3B5D95C369E5F034F6BCFF /* libPods-Coinsource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */; };
 		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
@@ -2687,16 +2681,16 @@
 		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Coinsource.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		980BD847C02C3AD60A5DCE71 /* Pods-Rackwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.debug.xcconfig"; sourceTree = "<group>"; };
-		A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.debug.xcconfig"; sourceTree = "<group>"; };
-		B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.release.xcconfig"; sourceTree = "<group>"; };
-		D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.release.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.release.xcconfig"; sourceTree = "<group>"; };
-		D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Athena.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
+		980BD847C02C3AD60A5DCE71 /* Pods-Rackwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.debug.xcconfig"; sourceTree = "<group>"; };
+		A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.debug.xcconfig"; sourceTree = "<group>"; };
+		B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.release.xcconfig"; sourceTree = "<group>"; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.release.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.release.xcconfig"; sourceTree = "<group>"; };
+		D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Athena.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0BA5B01D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA0BA5B11D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template.html; sourceTree = "<group>"; };
 		DA0BA5B21D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/info_disclaimer.html; sourceTree = "<group>"; };
@@ -3612,11 +3606,11 @@
 		DAE1BE451CC37883003494AB /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = "Airbitz-Common/MainController.h"; sourceTree = "<group>"; };
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DAE5464A1D29F6780065F926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
-		E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.debug.xcconfig"; sourceTree = "<group>"; };
-		ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rackwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-bracket@2x.png"; sourceTree = "<group>"; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.debug.xcconfig"; sourceTree = "<group>"; };
+		ECCE6B7ED261AB649A9CE96B /* libPods-Rackwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rackwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 /* End PBXFileReference section */
 
@@ -5940,6 +5934,7 @@
 				DAC531B41D273DF0008D9773 /* CalculatorView~iphone.xib in Resources */,
 				DAC531B51D273DF0008D9773 /* icon_logout@3x.png in Resources */,
 				DAC531B61D273DF0008D9773 /* icon_wallet.png in Resources */,
+				DA90C0651DD4F89400237E21 /* bitrefill.html in Resources */,
 				DAD84FA21D29FC1E00CA5DB5 /* info_spending_limits.html in Resources */,
 				DAC531B81D273DF0008D9773 /* icon_request.png in Resources */,
 				DAC531B91D273DF0008D9773 /* foldapp.html in Resources */,
@@ -6222,6 +6217,7 @@
 				DAC533911D27422A008D9773 /* icon_wallet.png in Resources */,
 				DAC533931D27422A008D9773 /* icon_request.png in Resources */,
 				DAC533941D27422A008D9773 /* foldapp.html in Resources */,
+				DA90C06A1DD4F89500237E21 /* bitrefill.html in Resources */,
 				DAD84FB41D29FC1F00CA5DB5 /* info_spending_limits.html in Resources */,
 				DAC533951D27422A008D9773 /* icon_category_atm.png in Resources */,
 				DAC533961D27422A008D9773 /* icon_transactions@3x.png in Resources */,
@@ -6504,6 +6500,7 @@
 				DAC535751D274575008D9773 /* icon_logout@3x.png in Resources */,
 				DAC535761D274575008D9773 /* icon_wallet.png in Resources */,
 				DAC535791D274575008D9773 /* icon_request.png in Resources */,
+				DA90C06B1DD4F89500237E21 /* bitrefill.html in Resources */,
 				DAD84FC61D29FC1F00CA5DB5 /* info_spending_limits.html in Resources */,
 				DAC5357A1D274575008D9773 /* foldapp.html in Resources */,
 				DAC5357B1D274575008D9773 /* icon_category_atm.png in Resources */,
@@ -7273,6 +7270,66 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		AA20A8E95F2846F43DCC4CD0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "uD83DuDCE6 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "uD83DuDCE6 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DAC530EC1D273DF0008D9773 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7406,66 +7463,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Athena/Pods-Athena-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA20A8E95F2846F43DCC4CD0 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E4AB2D4B32648E8C3AEB7904 /* 📦 Embed Pods Frameworks */ = {
@@ -7883,7 +7880,7 @@
 				DAC531131D273DF0008D9773 /* SendConfirmationViewController.m in Sources */,
 				DAC531141D273DF0008D9773 /* ExportWalletViewController.m in Sources */,
 				DAC531151D273DF0008D9773 /* CDataScanner_Extensions.m in Sources */,
-				DAC531161D273DF0008D9773 /* BuySellCell.m in Sources */,
+				DAC531161D273DF0008D9773 /* PluginCell.m in Sources */,
 				DAC531171D273DF0008D9773 /* SpendingLimitsViewController.m in Sources */,
 				DAC531181D273DF0008D9773 /* DirectoryViewController.m in Sources */,
 				DAC531191D273DF0008D9773 /* BD_CommonCell.m in Sources */,
@@ -7971,7 +7968,7 @@
 				DAC5316B1D273DF0008D9773 /* SettingsViewController.m in Sources */,
 				DAC5316C1D273DF0008D9773 /* DebugViewController.m in Sources */,
 				DAC5316D1D273DF0008D9773 /* GDrive.m in Sources */,
-				DAC5316E1D273DF0008D9773 /* GiftCardViewController.m in Sources */,
+				DAC5316E1D273DF0008D9773 /* PluginListViewController.m in Sources */,
 				DAC5316F1D273DF0008D9773 /* SignUpPINController.m in Sources */,
 				DAC531701D273DF0008D9773 /* AB.m in Sources */,
 				DAC531711D273DF0008D9773 /* Affiliate.m in Sources */,
@@ -8022,7 +8019,7 @@
 				DAC532F01D27422A008D9773 /* SendConfirmationViewController.m in Sources */,
 				DAC532F11D27422A008D9773 /* ExportWalletViewController.m in Sources */,
 				DAC532F21D27422A008D9773 /* CDataScanner_Extensions.m in Sources */,
-				DAC532F31D27422A008D9773 /* BuySellCell.m in Sources */,
+				DAC532F31D27422A008D9773 /* PluginCell.m in Sources */,
 				DAC532F41D27422A008D9773 /* SpendingLimitsViewController.m in Sources */,
 				DAC532F51D27422A008D9773 /* DirectoryViewController.m in Sources */,
 				DAC532F61D27422A008D9773 /* BD_CommonCell.m in Sources */,
@@ -8110,7 +8107,7 @@
 				DAC533481D27422A008D9773 /* SettingsViewController.m in Sources */,
 				DAC533491D27422A008D9773 /* DebugViewController.m in Sources */,
 				DAC5334A1D27422A008D9773 /* GDrive.m in Sources */,
-				DAC5334B1D27422A008D9773 /* GiftCardViewController.m in Sources */,
+				DAC5334B1D27422A008D9773 /* PluginListViewController.m in Sources */,
 				DAC5334C1D27422A008D9773 /* SignUpPINController.m in Sources */,
 				DAC5334D1D27422A008D9773 /* AB.m in Sources */,
 				DAC5334E1D27422A008D9773 /* Affiliate.m in Sources */,
@@ -8161,7 +8158,7 @@
 				DAC534D41D274575008D9773 /* SendConfirmationViewController.m in Sources */,
 				DAC534D51D274575008D9773 /* ExportWalletViewController.m in Sources */,
 				DAC534D61D274575008D9773 /* CDataScanner_Extensions.m in Sources */,
-				DAC534D71D274575008D9773 /* BuySellCell.m in Sources */,
+				DAC534D71D274575008D9773 /* PluginCell.m in Sources */,
 				DAC534D81D274575008D9773 /* SpendingLimitsViewController.m in Sources */,
 				DAC534D91D274575008D9773 /* DirectoryViewController.m in Sources */,
 				DAC534DA1D274575008D9773 /* BD_CommonCell.m in Sources */,
@@ -8249,7 +8246,7 @@
 				DAC5352C1D274575008D9773 /* SettingsViewController.m in Sources */,
 				DAC5352D1D274575008D9773 /* DebugViewController.m in Sources */,
 				DAC5352E1D274575008D9773 /* GDrive.m in Sources */,
-				DAC5352F1D274575008D9773 /* GiftCardViewController.m in Sources */,
+				DAC5352F1D274575008D9773 /* PluginListViewController.m in Sources */,
 				DAC535301D274575008D9773 /* SignUpPINController.m in Sources */,
 				DAC535311D274575008D9773 /* AB.m in Sources */,
 				DAC535321D274575008D9773 /* Affiliate.m in Sources */,
