@@ -751,6 +751,7 @@
         _labelPINTitle.text = passwordText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
+        _withdrawlPIN.font = [UIFont fontWithName:AppFont size:16.0];
         _imagePINEmboss.hidden = NO;
     } else if (!_destWallet
                 && abcAccount.settings.bSpendRequirePin
@@ -762,6 +763,7 @@
         _labelPINTitle.text = fourDigitPINText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeNumberPad;
+        _withdrawlPIN.font = [UIFont fontWithName:AppFont size:24.0];
         _imagePINEmboss.hidden = NO;
     } else {
         _labelPINTitle.hidden = YES;
