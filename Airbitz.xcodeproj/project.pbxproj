@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -23,8 +22,9 @@
 		34644DCDB063C438DFE4F489 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		34644E64D77421AA50F21575 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
 		34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
-		622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */; };
-		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
+		44F7116AE0A7F4DB302CDFFB /* Pods_Airbitz_Testnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373C0F068B09CF887B44DEA9 /* Pods_Airbitz_Testnet.framework */; };
+		4D7178CC07C37EB0D6C4B5DC /* Pods_Airbitz_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA5CA765C82C3D6F8FBB01F /* Pods_Airbitz_Develop.framework */; };
+		5C44E25996FF8FC71895C2F0 /* Pods_Airbitz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0582BF4F480B54DB451C28 /* Pods_Airbitz.framework */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1368,6 +1368,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0CA5CA765C82C3D6F8FBB01F /* Pods_Airbitz_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbitz_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SignUpPINController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1381,15 +1382,15 @@
 		34644B5A90803E3840979781 /* PluginListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginListViewController.h; sourceTree = "<group>"; };
 		34644D1324098851616413EC /* SSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewController.h; sourceTree = "<group>"; };
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AB.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		373C0F068B09CF887B44DEA9 /* Pods_Airbitz_Testnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbitz_Testnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		770A35631DE2519300AF0851 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
+		9D0582BF4F480B54DB451C28 /* Pods_Airbitz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbitz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		DA0BA5B01D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA0BA5B11D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template.html; sourceTree = "<group>"; };
@@ -2347,7 +2348,7 @@
 				DA9EF3F81BC7285D0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */,
-				313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */,
+				4D7178CC07C37EB0D6C4B5DC /* Pods_Airbitz_Develop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2378,7 +2379,7 @@
 				DA9EF5BF1BC729FA0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
-				662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */,
+				44F7116AE0A7F4DB302CDFFB /* Pods_Airbitz_Testnet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2409,7 +2410,7 @@
 				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
 				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
-				622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */,
+				5C44E25996FF8FC71895C2F0 /* Pods_Airbitz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2512,10 +2513,10 @@
 				DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */,
 				DA9ED7341BC60AA90063DA07 /* UIKit.framework */,
 				DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */,
-				57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */,
-				526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */,
 				5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */,
-				71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */,
+				9D0582BF4F480B54DB451C28 /* Pods_Airbitz.framework */,
+				0CA5CA765C82C3D6F8FBB01F /* Pods_Airbitz_Develop.framework */,
+				373C0F068B09CF887B44DEA9 /* Pods_Airbitz_Testnet.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3394,6 +3395,7 @@
 				34644D19B9AA8C31AD9453F3 /* AB.h */,
 				346446DF3DCE81998F436046 /* Affiliate.m */,
 				3464482EF1B9232A7ED8A342 /* Affiliate.h */,
+				770A35631DE2519300AF0851 /* Airbitz-Bridging-Header.h */,
 			);
 			path = Airbitz;
 			sourceTree = "<group>";
@@ -3655,6 +3657,7 @@
 					DAD1AD761BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = 6RV5CH2XTD;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -6462,6 +6465,7 @@
 			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6496,6 +6500,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -6504,6 +6511,7 @@
 			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6538,6 +6546,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -9,8 +9,10 @@ def import_pods
 end
 
 def import_pods_ios
+    use_frameworks!
     pod "ZBarSDK", "~> 1.3"
     pod 'SDWebImage', '~>3.6'
+    pod 'DropDown', '~>2'
 end
 
 target "Airbitz" do
