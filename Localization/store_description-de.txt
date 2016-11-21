@@ -1,42 +1,43 @@
 Verkaufen, sichern, senden und empfangen von Bitcoin
 
-Leistungsfähige und einfach zu bedienende Bitcoin-Wallet, so dass Anwender ihre eigenen Bitcoin-Privatschlüssel mit der Vertrautheit und Leichtigkeit vom Online-Banking einfach steuern können.
+Eine Leistungsfähige und einfach zu bedienende Bitcoin Wallet, die es Nutzern ermöglicht ihre eigenen Bitcoin privaten Schlüssel einfach zu bedienen, wie gewohntes Online-Banking.
 
-Übernehmen Sie die Kontrolle über Ihr Geld! Mit Airbitz haben nur SIE Zugriff auf Ihre Fonds oder Transaktionsinfo. Weder Airbitz noch Dritte könne auf Ihr Geld oder Ihre Daten zugreifen. Sie erhalten die finanzielle Privatsphäre und Autonomie-Bitcoin wurde so entwickelt, dass auch die Oma alles handhaben kann.
+Übernehmen Sie die Kontrolle über Ihr Geld! Mit Airbitz haben nur SIE Zugriff auf Ihr Guthaben oder Transaktionsinformationen. Weder Airbitz noch Dritte könne auf Ihr Geld oder Ihre Daten zugreifen. Sie erhalten finanzielle Privatsphäre und Autonomie für die Bitcoin steht, die selbst für jede Großmutter zu bedienen ist.
 
-Mit einem Schwerpunkt auf eine erstaunliche Nutzererfahrung bietet die Airbitz-Wallet die folgende Funktionalität:
+Um Ihnen eine einmalige Benutzererfahrung leisten zu können, bietet die Airbitz-Wallet folgende großartige Funktionen:
 
-• Null-Wissen & Null-Zugriff auf Benutzer-Fond, Schlüssel oder Transaktionsdaten von Airbitz oder 3. Parteien
-• Integriertes kaufen/verkaufen für Einwohner der USA und Kanada
+• Keine Kenntnisse & keinen Zugriff auf das Guthaben, Schlüssel oder Transaktionsdaten von Benutzern durch Airbitz oder Dritte
+• Integriertes Kaufen/Verkaufen fü US-Amerikaner und Kanadier
 • Bezahlung mit Bluetooth (BLE) ohne QR-codes 
-• Einfache Account-Erstellung mit nur einem Login & Passwort (kein PDF-Ausdruck, keine Passphrasen aufschreiben oder Verschlüsselungseinstellungen hinzufügen)
-• Automatisch verschlüsseltes Wallet-Backup zum redundanten Peer-to-Peer-Cloud-Server
-• One-Touch 2-Faktor-Authentifizierung für das einfachste Sichern der Wallet auf der Welt
-• Schneller Kontowechsel mit Username-Drop-Down auf dem Login-Bildschirm
+• Anmelden mit Touch-ID
+• Einfache Kontoerstellung mit nur einer Anmeldung und einem Passwort (kein Drucken von PDFs, Schreiben von Passphrasen oder Hinzufügen von Verschlüsselungseinstellungen)
+• Automatisch verschlüsselte Wallet-Backups, um Peer-to-Peer-Cloud-Server zu spiegeln
+• Eine 2-Faktor-Authentifizierung für die am einfachsten zu sichernde Wallet der Welt
+• Schneller Kontowechsel mit Benutzernamen-Drop-Down auf dem Anmelde-Bildschirm
 • Multi-Gerät-Synchronisierung auf allen mobilen Geräten
-• Hierarchische deterministische Wallets mit wechselnden Adressen pro Transaktion
-• Mehrere Wallets pro Account mit einfachen benutzerdefinierten Wallet-Namen (z.B. "Urlaubsfonds")
-• Mehrere Fiatwährungsunterstützung Weisen Sie eine Fiatwährung pro Wallet zu
-• Suche Transaktionen über Zahlungsempfänger, Kategorie oder Notizen
-• Im Taschenrechner für einfache Konvertierungen gebaut
-• Händler-Modus ermöglicht einfaches und flüssiges UI hinter der Theke
-• Teilzahlungserkennung schafft eine neue QR-Code-Zahlungsaufforderung mit Restbetrag 
-• Tägliche Ausgabelimits (erfordert Kennwort zum überschreiten)
-• PIN-erforderliche Ausgabenlimits
-• Zwei-Tipp schneller UI Geldtransfer zwischen Wallets
-• Importiere Fonds von WIF oder Casascius private Schlüssel
-• Dezentrale Serverarchitektur. Wallets arbeiten, auch wenn Airbitz Server ausfallen.
-• Integration mit dem Airbitz-Branchenverzeichnis, auto-vervollständigen von Informationen für Transaktionen einschließlich Business-Logo/Foto
-• Integration mit dem Adressbuch an auto-vervollständigen Empfänger-Name und -Foto
-• BIP 70 Zahlung Protokollunterstützung
+• Hierarchisch bestimmte Wallets mit wechselnden Adressen pro Transaktion
+• Mehrere Wallets pro Account mit einfachen benutzerdefinierten Wallet-Namen (z.B. "Urlaubsgeld")
+• Mehrfache Fiat-Währungsunterstützung. Weisen Sie eine Papierwährung pro Wallet zu
+• Suche Transaktionen nach Zahlungsempfängern, Kategorien oder Einträgen
+• Eingebauter Taschenrechner für einfache Konvertierungen
+• Händler-Modus ermöglicht eine einfache und flüssige Benutzeroberfläche hinter der Theke
+• Die Teilzahlungserkennung erzeugt eine neue QR-Code-Zahlungsanforderung mit verbleibendem Saldo 
+• Tageslimits (erfordert Passwort zum überschreiten)
+• Tageslimits benötigen PIN-Eingabe
+• Schnelle zwei-Tipp Benutzeroberfläche um Guthaben zwischen Wallets zu überweisen
+• Importiere Guthaben von privaten WIF oder Casascius Schlüsseln
+• Dezentrale Serverarchitektur. Wallets funktioneren, auch wenn Airbitz Server down sind.
+• Integration mit dem Airbitz Business-Verzeichnis zur automatischen Vervollständigung von Geschäftsinformationen für Transaktionen einschließlich Business-Logo/Foto
+• Einbindung des Adressbuchs, um den Namen und das Foto des Empfängers automatisch zu vervollständigen
+• Unterstützung des BIP70-Zahlungsprotokolls
 • Open-Source-Code. Erhältlich auf https://github.com/Airbitz
 
-********* Anmerkung zum Datenschutz *********
-Die Airbitz-Anwendung erfordert Zugriff auf die Gerätekontaktliste, Lage und persönliche Informationen. Diese Information wird auf dem Gerät verwendet, um eine verbesserte Benutzerfreundlichkeit durch folgende Wege zu bieten:
+********* Hinweis zum Datenschutz *********
+Die Airbitz-Anwendung fordert Zugriff auf die Kontaktliste, den Standort und die persönlichen Informationen des Geräts an. Die Informationen werden auf dem Gerät dazu verwendet, um eine verbesserte Benutzererfahrung auf folgende Weise zu ermöglichen:
 
 1. Vervollständigen Sie Kontakte automatisch aus dem Adressbuch des Benutzers nach einer Transaktion
 2. Vervollständigen Sie Kontakte automatisch aus dem Adressbuch des Benutzers um E-Mail- oder SMS-Zahlungsaufforderungen zu senden
-3. Vervollständigen Firmennamen-Auflistungen automatisch nach einer Transaktion
-4. Orten Sie Benutzergeräte, um in der Nähe Unternehmen zu finden
+3. Automatische Vervollständigung von Brancheneinträgen, die nach einer Transaktion angegeben wurden
+4. Orten Sie das Gerät des Nutzers, um Unternehmen in der Nähe zu finden
 
-Keine persönlichen Daten oder die Kontaktliste-Info verlassen jemals das Gerät ohne vorher durch die Anmeldeinformationen des Benutzers (Benutzername/Passwort) verschlüsselt zu werden. Weder Airbitz noch Dritte haben Kenntnis von der durch die Anwendung abgerufenen Informationen.
+Keine persönlichen Daten oder Kontaktdaten verlassen jemals das Gerät ohne vorher durch die Anmeldeinformationen des Benutzers (Benutzername/Passwort) verschlüsselt zu werden. Weder Airbitz noch Dritte haben Kenntnis von der durch die Anwendung abgerufenen Informationen.

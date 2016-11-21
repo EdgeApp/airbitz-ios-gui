@@ -15,6 +15,7 @@
 #define supportPhone            @"+1-844-928-9744"
 #define supportTelegram         @"https://telegram.airbitz.co"
 #define supportSlack            @"https://slack.airbitz.co"
+#define supportWhatsapp         @"https://whatsapp.airbitz.co"
 #define appStoreLink            @"https://itunes.apple.com/us/app/airbitz/id843536046"
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.airbitz"
 #define appDownloadLink         @"https://airbitz.co/app"

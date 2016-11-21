@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
-"BCk-jF-SE5.text" = "LOGOUT";
+"BCk-jF-SE5.text" = "ABMELDEN";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
-"GIG-Sd-O0c.accessibilityLabel" = "Logout";
+"GIG-Sd-O0c.accessibilityLabel" = "Abmelden";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
 "Lwy-1d-Qgs.accessibilityLabel" = "Kaufen oder verkaufen";
@@ -14,10 +14,10 @@
 "Zac-Lf-J4y.text" = "EINSTELLUNGEN";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
-"Zu4-Fd-NGP.accessibilityLabel" = "Kaufen oder verkaufen";
+"Zu4-Fd-NGP.accessibilityLabel" = "Kaufen oder Verkaufen";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
-"aSM-QX-pLq.accessibilityLabel" = "Logout";
+"aSM-QX-pLq.accessibilityLabel" = "Abmelden";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
 "bQy-8e-q5h.text" = "Strings.h ansehen";

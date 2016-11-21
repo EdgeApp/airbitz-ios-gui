@@ -2,7 +2,7 @@
 "0gq-ds-DJC.normalTitle" = "SIGUIENTE";
 
 /* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Su nombre de usuario y contraseña son solamente conocidos para usted y nunca se transmiten ni almacenan sin cifrar.";
+"4eB-ff-Ebh.text" = "Su nombre de usuario y contraseña son solamente conocidos por usted y nunca se transmiten ni almacenan sin encriptar.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "SIGUIENTE";
@@ -61,13 +61,13 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
 "YJZ-dK-bwv.text" = "Permitir el acceso a la cámara";
 
 /* Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4"; */
-"bPi-8w-xQ4.text" = "NIP";
+"bPi-8w-xQ4.text" = "PIN";
 
 /* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
 "cng-Cv-ULC.text" = "Habilitar el acceso a los contactos";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
-"dxS-14-iR5.text" = "El NIP es un código de 4 dígitos que se utiliza para volver a iniciar rápidamente sesión en la cuenta.";
+"dxS-14-iR5.text" = "Su PIN es un código de 4 dígitos utilizado para hacer rápidas re-inicios de sesión en su cuenta.";
 
 /* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
 "fCk-W4-OJJ.placeholder" = "Sobrenombre";

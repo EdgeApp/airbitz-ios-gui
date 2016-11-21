@@ -1,26 +1,43 @@
+v.2.3.3
+
+• Behebung seltener Probleme bei fehlerhafter PIN-Anmeldung
+• Behebung von Fehlern beim eingeben des Passworts im BestätigungSenden Bildschirm 
+• Unterstützug bei Edge-Anmeldung per URI-Taste auf dem Handy
+• Anzeigen von "Schwankungen des Wechselkurses", statt anzeige von einem 0 Wert, wenn benötigt
+• Hinzufügen eines WhatsApp Forums für Unterstützung von Links
+
+v 2.3.0
+
+Enführung von Edge-Anmeldung. Die weltweit erste, private, sichere und Zero-Knowledge einmalige Anmeldung für dezentrale Apps. Nun können Sie die Airbitz-Wallet zum sichern Anmelden und für verschlüsselte Konten für andere Blockchain-Apps, wie Augur und Wings, verwenden. 
+
+• Verbesserte Libbitcoin/Electrum Server-Auswahl mittels der Verwendung von Servern die besonders reaktionsschnell sind und kurze Wartezeiten haben. 
+• Behebung von iOS 10 UI Problemen
+• Behebung von Abstürzen auf iOS 10 bei Konten mit vielen Wallets
+• Verbessete Scrypt-Parameter-Berechnung für eine höhere Sicherheit auf schnelleren Geräten
+
 v 2.2.0
 
-We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+Wir beschreiten neue Wege bei der Umsetzung der weltweit ersten reibungslosen Passwort-Wiederherstellung, die es Benutzern erlaubt vergessene Passwörter mit nur 2 Fragen wiederherzustellen. Machen Sie sich keiner Sorgen mehr darum Ihr Passwort zu vergessen
 
-In addition:
+Hinzu:
 
-• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
-• Fixed TouchID occasionally not recognizing touches
-• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
-• Background notifications of incoming funds if app is recently backgrounded
-• Fallback public address for failed BIP70 payment protocol transactions 
-• Improved language translations
-• Show small dropdown when unable to connect to network
+• Bitrefill Plugin Integration, die es Nutzern erlaubt, Mobiltelefone von über 600 Betreibern in 143 Ländern aufzuladen
+• Fixed TouchID erkennt gelegentlich keine Berührung
+• Archivierte Benutzerkonten nehmen nun weniger Ressourcen weg, indem sie das Netzwerk nicht abfragen oder die Transaktionsdaten synchronisieren
+• Hintergrundbenachrichtigungen von eingehenden Beträgen, wenn die App kürzlich in den Hintergrund verschoben wurde
+• Zurückgreifen auf öffentliche Adresse für fehlgeschlagene BIP70 Zahlungsprotokolltransaktionen 
+• Verbesserte Sprachübersetzungen
+• Anzeigen eines kleinen Dropdown-Menüs, wenn Verbindung zum Netzwerk nicht möglich ist
 
 v 2.1.0
 
-• Fügen Sie Libbitcoin/Electrum Serverabonnement Adresse für deutlich verbesserte Leistung und erhöhte Batterielebensdauer hinzu.
-• Aktiviere dynamische Mining-Gebührenermittlung
-• Fügen Sie steuerbare geschätzte Mining-Nutzungsgebühren hinzu (niedrig, Standard, hohe Einstellungen)
-• Korrigieren Sie falsche Transaktionszeiten wann Transaktion empfangen wird, während Wallet offline war
+• Libbitcoin/Electrum Serverabonnement Adresse für deutlich verbesserte Leistung und erhöhte Batterielebensdauer hinzugefügt.
+• Aktivierung dynamischer Mining-Gebührenermittlung
+• Fügen Sie kontrollierbare geschätzte Mining Gebühren hinzu (niedrig, Standard, hohe Einstellungen)
+• Korrigieren Sie falsche Transaktionszeiten, wenn eine Transaktion empfangen wird, während Wallet offline war
 • Korriegieren Sie Rechner-Fehler
-• Fügen Sie Sprachunterstützung für Chinesisch, Hindi, Spanisch und Portugiesisch hinzu
-• Fügen Sie Unterstützung für die korrekte Lokalisierung von Zahlen, Zeiten und Terminen hinzu
-• Beschleunigen Sie Neugerät-Anmeldungen um 200 %
-• Verbesserung der Genauigkeit der Erkennung der Transaktion bei schlechten Netzwerkbedingungen
-• Fügen Sie TouchID-Button zum Login-Bildschirm um TouchID-Popup wieder auszulösen
+• Sprachunterstützung für Chinesisch, Hindi, Spanisch und Portugiesisch hinzugefügt
+• Unterstützung für die korrekte Lokalisierung von Zahlen, Zeiten und Datum hinzugefügt
+• Neugerät-Anmeldungen um 200 % beschleunigt
+• Verbesserte Genauigkeit der Transaktionserkennung bei schlechter Netzwerkverbindung
+• Touch-ID Schaltfläche beim Anmeldebildschirm hinzugefügt, um das Touch-ID-Popup erneut auszulösen

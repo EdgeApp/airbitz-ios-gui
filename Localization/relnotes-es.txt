@@ -1,20 +1,37 @@
+v.2.3.3
+
+• Se arreglaron fallos con el PIN de logeo
+• Fix hang when entering password in SendConfirmation screen 
+• Soporte de Edge Login desde el botón URI en el móvil
+• Show "exchange rate loading" insted of 0 value when needed
+• Agregar foro de WhatsApp a los vinculos de soporte
+
+v 2.3.0
+
+Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+
+• Mejoras en la selección del servidor Libbitcoin/Electrum al usar servidores más responsivos y con menor latencia. 
+• Fix iOS 10 UI issues
+• Fix iOS 10 crash on accounts with lots of wallets
+• Mejoras en los parámetros de Scrypt para una seguridad más fuerte en dispositivos más rápidos
+
 v 2.2.0
 
-Nosotros solo hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un email. Nunca se preocupe por olvidar su contraseña otra vez
+Hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un email. Nunca se preocupe por olvidar su contraseña otra vez
 
 Además:
 
-Integración de Bitrefill plugin lo cual permite a usuarios comprar las mejores mobile desde mas de 600 portadores en 143 países
-TouchID reparado ocasionalmente no reconocía toques
+Integración de Bitrefill plugin lo cual permite a usuarios comprar las mejores mobile top ups desde mas de 600 carriers en 143 países
+Un TouchID reparado ocasionalmente no reconoce la huella
 Cuentas archivadas ahora toman menos recursos por no consultar la red o sincronizar datos de transacción
-notificación de antecedentes de fondos entrante si la app esta recientemente en segundo plano
+notificación de antecedentes de fondos entrante de fondo si la app esta recientemente en segundo plano
 recurrir direcciones publicas por falla BIP70 protocolo de pago de transacciones 
 Mejoras en traducción de idiomas
 muestra un pequeño menu desplegable cuando no puede conectarse a la red
 
 v 2.1.0
 
-• Añadir suscripción de dirección de servidor Libbitcoin/Electrum para mucho mejor rendimiento y mayor duración de la batería.
+• Añadir suscripción de dirección de servidor Libbitcoin/Electrum para un mucho mejor rendimiento y una mayor duración de la batería.
 • Habilitar cálculo de tarifa de minado dinámico
 • Añadir tarifas de minado estimadas controlables por el usuario (ajustes Bajo, Estándar, Alto)
 • Arreglar tiempos de transacción incorrectos para cuando la transacción se recibe mientras la cartera estaba fuera de línea
@@ -22,5 +39,5 @@ v 2.1.0
 • Añadir ayuda en idioma Chino, Indio, Español y Portugués
 • Añadir soporte para la localización apropiada de números, horas y fechas
 • Acelera los inicios de sesión en un nuevo dispositivo en un 200%
-• Mejorar la precisión en la detección de la transacción en pobres condiciones de red
+• Mejorar la precisión en la detección de la transacción en condiciones de red insuficientes
 • Añadir botón TouchID a pantalla de inicio de sesión para volver a desencadenar una ventana emergente de TouchID

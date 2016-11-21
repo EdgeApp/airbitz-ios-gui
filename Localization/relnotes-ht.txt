@@ -1,0 +1,43 @@
+v.2.3.3
+
+• Fix rare issue with PIN login not working
+• Fix hang when entering password in SendConfirmation screen 
+• Support Edge Login from URI button on mobile
+• Show "exchange rate loading" insted of 0 value when needed
+• Add WhatsApp forum to support links
+
+v 2.3.0
+
+Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+
+• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
+• Fix iOS 10 UI issues
+• Fix iOS 10 crash on accounts with lots of wallets
+• Improve Scrypt parameter calculations for stronger security on faster devices
+
+v 2.2.0
+
+Nou apen inove epi mete an plas premye rekiperasyon mo non friksyon mond lan ki pèmèt itilizatè yo rekipere modpas yo avèk sèlman 2 kesyon ak yon email. Pa enkyetew jamè siw bliye modpas ou
+
+An plis:
+
+Bitrefill integre pulgin ki pèmèt itilizatè yo achte kat rechaj nan plis pase 600 konpayi telefon nan 143 peyi
+touchID fix yo pa rekonet touch yo pafwa
+Kont achive yo pran mwes espas e pa mande rezo a ou senkronize done transaksyon
+Notifikasyon deyè lajan kap antre si aplikasyon an apen background
+Adrès piblik Fallback pou BIP70 transaksyon protokol pèman echwe 
+Tradiksyon lang ameliore
+Afiche Meni desann anba le ou pakapab konekte sou rezo a
+
+v 2.1.0
+
+gen yon sèvis abonman pou adrès sèvè libbitcoin/electrum a kap ajoute pou ogmante pèfomans lan ak lavi batri a.
+Aktivasyom kalkil dinamik pou frè mining yo
+Ajoute yon kontrol itilizatè pou kontrole frè mining yo (bas, nomal, paramèt wo)
+Ranje tan transaksyon ki pa bon lè transaksyon an resevwa etan potfèy la pa konekte
+Ranje problèm kalkilatris
+Ajoute chinwa, endi, panyol ak potigè kom lang sipo
+Ajoute sipo pou lokalizasyon lang ki koresponn ak nimero, lè ak dat
+Vitès 200% koneksyon nouvo aparèy yo
+Amelyorasyon tan pou jwen transaksyon nan vye kondisyon
+Ajou bouton TouchID nan ekran koneksyon pou reaktive fenèt popup

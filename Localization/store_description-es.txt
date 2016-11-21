@@ -1,42 +1,43 @@
 Vender, Proteger, Enviar y Recibir Bitcoin
 
-Billetera Bitcoin potente y fácil de usar, permitiendo a los usuarios controlar fácilmente sus propias claves privadas bitcoin con la familiaridad y la facilidad de banca móvil.
+Potente Cartera de Bitcoin y fácil de utilizar que permite a los usuarios controlar sus propias claves privadas de Bitcoin con la familiaridad y facilidad de la banca móvil.
 
-Toma el control de sus fondos! Con Airbitz, sólo usted tiene acceso a sus fondos o datos de la transacción. Ni Airbitz ni ningún partido 3 puede acceder a tus datos o dinero. Recibes la privacidad financiera y autonomía Bitcoin fue diseñada para con la facilidad de uso incluso la abuela podía manejar.
+Tome el control de sus fondos! Con Airbitz, sólo usted tiene acceso a sus fondos o datos de la transacción. Ni Airbitz ni ningún tercero puede acceder a tus datos o dinero. Recibes la privacidad financiera y autonomía para la que Bitcoin fue diseñada con una facilidad de uso que incluso la abuela la podría usar.
 
-Con un enfoque en ofrecer una increíble experiencia de usuario, la carpeta de Airbitz proporciona la siguiente funcionalidad gran:
+Con un enfoque en ofrecer una increíble experiencia de usuario, la cartera de Airbitz proporciona la siguiente gran funcionalidad:
 
-• Conocimiento cero y cero-acceso a fondos de usuario, claves o datos de la transacción por Airbitz o 3 partes
-• Integrado de compra y venta para los residentes de Estados Unidos y Canadá
+Cero conocimiento y cero acceso a fondos, claves o datos de transacción del usuario por Airbitz o terceros
+• Compra y venta integrada para los residentes de Estados Unidos y Canadá
 • Pago mediante Bluetooth (BLE) sin necesidad de códigos QR 
-• Creación de cuenta simple con sólo un inicio de sesión y la contraseña (no impresión de archivos PDF, escribir frases de paso o agregar la configuración de cifrado)
-• Automática cifrado carpeta backup en redundante peer-to-peer servidores
-• Autenticación en 2 factores one-Touch para la cartera de seguro más fácil del mundo
-• Rápidamente interruptor cuentas con nombre de usuario desplegable en las pantallas de inicio de sesión
+• Login with TouchID
+Creación de cuenta simple utilizando simplemente un inicio de sesión y contraseña (sin imprimir PDF, escribir frases de paso o añadir ajustes de cifrado)
+• Copia de seguridad automática y encriptada de la cartera en servidores redundantes cloud punto a punto 
+• Autenticación de doble factor con un toque para la cartera más fácil de secularizar del mundo
+• Rápidamente cambio de cuentas con nombre de usuario desplegable en las pantallas de inicio de sesión
 • Sincronización de múltiples dispositivo a través de todos los dispositivos móviles
-• Jerárquica de carteras determinista con cambio de direcciones por cada transacción
-• Nombres de múltiples carteras por cuenta con monedero simple definido por el usuario (es decir,. "Fondo de vacaciones")
+Carteras de jerarquía determinista con direcciones cambiantes por cada transacción
+•Múltiples carteras por cuenta con nombres de cartera simples definidos por el usuario. "Fondo de vacaciones")
 • Soporte de múltiples monedas fiat. Asignar una moneda fiat por cartera
-• Las operaciones de búsqueda por beneficiario, categoría o notas
-• Construido en calculadora para conversiones fácil
-• modo comerciante permitiendo interfaz de usuario fácil y fluido detrás del mostrador
-• Detección de pago parcial crea una nueva solicitud de pago de código de QR con saldo 
-• Gasto diario límites (requieren contraseña para pasar por encima del límite)
-Límites de gastos • PIN-que requieren
-• Grifo de dos rápida interfaz de usuario para transferencias entre carteras
-• Fondos de importación de claves privadas WIF o Casascius
-Arquitectura de servidor • descentralizado. Carteras trabajan incluso si los servidores de Airbitz hacia abajo.
-• Integración con el directorio de negocios de Airbitz a información de negocio de autocompletado para transacciones como negocio logo/foto
+Buscar transacciones por beneficiario, categoría o notas
+Calculadora integrada para conversiones más sencillas
+• EL modo comercio hace posible un UI fácil y fluido detrás del mostrador
+• Detección de pago parcial crea un nuevo código QR de solicitud de pago con saldo restante 
+• Limites de gastos diarios (requieren contraseña para pasar por encima del límite)
+• PIN-requiriendo limite de gastos
+•Toque doble rápido a la interfaz de usuario para transferencias entre carteras
+• Importar fondos desde WIF claves privadas Casascius
+Arquitectura de servidor descentralizada. Las carteras funcionan incluso si los servidores de Airbitz están caídos.
+• Integración con el directorio de negocios de Airbitz para autocompletar información de negocio por transacciones como negocio logo/foto
 • Integración con la libreta de direcciones para completar automáticamente beneficiario nombre y Foto
 Soporte de protocolo de pago 70 • BIP
-• Código de fuente abierta. Disponible en http://github.com/Airbitz
+• Código abierto. Disponible en http://github.com/Airbitz
 
-Aviso de privacidad ***
+********* Nota de privacidad *********
 La aplicación de Airbitz solicita acceso a la lista de contactos del dispositivo, la ubicación y la información personal. Esta información es utilizada en el dispositivo para proporcionar una experiencia de usuario mejorada de la siguiente manera:
 
-1. Autocompletar contactos de libreta de direcciones del usuario después de una transacción
-2. Autocompletar contactos de libreta de direcciones del usuario para enviar las solicitudes de pago de correo electrónico o SMS
+1. Autocompletar contactos desde la libreta de direcciones del usuario después de una transacción
+2. Autocompletar contactos desde la libreta de direcciones del usuario para enviar correos electrónicos o solicitudes de pago por SMS
 3. Autocompletar nombres de listados de empresas después de una transacción
-4. Dispositivo de geolocalización usuario para encontrar empresas cercanas
+4. Dispositivo de geolocalización de usuario para encontrar empresas cercanas
 
-Ninguna información personal o información de la lista de contactos sale el dispositivo sin primero ser encriptado por las credenciales del usuario (nombre de usuario y contraseña). Ni Airbitz ni ninguna parte 3 tiene conocimiento de la información accedida por la aplicación.
+Ninguna información personal o información de lista de contactos deja el dispositivo sin ser primero cifrada por los credenciales del usuario (nombre de usuario / contraseña). Ni Airbitz ni ningún tercero tiene conocimiento de la información a la que accede la aplicación.

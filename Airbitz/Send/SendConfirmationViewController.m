@@ -732,6 +732,8 @@
     self.amountFiatSymbol.text = _currency.symbol;
     self.amountFiatLabel.text = _currency.code;
     self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+    if (!self.conversionLabel.text)
+        self.conversionLabel.text = exchange_rate_loading;
 
     [self checkAuthorization];
     [self startCalcFees];
@@ -749,6 +751,7 @@
         _labelPINTitle.text = passwordText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeDefault;
+        _withdrawlPIN.font = [UIFont fontWithName:AppFont size:16.0];
         _imagePINEmboss.hidden = NO;
     } else if (!_destWallet
                 && abcAccount.settings.bSpendRequirePin
@@ -760,6 +763,7 @@
         _labelPINTitle.text = fourDigitPINText;
         _withdrawlPIN.hidden = NO;
         _withdrawlPIN.keyboardType = UIKeyboardTypeNumberPad;
+        _withdrawlPIN.font = [UIFont fontWithName:AppFont size:24.0];
         _imagePINEmboss.hidden = NO;
     } else {
         _labelPINTitle.hidden = YES;
@@ -774,6 +778,8 @@
     if (_amountSatoshi == 0)
     {
         self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+        if (!self.conversionLabel.text)
+            self.conversionLabel.text = exchange_rate_loading;
         self.conversionLabel.textColor = [UIColor darkGrayColor];
         self.amountBTCTextField.textColor = [UIColor whiteColor];
         self.amountFiatTextField.textColor = [UIColor whiteColor];
@@ -832,6 +838,8 @@
         self.amountBTCLabel.text = coinFeeString;
         self.amountFiatLabel.text = fiatFeeString;
         self.conversionLabel.text = [abcAccount createExchangeRateString:_currency includeCurrencyCode:YES];
+        if (!self.conversionLabel.text)
+            self.conversionLabel.text = exchange_rate_loading;
 
         self.helpButton.hidden = YES;
         self.conversionLabel.layer.shadowOpacity = 0.0f;

@@ -14,7 +14,7 @@
 "MCV-gu-4YU.normalTitle" = "*";
 
 /* Class = "UIButton"; normalTitle = "C"; ObjectID = "O42-ZS-u2K"; Note = "Calculator Clear Button"; */
-"O42-ZS-u2K.normalTitle" = "C";
+"O42-ZS-u2K.normalTitle" = "清除";
 
 /* Class = "UIButton"; normalTitle = "6"; ObjectID = "ORi-eH-Enh"; Note = "Calculator Button"; */
 "ORi-eH-Enh.normalTitle" = "6";
