@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "2FA zurücksetzen von einem anderen Gerät angefordert.";
+"1Qx-Jp-bYp.text" = "2FA Wiederherstellung von einem anderen Gerät angefordert.";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "2FA HALTEN";
+"3uS-L5-frK.normalTitle" = "2FA BEHALTEN";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
 "4md-ob-Ttv.text" = "Kernversion:";
@@ -14,16 +14,16 @@
 "Ag5-Xn-Vpg.normalTitle" = "Watcher-Cache löschen";
 
 /* Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
-"Bs1-Yi-SIh.normalTitle" = "Log-Dateien hochladen";
+"Bs1-Yi-SIh.normalTitle" = "Anmeldedateien hochladen";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "Aktivieren Sie die 2-Faktor-Authentifizierung, um die Sicherheit zu erhöhen, indem Sie nur Anmeldungen auf Geräten ermöglichen, über die man sich vorher bereits angemeldet hat. Fügen Sie weitere Geräte, nachdem 2FA aktiviert wurde, durch das Scannen des QR-Codes unten hinzu";
+"GMX-G5-Rl3.text" = "Um Ihre Sicherheit zu erhöhen, aktivieren Sie die 2-Faktor-Authentifizierung indem Sie nur Anmeldungen auf Geräten erlauben, über die Sie sich bereits angemeldet haben. Fügen Sie weitere Geräte durch das Scannen des QR-Codes hinzu, nachdem die 2FA aktiviert wurde";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
-"GXU-6G-OIw.placeholder" = "Aktuelles Kennwort";
+"GXU-6G-OIw.placeholder" = "Aktuelles Passwort";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "Gehen Sie mit dem Gerät, das die 2-Faktor-Authentifizierung aktiviert hat, zu Einstellungen & Zwei-Faktor.
+"Izr-Cl-Osv.text" = "Gehen Sie mit dem Gerät, welches die 2-Faktor-Authentifizierung aktiviert hat, zu Einstellungen -> Zwei-Faktor.
 Scannen Sie den QR-Code mit diesem Gerät";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
@@ -39,7 +39,7 @@ Scannen Sie den QR-Code mit diesem Gerät";
 "SXK-F7-NoK.text" = "0.1.0-mainnet";
 
 /* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
-"T6x-zH-xvf.text" = "Auf diesem Konto ist die 2-Faktor-Authentifizierung (2FA) aktiviert. Scannen Sie das 2FA Token von dem Gerät, auf dem 2FA aktiviert ist und erlauben Sie diesem Gerät Zugriff. ";
+"T6x-zH-xvf.text" = "Auf diesem Konto ist 2-Faktor-Authentifizierung (2FA) aktiviert. Scannen Sie das 2FA-Token von dem Gerät, welches 2FA aktivierte, um diesem Gerät Zugriff zu erlauben. ";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
 "X6G-HD-WUv.placeholder" = "Suche";
@@ -54,7 +54,7 @@ Scannen Sie den QR-Code mit diesem Gerät";
 "avV-bm-INd.normalTitle" = "2FA DEAKTIVIEREN";
 
 /* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
-"bYl-WU-bNw.text" = "Fordern Sie, dass die Zwei-Faktor-Authentifizierung deaktiviert wird. Die Anforderung wird in 7 Tagen automatisch zurückgesetzt, sollte der Kontoinhaber keine Änderungen auf authentifizierten Geräten vornehmen";
+"bYl-WU-bNw.text" = "Fordern Sie die Deaktivierung der Zwei-Faktor-Authentifizierung an. Die Anforderung wird in 7 Tagen automatisch zurückgesetzt, sollte der Kontoinhaber keine Änderungen auf authentifizierten Geräten vornehmen";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
 "g6f-f3-w6p.text" = "Label";
@@ -63,13 +63,13 @@ Scannen Sie den QR-Code mit diesem Gerät";
 "h6I-iF-k15.text" = "Datum";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "Zwei-Faktor-Reset wurde angefordert";
+"hxc-na-KPc.text" = "Zwei-Faktor-Wiederherstellung wurde angefordert";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
 
 /* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
-"lqV-Y6-LKD.normalTitle" = "Anfrage-Reset";
+"lqV-Y6-LKD.normalTitle" = "Wiederherstellung beantragen";
 
 /* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
 "mJ9-nG-s79.text" = "Aktiviert";

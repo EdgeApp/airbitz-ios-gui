@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "Este Mês";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM"; */
+"0s2-OO-yBM.text" = "Rótulo";
+
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
 "1kz-sq-XsE.normalTitle" = "Carteira Pública de Fundo - XPub (avançado)";
 
@@ -60,6 +63,9 @@
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[3]" = "Flash";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5"; */
+"AkB-cD-ba5.text" = "Rótulo";
 
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
 "BED-Cf-F1n.text" = "A senha deve ter uma letra maiúscula e uma minúscula, um número, e um mínimo de 10 caracteres";
@@ -130,6 +136,9 @@
 /* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK"; */
 "Q2G-61-ExK.normalTitle" = "Entrar";
 
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QwV-te-soN"; */
+"QwV-te-soN.normalTitle" = "Cancelar";
+
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs"; */
 "QzV-Gk-Vrs.placeholder" = "Re-digite a Senha";
 
@@ -178,6 +187,9 @@
 /* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
 "WB0-Ox-RAw.text" = "PIN de 4 Dígitos";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "XJt-5y-Q5y"; */
+"XJt-5y-Q5y.text" = "Rótulo";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F"; */
 "Yfp-gi-q8F.text" = "Rótulo";
 
@@ -214,6 +226,9 @@
 /* Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
 "egu-Uy-luw.placeholder" = "PIN de Limite de Gastos";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol"; */
+"gJp-Ct-Vol.text" = "Rótulo";
+
 /* Class = "UIButton"; normalTitle = "Transaction Info (CSV)"; ObjectID = "hOS-Gw-CqO"; */
 "hOS-Gw-CqO.normalTitle" = "Informação de Transação (CSV)";
 
@@ -249,6 +264,9 @@
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB"; */
 "ltN-lB-ATB.placeholder" = "Procurar";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "mxS-jU-qS2"; */
+"mxS-jU-qS2.normalTitle" = "Login";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "n7B-WE-395"; */
 "n7B-WE-395.normalTitle" = "Feito";

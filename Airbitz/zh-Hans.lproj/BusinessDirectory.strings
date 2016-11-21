@@ -11,7 +11,7 @@
 "Sfb-cf-6wF.normalTitle" = "更多类别";
 
 /* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
-"a78-ih-LDk.normalTitle" = "咖啡和茶";
+"a78-ih-LDk.normalTitle" = "咖啡 & 茶";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
 "aNa-3g-QXd.placeholder" = "搜索";
@@ -20,13 +20,13 @@
 "b1E-1G-btq.normalTitle" = "礼品卡";
 
 /* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
-"baO-FH-Oy4.text" = "靠近您的";
+"baO-FH-Oy4.text" = "在您附近";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
 "f2g-xP-19U.text" = "标签";
 
 /* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
-"ga1-R0-wof.text" = "键入 BTC";
+"ga1-R0-wof.text" = "输入 BTC";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
 "heE-og-iXA.placeholder" = "搜索";

@@ -1,3 +1,20 @@
+v.2.3.3
+
+• Se arreglaron fallos con el PIN de logeo
+• Fix hang when entering password in SendConfirmation screen 
+• Soporte de Edge Login desde el botón URI en el móvil
+• Show "exchange rate loading" insted of 0 value when needed
+• Agregar foro de WhatsApp a los vinculos de soporte
+
+v 2.3.0
+
+Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+
+• Mejoras en la selección del servidor Libbitcoin/Electrum al usar servidores más responsivos y con menor latencia. 
+• Fix iOS 10 UI issues
+• Fix iOS 10 crash on accounts with lots of wallets
+• Mejoras en los parámetros de Scrypt para una seguridad más fuerte en dispositivos más rápidos
+
 v 2.2.0
 
 Hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un email. Nunca se preocupe por olvidar su contraseña otra vez

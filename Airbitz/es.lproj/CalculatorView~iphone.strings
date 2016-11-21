@@ -41,7 +41,7 @@
 "hpP-b8-SWQ.normalTitle" = "+";
 
 /* Class = "UIButton"; normalTitle = "< Del"; ObjectID = "tNK-PX-QMO"; Note = "Calculator Delete Button"; */
-"tNK-PX-QMO.normalTitle" = "< Borrar";
+"tNK-PX-QMO.normalTitle" = "< Del";
 
 /* Class = "UIButton"; normalTitle = "2"; ObjectID = "vjB-0i-g2w"; Note = "Calculator Button"; */
 "vjB-0i-g2w.normalTitle" = "2";

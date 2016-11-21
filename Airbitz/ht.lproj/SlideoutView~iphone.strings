@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "LOGOUT"; ObjectID = "BCk-jF-SE5"; */
+"BCk-jF-SE5.text" = "DEKONEKTE";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c"; */
+"GIG-Sd-O0c.accessibilityLabel" = "Logout";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Lwy-1d-Qgs"; */
+"Lwy-1d-Qgs.accessibilityLabel" = "Achte oswa Vann";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "O8N-2d-FwL"; */
+"O8N-2d-FwL.text" = "Label";
+
+/* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
+"Zac-Lf-J4y.text" = "Paramètres";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
+"Zu4-Fd-NGP.accessibilityLabel" = "Achte oswa Vann";
+
+/* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
+"aSM-QX-pLq.accessibilityLabel" = "Dekonekte";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
+"bQy-8e-q5h.text" = "Gade strings.h";
+
+/* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "jpu-23-4kh"; */
+"jpu-23-4kh.accessibilityLabel" = "Achte oswa Vann";
+
+/* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
+"lr4-kO-HCW.text" = "BOUS";
+
+/* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
+"rWQ-uJ-DUX.text" = "Achte / vann bitcoin";
+
+/* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.accessibilityHint" = "kounye a louvri sesyon an nan kont";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
+"vsf-Ms-1Ff.text" = "Label";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "xju-3Y-EvK"; */
+"xju-3Y-EvK.text" = "Gade strings.h";
+
+/* Class = "UIView"; accessibilityLabel = "Settings"; ObjectID = "xna-m1-9hx"; */
+"xna-m1-9hx.accessibilityLabel" = "Paramètres";
+
