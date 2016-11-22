@@ -14,7 +14,7 @@
 "D2i-9s-GAC.normalTitle" = "WEITER";
 
 /* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
-"DUg-At-veb.text" = "myName";
+"DUg-At-veb.text" = "meinName";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
 "DgW-Gm-7l2.normalTitle" = "WEITER";
@@ -42,7 +42,7 @@ Dies wird niemals an Airbitz oder einer Dritten gesendet und kann jederzeit in d
 "SsW-1b-1cv.text" = "Strings.h ansehen";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt"; */
-"Tqs-NN-dWt.text" = "Ihre PIN ist ein 4-stelliger Code und wird verwendet, damit Sie sich schneller wieder in Ihr Konto einloggen können.";
+"Tqs-NN-dWt.text" = "Ihre PIN ist ein vierstelliger Code, der verwendet wird, um schnelle Wiederanmeldungen in Ihr Konto zu erlauben.";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT"; */
 "VAn-0y-asT.text" = "Strings.h ansehen";
@@ -57,19 +57,19 @@ Dies wird niemals an Airbitz oder einer Dritten gesendet und kann jederzeit in d
 "WkL-r2-NLT.text" = "Registrieren";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf"; */
-"Wkt-fz-AEf.normalTitle" = "Button";
+"Wkt-fz-AEf.normalTitle" = "Taste";
 
 /* Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv"; */
-"YJZ-dK-bwv.text" = "Kamerazugriff aktivieren";
+"YJZ-dK-bwv.text" = "Kamerazugriff erlauben";
 
 /* Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4"; */
 "bPi-8w-xQ4.text" = "PIN";
 
 /* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
-"cng-Cv-ULC.text" = "Kontaktzugriff aktivieren";
+"cng-Cv-ULC.text" = "Kontaktzugriff erlauben";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
-"dxS-14-iR5.text" = "Ihre PIN ist ein 4-stelliger Code und wird verwendet, damit Sie sich schneller wieder in Ihr Konto einloggen können.";
+"dxS-14-iR5.text" = "Ihre PIN ist ein 4-stelliger Code, der verwendet wird, um schnelle Wiederanmeldungen in Ihr Konto zu erlauben.";
 
 /* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
 "fCk-W4-OJJ.placeholder" = "Spitzname";
@@ -84,7 +84,7 @@ Dies wird niemals an Airbitz oder einer Dritten gesendet und kann jederzeit in d
 "hHD-NP-fM6.normalTitle" = "WEITER";
 
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F"; */
-"hoE-Bh-x2F.placeholder" = "Passwort wiederholen";
+"hoE-Bh-x2F.placeholder" = "Passwort erneut eingeben";
 
 /* Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm"; */
 "i3b-ZH-bDm.placeholder" = "Wählen Sie einen Benutzernamen";
@@ -93,16 +93,16 @@ Dies wird niemals an Airbitz oder einer Dritten gesendet und kann jederzeit in d
 "jcU-OX-5Hj.text" = "Notieren und sicher aufbewahren";
 
 /* Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX"; */
-"jgQ-ju-YiX.text" = "Legen Sie ein Kennwort und PIN fest";
+"jgQ-ju-YiX.text" = "Legen Sie ein Passwort und eine PIN fest";
 
 /* Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV"; */
 "sJ6-mQ-mSV.text" = "Benutzername";
 
 /* Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm"; */
-"tOB-4i-OVm.text" = "mypassword12345";
+"tOB-4i-OVm.text" = "MeinPasswort12345";
 
 /* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
-"w3d-xe-eUq.text" = "Das Kennwort wird verwendet, um Ihr Konto zu authentifizieren und empfindliche Einstellungen zu ändern.";
+"w3d-xe-eUq.text" = "Das Kennwort wird verwendet, um Ihr Konto zu authentifizieren und um empfindliche Einstellungen zu ändern.";
 
 /* Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU"; */
 "wff-Il-8GU.text" = "Schreiben Sie es auf!";

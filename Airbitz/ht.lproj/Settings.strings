@@ -1,0 +1,93 @@
+/* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
+"1Qx-Jp-bYp.text" = "Re enstalasyon 2FA mande yon lot aparey.";
+
+/* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
+"3uS-L5-frK.normalTitle" = "Kenbe 2FA";
+
+/* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
+"4md-ob-Ttv.text" = "Vezyon ki andan net:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
+"9ur-p7-oPb.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg"; */
+"Ag5-Xn-Vpg.normalTitle" = "Retire done Watcher";
+
+/* Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
+"Bs1-Yi-SIh.normalTitle" = "Anregistre fichye Log la";
+
+/* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
+"GMX-G5-Rl3.text" = "Aktive otantifikasyon 2 faktè pou ranfò sekirite pou otorize sèlman koneksyon dispozitif yo ki konekte avan. Ajoute plis aparey ki netwayaj kod QR ki anba aprè 2FA aktive";
+
+/* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
+"GXU-6G-OIw.placeholder" = "Kouran Modpas";
+
+/* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
+"Izr-Cl-Osv.text" = "Avèk èd aparèy la ki aktive otantifikasyn 2 faktè a, ale nan paramèt > de faktè. skane kod QR a pati aparèy la";
+
+/* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
+"LAg-aY-W5b.normalTitle" = "FINI";
+
+/* Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
+"Myh-H6-aDd.text" = "Vèsyon:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05"; */
+"RqX-ow-U05.text" = "Label";
+
+/* Class = "UILabel"; text = "0.1.0-mainnet"; ObjectID = "SXK-F7-NoK"; */
+"SXK-F7-NoK.text" = "0.1.0-mainnet";
+
+/* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
+"T6x-zH-xvf.text" = "Kont sa gen 2 faktè (2FA) aktive. Netwaye jeton an 2FA nan dispozitif ki pemèt 2FA pou bay akzè nan aparey la. ";
+
+/* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
+"X6G-HD-WUv.placeholder" = "Rechèch";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XJN-At-Qod"; */
+"XJN-At-Qod.text" = "Label";
+
+/* Class = "UILabel"; text = "Mainnet"; ObjectID = "Zw4-k1-a82"; */
+"Zw4-k1-a82.text" = "Mainnet";
+
+/* Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd"; */
+"avV-bm-INd.normalTitle" = "Dezaktive 2FA";
+
+/* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
+"bYl-WU-bNw.text" = "Deman pou desaktive otentifikasyon a de faktè a. demand lan pral refet otomatikman nan 7 jou si oken aksyon pa fèt pa itilizatè kont sou aparèy ki otentifye";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
+"g6f-f3-w6p.text" = "Label";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "h6I-iF-k15"; */
+"h6I-iF-k15.text" = "Dat";
+
+/* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
+"hxc-na-KPc.text" = "Ou mande reyinisyalizasyon a de faktè";
+
+/* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
+"iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
+
+/* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
+"lqV-Y6-LKD.normalTitle" = "Mande Reyajiste";
+
+/* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
+"mJ9-nG-s79.text" = "Pèmèt";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50"; */
+"nhU-8o-H50.normalTitle" = "Bouton";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "pX1-NU-49a"; */
+"pX1-NU-49a.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Scan Token"; ObjectID = "pki-9D-VwL"; */
+"pki-9D-VwL.normalTitle" = "Eskane Token";
+
+/* Class = "UILabel"; text = "Network:"; ObjectID = "qLK-qd-7qg"; */
+"qLK-qd-7qg.text" = "Rezo:";
+
+/* Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
+"sZm-Gx-M8r.text" = "Vèsyon ki App";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x"; */
+"th1-bn-E4x.normalTitle" = "ANILE";
+

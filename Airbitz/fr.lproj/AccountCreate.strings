@@ -76,7 +76,7 @@ Ceci n’est jamais envoyé à Airbitz ou tout autre partie tiers et peut être 
 "fV9-pz-Wfn.placeholder" = "Créer code PIN";
 
 /* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL"; */
-"fnL-7h-MQL.placeholder" = "Choisissez un mot de passe";
+"fnL-7h-MQL.placeholder" = "Choisis un mot de passe";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6"; */
 "hHD-NP-fM6.normalTitle" = "Suivant";

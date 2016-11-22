@@ -1,0 +1,43 @@
+Vann, sekirize, voye ak resevwa Bitcoin
+
+Potfèy Bitcoin an fasil pou itilize e li pèmèt itilizatè a kontrole facilement kle Bitcoin li yo avèk fasilite sèvis bank mobil.
+
+Pan kontrol lajan ou yo! Avèk Airbitz, sèl ou menm ki ka we lajan ou ak done transaksyon ou yo. Airbit pa gen oken lot pati ki gen posibilite pou wè lajan w ni transaksyon ou yo. Wap jwenn konfyans ak otonomi sou finas ou se pou sa Bitcoin te kreye, dasil pou itilize menm granmè ka jere.
+
+Pandan nou fokis pou bay yon bon eksperyans itilizatè, potfèy Aitbitz la bay baga sa yo:
+
+Oken konesans & oken aksè a lajan, kle, ou done transaksyon pa Airbitz oubien on twazyèm pati
+Gen Acha/vann pou moun ki rezide kanada ak Etazini
+Peye ak Bluetooth (BLE) san ou pa gen kod QR 
+• Login with TouchID
+Kreyasyon yon senp kont jis itilize yon non itilizatè & modpas (pa gen enpresyon pdf, ekri anba pas fraz, oubien ajoute paramèt chifreman)
+Aregistreman otomatik chifre potfèy nan sèvè peer-to-peer
+Otentifikasyon de faktè one -touch pou potfèy ki pi fasil pou sekirize nan mond lan
+chanjman rapid kont ak non itilizatè dewoule sou ekran koneksyon
+Senkronizasyon ak plizyè aparèy sou tout aparèy mobil
+Potfèy youn apre lot ki chanje adress pa transaksyon
+Plizyè potfèy pa kont avèk non senp defini pa itilizatè (sa vle di. " fond vakans")
+Sipo plizyè deviz fiat. Bay yon deviz fiat pou chak potfèy
+Chache on transaksyon pa benifisyè, kategori oubien not
+Kalkilatris entegre pou fasilite yo konveti lajan
+Mod machann aktive yon entèfas itilizatè senp ak likid dèye kontwa an
+Lè nou jwenn yon pèman en pati, yon nouvo demann pèman QR kod kreye avèk balans ki rete a 
+Limit depans pa jou (mande modpas pou depase limit la)
+PIN lan exije lè depase limit depans lan
+Touche 2 fwa bien rapid entèfas itilizatè a pou transfere lajan de yon potfèy a yon lot
+• Enpote lajan a pati kle prive WIF oubien Casascius
+• Achitekti sèvè desantralize. Potfèy yo fonktyone menm si sèvè Airbitz yo pa disponib.
+• Entegrasyon anyè biznis Airbitz pou rempli enfo komèsyal poukont yo pou transaksyon ki gen logo/foto antrepriz
+• Entegrasyon avèk kanè adrès pour konplete otomatikman non ak foto moun kap resevwa a
+• Sipò peman pwotokòl BIP 70
+• Kod sous ouvè. Disponib sou http://github.com/Airbitz
+
+********* Avi konfyans *********
+Aplikasyon Airbitz la mande aksè a lis kontak aparèy la, lokalizasyon ak enfomasyon pèsonel. Enfomasyon sa yo itilize sou aparèy la pou bay yon sèvis ameliore nan fason sa yo:
+
+1. Konplete otomatikman kontak a pati kane adrès itilizatè a après yon transaksyon
+2. Konplete otomatikman kontak a pati kanè adrès itilizatè a pou voye demand pèman pa emèl oubyen SMS
+3. Konplete otomatikman non enskripsyon entrepriz yo aprè chak transaksyon
+4. Lokalize aparèy itilizatè a pouw jwenn antrepriz ki tou pre yo
+
+Oken enfomasyon pèsonel oubyen ki sou lis kontak la ppap kite aparèy la sans li pa chifre avèk enfo identifikasyon itilizatè (non itilizatè modpas). Ni Airbitz ni oken lot pati gen konesans enfomasyon ke aplikasyon gen aksè.

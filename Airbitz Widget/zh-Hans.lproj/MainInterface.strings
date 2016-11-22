@@ -1,15 +1,6 @@
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
 "Lt8-cl-BMW.text" = "扫描二维码【QR】";
 
-/* Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF"; */
-"NiJ-rT-MKF.text" = "发送";
-
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN"; */
 "WIw-mO-3VN.normalTitle" = "按钮";
-
-/* Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ"; */
-"gQB-TM-9HQ.text" = "BitID 登入";
-
-/* Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4"; */
-"pzG-q0-KJ4.text" = "或";
 

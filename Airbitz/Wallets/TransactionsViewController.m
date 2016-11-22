@@ -582,8 +582,13 @@ const int NumPromoRows              = 3;
 
     fCurrency = [abcAccount.exchangeCache satoshiToCurrency:_totalSatoshi currencyCode:abcAccount.currentWallet.currency.code error:nil];
     
-    NSString *fiatAmount = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
-    _balanceView.botAmount.text = [NSString stringWithFormat:@"%@ %@", abcAccount.currentWallet.currency.code, fiatAmount];
+    if (fCurrency == 0.0 && _totalSatoshi > 0) {
+        // Exchange rate is not finished loading
+        _balanceView.botAmount.text = exchange_rate_loading;
+    } else {
+        NSString *fiatAmount = [abcAccount.currentWallet.currency doubleToPrettyCurrencyString:fCurrency];
+        _balanceView.botAmount.text = [NSString stringWithFormat:@"%@ %@", abcAccount.currentWallet.currency.code, fiatAmount];
+    }
     
     if (abcAccount.currentWallet.archived)
     {

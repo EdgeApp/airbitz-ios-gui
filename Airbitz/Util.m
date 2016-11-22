@@ -57,6 +57,11 @@
     {
         slackSupportTemplate = [NSString stringWithFormat:@"<a href=\"%@\">Slack</a>", supportSlack];
     }
+    NSString *whatsappSupportTemplate = @"";
+    if (supportWhatsapp.length > 2)
+    {
+        whatsappSupportTemplate = [NSString stringWithFormat:@"<a href=\"%@\">WhatsApp</a>", supportWhatsapp];
+    }
 
     NSMutableArray* searchList  = [[NSMutableArray alloc] initWithObjects:
                                    @"[[abtag APP_TITLE]]",
@@ -73,6 +78,7 @@
                                    @"[[abtag PHONE_SUPPORT_TEMPLATE]]",
                                    @"[[abtag TELEGRAM_SUPPORT_TEMPLATE]]",
                                    @"[[abtag SLACK_SUPPORT_TEMPLATE]]",
+                                   @"[[abtag WHATSAPP_SUPPORT_TEMPLATE]]",
                                    @"[[abtag INFO_FOOTER]]",
                                    nil];
 
@@ -91,6 +97,7 @@
                                    phoneSupportTemplate,
                                    telegramSupportTemplate,
                                    slackSupportTemplate,
+                                   whatsappSupportTemplate,
                                    footerContent,
                                    nil];
 

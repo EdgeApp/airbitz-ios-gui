@@ -1,0 +1,1693 @@
+/* No comment provided by engineer. */
+" Please choose a wallet to receive funds." = " Пожалуйста, выберите кошелек для получения средств.";
+
+/* No comment provided by engineer. */
+"%@
+
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
+
+Поделитесь этой ссылкой, чтобы получать доход от пользователей, установивших по ней приложение %2$@ и использующих его. Вы получите 0.25%% от суммы всех подарочных карт, приобретенных через это приложение.";
+
+/* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ запрошено через %3$@ %4$@.";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request" = "%@ Запрос биткойнов";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request from %@" = "Запрос %1$@ биткойнов от %2$@";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin received. Tap for details." = "Получено %@ биткойнов. Нажмите для получения подробного описания.";
+
+/* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
+"%@ Recovery Token" = "Токен восстановления %@";
+
+/* No comment provided by engineer. */
+"%@ failed:
+%@" = "%1$@ не удалось:
+%2$@";
+
+/* No comment provided by engineer. */
+"%@ has requested a bitcoin address to send money to." = "%@ запросил биткойн-адрес для перевода средств.";
+
+/* ** Warning ** text on partial payment */
+"** Warning **" = "** Внимание **";
+
+/* No comment provided by engineer. */
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ВНИМАНИЕ** Вы НИКОГДА не сможете восстановить пароль, если забудете его!!";
+
+/* No comment provided by engineer. */
+"2 Factor (Enhanced Security)" = "2хфакторная аутентификация (усиленная защита)";
+
+/* No comment provided by engineer. */
+"4 Digit PIN" = "4хзначный PIN";
+
+/* No comment provided by engineer. */
+"15-20% off Amazon" = "Скидка 15-20% на Amazon";
+
+/* No comment provided by engineer. */
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "Был запрошен сброс двухфакторной аутентификации. Если Вы не направляли этот запрос, войдите как %@ и смените свой пароль.";
+
+/* section header in settings table */
+"ACCOUNT: " = "УЧЕТНАЯ ЗАПИСЬ: ";
+
+/* title of archived wallets table */
+"ARCHIVE" = "АРХИВ";
+
+/* No comment provided by engineer. */
+"ATM" = "Банкомат";
+
+/* No comment provided by engineer. */
+"ATM Fee" = "Комиссия банкомата";
+
+/* ACCEPT button text */
+"Accept" = "Принять";
+
+/* No comment provided by engineer. */
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Учетная запись '%@' требует пароль. Вы не сможете войти в свою учетную запись на другом устройстве без пароля.";
+
+/* Title of account signin error alert */
+"Account Sign Up" = "Регистрация учетной записи";
+
+/* No comment provided by engineer. */
+"Account has no password" = "Пароль учетной записи не задан";
+
+/* No comment provided by engineer. */
+"Add New" = "Добавить новый";
+
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Доход по партнерской программе";
+
+/* No comment provided by engineer. */
+"Affiliate link has been copied to the clipboard" = "Реферальная ссылка скопирована в буфер обмена";
+
+/* No comment provided by engineer. */
+"Air Travel" = "Путешествие самолетом";
+
+/* No comment provided by engineer. */
+"AirPrint is not currently available" = "AirPrint сейчас недоступен";
+
+/* No comment provided by engineer. */
+"Alcohol & Bars" = "Алкоголь & Бары";
+
+/* No comment provided by engineer. */
+"Allowance" = "Карманные расходы";
+
+/* No comment provided by engineer. */
+"Amount is too small" = "Сумма слишком мала";
+
+/* No comment provided by engineer. */
+"Amusement" = "Развлечения";
+
+/* No comment provided by engineer. */
+"An app has requested a bitcoin address to send money to." = "Приложение запросило биткойн-адрес для перевода средств.";
+
+/* No comment provided by engineer. */
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "Произошла ошибка. Пожалуйста, проверьте свое подключение к сети. Также Вы можете выйти из аутентификации по PIN-коду и ввести свои имя пользователя и пароль для работы в офлайн-режиме";
+
+/* No comment provided by engineer. */
+"An error occurred. Possible network connection issue or incorrect username & password" = "Произошла ошибка. Возможно ошибка сетевого подключения, либо ошибка ввода имени и/или пароля";
+
+/* Warning for password recovery textfields */
+"Answers are case sensitive" = "Ответы чувствительны к регистру";
+
+/* APPROVE button text */
+"Approve" = "Подтвердить";
+
+/* Approving Login popup */
+"Approving Login..." = "Подтверждение входа...";
+
+/* No comment provided by engineer. */
+"Are you sure you want to call" = "Вы уверены, что хотите позвонить";
+
+/* No comment provided by engineer. */
+"Are you sure you want to cancel any changes you've made?" = "Вы уверены, что хотите отменить все сделанные Вами изменения?";
+
+/* No comment provided by engineer. */
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Вы уверены? Вы не сможете получить доступ к средствам в этом кошельке или каким-либо средствам, которые могут быть на него переведены в будущем";
+
+/* No comment provided by engineer. */
+"Arts" = "Искусство";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Авто & транспорт";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Автострахование";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Платеж за машину";
+
+/* settings text */
+"Auto log off after" = "Автоматический выход по завершении";
+
+/* section header in settings table */
+"BITCOIN DENOMINATION" = "НОМИНАЛ БИТКОЙНОВ";
+
+/* No comment provided by engineer. */
+"Baby Supplies" = "Детские товары";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Няня & детский сад";
+
+/* Back button text on top left */
+"Back" = "Назад";
+
+/* No comment provided by engineer. */
+"Balance" = "Баланс";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Банковская комиссия";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Счета & коммунальные услуги";
+
+/* No comment provided by engineer. */
+"BitID Identity" = "Учетная запись BitID";
+
+/* No comment provided by engineer. */
+"BitID Login" = "Логин BitID";
+
+/* settings text */
+"Bitcoin" = "Биткойн";
+
+/* No comment provided by engineer. */
+"Bitcoin Address or Private Key" = "Биткойн-адрес или приватный ключ";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key" = "Приватный ключ для биткойнов";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key with Public Address" = "Приватный ключ биткойна с публичным адресом";
+
+/* Export wallet transactions email subject line */
+"Bitcoin Wallet Transactions" = "Переводы биткойнов между кошельками";
+
+/* No comment provided by engineer. */
+"Bitcoin address mismatch" = "Несовпадение адреса биткойнов";
+
+/* settings text */
+"Bluetooth" = "Bluetooth";
+
+/* No comment provided by engineer. */
+"Books" = "Книги";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Книги & сопутствующие товары";
+
+/* Business Name or Category placeholder */
+"Business Name or Category" = "Название организации или категория";
+
+/* No comment provided by engineer. */
+"Buy Bitcoin" = "Купить биткойны";
+
+/* No comment provided by engineer. */
+"Buy/Sell Bitcoin" = "Купить / продать биткойны";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Bank Account (USA)" = "Купить/продать через банковский счет (США)";
+
+/* Generic CANCEL button text */
+"CANCEL" = "ОТМЕНА";
+
+/* CHANGE button text */
+"CHANGE" = "ИЗМЕНИТЬ";
+
+/* No comment provided by engineer. */
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Камера недоступна. Пожалуйста, дайте приложению доступ к камере в настройках конфиденциальности Вашего устройства";
+
+/* No comment provided by engineer. */
+"Can't send e-mail" = "Не удается отправить сообщение по электронной почте";
+
+/* No comment provided by engineer. */
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Невозможно удалить кошелек со средствами. Пожалуйста, переведите средства сначала.";
+
+/* No comment provided by engineer. */
+"Car Wash" = "Мойка машины";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Наличные & банкоматы";
+
+/* No comment provided by engineer. */
+"Categories" = "Категории";
+
+/* settings text */
+"Change Categories" = "Изменить категории";
+
+/* No comment provided by engineer. */
+"Change Mining Fee" = "Изменить комиссию";
+
+/* No comment provided by engineer. */
+"Change PIN" = "Сменить PIN";
+
+/* No comment provided by engineer. */
+"Change Password" = "Сменить пароль";
+
+/* settings text */
+"Change recovery questions" = "Изменить вопросы для восстановления";
+
+/* No comment provided by engineer. */
+"Charity" = "Благотворительность";
+
+/* Check password button text */
+"Check Password" = "Проверить пароль";
+
+/* No comment provided by engineer. */
+"Checking password..." = "Проверка пароля...";
+
+/* No comment provided by engineer. */
+"Choose a Question" = "Выберите вопрос";
+
+/* City, State/Province, or Country placeholder */
+"City, State/Province, or Country" = "Город, штат/регион или страна";
+
+/* Generic CLOSE button text */
+"Close" = "Закрыть";
+
+/* No comment provided by engineer. */
+"Clothing" = "Одежда";
+
+/* No comment provided by engineer. */
+"Coffee & Tea" = "Кофе & чай";
+
+/* expense category */
+"Coffee Shops" = "Кафе";
+
+/* No comment provided by engineer. */
+"Complete Signup" = "Завершить регистрацию";
+
+/* Num of confirmations in transaction list */
+"Confirmation" = "Подтверждение";
+
+/* Num of confirmations in transaction list */
+"Confirmations" = "Подтверждения";
+
+/* Confirmed status in transaction list */
+"Confirmed" = "Подтвержденные";
+
+/* No comment provided by engineer. */
+"Congratulations" = "Поздравляем!";
+
+/* Popup text when BLE connects */
+"Connected" = "Подключено";
+
+/* No comment provided by engineer. */
+"Consulting Income" = "Консалтинговый доход";
+
+/* No comment provided by engineer. */
+"Copied" = "Скопировано";
+
+/* Copy button text */
+"Copy" = "Копировать";
+
+/* No comment provided by engineer. */
+"Create Wallet" = "Создать кошелек";
+
+/* No comment provided by engineer. */
+"Create new" = "Создать новый";
+
+/* No comment provided by engineer. */
+"Creating and securing account" = "Создание и шифровка учетной записи";
+
+/* No comment provided by engineer. */
+"Creating and securing wallet" = "Создание и шифровка кошелька";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Платежи по кредитным картам";
+
+/* No comment provided by engineer. */
+"Current Location" = "Текущее местоположение";
+
+/* No comment provided by engineer. */
+"Current Password" = "Текущий пароль";
+
+/* section header in settings table */
+"DEFAULT EXCHANGE RATE" = "Обменный курс по умолчанию";
+
+/* debug text */
+"Debug" = "Отладка";
+
+/* No comment provided by engineer. */
+"Debug Log File" = "Файл журнала отладки";
+
+/* Debug screen header title */
+"Debug Options" = "Параметры отладки";
+
+/* settings text */
+"Default Currency" = "Валюта по умолчанию";
+
+/* settings text */
+"Default Exchange" = "Обмен по умолчанию";
+
+/* DELETE button text for wallet delete */
+"Delete" = "Удалить";
+
+/* Delete Account With no Password Warning */
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Удалить '%@' с этого устройства? Пароль Вашей учетной записи не задан и НЕ СМОЖЕТ БЫТЬ ВОССТАНОВЛЕН, если Вы удалите приложение.";
+
+/* Delete Account Warning */
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Удалить '%@' с этого устройства? Это действие сделает невозможным вход по PIN-коду. Если у Вашей учетной записи активирована двухфакторная аутентификация, то Вы не сможете зайти в свою учетную запись без сброса двухфакторной аутентификации, что займет 7 дней.";
+
+/* No comment provided by engineer. */
+"Delete Account" = "Удалить учетную запись";
+
+/* Delete Wallet popup */
+"Delete Wallet" = "Удалить кошелёк";
+
+/* Text for popup while deleting wallet */
+"Deleting Wallet" = "Удаление кошелька";
+
+/* No comment provided by engineer. */
+"Dentist" = "Дантист";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Откладывание сбережений";
+
+/* No comment provided by engineer. */
+"Designed and Built by Airbitz in" = "Разработано и создано Airbitz в";
+
+/* Directory title bar text */
+"Directory" = "Каталог";
+
+/* Disable as in to disable a feature */
+"Disable" = "Отключить";
+
+/* Title of recovery popup */
+"Disable Recovery?" = "Отключить восстановление?";
+
+/* No comment provided by engineer. */
+"Disabled" = "Отключено";
+
+/* No comment provided by engineer. */
+"Div Income" = "Доход от дивидендов";
+
+/* No comment provided by engineer. */
+"Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
+Enter it below to make sure:" = "Вы помните Ваш пароль? Он понадобится Вам, если Выше устройство потеряется или будет украдено, а также, если Вы удалите приложение.
+Введите его ниже для проверки:";
+
+/* No comment provided by engineer. */
+"Doctor" = "Медицина";
+
+/* Generic DONE button text */
+"Done" = "Готово";
+
+/* No comment provided by engineer. */
+"Download the Airbitz wallet and save money using bitcoin" = "Скачайте кошелек Airbitz и экономьте деньги, используя биткойны";
+
+/* No comment provided by engineer. */
+"Edge Login" = "Учетная запись Edge";
+
+/* No comment provided by engineer. */
+"Education" = "Образование";
+
+/* No comment provided by engineer. */
+"Electronics" = "Электроника";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Электроника & программное обеспечение";
+
+/* text for Email */
+"Email" = "Электронная почта";
+
+/* No comment provided by engineer. */
+"Email Login Package" = "Пакетный вход по электронной почте";
+
+/* No comment provided by engineer. */
+"Email cancelled." = "Отправка сообщения электронной почтой отменена.";
+
+/* No comment provided by engineer. */
+"Email saved to send later." = "Письмо сохранено для отправки позже.";
+
+/* No comment provided by engineer. */
+"Email sent." = "Письмо отправлено.";
+
+/* No comment provided by engineer. */
+"Enable" = "Включить";
+
+/* settings text */
+"Enable Bluetooth in System Settings" = "Включите Bluetooth в системных настройках";
+
+/* No comment provided by engineer. */
+"Enable Touch ID" = "Включите Touch ID";
+
+/* No comment provided by engineer. */
+"Enter Payee" = "Введите получателя платежа";
+
+/* No comment provided by engineer. */
+"Enter any notes you would like to send to our support staff" = "Добавьте комментарии для нашей службы технической поддержки";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Развлечения";
+
+/* No comment provided by engineer. */
+"Error Changing PIN" = "Ошибка при смене PIN-кода";
+
+/* No comment provided by engineer. */
+"Error Deleting Wallet" = "Ошибка при удалении кошелька";
+
+/* No comment provided by engineer. */
+"Error Getting Wallet Count" = "Ошибка определения числа кошельков";
+
+/* No comment provided by engineer. */
+"Error Logging In" = "Ошибка входа";
+
+/* No comment provided by engineer. */
+"Error Recovering Account" = "Ошибка при восстановлении учетной записи";
+
+/* No comment provided by engineer. */
+"Error code" = "Код ошибки";
+
+/* No comment provided by engineer. */
+"Error connecting to payment processor. Send directly to bitcoin address
+
+%@" = "Ошибка соединения с платежной системой. Переведите напрямую на биткойн-адрес
+
+%@";
+
+/* No comment provided by engineer. */
+"Error creating affiliate link. Please try again later" = "Ошибка создания реферальной ссылки для партнерской программы. Пожалуйста, попробуйте позже";
+
+/* No comment provided by engineer. */
+"Error desc" = "Описание ошибки";
+
+/* No comment provided by engineer. */
+"Error disabling recovery" = "Ошибка при отключении восстановления";
+
+/* No comment provided by engineer. */
+"Error during send" = "Ошибка при отправлении";
+
+/* No comment provided by engineer. */
+"Error importing the token at this time. Please try again." = "Ошибка импорта токена. Пожалуйста, попробуйте позже.";
+
+/* No comment provided by engineer. */
+"Error occured copying to the clipboard" = "Ошибка копирования в буфер обмена";
+
+/* No comment provided by engineer. */
+"Error sending Email." = "Ошибка при отправлении электронной почты.";
+
+/* No comment provided by engineer. */
+"Error sending SMS" = "Ошибка при отправлении SMS";
+
+/* Prefix of list of financial exchange categories. Such as converting from one currency to another */
+"Exchange" = "Обмен";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Источник данных для курса обмена";
+
+/* Exit button text on top left */
+"Exit" = "Выход";
+
+/* Prefix of list of expense categories */
+"Expense" = "Расходы";
+
+/* EXPORT button text for wallet export */
+"Export" = "Экспорт";
+
+/* Prompt asking which wallet to export from */
+"Export From:" = "Экспорт из:";
+
+/* No comment provided by engineer. */
+"Export Private Seed" = "Экспорт приватных сидов";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Экспорт публичных сидов (XPub)";
+
+/* No comment provided by engineer. */
+"Export Wallet Transactions" = "Экспорт переводов кошелька";
+
+/* No comment provided by engineer. */
+"Eyecare" = "Офтальмолог";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Фаст-фуд";
+
+/* No comment provided by engineer. */
+"Feedback" = "Обратная связь";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Платежи & расходы";
+
+/* Fetching Login Request popup */
+"Fetching Login Request..." = "Обработка запроса на вход...";
+
+/* Fetching Payment Request popup */
+"Fetching Payment Request..." = "Обработка запроса на платеж...";
+
+/* Fiat */
+"Fiat" = "Официальная валюта";
+
+/* No comment provided by engineer. */
+"Financial" = "Финансист";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Финансовый консультант";
+
+/* settings text */
+"First Name (optional)" = "Имя (необязательно)";
+
+/* No comment provided by engineer. */
+"Food & Dining" = "Еда & обеды";
+
+/* No comment provided by engineer. */
+"From: %@" = "От: %@";
+
+/* No comment provided by engineer. */
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Средства были успешно импортированы, но возникла ошибка при соединении с сервером сообщений. Пожалуйста, попробуйте позже";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Меблировка";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Бензин & топливо";
+
+/* No comment provided by engineer. */
+"Generating QR Code..." = "Генерация QR-кода...";
+
+/* Button text for Get Affiliate Link */
+"Get Affiliate Link" = "Получите партнерскую ссылку";
+
+/* No comment provided by engineer. */
+"Gift" = "Подарки";
+
+/* No comment provided by engineer. */
+"Gift Cards" = "Подарочные карты";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Подарки & пожертвования";
+
+/* Generic Go Back button text */
+"Go Back" = "Назад";
+
+/* No comment provided by engineer. */
+"Great job remembering your password." = "Вы помните свой пароль!";
+
+/* expense category */
+"Groceries" = "Бакалея";
+
+/* No comment provided by engineer. */
+"Gym" = "Спортзал";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "Взносы в ЖЭК";
+
+/* No comment provided by engineer. */
+"Hair" = "Парикмахер";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Здоровье & фитнес";
+
+/* Help button text on top right */
+"Help" = "Помощь";
+
+/* Hide */
+"Hide" = "Скрыть";
+
+/* No comment provided by engineer. */
+"High Fee" = "Высокая комиссия";
+
+/* No comment provided by engineer. */
+"Hobbies" = "Хобби";
+
+/* No comment provided by engineer. */
+"Home" = "Дом";
+
+/* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "Home Depot (скидка до 15%)";
+
+/* expense category */
+"Home Improvement" = "Дизайн интерьера";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Домашнее страхование";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Домашний телефон";
+
+/* No comment provided by engineer. */
+"Home Services" = "Обслуживание дома";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Дом и сад";
+
+/* No comment provided by engineer. */
+"Hotel" = "Отели";
+
+/* Like Airbitz popup */
+"How are you liking %@?" = "Как Вам понравилось %@?";
+
+/* Slideout menu import private key text */
+"IMPORT PRIVATE KEY
+([[abtag APP_TITLE]] Gift Card)" = "ИМПОРТ ПРИВАТНОГО КЛЮЧА
+(подарочная карта [[abtag APP_TITLE]])";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "Отчисления в пенсионный фонд";
+
+/* No comment provided by engineer. */
+"Identity token from [%@] created and saved" = "Идентификационный токен [%@] создан и сохранен";
+
+/* No comment provided by engineer. */
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "Если настройка восстановления была правильно настроена, то Вы должны были получить по электронной почте сообщение с токеном восстановления и ссылкой";
+
+/* No comment provided by engineer. */
+"Import" = "Импорт";
+
+/* No comment provided by engineer. */
+"Import Airbitz Gift Card" = "Импорт подарочной карты Airbitz";
+
+/* No comment provided by engineer. */
+"Import Funds" = "Импортировать средства";
+
+/* No comment provided by engineer. */
+"Import Private Key" = "Импорт приватного ключа";
+
+/* No comment provided by engineer. */
+"Import failed" = "Не удалось импортировать";
+
+/* No comment provided by engineer. */
+"Import failed. Private key is empty" = "Не удалось импортировать. Приватный ключ пуст";
+
+/* No comment provided by engineer. */
+"Import the private key again to retry Twitter" = "Попробуйте снова импортировать приватный ключ для повторной попытки твита";
+
+/* No comment provided by engineer. */
+"Importing funds from %@ into wallet..." = "Импорт средств от %@ в кошелек...";
+
+/* Prefix of list of income categories */
+"Income" = "Доходы";
+
+/* No comment provided by engineer. */
+"Incorrect PIN" = "Неверный PIN-код";
+
+/* No comment provided by engineer. */
+"Incorrect PIN. Please wait %.0f seconds and try again." = "Неверный PIN. Пожалуйста, подождите %.0f секунд и попробуйте снова.";
+
+/* No comment provided by engineer. */
+"Incorrect Password" = "Неверный пароль";
+
+/* No comment provided by engineer. */
+"Incorrect Password. Try again, or change it now?" = "Неверный пароль. Попробуете ввести его снова или измените сейчас?";
+
+/* No comment provided by engineer. */
+"Incorrect current password" = "Неверный текущий пароль";
+
+/* No comment provided by engineer. */
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Неверное имя пользователя для этого токена восстановления. Пожалуйста, попробуйте другое имя пользователя или другую ссылку токена восстановления.";
+
+/* Info button text on top right */
+"Info" = "Информация";
+
+/* Title of password check popup alert */
+"Insufficient Password" = "Пароль не соответствует требованиям";
+
+/* No comment provided by engineer. */
+"Interest Exp" = "Расходы на выплату процентов";
+
+/* No comment provided by engineer. */
+"Internet" = "Интернет";
+
+/* No comment provided by engineer. */
+"Invalid Bitcoin Address" = "Неверный адрес биткойн";
+
+/* No comment provided by engineer. */
+"Invalid Bluetooth Request" = "Неверный запрос по Bluetooth";
+
+/* No comment provided by engineer. */
+"Invalid Email" = "Некорректный Email";
+
+/* No comment provided by engineer. */
+"Invalid QR Code" = "Неверный QR-код";
+
+/* No comment provided by engineer. */
+"It's great" = "Великолепно";
+
+/* No comment provided by engineer. */
+"Kids" = "Дети";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Мероприятия для детей";
+
+/* LOGIN button text */
+"LOGIN" = "Вход";
+
+/* settings text */
+"Last Name (optional)" = "Фамилия (необязательно)";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Комиссия за просрочку платежа";
+
+/* Later button text */
+"Later" = "Позже";
+
+/* No comment provided by engineer. */
+"Laundry" = "Прачечная";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Сад & огород";
+
+/* No comment provided by engineer. */
+"Level" = "Уровень";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Страхование жизни";
+
+/* Loading account alert text */
+"Loading Account..." = "Загрузка учетной записи...";
+
+/* title of wallets table balance header */
+"Loading Balance..." = "Загрузка баланса...";
+
+/* Loading Transactions alert text */
+"Loading Transactions..." = "Загрузка переводов...";
+
+/* Loading wallets alert text */
+"Loading Wallets..." = "Загрузка кошельков...";
+
+/* Loading... */
+"Loading..." = "Загрузка...";
+
+/* No comment provided by engineer. */
+"Logging Out" = "Выход";
+
+/* No comment provided by engineer. */
+"Login Package" = "Пакетный вход";
+
+/* No comment provided by engineer. */
+"Low Fee" = "Низкая комиссия";
+
+/* settings text */
+"Merchant Mode" = "Режим магазина";
+
+/* No comment provided by engineer. */
+"Message Sent" = "Сообщение отправлено";
+
+/* No comment provided by engineer. */
+"Misc." = "Прочее";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Мобильный телефон";
+
+/* No comment provided by engineer. */
+"More Categories" = "Больше категорий";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Ипотека & аренда";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Проценты по ипотечному кредиту";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Кино & DVD";
+
+/* No comment provided by engineer. */
+"Music" = "Музыка";
+
+/* No comment provided by engineer. */
+"Must have at least %d characters" = "Должно быть не менее %d символов";
+
+/* No comment provided by engineer. */
+"Must have at least one lower case letter" = "Должна быть как минимум одна буква в нижнем регистре";
+
+/* No comment provided by engineer. */
+"Must have at least one number" = "Должна быть как минимум одна цифра";
+
+/* No comment provided by engineer. */
+"Must have at least one upper case letter" = "Должна быть как минимум одна буква в верхнем регистре";
+
+/* Default wallet name for new accounts */
+"My Wallet" = "Мой кошелек";
+
+/* section header in settings table */
+"NAME" = "Имя";
+
+/* NO button text */
+"NO" = "НЕТ";
+
+/* No comment provided by engineer. */
+"Name" = "Имя";
+
+/* No comment provided by engineer. */
+"Net Salary" = "Чистый заработок";
+
+/* No comment provided by engineer. */
+"Network Error" = "Ошибка сети";
+
+/* No comment provided by engineer. */
+"New PIN" = "Новый PIN";
+
+/* No comment provided by engineer. */
+"New Password" = "Новый пароль";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Газеты & журналы";
+
+/* Next button text */
+"Next" = "Далее";
+
+/* settings text */
+"Nickname / Handle (optional)" = "Имя пользователя / псевдоним (необязательно)";
+
+/* what to display when wallet has no transactions */
+"No Transactions" = "Нет переводов";
+
+/* what to display when no transactions are found in search */
+"No Transactions Found" = "Не найдено ни одного перевода";
+
+/* No comment provided by engineer. */
+"No password set" = "Пароль не установлен";
+
+/* No comment provided by engineer. */
+"No thanks" = "Нет, спасибо";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Не уверен";
+
+/* No comment provided by engineer. */
+"Not so good" = "Не очень хорошо";
+
+/* No comment provided by engineer. */
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Примечание: Настройка валюты по умолчанию используется только для новых кошельков и отображения полного баланса Вашей учетной записи. Создайте новый кошелек, чтобы изменить отображающуюся в переводах валюту.";
+
+/* OK button text */
+"OK" = "ОК";
+
+/* section header in settings table */
+"OPTIONS" = "Опции";
+
+/* No comment provided by engineer. */
+"On The Web" = "В сети";
+
+/* No comment provided by engineer. */
+"Only numbers allowed in PIN" = "PIN-код может состоять только из цифр";
+
+/* No comment provided by engineer. */
+"Open 24" = "Работает 24 часа";
+
+/* No comment provided by engineer. */
+"Open 24 hours" = "Работает 24 часа в сутки";
+
+/* No comment provided by engineer. */
+"Other Income" = "Прочие доходы";
+
+/* No comment provided by engineer. */
+"PIN" = "PIN";
+
+/* settings text */
+"PIN Re-Login" = "Повторный вход с использованием PIN-кода";
+
+/* No comment provided by engineer. */
+"PIN must be %d digits" = "PIN-код должен состоять из %d цифр";
+
+/* No comment provided by engineer. */
+"PIN successfully changed." = "PIN-код был успешно изменен.";
+
+/* No comment provided by engineer. */
+"Parking" = "Парковка";
+
+/* Text on partial payment */
+"Partial Payment" = "Частичный платеж";
+
+/* No comment provided by engineer. */
+"Password" = "Пароль";
+
+/* No comment provided by engineer. */
+"Password Change" = "Изменить пароль";
+
+/* No comment provided by engineer. */
+"Password Recovery" = "Восстановление пароля";
+
+/* No comment provided by engineer. */
+"Password Recovery Setup" = "Настройка восстановления пароля";
+
+/* No comment provided by engineer. */
+"Password change failed:
+%@" = "Не удалось изменить пароль:
+%@";
+
+/* No comment provided by engineer. */
+"Password does not match. Re-enter password" = "Введенные пароли не совпадают. Пожалуйста, введите пароли повторно";
+
+/* No comment provided by engineer. */
+"Password mismatch" = "Пароли не совпадают";
+
+/* No comment provided by engineer. */
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "Пароль успешно изменен. НЕ ЗАБУДЬТЕ ВАШ ПАРОЛЬ И ОТВЕТЫ НА ВОПРОСЫ ДЛЯ ЕГО ВОССТАНОВЛЕНИЯ! ОНИ НЕ МОГУТ БЫТЬ ВОССТАНОВЛЕНЫ!";
+
+/* Text on payment recived popup */
+"Payment received" = "Платеж получен";
+
+/* Pending status in transaction list */
+"Pending" = "Ожидающие";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Личная гигиена";
+
+/* expense category */
+"Pet Food & Supplies" = "Корм & товары для домашних животных";
+
+/* expense category */
+"Pet Grooming" = "Уход за домашними животными";
+
+/* expense category */
+"Pets" = "Домашние животные";
+
+/* expense category */
+"Pharmacy" = "Лекарства";
+
+/* No comment provided by engineer. */
+"Place Call" = "Исходящий вызов";
+
+/* No comment provided by engineer. */
+"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
+
+<br><br>%@" = "Пожалуйста, откройте приведенную ниже ссылку на мобильном устройстве с установленным %1$@ для активации восстановления контроля над учетной записью пользователя [%2$@]
+
+<br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a new account and transfer your funds if you forgot your password." = "Пожалуйста, создайте новую учетную запись и переведите туда Ваши средства, если Вы забыли пароль.";
+
+/* No comment provided by engineer. */
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Пожалуйста, создайте пароль для этой учетной записи, иначе Вы не сможете получить доступ к ней, если потеряете свое устройство или оно будет украдено.";
+
+/* No comment provided by engineer. */
+"Please enter a User Name" = "Пожалуйста, введите имя пользователя";
+
+/* No comment provided by engineer. */
+"Please enter a username at the login screen" = "Пожалуйста, введите имя пользователя на экране входа";
+
+/* No comment provided by engineer. */
+"Please enter an amount to send" = "Пожалуйста, введите сумму для отправки";
+
+/* No comment provided by engineer. */
+"Please enter the username of the account to recover" = "Пожалуйста, введите имя пользователя, контроль над аккаунтом которого Вы хотите восстановить";
+
+/* No comment provided by engineer. */
+"Please enter your PIN" = "Пожалуйста, введите Ваш PIN-код";
+
+/* No comment provided by engineer. */
+"Please enter your correct password." = "Пожалуйста, введите верный пароль.";
+
+/* No comment provided by engineer. */
+"Please enter your password to enable Touch ID" = "Пожалуйста, введите ваш пароль для активации Touch ID";
+
+/* No comment provided by engineer. */
+"Please find the email and click on the link from this device to initiate recovery" = "Пожалуйста, зайдите с этого устройства на электронную почту и перейдите по ссылке из письма для начала процесса восстановления";
+
+/* No comment provided by engineer. */
+"Please have Requestor contact support" = "Запросивший должен обратиться в службу поддержки";
+
+/* No comment provided by engineer. */
+"Please logout of current account before attempting password recovery" = "Пожалуйста, выйдите из текущей учетной записи перед началом восстановления пароля";
+
+/* No comment provided by engineer. */
+"Please try again later or contact support" = "Пожалуйста, попробуйте позже или свяжитесь со службой технической поддержки";
+
+/* No comment provided by engineer. */
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "Пожалуйста, проверьте домен вверху и нажмите ВХОД для авторизации на этом сайте";
+
+/* No comment provided by engineer. */
+"Please wait %.0f seconds before retrying %@" = "Пожалуйста, подождите %1$.0f секунд перед следующей попыткой %2$@";
+
+/* No comment provided by engineer. */
+"Please wait 1 second before retrying %@" = "Пожалуйста, подождите 1 секунду перед следующей попыткой %@";
+
+/* No comment provided by engineer. */
+"Present QR code to Sender and have them scan to send you payment" = "Передайте QR-код отправителю для сканирования и совершения Вам платежа";
+
+/* No comment provided by engineer. */
+"Private Seed" = "Приватный сид";
+
+/* expense category */
+"Property" = "Собственность";
+
+/* No comment provided by engineer. */
+"Provide an Identity Token" = "Предоставить идентификационный токен";
+
+/* No comment provided by engineer. */
+"Public Seed (XPub)" = "Публичные сиды (XPub)";
+
+/* expense category */
+"Public Transportation" = "Общественный транспорт";
+
+/* No comment provided by engineer. */
+"QR Code Scan Failure" = "Ошибка сканирования QR-кода";
+
+/* No comment provided by engineer. */
+"REFER YOUR FRIENDS
+(Earn Bitcoin)" = "ПОСОВЕТОВАТЬ ДРУЗЬЯМ
+(Заработать бикойны)";
+
+/* No comment provided by engineer. */
+"Re-enter New Password" = "Повторно введите новый пароль";
+
+/* No comment provided by engineer. */
+"Received Bitcoin" = "Полученные биткойны";
+
+/* No comment provided by engineer. */
+"Received Funds" = "Полученные средства";
+
+/* Received string on Request screen */
+"Received..." = "Получение...";
+
+/* No comment provided by engineer. */
+"Recovery Disabled" = "Восстановление отключено";
+
+/* No comment provided by engineer. */
+"Recovery Password Reminder" = "Напоминание о восстановлении пароля";
+
+/* Title of recovery questions setup error alert */
+"Recovery Questions Not Set" = "Вопросы для восстановления не заданы";
+
+/* Title of recovery questions setup complete alert */
+"Recovery Questions Set" = "Вопросы для восстановления заданы";
+
+/* No comment provided by engineer. */
+"Recovery Successful
+
+Please change your password and PIN" = "Восстановление прошло успешно
+
+Пожалуйста, смените свои пароль и PIN-код";
+
+/* No comment provided by engineer. */
+"Recovery was not setup or was done on another device" = "Восстановление не было настроено или было проведено на другом устройстве";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "Пригласите Ваших друзей";
+
+/* expense category */
+"Registration" = "Регистрация";
+
+/* Remaining string on Request screen */
+"Remaining..." = "Осталось...";
+
+/* No comment provided by engineer. */
+"Remember your password?" = "Запомнит Ваш пароль?";
+
+/* No comment provided by engineer. */
+"Remind Me Later" = "Напомнить позже";
+
+/* RENAME button text for wallet rename */
+"Rename" = "Переименовать";
+
+/* Rename Wallet popup */
+"Rename Wallet" = "Переименовать кошелек";
+
+/* No comment provided by engineer. */
+"Rent" = "Аренда";
+
+/* expense category */
+"Rental Car & Taxi" = "Аренда машин & такси";
+
+/* No comment provided by engineer. */
+"Request a Payment Address" = "Запрос адреса платежа";
+
+/* No comment provided by engineer. */
+"Request confirmed, Two Factor off." = "Запрос подтвержден. Двухфакторная аутентификация отключена.";
+
+/* No comment provided by engineer. */
+"Request is copied to the clipboard" = "Запрос скопирован в буфер обмена";
+
+/* No comment provided by engineer. */
+"Request your Identity Token but you don't have any" = "У Вас был запрошен идентификационный токен, которого Вы не имеете";
+
+/* No comment provided by engineer. */
+"Request your Identity Token. Please select one below" = "Запрос идентификационного токена. Выберите один из списка ниже";
+
+/* Requested string on Request screen */
+"Requested..." = "Запрос...";
+
+/* No comment provided by engineer. */
+"Reset Cancelled" = "Сброс отменен";
+
+/* No comment provided by engineer. */
+"Reset Date" = "Сбросить дату";
+
+/* No comment provided by engineer. */
+"Reset requested. Please retry login after 7 days." = "Сброс запрошен. Пожалуйста, попробуйте войти через 7 дней.";
+
+/* No comment provided by engineer. */
+"Restarting watcher service" = "Перезапуск службы мониторинга";
+
+/* expense category */
+"Restaurants" = "Рестораны";
+
+/* No comment provided by engineer. */
+"Restaurants & Food Trucks" = "Рестораны & передвижные закусочные";
+
+/* Income notes field for affiliate revenue */
+"Revenue share from affiliate link %@" = "Доход с партнерской ссылки %@";
+
+/* SEND button text */
+"SEND" = "Отправленные";
+
+/* text for textmessage/SMS */
+"SMS" = "SMS";
+
+/* No comment provided by engineer. */
+"SMS cancelled" = "Отправка SMS-сообщения отменена";
+
+/* No comment provided by engineer. */
+"SMS sent" = "SMS-сообщение отправлено";
+
+/* Slideout menu spend text */
+"SPEND BITCOIN (Plugins)" = "ПОТРАТИТЬ БИТКОЙНЫ (плагины)";
+
+/* No comment provided by engineer. */
+"Sales" = "Продажи";
+
+/* No comment provided by engineer. */
+"San Diego, California, USA" = "Сан-Диего, Калифорния, США";
+
+/* Title of recovery email popup */
+"Save Recovery Token" = "Сохранить токен восстановления";
+
+/* Text at top of Scan Screen */
+"Scan QR to Import Private Key/Gift Card" = "Отсканируйте QR-код для импорта приватного ключа или подарочной карты";
+
+/* No comment provided by engineer. */
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Отсканируйте QR-код получателя платежа для осуществления перевода или нажмите на Bluetooth-запрос в списке ниже";
+
+/* Text at top of Send screen */
+"Scan to Send, Import, or Edge Login" = "Отсканируйте для отправки, импорта или входа через Edge";
+
+/* SearchBarSearch placeholder */
+"Search" = "Поиск";
+
+/* No comment provided by engineer. */
+"Select Currency" = "Выбрать валюту";
+
+/* No comment provided by engineer. */
+"Sell Bitcoin" = "Продать биткойны";
+
+/* No comment provided by engineer. */
+"Send Funds to Private Key" = "Перевести средства на приватный ключ";
+
+/* settings text */
+"Send name on payment request" = "Имя для заполнения запросов на платеж";
+
+/* No comment provided by engineer. */
+"Send to Bitcoin Address or Import Private Key" = "Отправить на биткойн-адрес или импортировать приватный ключ";
+
+/* status message */
+"Sending..." = "Отправка...";
+
+/* No comment provided by engineer. */
+"Sent Bitcoin" = "Отправленные биткойны";
+
+/* expense category */
+"Service & Parts" = "Сервис & запчасти";
+
+/* expense category */
+"Service Fee" = "Оплата услуг";
+
+/* No comment provided by engineer. */
+"Set a Password" = "Установить пароль";
+
+/* No comment provided by engineer. */
+"Set a Password and PIN" = "Задайте пароль и PIN-код";
+
+/* No comment provided by engineer. */
+"Setting recovery questions failed:
+%@" = "Установка вопросов для восстановления не удалась:
+%@";
+
+/* No comment provided by engineer. */
+"Settings" = "Настройки";
+
+/* Generic SHARE button text */
+"Share" = "Поделиться";
+
+/* expense category */
+"Shopping" = "Шоппинг";
+
+/* Show */
+"Show" = "Показать";
+
+/* No comment provided by engineer. */
+"Show Balance" = "Показать баланс";
+
+/* No comment provided by engineer. */
+"Show QR Code" = "Показать QR-код";
+
+/* No comment provided by engineer. */
+"Sign Up" = "Зарегистрироваться";
+
+/* No comment provided by engineer. */
+"Sign-Up failed:
+%@" = "Регистрация не удалась:
+%@";
+
+/* Skip button text */
+"Skip" = "Пропустить";
+
+/* Title of Skip this step alert */
+"Skip this step" = "Пропустить этот шаг";
+
+/* No comment provided by engineer. */
+"Sorry" = "Извините";
+
+/* expense category */
+"Spa & Massage" = "Спа & массаж";
+
+/* No comment provided by engineer. */
+"Spend Bitcoin (Plugins)" = "Потратить биткойны (плагины)";
+
+/* spending limits text */
+"Spending Limits" = "Пределы трат";
+
+/* expense category */
+"Sporting Goods" = "Спортивные товары";
+
+/* expense category */
+"Sports" = "Спорт";
+
+/* No comment provided by engineer. */
+"Standard Fee" = "Средняя комиссия";
+
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "Starbucks (скидка до 20%)";
+
+/* expense category */
+"Student Loan" = "Студенческий кредит";
+
+/* No comment provided by engineer. */
+"Successfully Logged In" = "Вход прошел успешно";
+
+/* No comment provided by engineer. */
+"Successfully Verified Identity" = "Идентификация успешно подтверждена";
+
+/* No comment provided by engineer. */
+"Successfully received identity token from %@" = "Получен идентификационный токен от %@";
+
+/* No comment provided by engineer. */
+"Sweep Funds From Private Key" = "Перевести средства с приватного ключа";
+
+/* Synchronizing text in confirmation textfield */
+"Synchronizing" = "Синхронизация";
+
+/* Prefix of wallet balance dropdown header */
+"TOTAL: " = "Итого: ";
+
+/* No comment provided by engineer. */
+"Tap and hold a wallet for additional options" = "Нажмите и удерживайте кошелек для дополнительных опций";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target (скидка до 10%)";
+
+/* expense category */
+"Tax" = "Налоги";
+
+/* expense category */
+"Television" = "Телевидение";
+
+/* No comment provided by engineer. */
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "Токен двухфакторной аутентификации на этом устройстве неверен. Либо токен был сменен другим устройством, либо системные часы рассинхронизировались. Пожалуйста, проверьте установленное в системе время.";
+
+/* No comment provided by engineer. */
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "Биткойн-адрес устройства, к которому Вы присоединены: %1$@ не соответствует первоначально заявленному адресу: %2$@";
+
+/* No comment provided by engineer. */
+"The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers." = "Данная услуга не поддерживается %@.
+
+Пожалуйста, свяжитесь с уполномоченными представителями предоставляющего услугу сервиса, если у Вас есть вопросы.";
+
+/* No comment provided by engineer. */
+"The given answers were incorrect. Please try again." = "Вы дали неправильные ответы на вопросы. Пожалуйста, попробуйте снова.";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "Пароль к этой учетной записи был изменен на другом устройстве. Пожалуйста, войдите, используя новые регистрационные данные.";
+
+/* Title of recovery popup message */
+"This account already has password recovery setup. Would you like to disable it?" = "Восстановления пароля для этой учетной записи уже настроен. Хотите отключить его?";
+
+/* No comment provided by engineer. */
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "Это приложение хочет получить доступ к следующим хранилищам, связанным с Вашей учетной записью в Airbitz. Оно не получит доступа к другим учетным записям или кошелькам.";
+
+/* Username Signup screen info text */
+"This is not your email or real name.
+
+This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+
+Your username and password are known only to you and never stored unencrypted." = "Это поле не должно содержать адрес Вашей электронной почты или Ваше настоящее имя.
+
+Это имя пользователя для входа в Вашу учетную запись [[abtag APP_TITLE]] на этом и других устройствах.
+
+Ваши имя пользователя и пароль известны только Вам и никогда не хранятся в незашифрованном виде.";
+
+/* Loading Wallets alert text */
+"This may take a few minutes if it is the first time logging into this device." = "Это может занять несколько минут при первом входе на данном устройстве.";
+
+/* No comment provided by engineer. */
+"This site would like to:" = "Этот сайт желает:";
+
+/* Popup sessage for when a wallet is archived */
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "Этот кошелек был переведен в архив. Пожалуйста, выберите другой кошелек на экране [Wallets]";
+
+/* text in password verification popup */
+"Time to crack:" = "Оставшееся время:";
+
+/* Message of recovery token popup */
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "Для завершения настройки восстановления пароля Вы ДОЛЖНЫ сохранить токен восстановления. Он потребуется Вам для восстановления контроля над Вашей учетной записью вместе с именем пользователя и ответами на вопросы для восстановления. Пожалуйста, введите адрес Вашей электронной почты для отправки токена восстановления.";
+
+/* Popup wallet help test */
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Нажмите у удерживайте три панели справа от кошелька для сортировки кошельков. Чтобы переместить кошелек в архив перетащите его под заголовок [ARCHIVE]";
+
+/* No comment provided by engineer. */
+"To: %@" = "Кому: %@";
+
+/* Top of screen wallet dropdown prefix text */
+"To: %@ ▼" = "Кому: %@ ▼";
+
+/* expense category */
+"Tolls" = "Таможенные сборы";
+
+/* No comment provided by engineer. */
+"Top Up Prepaid Phones" = "Пополнить баланс телефона";
+
+/* No comment provided by engineer. */
+"Touch ID" = "Touch ID";
+
+/* No comment provided by engineer. */
+"Touch ID Disabled" = "Touch ID отключено";
+
+/* No comment provided by engineer. */
+"Touch ID Enabled" = "Touch ID включено";
+
+/* Touch ID prompt text */
+"Touch to login user" = "Прикоснитесь для входа";
+
+/* settings text */
+"TouchID: Set password first" = "TouchID: Сначала установите пароль";
+
+/* settings text */
+"TouchID: Unsupported Device" = "TouchID: Не поддерживается на этом устройстве";
+
+/* expense category */
+"Toys" = "Игрушки";
+
+/* expense category */
+"Trade Commissions" = "Торговые комиссии";
+
+/* Transaction Details header text */
+"Transaction Details" = "Детали перевода";
+
+/* Financial transaction that moves money from one account to another */
+"Transfer" = "Перевести";
+
+/* From wallet transfer text */
+"Transfer From %@" = "Перевод от %@";
+
+/* To wallet transfer text */
+"Transfer To %@" = "Перевод %@";
+
+/* expense category */
+"Travel" = "Путешествия";
+
+/* No comment provided by engineer. */
+"Trouble connecting to network" = "Проблемы соединения с сетью";
+
+/* No comment provided by engineer. */
+"Try again?" = "Попробовать снова?";
+
+/* expense category */
+"Tuition" = "Обучение";
+
+/* No comment provided by engineer. */
+"Two Factor" = "Два фактора";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "Двухфакторная аутентификация (продвинутая защита) для данной учетной записи была активирована с другого устройства. Пожалуйста, включите двухфакторную аутентификацию на этом устройстве для полного доступа ко всем возможностям.";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication On" = "Двухфакторная аутентификация включена";
+
+/* No comment provided by engineer. */
+"Two Factor Disabled" = "Двухфакторная аутентификация отключена";
+
+/* 2FA warning on enable */
+"Two Factor Enabled
+
+** Warning **
+
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Включена двухфакторная аутентификация
+
+** Внимание **
+
+Если Вы потеряете свое устройство или удалите приложение, то потребуется 7 дней для сброса двухфакторной аутентификации и получения доступа к Вашей учетной записи.";
+
+/* No comment provided by engineer. */
+"Two Factor Invalid" = "Ошибка двухфакторной аутентификации";
+
+/* No comment provided by engineer. */
+"Two Factor Reset" = "Сброс двухфакторной аутентификации";
+
+/* No comment provided by engineer. */
+"USA" = "США";
+
+/* No comment provided by engineer. */
+"USA and Canada" = "США и Канада";
+
+/* No comment provided by engineer. */
+"Unable to determine two factor status" = "Невозможно определить статус двухфакторной аутентификации";
+
+/* No comment provided by engineer. */
+"Unable to import secret" = "Не удалось импортировать секрет";
+
+/* No comment provided by engineer. */
+"Unable to import token" = "Не удалось импортировать токен";
+
+/* No comment provided by engineer. */
+"Unable to save Settings" = "Не удалось сохранить настройки";
+
+/* No comment provided by engineer. */
+"Unable to scan QR code" = "Не удалось отсканировать QR-код";
+
+/* No comment provided by engineer. */
+"Unable to update Settings" = "Не удалось сохранить изменения настроек";
+
+/* No comment provided by engineer. */
+"Up to 10% off Target" = "Скидка в Target до 10%";
+
+/* No comment provided by engineer. */
+"Up to 20% off Starbucks" = "Скидка в Starbucks до 20%";
+
+/* Upload Failed */
+"Upload Failed. Please check your network connection" = "Сбой загрузки. Пожалуйста, проверьте свое сетевое подключение";
+
+/* No comment provided by engineer. */
+"Upload Image" = "Загрузить изображение";
+
+/* No comment provided by engineer. */
+"Upload Log" = "Загрузить журналы";
+
+/* No comment provided by engineer. */
+"Upload Log File" = "Загрузить файлы журнала";
+
+/* Upload Successful fading popup */
+"Upload Successful" = "Успешно загружено";
+
+/* Uploading logfile fading popup */
+"Uploading logfile. Please wait..." = "Загрузка фалов журнала. Пожалуйста, подождите...";
+
+/* No comment provided by engineer. */
+"Use Camera" = "Использовать камеру";
+
+/* Touch ID [Use PIN] button */
+"Use PIN" = "Использовать PIN-код";
+
+/* Touch ID [Use Password] button */
+"Use Password" = "Использовать пароль";
+
+/* No comment provided by engineer. */
+"Use Photo Album" = "Использовать фотоальбом";
+
+/* settings text */
+"Use TouchID" = "Использовать TouchID";
+
+/* No comment provided by engineer. */
+"User Name: %@" = "Имя пользователя: %@";
+
+/* Username */
+"Username" = "Имя пользователя";
+
+/* No comment provided by engineer. */
+"Username must be at least %d characters." = "Имя пользователя должно содержать не менее %d символов.";
+
+/* expense category */
+"Utilities" = "Аксессуары";
+
+/* expense category */
+"Vacation" = "Отпуск";
+
+/* No comment provided by engineer. */
+"Validating Address..." = "Валидация адреса...";
+
+/* expense category */
+"Vet" = "Ветеринария";
+
+/* title of active wallets table */
+"WALLETS" = "Кошельки";
+
+/* Title of missing password notification */
+"WARNING: missing password" = "ВНИМАНИЕ: пароль отсутствует";
+
+/* Status on Request screen */
+"Waiting for Payment..." = "Ожидание платежа...";
+
+/* No comment provided by engineer. */
+"Wallet Deleted" = "Кошелек удален";
+
+/* No comment provided by engineer. */
+"Wallet Export" = "Экспорт кошелька";
+
+/* No comment provided by engineer. */
+"Wallet Private Seed" = "Приватные сиды кошелька";
+
+/* No comment provided by engineer. */
+"Wallet creation failed:
+%@" = "Не удалось создать кошелек:
+%@";
+
+/* No comment provided by engineer. */
+"Wallet name must have at least one character" = "Название кошелька должно содержать хотя бы один символ";
+
+/* Prefix of wallet name on rename popup */
+"Wallet: " = "Кошелек: ";
+
+/* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart (скидка до 10%)";
+
+/* No comment provided by engineer. */
+"Warning!" = "Внимание!";
+
+/* No comment provided by engineer. */
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Внимание. Если это устройство будет утеряно или украдено, либо приложение будет удалено, то без пароля Вы не сможете войти в свою учетную запись на другом устройстве";
+
+/* Double spend status in transaction list */
+"Warning: Double Spend" = "Внимание: Двойное начисление";
+
+/* No comment provided by engineer. */
+"Warning: Low Fees may cause long delays in transaction confirmation" = "Внимание: низкая комиссия может привести к длительным задержкам в подтверждениях переводов";
+
+/* RBF status in transaction list */
+"Warning: Replace by Fee Detected. Double spend likely" = "Внимание: Обнаружена смена комиссии. Возможно двойное начисление";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "База данных службы мониторинга была очищена с ошибкой. Пожалуйста, подождите несколько минут для ре-синхронизации информации с распределенной базой данных. Отображение переводов и баланса во время синхронизации может быть некорректным";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "База данных службы мониторинга очищена. Пожалуйста, подождите несколько минут для ре-синхронизации информации с распределенной базой данных. Отображение переводов и баланса во время синхронизации может быть некорректным";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "Whole Foods (скидка до 10%)";
+
+/* No comment provided by engineer. */
+"Would you like to enable TouchID for this account and device?" = "Хотите ли Вы активировать TouchID для этой учетной записи на этом устройстве?";
+
+/* No comment provided by engineer. */
+"Would you like to send funds to this address or import funds into your wallet?" = "Хотите ли Вы перевести средства на этот адрес или импортировать средства в Ваш кошелек?";
+
+/* No comment provided by engineer. */
+"Would you like to send us some feedback?" = "Не могли бы Вы оставить отзыв о нашем приложении?";
+
+/* No comment provided by engineer. */
+"Would you like to write a review in the App store?" = "Не могли бы Вы написать отзыв в App store?";
+
+/* No comment provided by engineer. */
+"Wrong Answers" = "Неверные ответы";
+
+/* YES button text */
+"YES" = "ДА";
+
+/* No comment provided by engineer. */
+"You Received Bitcoin!
+%@ (~%@)" = "Вы получили биткойны!
+%1$@ (~%2$@)";
+
+/* No comment provided by engineer. */
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "Вы собираетесь выйти из настройки восстановления пароля. Выбранные вопросы и ответы не будут сохранены.";
+
+/* No comment provided by engineer. */
+"You must answer all questions. Make sure your answers are long enough." = "Вы должны ответить на все вопросы. Проверьте, чтобы все ответы имели достаточную длину.";
+
+/* No comment provided by engineer. */
+"You must choose a question for all selections before proceeding." = "Вы должны выбрать все вопросы перед тем, как продолжить.";
+
+/* No comment provided by engineer. */
+"You must enter a user name" = "Вы должны ввести имя пользователя";
+
+/* No comment provided by engineer. */
+"You received Bitcoin!
+%@ (~%@)
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "Вы получили биткойны!
+%1$@ (~%2$@)
+По желанию Вы можете использовать поля \"Получатель платежа\", \"Категория\" и \"Примечания\", чтобы пометить Ваш перевод";
+
+/* Camera signup screen */
+"You will next see a popup requesting access to your Camera.
+
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "Далее Вы увидите всплывающее окно с запросом на получение доступа к камере Вашего устройства.
+
+[[abtag APP_TITLE]] нужен доступ к камере для сканирования QR-кодов и осуществления платежей физическим и юридическим лицам.";
+
+/* No comment provided by engineer. */
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Вы получили биткойны! Мы настоятельно рекомендуем Вам задать пароль и вопросы с ответами для его восстановления. В противном случае Вы не сможете зайти в свою учетную запись в случае утери пароля.";
+
+/* No comment provided by engineer. */
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Заданы вопросы и ответы для восстановления Вашего пароля. При восстановлении пароля ответы должны совпадать абсолютно точно. **НЕ ЗАБУДЬТЕ ВАШ ПАРОЛЬ И ОТВЕТЫ ДЛЯ ЕГО ВОССТАНОВЛЕНИЯ** ВЫ НЕ СМОЖЕТЕ ПОЛУЧИТЬ ДОСТУП К СВОЕЙ УЧЕТНОЙ ЗАПИСИ БЕЗ НИХ!!";
+
+/* Start of password rules text */
+"Your password..." = "Ваш пароль...";
+
+/* Contacts signup screen */
+"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+
+All tagged information is kept 100% private and encrypted by your password.
+
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] использует список контактов, чтобы маркировать переводы для Вашего удобства.
+
+Вся информация содержащаяся в метках приватна на 100% и зашифрована с использованием Вашего пароля.
+
+Никто, включая [[abtag APP_TITLE]], не имеет никакого доступа к этой информации.";
+
+/* settings text */
+"bits = (0.000001 Bitcoin)" = "бит = (0,000001 биткойн)";
+
+/* business listings is closed */
+"closed" = "закрыто";
+
+/* No comment provided by engineer. */
+"day" = "день";
+
+/* No comment provided by engineer. */
+"days" = "дни";
+
+/* No comment provided by engineer. */
+"hour" = "час";
+
+/* No comment provided by engineer. */
+"hours" = "часы";
+
+/* settings text */
+"mBitcoin = (0.001 Bitcoin)" = "мбиткойн = (0,001 биткойн)";
+
+/* No comment provided by engineer. */
+"minute" = "минута";
+
+/* No comment provided by engineer. */
+"minutes" = "минуты";
+
+/* No comment provided by engineer. */
+"second" = "секунда";
+
+/* No comment provided by engineer. */
+"seconds" = "секунды";
+
+/* Header of popup in SendView from wallet to wallet transfer */
+"▼ Choose a wallet to transfer funds to ▼" = "▼ Выберите кошелек для перевода средств ▼";
+

@@ -27,7 +27,8 @@
 #define KEY_LOCAL_SETTINGS_REQUEST_VIEW_COUNT       @"request_view_count"
 #define KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT          @"send_view_count"
 #define KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT           @"ble_view_count"
-#define KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT       @"ble_view_count"
+#define KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT       @"wallets_view_count"
+#define KEY_LOCAL_SETTINGS_PLUGINS_VIEW_COUNT       @"plugins_view_count"
 #define KEY_LOCAL_SETTINGS_HIDE_BALANCE             @"hide_balance"
 #define KEY_LOCAL_SETTINGS_SHOW_RUNNING_BALANCE     @"show_running_balance"
 #define KEY_LOCAL_SETTINGS_HAVE_CHECKED_AFFILIATE   @"have_checked_affiliate"
@@ -132,8 +133,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     self.sendViewCount          = [defaults integerForKey:KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT];
     self.bleViewCount           = [defaults integerForKey:KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT];
     self.walletsViewCount       = [defaults integerForKey:KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT];
-
-
+    self.pluginsViewCount       = [defaults integerForKey:KEY_LOCAL_SETTINGS_PLUGINS_VIEW_COUNT];
 
     NSData *notifsData = [defaults objectForKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
     if (notifsData) {
@@ -176,6 +176,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     [defaults setInteger:self.sendViewCount     forKey:KEY_LOCAL_SETTINGS_SEND_VIEW_COUNT];
     [defaults setInteger:self.bleViewCount      forKey:KEY_LOCAL_SETTINGS_BLE_VIEW_COUNT];
     [defaults setInteger:self.walletsViewCount  forKey:KEY_LOCAL_SETTINGS_WALLETS_VIEW_COUNT];
+    [defaults setInteger:self.pluginsViewCount  forKey:KEY_LOCAL_SETTINGS_PLUGINS_VIEW_COUNT];
 
     NSData *notifsData = [NSKeyedArchiver archivedDataWithRootObject:self.notifications];
     [defaults setObject:notifsData forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];

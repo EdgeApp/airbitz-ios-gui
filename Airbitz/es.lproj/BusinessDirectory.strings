@@ -11,13 +11,13 @@
 "Sfb-cf-6wF.normalTitle" = "Más categorías";
 
 /* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
-"a78-ih-LDk.normalTitle" = "Café y té";
+"a78-ih-LDk.normalTitle" = "Café &am; té";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
 "aNa-3g-QXd.placeholder" = "Búsqueda de";
 
 /* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
-"b1E-1G-btq.normalTitle" = "Tarjetas de regalo";
+"b1E-1G-btq.normalTitle" = "Tarjetas regalo";
 
 /* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
 "baO-FH-Oy4.text" = "Cerca de usted";
@@ -29,7 +29,7 @@
 "ga1-R0-wof.text" = "Tipo BTC";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
-"heE-og-iXA.placeholder" = "Búsqueda de";
+"heE-og-iXA.placeholder" = "Búsqueda";
 
 /* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
 "kTm-at-TUR.normalTitle" = "Electrónica";
