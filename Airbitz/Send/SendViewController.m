@@ -1680,6 +1680,24 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 #endif
 
+- (void)processEdgeLogin:(NSString *)token
+{
+    [MainViewController fadingAlert:fetching_login_request holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
+        [abcAccount getEdgeLoginRequest:token callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
+            [MainViewController fadingAlertDismiss];
+            if (!error)
+            {
+                [self showSSOViewController:nil edgeLoginRequest:info];
+            }
+            else
+            {
+                [MainViewController fadingAlert:@"Invalid Edge Login Request"];
+                [self startQRReader];
+            }
+        }];
+    }];
+}
+
 - (void)processURI:(NSString *)uriString;
 {
     ABCError *error;
@@ -1692,20 +1710,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if ((uriString.length == 8) && [self isBase32:uriString])
         {
-            [MainViewController fadingAlert:fetching_login_request holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^{
-                [abcAccount getEdgeLoginRequest:uriString callback:^(ABCError *error, ABCEdgeLoginInfo *info) {
-                    [MainViewController fadingAlertDismiss];
-                    if (!error)
-                    {
-                        [self showSSOViewController:nil edgeLoginRequest:info];
-                    }
-                    else
-                    {
-                        [MainViewController fadingAlert:@"Invalid Edge Login Request"];
-                        [self startQRReader];
-                    }
-                }];
-            }];
+            [self processEdgeLogin:uriString];
             return;
         }
     }
@@ -1861,7 +1866,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             || [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
                 [self stopQRReader];
-                
+                if ([uri.path containsString:@"edgelogin"])
+                {
+                    NSString *token = uri.lastPathComponent;
+                    [self processEdgeLogin:token];
+                    return;
+                }
+                else
                 {
                     
                     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];

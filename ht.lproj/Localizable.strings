@@ -1,0 +1,1680 @@
+/* No comment provided by engineer. */
+" Please choose a wallet to receive funds." = " Tanpri chwazi yon potfey pou resevwa lajan.";
+
+/* No comment provided by engineer. */
+"%@
+
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
+
+Patage lyen sa a pou ou resevwa resèt itilizatè ki enstale e itilize %2$@. Wap resevwa 0.25%% pou tout acha pa kat kado ou fe apati de aplikasyon sa a.";
+
+/* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ mande ak %3$@ sou %4$@.";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request" = "%@ Bitcoin Mande";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin Request from %@" = "%1$@ mande %2$@ bitcoin";
+
+/* No comment provided by engineer. */
+"%@ Bitcoin received. Tap for details." = "%@ ou resevwa bitcoin. Klike pou detay.";
+
+/* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
+"%@ Recovery Token" = "%@ Token rekipere";
+
+/* No comment provided by engineer. */
+"%@ failed:
+%@" = "%1$@ echwe:
+%2$@";
+
+/* No comment provided by engineer. */
+"%@ has requested a bitcoin address to send money to." = "%@ mande yon adrès bitcoin pou voye lajan pou.";
+
+/* ** Warning ** text on partial payment */
+"** Warning **" = "** Avètisman **";
+
+/* No comment provided by engineer. */
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ATANSYON** Ou pap janm ka rekipere modpas ou a siw bliyel!!";
+
+/* No comment provided by engineer. */
+"2 Factor (Enhanced Security)" = "2 Faktè (Sekirite ranfose)";
+
+/* No comment provided by engineer. */
+"4 Digit PIN" = "kod PIN 4 chif";
+
+/* No comment provided by engineer. */
+"15-20% off Amazon" = "15-20% remiz Amazon";
+
+/* No comment provided by engineer. */
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "Yo mande reyinisyalizasyon de faktè. si ou kreye demand konektew antan ke que %@ epi chanje modpas.";
+
+/* section header in settings table */
+"ACCOUNT: " = "KONT: ";
+
+/* title of archived wallets table */
+"ARCHIVE" = "ACHIV";
+
+/* No comment provided by engineer. */
+"ATM" = "ATM";
+
+/* No comment provided by engineer. */
+"ATM Fee" = "ATM Frè";
+
+/* ACCEPT button text */
+"Accept" = "Aksepte";
+
+/* No comment provided by engineer. */
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Kont '%@' bezwen yon modpas. Ou paka konekte sou kont lan sou yon nouvo aparèy san modpas.";
+
+/* Title of account signin error alert */
+"Account Sign Up" = "Enskripsyon kont";
+
+/* No comment provided by engineer. */
+"Account has no password" = "Kont pa gen okenn modpas";
+
+/* No comment provided by engineer. */
+"Add New" = "Ajoute Nouvo";
+
+/* Income category for affiliate revenue */
+"Affiliate Revenue" = "Revni afilye";
+
+/* No comment provided by engineer. */
+"Affiliate link has been copied to the clipboard" = "Lyen afilyasyon an kopye nan près papye";
+
+/* No comment provided by engineer. */
+"Air Travel" = "Vwayaj Lè";
+
+/* No comment provided by engineer. */
+"AirPrint is not currently available" = "AirPrint lan pa disponib kounye a";
+
+/* No comment provided by engineer. */
+"Alcohol & Bars" = "Alkòl & Barres";
+
+/* No comment provided by engineer. */
+"Allowance" = "Alokasyon Pou";
+
+/* No comment provided by engineer. */
+"Amount is too small" = "Kantite lajan se twò piti";
+
+/* No comment provided by engineer. */
+"Amusement" = "Amizman";
+
+/* No comment provided by engineer. */
+"An app has requested a bitcoin address to send money to." = "Gen yon aplikasyon ki mande yon adres bitcoin pou voye lajan pou.";
+
+/* No comment provided by engineer. */
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "Gen yon erè. Tanpri tcheke koneskyon rezo ou. Ou ka anile koneksyon PIN epi itilize non itilizatè & modpas pou ou konekte nan mod san koneksyon";
+
+/* No comment provided by engineer. */
+"An error occurred. Possible network connection issue or incorrect username & password" = "Gen yon erè. Se ka yon problèm koneksyon oubyen yon vye non itilizatè & modpas";
+
+/* Warning for password recovery textfields */
+"Answers are case sensitive" = "Repons yo dwe majiskil oswa miniskil";
+
+/* APPROVE button text */
+"Approve" = "Apwouve";
+
+/* Approving Login popup */
+"Approving Login..." = "Apwouve Login...";
+
+/* No comment provided by engineer. */
+"Are you sure you want to call" = "Eskew vle fè apèl";
+
+/* No comment provided by engineer. */
+"Are you sure you want to cancel any changes you've made?" = "Eskew vle anile modifikasyon ou t fe yo?";
+
+/* No comment provided by engineer. */
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Eske ou kwè? Ou kapab gen plis aksè ak fon nan potfey la ni tout lot fon ou pral resevwa yo";
+
+/* No comment provided by engineer. */
+"Arts" = "Atizay";
+
+/* No comment provided by engineer. */
+"Auto & Transport" = "Auto & Transpò";
+
+/* No comment provided by engineer. */
+"Auto Insurance" = "Auto Asirans";
+
+/* No comment provided by engineer. */
+"Auto Payment" = "Auto Peman";
+
+/* settings text */
+"Auto log off after" = "Dekoneksyon otomatik apre";
+
+/* section header in settings table */
+"BITCOIN DENOMINATION" = "BITCOIN DENOMINASYON";
+
+/* No comment provided by engineer. */
+"Baby Supplies" = "Bebe Pwodwi Pou";
+
+/* No comment provided by engineer. */
+"Babysitter & Daycare" = "Gade & Gadri";
+
+/* Back button text on top left */
+"Back" = "Dèyè";
+
+/* No comment provided by engineer. */
+"Balance" = "Balans";
+
+/* No comment provided by engineer. */
+"Bank Fee" = "Bank Frè";
+
+/* No comment provided by engineer. */
+"Bills & Utilities" = "Bòdwo & Itilite";
+
+/* No comment provided by engineer. */
+"BitID Identity" = "BitID Idantite";
+
+/* No comment provided by engineer. */
+"BitID Login" = "BitID Login";
+
+/* settings text */
+"Bitcoin" = "Bitcoin";
+
+/* No comment provided by engineer. */
+"Bitcoin Address or Private Key" = "Adres bitcoin oubyen kle prive";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key" = "Bitcoin Prive Kle";
+
+/* No comment provided by engineer. */
+"Bitcoin Private Key with Public Address" = "Kle prive bitcoin avèk adress prive";
+
+/* Export wallet transactions email subject line */
+"Bitcoin Wallet Transactions" = "Operasyon potfey Bitcoin";
+
+/* No comment provided by engineer. */
+"Bitcoin address mismatch" = "Bitcoin adrès pa matche";
+
+/* settings text */
+"Bluetooth" = "Bluetooth";
+
+/* No comment provided by engineer. */
+"Books" = "Liv";
+
+/* No comment provided by engineer. */
+"Books & Supplies" = "Liv & Pwodwi Pou";
+
+/* Business Name or Category placeholder */
+"Business Name or Category" = "Non Biznis oswa Kategori";
+
+/* No comment provided by engineer. */
+"Buy Bitcoin" = "Achte Bitcoin";
+
+/* No comment provided by engineer. */
+"Buy/Sell Bitcoin" = "Achte / Vann Bitcoin";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Bank Account (USA)" = "Achte / Vann ak Kont labank (USA)";
+
+/* Generic CANCEL button text */
+"CANCEL" = "ANILE";
+
+/* CHANGE button text */
+"CHANGE" = "CHANJE";
+
+/* No comment provided by engineer. */
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Aparèy foto pa disponib. Tanpri bay aksè a kamera sou paramèt konfidensyalite telefon ou an";
+
+/* No comment provided by engineer. */
+"Can't send e-mail" = "Enposib pou pou voye email";
+
+/* No comment provided by engineer. */
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Pa ka efase bous kòm li gen lajan. Tanpri transfere soti lajan premye.";
+
+/* No comment provided by engineer. */
+"Car Wash" = "Lave Machin Pou";
+
+/* No comment provided by engineer. */
+"Cash & ATM" = "Kach & ATM";
+
+/* No comment provided by engineer. */
+"Categories" = "Kategori";
+
+/* settings text */
+"Change Categories" = "Chanje Kategori";
+
+/* No comment provided by engineer. */
+"Change Mining Fee" = "Chanje Mining Frè";
+
+/* No comment provided by engineer. */
+"Change PIN" = "Chanje PIN";
+
+/* No comment provided by engineer. */
+"Change Password" = "Chanje modpas";
+
+/* settings text */
+"Change recovery questions" = "Chanje kesyon rekiperasyon";
+
+/* No comment provided by engineer. */
+"Charity" = "Charite";
+
+/* Check password button text */
+"Check Password" = "Verifye modpas";
+
+/* No comment provided by engineer. */
+"Checking password..." = "Verifikasyon modpas...";
+
+/* No comment provided by engineer. */
+"Choose a Question" = "Chwazi on kesyon";
+
+/* City, State/Province, or Country placeholder */
+"City, State/Province, or Country" = "Vil, Eta / Pwovens, oswa Peyi";
+
+/* Generic CLOSE button text */
+"Close" = "Pwòch";
+
+/* No comment provided by engineer. */
+"Clothing" = "Rad";
+
+/* No comment provided by engineer. */
+"Coffee & Tea" = "Kafe & amp; Te";
+
+/* expense category */
+"Coffee Shops" = "Kafe Chòp";
+
+/* No comment provided by engineer. */
+"Complete Signup" = "Konplete enskripsyon";
+
+/* Num of confirmations in transaction list */
+"Confirmation" = "Konfimasyon";
+
+/* Num of confirmations in transaction list */
+"Confirmations" = "Konfimasyon";
+
+/* Confirmed status in transaction list */
+"Confirmed" = "Konfime";
+
+/* No comment provided by engineer. */
+"Congratulations" = "Konpliman";
+
+/* Popup text when BLE connects */
+"Connected" = "Konekte";
+
+/* No comment provided by engineer. */
+"Consulting Income" = "Revni Konsiltasyon";
+
+/* No comment provided by engineer. */
+"Copied" = "Kopye";
+
+/* Copy button text */
+"Copy" = "Kopi";
+
+/* No comment provided by engineer. */
+"Create Wallet" = "Kreye Bous";
+
+/* No comment provided by engineer. */
+"Create new" = "Kreye nouvo";
+
+/* No comment provided by engineer. */
+"Creating and securing account" = "Kreye epi sekirize kont";
+
+/* No comment provided by engineer. */
+"Creating and securing wallet" = "Kreye epi sekirize potfèy";
+
+/* No comment provided by engineer. */
+"Credit Card Payment" = "Kat Kredi Peman";
+
+/* No comment provided by engineer. */
+"Current Location" = "Kouran Kote";
+
+/* No comment provided by engineer. */
+"Current Password" = "Kouran Modpas";
+
+/* section header in settings table */
+"DEFAULT EXCHANGE RATE" = "To echanj pa defo";
+
+/* debug text */
+"Debug" = "Debug";
+
+/* No comment provided by engineer. */
+"Debug Log File" = "Reire erè nan fichye jounal la";
+
+/* Debug screen header title */
+"Debug Options" = "Opsyon pou retire erè";
+
+/* settings text */
+"Default Currency" = "Default Lajan";
+
+/* settings text */
+"Default Exchange" = "Echaj pa defo";
+
+/* DELETE button text for wallet delete */
+"Delete" = "Elimine";
+
+/* Delete Account With no Password Warning */
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Efase '%@' nan aparèy sa a? kont sa a pa gen modpas e li paka rekirepe si ou efase li.";
+
+/* Delete Account Warning */
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Efase '%@' sou aparèy sa a? lap desaktive aksè a pati de PIN. si @FA aktive sou kont sa a, ou pap ka konekte sou aparèy la san 2FA kap reset lap pran 7 jou.";
+
+/* No comment provided by engineer. */
+"Delete Account" = "Efase kont lan";
+
+/* Delete Wallet popup */
+"Delete Wallet" = "Efase Bous";
+
+/* Text for popup while deleting wallet */
+"Deleting Wallet" = "Sipresyon Potfèy";
+
+/* No comment provided by engineer. */
+"Dentist" = "Dantis";
+
+/* No comment provided by engineer. */
+"Deposit to Savings" = "Depo ak Savings";
+
+/* No comment provided by engineer. */
+"Designed and Built by Airbitz in" = "Conçu et Te konstwi pa Airbitz nan";
+
+/* Directory title bar text */
+"Directory" = "Anyè";
+
+/* Disable as in to disable a feature */
+"Disable" = "Désactiver";
+
+/* Title of recovery popup */
+"Disable Recovery?" = "Desaktive Rekiperasyon?";
+
+/* No comment provided by engineer. */
+"Disabled" = "Andikape";
+
+/* No comment provided by engineer. */
+"Div Income" = "Div Revni";
+
+/* No comment provided by engineer. */
+"Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
+Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas ou si aparèy ou pèdi ou byen yo vòlè li, ou byen si ou dezenstale aplikasyon an: antre la pou kapab kwè:";
+
+/* No comment provided by engineer. */
+"Doctor" = "Doktè";
+
+/* Generic DONE button text */
+"Done" = "Fèt";
+
+/* No comment provided by engineer. */
+"Download the Airbitz wallet and save money using bitcoin" = "Telechaje aplikasyon Airbitz epi fè lajan lè wap itilize bitcoin";
+
+/* No comment provided by engineer. */
+"Edge Login" = "Edge Login";
+
+/* No comment provided by engineer. */
+"Education" = "Edikasyon";
+
+/* No comment provided by engineer. */
+"Electronics" = "Elektwonik";
+
+/* No comment provided by engineer. */
+"Electronics & Software" = "Elektwonik & Lojisyèl";
+
+/* text for Email */
+"Email" = "Imèl";
+
+/* No comment provided by engineer. */
+"Email Login Package" = "Imèl Login Package";
+
+/* No comment provided by engineer. */
+"Email cancelled." = "Imèl anile.";
+
+/* No comment provided by engineer. */
+"Email saved to send later." = "Imèl anrejistre pou voye talè.";
+
+/* No comment provided by engineer. */
+"Email sent." = "Voye Imèl.";
+
+/* No comment provided by engineer. */
+"Enable" = "Pèmèt";
+
+/* settings text */
+"Enable Bluetooth in System Settings" = "Aktive Bluetooth nan paramèt systèm lan";
+
+/* No comment provided by engineer. */
+"Enable Touch ID" = "Aktive TouchID";
+
+/* No comment provided by engineer. */
+"Enter Payee" = "Jwenn moun benefisye a";
+
+/* No comment provided by engineer. */
+"Enter any notes you would like to send to our support staff" = "Antre nan nenpòt nòt ou ta renmen pou voye bay anplwaye sipò nou";
+
+/* No comment provided by engineer. */
+"Entertainment" = "Lwazi";
+
+/* No comment provided by engineer. */
+"Error Changing PIN" = "Erè chajman PIN";
+
+/* No comment provided by engineer. */
+"Error Deleting Wallet" = "Erè pandan potfèy la ap siprime";
+
+/* No comment provided by engineer. */
+"Error Getting Wallet Count" = "Erè pandan potfèy la ap konte";
+
+/* No comment provided by engineer. */
+"Error Logging In" = "Erè ouvri sesyon an";
+
+/* No comment provided by engineer. */
+"Error Recovering Account" = "Erè pandan kont la ap rekipere";
+
+/* No comment provided by engineer. */
+"Error code" = "Erè Kòd";
+
+/* No comment provided by engineer. */
+"Error connecting to payment processor. Send directly to bitcoin address
+
+%@" = "Erè koneksyon pou peye. Voye bitcoin dirèkteman nan adres 
+%@";
+
+/* No comment provided by engineer. */
+"Error creating affiliate link. Please try again later" = "Erè pou kreye lyen afilye. Tanpri eseye anko aprè";
+
+/* No comment provided by engineer. */
+"Error desc" = "Erè desc";
+
+/* No comment provided by engineer. */
+"Error disabling recovery" = "Erè pou desaktive rekiperasyon";
+
+/* No comment provided by engineer. */
+"Error during send" = "Erè pandan envwa";
+
+/* No comment provided by engineer. */
+"Error importing the token at this time. Please try again." = "Erè pandan token ap enpote kounye a. tanpri eseye anko.";
+
+/* No comment provided by engineer. */
+"Error occured copying to the clipboard" = "Erè pandan yap kopye nan près papye";
+
+/* No comment provided by engineer. */
+"Error sending Email." = "Erè voye Imèl.";
+
+/* No comment provided by engineer. */
+"Error sending SMS" = "Erè voye SMS";
+
+/* Prefix of list of financial exchange categories. Such as converting from one currency to another */
+"Exchange" = "Echanj";
+
+/* No comment provided by engineer. */
+"Exchange Rate Data Source" = "Sous done to echanj";
+
+/* Exit button text on top left */
+"Exit" = "Kite";
+
+/* Prefix of list of expense categories */
+"Expense" = "Depans";
+
+/* EXPORT button text for wallet export */
+"Export" = "Ekspòt";
+
+/* Prompt asking which wallet to export from */
+"Export From:" = "Ekspote de:";
+
+/* No comment provided by engineer. */
+"Export Private Seed" = "Ekspote semens prive";
+
+/* No comment provided by engineer. */
+"Export Public Seed (XPub)" = "Ekspotasyon semens piblik (Xpub)";
+
+/* No comment provided by engineer. */
+"Export Wallet Transactions" = "Ekspotasyon transaksyon potfèy la";
+
+/* No comment provided by engineer. */
+"Eyecare" = "Swen Je";
+
+/* No comment provided by engineer. */
+"Fast Food" = "Manje Rapid";
+
+/* No comment provided by engineer. */
+"Feedback" = "Fidbak";
+
+/* No comment provided by engineer. */
+"Fees & Charges" = "Peye Frè";
+
+/* Fetching Login Request popup */
+"Fetching Login Request..." = "Konparezon koneksyon demand...";
+
+/* Fetching Payment Request popup */
+"Fetching Payment Request..." = "Rekiperasyon demand pèman...";
+
+/* Fiat */
+"Fiat" = "Fiat";
+
+/* No comment provided by engineer. */
+"Financial" = "Finansye";
+
+/* No comment provided by engineer. */
+"Financial Advisor" = "Konseye Finansye";
+
+/* settings text */
+"First Name (optional)" = "Prenon (Si ou vle)";
+
+/* No comment provided by engineer. */
+"Food & Dining" = "Manje & Gastronomie";
+
+/* No comment provided by engineer. */
+"From: %@" = "A pati: %@";
+
+/* No comment provided by engineer. */
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Lajan enpote ak siksè, men gen yon erè pandan sevè a ap konekte. Eseye talè";
+
+/* No comment provided by engineer. */
+"Furnishings" = "Mobilier";
+
+/* No comment provided by engineer. */
+"Gas & Fuel" = "Gaz & Fuel";
+
+/* No comment provided by engineer. */
+"Generating QR Code..." = "Jenere QR kod...";
+
+/* Button text for Get Affiliate Link */
+"Get Affiliate Link" = "Jwen yon lyen afilye";
+
+/* No comment provided by engineer. */
+"Gift" = "Kado";
+
+/* No comment provided by engineer. */
+"Gift Cards" = "Gift Kat";
+
+/* No comment provided by engineer. */
+"Gifts & Donations" = "Kado & Donasyon";
+
+/* Generic Go Back button text */
+"Go Back" = "Retounen";
+
+/* No comment provided by engineer. */
+"Great job remembering your password." = "Gwo travay sonje modpas ou.";
+
+/* expense category */
+"Groceries" = "Episri";
+
+/* No comment provided by engineer. */
+"Gym" = "Jimnazyòm";
+
+/* No comment provided by engineer. */
+"HOA Dues" = "HOA Kotizasyon";
+
+/* No comment provided by engineer. */
+"Hair" = "Cheve";
+
+/* No comment provided by engineer. */
+"Health & Fitness" = "Santé & Fòm";
+
+/* Help button text on top right */
+"Help" = "Ede";
+
+/* Hide */
+"Hide" = "Kache";
+
+/* No comment provided by engineer. */
+"High Fee" = "Segondè Frè";
+
+/* No comment provided by engineer. */
+"Hobbies" = "Òbi";
+
+/* No comment provided by engineer. */
+"Home" = "Lakay";
+
+/* No comment provided by engineer. */
+"Home Depot (Up to 15% Off)" = "Home depot (jiska 15% rediksyon)";
+
+/* expense category */
+"Home Improvement" = "Amelyorasyon Lakay";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "Kay Asirans";
+
+/* No comment provided by engineer. */
+"Home Phone" = "Telefòn Lakay";
+
+/* No comment provided by engineer. */
+"Home Services" = "Kay Sèvis";
+
+/* No comment provided by engineer. */
+"Home Supplies" = "Kay Pwodwi";
+
+/* No comment provided by engineer. */
+"Hotel" = "Otèl";
+
+/* Like Airbitz popup */
+"How are you liking %@?" = "Kijan w te renmen l %@?";
+
+/* Slideout menu import private key text */
+"IMPORT PRIVATE KEY
+([[abtag APP_TITLE]] Gift Card)" = "Enpote kle prive
+([[abtag APP_TITLE]] kat kado)";
+
+/* No comment provided by engineer. */
+"IRA Contribution" = "IRA Kontribisyon";
+
+/* No comment provided by engineer. */
+"Identity token from [%@] created and saved" = "Token idantite soti nan [%@] kreye ak sove";
+
+/* No comment provided by engineer. */
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "Si rekiperasyon te konfigirasyon, ou ta dwe te kouriyèl tèt ou yon token rekiperasyon ak yon lyen";
+
+/* No comment provided by engineer. */
+"Import" = "Enpote";
+
+/* No comment provided by engineer. */
+"Import Airbitz Gift Card" = "Import Airbitz Kado Kat";
+
+/* No comment provided by engineer. */
+"Import Funds" = "Enpòte Fon";
+
+/* No comment provided by engineer. */
+"Import Private Key" = "Kle prive ap enpote";
+
+/* No comment provided by engineer. */
+"Import failed" = "Enpotasyon an echwe";
+
+/* No comment provided by engineer. */
+"Import failed. Private key is empty" = "Enpotasyon echwe. Kle prive a vid";
+
+/* No comment provided by engineer. */
+"Import the private key again to retry Twitter" = "Enpote kle prive a anko pou reeseye Twitter";
+
+/* No comment provided by engineer. */
+"Importing funds from %@ into wallet..." = "Enpotasyon lajan soti nan %@ pou Potfèy...";
+
+/* Prefix of list of income categories */
+"Income" = "Revni";
+
+/* No comment provided by engineer. */
+"Incorrect PIN" = "Enkòrèk PIN";
+
+/* No comment provided by engineer. */
+"Incorrect PIN. Please wait %.0f seconds and try again." = "Kod PIN pa bon. Tanpri tann %.0f segonn epi eseye anko.";
+
+/* No comment provided by engineer. */
+"Incorrect Password" = "Enkòrèk Modpas";
+
+/* No comment provided by engineer. */
+"Incorrect Password. Try again, or change it now?" = "Modpas pa bon. reeseye oubyen chanje kounye a?";
+
+/* No comment provided by engineer. */
+"Incorrect current password" = "Modpas aktyel la pa bon";
+
+/* No comment provided by engineer. */
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Non itilizate pa bon pou jeton rekiperasyon. tanpri eseye avèk yon lot non itilizatè ou itilize yon lot lyen rekiperasyon token.";
+
+/* Info button text on top right */
+"Info" = "Enfòmasyon";
+
+/* Title of password check popup alert */
+"Insufficient Password" = "Modpas twò piti";
+
+/* No comment provided by engineer. */
+"Interest Exp" = "Depans enterè";
+
+/* No comment provided by engineer. */
+"Internet" = "Entènèt";
+
+/* No comment provided by engineer. */
+"Invalid Bitcoin Address" = "Adres bitcoin an pa bon";
+
+/* No comment provided by engineer. */
+"Invalid Bluetooth Request" = "Sa yo konsève pa bon nan Bluetooth";
+
+/* No comment provided by engineer. */
+"Invalid Email" = "Envalid Imèl";
+
+/* No comment provided by engineer. */
+"Invalid QR Code" = "Kod QR envalid";
+
+/* No comment provided by engineer. */
+"It's great" = "Li gwo";
+
+/* No comment provided by engineer. */
+"Kids" = "Timoun";
+
+/* No comment provided by engineer. */
+"Kids Activities" = "Timoun Aktivite";
+
+/* LOGIN button text */
+"LOGIN" = "LOGIN";
+
+/* settings text */
+"Last Name (optional)" = "Siyati (Si ou vle)";
+
+/* No comment provided by engineer. */
+"Late Fee" = "Frè Anreta";
+
+/* Later button text */
+"Later" = "Annapre";
+
+/* No comment provided by engineer. */
+"Laundry" = "Lesiv";
+
+/* No comment provided by engineer. */
+"Lawn & Garden" = "Gazon & Jaden";
+
+/* No comment provided by engineer. */
+"Level" = "Nivo";
+
+/* No comment provided by engineer. */
+"Life Insurance" = "Lavi Asirans";
+
+/* Loading account alert text */
+"Loading Account..." = "Chajman Kont...";
+
+/* title of wallets table balance header */
+"Loading Balance..." = "Chajman balans...";
+
+/* Loading Transactions alert text */
+"Loading Transactions..." = "Loading Tranzaksyon...";
+
+/* Loading wallets alert text */
+"Loading Wallets..." = "Chanjman potfèy...";
+
+/* Loading... */
+"Loading..." = "Loading...";
+
+/* No comment provided by engineer. */
+"Logging Out" = "Ap dekonekte";
+
+/* No comment provided by engineer. */
+"Login Package" = "Koneksyon pakè";
+
+/* No comment provided by engineer. */
+"Low Fee" = "Ba Frè";
+
+/* settings text */
+"Merchant Mode" = "Mod Machann";
+
+/* No comment provided by engineer. */
+"Message Sent" = "Mesaj ale";
+
+/* No comment provided by engineer. */
+"Misc." = "Divès";
+
+/* No comment provided by engineer. */
+"Mobile Phone" = "Mobil Telefòn";
+
+/* No comment provided by engineer. */
+"More Categories" = "Plis Kategori";
+
+/* No comment provided by engineer. */
+"Mortgage & Rent" = "Ipotèk & Lwe";
+
+/* No comment provided by engineer. */
+"Mortgage Interest" = "Enterè Ipotèk";
+
+/* No comment provided by engineer. */
+"Movies & DVDs" = "Sinema & DV";
+
+/* No comment provided by engineer. */
+"Music" = "Mizik";
+
+/* No comment provided by engineer. */
+"Must have at least %d characters" = "Dwe gen pou pi piti %d mo";
+
+/* No comment provided by engineer. */
+"Must have at least one lower case letter" = "Dwe gen pou pi piti yon lèt miniskil";
+
+/* No comment provided by engineer. */
+"Must have at least one number" = "Dwe gen pou pi piti yon chif";
+
+/* No comment provided by engineer. */
+"Must have at least one upper case letter" = "Dwe gen pou pi piti yon lèt majiskil";
+
+/* Default wallet name for new accounts */
+"My Wallet" = "Bous Mwen";
+
+/* section header in settings table */
+"NAME" = "NON";
+
+/* NO button text */
+"NO" = "NON";
+
+/* No comment provided by engineer. */
+"Name" = "Non";
+
+/* No comment provided by engineer. */
+"Net Salary" = "Nèt Salè";
+
+/* No comment provided by engineer. */
+"Network Error" = "Rezo Erè";
+
+/* No comment provided by engineer. */
+"New PIN" = "Nouvo PIN";
+
+/* No comment provided by engineer. */
+"New Password" = "Nouvo Modpas";
+
+/* No comment provided by engineer. */
+"Newspaper & Magazines" = "Jounal & Magazin";
+
+/* Next button text */
+"Next" = "Pwochén";
+
+/* settings text */
+"Nickname / Handle (optional)" = "Non itilizatè / okipe (Si ou vle)";
+
+/* what to display when wallet has no transactions */
+"No Transactions" = "Pa Gen Tranzaksyon";
+
+/* what to display when no transactions are found in search */
+"No Transactions Found" = "Nou pa jwenn transaksyon";
+
+/* No comment provided by engineer. */
+"No password set" = "Pa gen modpas seri";
+
+/* No comment provided by engineer. */
+"No thanks" = "Non Mèsi";
+
+/* No comment provided by engineer. */
+"Not Sure" = "Pa Si";
+
+/* No comment provided by engineer. */
+"Not so good" = "Se pa konsa bon";
+
+/* No comment provided by engineer. */
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Nòt: Paramèt lajan pa defo a itilize selman pou nouvo potfèy epi pou moutre kantite lajan ki gen sou kont lan. Kreye yon nouvo potfèy pou chanje lajan ki afiche nan chak tranzaksyon.";
+
+/* OK button text */
+"OK" = "OK";
+
+/* section header in settings table */
+"OPTIONS" = "OPSYON";
+
+/* No comment provided by engineer. */
+"On The Web" = "Sou Wèb la";
+
+/* No comment provided by engineer. */
+"Only numbers allowed in PIN" = "Sel nimero ki otorize";
+
+/* No comment provided by engineer. */
+"Open 24" = "Ouvè 24";
+
+/* No comment provided by engineer. */
+"Open 24 hours" = "Ouvè 24 è";
+
+/* No comment provided by engineer. */
+"Other Income" = "Lòt Revni";
+
+/* No comment provided by engineer. */
+"PIN" = "PIN";
+
+/* settings text */
+"PIN Re-Login" = "PIN rekonekte";
+
+/* No comment provided by engineer. */
+"PIN must be %d digits" = "PIN dwe %d chif";
+
+/* No comment provided by engineer. */
+"PIN successfully changed." = "PIN lan chanje avèk siksè,.";
+
+/* No comment provided by engineer. */
+"Parking" = "Pakin";
+
+/* Text on partial payment */
+"Partial Payment" = "Pèman an pati";
+
+/* No comment provided by engineer. */
+"Password" = "Modpas";
+
+/* No comment provided by engineer. */
+"Password Change" = "Enkòrèk Modpas";
+
+/* No comment provided by engineer. */
+"Password Recovery" = "Rekiperasyon modpas";
+
+/* No comment provided by engineer. */
+"Password Recovery Setup" = "Aktivite pou rekipere modpas";
+
+/* No comment provided by engineer. */
+"Password change failed:
+%@" = "Echèk chajman modpas: %@";
+
+/* No comment provided by engineer. */
+"Password does not match. Re-enter password" = "Modpas yo pa sanble, antre modpas la anko";
+
+/* No comment provided by engineer. */
+"Password mismatch" = "Modpas yo pa sanble";
+
+/* No comment provided by engineer. */
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "Modpas la modifye ak siksè. PA BLIYE MODPAS LA AK REPONS POU REKIPERASYON! YO PAKA REKIPERE!";
+
+/* Text on payment recived popup */
+"Payment received" = "Peman Resevwa";
+
+/* Pending status in transaction list */
+"Pending" = "Annatandan";
+
+/* No comment provided by engineer. */
+"Personal Care" = "Pèsonèl Swen";
+
+/* expense category */
+"Pet Food & Supplies" = "Bèt Manje & Pwodwi Pou";
+
+/* expense category */
+"Pet Grooming" = "Bèt Atik";
+
+/* expense category */
+"Pets" = "Bèt Kay";
+
+/* expense category */
+"Pharmacy" = "Famasi";
+
+/* No comment provided by engineer. */
+"Place Call" = "Fè apèl";
+
+/* No comment provided by engineer. */
+"Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
+
+<br><br>%@" = "Tanpri klike sou lyen anba a sa a pati yon aparèy mobil ak %1$@ enstale pou lanse rekiperasyon kont pou non itilizatè [%2$@]
+
+<br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a new account and transfer your funds if you forgot your password." = "Tanpri kreye yon lot kont ak transfè fon ou yo si ou bliye mod pas ou.";
+
+/* No comment provided by engineer. */
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Tanpri kreye yon modpas pou kont sa a, ou pap ka rekipere kont ou so aparèy la ta pèdi oubyen volè.";
+
+/* No comment provided by engineer. */
+"Please enter a User Name" = "Tanpri antre yon non itilizatè";
+
+/* No comment provided by engineer. */
+"Please enter a username at the login screen" = "Tanpri antre yon non itilizatè nan fenèt Koneksyon an";
+
+/* No comment provided by engineer. */
+"Please enter an amount to send" = "Tanpri antre kantite lajan pou voye a";
+
+/* No comment provided by engineer. */
+"Please enter the username of the account to recover" = "Tanpri antre non itilizatè kont lan pou rekiperel";
+
+/* No comment provided by engineer. */
+"Please enter your PIN" = "Tanpri antre PIN ou";
+
+/* No comment provided by engineer. */
+"Please enter your correct password." = "Tanpri antre bon modpass ou.";
+
+/* No comment provided by engineer. */
+"Please enter your password to enable Touch ID" = "Tanpri antre modpas ou pouw aktive Touch ID";
+
+/* No comment provided by engineer. */
+"Please find the email and click on the link from this device to initiate recovery" = "Tanpri chache mèl epi klike sou lyen nan aparey pou lanse rekiperasyon";
+
+/* No comment provided by engineer. */
+"Please have Requestor contact support" = "Tanpri gade byen si kontak ou yo jwnn sèvis teknik lan byen";
+
+/* No comment provided by engineer. */
+"Please logout of current account before attempting password recovery" = "Tanpri soti nan kont kouran anvan eseye rekiperasyon modpas";
+
+/* No comment provided by engineer. */
+"Please try again later or contact support" = "Tanpri eseye anko oubyen kontakte sipo";
+
+/* No comment provided by engineer. */
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "Tanpri verifye domèn nan pi wo a epi tape LOGIN pou otantifye ak sit sa a";
+
+/* No comment provided by engineer. */
+"Please wait %.0f seconds before retrying %@" = "Tanpri tann %1$.0f segonn avan ou reeseye%2$@";
+
+/* No comment provided by engineer. */
+"Please wait 1 second before retrying %@" = "Tanpri tann 1 segonn avan ou reeseye %@";
+
+/* No comment provided by engineer. */
+"Present QR code to Sender and have them scan to send you payment" = "Montre kòd moun ki voye la ak analyzè pou voye pou ou lajan";
+
+/* No comment provided by engineer. */
+"Private Seed" = "Prive Semans";
+
+/* expense category */
+"Property" = "Pwopriyete";
+
+/* No comment provided by engineer. */
+"Provide an Identity Token" = "Bay yon Token Idantite";
+
+/* No comment provided by engineer. */
+"Public Seed (XPub)" = "Gren piblik (XPub)";
+
+/* expense category */
+"Public Transportation" = "Transpò Piblik";
+
+/* No comment provided by engineer. */
+"QR Code Scan Failure" = "Skanè QR kod la echwe";
+
+/* No comment provided by engineer. */
+"REFER YOUR FRIENDS
+(Earn Bitcoin)" = "Refere zanmi ou (Genyen Bitcoin)";
+
+/* No comment provided by engineer. */
+"Re-enter New Password" = "Ekri nouvo modpas la ankò";
+
+/* No comment provided by engineer. */
+"Received Bitcoin" = "Li jwenn Bitcoin an";
+
+/* No comment provided by engineer. */
+"Received Funds" = "Resevwa lajan";
+
+/* Received string on Request screen */
+"Received..." = "Resevwa...";
+
+/* No comment provided by engineer. */
+"Recovery Disabled" = "Rekiperasyon desaktive";
+
+/* No comment provided by engineer. */
+"Recovery Password Reminder" = "Sonje Rekiperasyon modpas";
+
+/* Title of recovery questions setup error alert */
+"Recovery Questions Not Set" = "Kesyon pou rekiperasyon pa defini";
+
+/* Title of recovery questions setup complete alert */
+"Recovery Questions Set" = "Tout kesyon pou rekiperasyon defini";
+
+/* No comment provided by engineer. */
+"Recovery Successful
+
+Please change your password and PIN" = "Rekiperasyon siksè 
+ Tanpri chanje modpas ou ak PIN";
+
+/* No comment provided by engineer. */
+"Recovery was not setup or was done on another device" = "Recovery pat kreye ou byen li fèt sou yon lòt aparey";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "Refere Zanmi Ou yo";
+
+/* expense category */
+"Registration" = "Enskripsyon";
+
+/* Remaining string on Request screen */
+"Remaining..." = "Ki rete...";
+
+/* No comment provided by engineer. */
+"Remember your password?" = "Sonje modpas ou?";
+
+/* No comment provided by engineer. */
+"Remind Me Later" = "Raple m 'Annapre";
+
+/* RENAME button text for wallet rename */
+"Rename" = "Chanje Non";
+
+/* Rename Wallet popup */
+"Rename Wallet" = "Bay potfey la yon lot non";
+
+/* No comment provided by engineer. */
+"Rent" = "Lwe";
+
+/* expense category */
+"Rental Car & Taxi" = "Lokasyon Machin & Taksi";
+
+/* No comment provided by engineer. */
+"Request a Payment Address" = "Mande yon Adrès Peman";
+
+/* No comment provided by engineer. */
+"Request confirmed, Two Factor off." = "Mande konfimasyon. De faktè anile.";
+
+/* No comment provided by engineer. */
+"Request is copied to the clipboard" = "Demand la kopye nan prespapye a";
+
+/* No comment provided by engineer. */
+"Request your Identity Token but you don't have any" = "Mande jeton Idantite ou, men ou pa gen okenn";
+
+/* No comment provided by engineer. */
+"Request your Identity Token. Please select one below" = "Mandetoken Idantite ou yo. Tanpri chwazi yon sèl anba a";
+
+/* Requested string on Request screen */
+"Requested..." = "Demand...";
+
+/* No comment provided by engineer. */
+"Reset Cancelled" = "Reyinisializasyon anile";
+
+/* No comment provided by engineer. */
+"Reset Date" = "Reinisialize dat";
+
+/* No comment provided by engineer. */
+"Reset requested. Please retry login after 7 days." = "Reyinisializasyon mande. Tanpri eseye enskripsyona pre 7 jou.";
+
+/* No comment provided by engineer. */
+"Restarting watcher service" = "Redemare sèvis vigilans lan";
+
+/* expense category */
+"Restaurants" = "Restoran";
+
+/* No comment provided by engineer. */
+"Restaurants & Food Trucks" = "Restoran & Manje Kamyon";
+
+/* Income notes field for affiliate revenue */
+"Revenue share from affiliate link %@" = "Daprè revi lyen afilyasyon an%@";
+
+/* SEND button text */
+"SEND" = "VOYE";
+
+/* text for textmessage/SMS */
+"SMS" = "SMS";
+
+/* No comment provided by engineer. */
+"SMS cancelled" = "SMS anile";
+
+/* No comment provided by engineer. */
+"SMS sent" = "Voye SMS";
+
+/* Slideout menu spend text */
+"SPEND BITCOIN (Plugins)" = "Depanse bitcoin (Plugins)";
+
+/* No comment provided by engineer. */
+"Sales" = "Vant";
+
+/* No comment provided by engineer. */
+"San Diego, California, USA" = "San Diego, California, USA";
+
+/* Title of recovery email popup */
+"Save Recovery Token" = "Anregistre token rekiperasyon";
+
+/* Text at top of Scan Screen */
+"Scan QR to Import Private Key/Gift Card" = "Skane QR pou enpote kle prive/kat kado";
+
+/* No comment provided by engineer. */
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Skane QR kod moun lan pou voye pèman oubyen klike sou yon demand bluetooth nan lis anba a";
+
+/* Text at top of Send screen */
+"Scan to Send, Import, or Edge Login" = "Skane pou voye, enpote oubyen konekte edge";
+
+/* SearchBarSearch placeholder */
+"Search" = "Rechèch";
+
+/* No comment provided by engineer. */
+"Select Currency" = "Seleksyone deviz";
+
+/* No comment provided by engineer. */
+"Sell Bitcoin" = "Vann Bitcoin";
+
+/* No comment provided by engineer. */
+"Send Funds to Private Key" = "Voye lajan pou kle prive";
+
+/* settings text */
+"Send name on payment request" = "Voye non ou sou demand pou peye a";
+
+/* No comment provided by engineer. */
+"Send to Bitcoin Address or Import Private Key" = "Voye pou adress bitcoin oubien enpote kle prive";
+
+/* status message */
+"Sending..." = "Voye...";
+
+/* No comment provided by engineer. */
+"Sent Bitcoin" = "Voye Bitcoin";
+
+/* expense category */
+"Service & Parts" = "Sèvis & Pyès";
+
+/* expense category */
+"Service Fee" = "Lapòs Frè";
+
+/* No comment provided by engineer. */
+"Set a Password" = "Mete yon Modpas";
+
+/* No comment provided by engineer. */
+"Set a Password and PIN" = "Kreye yon modpas ak yon PIN";
+
+/* No comment provided by engineer. */
+"Setting recovery questions failed:
+%@" = "Konfigirasyon kesyon rekiperasyon echwe:
+%@";
+
+/* No comment provided by engineer. */
+"Settings" = "Paramètres";
+
+/* Generic SHARE button text */
+"Share" = "Pataje";
+
+/* expense category */
+"Shopping" = "Shopping";
+
+/* Show */
+"Show" = "Montre";
+
+/* No comment provided by engineer. */
+"Show Balance" = "Montre Balans";
+
+/* No comment provided by engineer. */
+"Show QR Code" = "Montre QR Kòd";
+
+/* No comment provided by engineer. */
+"Sign Up" = "Enskri";
+
+/* No comment provided by engineer. */
+"Sign-Up failed:
+%@" = "Echèk enskripsyon:
+%@";
+
+/* Skip button text */
+"Skip" = "Pase";
+
+/* Title of Skip this step alert */
+"Skip this step" = "Pase etap sa a";
+
+/* No comment provided by engineer. */
+"Sorry" = "Padon";
+
+/* expense category */
+"Spa & Massage" = "Spa & Masaj";
+
+/* No comment provided by engineer. */
+"Spend Bitcoin (Plugins)" = "Pase nan Bitcoin (Plugins)";
+
+/* spending limits text */
+"Spending Limits" = "Depans Limit";
+
+/* expense category */
+"Sporting Goods" = "Pou Spò Atik";
+
+/* expense category */
+"Sports" = "Espò";
+
+/* No comment provided by engineer. */
+"Standard Fee" = "Estanda Frè";
+
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "Starbucks (jiska 20% rediksyon)";
+
+/* expense category */
+"Student Loan" = "Prè Elèv";
+
+/* No comment provided by engineer. */
+"Successfully Logged In" = "Avèk siksè louvri sesyon an";
+
+/* No comment provided by engineer. */
+"Successfully Verified Identity" = "Idantite verifye Avèk Siksè";
+
+/* No comment provided by engineer. */
+"Successfully received identity token from %@" = "Ou jwen token avèk siksè nan men %@";
+
+/* No comment provided by engineer. */
+"Sweep Funds From Private Key" = "Pase lajan ki soti nan kle prive";
+
+/* Synchronizing text in confirmation textfield */
+"Synchronizing" = "Ap senkronize";
+
+/* Prefix of wallet balance dropdown header */
+"TOTAL: " = "TOTAL: ";
+
+/* No comment provided by engineer. */
+"Tap and hold a wallet for additional options" = "Peze epi kenbe yon potfèy pou plis opsyon";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target (jiska 10 % rediksyon)";
+
+/* expense category */
+"Tax" = "Taks";
+
+/* expense category */
+"Television" = "Televizyon";
+
+/* No comment provided by engineer. */
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "De faktè otentifikasyon token sou aparèy sa a pa valid. Swa token lan te chanje pa yon lot aparèy oubyen lè ou a pa bon. Tanpri verifye lè ou a ou ou asirew.";
+
+/* No comment provided by engineer. */
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "Adres bitcoin periferik ou te itilize pou konekte:%1$@ pa korespon ak adres ki te anonse avan:%2$@";
+
+/* No comment provided by engineer. */
+"The following services are not provided by %@.
+
+For issues and feedback, please contact the respective service providers." = "Sèvis sa yo gen yon pa yo bay nan %1$s. \\n\\n Pou pwoblèm ak fidbak, tanpri kontakte bayè sèvis yo respektif.";
+
+/* No comment provided by engineer. */
+"The given answers were incorrect. Please try again." = "Repons ou bay yo pa bon. Tanpri eseye anko.";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "Modpas pou kont ou an t modifye nan yon lòt aparey. Konekte ou pandan wa itilize yon lot infomasyon ki ka idantifye ou.";
+
+/* Title of recovery popup message */
+"This account already has password recovery setup. Would you like to disable it?" = "Kont sa a deja gen konfigirasyon rekiperasyon modpas. Èske ou ta renmen desaktivel li?";
+
+/* No comment provided by engineer. */
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "Aplikasyon sa a ta renmen jwenn aksè nan zarchiv sa yo lye nan kont Airbitz ou yo. Li pa pral gen aksè a nenpòt lòt kont oswa bous.";
+
+/* Username Signup screen info text */
+"This is not your email or real name.
+
+This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+
+Your username and password are known only to you and never stored unencrypted." = "Se pa email ou oubyen vrè non ou.
+se non itilizatè pou ou konekte nan [[abtag APP_TITLE]] kon ou sou aparèy sa a oubyen lot.
+non itilizatè ou ak modpas ou sèl ou menm ki konnen yo epi yo pa janm anrejistre ak kod.";
+
+/* Loading Wallets alert text */
+"This may take a few minutes if it is the first time logging into this device." = "Sa ka pran anpil minit si se premye fwa wap konekte sou aparèy sa a.";
+
+/* No comment provided by engineer. */
+"This site would like to:" = "Sit sa a ta renmen:";
+
+/* Popup sessage for when a wallet is archived */
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "Potfèy la sere. Tanpri seleksyone yon lot potfèy nan [Wallets] ekran";
+
+/* text in password verification popup */
+"Time to crack:" = "Lè poz:";
+
+/* Message of recovery token popup */
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "Pou fini konfimasyon pou rekipere kont ou, ou dwe anregistre yon token rekiperasyon kont lan. Li nesesè pou rekipere kont ou nan non itilizatè ak rekiperasyon repons. Tanpri antre mèl ou anba pou voye token rekiperasyon an.";
+
+/* Popup wallet help test */
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Pou ou ranje potfèy, apiye epi glise 3 ba yo a dwat yon potfèy. Glise tèt [ARCHIVE] pouw achive yon potfèy";
+
+/* No comment provided by engineer. */
+"To: %@" = "Pou: %@";
+
+/* Top of screen wallet dropdown prefix text */
+"To: %@ ▼" = "Pou: %@ ▼";
+
+/* expense category */
+"Tolls" = "Tòll";
+
+/* No comment provided by engineer. */
+"Top Up Prepaid Phones" = "Rechaje yon telefon prepaye";
+
+/* No comment provided by engineer. */
+"Touch ID" = "Touch ID";
+
+/* No comment provided by engineer. */
+"Touch ID Disabled" = "Touch ID desaktive";
+
+/* No comment provided by engineer. */
+"Touch ID Enabled" = "Touch ID aktive";
+
+/* Touch ID prompt text */
+"Touch to login user" = "Touche pou konekte yon itilizatè";
+
+/* settings text */
+"TouchID: Set password first" = "TouchID: Defini yon modpas an premye";
+
+/* settings text */
+"TouchID: Unsupported Device" = "TouchID: aparèy pa sipote";
+
+/* expense category */
+"Toys" = "Jwèt";
+
+/* expense category */
+"Trade Commissions" = "Komisyon Komès";
+
+/* Transaction Details header text */
+"Transaction Details" = "Tranzaksyon Detay";
+
+/* Financial transaction that moves money from one account to another */
+"Transfer" = "Transfè";
+
+/* From wallet transfer text */
+"Transfer From %@" = "Transfè De %@";
+
+/* To wallet transfer text */
+"Transfer To %@" = "Transfè Pou %@";
+
+/* expense category */
+"Travel" = "Vwayaj";
+
+/* No comment provided by engineer. */
+"Trouble connecting to network" = "Problèm koneksyon rezo";
+
+/* No comment provided by engineer. */
+"Try again?" = "Eseye anko?";
+
+/* expense category */
+"Tuition" = "Ekolaj";
+
+/* No comment provided by engineer. */
+"Two Factor" = "De Faktè";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "Otantifikasyon de fakte ( sekirite byen) ki te aktive nan yon periferik diferan pou kont lan. Tanpri pemèt otantofikasyon nan 2 aksè komplè ki dispozitif.";
+
+/* No comment provided by engineer. */
+"Two Factor Authentication On" = "De Faktè Otantifikasyon Sou";
+
+/* No comment provided by engineer. */
+"Two Factor Disabled" = "De faktè dezaktive";
+
+/* 2FA warning on enable */
+"Two Factor Enabled
+
+** Warning **
+
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "De faktè aktive
+
+**Avètisman**
+
+Si ou pèdi aparèy oubyen desinstale aplikasyon an, Sa ap pran 7 jou pou desaktive 2FA epi pou antre nan kont ou an.\"";
+
+/* No comment provided by engineer. */
+"Two Factor Invalid" = "De faktè ki pa valid";
+
+/* No comment provided by engineer. */
+"Two Factor Reset" = "De faktè Reset";
+
+/* No comment provided by engineer. */
+"USA" = "USA";
+
+/* No comment provided by engineer. */
+"USA and Canada" = "USA ak Kanada";
+
+/* No comment provided by engineer. */
+"Unable to determine two factor status" = "Imposib pou detèmine stati de faktè";
+
+/* No comment provided by engineer. */
+"Unable to import secret" = "Enposib pou enpote sekrè";
+
+/* No comment provided by engineer. */
+"Unable to import token" = "Imposib pou mwen pote jeton";
+
+/* No comment provided by engineer. */
+"Unable to save Settings" = "Enposib pou anregistre paramèt yo";
+
+/* No comment provided by engineer. */
+"Unable to scan QR code" = "Paka skane QR kod la";
+
+/* No comment provided by engineer. */
+"Unable to update Settings" = "Enposib pou met paramèt yo a jou";
+
+/* No comment provided by engineer. */
+"Up to 10% off Target" = "Rive nan 10% sou Target";
+
+/* No comment provided by engineer. */
+"Up to 20% off Starbucks" = "Jiska 10% Off Starbucks";
+
+/* Upload Failed */
+"Upload Failed. Please check your network connection" = "Telechajman echwe. Tanpri tcheke koneksyon rezo a";
+
+/* No comment provided by engineer. */
+"Upload Image" = "Telecharje Imaj";
+
+/* No comment provided by engineer. */
+"Upload Log" = "Telecharje Logs";
+
+/* No comment provided by engineer. */
+"Upload Log File" = "Anregistre fichye Log la";
+
+/* Upload Successful fading popup */
+"Upload Successful" = "Siksè telechajman";
+
+/* Uploading logfile fading popup */
+"Uploading logfile. Please wait..." = "Chajman fichye log. Tanpri fè yon ti tann...";
+
+/* No comment provided by engineer. */
+"Use Camera" = "Sèvi ak Kamera";
+
+/* Touch ID [Use PIN] button */
+"Use PIN" = "Sèvi ak PIN";
+
+/* Touch ID [Use Password] button */
+"Use Password" = "Sèvi ak Modpas";
+
+/* No comment provided by engineer. */
+"Use Photo Album" = "Sèvi ak foto album";
+
+/* settings text */
+"Use TouchID" = "Sèvi ak TouchID";
+
+/* No comment provided by engineer. */
+"User Name: %@" = "Non Itilizatè: %@";
+
+/* Username */
+"Username" = "Non Itilizatè";
+
+/* No comment provided by engineer. */
+"Username must be at least %d characters." = "Non Itilizatè dwe omwen %d karaktè.";
+
+/* expense category */
+"Utilities" = "Itilite";
+
+/* expense category */
+"Vacation" = "Vakans";
+
+/* No comment provided by engineer. */
+"Validating Address..." = "Adrès la ap valide...";
+
+/* expense category */
+"Vet" = "Veterinè";
+
+/* title of active wallets table */
+"WALLETS" = "BOUS";
+
+/* Title of missing password notification */
+"WARNING: missing password" = "AVÈTISMAN: manke modpas";
+
+/* Status on Request screen */
+"Waiting for Payment..." = "Ap tann pou Peman...";
+
+/* No comment provided by engineer. */
+"Wallet Deleted" = "Potfey la efase";
+
+/* No comment provided by engineer. */
+"Wallet Export" = "Ekspòt Bous";
+
+/* No comment provided by engineer. */
+"Wallet Private Seed" = "Bous Prive Semans";
+
+/* No comment provided by engineer. */
+"Wallet creation failed:
+%@" = "Kreyasyon Potfèy la echwe:
+%@";
+
+/* No comment provided by engineer. */
+"Wallet name must have at least one character" = "Non Potfèy la dwe genyen pou pi piti yon karaktè";
+
+/* Prefix of wallet name on rename popup */
+"Wallet: " = "Bous: ";
+
+/* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart (Jiska 10% Off)";
+
+/* No comment provided by engineer. */
+"Warning!" = "Avètisman!";
+
+/* No comment provided by engineer. */
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Atansyon. Ou paka konektew san modpas sou yon nouvo aparèy, si aparèy sa a pèdi oubyen si yo vòlèl, oubyen si aplikasyon an dezenstale";
+
+/* Double spend status in transaction list */
+"Warning: Double Spend" = "Avètisman: Depans de fwa";
+
+/* No comment provided by engineer. */
+"Warning: Low Fees may cause long delays in transaction confirmation" = "Avètiw: Frè ki pa gwo kapab genyen yon gwo reta nan konfimasyon transaksyon an";
+
+/* RBF status in transaction list */
+"Warning: Replace by Fee Detected. Double spend likely" = "Atansyon: Ramplase pandan wa chache frè. Probablman depanse de fwa";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Baz done efase men gen yon erè ki pase. Tann kelke minit pou resenkronize enfomation blockchain. transaksyon ak balans yo ka pa exat pandan sa";
+
+/* Watcher Database Cleared popup text */
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Baz done efase men gen yon erè ki pase. Tann kelke minit pou resenkronize enfomation blockchain. transaksyon ak balans yo ka pa exat pandan sa";
+
+/* No comment provided by engineer. */
+"Whole Foods (Up to 10% Off)" = "Whole foods (jiska 10% rediksyon)";
+
+/* No comment provided by engineer. */
+"Would you like to enable TouchID for this account and device?" = "Ou vle aktive TouchID pou kont sa a ak aparèy sa a?";
+
+/* No comment provided by engineer. */
+"Would you like to send funds to this address or import funds into your wallet?" = "Ou vle voye lajan pou adres sa a oubyen enpote lajan nan potfèy ou?";
+
+/* No comment provided by engineer. */
+"Would you like to send us some feedback?" = "Èske ou ta renmen voye nou kèk fidbak?";
+
+/* No comment provided by engineer. */
+"Would you like to write a review in the App store?" = "Ou vle ekri ton komantè sou app store?";
+
+/* No comment provided by engineer. */
+"Wrong Answers" = "Repons Mal";
+
+/* YES button text */
+"YES" = "WI";
+
+/* No comment provided by engineer. */
+"You Received Bitcoin!
+%@ (~%@)" = "Ou resevwa Bitcoin!
+%1$@(~%2$@)";
+
+/* No comment provided by engineer. */
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "Ou sou wout pou ou kite enstalasyon rekiperasyon modpas la. Kesyon ou ak repons ou yo poko anregistre.";
+
+/* No comment provided by engineer. */
+"You must answer all questions. Make sure your answers are long enough." = "Ou dwe reponn tout kesyon. Asirew ke repons ou yo long.";
+
+/* No comment provided by engineer. */
+"You must choose a question for all selections before proceeding." = "Ou dwe chwazi yon kesyon pou tout seleksyon avan w kontinye.";
+
+/* No comment provided by engineer. */
+"You must enter a user name" = "Ou dwe antre yon non itilizatè";
+
+/* No comment provided by engineer. */
+"You received Bitcoin!
+%@ (~%@)
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "Ou resevwa bitcoin!
+%1$@(~%2$@)
+Itilize chan Payee, kategori ak not pou ou make transaksyon an";
+
+/* Camera signup screen */
+"You will next see a popup requesting access to your Camera.
+
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "Wap wè apresa yon paj kap mandew aksè a kamera ou.
+ [[abtag APP_TITLE]] bezwen sa a pou skane kod QR pou payer moun yo ak machann.";
+
+/* No comment provided by engineer. */
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "OU jwenn Bitcoin! Nou ba ou konsey sa trè byen jan kesyon yo dwe ye a / repons yo pou rekipere mod pas. Si non, ou pap ka jwnn kont ou si ou blye mod pas ou.";
+
+/* No comment provided by engineer. */
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Kesyon pou rekiperasyon modpas yo la kounye a. Lè wap rekipere modpas ou repons yo dwe menm.** PA BLIYE MODPAS OU AK REPONS POU REKIPERASYON YO** OUPAKA REKIPERE KONT OU AN SAN YO MENM!!";
+
+/* Start of password rules text */
+"Your password..." = "Modpas ou...";
+
+/* Contacts signup screen */
+"[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+
+All tagged information is kept 100% private and encrypted by your password.
+
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] itilize kontak ou yo pou enfomasyon konsènan transaksyon tag.
+Tout enfomasyon yo konsève 100% prive et anklete avèk modpas. pèson e menm [[abtag APP_TITLE]] pa gen aksè a yo.";
+
+/* settings text */
+"bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";
+
+/* business listings is closed */
+"closed" = "pwòch";
+
+/* No comment provided by engineer. */
+"day" = "jou";
+
+/* No comment provided by engineer. */
+"days" = "jou";
+
+/* No comment provided by engineer. */
+"hour" = "èdtan";
+
+/* No comment provided by engineer. */
+"hours" = "èdtan";
+
+/* settings text */
+"mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
+
+/* No comment provided by engineer. */
+"minute" = "minit";
+
+/* No comment provided by engineer. */
+"minutes" = "minit";
+
+/* No comment provided by engineer. */
+"second" = "segonn";
+
+/* No comment provided by engineer. */
+"seconds" = "segonn";
+
+/* Header of popup in SendView from wallet to wallet transfer */
+"▼ Choose a wallet to transfer funds to ▼" = "▼ Chwazi yon potfèy pou voye lajan bay ▼";
+

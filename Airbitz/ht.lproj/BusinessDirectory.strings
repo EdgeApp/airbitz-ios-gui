@@ -1,0 +1,51 @@
+/* Class = "UILabel"; text = "Business Name"; ObjectID = "DlF-tR-T08"; */
+"DlF-tR-T08.text" = "Non biznis";
+
+/* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
+"GGS-YR-zt1.normalTitle" = "Shopping";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
+"KxI-24-PCF.text" = "Kategori";
+
+/* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
+"Sfb-cf-6wF.normalTitle" = "Plis Kategori";
+
+/* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
+"a78-ih-LDk.normalTitle" = "Kafe & Te";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
+"aNa-3g-QXd.placeholder" = "Rechèch";
+
+/* Class = "UIButton"; normalTitle = "Gift Cards"; ObjectID = "b1E-1G-btq"; */
+"b1E-1G-btq.normalTitle" = "Gift Kat";
+
+/* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
+"baO-FH-Oy4.text" = "Toupre ak Ou";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
+"f2g-xP-19U.text" = "Label";
+
+/* Class = "UILabel"; text = "Type BTC"; ObjectID = "ga1-R0-wof"; */
+"ga1-R0-wof.text" = "Eskane";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "heE-og-iXA"; */
+"heE-og-iXA.placeholder" = "Rechèch";
+
+/* Class = "UIButton"; normalTitle = "Electronics"; ObjectID = "kTm-at-TUR"; */
+"kTm-at-TUR.normalTitle" = "Elektwonik";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "lFC-s8-IJT"; */
+"lFC-s8-IJT.text" = "Label";
+
+/* Class = "UILabel"; text = "leftLabel"; ObjectID = "oPG-fA-f9b"; */
+"oPG-fA-f9b.text" = "leftLabel";
+
+/* Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S"; */
+"oyK-ph-99S.normalTitle" = "Restoran";
+
+/* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
+"sWr-pd-hBY.normalTitle" = "ATM";
+
+/* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
+"wy7-Kv-3ap.text" = "Adrès 1234";
+

@@ -9,6 +9,7 @@ With a focus on delivering an amazing user experience, the Airbitz wallet provid
 • Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
 • Integrated buy/sell for US and Canada residents
 • Pay using Bluetooth (BLE) without needing QR codes 
+• Login with TouchID
 • Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
 • Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
 • One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world

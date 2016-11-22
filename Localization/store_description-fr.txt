@@ -9,6 +9,7 @@ En mettant l’accent sur la prestation d’une excellente expérience utilisate
 • Zéro connaissance & zéro accès aux fonds, clés ou données de transaction de l’utilisateur par Airbitz ou des parties tierces
 • Achat / vente intégré pour les résidents Américains et Canadiens
 • Payer à l’aide du Bluetooth (BLE) sans avoir besoin de codes QR 
+• Login with TouchID
 • Création d’un compte simple en utilisant juste un nom d'utilisateur & mot de passe (pas d’impression de PDFs, d'écrire des phrases de passe ou d'ajout de paramètres de chiffrement)
 • Sauvegarde chiffrée automatique de portefeuille aux serveurs peer-to-peer cloud redondants
 • Authentification à 2 facteurs One-Touch pour le portefeuille le plus facile à sécuriser du monde
@@ -16,7 +17,7 @@ En mettant l’accent sur la prestation d’une excellente expérience utilisate
 • Synchronisation à plusieurs appareil sur tous les appareils mobiles
 • Portefeuilles déterministes hiérarchique qui changent d'adresses par transaction
 • Des multiples portefeuilles par compte avec des simple nom de portefeuille défini par l’utilisateur (c-à-d. « Fonds de vacances »)
-• Support de multiples devises fiduciaire. Attribuer une devise fiduciaire par portefeuille
+• Support de multiples devises fiduciaire. Attribuer une devise fiduciaire par porte-monnaie
 • Les opérations de recherche par bénéficiaire, catégorie ou notes
 • Calculatrice intégrée pour faciliter les conversions
 • Mode Marchand permettant un interface utilisateur simple et fluide derrière le comptoir
