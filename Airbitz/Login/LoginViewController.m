@@ -80,7 +80,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
 //@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
-@property (weak, nonatomic) IBOutlet ButtonSelectorView *PINusernameSelector;
+@property (weak, nonatomic) IBOutlet UIButton *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
@@ -132,7 +132,6 @@ static BOOL bInitialized = false;
     self.passwordTextField.delegate = self;
 //    self.PINCodeView.delegate = self;
     self.PINTextField.delegate = self;
-    self.PINusernameSelector.delegate = self;
     self.spinnerView.hidden = YES;
     self.buttonOutsideTap.enabled = NO;
 
@@ -168,12 +167,13 @@ static BOOL bInitialized = false;
     self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
 
     // Add shadows to some text for visibility
-    self.PINusernameSelector.textLabel.layer.shadowRadius = 3.0f;
-    self.PINusernameSelector.textLabel.layer.shadowOpacity = 1.0f;
-    self.PINusernameSelector.textLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.textLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
-    self.PINusernameSelector.textLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    self.PINusernameSelector.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:24.0];
+    self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
+    self.PINusernameSelector.titleLabel.layer.shadowOpacity = 1.0f;
+    self.PINusernameSelector.titleLabel.layer.masksToBounds = NO;
+    self.PINusernameSelector.titleLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
+    self.PINusernameSelector.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
+    self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
 
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
@@ -187,12 +187,6 @@ static BOOL bInitialized = false;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.titleText.textColor = ColorLoginTitleText;
-
-    self.PINusernameSelector.button.layer.shadowRadius = PinEntryTextShadowRadius;
-    self.PINusernameSelector.button.layer.shadowOpacity = 1.0f;
-    self.PINusernameSelector.button.layer.masksToBounds = NO;
-    self.PINusernameSelector.button.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
-    self.PINusernameSelector.button.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
@@ -207,14 +201,6 @@ static BOOL bInitialized = false;
     self.usernameSelector.pickerMaxChoicesVisible = 3;
     [self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
     [Util stylizeTextField:self.usernameSelector.textField];
-
-    [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateNormal];
-    [self.PINusernameSelector.button setBackgroundImage:nil forState:UIControlStateSelected];
-    [self.PINusernameSelector.button setBackgroundColor:[UIColor clearColor]];
-
-    self.PINusernameSelector.textLabel.text = @"";
-    [self.PINusernameSelector setButtonWidth:_originalPINSelectorWidth];
-    self.PINusernameSelector.accessoryImage = [UIImage imageNamed:@"btn_close.png"];
     
 //    [self.PINTextField addTarget:self
 //                          action:@selector(PINTextFieldDidChange:)
@@ -453,7 +439,6 @@ static BOOL bInitialized = false;
 }
 
 - (IBAction)OutsideTapButton:(id)sender {
-    [self.PINusernameSelector close];
     [self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
 }
@@ -474,7 +459,6 @@ static BOOL bInitialized = false;
         [stringArray addObject:str];
     }
     self.otherAccounts = [stringArray copy];
-    self.PINusernameSelector.arrayItemsToSelect = self.otherAccounts;
 }
 
 - (void)setUsernameText:(NSString *)username
@@ -505,7 +489,7 @@ static BOOL bInitialized = false;
         [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
-        [self.PINusernameSelector.button setAttributedTitle:attributedText forState:UIControlStateNormal];
+        [self.PINusernameSelector setAttributedTitle:attributedText forState:UIControlStateNormal];
 
         //
         // Set the regular username field
@@ -1684,7 +1668,6 @@ static BOOL bInitialized = false;
 
 - (void)ButtonSelectorWillShowTable:(ButtonSelectorView *)view
 {
-    [self.PINusernameSelector.textLabel resignFirstResponder];
     [self.PINTextField resignFirstResponder];
     self.buttonOutsideTap.enabled = YES;
 
