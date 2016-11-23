@@ -3037,6 +3037,9 @@
                                                     <constraint firstAttribute="height" constant="30" id="d1V-BK-491"/>
                                                 </constraints>
                                                 <state key="normal" title="PIN Username"/>
+                                                <connections>
+                                                    <action selector="PINusernameButton:" destination="zLx-xG-j1m" eventType="touchUpInside" id="j9e-di-sbn"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Enter PIN" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KTi-U4-C5T" userLabel="PINCode Text Field" customClass="StylizedTextField">
                                                 <rect key="frame" x="85" y="69" width="150" height="44"/>

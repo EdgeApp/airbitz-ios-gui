@@ -27,6 +27,7 @@
 #import "SettingsViewController.h"
 #import "InfoView.h"
 #import <MessageUI/MFMailComposeViewController.h>
+@import DropDown;
 
 typedef enum eLoginMode
 {
@@ -105,6 +106,8 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
 
+@property (strong, nonatomic) DropDown *usernameDropDown;
+
 @end
 
 static BOOL bPINModeEnabled = false;
@@ -175,6 +178,11 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
     self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
 
+    // Initialize the usernameDropDown
+    self.usernameDropDown = [[DropDown alloc] init];
+    self.usernameDropDown.anchorView = self.PINusernameSelector;
+    self.usernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
+    
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
     self.swipeText.layer.masksToBounds = NO;
@@ -447,6 +455,10 @@ static BOOL bInitialized = false;
     [self autoReloginOrTouchIDIfPossible];
 }
 
+- (IBAction)PINusernameButton:(id)sender {
+    [self.usernameDropDown show];
+}
+
 #pragma mark - Misc Methods
 
 - (void)updateUsernameSelector:(NSString *)username
@@ -459,6 +471,9 @@ static BOOL bInitialized = false;
         [stringArray addObject:str];
     }
     self.otherAccounts = [stringArray copy];
+    
+    // Add all accounts to the usernameDropDown datasource
+    self.usernameDropDown.dataSource = self.arrayAccounts;
 }
 
 - (void)setUsernameText:(NSString *)username
