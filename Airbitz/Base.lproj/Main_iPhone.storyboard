@@ -3031,9 +3031,9 @@
                                         <rect key="frame" x="27" y="161" width="320" height="200"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuG-b1-njk">
-                                                <rect key="frame" x="35" y="30" width="250" height="30"/>
+                                                <rect key="frame" x="60" y="30" width="200" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="250" id="O9x-hN-9hE"/>
+                                                    <constraint firstAttribute="width" constant="200" id="O9x-hN-9hE"/>
                                                     <constraint firstAttribute="height" constant="30" id="d1V-BK-491"/>
                                                 </constraints>
                                                 <state key="normal" title="PIN Username"/>

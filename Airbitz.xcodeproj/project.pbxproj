@@ -25,6 +25,8 @@
 		44F7116AE0A7F4DB302CDFFB /* Pods_Airbitz_Testnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373C0F068B09CF887B44DEA9 /* Pods_Airbitz_Testnet.framework */; };
 		4D7178CC07C37EB0D6C4B5DC /* Pods_Airbitz_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA5CA765C82C3D6F8FBB01F /* Pods_Airbitz_Develop.framework */; };
 		5C44E25996FF8FC71895C2F0 /* Pods_Airbitz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D0582BF4F480B54DB451C28 /* Pods_Airbitz.framework */; };
+		77F249D91DE541F9005DFBCF /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77F249D81DE541F9005DFBCF /* UsernameDropDownCell.xib */; };
+		77F249DF1DE5426C005DFBCF /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F249DE1DE5426C005DFBCF /* UsernameDropDownCell.swift */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1389,6 +1391,8 @@
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		770A35631DE2519300AF0851 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
+		77F249D81DE541F9005DFBCF /* UsernameDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsernameDropDownCell.xib; sourceTree = "<group>"; };
+		77F249DE1DE5426C005DFBCF /* UsernameDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameDropDownCell.swift; sourceTree = "<group>"; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
 		9D0582BF4F480B54DB451C28 /* Pods_Airbitz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Airbitz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
@@ -2626,6 +2630,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		77F249E01DE54276005DFBCF /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				77F249D81DE541F9005DFBCF /* UsernameDropDownCell.xib */,
+				77F249DE1DE5426C005DFBCF /* UsernameDropDownCell.swift */,
+			);
+			name = DropDown;
+			path = Login;
+			sourceTree = "<group>";
+		};
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
 			isa = PBXGroup;
 			children = (
@@ -3466,6 +3480,7 @@
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
+				77F249E01DE54276005DFBCF /* DropDown */,
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
@@ -4571,6 +4586,7 @@
 				DA9EE4D21BC61F920063DA07 /* large-digit-input_selected@2x.png in Resources */,
 				DADFAC3C1D29F59C006798D5 /* info_insufficient_funds.html in Resources */,
 				DA9EE43C1BC61F920063DA07 /* btn_add@3x.png in Resources */,
+				77F249D91DE541F9005DFBCF /* UsernameDropDownCell.xib in Resources */,
 				DA57A1DF1D131C8A005442AF /* PopupWheelPickerView.xib in Resources */,
 				DA9EE4511BC61F920063DA07 /* btn_collapse_expand_black.png in Resources */,
 				DA9EE4571BC61F920063DA07 /* btn_export@2x.png in Resources */,
@@ -5510,6 +5526,7 @@
 				DA9EE40E1BC61F920063DA07 /* SignUpViewController.m in Sources */,
 				DA9EE4161BC61F920063DA07 /* PluginViewController.m in Sources */,
 				DA9EE0C11BC61F920063DA07 /* Location.m in Sources */,
+				77F249DF1DE5426C005DFBCF /* UsernameDropDownCell.swift in Sources */,
 				DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */,
 				DA9EEC471BC6332F0063DA07 /* GTLDrive_Sources.m in Sources */,
 				DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */,
@@ -6916,6 +6933,7 @@
 		DAD1ADA81BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
@@ -6929,6 +6947,7 @@
 		DAD1ADA91BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
@@ -6942,6 +6961,7 @@
 		DAD1ADAB1BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6955,6 +6975,7 @@
 		DAD1ADAC1BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -474,6 +474,7 @@ static BOOL bInitialized = false;
     
     // Add all accounts to the usernameDropDown datasource
     self.usernameDropDown.dataSource = self.arrayAccounts;
+    self.usernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
 }
 
 - (void)setUsernameText:(NSString *)username
