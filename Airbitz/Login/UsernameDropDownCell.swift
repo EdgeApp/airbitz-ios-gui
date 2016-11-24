@@ -9,10 +9,12 @@
 import UIKit
 import DropDown
 
+let DropDownDeleteNotificationIdentifier = Notification.Name("DropDownDeleteNotificationIdentifier")
+
 class UsernameDropDownCell: DropDownCell {
 
     @IBAction func deleteButton(_ sender: Any) {
-        print("Tapped delete")
+        NotificationCenter.default.post(name: DropDownDeleteNotificationIdentifier, object: self)
     }
 
 }

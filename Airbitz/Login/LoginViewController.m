@@ -81,7 +81,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
 @property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
 //@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
-@property (weak, nonatomic) IBOutlet UIButton *PINusernameSelector;
+@property (weak, nonatomic) IBOutlet UIButton           *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
 @property (nonatomic, weak) IBOutlet UIView             *contentView;
@@ -182,6 +182,19 @@ static BOOL bInitialized = false;
     self.usernameDropDown = [[DropDown alloc] init];
     self.usernameDropDown.anchorView = self.PINusernameSelector;
     self.usernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
+    __weak typeof(self) weakSelf = self;
+    self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf updateUsernameSelector:item];
+        }
+    };
+    
+    //Register for DropDown delete notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(removeAccountFromDropDown:)
+                                                 name:@"DropDownDeleteNotificationIdentifier"
+                                               object:nil];
     
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
@@ -308,6 +321,13 @@ static BOOL bInitialized = false;
 
 }
 
+- (void)removeAccountFromDropDown:(NSNotification *)notification {
+    DropDownCell *dropDownCell = notification.object;
+    NSString *username = dropDownCell.optionLabel.text;
+    [self.usernameDropDown hide];
+    [self deleteAccountPopup:username];
+}
+
 - (void)uploadLog {
     [self resignAllResponders];
     NSString *title = uploadLogText;
@@ -387,6 +407,10 @@ static BOOL bInitialized = false;
 {
     [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // Remove observer for Dropdowns
+    [[NSNotificationCenter defaultCenter] removeObserver:@"DropDownDeleteNotificationIdentifier"];
+    
 //    self.PINCodeView.PINCode = nil;
     self.PINTextField.text = nil;
     _tempPin = nil;
