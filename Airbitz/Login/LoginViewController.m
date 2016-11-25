@@ -190,12 +190,6 @@ static BOOL bInitialized = false;
         }
     };
     
-    //Register for DropDown delete notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(removeAccountFromDropDown:)
-                                                 name:@"DropDownDeleteNotificationIdentifier"
-                                               object:nil];
-    
     self.swipeText.layer.shadowRadius = 3.0f;
     self.swipeText.layer.shadowOpacity = 1.0f;
     self.swipeText.layer.masksToBounds = NO;
@@ -241,6 +235,7 @@ static BOOL bInitialized = false;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [center addObserver:self selector:@selector(removeAccountFromDropDown:) name:@"DropDownDeleteNotificationIdentifier" object:nil];
 
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
@@ -407,9 +402,6 @@ static BOOL bInitialized = false;
 {
     [self dismissErrorMessage];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    // Remove observer for Dropdowns
-    [[NSNotificationCenter defaultCenter] removeObserver:@"DropDownDeleteNotificationIdentifier"];
     
 //    self.PINCodeView.PINCode = nil;
     self.PINTextField.text = nil;
@@ -762,8 +754,9 @@ static BOOL bInitialized = false;
 {
     [MainViewController showBackground:YES animate:YES];
 
+    //NOTE: pinLogin was set to look at [abc getLastAccessedAccount]
     [abc
-     pinLogin:[abc getLastAccessedAccount]
+     pinLogin:self.PINusernameSelector.titleLabel.text
      pin:pin
      delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
          [User login:user];
