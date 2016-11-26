@@ -100,7 +100,8 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
 
-@property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
+//@property (nonatomic, weak) IBOutlet    PickerTextView      *usernameSelector;
+@property (weak, nonatomic) IBOutlet    StylizedTextField   *usernameSelector;
 @property (nonatomic, strong)           NSArray             *arrayAccounts;
 @property (nonatomic, strong)           NSArray             *otherAccounts;
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
@@ -130,7 +131,8 @@ static BOOL bInitialized = false;
     // Do any additional setup after loading the view.
     _mode = MODE_ENTERING_NEITHER;
 
-    self.usernameSelector.textField.delegate = self;
+//    self.usernameSelector.textField.delegate = self;
+//    self.usernameSelector.delegate = self;
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
 //    self.PINCodeView.delegate = self;
@@ -157,17 +159,17 @@ static BOOL bInitialized = false;
     }
 
     // set up the specifics on our picker text view
-    self.usernameSelector.textField.borderStyle = UITextBorderStyleNone;
-    self.usernameSelector.textField.backgroundColor = [UIColor clearColor];
-    self.usernameSelector.textField.font = [UIFont fontWithName:AppFont size:16.0];
-    self.usernameSelector.textField.clearButtonMode = UITextFieldViewModeNever;
-    self.usernameSelector.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.usernameSelector.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.usernameSelector.textField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.usernameSelector.textField.textColor = [UIColor whiteColor];
-    self.usernameSelector.textField.returnKeyType = UIReturnKeyDone;
-    self.usernameSelector.textField.tintColor = [UIColor whiteColor];
-    self.usernameSelector.textField.textAlignment = NSTextAlignmentLeft;
+    self.usernameSelector.borderStyle = UITextBorderStyleNone;
+    self.usernameSelector.backgroundColor = [UIColor clearColor];
+    self.usernameSelector.font = [UIFont fontWithName:AppFont size:16.0];
+    self.usernameSelector.clearButtonMode = UITextFieldViewModeNever;
+    self.usernameSelector.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameSelector.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.usernameSelector.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.usernameSelector.textColor = [UIColor whiteColor];
+    self.usernameSelector.returnKeyType = UIReturnKeyDone;
+    self.usernameSelector.tintColor = [UIColor whiteColor];
+    self.usernameSelector.textAlignment = NSTextAlignmentLeft;
 
     // Add shadows to some text for visibility
     self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
@@ -209,13 +211,13 @@ static BOOL bInitialized = false;
     self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
     self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    self.usernameSelector.textField.placeholder = usernameText;
-    self.usernameSelector.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.textField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
+    self.usernameSelector.placeholder = usernameText;
+    self.usernameSelector.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
 
-    [self.usernameSelector setTopMostView:self.view];
-    self.usernameSelector.pickerMaxChoicesVisible = 3;
-    [self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
-    [Util stylizeTextField:self.usernameSelector.textField];
+    //[self.usernameSelector setTopMostView:self.view];
+    //self.usernameSelector.pickerMaxChoicesVisible = 3;
+    //[self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
+    [Util stylizeTextField:self.usernameSelector];
     
 //    [self.PINTextField addTarget:self
 //                          action:@selector(PINTextFieldDidChange:)
@@ -256,7 +258,7 @@ static BOOL bInitialized = false;
         self.credentialsView.hidden = true;
         self.userEntryView.hidden = true;
         [self.passwordTextField resignFirstResponder];
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
 //        [self.PINCodeView becomeFirstResponder];
         [self.PINTextField becomeFirstResponder];
     }
@@ -267,14 +269,14 @@ static BOOL bInitialized = false;
         self.credentialsView.hidden = false;
         self.userEntryView.hidden = false;
         [self.passwordTextField resignFirstResponder];
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
         [self.PINTextField resignFirstResponder];
 //        [self.PINCodeView resignFirstResponder];
     }
 
     if (_mode == MODE_NO_USERS)
     {
-        self.usernameSelector.textField.hidden = true;
+        self.usernameSelector.hidden = true;
         self.usernameHeight.constant = 0;
         self.passwordHeight.constant = 0;
         self.forgotPassworddButton.hidden = true;
@@ -289,7 +291,7 @@ static BOOL bInitialized = false;
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^
                          {
-                             self.usernameSelector.textField.hidden = false;
+                             self.usernameSelector.hidden = false;
                              self.forgotPassworddButton.hidden = false;
                              [self.view.superview layoutIfNeeded];
                          }
@@ -306,7 +308,7 @@ static BOOL bInitialized = false;
 
     if (HARD_CODED_LOGIN)
     {
-        self.usernameSelector.textField.text = HARD_CODED_LOGIN_NAME;
+        self.usernameSelector.text = HARD_CODED_LOGIN_NAME;
         self.passwordTextField.text = HARD_CODED_LOGIN_PASSWORD;
     }
 }
@@ -346,7 +348,7 @@ static BOOL bInitialized = false;
     if (![LocalSettings controller].bDisclaimerViewed)
     {
         [self.passwordTextField resignFirstResponder];
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
         [self.PINTextField resignFirstResponder];
 //        [self.PINCodeView resignFirstResponder];
 
@@ -463,7 +465,7 @@ static BOOL bInitialized = false;
 }
 
 - (IBAction)OutsideTapButton:(id)sender {
-    [self.usernameSelector dismissPopupPicker];
+    //[self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
 }
 
@@ -526,7 +528,7 @@ static BOOL bInitialized = false;
         //
         // Set the regular username field
         //
-        self.usernameSelector.textField.text = username;
+        self.usernameSelector.text = username;
     }
 //    self.passwordTextField.text = abcAccount.password;
 
@@ -548,10 +550,10 @@ static BOOL bInitialized = false;
 //        _bSuccess = NO;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
+        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
-        [abc loginWithPassword:self.usernameSelector.textField.text
+        [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
                       delegate:[MainViewController Singleton]
                            otp:nil callback:^(ABCError *error, ABCAccount *account)
@@ -590,7 +592,7 @@ static BOOL bInitialized = false;
 
     [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
     {
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
 
         _signupManager = [[SignUpManager alloc] initWithController:self];
@@ -605,12 +607,12 @@ static BOOL bInitialized = false;
 
 - (IBAction)buttonForgotTouched:(id)sender
 {
-    [self launchRecoveryPopup:self.usernameSelector.textField.text recoveryToken:nil];
+    [self launchRecoveryPopup:self.usernameSelector.text recoveryToken:nil];
 }
 
 - (void) launchRecoveryPopup:(NSString *)username recoveryToken:(NSString *)recoveryToken
 {
-    [self.usernameSelector.textField resignFirstResponder];
+    [self.usernameSelector resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.PINTextField resignFirstResponder]; 
     
@@ -635,7 +637,7 @@ static BOOL bInitialized = false;
 - (void)recoverPassword:(NSString *)username
 {
     [self dismissErrorMessage];
-    [self.usernameSelector.textField resignFirstResponder];
+    [self.usernameSelector resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
 
     // if they have a username
@@ -677,7 +679,7 @@ static BOOL bInitialized = false;
             [self showSpinner:YES];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
                 ABCError *error;
-                NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.textField.text
+                NSArray *arrayQuestions = [abc getRecoveryQuestionsForUserName:self.usernameSelector.text
                                                                          error:&error];
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     [self showSpinner:NO];
@@ -899,10 +901,10 @@ static BOOL bInitialized = false;
                             options: UIViewAnimationOptionCurveEaseInOut
                          animations:^
         {
-                 if(self.usernameSelector.textField.isEditing)
+                 if(self.usernameSelector.isEditing)
                  {
                      [self getAllAccounts];
-                     [self.usernameSelector updateChoices:self.arrayAccounts];
+                     //[self.usernameSelector updateChoices:self.arrayAccounts];
                  }
 
                  self.logoHeight.constant = _originalLogoHeight * 0.75;
@@ -1070,7 +1072,7 @@ static BOOL bInitialized = false;
     
     if(_mode == MODE_ENTERING_NEITHER)
     {
-        if(textField == self.usernameSelector.textField)
+        if(textField == self.usernameSelector)
         {
             _mode = MODE_ENTERING_USERNAME;
         }
@@ -1085,10 +1087,10 @@ static BOOL bInitialized = false;
     }
 
     // highlight all of the text
-    if (textField == self.usernameSelector.textField)
+    if (textField == self.usernameSelector)
     {
         [self getAllAccounts];
-        [self.usernameSelector updateChoices:self.arrayAccounts];
+        //[self.usernameSelector updateChoices:self.arrayAccounts];
 
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
     }
@@ -1097,9 +1099,10 @@ static BOOL bInitialized = false;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if (textField == self.usernameSelector.textField)
+    if (textField == self.usernameSelector)
     {
-        [self.usernameSelector dismissPopupPicker];
+        //TODO: Dismiss the dropDown.
+        //[self.usernameSelector dismissPopupPicker];
         [self.passwordTextField becomeFirstResponder];
     }
 
@@ -1156,7 +1159,7 @@ static BOOL bInitialized = false;
 {
     _tfaMenuViewController = (TwoFactorMenuViewController *)[Util animateIn:@"TwoFactorMenuViewController" storyboard:@"Settings" parentController:self];
     _tfaMenuViewController.delegate = self;
-    _tfaMenuViewController.username = self.usernameSelector.textField.text;
+    _tfaMenuViewController.username = self.usernameSelector.text;
     _tfaMenuViewController.bStoreSecret = NO;
     _tfaMenuViewController.bTestSecret = NO;
     _tfaMenuViewController.resetDate = resetDate;
@@ -1198,16 +1201,16 @@ static BOOL bInitialized = false;
         if (!success) {
             return;
         }
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
 
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
-        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.textField.text];
+        _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         // Perform the two factor sign in
-        [abc loginWithPassword:self.usernameSelector.textField.text
+        [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
                       delegate:[MainViewController Singleton]
                            otp:secret
@@ -1287,14 +1290,15 @@ static BOOL bInitialized = false;
 
 - (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
 {
-    [self.usernameSelector.textField resignFirstResponder];
-    [self.usernameSelector dismissPopupPicker];
+    [self.usernameSelector resignFirstResponder];
+    //[self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
     
     // set the text field to the choice
     NSString *account = [self.arrayAccounts objectAtIndex:row];
     if([abc pinLoginEnabled:account error:nil])
     {
+        //TODO: This may have to be moved to the dropdown actions closures.
         [abc setLastAccessedAccount:account];
         bPINModeEnabled = true;
         [self viewDidLoad];
@@ -1303,8 +1307,8 @@ static BOOL bInitialized = false;
     }
     else
     {
-        self.usernameSelector.textField.text = account;
-        [self.usernameSelector dismissPopupPicker];
+        self.usernameSelector.text = account;
+        //[self.usernameSelector dismissPopupPicker];
         [self autoReloginOrTouchIDIfPossible];
     }
 }
@@ -1329,7 +1333,7 @@ static BOOL bInitialized = false;
 - (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
 {
     [self deleteAccountPopup:string];
-    [self.usernameSelector dismissPopupPicker];
+    //[self.usernameSelector dismissPopupPicker];
     self.buttonOutsideTap.enabled = NO;
 }
 
@@ -1523,13 +1527,13 @@ static BOOL bInitialized = false;
     }
     else if (_deleteAccountAlert == alertView)
     {
-        [self.usernameSelector.textField resignFirstResponder];
+        [self.usernameSelector resignFirstResponder];
         // if they said they wanted to delete the account
         if (buttonIndex == 1)
         {
             [self removeAccount:_accountToDelete];
-            self.usernameSelector.textField.text = @"";
-            [self.usernameSelector dismissPopupPicker];
+            self.usernameSelector.text = @"";
+            //[self.usernameSelector dismissPopupPicker];
         }
     }
 }
@@ -1539,7 +1543,7 @@ static BOOL bInitialized = false;
     // if mail is available
     if ([MFMailComposeViewController canSendMail])
     {
-        NSString *username =  self.usernameSelector.textField.text;
+        NSString *username =  self.usernameSelector.text;
         
         if (!username || username.length < 3)
         {
@@ -1591,7 +1595,7 @@ static BOOL bInitialized = false;
 - (void)resignAllResponders
 {
     [self.passwordTextField resignFirstResponder];
-    [self.usernameSelector.textField resignFirstResponder];
+    [self.usernameSelector resignFirstResponder];
     [self.PINTextField resignFirstResponder];
 }
 
@@ -1605,13 +1609,13 @@ static BOOL bInitialized = false;
     {
         if (_mode != MODE_NO_USERS)
         {
-            if ([self.usernameSelector.textField.text length] > 0)
+            if ([self.usernameSelector.text length] > 0)
             {
                 [self.passwordTextField becomeFirstResponder];
             }
             else
             {
-                [self.usernameSelector.textField becomeFirstResponder];
+                [self.usernameSelector becomeFirstResponder];
             }
         }
     }

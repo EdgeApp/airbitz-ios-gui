@@ -902,7 +902,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
-                                        <rect key="frame" x="20" y="333" width="335" height="20"/>
+                                        <rect key="frame" x="20" y="333" width="335" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="d6r-Ou-4zx"/>
                                         </constraints>
@@ -913,7 +913,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2">
-                                        <rect key="frame" x="20" y="355" width="335" height="20"/>
+                                        <rect key="frame" x="20" y="356" width="335" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="L38-8w-StF"/>
                                         </constraints>
@@ -924,7 +924,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS">
-                                        <rect key="frame" x="20" y="377" width="335" height="20"/>
+                                        <rect key="frame" x="20" y="378" width="335" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="u2z-WZ-GnH"/>
                                         </constraints>
@@ -2348,7 +2348,7 @@
                                 <rect key="frame" x="0.0" y="62" width="375" height="605"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dx-DT-q9d" customClass="StylizedTextField">
-                                        <rect key="frame" x="57.5" y="12" width="260" height="30"/>
+                                        <rect key="frame" x="58" y="12" width="260" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="OKI-6i-U04"/>
                                             <constraint firstAttribute="width" constant="260" id="Z3X-VO-eK6"/>
@@ -2524,7 +2524,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
                                             </textField>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuE-s0-NQ2" userLabel="Lato Label - USD" customClass="LatoLabel">
-                                                <rect key="frame" x="310" y="200.5" width="35" height="21"/>
+                                                <rect key="frame" x="310" y="200" width="35" height="22"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2978,14 +2978,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpH-FO-ztL" userLabel="View - Username Pwd">
                                         <rect key="frame" x="28" y="161" width="320" height="147"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z92-xY-Nti" userLabel="View username picker" customClass="PickerTextView">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SEw-4z-klE" customClass="StylizedTextField">
                                                 <rect key="frame" x="34" y="20" width="251" height="35"/>
-                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="P9O-6a-PAa"/>
-                                                    <constraint firstAttribute="width" constant="251" id="acp-pT-DJB"/>
+                                                    <constraint firstAttribute="height" constant="35" id="Qc4-bm-Jay"/>
+                                                    <constraint firstAttribute="width" constant="251" id="sQy-l0-aXR"/>
                                                 </constraints>
-                                            </view>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="V5e-1n-K9Z" customClass="StylizedTextField">
                                                 <rect key="frame" x="34" y="63" width="251" height="35"/>
                                                 <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
@@ -3017,13 +3020,13 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="V5e-1n-K9Z" firstAttribute="top" secondItem="SEw-4z-klE" secondAttribute="bottom" constant="8" symbolic="YES" id="8W5-F4-878"/>
                                             <constraint firstAttribute="width" constant="320" id="GhS-9N-0LZ"/>
-                                            <constraint firstItem="Z92-xY-Nti" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="top" constant="20" symbolic="YES" id="IXP-nw-i6O"/>
+                                            <constraint firstItem="SEw-4z-klE" firstAttribute="centerX" secondItem="kpH-FO-ztL" secondAttribute="centerX" id="KiL-31-mz1"/>
                                             <constraint firstAttribute="height" constant="147" id="Y8S-MA-RHJ"/>
                                             <constraint firstItem="Q2G-61-ExK" firstAttribute="top" secondItem="V5e-1n-K9Z" secondAttribute="bottom" constant="8" symbolic="YES" id="Zk8-TA-yLs"/>
                                             <constraint firstAttribute="centerX" secondItem="V5e-1n-K9Z" secondAttribute="centerX" id="dbS-Qg-1vX"/>
-                                            <constraint firstItem="V5e-1n-K9Z" firstAttribute="top" secondItem="Z92-xY-Nti" secondAttribute="bottom" constant="8" symbolic="YES" id="i17-Lm-LKm"/>
-                                            <constraint firstAttribute="centerX" secondItem="Z92-xY-Nti" secondAttribute="centerX" id="mNC-ve-GCB"/>
+                                            <constraint firstItem="V5e-1n-K9Z" firstAttribute="top" secondItem="kpH-FO-ztL" secondAttribute="top" constant="63" id="lNL-Eo-hcC"/>
                                             <constraint firstAttribute="centerX" secondItem="Q2G-61-ExK" secondAttribute="centerX" id="nta-60-8u4"/>
                                         </constraints>
                                     </view>
@@ -3269,8 +3272,7 @@
                         <outlet property="textBitcoinWalletHeight" destination="6J0-O3-MAp" id="PKx-Pf-IgX"/>
                         <outlet property="titleText" destination="nae-d6-xoW" id="2iX-DH-tAT"/>
                         <outlet property="userEntryView" destination="bUp-i4-uHt" id="dJP-E5-WVa"/>
-                        <outlet property="usernameHeight" destination="P9O-6a-PAa" id="gxa-YL-WhN"/>
-                        <outlet property="usernameSelector" destination="Z92-xY-Nti" id="5Mc-tU-He9"/>
+                        <outlet property="usernameSelector" destination="SEw-4z-klE" id="SRw-Le-Jf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfQ-ZQ-sIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4006,7 +4008,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfk-fn-TnF" userLabel="View -white frost">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AkB-cD-ba5" userLabel="topLabel" customClass="LatoLabel">
@@ -4021,7 +4023,7 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gJp-Ct-Vol" userLabel="bottomLabel" customClass="LatoLabel">
-                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
+                                            <rect key="frame" x="69" y="38" width="38" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="7Up-y4-tsr"/>
                                             </constraints>
@@ -4181,7 +4183,7 @@
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XJt-5y-Q5y" userLabel="bottomLabel" customClass="LatoLabel">
-                                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
+                                                            <rect key="frame" x="69" y="38" width="38" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="4xA-Cc-iPf"/>
                                                             </constraints>
