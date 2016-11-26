@@ -1111,6 +1111,7 @@ static BOOL bInitialized = false;
     if (textField == self.usernameSelector)
     {
         [self getAllAccounts];
+        [self.usernameDropDown show];
         //[self.usernameSelector updateChoices:self.arrayAccounts];
 
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
