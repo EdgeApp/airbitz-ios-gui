@@ -8,8 +8,10 @@ def import_pods
 end
 
 def import_pods_ios
+    use_frameworks!
     pod "ZBarSDK", "~> 1.3"
     pod 'SDWebImage', '~>3.6'
+    pod 'DropDown', '~>2'
 end
 
 target "Airbitz" do
@@ -31,4 +33,12 @@ end
 target 'Airbitz-OSX' do
     platform :osx, '10.9'
     import_pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ENABLE_BITCODE'] = 'NO'
+        end
+    end
 end
