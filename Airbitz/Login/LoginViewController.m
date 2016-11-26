@@ -107,6 +107,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
 
+@property (strong, nonatomic) DropDown *PINusernameDropDown;
 @property (strong, nonatomic) DropDown *usernameDropDown;
 
 @end
@@ -180,13 +181,25 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
     self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
 
+    // Initialize the PINusernameDropDown
+    self.PINusernameDropDown = [[DropDown alloc] init];
+    self.PINusernameDropDown.anchorView = self.PINusernameSelector;
+    self.PINusernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
+    __weak typeof(self) weakSelf = self;
+    self.PINusernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf updateUsernameSelector:item];
+        }
+    };
+    
     // Initialize the usernameDropDown
     self.usernameDropDown = [[DropDown alloc] init];
-    self.usernameDropDown.anchorView = self.PINusernameSelector;
-    self.usernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
-    __weak typeof(self) weakSelf = self;
+    self.usernameDropDown.anchorView = self.usernameSelector;
+    self.usernameDropDown.bottomOffset = CGPointMake(0, self.usernameSelector.bounds.size.height);
+    __weak typeof(self) weakSelf2 = self;
     self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
-        __strong typeof(self) strongSelf = weakSelf;
+        __strong typeof(self) strongSelf = weakSelf2;
         if (strongSelf) {
             [strongSelf updateUsernameSelector:item];
         }
@@ -237,7 +250,11 @@ static BOOL bInitialized = false;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [center addObserver:self selector:@selector(removeAccountFromDropDown:) name:@"DropDownDeleteNotificationIdentifier" object:nil];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [center addObserver:self selector:@selector(removeAccountFromDropDown:) name:@"DropDownDeleteNotificationIdentifier" object:nil];
+    });
 
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
@@ -321,6 +338,7 @@ static BOOL bInitialized = false;
 - (void)removeAccountFromDropDown:(NSNotification *)notification {
     DropDownCell *dropDownCell = notification.object;
     NSString *username = dropDownCell.optionLabel.text;
+    [self.PINusernameDropDown hide];
     [self.usernameDropDown hide];
     [self deleteAccountPopup:username];
 }
@@ -474,7 +492,7 @@ static BOOL bInitialized = false;
 }
 
 - (IBAction)PINusernameButton:(id)sender {
-    [self.usernameDropDown show];
+    [self.PINusernameDropDown show];
 }
 
 #pragma mark - Misc Methods
@@ -491,6 +509,8 @@ static BOOL bInitialized = false;
     self.otherAccounts = [stringArray copy];
     
     // Add all accounts to the usernameDropDown datasource
+    self.PINusernameDropDown.dataSource = self.arrayAccounts;
+    self.PINusernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
     self.usernameDropDown.dataSource = self.arrayAccounts;
     self.usernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
 }
@@ -1075,6 +1095,7 @@ static BOOL bInitialized = false;
         if(textField == self.usernameSelector)
         {
             _mode = MODE_ENTERING_USERNAME;
+            [self.usernameDropDown show];
         }
         else
         {
@@ -1101,8 +1122,7 @@ static BOOL bInitialized = false;
     [textField resignFirstResponder];
     if (textField == self.usernameSelector)
     {
-        //TODO: Dismiss the dropDown.
-        //[self.usernameSelector dismissPopupPicker];
+        [self.usernameDropDown hide];
         [self.passwordTextField becomeFirstResponder];
     }
 
