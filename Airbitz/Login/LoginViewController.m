@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "PickerTextView.h"
 #import "SignUpViewController.h"
 #import "User.h"
 #import "StylizedTextField.h"
@@ -39,8 +38,7 @@ typedef enum eLoginMode
 
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate, PickerTextViewDelegate,
-    TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate >
+@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate,  TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -1309,31 +1307,6 @@ static BOOL bInitialized = false;
 
 #pragma mark - PickerTextView delegates
 
-- (void)pickerTextViewPopupSelected:(PickerTextView *)pickerTextView onRow:(NSInteger)row
-{
-    [self.usernameSelector resignFirstResponder];
-    //[self.usernameSelector dismissPopupPicker];
-    self.buttonOutsideTap.enabled = NO;
-    
-    // set the text field to the choice
-    NSString *account = [self.arrayAccounts objectAtIndex:row];
-    if([abc pinLoginEnabled:account error:nil])
-    {
-        //TODO: This may have to be moved to the dropdown actions closures.
-        [abc setLastAccessedAccount:account];
-        bPINModeEnabled = true;
-        [self viewDidLoad];
-        [self viewWillAppear:true];
-        [self autoReloginOrTouchIDIfPossible];
-    }
-    else
-    {
-        self.usernameSelector.text = account;
-        //[self.usernameSelector dismissPopupPicker];
-        [self autoReloginOrTouchIDIfPossible];
-    }
-}
-
 - (void)removeAccount:(NSString *)account
 {
     NSError *error = [abc deleteLocalAccount:account];
@@ -1349,13 +1322,6 @@ static BOOL bInitialized = false;
     {
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
-}
-
-- (void)pickerTextViewDidTouchAccessory:(PickerTextView *)pickerTextView categoryString:(NSString *)string
-{
-    [self deleteAccountPopup:string];
-    //[self.usernameSelector dismissPopupPicker];
-    self.buttonOutsideTap.enabled = NO;
 }
 
 - (void)deleteAccountPopup:(NSString *)acct;
@@ -1375,53 +1341,6 @@ static BOOL bInitialized = false;
                           cancelButtonTitle:noButtonText
                           otherButtonTitles:yesButtonText, nil];
     [_deleteAccountAlert show];
-}
-
-- (void)pickerTextViewFieldDidShowPopup:(PickerTextView *)pickerTextView
-{
-    CGRect frame = pickerTextView.popupPicker.frame;
-    pickerTextView.popupPicker.frame = frame;
-
-    CGRect pickerWindowFrame = [self.contentView convertRect:frame toView:self.view.window];
-
-    // Shrink the popup if it would be behind the keyboard.
-
-    if (_keyboardFrameOriginY > 0)
-    {
-        float overlap = _keyboardFrameOriginY - (pickerWindowFrame.origin.y + pickerWindowFrame.size.height);
-        
-        if (overlap < 0)
-        {
-            frame.size.height += overlap;
-        }
-        pickerTextView.popupPicker.frame = frame;
-        
-    }
-    self.buttonOutsideTap.enabled = YES;
-
-}
-
-- (void)pickerTextViewFieldDidChange:(PickerTextView *)pickerTextView;
-{
-    //
-    // Do not show popup if user has text in the field
-    //
-    if ([pickerTextView.textField.text length] > 0)
-    {
-        [pickerTextView dismissPopupPicker];
-        self.buttonOutsideTap.enabled = NO;
-    }
-    else if ([pickerTextView.textField.text length] == 0)
-    {
-        [pickerTextView createPopupPicker];
-        self.buttonOutsideTap.enabled = YES;
-    }
-}
-
-- (void)pickerTextViewFieldDidEndEditing:(PickerTextView *)pickerTextView;
-{
-    [pickerTextView dismissPopupPicker];
-    self.buttonOutsideTap.enabled = NO;
 }
 
 #pragma mark - UIAlertView Delegate
