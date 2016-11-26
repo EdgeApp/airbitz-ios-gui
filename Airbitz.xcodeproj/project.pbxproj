@@ -3861,7 +3861,6 @@
 					};
 					DAD1AD8F1BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 6RV5CH2XTD;
 						TestTargetID = DAD1AD761BC6065100C648C4;
 					};
 					DAD1AD9A1BC6065100C648C4 = {
@@ -6450,7 +6449,7 @@
 					"$(PROJECT_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.Airbitz-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -6471,7 +6470,7 @@
 					"$(PROJECT_DIR)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.Airbitz-OSX";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.Airbitz-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -6552,7 +6551,7 @@
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6567,7 +6566,7 @@
 				DEVELOPMENT_TEAM = 6RV5CH2XTD;
 				INFOPLIST_FILE = "Airbitz Widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rommelrico.airbitz.Airbitz-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.airbitz.airbitz.Airbitz-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -6611,7 +6610,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.develop;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6655,7 +6654,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.develop;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6699,7 +6698,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.testnet;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6743,7 +6742,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.testnet;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6876,7 +6875,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
@@ -6922,7 +6921,7 @@
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rommelrico.airbitz;
+				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
@@ -6935,7 +6934,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 6RV5CH2XTD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
@@ -6949,7 +6948,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 6RV5CH2XTD;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzTests;
