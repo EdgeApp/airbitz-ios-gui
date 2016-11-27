@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "This Month"; ObjectID = "0ea-NR-Nd9"; */
 "0ea-NR-Nd9.normalTitle" = "本月";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM"; */
+"0s2-OO-yBM.text" = "标签";
+
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
 "1kz-sq-XsE.normalTitle" = "钱包公钥 - XPub（高级）";
 
@@ -14,10 +17,10 @@
 "3A3-3d-okn.text" = "状态1";
 
 /* Class = "UIButton"; normalTitle = "Advanced"; ObjectID = "3Py-nn-1AR"; */
-"3Py-nn-1AR.normalTitle" = "提前";
+"3Py-nn-1AR.normalTitle" = "高级设置";
 
 /* Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA"; */
-"4KX-hj-tJA.text" = "线下钱包";
+"4KX-hj-tJA.text" = "离线钱包";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
 "4ab-Wa-eS4.placeholder" = "密码";
@@ -38,7 +41,7 @@
 "8Nr-wB-OaB.text" = "外部存储 / 打印";
 
 /* Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
-"8XB-1A-1hO.text" = "滑动来查看商业目录";
+"8XB-1A-1hO.text" = "滑动以查看企业名录";
 
 /* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
 "8iz-Uc-LTS.normalTitle" = "注册";
@@ -50,7 +53,7 @@
 "90X-8Y-MEH.normalTitle" = "去年";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
-"AOi-Wp-bVq.segmentTitles[0]" = "转换 ︰";
+"AOi-Wp-bVq.segmentTitles[0]" = "转账";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[1]" = "地址";
@@ -61,8 +64,11 @@
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[3] = "Flash"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[3]" = "闪存";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5"; */
+"AkB-cD-ba5.text" = "标签";
+
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
-"BED-Cf-F1n.text" = "密码必须有大写和小写字母、 一个数字和最少10 个字符";
+"BED-Cf-F1n.text" = "密码必须具有一个大写和小写字母、数字和至少10个字符";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
 "Bxa-tB-mk3.text" = "电话";
@@ -95,16 +101,16 @@
 "HzM-6V-ckO.text" = "导出";
 
 /* Class = "UIViewController"; title = "Request View Controller"; ObjectID = "Int-ih-AH6"; */
-"Int-ih-AH6.title" = "钱包展示控制器";
+"Int-ih-AH6.title" = "索求视图控制器";
 
 /* Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
-"JZ8-MW-EwQ.text" = "PRIVATE KEY";
+"JZ8-MW-EwQ.text" = "私钥";
 
 /* Class = "UITextField"; placeholder = "Enter PIN"; ObjectID = "KTi-U4-C5T"; */
 "KTi-U4-C5T.placeholder" = "输入 PIN";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE"; */
-"L8T-Xw-aVE.text" = "备注";
+"L8T-Xw-aVE.text" = "记录";
 
 /* Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG"; */
 "LI5-7a-oQG.text" = "开始日期";
@@ -125,10 +131,13 @@
 "PI3-NW-bVF.placeholder" = "当前密码";
 
 /* Class = "UILabel"; text = "Sending..."; ObjectID = "PY5-r2-zeB"; */
-"PY5-r2-zeB.text" = "正在发送";
+"PY5-r2-zeB.text" = "正在发送...";
 
 /* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Q2G-61-ExK"; */
 "Q2G-61-ExK.normalTitle" = "登入";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "QwV-te-soN"; */
+"QwV-te-soN.normalTitle" = "取消";
 
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "QzV-Gk-Vrs"; */
 "QzV-Gk-Vrs.placeholder" = "重新输入密码";
@@ -170,49 +179,55 @@
 "V5e-1n-K9Z.placeholder" = "密码";
 
 /* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
-"Vcb-0y-fDf.text" = "有一个应用程序正要求用来寄送资金的比特币地址。请在上面挑选一个钱包以接收资金：";
+"Vcb-0y-fDf.text" = "有个应用程序要求一个可发送资金的比特币地址。请从上列选择一个钱包以便接收资金：";
 
 /* Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY"; */
-"Vuw-Bw-dQY.normalTitle" = "钱包的Private Seed (高级)";
+"Vuw-Bw-dQY.normalTitle" = "钱包的密钥种子 (高级)";
 
 /* Class = "UILabel"; text = "4 Digit PIN"; ObjectID = "WB0-Ox-RAw"; */
 "WB0-Ox-RAw.text" = "4 位数字的 PIN";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XJt-5y-Q5y"; */
+"XJt-5y-Q5y.text" = "标签";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Yfp-gi-q8F"; */
 "Yfp-gi-q8F.text" = "标签";
 
 /* Class = "UIViewController"; title = "Wallets View Controller"; ObjectID = "ZP6-jP-fb3"; */
-"ZP6-jP-fb3.title" = "钱包展示控制器";
+"ZP6-jP-fb3.title" = "钱包视图控制器";
 
 /* Class = "UITextField"; placeholder = "Private key"; ObjectID = "ZTK-Sq-FqJ"; */
-"ZTK-Sq-FqJ.placeholder" = "Private Key";
+"ZTK-Sq-FqJ.placeholder" = "私钥";
 
 /* Class = "UILabel"; text = "Sent From:"; ObjectID = "ZW8-Za-VVy"; */
-"ZW8-Za-VVy.text" = "来自：";
+"ZW8-Za-VVy.text" = "发送自：";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "a3J-4E-YSl"; */
 "a3J-4E-YSl.text" = "标签";
 
 /* Class = "UIViewController"; title = "Send View Controller"; ObjectID = "c1q-yF-WIr"; */
-"c1q-yF-WIr.title" = "发送展示控制器";
+"c1q-yF-WIr.title" = "发送视图控制器";
 
 /* Class = "UILabel"; text = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj"; ObjectID = "cIH-5H-WKu"; */
 "cIH-5H-WKu.text" = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj";
 
 /* Class = "UILabel"; text = "Scan QR to Send Funds or Login with BitID"; ObjectID = "cYL-n1-ybU"; */
-"cYL-n1-ybU.text" = "扫描二维码以进行资金传送或是使用BitID登入";
+"cYL-n1-ybU.text" = "扫描二维码以发送资金或是使用BitID登入";
 
 /* Class = "UIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I"; */
 "cix-f2-i3I.normalTitle" = "跳过此步骤";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "dKh-rY-DMM"; */
-"dKh-rY-DMM.normalTitle" = "完成";
+"dKh-rY-DMM.normalTitle" = "确定";
 
 /* Class = "UILabel"; text = "End Date"; ObjectID = "dm1-b8-Vp0"; */
 "dm1-b8-Vp0.text" = "结束日期";
 
 /* Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
 "egu-Uy-luw.placeholder" = "支出限额PIN";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol"; */
+"gJp-Ct-Vol.text" = "标签";
 
 /* Class = "UIButton"; normalTitle = "Transaction Info (CSV)"; ObjectID = "hOS-Gw-CqO"; */
 "hOS-Gw-CqO.normalTitle" = "交易信息 (CSV)";
@@ -221,19 +236,19 @@
 "iE3-Jv-3vs.text" = "标签";
 
 /* Class = "UILabel"; text = "Camera unavailable"; ObjectID = "iXW-st-n5q"; */
-"iXW-st-n5q.text" = "相机无效";
+"iXW-st-n5q.text" = "相机未能使用";
 
 /* Class = "UILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe"; */
-"ifv-G8-Cxe.text" = "（当超越每日限额时需要密码）";
+"ifv-G8-Cxe.text" = "（当超越每日限额时需要输入密码）";
 
 /* Class = "UITabBarItem"; title = "Transactions"; ObjectID = "j3q-OI-el3"; */
 "j3q-OI-el3.title" = "交易";
 
 /* Class = "UIViewController"; title = "Main View Controller"; ObjectID = "jDp-Og-qtC"; */
-"jDp-Og-qtC.title" = "主要的展示控制器";
+"jDp-Og-qtC.title" = "主视图控制器";
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[0] = "Copy"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
-"jlL-oE-aWy.segmentTitles[0]" = "副本";
+"jlL-oE-aWy.segmentTitles[0]" = "复制";
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[1] = "Email"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[1]" = "电子邮件";
@@ -249,6 +264,9 @@
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "ltN-lB-ATB"; */
 "ltN-lB-ATB.placeholder" = "搜索";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "mxS-jU-qS2"; */
+"mxS-jU-qS2.normalTitle" = "Login";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "n7B-WE-395"; */
 "n7B-WE-395.normalTitle" = "完成";
@@ -269,13 +287,13 @@
 "pIj-oW-HUW.normalTitle" = "交易信息 (Quickbooks)";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
-"puA-fb-r0H.placeholder" = "创建 PIN";
+"puA-fb-r0H.placeholder" = "创建个人识别码PIN";
 
 /* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
 "rls-16-YZg.text" = "[不翻译]";
 
 /* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
-"sAy-bR-lqd.title" = "目录";
+"sAy-bR-lqd.title" = "菜单";
 
 /* Class = "UILabel"; text = "Daily Spending Limit"; ObjectID = "sgY-Eq-QTK"; */
 "sgY-Eq-QTK.text" = "每日支出限额";

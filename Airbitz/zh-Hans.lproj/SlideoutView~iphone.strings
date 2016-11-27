@@ -29,7 +29,7 @@
 "lr4-kO-HCW.text" = "钱包";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
-"rWQ-uJ-DUX.text" = "买入/卖出比特币";
+"rWQ-uJ-DUX.text" = "买入/售出比特币";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.accessibilityHint" = "目前所登录的帐户";

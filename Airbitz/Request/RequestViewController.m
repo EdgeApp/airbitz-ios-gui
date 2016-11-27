@@ -807,6 +807,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     ABCWallet *wallet = [self getCurrentWallet];
     
     self.exchangeRateLabel.text = [wallet conversionString];
+    if (!self.exchangeRateLabel.text)
+        self.exchangeRateLabel.text = exchange_rate_loading;
+    
 //XXX    self.USDLabel_TextField.text = wallet.currencyAbbrev;
     [self.segmentedControlBTCUSD setTitle:wallet.currency.code forSegmentAtIndex:0];
     _fiatLabel.text = wallet.currency.code;

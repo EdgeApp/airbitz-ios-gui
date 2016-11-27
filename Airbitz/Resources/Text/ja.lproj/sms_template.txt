@@ -1,19 +1,19 @@
-Bitcoin Payment Request
-From: [[abtag FROM]]
+Bitcoin支払い要求
+から [[abtag FROM]]
 
-Please scan QR code or click on the links to pay
+QRコードをスキャンするか、有料のリンクをクリックしてください
 
-Click to Pay
+クリックでプレイ
 [[abtag REDIRECT_URL]]
 
 [[abtag BITCOIN_URI]]
 
-Address: [[abtag ADDRESS]]
-Amount: [[abtag AMOUNT_BTC]] BTC
-Amount: [[abtag AMOUNT_BITS]] bits
+住所: [[abtag ADDRESS]]
+量：[[abtag AMOUNT_BTC]] BTC
+量： [[abtag AMOUNT_BITS]] bits
 
-Sent from the [[abtag APP_TITLE]] Mobile Bitcoin Wallet + Business Directory
+から送信された  [[abtag APP_TITLE]]モバイルBitcoin Wallet +ビジネスディレクトリ
 
-Download [[abtag APP_TITLE]] for iOS or Android
+ダウンロード[[abtag APP_TITLE]]iOSまたはAndroid用
 [[abtag APP_DOWNLOAD_LINK]]
 

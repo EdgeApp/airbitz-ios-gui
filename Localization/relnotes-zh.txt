@@ -1,16 +1,33 @@
-v 2.2.0
+v.2.3.3
 
-We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+• Fix rare issue with PIN login not working
+• Fix hang when entering password in SendConfirmation screen 
+• Support Edge Login from URI button on mobile
+• Show "exchange rate loading" insted of 0 value when needed
+• Add WhatsApp forum to support links
 
-In addition:
+v 2.3.0
 
-• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
-• Fixed TouchID occasionally not recognizing touches
-• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
-• Background notifications of incoming funds if app is recently backgrounded
-• Fallback public address for failed BIP70 payment protocol transactions 
-• Improved language translations
-• Show small dropdown when unable to connect to network
+Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+
+• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
+• Fix iOS 10 UI issues
+• Fix iOS 10 crash on accounts with lots of wallets
+• Improve Scrypt parameter calculations for stronger security on faster devices
+
+2.2.0版本
+
+我们刚创新地实施了世界上首个流畅的密码复原程序，让忘记密码的用户只需两道问题和一封电邮便能取得密码。 无需再为了忘记密码而操心
+
+另外：
+
+• 结合Bitrefill插件让用户为手机充值，涵括143个国家的600服务供应商
+• 已修复TouchID偶尔失效的问题
+• 已封存的帐户先占用较少资源，停止访问网络或将交易资料进行同步
+• 软件程序仍为来临资金发出通知讯号，即使已处于后台
+• 为不成功的BIP70付款协议交易提供备用的公共地址 
+• 已改善的语言翻译
+• 当无法连接网络时，显示小型下拉选项
 
 v 2.1.0
 
@@ -19,8 +36,8 @@ v 2.1.0
 • 添加用户可控的估计挖掘费 (低，标准，高设置)
 • 当钱包离线并收到交易时，修复不正确的交易时间
 • 修复计算器 缺陷
-• 添加中文、 印度语、 西班牙语和葡萄牙语语言
-• 对本地化的数量、 时间和日期添加支持
-• 加快新设备登录 速度200%
+• 添加中文、 印度语、 西班牙语和葡萄牙语语言支援
+• 对数字、时间和日期的适当定位添加支援
+• 加快新装置的登录速度达200%
 • 在较差的网络条件下提升交易检测的准确性
 • 在登入屏幕中添加TouchID 按钮来重新触发 TouchID 的弹出窗口

@@ -4,7 +4,9 @@
 /* No comment provided by engineer. */
 "%@
 
-Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@请分享这个链接，当有人安装和使用 %2$s 时就能够赚钱收入。您将收到在这个应用程序里所购买的所有礼品卡的 0.25%%。";
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
+
+分享此链接，任何用户安装和使用%2$s时，您就能够获利。凡是在此应用程序里购买的礼品卡，您将得到其中的0.25%%。";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
 "%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ 请求通过 %3$@ 于 %4$@。";
@@ -13,45 +15,45 @@ Share this link to receive revenue from users that install and use %@. You will 
 "%@ Bitcoin Request" = "%@ 的比特币请求";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request from %@" = "%1$@ 的比特币请求来自 %2$@";
+"%@ Bitcoin Request from %@" = "%1$@ 的比特币请求，来自 %2$@";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin received. Tap for details." = "%@ 收到比特币。请点击查看有关详细信息。";
+"%@ Bitcoin received. Tap for details." = "已收到 %@ 比特币。请点击以查看详情。";
 
 /* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
-"%@ Recovery Token" = "%@ Recovery Token";
+"%@ Recovery Token" = "%@ 复原代币";
 
 /* No comment provided by engineer. */
 "%@ failed:
-%@" = "%1$@ 失败:
+%@" = "%1$@ 已失败:
 %2$@";
 
 /* No comment provided by engineer. */
-"%@ has requested a bitcoin address to send money to." = "%@ 提出传送比特币地址的要求。";
+"%@ has requested a bitcoin address to send money to." = "%@ 要求一个比特币地址以便发送资金。";
 
 /* ** Warning ** text on partial payment */
 "** Warning **" = "* * 警告 * *";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "* * 警告 * * 如果您忘记密码了，那么将永远无法找回密码!!";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "* * 警告 * * 如果忘记密码，您将无法将它复原!!";
 
 /* No comment provided by engineer. */
-"2 Factor (Enhanced Security)" = "2 要素 （增强版保安）";
+"2 Factor (Enhanced Security)" = "2元认证（加强保安）";
 
 /* No comment provided by engineer. */
-"4 Digit PIN" = "4 位数字的 PIN";
+"4 Digit PIN" = "4 位数字的个人识别码PIN";
 
 /* No comment provided by engineer. */
 "15-20% off Amazon" = "亚马逊高达15%-20%的折扣";
 
 /* No comment provided by engineer. */
-"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "已经请求了重置2要素身份验证。如果不是您提出这个要求，请马上登入 %@，然后更改您的密码。";
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "已收到二元认证重置请求。如果您为提出此请求，请马上以 %@ 登入，然后更改您的密码。";
 
 /* section header in settings table */
 "ACCOUNT: " = "帐户： ";
 
 /* title of archived wallets table */
-"ARCHIVE" = "进行";
+"ARCHIVE" = "封存";
 
 /* No comment provided by engineer. */
 "ATM" = "自动提款机";
@@ -59,8 +61,11 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "ATM Fee" = "自动提款机手续费";
 
+/* ACCEPT button text */
+"Accept" = "Accept";
+
 /* No comment provided by engineer. */
-"Account '%@' needs a password. Account is not accessible on a new device without a password." = "帐户 '%@'需要密码。如果新设备没有输入密码，那么将无法登入帐户。";
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "帐户'%@'需要密码。缺乏密码将无法在新装置上登入帐户。";
 
 /* Title of account signin error alert */
 "Account Sign Up" = "帐户注册";
@@ -69,7 +74,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Account has no password" = "帐户没有密码";
 
 /* No comment provided by engineer. */
-"Add New" = "添加";
+"Add New" = "新添";
 
 /* Income category for affiliate revenue */
 "Affiliate Revenue" = "合作伙伴收入";
@@ -81,10 +86,10 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Air Travel" = "航空旅游";
 
 /* No comment provided by engineer. */
-"AirPrint is not currently available" = "AirPrint 目前无法使用";
+"AirPrint is not currently available" = "目前无法使用AirPrint ";
 
 /* No comment provided by engineer. */
-"Alcohol & Bars" = "酒精 & 酒吧";
+"Alcohol & Bars" = "酒精饮料 & 酒吧";
 
 /* No comment provided by engineer. */
 "Allowance" = "津贴";
@@ -96,16 +101,22 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Amusement" = "娱乐";
 
 /* No comment provided by engineer. */
-"An app has requested a bitcoin address to send money to." = "有一个程序提出传送比特币地址的要求。";
+"An app has requested a bitcoin address to send money to." = "有个程序要求一个比特币地址以便发送资金。";
 
 /* No comment provided by engineer. */
-"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "发生错误。请检查您的网络连接。您也可能退出 PIN 的登入，和使用您的用户名& 密码来进行离线登出。";
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "发生了一项错误。请检查您的网络连接。您也可以退出PIN的登入，并使用您的用户名& 密码进行离线登入。";
 
 /* No comment provided by engineer. */
 "An error occurred. Possible network connection issue or incorrect username & password" = "出现错误。可能是网络连接的问题或不正确的用户名& 密码";
 
 /* Warning for password recovery textfields */
-"Answers are case sensitive" = "答案对大小写之分敏感";
+"Answers are case sensitive" = "答案对于大小写有所区分";
+
+/* APPROVE button text */
+"Approve" = "Approve";
+
+/* Approving Login popup */
+"Approving Login..." = "Approving Login...";
 
 /* No comment provided by engineer. */
 "Are you sure you want to call" = "您确定要拨打吗？";
@@ -129,7 +140,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Auto Payment" = "自动转账";
 
 /* settings text */
-"Auto log off after" = "自动登出 ︰";
+"Auto log off after" = "自动登出时限 ︰";
 
 /* section header in settings table */
 "BITCOIN DENOMINATION" = "比特币面额";
@@ -150,7 +161,10 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Bank Fee" = "银行费用";
 
 /* No comment provided by engineer. */
-"Bills & Utilities" = "账单 & 杂费";
+"Bills & Utilities" = "账单 & 基础设施费";
+
+/* No comment provided by engineer. */
+"BitID Identity" = "BitID Identity";
 
 /* No comment provided by engineer. */
 "BitID Login" = "BitID 登入";
@@ -159,13 +173,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Bitcoin" = "比特币";
 
 /* No comment provided by engineer. */
-"Bitcoin Address or Private Key" = "比特币地址或Private Key";
+"Bitcoin Address or Private Key" = "比特币地址或私钥";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key" = "比特币Private Key";
+"Bitcoin Private Key" = "比特币私钥";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key with Public Address" = "拥有公用地址的比特币专用Private Key";
+"Bitcoin Private Key with Public Address" = "拥有公用地址的比特币私钥";
 
 /* Export wallet transactions email subject line */
 "Bitcoin Wallet Transactions" = "比特币钱包的交易";
@@ -180,16 +194,19 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Books" = "书籍";
 
 /* No comment provided by engineer. */
-"Books & Supplies" = "书本 & 文具";
+"Books & Supplies" = "书籍 & 用品";
 
 /* Business Name or Category placeholder */
-"Business Name or Category" = "生意名称或类别";
+"Business Name or Category" = "商业名称或类别";
 
 /* No comment provided by engineer. */
 "Buy Bitcoin" = "购买比特币";
 
 /* No comment provided by engineer. */
 "Buy/Sell Bitcoin" = "买/卖比特币";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Bank Account (USA)" = "Buy/Sell with Bank Account (USA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "取消";
@@ -198,13 +215,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "CHANGE" = "更改";
 
 /* No comment provided by engineer. */
-"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "相机功能无效。请在您的手机私人设定中启动相机功能。";
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "未能使用相机。请在您的手机私人设定中启动相机功能。";
 
 /* No comment provided by engineer. */
 "Can't send e-mail" = "无法发送电子邮件";
 
 /* No comment provided by engineer. */
-"Cannot delete wallet as it contains funds. Please transfer out funds first." = "钱包无法被删除，因为它内含资金。请先把资金转出去。";
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "无法删除含有资金的钱包。请先把资金转出。";
 
 /* No comment provided by engineer. */
 "Car Wash" = "洗车";
@@ -231,19 +248,19 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Change recovery questions" = "更改帐户复原问题";
 
 /* No comment provided by engineer. */
-"Charity" = "慈善机构";
+"Charity" = "慈善";
 
 /* Check password button text */
-"Check Password" = "查看密码";
+"Check Password" = "检查密码";
 
 /* No comment provided by engineer. */
 "Checking password..." = "正在检查密码......";
 
 /* No comment provided by engineer. */
-"Choose a Question" = "Choose a Question";
+"Choose a Question" = "选择一道问题";
 
 /* City, State/Province, or Country placeholder */
-"City, State/Province, or Country" = "城市、 州/省或国家";
+"City, State/Province, or Country" = "城市、州/省或国家";
 
 /* Generic CLOSE button text */
 "Close" = "关闭";
@@ -252,7 +269,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Clothing" = "服装";
 
 /* No comment provided by engineer. */
-"Coffee & Tea" = "咖啡和茶";
+"Coffee & Tea" = "咖啡 & 茶";
 
 /* expense category */
 "Coffee Shops" = "咖啡厅";
@@ -273,13 +290,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Congratulations" = "恭喜您！";
 
 /* Popup text when BLE connects */
-"Connected" = "连接";
+"Connected" = "已连接";
 
 /* No comment provided by engineer. */
 "Consulting Income" = "咨询收入";
 
 /* No comment provided by engineer. */
-"Copied" = "复制";
+"Copied" = "已复制";
 
 /* Copy button text */
 "Copy" = "拷贝";
@@ -288,16 +305,19 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Create Wallet" = "创建钱包";
 
 /* No comment provided by engineer. */
-"Creating and securing account" = "创建和保护帐户";
+"Create new" = "Create new";
 
 /* No comment provided by engineer. */
-"Creating and securing wallet" = "创建和保护钱包";
+"Creating and securing account" = "正在创建和保护帐户";
+
+/* No comment provided by engineer. */
+"Creating and securing wallet" = "正在创建和保护钱包";
 
 /* No comment provided by engineer. */
 "Credit Card Payment" = "信用卡付款";
 
 /* No comment provided by engineer. */
-"Current Location" = "您目前的位置";
+"Current Location" = "当前位置";
 
 /* No comment provided by engineer. */
 "Current Password" = "当前密码";
@@ -309,7 +329,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Debug" = "调试";
 
 /* No comment provided by engineer. */
-"Debug Log File" = "日志文件调试";
+"Debug Log File" = "调试日志文件";
 
 /* Debug screen header title */
 "Debug Options" = "调试选项";
@@ -318,16 +338,16 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Default Currency" = "默认货币";
 
 /* settings text */
-"Default Exchange" = "默认转换";
+"Default Exchange" = "默认兑换";
 
 /* DELETE button text for wallet delete */
 "Delete" = "删除";
 
 /* Delete Account With no Password Warning */
-"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "在这个设备删除 '%@' 吗？此帐户没有设置密码，如果您将帐户删除后，将无法被复原。";
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "在这个装置删除 '%@' 吗？您若删除这个没有设置密码的帐户，它将无法被复原。";
 
 /* Delete Account Warning */
-"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "删除该设备上的 '%@' 吗？这将禁用PIN的使用。如果该帐户启用了 2FA，则此设备将在2FA 重置后的7 天里无法被登入。";
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "删除此装置上的 '%@' 吗？这将禁止使用PIN登入。如果此帐户启用了 2FA，除非通过7天的2FA重置程序，否则此装置将无法登入帐户。";
 
 /* No comment provided by engineer. */
 "Delete Account" = "删除帐户";
@@ -342,13 +362,19 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Dentist" = "牙医";
 
 /* No comment provided by engineer. */
-"Deposit to Savings" = "银行存款";
+"Deposit to Savings" = "存款至储蓄户口";
 
 /* No comment provided by engineer. */
-"Designed and Built by Airbitz in" = "由 Airbitz 设计和创造";
+"Designed and Built by Airbitz in" = "由 Airbitz 设计和创建";
 
 /* Directory title bar text */
 "Directory" = "目录";
+
+/* Disable as in to disable a feature */
+"Disable" = "Disable";
+
+/* Title of recovery popup */
+"Disable Recovery?" = "Disable Recovery?";
 
 /* No comment provided by engineer. */
 "Disabled" = "禁用";
@@ -358,7 +384,8 @@ Share this link to receive revenue from users that install and use %@. You will 
 
 /* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
-Enter it below to make sure:" = "您还记得您的密码吗？如果您的设备被丢失或被盗，或如果您卸载了应用程序，那么您将需要您的密码。 请输入它们以进行确认：";
+Enter it below to make sure:" = "您还记得您的密码吗？如果您的设备被丢失或被盗，或如果您卸载了应用程序，那么您将需要您的密码。 
+请在下方输入密码以进行确认：";
 
 /* No comment provided by engineer. */
 "Doctor" = "医生";
@@ -367,7 +394,10 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Done" = "完成";
 
 /* No comment provided by engineer. */
-"Download the Airbitz wallet and save money using bitcoin" = "下载 Airbitz 钱包和通过用比特币来省钱";
+"Download the Airbitz wallet and save money using bitcoin" = "下载 Airbitz 钱包并使用比特币以便省钱";
+
+/* No comment provided by engineer. */
+"Edge Login" = "Edge Login";
 
 /* No comment provided by engineer. */
 "Education" = "教育";
@@ -382,71 +412,72 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Email" = "电子邮件";
 
 /* No comment provided by engineer. */
+"Email Login Package" = "Email Login Package";
+
+/* No comment provided by engineer. */
 "Email cancelled." = "电子邮件被取消。";
 
 /* No comment provided by engineer. */
-"Email saved to send later." = "保存以便稍后发送电子邮件。";
+"Email saved to send later." = "电子邮件已被保存以便稍后发送。";
 
 /* No comment provided by engineer. */
-"Email sent." = "发送电子邮件。";
+"Email sent." = "已发送电子邮件。";
 
 /* No comment provided by engineer. */
 "Enable" = "启用";
 
 /* settings text */
-"Enable Bluetooth in System Settings" = "在系统设置启用蓝牙";
+"Enable Bluetooth in System Settings" = "在系统设定里启用蓝牙";
 
 /* No comment provided by engineer. */
 "Enable Touch ID" = "启用Touch ID";
-
-/* Placeholder text for Receive screen amount */
-"Enter Amount (optional)" = "输入金额 （自选）";
 
 /* No comment provided by engineer. */
 "Enter Payee" = "请输入收款人";
 
 /* No comment provided by engineer. */
-"Enter any notes you would like to send to our support staff" = "请输入您想要发送给我们支援人员的备注";
+"Enter any notes you would like to send to our support staff" = "请输入任何您想要发送给我们支援人员的短信";
 
 /* No comment provided by engineer. */
 "Entertainment" = "娱乐";
 
 /* No comment provided by engineer. */
-"Error Changing PIN" = "更改 PIN出现错误";
+"Error Changing PIN" = "更改PIN时出现错误";
 
 /* No comment provided by engineer. */
-"Error Deleting Wallet" = "删除钱包出现错误";
+"Error Deleting Wallet" = "删除钱包时出现错误";
 
 /* No comment provided by engineer. */
-"Error Getting Wallet Count" = "钱包计数出现错误";
+"Error Getting Wallet Count" = "钱包计数时出现错误";
 
 /* No comment provided by engineer. */
-"Error Logging In" = "登入出现错误";
+"Error Logging In" = "登入时出现错误";
 
 /* No comment provided by engineer. */
-"Error Recovering Account" = "恢复帐户出现错误";
+"Error Recovering Account" = "恢复帐户时出现错误";
 
 /* No comment provided by engineer. */
-"Error code" = "代码出现错误";
+"Error code" = "错误代码";
 
 /* No comment provided by engineer. */
 "Error connecting to payment processor. Send directly to bitcoin address
 
-%@" = "Error connecting to payment processor. Send directly to bitcoin address
-
-%@";
+%@" = "与付款处理者连接有误。直接发送到比特币地址。";
 
 /* No comment provided by engineer. */
-"Error creating affiliate link. Please try again later" = "Error creating affiliate link. Please try again later";
+"Error creating affiliate link. Please try again later" = "产生合作伙伴链接时有误。请稍后再尝试";
 
 /* No comment provided by engineer. */
-"Error desc" = "Desc出现错误";
+"Error desc" = "错误描述";
+
+/* No comment provided by engineer. */
+"Error disabling recovery" = "Error disabling recovery";
 
 /* No comment provided by engineer. */
 "Error during send" = "发送时出现错误";
 
 /* No comment provided by engineer. */
-"Error importing the token at this time. Please try again." = "在导入代币时出现错误。请再试一次。";
+"Error importing the token at this time. Please try again." = "这回在导入代币时出现错误。请再尝试。";
 
 /* No comment provided by engineer. */
 "Error occured copying to the clipboard" = "复制到剪贴板时出现错误";
@@ -461,7 +492,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Exchange" = "兑换";
 
 /* No comment provided by engineer. */
-"Exchange Rate Data Source" = "兑换率数据来源";
+"Exchange Rate Data Source" = "汇率数据来源";
 
 /* Exit button text on top left */
 "Exit" = "退出";
@@ -473,13 +504,13 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Export" = "导出";
 
 /* Prompt asking which wallet to export from */
-"Export From:" = "Export From:";
+"Export From:" = "导出自：";
 
 /* No comment provided by engineer. */
-"Export Private Seed" = "导出Private Seed";
+"Export Private Seed" = "导出密钥种子";
 
 /* No comment provided by engineer. */
-"Export Public Seed (XPub)" = "Public Seed (XPub)";
+"Export Public Seed (XPub)" = "导出公钥种子(XPub)";
 
 /* No comment provided by engineer. */
 "Export Wallet Transactions" = "导出钱包交易";
@@ -496,6 +527,9 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Fees & Charges" = "费用 & 收费";
 
+/* Fetching Login Request popup */
+"Fetching Login Request..." = "Fetching Login Request...";
+
 /* Fetching Payment Request popup */
 "Fetching Payment Request..." = "正在获取支付请求...";
 
@@ -503,13 +537,13 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Fiat" = "法定货币";
 
 /* No comment provided by engineer. */
-"Financial" = "金融";
+"Financial" = "财务";
 
 /* No comment provided by engineer. */
 "Financial Advisor" = "财务顾问";
 
 /* settings text */
-"First Name (optional)" = "名字（自选）";
+"First Name (optional)" = "名字（可选）";
 
 /* No comment provided by engineer. */
 "Food & Dining" = "食物 & 餐饮";
@@ -518,7 +552,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "From: %@" = "来自: %@";
 
 /* No comment provided by engineer. */
-"Funds successfully imported, but error connecting to messenger server. Try again later" = "Funds successfully imported, but error connecting to messenger server. Try again later";
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "资金成功被导入，但是在连接邮件伺服器时出现错误。请稍后再尝试。";
 
 /* No comment provided by engineer. */
 "Furnishings" = "家具";
@@ -545,16 +579,16 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Go Back" = "返回";
 
 /* No comment provided by engineer. */
-"Great job remembering your password." = "您记得您的密码，真棒！";
+"Great job remembering your password." = "好极了，您想起了密码。";
 
 /* expense category */
-"Groceries" = "杂货";
+"Groceries" = "日用品";
 
 /* No comment provided by engineer. */
 "Gym" = "健身房";
 
 /* No comment provided by engineer. */
-"HOA Dues" = "HOA 会费";
+"HOA Dues" = "物业管理费";
 
 /* No comment provided by engineer. */
 "Hair" = "头发";
@@ -563,7 +597,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Health & Fitness" = "健康 & 健身";
 
 /* Help button text on top right */
-"Help" = "客服";
+"Help" = "支援";
 
 /* Hide */
 "Hide" = "隐藏";
@@ -575,13 +609,16 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Hobbies" = "爱好";
 
 /* No comment provided by engineer. */
-"Home" = "首页";
-
-/* expense category */
-"Home Improvement" = "家庭装修";
+"Home" = "家居";
 
 /* No comment provided by engineer. */
-"Home Insurance" = "家庭保险";
+"Home Depot (Up to 15% Off)" = "Home Depot (Up to 15% Off)";
+
+/* expense category */
+"Home Improvement" = "家居装潢";
+
+/* No comment provided by engineer. */
+"Home Insurance" = "房屋保险";
 
 /* No comment provided by engineer. */
 "Home Phone" = "家用电话";
@@ -590,7 +627,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Home Services" = "居家服务";
 
 /* No comment provided by engineer. */
-"Home Supplies" = "家庭用品";
+"Home Supplies" = "家居用品";
 
 /* No comment provided by engineer. */
 "Hotel" = "酒店";
@@ -600,14 +637,17 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* Slideout menu import private key text */
 "IMPORT PRIVATE KEY
-([[abtag APP_TITLE]] Gift Card)" = "导入PRIVATE KEY
+([[abtag APP_TITLE]] Gift Card)" = "导入私钥
 ([[abtag APP_TITLE]] 礼品卡)";
 
 /* No comment provided by engineer. */
-"IRA Contribution" = "IRA的贡献";
+"IRA Contribution" = "个人退休帐户的资金投入";
 
 /* No comment provided by engineer. */
-"If recovery was setup, you should have emailed yourself a recovery token with a link" = "If recovery was setup, you should have emailed yourself a recovery token with a link";
+"Identity token from [%@] created and saved" = "Identity token from [%@] created and saved";
+
+/* No comment provided by engineer. */
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "若已设置好复原程序，您须发送一封附有复原代币链接的电邮给自己。";
 
 /* No comment provided by engineer. */
 "Import" = "导入";
@@ -619,19 +659,19 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Import Funds" = "导入资金";
 
 /* No comment provided by engineer. */
-"Import Private Key" = "导入Private Key";
+"Import Private Key" = "导入私钥";
 
 /* No comment provided by engineer. */
 "Import failed" = "导入失败";
 
 /* No comment provided by engineer. */
-"Import failed. Private key is empty" = "导入失败。Private Key是空的";
+"Import failed. Private key is empty" = "导入失败。私钥是空白的";
 
 /* No comment provided by engineer. */
-"Import the private key again to retry Twitter" = "再次导入private key来重试推特";
+"Import the private key again to retry Twitter" = "再次导入私钥以便重试推特";
 
 /* No comment provided by engineer. */
-"Importing funds from %@ into wallet..." = "从 %@ 将资金从导入钱包...";
+"Importing funds from %@ into wallet..." = "从 %@ 将资金导入钱包...";
 
 /* Prefix of list of income categories */
 "Income" = "收入";
@@ -646,13 +686,13 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Incorrect Password" = "密码不正确。";
 
 /* No comment provided by engineer. */
-"Incorrect Password. Try again, or change it now?" = "密码不正确。请再试一次，或现在修改吗？";
+"Incorrect Password. Try again, or change it now?" = "密码不正确。请再试一次，或现在就更换密码？";
 
 /* No comment provided by engineer. */
 "Incorrect current password" = "当前密码不正确。";
 
 /* No comment provided by engineer. */
-"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Incorrect username for this recovery token. Please try a different username or use a different recovery token link.";
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "此复原代币的用户名不正确。请用不同的用户名再尝试或使用不同的复原代币链接。";
 
 /* Info button text on top right */
 "Info" = "信息";
@@ -661,7 +701,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Insufficient Password" = "密码不足";
 
 /* No comment provided by engineer. */
-"Interest Exp" = "Exp利息";
+"Interest Exp" = "利息开支";
 
 /* No comment provided by engineer. */
 "Internet" = "互联网";
@@ -673,7 +713,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Invalid Bluetooth Request" = "无效的蓝牙请求";
 
 /* No comment provided by engineer. */
-"Invalid Email" = "Invalid Email";
+"Invalid Email" = "无效的电子邮件";
 
 /* No comment provided by engineer. */
 "Invalid QR Code" = "无效的二维码";
@@ -682,19 +722,22 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "It's great" = "太棒了";
 
 /* No comment provided by engineer. */
-"Kids" = "孩子们";
+"Kids" = "儿童";
 
 /* No comment provided by engineer. */
-"Kids Activities" = "孩子的活动";
+"Kids Activities" = "儿童活动";
+
+/* LOGIN button text */
+"LOGIN" = "LOGIN";
 
 /* settings text */
-"Last Name (optional)" = "姓氏 （自选）";
+"Last Name (optional)" = "姓氏 （可选）";
 
 /* No comment provided by engineer. */
-"Late Fee" = "迟交费用";
+"Late Fee" = "滞纳金";
 
 /* Later button text */
-"Later" = "待会";
+"Later" = "稍后";
 
 /* No comment provided by engineer. */
 "Laundry" = "洗衣";
@@ -715,7 +758,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Loading Balance..." = "正在加载余额...";
 
 /* Loading Transactions alert text */
-"Loading Transactions..." = "正在加载交易记录...";
+"Loading Transactions..." = "正在载入交易...";
 
 /* Loading wallets alert text */
 "Loading Wallets..." = "正在加载钱包...";
@@ -727,19 +770,22 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Logging Out" = "正在登出";
 
 /* No comment provided by engineer. */
+"Login Package" = "Login Package";
+
+/* No comment provided by engineer. */
 "Low Fee" = "低费用";
 
 /* settings text */
 "Merchant Mode" = "商用模式：";
 
 /* No comment provided by engineer. */
-"Message Sent" = "消息已发送";
+"Message Sent" = "已发送短信";
 
 /* No comment provided by engineer. */
 "Misc." = "杂项";
 
 /* No comment provided by engineer. */
-"Mobile Phone" = "移动电话";
+"Mobile Phone" = "手机";
 
 /* No comment provided by engineer. */
 "More Categories" = "更多类别";
@@ -763,10 +809,10 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Must have at least one lower case letter" = "必须有至少一个小写字母";
 
 /* No comment provided by engineer. */
-"Must have at least one number" = "必须有至少一个数字";
+"Must have at least one number" = "必须至少有一个数字";
 
 /* No comment provided by engineer. */
-"Must have at least one upper case letter" = "必须有至少一个大写字母";
+"Must have at least one upper case letter" = "必须至少有一个大写字母";
 
 /* Default wallet name for new accounts */
 "My Wallet" = "我的钱包";
@@ -781,10 +827,10 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Name" = "名字";
 
 /* No comment provided by engineer. */
-"Net Salary" = "薪金净额";
+"Net Salary" = "薪资净额";
 
 /* No comment provided by engineer. */
-"Network Error" = "Network Error";
+"Network Error" = "网络有误";
 
 /* No comment provided by engineer. */
 "New PIN" = "新PIN";
@@ -799,28 +845,28 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Next" = "下一个";
 
 /* settings text */
-"Nickname / Handle (optional)" = "昵称/匿名 （自选）";
+"Nickname / Handle (optional)" = "昵称/匿名 （可选）";
 
 /* what to display when wallet has no transactions */
-"No Transactions" = "没有交易记录";
+"No Transactions" = "无交易";
 
 /* what to display when no transactions are found in search */
-"No Transactions Found" = "没有交易记录";
+"No Transactions Found" = "未找到交易";
 
 /* No comment provided by engineer. */
 "No password set" = "没有设置密码";
 
 /* No comment provided by engineer. */
-"No thanks" = "不用，谢谢";
+"No thanks" = "不必了，谢谢";
 
 /* No comment provided by engineer. */
 "Not Sure" = "不确定";
 
 /* No comment provided by engineer. */
-"Not so good" = "不是很好";
+"Not so good" = "不太好";
 
 /* No comment provided by engineer. */
-"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "注意 ︰ 默认的货币设置只适用于心钱包和显示帐户的余额。创建新的钱包来更改显示在每个交易记录的货币单位。";
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "注意 ︰ 默认的货币设置只适用于新钱包和显示账户的总余额。创建新的钱包以更改每个交易记录所显示的法定货币单位。";
 
 /* OK button text */
 "OK" = "完成";
@@ -847,10 +893,10 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "PIN" = "PIN";
 
 /* settings text */
-"PIN Re-Login" = "PIN 重新登录 ︰";
+"PIN Re-Login" = "PIN 重新登入 ︰";
 
 /* No comment provided by engineer. */
-"PIN must be %d digits" = "PIN 必须有 %d 个数码";
+"PIN must be %d digits" = "PIN 必须有 %d 个数字";
 
 /* No comment provided by engineer. */
 "PIN successfully changed." = "PIN修改成功。";
@@ -871,11 +917,12 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Password Recovery" = "复原密码";
 
 /* No comment provided by engineer. */
-"Password Recovery Setup" = "复原密码设置程序";
+"Password Recovery Setup" = "密码复原设置程序";
 
 /* No comment provided by engineer. */
 "Password change failed:
-%@" = "更换密码失败：%@";
+%@" = "更换密码失败：
+%@";
 
 /* No comment provided by engineer. */
 "Password does not match. Re-enter password" = "密码不匹配，请再输入密码。";
@@ -884,10 +931,10 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Password mismatch" = "密码不匹配";
 
 /* No comment provided by engineer. */
-"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "密码修改成功。请不要忘记您的密码或是复原帐户的答案！它们是无法被重新寻回的！";
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "密码修改成功。请勿忘记您的密码或是复原帐户的答案！它们是无法被重获的！";
 
 /* Text on payment recived popup */
-"Payment received" = "付款已接受";
+"Payment received" = "已收到付款";
 
 /* Pending status in transaction list */
 "Pending" = "待处理";
@@ -896,7 +943,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Personal Care" = "个人护理";
 
 /* expense category */
-"Pet Food & Supplies" = "宠物食品 & 宠物用品";
+"Pet Food & Supplies" = "宠物食品 & 用品";
 
 /* expense category */
 "Pet Grooming" = "宠物美容";
@@ -913,68 +960,72 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
 
-<br><br>%@" = "Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+<br><br>%@" = "请点击以下链接，此链接来自一台安装了 %1$@ 的移动装置，为了替用户名称[%2$@]启动帐户复原程序。
 
 <br><br>%3$@";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "如果您忘记了密码，请创建一个新的帐户和转移您的资金。";
+"Please create a new account and transfer your funds if you forgot your password." = "如果您忘记了密码，请创建一个新的帐户并转移您的资金。";
 
 /* No comment provided by engineer. */
-"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "请创建此帐户的密码，如果您的设备被丢失或被盗，那您将无法再复原您的帐户。";
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "请创建此帐户的密码，否则当您的装置被丢失或被盗时，您将无法再复原您的帐户。";
 
 /* No comment provided by engineer. */
 "Please enter a User Name" = "请输入用户名称";
 
 /* No comment provided by engineer. */
+"Please enter a username at the login screen" = "Please enter a username at the login screen";
+
+/* No comment provided by engineer. */
 "Please enter an amount to send" = "请输入要发送的金额";
 
 /* No comment provided by engineer. */
-"Please enter the username of the account to recover" = "Please enter the username of the account to recover";
+"Please enter the username of the account to recover" = "请输入账户的用户名称以进行复原";
 
 /* No comment provided by engineer. */
 "Please enter your PIN" = "请输入您的PIN";
 
 /* No comment provided by engineer. */
-"Please enter your correct password." = "请输入正确的密码。";
+"Please enter your correct password." = "请输入您正确的密码。";
 
 /* No comment provided by engineer. */
 "Please enter your password to enable Touch ID" = "请输入您的密码来启动Touch ID";
 
 /* No comment provided by engineer. */
-"Please find the email and click on the link from this device to initiate recovery" = "Please find the email and click on the link from this device to initiate recovery";
+"Please find the email and click on the link from this device to initiate recovery" = "请搜寻有关邮件，然后点击来自此装置的链接以便启动复原程序";
 
 /* No comment provided by engineer. */
 "Please have Requestor contact support" = "请让请求者与客服部门联系";
 
 /* No comment provided by engineer. */
-"Please logout of current account before attempting password recovery" = "Please logout of current account before attempting password recovery";
+"Please logout of current account before attempting password recovery" = "请在尝试复原密码之前登出当前的帐户";
 
 /* No comment provided by engineer. */
 "Please try again later or contact support" = "请稍后再试或联络客服";
 
 /* No comment provided by engineer. */
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "Please verify the domain above and tap LOGIN to authenticate with this site";
+
+/* No comment provided by engineer. */
 "Please wait %.0f seconds before retrying %@" = "在尝试 %2$@前，请稍等%1$.0f秒";
 
 /* No comment provided by engineer. */
-"Please wait 1 second before retrying %@" = "在尝试%@前，请稍等1秒";
+"Please wait 1 second before retrying %@" = "在重试%@前，请稍等1秒";
 
 /* No comment provided by engineer. */
-"Present QR code to Sender and have them scan to send you payment" = "把二维码展现给发款人，然后请他扫描以进行付款传送。";
+"Present QR code to Sender and have them scan to send you payment" = "把二维码展示给发款人并让他进行扫描以便对您传送付款。";
 
 /* No comment provided by engineer. */
-"Private Seed" = "Private Seed";
+"Private Seed" = "密钥种子";
 
 /* expense category */
-"Property" = "地产";
+"Property" = "房地产";
 
 /* No comment provided by engineer. */
-"Provide an Identity Token
-" = "Provide an Identity Token
-";
+"Provide an Identity Token" = "Provide an Identity Token";
 
 /* No comment provided by engineer. */
-"Public Seed (XPub)" = "Public Seed (XPub)";
+"Public Seed (XPub)" = "公钥种子 (XPub)";
 
 /* expense category */
 "Public Transportation" = "公共交通";
@@ -984,19 +1035,23 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 
 /* No comment provided by engineer. */
 "REFER YOUR FRIENDS
-(Earn Bitcoin)" = "请推荐朋友使用(赚钱比特币)";
+(Earn Bitcoin)" = "介绍给朋友们
+(赚取比特币)";
 
 /* No comment provided by engineer. */
 "Re-enter New Password" = "重新输入新密码";
 
 /* No comment provided by engineer. */
-"Received Bitcoin" = "接收比特币";
+"Received Bitcoin" = "已收到比特币";
 
 /* No comment provided by engineer. */
-"Received Funds" = "接受资金";
+"Received Funds" = "已收到资金";
 
 /* Received string on Request screen */
 "Received..." = "已接收...";
+
+/* No comment provided by engineer. */
+"Recovery Disabled" = "Recovery Disabled";
 
 /* No comment provided by engineer. */
 "Recovery Password Reminder" = "复原密码提醒";
@@ -1010,15 +1065,13 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 /* No comment provided by engineer. */
 "Recovery Successful
 
-Please change your password and PIN" = "Recovery Successful
-
-Please change your password and PIN";
+Please change your password and PIN" = "成功复原";
 
 /* No comment provided by engineer. */
-"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+"Recovery was not setup or was done on another device" = "未曾设置复原程序或已在其他装置上完成";
 
 /* No comment provided by engineer. */
-"Refer Your Friends" = "推荐给您的朋友";
+"Refer Your Friends" = "推荐给您的朋友们";
 
 /* expense category */
 "Registration" = "注册";
@@ -1030,7 +1083,7 @@ Please change your password and PIN";
 "Remember your password?" = "还记得您的密码吗？";
 
 /* No comment provided by engineer. */
-"Remind Me Later" = "以后再提醒我";
+"Remind Me Later" = "稍后提醒我";
 
 /* RENAME button text for wallet rename */
 "Rename" = "重新命名";
@@ -1045,25 +1098,19 @@ Please change your password and PIN";
 "Rental Car & Taxi" = "出租车 & 的士";
 
 /* No comment provided by engineer. */
-"Request a Payment Address
-" = "Request a Payment Address
-";
+"Request a Payment Address" = "Request a Payment Address";
 
 /* No comment provided by engineer. */
-"Request confirmed, Two Factor off." = "请求已被确认，2要素身份验证关闭。";
+"Request confirmed, Two Factor off." = "请求已被确认，二元认证关闭。";
 
 /* No comment provided by engineer. */
 "Request is copied to the clipboard" = "请求已被复制到剪贴板中";
 
 /* No comment provided by engineer. */
-"Request your Identity Token
-" = "Request your Identity Token
-";
+"Request your Identity Token but you don't have any" = "Request your Identity Token but you don't have any";
 
 /* No comment provided by engineer. */
-"Request your Identity Token but you don't have any
-" = "Request your Identity Token but you don't have any
-";
+"Request your Identity Token. Please select one below" = "Request your Identity Token. Please select one below";
 
 /* Requested string on Request screen */
 "Requested..." = "已发出请求...";
@@ -1075,7 +1122,7 @@ Please change your password and PIN";
 "Reset Date" = "重置日期";
 
 /* No comment provided by engineer. */
-"Reset requested. Please retry login after 7 days." = "重置请求已发送。请 在7 天后重试登录。";
+"Reset requested. Please retry login after 7 days." = "已发出重置请求。请在7 天后重试登录。";
 
 /* No comment provided by engineer. */
 "Restarting watcher service" = "重新启动监视服务";
@@ -1084,10 +1131,10 @@ Please change your password and PIN";
 "Restaurants" = "餐馆";
 
 /* No comment provided by engineer. */
-"Restaurants & Food Trucks" = "餐厅& 食物卡车";
+"Restaurants & Food Trucks" = "餐馆& 食物卡车";
 
 /* Income notes field for affiliate revenue */
-"Revenue share from affiliate link %@" = "从合作伙伴链接 %@ 所收到的收入";
+"Revenue share from affiliate link %@" = "从合作伙伴链接 %@ 所获取的收入份额";
 
 /* SEND button text */
 "SEND" = "发送";
@@ -1096,13 +1143,13 @@ Please change your password and PIN";
 "SMS" = "短信";
 
 /* No comment provided by engineer. */
-"SMS cancelled" = "取消短信";
+"SMS cancelled" = "已取消短信";
 
 /* No comment provided by engineer. */
-"SMS sent" = "短信已发送";
+"SMS sent" = "已发送短信";
 
 /* Slideout menu spend text */
-"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+"SPEND BITCOIN (Plugins)" = "花费比特币 (插件)";
 
 /* No comment provided by engineer. */
 "Sales" = "销售";
@@ -1111,16 +1158,16 @@ Please change your password and PIN";
 "San Diego, California, USA" = "圣地亚哥，加利福尼亚州，美国";
 
 /* Title of recovery email popup */
-"Save Recovery Token" = "Save Recovery Token";
+"Save Recovery Token" = "储存复原代币";
 
 /* Text at top of Scan Screen */
-"Scan QR to Import Private Key/Gift Card" = "扫描 二维码来导入Private Key/礼品卡";
-
-/* Text at top of Send screen */
-"Scan QR to Send, Import, or Login with BitID" = "扫描二维码以进行传送，导入或是使用BitID登入。";
+"Scan QR to Import Private Key/Gift Card" = "扫描二维码以导入私钥/礼品卡";
 
 /* No comment provided by engineer. */
-"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "扫描付款人的二维码来发送付款或点击在列表当中的蓝牙请求";
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "扫描付款人的二维码以便发送付款或点击以下列表中的蓝牙请求";
+
+/* Text at top of Send screen */
+"Scan to Send, Import, or Edge Login" = "Scan to Send, Import, or Edge Login";
 
 /* SearchBarSearch placeholder */
 "Search" = "搜索";
@@ -1132,22 +1179,22 @@ Please change your password and PIN";
 "Sell Bitcoin" = "销售比特币";
 
 /* No comment provided by engineer. */
-"Send Funds to Private Key" = "把资金发送到Private Key";
+"Send Funds to Private Key" = "把资金发送到私钥";
 
 /* settings text */
-"Send name on payment request" = "在征收要求上发送名字";
+"Send name on payment request" = "在要求付款时发送名字";
 
 /* No comment provided by engineer. */
-"Send to Bitcoin Address or Import Private Key" = "发送比特币地址或导入Private Key";
+"Send to Bitcoin Address or Import Private Key" = "发送至比特币地址或导入私钥";
 
 /* status message */
-"Sending..." = "正在发送";
+"Sending..." = "正在发送...";
 
 /* No comment provided by engineer. */
 "Sent Bitcoin" = "发送比特币";
 
 /* expense category */
-"Service & Parts" = "服务 & 配件";
+"Service & Parts" = "维修服务 & 零件";
 
 /* expense category */
 "Service Fee" = "服务费用";
@@ -1156,7 +1203,7 @@ Please change your password and PIN";
 "Set a Password" = "设置密码";
 
 /* No comment provided by engineer. */
-"Set a Password and PIN" = "设置密码和 PIN";
+"Set a Password and PIN" = "设置密码和PIN";
 
 /* No comment provided by engineer. */
 "Setting recovery questions failed:
@@ -1178,14 +1225,15 @@ Please change your password and PIN";
 "Show Balance" = "显示余额";
 
 /* No comment provided by engineer. */
-"Show QR Code" = "Show QR Code";
+"Show QR Code" = "显示二维码";
 
 /* No comment provided by engineer. */
 "Sign Up" = "注册";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
-%@" = "注册失败 ︰%@";
+%@" = "注册失败 ︰
+%@";
 
 /* Skip button text */
 "Skip" = "跳过";
@@ -1209,10 +1257,13 @@ Please change your password and PIN";
 "Sporting Goods" = "体育用品";
 
 /* expense category */
-"Sports" = "体育";
+"Sports" = "体育运动";
 
 /* No comment provided by engineer. */
 "Standard Fee" = "标准费用";
+
+/* No comment provided by engineer. */
+"Starbucks (Up to 20% Off)" = "Starbucks (Up to 20% Off)";
 
 /* expense category */
 "Student Loan" = "助学贷款";
@@ -1221,13 +1272,13 @@ Please change your password and PIN";
 "Successfully Logged In" = "成功登入";
 
 /* No comment provided by engineer. */
-"Successfully Verified Identity" = "Successfully Verified Identity";
+"Successfully Verified Identity" = "成功鉴定身份";
 
 /* No comment provided by engineer. */
-"Successfully received identity token from %@" = "Successfully received identity token from %@";
+"Successfully received identity token from %@" = "成功收到来自%@的身份代币";
 
 /* No comment provided by engineer. */
-"Sweep Funds From Private Key" = "从Private Key掠过资金";
+"Sweep Funds From Private Key" = "从私钥导入资金";
 
 /* Synchronizing text in confirmation textfield */
 "Synchronizing" = "正在同步";
@@ -1236,54 +1287,70 @@ Please change your password and PIN";
 "TOTAL: " = "总数 ︰ ";
 
 /* No comment provided by engineer. */
-"Tap and hold a wallet for additional options" = "点击和常按钱包来列开更多选项";
+"Tap and hold a wallet for additional options" = "点击和长按钱包以列出更多选项";
+
+/* No comment provided by engineer. */
+"Target (Up to 10% Off)" = "Target (Up to 10% Off)";
 
 /* expense category */
-"Tax" = "税收";
+"Tax" = "税务";
 
 /* expense category */
 "Television" = "电视";
 
 /* No comment provided by engineer. */
-"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "在这个设备的2要素身份验证代币无效。这也许是代币被另一个设备修改或是您的时钟出现偏差。请检查您的系统设计以确保时钟的正确。";
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "在此装置上的二元认证代币无效。这也许是代币被另一个装置修改或是您的时钟出现偏差所造成的。请检查您的系统时间以确保它是正确的。";
 
 /* No comment provided by engineer. */
-"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "您想要连接的%1$@ 设备的比特币地址和之前所广播的%2$@地址不符合";
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "您所连接的装置上具有的比特币地址%1$s与原先广播的地址%2$s不匹配。";
 
 /* No comment provided by engineer. */
 "The following services are not provided by %@.
 
-For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+For issues and feedback, please contact the respective service providers." = "以下的服务并非由%@所提供。
 
-For issues and feedback, please contact the respective service providers.";
-
-/* No comment provided by engineer. */
-"The given answers were incorrect. Please try again." = "所提供的答案不正确。请再试一次";
+若有任何状况及反馈，请联系相关的服务供应商。";
 
 /* No comment provided by engineer. */
-"The password to this account was changed by another device. Please login using the new credentials." = "此帐户的密码已被另一个设备更改。请使用新的密码登入";
+"The given answers were incorrect. Please try again." = "所提供的答案不正确。请再尝试。";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "此帐户的密码已被另一个装置更改。请使用新认证登入。";
+
+/* Title of recovery popup message */
+"This account already has password recovery setup. Would you like to disable it?" = "This account already has password recovery setup. Would you like to disable it?";
+
+/* No comment provided by engineer. */
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.";
 
 /* Username Signup screen info text */
 "This is not your email or real name.
 
 This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
 
-Your username and password are known only to you and never stored unencrypted." = "这不是您的电邮或实名。这是您用来在这个和其他设备登入[[abtag APP_TITLE]] 帐户时所用的用户名称。只有您知道您所设置的用户名和密码，并且永远不会未经加密就储存起来。";
+Your username and password are known only to you and never stored unencrypted." = "这不是您的电邮或实名。
+
+这是您在这个装置和其他装置用来登入您[[abtag APP_TITLE]]帐户的用户名字。
+
+只有您知道您所设置的用户名和密码，并且绝不会未经加密就储存。";
 
 /* Loading Wallets alert text */
-"This may take a few minutes if it is the first time logging into this device." = "如果这是此设备的第一次登入，可能需要几分钟的时间。";
+"This may take a few minutes if it is the first time logging into this device." = "若是首次登入此装置，可能需要等待数分钟。";
+
+/* No comment provided by engineer. */
+"This site would like to:" = "This site would like to:";
 
 /* Popup sessage for when a wallet is archived */
-"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "这个钱包已被归档。请在[Wallets] 的荧幕当中选择不同的钱包";
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "此钱包已被封存。请在[Wallets] 的屏幕中选择一个不同的钱包";
 
 /* text in password verification popup */
-"Time to crack:" = "拆开的时间：";
+"Time to crack:" = "破解的时间：";
 
 /* Message of recovery token popup */
-"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "为了完成帐户复原设置程序，您必须储存一枚帐户复原代币。除了您的用户名字及复原答案以外，你还需要此代币方能复原您的帐户。请在以下输入您的电邮地址以将复原代币发送给您自己。";
 
 /* Popup wallet help test */
-"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "如果要排列所有钱包，请将3条栏目拖移到钱包的右方。拖移到[ARCHIVE] 标题底下来为钱包进行归档";
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "为了将钱包排序，点击并拖拉钱包右边的三条栏。将它拖移到[ARCHIVE] 标题底下以便封存该钱包";
 
 /* No comment provided by engineer. */
 "To: %@" = "致：%@";
@@ -1295,22 +1362,25 @@ Your username and password are known only to you and never stored unencrypted." 
 "Tolls" = "通行费";
 
 /* No comment provided by engineer. */
+"Top Up Prepaid Phones" = "Top Up Prepaid Phones";
+
+/* No comment provided by engineer. */
 "Touch ID" = "Touch ID";
 
 /* No comment provided by engineer. */
-"Touch ID Disabled" = "Touch ID禁用";
+"Touch ID Disabled" = "已禁用Touch ID";
 
 /* No comment provided by engineer. */
-"Touch ID Enabled" = "Touch ID启用";
+"Touch ID Enabled" = "已启用Touch ID";
 
 /* Touch ID prompt text */
-"Touch to login user" = "点击来登入用户";
+"Touch to login user" = "点击以便登入用户";
 
 /* settings text */
 "TouchID: Set password first" = "TouchID: 先设置密码";
 
 /* settings text */
-"TouchID: Unsupported Device" = "销售比特币";
+"TouchID: Unsupported Device" = "TouchID: 不支援系统的装置";
 
 /* expense category */
 "Toys" = "玩具";
@@ -1319,13 +1389,13 @@ Your username and password are known only to you and never stored unencrypted." 
 "Trade Commissions" = "交易佣金";
 
 /* Transaction Details header text */
-"Transaction Details" = "交易记录详细信息";
+"Transaction Details" = "交易详情";
 
 /* Financial transaction that moves money from one account to another */
-"Transfer" = "转换";
+"Transfer" = "转账";
 
 /* From wallet transfer text */
-"Transfer From %@" = "转送来自%@";
+"Transfer From %@" = "来自%@的转账";
 
 /* To wallet transfer text */
 "Transfer To %@" = "转送致%@";
@@ -1334,42 +1404,42 @@ Your username and password are known only to you and never stored unencrypted." 
 "Travel" = "旅行";
 
 /* No comment provided by engineer. */
-"Trouble connecting to network" = "Trouble connecting to network";
+"Trouble connecting to network" = "无法与网络连接";
 
 /* No comment provided by engineer. */
 "Try again?" = "再试一次吗？";
 
 /* expense category */
-"Tuition" = "补习费";
+"Tuition" = "学费";
 
 /* No comment provided by engineer. */
-"Two Factor" = "2要素";
+"Two Factor" = "二元认证";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "来自其他设备对这个帐户的2要素身份验证（增强保安）已被启用。请为这个设备的通行启动2要素身份验证。";
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "此帐户的二元认证(增强保安)已被另一个装置所启用。请启用二元认证以让此装置获得完整权限。";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication On" = "2要素身份验证启动";
+"Two Factor Authentication On" = "二元认证启用";
 
 /* No comment provided by engineer. */
-"Two Factor Disabled" = "禁用2要素";
+"Two Factor Disabled" = "二元认证已被禁用";
 
 /* 2FA warning on enable */
 "Two Factor Enabled
 
 ** Warning **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "2要素身份验证功能启用
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "已启用二元认证
 
 **警告**
 
-如果您遗失了设备或卸载了应用程序，那么将需要 7 天的时间来取消 2FA 并再次登入您的帐户。";
+如果您遗失了您的装置或卸载了该应用程序，那么将需要 7 天以禁用2FA并重获您使用帐户的权限。";
 
 /* No comment provided by engineer. */
-"Two Factor Invalid" = "2要素无效";
+"Two Factor Invalid" = "二元认证无效";
 
 /* No comment provided by engineer. */
-"Two Factor Reset" = "2要素重置";
+"Two Factor Reset" = "二元认证重置";
 
 /* No comment provided by engineer. */
 "USA" = "美国";
@@ -1378,7 +1448,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "USA and Canada" = "美国和加拿大";
 
 /* No comment provided by engineer. */
-"Unable to determine two factor status" = "无法确认2要素的状态";
+"Unable to determine two factor status" = "无法确认二元认证的状态";
 
 /* No comment provided by engineer. */
 "Unable to import secret" = "无法导入秘密";
@@ -1396,7 +1466,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Unable to update Settings" = "无法更新设置";
 
 /* No comment provided by engineer. */
-"Up to 10% off Target" = "在Target获得高达 10%的折扣";
+"Up to 10% off Target" = "塔吉特Target高达 10%的折扣";
 
 /* No comment provided by engineer. */
 "Up to 20% off Starbucks" = "在星巴克获得高达 20%的折扣";
@@ -1432,7 +1502,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Use Photo Album" = "使用相册";
 
 /* settings text */
-"Use TouchID" = "使用 TouchID:";
+"Use TouchID" = "使用 TouchID";
 
 /* No comment provided by engineer. */
 "User Name: %@" = "用户名字：%@";
@@ -1441,10 +1511,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Username" = "用户名";
 
 /* No comment provided by engineer. */
-"Username must be at least %d characters." = "用户名需要至少 %d个字符";
+"Username must be at least %d characters." = "用户名必须至少有%d个字符";
 
 /* expense category */
-"Utilities" = "杂费";
+"Utilities" = "基础设施费";
 
 /* expense category */
 "Vacation" = "度假";
@@ -1456,10 +1526,10 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Vet" = "兽医";
 
 /* title of active wallets table */
-"WALLETS" = "按";
+"WALLETS" = "钱包";
 
 /* Title of missing password notification */
-"WARNING: missing password" = "警告 ︰ 探测不到密码";
+"WARNING: missing password" = "警告 ︰ 遗漏密码";
 
 /* Status on Request screen */
 "Waiting for Payment..." = "正在等待款项...";
@@ -1471,44 +1541,48 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Wallet Export" = "导出钱包";
 
 /* No comment provided by engineer. */
-"Wallet Private Seed" = "钱包Private Seed";
+"Wallet Private Seed" = "钱包密钥种子";
 
 /* No comment provided by engineer. */
 "Wallet creation failed:
-%@" = "钱包创建失败 ︰%@";
+%@" = "钱包创建失败 ︰
+%@";
 
 /* No comment provided by engineer. */
-"Wallet name must have at least one character" = "钱包名称必须有至少一个字符";
+"Wallet name must have at least one character" = "钱包名称必须至少有一个字符";
 
 /* Prefix of wallet name on rename popup */
-"Wallet: " = "钱包 ";
+"Wallet: " = "钱包： ";
+
+/* No comment provided by engineer. */
+"Walmart (Up to 10% Off)" = "Walmart (Up to 10% Off)";
 
 /* No comment provided by engineer. */
 "Warning!" = "警告 ！";
 
 /* No comment provided by engineer. */
-"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "警告。如果没有密码，当此设备丢失或被盗，或者程序被卸载时，那么您将不能在新设备上登入。";
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "警告。如果没有密码，当此装置丢失或被盗，或者程序被卸载时，您将不能在新装置上登入帐户。";
 
 /* Double spend status in transaction list */
 "Warning: Double Spend" = "警告 ︰ 双倍支出";
 
 /* No comment provided by engineer. */
-"Warning: Low Fees may cause long delays in transaction confirmation" = "警告 ︰ 低费用可能会导致在交易确认的时间延迟";
+"Warning: Low Fees may cause long delays in transaction confirmation" = "警告 ︰ 低挖掘费可能会导致交易的确认时间遭到延迟";
 
 /* RBF status in transaction list */
-"Warning: Replace by Fee Detected. Double spend likely" = "警告 ︰ 检测到替代费用。可能造成双倍支出";
+"Warning: Replace by Fee Detected. Double spend likely" = "警告 ︰ 检测到替代费用。可能发生双倍支出";
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "守望者数据库已被清除，但出现错误。请允许几分钟重新同步 blockchain 的信息。所显示的交易记录和余额可能在同步期间时不准确";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "守望者数据库已被清除。请允许几分钟重新同步 blockchain 的信息。所显示的交易记录和余额可能在同步期间时不准确";
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "监控程式数据库已被清除。请允许几分钟重新同步 blockchain 的信息。所显示的交易记录和余额可能在同步期间时不准确";
 
 /* No comment provided by engineer. */
-"Would like to:" = "Would like to:";
+"Whole Foods (Up to 10% Off)" = "Whole Foods (Up to 10% Off)";
 
 /* No comment provided by engineer. */
-"Would you like to enable TouchID for this account and device?" = "您想要为此帐户和设备启用 TouchID 吗？";
+"Would you like to enable TouchID for this account and device?" = "您想要为此帐户和装置启用 TouchID 吗？";
 
 /* No comment provided by engineer. */
 "Would you like to send funds to this address or import funds into your wallet?" = "您想要发送资金到这个地址或将资金导入您的钱包吗？";
@@ -1517,7 +1591,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Would you like to send us some feedback?" = "您想为我们提供任何反馈吗？";
 
 /* No comment provided by engineer. */
-"Would you like to write a review in the App store?" = "您想在Google Play Store写下评论吗？";
+"Would you like to write a review in the App store?" = "请问您愿意在Google Play Store写下评论吗？";
 
 /* No comment provided by engineer. */
 "Wrong Answers" = "答案错误";
@@ -1527,24 +1601,27 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* No comment provided by engineer. */
 "You Received Bitcoin!
-%@ (~%@)" = "您收到了比特币 ！ %1$@ (~%2$@)";
+%@ (~%@)" = "您收到了比特币！ 
+%1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "您将要退出密码复原设置程序。您所选中的问题与答案尚未被储存。";
 
 /* No comment provided by engineer. */
-"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+"You must answer all questions. Make sure your answers are long enough." = "您必须回答所有问题。请确保您的答案符合字数长度。";
 
 /* No comment provided by engineer. */
-"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
+"You must choose a question for all selections before proceeding." = "在进行下一步骤前，您必须在所有选项中选择一道问题。";
 
 /* No comment provided by engineer. */
-"You must enter a user name" = "您必须输入用户名称";
+"You must enter a user name" = "您必须输入一个用户名称";
 
 /* No comment provided by engineer. */
 "You received Bitcoin!
 %@ (~%@)
-Use the Payee, Category, and Notes field to optionally tag your transaction" = "您收到比特币 ！%1$@ (~%2$@) 使用收款人、 类别和备注来为您的交易进行标记";
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "您已收到比特币 ！
+%1$@ (~%2$@) 
+使用收款人、类别和记录栏位来选择性为您的交易进行标记";
 
 /* Camera signup screen */
 "You will next see a popup requesting access to your Camera.
@@ -1557,7 +1634,7 @@ Use the Payee, Category, and Notes field to optionally tag your transaction" = "
 "You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "您收到比特币了 ！我们强烈建议您设置帐户复原密码的问题和答案。否则，如果忘记了您的密码，您将无法使用您的帐户。";
 
 /* No comment provided by engineer. */
-"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "您的帐户复原问题和答案现已被设置完成。 当您下次复原密码时，你所提供的答案必须完全匹配。* * 千万不要忘记您的密码和帐户复原答案 * * 没有它们将无法复原您的帐户 ！";
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "您的帐户复原问题和答案现已被设置完成。 当您下次复原密码时，你所提供的答案必须完全匹配。* * 千万不要忘记您的密码和帐户复原答案 * * 缺少了它们将无法复原您的帐户 ！";
 
 /* Start of password rules text */
 "Your password..." = "您的密码...";
@@ -1567,15 +1644,17 @@ Use the Payee, Category, and Notes field to optionally tag your transaction" = "
 
 All tagged information is kept 100% private and encrypted by your password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] 使用联系人来为您的交易资讯 标记。 
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] 使用联系人来为您的交易资讯进行标记。 
 
-所有已标记的信息绝对保持 100%的私隐和通过你呢密码进行加密处理。没有人，包括 [[abtag APP_TITLE]]，能够得知此信息。";
+所有已标记的信息绝对100%保密以及通过你的密码进行加密处理。
+
+没有任何人，包括 [[abtag APP_TITLE]]，能够得知此信息。";
 
 /* settings text */
 "bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";
 
 /* business listings is closed */
-"closed" = "关闭";
+"closed" = "已关闭";
 
 /* No comment provided by engineer. */
 "day" = "天";
@@ -1607,5 +1686,5 @@ Context | Request Context";
 "seconds" = "秒";
 
 /* Header of popup in SendView from wallet to wallet transfer */
-"▼ Choose a wallet to transfer funds to ▼" = "▼选择要进行转账的钱包 ▼ ";
+"▼ Choose a wallet to transfer funds to ▼" = "▼ 选择一个钱包以便转入资金 ▼";
 
