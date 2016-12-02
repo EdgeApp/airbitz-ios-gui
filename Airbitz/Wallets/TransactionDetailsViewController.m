@@ -393,7 +393,7 @@ typedef enum eRequestType
 {
     [MainViewController changeNavBarTitle:self title:transactionDetailsHeaderText];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Exit:) fromObject:self];
-    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:false action:nil fromObject:self];
+    [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(buttonInfoTouched:) fromObject:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
