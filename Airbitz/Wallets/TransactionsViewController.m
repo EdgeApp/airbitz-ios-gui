@@ -1444,7 +1444,12 @@ const int NumPromoRows              = 3;
         else
         {
             // balance becomes fiat
-            double fCurrency = [abcAccount.exchangeCache satoshiToCurrency:transaction.amountSatoshi currencyCode:wallet.currency.code error:nil];
+            // Show recorded fiat value at time of transaction
+            
+            double fCurrency = 0.0f;
+            if (transaction.metaData)
+                fCurrency = transaction.metaData.amountFiat;
+            
             cell.balanceLabel.text = [wallet.currency doubleToPrettyCurrencyString:fCurrency];
             cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
