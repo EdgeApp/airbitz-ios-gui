@@ -56,8 +56,11 @@
     
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
+    self.passwordTextField.font = [UIFont fontWithName:AppFont size:17.0];
+
     self.reenterPasswordTextField.delegate = self;
     self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
+    self.reenterPasswordTextField.font = [UIFont fontWithName:AppFont size:17.0];
     self.pinTextField.delegate = self;
     self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
