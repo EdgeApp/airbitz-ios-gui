@@ -1215,16 +1215,18 @@ function _native(functionName, cbid, args, block) {
   if (args) {
     data.args = args;
   }
-  return openUrl(b, "bridge://airbitz.co/" + JSON.stringify(data), cbid);
+
+  var jsonStr = JSON.stringify(data)
+  var uriString = encodeURIComponent(jsonStr)
+
+  return openUrl(b, "bridge://airbitz.co/" + uriString, cbid);
 }
 
 function openUrl(block, url, cbid) {
   var frame = document.createElement("IFRAME");
   frame.setAttribute("src", url);
-  // frame.setAttribute("src", "htt://go+lf");
   document.documentElement.appendChild(frame);
   frame.parentNode.removeChild(frame);
-  // window.location = url
   if (block) {
     var ret = null;
     if (Airbitz._results[cbid]) {
@@ -1337,7 +1339,10 @@ function _bridge() {
     },
 
     writeData: function(key, value) {
-      _handleBlocking(_native('writeData', newId(), {'key': key, 'value': value}, true));
+      var nid = newId()
+      var nret = _native('writeData', nid, {'key': key, 'value': value}, true)
+      _handleBlocking(nret);
+      // _handleBlocking(_native('writeData', newId(), {'key': key, 'value': value}, true));
     },
 
     clearData: function() {
@@ -1514,7 +1519,6 @@ function _bridge() {
    * @param {object} wallet - the wallet object
    * @param {string} toAddress - the recipient address
    * @param {number} amountSatoshi - how many satoshis to spend
-   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
   Airbitz.core.createSpendRequest = function(wallet, toAddress, amountSatoshi, options) {
     Airbitz._bridge.createSpendRequest(wallet, toAddress, amountSatoshi, 0, options);
@@ -1527,10 +1531,9 @@ function _bridge() {
    * @param {number} amountSatoshi - how many satoshis to spend
    * @param {string} toAddress2 - the recipient address
    * @param {number} amountSatoshi2 - how many satoshis to spend
-   * @param {amountFiat} amountFiat - not required, but the fiat value at the time of the request
    */
-  Airbitz.core.createSpendRequest2 = function(wallet, toAddress, amountSatoshi, toAddress2, options) {
-    Airbitz._bridge.createSpendRequest2(wallet, toAddress, amountSatoshi, toAddress2, 0, options);
+  Airbitz.core.createSpendRequest2 = function(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, options) {
+    Airbitz._bridge.createSpendRequest2(wallet, toAddress, amountSatoshi, toAddress2, amountSatoshi2, 0,options);
   };
 
   /**
@@ -12662,7 +12665,7 @@ module.run(['$templateCache', function($templateCache) {
     '      <div class="no-pad-left form-group col-xs-12" ng-show="exchange.countryCode != \'CA\'">\n' +
     '        <label for="last4Ssn">Last 4 of SSN</label>\n' +
     '        <input ng-model="account.last4Ssn"\n' +
-    '        type="number" id="last4Ssn" class="form-control large"\n' +
+    '        type="text" id="last4Ssn" class="form-control large"\n' +
     '        placeholder="Last 4 SSN" autocomplete="off" autocorrect="off"\n' +
     '        name="last4Ssn"\n' +
     '        required="" />\n' +
