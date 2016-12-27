@@ -238,6 +238,14 @@ static BOOL bInitialized = false;
                                              selector:@selector(applicationEnteredForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(removeAccountFromDropDown:)
+                                                     name:@"DropDownDeleteNotificationIdentifier"
+                                                   object:nil];
+    });
 
     if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
         self.fingerprintButton.hidden = YES;
@@ -248,11 +256,6 @@ static BOOL bInitialized = false;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [center addObserver:self selector:@selector(removeAccountFromDropDown:) name:@"DropDownDeleteNotificationIdentifier" object:nil];
-    });
 
     [self animateSwipeArrowWithRepetitions:3 andDelay:1.0 direction:1];
 
@@ -419,7 +422,8 @@ static BOOL bInitialized = false;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self dismissErrorMessage];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     
 //    self.PINCodeView.PINCode = nil;
     self.PINTextField.text = nil;
