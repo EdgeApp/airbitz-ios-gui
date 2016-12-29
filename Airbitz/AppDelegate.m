@@ -23,6 +23,7 @@
 #import "Config.h"
 #import "Theme.h"
 #import "AB.h"
+@import DropDown;
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -60,6 +61,9 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 #endif
+    
+    //DropDown configuration
+    [DropDown startListeningToKeyboard];
 
     return YES;
 }
