@@ -30,6 +30,8 @@
 		775F66761E14E54F007F00D8 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66731E14E54E007F00D8 /* DPDConstants.swift */; };
 		775F66771E14E54F007F00D8 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */; };
 		775F66781E14E54F007F00D8 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */; };
+		775F66811E15752F007F00D8 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
+		775F66871E157580007F00D8 /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66861E157580007F00D8 /* UsernameDropDownCell.swift */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1402,6 +1404,8 @@
 		775F66731E14E54E007F00D8 /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
 		775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
 		775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UsernameDropDownCell.xib; path = Login/UsernameDropDownCell.xib; sourceTree = "<group>"; };
+		775F66861E157580007F00D8 /* UsernameDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsernameDropDownCell.swift; path = Login/UsernameDropDownCell.swift; sourceTree = "<group>"; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
 		9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
@@ -2648,6 +2652,7 @@
 				775F666B1E14E506007F00D8 /* DropDown.swift */,
 				775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */,
 				775F666D1E14E506007F00D8 /* DropDownCell.swift */,
+				775F66861E157580007F00D8 /* UsernameDropDownCell.swift */,
 			);
 			name = DropDown;
 			sourceTree = "<group>";
@@ -2665,6 +2670,7 @@
 		775F66661E14E492007F00D8 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */,
 				775F66711E14E531007F00D8 /* DropDownCell.xib */,
 			);
 			name = resources;
@@ -4657,6 +4663,7 @@
 				DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA57A1431D13145A005442AF /* PopupPickerView.xib in Resources */,
+				775F66811E15752F007F00D8 /* UsernameDropDownCell.xib in Resources */,
 				DADFAC5A1D29F59C006798D5 /* info.html in Resources */,
 				DA9EE4881BC61F920063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EE4701BC61F920063DA07 /* flash_on@2x.png in Resources */,
@@ -5659,6 +5666,7 @@
 				346445A65D1AF39AD0044785 /* PluginListViewController.m in Sources */,
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
 				346442FF5C0981D87A7C8AB0 /* AB.m in Sources */,
+				775F66871E157580007F00D8 /* UsernameDropDownCell.swift in Sources */,
 				34644BA757EFF80569B02240 /* Affiliate.m in Sources */,
 				DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */,
 				34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */,
