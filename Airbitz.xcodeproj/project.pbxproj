@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */; };
+		290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
 		3464426A362C97FF7C89103B /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -23,9 +23,17 @@
 		34644DCDB063C438DFE4F489 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		34644E64D77421AA50F21575 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
 		34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
-		622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */; };
-		662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */; };
+		775F666E1E14E506007F00D8 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666B1E14E506007F00D8 /* DropDown.swift */; };
+		775F666F1E14E506007F00D8 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */; };
+		775F66701E14E506007F00D8 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666D1E14E506007F00D8 /* DropDownCell.swift */; };
+		775F66721E14E531007F00D8 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66711E14E531007F00D8 /* DropDownCell.xib */; };
+		775F66761E14E54F007F00D8 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66731E14E54E007F00D8 /* DPDConstants.swift */; };
+		775F66771E14E54F007F00D8 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */; };
+		775F66781E14E54F007F00D8 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */; };
+		775F66811E15752F007F00D8 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
+		775F66871E157580007F00D8 /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66861E157580007F00D8 /* UsernameDropDownCell.swift */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
+		C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB8F1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
 		DA10BB901BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1284,6 +1292,7 @@
 		DAF024C21DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
 		DAF024C31DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
 		DAF024C41DB2C10B00FF815F /* barcode-bracket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */; };
+		E9626EAC8BD816811AFB3422 /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */; };
 		F6CF2CD47C8D9E358BBD6855 /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
 /* End PBXBuildFile section */
 
@@ -1383,13 +1392,22 @@
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AB.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		775F66681E14E4B8007F00D8 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
+		775F666B1E14E506007F00D8 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		775F666D1E14E506007F00D8 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		775F66711E14E531007F00D8 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		775F66731E14E54E007F00D8 /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
+		775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UsernameDropDownCell.xib; path = Login/UsernameDropDownCell.xib; sourceTree = "<group>"; };
+		775F66861E157580007F00D8 /* UsernameDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsernameDropDownCell.swift; path = Login/UsernameDropDownCell.swift; sourceTree = "<group>"; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
+		9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		DA0BA5B01D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA0BA5B11D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template.html; sourceTree = "<group>"; };
@@ -2464,6 +2482,7 @@
 		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-bracket@2x.png"; sourceTree = "<group>"; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 /* End PBXFileReference section */
 
@@ -2527,7 +2546,7 @@
 				DA9EF3F81BC7285D0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */,
-				313526302F2C0D77024F38CD /* libPods-Airbitz-Develop.a in Frameworks */,
+				E9626EAC8BD816811AFB3422 /* libPods-Airbitz-Develop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2558,7 +2577,7 @@
 				DA9EF5BF1BC729FA0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
-				662E8C22BDCC114A855DF558 /* libPods-Airbitz-Testnet.a in Frameworks */,
+				290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2589,7 +2608,7 @@
 				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
 				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
-				622641632C323DA8FA24E893 /* libPods-Airbitz.a in Frameworks */,
+				C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2623,6 +2642,38 @@
 				2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		775F66601E14E42B007F00D8 /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				775F66661E14E492007F00D8 /* resources */,
+				775F66651E14E482007F00D8 /* helpers */,
+				775F666B1E14E506007F00D8 /* DropDown.swift */,
+				775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */,
+				775F666D1E14E506007F00D8 /* DropDownCell.swift */,
+				775F66861E157580007F00D8 /* UsernameDropDownCell.swift */,
+			);
+			name = DropDown;
+			sourceTree = "<group>";
+		};
+		775F66651E14E482007F00D8 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				775F66731E14E54E007F00D8 /* DPDConstants.swift */,
+				775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */,
+				775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		775F66661E14E492007F00D8 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */,
+				775F66711E14E531007F00D8 /* DropDownCell.xib */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
@@ -2692,10 +2743,10 @@
 				DA9ED7331BC60AA90063DA07 /* SystemConfiguration.framework */,
 				DA9ED7341BC60AA90063DA07 /* UIKit.framework */,
 				DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */,
-				57EB4E21859E2995DDDD8745 /* libPods-Airbitz.a */,
-				526C4B265BBD39C0B77BA310 /* libPods-Airbitz-Develop.a */,
 				5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */,
-				71B0BD77B76AD89B6C321C0C /* libPods-Airbitz-Testnet.a */,
+				9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */,
+				5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */,
+				E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3463,8 +3514,10 @@
 			isa = PBXGroup;
 			children = (
 				DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */,
+				775F66681E14E4B8007F00D8 /* Airbitz-Bridging-Header.h */,
 				DA9ED8031BC61F8F0063DA07 /* Business Directory */,
 				DA9ED82F1BC61F8F0063DA07 /* DDData */,
+				775F66601E14E42B007F00D8 /* DropDown */,
 				DA9ED8361BC61F8F0063DA07 /* FadingAlert */,
 				DA9ED8391BC61F8F0063DA07 /* FadingAlert2 */,
 				DA9EE5C21BC6332C0063DA07 /* Google Drive */,
@@ -3618,13 +3671,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9D8F851CC0C191006A8C0A /* Build configuration list for PBXNativeTarget "Airbitz-OSX" */;
 			buildPhases = (
-				0EF999E02DE12E9F3996B6EC /* 📦 Check Pods Manifest.lock */,
+				0EF999E02DE12E9F3996B6EC /* [CP] Check Pods Manifest.lock */,
 				8098D09DC906C087001E94A0 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9D8F501CC0C191006A8C0A /* Sources */,
 				DA9D8F511CC0C191006A8C0A /* Frameworks */,
 				DA9D8F521CC0C191006A8C0A /* Resources */,
-				F736412B2F002033811E3ECD /* uD83DuDCE6 Embed Pods Frameworks */,
-				EB1F9F1B010317F8520994B9 /* uD83DuDCE6 Copy Pods Resources */,
+				F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */,
+				EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */,
 				4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */,
 				AA20A8E95F2846F43DCC4CD0 /* 📦 Copy Pods Resources */,
 			);
@@ -3694,13 +3747,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF5101BC7285D0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Develop" */;
 			buildPhases = (
-				46B0B9D5591E42E896DB53E0 /* 📦 Check Pods Manifest.lock */,
+				46B0B9D5591E42E896DB53E0 /* [CP] Check Pods Manifest.lock */,
 				A4A2902C0CC41F6230966708 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9EF3501BC7285D0063DA07 /* Sources */,
 				DA9EF3DA1BC7285D0063DA07 /* Frameworks */,
 				DA9EF4021BC7285D0063DA07 /* Resources */,
-				C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */,
-				77521873930B17B23434AFD3 /* uD83DuDCE6 Copy Pods Resources */,
+				C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */,
+				77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */,
 				E4AB2D4B32648E8C3AEB7904 /* 📦 Embed Pods Frameworks */,
 				304C82C1076D8CA8C89E01B8 /* 📦 Copy Pods Resources */,
 			);
@@ -3717,13 +3770,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA9EF6D51BC729FA0063DA07 /* Build configuration list for PBXNativeTarget "Airbitz-Testnet" */;
 			buildPhases = (
-				36185E2FCBC1542FB7BEE6E1 /* 📦 Check Pods Manifest.lock */,
+				36185E2FCBC1542FB7BEE6E1 /* [CP] Check Pods Manifest.lock */,
 				07AA425DC801DD902C371688 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DA9EF5171BC729FA0063DA07 /* Sources */,
 				DA9EF5A11BC729FA0063DA07 /* Frameworks */,
 				DA9EF5C91BC729FA0063DA07 /* Resources */,
-				148495570A5C654A9580E66E /* uD83DuDCE6 Embed Pods Frameworks */,
-				362598A803D456F4E4BF374A /* uD83DuDCE6 Copy Pods Resources */,
+				148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */,
+				362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */,
 				656EB90AAC0A5CD7943330A3 /* 📦 Embed Pods Frameworks */,
 				2EC4A662EF02880A27A5993B /* 📦 Copy Pods Resources */,
 			);
@@ -3740,13 +3793,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAD1ADA41BC6065100C648C4 /* Build configuration list for PBXNativeTarget "Airbitz" */;
 			buildPhases = (
-				C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */,
+				C782C142C05CBA2C42285091 /* [CP] Check Pods Manifest.lock */,
 				84E4F0AEEF0E1054D0334101 /* uD83DuDCE6 Check Pods Manifest.lock */,
 				DAD1AD731BC6065100C648C4 /* Sources */,
 				DAD1AD741BC6065100C648C4 /* Frameworks */,
 				DAD1AD751BC6065100C648C4 /* Resources */,
-				AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */,
-				0AF405240848F7D4E657A31C /* uD83DuDCE6 Copy Pods Resources */,
+				AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */,
+				0AF405240848F7D4E657A31C /* [CP] Copy Pods Resources */,
 				DABFC98D1CFBC89400104AC1 /* Embed App Extensions */,
 				4D1411765C8B62805AE86C22 /* 📦 Embed Pods Frameworks */,
 				3B3AF4AE172796DA27F53DF5 /* 📦 Copy Pods Resources */,
@@ -3835,6 +3888,7 @@
 					DAD1AD761BC6065100C648C4 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = G5LQ7MERPK;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -4545,6 +4599,7 @@
 				DA9EE46D1BC61F920063DA07 /* flash-off@2x.png in Resources */,
 				DA9EE48F1BC61F920063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DA9EE45B1BC61F920063DA07 /* btn_export_white@2x.png in Resources */,
+				775F66721E14E531007F00D8 /* DropDownCell.xib in Resources */,
 				DA57A1F31D131CAD005442AF /* CalculatorView~iphone.xib in Resources */,
 				DA9EE4A71BC61F920063DA07 /* icon_logout@3x.png in Resources */,
 				DA9EE4C81BC61F920063DA07 /* icon_wallet.png in Resources */,
@@ -4608,6 +4663,7 @@
 				DA4A13F41CFEC8400097EF31 /* fingerprint-wht.png in Resources */,
 				DABA01201C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA57A1431D13145A005442AF /* PopupPickerView.xib in Resources */,
+				775F66811E15752F007F00D8 /* UsernameDropDownCell.xib in Resources */,
 				DADFAC5A1D29F59C006798D5 /* info.html in Resources */,
 				DA9EE4881BC61F920063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EE4701BC61F920063DA07 /* flash_on@2x.png in Resources */,
@@ -4798,14 +4854,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		0AF405240848F7D4E657A31C /* uD83DuDCE6 Copy Pods Resources */ = {
+		0AF405240848F7D4E657A31C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4813,29 +4869,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0EF999E02DE12E9F3996B6EC /* 📦 Check Pods Manifest.lock */ = {
+		0EF999E02DE12E9F3996B6EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		148495570A5C654A9580E66E /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4873,29 +4929,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		36185E2FCBC1542FB7BEE6E1 /* 📦 Check Pods Manifest.lock */ = {
+		36185E2FCBC1542FB7BEE6E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		362598A803D456F4E4BF374A /* uD83DuDCE6 Copy Pods Resources */ = {
+		362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4918,19 +4974,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		46B0B9D5591E42E896DB53E0 /* 📦 Check Pods Manifest.lock */ = {
+		46B0B9D5591E42E896DB53E0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */ = {
@@ -4978,14 +5034,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		77521873930B17B23434AFD3 /* uD83DuDCE6 Copy Pods Resources */ = {
+		77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5053,14 +5109,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AC39B6D1FB9EDE1712613FD4 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5068,29 +5124,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C782C142C05CBA2C42285091 /* 📦 Check Pods Manifest.lock */ = {
+		C782C142C05CBA2C42285091 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C8206127E5601AA2C80919B3 /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5113,14 +5169,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB1F9F1B010317F8520994B9 /* uD83DuDCE6 Copy Pods Resources */ = {
+		EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5128,14 +5184,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F736412B2F002033811E3ECD /* uD83DuDCE6 Embed Pods Frameworks */ = {
+		F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "uD83DuDCE6 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5508,6 +5564,7 @@
 				DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */,
 				DA9EEC471BC6332F0063DA07 /* GTLDrive_Sources.m in Sources */,
 				DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */,
+				775F666E1E14E506007F00D8 /* DropDown.swift in Sources */,
 				DA9ED7F61BC61E680063DA07 /* UIImage+Colorize.m in Sources */,
 				DA9ED7CF1BC61E680063DA07 /* BalanceView.m in Sources */,
 				DA9EE5111BC61F930063DA07 /* SendConfirmationViewController.m in Sources */,
@@ -5526,12 +5583,14 @@
 				DA9EE41D1BC61F920063DA07 /* AddressRequestController.m in Sources */,
 				DA9EE55B1BC61F930063DA07 /* TransactionDetailsViewController.m in Sources */,
 				DA9EE55A1BC61F930063DA07 /* TransactionCell.m in Sources */,
+				775F66761E14E54F007F00D8 /* DPDConstants.swift in Sources */,
 				DA9EE0CD1BC61F920063DA07 /* DDData.m in Sources */,
 				DA9EE41F1BC61F920063DA07 /* RecipientViewController.m in Sources */,
 				DA9ED7E41BC61E680063DA07 /* MainViewController.m in Sources */,
 				DA9EE5541BC61F930063DA07 /* ExportWalletOptionsCell.m in Sources */,
 				DA9EE55C1BC61F930063DA07 /* TransactionsViewController.m in Sources */,
 				DA9EE51C1BC61F930063DA07 /* PlainCell.m in Sources */,
+				775F666F1E14E506007F00D8 /* DropDown+Appearance.swift in Sources */,
 				DA9EE0C31BC61F920063DA07 /* AnnotationContentView.m in Sources */,
 				DA9EE5551BC61F930063DA07 /* ExportWalletOptionsViewController.m in Sources */,
 				DA9EE5591BC61F930063DA07 /* PayeeCell.m in Sources */,
@@ -5542,6 +5601,7 @@
 				DA9EE4061BC61F920063DA07 /* LoginViewController.m in Sources */,
 				DA9EE5601BC61F930063DA07 /* WalletMakerView.m in Sources */,
 				DA9EE4141BC61F920063DA07 /* Plugin.m in Sources */,
+				775F66771E14E54F007F00D8 /* DPDKeyboardListener.swift in Sources */,
 				DA9ED7EC1BC61E680063DA07 /* SlideoutView.m in Sources */,
 				DA8B61061DE2ECCC009EB585 /* main.m in Sources */,
 				DAE1BE471CC37883003494AB /* MainController.m in Sources */,
@@ -5560,6 +5620,7 @@
 				DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */,
 				DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */,
 				DA74B5371C394B8700C5CD43 /* Strings.m in Sources */,
+				775F66701E14E506007F00D8 /* DropDownCell.swift in Sources */,
 				DA9EE5221BC61F930063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				DA9EE5121BC61F930063DA07 /* SendStatusViewController.m in Sources */,
 				DA9ED7E81BC61E680063DA07 /* NSDate+Helper.m in Sources */,
@@ -5577,6 +5638,7 @@
 				DA9ED7EA1BC61E680063DA07 /* NSString+StripHTML.m in Sources */,
 				DA9ED7F11BC61E680063DA07 /* StylizedTextField2.m in Sources */,
 				DA9EE4171BC61F920063DA07 /* PopupPickerView.m in Sources */,
+				775F66781E14E54F007F00D8 /* DPDUIView+Extension.swift in Sources */,
 				DA4902961D1F3BEC00F34324 /* MiniDropDownAlertView.m in Sources */,
 				DA9EE5311BC61F930063DA07 /* NSDictionary_JSONExtensions.m in Sources */,
 				DA9ED7DF1BC61E680063DA07 /* InfoView.m in Sources */,
@@ -5604,6 +5666,7 @@
 				346445A65D1AF39AD0044785 /* PluginListViewController.m in Sources */,
 				346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */,
 				346442FF5C0981D87A7C8AB0 /* AB.m in Sources */,
+				775F66871E157580007F00D8 /* UsernameDropDownCell.swift in Sources */,
 				34644BA757EFF80569B02240 /* Affiliate.m in Sources */,
 				DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */,
 				34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */,
@@ -6742,6 +6805,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -6788,6 +6852,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6812,6 +6877,7 @@
 			baseConfigurationReference = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6845,6 +6911,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -6853,6 +6922,7 @@
 			baseConfigurationReference = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Airbitz/Airbitz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6886,12 +6956,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Airbitz/Airbitz-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		DAD1ADA81BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6904,6 +6977,7 @@
 		DAD1ADA91BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = AirbitzTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6916,6 +6990,7 @@
 		DAD1ADAB1BC6065100C648C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;
@@ -6928,6 +7003,7 @@
 		DAD1ADAC1BC6065100C648C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = AirbitzUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.AirbitzUITests;
