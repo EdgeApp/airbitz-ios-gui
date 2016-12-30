@@ -32,6 +32,24 @@
 		775F66781E14E54F007F00D8 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */; };
 		775F66811E15752F007F00D8 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
 		775F66871E157580007F00D8 /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66861E157580007F00D8 /* UsernameDropDownCell.swift */; };
+		77B631B71E1616020099B091 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666B1E14E506007F00D8 /* DropDown.swift */; };
+		77B631B81E1616030099B091 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666B1E14E506007F00D8 /* DropDown.swift */; };
+		77B631B91E1616060099B091 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */; };
+		77B631BA1E1616070099B091 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */; };
+		77B631BB1E16160A0099B091 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666D1E14E506007F00D8 /* DropDownCell.swift */; };
+		77B631BC1E16160B0099B091 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666D1E14E506007F00D8 /* DropDownCell.swift */; };
+		77B631BD1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66861E157580007F00D8 /* UsernameDropDownCell.swift */; };
+		77B631BE1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66861E157580007F00D8 /* UsernameDropDownCell.swift */; };
+		77B631BF1E1616120099B091 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66731E14E54E007F00D8 /* DPDConstants.swift */; };
+		77B631C01E1616130099B091 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66731E14E54E007F00D8 /* DPDConstants.swift */; };
+		77B631C11E1616160099B091 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */; };
+		77B631C21E1616170099B091 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66741E14E54E007F00D8 /* DPDKeyboardListener.swift */; };
+		77B631C31E16161A0099B091 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */; };
+		77B631C41E16161B0099B091 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */; };
+		77B631C51E1616240099B091 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66711E14E531007F00D8 /* DropDownCell.xib */; };
+		77B631C61E1616250099B091 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66711E14E531007F00D8 /* DropDownCell.xib */; };
+		77B631C71E1616280099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
+		77B631C81E1616290099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -4072,6 +4090,7 @@
 				DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF43B1BC7285D0063DA07 /* icon_category_atm.png in Resources */,
 				DA9EF43C1BC7285D0063DA07 /* icon_transactions@3x.png in Resources */,
+				77B631C51E1616240099B091 /* DropDownCell.xib in Resources */,
 				DA9EF43D1BC7285D0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF43E1BC7285D0063DA07 /* icon_directory@3x.png in Resources */,
 				DA9101F31C4964AD00603D62 /* icon_import.png in Resources */,
@@ -4276,6 +4295,7 @@
 				DA9EF4FC1BC7285D0063DA07 /* logo@2x.png in Resources */,
 				DA9EF4FD1BC7285D0063DA07 /* btn_selected@2x.png in Resources */,
 				DABA01251C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
+				77B631C71E1616280099B091 /* UsernameDropDownCell.xib in Resources */,
 				DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF5001BC7285D0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF5011BC7285D0063DA07 /* bd_icon_web@2x.png in Resources */,
@@ -4337,6 +4357,7 @@
 				DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EF6021BC729FA0063DA07 /* icon_category_atm.png in Resources */,
 				DA9EF6031BC729FA0063DA07 /* icon_transactions@3x.png in Resources */,
+				77B631C61E1616250099B091 /* DropDownCell.xib in Resources */,
 				DA9EF6041BC729FA0063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA9EF6051BC729FA0063DA07 /* icon_directory@3x.png in Resources */,
 				DA9101F41C4964AD00603D62 /* icon_import.png in Resources */,
@@ -4541,6 +4562,7 @@
 				DA9EF6C31BC729FA0063DA07 /* logo@2x.png in Resources */,
 				DA9EF6C41BC729FA0063DA07 /* btn_selected@2x.png in Resources */,
 				DABA01261C111950008702AB /* plugin_icon_usd@2x.png in Resources */,
+				77B631C81E1616290099B091 /* UsernameDropDownCell.xib in Resources */,
 				DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF6C71BC729FA0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
 				DA9EF6C81BC729FA0063DA07 /* bd_icon_web@2x.png in Resources */,
@@ -5250,6 +5272,7 @@
 				DA9EF3511BC7285D0063DA07 /* SMCalloutView.m in Sources */,
 				DA9EF3521BC7285D0063DA07 /* MinCharTextField.m in Sources */,
 				DA9EF3531BC7285D0063DA07 /* TextFieldCell.m in Sources */,
+				77B631C31E16161A0099B091 /* DPDUIView+Extension.swift in Sources */,
 				DA9EF3541BC7285D0063DA07 /* CategoriesCell.m in Sources */,
 				DA9EF3551BC7285D0063DA07 /* SignUpManager.m in Sources */,
 				DA51EA421CCA162800C7C95F /* BrandStrings.m in Sources */,
@@ -5275,6 +5298,7 @@
 				DA9EF3691BC7285D0063DA07 /* ButtonSelectorView2.m in Sources */,
 				DA9EF36A1BC7285D0063DA07 /* CancelDoneCell.m in Sources */,
 				DA9EF36B1BC7285D0063DA07 /* Util.m in Sources */,
+				77B631BF1E1616120099B091 /* DPDConstants.swift in Sources */,
 				DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */,
 				DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */,
@@ -5282,6 +5306,7 @@
 				DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */,
 				DA9EF3721BC7285D0063DA07 /* GTLDrive_Sources.m in Sources */,
 				DA9EF3731BC7285D0063DA07 /* PasswordVerifyView.m in Sources */,
+				77B631B71E1616020099B091 /* DropDown.swift in Sources */,
 				DA9EF3741BC7285D0063DA07 /* UIImage+Colorize.m in Sources */,
 				DA9EF3751BC7285D0063DA07 /* BalanceView.m in Sources */,
 				DA9EF3761BC7285D0063DA07 /* SendConfirmationViewController.m in Sources */,
@@ -5306,7 +5331,9 @@
 				DA9EF38A1BC7285D0063DA07 /* ExportWalletOptionsCell.m in Sources */,
 				DA9EF38B1BC7285D0063DA07 /* TransactionsViewController.m in Sources */,
 				DA9EF38C1BC7285D0063DA07 /* PlainCell.m in Sources */,
+				77B631B91E1616060099B091 /* DropDown+Appearance.swift in Sources */,
 				DA9EF38D1BC7285D0063DA07 /* AnnotationContentView.m in Sources */,
+				77B631BD1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */,
 				DA9EF38E1BC7285D0063DA07 /* ExportWalletOptionsViewController.m in Sources */,
 				DA9EF38F1BC7285D0063DA07 /* PayeeCell.m in Sources */,
 				DA9EF3901BC7285D0063DA07 /* UIPhotoItemView.m in Sources */,
@@ -5334,6 +5361,7 @@
 				DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */,
 				DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF3AB1BC7285D0063DA07 /* TwoFactorMenuViewController.m in Sources */,
+				77B631BB1E16160A0099B091 /* DropDownCell.swift in Sources */,
 				DA9EF3AC1BC7285D0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF3AD1BC7285D0063DA07 /* NSDate+Helper.m in Sources */,
 				DA9EF3AE1BC7285D0063DA07 /* overviewCell.m in Sources */,
@@ -5345,6 +5373,7 @@
 				DA9EF3B51BC7285D0063DA07 /* BuySellViewController.m in Sources */,
 				DA9EF3B81BC7285D0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF3B91BC7285D0063DA07 /* categoryCell.m in Sources */,
+				77B631C11E1616160099B091 /* DPDKeyboardListener.swift in Sources */,
 				DA9EF3BA1BC7285D0063DA07 /* FlashSelectView.m in Sources */,
 				DA9EF3BB1BC7285D0063DA07 /* User.m in Sources */,
 				DA9EF3BC1BC7285D0063DA07 /* NSString+StripHTML.m in Sources */,
@@ -5391,6 +5420,7 @@
 				DA9EF5181BC729FA0063DA07 /* SMCalloutView.m in Sources */,
 				DA9EF5191BC729FA0063DA07 /* MinCharTextField.m in Sources */,
 				DA9EF51A1BC729FA0063DA07 /* TextFieldCell.m in Sources */,
+				77B631C41E16161B0099B091 /* DPDUIView+Extension.swift in Sources */,
 				DA9EF51B1BC729FA0063DA07 /* CategoriesCell.m in Sources */,
 				DA9EF51C1BC729FA0063DA07 /* SignUpManager.m in Sources */,
 				DA51EA431CCA162800C7C95F /* BrandStrings.m in Sources */,
@@ -5416,6 +5446,7 @@
 				DA9EF5301BC729FA0063DA07 /* ButtonSelectorView2.m in Sources */,
 				DA9EF5311BC729FA0063DA07 /* CancelDoneCell.m in Sources */,
 				DA9EF5321BC729FA0063DA07 /* Util.m in Sources */,
+				77B631C01E1616130099B091 /* DPDConstants.swift in Sources */,
 				DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */,
 				DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */,
@@ -5423,6 +5454,7 @@
 				DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */,
 				DA9EF5391BC729FA0063DA07 /* GTLDrive_Sources.m in Sources */,
 				DA9EF53A1BC729FA0063DA07 /* PasswordVerifyView.m in Sources */,
+				77B631B81E1616030099B091 /* DropDown.swift in Sources */,
 				DA9EF53B1BC729FA0063DA07 /* UIImage+Colorize.m in Sources */,
 				DA9EF53C1BC729FA0063DA07 /* BalanceView.m in Sources */,
 				DA9EF53D1BC729FA0063DA07 /* SendConfirmationViewController.m in Sources */,
@@ -5447,7 +5479,9 @@
 				DA9EF5511BC729FA0063DA07 /* ExportWalletOptionsCell.m in Sources */,
 				DA9EF5521BC729FA0063DA07 /* TransactionsViewController.m in Sources */,
 				DA9EF5531BC729FA0063DA07 /* PlainCell.m in Sources */,
+				77B631BA1E1616070099B091 /* DropDown+Appearance.swift in Sources */,
 				DA9EF5541BC729FA0063DA07 /* AnnotationContentView.m in Sources */,
+				77B631BE1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */,
 				DA9EF5551BC729FA0063DA07 /* ExportWalletOptionsViewController.m in Sources */,
 				DA9EF5561BC729FA0063DA07 /* PayeeCell.m in Sources */,
 				DA9EF5571BC729FA0063DA07 /* UIPhotoItemView.m in Sources */,
@@ -5475,6 +5509,7 @@
 				DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */,
 				DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF5721BC729FA0063DA07 /* TwoFactorMenuViewController.m in Sources */,
+				77B631BC1E16160B0099B091 /* DropDownCell.swift in Sources */,
 				DA9EF5731BC729FA0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF5741BC729FA0063DA07 /* NSDate+Helper.m in Sources */,
 				DA9EF5751BC729FA0063DA07 /* overviewCell.m in Sources */,
@@ -5486,6 +5521,7 @@
 				DA9EF57C1BC729FA0063DA07 /* BuySellViewController.m in Sources */,
 				DA9EF57F1BC729FA0063DA07 /* StylizedTextField.m in Sources */,
 				DA9EF5801BC729FA0063DA07 /* categoryCell.m in Sources */,
+				77B631C21E1616170099B091 /* DPDKeyboardListener.swift in Sources */,
 				DA9EF5811BC729FA0063DA07 /* FlashSelectView.m in Sources */,
 				DA9EF5821BC729FA0063DA07 /* User.m in Sources */,
 				DA9EF5831BC729FA0063DA07 /* NSString+StripHTML.m in Sources */,
@@ -6827,6 +6863,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Airbitz-Swift.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -6867,6 +6905,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Airbitz-Swift.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
