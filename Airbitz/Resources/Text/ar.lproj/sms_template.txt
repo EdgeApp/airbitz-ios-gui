@@ -1,19 +1,19 @@
-Bitcoin Payment Request
-From: [[abtag FROM]]
+بيتكوين طلب الدفع
+من عند: [[abtag FROM]]
 
-Please scan QR code or click on the links to pay
+يرجى تفحص  QR رمز  أو انقر على وصلات لدفع
 
-Click to Pay
+انقر على الدفع
 [[abtag REDIRECT_URL]]
 
 [[abtag BITCOIN_URI]]
 
-Address: [[abtag ADDRESS]]
-Amount: [[abtag AMOUNT_BTC]] BTC
-Amount: [[abtag AMOUNT_BITS]] bits
+عنوان [[abtag ADDRESS]]
+كمية [[abtag AMOUNT_BTC]] BTC
+كمية: [[abtag AMOUNT_BITS]] بت
 
-Sent from the [[abtag APP_TITLE]] Mobile Bitcoin Wallet + Business Directory
+أرسلت من [[abtag APP_TITLE]] موبايل بيتكوين محفظة + دليل الأعمال
 
-Download [[abtag APP_TITLE]] for iOS or Android
+تحميل [[abtag APP_TITLE]] لدائرة الرقابة الداخلية أو الروبوت
 [[abtag APP_DOWNLOAD_LINK]]
 

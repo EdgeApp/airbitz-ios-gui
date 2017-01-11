@@ -1,33 +1,33 @@
 v.2.3.3
 
-• Fix rare issue with PIN login not working
-• Fix hang when entering password in SendConfirmation screen 
-• Support Edge Login from URI button on mobile
-• Show "exchange rate loading" insted of 0 value when needed
-• Add WhatsApp forum to support links
+• Corrigir um problema raro com o login do PIN não funcionando
+• Corrigir o bloqueio ao digitar a senha na tela SendConfirmation 
+• Apoiar o início de sessão de navegação a partir do botão URI no telemóvel
+• Mostrar "taxa de câmbio carregando" em vez de 0 valor quando necessário
+• Adicionar fórum do WhatsApp a links de suporte
 
 v 2.3.0
 
-Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+Introduzindo o Login de Borda. O primeiro single-sign-on privado, seguro, de conhecimento zero para aplicativos descentralizados. Agora você pode usar a Carteira Airbitz para efetuar login em contas seguras e criptografadas para outras aplicações blockchain como Augur e Wings. 
 
-• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
-• Fix iOS 10 UI issues
-• Fix iOS 10 crash on accounts with lots of wallets
-• Improve Scrypt parameter calculations for stronger security on faster devices
+• Seleção de servidor Libbitcoin / Electrum melhorada usando servidores de latência mais responsivos e de menor latência. 
+• Corrigir problemas de interface do usuário do iOS 10
+• Corrigir iOS 10 crash em contas com lotes de carteiras
+• Melhorar os cálculos de parâmetro Scrypt para maior segurança em dispositivos mais rápidos
 
 v 2.2.0
 
-We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+Acabamos de abrir novos caminhos implementando a primeira recuperação de senha sem atritos do mundo, que permite aos usuários recuperar senhas esquecidas com apenas duas perguntas e um e-mail. Nunca se preocupe em esquecer sua senha novamente
 
-In addition:
+Além:
 
-• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
-• Fixed TouchID occasionally not recognizing touches
-• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
-• Background notifications of incoming funds if app is recently backgrounded
-• Fallback public address for failed BIP70 payment protocol transactions 
-• Improved language translations
-• Show small dropdown when unable to connect to network
+• Integração de plugins Bitrefill que permite aos usuários comprar ups top móveis de mais de 600 operadoras em 143 países
+• Fixo TouchID ocasionalmente não reconhecendo toques
+• As contas arquivadas ocupam menos recursos ao não consultar a rede ou sincronizar dados de transação
+• Notificações em segundo plano de fundos recebidos se o aplicativo tiver sido recentemente
+• Endereço público de falha para transações de protocolo de pagamento com falha no BIP70 
+• Melhores traduções de idiomas
+• Mostrar menu suspenso pequeno quando não conseguir se conectar à rede
 
 v 2.1.0
 

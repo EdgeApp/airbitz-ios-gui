@@ -9,7 +9,7 @@ Com um foco em entregar uma experiência incrível ao usuário, a carteira Airbi
 • Zero conhecimento & zero acesso a fundos, chaves, ou dados de transação pela Airbitz ou terceiros
 • Compra/venda integrada para residentes dos EUA e Canadá
 • Pague usando o Bluetooth (BLE) sem precisar de códigos QR 
-• Login with TouchID
+• Entrar com TouchID
 • Criação de conta simples usando apenas usuário & senha (sem imprimir PDFs, escrever frases de passe, ou adicionar configurações de criptografia)
 • Backup automático criptografado da carteira para servidores redundantes de pessoa para pessoa
 • Autenticação de um toque com 2 fatores para a carteira mais fácil de proteger no mundo

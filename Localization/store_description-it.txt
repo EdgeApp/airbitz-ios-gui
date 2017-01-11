@@ -1,43 +1,43 @@
-Sell, Secure, Send, and Receive Bitcoin
+Vendi, sicuro, inviare e ricevere Bitcoin
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+Potente e facile da usare Bitcoin portafoglio permettendo agli utenti di controllare facilmente le proprie bitcoin chiavi private con la familiarità e la facilità di servizi bancari per smarthpone.
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+Prendi il controllo del tuo patrimonio! Con Airbitz, solo si ha accesso ai suoi fondi o dati di transazione. Né Airbitz o qualsiasi 3rd party possono accedere al denaro o dati. È possibile ottenere la privacy finanziaria e l'autonomia Bitcoin è stato progettato per la facilità d'uso, anche la nonna in grado di gestire.
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+Con un focus sulla fornitura di un'esperienza utente straordinaria, il portafoglio Airbitz fornisce le seguenti grande funzionalità:
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Login with TouchID
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+• Conoscenza zero e zero l'accesso ai fondi degli utenti, chiavi o dati delle transazioni da Airbitz o 3 parti
+• Integrated acquisto / vendita per i residenti degli Stati Uniti e Canada
+• Pagare tramite Bluetooth (BLE) senza bisogno di codici QR 
+• Accesso con TouchID
+• Creazione di account semplice utilizzando solo una login e password (senza la stampa di file PDF, scrivere frasi Pass, o l'aggiunta di impostazioni di crittografia)
+• Di riserva automatico portafoglio cifrato al server cloud ridondante peer-to-peer
+• Un tocco autenticazione a 2 fattori per il portafoglio più facile da sicuro nel mondo
+• Passare rapidamente i conti con nome utente discesa sugli schermi d'accesso
+• Sincronizzazione multi-dispositivo di tutti i dispositivi mobili
+• Portafogli deterministici gerarchici con mutevoli indirizzi per transazione
+• Più portafogli per account con nomi portafoglio definito semplice utente (ie. "Vacanza Fondo")
+• Supporto di più moneta a corso forzoso. Assegnare una moneta a corso forzoso per portafogli
+• le operazioni di ricerca da parte del beneficiario, categoria, o nota
+• Costruito in calcolatrice per le conversioni facile
+• Modalità mercante che consente una facile e fluida interfaccia utente dietro il bancone
+• Rilevamento pagamento parziale crea una nuova richiesta di pagamento il codice QR con il saldo 
+• Limiti di spesa giornaliera (richiedere la password per passare sopra il limite)
+• Limiti di spesa PIN-dipendenti
+• Due-rubinetto veloce interfaccia utente di trasferire fondi tra i portafogli
+• I fondi Importa da WIF o chiavi private Casascius
+• Decentralizzata architettura server. Portafogli funzionano anche se i server Airbitz sono giù.
+• L'integrazione con la directory Airbitz Affari alle informazioni aziendali completamento automatico per le transazioni tra imprese logo / foto
+• L'integrazione con rubrica a nome del beneficiario completamento automatico e foto
+• BIP Supporto protocollo 70 Pagamento
+• Il codice open-source. Disponibile a https://github.com/Airbitz
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+********* Informativa sulla Privacy *********
+L'applicazione richiede Airbitz accesso alla lista dispositivo a contatto, la posizione e le informazioni personali. Questa informazione viene utilizzata sul dispositivo per fornire un'esperienza utente migliorata nei seguenti modi:
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1. Contatti completamento automatico dalla rubrica dell'utente dopo una transazione
+2. Contatti completamento automatico dalla rubrica dell'utente per inviare e-mail o SMS richieste di pagamento
+3. Completamento automatico aziende nomi dopo una transazione
+4. Geolocalizza dispositivo dell'utente per trovare attività commerciali nelle vicinanze
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+Nessuna informazione o elenco di contatti personali informazioni mai lascia il dispositivo senza prima essere crittografato le credenziali dell'utente (Nome utente / parola d'ordine). Né Airbitz né alcuna 3rd party è a conoscenza delle informazioni accessibili dall'applicazione.

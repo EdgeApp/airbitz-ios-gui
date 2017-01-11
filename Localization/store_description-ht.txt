@@ -9,7 +9,7 @@ Pandan nou fokis pou bay yon bon eksperyans itilizatè, potfèy Aitbitz la bay b
 Oken konesans & oken aksè a lajan, kle, ou done transaksyon pa Airbitz oubien on twazyèm pati
 Gen Acha/vann pou moun ki rezide kanada ak Etazini
 Peye ak Bluetooth (BLE) san ou pa gen kod QR 
-• Login with TouchID
+Konekte ak TouchId
 Kreyasyon yon senp kont jis itilize yon non itilizatè & modpas (pa gen enpresyon pdf, ekri anba pas fraz, oubien ajoute paramèt chifreman)
 Aregistreman otomatik chifre potfèy nan sèvè peer-to-peer
 Otentifikasyon de faktè one -touch pou potfèy ki pi fasil pou sekirize nan mond lan

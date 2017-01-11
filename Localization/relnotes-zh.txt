@@ -1,19 +1,24 @@
-v.2.3.3
+2.3.3版本
 
-• Fix rare issue with PIN login not working
-• Fix hang when entering password in SendConfirmation screen 
-• Support Edge Login from URI button on mobile
-• Show "exchange rate loading" insted of 0 value when needed
-• Add WhatsApp forum to support links
+• 解决PIN登录无法正常使用的罕见问题
+•固定挂当输入密码时在SendConfirmation屏幕中 
+•支持边缘登录从 URI钮在移动
 
-v 2.3.0
 
-Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+• 显示 "exchange rate loading" 而不是0值
+• 添加WhatsApp论坛以支持链接
+ 
+Request Context
 
-• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
-• Fix iOS 10 UI issues
-• Fix iOS 10 crash on accounts with lots of wallets
-• Improve Scrypt parameter calculations for stronger security on faster devices
+
+2.3.0版本
+
+介绍边缘登录。 世界上第一个私人，安全，零知识单点登录的分散应用程序。 现在你可以使用Airbitz钱包登录安全，加密帐户为其他区块链应用程序，如Augur和翅膀。 
+
+•改进的Libbitcoin / Electrum 服务器选择通过使用最响应和最低延迟的服务器。 
+•修复iOS 10 UI问题
+•修复iOS 10崩溃的帐户有很多钱包
+• 改进Scrypt参数计算，以在更快的设备上实现更强的安全性
 
 2.2.0版本
 
