@@ -171,6 +171,21 @@ static NSMutableArray *generalPlugins;
                        };
         [buySellPlugins addObject:plugin];
 
+        plugin = [[Plugin alloc] init];
+        plugin.pluginId = @"com.libertyx.app";
+        plugin.provider = @"LibertyX";
+        plugin.country = @"US";
+        plugin.sourceFile = @"libertyx";
+        plugin.sourceExtension = @"html";
+        plugin.imageUrl = @"";
+        plugin.name = buy_sell_cash_usa;
+        plugin.env = @{
+                       @"SANDBOX": (isTestnet ? @"true" : @"false"),
+                       @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
+                       @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
+                       };
+        [buySellPlugins addObject:plugin];
+        
         bInitialized = YES;
     }
 }
