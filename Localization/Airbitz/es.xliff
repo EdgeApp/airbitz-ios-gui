@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text" approved="yes">
@@ -10,34 +10,21 @@
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
         <target xml:lang="es">Escanear Código QR</target>
       </trans-unit>
-      <trans-unit id="NiJ-rT-MKF.text" approved="yes">
-        <source>Send</source>
-        <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-        <target xml:lang="es">Enviar</target>
-      </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle" approved="yes">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
         <target xml:lang="es">Botón</target>
       </trans-unit>
-      <trans-unit id="gQB-TM-9HQ.text" approved="yes">
-        <source>BitID Login</source>
-        <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="es">BitID Inicio de Sesión</target>
-        <alt-trans>
-          <target xml:lang="es">BitID Login</target>
-        </alt-trans>
-      </trans-unit>
-      <trans-unit id="pzG-q0-KJ4.text" approved="yes">
-        <source>or</source>
-        <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
-        <target xml:lang="es">o</target>
+      <trans-unit id="gQB-TM-9HQ.text">
+        <source>Login or Send</source>
+        <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
+        <target xml:lang="es" state="needs-translation">Login or Send</target>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle" approved="yes">
@@ -257,7 +244,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text" approved="yes">
@@ -358,7 +345,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle" approved="yes">
@@ -463,7 +450,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text" approved="yes">
@@ -475,7 +462,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle" approved="yes">
@@ -490,7 +477,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder" approved="yes">
@@ -733,6 +720,11 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
         <target xml:lang="es">La semana pasada</target>
       </trans-unit>
+      <trans-unit id="NuG-b1-njk.normalTitle">
+        <source>PIN Username</source>
+        <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
+        <target xml:lang="es" state="needs-translation">PIN Username</target>
+      </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text" approved="yes">
         <source>PUBLIC ADDRESS</source>
         <note>Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc";</note>
@@ -795,6 +787,11 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
         <source>BTC</source>
         <note>Class = "UILabel"; text = "BTC"; ObjectID = "S8Q-An-svf";</note>
         <target xml:lang="es">BTC</target>
+      </trans-unit>
+      <trans-unit id="SEw-4z-klE.placeholder" approved="yes">
+        <source>Username</source>
+        <note>Class = "UITextField"; placeholder = "Username"; ObjectID = "SEw-4z-klE";</note>
+        <target xml:lang="es">Nombre de usuario</target>
       </trans-unit>
       <trans-unit id="ScE-Ny-R3i.text" approved="yes">
         <source>4 Digit PIN</source>
@@ -1096,7 +1093,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text" approved="yes">
@@ -1108,7 +1105,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle" approved="yes">
@@ -1125,7 +1122,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text" approved="yes">
@@ -1309,7 +1306,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text" approved="yes">
@@ -1391,7 +1388,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder" approved="yes">
@@ -1426,9 +1423,14 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="es">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
+      <trans-unit id="  Amount">
+        <source>  Amount</source>
+        <note>Placeholder text for Receive screen amount text field</note>
+        <target xml:lang="es" state="translated">  Total</target>
+      </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds." approved="yes">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
@@ -2270,11 +2272,6 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es">Activar Touch ID</target>
       </trans-unit>
-      <trans-unit id="Enter Amount (optional)" approved="yes">
-        <source>Enter Amount (optional)</source>
-        <note>Placeholder text for Receive screen amount</note>
-        <target xml:lang="es">Ingrese cantidad (opcional)</target>
-      </trans-unit>
       <trans-unit id="Enter Payee" approved="yes">
         <source>Enter Payee</source>
         <note>No comment provided by engineer.</note>
@@ -2390,6 +2387,11 @@ Enter it below to make sure:</source>
         <source>Exchange Rate Data Source</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="es">Origen de datos de tipo de cambio</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate loading..">
+        <source>Exchange rate loading..</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es" state="needs-translation">Exchange rate loading..</target>
       </trans-unit>
       <trans-unit id="Exit" approved="yes">
         <source>Exit</source>
@@ -3041,6 +3043,14 @@ Enter it below to make sure:</source>
         <note>settings text</note>
         <target xml:lang="es">Sobrenombre / Alias (Opcional)</target>
       </trans-unit>
+      <trans-unit id="No PIN set" approved="yes">
+        <source>No PIN set</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es">Sin PIN activado</target>
+        <alt-trans>
+          <target xml:lang="es">Sin set de PIN</target>
+        </alt-trans>
+      </trans-unit>
       <trans-unit id="No Transactions" approved="yes">
         <source>No Transactions</source>
         <note>what to display when wallet has no transactions</note>
@@ -3242,6 +3252,11 @@ Enter it below to make sure:</source>
         <target xml:lang="es">Por favor hacer click en el link de abajo desde un dispositivo móvil con %1$@ instalado para iniciar recuperación de cuenta por nombre de usuario [%2$@]
 
 &lt;br&gt;&lt;br&gt;%3$@</target>
+      </trans-unit>
+      <trans-unit id="Please create a PIN for this account to enable quick re-logins" approved="yes">
+        <source>Please create a PIN for this account to enable quick re-logins</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="es">Por favor crear un PIN para esta cuenta y habilitar el registro rápido</target>
       </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password." approved="yes">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>

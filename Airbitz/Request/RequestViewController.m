@@ -446,6 +446,18 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
         [self launchRecipientWithMode:RecipientMode_SMS];
     }
+    else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 3)
+    {
+        {
+            NSMutableArray *sharingItems = [NSMutableArray new];
+            if (_uriString) {
+                [sharingItems addObject:_uriString];
+            }
+            
+            UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+            [self presentViewController:activityController animated:YES completion:nil];
+        }
+    }
 }
 
 - (IBAction)info:(id)sender

@@ -53,10 +53,10 @@
 const int PromoIndexBuyBitcoin      = 0;
 const int PromoIndexImportGiftCard  = 1;
 const int PromoIndexBitrefill       = 2;
-const int PromoIndex20offStarbucks  = 2;
-const int PromoIndex10offTarget     = 3;
-const int PromoIndex15to20offAmazon = 4;
-const int NumPromoRows              = 3;
+const int PromoIndex15to20offAmazon = 3;
+const int PromoIndex20offStarbucks  = 4;
+const int PromoIndex10offTarget     = 5;
+const int NumPromoRows              = 4;
 
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
@@ -1444,7 +1444,12 @@ const int NumPromoRows              = 3;
         else
         {
             // balance becomes fiat
-            double fCurrency = [abcAccount.exchangeCache satoshiToCurrency:transaction.amountSatoshi currencyCode:wallet.currency.code error:nil];
+            // Show recorded fiat value at time of transaction
+            
+            double fCurrency = 0.0f;
+            if (transaction.metaData)
+                fCurrency = transaction.metaData.amountFiat;
+            
             cell.balanceLabel.text = [wallet.currency doubleToPrettyCurrencyString:fCurrency];
             cell.balanceLabel.textColor = (transaction.amountSatoshi < 0) ? COLOR_NEGATIVE : COLOR_POSITIVE;
         }
@@ -1526,6 +1531,11 @@ const int NumPromoRows              = 3;
             {
                 // Import Gift Card
                 [MainViewController launchSend];
+            }
+            else if (indexPath.row == PromoIndexBitrefill)
+            {
+                // Bitrefill
+                [MainViewController launchGiftCard];
             }
             else if (indexPath.row == PromoIndex20offStarbucks)
             {

@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
@@ -10,31 +10,21 @@
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
         <target xml:lang="ja" state="translated">スキャンQR</target>
       </trans-unit>
-      <trans-unit id="NiJ-rT-MKF.text">
-        <source>Send</source>
-        <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-        <target xml:lang="ja" state="translated">送る</target>
-      </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
         <target xml:lang="ja" state="translated">ボタン</target>
       </trans-unit>
       <trans-unit id="gQB-TM-9HQ.text">
-        <source>BitID Login</source>
-        <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="ja" state="translated">BitIDログイン</target>
-      </trans-unit>
-      <trans-unit id="pzG-q0-KJ4.text">
-        <source>or</source>
-        <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
-        <target xml:lang="ja" state="translated"> または</target>
+        <source>Login or Send</source>
+        <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
+        <target xml:lang="ja" state="needs-translation">Login or Send</target>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -251,7 +241,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -346,7 +336,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -448,7 +438,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -460,7 +450,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
@@ -472,7 +462,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -686,6 +676,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
         <target xml:lang="ja" state="translated">先週</target>
       </trans-unit>
+      <trans-unit id="NuG-b1-njk.normalTitle">
+        <source>PIN Username</source>
+        <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
+        <target xml:lang="ja" state="needs-translation">PIN Username</target>
+      </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text">
         <source>PUBLIC ADDRESS</source>
         <note>Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc";</note>
@@ -745,6 +740,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>BTC</source>
         <note>Class = "UILabel"; text = "BTC"; ObjectID = "S8Q-An-svf";</note>
         <target xml:lang="ja" state="translated">BTC</target>
+      </trans-unit>
+      <trans-unit id="SEw-4z-klE.placeholder">
+        <source>Username</source>
+        <note>Class = "UITextField"; placeholder = "Username"; ObjectID = "SEw-4z-klE";</note>
+        <target xml:lang="ja" state="translated">ユーザー名</target>
       </trans-unit>
       <trans-unit id="ScE-Ny-R3i.text">
         <source>4 Digit PIN</source>
@@ -1019,7 +1019,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -1031,7 +1031,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -1048,7 +1048,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -1213,7 +1213,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1295,7 +1295,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1327,9 +1327,14 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
+      <trans-unit id="  Amount">
+        <source>  Amount</source>
+        <note>Placeholder text for Receive screen amount text field</note>
+        <target xml:lang="ja" state="needs-translation">  Amount</target>
+      </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
@@ -2068,11 +2073,6 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">タッチIDを有効にする</target>
       </trans-unit>
-      <trans-unit id="Enter Amount (optional)">
-        <source>Enter Amount (optional)</source>
-        <note>Placeholder text for Receive screen amount</note>
-        <target xml:lang="ja" state="translated">金額を入力して（オプション）</target>
-      </trans-unit>
       <trans-unit id="Enter Payee">
         <source>Enter Payee</source>
         <note>No comment provided by engineer.</note>
@@ -2175,6 +2175,11 @@ Enter it below to make sure:</source>
         <source>Exchange Rate Data Source</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">為替レートデータソース</target>
+      </trans-unit>
+      <trans-unit id="Exchange rate loading..">
+        <source>Exchange rate loading..</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="needs-translation">Exchange rate loading..</target>
       </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
@@ -2767,6 +2772,11 @@ Enter it below to make sure:</source>
         <note>settings text</note>
         <target xml:lang="ja" state="translated">ニックネーム/ハンドル（オプション）</target>
       </trans-unit>
+      <trans-unit id="No PIN set">
+        <source>No PIN set</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">PINは設定されていません</target>
+      </trans-unit>
       <trans-unit id="No Transactions">
         <source>No Transactions</source>
         <note>what to display when wallet has no transactions</note>
@@ -2967,6 +2977,11 @@ Enter it below to make sure:</source>
 
 &lt;br&gt;&lt;br&gt;%3$@</target>
       </trans-unit>
+      <trans-unit id="Please create a PIN for this account to enable quick re-logins">
+        <source>Please create a PIN for this account to enable quick re-logins</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">迅速な再ログインを可能にするには、このアカウントのPINを作成してください</target>
+      </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
@@ -3045,7 +3060,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Please wait 1 second before retrying %@">
         <source>Please wait 1 second before retrying %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Please wait 1 second before retrying %@</target>
+        <target xml:lang="ja" state="translated">再試行する前に1秒間お待ちください％@</target>
       </trans-unit>
       <trans-unit id="Present QR code to Sender and have them scan to send you payment">
         <source>Present QR code to Sender and have them scan to send you payment</source>
@@ -3065,12 +3080,12 @@ Enter it below to make sure:</source>
       <trans-unit id="Provide an Identity Token">
         <source>Provide an Identity Token</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Provide an Identity Token</target>
+        <target xml:lang="ja" state="translated">アイデンティティトークンを提供する</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Public Seed (XPub)</target>
+        <target xml:lang="ja" state="translated">パブリックシード（XPub）</target>
       </trans-unit>
       <trans-unit id="Public Transportation">
         <source>Public Transportation</source>
@@ -3080,14 +3095,14 @@ Enter it below to make sure:</source>
       <trans-unit id="QR Code Scan Failure">
         <source>QR Code Scan Failure</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">QR Code Scan Failure</target>
+        <target xml:lang="ja" state="translated">QRコードスキャン失敗</target>
       </trans-unit>
       <trans-unit id="REFER YOUR FRIENDS\n(Earn Bitcoin)">
         <source>REFER YOUR FRIENDS
 (Earn Bitcoin)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">REFER YOUR FRIENDS
-(Earn Bitcoin)</target>
+        <target xml:lang="ja" state="translated">参照するあなたの友人
+（獲得Bitcoin）</target>
       </trans-unit>
       <trans-unit id="Re-enter New Password">
         <source>Re-enter New Password</source>
@@ -3102,27 +3117,27 @@ Enter it below to make sure:</source>
       <trans-unit id="Received Funds">
         <source>Received Funds</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Received Funds</target>
+        <target xml:lang="ja" state="translated">受領した資金</target>
       </trans-unit>
       <trans-unit id="Received...">
         <source>Received...</source>
         <note>Received string on Request screen</note>
-        <target xml:lang="ja" state="needs-translation">Received...</target>
+        <target xml:lang="ja" state="translated">受け取った...</target>
       </trans-unit>
       <trans-unit id="Recovery Disabled">
         <source>Recovery Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Recovery Disabled</target>
+        <target xml:lang="ja" state="translated">回復無効</target>
       </trans-unit>
       <trans-unit id="Recovery Password Reminder">
         <source>Recovery Password Reminder</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Recovery Password Reminder</target>
+        <target xml:lang="ja" state="translated">パスワードリマインダーを回復する</target>
       </trans-unit>
       <trans-unit id="Recovery Questions Not Set">
         <source>Recovery Questions Not Set</source>
         <note>Title of recovery questions setup error alert</note>
-        <target xml:lang="ja" state="needs-translation">Recovery Questions Not Set</target>
+        <target xml:lang="ja" state="translated">回復に関する質問が設定されていない</target>
       </trans-unit>
       <trans-unit id="Recovery Questions Set">
         <source>Recovery Questions Set</source>
@@ -3134,19 +3149,19 @@ Enter it below to make sure:</source>
 
 Please change your password and PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Recovery Successful
+        <target xml:lang="ja" state="translated">回復成功
 
-Please change your password and PIN</target>
+パスワードとPINを変更してください</target>
       </trans-unit>
       <trans-unit id="Recovery was not setup or was done on another device">
         <source>Recovery was not setup or was done on another device</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Recovery was not setup or was done on another device</target>
+        <target xml:lang="ja" state="translated">回復がセットアップされていないか、別のデバイスで実行されました</target>
       </trans-unit>
       <trans-unit id="Refer Your Friends">
         <source>Refer Your Friends</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Refer Your Friends</target>
+        <target xml:lang="ja" state="translated">参照するあなたの友人</target>
       </trans-unit>
       <trans-unit id="Registration">
         <source>Registration</source>
@@ -3156,7 +3171,7 @@ Please change your password and PIN</target>
       <trans-unit id="Remaining...">
         <source>Remaining...</source>
         <note>Remaining string on Request screen</note>
-        <target xml:lang="ja" state="needs-translation">Remaining...</target>
+        <target xml:lang="ja" state="translated">残り...</target>
       </trans-unit>
       <trans-unit id="Remember your password?">
         <source>Remember your password?</source>
@@ -3197,52 +3212,55 @@ Please change your password and PIN</target>
       <trans-unit id="Request a Payment Address">
         <source>Request a Payment Address</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Request a Payment Address</target>
+        <target xml:lang="ja" state="translated">支払い先住所のリクエスト</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Request confirmed, Two Factor off.</target>
+        <target xml:lang="ja" state="translated">リクエストが確認され、2因子がオフになりました。</target>
       </trans-unit>
       <trans-unit id="Request is copied to the clipboard">
         <source>Request is copied to the clipboard</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Request is copied to the clipboard</target>
+        <target xml:lang="ja" state="translated">リクエストはクリップボードにコピーされます</target>
       </trans-unit>
       <trans-unit id="Request your Identity Token but you don't have any">
         <source>Request your Identity Token but you don't have any</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Request your Identity Token but you don't have any</target>
+        <target xml:lang="ja" state="translated">あなたのアイデンティティトークンをリクエストするあなたは何も持っていない</target>
       </trans-unit>
       <trans-unit id="Request your Identity Token. Please select one below">
         <source>Request your Identity Token. Please select one below</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Request your Identity Token. Please select one below</target>
+        <target xml:lang="ja" state="translated">あなたのアイデンティティトークンをリクエストしてください。 下の1つを選択してください</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
         <note>Requested string on Request screen</note>
-        <target xml:lang="ja" state="needs-translation">Requested...</target>
+        <target xml:lang="ja" state="translated">要求さ</target>
       </trans-unit>
       <trans-unit id="Reset Cancelled">
         <source>Reset Cancelled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Reset Cancelled</target>
+        <target xml:lang="ja" state="translated">リセットがキャンセ</target>
       </trans-unit>
       <trans-unit id="Reset Date">
         <source>Reset Date</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Reset Date</target>
+        <target xml:lang="ja" state="translated">リセット日</target>
       </trans-unit>
       <trans-unit id="Reset requested. Please retry login after 7 days.">
         <source>Reset requested. Please retry login after 7 days.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Reset requested. Please retry login after 7 days.</target>
+        <target xml:lang="ja" state="translated">リセットが要求。 7日後にログインを再試行してください。</target>
       </trans-unit>
       <trans-unit id="Restarting watcher service">
         <source>Restarting watcher service</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Restarting watcher service</target>
+        <target xml:lang="ja" state="translated">ウォッチャーサービスを再開</target>
+        <alt-trans>
+          <target xml:lang="ja">ウォッチャーサービスを再開する</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Restaurants">
         <source>Restaurants</source>
@@ -3272,17 +3290,17 @@ Please change your password and PIN</target>
       <trans-unit id="SMS cancelled">
         <source>SMS cancelled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">SMS cancelled</target>
+        <target xml:lang="ja" state="translated">SMSがキャンセ</target>
       </trans-unit>
       <trans-unit id="SMS sent">
         <source>SMS sent</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">SMS sent</target>
+        <target xml:lang="ja" state="translated">SMSが送信</target>
       </trans-unit>
       <trans-unit id="SPEND BITCOIN (Plugins)">
         <source>SPEND BITCOIN (Plugins)</source>
         <note>Slideout menu spend text</note>
-        <target xml:lang="ja" state="needs-translation">SPEND BITCOIN (Plugins)</target>
+        <target xml:lang="ja" state="translated">費やすBITCOIN（プラグイン）</target>
       </trans-unit>
       <trans-unit id="Sales">
         <source>Sales</source>
@@ -3297,22 +3315,22 @@ Please change your password and PIN</target>
       <trans-unit id="Save Recovery Token">
         <source>Save Recovery Token</source>
         <note>Title of recovery email popup</note>
-        <target xml:lang="ja" state="needs-translation">Save Recovery Token</target>
+        <target xml:lang="ja" state="translated">回復トークンを保存</target>
       </trans-unit>
       <trans-unit id="Scan QR to Import Private Key/Gift Card">
         <source>Scan QR to Import Private Key/Gift Card</source>
         <note>Text at top of Scan Screen</note>
-        <target xml:lang="ja" state="needs-translation">Scan QR to Import Private Key/Gift Card</target>
+        <target xml:lang="ja" state="translated">秘密鍵/ギフトカードをインポートするためにQRをスキャ</target>
       </trans-unit>
       <trans-unit id="Scan the QR code of payee to send payment or tap on a bluetooth request from the list below">
         <source>Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Scan the QR code of payee to send payment or tap on a bluetooth request from the list below</target>
+        <target xml:lang="ja" state="translated">受取人のQRコードをスキャンして支払いを送信するか以下のリストからBluetoothリクエストをタップ</target>
       </trans-unit>
       <trans-unit id="Scan to Send, Import, or Edge Login">
         <source>Scan to Send, Import, or Edge Login</source>
         <note>Text at top of Send screen</note>
-        <target xml:lang="ja" state="needs-translation">Scan to Send, Import, or Edge Login</target>
+        <target xml:lang="ja" state="translated">スキャン、送信、インポート、またはエッジログイン</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
@@ -3322,7 +3340,7 @@ Please change your password and PIN</target>
       <trans-unit id="Select Currency">
         <source>Select Currency</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Select Currency</target>
+        <target xml:lang="ja" state="translated">通貨を選択</target>
       </trans-unit>
       <trans-unit id="Sell Bitcoin">
         <source>Sell Bitcoin</source>
@@ -3332,7 +3350,7 @@ Please change your password and PIN</target>
       <trans-unit id="Send Funds to Private Key">
         <source>Send Funds to Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Send Funds to Private Key</target>
+        <target xml:lang="ja" state="translated">ファンドを秘密鍵に送</target>
       </trans-unit>
       <trans-unit id="Send name on payment request">
         <source>Send name on payment request</source>
@@ -3342,7 +3360,10 @@ Please change your password and PIN</target>
       <trans-unit id="Send to Bitcoin Address or Import Private Key">
         <source>Send to Bitcoin Address or Import Private Key</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Send to Bitcoin Address or Import Private Key</target>
+        <target xml:lang="ja" state="translated">Bitcoinアドレスに送信するか、秘密鍵をインポート</target>
+        <alt-trans>
+          <target xml:lang="ja">Bitcoinアドレスに送信するか、秘密鍵をインポートする</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Sending...">
         <source>Sending...</source>
@@ -3367,7 +3388,7 @@ Please change your password and PIN</target>
       <trans-unit id="Set a Password">
         <source>Set a Password</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Set a Password</target>
+        <target xml:lang="ja" state="translated">パスワードを設定</target>
       </trans-unit>
       <trans-unit id="Set a Password and PIN">
         <source>Set a Password and PIN</source>
@@ -3378,8 +3399,8 @@ Please change your password and PIN</target>
         <source>Setting recovery questions failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Setting recovery questions failed:
-%@</target>
+        <target xml:lang="ja" state="translated">復旧の質問を設定できませ：
+％@</target>
       </trans-unit>
       <trans-unit id="Settings">
         <source>Settings</source>
@@ -3409,7 +3430,7 @@ Please change your password and PIN</target>
       <trans-unit id="Show QR Code">
         <source>Show QR Code</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Show QR Code</target>
+        <target xml:lang="ja" state="translated">QRコードを表示する</target>
       </trans-unit>
       <trans-unit id="Sign Up">
         <source>Sign Up</source>
@@ -3420,8 +3441,8 @@ Please change your password and PIN</target>
         <source>Sign-Up failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Sign-Up failed:
-%@</target>
+        <target xml:lang="ja" state="translated">登録は失敗：
+％@</target>
       </trans-unit>
       <trans-unit id="Skip">
         <source>Skip</source>
@@ -3471,7 +3492,7 @@ Please change your password and PIN</target>
       <trans-unit id="Starbucks (Up to 20% Off)">
         <source>Starbucks (Up to 20% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Starbucks (Up to 20% Off)</target>
+        <target xml:lang="ja" state="translated">スターバックス（最大20％オフ）</target>
       </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
@@ -3486,12 +3507,15 @@ Please change your password and PIN</target>
       <trans-unit id="Successfully Verified Identity">
         <source>Successfully Verified Identity</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Successfully Verified Identity</target>
+        <target xml:lang="ja" state="translated">正常に確認されたアイデンティティ</target>
       </trans-unit>
       <trans-unit id="Successfully received identity token from %@">
         <source>Successfully received identity token from %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Successfully received identity token from %@</target>
+        <target xml:lang="ja" state="translated">Idトークンを正常に受信しました％@</target>
+        <alt-trans>
+          <target xml:lang="ja">IDトークンを正常に受信しました％@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Sweep Funds From Private Key">
         <source>Sweep Funds From Private Key</source>
@@ -3501,7 +3525,7 @@ Please change your password and PIN</target>
       <trans-unit id="Synchronizing">
         <source>Synchronizing</source>
         <note>Synchronizing text in confirmation textfield</note>
-        <target xml:lang="ja" state="needs-translation">Synchronizing</target>
+        <target xml:lang="ja" state="translated">同期中</target>
       </trans-unit>
       <trans-unit id="TOTAL: ">
         <source>TOTAL: </source>
@@ -3511,12 +3535,12 @@ Please change your password and PIN</target>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Tap and hold a wallet for additional options</target>
+        <target xml:lang="ja" state="translated">追加オプションのためにウォレットをタップ＆ホールド</target>
       </trans-unit>
       <trans-unit id="Target (Up to 10% Off)">
         <source>Target (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Target (Up to 10% Off)</target>
+        <target xml:lang="ja" state="translated">ターゲット（最大10％オフ）</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -3531,41 +3555,41 @@ Please change your password and PIN</target>
       <trans-unit id="The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.">
         <source>The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.</target>
+        <target xml:lang="ja" state="translated">2要素認証トークン無効です。トークンが別のデバイスによって変更されたか時計が歪んでい。 システム時刻が正しいことを確認してください。</target>
       </trans-unit>
       <trans-unit id="The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@">
         <source>The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@</target>
+        <target xml:lang="ja" state="translated">あなたが接続したデバイスのビットコインアドレス：％1 $ @最初に広告されたアドレスと一致しません：％2 $ @</target>
       </trans-unit>
       <trans-unit id="The following services are not provided by %@.\n\nFor issues and feedback, please contact the respective service providers.">
         <source>The following services are not provided by %@.
 
 For issues and feedback, please contact the respective service providers.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">The following services are not provided by %@.
+        <target xml:lang="ja" state="translated">以下のサービスは、％@。
 
-For issues and feedback, please contact the respective service providers.</target>
+問題とフィードバックに関、それぞれのサービスプロバイダにお問い合わせください。</target>
       </trans-unit>
       <trans-unit id="The given answers were incorrect. Please try again.">
         <source>The given answers were incorrect. Please try again.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">The given answers were incorrect. Please try again.</target>
+        <target xml:lang="ja" state="translated">与えられた答えは間違っていた。もう一度お試しください。</target>
       </trans-unit>
       <trans-unit id="The password to this account was changed by another device. Please login using the new credentials.">
         <source>The password to this account was changed by another device. Please login using the new credentials.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">The password to this account was changed by another device. Please login using the new credentials.</target>
+        <target xml:lang="ja" state="translated">このアカウントのパスワードは、別のデバイスによって変更されました。 新しい資格情報を使用してログインしてください。</target>
       </trans-unit>
       <trans-unit id="This account already has password recovery setup. Would you like to disable it?">
         <source>This account already has password recovery setup. Would you like to disable it?</source>
         <note>Title of recovery popup message</note>
-        <target xml:lang="ja" state="needs-translation">This account already has password recovery setup. Would you like to disable it?</target>
+        <target xml:lang="ja" state="translated">このアカウントにはすでにパスワード回復の設定があります。それを無効にしますか？</target>
       </trans-unit>
       <trans-unit id="This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.">
         <source>This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</target>
+        <target xml:lang="ja" state="translated">このアプリケーションは、あなたのAirbitzアカウントにリンクされた以下のリポジトリにアクセスしたいと考えています。他のアカウントや財布にアクセスすることはできません。</target>
       </trans-unit>
       <trans-unit id="This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.">
         <source>This is not your email or real name.
@@ -3574,51 +3598,51 @@ This is the username to login into your [[abtag APP_TITLE]] account on this and 
 
 Your username and password are known only to you and never stored unencrypted.</source>
         <note>Username Signup screen info text</note>
-        <target xml:lang="ja" state="needs-translation">This is not your email or real name.
+        <target xml:lang="ja" state="translated">これはあなたの電子メールまたは本名ではありません。
 
-This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+これはあなたにログインするためのユーザー名です[[abtag APP_TITLE]] このデバイスと他のデバイスのアカウント
 
-Your username and password are known only to you and never stored unencrypted.</target>
+あなたのユーザー名とパスワードは知られており、暗号化されていない状態では決して保管されません。</target>
       </trans-unit>
       <trans-unit id="This may take a few minutes if it is the first time logging into this device.">
         <source>This may take a few minutes if it is the first time logging into this device.</source>
         <note>Loading Wallets alert text</note>
-        <target xml:lang="ja" state="needs-translation">This may take a few minutes if it is the first time logging into this device.</target>
+        <target xml:lang="ja" state="translated">このデバイスに初めてログインする場合は、数分かかることがあ。</target>
       </trans-unit>
       <trans-unit id="This site would like to:">
         <source>This site would like to:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">This site would like to:</target>
+        <target xml:lang="ja" state="translated">このサイトは次のようにします：</target>
       </trans-unit>
       <trans-unit id="This wallet has been archived. Please select a different wallet from the [Wallets] screen">
         <source>This wallet has been archived. Please select a different wallet from the [Wallets] screen</source>
         <note>Popup sessage for when a wallet is archived</note>
-        <target xml:lang="ja" state="needs-translation">This wallet has been archived. Please select a different wallet from the [Wallets] screen</target>
+        <target xml:lang="ja" state="translated">この財布は保管されています。別のウォレットを選択してください[Wallets] 画面</target>
       </trans-unit>
       <trans-unit id="Time to crack:">
         <source>Time to crack:</source>
         <note>text in password verification popup</note>
-        <target xml:lang="ja" state="needs-translation">Time to crack:</target>
+        <target xml:lang="ja" state="translated">クラックする時間：</target>
       </trans-unit>
       <trans-unit id="To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.">
         <source>To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</source>
         <note>Message of recovery token popup</note>
-        <target xml:lang="ja" state="needs-translation">To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.</target>
+        <target xml:lang="ja" state="translated">アカウント回復セットアップを完了するにはアカウント回復トークンを保存する必要があり。これは、ユーザー名と復旧の回答に加えて、アカウントを回復するために必要となります。リカバリトークンを送信するには下にメールアドレスを入力してください。</target>
       </trans-unit>
       <trans-unit id="To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet">
         <source>To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</source>
         <note>Popup wallet help test</note>
-        <target xml:lang="ja" state="needs-translation">To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet</target>
+        <target xml:lang="ja" state="translated">ウォレットをソートするには、3本のバーをタップしてウォレットの右にドラッグします。ウォレットをアーカイブするに[ARCHIVE] ヘッダーの下にドラッグします</target>
       </trans-unit>
       <trans-unit id="To: %@">
         <source>To: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">To: %@</target>
+        <target xml:lang="ja" state="translated">に：％@</target>
       </trans-unit>
       <trans-unit id="To: %@ ▼">
         <source>To: %@ ▼</source>
         <note>Top of screen wallet dropdown prefix text</note>
-        <target xml:lang="ja" state="needs-translation">To: %@ ▼</target>
+        <target xml:lang="ja" state="translated">に：％@▼</target>
       </trans-unit>
       <trans-unit id="Tolls">
         <source>Tolls</source>
@@ -3628,37 +3652,37 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Top Up Prepaid Phones">
         <source>Top Up Prepaid Phones</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Top Up Prepaid Phones</target>
+        <target xml:lang="ja" state="translated">プリペイド携帯電話のトップアップ</target>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Touch ID</target>
+        <target xml:lang="ja" state="translated">タッチID</target>
       </trans-unit>
       <trans-unit id="Touch ID Disabled">
         <source>Touch ID Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Touch ID Disabled</target>
+        <target xml:lang="ja" state="translated">タッチIDが無効</target>
       </trans-unit>
       <trans-unit id="Touch ID Enabled">
         <source>Touch ID Enabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Touch ID Enabled</target>
+        <target xml:lang="ja" state="translated">タッチIDが有効</target>
       </trans-unit>
       <trans-unit id="Touch to login user">
         <source>Touch to login user</source>
         <note>Touch ID prompt text</note>
-        <target xml:lang="ja" state="needs-translation">Touch to login user</target>
+        <target xml:lang="ja" state="translated">タップしてユーザーにログイン</target>
       </trans-unit>
       <trans-unit id="TouchID: Set password first">
         <source>TouchID: Set password first</source>
         <note>settings text</note>
-        <target xml:lang="ja" state="needs-translation">TouchID: Set password first</target>
+        <target xml:lang="ja" state="translated">TouchID：パスワードを最初に設定する</target>
       </trans-unit>
       <trans-unit id="TouchID: Unsupported Device">
         <source>TouchID: Unsupported Device</source>
         <note>settings text</note>
-        <target xml:lang="ja" state="needs-translation">TouchID: Unsupported Device</target>
+        <target xml:lang="ja" state="translated">TouchID：サポートされていないデバイス</target>
       </trans-unit>
       <trans-unit id="Toys">
         <source>Toys</source>
@@ -3683,12 +3707,15 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
         <note>From wallet transfer text</note>
-        <target xml:lang="ja" state="needs-translation">Transfer From %@</target>
+        <target xml:lang="ja" state="translated">移転 から％@</target>
+        <alt-trans>
+          <target xml:lang="ja">転送％@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Transfer To %@">
         <source>Transfer To %@</source>
         <note>To wallet transfer text</note>
-        <target xml:lang="ja" state="needs-translation">Transfer To %@</target>
+        <target xml:lang="ja" state="translated">%@ に送</target>
       </trans-unit>
       <trans-unit id="Travel">
         <source>Travel</source>
@@ -3698,12 +3725,12 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Trouble connecting to network">
         <source>Trouble connecting to network</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Trouble connecting to network</target>
+        <target xml:lang="ja" state="translated">ネットワークへの接続に問題</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Try again?</target>
+        <target xml:lang="ja" state="translated">再試行する？</target>
       </trans-unit>
       <trans-unit id="Tuition">
         <source>Tuition</source>
@@ -3737,11 +3764,11 @@ Your username and password are known only to you and never stored unencrypted.</
 
 If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account."</source>
         <note>2FA warning on enable</note>
-        <target xml:lang="ja" state="needs-translation">Two Factor Enabled
+        <target xml:lang="ja" state="translated">2つの要素が有効
 
-** Warning **
+**警告**
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account."</target>
+端末を紛失した場合やアプリをアンインストールした場合は、2FAを無効にしてアカウントにアクセスするには7日間かかります 」</target>
       </trans-unit>
       <trans-unit id="Two Factor Invalid">
         <source>Two Factor Invalid</source>
@@ -3752,17 +3779,17 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Two Factor Reset">
         <source>Two Factor Reset</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Two Factor Reset</target>
+        <target xml:lang="ja" state="translated">2因子リセット</target>
       </trans-unit>
       <trans-unit id="USA">
         <source>USA</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">USA</target>
+        <target xml:lang="ja" state="translated">米国</target>
       </trans-unit>
       <trans-unit id="USA and Canada">
         <source>USA and Canada</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">USA and Canada</target>
+        <target xml:lang="ja" state="translated">アメリカとカナダ</target>
       </trans-unit>
       <trans-unit id="Unable to determine two factor status">
         <source>Unable to determine two factor status</source>
@@ -3772,7 +3799,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Unable to import secret">
         <source>Unable to import secret</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Unable to import secret</target>
+        <target xml:lang="ja" state="translated">秘密をインできません</target>
       </trans-unit>
       <trans-unit id="Unable to import token">
         <source>Unable to import token</source>
@@ -3782,7 +3809,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Unable to save Settings">
         <source>Unable to save Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Unable to save Settings</target>
+        <target xml:lang="ja" state="translated">設定を保存できません</target>
       </trans-unit>
       <trans-unit id="Unable to scan QR code">
         <source>Unable to scan QR code</source>
@@ -3792,7 +3819,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Unable to update Settings">
         <source>Unable to update Settings</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Unable to update Settings</target>
+        <target xml:lang="ja" state="translated">設定を更新できません</target>
       </trans-unit>
       <trans-unit id="Up to 10% off Target">
         <source>Up to 10% off Target</source>
@@ -3807,32 +3834,32 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Upload Failed. Please check your network connection">
         <source>Upload Failed. Please check your network connection</source>
         <note>Upload Failed</note>
-        <target xml:lang="ja" state="needs-translation">Upload Failed. Please check your network connection</target>
+        <target xml:lang="ja" state="translated">アップロードに失敗しました。ネットワーク接続を確認してください</target>
       </trans-unit>
       <trans-unit id="Upload Image">
         <source>Upload Image</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Upload Image</target>
+        <target xml:lang="ja" state="translated">無題</target>
       </trans-unit>
       <trans-unit id="Upload Log">
         <source>Upload Log</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Upload Log</target>
+        <target xml:lang="ja" state="translated">ログをアップロードする</target>
       </trans-unit>
       <trans-unit id="Upload Log File">
         <source>Upload Log File</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Upload Log File</target>
+        <target xml:lang="ja" state="translated">ログファイルをアップロードする</target>
       </trans-unit>
       <trans-unit id="Upload Successful">
         <source>Upload Successful</source>
         <note>Upload Successful fading popup</note>
-        <target xml:lang="ja" state="needs-translation">Upload Successful</target>
+        <target xml:lang="ja" state="translated">アップロードが成功</target>
       </trans-unit>
       <trans-unit id="Uploading logfile. Please wait...">
         <source>Uploading logfile. Please wait...</source>
         <note>Uploading logfile fading popup</note>
-        <target xml:lang="ja" state="needs-translation">Uploading logfile. Please wait...</target>
+        <target xml:lang="ja" state="translated">ログファイルをアップしています。お待ちください...</target>
       </trans-unit>
       <trans-unit id="Use Camera">
         <source>Use Camera</source>
@@ -3842,12 +3869,12 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Use PIN">
         <source>Use PIN</source>
         <note>Touch ID [Use PIN] button</note>
-        <target xml:lang="ja" state="needs-translation">Use PIN</target>
+        <target xml:lang="ja" state="translated">PINを使用する</target>
       </trans-unit>
       <trans-unit id="Use Password">
         <source>Use Password</source>
         <note>Touch ID [Use Password] button</note>
-        <target xml:lang="ja" state="needs-translation">Use Password</target>
+        <target xml:lang="ja" state="translated">パスワードを使用する</target>
       </trans-unit>
       <trans-unit id="Use Photo Album">
         <source>Use Photo Album</source>
@@ -3857,12 +3884,12 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Use TouchID">
         <source>Use TouchID</source>
         <note>settings text</note>
-        <target xml:lang="ja" state="needs-translation">Use TouchID</target>
+        <target xml:lang="ja" state="translated">を使用TouchID:</target>
       </trans-unit>
       <trans-unit id="User Name: %@">
         <source>User Name: %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">User Name: %@</target>
+        <target xml:lang="ja" state="translated">ユーザー名：％@</target>
       </trans-unit>
       <trans-unit id="Username">
         <source>Username</source>
@@ -3872,7 +3899,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Username must be at least %d characters.">
         <source>Username must be at least %d characters.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Username must be at least %d characters.</target>
+        <target xml:lang="ja" state="translated">ユーザー名は少なくとも％d文字でなければなりません。</target>
       </trans-unit>
       <trans-unit id="Utilities">
         <source>Utilities</source>
@@ -3887,7 +3914,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Validating Address...">
         <source>Validating Address...</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Validating Address...</target>
+        <target xml:lang="ja" state="translated">アドレスの検証中...</target>
       </trans-unit>
       <trans-unit id="Vet">
         <source>Vet</source>
@@ -3907,34 +3934,34 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Waiting for Payment...">
         <source>Waiting for Payment...</source>
         <note>Status on Request screen</note>
-        <target xml:lang="ja" state="needs-translation">Waiting for Payment...</target>
+        <target xml:lang="ja" state="translated">お支払いを待ってい...</target>
       </trans-unit>
       <trans-unit id="Wallet Deleted">
         <source>Wallet Deleted</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Wallet Deleted</target>
+        <target xml:lang="ja" state="translated">ウォレットが削除さ</target>
       </trans-unit>
       <trans-unit id="Wallet Export">
         <source>Wallet Export</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Wallet Export</target>
+        <target xml:lang="ja" state="translated">ウォレットのエクスポート</target>
       </trans-unit>
       <trans-unit id="Wallet Private Seed">
         <source>Wallet Private Seed</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Wallet Private Seed</target>
+        <target xml:lang="ja" state="translated">ウォレットプライベートシード</target>
       </trans-unit>
       <trans-unit id="Wallet creation failed:\n%@">
         <source>Wallet creation failed:
 %@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Wallet creation failed:
+        <target xml:lang="ja" state="translated">ウォレットの作成に失敗：
 %@</target>
       </trans-unit>
       <trans-unit id="Wallet name must have at least one character">
         <source>Wallet name must have at least one character</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Wallet name must have at least one character</target>
+        <target xml:lang="ja" state="translated">ウォレット名には少なくとも1文字は必要です</target>
       </trans-unit>
       <trans-unit id="Wallet: ">
         <source>Wallet: </source>
@@ -3944,17 +3971,17 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Walmart (Up to 10% Off)">
         <source>Walmart (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Walmart (Up to 10% Off)</target>
+        <target xml:lang="ja" state="translated">ウォルマート（最大10％割引）</target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Warning!</target>
+        <target xml:lang="ja" state="translated">警告！</target>
       </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</target>
+        <target xml:lang="ja" state="translated">警告。パースワードがなければ、このデバイスを紛失または盗難した場合は新しいデバイスにログインすることはできませんが、またこのアプリがアンインストールされている場合</target>
       </trans-unit>
       <trans-unit id="Warning: Double Spend">
         <source>Warning: Double Spend</source>
@@ -3974,27 +4001,27 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync">
         <source>Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
-        <target xml:lang="ja" state="needs-translation">Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</target>
+        <target xml:lang="ja" state="translated">ウォッチャーデータベースはクリアされましたが、エラーが発生しました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります</target>
       </trans-unit>
       <trans-unit id="Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync">
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
-        <target xml:lang="ja" state="needs-translation">Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</target>
+        <target xml:lang="ja" state="translated">ウォッチャーデータベースがクリアされました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります</target>
       </trans-unit>
       <trans-unit id="Whole Foods (Up to 10% Off)">
         <source>Whole Foods (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Whole Foods (Up to 10% Off)</target>
+        <target xml:lang="ja" state="translated">全体の食べ物（最大10％オフ）</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Would you like to enable TouchID for this account and device?</target>
+        <target xml:lang="ja" state="translated">このアカウントと端末のタッチIDを有効にしますか？</target>
       </trans-unit>
       <trans-unit id="Would you like to send funds to this address or import funds into your wallet?">
         <source>Would you like to send funds to this address or import funds into your wallet?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Would you like to send funds to this address or import funds into your wallet?</target>
+        <target xml:lang="ja" state="translated">この住所に資金を送ったり、財布に財布を入れたいですか？</target>
       </trans-unit>
       <trans-unit id="Would you like to send us some feedback?">
         <source>Would you like to send us some feedback?</source>
@@ -4004,7 +4031,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Would you like to write a review in the App store?">
         <source>Would you like to write a review in the App store?</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Would you like to write a review in the App store?</target>
+        <target xml:lang="ja" state="translated">アプリケーションストアにレビューを書いてみませんか？</target>
       </trans-unit>
       <trans-unit id="Wrong Answers">
         <source>Wrong Answers</source>
@@ -4014,29 +4041,30 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="YES">
         <source>YES</source>
         <note>YES button text</note>
-        <target xml:lang="ja" state="needs-translation">YES</target>
+        <target xml:lang="ja" state="translated">はい</target>
       </trans-unit>
       <trans-unit id="You Received Bitcoin!\n%@ (~%@)">
         <source>You Received Bitcoin!
 %1$@ (~%2$@)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">You Received Bitcoin!
-%1$@ (~%2$@)</target>
+        <target xml:lang="ja" state="translated">あなたはBitcoinを受け取りました！
+%1$@ (~%2$@)
+</target>
       </trans-unit>
       <trans-unit id="You are about to exit password recovery setup. Your chosen questions and answers have not been saved.">
         <source>You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">You are about to exit password recovery setup. Your chosen questions and answers have not been saved.</target>
+        <target xml:lang="ja" state="translated">パスワード回復の設定を終了しようとしています。選択した質問と回答は保存されていません。</target>
       </trans-unit>
       <trans-unit id="You must answer all questions. Make sure your answers are long enough.">
         <source>You must answer all questions. Make sure your answers are long enough.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">You must answer all questions. Make sure your answers are long enough.</target>
+        <target xml:lang="ja" state="translated">あなたはすべての質問に答える必要があります。あなたの答えが十分に長いことを確認してください。</target>
       </trans-unit>
       <trans-unit id="You must choose a question for all selections before proceeding.">
         <source>You must choose a question for all selections before proceeding.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">You must choose a question for all selections before proceeding.</target>
+        <target xml:lang="ja" state="translated">続行する前にすべての選択について質問を選択する必要があります。</target>
       </trans-unit>
       <trans-unit id="You must enter a user name">
         <source>You must enter a user name</source>
@@ -4048,18 +4076,18 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 %1$@ (~%2$@)
 Use the Payee, Category, and Notes field to optionally tag your transaction</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">You received Bitcoin!
+        <target xml:lang="ja" state="translated">あなたはBitcoinを受け取った！
 %1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction</target>
+受取人を使用して、カテゴリとメモフィールドはオプションのトランザクションタグに</target>
       </trans-unit>
       <trans-unit id="You will next see a popup requesting access to your Camera.\n\n[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.">
         <source>You will next see a popup requesting access to your Camera.
 
 [[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.</source>
         <note>Camera signup screen</note>
-        <target xml:lang="ja" state="needs-translation">You will next see a popup requesting access to your Camera.
+        <target xml:lang="ja" state="translated">次にカメラへのアクセスを要求するポップアップが表示されます。
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.</target>
+[[abtag APP_TITLE]] QRコードをスキャンして人や商人に支払う必要があ。</target>
       </trans-unit>
       <trans-unit id="You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
         <source>You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
@@ -4069,12 +4097,12 @@ Use the Payee, Category, and Notes field to optionally tag your transaction</tar
       <trans-unit id="Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!">
         <source>Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!</target>
+        <target xml:lang="ja" state="translated">パスワード復旧の質問と回答が設定されました。パスワードを回復するときは、あなたの答えは正確に一致する必要があります。**あなたのパスワードと復習の回答を忘れない**あなたのアカウントはそれらを使わずに回復できません！</target>
       </trans-unit>
       <trans-unit id="Your password...">
         <source>Your password...</source>
         <note>Start of password rules text</note>
-        <target xml:lang="ja" state="needs-translation">Your password...</target>
+        <target xml:lang="ja" state="translated">あなたのパスワード...</target>
       </trans-unit>
       <trans-unit id="[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.\n\nAll tagged information is kept 100% private and encrypted by your password.\n\nNo one, including [[abtag APP_TITLE]], has any access to this information.">
         <source>[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
@@ -4083,11 +4111,11 @@ All tagged information is kept 100% private and encrypted by your password.
 
 No one, including [[abtag APP_TITLE]], has any access to this information.</source>
         <note>Contacts signup screen</note>
-        <target xml:lang="ja" state="needs-translation">[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+        <target xml:lang="ja" state="translated">[[abtag APP_TITLE]] 連絡先を使用取引に関する情報にタグを付けるのに役立ちます。
 
-All tagged information is kept 100% private and encrypted by your password.
+すべてのタグ付けされた情報はプライベートで100％保たれ、パスワードで暗号化されます。
 
-No one, including [[abtag APP_TITLE]], has any access to this information.</target>
+[[abtag APP_TITLE]] を含む誰もこの情報にアクセスできません。</target>
       </trans-unit>
       <trans-unit id="bits = (0.000001 Bitcoin)">
         <source>bits = (0.000001 Bitcoin)</source>
@@ -4097,12 +4125,12 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="closed">
         <source>closed</source>
         <note>business listings is closed</note>
-        <target xml:lang="ja" state="needs-translation">closed</target>
+        <target xml:lang="ja" state="translated">閉まって</target>
       </trans-unit>
       <trans-unit id="day">
         <source>day</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">day</target>
+        <target xml:lang="ja" state="translated">日</target>
       </trans-unit>
       <trans-unit id="days">
         <source>days</source>
@@ -4112,7 +4140,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="hour">
         <source>hour</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">hour</target>
+        <target xml:lang="ja" state="translated">アワー</target>
       </trans-unit>
       <trans-unit id="hours">
         <source>hours</source>
@@ -4127,7 +4155,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="minute">
         <source>minute</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">minute</target>
+        <target xml:lang="ja" state="translated">分</target>
       </trans-unit>
       <trans-unit id="minutes">
         <source>minutes</source>
@@ -4137,7 +4165,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="second">
         <source>second</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="needs-translation">second</target>
+        <target xml:lang="ja" state="translated">二番</target>
       </trans-unit>
       <trans-unit id="seconds">
         <source>seconds</source>
@@ -4147,7 +4175,7 @@ No one, including [[abtag APP_TITLE]], has any access to this information.</targ
       <trans-unit id="▼ Choose a wallet to transfer funds to ▼">
         <source>▼ Choose a wallet to transfer funds to ▼</source>
         <note>Header of popup in SendView from wallet to wallet transfer</note>
-        <target xml:lang="ja" state="needs-translation">▼ Choose a wallet to transfer funds to ▼</target>
+        <target xml:lang="ja" state="translated">▼資金を移転するウォレットを選択▼</target>
       </trans-unit>
     </body>
   </file>
