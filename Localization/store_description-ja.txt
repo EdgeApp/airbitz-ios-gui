@@ -1,43 +1,46 @@
-Sell, Secure, Send, and Receive Bitcoin
+売る、安全な、 送信、受信Bitcoin
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+パワフルで使いやすいBitcoin Walletを使用すると、ユーザーはモバイルバンキングの使い慣れた使いやすさで簡単に独自のビットコイン秘密鍵を制御。
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+取るコントロールあなたの資金の！ エアビッツでは、あなただけがあなたの資金や取引データにアクセスできま。 どちらもAirbitzまたは第三者があなたのお金やデータにアクセスすることができます。 あなたは財政のプライバシーと自立を得るBitcoinは、おばあちゃんでさえ扱うことができる使いやすさのために設計されています。
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+優れたユーザーエクスペリエンスを提供することに重点を置いて、Airbitzウォレットは次の優れた機能を提供します。
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Login with TouchID
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+•Airbitzまたは第三者によるユーザーの資金、鍵、取引データに対するゼロ知識とゼロアクセス
+•米国とカナダの住民のための統合された売買
+•QRコードを必要とせずにBluetooth（BLE）を使用して支払い 
+•タッチIDでログインする
+•ログインとパスワードだけを使用した簡単なアカウント作成（PDF、パスフレーズを書き留め、 または暗号化設定を追加する）
+•冗長ピアツーピアクラウドサーバへの自動暗号化ウォレットバックアップ
+•世界で最も安全な財布のワンタッチ2ファクター認証
+•ログイン画面でユーザ名をドロップダウンしてアカウントをすばやく切り替え
+•すべてのモバイルデバイスでのマルチデバイス同期
+•トランザクションごとに変更されたアドレスを持つ階層的決定論的ウォレット
+•単純なユーザー定義のウォレット名でアカウントごとに複数のウォレット（すなわち、 「バケーションファンド」）
+•複数fiat通貨サポート。 ウォレットごとに決済通貨を割り当てる
+•受取人、カテゴリ、またはノートによる取引の検索
+•簡単なコンバージョンのための電卓内蔵
+カウンターの後ろに簡単で流動的なUIを可能にするマーチャントモード
+•部分的な支払いの検出により、新しい残高を伴う新しいQRコード支払請求が作成されます。 
+•毎日の支出制限（上限を超えるためにパスワードが必要）
+•PINを必要支出制限
+•ウォレット間で資金を移動するための2タップのクイックUI
+•WIFまたはCasascius秘密鍵から資金をインポートする
+•分散型サーバーアーキテクチャ。 Airbitzサーバーがダウンしていても、ウォレットは機能します。
+•ビジネスロゴ/写真を含むトランザクションのビジネス情報を自動完成するためのAirbitz Businessディレクトリとの統合
+•アドレス帳との統合受取名前と写真の自動記入
+•BIP 70支払いプロトコルサポート
+•オープンソースコード。 利用可能 http://github.com/Airbitz
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+*********プライバシーに関する告知*********
+Airbitzアプリケーションはデバイスの連絡先リストへのアクセスを要求し、
+ロケーション、
+  および個人情報。 この情報は、デバイス上で以下の方法でユーザーエクスペリエンスを向上させるために使用されます。
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1. 取引後にユーザーのアドレス帳から連絡先を自動完成
+2. ユーザーのアドレス帳から連絡先を自動完成して、電子メールまたはSMS支払い要求を送信する
+3. トランザクション後のビジネスリスティング名のオートコンプリート
+4. 近くのビジネスを見つけるためにユーザーのデバイスを配置する
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+個人情報なしまたは連絡先リストの情報は、ユーザーの資格情報によって最初に暗号化されることなく、デバイスから離れる
+（ユーザー名パスワード）。 Airbitzも第三者も、アプリケーションがアクセスする情報について知っていません。

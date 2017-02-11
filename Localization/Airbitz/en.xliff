@@ -2,34 +2,26 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
         <source>Scan QR</source>
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
       </trans-unit>
-      <trans-unit id="NiJ-rT-MKF.text">
-        <source>Send</source>
-        <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-      </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
       </trans-unit>
       <trans-unit id="gQB-TM-9HQ.text">
-        <source>BitID Login</source>
-        <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
-      </trans-unit>
-      <trans-unit id="pzG-q0-KJ4.text">
-        <source>or</source>
-        <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
+        <source>Login or Send</source>
+        <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -196,7 +188,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -271,7 +263,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -354,7 +346,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -365,7 +357,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
@@ -376,7 +368,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -547,6 +539,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>Last Week</source>
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
       </trans-unit>
+      <trans-unit id="NuG-b1-njk.normalTitle">
+        <source>PIN Username</source>
+        <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
+      </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text">
         <source>PUBLIC ADDRESS</source>
         <note>Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc";</note>
@@ -594,6 +590,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="S8Q-An-svf.text">
         <source>BTC</source>
         <note>Class = "UILabel"; text = "BTC"; ObjectID = "S8Q-An-svf";</note>
+      </trans-unit>
+      <trans-unit id="SEw-4z-klE.placeholder">
+        <source>Username</source>
+        <note>Class = "UITextField"; placeholder = "Username"; ObjectID = "SEw-4z-klE";</note>
       </trans-unit>
       <trans-unit id="ScE-Ny-R3i.text">
         <source>4 Digit PIN</source>
@@ -811,7 +811,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -822,7 +822,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -837,7 +837,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -969,7 +969,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1036,7 +1036,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1063,9 +1063,13 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
+      <trans-unit id="  Amount">
+        <source>  Amount</source>
+        <note>Placeholder text for Receive screen amount text field</note>
+      </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
@@ -1638,10 +1642,6 @@ Enter it below to make sure:</source>
         <source>Enable Touch ID</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Enter Amount (optional)">
-        <source>Enter Amount (optional)</source>
-        <note>Placeholder text for Receive screen amount</note>
-      </trans-unit>
       <trans-unit id="Enter Payee">
         <source>Enter Payee</source>
         <note>No comment provided by engineer.</note>
@@ -1722,6 +1722,10 @@ Enter it below to make sure:</source>
       </trans-unit>
       <trans-unit id="Exchange Rate Data Source">
         <source>Exchange Rate Data Source</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Exchange rate loading..">
+        <source>Exchange rate loading..</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Exit">
@@ -2193,6 +2197,10 @@ Enter it below to make sure:</source>
         <source>Nickname / Handle (optional)</source>
         <note>settings text</note>
       </trans-unit>
+      <trans-unit id="No PIN set">
+        <source>No PIN set</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="No Transactions">
         <source>No Transactions</source>
         <note>what to display when wallet has no transactions</note>
@@ -2342,6 +2350,10 @@ Enter it below to make sure:</source>
         <source>Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
 
 &lt;br&gt;&lt;br&gt;%3$@</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please create a PIN for this account to enable quick re-logins">
+        <source>Please create a PIN for this account to enable quick re-logins</source>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">

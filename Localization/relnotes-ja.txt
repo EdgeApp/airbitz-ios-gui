@@ -1,43 +1,43 @@
 v.2.3.3
 
-• Fix rare issue with PIN login not working
-• Fix hang when entering password in SendConfirmation screen 
-• Support Edge Login from URI button on mobile
-• Show "exchange rate loading" insted of 0 value when needed
-• Add WhatsApp forum to support links
+•PINログインが動作しないまれな問題を修正
+•確認送信画面でパスワードを入力するとハングアップ 
+•モバイル上のURIボタンからエッジログインをサポートする
+•必要に応じて0値の代わりに "為替レートの読み込み"を表示する
+•WhatsAppフォーラムを追加してリンクをサポートする
 
 v 2.3.0
 
-Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+導入エッジログイン。 世界初のプライベート、安全な、分散アプリケーション用のナレッジ・シングル・サインオン。 これでAirbitz Walletを使用して、AugurとWingsのような他のブロックチェーンアプリの安全な暗号化アカウントにログインできます。 
 
-• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
-• Fix iOS 10 UI issues
-• Fix iOS 10 crash on accounts with lots of wallets
-• Improve Scrypt parameter calculations for stronger security on faster devices
+•改良Libbitcoin / Electrumサーバーの選択応答時間が最も短く、待ち時間の短いサーバーを使用します。 
+•iOS 10 UIの問題を修正する
+•財布がたくさんあるアカウントでiOS 10のクラッシュを修正する
+•より速いデバイスでより強力なセキュリティを実現するためのScryptパラメータ計算の改善
 
 v 2.2.0
 
-We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+私たちは、世界で最初の摩擦のないパスワード復旧を実装することで、ユーザーが忘れたパスワードをわずか2つの質問と電子メールで回復できるようにすることで、新しい地平を壊。 もう一度パスワードを忘れることを心配しないでください
 
-In addition:
+加えて：
 
-• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
-• Fixed TouchID occasionally not recognizing touches
-• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
-• Background notifications of incoming funds if app is recently backgrounded
-• Fallback public address for failed BIP70 payment protocol transactions 
-• Improved language translations
-• Show small dropdown when unable to connect to network
+•Bitrefillプラグインの統合によりユーザーは143カ国の600以上のキャリアからモバイルトップアップを購。
+•TouchIDがタッチを認識しないことがあったのを修正
+•アーカイブされたアカウント今すぐ少ないリソースを取るネットワークに照会しないかトランザクションデータを同期させない
+最近アプリがバックグラウンドになっている場合入金された資金のバックグラウンド通知
+•フォールバック公開アドレス失敗したBIP70支払いプロトコルトランザクションの場合 
+•改善された言語翻訳
+•ネットワークに接続できないときに小さなドロップダウンを表示
 
 v 2.1.0
 
-• Add Libbitcoin/Electrum server address subscription for much improved performance and increased battery life.
-• Enable dynamic mining fee calculation
-• Add user controllable estimated mining fees (Low, Standard, High settings)
-• Fix incorrect transaction times for when transaction is received while wallet was offline
-• Fix calculator bugs
-• Add Chinese, Hindi, Spanish, and Portuguese language support
-• Add support for proper localization of numbers, times, and dates
-• Speed up new-device logins by 200%
-• Improve accuracy of transaction detection in poor network conditions
-• Add TouchID button to login screen to re-trigger TouchID popup
+•パフォーマンスを向上させ、バッテリ寿命を延ばすために、Libbitcoin / Electrumサーバーのアドレスサブスクリプションを追加。
+•動的なマイニング料金計算を有効
+•ユーザーが制御可能な推定鉱業料金を追加する（低、標準、高設定）
+•間違ったトランザクション時間を修正ウォレットがオフラインの間にトランザクションが受信されたとき
+電卓のバグ修正
+•追加中国語、ヒンディー語、スペイン語、ポルトガル語サポート
+•数値の適切なローカライズのサポートを追加し、時間、日付
+•新しいデバイスログインのスピードアップ200％
+•ネットワーク状態が悪い場合のトランザクション検出の精度を向上させ
+•TouchIDポップアップを再トリガするためにログイン画面にTouchIDボタンを追加する

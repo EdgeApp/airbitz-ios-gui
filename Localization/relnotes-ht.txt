@@ -1,19 +1,19 @@
 v.2.3.3
 
-• Fix rare issue with PIN login not working
-• Fix hang when entering password in SendConfirmation screen 
-• Support Edge Login from URI button on mobile
-• Show "exchange rate loading" insted of 0 value when needed
-• Add WhatsApp forum to support links
+• Koreksyon problèm ak Koneksyon PIN lan pa mache
+• Koreksyon yon problèm pandan ante mod pas nan ekran SendConfirmation 
+• Sipò avèk Edge Login depi bouton URI sou mobil
+•Moutre " chajman to echanj " nan plas 0 si nesesè
+• Ajoute Foròm WhatsApp pou sipòte lyen yo
 
 v 2.3.0
 
-Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+Entwodwi Edge Login. Premye aplikasyon prive, sekirize, san konesans sou aplikasyon desantralize yo. Kounyea ou ka itilize potfèy Airbitz pou konekte pou sekirize, chifre kont lot aplikasyon Blockchain tankou Augur ak Wings. 
 
-• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
-• Fix iOS 10 UI issues
-• Fix iOS 10 crash on accounts with lots of wallets
-• Improve Scrypt parameter calculations for stronger security on faster devices
+• Amelyorasyon nan seleksyon sèvè Libbitcoin/Electrum pandan nap itilize sèvè ki repon pi vit la ak sak pi fèb yo. 
+Korije problèm IOS 10
+Korije problèm Ios 10 sou kont ki gen anpil potfèy yo
+• Amelyore kalkil paramèt Scrypt pou plis sekirite sou aparèy rapid yo
 
 v 2.2.0
 

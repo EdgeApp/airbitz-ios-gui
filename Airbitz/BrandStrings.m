@@ -76,6 +76,23 @@
 #define appDesignedBy           NSLocalizedString(@"Designed by Coinsource in",nil)
 #define appCompanyLocation      NSLocalizedString(@"New York, New York, USA", nil)
 
+#elif ROCKITCOIN
+
+#define appURI                  @"rockitcoin"
+#define appTitle                @"Rockitcoin Bitcoin Wallet"
+#define appHomepage             @"http://rockitcoin.com"
+#define supportEmail            @"support@rockitcoin.com"
+#define supportPhone            @"+1-888-888-8888"
+#define supportTelegram         @""
+#define supportSlack            @""
+#define supportWhatsapp         @""
+#define appStoreLink            @"https://itunes.apple.com/us/app/coinsource-bitcoin-wallet/id1089856071"
+#define playStoreLink           @"https://play.google.com/store/apps/details?id=com.coinsource.wallet"
+#define appDownloadLink         @"http://rockitcoin.com/app"
+#define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2016/03/Coinsource-logo-100w.png"
+#define appDesignedBy           NSLocalizedString(@"Designed by Rockitcoin in",nil)
+#define appCompanyLocation      NSLocalizedString(@"Chicago, IL, USA", nil)
+
 #endif
 
 #ifndef AIRBITZ
@@ -84,6 +101,10 @@
 
 #ifndef RACKWALLET
 #define RACKWALLET 0
+#endif
+
+#ifndef ROCKITCOIN
+#define ROCKITCOIN 0
 #endif
 
 #ifndef ATHENA

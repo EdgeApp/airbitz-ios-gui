@@ -1,43 +1,43 @@
 v.2.3.3
 
-• Fix rare issue with PIN login not working
-• Fix hang when entering password in SendConfirmation screen 
-• Support Edge Login from URI button on mobile
-• Show "exchange rate loading" insted of 0 value when needed
-• Add WhatsApp forum to support links
+• إصلاح مشكلة نادرة مع الدخول PIN لا يعمل
+• إصلاح تعليق عند إدخال كلمة السر في شاشة إرسال تأكيد 
+• الدعم حافة الدخول من زر URI على الهاتف المحمول
+• عرض "سعر الصرف تحميل" بدلا من 0 قيمة عند الحاجة
+• إضافة ال WhatsApp منتدى لدعم الروابط
 
 v 2.3.0
 
-Introducing Edge Login. The worlds first private, secure, zero knowledge single-sign-on for decentralized apps. Now you can use the Airbitz Wallet to login to secure, encrypted accounts for other blockchain apps like Augur and Wings. 
+إدخال الحافة تسجيل الدخول. الأولى في العالم خاصة وآمنة، الصفر المعرفة واحد تسجيل الدخول لتطبيقات اللامركزية. الآن يمكنك استخدام المحفظة Airbitz للدخول لتأمين حسابات مشفرة لتطبيقات أخرى مثل blockchain تنبأ وأجنحة. 
 
-• Improved Libbitcoin/Electrum server selection by using most responsive and lowest latency servers. 
+• تحسين Libbitcoin / Electrum اختيار الخادم باستخدام خوادم الكمون الأكثر استجابة وأدنى. 
 • Fix iOS 10 UI issues
-• Fix iOS 10 crash on accounts with lots of wallets
-• Improve Scrypt parameter calculations for stronger security on faster devices
+• فيكس دائرة الرقابة الداخلية 10 تحطم على حسابات مع الكثير من محفظة
+• تحسين Scrypt الحسابات المعلمة للأمن أقوى على الأجهزة أسرع
 
 v 2.2.0
 
-We've just broken new ground by implementing the world's first frictionless password recovery which lets users recover forgotten passwords with just 2 questions and an email. Never worry about forgetting your password again
+لقد كسر فقط آفاقا جديدة من خلال تنفيذ أول استعادة كلمة السر الاحتكاك في العالم الذي يتيح للمستخدمين استعادة كلمات السر المنسية مع مجرد 2 الأسئلة والبريد الإلكتروني. لا تقلق أبدا بشأن نسيان كلمة المرور الخاصة بك مرة أخرى
 
-In addition:
+بالإضافة الى:
 
-• Bitrefill plugin integration which lets users buy mobile top ups from over 600 carriers in 143 countries
-• Fixed TouchID occasionally not recognizing touches
-• Archived accounts now take up less resources by not querying the network or sync'ing transaction data
-• Background notifications of incoming funds if app is recently backgrounded
-• Fallback public address for failed BIP70 payment protocol transactions 
-• Improved language translations
-• Show small dropdown when unable to connect to network
+• Bitrefill التكامل البرنامج المساعد الذي يتيح للمستخدمين شراء العليا المنبثقة المحمولة من أكثر من 600 ناقلة في 143 بلدا
+• الثابتة TouchID اللمسات أحيانا عدم الاعتراف
+• حسابات الأرشيف تتخذ الآن موارد أقل من خلال عدم الاستعلام عن الشبكة أو مزامنة 'بيانات المعاملات
+• إخطارات خلفية أموال واردة إذا التطبيق مؤخرا الخلفية
+• مخاطبة الجمهور الإحتياطي للمعاملات بروتوكول دفع BIP70 فشل 
+• تحسين الترجمة
+• إظهار القائمة المنسدلة صغيرة عند غير قادر على الاتصال بالشبكة
 
 v 2.1.0
 
-• Add Libbitcoin/Electrum server address subscription for much improved performance and increased battery life.
-• Enable dynamic mining fee calculation
-• Add user controllable estimated mining fees (Low, Standard, High settings)
-• Fix incorrect transaction times for when transaction is received while wallet was offline
-• Fix calculator bugs
-• Add Chinese, Hindi, Spanish, and Portuguese language support
-• Add support for proper localization of numbers, times, and dates
-• Speed up new-device logins by 200%
-• Improve accuracy of transaction detection in poor network conditions
-• Add TouchID button to login screen to re-trigger TouchID popup
+• إضافة Libbitcoin / Electrum عنوان ملقم اشتراك لتحسن كبير في الأداء وزيادة عمر البطارية.
+• تمكين ديناميكية حساب رسوم التعدين
+• إضافة مستخدم التحكم فيها رسوم التعدين يقدر (منخفض، عادي، وإعدادات عالية)
+• فيكس غير صحيح الأوقات الصفقة لحين ورود المعاملة بينما المحفظة كانت متواجد حاليا
+• اصلاح الخلل آلة حاسبة
+• إضافة الصينية والهندية والإسبانية، ودعم اللغة البرتغالية
+• إضافة دعم لتوطين الصحيح من الأرقام والأوقات والتواريخ
+• تسريع عمليات تسجيل الدخول على الجهاز الجديد بنسبة 200٪
+• تحسين دقة الكشف المعاملة في ظروف الشبكة الفقيرة
+• إضافة زر معرف اللمس للدخول الشاشة لإعادة تحريك اللمس معرف منبثقة
