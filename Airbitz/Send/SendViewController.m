@@ -1862,11 +1862,19 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         NSURL *uri = [NSURL URLWithString:uriString];
         NSString *vendorRetString = [NSString stringWithFormat:@"%@-ret", [MainViewController Singleton].appUrlPrefix];
         
-        if ([uri.scheme isEqualToString:@"bitcoin-ret"]  || [uri.scheme isEqualToString:vendorRetString]
-            || [uri.host isEqualToString:@"x-callback-url"]) {
+        if ([uri.scheme isEqualToString:@"bitcoin-ret"] ||
+            [uri.scheme isEqualToString:vendorRetString] ||
+            [uri.scheme isEqualToString:[MainViewController Singleton].appUrlPrefix] ||
+            [uri.host isEqualToString:@"x-callback-url"]) {
             if ([User isLoggedIn]) {
                 [self stopQRReader];
                 if ([uri.path containsString:@"edgelogin"])
+                {
+                    NSString *token = uri.lastPathComponent;
+                    [self processEdgeLogin:token];
+                    return;
+                }
+                else if ([uri.host isEqualToString:@"edge"])
                 {
                     NSString *token = uri.lastPathComponent;
                     [self processEdgeLogin:token];
