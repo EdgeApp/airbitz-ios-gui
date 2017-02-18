@@ -180,8 +180,8 @@ static NSMutableArray *generalPlugins;
         plugin.imageUrl = @"";
         plugin.name = buy_sell_cash_usa;
         plugin.env = @{
-                       @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                       @"GLIDERA_CLIENT_ID": (isTestnet ? GLIDERA_API_SANDBOX_KEY : GLIDERA_API_KEY),
+                       @"TESTNET": (isTestnet ? @"true" : @"false"),
+                       @"LIBERTYX_API_KEY": (isTestnet ? @"" : LIBERTYX_API_KEY),
                        @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                        };
         [buySellPlugins addObject:plugin];
