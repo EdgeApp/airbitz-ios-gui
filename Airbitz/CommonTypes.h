@@ -86,6 +86,7 @@ static unsigned int WholeFoodsBizID =       11139;
 static unsigned int WalmartBizID =          11140;
 static unsigned int HomeDepotBizID =        11141;
 static unsigned int AmazonBizID =           11245;
+static unsigned int LibertyXBizID =         9547;
 
 typedef enum eTabBarButton
 {
