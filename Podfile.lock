@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AirbitzCore (1.0.4)
+  - AirbitzCore (1.1.1)
   - Reachability (3.2)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -29,22 +29,26 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - AirbitzCore (from `../airbitz-core-objc/`)
+  - AirbitzCore (from `{:http=>"https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz"}`)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.6)
   - ZBarSDK (~> 1.3)
 
 EXTERNAL SOURCES:
   AirbitzCore:
-    :path: "../airbitz-core-objc/"
+    :http: https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz
+
+CHECKOUT OPTIONS:
+  AirbitzCore:
+    :http: https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  AirbitzCore: 405f402f3b9886d97e7458b0ca7f89fd705d680d
+  AirbitzCore: 96558e3e02b594d885dbed97b47d7afe15543179
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: 4113a5937d93bce8892ac6b884a640e7a509ac81
+PODFILE CHECKSUM: ce5ce504fdb78b28dabef2366f59bb2e073010e8
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.2.0
