@@ -11057,7 +11057,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "RACKWALLET=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"RACKWALLET=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11099,7 +11102,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) RACKWALLET=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"RACKWALLET=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11140,7 +11146,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ATHENA=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"ATHENA=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11182,7 +11191,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ATHENA=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"ATHENA=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11223,7 +11235,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "COINSOURCE=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"COINSOURCE=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11265,7 +11280,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) COINSOURCE=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COINSOURCE=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11295,7 +11313,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2658064CE5A804AD0B98219E /* Pods-Rockitcoin.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RackWallet";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Rockitcoin";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11306,7 +11324,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ROCKITCOIN=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"ROCKITCOIN=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11337,7 +11358,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC567EA2DE48CB4791248652 /* Pods-Rockitcoin.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-RackWallet";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Rockitcoin";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11348,7 +11369,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ROCKITCOIN=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"ROCKITCOIN=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11486,7 +11510,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -11528,7 +11555,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
