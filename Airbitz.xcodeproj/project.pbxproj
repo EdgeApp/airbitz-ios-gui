@@ -7065,10 +7065,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -7110,10 +7107,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
