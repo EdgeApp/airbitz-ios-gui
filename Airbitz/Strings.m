@@ -266,6 +266,8 @@
 #define moreCategoriesText                          NSLocalizedString(@"More Categories", @"")
 #define twoFactorResetText                          NSLocalizedString(@"Two Factor Reset", nil)
 #define aTwoFactorResetHasBeenRequested             NSLocalizedString(@"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." ,nil)
+#define recoveryAnswersCorruptTitle                 NSLocalizedString(@"Recovery Answers Corrupt!", nil)
+#define recoveryAnswersCorrupt                      NSLocalizedString(@"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery." ,nil)
 #define warningExclamationText                      NSLocalizedString(@"Warning!", nil)
 #define aboutToExitPasswordRecovery                 NSLocalizedString(@"You are about to exit password recovery setup. Your chosen questions and answers have not been saved.", nil)
 #define skipThisStepText                            NSLocalizedString(@"Skip this step", @"Title of Skip this step alert")

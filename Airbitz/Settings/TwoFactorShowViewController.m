@@ -337,7 +337,7 @@
         {
             _secret = nil;
             _isOn = NO;
-            [NotificationChecker resetOtpNotifications];
+            [NotificationChecker resetLoginNotifications];
         }
     }
     if (!error) {
