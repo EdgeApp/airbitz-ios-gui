@@ -80,9 +80,9 @@
 
 #define appURI                  @"rockitcoin"
 #define appTitle                @"Rockitcoin Bitcoin Wallet"
-#define appHomepage             @"http://rockitcoin.com"
+#define appHomepage             @"https://www.rockitcoin.com"
 #define supportEmail            @"support@rockitcoin.com"
-#define supportPhone            @"+1-888-888-8888"
+#define supportPhone            @"+1-888-702-4826"
 #define supportTelegram         @""
 #define supportSlack            @""
 #define supportWhatsapp         @""
@@ -90,7 +90,7 @@
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.coinsource.wallet"
 #define appDownloadLink         @"http://rockitcoin.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2016/03/Coinsource-logo-100w.png"
-#define appDesignedBy           NSLocalizedString(@"Designed by Rockitcoin in",nil)
+#define appDesignedBy           NSLocalizedString(@"Designed by RockitCoin in",nil)
 #define appCompanyLocation      NSLocalizedString(@"Chicago, IL, USA", nil)
 
 #endif
