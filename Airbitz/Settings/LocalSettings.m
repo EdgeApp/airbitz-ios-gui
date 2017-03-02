@@ -142,11 +142,11 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         self.notifications = [[NSMutableArray alloc] init];
     }
 
-    NSData *notifsOtpData = [defaults objectForKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
-    if (notifsOtpData) {
-        self.otpNotifications = [NSKeyedUnarchiver unarchiveObjectWithData:notifsOtpData];
+    NSData *notifsLoginData = [defaults objectForKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
+    if (notifsLoginData) {
+        self.loginNotifications = [NSKeyedUnarchiver unarchiveObjectWithData:notifsLoginData];
     } else {
-        self.otpNotifications = [[NSMutableArray alloc] init];
+        self.loginNotifications = [[NSMutableArray alloc] init];
     }
 
 }
@@ -181,9 +181,9 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
     NSData *notifsData = [NSKeyedArchiver archivedDataWithRootObject:self.notifications];
     [defaults setObject:notifsData forKey:KEY_LOCAL_SETTINGS_NOTIFICATION_DATA];
 
-    NSData *otpNotifsData = [NSKeyedArchiver archivedDataWithRootObject:self.otpNotifications];
-    [defaults setObject:otpNotifsData forKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
-
+    NSData *notifsLoginData = [NSKeyedArchiver archivedDataWithRootObject:self.loginNotifications];
+    [defaults setObject:notifsLoginData forKey:KEY_LOCAL_SETTINGS_OTP_NOTIF_DATA];
+    
     // flush the buffer
     [defaults synchronize];
 }
@@ -206,7 +206,7 @@ __strong static LocalSettings *singleton = nil; // this will be the one and only
         self.bDisableBLE = NO;
         self.bMerchantMode = NO;
         self.notifications = nil;
-        self.otpNotifications = nil;
+        self.loginNotifications = nil;
         self.previousNotificationID = 0;
         self.receiveBitcoinCount = 0;
     }

@@ -1,3 +1,13 @@
+v.2.4.0
+
+• Protocol Changes to Edge Login
+• LibertyX plugin
+• Support for non-USD CSV/QBO export
+• Large wallet support. Better timeouts
+• Email CSV/QBO export crash fixes
+• Additional language support
+
+
 v.2.3.3
 
 • Fix rare issue with PIN login not working

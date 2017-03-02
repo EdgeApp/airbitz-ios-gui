@@ -24,6 +24,10 @@
 #define OTP_REPEAT_PERIOD         60 * 60 * 24
 #define NOTIFICATION_SEEN_KEY     @"viewed"
 #define NOTIFICATION_SHOWN_IN_APP @"shown_in_app"
+#define NOTIFICATION_USERNAME                   @"username"
+#define NOTIFICATION_TYPE                       @"type"
+#define NOTIFICATION_TYPE_OTP_RESET             @"otpResetPending"
+#define NOTIFICATION_TYPE_RECOVERY2_CORRUPT     @"recovery2Corrupt"
 
 static BOOL bInitialized = NO;
 static NotificationChecker *singleton = nil;
@@ -64,7 +68,7 @@ static NotificationChecker *singleton = nil;
 + (void)requestNotificationsFromBackgroundFetch
 {
     ABCLog(2,@"ENTER requestNotificationsFromBackgroundFetch\n");
-    [singleton checkOtpResetPending];
+    [singleton checkLoginNotifications];
     [singleton checkDirectoryNotifications];
     ABCLog(2,@"EXIT requestNotificationsFromBackgroundFetch\n");
 }
@@ -101,7 +105,7 @@ static NotificationChecker *singleton = nil;
     }
     int i = 0;
     // Find the first unseen notification
-    for (NSDictionary *dict in [LocalSettings controller].otpNotifications) {
+    for (NSDictionary *dict in [LocalSettings controller].loginNotifications) {
         NSNumber *shown = [dict objectForKey:NOTIFICATION_SHOWN_IN_APP];
         if (![shown boolValue]) {
             notif = dict;
@@ -115,7 +119,7 @@ static NotificationChecker *singleton = nil;
                 forKey:NOTIFICATION_SEEN_KEY];
         [temp setValue:[NSNumber numberWithBool:YES]
                 forKey:NOTIFICATION_SHOWN_IN_APP];
-        [[LocalSettings controller].otpNotifications
+        [[LocalSettings controller].loginNotifications
             replaceObjectAtIndex:i withObject:temp];
         [LocalSettings saveAll];
     }
@@ -130,8 +134,8 @@ static NotificationChecker *singleton = nil;
     
     if ([LocalSettings controller].notifications)
         [arrays addObject:[LocalSettings controller].notifications];
-    if ([LocalSettings controller].otpNotifications)
-        [arrays addObject:[LocalSettings controller].otpNotifications];
+    if ([LocalSettings controller].loginNotifications)
+        [arrays addObject:[LocalSettings controller].loginNotifications];
     
     for (NSMutableArray *array in arrays) {
         int i = 0;
@@ -166,7 +170,7 @@ static NotificationChecker *singleton = nil;
     ABCLog(2,@"ENTER setNotificationSeen\n");
 
     NSArray *arrays = @[[LocalSettings controller].notifications,
-            [LocalSettings controller].otpNotifications];
+            [LocalSettings controller].loginNotifications];
 
     //
     // Verify that this notification is in our notification pool
@@ -226,7 +230,7 @@ static NotificationChecker *singleton = nil;
         return;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [self checkOtpResetPending];
+        [self checkLoginNotifications];
         [self checkDirectoryNotifications];
         
         if ([self getFirstUnseenNotification] != nil)
@@ -238,13 +242,13 @@ static NotificationChecker *singleton = nil;
     ABCLog(2,@"EXIT checkNotifications\n");
 }
 
-+ (void)resetOtpNotifications
++ (void)resetLoginNotifications
 {
     int i = 0;
-    while (i < [[LocalSettings controller].otpNotifications count]) {
-        NSDictionary *notif = [[LocalSettings controller].otpNotifications firstObject];
-        if ([[notif objectForKey:@"id"] isEqualToString:abcAccount.name]) {
-            [[LocalSettings controller].otpNotifications removeObject:notif];
+    while (i < [[LocalSettings controller].loginNotifications count]) {
+        NSDictionary *notif = [[LocalSettings controller].loginNotifications firstObject];
+        if ([[notif objectForKey:NOTIFICATION_USERNAME] isEqualToString:abcAccount.name]) {
+            [[LocalSettings controller].loginNotifications removeObject:notif];
             break;
         }
         i++;
@@ -252,51 +256,42 @@ static NotificationChecker *singleton = nil;
     [LocalSettings saveAll];
 }
 
-- (void)resetOtpNotification:(NSDictionary *)notif
+- (void)resetLoginNotification:(NSDictionary *)notif
 {
 
-    [[LocalSettings controller].otpNotifications removeObject:notif];
+    [[LocalSettings controller].loginNotifications removeObject:notif];
 
     [LocalSettings saveAll];
 }
 
-- (void)checkOtpResetPending
+- (void)createNotificationIfNeeded:(NSString *)username type:(NSString *)type;
 {
-    NSError *error = nil;
-    NSArray *arrayUsers = [abc listPendingOTPResetUsernames:&error];
+    bool bHasNotification = false;
     
-    if (!arrayUsers) return;
-
-    for (NSString *username in arrayUsers)
+    // If there is already an OTP notification, then if it's over a day old, replace it, else ignore it
+    for (NSDictionary *d in [LocalSettings controller].loginNotifications)
     {
-        if (!username || ![username length])
+        if ([[d objectForKey:NOTIFICATION_USERNAME] isEqualToString:username])
         {
-            continue;
-        }
-
-        bool bHasNotification = false;
-
-        // If there is already an OTP notification, then if it's over a day old, replace it, else ignore it
-        for (NSDictionary *d in [LocalSettings controller].otpNotifications)
-        {
-            if ([[d objectForKey:@"id"] isEqualToString:username])
+            if ([[d objectForKey:NOTIFICATION_TYPE] isEqualToString:type])
             {
                 //
                 // Already a notification for this user
                 //
                 bHasNotification = true;
                 double currentTime = [[NSDate date] timeIntervalSince1970]; // in seconds
-                double notifBegan = [[d objectForKey:@"otp_time"] doubleValue];
+                double notifBegan = [[d objectForKey:OTP_TIME] doubleValue];
                 double delta = currentTime - notifBegan;
-
+                
                 //
                 // If notification is older than the repeat period, then remove this user's notification
                 // and re-add it below with new timestamp
                 //
                 if (delta > OTP_REPEAT_PERIOD)
                 {
-                    [self resetOtpNotification:d];
-
+                    [self resetLoginNotification:d];
+                    bHasNotification = false;
+                    
                     // Must break out of otpNotifications loop since we have modified the dictionary
                     // during the reset
                 }
@@ -304,21 +299,61 @@ static NotificationChecker *singleton = nil;
 
             }
         }
-
-        if (!bHasNotification)
+    }
+    
+    if (!bHasNotification)
+    {
+        NSMutableDictionary *notif = [[NSMutableDictionary alloc] init];
+        [notif setObject:username forKey:NOTIFICATION_USERNAME];
+        [notif setObject:type forKey:NOTIFICATION_TYPE];
+        [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SEEN_KEY];
+        [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SHOWN_IN_APP];
+        [notif setValue:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:OTP_TIME];
+        
+        if ([type isEqualToString:NOTIFICATION_TYPE_OTP_RESET])
         {
-            NSMutableDictionary *notif = [[NSMutableDictionary alloc] init];
-            [notif setObject:username forKey:@"id"];
-            [notif setObject:OTP_NOTIFICATION forKey:@"type"];
-            [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SEEN_KEY];
-            [notif setValue:[NSNumber numberWithBool:NO] forKey:NOTIFICATION_SHOWN_IN_APP];
-            [notif setValue:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:OTP_TIME];
             [notif setObject:twoFactorResetText forKey:@"title"];
             NSString *message = [NSString stringWithFormat:aTwoFactorResetHasBeenRequested, username];
             [notif setObject:message forKey:@"message"];
-            [[LocalSettings controller].otpNotifications addObject:notif];
+            [[LocalSettings controller].loginNotifications addObject:notif];
         }
+        else if ([type isEqualToString:NOTIFICATION_TYPE_RECOVERY2_CORRUPT])
+        {
+            [notif setObject:recoveryAnswersCorruptTitle forKey:@"title"];
+            NSString *message = [NSString stringWithFormat:recoveryAnswersCorrupt, username];
+            [notif setObject:message forKey:@"message"];
+            [[LocalSettings controller].loginNotifications addObject:notif];
+        }
+        
+    }
+}
 
+- (void)checkLoginNotifications
+{
+    NSError *error = nil;
+    
+    NSArray *arrayMessages = [abc getLoginMessages:&error];
+    
+    if (error) return;
+    if (!arrayMessages) return;
+
+    for (NSDictionary *dictMessage in arrayMessages)
+    {
+        if (!dictMessage)
+            continue;
+        
+        NSString *username = dictMessage[NOTIFICATION_USERNAME];
+        NSNumber *otpResetPending = dictMessage[NOTIFICATION_TYPE_OTP_RESET];
+        NSNumber *recovery2Corrupt = dictMessage[NOTIFICATION_TYPE_RECOVERY2_CORRUPT];
+
+        if (!username || ![username length])
+            continue;
+        
+        if ([otpResetPending boolValue] == true)
+            [self createNotificationIfNeeded:username type:NOTIFICATION_TYPE_OTP_RESET];
+        
+        if ([recovery2Corrupt boolValue] == true)
+            [self createNotificationIfNeeded:username type:NOTIFICATION_TYPE_RECOVERY2_CORRUPT];
     }
 }
 
