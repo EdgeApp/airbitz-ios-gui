@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
@@ -13,31 +13,21 @@
           <target xml:lang="zh-Hans">扫描 QR</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="NiJ-rT-MKF.text" approved="yes">
-        <source>Send</source>
-        <note>Class = "UILabel"; text = "Send"; ObjectID = "NiJ-rT-MKF";</note>
-        <target xml:lang="zh-Hans">发送</target>
-      </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle" approved="yes">
         <source>Button</source>
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
         <target xml:lang="zh-Hans">按钮</target>
       </trans-unit>
       <trans-unit id="gQB-TM-9HQ.text">
-        <source>BitID Login</source>
-        <note>Class = "UILabel"; text = "BitID Login"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="zh-Hans" state="translated">BitID 登入</target>
-      </trans-unit>
-      <trans-unit id="pzG-q0-KJ4.text">
-        <source>or</source>
-        <note>Class = "UILabel"; text = "or"; ObjectID = "pzG-q0-KJ4";</note>
-        <target xml:lang="zh-Hans" state="translated">或</target>
+        <source>Login or Send</source>
+        <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Login or Send</target>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -284,7 +274,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text" approved="yes">
@@ -388,7 +378,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -493,7 +483,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -505,7 +495,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle" approved="yes">
@@ -517,7 +507,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder" approved="yes">
@@ -757,6 +747,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
         <target xml:lang="zh-Hans" state="translated">上周</target>
       </trans-unit>
+      <trans-unit id="NuG-b1-njk.normalTitle">
+        <source>PIN Username</source>
+        <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
+        <target xml:lang="zh-Hans" state="needs-translation">PIN Username</target>
+      </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text">
         <source>PUBLIC ADDRESS</source>
         <note>Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc";</note>
@@ -819,6 +814,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>BTC</source>
         <note>Class = "UILabel"; text = "BTC"; ObjectID = "S8Q-An-svf";</note>
         <target xml:lang="zh-Hans" state="translated">BTC</target>
+      </trans-unit>
+      <trans-unit id="SEw-4z-klE.placeholder" approved="yes">
+        <source>Username</source>
+        <note>Class = "UITextField"; placeholder = "Username"; ObjectID = "SEw-4z-klE";</note>
+        <target xml:lang="zh-Hans">用户名</target>
       </trans-unit>
       <trans-unit id="ScE-Ny-R3i.text">
         <source>4 Digit PIN</source>
@@ -1042,7 +1042,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="mxS-jU-qS2.normalTitle">
         <source>Login</source>
         <note>Class = "UIButton"; normalTitle = "Login"; ObjectID = "mxS-jU-qS2";</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Login</target>
+        <target xml:lang="zh-Hans" state="translated">登录</target>
       </trans-unit>
       <trans-unit id="n7B-WE-395.normalTitle">
         <source>Done</source>
@@ -1129,7 +1129,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text" approved="yes">
@@ -1141,7 +1141,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -1161,7 +1161,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -1351,7 +1351,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1436,7 +1436,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1468,9 +1468,14 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="zh-Hans">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.0" build-num="8A218a"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
+      <trans-unit id="  Amount">
+        <source>  Amount</source>
+        <note>Placeholder text for Receive screen amount text field</note>
+        <target xml:lang="zh-Hans" state="needs-translation">  Amount</target>
+      </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
@@ -1609,7 +1614,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Accept">
         <source>Accept</source>
         <note>ACCEPT button text</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Accept</target>
+        <target xml:lang="zh-Hans" state="translated">接受</target>
       </trans-unit>
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
@@ -1715,12 +1720,12 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Approve">
         <source>Approve</source>
         <note>APPROVE button text</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Approve</target>
+        <target xml:lang="zh-Hans" state="translated">批准</target>
       </trans-unit>
       <trans-unit id="Approving Login...">
         <source>Approving Login...</source>
         <note>Approving Login popup</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Approving Login...</target>
+        <target xml:lang="zh-Hans" state="translated">正在批准登录...</target>
       </trans-unit>
       <trans-unit id="Are you sure you want to call" approved="yes">
         <source>Are you sure you want to call</source>
@@ -1806,7 +1811,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="BitID Identity">
         <source>BitID Identity</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">BitID Identity</target>
+        <target xml:lang="zh-Hans" state="translated">BitID标识</target>
       </trans-unit>
       <trans-unit id="BitID Login">
         <source>BitID Login</source>
@@ -1891,7 +1896,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Buy/Sell with Bank Account (USA)">
         <source>Buy/Sell with Bank Account (USA)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Buy/Sell with Bank Account (USA)</target>
+        <target xml:lang="zh-Hans" state="translated">买/卖银行帐户 (美国)</target>
       </trans-unit>
       <trans-unit id="CANCEL">
         <source>CANCEL</source>
@@ -2080,7 +2085,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Create new">
         <source>Create new</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Create new</target>
+        <target xml:lang="zh-Hans" state="translated">创建新的</target>
       </trans-unit>
       <trans-unit id="Creating and securing account">
         <source>Creating and securing account</source>
@@ -2217,12 +2222,12 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Disable">
         <source>Disable</source>
         <note>Disable as in to disable a feature</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Disable</target>
+        <target xml:lang="zh-Hans" state="translated">禁用</target>
       </trans-unit>
       <trans-unit id="Disable Recovery?">
         <source>Disable Recovery?</source>
         <note>Title of recovery popup</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Disable Recovery?</target>
+        <target xml:lang="zh-Hans" state="translated">禁用恢复？</target>
       </trans-unit>
       <trans-unit id="Disabled">
         <source>Disabled</source>
@@ -2265,7 +2270,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Edge Login">
         <source>Edge Login</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Edge Login</target>
+        <target xml:lang="zh-Hans" state="translated">边缘登录</target>
       </trans-unit>
       <trans-unit id="Education">
         <source>Education</source>
@@ -2290,7 +2295,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Email Login Package">
         <source>Email Login Package</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Email Login Package</target>
+        <target xml:lang="zh-Hans" state="translated">电子邮件登录包</target>
       </trans-unit>
       <trans-unit id="Email cancelled.">
         <source>Email cancelled.</source>
@@ -2330,14 +2335,6 @@ Enter it below to make sure:</source>
         <source>Enable Touch ID</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="zh-Hans" state="translated">启用Touch ID</target>
-      </trans-unit>
-      <trans-unit id="Enter Amount (optional)">
-        <source>Enter Amount (optional)</source>
-        <note>Placeholder text for Receive screen amount</note>
-        <target xml:lang="zh-Hans" state="translated">输入金额 （自选）</target>
-        <alt-trans>
-          <target xml:lang="zh-Hans">输入金额 （可选）</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Enter Payee">
         <source>Enter Payee</source>
@@ -2428,7 +2425,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Error disabling recovery">
         <source>Error disabling recovery</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Error disabling recovery</target>
+        <target xml:lang="zh-Hans" state="translated">禁用恢复时出错</target>
       </trans-unit>
       <trans-unit id="Error during send">
         <source>Error during send</source>
@@ -2473,6 +2470,11 @@ Enter it below to make sure:</source>
         <alt-trans>
           <target xml:lang="zh-Hans">兑换率数据来源</target>
         </alt-trans>
+      </trans-unit>
+      <trans-unit id="Exchange rate loading..">
+        <source>Exchange rate loading..</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="needs-translation">Exchange rate loading..</target>
       </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
@@ -2538,7 +2540,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Fetching Login Request...">
         <source>Fetching Login Request...</source>
         <note>Fetching Login Request popup</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Fetching Login Request...</target>
+        <target xml:lang="zh-Hans" state="translated">正在获取登录请求...</target>
       </trans-unit>
       <trans-unit id="Fetching Payment Request...">
         <source>Fetching Payment Request...</source>
@@ -2699,7 +2701,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Home Depot (Up to 15% Off)">
         <source>Home Depot (Up to 15% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Home Depot (Up to 15% Off)</target>
+        <target xml:lang="zh-Hans" state="translated">家得宝 (最多15％折扣)</target>
       </trans-unit>
       <trans-unit id="Home Improvement">
         <source>Home Improvement</source>
@@ -2767,7 +2769,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Identity token from [%@] created and saved">
         <source>Identity token from [%@] created and saved</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Identity token from [%@] created and saved</target>
+        <target xml:lang="zh-Hans" state="translated">身份令牌 [%@] 创建和保存</target>
       </trans-unit>
       <trans-unit id="If recovery was setup, you should have emailed yourself a recovery token with a link">
         <source>If recovery was setup, you should have emailed yourself a recovery token with a link</source>
@@ -2934,7 +2936,7 @@ Enter it below to make sure:</source>
       <trans-unit id="LOGIN">
         <source>LOGIN</source>
         <note>LOGIN button text</note>
-        <target xml:lang="zh-Hans" state="needs-translation">LOGIN</target>
+        <target xml:lang="zh-Hans" state="translated">登录</target>
       </trans-unit>
       <trans-unit id="Last Name (optional)">
         <source>Last Name (optional)</source>
@@ -3016,7 +3018,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Login Package">
         <source>Login Package</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Login Package</target>
+        <target xml:lang="zh-Hans" state="translated">登录包</target>
       </trans-unit>
       <trans-unit id="Low Fee">
         <source>Low Fee</source>
@@ -3166,6 +3168,11 @@ Enter it below to make sure:</source>
         <alt-trans>
           <target xml:lang="zh-Hans">昵称/匿名 （自选）</target>
         </alt-trans>
+      </trans-unit>
+      <trans-unit id="No PIN set">
+        <source>No PIN set</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">未设置PIN</target>
       </trans-unit>
       <trans-unit id="No Transactions">
         <source>No Transactions</source>
@@ -3397,6 +3404,11 @@ Enter it below to make sure:</source>
 
 &lt;br&gt;&lt;br&gt;%3$@</target>
       </trans-unit>
+      <trans-unit id="Please create a PIN for this account to enable quick re-logins">
+        <source>Please create a PIN for this account to enable quick re-logins</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="zh-Hans" state="translated">请为此帐户创建一个PIN，以启用快速重新登录</target>
+      </trans-unit>
       <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
         <source>Please create a new account and transfer your funds if you forgot your password.</source>
         <note>No comment provided by engineer.</note>
@@ -3421,7 +3433,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Please enter a username at the login screen">
         <source>Please enter a username at the login screen</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Please enter a username at the login screen</target>
+        <target xml:lang="zh-Hans" state="translated">请在登录屏幕上输入用户名</target>
       </trans-unit>
       <trans-unit id="Please enter an amount to send">
         <source>Please enter an amount to send</source>
@@ -3474,7 +3486,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Please verify the domain above and tap LOGIN to authenticate with this site">
         <source>Please verify the domain above and tap LOGIN to authenticate with this site</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Please verify the domain above and tap LOGIN to authenticate with this site</target>
+        <target xml:lang="zh-Hans" state="translated">请验证上述网域，然后点按登录即可验证此网站</target>
       </trans-unit>
       <trans-unit id="Please wait %.0f seconds before retrying %@">
         <source>Please wait %1$.0f seconds before retrying %2$@</source>
@@ -3516,7 +3528,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Provide an Identity Token">
         <source>Provide an Identity Token</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Provide an Identity Token</target>
+        <target xml:lang="zh-Hans" state="translated">提供身份令牌</target>
       </trans-unit>
       <trans-unit id="Public Seed (XPub)">
         <source>Public Seed (XPub)</source>
@@ -3575,7 +3587,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Recovery Disabled">
         <source>Recovery Disabled</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Recovery Disabled</target>
+        <target xml:lang="zh-Hans" state="translated">恢复已禁用</target>
       </trans-unit>
       <trans-unit id="Recovery Password Reminder">
         <source>Recovery Password Reminder</source>
@@ -3661,7 +3673,7 @@ Please change your password and PIN</source>
       <trans-unit id="Request a Payment Address">
         <source>Request a Payment Address</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Request a Payment Address</target>
+        <target xml:lang="zh-Hans" state="translated">请求付款地址</target>
       </trans-unit>
       <trans-unit id="Request confirmed, Two Factor off.">
         <source>Request confirmed, Two Factor off.</source>
@@ -3679,12 +3691,12 @@ Please change your password and PIN</source>
       <trans-unit id="Request your Identity Token but you don't have any">
         <source>Request your Identity Token but you don't have any</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Request your Identity Token but you don't have any</target>
+        <target xml:lang="zh-Hans" state="translated">请求您的身份令牌，但您没有任何</target>
       </trans-unit>
       <trans-unit id="Request your Identity Token. Please select one below">
         <source>Request your Identity Token. Please select one below</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Request your Identity Token. Please select one below</target>
+        <target xml:lang="zh-Hans" state="translated">请求您的身份标记。 请在下面选择一个</target>
       </trans-unit>
       <trans-unit id="Requested...">
         <source>Requested...</source>
@@ -3800,7 +3812,7 @@ Please change your password and PIN</source>
       <trans-unit id="Scan to Send, Import, or Edge Login">
         <source>Scan to Send, Import, or Edge Login</source>
         <note>Text at top of Send screen</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Scan to Send, Import, or Edge Login</target>
+        <target xml:lang="zh-Hans" state="translated">扫描发送，导入或边缘登录</target>
       </trans-unit>
       <trans-unit id="Search">
         <source>Search</source>
@@ -3982,7 +3994,7 @@ Please change your password and PIN</source>
       <trans-unit id="Starbucks (Up to 20% Off)">
         <source>Starbucks (Up to 20% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Starbucks (Up to 20% Off)</target>
+        <target xml:lang="zh-Hans" state="translated">星巴克 (最多20％折扣)</target>
       </trans-unit>
       <trans-unit id="Student Loan">
         <source>Student Loan</source>
@@ -4033,7 +4045,7 @@ Please change your password and PIN</source>
       <trans-unit id="Target (Up to 10% Off)">
         <source>Target (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Target (Up to 10% Off)</target>
+        <target xml:lang="zh-Hans" state="translated">目标 (最多10％折扣)</target>
       </trans-unit>
       <trans-unit id="Tax">
         <source>Tax</source>
@@ -4092,12 +4104,12 @@ For issues and feedback, please contact the respective service providers.</sourc
       <trans-unit id="This account already has password recovery setup. Would you like to disable it?">
         <source>This account already has password recovery setup. Would you like to disable it?</source>
         <note>Title of recovery popup message</note>
-        <target xml:lang="zh-Hans" state="needs-translation">This account already has password recovery setup. Would you like to disable it?</target>
+        <target xml:lang="zh-Hans" state="translated">此帐户已设置密码恢复。 您要禁用它吗？</target>
       </trans-unit>
       <trans-unit id="This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.">
         <source>This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.</target>
+        <target xml:lang="zh-Hans" state="translated">此应用程序希望访问以下与您的Airbitz帐户关联的存储库。 它将无法访问任何其他帐户或钱包。</target>
       </trans-unit>
       <trans-unit id="This is not your email or real name.\n\nThis is the username to login into your [[abtag APP_TITLE]] account on this and other devices.\n\nYour username and password are known only to you and never stored unencrypted.">
         <source>This is not your email or real name.
@@ -4126,7 +4138,7 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="This site would like to:">
         <source>This site would like to:</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">This site would like to:</target>
+        <target xml:lang="zh-Hans" state="translated">本网站想：</target>
       </trans-unit>
       <trans-unit id="This wallet has been archived. Please select a different wallet from the [Wallets] screen">
         <source>This wallet has been archived. Please select a different wallet from the [Wallets] screen</source>
@@ -4175,7 +4187,7 @@ Your username and password are known only to you and never stored unencrypted.</
       <trans-unit id="Top Up Prepaid Phones">
         <source>Top Up Prepaid Phones</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Top Up Prepaid Phones</target>
+        <target xml:lang="zh-Hans" state="translated">充值预付电话</target>
       </trans-unit>
       <trans-unit id="Touch ID">
         <source>Touch ID</source>
@@ -4572,7 +4584,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Walmart (Up to 10% Off)">
         <source>Walmart (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Walmart (Up to 10% Off)</target>
+        <target xml:lang="zh-Hans" state="translated">Walmart (最多10％折扣)</target>
       </trans-unit>
       <trans-unit id="Warning!">
         <source>Warning!</source>
@@ -4627,7 +4639,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
       <trans-unit id="Whole Foods (Up to 10% Off)">
         <source>Whole Foods (Up to 10% Off)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="zh-Hans" state="needs-translation">Whole Foods (Up to 10% Off)</target>
+        <target xml:lang="zh-Hans" state="translated">全食 (高达10％折扣)</target>
       </trans-unit>
       <trans-unit id="Would you like to enable TouchID for this account and device?">
         <source>Would you like to enable TouchID for this account and device?</source>

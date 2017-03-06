@@ -19,7 +19,7 @@
 @property (nonatomic, assign)   NSInteger       previousNotificationID;
 @property (nonatomic, assign)   NSInteger       receiveBitcoinCount;    // how many times user received bitcoin, for messaging
 @property (nonatomic, retain)   NSMutableArray  *notifications;
-@property (nonatomic, retain)   NSMutableArray  *otpNotifications;
+@property (nonatomic, retain)   NSMutableArray  *loginNotifications;
 @property (nonatomic, retain)   NSString        *clientID;
 @property (nonatomic, assign)   NSTimeInterval  noPasswordNotificationTime;
 

@@ -23,6 +23,7 @@
 #import "Config.h"
 #import "Theme.h"
 #import "AB.h"
+#import "Airbitz-Swift.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -61,6 +62,9 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 #endif
 
+    //DropDown configuration
+    [DropDown startListeningToKeyboard];
+    
     return YES;
 }
 

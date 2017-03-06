@@ -1,43 +1,43 @@
-Sell, Secure, Send, and Receive Bitcoin
+بيع، آمن، إرسال، واستقبال بيتكوين
 
-Powerful and easy to use Bitcoin Wallet allowing users to easily control their own bitcoin private keys with the familiarity and ease of mobile banking.
+قوية وسهلة لاستخدام بيتكوين المحفظة مما يسمح للمستخدمين بالتحكم بسهولة خاصة بهم بيتكوين مفاتيح خاصة مع البساطة وسهولة المصرفية عبر الهاتف المحمول.
 
-Take control of your funds! With Airbitz, only YOU have access to your funds or transaction data. Neither Airbitz or any 3rd party can access your money or data. You get the financial privacy and autonomy Bitcoin was designed for with the ease of use even grandma could handle.
+السيطرة على أموالك! مع Airbitz، فقط لديك حق الوصول إلى أموالك أو بيانات المعاملات. لا Airbitz أو أي 3rd الطرف يمكن الوصول إلى المال أو البيانات الخاصة بك. يمكنك الحصول على الخصوصية المالية، وكان الغرض من الحكم الذاتي بيتكوين لمع سهولة الاستخدام حتى الجدة يمكن التعامل معها.
 
-With a focus on delivering an amazing user experience, the Airbitz wallet provides the following great functionality:
+مع التركيز على تقديم تجربة مستخدم مذهلة، المحفظة Airbitz يوفر وظائف كبيرة التالية:
 
-• Zero-knowledge & zero-access to user funds, keys, or transaction data by Airbitz or 3rd parties
-• Integrated buy/sell for US and Canada residents
-• Pay using Bluetooth (BLE) without needing QR codes 
-• Login with TouchID
-• Simple account creation using just a login & password (no printing of PDFs, writing down pass phrases, or adding encryption settings)
-• Automatic encrypted wallet backup to redundant peer-to-peer cloud servers
-• One-Touch 2-Factor Authentication for the easiest-to-secure wallet in the world
-• Quickly switch accounts with username drop down on login screens
-• Multi-device synchronization across all mobile devices
-• Hierarchical Deterministic wallets with changing addresses per transaction
-• Multiple wallets per account with simple user defined wallet names (ie. “Vacation Fund”)
-• Multiple fiat currency support. Assign a fiat currency per wallet
-• Search transactions by payee, category, or notes
-• Built in calculator for easy conversions
-• Merchant Mode enabling easy and fluid UI behind the counter
-• Partial payment detection creates a new QR code payment request with remaining balance 
-• Daily spending limits (require password to spend above limit)
-• PIN-requiring spending limits
-• Two-tap quick UI to transfer funds between wallets
-• Import funds from WIF or Casascius private keys
-• Decentralized server architecture. Wallets work even if Airbitz servers are down.
-• Integration with the Airbitz Business directory to auto-complete business information for transactions including business logo/photo
-• Integration with address book to auto-complete payee name and photo
-• BIP 70 Payment Protocol Support
-• Open-source code. Available on http://github.com/Airbitz
+• صفر المعرفة والوصول صفر إلى صناديق المستخدم، مفاتيح، أو بيانات المعاملات التي Airbitz أو أطراف ثالثة
+• شراء المتكاملة / بيع لسكان الولايات المتحدة وكندا
+• الدفع من خلال بلوتوث (بليه) دون الحاجة رموز QR 
+• تسجيل الدخول مع معرف تاتش
+• إنشاء حساب بسيط فقط باستخدام تسجيل الدخول وكلمة السر (لا طباعة ملفات PDF، بكتابة عبارات المرور، أو إضافة إعدادات التشفير)
+• النسخ الاحتياطي التلقائي مشفرة المحفظة إلى دون جدوى الخوادم السحابية الند للند
+• لمسة واحدة مصادقة 2-عامل لمحفظة أسهل للأمنا في العالم
+• التبديل بسرعة حسابات المستخدم المنسدلة على شاشات تسجيل الدخول
+• تزامن متعددة الجهاز على جميع الأجهزة المحمولة
+محفظة القطعية الهرمية مع تغيير عناوين لكل معاملة
+• محافظ متعددة لكل حساب مع تعريف المستخدم أسماء المحفظة بسيطة. (أي "صندوق عطلة")
+• مضاعف  دعم العملة الورقية. تعيين العملة الورقية  في المحفظة
+• المعاملات في البحث عن طريق المستفيد أو الفئة أو الملاحظات
+• بنيت في آلة حاسبة لتحويل سهلة
+• وضع تاجر تمكن سهلة والسوائل UI خلف المنضدة
+• الكشف عن السداد الجزئي يخلق جديدة QR طلب الدفع الرمز مع الرصيد المتبقي 
+• حدود الإنفاق اليومي (تتطلب كلمة مرور لقضاء فوق الحد)
+• حدود الإنفاق التي تتطلب PIN
+• اثنان من الصنبور سريعة UI لتحويل الأموال بين محافظ
+• الأموال استيراد من WIF أو Casascius مفاتيح خاصة
+• اللامركزية بنية الخادم. محافظ يعمل حتى لو خوادم Airbitz إلى أسفل.
+• التكامل مع الدليل Airbitz الأعمال إلى المعلومات التجارية الإكمال التلقائي للمعاملات بما في ذلك شعار العمل / صور
+• التكامل مع دفتر العناوين لالإكمال التلقائي اسم المستفيد والصورة
+• BIP دعم بروتوكول 70 الدفع
+• كود مفتوح المصدر. متاح على http://github.com/Airbitz
 
-********* Privacy Notice *********
-The Airbitz application requests access to the device contact list, location, and personal information. This information is used on the device to provide an improved user experience in the following ways:
+********* مذكرة بشأن الخصوصية *********
+طلبات التطبيق Airbitz الوصول إلى قائمة الأجهزة الاتصال، والموقع، والمعلومات الشخصية. وتستخدم هذه المعلومات على الجهاز لتوفير تجربة مستخدم محسنة من خلال الطرق التالية:
 
-1. Autocomplete contacts from the user's address book after a transaction
-2. Autocomplete contacts from the user's address book to send Email or SMS payment requests
-3. Autocomplete business listings names after a transaction
-4. Geolocate user's device to find nearby businesses
+1. الاتصالات الإكمال التلقائي من دفتر العناوين الخاص بالمستخدم بعد الصفقة
+2. الاتصالات الإكمال التلقائي من دفتر عناوين المستخدم لإرسال البريد الإلكتروني أو الرسائل القصيرة طلبات الدفع
+3. أسماء قوائم الشركات الإكمال التلقائي بعد الصفقة
+4. تحديد الموقع الجغرافي الجهاز المستخدم لتجد الشركات القريبة
 
-No personal info or contact list info ever leaves the device without first being encrypted by the user's credentials (username/password). Neither Airbitz nor any 3rd party has knowledge of the information accessed by the application.
+لا توجد معلومات أو قائمة الاتصال الشخصية معلومات من أي وقت مضى يترك الجهاز دون الأول يتم تشفيرها من قبل أوراق اعتماد المستخدم (اسم المستخدم / كلمة المرور). لا Airbitz ولا أي 3rd الطرف لديه معرفة المعلومات الوصول إليها من قبل التطبيق.
