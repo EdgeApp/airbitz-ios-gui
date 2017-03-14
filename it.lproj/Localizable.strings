@@ -1,1704 +1,1708 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
-" Please choose a wallet to receive funds." = " お金を受け取るウォレットを選択してください。";
+" Please choose a wallet to receive funds." = " Scegliere un portafoglio per ricevere i fondi.";
 
 /* No comment provided by engineer. */
 "%@
 
 Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
 
-このリンクを共有すると、％2 $ @をインストールして使用するユーザーから収益を受け取ることができます。このアプリ内で行われたすべてのギフトカードの購入額の0.25 %%を受け取ることになります。";
+Condividi questo link per ricevere entrate da parte degli utenti che installano e l'uso %2$@. Riceverai 0.25%% di tutti gli acquisti con carta regalo fatte all'interno di questa applicazione.";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
-"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@経由でリクエストされま  %3$@に%4$@.";
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ richiesto via %3$@ sopra %4$@.";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request" = "%@ Bitcoinリクエスト";
+"%@ Bitcoin Request" = "%@ Bitcoin Richiesta";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request from %@" = "%1$@ Bitcoinリクエストから%2$@";
+"%@ Bitcoin Request from %@" = "%1$@ Bitcoin Richiesta %2$@";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin received. Tap for details." = "%@Bitcoinは受け取った 詳細はタップ
- ";
+"%@ Bitcoin received. Tap for details." = "%@ Bitcoin ricevuto. Toccare per i dettagli.";
 
 /* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
-"%@ Recovery Token" = "%@回復トークン
- 
-
-";
+"%@ Recovery Token" = "%@ Token di Recupero";
 
 /* No comment provided by engineer. */
 "%@ failed:
-%@" = "%1$@失敗した :
+%@" = "%1$@ fallito:
 %2$@";
 
 /* No comment provided by engineer. */
-"%@ has requested a bitcoin address to send money to." = "%@要求したBitcoinアドレスにお金を送る。";
+"%@ has requested a bitcoin address to send money to." = "%@ ha richiesto un indirizzo bitcoin per inviare denaro a.";
 
 /* ** Warning ** text on partial payment */
-"** Warning **" = "**警告**";
+"** Warning **" = "** Avvertimento **";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**警告**パスワードを忘れた場合は、絶対にパスワードを回復することはできません！";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**AVVERTIMENTO** Non si sarà mai in grado di recuperare la password se si dimentica!!";
 
 /* No comment provided by engineer. */
-"2 Factor (Enhanced Security)" = "2因子（セキュリティ強化）";
+"2 Factor (Enhanced Security)" = "2 Fattore (Migliorata Sicurezza)";
 
 /* No comment provided by engineer. */
-"4 Digit PIN" = "4桁PIN";
+"4 Digit PIN" = "PIN a 4 cifre";
 
 /* No comment provided by engineer. */
-"15-20% off Amazon" = "15％〜20％オフAmazon";
+"15-20% off Amazon" = "15-20% di sconto Amazon";
 
 /* No comment provided by engineer. */
-"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "2ファクタのリセットが要求されました。このリクエストを作成していない場合は、  ％@としてログインし、パスワードを変更。";
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "Un reset a due fattori è stato richiesto. Se non hai creato questa richiesta, effettuare il login come %@ e cambiare la password.";
 
 /* section header in settings table */
-"ACCOUNT: " = "アカウント： ";
+"ACCOUNT: " = "CONTO: ";
 
 /* title of archived wallets table */
-"ARCHIVE" = "アーカイブ";
+"ARCHIVE" = "ARCHIVIO";
 
 /* No comment provided by engineer. */
 "ATM" = "ATM";
 
 /* No comment provided by engineer. */
-"ATM Fee" = "自動預払機料金";
+"ATM Fee" = "Automatizzare cassiere macchina tassa";
 
 /* ACCEPT button text */
-"Accept" = "受け入れる";
+"Accept" = "Accetto";
 
 /* No comment provided by engineer. */
-"Account '%@' needs a password. Account is not accessible on a new device without a password." = "アカウント '％@'にはパスワードが必。新しいデバイスでパスワードなしでアカウントにアクセスすることはできません。";
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "Conto '%@' needs a password. Account is not accessible on a new device without a password.";
 
 /* Title of account signin error alert */
-"Account Sign Up" = "アカウントサインアップ";
+"Account Sign Up" = "Conto Iscriversi";
 
 /* No comment provided by engineer. */
-"Account has no password" = "アカウントにパスワードがありません";
+"Account has no password" = "Conto non ha password";
 
 /* No comment provided by engineer. */
-"Add New" = "新しく追加する";
+"Add New" = "Aggiungere nuova";
 
 /* Income category for affiliate revenue */
-"Affiliate Revenue" = "アフィリエイト 収入";
+"Affiliate Revenue" = "Affiliato entrate";
 
 /* No comment provided by engineer. */
-"Affiliate link has been copied to the clipboard" = "アフィリエイトリンクがクリップボードにコピー";
+"Affiliate link has been copied to the clipboard" = "Collegamento di affiliazione è stato copiato negli appunti";
 
 /* No comment provided by engineer. */
-"Air Travel" = "空の旅";
+"Air Travel" = "Aria Viaggio";
 
 /* No comment provided by engineer. */
-"AirPrint is not currently available" = "AirPrintは現在利用できません";
+"AirPrint is not currently available" = "AirPrint non è attualmente disponibile";
 
 /* No comment provided by engineer. */
-"Alcohol & Bars" = "アルコールとアンプ;バー";
+"Alcohol & Bars" = "Alcol e amp; Barre";
 
 /* No comment provided by engineer. */
-"Allowance" = "手当";
+"Allowance" = "Assegno";
 
 /* No comment provided by engineer. */
-"Amount is too small" = "金額が小さすぎます";
+"Amount is too small" = "Importo è troppo piccolo";
 
 /* No comment provided by engineer. */
-"Amusement" = "アミューズメント";
+"Amusement" = "Divertimento";
 
 /* No comment provided by engineer. */
-"An app has requested a bitcoin address to send money to." = "アプリがお金を送るためにビットコインアドレスを要求。";
+"An app has requested a bitcoin address to send money to." = "Un'applicazione ha richiesto un indirizzo bitcoin per inviare denaro a.";
 
 /* No comment provided by engineer. */
-"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "エラーが発生しました。ネットワーク接続を確認してください。 PINのログインを終了し、ユーザー名とアンプを使用することもできます。オフラインでログインするパスワード";
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "Si è verificato un errore. Si prega di verificare la connessione di rete. Si può anche uscire login PIN e utilizzare il nome utente & password per il login in linea";
 
 /* No comment provided by engineer. */
-"An error occurred. Possible network connection issue or incorrect username & password" = "エラーが発生しました。 考えられるネットワーク接続の問題または間違ったユーザー名とアンプ;パスワード";
+"An error occurred. Possible network connection issue or incorrect username & password" = "Si è verificato un errore. Possibile problema di connessione di rete o nome utente errato & parola d'ordine";
 
 /* Warning for password recovery textfields */
-"Answers are case sensitive" = "答えは大文字と小文字が区別";
+"Answers are case sensitive" = "Le risposte sono case sensitive";
 
 /* APPROVE button text */
-"Approve" = "承認する";
+"Approve" = "Approvare";
 
 /* Approving Login popup */
-"Approving Login..." = "ログインの承認...";
+"Approving Login..." = "Approvazione Accesso...";
 
 /* No comment provided by engineer. */
-"Are you sure you want to call" = "本気ですかあなた電話したい";
+"Are you sure you want to call" = "Sei sicuro che si desidera chiamare";
 
 /* No comment provided by engineer. */
-"Are you sure you want to cancel any changes you've made?" = "あなたが行った変更をキャンセルしてもよろしいですか？";
+"Are you sure you want to cancel any changes you've made?" = "Sei sicuro di voler annullare le modifiche apportate?";
 
 /* No comment provided by engineer. */
-"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "本気ですか？このウォレット内の資金とそれが受け取る将来の資金にアクセスすることはできません";
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "Sei sicuro? Sarete in grado di accedere a tutti i fondi di questo portafoglio e tutti i fondi futuri che essa può ricevere";
 
 /* No comment provided by engineer. */
-"Arts" = "芸術";
+"Arts" = "Arte";
 
 /* No comment provided by engineer. */
-"Auto & Transport" = "自動車とアンペア;輸送
-";
+"Auto & Transport" = "Auto &Trasporto";
 
 /* No comment provided by engineer. */
-"Auto Insurance" = "自動車保険
-";
+"Auto Insurance" = "Assicurazione auto";
 
 /* No comment provided by engineer. */
-"Auto Payment" = "自動支払い";
+"Auto Payment" = "Auto Pagamento";
 
 /* settings text */
-"Auto log off after" = "自動ログオフ後";
+"Auto log off after" = "Auto Log dopo";
 
 /* section header in settings table */
-"BITCOIN DENOMINATION" = "BITCOINデノミネーション";
+"BITCOIN DENOMINATION" = "BITCOIN DENOMINAZIONE";
 
 /* No comment provided by engineer. */
-"Baby Supplies" = "ベビー用品";
+"Baby Supplies" = "Bebè forniture";
 
 /* No comment provided by engineer. */
-"Babysitter & Daycare" = "ベビーシッターとアンプ;保育";
+"Babysitter & Daycare" = "Chi accudisce i bambini & Diurni";
 
 /* Back button text on top left */
-"Back" = "裏";
+"Back" = "Indietro";
 
 /* No comment provided by engineer. */
-"Balance" = "バランス";
+"Balance" = "Equilibrio";
 
 /* No comment provided by engineer. */
-"Bank Fee" = "
-銀行手数料";
+"Bank Fee" = "Banca tassa";
 
 /* No comment provided by engineer. */
-"Bills & Utilities" = "
-紙幣とアンプ;ユーティリティー";
+"Bills & Utilities" = "Polizza & utilità";
 
 /* No comment provided by engineer. */
-"BitID Identity" = "BitIDアイデンティティ";
+"BitID Identity" = "BitID Identità";
 
 /* No comment provided by engineer. */
-"BitID Login" = "BitIDログイン";
+"BitID Login" = "BitID Accesso";
 
 /* settings text */
 "Bitcoin" = "Bitcoin";
 
 /* No comment provided by engineer. */
-"Bitcoin Address or Private Key" = "Bitcoinアドレスまたは秘密鍵";
+"Bitcoin Address or Private Key" = "Bitcoin Indirizzo o chiave privata";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key" = "Bitcoinプライベートキー";
+"Bitcoin Private Key" = "Bitcoin chiave privata";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key with Public Address" = "パブリックアドレスを持つBitcoinプライベートキー";
+"Bitcoin Private Key with Public Address" = "Bitcoin chiave Privata con Public Address";
 
 /* Export wallet transactions email subject line */
-"Bitcoin Wallet Transactions" = "Bitcoin財布トランザクション";
+"Bitcoin Wallet Transactions" = "Bitcoin transazioni Portafoglio";
 
 /* No comment provided by engineer. */
-"Bitcoin address mismatch" = "Bitcoinアドレスの不一致";
+"Bitcoin address mismatch" = "Non corrispondente indirizzo bitcoin";
 
 /* settings text */
-"Bluetooth" = "ブルートゥース";
+"Bluetooth" = "Bluetooth";
 
 /* No comment provided by engineer. */
-"Books" = "本";
+"Books" = "Libri";
 
 /* No comment provided by engineer. */
-"Books & Supplies" = "書籍とアンプ; 用品";
+"Books & Supplies" = "Libri & forniture";
 
 /* Business Name or Category placeholder */
-"Business Name or Category" = "ビジネス名またはカテゴリ";
+"Business Name or Category" = "Nome commerciale o Categoria";
 
 /* No comment provided by engineer. */
-"Buy Bitcoin" = "購入Bitcoin";
+"Buy Bitcoin" = "Acquista Bitcoin";
 
 /* No comment provided by engineer. */
-"Buy/Sell Bitcoin" = "購入/販売Bitcoin";
+"Buy/Sell Bitcoin" = "Acquisto / Vendita Bitcoin";
 
 /* No comment provided by engineer. */
-"Buy/Sell with Bank Account (USA)" = "銀行口座での購入/販売（米国）";
+"Buy/Sell with Bank Account (USA)" = "Acquisto / Vendita con conto bancario (USA)";
 
 /* Generic CANCEL button text */
-"CANCEL" = "キャンセル";
+"CANCEL" = "ANNULLA";
 
 /* CHANGE button text */
-"CHANGE" = "変化する";
+"CHANGE" = "CAMBIA";
 
 /* No comment provided by engineer. */
-"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "カメラは使用できません。 携帯電話のプライバシー設定でカメラアクセスを有効にしてください";
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "Camera non disponibile. Si prega di abilitare l'accesso macchina fotografica su Impostazioni sulla privacy del telefono";
 
 /* No comment provided by engineer. */
-"Can't send e-mail" = "電子メールを送信できません。";
+"Can't send e-mail" = "Non è possibile inviare e-mail";
 
 /* No comment provided by engineer. */
-"Cannot delete wallet as it contains funds. Please transfer out funds first." = "ウォレットには資金が含まれているため、ウォレットを削除できません。 最初に資金を送金してください。";
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "Impossibile eliminare portafoglio in quanto contiene fondi. Si prega di trasferire fuori i fondi prima.";
 
 /* No comment provided by engineer. */
-"Car Wash" = "洗車";
+"Car Wash" = "Autolavaggio";
 
 /* No comment provided by engineer. */
-"Cash & ATM" = "現金とアンプ; ATM";
+"Cash & ATM" = "contanti & Automatizzare cassiere macchina";
 
 /* No comment provided by engineer. */
-"Categories" = "カテゴリ";
+"Categories" = "Categorie";
 
 /* settings text */
-"Change Categories" = "カテゴリーを変更する";
+"Change Categories" = "Modifica categorie";
 
 /* No comment provided by engineer. */
-"Change Mining Fee" = "鉱業料金の変更";
+"Change Mining Fee" = "Cambio Fee Mining";
 
 /* No comment provided by engineer. */
-"Change PIN" = "PINの変更";
+"Change PIN" = "Cambia PIN";
 
 /* No comment provided by engineer. */
-"Change Password" = "パスワードを変更する";
+"Change Password" = "Cambia password";
 
 /* settings text */
-"Change recovery questions" = "変化する回復質問";
+"Change recovery questions" = "Domande Cambio di recupero";
 
 /* No comment provided by engineer. */
-"Charity" = "慈善";
+"Charity" = "Opera pia";
 
 /* Check password button text */
-"Check Password" = "チェックパスワード";
+"Check Password" = "Controllare la password";
 
 /* No comment provided by engineer. */
-"Checking password..." = "パスワードを確認しています...";
+"Checking password..." = "Il controllo della password...";
 
 /* No comment provided by engineer. */
-"Choose a Question" = "質問を選択";
+"Choose a Question" = "Scegli una domanda";
 
 /* City, State/Province, or Country placeholder */
-"City, State/Province, or Country" = "市、州/県、または国";
+"City, State/Province, or Country" = "Città, Stato / Provincia, o Paese";
 
 /* Generic CLOSE button text */
-"Close" = "閉じ";
+"Close" = "Vicino";
 
 /* No comment provided by engineer. */
-"Clothing" = "衣類";
+"Clothing" = "Capi di abbigliamento";
 
 /* No comment provided by engineer. */
-"Coffee & Tea" = "コーヒーとアンプ; お茶";
+"Coffee & Tea" = "Caffè & Tè";
 
 /* expense category */
-"Coffee Shops" = "コーヒーショップ";
+"Coffee Shops" = "Caffetteria";
 
 /* No comment provided by engineer. */
-"Complete Signup" = "完全なサインアップ";
+"Complete Signup" = "Completa l'iscrizione";
 
 /* Num of confirmations in transaction list */
-"Confirmation" = "確認";
+"Confirmation" = "Conferma";
 
 /* Num of confirmations in transaction list */
-"Confirmations" = "確認";
+"Confirmations" = "Conferma";
 
 /* Confirmed status in transaction list */
-"Confirmed" = "確認済み";
+"Confirmed" = "Confermato";
 
 /* No comment provided by engineer. */
-"Congratulations" = "おめでとうございます";
+"Congratulations" = "Complimenti";
 
 /* Popup text when BLE connects */
-"Connected" = "Connected";
+"Connected" = "Collegato";
 
 /* No comment provided by engineer. */
-"Consulting Income" = "コンサルティング収入";
+"Consulting Income" = "Consulenza reddito";
 
 /* No comment provided by engineer. */
-"Copied" = "コピーされた";
+"Copied" = "Copiato";
 
 /* Copy button text */
-"Copy" = "コピー";
+"Copy" = "Copia";
 
 /* No comment provided by engineer. */
-"Create Wallet" = "ウォレットを作成";
+"Create Wallet" = "Crea Portafoglio";
 
 /* No comment provided by engineer. */
-"Create new" = "作成新しい";
+"Create new" = "Creare nuovo";
 
 /* No comment provided by engineer. */
-"Creating and securing account" = "作成と保護アカウント";
+"Creating and securing account" = "La creazione e la protezione conto";
 
 /* No comment provided by engineer. */
-"Creating and securing wallet" = "作成と保護財布";
+"Creating and securing wallet" = "Creazione e fissaggio portafoglio";
 
 /* No comment provided by engineer. */
-"Credit Card Payment" = "クレジットカード 支払い";
+"Credit Card Payment" = "Carta di credito Pagamento";
 
 /* No comment provided by engineer. */
-"Current Location" = "現在位置";
+"Current Location" = "Posizione attuale";
 
 /* No comment provided by engineer. */
-"Current Password" = "現在のパスワード";
+"Current Password" = "Corrente Password";
 
 /* section header in settings table */
-"DEFAULT EXCHANGE RATE" = "デフォルト換算レート";
+"DEFAULT EXCHANGE RATE" = "STANDARD DI CAMBIO";
 
 /* debug text */
-"Debug" = "調試";
+"Debug" = "Eseguire il debug";
 
 /* No comment provided by engineer. */
-"Debug Log File" = "デバッグログファイル";
+"Debug Log File" = "Lima registro di debug";
 
 /* Debug screen header title */
-"Debug Options" = "デバッグオプション";
+"Debug Options" = "Opzioni di debug";
 
 /* settings text */
-"Default Currency" = "デフォルト通貨";
+"Default Currency" = "Valuta di default";
 
 /* settings text */
-"Default Exchange" = "デフォルトの交換";
+"Default Exchange" = "Scambio di default";
 
 /* DELETE button text for wallet delete */
-"Delete" = "デリート";
+"Delete" = "Cancellare";
 
 /* Delete Account With no Password Warning */
-"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "このデバイスで '％@'を削除しま？このアカウントにはパスワードはなく、削除すると回復できません。";
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "Cancellare '%@' su questo dispositivo? Questo account non ha password e non saranno recuperabili se lo si elimina.";
 
 /* Delete Account Warning */
-"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "このデバイスで '％@'を削除しますか？これにより、PINによるアクセスが無効になります。このアカウントで2FAが有効になっている場合、このデバイスは7日間かかる2FAリセットなしではログインできません。";
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "Cancellare '%@' su questo dispositivo? Questo disabiliterà l'accesso tramite PIN. Se 2FA è abilitata su questo account, questo dispositivo non sarà in grado di accedere senza un reset 2FA che prende 7 giorni.";
 
 /* No comment provided by engineer. */
-"Delete Account" = "アカウントを削除";
+"Delete Account" = "Elimina Conto";
 
 /* Delete Wallet popup */
-"Delete Wallet" = "ウォレットの削除";
+"Delete Wallet" = "Eliminare portafoglio";
 
 /* Text for popup while deleting wallet */
-"Deleting Wallet" = "ウォレットの削除";
+"Deleting Wallet" = "Eliminazione Portafoglio";
 
 /* No comment provided by engineer. */
-"Dentist" = "歯科医";
+"Dentist" = "Dentista";
 
 /* No comment provided by engineer. */
-"Deposit to Savings" = "貯蓄への入金";
+"Deposit to Savings" = "Deposito a risparmio";
 
 /* No comment provided by engineer. */
-"Designed and Built by Airbitz in" = "Airbitzによって設計され、築かれた";
+"Designed and Built by Airbitz in" = "Progettato e costruito da Airbitz in";
 
 /* Directory title bar text */
-"Directory" = "ディレクトリ";
+"Directory" = "Direttorio";
 
 /* Disable as in to disable a feature */
-"Disable" = "無効にす";
+"Disable" = "Disabilitare";
 
 /* Title of recovery popup */
-"Disable Recovery?" = "回復を無効に？";
+"Disable Recovery?" = "Disabilitare il Recupero?";
 
 /* No comment provided by engineer. */
-"Disabled" = "を無効にする";
+"Disabled" = "Disattivato";
 
 /* No comment provided by engineer. */
-"Div Income" = "事業部所得";
+"Div Income" = "Dividere Reddito";
 
 /* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
-Enter it below to make sure:" = "あなたはまだあなたのパスワードを覚えていますか？デバイスが紛失または盗難にあった場合パスワードが必要にな。 またはアプリをアンインストールした場合\\ n以下を入力して確認してください";
+Enter it below to make sure:" = "Ti ricordi ancora la password? Sarà necessario la password se il dispositivo viene perso o rubato, o se si disinstalla l'applicazione.
+Inserisci qui sotto per assicurarsi che:";
 
 /* No comment provided by engineer. */
-"Doctor" = "医師";
+"Doctor" = "Medico";
 
 /* Generic DONE button text */
-"Done" = "完了";
+"Done" = "Fatto";
 
 /* No comment provided by engineer. */
-"Download the Airbitz wallet and save money using bitcoin" = "AirbitzウォレットをダウンロードするBitcoinを使ってお金を節約する";
+"Download the Airbitz wallet and save money using bitcoin" = "Scarica il portafoglio Airbitz e risparmiare denaro utilizzando bitcoin";
 
 /* No comment provided by engineer. */
-"Edge Login" = "
-エッジログイン";
+"Edge Login" = "Bordo Accesso";
 
 /* No comment provided by engineer. */
-"Education" = "教育";
+"Education" = "Educazione";
 
 /* No comment provided by engineer. */
-"Electronics" = "電子";
+"Electronics" = "Elettronica";
 
 /* No comment provided by engineer. */
-"Electronics & Software" = "エレクトロニクスとアンプ; ソフトウェア";
+"Electronics & Software" = "Elettronica & software";
 
 /* text for Email */
-"Email" = "Eメール";
+"Email" = "Email";
 
 /* No comment provided by engineer. */
-"Email Login Package" = "メールログインパッケージ";
+"Email Login Package" = "Email Pacchetto Accesso";
 
 /* No comment provided by engineer. */
-"Email cancelled." = "電子メールをキャンセルし。";
+"Email cancelled." = "Email annullato.";
 
 /* No comment provided by engineer. */
-"Email saved to send later." = "メールを保存して後で送信。";
+"Email saved to send later." = "Email salvato da inviare successivamente.";
 
 /* No comment provided by engineer. */
-"Email sent." = "メール送信完了！";
+"Email sent." = "Email inviata.";
 
 /* No comment provided by engineer. */
-"Enable" = "有効にする";
+"Enable" = "Attiva";
 
 /* settings text */
-"Enable Bluetooth in System Settings" = "システム設定でBluetoothを有効に";
+"Enable Bluetooth in System Settings" = "Attiva Bluetooth in Impostazioni di sistema";
 
 /* No comment provided by engineer. */
-"Enable Touch ID" = "タッチIDを有効にする";
+"Enable Touch ID" = "Abilita tocco ID";
 
 /* No comment provided by engineer. */
-"Enter Payee" = "受取人を入力して";
+"Enter Payee" = "Inserisci beneficiario";
 
 /* No comment provided by engineer. */
-"Enter any notes you would like to send to our support staff" = "サポートスタッフに送信したいメモを入力してください";
+"Enter any notes you would like to send to our support staff" = "Inserisci eventuali note si desidera inviare al nostro staff di supporto";
 
 /* No comment provided by engineer. */
-"Entertainment" = "エンターテインメント";
+"Entertainment" = "Trattenimento";
 
 /* No comment provided by engineer. */
-"Error Changing PIN" = "PINを変更中のエラー";
+"Error Changing PIN" = "L'errore che modifica PIN";
 
 /* No comment provided by engineer. */
-"Error Deleting Wallet" = "ウォレットを削除中にエラーが発生";
+"Error Deleting Wallet" = "Errore durante l'eliminazione Portafoglio";
 
 /* No comment provided by engineer. */
-"Error Getting Wallet Count" = "ウォレットカウントの取得中にエラーが発生する";
+"Error Getting Wallet Count" = "Errore Ottenere Conte Portafoglio";
 
 /* No comment provided by engineer. */
-"Error Logging In" = "エラーログイン";
+"Error Logging In" = "Registrazione degli errori In";
 
 /* No comment provided by engineer. */
-"Error Recovering Account" = "エラー回復アカウント";
+"Error Recovering Account" = "Errore Recupero account";
 
 /* No comment provided by engineer. */
-"Error code" = "エラー コード:";
+"Error code" = "Codice di errore";
 
 /* No comment provided by engineer. */
 "Error connecting to payment processor. Send directly to bitcoin address
 
-%@" = "支払い処理プログラムに接続中にエラー。ビットコインアドレスに直接送信する
+%@" = "Errore di connessione al sistema di pagamento. Invia direttamente a Bitcoin indirizzo
+
 %@";
 
 /* No comment provided by engineer. */
-"Error creating affiliate link. Please try again later" = "アフィリエイトリンクの作成中にエラー。後でもう一度お試しください";
+"Error creating affiliate link. Please try again later" = "Errore nella creazione link di affiliazione. Per favore riprova più tardi";
 
 /* No comment provided by engineer. */
-"Error desc" = "エラーdesc";
+"Error desc" = "Disc Errore";
 
 /* No comment provided by engineer. */
-"Error disabling recovery" = "復旧を無効にするエラー";
+"Error disabling recovery" = "Errore disabilitazione recupero";
 
 /* No comment provided by engineer. */
-"Error during send" = "送信中のエラー";
+"Error during send" = "Errore durante l'invio";
 
 /* No comment provided by engineer. */
-"Error importing the token at this time. Please try again." = "現時点でトークンのインポート中にエラーが発生。 もう一度お試しください。";
+"Error importing the token at this time. Please try again." = "Errore importando il token in questo momento. Riprova.";
 
 /* No comment provided by engineer. */
-"Error occured copying to the clipboard" = "クリップボードへのコピー中にエラーが発生しました";
+"Error occured copying to the clipboard" = "Errore copia negli appunti";
 
 /* No comment provided by engineer. */
-"Error sending Email." = "電子メール送信中にエラー";
+"Error sending Email." = "Errore spedendo e-mail.";
 
 /* No comment provided by engineer. */
-"Error sending SMS" = "エラー送信SMS";
+"Error sending SMS" = "Errore durante l'invio di SMS";
 
 /* Prefix of list of financial exchange categories. Such as converting from one currency to another */
-"Exchange" = "交換";
+"Exchange" = "Scambio";
 
 /* No comment provided by engineer. */
-"Exchange Rate Data Source" = "為替レートデータソース";
+"Exchange Rate Data Source" = "Origine dati Tasso di cambio";
+
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
 
 /* Exit button text on top left */
-"Exit" = "出口";
+"Exit" = "Uscita";
 
 /* Prefix of list of expense categories */
-"Expense" = "経費";
+"Expense" = "Spese";
 
 /* EXPORT button text for wallet export */
-"Export" = "輸出する";
+"Export" = "Esportare";
 
 /* Prompt asking which wallet to export from */
-"Export From:" = "から輸出:";
+"Export From:" = "Esportare Da parte di:";
 
 /* No comment provided by engineer. */
-"Export Private Seed" = "プライベートシード輸出";
+"Export Private Seed" = "Esportare Seed privato";
 
 /* No comment provided by engineer. */
-"Export Public Seed (XPub)" = "パブリックシードエクスポート（XPub）";
+"Export Public Seed (XPub)" = "Esportare Seed pubblica (XPub)";
 
 /* No comment provided by engineer. */
-"Export Wallet Transactions" = "ウォレットトランザクションのエクスポート";
+"Export Wallet Transactions" = "Operazioni di esportazione Portafoglio";
 
 /* No comment provided by engineer. */
-"Eyecare" = "アイケア";
+"Eyecare" = "Cura degli occhi";
 
 /* No comment provided by engineer. */
-"Fast Food" = "ファストフード";
+"Fast Food" = "Che serve cibi pronti";
 
 /* No comment provided by engineer. */
-"Feedback" = "フィードバック";
+"Feedback" = "Risposta";
 
 /* No comment provided by engineer. */
-"Fees & Charges" = "料金とアンペア; 料金";
+"Fees & Charges" = "Tassa & carica";
 
 /* Fetching Login Request popup */
-"Fetching Login Request..." = "ログインリクエストを取得中...";
+"Fetching Login Request..." = "Recupero Accesso Richiesta...";
 
 /* Fetching Payment Request popup */
-"Fetching Payment Request..." = "支払いリクエストを取得中...";
+"Fetching Payment Request..." = "Recupero richiesta di pagamento...";
 
 /* Fiat */
-"Fiat" = "フィアット";
+"Fiat" = "Fiat";
 
 /* No comment provided by engineer. */
-"Financial" = "財務";
+"Financial" = "Finanziario";
 
 /* No comment provided by engineer. */
-"Financial Advisor" = "財務顧問";
+"Financial Advisor" = "Consulente finanziario";
 
 /* settings text */
-"First Name (optional)" = "ファーストネーム（オプション）";
+"First Name (optional)" = "Nome (facoltativo)";
 
 /* No comment provided by engineer. */
-"Food & Dining" = "食品とアンプ; ダイニング";
+"Food & Dining" = "Cibo & il pranzare";
 
 /* No comment provided by engineer. */
-"From: %@" = "から： %@";
+"From: %@" = "Da parte di: %@";
 
 /* No comment provided by engineer. */
-"Funds successfully imported, but error connecting to messenger server. Try again later" = "ファンド輸入が成功、メッセンジャーサーバーに接続する際にエラーが発生。あとでもう一度試してみ";
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Fondi importato con successo, ma errore di connessione al server di messenger. Riprovare più tardi";
 
 /* No comment provided by engineer. */
-"Furnishings" = "家具";
+"Furnishings" = "Arredamento";
 
 /* No comment provided by engineer. */
-"Gas & Fuel" = "ガスとアンプ; 燃料";
+"Gas & Fuel" = "Gas & Carburante";
 
 /* No comment provided by engineer. */
-"Generating QR Code..." = "QRコードの生成...";
+"Generating QR Code..." = "Generazione QR Code...";
 
 /* Button text for Get Affiliate Link */
-"Get Affiliate Link" = "アフィリエイトリンクを取得";
+"Get Affiliate Link" = "Ottenere collegamento di affiliazione";
 
 /* No comment provided by engineer. */
-"Gift" = "贈り物";
+"Gift" = "Regalo";
 
 /* No comment provided by engineer. */
-"Gift Cards" = "ギフトカード";
+"Gift Cards" = "Carte regalo";
 
 /* No comment provided by engineer. */
-"Gifts & Donations" = "ギフトとアンプ; 寄付";
+"Gifts & Donations" = "Regalo & donazione";
 
 /* Generic Go Back button text */
-"Go Back" = "行こバック";
+"Go Back" = "Torna Indietro";
 
 /* No comment provided by engineer. */
-"Great job remembering your password." = "よくやったあなたのパスワードを覚えている。";
+"Great job remembering your password." = "Grande lavoro ricordare la password.";
 
 /* expense category */
-"Groceries" = "食料品";
+"Groceries" = "Drogheria";
 
 /* No comment provided by engineer. */
-"Gym" = "ジム";
+"Gym" = "Palestra";
 
 /* No comment provided by engineer. */
-"HOA Dues" = "HOA会費";
+"HOA Dues" = "HOA Quota";
 
 /* No comment provided by engineer. */
-"Hair" = "ヘア";
+"Hair" = "Capelli";
 
 /* No comment provided by engineer. */
-"Health & Fitness" = "健康とアンプ; フィットネス";
+"Health & Fitness" = "Salute & Fitness";
 
 /* Help button text on top right */
-"Help" = "助ける";
+"Help" = "Aiuto";
 
 /* Hide */
-"Hide" = "隠す";
+"Hide" = "Nascondere";
 
 /* No comment provided by engineer. */
-"High Fee" = "高い 代";
+"High Fee" = "Alto tassa";
 
 /* No comment provided by engineer. */
-"Hobbies" = "趣味";
+"Hobbies" = "Passatempo";
 
 /* No comment provided by engineer. */
-"Home" = "ホーム";
+"Home" = "Casa";
 
 /* No comment provided by engineer. */
-"Home Depot (Up to 15% Off)" = "ホームデポ（最大15％オフ）";
+"Home Depot (Up to 15% Off)" = "Casa Deposito (fino al 15% di sconto)";
 
 /* expense category */
-"Home Improvement" = "ホーム改善";
+"Home Improvement" = "Migliorie di casa";
 
 /* No comment provided by engineer. */
-"Home Insurance" = "ホーム保険";
+"Home Insurance" = "Assicurazione sulla casa";
 
 /* No comment provided by engineer. */
-"Home Phone" = "自宅の電話";
+"Home Phone" = "Telefono casa";
 
 /* No comment provided by engineer. */
-"Home Services" = "ホームサービス";
+"Home Services" = "Servizi per la casa";
 
 /* No comment provided by engineer. */
-"Home Supplies" = "ホーム用品";
+"Home Supplies" = "La casa e giardino";
 
 /* No comment provided by engineer. */
-"Hotel" = "ホテル";
+"Hotel" = "Albergo";
 
 /* Like Airbitz popup */
-"How are you liking %@?" = "お元気ですか好み％@？";
+"How are you liking %@?" = "Come stai simpatia %@?";
 
 /* Slideout menu import private key text */
 "IMPORT PRIVATE KEY
-([[abtag APP_TITLE]] Gift Card)" = "プライベートキーをインポートする
-([[abtag APP_TITLE]] ギフトカード)";
+([[abtag APP_TITLE]] Gift Card)" = "Importa chiave PRIVATA
+([[abtag APP_TITLE]] Carta regalo)";
 
 /* No comment provided by engineer. */
-"IRA Contribution" = "IRA貢献";
+"IRA Contribution" = "IRA Contribuzione";
 
 /* No comment provided by engineer. */
-"Identity token from [%@] created and saved" = "からのアイデンティティトークン  [％@]  作成して保存しました";
+"Identity token from [%@] created and saved" = "Token di identità da [%@] creato e salvato";
 
 /* No comment provided by engineer. */
-"If recovery was setup, you should have emailed yourself a recovery token with a link" = "リカバリが設定されている場合、リンクが付いた回復トークンを自分宛に電子メールで送信したはずです";
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "Se il recupero è stato installato, si dovrebbe avere inviato via email voi stessi un token di ripristino con un collegamento";
 
 /* No comment provided by engineer. */
-"Import" = "インポート";
+"Import" = "Importa";
 
 /* No comment provided by engineer. */
-"Import Airbitz Gift Card" = "輸入エアビッツギフトカード";
+"Import Airbitz Gift Card" = "Importa Gift Card Airbitz";
 
 /* No comment provided by engineer. */
-"Import Funds" = "輸入基金";
+"Import Funds" = "Importa Fondi";
 
 /* No comment provided by engineer. */
-"Import Private Key" = "秘密鍵をインポートする";
+"Import Private Key" = "Importa chiave privata";
 
 /* No comment provided by engineer. */
-"Import failed" = "インポートに失敗";
+"Import failed" = "Importazione non riuscita";
 
 /* No comment provided by engineer. */
-"Import failed. Private key is empty" = "インポートに失敗。秘密鍵は空です";
+"Import failed. Private key is empty" = "Importazione non riuscita. chiave privata è vuoto";
 
 /* No comment provided by engineer. */
-"Import the private key again to retry Twitter" = "Twitterを再試行するために秘密鍵を再度インポートする";
+"Import the private key again to retry Twitter" = "Importare nuovamente la chiave privata per riprovare Twitter";
 
 /* No comment provided by engineer. */
-"Importing funds from %@ into wallet..." = "からの資金のインポート％@財布に...";
+"Importing funds from %@ into wallet..." = "Importing funds from %@ in portafoglio...";
 
 /* Prefix of list of income categories */
-"Income" = "収入";
+"Income" = "Reddito";
 
 /* No comment provided by engineer. */
-"Incorrect PIN" = "不正なPIN";
+"Incorrect PIN" = "PIN errato";
 
 /* No comment provided by engineer. */
-"Incorrect PIN. Please wait %.0f seconds and try again." = "PINが正しくありません。お待ちください ％。の秒後に再試行して。";
+"Incorrect PIN. Please wait %.0f seconds and try again." = "PIN errato. Attendere prego %.0f secondi e riprovare.";
 
 /* No comment provided by engineer. */
-"Incorrect Password" = "不正なパスワード";
+"Incorrect Password" = "Password errata";
 
 /* No comment provided by engineer. */
-"Incorrect Password. Try again, or change it now?" = "パスワードが間違っ。再試行する、それとも今変更？";
+"Incorrect Password. Try again, or change it now?" = "Password errata. Prova di nuovo, o cambiare ora?";
 
 /* No comment provided by engineer. */
-"Incorrect current password" = "現在のパスワードが正しくありません";
+"Incorrect current password" = "Non corretta password corrente";
 
 /* No comment provided by engineer. */
-"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "この回復トークンのユーザー名が正しくありません。別のユーザー名を試してみるか、別の回復トークンリンクを使用してください。";
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Nome utente errato per questo recupero token. Prova con un nome utente diverso o utilizzare un diverso collegamento recupero token.";
 
 /* Info button text on top right */
-"Info" = "情報";
+"Info" = "Informazioni";
 
 /* Title of password check popup alert */
-"Insufficient Password" = "不十分なパスワード";
+"Insufficient Password" = "Password insufficiente";
 
 /* No comment provided by engineer. */
-"Interest Exp" = "利子率";
+"Interest Exp" = "Interessi Exp";
 
 /* No comment provided by engineer. */
-"Internet" = "インターネ";
+"Internet" = "Internet";
 
 /* No comment provided by engineer. */
-"Invalid Bitcoin Address" = "無効なBitcoinアドレス";
+"Invalid Bitcoin Address" = "Non valido Bitcoin Indirizzo";
 
 /* No comment provided by engineer. */
-"Invalid Bluetooth Request" = "無効なブルートゥースリクエスト";
+"Invalid Bluetooth Request" = "Non valido Richiesta Bluetooth";
 
 /* No comment provided by engineer. */
-"Invalid Email" = "無効なメール";
+"Invalid Email" = "E-mail non valido";
 
 /* No comment provided by engineer. */
-"Invalid QR Code" = "無効なQRコード";
+"Invalid QR Code" = "Codice QR non valido";
 
 /* No comment provided by engineer. */
-"It's great" = "それは素晴らしい";
+"It's great" = "È ottimo";
 
 /* No comment provided by engineer. */
-"Kids" = "子供たち";
+"Kids" = "Bambini";
 
 /* No comment provided by engineer. */
-"Kids Activities" = "キッズアクティビティ";
+"Kids Activities" = " Attività Bambini";
 
 /* LOGIN button text */
-"LOGIN" = "ログイン";
+"LOGIN" = "ACCESSO";
 
 /* settings text */
-"Last Name (optional)" = "姓（オプション）";
+"Last Name (optional)" = "Cognome (facoltativo)";
 
 /* No comment provided by engineer. */
-"Late Fee" = "延滞料";
+"Late Fee" = "Tassa di ritardo";
 
 /* Later button text */
-"Later" = "後で";
+"Later" = "In seguito";
 
 /* No comment provided by engineer. */
-"Laundry" = "ランドリー";
+"Laundry" = "Lavanderia";
 
 /* No comment provided by engineer. */
-"Lawn & Garden" = "芝生とアンプ; 庭園
-";
+"Lawn & Garden" = "Prato & Giardino";
 
 /* No comment provided by engineer. */
-"Level" = "レベル";
+"Level" = "Livello";
 
 /* No comment provided by engineer. */
-"Life Insurance" = "生命保険";
+"Life Insurance" = "Assicurazione sulla vita";
 
 /* Loading account alert text */
-"Loading Account..." = "アカウントの読み込み中...";
+"Loading Account..." = "Caricamento Account...";
 
 /* title of wallets table balance header */
-"Loading Balance..." = "ローディング残高...";
+"Loading Balance..." = "Caricamento in corso Bilanciamento...";
 
 /* Loading Transactions alert text */
-"Loading Transactions..." = "トランザクションの読み込み中...";
+"Loading Transactions..." = "Caricamento transazioni...
+ 
+
+";
 
 /* Loading wallets alert text */
-"Loading Wallets..." = "ウォレットの読み込み中...";
+"Loading Wallets..." = "Caricamento Portafogli...";
 
 /* Loading... */
-"Loading..." = "読み込み中";
+"Loading..." = "Caricamento...";
 
 /* No comment provided by engineer. */
-"Logging Out" = "ログアウト中";
+"Logging Out" = "Scollegamento";
 
 /* No comment provided by engineer. */
-"Login Package" = "ログインパッケージ";
+"Login Package" = "Pacchetto Accesso";
 
 /* No comment provided by engineer. */
-"Low Fee" = "低い 代";
+"Low Fee" = "Basso Costo";
 
 /* settings text */
-"Merchant Mode" = "マーチャントモード";
+"Merchant Mode" = "Modalità Merchant";
 
 /* No comment provided by engineer. */
-"Message Sent" = "メッセージが送信さ";
+"Message Sent" = "Messaggio inviato";
 
 /* No comment provided by engineer. */
-"Misc." = " その他";
+"Misc." = "Varie.";
 
 /* No comment provided by engineer. */
-"Mobile Phone" = "携帯電話";
+"Mobile Phone" = "Cellulare";
 
 /* No comment provided by engineer. */
-"More Categories" = "その他のカテゴリ";
+"More Categories" = "Più Categoria";
 
 /* No comment provided by engineer. */
-"Mortgage & Rent" = "住宅ローンとアンプ; 賃貸";
+"Mortgage & Rent" = "Ipoteca & affittare";
 
 /* No comment provided by engineer. */
-"Mortgage Interest" = "住宅ローン利息";
+"Mortgage Interest" = "Interessi Ipotecari";
 
 /* No comment provided by engineer. */
-"Movies & DVDs" = "映画とアンプ; DVD";
+"Movies & DVDs" = "Film & DVDs";
 
 /* No comment provided by engineer. */
-"Music" = "音楽";
+"Music" = "Musica";
 
 /* No comment provided by engineer. */
-"Must have at least %d characters" = "少なくとも持っていなければならない％d文字";
+"Must have at least %d characters" = "Deve avere almeno %d personaggi";
 
 /* No comment provided by engineer. */
-"Must have at least one lower case letter" = "少なくとも1つの小文字が必要です";
+"Must have at least one lower case letter" = "Deve avere la lettera caso almeno un minore";
 
 /* No comment provided by engineer. */
-"Must have at least one number" = "少なくとも1つの番号を持つ必要があります";
+"Must have at least one number" = "Deve avere almeno un numero";
 
 /* No comment provided by engineer. */
-"Must have at least one upper case letter" = "少なくとも1つの大文字が必要です";
+"Must have at least one upper case letter" = "Deve avere almeno una lettera maiuscola";
 
 /* Default wallet name for new accounts */
-"My Wallet" = "マイウォレット";
+"My Wallet" = "Il mio portafoglio";
 
 /* section header in settings table */
-"NAME" = "名";
+"NAME" = "NOME";
 
 /* NO button text */
-"NO" = "いいえ";
+"NO" = "NO";
 
 /* No comment provided by engineer. */
-"Name" = "名";
+"Name" = "Nome";
 
 /* No comment provided by engineer. */
-"Net Salary" = "ネット給与";
+"Net Salary" = "Salario netto";
 
 /* No comment provided by engineer. */
-"Network Error" = "ネットワーク エラー";
+"Network Error" = "Errore di rete";
 
 /* No comment provided by engineer. */
-"New PIN" = "新しいPIN";
+"New PIN" = "Nuovo PIN";
 
 /* No comment provided by engineer. */
-"New Password" = "新しいパスワード";
+"New Password" = "Nuova password";
 
 /* No comment provided by engineer. */
-"Newspaper & Magazines" = "新聞とアンプ; 雑誌";
+"Newspaper & Magazines" = "Giornale & rivista";
 
 /* Next button text */
-"Next" = "次";
+"Next" = "Successiva";
 
 /* settings text */
-"Nickname / Handle (optional)" = "ニックネーム/ハンドル（オプション）";
+"Nickname / Handle (optional)" = "Soprannome / maniglia (opzionale)";
+
+/* No comment provided by engineer. */
+"No PIN set" = "Nessun PIN impostato";
 
 /* what to display when wallet has no transactions */
-"No Transactions" = "トランザクションなし";
+"No Transactions" = "Nessuna transazione";
 
 /* what to display when no transactions are found in search */
-"No Transactions Found" = "トランザクションが見つかりません";
+"No Transactions Found" = "Nessuna Transazione Trovata";
 
 /* No comment provided by engineer. */
-"No password set" = "パスワードは設定されていません";
+"No password set" = "Nessuna password Impostato";
 
 /* No comment provided by engineer. */
-"No thanks" = "結構です
- ";
+"No thanks" = "No grazie";
 
 /* No comment provided by engineer. */
-"Not Sure" = "わからない";
+"Not Sure" = "Non Sicuro";
 
 /* No comment provided by engineer. */
-"Not so good" = "あまり良";
+"Not so good" = "Not so good";
 
 /* No comment provided by engineer. */
-"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "注意：  デフォルトの通貨設定は、新しいウォレットにのみ使用され、アカウントの合計残高を表示します。新しいウォレットを作成して、各トランザクションに表示される金額の通貨を変更します。";
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "Nota: L'impostazione predefinita valuta viene utilizzata solo per i nuovi portafogli e per mostrare numero totale di conto. Creare un nuovo portafoglio di cambiare la moneta a corso forzoso mostrato in ogni transazione.";
 
 /* OK button text */
-"OK" = "はい";
+"OK" = "OK";
 
 /* section header in settings table */
-"OPTIONS" = "アカウント";
+"OPTIONS" = "OPZIONI";
 
 /* No comment provided by engineer. */
-"On The Web" = "オン・ザ・ウェブ";
+"On The Web" = "In rete";
 
 /* No comment provided by engineer. */
-"Only numbers allowed in PIN" = "PINに許可されている番号のみ";
+"Only numbers allowed in PIN" = "Solo numeri consentiti in PIN";
 
 /* No comment provided by engineer. */
-"Open 24" = "オープン24";
+"Open 24" = "Aperto 24";
 
 /* No comment provided by engineer. */
-"Open 24 hours" = "２４時間営業";
+"Open 24 hours" = "Aperto 24 ore";
 
 /* No comment provided by engineer. */
-"Other Income" = "その他の収益";
+"Other Income" = "Altri proventi";
 
 /* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
-"PIN Re-Login" = "ピン再ログイン";
+"PIN Re-Login" = "PIN Re-Accesso";
 
 /* No comment provided by engineer. */
-"PIN must be %d digits" = "PINは必須です％d数字";
+"PIN must be %d digits" = "PIN deve essere %d cifre";
 
 /* No comment provided by engineer. */
-"PIN successfully changed." = "PINが正常に変更されました。";
+"PIN successfully changed." = "PIN modificato con successo.";
 
 /* No comment provided by engineer. */
-"Parking" = "パーキング";
+"Parking" = "Parcheggio";
 
 /* Text on partial payment */
-"Partial Payment" = "一部支払い";
+"Partial Payment" = "Pagamento parziale";
 
 /* No comment provided by engineer. */
-"Password" = "パスワード";
+"Password" = "Parola d'ordine";
 
 /* No comment provided by engineer. */
-"Password Change" = "パスワードの変更";
+"Password Change" = "Cambio di password";
 
 /* No comment provided by engineer. */
-"Password Recovery" = "パスワード回復";
+"Password Recovery" = "Recupero della password";
 
 /* No comment provided by engineer. */
-"Password Recovery Setup" = "パスワード回復のセットアップ";
+"Password Recovery Setup" = "Password Impostazione di recupero";
 
 /* No comment provided by engineer. */
 "Password change failed:
-%@" = "パスワードの変更に失敗：
+%@" = "Modifica della password non riuscita:
 %@";
 
 /* No comment provided by engineer. */
-"Password does not match. Re-enter password" = "パスワードが合わない。 パスワード再入力";
+"Password does not match. Re-enter password" = "La password non corrisponde. Reinserire la password";
 
 /* No comment provided by engineer. */
-"Password mismatch" = "パスワードの不一致";
+"Password mismatch" = "Password non corrispondente";
 
 /* No comment provided by engineer. */
-"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "パスワードが正常に変更されました。
-  あなたのパスワードや回復を忘れるな！ 彼らは回復できません！";
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "Password cambiata con successo. NON dimenticare la password o il recupero RISPOSTE! NON possono essere recuperati!";
 
 /* Text on payment recived popup */
-"Payment received" = "支払い受け取";
+"Payment received" = "Pagamento ricevuto";
 
 /* Pending status in transaction list */
-"Pending" = "ペンディング";
+"Pending" = "In sospeso";
 
 /* No comment provided by engineer. */
-"Personal Care" = "パーソナルケア";
+"Personal Care" = "Cura Personale";
 
 /* expense category */
-"Pet Food & Supplies" = "ペットフードとアンプ; 用品";
+"Pet Food & Supplies" = "Cibo per animali & forniture";
 
 /* expense category */
-"Pet Grooming" = "ペットグルーミング";
+"Pet Grooming" = "Beniamino Strigliare";
 
 /* expense category */
-"Pets" = "ペット";
+"Pets" = "Beniamino";
 
 /* expense category */
-"Pharmacy" = "薬局";
+"Pharmacy" = "Farmacia";
 
 /* No comment provided by engineer. */
-"Place Call" = "場所コール";
+"Place Call" = "Effettua chiamata";
 
 /* No comment provided by engineer. */
 "Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
 
-<br><br>%@" = "％1 $ @がインストールされているモバイルデバイスから下のリンクをクリックして、ユーザー名[％2 $ @]のアカウントの復元を開始してください
+<br><br>%@" = "Cliccate sul link qui sotto da un dispositivo mobile con %1$@ installato per avviare il ripristino conto username [%2$@] 
 
 <br><br>%3$@";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "パスワードを忘れた場合は、新しいアカウントを作成して資金を振り替えてください。";
+"Please create a PIN for this account to enable quick re-logins" = "Si prega di creare un PIN per questo account per consentire rapido ri-login";
 
 /* No comment provided by engineer. */
-"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "このアカウントのパスワードを作成してください。または端末を紛失または盗難した場合にアカウントを復旧することはできません";
+"Please create a new account and transfer your funds if you forgot your password." = "Si prega di creare un nuovo account e trasferire i fondi se hai dimenticato la password.";
 
 /* No comment provided by engineer. */
-"Please enter a User Name" = "ユーザー名を入力してください";
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Si prega di creare una password per questo account o non sarà in grado di recuperare il tuo account se il dispositivo viene perso o rubato.";
 
 /* No comment provided by engineer. */
-"Please enter a username at the login screen" = "ログイン画面でユーザー名を入力してください";
+"Please enter a User Name" = "Si prega di inserire un nome utente";
 
 /* No comment provided by engineer. */
-"Please enter an amount to send" = "送信する金額を入力してください";
+"Please enter a username at the login screen" = "Prega di inserire un nome utente alla schermata di login";
 
 /* No comment provided by engineer. */
-"Please enter the username of the account to recover" = "復旧するアカウントのユーザー名を入力してください";
+"Please enter an amount to send" = "Si prega di inserire un importo di inviare";
 
 /* No comment provided by engineer. */
-"Please enter your PIN" = "PINを入力してください";
+"Please enter the username of the account to recover" = "Si prega di inserire il nome utente dell'account di recuperare";
 
 /* No comment provided by engineer. */
-"Please enter your correct password." = "正しいパスワードを入力してください。";
+"Please enter your PIN" = "Si prega di inserire il PIN";
 
 /* No comment provided by engineer. */
-"Please enter your password to enable Touch ID" = "タッチIDを有効にするにはパスワードを入力してください";
+"Please enter your correct password." = "Si prega di inserire la password corretta.";
 
 /* No comment provided by engineer. */
-"Please find the email and click on the link from this device to initiate recovery" = "Eメール見つけてください、このデバイスからのリンクをクリックしてリカバリを開始します";
+"Please enter your password to enable Touch ID" = "Si prega di inserire la password per consentire tocco ID";
 
 /* No comment provided by engineer. */
-"Please have Requestor contact support" = "リクルーターにサポートを依頼してください";
+"Please find the email and click on the link from this device to initiate recovery" = "Si prega di trovare l'e-mail e fare clic sul collegamento da questo dispositivo per avviare il ripristino";
 
 /* No comment provided by engineer. */
-"Please logout of current account before attempting password recovery" = "パスワードの回復を試みる前に現在のアカウントからログアウトしてください";
+"Please have Requestor contact support" = "Si prega di avere il supporto di contatto Richiedente";
 
 /* No comment provided by engineer. */
-"Please try again later or contact support" = "後でもう一度お試しいただくか、サポートにお問い合わせください";
+"Please logout of current account before attempting password recovery" = "Si prega di disconnettersi di conto corrente prima di tentare il recupero della password";
 
 /* No comment provided by engineer. */
-"Please verify the domain above and tap LOGIN to authenticate with this site" = "上記のドメインを確認しこのサイトで認証するにはLOGINをタップしてください";
+"Please try again later or contact support" = "Si prega di riprovare più tardi o contattare il supporto";
 
 /* No comment provided by engineer. */
-"Please wait %.0f seconds before retrying %@" = "％1$.0f秒待ってから％2 $ @を再試行してください。";
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "Si prega di verificare il dominio sopra e toccare Accedi per l'autenticazione con questo sito";
 
 /* No comment provided by engineer. */
-"Please wait 1 second before retrying %@" = "Please wait 1 second before retrying %@";
+"Please wait %.0f seconds before retrying %@" = "Attendere prego %1$.0f secondi prima di riprovare %2$@";
 
 /* No comment provided by engineer. */
-"Present QR code to Sender and have them scan to send you payment" = "送信者にQRコードを提示して、支払いを送信するようスキャンします";
+"Please wait 1 second before retrying %@" = "Attendere prego 1 secondo prima di riprovare %@";
 
 /* No comment provided by engineer. */
-"Private Seed" = "プライベートシード";
+"Present QR code to Sender and have them scan to send you payment" = "Codice QR presente al mittente e li hanno scansione di inviare il pagamento";
+
+/* No comment provided by engineer. */
+"Private Seed" = "Seed privato";
 
 /* expense category */
-"Property" = "プロパティ";
+"Property" = "Proprietà";
 
 /* No comment provided by engineer. */
-"Provide an Identity Token" = "Provide an Identity Token";
+"Provide an Identity Token" = "Fornire un token di identità";
 
 /* No comment provided by engineer. */
-"Public Seed (XPub)" = "Public Seed (XPub)";
+"Public Seed (XPub)" = "Pubblico Seme (XPub)";
 
 /* expense category */
-"Public Transportation" = "公共交通機関";
+"Public Transportation" = "Pubblico Trasporti";
 
 /* No comment provided by engineer. */
-"QR Code Scan Failure" = "QR Code Scan Failure";
+"QR Code Scan Failure" = "La mancata QR Codice scansione";
 
 /* No comment provided by engineer. */
 "REFER YOUR FRIENDS
-(Earn Bitcoin)" = "REFER YOUR FRIENDS
-(Earn Bitcoin)";
+(Earn Bitcoin)" = "Invita un amico
+(Guadagna Bitcoin)";
 
 /* No comment provided by engineer. */
-"Re-enter New Password" = "新しいパスワードを再入力する";
+"Re-enter New Password" = "Reinserisci la nuova password";
 
 /* No comment provided by engineer. */
-"Received Bitcoin" = "受け取ったBitcoin";
+"Received Bitcoin" = "Ricevuto Bitcoin";
 
 /* No comment provided by engineer. */
-"Received Funds" = "Received Funds";
+"Received Funds" = "I fondi ricevuti";
 
 /* Received string on Request screen */
-"Received..." = "Received...";
+"Received..." = "Ricevuti...";
 
 /* No comment provided by engineer. */
-"Recovery Disabled" = "Recovery Disabled";
+"Recovery Disabled" = "Recupero disabili";
 
 /* No comment provided by engineer. */
-"Recovery Password Reminder" = "Recovery Password Reminder";
+"Recovery Password Reminder" = "Recupero Password Promemoria";
 
 /* Title of recovery questions setup error alert */
-"Recovery Questions Not Set" = "Recovery Questions Not Set";
+"Recovery Questions Not Set" = "Recupero Domande non impost";
 
 /* Title of recovery questions setup complete alert */
-"Recovery Questions Set" = "回復の質問セット";
+"Recovery Questions Set" = "Recupero quesiti";
 
 /* No comment provided by engineer. */
 "Recovery Successful
 
-Please change your password and PIN" = "Recovery Successful
+Please change your password and PIN" = "Recupero di successo
 
-Please change your password and PIN";
-
-/* No comment provided by engineer. */
-"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+Si prega di cambiare la password e PIN";
 
 /* No comment provided by engineer. */
-"Refer Your Friends" = "Refer Your Friends";
+"Recovery was not setup or was done on another device" = "Il recupero non è stato installato o è stato fatto su un altro dispositivo";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "Fare riferimento ai tuoi amici";
 
 /* expense category */
-"Registration" = "登録";
+"Registration" = "Registrazione";
 
 /* Remaining string on Request screen */
-"Remaining..." = "Remaining...";
+"Remaining..." = "Residuo...";
 
 /* No comment provided by engineer. */
-"Remember your password?" = "パスワードを記憶";
+"Remember your password?" = "Ricorda la password?";
 
 /* No comment provided by engineer. */
-"Remind Me Later" = "後で思い出させる";
+"Remind Me Later" = "Ricordamelo dopo";
 
 /* RENAME button text for wallet rename */
-"Rename" = "名前を変更する";
+"Rename" = "Rinominare";
 
 /* Rename Wallet popup */
-"Rename Wallet" = "ウォレットの名前変更";
+"Rename Wallet" = "Rinomina Portafoglio";
 
 /* No comment provided by engineer. */
-"Rent" = "家賃";
+"Rent" = "Affitto";
 
 /* expense category */
-"Rental Car & Taxi" = "レンタカーとアンプ; タクシー";
+"Rental Car & Taxi" = "Autonoleggio & Taxi";
 
 /* No comment provided by engineer. */
-"Request a Payment Address" = "Request a Payment Address";
+"Request a Payment Address" = "Richiedere un indirizzo di pagamento";
 
 /* No comment provided by engineer. */
-"Request confirmed, Two Factor off." = "Request confirmed, Two Factor off.";
+"Request confirmed, Two Factor off." = "Richiesta confermata, a due fattori off.";
 
 /* No comment provided by engineer. */
-"Request is copied to the clipboard" = "Request is copied to the clipboard";
+"Request is copied to the clipboard" = "Richiesta viene copiato negli appunti";
 
 /* No comment provided by engineer. */
-"Request your Identity Token but you don't have any" = "Request your Identity Token but you don't have any";
+"Request your Identity Token but you don't have any" = "Richiedi il tuo identità provvisoria, ma non si dispone di alcun";
 
 /* No comment provided by engineer. */
-"Request your Identity Token. Please select one below" = "Request your Identity Token. Please select one below";
+"Request your Identity Token. Please select one below" = "Richiedi il tuo Identità token. Si prega di selezionare una di seguito";
 
 /* Requested string on Request screen */
-"Requested..." = "Requested...";
+"Requested..." = "Richiesta...";
 
 /* No comment provided by engineer. */
-"Reset Cancelled" = "Reset Cancelled";
+"Reset Cancelled" = "Ripristino Annullato";
 
 /* No comment provided by engineer. */
-"Reset Date" = "Reset Date";
+"Reset Date" = "Data di reset";
 
 /* No comment provided by engineer. */
-"Reset requested. Please retry login after 7 days." = "Reset requested. Please retry login after 7 days.";
+"Reset requested. Please retry login after 7 days." = "Ripristino richiesto. Riprova login dopo 7 giorni.";
 
 /* No comment provided by engineer. */
-"Restarting watcher service" = "Restarting watcher service";
+"Restarting watcher service" = "Servizio di osservatore Riavvio";
 
 /* expense category */
-"Restaurants" = "レストラン";
+"Restaurants" = "Ristoranti";
 
 /* No comment provided by engineer. */
-"Restaurants & Food Trucks" = "レストランとアンプ; 食品トラック";
+"Restaurants & Food Trucks" = "Ristoranti & Camion alimentari";
 
 /* Income notes field for affiliate revenue */
-"Revenue share from affiliate link %@" = "レベニューシェアアフィリエイトリンク％@";
+"Revenue share from affiliate link %@" = "Quota di fatturato da link di affiliazione %@";
 
 /* SEND button text */
-"SEND" = "送信";
+"SEND" = "INVIARE";
 
 /* text for textmessage/SMS */
-"SMS" = "メッセージ";
+"SMS" = "SMS";
 
 /* No comment provided by engineer. */
-"SMS cancelled" = "SMS cancelled";
+"SMS cancelled" = "SMS cancellati";
 
 /* No comment provided by engineer. */
-"SMS sent" = "SMS sent";
+"SMS sent" = "SMS inviato";
 
 /* Slideout menu spend text */
-"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+"SPEND BITCOIN (Plugins)" = "SPENDERE bitcoin (Plugins)";
 
 /* No comment provided by engineer. */
-"Sales" = "販売";
+"Sales" = "Vendite";
 
 /* No comment provided by engineer. */
-"San Diego, California, USA" = "カリフォルニア州サンディエゴ";
+"San Diego, California, USA" = "San Diego, California, Stati Uniti d'America";
 
 /* Title of recovery email popup */
-"Save Recovery Token" = "Save Recovery Token";
+"Save Recovery Token" = "Salva token di ripristino";
 
 /* Text at top of Scan Screen */
-"Scan QR to Import Private Key/Gift Card" = "Scan QR to Import Private Key/Gift Card";
+"Scan QR to Import Private Key/Gift Card" = "Scansione QR per importare la chiave privata della carta/regalo";
 
 /* No comment provided by engineer. */
-"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Eseguire la scansione del codice QR del beneficiario per inviare il pagamento o toccare su una richiesta bluetooth dalla lista qui sotto";
 
 /* Text at top of Send screen */
-"Scan to Send, Import, or Edge Login" = "Scan to Send, Import, or Edge Login";
+"Scan to Send, Import, or Edge Login" = "Scansione su Invia, l'importazione, o Bordo Accesso";
 
 /* SearchBarSearch placeholder */
-"Search" = "サーチ";
+"Search" = "Ricerca";
 
 /* No comment provided by engineer. */
-"Select Currency" = "Select Currency";
+"Select Currency" = "Seleziona la valuta";
 
 /* No comment provided by engineer. */
-"Sell Bitcoin" = "Bitcoinを売る";
+"Sell Bitcoin" = "Smerciare Bitcoin";
 
 /* No comment provided by engineer. */
-"Send Funds to Private Key" = "Send Funds to Private Key";
+"Send Funds to Private Key" = "Inviare fondi a chiave privata";
 
 /* settings text */
-"Send name on payment request" = "支払い依頼時に名前を送信";
+"Send name on payment request" = "Invia nome su richiesta di pagamento";
 
 /* No comment provided by engineer. */
-"Send to Bitcoin Address or Import Private Key" = "Send to Bitcoin Address or Import Private Key";
+"Send to Bitcoin Address or Import Private Key" = "Invia ad Bitcoin Indirizzo o Importa chiave privata";
 
 /* status message */
-"Sending..." = "送信中…";
+"Sending..." = "Invio...";
 
 /* No comment provided by engineer. */
-"Sent Bitcoin" = "送信Bitcoin";
+"Sent Bitcoin" = "Invia Bitcoin";
 
 /* expense category */
-"Service & Parts" = "サービスとアンプ; 部品";
+"Service & Parts" = "Servizio & Parti";
 
 /* expense category */
-"Service Fee" = "サービス料金:";
+"Service Fee" = "Costo servizio";
 
 /* No comment provided by engineer. */
-"Set a Password" = "Set a Password";
+"Set a Password" = "Impostare una password";
 
 /* No comment provided by engineer. */
-"Set a Password and PIN" = "パスワードとPINを設定する";
+"Set a Password and PIN" = "Impostare una password e PIN";
 
 /* No comment provided by engineer. */
 "Setting recovery questions failed:
-%@" = "Setting recovery questions failed:
+%@" = "Impostazione domande di recupero non è riuscito:
 %@";
 
 /* No comment provided by engineer. */
-"Settings" = "セッティング";
+"Settings" = "Impostazioni";
 
 /* Generic SHARE button text */
-"Share" = "シェア";
+"Share" = "Condividere";
 
 /* expense category */
-"Shopping" = "ショッピング";
+"Shopping" = "Compere";
 
 /* Show */
-"Show" = "ショー";
+"Show" = "Mostrare";
 
 /* No comment provided by engineer. */
-"Show Balance" = "ショーバランス";
+"Show Balance" = "Mostrare Equilibrio";
 
 /* No comment provided by engineer. */
-"Show QR Code" = "Show QR Code";
+"Show QR Code" = "Mostra QR Code";
 
 /* No comment provided by engineer. */
-"Sign Up" = "サインアップ";
+"Sign Up" = "Registrazione";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
-%@" = "Sign-Up failed:
+%@" = "Accesso fallito:
 %@";
 
 /* Skip button text */
-"Skip" = "スキップ";
+"Skip" = "Salta";
 
 /* Title of Skip this step alert */
-"Skip this step" = "このステップをスキップ";
+"Skip this step" = "Saltare questo passaggio";
 
 /* No comment provided by engineer. */
-"Sorry" = "ごめん";
+"Sorry" = "Scusa";
 
 /* expense category */
-"Spa & Massage" = "スパとアンペア; マッサージ";
+"Spa & Massage" = "Terme & Massaggio";
 
 /* No comment provided by engineer. */
-"Spend Bitcoin (Plugins)" = "Bitcoinを使う（プラグイン）";
+"Spend Bitcoin (Plugins)" = "Trascorrere Bitcoin (Plugins)";
 
 /* spending limits text */
-"Spending Limits" = "費やす限界";
+"Spending Limits" = "Limiti di spesa";
 
 /* expense category */
-"Sporting Goods" = "スポーツ用品";
+"Sporting Goods" = "Sportivo Merce";
 
 /* expense category */
-"Sports" = "スポーツ";
+"Sports" = "Sportivo";
 
 /* No comment provided by engineer. */
-"Standard Fee" = "標準料金";
+"Standard Fee" = "Tariffa ordinaria";
 
 /* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "Starbucks (Up to 20% Off)";
+"Starbucks (Up to 20% Off)" = "Starbucks (fino al 20% di sconto)";
 
 /* expense category */
-"Student Loan" = "学生ローン";
+"Student Loan" = "Prestito Studente";
 
 /* No comment provided by engineer. */
-"Successfully Logged In" = "正常にログインしました";
+"Successfully Logged In" = "Autenticato correttamente";
 
 /* No comment provided by engineer. */
-"Successfully Verified Identity" = "Successfully Verified Identity";
+"Successfully Verified Identity" = "Identità verificato correttamente";
 
 /* No comment provided by engineer. */
-"Successfully received identity token from %@" = "Successfully received identity token from %@";
+"Successfully received identity token from %@" = "Ricevuto con successo dal token di identità %@";
 
 /* No comment provided by engineer. */
-"Sweep Funds From Private Key" = "プライベートキーから資金を払う";
+"Sweep Funds From Private Key" = "Sweep Funds From chiave Privata";
 
 /* Synchronizing text in confirmation textfield */
-"Synchronizing" = "Synchronizing";
+"Synchronizing" = "Sincronizzo";
 
 /* Prefix of wallet balance dropdown header */
-"TOTAL: " = "合計 ";
+"TOTAL: " = "TOTALE: ";
 
 /* No comment provided by engineer. */
-"Tap and hold a wallet for additional options" = "Tap and hold a wallet for additional options";
+"Tap and hold a wallet for additional options" = "Toccare e tenere premuto un portafoglio di opzioni aggiuntive";
 
 /* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "Target (Up to 10% Off)";
+"Target (Up to 10% Off)" = "Bersaglio (fino al 10% Off)";
 
 /* expense category */
-"Tax" = "税金";
+"Tax" = "Imposta";
 
 /* expense category */
-"Television" = "テレビ";
+"Television" = "Televisione";
 
 /* No comment provided by engineer. */
-"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.";
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "Il token Autenticazione a due fattori su questo dispositivo non è valido. In entrambi i casi il token è stato cambiato da un dispositivo diverso il nostro il vostro orologio è inclinata. Si prega di verificare l'ora di sistema per assicurarsi che sia corretto.";
 
 /* No comment provided by engineer. */
-"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@";
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "L'indirizzo bitcoin del dispositivo è stato collegato con:%1$@ non corrisponde l'indirizzo che è stato inizialmente pubblicizzato:%2$@";
 
 /* No comment provided by engineer. */
 "The following services are not provided by %@.
 
-For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+For issues and feedback, please contact the respective service providers." = "I seguenti servizi non sono forniti da %@.
 
-For issues and feedback, please contact the respective service providers.";
-
-/* No comment provided by engineer. */
-"The given answers were incorrect. Please try again." = "The given answers were incorrect. Please try again.";
+Per problemi e feedback, si prega di contattare i rispettivi fornitori di servizi.";
 
 /* No comment provided by engineer. */
-"The password to this account was changed by another device. Please login using the new credentials." = "The password to this account was changed by another device. Please login using the new credentials.";
+"The given answers were incorrect. Please try again." = "Le risposte fornite non erano corretti. Riprova.";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "La password per questo account è stato modificato da un altro dispositivo. Effettua il login utilizzando le nuove credenziali.";
 
 /* Title of recovery popup message */
-"This account already has password recovery setup. Would you like to disable it?" = "This account already has password recovery setup. Would you like to disable it?";
+"This account already has password recovery setup. Would you like to disable it?" = "Questo account ha già impostato il recupero della password. Volete disattivarlo?";
 
 /* No comment provided by engineer. */
-"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.";
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "Questa applicazione vuole accedere alle seguenti repository collegati al tuo account Airbitz. Essa non avrà accesso a qualsiasi altro account o portafogli.";
 
 /* Username Signup screen info text */
 "This is not your email or real name.
 
 This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
 
-Your username and password are known only to you and never stored unencrypted." = "This is not your email or real name.
+Your username and password are known only to you and never stored unencrypted." = "Questo non è il tuo e-mail o il nome reale.
 
-This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+Questo è il nome utente per accedere al tuo account [[abtag APP_TITLE]] su questo e altri dispositivi.
 
-Your username and password are known only to you and never stored unencrypted.";
+Il nome utente e la password sono noti solo a voi e non contenute in chiaro.";
 
 /* Loading Wallets alert text */
-"This may take a few minutes if it is the first time logging into this device." = "This may take a few minutes if it is the first time logging into this device.";
+"This may take a few minutes if it is the first time logging into this device." = "Questa operazione potrebbe richiedere alcuni minuti se è la prima volta che la registrazione in questo dispositivo.";
 
 /* No comment provided by engineer. */
-"This site would like to:" = "This site would like to:";
+"This site would like to:" = "Questo sito vorrebbe:";
 
 /* Popup sessage for when a wallet is archived */
-"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "This wallet has been archived. Please select a different wallet from the [Wallets] screen";
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "Questo portafoglio è stato archiviato. Si prega di selezionare un portafoglio diverso da quello [Wallets] schermo";
 
 /* text in password verification popup */
-"Time to crack:" = "Time to crack:";
+"Time to crack:" = "Tempo di crack:";
 
 /* Message of recovery token popup */
-"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "Per completare la configurazione dell'account di ripristino che si deve salvare un token per il recupero. Questo sarà necessario per recuperare il tuo account in aggiunta al vostro nome utente e recupero risposte. Per inviare te stesso il token di recupero Inserisci il tuo indirizzo email qui sotto.";
 
 /* Popup wallet help test */
-"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet";
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Per ordinare i portafogli, toccare e trascinare i 3 bar a destra di un portafoglio. Trascinare sotto del [ARCHIVE] intestazione di archiviare il portafoglio";
 
 /* No comment provided by engineer. */
-"To: %@" = "To: %@";
+"To: %@" = "A: %@";
 
 /* Top of screen wallet dropdown prefix text */
-"To: %@ ▼" = "To: %@ ▼";
+"To: %@ ▼" = "A: %@ ▼";
 
 /* expense category */
-"Tolls" = "通行料金";
+"Tolls" = "Pedaggio";
 
 /* No comment provided by engineer. */
-"Top Up Prepaid Phones" = "Top Up Prepaid Phones";
+"Top Up Prepaid Phones" = "Riempire telefoni prepagati";
 
 /* No comment provided by engineer. */
-"Touch ID" = "Touch ID";
+"Touch ID" = "Tocco ID";
 
 /* No comment provided by engineer. */
-"Touch ID Disabled" = "Touch ID Disabled";
+"Touch ID Disabled" = "Tocca ID disabili";
 
 /* No comment provided by engineer. */
-"Touch ID Enabled" = "Touch ID Enabled";
+"Touch ID Enabled" = "Tocca ID Abilitato";
 
 /* Touch ID prompt text */
-"Touch to login user" = "Touch to login user";
+"Touch to login user" = "Tocca a utenti registrati";
 
 /* settings text */
-"TouchID: Set password first" = "TouchID: Set password first";
+"TouchID: Set password first" = "TouchID: impostare la password prima";
 
 /* settings text */
-"TouchID: Unsupported Device" = "TouchID: Unsupported Device";
+"TouchID: Unsupported Device" = "ToccoID: Dispositivo non supportato";
 
 /* expense category */
-"Toys" = "おもちゃ";
+"Toys" = "Giocattolo";
 
 /* expense category */
-"Trade Commissions" = "貿易手数料";
+"Trade Commissions" = "Commissioni Commercio";
 
 /* Transaction Details header text */
-"Transaction Details" = "取引の詳細";
+"Transaction Details" = "Dettagli di Transazione";
 
 /* Financial transaction that moves money from one account to another */
-"Transfer" = "移転";
+"Transfer" = "Trasferimento";
 
 /* From wallet transfer text */
-"Transfer From %@" = "Transfer From %@";
+"Transfer From %@" = "Trasferito da %@";
 
 /* To wallet transfer text */
-"Transfer To %@" = "Transfer To %@";
+"Transfer To %@" = "Trasferire a%@";
 
 /* expense category */
-"Travel" = "トラベル";
+"Travel" = "Viaggio";
 
 /* No comment provided by engineer. */
-"Trouble connecting to network" = "Trouble connecting to network";
+"Trouble connecting to network" = "Problemi di connessione alla rete";
 
 /* No comment provided by engineer. */
-"Try again?" = "Try again?";
+"Try again?" = "Riprova?";
 
 /* expense category */
-"Tuition" = "授業料";
+"Tuition" = "Tassa di insegnamento";
 
 /* No comment provided by engineer. */
-"Two Factor" = "2因子";
+"Two Factor" = "A due fattori";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "2要素認証（セキュリティ強化）このアカウントの別のデバイスから有効になっています。このデバイスから完全にアクセスするには2因子認証を有効にしてください。";
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "Autenticazione a due fattori (protezione avanzata) è stato attivato da un dispositivo diverso per questo account. Si prega di abilitare 2 fattori di autenticazione per l'accesso completo da questo dispositivo.";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication On" = "2つのファクター認証を有効";
+"Two Factor Authentication On" = "Autenticazione a due fattori On";
 
 /* No comment provided by engineer. */
-"Two Factor Disabled" = "2因子無効";
+"Two Factor Disabled" = "A due fattori disabili";
 
 /* 2FA warning on enable */
 "Two Factor Enabled
 
 ** Warning **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Two Factor Enabled
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "A due fattori Abilitato
 
-** Warning **
+** Avvertimento **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"";
-
-/* No comment provided by engineer. */
-"Two Factor Invalid" = "2つの要因が無効です
- ";
+Se si perde il dispositivo o disinstallare l'applicazione, ci vorranno 7 giorni per disabilitare 2FA e accedere al proprio account.\"";
 
 /* No comment provided by engineer. */
-"Two Factor Reset" = "Two Factor Reset";
+"Two Factor Invalid" = "A due fattori non valido";
+
+/* No comment provided by engineer. */
+"Two Factor Reset" = "Due fattori di reset";
 
 /* No comment provided by engineer. */
 "USA" = "USA";
 
 /* No comment provided by engineer. */
-"USA and Canada" = "USA and Canada";
+"USA and Canada" = "USA e Canada";
 
 /* No comment provided by engineer. */
-"Unable to determine two factor status" = "2つの要因のステータスを判断できません";
+"Unable to determine two factor status" = "Impossibile determinare lo stato a due fattori";
 
 /* No comment provided by engineer. */
-"Unable to import secret" = "Unable to import secret";
+"Unable to import secret" = "Impossibile importare segreto";
 
 /* No comment provided by engineer. */
-"Unable to import token" = "トークンをインポートできません";
+"Unable to import token" = "Impossibile importare gettone";
 
 /* No comment provided by engineer. */
-"Unable to save Settings" = "Unable to save Settings";
+"Unable to save Settings" = "Impossibile salvare le impostazioni";
 
 /* No comment provided by engineer. */
-"Unable to scan QR code" = "QRコードをスキャンできません";
+"Unable to scan QR code" = "Impossibile effettuare la scansione del codice a barre";
 
 /* No comment provided by engineer. */
-"Unable to update Settings" = "Unable to update Settings";
+"Unable to update Settings" = "Impossibile aggiornare le impostazioni";
 
 /* No comment provided by engineer. */
-"Up to 10% off Target" = "ターゲットから最大10％オフ";
+"Up to 10% off Target" = "Fino al 10% fuori";
 
 /* No comment provided by engineer. */
-"Up to 20% off Starbucks" = "スターバックスを最大20％オフ";
+"Up to 20% off Starbucks" = "Fino al 20% di sconto Starbucks";
 
 /* Upload Failed */
-"Upload Failed. Please check your network connection" = "Upload Failed. Please check your network connection";
+"Upload Failed. Please check your network connection" = "Caricamento fallito. Si prega di verificare la connessione di rete";
 
 /* No comment provided by engineer. */
-"Upload Image" = "Upload Image";
+"Upload Image" = "Carica immagine";
 
 /* No comment provided by engineer. */
-"Upload Log" = "Upload Log";
+"Upload Log" = "Caricare Log";
 
 /* No comment provided by engineer. */
-"Upload Log File" = "Upload Log File";
+"Upload Log File" = "Carica file di registro";
 
 /* Upload Successful fading popup */
-"Upload Successful" = "Upload Successful";
+"Upload Successful" = "Carica di successo";
 
 /* Uploading logfile fading popup */
-"Uploading logfile. Please wait..." = "Uploading logfile. Please wait...";
+"Uploading logfile. Please wait..." = "Caricamento file di log. Attendere prego...";
 
 /* No comment provided by engineer. */
-"Use Camera" = "カメラを使用する";
+"Use Camera" = "Usa fotocamera";
 
 /* Touch ID [Use PIN] button */
-"Use PIN" = "Use PIN";
+"Use PIN" = "Usa PIN";
 
 /* Touch ID [Use Password] button */
-"Use Password" = "Use Password";
+"Use Password" = "Utilizza una password";
 
 /* No comment provided by engineer. */
-"Use Photo Album" = "フォトアルバムを使う";
+"Use Photo Album" = "Usa Photo Album";
 
 /* settings text */
-"Use TouchID" = "Use TouchID";
+"Use TouchID" = "Utilizzare TouchID";
 
 /* No comment provided by engineer. */
-"User Name: %@" = "User Name: %@";
+"User Name: %@" = "Nome utente: %@";
 
 /* Username */
-"Username" = "ユーザー名";
+"Username" = "Nome utente";
 
 /* No comment provided by engineer. */
-"Username must be at least %d characters." = "Username must be at least %d characters.";
+"Username must be at least %d characters." = "Nome utente deve essere almeno %d personaggi.";
 
 /* expense category */
-"Utilities" = "ユーティリティ";
+"Utilities" = "Utilità";
 
 /* expense category */
-"Vacation" = "バケーション";
+"Vacation" = "Vacanza";
 
 /* No comment provided by engineer. */
-"Validating Address..." = "Validating Address...";
+"Validating Address..." = "Convalida Indirizzo...";
 
 /* expense category */
-"Vet" = "獣医";
+"Vet" = "Veterinario";
 
 /* title of active wallets table */
-"WALLETS" = "財布";
+"WALLETS" = "PORTAFOGLI";
 
 /* Title of missing password notification */
-"WARNING: missing password" = "警告：パスワードがありません";
+"WARNING: missing password" = "ATTENZIONE: manca la password";
 
 /* Status on Request screen */
-"Waiting for Payment..." = "Waiting for Payment...";
+"Waiting for Payment..." = "In attesa del pagamento...";
 
 /* No comment provided by engineer. */
-"Wallet Deleted" = "Wallet Deleted";
+"Wallet Deleted" = "Portafoglio eliminata";
 
 /* No comment provided by engineer. */
-"Wallet Export" = "Wallet Export";
+"Wallet Export" = "Portafoglio Export";
 
 /* No comment provided by engineer. */
-"Wallet Private Seed" = "Wallet Private Seed";
+"Wallet Private Seed" = "Portafoglio Seed privato";
 
 /* No comment provided by engineer. */
 "Wallet creation failed:
-%@" = "Wallet creation failed:
+%@" = "Creazione Portafoglio non riuscita:
 %@";
 
 /* No comment provided by engineer. */
-"Wallet name must have at least one character" = "Wallet name must have at least one character";
+"Wallet name must have at least one character" = "Nome Portafoglio deve avere almeno un carattere";
 
 /* Prefix of wallet name on rename popup */
-"Wallet: " = "財布： ";
+"Wallet: " = "Portafoglio: ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "Walmart (Up to 10% Off)";
+"Walmart (Up to 10% Off)" = "Walmart (fino al 10% di sconto)";
 
 /* No comment provided by engineer. */
-"Warning!" = "Warning!";
+"Warning!" = "Avvertimento!";
 
 /* No comment provided by engineer. */
-"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled";
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Avvertimento. Senza una password, non sarà in grado di accedere a un nuovo dispositivo, se il dispositivo viene perso o rubato, o se questa applicazione viene disinstallato";
 
 /* Double spend status in transaction list */
-"Warning: Double Spend" = "警告：ダブル費やす";
+"Warning: Double Spend" = "Attenzione: Doppio Spend";
 
 /* No comment provided by engineer. */
-"Warning: Low Fees may cause long delays in transaction confirmation" = "警告：低額の料金は長い遅延を引き起こす可能性があります  取引の確認";
+"Warning: Low Fees may cause long delays in transaction confirmation" = "Attenzione: commissioni basse possono causare lunghi ritardi nella conferma della transazione";
 
 /* RBF status in transaction list */
-"Warning: Replace by Fee Detected. Double spend likely" = "警告：検出された料金で交換してください。 二重の可能性が高い";
+"Warning: Replace by Fee Detected. Double spend likely" = "Attenzione: Sostituire con pagamento Rilevato. Doppia spesa probabile";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database cancellato ma errore si è verificato. Si prega di consentire qualche minuto per risincronizzazione informazioni blockchain. Transazioni e saldi possono essere imprecisi durante la sincronizzazione";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Azzerato. Si prega di consentire qualche minuto per risincronizzazione informazioni blockchain. Transazioni e saldi possono essere imprecisi durante la sincronizzazione";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "Whole Foods (Up to 10% Off)";
+"Whole Foods (Up to 10% Off)" = "Cibi integrali (fino al 10% di sconto)";
 
 /* No comment provided by engineer. */
-"Would you like to enable TouchID for this account and device?" = "Would you like to enable TouchID for this account and device?";
+"Would you like to enable TouchID for this account and device?" = "Volete abilitare TouchID per questo account e il dispositivo?";
 
 /* No comment provided by engineer. */
-"Would you like to send funds to this address or import funds into your wallet?" = "Would you like to send funds to this address or import funds into your wallet?";
+"Would you like to send funds to this address or import funds into your wallet?" = "Volete inviare fondi a questo indirizzo o fondi di importazione nel vostro portafoglio?";
 
 /* No comment provided by engineer. */
-"Would you like to send us some feedback?" = "フィードバックをお送りしますか？";
+"Would you like to send us some feedback?" = "Volete inviarci un feedback?";
 
 /* No comment provided by engineer. */
-"Would you like to write a review in the App store?" = "Would you like to write a review in the App store?";
+"Would you like to write a review in the App store?" = "Ti piacerebbe scrivere un commento in App Store?";
 
 /* No comment provided by engineer. */
-"Wrong Answers" = "間違った答え";
+"Wrong Answers" = "Risposte sbagliate";
 
 /* YES button text */
-"YES" = "YES";
+"YES" = "SÌ";
 
 /* No comment provided by engineer. */
 "You Received Bitcoin!
-%@ (~%@)" = "You Received Bitcoin!
+%@ (~%@)" = "Hai ricevuto Bitcoin!
 %1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "Stai per uscire dall'installazione di recupero della password. Le vostre domande e risposte scelte non sono state salvate.";
 
 /* No comment provided by engineer. */
-"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+"You must answer all questions. Make sure your answers are long enough." = "Dovete rispondere a tutte le domande. Assicurarsi che le risposte sono abbastanza a lungo.";
 
 /* No comment provided by engineer. */
-"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
+"You must choose a question for all selections before proceeding." = "È necessario scegliere una domanda per tutte le selezioni prima di procedere.";
 
 /* No comment provided by engineer. */
-"You must enter a user name" = "ユーザー名を入力する必要があり";
+"You must enter a user name" = "È necessario inserire un nome utente";
 
 /* No comment provided by engineer. */
 "You received Bitcoin!
 %@ (~%@)
-Use the Payee, Category, and Notes field to optionally tag your transaction" = "You received Bitcoin!
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "Hai ricevuto Bitcoin!
 %1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction";
+Utilizzare il campo beneficiario, Categoria e note facoltativamente contrassegnare la transazione";
 
 /* Camera signup screen */
 "You will next see a popup requesting access to your Camera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "You will next see a popup requesting access to your Camera.
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "Vi verrà poi visualizzato un popup che richiede l'accesso alla fotocamera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
-
-/* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "あなたはBitcoinを受け取りました！ パスワード回復の質問と回答を設定することを強くおすすめします。それ以外の場合は、パスワードを忘れてしまった場合、あなたのアカウントにアクセスすることはできません。";
+[[Abtag APP_TITLE]] ha bisogno di questo per eseguire la scansione dei codici QR per pagare le persone e commercianti.";
 
 /* No comment provided by engineer. */
-"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!";
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Hai ricevuto Bitcoin! Si consiglia vivamente la creazione di domande Password Recovery e risposte. In caso contrario non sarà in grado di accedere al tuo account se la password viene dimenticata.";
+
+/* No comment provided by engineer. */
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Le tue domande di recupero della password e le risposte sono ora impostati. Durante il ripristino della password, le risposte devono corrispondere esattamente. ** NON dimenticare la password e il recupero RISPOSTE ** ACCOUNT non possono essere recuperate SENZA LORO!!";
 
 /* Start of password rules text */
-"Your password..." = "Your password...";
+"Your password..." = "La tua password...";
 
 /* Contacts signup screen */
 "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
 
 All tagged information is kept 100% private and encrypted by your password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[Abtag APP_TITLE]] utilizza i contatti per aiutare le informazioni dei tag per quanto riguarda le transazioni.
 
-All tagged information is kept 100% private and encrypted by your password.
+Tutte le informazioni tag è mantenuto al 100% privata e crittografata con la password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information.";
+Nessuno, tra cui [[abtag APP_TITLE]], ha qualche accesso a queste informazioni.";
 
 /* settings text */
-"bits = (0.000001 Bitcoin)" = "ビット=（0.000001Bitcoin）";
+"bits = (0.000001 Bitcoin)" = "bits = (0.000001 Bitcoin)";
 
 /* business listings is closed */
-"closed" = "closed";
+"closed" = "chiusa";
 
 /* No comment provided by engineer. */
-"day" = "day";
+"day" = "giorno";
 
 /* No comment provided by engineer. */
-"days" = "日々";
+"days" = "giorni";
 
 /* No comment provided by engineer. */
-"hour" = "hour";
+"hour" = "ora";
 
 /* No comment provided by engineer. */
-"hours" = "アワー";
+"hours" = "ore";
 
 /* settings text */
 "mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
 
 /* No comment provided by engineer. */
-"minute" = "minute";
+"minute" = "minuto";
 
 /* No comment provided by engineer. */
-"minutes" = "分";
+"minutes" = "minuti";
 
 /* No comment provided by engineer. */
-"second" = "second";
+"second" = "secondo";
 
 /* No comment provided by engineer. */
-"seconds" = "秒";
+"seconds" = "secondi";
 
 /* Header of popup in SendView from wallet to wallet transfer */
-"▼ Choose a wallet to transfer funds to ▼" = "▼ Choose a wallet to transfer funds to ▼";
+"▼ Choose a wallet to transfer funds to ▼" = "▼ Scegliere un portafoglio di trasferire fondi alla ▼";
 
