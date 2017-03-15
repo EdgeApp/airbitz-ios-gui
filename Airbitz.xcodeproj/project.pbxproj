@@ -50,6 +50,118 @@
 		77B631C61E1616250099B091 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66711E14E531007F00D8 /* DropDownCell.xib */; };
 		77B631C71E1616280099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
 		77B631C81E1616290099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
+		8B608D421E736EC80038E8AC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B608D441E736EC80038E8AC /* Localizable.strings */; };
+		8B608D4F1E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A21BC61E680063DA07 /* main.m */; };
+		8B608D501E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED7A21BC61E680063DA07 /* main.m */; };
+		8B608D511E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD7B1BC6065100C648C4 /* main.m */; };
+		8B608D521E736F830038E8AC /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
+		8B608D531E736F830038E8AC /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
+		8B608D541E736F830038E8AC /* AirbitzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD941BC6065100C648C4 /* AirbitzTests.m */; };
+		8B608D551E736F830038E8AC /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		8B608D561E736F830038E8AC /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		8B608D571E736F830038E8AC /* AirbitzUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD1AD9F1BC6065100C648C4 /* AirbitzUITests.m */; };
+		8B608D581E736F830038E8AC /* Airbitz Widget.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */; };
+		8B608D591E736F830038E8AC /* Airbitz Widget.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */; };
+		8B608D5A1E736F830038E8AC /* Airbitz Widget.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */; };
+		8B608D5B1E736F830038E8AC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
+		8B608D5C1E736F830038E8AC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
+		8B608D5D1E736F830038E8AC /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
+		8B608D5E1E736F830038E8AC /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
+		8B608D5F1E736F830038E8AC /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6F01BC607FA0063DA07 /* TodayViewController.m */; };
+		8B608D601E736F830038E8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1BF1D131B2D005442AF /* Main.storyboard */; };
+		8B608D611E736F830038E8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1BF1D131B2D005442AF /* Main.storyboard */; };
+		8B608D621E736F830038E8AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1BF1D131B2D005442AF /* Main.storyboard */; };
+		8B608D631E736F830038E8AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F571CC0C191006A8C0A /* AppDelegate.m */; };
+		8B608D641E736F830038E8AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F571CC0C191006A8C0A /* AppDelegate.m */; };
+		8B608D651E736F830038E8AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F571CC0C191006A8C0A /* AppDelegate.m */; };
+		8B608D661E736F830038E8AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5D1CC0C191006A8C0A /* ViewController.m */; };
+		8B608D671E736F830038E8AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5D1CC0C191006A8C0A /* ViewController.m */; };
+		8B608D681E736F830038E8AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5D1CC0C191006A8C0A /* ViewController.m */; };
+		8B608D691E736F830038E8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */; };
+		8B608D6A1E736F830038E8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */; };
+		8B608D6B1E736F830038E8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F5F1CC0C191006A8C0A /* Assets.xcassets */; };
+		8B608D6C1E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5A1CC0C191006A8C0A /* main.m */; };
+		8B608D6D1E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5A1CC0C191006A8C0A /* main.m */; };
+		8B608D6E1E736F830038E8AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F5A1CC0C191006A8C0A /* main.m */; };
+		8B608D6F1E736F830038E8AC /* Airbitz_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */; };
+		8B608D701E736F830038E8AC /* Airbitz_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */; };
+		8B608D711E736F830038E8AC /* Airbitz_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F6D1CC0C191006A8C0A /* Airbitz_OSXTests.m */; };
+		8B608D721E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */; };
+		8B608D731E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */; };
+		8B608D741E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D8F781CC0C191006A8C0A /* Airbitz_OSXUITests.m */; };
+		8B608D751E736F830038E8AC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE371CC36C5E003494AB /* libiconv.tbd */; };
+		8B608D761E736F830038E8AC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE371CC36C5E003494AB /* libiconv.tbd */; };
+		8B608D771E736F830038E8AC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE371CC36C5E003494AB /* libiconv.tbd */; };
+		8B608D781E736F830038E8AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE351CC36C58003494AB /* libc++.tbd */; };
+		8B608D791E736F830038E8AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE351CC36C58003494AB /* libc++.tbd */; };
+		8B608D7A1E736F830038E8AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BE351CC36C58003494AB /* libc++.tbd */; };
+		8B608D7B1E736F830038E8AC /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BDD91CC330DD003494AB /* libcurl.a */; };
+		8B608D7C1E736F8B0038E8AC /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BDD91CC330DD003494AB /* libcurl.a */; };
+		8B608D7D1E736F930038E8AC /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE1BDD91CC330DD003494AB /* libcurl.a */; };
+		8B608D7E1E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
+		8B608D7F1E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
+		8B608D801E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9ED6EC1BC607FA0063DA07 /* NotificationCenter.framework */; };
+		8B608D811E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
+		8B608D821E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
+		8B608D831E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */; };
+		8B608D841E736F9C0038E8AC /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
+		8B608D851E736F9C0038E8AC /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
+		8B608D861E736F9C0038E8AC /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */; };
+		8B608D871E736F9C0038E8AC /* libPods-Airbitz-Develop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */; };
+		8B608D881E736F9C0038E8AC /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
+		8B608D891E736F9C0038E8AC /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
+		8B608D8A1E736F9C0038E8AC /* Airbitz.app in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD771BC6065100C648C4 /* Airbitz.app */; };
+		8B608D8B1E736F9C0038E8AC /* Airbitz.app in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD771BC6065100C648C4 /* Airbitz.app */; };
+		8B608D8C1E736F9C0038E8AC /* Airbitz.app in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD771BC6065100C648C4 /* Airbitz.app */; };
+		8B608D8D1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */; };
+		8B608D8E1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */; };
+		8B608D8F1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD901BC6065100C648C4 /* AirbitzTests.xctest */; };
+		8B608D901E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */; };
+		8B608D911E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */; };
+		8B608D921E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DAD1AD9B1BC6065100C648C4 /* AirbitzUITests.xctest */; };
+		8B608D931E736F9C0038E8AC /* Airbitz Widget.appex in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; };
+		8B608D941E736F9C0038E8AC /* Airbitz Widget.appex in Resources */ = {isa = PBXBuildFile; fileRef = DA9ED6EA1BC607FA0063DA07 /* Airbitz Widget.appex */; };
+		8B608D951E736F9C0038E8AC /* Airbitz Develop.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */; };
+		8B608D961E736F9C0038E8AC /* Airbitz Develop.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */; };
+		8B608D971E736F9C0038E8AC /* Airbitz Develop.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */; };
+		8B608D981E736F9C0038E8AC /* Airbitz Testnet.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */; };
+		8B608D991E736F9C0038E8AC /* Airbitz Testnet.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */; };
+		8B608D9A1E736F9C0038E8AC /* Airbitz Testnet.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */; };
+		8B608D9B1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */; };
+		8B608D9C1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */; };
+		8B608D9D1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F541CC0C191006A8C0A /* Airbitz-OSX.app */; };
+		8B608D9E1E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */; };
+		8B608D9F1E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */; };
+		8B608DA01E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F691CC0C191006A8C0A /* Airbitz-OSXTests.xctest */; };
+		8B608DA11E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */; };
+		8B608DA21E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */; };
+		8B608DA31E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DA9D8F741CC0C191006A8C0A /* Airbitz-OSXUITests.xctest */; };
+		8B608DA41E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */; };
+		8B608DA51E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */; };
+		8B608DA61E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */; };
+		8B608DA71E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */; };
+		8B608DA81E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */; };
+		8B608DA91E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */; };
+		8B608DAA1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */; };
+		8B608DAB1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */; };
+		8B608DAC1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */; };
+		8B608DAD1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */; };
+		8B608DAE1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */; };
+		8B608DAF1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */; };
+		8B608DB01E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */; };
+		8B608DB11E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */; };
+		8B608DB21E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */; };
+		8B608DB31E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */; };
+		8B608DB41E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */; };
+		8B608DB51E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */; };
+		8B608DB61E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */; };
+		8B608DB71E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */; };
+		8B608DB81E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */; };
+		8B608DB91E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */; };
+		8B608DBA1E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */; };
+		8B608DBB1E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */; };
+		8B608DBE1E736FC70038E8AC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B608D441E736EC80038E8AC /* Localizable.strings */; };
+		8B608DBF1E736FC80038E8AC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B608D441E736EC80038E8AC /* Localizable.strings */; };
 		8E86114A1D59B9E90051FD8C /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */; };
 		DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB8D1BFEB8280086AD8B /* logo_icon@2x.png */; };
@@ -1201,7 +1313,6 @@
 		DA9EF6CF1BC729FA0063DA07 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		DA9EF6D01BC729FA0063DA07 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFB41BC61F920063DA07 /* logo_large@2x.png */; };
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
-		DAA5D72A1DE361BF002B8F7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
 		DAA5D72F1DE361BF002B8F7D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
 		DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
 		DAB5C01F1C9FBD0800CE4993 /* logo_icon_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C01E1C9FBD0800CE4993 /* logo_icon_full@2x.png */; };
@@ -1398,7 +1509,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SignUpPINController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		346445D195B1F9C065B7CDBC /* PluginListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginListViewController.m; sourceTree = "<group>"; };
@@ -1411,13 +1522,13 @@
 		34644B5A90803E3840979781 /* PluginListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginListViewController.h; sourceTree = "<group>"; };
 		34644D1324098851616413EC /* SSOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOViewController.h; sourceTree = "<group>"; };
 		34644D19B9AA8C31AD9453F3 /* AB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AB.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		487413F047376D04BC7DA055 /* Pods-Airbitz-Testnet.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		4D304BEAD9B3844D249514BD /* Pods-Airbitz-OSX.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		5319AB81AC43EB8DC5CE9A62 /* libPods-Airbitz-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
-		775F66681E14E4B8007F00D8 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
+		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		775F66681E14E4B8007F00D8 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
 		775F666B1E14E506007F00D8 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
 		775F666D1E14E506007F00D8 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
@@ -1427,9 +1538,20 @@
 		775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
 		775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UsernameDropDownCell.xib; path = Login/UsernameDropDownCell.xib; sourceTree = "<group>"; };
 		775F66861E157580007F00D8 /* UsernameDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsernameDropDownCell.swift; path = Login/UsernameDropDownCell.swift; sourceTree = "<group>"; };
+		8B608D431E736EC80038E8AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8B608D451E736F820038E8AC /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D461E736F820038E8AC /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D471E736F820038E8AC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D481E736F820038E8AC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D491E736F820038E8AC /* ht */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ht; path = ht.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D4A1E736F820038E8AC /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D4B1E736F820038E8AC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D4C1E736F820038E8AC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D4D1E736F820038E8AC /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8B608D4E1E736F820038E8AC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E8611491D59B9E90051FD8C /* bitrefill.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = bitrefill.html; sourceTree = "<group>"; };
 		9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		DA0BA5B01D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA0BA5B11D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/email_template.html; sourceTree = "<group>"; };
 		DA0BA5B21D29F5F60080D5C8 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pt; path = pt.lproj/info_disclaimer.html; sourceTree = "<group>"; };
@@ -1736,7 +1858,6 @@
 		DA9A9F9E1E26DCF500B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = "it.lproj/SlideoutView~iphone.strings"; sourceTree = "<group>"; };
 		DA9A9F9F1E26DCF500B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = "it.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DA9A9FA01E26DCF500B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = "it.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
-		DA9A9FA11E26DCF500B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA9A9FA21E26DCF500B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA9A9FA31E26DCF600B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/email_template.html; sourceTree = "<group>"; };
 		DA9A9FA41E26DCF600B1A962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/info_disclaimer.html; sourceTree = "<group>"; };
@@ -1768,7 +1889,6 @@
 		DA9A9FBE1E26DEDF00B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/WalletMakerView~iphone.strings"; sourceTree = "<group>"; };
 		DA9A9FBF1E26DEDF00B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = "ar.lproj/CalculatorView~iphone.strings"; sourceTree = "<group>"; };
 		DA9A9FC01E26DEDF00B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		DA9A9FC11E26DEDF00B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA9A9FC21E26DEDF00B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ar; path = ar.lproj/email_template_simple.html; sourceTree = "<group>"; };
 		DA9A9FC31E26DEE000B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ar; path = ar.lproj/email_template.html; sourceTree = "<group>"; };
 		DA9A9FC41E26DEE000B1A962 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = ar; path = ar.lproj/info_disclaimer.html; sourceTree = "<group>"; };
@@ -2266,23 +2386,14 @@
 		DA9EE5CB1BC6332C0063DA07 /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GTMOAuth2ViewTouch.xib; sourceTree = "<group>"; };
 		DA9EEF9E1BC63D040063DA07 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		DA9EEFA01BC63E670063DA07 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
-		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		DA9EEFA21BC63F000063DA07 /* libc++.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DA9EEFAA1BC70AF10063DA07 /* libiconv.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Airbitz.entitlements; sourceTree = "<group>"; };
 		DA9EEFB61BC722840063DA07 /* Airbitz Widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Airbitz Widget.entitlements"; sourceTree = "<group>"; };
 		DA9EEFB71BC724B00063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
 		DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAA5D7211DE361BF002B8F7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7221DE361BF002B8F7D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7231DE361BF002B8F7D /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7241DE361BF002B8F7D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7251DE361BF002B8F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DAA5D7261DE361BF002B8F7D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7271DE361BF002B8F7D /* ht */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ht; path = ht.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7281DE361BF002B8F7D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7291DE361BF002B8F7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAB0699C1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		DAB0699D1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DAB0699E1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
@@ -2560,16 +2671,16 @@
 		DADFACEE1D29F5DA006798D5 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/info.html"; sourceTree = "<group>"; };
 		DADFACEF1D29F5DA006798D5 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "pt-BR"; path = "pt-BR.lproj/transaction_details.html"; sourceTree = "<group>"; };
 		DAE1BDD91CC330DD003494AB /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
-		DAE1BE351CC36C58003494AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
-		DAE1BE371CC36C5E003494AB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		DAE1BE351CC36C58003494AB /* libc++.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		DAE1BE371CC36C5E003494AB /* libiconv.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		DAE1BE451CC37883003494AB /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = "Airbitz-Common/MainController.h"; sourceTree = "<group>"; };
 		DAE1BE461CC37883003494AB /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MainController.m; path = "Airbitz-Common/MainController.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DAE5464A1D29F6780065F926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-bracket@2x.png"; sourceTree = "<group>"; };
-		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2609,6 +2720,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B608D7F1E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */,
 				DAE951651D5C022F0060501F /* AddressBook.framework in Frameworks */,
 				DA9EF3DB1BC7285D0063DA07 /* libiconv.tbd in Frameworks */,
 				DA9EF3DD1BC7285D0063DA07 /* AudioToolbox.framework in Frameworks */,
@@ -2618,19 +2730,25 @@
 				DA9EF3E11BC7285D0063DA07 /* MessageUI.framework in Frameworks */,
 				DA9EF3E21BC7285D0063DA07 /* CoreText.framework in Frameworks */,
 				DA9EF3E31BC7285D0063DA07 /* CoreBluetooth.framework in Frameworks */,
+				8B608D761E736F830038E8AC /* libiconv.tbd in Frameworks */,
 				DA9EF3EB1BC7285D0063DA07 /* CoreVideo.framework in Frameworks */,
+				8B608D7C1E736F8B0038E8AC /* libcurl.a in Frameworks */,
 				DA9EF3EC1BC7285D0063DA07 /* CoreAudio.framework in Frameworks */,
 				DA9EF3ED1BC7285D0063DA07 /* CoreMedia.framework in Frameworks */,
 				DA9EF3EE1BC7285D0063DA07 /* DriveLib.a in Frameworks */,
 				DA9EF3EF1BC7285D0063DA07 /* AVFoundation.framework in Frameworks */,
 				DA9EF3F01BC7285D0063DA07 /* QuartzCore.framework in Frameworks */,
+				8B608D791E736F830038E8AC /* libc++.tbd in Frameworks */,
+				8B608D841E736F9C0038E8AC /* libPods-Airbitz.a in Frameworks */,
 				DA9EF3F11BC7285D0063DA07 /* MapKit.framework in Frameworks */,
 				DA9EF3F21BC7285D0063DA07 /* SystemConfiguration.framework in Frameworks */,
 				DA9EF3F41BC7285D0063DA07 /* libc++.tbd in Frameworks */,
 				DA9EF3F51BC7285D0063DA07 /* CFNetwork.framework in Frameworks */,
 				DA9EF3F71BC7285D0063DA07 /* CoreGraphics.framework in Frameworks */,
+				8B608D891E736F9C0038E8AC /* libPods-Airbitz-Testnet.a in Frameworks */,
 				DA9EF3F81BC7285D0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF3F91BC7285D0063DA07 /* HockeySDK.framework in Frameworks */,
+				8B608D821E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */,
 				DA9EF3FE1BC7285D0063DA07 /* Foundation.framework in Frameworks */,
 				E9626EAC8BD816811AFB3422 /* libPods-Airbitz-Develop.a in Frameworks */,
 			);
@@ -2640,6 +2758,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B608D801E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */,
 				DAE951661D5C02380060501F /* AddressBook.framework in Frameworks */,
 				DA9EF5A21BC729FA0063DA07 /* libiconv.tbd in Frameworks */,
 				DA9EF5A41BC729FA0063DA07 /* AudioToolbox.framework in Frameworks */,
@@ -2649,12 +2768,17 @@
 				DA9EF5A81BC729FA0063DA07 /* MessageUI.framework in Frameworks */,
 				DA9EF5A91BC729FA0063DA07 /* CoreText.framework in Frameworks */,
 				DA9EF5AA1BC729FA0063DA07 /* CoreBluetooth.framework in Frameworks */,
+				8B608D771E736F830038E8AC /* libiconv.tbd in Frameworks */,
 				DA9EF5B21BC729FA0063DA07 /* CoreVideo.framework in Frameworks */,
+				8B608D871E736F9C0038E8AC /* libPods-Airbitz-Develop.a in Frameworks */,
+				8B608D7D1E736F930038E8AC /* libcurl.a in Frameworks */,
 				DA9EF5B31BC729FA0063DA07 /* CoreAudio.framework in Frameworks */,
 				DA9EF5B41BC729FA0063DA07 /* CoreMedia.framework in Frameworks */,
 				DA9EF5B51BC729FA0063DA07 /* DriveLib.a in Frameworks */,
 				DA9EF5B61BC729FA0063DA07 /* AVFoundation.framework in Frameworks */,
 				DA9EF5B71BC729FA0063DA07 /* QuartzCore.framework in Frameworks */,
+				8B608D7A1E736F830038E8AC /* libc++.tbd in Frameworks */,
+				8B608D851E736F9C0038E8AC /* libPods-Airbitz.a in Frameworks */,
 				DA9EF5B81BC729FA0063DA07 /* MapKit.framework in Frameworks */,
 				DA9EF5B91BC729FA0063DA07 /* SystemConfiguration.framework in Frameworks */,
 				DA9EF5BB1BC729FA0063DA07 /* libc++.tbd in Frameworks */,
@@ -2662,6 +2786,7 @@
 				DA9EF5BE1BC729FA0063DA07 /* CoreGraphics.framework in Frameworks */,
 				DA9EF5BF1BC729FA0063DA07 /* UIKit.framework in Frameworks */,
 				DA9EF5C01BC729FA0063DA07 /* HockeySDK.framework in Frameworks */,
+				8B608D831E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */,
 				DA9EF5C51BC729FA0063DA07 /* Foundation.framework in Frameworks */,
 				290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */,
 			);
@@ -2671,6 +2796,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B608D7E1E736F9C0038E8AC /* NotificationCenter.framework in Frameworks */,
 				DAE951601D5C02230060501F /* AddressBook.framework in Frameworks */,
 				DA9EEFAB1BC70AF10063DA07 /* libiconv.tbd in Frameworks */,
 				DA9ED7361BC60AA90063DA07 /* AudioToolbox.framework in Frameworks */,
@@ -2680,19 +2806,25 @@
 				DA9ED7411BC60AA90063DA07 /* MessageUI.framework in Frameworks */,
 				DA9ED73D1BC60AA90063DA07 /* CoreText.framework in Frameworks */,
 				DA9ED73A1BC60AA90063DA07 /* CoreBluetooth.framework in Frameworks */,
+				8B608D751E736F830038E8AC /* libiconv.tbd in Frameworks */,
 				DA9ED73E1BC60AA90063DA07 /* CoreVideo.framework in Frameworks */,
+				8B608D7B1E736F830038E8AC /* libcurl.a in Frameworks */,
 				DA9ED7391BC60AA90063DA07 /* CoreAudio.framework in Frameworks */,
 				DA9ED73C1BC60AA90063DA07 /* CoreMedia.framework in Frameworks */,
 				DA9EEC451BC6332E0063DA07 /* DriveLib.a in Frameworks */,
 				DA9ED7371BC60AA90063DA07 /* AVFoundation.framework in Frameworks */,
 				DA9ED7421BC60AA90063DA07 /* QuartzCore.framework in Frameworks */,
+				8B608D781E736F830038E8AC /* libc++.tbd in Frameworks */,
 				DA9ED7401BC60AA90063DA07 /* MapKit.framework in Frameworks */,
 				DA9ED7441BC60AA90063DA07 /* SystemConfiguration.framework in Frameworks */,
 				DA9EEFA31BC63F000063DA07 /* libc++.tbd in Frameworks */,
 				DA9ED7381BC60AA90063DA07 /* CFNetwork.framework in Frameworks */,
 				DA9ED73B1BC60AA90063DA07 /* CoreGraphics.framework in Frameworks */,
 				DA9ED7451BC60AA90063DA07 /* UIKit.framework in Frameworks */,
+				8B608D881E736F9C0038E8AC /* libPods-Airbitz-Testnet.a in Frameworks */,
+				8B608D861E736F9C0038E8AC /* libPods-Airbitz-Develop.a in Frameworks */,
 				DA9EEFA11BC63E670063DA07 /* HockeySDK.framework in Frameworks */,
+				8B608D811E736F9C0038E8AC /* libPods-Airbitz-OSX.a in Frameworks */,
 				DA9ED73F1BC60AA90063DA07 /* Foundation.framework in Frameworks */,
 				C12852D4A9ACBA6B988B9509 /* libPods-Airbitz.a in Frameworks */,
 			);
@@ -3566,7 +3698,7 @@
 		DAD1AD6E1BC6065100C648C4 = {
 			isa = PBXGroup;
 			children = (
-				DAA5D7201DE361BF002B8F7D /* Localizable.strings */,
+				8B608D441E736EC80038E8AC /* Localizable.strings */,
 				DAE1BE3E1CC37846003494AB /* Airbitz-Common */,
 				DAD1AD791BC6065100C648C4 /* Airbitz */,
 				DAD1AD931BC6065100C648C4 /* AirbitzTests */,
@@ -4118,6 +4250,7 @@
 			files = (
 				DA9EF4031BC7285D0063DA07 /* icon_logout@2x.png in Resources */,
 				DA9EF4041BC7285D0063DA07 /* btn_locateMe@2x.png in Resources */,
+				8B608DBE1E736FC70038E8AC /* Localizable.strings in Resources */,
 				DA9EF4051BC7285D0063DA07 /* icon_settings@2x.png in Resources */,
 				DA9101F91C4964AD00603D62 /* icon_import@3x.png in Resources */,
 				DA9EF4081BC7285D0063DA07 /* icon_settings_dark@2x.png in Resources */,
@@ -4135,6 +4268,7 @@
 				DA9EF41F1BC7285D0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF4201BC7285D0063DA07 /* write-it-down.png in Resources */,
 				DA9EF4211BC7285D0063DA07 /* drag_bar@2x.png in Resources */,
+				8B608DAE1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */,
 				DA9EF4221BC7285D0063DA07 /* icon_arrow.png in Resources */,
 				DA9EF4241BC7285D0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB991BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
@@ -4143,15 +4277,20 @@
 				DA9101F61C4964AD00603D62 /* icon_import@2x.png in Resources */,
 				DA9EF4271BC7285D0063DA07 /* btn_close@3x.png in Resources */,
 				DA9EF4281BC7285D0063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
+				8B608D611E736F830038E8AC /* Main.storyboard in Resources */,
 				DA9EF4291BC7285D0063DA07 /* clearButton@2x.png in Resources */,
 				DA9EF42B1BC7285D0063DA07 /* btn_slider@2x.png in Resources */,
 				DADFAC551D29F59C006798D5 /* info_transactions.html in Resources */,
 				DA9EF42C1BC7285D0063DA07 /* icon_export_view@2x.png in Resources */,
+				8B608D9F1E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */,
 				DA9EF42E1BC7285D0063DA07 /* Config.h.example in Resources */,
 				DA9EF42F1BC7285D0063DA07 /* icon_category_atm@3x.png in Resources */,
+				8B608DA81E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */,
 				DA9EF4301BC7285D0063DA07 /* flash-off@2x.png in Resources */,
+				8B608DAB1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */,
 				DA9EF4311BC7285D0063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DADFAC521D29F59C006798D5 /* info_transaction_details.html in Resources */,
+				8B608D5B1E736F830038E8AC /* MainInterface.storyboard in Resources */,
 				DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF4321BC7285D0063DA07 /* btn_export_white@2x.png in Resources */,
 				DA9EF4341BC7285D0063DA07 /* icon_logout@3x.png in Resources */,
@@ -4182,6 +4321,7 @@
 				DA9EF44D1BC7285D0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF44E1BC7285D0063DA07 /* 5-bars@2x.png in Resources */,
 				DA57A1E01D131C8A005442AF /* PopupWheelPickerView.xib in Resources */,
+				8B608DA21E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */,
 				DA9EF4501BC7285D0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA9EF4511BC7285D0063DA07 /* btn_unselected@2x.png in Resources */,
 				DA57A1E51D131C8E005442AF /* Settings.storyboard in Resources */,
@@ -4199,7 +4339,9 @@
 				DADFAC431D29F59C006798D5 /* info_request.html in Resources */,
 				DA9EF45A1BC7285D0063DA07 /* Montserrat-Bold.ttf in Resources */,
 				DA9EF45F1BC7285D0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
+				8B608DB41E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */,
 				DA57A1371D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
+				8B608D591E736F830038E8AC /* Airbitz Widget.entitlements in Resources */,
 				DA9EF4621BC7285D0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF4631BC7285D0063DA07 /* icon_search@2x.png in Resources */,
 				DA9EF4641BC7285D0063DA07 /* icon_account_secure.png in Resources */,
@@ -4224,6 +4366,7 @@
 				DA9EF4781BC7285D0063DA07 /* btn_close.png in Resources */,
 				DA9EF4791BC7285D0063DA07 /* large-digit-input@2x.png in Resources */,
 				DA57A1441D13145A005442AF /* PopupPickerView.xib in Resources */,
+				8B608D8B1E736F9C0038E8AC /* Airbitz.app in Resources */,
 				DA9EF47B1BC7285D0063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9EF47C1BC7285D0063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EF47D1BC7285D0063DA07 /* Lato-Bold.ttf in Resources */,
@@ -4243,6 +4386,7 @@
 				DA9EF4881BC7285D0063DA07 /* background_launch.png in Resources */,
 				DADFAC341D29F59C006798D5 /* info_export_wallet_options.html in Resources */,
 				DA9EF4891BC7285D0063DA07 /* icon_directory.png in Resources */,
+				8B608DBA1E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */,
 				DA9EF48A1BC7285D0063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EF48B1BC7285D0063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EF48D1BC7285D0063DA07 /* Lato-Black.ttf in Resources */,
@@ -4250,6 +4394,7 @@
 				DA9EF4901BC7285D0063DA07 /* btn_right@2x.png in Resources */,
 				DA9EF4911BC7285D0063DA07 /* BLE_Logo@2x.png in Resources */,
 				DADFAC3A1D29F59C006798D5 /* info_footer.html in Resources */,
+				8B608D9C1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */,
 				DA9EF4921BC7285D0063DA07 /* btn_export_white@3x.png in Resources */,
 				DA9EF4931BC7285D0063DA07 /* bd_icon_facebook@2x.png in Resources */,
 				DA9EF4951BC7285D0063DA07 /* Lato-BoldItalic.ttf in Resources */,
@@ -4277,6 +4422,7 @@
 				DA9EF4AC1BC7285D0063DA07 /* bankcheck.png in Resources */,
 				DA9EF4AD1BC7285D0063DA07 /* flash_off@2x.png in Resources */,
 				DAE5464C1D29F6780065F926 /* sms_template.txt in Resources */,
+				8B608DB71E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */,
 				DA9EF4AE1BC7285D0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA9EF4B01BC7285D0063DA07 /* thumb@2x.png in Resources */,
 				DA3C7A911C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
@@ -4284,6 +4430,7 @@
 				DA57A13F1D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DA9EF4B11BC7285D0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF4B21BC7285D0063DA07 /* enable-contacts.png in Resources */,
+				8B608D961E736F9C0038E8AC /* Airbitz Develop.app in Resources */,
 				DA9EF4B31BC7285D0063DA07 /* btn_add@2x.png in Resources */,
 				DA9EF4B41BC7285D0063DA07 /* icon_logout.png in Resources */,
 				DA9EF4B61BC7285D0063DA07 /* Images.xcassets in Resources */,
@@ -4304,6 +4451,8 @@
 				DA9EF4C51BC7285D0063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EF4C61BC7285D0063DA07 /* icon_export_google@2x.png in Resources */,
 				DA9EF4C71BC7285D0063DA07 /* icon_category_gift_cards@2x.png in Resources */,
+				8B608D931E736F9C0038E8AC /* Airbitz Widget.appex in Resources */,
+				8B608D8E1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */,
 				DA9EF4C81BC7285D0063DA07 /* Lato-HairlineItalic.ttf in Resources */,
 				DA9EF4C91BC7285D0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF4CA1BC7285D0063DA07 /* 0-bars@2x.png in Resources */,
@@ -4315,6 +4464,7 @@
 				DADFAC491D29F59C006798D5 /* info_send.html in Resources */,
 				DA57A1471D13145A005442AF /* PopupPickerView2.xib in Resources */,
 				DA9EF4D11BC7285D0063DA07 /* btn_add.png in Resources */,
+				8B608D911E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */,
 				DA9EF4D21BC7285D0063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA57A1D61D131C7D005442AF /* InfoView~iphone.xib in Resources */,
 				DA9EF4D41BC7285D0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
@@ -4347,6 +4497,7 @@
 				DADFAC2E1D29F59C006798D5 /* email_template.html in Resources */,
 				DA91020C1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
 				DA9EF4EC1BC7285D0063DA07 /* Montserrat-Regular.ttf in Resources */,
+				8B608D991E736F9C0038E8AC /* Airbitz Testnet.app in Resources */,
 				DA57A1EA1D131C94005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA9EF4ED1BC7285D0063DA07 /* h_seperator@2x.png in Resources */,
 				DADFAC2B1D29F59C006798D5 /* email_template_simple.html in Resources */,
@@ -4357,10 +4508,12 @@
 				DA57A13B1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF4F11BC7285D0063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EF4F21BC7285D0063DA07 /* bd_icon_yelp@2x.png in Resources */,
+				8B608D6A1E736F830038E8AC /* Assets.xcassets in Resources */,
 				DA9EF4F31BC7285D0063DA07 /* btn_export_white.png in Resources */,
 				DA9EF4F41BC7285D0063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EF4F51BC7285D0063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EF4F61BC7285D0063DA07 /* Green-check@2x.png in Resources */,
+				8B608DB11E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */,
 				DA9EF4F81BC7285D0063DA07 /* Lato-Light.ttf in Resources */,
 				DABA01291C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
 				DA9EF4FA1BC7285D0063DA07 /* icon_account_secure@2x.png in Resources */,
@@ -4370,6 +4523,7 @@
 				77B631C71E1616280099B091 /* UsernameDropDownCell.xib in Resources */,
 				DABA01211C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF5001BC7285D0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
+				8B608DA51E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */,
 				DA9EF5011BC7285D0063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EF5031BC7285D0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF5041BC7285D0063DA07 /* icon_category_shopping.png in Resources */,
@@ -4386,6 +4540,7 @@
 			files = (
 				DA9EF5CA1BC729FA0063DA07 /* icon_logout@2x.png in Resources */,
 				DA9EF5CB1BC729FA0063DA07 /* btn_locateMe@2x.png in Resources */,
+				8B608DBF1E736FC80038E8AC /* Localizable.strings in Resources */,
 				DA9EF5CC1BC729FA0063DA07 /* icon_settings@2x.png in Resources */,
 				DA9101FA1C4964AD00603D62 /* icon_import@3x.png in Resources */,
 				DA9EF5CF1BC729FA0063DA07 /* icon_settings_dark@2x.png in Resources */,
@@ -4403,6 +4558,7 @@
 				DA9EF5E61BC729FA0063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EF5E71BC729FA0063DA07 /* write-it-down.png in Resources */,
 				DA9EF5E81BC729FA0063DA07 /* drag_bar@2x.png in Resources */,
+				8B608DAF1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */,
 				DA9EF5E91BC729FA0063DA07 /* icon_arrow.png in Resources */,
 				DA9EF5EB1BC729FA0063DA07 /* Lato-Italic.ttf in Resources */,
 				DA10BB9A1BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
@@ -4411,15 +4567,20 @@
 				DA9101F71C4964AD00603D62 /* icon_import@2x.png in Resources */,
 				DA9EF5EE1BC729FA0063DA07 /* btn_close@3x.png in Resources */,
 				DA9EF5EF1BC729FA0063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
+				8B608D621E736F830038E8AC /* Main.storyboard in Resources */,
 				DA9EF5F01BC729FA0063DA07 /* clearButton@2x.png in Resources */,
 				DA9EF5F21BC729FA0063DA07 /* btn_slider@2x.png in Resources */,
 				DADFAC561D29F59C006798D5 /* info_transactions.html in Resources */,
 				DA9EF5F31BC729FA0063DA07 /* icon_export_view@2x.png in Resources */,
+				8B608DA01E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */,
 				DA9EF5F51BC729FA0063DA07 /* Config.h.example in Resources */,
 				DA9EF5F61BC729FA0063DA07 /* icon_category_atm@3x.png in Resources */,
+				8B608DA91E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */,
 				DA9EF5F71BC729FA0063DA07 /* flash-off@2x.png in Resources */,
+				8B608DAC1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */,
 				DA9EF5F81BC729FA0063DA07 /* icon_category_electronics@3x.png in Resources */,
 				DADFAC531D29F59C006798D5 /* info_transaction_details.html in Resources */,
+				8B608D5C1E736F830038E8AC /* MainInterface.storyboard in Resources */,
 				DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */,
 				DA9EF5F91BC729FA0063DA07 /* btn_export_white@2x.png in Resources */,
 				DA9EF5FB1BC729FA0063DA07 /* icon_logout@3x.png in Resources */,
@@ -4450,6 +4611,7 @@
 				DA9EF6141BC729FA0063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA9EF6151BC729FA0063DA07 /* 5-bars@2x.png in Resources */,
 				DA57A1E11D131C8A005442AF /* PopupWheelPickerView.xib in Resources */,
+				8B608DA31E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */,
 				DA9EF6171BC729FA0063DA07 /* bd_icon_twitter@2x.png in Resources */,
 				DA57A1E61D131C8E005442AF /* Settings.storyboard in Resources */,
 				DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
@@ -4467,7 +4629,9 @@
 				DA9EF6201BC729FA0063DA07 /* 2-bars@2x.png in Resources */,
 				DA9EF6211BC729FA0063DA07 /* Montserrat-Bold.ttf in Resources */,
 				DA9EF6261BC729FA0063DA07 /* BitcoinReceivedPartial.mp3 in Resources */,
+				8B608DB51E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */,
 				DA57A1381D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
+				8B608D5A1E736F830038E8AC /* Airbitz Widget.entitlements in Resources */,
 				DA9EF6291BC729FA0063DA07 /* icon_export_dropbox@2x.png in Resources */,
 				DA9EF62A1BC729FA0063DA07 /* icon_search@2x.png in Resources */,
 				DADFAC411D29F59C006798D5 /* info_recipient.html in Resources */,
@@ -4492,6 +4656,7 @@
 				DA9EF63F1BC729FA0063DA07 /* btn_close.png in Resources */,
 				DA57A1451D13145A005442AF /* PopupPickerView.xib in Resources */,
 				DA9EF6401BC729FA0063DA07 /* large-digit-input@2x.png in Resources */,
+				8B608D8C1E736F9C0038E8AC /* Airbitz.app in Resources */,
 				DA9EF6421BC729FA0063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9EF6431BC729FA0063DA07 /* LaunchScreen.xib in Resources */,
 				DA9EF6441BC729FA0063DA07 /* Lato-Bold.ttf in Resources */,
@@ -4511,6 +4676,7 @@
 				DA9EF64E1BC729FA0063DA07 /* btn_close@2x.png in Resources */,
 				DA9EF64F1BC729FA0063DA07 /* background_launch.png in Resources */,
 				DA9EF6501BC729FA0063DA07 /* icon_directory.png in Resources */,
+				8B608DBB1E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */,
 				DA9EF6511BC729FA0063DA07 /* icon_category_restaurants.png in Resources */,
 				DA9EF6521BC729FA0063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EF6541BC729FA0063DA07 /* Lato-Black.ttf in Resources */,
@@ -4518,6 +4684,7 @@
 				DADFAC3B1D29F59C006798D5 /* info_footer.html in Resources */,
 				DA9EF6571BC729FA0063DA07 /* btn_right@2x.png in Resources */,
 				DA9EF6581BC729FA0063DA07 /* BLE_Logo@2x.png in Resources */,
+				8B608D9D1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */,
 				DA9EF6591BC729FA0063DA07 /* btn_export_white@3x.png in Resources */,
 				DA9EF65A1BC729FA0063DA07 /* bd_icon_facebook@2x.png in Resources */,
 				DA9EF65C1BC729FA0063DA07 /* Lato-BoldItalic.ttf in Resources */,
@@ -4545,6 +4712,7 @@
 				DAE5464D1D29F6780065F926 /* sms_template.txt in Resources */,
 				DA9EF6731BC729FA0063DA07 /* bankcheck.png in Resources */,
 				DA9EF6741BC729FA0063DA07 /* flash_off@2x.png in Resources */,
+				8B608DB81E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */,
 				DA9EF6751BC729FA0063DA07 /* icon_wallet@3x.png in Resources */,
 				DA3C7A921C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA3C7A8E1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png in Resources */,
@@ -4552,6 +4720,7 @@
 				DA57A1401D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DA9EF6781BC729FA0063DA07 /* GTMOAuth2ViewTouch.xib in Resources */,
 				DA9EF6791BC729FA0063DA07 /* enable-contacts.png in Resources */,
+				8B608D971E736F9C0038E8AC /* Airbitz Develop.app in Resources */,
 				DA9EF67A1BC729FA0063DA07 /* btn_add@2x.png in Resources */,
 				DA9EF67B1BC729FA0063DA07 /* icon_logout.png in Resources */,
 				DA9EF67D1BC729FA0063DA07 /* Images.xcassets in Resources */,
@@ -4572,6 +4741,8 @@
 				DA9EF68C1BC729FA0063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EF68D1BC729FA0063DA07 /* icon_export_google@2x.png in Resources */,
 				DA9EF68E1BC729FA0063DA07 /* icon_category_gift_cards@2x.png in Resources */,
+				8B608D941E736F9C0038E8AC /* Airbitz Widget.appex in Resources */,
+				8B608D8F1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */,
 				DA9EF68F1BC729FA0063DA07 /* Lato-HairlineItalic.ttf in Resources */,
 				DA9EF6901BC729FA0063DA07 /* icon_send@2x.png in Resources */,
 				DA9EF6911BC729FA0063DA07 /* 0-bars@2x.png in Resources */,
@@ -4583,6 +4754,7 @@
 				DA9EF6961BC729FA0063DA07 /* Red-X@2x.png in Resources */,
 				DA57A1481D13145A005442AF /* PopupPickerView2.xib in Resources */,
 				DA9EF6981BC729FA0063DA07 /* btn_add.png in Resources */,
+				8B608D921E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */,
 				DA9EF6991BC729FA0063DA07 /* bitcoin_symbol@3x.png in Resources */,
 				DA57A1D71D131C7D005442AF /* InfoView~iphone.xib in Resources */,
 				DA9EF69B1BC729FA0063DA07 /* UIButtonBarRefresh@2x.png in Resources */,
@@ -4615,6 +4787,7 @@
 				DADFAC2F1D29F59C006798D5 /* email_template.html in Resources */,
 				DA91020D1C4A71EA00603D62 /* eyeball@2x.png in Resources */,
 				DA9EF6B31BC729FA0063DA07 /* Montserrat-Regular.ttf in Resources */,
+				8B608D9A1E736F9C0038E8AC /* Airbitz Testnet.app in Resources */,
 				DA57A1EB1D131C94005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA9EF6B41BC729FA0063DA07 /* h_seperator@2x.png in Resources */,
 				DADFAC2C1D29F59C006798D5 /* email_template_simple.html in Resources */,
@@ -4625,10 +4798,12 @@
 				DA57A13C1D1309C4005442AF /* WalletHeaderView~iphone.xib in Resources */,
 				DA9EF6B81BC729FA0063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EF6B91BC729FA0063DA07 /* bd_icon_yelp@2x.png in Resources */,
+				8B608D6B1E736F830038E8AC /* Assets.xcassets in Resources */,
 				DA9EF6BA1BC729FA0063DA07 /* btn_export_white.png in Resources */,
 				DA9EF6BB1BC729FA0063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EF6BC1BC729FA0063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EF6BD1BC729FA0063DA07 /* Green-check@2x.png in Resources */,
+				8B608DB21E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */,
 				DA9EF6BF1BC729FA0063DA07 /* Lato-Light.ttf in Resources */,
 				DABA012A1C111982008702AB /* plugin_icon_coffee@2x.png in Resources */,
 				DA9EF6C11BC729FA0063DA07 /* icon_account_secure@2x.png in Resources */,
@@ -4638,6 +4813,7 @@
 				77B631C81E1616290099B091 /* UsernameDropDownCell.xib in Resources */,
 				DABA01221C111917008702AB /* plugin_icon_euro@2x.png in Resources */,
 				DA9EF6C71BC729FA0063DA07 /* icon_category_gift_cards@3x.png in Resources */,
+				8B608DA61E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */,
 				DA9EF6C81BC729FA0063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EF6CA1BC729FA0063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EF6CB1BC729FA0063DA07 /* icon_category_shopping.png in Resources */,
@@ -4664,28 +4840,33 @@
 				DA9EE4951BC61F920063DA07 /* icon_category_restaurants@3x.png in Resources */,
 				DA9EE4231BC61F920063DA07 /* 1-bar@2x.png in Resources */,
 				DA9EE4841BC61F920063DA07 /* icon_bitcoin_light@2x.png in Resources */,
+				8B608D901E736F9C0038E8AC /* AirbitzUITests.xctest in Resources */,
 				DA9EE4581BC61F920063DA07 /* btn_export@3x.png in Resources */,
 				DA9EE42C1BC61F920063DA07 /* bd_icon_foursquare@2x.png in Resources */,
 				DA9EE4941BC61F920063DA07 /* icon_category_restaurants@2x.png in Resources */,
 				DA9EE4411BC61F920063DA07 /* btn_add_black@3x.png in Resources */,
 				DA9EE54E1BC61F930063DA07 /* UIPhotoGallerySliderView.xib in Resources */,
 				DA9EE4EF1BC61F920063DA07 /* Lato-LightItalic.ttf in Resources */,
+				8B608DAD1E736F9C0038E8AC /* Pods-Airbitz-Develop.release.xcconfig in Resources */,
 				DA9EE44B1BC61F920063DA07 /* btn_close_white@3x.png in Resources */,
 				DA9EE4E11BC61F920063DA07 /* write-it-down.png in Resources */,
 				DA9101F81C4964AD00603D62 /* icon_import@3x.png in Resources */,
 				DA9EE4691BC61F920063DA07 /* drag_bar@2x.png in Resources */,
+				8B608D581E736F830038E8AC /* Airbitz Widget.entitlements in Resources */,
 				DA9EE4821BC61F920063DA07 /* icon_arrow.png in Resources */,
 				DA10BB981BFF90980086AD8B /* background-fade@2x.jpg in Resources */,
-				DAA5D72A1DE361BF002B8F7D /* Localizable.strings in Resources */,
 				DA3C7A901C2E3F4000599E3D /* plugin_icon_homedepot@2x.png in Resources */,
 				DA9EE4ED1BC61F920063DA07 /* Lato-Italic.ttf in Resources */,
 				DA9EE46B1BC61F920063DA07 /* enable-camera.png in Resources */,
 				DA9EE4811BC61F920063DA07 /* icon_approved@2x.png in Resources */,
 				DA9EE4461BC61F920063DA07 /* btn_close@3x.png in Resources */,
 				DAB5C0271C9FBF3A00CE4993 /* red-bulls-eye-128px@2x.png in Resources */,
+				8B608D9E1E736F9C0038E8AC /* Airbitz-OSXTests.xctest in Resources */,
 				DADFAC541D29F59C006798D5 /* info_transactions.html in Resources */,
 				DA9EE48B1BC61F920063DA07 /* icon_category_coffee_tea@2x.png in Resources */,
+				8B608DA71E736F9C0038E8AC /* Pods-Airbitz.release.xcconfig in Resources */,
 				DA9EE4641BC61F920063DA07 /* clearButton@2x.png in Resources */,
+				8B608DAA1E736F9C0038E8AC /* Pods-Airbitz-Develop.debug.xcconfig in Resources */,
 				DA9EE4621BC61F920063DA07 /* btn_slider@2x.png in Resources */,
 				DA9EE4A31BC61F920063DA07 /* icon_export_view@2x.png in Resources */,
 				DA9ED7D91BC61E680063DA07 /* Config.h.example in Resources */,
@@ -4702,6 +4883,7 @@
 				DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */,
 				DA9EE4871BC61F920063DA07 /* icon_category_atm.png in Resources */,
 				DA9EE4C41BC61F920063DA07 /* icon_transactions@3x.png in Resources */,
+				8B608D8A1E736F9C0038E8AC /* Airbitz.app in Resources */,
 				DA9EE4981BC61F920063DA07 /* icon_category_shopping@3x.png in Resources */,
 				DA57A1C61D131C6E005442AF /* AccountCreate.storyboard in Resources */,
 				DADFAC4B1D29F59C006798D5 /* info_settings.html in Resources */,
@@ -4712,17 +4894,20 @@
 				DA9EE4611BC61F920063DA07 /* btn_slide_to_confirm@2x.png in Resources */,
 				DA9EE4671BC61F920063DA07 /* divider.png in Resources */,
 				DADFAC571D29F59C006798D5 /* info_wallets.html in Resources */,
+				8B608D691E736F830038E8AC /* Assets.xcassets in Resources */,
 				DA9EE42A1BC61F920063DA07 /* bd_icon_clock@2x.png in Resources */,
 				DA9EE4D21BC61F920063DA07 /* large-digit-input_selected@2x.png in Resources */,
 				DADFAC3C1D29F59C006798D5 /* info_insufficient_funds.html in Resources */,
 				DA9EE43C1BC61F920063DA07 /* btn_add@3x.png in Resources */,
 				DA57A1DF1D131C8A005442AF /* PopupWheelPickerView.xib in Resources */,
+				8B608DA11E736F9C0038E8AC /* Airbitz-OSXUITests.xctest in Resources */,
 				DA9EE4511BC61F920063DA07 /* btn_collapse_expand_black.png in Resources */,
 				DA9EE4571BC61F920063DA07 /* btn_export@2x.png in Resources */,
 				DA9EE4831BC61F920063DA07 /* icon_bitcoin_dark@2x.png in Resources */,
 				DA57A1E41D131C8E005442AF /* Settings.storyboard in Resources */,
 				DA9EE4271BC61F920063DA07 /* 5-bars@2x.png in Resources */,
 				DA9EE4301BC61F920063DA07 /* bd_icon_twitter@2x.png in Resources */,
+				8B608D601E736F830038E8AC /* Main.storyboard in Resources */,
 				DA91020E1C4A71EA00603D62 /* eyeball@3x.png in Resources */,
 				DA8988CF1D0BF84F00796F3D /* Airbitz.entitlements in Resources */,
 				DA9EE4631BC61F920063DA07 /* btn_unselected@2x.png in Resources */,
@@ -4733,6 +4918,7 @@
 				DA9EE5091BC61F920063DA07 /* bitcoin-icon-logo.png in Resources */,
 				DA9EE4B71BC61F920063DA07 /* icon_send@3x.png in Resources */,
 				DA9EE4E81BC61F920063DA07 /* Lato-BlackItalic.ttf in Resources */,
+				8B608DB31E736F9C0038E8AC /* Pods-Airbitz-OSX.release.xcconfig in Resources */,
 				DA9EE4401BC61F920063DA07 /* btn_add_black@2x.png in Resources */,
 				DADFAC421D29F59C006798D5 /* info_request.html in Resources */,
 				DA9EE4241BC61F920063DA07 /* 2-bars@2x.png in Resources */,
@@ -4779,6 +4965,7 @@
 				DA10BB8E1BFEB8280086AD8B /* logo_icon@2x.png in Resources */,
 				DABA012C1C111D59008702AB /* plugin_icon_target@2x.png in Resources */,
 				DA9ED7D11BC61E680063DA07 /* BalanceView~iphone.xib in Resources */,
+				8B608DB91E736F9C0038E8AC /* Pods-Airbitz-Testnet.release.xcconfig in Resources */,
 				DA9EE4A91BC61F920063DA07 /* icon_more.png in Resources */,
 				DA9101F51C4964AD00603D62 /* icon_import@2x.png in Resources */,
 				DADFAC331D29F59C006798D5 /* info_export_wallet_options.html in Resources */,
@@ -4786,6 +4973,7 @@
 				DA9EE4281BC61F920063DA07 /* background_launch.png in Resources */,
 				DA9EE4991BC61F920063DA07 /* icon_directory.png in Resources */,
 				DA9EE4931BC61F920063DA07 /* icon_category_restaurants.png in Resources */,
+				8B608D9B1E736F9C0038E8AC /* Airbitz-OSX.app in Resources */,
 				DA9EE4CB1BC61F920063DA07 /* icon_wallet_dark.png in Resources */,
 				DA9EE4E71BC61F920063DA07 /* Lato-Black.ttf in Resources */,
 				DA9EE47A1BC61F920063DA07 /* ico_nav_directory_dark@3x.png in Resources */,
@@ -4813,6 +5001,7 @@
 				DA9EE4BA1BC61F920063DA07 /* icon_settings.png in Resources */,
 				DA9EE5081BC61F920063DA07 /* bg_app.jpg in Resources */,
 				DA9EE4DB1BC61F920063DA07 /* ribbon@2x.png in Resources */,
+				8B608DB61E736F9C0038E8AC /* Pods-Airbitz-Testnet.debug.xcconfig in Resources */,
 				DA9EE4DF1BC61F920063DA07 /* Warning_icon@2x.png in Resources */,
 				DA9EE4AA1BC61F920063DA07 /* icon_more@2x.png in Resources */,
 				DA9EE4C01BC61F920063DA07 /* icon_settings_dark@3x.png in Resources */,
@@ -4820,6 +5009,7 @@
 				DA9102081C4A71EA00603D62 /* eyeball.png in Resources */,
 				DA9EE5071BC61F920063DA07 /* bankcheck.png in Resources */,
 				DA9EE46F1BC61F920063DA07 /* flash_off@2x.png in Resources */,
+				8B608D951E736F9C0038E8AC /* Airbitz Develop.app in Resources */,
 				DA9EE4CA1BC61F920063DA07 /* icon_wallet@3x.png in Resources */,
 				DA57A13E1D131417005442AF /* ScanView~iphone.xib in Resources */,
 				DA9EE4DD1BC61F920063DA07 /* thumb@2x.png in Resources */,
@@ -4829,6 +5019,7 @@
 				DA9EE4A51BC61F920063DA07 /* icon_logout.png in Resources */,
 				DABF60F11C10263A004E613B /* clevercoin.html in Resources */,
 				DA9EEFAF1BC70E0C0063DA07 /* Images.xcassets in Resources */,
+				8B608D8D1E736F9C0038E8AC /* AirbitzTests.xctest in Resources */,
 				DA57A1DA1D131C86005442AF /* PasswordVerifyView.xib in Resources */,
 				DA9EE4BC1BC61F920063DA07 /* icon_settings@3x.png in Resources */,
 				DA4A13FA1CFEC8400097EF31 /* fingerprint-wht@3x.png in Resources */,
@@ -4844,6 +5035,7 @@
 				DA9EE4901BC61F920063DA07 /* icon_category_gift_cards.png in Resources */,
 				DA9EE4CD1BC61F920063DA07 /* icon_wallet_dark@3x.png in Resources */,
 				DA9EE4A01BC61F920063DA07 /* icon_export_google@2x.png in Resources */,
+				8B608D421E736EC80038E8AC /* Localizable.strings in Resources */,
 				DA9EE4911BC61F920063DA07 /* icon_category_gift_cards@2x.png in Resources */,
 				DA9EE4EC1BC61F920063DA07 /* Lato-HairlineItalic.ttf in Resources */,
 				DA9EE4B61BC61F920063DA07 /* icon_send@2x.png in Resources */,
@@ -4884,6 +5076,7 @@
 				DADFAC5D1D29F59C006798D5 /* transaction_details.html in Resources */,
 				DA9EE4551BC61F920063DA07 /* btn_export.png in Resources */,
 				DA9EE4971BC61F920063DA07 /* icon_category_shopping@2x.png in Resources */,
+				8B608D981E736F9C0038E8AC /* Airbitz Testnet.app in Resources */,
 				DADFAC2D1D29F59C006798D5 /* email_template.html in Resources */,
 				DA57A1E91D131C94005442AF /* SlideoutView~iphone.xib in Resources */,
 				DA4902991D1F3BEC00F34324 /* MiniDropDownAlertView.xib in Resources */,
@@ -4899,6 +5092,7 @@
 				DA9EE4B91BC61F920063DA07 /* icon_send_padded@2x.png in Resources */,
 				DA9EE4321BC61F920063DA07 /* bd_icon_yelp@2x.png in Resources */,
 				DA9EE45A1BC61F920063DA07 /* btn_export_white.png in Resources */,
+				8B608DB01E736F9C0038E8AC /* Pods-Airbitz-OSX.debug.xcconfig in Resources */,
 				DA9EE4C71BC61F920063DA07 /* icon_USD_light@2x.png in Resources */,
 				DA9EE4F01BC61F920063DA07 /* Lato-Regular.ttf in Resources */,
 				DA9EE4761BC61F920063DA07 /* Green-check@2x.png in Resources */,
@@ -4908,6 +5102,7 @@
 				DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EE4601BC61F920063DA07 /* btn_selected@2x.png in Resources */,
 				DA9EE4921BC61F920063DA07 /* icon_category_gift_cards@3x.png in Resources */,
+				8B608DA41E736F9C0038E8AC /* Pods-Airbitz.debug.xcconfig in Resources */,
 				DA9EE4311BC61F920063DA07 /* bd_icon_web@2x.png in Resources */,
 				DA9EE4B21BC61F920063DA07 /* icon_request_padded@2x.png in Resources */,
 				DA9EE4961BC61F920063DA07 /* icon_category_shopping.png in Resources */,
@@ -5348,6 +5543,7 @@
 				DA9EF3531BC7285D0063DA07 /* TextFieldCell.m in Sources */,
 				77B631C31E16161A0099B091 /* DPDUIView+Extension.swift in Sources */,
 				DA9EF3541BC7285D0063DA07 /* CategoriesCell.m in Sources */,
+				8B608D531E736F830038E8AC /* AirbitzTests.m in Sources */,
 				DA9EF3551BC7285D0063DA07 /* SignUpManager.m in Sources */,
 				DA51EA421CCA162800C7C95F /* BrandStrings.m in Sources */,
 				DA9EF3561BC7285D0063DA07 /* MoreCategoriesViewController.m in Sources */,
@@ -5356,12 +5552,14 @@
 				DA9EF3591BC7285D0063DA07 /* SignUpWriteItController.m in Sources */,
 				DA9EF35A1BC7285D0063DA07 /* SignUpHandleController.m in Sources */,
 				DA9EF35B1BC7285D0063DA07 /* TwoFactorScanViewController.m in Sources */,
+				8B608D641E736F830038E8AC /* AppDelegate.m in Sources */,
 				DA9EF35C1BC7285D0063DA07 /* WalletHeaderView.m in Sources */,
 				DA9EF35D1BC7285D0063DA07 /* DropDownAlertView.m in Sources */,
 				DA9EF35E1BC7285D0063DA07 /* AirbitzViewController.m in Sources */,
 				DA9EF35F1BC7285D0063DA07 /* SignUpCameraController.m in Sources */,
 				DA9EF3601BC7285D0063DA07 /* RequestViewController.m in Sources */,
 				DA9EF3611BC7285D0063DA07 /* CJSONDeserializer.m in Sources */,
+				8B608D701E736F830038E8AC /* Airbitz_OSXTests.m in Sources */,
 				DA9EF3621BC7285D0063DA07 /* CustomAnnotationView.m in Sources */,
 				DA9EF3631BC7285D0063DA07 /* TwoFactorShowViewController.m in Sources */,
 				DA9EF3641BC7285D0063DA07 /* DateTime.m in Sources */,
@@ -5376,6 +5574,7 @@
 				DA9EF36C1BC7285D0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF36D1BC7285D0063DA07 /* SignUpViewController.m in Sources */,
 				DA9EF36F1BC7285D0063DA07 /* PluginViewController.m in Sources */,
+				8B608D731E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */,
 				DA9EF3701BC7285D0063DA07 /* Location.m in Sources */,
 				DA9EF3711BC7285D0063DA07 /* BlurView.m in Sources */,
 				DA9EF3721BC7285D0063DA07 /* GTLDrive_Sources.m in Sources */,
@@ -5406,6 +5605,7 @@
 				DA9EF38B1BC7285D0063DA07 /* TransactionsViewController.m in Sources */,
 				DA9EF38C1BC7285D0063DA07 /* PlainCell.m in Sources */,
 				77B631B91E1616060099B091 /* DropDown+Appearance.swift in Sources */,
+				8B608D5E1E736F830038E8AC /* TodayViewController.m in Sources */,
 				DA9EF38D1BC7285D0063DA07 /* AnnotationContentView.m in Sources */,
 				77B631BD1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */,
 				DA9EF38E1BC7285D0063DA07 /* ExportWalletOptionsViewController.m in Sources */,
@@ -5417,6 +5617,7 @@
 				DA9EF3941BC7285D0063DA07 /* LoginViewController.m in Sources */,
 				DA9EF3951BC7285D0063DA07 /* WalletMakerView.m in Sources */,
 				DA9EF3961BC7285D0063DA07 /* Plugin.m in Sources */,
+				8B608D4F1E736F830038E8AC /* main.m in Sources */,
 				DA9EF3971BC7285D0063DA07 /* SlideoutView.m in Sources */,
 				DAE1BE481CC37883003494AB /* MainController.m in Sources */,
 				DA9EF3991BC7285D0063DA07 /* PasswordRecoveryViewController.m in Sources */,
@@ -5433,6 +5634,7 @@
 				DA9EF3A81BC7285D0063DA07 /* Contact.m in Sources */,
 				DA9EF3A91BC7285D0063DA07 /* SendViewController.m in Sources */,
 				DA9EF3AA1BC7285D0063DA07 /* DarkenView.m in Sources */,
+				8B608D6D1E736F830038E8AC /* main.m in Sources */,
 				DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF3AB1BC7285D0063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				77B631BB1E16160A0099B091 /* DropDownCell.swift in Sources */,
@@ -5465,11 +5667,13 @@
 				DA9EF3C91BC7285D0063DA07 /* CommonCell.m in Sources */,
 				DA9EF3CA1BC7285D0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF3CB1BC7285D0063DA07 /* ButtonSelectorView.m in Sources */,
+				8B608D671E736F830038E8AC /* ViewController.m in Sources */,
 				DA9EF3CD1BC7285D0063DA07 /* WalletCell.m in Sources */,
 				DA9EF3CE1BC7285D0063DA07 /* CDataScanner.m in Sources */,
 				DA9EF3D01BC7285D0063DA07 /* BooleanCell.m in Sources */,
 				DA9EF3D11BC7285D0063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EF3D21BC7285D0063DA07 /* UIPhotoGallerySliderView.m in Sources */,
+				8B608D561E736F830038E8AC /* AirbitzUITests.m in Sources */,
 				DA9EF3D31BC7285D0063DA07 /* UIPhotoGalleryView.m in Sources */,
 				DA9EF3D41BC7285D0063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EF3D51BC7285D0063DA07 /* SignUpPasswordController.m in Sources */,
@@ -5496,6 +5700,7 @@
 				DA9EF51A1BC729FA0063DA07 /* TextFieldCell.m in Sources */,
 				77B631C41E16161B0099B091 /* DPDUIView+Extension.swift in Sources */,
 				DA9EF51B1BC729FA0063DA07 /* CategoriesCell.m in Sources */,
+				8B608D541E736F830038E8AC /* AirbitzTests.m in Sources */,
 				DA9EF51C1BC729FA0063DA07 /* SignUpManager.m in Sources */,
 				DA51EA431CCA162800C7C95F /* BrandStrings.m in Sources */,
 				DA9EF51D1BC729FA0063DA07 /* MoreCategoriesViewController.m in Sources */,
@@ -5504,12 +5709,14 @@
 				DA9EF5201BC729FA0063DA07 /* SignUpWriteItController.m in Sources */,
 				DA9EF5211BC729FA0063DA07 /* SignUpHandleController.m in Sources */,
 				DA9EF5221BC729FA0063DA07 /* TwoFactorScanViewController.m in Sources */,
+				8B608D651E736F830038E8AC /* AppDelegate.m in Sources */,
 				DA9EF5231BC729FA0063DA07 /* WalletHeaderView.m in Sources */,
 				DA9EF5241BC729FA0063DA07 /* DropDownAlertView.m in Sources */,
 				DA9EF5251BC729FA0063DA07 /* AirbitzViewController.m in Sources */,
 				DA9EF5261BC729FA0063DA07 /* SignUpCameraController.m in Sources */,
 				DA9EF5271BC729FA0063DA07 /* RequestViewController.m in Sources */,
 				DA9EF5281BC729FA0063DA07 /* CJSONDeserializer.m in Sources */,
+				8B608D711E736F830038E8AC /* Airbitz_OSXTests.m in Sources */,
 				DA9EF5291BC729FA0063DA07 /* CustomAnnotationView.m in Sources */,
 				DA9EF52A1BC729FA0063DA07 /* TwoFactorShowViewController.m in Sources */,
 				DA9EF52B1BC729FA0063DA07 /* DateTime.m in Sources */,
@@ -5524,6 +5731,7 @@
 				DA9EF5331BC729FA0063DA07 /* StrokeGradientButton.m in Sources */,
 				DA9EF5341BC729FA0063DA07 /* SignUpViewController.m in Sources */,
 				DA9EF5361BC729FA0063DA07 /* PluginViewController.m in Sources */,
+				8B608D741E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */,
 				DA9EF5371BC729FA0063DA07 /* Location.m in Sources */,
 				DA9EF5381BC729FA0063DA07 /* BlurView.m in Sources */,
 				DA9EF5391BC729FA0063DA07 /* GTLDrive_Sources.m in Sources */,
@@ -5554,6 +5762,7 @@
 				DA9EF5521BC729FA0063DA07 /* TransactionsViewController.m in Sources */,
 				DA9EF5531BC729FA0063DA07 /* PlainCell.m in Sources */,
 				77B631BA1E1616070099B091 /* DropDown+Appearance.swift in Sources */,
+				8B608D5F1E736F830038E8AC /* TodayViewController.m in Sources */,
 				DA9EF5541BC729FA0063DA07 /* AnnotationContentView.m in Sources */,
 				77B631BE1E16160E0099B091 /* UsernameDropDownCell.swift in Sources */,
 				DA9EF5551BC729FA0063DA07 /* ExportWalletOptionsViewController.m in Sources */,
@@ -5565,6 +5774,7 @@
 				DA9EF55B1BC729FA0063DA07 /* LoginViewController.m in Sources */,
 				DA9EF55C1BC729FA0063DA07 /* WalletMakerView.m in Sources */,
 				DA9EF55D1BC729FA0063DA07 /* Plugin.m in Sources */,
+				8B608D501E736F830038E8AC /* main.m in Sources */,
 				DA9EF55E1BC729FA0063DA07 /* SlideoutView.m in Sources */,
 				DAE1BE491CC37883003494AB /* MainController.m in Sources */,
 				DA9EF5601BC729FA0063DA07 /* PasswordRecoveryViewController.m in Sources */,
@@ -5581,6 +5791,7 @@
 				DA9EF56F1BC729FA0063DA07 /* Contact.m in Sources */,
 				DA9EF5701BC729FA0063DA07 /* SendViewController.m in Sources */,
 				DA9EF5711BC729FA0063DA07 /* DarkenView.m in Sources */,
+				8B608D6E1E736F830038E8AC /* main.m in Sources */,
 				DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */,
 				DA9EF5721BC729FA0063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				77B631BC1E16160B0099B091 /* DropDownCell.swift in Sources */,
@@ -5613,11 +5824,13 @@
 				DA9EF5901BC729FA0063DA07 /* CommonCell.m in Sources */,
 				DA9EF5911BC729FA0063DA07 /* LocalSettings.m in Sources */,
 				DA9EF5921BC729FA0063DA07 /* ButtonSelectorView.m in Sources */,
+				8B608D681E736F830038E8AC /* ViewController.m in Sources */,
 				DA9EF5941BC729FA0063DA07 /* WalletCell.m in Sources */,
 				DA9EF5951BC729FA0063DA07 /* CDataScanner.m in Sources */,
 				DA9EF5971BC729FA0063DA07 /* BooleanCell.m in Sources */,
 				DA9EF5981BC729FA0063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EF5991BC729FA0063DA07 /* UIPhotoGallerySliderView.m in Sources */,
+				8B608D571E736F830038E8AC /* AirbitzUITests.m in Sources */,
 				DA9EF59A1BC729FA0063DA07 /* UIPhotoGalleryView.m in Sources */,
 				DA9EF59B1BC729FA0063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EF59C1BC729FA0063DA07 /* SignUpPasswordController.m in Sources */,
@@ -5644,6 +5857,7 @@
 				DA9EE5211BC61F930063DA07 /* TextFieldCell.m in Sources */,
 				DA9EE5191BC61F930063DA07 /* CategoriesCell.m in Sources */,
 				DA9EE52A1BC61F930063DA07 /* SignUpManager.m in Sources */,
+				8B608D521E736F830038E8AC /* AirbitzTests.m in Sources */,
 				DA51EA481CCA16E500C7C95F /* BrandStrings.m in Sources */,
 				DA9EE0C71BC61F920063DA07 /* MoreCategoriesViewController.m in Sources */,
 				DA9EE4101BC61F920063DA07 /* PickerTextView.m in Sources */,
@@ -5652,12 +5866,14 @@
 				DA9EE5291BC61F930063DA07 /* SignUpHandleController.m in Sources */,
 				DA9EE5231BC61F930063DA07 /* TwoFactorScanViewController.m in Sources */,
 				DA9EE55E1BC61F930063DA07 /* WalletHeaderView.m in Sources */,
+				8B608D631E736F830038E8AC /* AppDelegate.m in Sources */,
 				DA9EE0D11BC61F920063DA07 /* DropDownAlertView.m in Sources */,
 				DA9EE5C01BC62F430063DA07 /* AirbitzViewController.m in Sources */,
 				DA9EE5271BC61F930063DA07 /* SignUpCameraController.m in Sources */,
 				DA9EE4201BC61F920063DA07 /* RequestViewController.m in Sources */,
 				DA9EE5321BC61F930063DA07 /* CJSONDeserializer.m in Sources */,
 				DA9EE0C51BC61F920063DA07 /* CustomAnnotationView.m in Sources */,
+				8B608D6F1E736F830038E8AC /* Airbitz_OSXTests.m in Sources */,
 				DA9EE5241BC61F930063DA07 /* TwoFactorShowViewController.m in Sources */,
 				DA9ED7DD1BC61E680063DA07 /* DateTime.m in Sources */,
 				DA9EE5161BC61F930063DA07 /* ButtonCell.m in Sources */,
@@ -5672,6 +5888,7 @@
 				DA9EE4161BC61F920063DA07 /* PluginViewController.m in Sources */,
 				DA9EE0C11BC61F920063DA07 /* Location.m in Sources */,
 				DA9ED7D21BC61E680063DA07 /* BlurView.m in Sources */,
+				8B608D721E736F830038E8AC /* Airbitz_OSXUITests.m in Sources */,
 				DA9EEC471BC6332F0063DA07 /* GTLDrive_Sources.m in Sources */,
 				DA9EE4081BC61F920063DA07 /* PasswordVerifyView.m in Sources */,
 				775F666E1E14E506007F00D8 /* DropDown.swift in Sources */,
@@ -5702,6 +5919,7 @@
 				DA9EE51C1BC61F930063DA07 /* PlainCell.m in Sources */,
 				775F666F1E14E506007F00D8 /* DropDown+Appearance.swift in Sources */,
 				DA9EE0C31BC61F920063DA07 /* AnnotationContentView.m in Sources */,
+				8B608D5D1E736F830038E8AC /* TodayViewController.m in Sources */,
 				DA9EE5551BC61F930063DA07 /* ExportWalletOptionsViewController.m in Sources */,
 				DA9EE5591BC61F930063DA07 /* PayeeCell.m in Sources */,
 				DA9EE5511BC61F930063DA07 /* UIPhotoItemView.m in Sources */,
@@ -5713,6 +5931,7 @@
 				DA9EE4141BC61F920063DA07 /* Plugin.m in Sources */,
 				775F66771E14E54F007F00D8 /* DPDKeyboardListener.swift in Sources */,
 				DA9ED7EC1BC61E680063DA07 /* SlideoutView.m in Sources */,
+				8B608D511E736F830038E8AC /* main.m in Sources */,
 				DA8B61061DE2ECCC009EB585 /* main.m in Sources */,
 				DAE1BE471CC37883003494AB /* MainController.m in Sources */,
 				DA9EE4071BC61F920063DA07 /* PasswordRecoveryViewController.m in Sources */,
@@ -5729,6 +5948,7 @@
 				DA9ED7DA1BC61E680063DA07 /* Contact.m in Sources */,
 				DA9EE5131BC61F930063DA07 /* SendViewController.m in Sources */,
 				DA9ED7DC1BC61E680063DA07 /* DarkenView.m in Sources */,
+				8B608D6C1E736F830038E8AC /* main.m in Sources */,
 				DA74B5371C394B8700C5CD43 /* Strings.m in Sources */,
 				775F66701E14E506007F00D8 /* DropDownCell.swift in Sources */,
 				DA9EE5221BC61F930063DA07 /* TwoFactorMenuViewController.m in Sources */,
@@ -5761,11 +5981,13 @@
 				DA9EE51B1BC61F930063DA07 /* LocalSettings.m in Sources */,
 				DA9ED7D31BC61E680063DA07 /* ButtonSelectorView.m in Sources */,
 				DA9EE55D1BC61F930063DA07 /* WalletCell.m in Sources */,
+				8B608D661E736F830038E8AC /* ViewController.m in Sources */,
 				DA9EE52F1BC61F930063DA07 /* CDataScanner.m in Sources */,
 				DA9EE5151BC61F930063DA07 /* BooleanCell.m in Sources */,
 				DA9EE0BA1BC61F920063DA07 /* BD_Social_Cell.m in Sources */,
 				DA9EE54D1BC61F930063DA07 /* UIPhotoGallerySliderView.m in Sources */,
 				DA9EE54F1BC61F930063DA07 /* UIPhotoGalleryView.m in Sources */,
+				8B608D551E736F830038E8AC /* AirbitzUITests.m in Sources */,
 				DA9ED7EF1BC61E680063DA07 /* StylizedButtonOutline.m in Sources */,
 				DA9EE52B1BC61F930063DA07 /* SignUpPasswordController.m in Sources */,
 				DA9EE0CB1BC61F920063DA07 /* RibbonView.m in Sources */,
@@ -5830,6 +6052,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8B608D441E736EC80038E8AC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B608D431E736EC80038E8AC /* zh-Hans */,
+				8B608D451E736F820038E8AC /* pt */,
+				8B608D461E736F820038E8AC /* ar */,
+				8B608D471E736F820038E8AC /* es */,
+				8B608D481E736F820038E8AC /* ja */,
+				8B608D491E736F820038E8AC /* ht */,
+				8B608D4A1E736F820038E8AC /* hi */,
+				8B608D4B1E736F820038E8AC /* ru */,
+				8B608D4C1E736F820038E8AC /* fr */,
+				8B608D4D1E736F820038E8AC /* it */,
+				8B608D4E1E736F820038E8AC /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DA57A1C11D131C62005442AF /* Main_iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -6048,24 +6288,6 @@
 				DA9A9FBF1E26DEDF00B1A962 /* ar */,
 			);
 			name = "CalculatorView~iphone.xib";
-			sourceTree = "<group>";
-		};
-		DAA5D7201DE361BF002B8F7D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAA5D7211DE361BF002B8F7D /* ja */,
-				DAA5D7221DE361BF002B8F7D /* de */,
-				DAA5D7231DE361BF002B8F7D /* pt */,
-				DAA5D7241DE361BF002B8F7D /* fr */,
-				DAA5D7251DE361BF002B8F7D /* zh-Hans */,
-				DAA5D7261DE361BF002B8F7D /* es */,
-				DAA5D7271DE361BF002B8F7D /* ht */,
-				DAA5D7281DE361BF002B8F7D /* hi */,
-				DAA5D7291DE361BF002B8F7D /* ru */,
-				DA9A9FA11E26DCF500B1A962 /* it */,
-				DA9A9FC11E26DEDF00B1A962 /* ar */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		DAB06AE61D1677ED00050098 /* MainInterface.storyboard */ = {
@@ -6822,6 +7044,7 @@
 					Drive,
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
@@ -6865,6 +7088,7 @@
 					Drive,
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.develop;
 				PRODUCT_NAME = "Airbitz Develop";
@@ -6908,6 +7132,7 @@
 					Drive,
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
@@ -6951,6 +7176,7 @@
 					Drive,
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.testnet;
 				PRODUCT_NAME = "Airbitz Testnet";
@@ -7065,7 +7291,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -7082,6 +7311,7 @@
 					"\"$(PROJECT_DIR)/Airbitz/Google Drive\"",
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7107,7 +7337,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -7124,6 +7357,7 @@
 					"\"$(PROJECT_DIR)/Airbitz/Google Drive\"",
 					"$(PROJECT_DIR)/Airbitz/ZBarSDK",
 					"$(PROJECT_DIR)/AirBitz/ABC-testnet",
+					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.airbitz.airbitz;
 				PRODUCT_NAME = "$(TARGET_NAME)";

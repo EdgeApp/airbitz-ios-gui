@@ -1,9 +1,9 @@
-
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
-"Lt8-cl-BMW.text" = "Scan QR";
+"Lt8-cl-BMW.text" = "مسح QR";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN"; */
-"WIw-mO-3VN.normalTitle" = "Button";
+"WIw-mO-3VN.normalTitle" = "زر";
 
 /* Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ"; */
 "gQB-TM-9HQ.text" = "Login or Send";
+
