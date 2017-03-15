@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2136D1C2ED0532661FEF869A /* libPods-Athena.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */; };
 		290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
+		2BBB5216A01FC7724AF6DA83 /* libPods-BitcoinDepot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0622A95B124DC0771610D48 /* libPods-BitcoinDepot.a */; };
 		31E23CC0E2023E59289903B5 /* libPods-Coinsource.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F01BE7B6D94E355E426B04 /* libPods-Coinsource.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -3534,6 +3535,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D010D0EE16773F30DBC1573 /* Pods-BitcoinDepot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinDepot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitcoinDepot/Pods-BitcoinDepot.release.xcconfig"; sourceTree = "<group>"; };
 		1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.release.xcconfig"; sourceTree = "<group>"; };
 		2658064CE5A804AD0B98219E /* Pods-Rockitcoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rockitcoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rockitcoin/Pods-Rockitcoin.debug.xcconfig"; sourceTree = "<group>"; };
 		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
@@ -3571,6 +3573,7 @@
 		9B1682CEAB67687DDECCED01 /* libPods-Airbitz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4667A059675ED51F534AF42 /* Pods-Athena.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.debug.xcconfig"; sourceTree = "<group>"; };
 		B5CD79159A5BE7DDF174F31A /* Pods-Coinsource.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.release.xcconfig"; sourceTree = "<group>"; };
+		BD1DC03FBF5C70AA9E3182E1 /* Pods-BitcoinDepot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinDepot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BitcoinDepot/Pods-BitcoinDepot.debug.xcconfig"; sourceTree = "<group>"; };
 		C242315399612849F0B009B1 /* Pods-Airbitz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		C4345BC59F713D27A5680CC3 /* libPods-Rockitcoin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rockitcoin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0365A53D7E80DABE4C7F540 /* Pods-Athena.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Athena.release.xcconfig"; path = "Pods/Target Support Files/Pods-Athena/Pods-Athena.release.xcconfig"; sourceTree = "<group>"; };
@@ -4745,6 +4748,7 @@
 		DAE5464A1D29F6780065F926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/sms_template.txt; sourceTree = "<group>"; };
 		DAE9515F1D5C02230060501F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		DAF024C01DB2C10B00FF815F /* barcode-bracket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barcode-bracket@2x.png"; sourceTree = "<group>"; };
+		E0622A95B124DC0771610D48 /* libPods-BitcoinDepot.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BitcoinDepot.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E151281836D6BEFF1426BFBA /* Pods-Airbitz-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		E2D052C6FE7A378B4751D442 /* Pods-Coinsource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coinsource.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coinsource/Pods-Coinsource.debug.xcconfig"; sourceTree = "<group>"; };
 		E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Testnet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5061,6 +5065,7 @@
 				FD4256AC1E789B5E00F762D2 /* Foundation.framework in Frameworks */,
 				FD4256AD1E789B5E00F762D2 /* libPods-Airbitz.a in Frameworks */,
 				FD4256AE1E789B5E00F762D2 /* libPods-Rockitcoin.a in Frameworks */,
+				2BBB5216A01FC7724AF6DA83 /* libPods-BitcoinDepot.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5086,6 +5091,8 @@
 				1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */,
 				2658064CE5A804AD0B98219E /* Pods-Rockitcoin.debug.xcconfig */,
 				FC567EA2DE48CB4791248652 /* Pods-Rockitcoin.release.xcconfig */,
+				BD1DC03FBF5C70AA9E3182E1 /* Pods-BitcoinDepot.debug.xcconfig */,
+				0D010D0EE16773F30DBC1573 /* Pods-BitcoinDepot.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -5197,6 +5204,7 @@
 				5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */,
 				E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */,
 				C4345BC59F713D27A5680CC3 /* libPods-Rockitcoin.a */,
+				E0622A95B124DC0771610D48 /* libPods-BitcoinDepot.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -9634,7 +9642,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rockitcoin/Pods-Rockitcoin-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BitcoinDepot/Pods-BitcoinDepot-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD4257B71E789B5E00F762D2 /* [CP] Copy Pods Resources */ = {
@@ -9649,7 +9657,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rockitcoin/Pods-Rockitcoin-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BitcoinDepot/Pods-BitcoinDepot-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD4257B81E789B5E00F762D2 /* 📦 Embed Pods Frameworks */ = {
@@ -12100,10 +12108,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"RACKWALLET=1",
-					"$(inherited)",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "RACKWALLET=1 $(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12145,10 +12150,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"RACKWALLET=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) RACKWALLET=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12189,10 +12191,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"ATHENA=1",
-					"$(inherited)",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ATHENA=1 $(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12234,10 +12233,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"ATHENA=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ATHENA=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12278,10 +12274,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"COINSOURCE=1",
-					"$(inherited)",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "COINSOURCE=1 $(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12323,10 +12316,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"COINSOURCE=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) COINSOURCE=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12367,10 +12357,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"ROCKITCOIN=1",
-					"$(inherited)",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ROCKITCOIN=1 $(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12412,10 +12399,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"ROCKITCOIN=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ROCKITCOIN=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12553,10 +12537,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12598,10 +12579,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12681,7 +12659,7 @@
 		};
 		FD4257BB1E789B5E00F762D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2658064CE5A804AD0B98219E /* Pods-Rockitcoin.debug.xcconfig */;
+			baseConfigurationReference = BD1DC03FBF5C70AA9E3182E1 /* Pods-BitcoinDepot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -12695,17 +12673,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"BITCOINDEPOT=1",
-					"$(inherited)",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "BITCOINDEPOT=1 $(inherited)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/BitcoinDepot/BitcoinDepot-Info.plist";
+				INFOPLIST_FILE = "BitcoinDepot-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12727,7 +12702,7 @@
 		};
 		FD4257BC1E789B5E00F762D2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC567EA2DE48CB4791248652 /* Pods-Rockitcoin.release.xcconfig */;
+			baseConfigurationReference = 0D010D0EE16773F30DBC1573 /* Pods-BitcoinDepot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -12741,17 +12716,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"BITCOINDEPOT=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) BITCOINDEPOT=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/BitcoinDepot/BitcoinDepot-Info.plist";
+				INFOPLIST_FILE = "BitcoinDepot-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

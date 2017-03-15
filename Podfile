@@ -48,6 +48,11 @@ target "Rockitcoin" do
     import_pods_ios
 end
 
+target "BitcoinDepot" do
+    import_pods
+    import_pods_ios
+end
+
 target 'Airbitz-OSX' do
     platform :osx, '10.9'
     import_pods
