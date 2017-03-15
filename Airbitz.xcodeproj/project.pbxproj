@@ -3450,8 +3450,10 @@
 		FD4257CF1E78A64800F762D2 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C41E78A64800F762D2 /* logo_icon@2x.png */; };
 		FD4257D01E78A64800F762D2 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C51E78A64800F762D2 /* logo_large@2x.png */; };
 		FD4257D11E78A64800F762D2 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C61E78A64800F762D2 /* logo@2x.png */; };
-		FD4257D21E78A64800F762D2 /* BitcoinDepot-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C71E78A64800F762D2 /* BitcoinDepot-Info.plist */; };
-		FD4257D31E78A64800F762D2 /* BitcoinDepotWidget-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C81E78A64800F762D2 /* BitcoinDepotWidget-Info.plist */; };
+		FD5121E11E79DF8E009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
+		FD5121E61E79DF8F009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
+		FD5121E71E79DF91009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
+		FD5121E81E79DF92009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -7473,6 +7475,7 @@
 				DACC2A901E4D8B6E00130A6E /* icon_location@2x.png in Resources */,
 				DACC2A911E4D8B6E00130A6E /* icon_approved.png in Resources */,
 				DACC2A921E4D8B6E00130A6E /* btn_collapse_expand.png in Resources */,
+				FD5121E11E79DF8E009A99F2 /* Images.xcassets in Resources */,
 				DACC2A931E4D8B6E00130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2A941E4D8B6E00130A6E /* FadingAlertViewNew.xib in Resources */,
 				DACC2A951E4D8B6E00130A6E /* BitcoinSent.mp3 in Resources */,
@@ -7741,6 +7744,7 @@
 				DACC2C561E4DA10700130A6E /* icon_location@2x.png in Resources */,
 				DACC2C571E4DA10700130A6E /* icon_approved.png in Resources */,
 				DACC2C581E4DA10700130A6E /* btn_collapse_expand.png in Resources */,
+				FD5121E61E79DF8F009A99F2 /* Images.xcassets in Resources */,
 				DACC2C591E4DA10700130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2C5A1E4DA10700130A6E /* FadingAlertViewNew.xib in Resources */,
 				DACC2C5B1E4DA10700130A6E /* BitcoinSent.mp3 in Resources */,
@@ -8009,6 +8013,7 @@
 				DACC2E161E4DA33200130A6E /* barcode-bracket@2x.png in Resources */,
 				DACC2E171E4DA33200130A6E /* icon_location@2x.png in Resources */,
 				DACC2E181E4DA33200130A6E /* icon_approved.png in Resources */,
+				FD5121E71E79DF91009A99F2 /* Images.xcassets in Resources */,
 				DACC2E191E4DA33200130A6E /* btn_collapse_expand.png in Resources */,
 				DACC2E1A1E4DA33200130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2E1B1E4DA33200130A6E /* FadingAlertViewNew.xib in Resources */,
@@ -8277,6 +8282,7 @@
 				DACC2FD41E4DA4C300130A6E /* plugin_icon_coffee@2x.png in Resources */,
 				DACC2FD51E4DA4C300130A6E /* barcode-bracket@2x.png in Resources */,
 				DACC2FD61E4DA4C300130A6E /* icon_location@2x.png in Resources */,
+				FD5121E81E79DF92009A99F2 /* Images.xcassets in Resources */,
 				DACC2FD71E4DA4C300130A6E /* icon_approved.png in Resources */,
 				DACC2FD81E4DA4C300130A6E /* btn_collapse_expand.png in Resources */,
 				DACC2FD91E4DA4C300130A6E /* WalletExportQuicken.QIF in Resources */,
@@ -8704,7 +8710,6 @@
 				FD42570E1E789B5E00F762D2 /* WalletExportPDF.pdf in Resources */,
 				FD42570F1E789B5E00F762D2 /* WalletMakerView~iphone.xib in Resources */,
 				FD4257101E789B5E00F762D2 /* icon_more@3x.png in Resources */,
-				FD4257D31E78A64800F762D2 /* BitcoinDepotWidget-Info.plist in Resources */,
 				FD4257111E789B5E00F762D2 /* darken_bottom_table_cell.png in Resources */,
 				FD4257121E789B5E00F762D2 /* glidera.html in Resources */,
 				FD4257131E789B5E00F762D2 /* fingerprint-wht@2x.png in Resources */,
@@ -8816,7 +8821,6 @@
 				FD42577C1E789B5E00F762D2 /* InfoView~iphone.xib in Resources */,
 				FD42577D1E789B5E00F762D2 /* Red-X@2x.png in Resources */,
 				FD42577E1E789B5E00F762D2 /* btn_add.png in Resources */,
-				FD4257D21E78A64800F762D2 /* BitcoinDepot-Info.plist in Resources */,
 				FD42577F1E789B5E00F762D2 /* bitcoin_symbol@3x.png in Resources */,
 				FD4257801E789B5E00F762D2 /* UIButtonBarRefresh@2x.png in Resources */,
 				FD4257811E789B5E00F762D2 /* plugin_icon_wholefoods@2x.png in Resources */,
@@ -12108,7 +12112,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "RACKWALLET=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"RACKWALLET=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12150,7 +12157,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) RACKWALLET=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"RACKWALLET=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12191,7 +12201,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ATHENA=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"ATHENA=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12233,7 +12246,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ATHENA=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"ATHENA=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12274,7 +12290,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "COINSOURCE=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"COINSOURCE=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12316,7 +12335,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) COINSOURCE=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COINSOURCE=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12357,7 +12379,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "ROCKITCOIN=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"ROCKITCOIN=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12399,7 +12424,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) ROCKITCOIN=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"ROCKITCOIN=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12537,7 +12565,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12579,7 +12610,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"AIRBITZ=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -12673,14 +12707,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "BITCOINDEPOT=1 $(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"BITCOINDEPOT=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "BitcoinDepot-Info.plist";
+				INFOPLIST_FILE = "BitcoinDepot/BitcoinDepot-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12716,14 +12753,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) BITCOINDEPOT=1";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"BITCOINDEPOT=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
 					"\"$(SRCROOT)/AirBitz/Google Drive/Source/\"/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "BitcoinDepot-Info.plist";
+				INFOPLIST_FILE = "BitcoinDepot/BitcoinDepot-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
