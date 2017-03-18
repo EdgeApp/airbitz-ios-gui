@@ -1199,6 +1199,11 @@
 		DA9EF6D21BC729FA0063DA07 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		DAA5D72A1DE361BF002B8F7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
 		DAA5D72F1DE361BF002B8F7D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
+		DAA6F5D51E7CB9D500E6F4B4 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */; };
+		DAA6F5D61E7CB9D500E6F4B4 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */; };
+		DAA6F5D71E7CB9D500E6F4B4 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */; };
+		DAA6F5D81E7CB9D500E6F4B4 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA6F5D31E7CB9D500E6F4B4 /* logo_large@2x.png */; };
+		DAA6F5D91E7CB9D500E6F4B4 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAA6F5D41E7CB9D500E6F4B4 /* logo@2x.png */; };
 		DAB06AE41D1677ED00050098 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB06AE61D1677ED00050098 /* MainInterface.storyboard */; };
 		DAB5C0231C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
 		DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB5C0221C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png */; };
@@ -3443,13 +3448,6 @@
 		FD4257B31E789B5E00F762D2 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		FD4257B41E789B5E00F762D2 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		FD4257B51E789B5E00F762D2 /* info_export_wallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC0E1D29F59C006798D5 /* info_export_wallet.html */; };
-		FD4257CB1E78A64800F762D2 /* background-fade@2x.psd in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C01E78A64700F762D2 /* background-fade@2x.psd */; };
-		FD4257CC1E78A64800F762D2 /* background_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C11E78A64800F762D2 /* background_launch.png */; };
-		FD4257CD1E78A64800F762D2 /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C21E78A64800F762D2 /* background@2x.jpg */; };
-		FD4257CE1E78A64800F762D2 /* logo_icon.psd in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C31E78A64800F762D2 /* logo_icon.psd */; };
-		FD4257CF1E78A64800F762D2 /* logo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C41E78A64800F762D2 /* logo_icon@2x.png */; };
-		FD4257D01E78A64800F762D2 /* logo_large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C51E78A64800F762D2 /* logo_large@2x.png */; };
-		FD4257D11E78A64800F762D2 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4257C61E78A64800F762D2 /* logo@2x.png */; };
 		FD5121E11E79DF8E009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 		FD5121E61E79DF8F009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 		FD5121E71E79DF91009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
@@ -4433,6 +4431,11 @@
 		DAA5D7271DE361BF002B8F7D /* ht */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ht; path = ht.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA5D7281DE361BF002B8F7D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA5D7291DE361BF002B8F7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_launch.png; path = BitcoinDepot/background_launch.png; sourceTree = "<group>"; };
+		DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background@2x.jpg"; path = "BitcoinDepot/background@2x.jpg"; sourceTree = "<group>"; };
+		DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_icon@2x.png"; path = "BitcoinDepot/logo_icon@2x.png"; sourceTree = "<group>"; };
+		DAA6F5D31E7CB9D500E6F4B4 /* logo_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_large@2x.png"; path = "BitcoinDepot/logo_large@2x.png"; sourceTree = "<group>"; };
+		DAA6F5D41E7CB9D500E6F4B4 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "BitcoinDepot/logo@2x.png"; sourceTree = "<group>"; };
 		DAB0699C1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		DAB0699D1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DAB0699E1D14B07200050098 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
@@ -4758,16 +4761,7 @@
 		F33667E88DB069C7002CD36A /* Pods-Airbitz-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		FC567EA2DE48CB4791248652 /* Pods-Rockitcoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rockitcoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rockitcoin/Pods-Rockitcoin.release.xcconfig"; sourceTree = "<group>"; };
 		FD4257BD1E789B5E00F762D2 /* BitcoinDepot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitcoinDepot.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD4257C01E78A64700F762D2 /* background-fade@2x.psd */ = {isa = PBXFileReference; lastKnownFileType = file; name = "background-fade@2x.psd"; path = "BitcoinDepot/background-fade@2x.psd"; sourceTree = "<group>"; };
-		FD4257C11E78A64800F762D2 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_launch.png; path = BitcoinDepot/background_launch.png; sourceTree = "<group>"; };
-		FD4257C21E78A64800F762D2 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background@2x.jpg"; path = "BitcoinDepot/background@2x.jpg"; sourceTree = "<group>"; };
-		FD4257C31E78A64800F762D2 /* logo_icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; name = logo_icon.psd; path = BitcoinDepot/logo_icon.psd; sourceTree = "<group>"; };
-		FD4257C41E78A64800F762D2 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_icon@2x.png"; path = "BitcoinDepot/logo_icon@2x.png"; sourceTree = "<group>"; };
-		FD4257C51E78A64800F762D2 /* logo_large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_large@2x.png"; path = "BitcoinDepot/logo_large@2x.png"; sourceTree = "<group>"; };
-		FD4257C61E78A64800F762D2 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "BitcoinDepot/logo@2x.png"; sourceTree = "<group>"; };
 		FD4257C71E78A64800F762D2 /* BitcoinDepot-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BitcoinDepot-Info.plist"; path = "BitcoinDepot/BitcoinDepot-Info.plist"; sourceTree = "<group>"; };
-		FD4257C81E78A64800F762D2 /* BitcoinDepotWidget-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "BitcoinDepotWidget-Info.plist"; path = "BitcoinDepot/BitcoinDepotWidget-Info.plist"; sourceTree = "<group>"; };
-		FD4257D51E78AA6400F762D2 /* BitcoinDepot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BitcoinDepot.entitlements; path = BitcoinDepot/BitcoinDepot.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -6203,16 +6197,12 @@
 		FD4257BF1E78A27800F762D2 /* BitcoinDepot */ = {
 			isa = PBXGroup;
 			children = (
-				FD4257D51E78AA6400F762D2 /* BitcoinDepot.entitlements */,
-				FD4257C01E78A64700F762D2 /* background-fade@2x.psd */,
-				FD4257C11E78A64800F762D2 /* background_launch.png */,
-				FD4257C21E78A64800F762D2 /* background@2x.jpg */,
-				FD4257C31E78A64800F762D2 /* logo_icon.psd */,
-				FD4257C41E78A64800F762D2 /* logo_icon@2x.png */,
-				FD4257C51E78A64800F762D2 /* logo_large@2x.png */,
-				FD4257C61E78A64800F762D2 /* logo@2x.png */,
+				DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */,
+				DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */,
+				DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */,
+				DAA6F5D31E7CB9D500E6F4B4 /* logo_large@2x.png */,
+				DAA6F5D41E7CB9D500E6F4B4 /* logo@2x.png */,
 				FD4257C71E78A64800F762D2 /* BitcoinDepot-Info.plist */,
-				FD4257C81E78A64800F762D2 /* BitcoinDepotWidget-Info.plist */,
 			);
 			name = BitcoinDepot;
 			sourceTree = "<group>";
@@ -8648,7 +8638,6 @@
 				FD4256CE1E789B5E00F762D2 /* icon_category_coffee_tea@2x.png in Resources */,
 				FD4256CF1E789B5E00F762D2 /* clearButton@2x.png in Resources */,
 				FD4256D01E789B5E00F762D2 /* btn_slider@2x.png in Resources */,
-				FD4257CC1E78A64800F762D2 /* background_launch.png in Resources */,
 				FD4256D21E789B5E00F762D2 /* icon_export_view@2x.png in Resources */,
 				FD4256D31E789B5E00F762D2 /* Config.h.example in Resources */,
 				FD4256D41E789B5E00F762D2 /* info_transaction_details.html in Resources */,
@@ -8660,7 +8649,6 @@
 				FD4256DA1E789B5E00F762D2 /* CalculatorView~iphone.xib in Resources */,
 				FD4256DB1E789B5E00F762D2 /* icon_logout@3x.png in Resources */,
 				FD4256DC1E789B5E00F762D2 /* icon_wallet.png in Resources */,
-				FD4257CB1E78A64800F762D2 /* background-fade@2x.psd in Resources */,
 				FD4256DD1E789B5E00F762D2 /* icon_request.png in Resources */,
 				FD4256DE1E789B5E00F762D2 /* foldapp.html in Resources */,
 				FD4256DF1E789B5E00F762D2 /* icon_category_atm.png in Resources */,
@@ -8670,10 +8658,12 @@
 				FD4256E31E789B5E00F762D2 /* info_settings.html in Resources */,
 				FD4256E41E789B5E00F762D2 /* icon_directory@3x.png in Resources */,
 				FD4256E51E789B5E00F762D2 /* BitcoinReceived.mp3 in Resources */,
+				DAA6F5D81E7CB9D500E6F4B4 /* logo_large@2x.png in Resources */,
 				FD4256E61E789B5E00F762D2 /* icon_wallet@2x.png in Resources */,
 				FD4256E71E789B5E00F762D2 /* icon_export_sdcard@2x.png in Resources */,
 				FD4256E81E789B5E00F762D2 /* btn_slide_to_confirm@2x.png in Resources */,
 				FD4256E91E789B5E00F762D2 /* divider.png in Resources */,
+				DAA6F5D51E7CB9D500E6F4B4 /* background_launch.png in Resources */,
 				FD4256EA1E789B5E00F762D2 /* info_wallets.html in Resources */,
 				FD4256EB1E789B5E00F762D2 /* bd_icon_clock@2x.png in Resources */,
 				FD4256EC1E789B5E00F762D2 /* large-digit-input_selected@2x.png in Resources */,
@@ -8712,6 +8702,7 @@
 				FD4257101E789B5E00F762D2 /* icon_more@3x.png in Resources */,
 				FD4257111E789B5E00F762D2 /* darken_bottom_table_cell.png in Resources */,
 				FD4257121E789B5E00F762D2 /* glidera.html in Resources */,
+				DAA6F5D91E7CB9D500E6F4B4 /* logo@2x.png in Resources */,
 				FD4257131E789B5E00F762D2 /* fingerprint-wht@2x.png in Resources */,
 				FD4257141E789B5E00F762D2 /* gift_box.png in Resources */,
 				FD4257151E789B5E00F762D2 /* icon_category_coffee_tea.png in Resources */,
@@ -8721,7 +8712,6 @@
 				FD4257191E789B5E00F762D2 /* fingerprint-wht.png in Resources */,
 				FD42571A1E789B5E00F762D2 /* plugin_icon_euro@2x.png in Resources */,
 				FD42571B1E789B5E00F762D2 /* PopupPickerView.xib in Resources */,
-				FD4257CF1E78A64800F762D2 /* logo_icon@2x.png in Resources */,
 				FD42571C1E789B5E00F762D2 /* UsernameDropDownCell.xib in Resources */,
 				FD42571D1E789B5E00F762D2 /* info.html in Resources */,
 				FD42571E1E789B5E00F762D2 /* icon_category_atm@2x.png in Resources */,
@@ -8775,15 +8765,16 @@
 				FD4257501E789B5E00F762D2 /* bg_app.jpg in Resources */,
 				FD4257511E789B5E00F762D2 /* ribbon@2x.png in Resources */,
 				FD4257521E789B5E00F762D2 /* Warning_icon@2x.png in Resources */,
+				DAA6F5D71E7CB9D500E6F4B4 /* logo_icon@2x.png in Resources */,
 				FD4257531E789B5E00F762D2 /* icon_more@2x.png in Resources */,
 				FD4257541E789B5E00F762D2 /* icon_settings_dark@3x.png in Resources */,
+				DAA6F5D61E7CB9D500E6F4B4 /* background@2x.jpg in Resources */,
 				FD4257551E789B5E00F762D2 /* eyeball.png in Resources */,
 				FD4257561E789B5E00F762D2 /* bankcheck.png in Resources */,
 				FD4257571E789B5E00F762D2 /* flash_off@2x.png in Resources */,
 				FD4257581E789B5E00F762D2 /* icon_wallet@3x.png in Resources */,
 				FD4257591E789B5E00F762D2 /* ScanView~iphone.xib in Resources */,
 				FD42575A1E789B5E00F762D2 /* thumb@2x.png in Resources */,
-				FD4257CD1E78A64800F762D2 /* background@2x.jpg in Resources */,
 				FD42575B1E789B5E00F762D2 /* GTMOAuth2ViewTouch.xib in Resources */,
 				FD42575C1E789B5E00F762D2 /* enable-contacts.png in Resources */,
 				FD42575D1E789B5E00F762D2 /* btn_add@2x.png in Resources */,
@@ -8816,7 +8807,6 @@
 				FD4257781E789B5E00F762D2 /* PopupPickerView2.xib in Resources */,
 				FD4257791E789B5E00F762D2 /* info_send.html in Resources */,
 				FD42577A1E789B5E00F762D2 /* icon_rightArrow@2x.png in Resources */,
-				FD4257D11E78A64800F762D2 /* logo@2x.png in Resources */,
 				FD42577B1E789B5E00F762D2 /* eyeball@2x.png in Resources */,
 				FD42577C1E789B5E00F762D2 /* InfoView~iphone.xib in Resources */,
 				FD42577D1E789B5E00F762D2 /* Red-X@2x.png in Resources */,
@@ -8831,7 +8821,6 @@
 				FD4257861E789B5E00F762D2 /* MainInterface.storyboard in Resources */,
 				FD4257871E789B5E00F762D2 /* ico_nav_directory_dark@2x.png in Resources */,
 				FD4257881E789B5E00F762D2 /* AnnotationContentView.xib in Resources */,
-				FD4257D01E78A64800F762D2 /* logo_large@2x.png in Resources */,
 				FD4257891E789B5E00F762D2 /* plugin_icon_coffee@2x.png in Resources */,
 				FD42578A1E789B5E00F762D2 /* barcode-bracket@2x.png in Resources */,
 				FD42578B1E789B5E00F762D2 /* icon_location@2x.png in Resources */,
@@ -8847,7 +8836,6 @@
 				FD4257951E789B5E00F762D2 /* San Diego.gpx in Resources */,
 				FD4257961E789B5E00F762D2 /* transaction_details.html in Resources */,
 				FD4257971E789B5E00F762D2 /* btn_export.png in Resources */,
-				FD4257CE1E78A64800F762D2 /* logo_icon.psd in Resources */,
 				FD4257981E789B5E00F762D2 /* icon_category_shopping@2x.png in Resources */,
 				FD4257991E789B5E00F762D2 /* email_template.html in Resources */,
 				FD42579A1E789B5E00F762D2 /* SlideoutView~iphone.xib in Resources */,
