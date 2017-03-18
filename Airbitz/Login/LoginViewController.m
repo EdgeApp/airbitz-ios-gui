@@ -184,10 +184,13 @@ static BOOL bInitialized = false;
     self.PINusernameDropDown.anchorView = self.PINusernameSelector;
     self.PINusernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
     __weak typeof(self) weakSelf = self;
-    self.PINusernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+    self.PINusernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item)
+    {
         __strong typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
+        if (strongSelf)
+        {
             [strongSelf updateUsernameSelector:item];
+            [strongSelf switchLoginTypeIfNeeded:item];
         }
     };
     
@@ -196,10 +199,13 @@ static BOOL bInitialized = false;
     self.usernameDropDown.anchorView = self.usernameSelector;
     self.usernameDropDown.bottomOffset = CGPointMake(0, self.usernameSelector.bounds.size.height);
     __weak typeof(self) weakSelf2 = self;
-    self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+    self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item)
+    {
         __strong typeof(self) strongSelf = weakSelf2;
-        if (strongSelf) {
+        if (strongSelf)
+        {
             [strongSelf updateUsernameSelector:item];
+            [strongSelf switchLoginTypeIfNeeded:item];
         }
     };
     
@@ -249,6 +255,25 @@ static BOOL bInitialized = false;
 
     if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
         self.fingerprintButton.hidden = YES;
+}
+
+- (void)switchLoginTypeIfNeeded:(NSString *)username
+{
+    BOOL oldPINModeEnabled = bPINModeEnabled;
+    [abc setLastAccessedAccount:username];
+    if([abc pinLoginEnabled:username error:nil])
+    {
+        bPINModeEnabled = true;
+        [self viewDidLoad];
+        [self viewWillAppear:true];
+        [self viewDidAppear:true];
+    }
+    else
+    {
+        bPINModeEnabled = false;
+        [self viewDidLoad];
+        [self viewWillAppear:true];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -515,6 +540,7 @@ static BOOL bInitialized = false;
     self.PINusernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
     self.usernameDropDown.dataSource = self.arrayAccounts;
     self.usernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
+    
 }
 
 - (void)setUsernameText:(NSString *)username
@@ -726,6 +752,7 @@ static BOOL bInitialized = false;
 
     [self viewDidLoad];
     [self viewWillAppear:true];
+//    [self viewDidAppear:true];
 }
 
 
@@ -1308,8 +1335,6 @@ static BOOL bInitialized = false;
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
     }
 }
-
-#pragma mark - PickerTextView delegates
 
 - (void)removeAccount:(NSString *)account
 {
