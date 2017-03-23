@@ -32,7 +32,7 @@
 "V76-TG-gfn.normalTitle" = "0";
 
 /* Class = "UIButton"; normalTitle = "1"; ObjectID = "b8e-QF-DXa"; Note = "Calculator Button"; */
-"b8e-QF-DXa.normalTitle" = "1।";
+"b8e-QF-DXa.normalTitle" = "1";
 
 /* Class = "UIButton"; normalTitle = "/"; ObjectID = "fTN-mi-eGB"; Note = "Calculator Button"; */
 "fTN-mi-eGB.normalTitle" = "/";

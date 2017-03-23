@@ -1,1704 +1,1704 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
-" Please choose a wallet to receive funds." = " お金を受け取るウォレットを選択してください。";
+" Please choose a wallet to receive funds." = " الرجاء اختيار محفظة لتلقي الأموال.";
 
 /* No comment provided by engineer. */
 "%@
 
-Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "%1$@
-
-このリンクを共有すると、％2 $ @をインストールして使用するユーザーから収益を受け取ることができます。このアプリ内で行われたすべてのギフトカードの購入額の0.25 %%を受け取ることになります。";
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "شارك هذا الرابط للحصول على الإيرادات من المستخدمين الذين التركيب والاستخدام %2$@. ستستلم 0.25%% جميع مشتريات بطاقة هدية مصنوعة داخل هذا التطبيق.";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
-"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@経由でリクエストされま  %3$@に%4$@.";
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ طلب عبر %3$@ on %4$@.";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request" = "%@ Bitcoinリクエスト";
+"%@ Bitcoin Request" = "%@ بيتكوين طلب";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request from %@" = "%1$@ Bitcoinリクエストから%2$@";
+"%@ Bitcoin Request from %@" = "%1$@ طلب بيتكوين من%2$@";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin received. Tap for details." = "%@Bitcoinは受け取った 詳細はタップ
- ";
+"%@ Bitcoin received. Tap for details." = "%@ تلقى بيتكوين. اضغط للاطلاع على التفاصيل.";
 
 /* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
-"%@ Recovery Token" = "%@回復トークン
- 
-
-";
+"%@ Recovery Token" = "%@ انتعاش رمز";
 
 /* No comment provided by engineer. */
 "%@ failed:
-%@" = "%1$@失敗した :
+%@" = "%1$@ فشل:
 %2$@";
 
 /* No comment provided by engineer. */
-"%@ has requested a bitcoin address to send money to." = "%@要求したBitcoinアドレスにお金を送る。";
+"%@ has requested a bitcoin address to send money to." = "%@ وقد طلبت عنوان بيتكوين لإرسال الأموال إلى.";
 
 /* ** Warning ** text on partial payment */
-"** Warning **" = "**警告**";
+"** Warning **" = "** تحذير **";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**警告**パスワードを忘れた場合は、絶対にパスワードを回復することはできません！";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "** تحذير ** وأنك لن تكون قادرة على استعادة كلمة السر الخاصة بك في حالة نسيانها!!";
 
 /* No comment provided by engineer. */
-"2 Factor (Enhanced Security)" = "2因子（セキュリティ強化）";
+"2 Factor (Enhanced Security)" = "2 عامل (تعزيز الأمن)";
 
 /* No comment provided by engineer. */
-"4 Digit PIN" = "4桁PIN";
+"4 Digit PIN" = "PIN 4 أرقام";
 
 /* No comment provided by engineer. */
-"15-20% off Amazon" = "15％〜20％オフAmazon";
+"15-20% off Amazon" = "15-20٪ من الأمازون";
 
 /* No comment provided by engineer. */
-"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "2ファクタのリセットが要求されました。このリクエストを作成していない場合は、  ％@としてログインし、パスワードを変更。";
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "وقد طلب إعادة تعيين اثنين عامل. إذا لم تقم بإنشاء هذا الطلب، سجل دخول%@ وتغيير كلمة المرور الخاصة بك.";
 
 /* section header in settings table */
-"ACCOUNT: " = "アカウント： ";
+"ACCOUNT: " = "حساب: ";
 
 /* title of archived wallets table */
-"ARCHIVE" = "アーカイブ";
+"ARCHIVE" = "أرشيف";
 
 /* No comment provided by engineer. */
 "ATM" = "ATM";
 
 /* No comment provided by engineer. */
-"ATM Fee" = "自動預払機料金";
+"ATM Fee" = "رسوم الصراف الآلي";
 
 /* ACCEPT button text */
-"Accept" = "受け入れる";
+"Accept" = "قبول";
 
 /* No comment provided by engineer. */
-"Account '%@' needs a password. Account is not accessible on a new device without a password." = "アカウント '％@'にはパスワードが必。新しいデバイスでパスワードなしでアカウントにアクセスすることはできません。";
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "حساب %@يحتاج كلمة مرور. الحساب لا يمكن الوصول إليها على جهاز جديد بدون كلمة مرور.";
 
 /* Title of account signin error alert */
-"Account Sign Up" = "アカウントサインアップ";
+"Account Sign Up" = "حساب اشترك";
 
 /* No comment provided by engineer. */
-"Account has no password" = "アカウントにパスワードがありません";
+"Account has no password" = "حساب ليس لديه كلمة السر";
 
 /* No comment provided by engineer. */
-"Add New" = "新しく追加する";
+"Add New" = "اضف جديد";
 
 /* Income category for affiliate revenue */
-"Affiliate Revenue" = "アフィリエイト 収入";
+"Affiliate Revenue" = "انضم الإيرادات";
 
 /* No comment provided by engineer. */
-"Affiliate link has been copied to the clipboard" = "アフィリエイトリンクがクリップボードにコピー";
+"Affiliate link has been copied to the clipboard" = "تم نسخ الرابط التابعة إلى الحافظة";
 
 /* No comment provided by engineer. */
-"Air Travel" = "空の旅";
+"Air Travel" = "هواء سفر";
 
 /* No comment provided by engineer. */
-"AirPrint is not currently available" = "AirPrintは現在利用できません";
+"AirPrint is not currently available" = "تعمل بميزة AirPrint غير متوفر حاليا";
 
 /* No comment provided by engineer. */
-"Alcohol & Bars" = "アルコールとアンプ;バー";
+"Alcohol & Bars" = "الحانات & الحانات";
 
 /* No comment provided by engineer. */
-"Allowance" = "手当";
+"Allowance" = "بدل";
 
 /* No comment provided by engineer. */
-"Amount is too small" = "金額が小さすぎます";
+"Amount is too small" = "كمية صغيرة جدا";
 
 /* No comment provided by engineer. */
-"Amusement" = "アミューズメント";
+"Amusement" = "كل ما يسلي";
 
 /* No comment provided by engineer. */
-"An app has requested a bitcoin address to send money to." = "アプリがお金を送るためにビットコインアドレスを要求。";
+"An app has requested a bitcoin address to send money to." = "وقد طلبت التطبيق عنوان بيتكوين لإرسال الأموال إلى.";
 
 /* No comment provided by engineer. */
-"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "エラーが発生しました。ネットワーク接続を確認してください。 PINのログインを終了し、ユーザー名とアンプを使用することもできます。オフラインでログインするパスワード";
+"An error occurred. Please check your network connection. You may also exit PIN login and use your username & password to login offline" = "حدث خطأ. يرجى التحقق من الاتصال بالشبكة. يمكنك أيضا الخروج تسجيل الدخول PIN واستخدام اسم المستخدم الخاص بك & كلمة السر للدخول حاليا";
 
 /* No comment provided by engineer. */
-"An error occurred. Possible network connection issue or incorrect username & password" = "エラーが発生しました。 考えられるネットワーク接続の問題または間違ったユーザー名とアンプ;パスワード";
+"An error occurred. Possible network connection issue or incorrect username & password" = "حدث خطأ. ممكن مشكلة في اتصال الشبكة أو اسم المستخدم غير صحيح & كلمه السر";
 
 /* Warning for password recovery textfields */
-"Answers are case sensitive" = "答えは大文字と小文字が区別";
+"Answers are case sensitive" = "الأجوبة هي قضية حساسة";
 
 /* APPROVE button text */
-"Approve" = "承認する";
+"Approve" = "وافق";
 
 /* Approving Login popup */
-"Approving Login..." = "ログインの承認...";
+"Approving Login..." = "وافق تسجيل الدخول...";
 
 /* No comment provided by engineer. */
-"Are you sure you want to call" = "本気ですかあなた電話したい";
+"Are you sure you want to call" = "هل أنت متأكد أنك تريد الاتصال بها";
 
 /* No comment provided by engineer. */
-"Are you sure you want to cancel any changes you've made?" = "あなたが行った変更をキャンセルしてもよろしいですか？";
+"Are you sure you want to cancel any changes you've made?" = "هل أنت متأكد أنك تريد إلغاء أي التغييرات التي قمت بها؟";
 
 /* No comment provided by engineer. */
-"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "本気ですか？このウォレット内の資金とそれが受け取る将来の資金にアクセスすることはできません";
+"Are you sure? You will be unable to access any funds in this wallet and any future funds that it may receive" = "هل أنت واثق؟ سوف تكون قادرة على الوصول إلى أي أموال في هذه المحفظة وأي أموال المستقبلية التي قد تلقي";
 
 /* No comment provided by engineer. */
-"Arts" = "芸術";
+"Arts" = "فنون";
 
 /* No comment provided by engineer. */
-"Auto & Transport" = "自動車とアンペア;輸送
-";
+"Auto & Transport" = "السيارات & المواصلات";
 
 /* No comment provided by engineer. */
-"Auto Insurance" = "自動車保険
-";
+"Auto Insurance" = "تأمين تلقائي";
 
 /* No comment provided by engineer. */
-"Auto Payment" = "自動支払い";
+"Auto Payment" = "السيارات الدفع";
 
 /* settings text */
-"Auto log off after" = "自動ログオフ後";
+"Auto log off after" = "التلقائي تسجيل الخروج بعد";
 
 /* section header in settings table */
-"BITCOIN DENOMINATION" = "BITCOINデノミネーション";
+"BITCOIN DENOMINATION" = "بيتكوين  فئة";
 
 /* No comment provided by engineer. */
-"Baby Supplies" = "ベビー用品";
+"Baby Supplies" = "لوازم الطفل";
 
 /* No comment provided by engineer. */
-"Babysitter & Daycare" = "ベビーシッターとアンプ;保育";
+"Babysitter & Daycare" = "جليسه اطفال & الرعاية النهارية";
 
 /* Back button text on top left */
-"Back" = "裏";
+"Back" = "الى الخلف";
 
 /* No comment provided by engineer. */
-"Balance" = "バランス";
+"Balance" = "توازن";
 
 /* No comment provided by engineer. */
-"Bank Fee" = "
-銀行手数料";
+"Bank Fee" = "بنك رسوم";
 
 /* No comment provided by engineer. */
-"Bills & Utilities" = "
-紙幣とアンプ;ユーティリティー";
+"Bills & Utilities" = "فواتير& خدمات";
 
 /* No comment provided by engineer. */
-"BitID Identity" = "BitIDアイデンティティ";
+"BitID Identity" = "BitID الهوية";
 
 /* No comment provided by engineer. */
-"BitID Login" = "BitIDログイン";
+"BitID Login" = "BitID تسجيل الدخول";
 
 /* settings text */
-"Bitcoin" = "Bitcoin";
+"Bitcoin" = "بيتكوين";
 
 /* No comment provided by engineer. */
-"Bitcoin Address or Private Key" = "Bitcoinアドレスまたは秘密鍵";
+"Bitcoin Address or Private Key" = "عنوان بيتكوين أو المفتاح الخاص";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key" = "Bitcoinプライベートキー";
+"Bitcoin Private Key" = "بيتكوين مفتاح خاص";
 
 /* No comment provided by engineer. */
-"Bitcoin Private Key with Public Address" = "パブリックアドレスを持つBitcoinプライベートキー";
+"Bitcoin Private Key with Public Address" = "بيتكوين مفتاح خاص مع مخاطبة الجمهور";
 
 /* Export wallet transactions email subject line */
-"Bitcoin Wallet Transactions" = "Bitcoin財布トランザクション";
+"Bitcoin Wallet Transactions" = "بيتكوين المعاملات محفظة";
 
 /* No comment provided by engineer. */
-"Bitcoin address mismatch" = "Bitcoinアドレスの不一致";
+"Bitcoin address mismatch" = "عدم تطابق عنوان بيتكوين";
 
 /* settings text */
-"Bluetooth" = "ブルートゥース";
+"Bluetooth" = "بلوتوث";
 
 /* No comment provided by engineer. */
-"Books" = "本";
+"Books" = "كتاب";
 
 /* No comment provided by engineer. */
-"Books & Supplies" = "書籍とアンプ; 用品";
+"Books & Supplies" = "كتب & اللوازم";
 
 /* Business Name or Category placeholder */
-"Business Name or Category" = "ビジネス名またはカテゴリ";
+"Business Name or Category" = "اسم العمل أو الفئة";
 
 /* No comment provided by engineer. */
-"Buy Bitcoin" = "購入Bitcoin";
+"Buy Bitcoin" = "شراء بيتكوين";
 
 /* No comment provided by engineer. */
-"Buy/Sell Bitcoin" = "購入/販売Bitcoin";
+"Buy/Sell Bitcoin" = "شراء / بيع بيتكوين";
 
 /* No comment provided by engineer. */
-"Buy/Sell with Bank Account (USA)" = "銀行口座での購入/販売（米国）";
+"Buy/Sell with Bank Account (USA)" = "شراء / بيع مع حساب البنك (الولايات المتحدة الأمريكية)";
 
 /* Generic CANCEL button text */
-"CANCEL" = "キャンセル";
+"CANCEL" = "إلغاء";
 
 /* CHANGE button text */
-"CHANGE" = "変化する";
+"CHANGE" = "تغيير";
 
 /* No comment provided by engineer. */
-"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "カメラは使用できません。 携帯電話のプライバシー設定でカメラアクセスを有効にしてください";
+"Camera unavailable. Please enable camera access on your phone's Privacy Settings" = "الكاميرا غير متوفرة. يرجى تمكين وصول الكاميرا على إعدادات الخصوصية الهاتف";
 
 /* No comment provided by engineer. */
-"Can't send e-mail" = "電子メールを送信できません。";
+"Can't send e-mail" = "لا يمكن إرسال البريد الإلكتروني";
 
 /* No comment provided by engineer. */
-"Cannot delete wallet as it contains funds. Please transfer out funds first." = "ウォレットには資金が含まれているため、ウォレットを削除できません。 最初に資金を送金してください。";
+"Cannot delete wallet as it contains funds. Please transfer out funds first." = "لا يمكن حذف المحفظة كما أنه يحتوي على الأموال. يرجى نقل من الأموال أولا.";
 
 /* No comment provided by engineer. */
-"Car Wash" = "洗車";
+"Car Wash" = "غسيل سيارة";
 
 /* No comment provided by engineer. */
-"Cash & ATM" = "現金とアンプ; ATM";
+"Cash & ATM" = "السيولة النقدية & ماكينة الصراف الآلي";
 
 /* No comment provided by engineer. */
-"Categories" = "カテゴリ";
+"Categories" = "الفئات";
 
 /* settings text */
-"Change Categories" = "カテゴリーを変更する";
+"Change Categories" = "تغيير الفئات";
 
 /* No comment provided by engineer. */
-"Change Mining Fee" = "鉱業料金の変更";
+"Change Mining Fee" = "تغيير رسوم التعدين";
 
 /* No comment provided by engineer. */
-"Change PIN" = "PINの変更";
+"Change PIN" = "تغيير PIN";
 
 /* No comment provided by engineer. */
-"Change Password" = "パスワードを変更する";
+"Change Password" = "تغيير كلمة السر";
 
 /* settings text */
-"Change recovery questions" = "変化する回復質問";
+"Change recovery questions" = "أسئلة التغيير الانتعاش";
 
 /* No comment provided by engineer. */
-"Charity" = "慈善";
+"Charity" = "مؤسسة خيرية";
 
 /* Check password button text */
-"Check Password" = "チェックパスワード";
+"Check Password" = "التحقق من كلمة المرور";
 
 /* No comment provided by engineer. */
-"Checking password..." = "パスワードを確認しています...";
+"Checking password..." = "التحقق من كلمة المرور...";
 
 /* No comment provided by engineer. */
-"Choose a Question" = "質問を選択";
+"Choose a Question" = "اختر سؤالا";
 
 /* City, State/Province, or Country placeholder */
-"City, State/Province, or Country" = "市、州/県、または国";
+"City, State/Province, or Country" = "المدينة، الدولة / المقاطعة أو البلد";
 
 /* Generic CLOSE button text */
-"Close" = "閉じ";
+"Close" = "قريب";
 
 /* No comment provided by engineer. */
-"Clothing" = "衣類";
+"Clothing" = "ملابس";
 
 /* No comment provided by engineer. */
-"Coffee & Tea" = "コーヒーとアンプ; お茶";
+"Coffee & Tea" = "قهوة & شاي";
 
 /* expense category */
-"Coffee Shops" = "コーヒーショップ";
+"Coffee Shops" = "محلات القهوة";
 
 /* No comment provided by engineer. */
-"Complete Signup" = "完全なサインアップ";
+"Complete Signup" = "إكمل توقيع حتى";
 
 /* Num of confirmations in transaction list */
-"Confirmation" = "確認";
+"Confirmation" = "تتأكيد";
 
 /* Num of confirmations in transaction list */
-"Confirmations" = "確認";
+"Confirmations" = "التأكيد";
 
 /* Confirmed status in transaction list */
-"Confirmed" = "確認済み";
+"Confirmed" = "أكد";
 
 /* No comment provided by engineer. */
-"Congratulations" = "おめでとうございます";
+"Congratulations" = "تهانينا";
 
 /* Popup text when BLE connects */
-"Connected" = "Connected";
+"Connected" = "متصل";
 
 /* No comment provided by engineer. */
-"Consulting Income" = "コンサルティング収入";
+"Consulting Income" = "دخل الاستشارات";
 
 /* No comment provided by engineer. */
-"Copied" = "コピーされた";
+"Copied" = "نسخ";
 
 /* Copy button text */
-"Copy" = "コピー";
+"Copy" = "نسخ";
 
 /* No comment provided by engineer. */
-"Create Wallet" = "ウォレットを作成";
+"Create Wallet" = "إنشاء محفظة";
 
 /* No comment provided by engineer. */
-"Create new" = "作成新しい";
+"Create new" = "خلق جديد";
 
 /* No comment provided by engineer. */
-"Creating and securing account" = "作成と保護アカウント";
+"Creating and securing account" = "خلق وتأمين الحساب";
 
 /* No comment provided by engineer. */
-"Creating and securing wallet" = "作成と保護財布";
+"Creating and securing wallet" = "خلق وتأمين المحفظة";
 
 /* No comment provided by engineer. */
-"Credit Card Payment" = "クレジットカード 支払い";
+"Credit Card Payment" = "رصيد بطاقة دفع";
 
 /* No comment provided by engineer. */
-"Current Location" = "現在位置";
+"Current Location" = "الموقع الحالي";
 
 /* No comment provided by engineer. */
-"Current Password" = "現在のパスワード";
+"Current Password" = "كلمة السر الحالية";
 
 /* section header in settings table */
-"DEFAULT EXCHANGE RATE" = "デフォルト換算レート";
+"DEFAULT EXCHANGE RATE" = "افتراضي سعر الصرف";
 
 /* debug text */
-"Debug" = "調試";
+"Debug" = "التصحيح";
 
 /* No comment provided by engineer. */
-"Debug Log File" = "デバッグログファイル";
+"Debug Log File" = "ملف سجل التصحيح";
 
 /* Debug screen header title */
-"Debug Options" = "デバッグオプション";
+"Debug Options" = "التصحيح  خيارات";
 
 /* settings text */
-"Default Currency" = "デフォルト通貨";
+"Default Currency" = "افتراضي عملة";
 
 /* settings text */
-"Default Exchange" = "デフォルトの交換";
+"Default Exchange" = "افتراضي تبادل";
 
 /* DELETE button text for wallet delete */
-"Delete" = "デリート";
+"Delete" = "حذف";
 
 /* Delete Account With no Password Warning */
-"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "このデバイスで '％@'を削除しま？このアカウントにはパスワードはなく、削除すると回復できません。";
+"Delete '%@' on this device? This account has no password and will NOT BE RECOVERABLE if you delete it." = "حذف '%@' على هذا الجهاز؟ هذا الحساب ليس لديه كلمة المرور و لن يمكن استعادتها إذا قمت بحذفه.";
 
 /* Delete Account Warning */
-"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "このデバイスで '％@'を削除しますか？これにより、PINによるアクセスが無効になります。このアカウントで2FAが有効になっている場合、このデバイスは7日間かかる2FAリセットなしではログインできません。";
+"Delete '%@' on this device? This will disable access via PIN. If 2FA is enabled on this account, this device will not be able to login without a 2FA reset which takes 7 days." = "حذف '%@' على هذا الجهاز؟ سيؤدي ذلك إلى تعطيل الوصول عن طريق PIN. إذا تم تمكين 2FA على هذا الحساب، وهذا الجهاز لن يكون قادرا على تسجيل الدخول بدون إعادة 2FA الذي يستغرق 7 أيام.";
 
 /* No comment provided by engineer. */
-"Delete Account" = "アカウントを削除";
+"Delete Account" = "حذف الحساب";
 
 /* Delete Wallet popup */
-"Delete Wallet" = "ウォレットの削除";
+"Delete Wallet" = "حذف محفظة";
 
 /* Text for popup while deleting wallet */
-"Deleting Wallet" = "ウォレットの削除";
+"Deleting Wallet" = "حذف محفظة";
 
 /* No comment provided by engineer. */
-"Dentist" = "歯科医";
+"Dentist" = "طبيبة الاسنان";
 
 /* No comment provided by engineer. */
-"Deposit to Savings" = "貯蓄への入金";
+"Deposit to Savings" = "الودائع إلى الادخار";
 
 /* No comment provided by engineer. */
-"Designed and Built by Airbitz in" = "Airbitzによって設計され、築かれた";
+"Designed and Built by Airbitz in" = "صممت وبنيت من قبل Airbitz في";
 
 /* Directory title bar text */
-"Directory" = "ディレクトリ";
+"Directory" = "مجلس مديرين";
 
 /* Disable as in to disable a feature */
-"Disable" = "無効にす";
+"Disable" = "تعطيل";
 
 /* Title of recovery popup */
-"Disable Recovery?" = "回復を無効に？";
+"Disable Recovery?" = "تعطيل الانتعاش؟";
 
 /* No comment provided by engineer. */
-"Disabled" = "を無効にする";
+"Disabled" = "معاق";
 
 /* No comment provided by engineer. */
-"Div Income" = "事業部所得";
+"Div Income" = "شعبة الدخل";
 
 /* No comment provided by engineer. */
 "Do you still remember your password? You will need your password if your device gets lost or stolen, or if you uninstall the app.
-Enter it below to make sure:" = "あなたはまだあなたのパスワードを覚えていますか？デバイスが紛失または盗難にあった場合パスワードが必要にな。 またはアプリをアンインストールした場合\\ n以下を入力して確認してください";
+Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرور الخاصة بك؟ وسوف تحتاج إلى كلمة المرور الخاصة بك إذا كان جهازك يحصل فقدت أو سرقت، أو إذا قمت بإلغاء تثبيت التطبيق.
+ادخال أدناه للتأكد من:";
 
 /* No comment provided by engineer. */
-"Doctor" = "医師";
+"Doctor" = "طبيب";
 
 /* Generic DONE button text */
-"Done" = "完了";
+"Done" = "فعله";
 
 /* No comment provided by engineer. */
-"Download the Airbitz wallet and save money using bitcoin" = "AirbitzウォレットをダウンロードするBitcoinを使ってお金を節約する";
+"Download the Airbitz wallet and save money using bitcoin" = "تحميل محفظة Airbitz وتوفير المال باستخدام بيتكوين";
 
 /* No comment provided by engineer. */
-"Edge Login" = "
-エッジログイン";
+"Edge Login" = "تسجيل الدخول الحافة";
 
 /* No comment provided by engineer. */
-"Education" = "教育";
+"Education" = "التعليم";
 
 /* No comment provided by engineer. */
-"Electronics" = "電子";
+"Electronics" = "إلكترونيات";
 
 /* No comment provided by engineer. */
-"Electronics & Software" = "エレクトロニクスとアンプ; ソフトウェア";
+"Electronics & Software" = "إلكترونيات & البرمجيات";
 
 /* text for Email */
-"Email" = "Eメール";
+"Email" = "البريد الإلكتروني";
 
 /* No comment provided by engineer. */
-"Email Login Package" = "メールログインパッケージ";
+"Email Login Package" = "البريد الإلكتروني  تسجيل الدخول  صفقة";
 
 /* No comment provided by engineer. */
-"Email cancelled." = "電子メールをキャンセルし。";
+"Email cancelled." = "البريد الإلكتروني إلغاء.";
 
 /* No comment provided by engineer. */
-"Email saved to send later." = "メールを保存して後で送信。";
+"Email saved to send later." = "حفظ البريد الإلكتروني لإرسال في وقت لاحق.";
 
 /* No comment provided by engineer. */
-"Email sent." = "メール送信完了！";
+"Email sent." = "البريد الالكتروني أرسل.";
 
 /* No comment provided by engineer. */
-"Enable" = "有効にする";
+"Enable" = "تمكين";
 
 /* settings text */
-"Enable Bluetooth in System Settings" = "システム設定でBluetoothを有効に";
+"Enable Bluetooth in System Settings" = "تمكين البلوتوث في إعدادات النظام";
 
 /* No comment provided by engineer. */
-"Enable Touch ID" = "タッチIDを有効にする";
+"Enable Touch ID" = "تمكين معرف تاتش";
 
 /* No comment provided by engineer. */
-"Enter Payee" = "受取人を入力して";
+"Enter Payee" = "أدخل المستفيد";
 
 /* No comment provided by engineer. */
-"Enter any notes you would like to send to our support staff" = "サポートスタッフに送信したいメモを入力してください";
+"Enter any notes you would like to send to our support staff" = "أدخل أي ملاحظات كنت ترغب أن ترسل إلى فريق الدعم لدينا";
 
 /* No comment provided by engineer. */
-"Entertainment" = "エンターテインメント";
+"Entertainment" = "تسلية";
 
 /* No comment provided by engineer. */
-"Error Changing PIN" = "PINを変更中のエラー";
+"Error Changing PIN" = "خطأ تغيير PIN";
 
 /* No comment provided by engineer. */
-"Error Deleting Wallet" = "ウォレットを削除中にエラーが発生";
+"Error Deleting Wallet" = "خطأ حذف محفظة";
 
 /* No comment provided by engineer. */
-"Error Getting Wallet Count" = "ウォレットカウントの取得中にエラーが発生する";
+"Error Getting Wallet Count" = "خطأ الحصول على محفظة  عد";
 
 /* No comment provided by engineer. */
-"Error Logging In" = "エラーログイン";
+"Error Logging In" = "خطأ تسجيل في";
 
 /* No comment provided by engineer. */
-"Error Recovering Account" = "エラー回復アカウント";
+"Error Recovering Account" = "خطأ حساب استعادة";
 
 /* No comment provided by engineer. */
-"Error code" = "エラー コード:";
+"Error code" = "خطأ رمز";
 
 /* No comment provided by engineer. */
 "Error connecting to payment processor. Send directly to bitcoin address
 
-%@" = "支払い処理プログラムに接続中にエラー。ビットコインアドレスに直接送信する
+%@" = "خطأ في الاتصال معالج الدفع. ترسل مباشرة إلى بيتكوين عنوان
+
 %@";
 
 /* No comment provided by engineer. */
-"Error creating affiliate link. Please try again later" = "アフィリエイトリンクの作成中にエラー。後でもう一度お試しください";
+"Error creating affiliate link. Please try again later" = "خطأ في إنشاء وصلة التابعة. الرجاء معاودة المحاولة في وقت لاحق";
 
 /* No comment provided by engineer. */
-"Error desc" = "エラーdesc";
+"Error desc" = "تفاصيل الخطأ";
 
 /* No comment provided by engineer. */
-"Error disabling recovery" = "復旧を無効にするエラー";
+"Error disabling recovery" = "خطأ انتعاش تعطيل";
 
 /* No comment provided by engineer. */
-"Error during send" = "送信中のエラー";
+"Error during send" = "خطأ أثناء الإرسال";
 
 /* No comment provided by engineer. */
-"Error importing the token at this time. Please try again." = "現時点でトークンのインポート中にエラーが発生。 もう一度お試しください。";
+"Error importing the token at this time. Please try again." = "خطأ استيراد الرمز المميز في هذا الوقت. حاول مرة اخرى.";
 
 /* No comment provided by engineer. */
-"Error occured copying to the clipboard" = "クリップボードへのコピー中にエラーが発生しました";
+"Error occured copying to the clipboard" = "حدث خطأ النسخ إلى الحافظة";
 
 /* No comment provided by engineer. */
-"Error sending Email." = "電子メール送信中にエラー";
+"Error sending Email." = "خطأ في إرسال البريد الإلكتروني.";
 
 /* No comment provided by engineer. */
-"Error sending SMS" = "エラー送信SMS";
+"Error sending SMS" = "خطأ في إرسال الرسائل القصيرة";
 
 /* Prefix of list of financial exchange categories. Such as converting from one currency to another */
-"Exchange" = "交換";
+"Exchange" = "تبادل";
 
 /* No comment provided by engineer. */
-"Exchange Rate Data Source" = "為替レートデータソース";
+"Exchange Rate Data Source" = "مصدر بيانات أسعار الصرف";
+
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
 
 /* Exit button text on top left */
-"Exit" = "出口";
+"Exit" = "خروج";
 
 /* Prefix of list of expense categories */
-"Expense" = "経費";
+"Expense" = "مصروف";
 
 /* EXPORT button text for wallet export */
-"Export" = "輸出する";
+"Export" = "تصدير";
 
 /* Prompt asking which wallet to export from */
-"Export From:" = "から輸出:";
+"Export From:" = "تصدير من:";
 
 /* No comment provided by engineer. */
-"Export Private Seed" = "プライベートシード輸出";
+"Export Private Seed" = "تصدير البذور الخاص";
 
 /* No comment provided by engineer. */
-"Export Public Seed (XPub)" = "パブリックシードエクスポート（XPub）";
+"Export Public Seed (XPub)" = "تصدير البذور العام (XPub)";
 
 /* No comment provided by engineer. */
-"Export Wallet Transactions" = "ウォレットトランザクションのエクスポート";
+"Export Wallet Transactions" = "المعاملات تصدير محفظة";
 
 /* No comment provided by engineer. */
-"Eyecare" = "アイケア";
+"Eyecare" = "العناية بالعين";
 
 /* No comment provided by engineer. */
-"Fast Food" = "ファストフード";
+"Fast Food" = "الطعام السريع";
 
 /* No comment provided by engineer. */
-"Feedback" = "フィードバック";
+"Feedback" = "تعليقات";
 
 /* No comment provided by engineer. */
-"Fees & Charges" = "料金とアンペア; 料金";
+"Fees & Charges" = "رسوم& رسوم";
 
 /* Fetching Login Request popup */
-"Fetching Login Request..." = "ログインリクエストを取得中...";
+"Fetching Login Request..." = "الدخول طلب جلب...";
 
 /* Fetching Payment Request popup */
-"Fetching Payment Request..." = "支払いリクエストを取得中...";
+"Fetching Payment Request..." = "جلب الدفع طلب...";
 
 /* Fiat */
-"Fiat" = "フィアット";
+"Fiat" = "النقود الورقية";
 
 /* No comment provided by engineer. */
-"Financial" = "財務";
+"Financial" = "مالي";
 
 /* No comment provided by engineer. */
-"Financial Advisor" = "財務顧問";
+"Financial Advisor" = "مالي المستشار";
 
 /* settings text */
-"First Name (optional)" = "ファーストネーム（オプション）";
+"First Name (optional)" = "الإسم الأول (إختياري)";
 
 /* No comment provided by engineer. */
-"Food & Dining" = "食品とアンプ; ダイニング";
+"Food & Dining" = "طعام & الطعام";
 
 /* No comment provided by engineer. */
-"From: %@" = "から： %@";
+"From: %@" = "من عند: %@";
 
 /* No comment provided by engineer. */
-"Funds successfully imported, but error connecting to messenger server. Try again later" = "ファンド輸入が成功、メッセンジャーサーバーに接続する際にエラーが発生。あとでもう一度試してみ";
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "الأموال استيرادها بنجاح، ولكن الخطأ ربط إلى خادم رسول. حاول مرة أخرى في وقت لاحق";
 
 /* No comment provided by engineer. */
-"Furnishings" = "家具";
+"Furnishings" = "تأثيث";
 
 /* No comment provided by engineer. */
-"Gas & Fuel" = "ガスとアンプ; 燃料";
+"Gas & Fuel" = "غاز & وقود";
 
 /* No comment provided by engineer. */
-"Generating QR Code..." = "QRコードの生成...";
+"Generating QR Code..." = "توليد رمز الاستجابة السريعة...";
 
 /* Button text for Get Affiliate Link */
-"Get Affiliate Link" = "アフィリエイトリンクを取得";
+"Get Affiliate Link" = "الحصول على وصلة فرعية";
 
 /* No comment provided by engineer. */
-"Gift" = "贈り物";
+"Gift" = "هدية";
 
 /* No comment provided by engineer. */
-"Gift Cards" = "ギフトカード";
+"Gift Cards" = "بطاقات الهدايا";
 
 /* No comment provided by engineer. */
-"Gifts & Donations" = "ギフトとアンプ; 寄付";
+"Gifts & Donations" = "الهدايا& التبرعات";
 
 /* Generic Go Back button text */
-"Go Back" = "行こバック";
+"Go Back" = "العودة للخلف";
 
 /* No comment provided by engineer. */
-"Great job remembering your password." = "よくやったあなたのパスワードを覚えている。";
+"Great job remembering your password." = "عمل عظيم تذكر كلمة المرور الخاصة بك.";
 
 /* expense category */
-"Groceries" = "食料品";
+"Groceries" = "البقالة";
 
 /* No comment provided by engineer. */
-"Gym" = "ジム";
+"Gym" = "رياضة بدنية";
 
 /* No comment provided by engineer. */
-"HOA Dues" = "HOA会費";
+"HOA Dues" = "القرن الإفريقي استحقاقات";
 
 /* No comment provided by engineer. */
-"Hair" = "ヘア";
+"Hair" = "قماش من الصوف";
 
 /* No comment provided by engineer. */
-"Health & Fitness" = "健康とアンプ; フィットネス";
+"Health & Fitness" = "الصحة& اللياقه البدنيه";
 
 /* Help button text on top right */
-"Help" = "助ける";
+"Help" = "مساعدة";
 
 /* Hide */
-"Hide" = "隠す";
+"Hide" = "إخفاء";
 
 /* No comment provided by engineer. */
-"High Fee" = "高い 代";
+"High Fee" = "رسوم عالية";
 
 /* No comment provided by engineer. */
-"Hobbies" = "趣味";
+"Hobbies" = "الهوايات";
 
 /* No comment provided by engineer. */
-"Home" = "ホーム";
+"Home" = "الرئيسية";
 
 /* No comment provided by engineer. */
-"Home Depot (Up to 15% Off)" = "ホームデポ（最大15％オフ）";
+"Home Depot (Up to 15% Off)" = "هوم ديبوت (ما يصل الى 15٪ من)";
 
 /* expense category */
-"Home Improvement" = "ホーム改善";
+"Home Improvement" = "تحسين المنزل";
 
 /* No comment provided by engineer. */
-"Home Insurance" = "ホーム保険";
+"Home Insurance" = "تامين البيت";
 
 /* No comment provided by engineer. */
-"Home Phone" = "自宅の電話";
+"Home Phone" = "الهاتف المنزلي";
 
 /* No comment provided by engineer. */
-"Home Services" = "ホームサービス";
+"Home Services" = "خدمات منزلية";
 
 /* No comment provided by engineer. */
-"Home Supplies" = "ホーム用品";
+"Home Supplies" = "الرئيسية اللوازم";
 
 /* No comment provided by engineer. */
-"Hotel" = "ホテル";
+"Hotel" = "الفندق";
 
 /* Like Airbitz popup */
-"How are you liking %@?" = "お元気ですか好み％@？";
+"How are you liking %@?" = "كيف حالك تروق%@؟";
 
 /* Slideout menu import private key text */
 "IMPORT PRIVATE KEY
-([[abtag APP_TITLE]] Gift Card)" = "プライベートキーをインポートする
-([[abtag APP_TITLE]] ギフトカード)";
+([[abtag APP_TITLE]] Gift Card)" = "استيراد المفتاح الخاص
+([[abtag APP_TITLE]] Gift Card)";
 
 /* No comment provided by engineer. */
-"IRA Contribution" = "IRA貢献";
+"IRA Contribution" = "IRA إسهام";
 
 /* No comment provided by engineer. */
-"Identity token from [%@] created and saved" = "からのアイデンティティトークン  [％@]  作成して保存しました";
+"Identity token from [%@] created and saved" = "رمز هوية من [%@] إنشاؤها وحفظها";
 
 /* No comment provided by engineer. */
-"If recovery was setup, you should have emailed yourself a recovery token with a link" = "リカバリが設定されている場合、リンクが付いた回復トークンを自分宛に電子メールで送信したはずです";
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "إذا كان الانتعاش الإعداد، يجب أن يكون عبر البريد الالكتروني نفسك عربون الانتعاش مع وصلة";
 
 /* No comment provided by engineer. */
-"Import" = "インポート";
+"Import" = "إنزال";
 
 /* No comment provided by engineer. */
-"Import Airbitz Gift Card" = "輸入エアビッツギフトカード";
+"Import Airbitz Gift Card" = "استيراد بطاقة هدية Airbitz";
 
 /* No comment provided by engineer. */
-"Import Funds" = "輸入基金";
+"Import Funds" = "استيراد أموال";
 
 /* No comment provided by engineer. */
-"Import Private Key" = "秘密鍵をインポートする";
+"Import Private Key" = "استيراد مفتاح خاص";
 
 /* No comment provided by engineer. */
-"Import failed" = "インポートに失敗";
+"Import failed" = "فشل الاستيراد";
 
 /* No comment provided by engineer. */
-"Import failed. Private key is empty" = "インポートに失敗。秘密鍵は空です";
+"Import failed. Private key is empty" = "فشل الاستيراد. المفتاح الخاص فارغ";
 
 /* No comment provided by engineer. */
-"Import the private key again to retry Twitter" = "Twitterを再試行するために秘密鍵を再度インポートする";
+"Import the private key again to retry Twitter" = "استيراد المفتاح الخاص مرة أخرى لإعادة المحاولة تويتر";
 
 /* No comment provided by engineer. */
-"Importing funds from %@ into wallet..." = "からの資金のインポート％@財布に...";
+"Importing funds from %@ into wallet..." = "استيراد صناديق من%@ في المحفظة...";
 
 /* Prefix of list of income categories */
-"Income" = "収入";
+"Income" = "إيراد";
 
 /* No comment provided by engineer. */
-"Incorrect PIN" = "不正なPIN";
+"Incorrect PIN" = "PIN غير صحيح";
 
 /* No comment provided by engineer. */
-"Incorrect PIN. Please wait %.0f seconds and try again." = "PINが正しくありません。お待ちください ％。の秒後に再試行して。";
+"Incorrect PIN. Please wait %.0f seconds and try again." = "PIN غير صحيح. يرجى الانتظار ثواني%.0fوحاول مرة أخرى.";
 
 /* No comment provided by engineer. */
-"Incorrect Password" = "不正なパスワード";
+"Incorrect Password" = "كلمة المرور غير صحيحة";
 
 /* No comment provided by engineer. */
-"Incorrect Password. Try again, or change it now?" = "パスワードが間違っ。再試行する、それとも今変更？";
+"Incorrect Password. Try again, or change it now?" = "كلمة المرور غير صحيحة. حاول مرة أخرى، أو تغييره الآن؟";
 
 /* No comment provided by engineer. */
-"Incorrect current password" = "現在のパスワードが正しくありません";
+"Incorrect current password" = "المرور الحالية غير صحيحة";
 
 /* No comment provided by engineer. */
-"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "この回復トークンのユーザー名が正しくありません。別のユーザー名を試してみるか、別の回復トークンリンクを使用してください。";
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "اسم المستخدم غير صحيح لهذا رمز الانتعاش. يرجى المحاولة اسم مستخدم مختلف أو استخدام رابط استرداد رمز مختلف.";
 
 /* Info button text on top right */
-"Info" = "情報";
+"Info" = "معلومات";
 
 /* Title of password check popup alert */
-"Insufficient Password" = "不十分なパスワード";
+"Insufficient Password" = "غير كاف كلمه السر";
 
 /* No comment provided by engineer. */
-"Interest Exp" = "利子率";
+"Interest Exp" = "الفائدة إكسب";
 
 /* No comment provided by engineer. */
-"Internet" = "インターネ";
+"Internet" = "إنترنت";
 
 /* No comment provided by engineer. */
-"Invalid Bitcoin Address" = "無効なBitcoinアドレス";
+"Invalid Bitcoin Address" = "عنوان بيتكوين غير صالح";
 
 /* No comment provided by engineer. */
-"Invalid Bluetooth Request" = "無効なブルートゥースリクエスト";
+"Invalid Bluetooth Request" = "طلب بلوتوث غير صالح";
 
 /* No comment provided by engineer. */
-"Invalid Email" = "無効なメール";
+"Invalid Email" = "البريد الالكتروني غير صحيح";
 
 /* No comment provided by engineer. */
-"Invalid QR Code" = "無効なQRコード";
+"Invalid QR Code" = "رمز QR غير صالح";
 
 /* No comment provided by engineer. */
-"It's great" = "それは素晴らしい";
+"It's great" = "انه رائع";
 
 /* No comment provided by engineer. */
-"Kids" = "子供たち";
+"Kids" = "أطفال";
 
 /* No comment provided by engineer. */
-"Kids Activities" = "キッズアクティビティ";
+"Kids Activities" = "أنشطة الأطفال";
 
 /* LOGIN button text */
-"LOGIN" = "ログイン";
+"LOGIN" = "تسجيل الدخول";
 
 /* settings text */
-"Last Name (optional)" = "姓（オプション）";
+"Last Name (optional)" = "اسم العائلة (اختياري)";
 
 /* No comment provided by engineer. */
-"Late Fee" = "延滞料";
+"Late Fee" = "متأخر رسوم";
 
 /* Later button text */
-"Later" = "後で";
+"Later" = "في وقت لاحق";
 
 /* No comment provided by engineer. */
-"Laundry" = "ランドリー";
+"Laundry" = "غسيل ملابس";
 
 /* No comment provided by engineer. */
-"Lawn & Garden" = "芝生とアンプ; 庭園
-";
+"Lawn & Garden" = "الحديقة & حديقة";
 
 /* No comment provided by engineer. */
-"Level" = "レベル";
+"Level" = "المستوى";
 
 /* No comment provided by engineer. */
-"Life Insurance" = "生命保険";
+"Life Insurance" = "التأمين على الحياة";
 
 /* Loading account alert text */
-"Loading Account..." = "アカウントの読み込み中...";
+"Loading Account..." = "جار التحميل حساب...";
 
 /* title of wallets table balance header */
-"Loading Balance..." = "ローディング残高...";
+"Loading Balance..." = "تحميل الرصيد...";
 
 /* Loading Transactions alert text */
-"Loading Transactions..." = "トランザクションの読み込み中...";
+"Loading Transactions..." = "جار التحميل المعاملات...";
 
 /* Loading wallets alert text */
-"Loading Wallets..." = "ウォレットの読み込み中...";
+"Loading Wallets..." = "تحميل المحفظة...";
 
 /* Loading... */
-"Loading..." = "読み込み中";
+"Loading..." = "جار التحميل...";
 
 /* No comment provided by engineer. */
-"Logging Out" = "ログアウト中";
+"Logging Out" = "تسجيل الخروج";
 
 /* No comment provided by engineer. */
-"Login Package" = "ログインパッケージ";
+"Login Package" = "تسجيل الدخول حزمة";
 
 /* No comment provided by engineer. */
-"Low Fee" = "低い 代";
+"Low Fee" = "رسوم منخفضة";
 
 /* settings text */
-"Merchant Mode" = "マーチャントモード";
+"Merchant Mode" = "تاجر  طريقة";
 
 /* No comment provided by engineer. */
-"Message Sent" = "メッセージが送信さ";
+"Message Sent" = "تم ارسال الرسالة";
 
 /* No comment provided by engineer. */
-"Misc." = " その他";
+"Misc." = "متفرقات.";
 
 /* No comment provided by engineer. */
-"Mobile Phone" = "携帯電話";
+"Mobile Phone" = "تليفون محمول";
 
 /* No comment provided by engineer. */
-"More Categories" = "その他のカテゴリ";
+"More Categories" = "المزيد من التصنيفات";
 
 /* No comment provided by engineer. */
-"Mortgage & Rent" = "住宅ローンとアンプ; 賃貸";
+"Mortgage & Rent" = "رهن & إيجار";
 
 /* No comment provided by engineer. */
-"Mortgage Interest" = "住宅ローン利息";
+"Mortgage Interest" = "الفائدة الرهن العقاري";
 
 /* No comment provided by engineer. */
-"Movies & DVDs" = "映画とアンプ; DVD";
+"Movies & DVDs" = "أفلام & أقراص الفيديو الرقمية";
 
 /* No comment provided by engineer. */
-"Music" = "音楽";
+"Music" = "موسيقى";
 
 /* No comment provided by engineer. */
-"Must have at least %d characters" = "少なくとも持っていなければならない％d文字";
+"Must have at least %d characters" = "يجب أن يكون على الأقل %d الشخصيات";
 
 /* No comment provided by engineer. */
-"Must have at least one lower case letter" = "少なくとも1つの小文字が必要です";
+"Must have at least one lower case letter" = "يجب أن يكون على الأقل  واحد أقل إلكتروني حالة";
 
 /* No comment provided by engineer. */
-"Must have at least one number" = "少なくとも1つの番号を持つ必要があります";
+"Must have at least one number" = "يجب أن يكون رقم واحد على الأقل";
 
 /* No comment provided by engineer. */
-"Must have at least one upper case letter" = "少なくとも1つの大文字が必要です";
+"Must have at least one upper case letter" = "يجب أن يكون واحد على الأقل إلكتروني حالة العلوي";
 
 /* Default wallet name for new accounts */
-"My Wallet" = "マイウォレット";
+"My Wallet" = "محفظتى";
 
 /* section header in settings table */
-"NAME" = "名";
+"NAME" = "الإ سم";
 
 /* NO button text */
-"NO" = "いいえ";
+"NO" = "لا";
 
 /* No comment provided by engineer. */
-"Name" = "名";
+"Name" = "الاسم";
 
 /* No comment provided by engineer. */
-"Net Salary" = "ネット給与";
+"Net Salary" = "صافي الراتب";
 
 /* No comment provided by engineer. */
-"Network Error" = "ネットワーク エラー";
+"Network Error" = "خطأ في الشبكة";
 
 /* No comment provided by engineer. */
-"New PIN" = "新しいPIN";
+"New PIN" = "جديد PIN";
 
 /* No comment provided by engineer. */
-"New Password" = "新しいパスワード";
+"New Password" = "كلمة السر الجديدة";
 
 /* No comment provided by engineer. */
-"Newspaper & Magazines" = "新聞とアンプ; 雑誌";
+"Newspaper & Magazines" = "جريدة & مجلات";
 
 /* Next button text */
-"Next" = "次";
+"Next" = "التالى";
 
 /* settings text */
-"Nickname / Handle (optional)" = "ニックネーム/ハンドル（オプション）";
+"Nickname / Handle (optional)" = "كنية / مقبض (اختياري)";
+
+/* No comment provided by engineer. */
+"No PIN set" = "لا مجموعة PIN";
 
 /* what to display when wallet has no transactions */
-"No Transactions" = "トランザクションなし";
+"No Transactions" = "لا المعاملات";
 
 /* what to display when no transactions are found in search */
-"No Transactions Found" = "トランザクションが見つかりません";
+"No Transactions Found" = "لا المعاملات تم العثور عليها";
 
 /* No comment provided by engineer. */
-"No password set" = "パスワードは設定されていません";
+"No password set" = "لا مجموعة كلمة المرور";
 
 /* No comment provided by engineer. */
-"No thanks" = "結構です
- ";
+"No thanks" = "لا شكرا";
 
 /* No comment provided by engineer. */
-"Not Sure" = "わからない";
+"Not Sure" = "غير متأكد";
 
 /* No comment provided by engineer. */
-"Not so good" = "あまり良";
+"Not so good" = "ليست جيدة جدا";
 
 /* No comment provided by engineer. */
-"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "注意：  デフォルトの通貨設定は、新しいウォレットにのみ使用され、アカウントの合計残高を表示します。新しいウォレットを作成して、各トランザクションに表示される金額の通貨を変更します。";
+"Note: Default Currency setting is only used for new wallets and to show total balance of account. Create a new wallet to change the fiat currency shown in each transaction." = "ملاحظة: يستخدم الإعداد الافتراضي العملة فقط لمحافظ جديدة وإظهار الرصيد الكلي للحساب. إنشاء محفظة جديدة لتغيير العملة الورقية هو مبين في كل معاملة.";
 
 /* OK button text */
-"OK" = "はい";
+"OK" = "حسنا";
 
 /* section header in settings table */
-"OPTIONS" = "アカウント";
+"OPTIONS" = "خيارات";
 
 /* No comment provided by engineer. */
-"On The Web" = "オン・ザ・ウェブ";
+"On The Web" = "على شبكة الإنترنت";
 
 /* No comment provided by engineer. */
-"Only numbers allowed in PIN" = "PINに許可されている番号のみ";
+"Only numbers allowed in PIN" = "الأرقام الوحيدة المسموح بها في PIN";
 
 /* No comment provided by engineer. */
-"Open 24" = "オープン24";
+"Open 24" = "مفتوح 24";
 
 /* No comment provided by engineer. */
-"Open 24 hours" = "２４時間営業";
+"Open 24 hours" = "مفتوحة 24 ساعة";
 
 /* No comment provided by engineer. */
-"Other Income" = "その他の収益";
+"Other Income" = "مصدر دخل آخر";
 
 /* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
-"PIN Re-Login" = "ピン再ログイン";
+"PIN Re-Login" = "PIN إعادة الدخول";
 
 /* No comment provided by engineer. */
-"PIN must be %d digits" = "PINは必須です％d数字";
+"PIN must be %d digits" = "يجب أن يكون PIN%d من الأرقام";
 
 /* No comment provided by engineer. */
-"PIN successfully changed." = "PINが正常に変更されました。";
+"PIN successfully changed." = "PIN تغييرها بنجاح.";
 
 /* No comment provided by engineer. */
-"Parking" = "パーキング";
+"Parking" = "موقف سيارات";
 
 /* Text on partial payment */
-"Partial Payment" = "一部支払い";
+"Partial Payment" = "دفع جزء من المال";
 
 /* No comment provided by engineer. */
-"Password" = "パスワード";
+"Password" = "كلمه السر";
 
 /* No comment provided by engineer. */
-"Password Change" = "パスワードの変更";
+"Password Change" = "تغيير كلمة السر";
 
 /* No comment provided by engineer. */
-"Password Recovery" = "パスワード回復";
+"Password Recovery" = "استعادة كلمة السر";
 
 /* No comment provided by engineer. */
-"Password Recovery Setup" = "パスワード回復のセットアップ";
+"Password Recovery Setup" = "استعادة كلمة السر إعداد";
 
 /* No comment provided by engineer. */
 "Password change failed:
-%@" = "パスワードの変更に失敗：
+%@" = "فشل تغيير كلمة المرور:
 %@";
 
 /* No comment provided by engineer. */
-"Password does not match. Re-enter password" = "パスワードが合わない。 パスワード再入力";
+"Password does not match. Re-enter password" = "كلمة السر غير مطابقة. إعادة إدخال كلمة المرور";
 
 /* No comment provided by engineer. */
-"Password mismatch" = "パスワードの不一致";
+"Password mismatch" = "عدم تطابق كلمة المرور";
 
 /* No comment provided by engineer. */
-"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "パスワードが正常に変更されました。
-  あなたのパスワードや回復を忘れるな！ 彼らは回復できません！";
+"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!" = "الرقم السري تغير بنجاح. لا ينسى كلمة المرور الخاصة بك أو استرداد أجوبة! فلا يمكن المستردة!";
 
 /* Text on payment recived popup */
-"Payment received" = "支払い受け取";
+"Payment received" = "تلقى الدفع";
 
 /* Pending status in transaction list */
-"Pending" = "ペンディング";
+"Pending" = "Pending";
 
 /* No comment provided by engineer. */
-"Personal Care" = "パーソナルケア";
+"Personal Care" = "رعاية شخصية";
 
 /* expense category */
-"Pet Food & Supplies" = "ペットフードとアンプ; 用品";
+"Pet Food & Supplies" = "طعام الحيوانات الاليفة & اللوازم";
 
 /* expense category */
-"Pet Grooming" = "ペットグルーミング";
+"Pet Grooming" = "الحيوانات الأليفة الاستمالة";
 
 /* expense category */
-"Pets" = "ペット";
+"Pets" = "الحيوانات الأليفة";
 
 /* expense category */
-"Pharmacy" = "薬局";
+"Pharmacy" = "صيدلية";
 
 /* No comment provided by engineer. */
-"Place Call" = "場所コール";
+"Place Call" = "مكان  مكالمة";
 
 /* No comment provided by engineer. */
 "Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
 
-<br><br>%@" = "％1 $ @がインストールされているモバイルデバイスから下のリンクをクリックして、ユーザー名[％2 $ @]のアカウントの復元を開始してください
+<br><br>%@" = "يرجى النقر على الرابط أدناه من جهاز محمول مع %1$@ تثبيت لبدء استرداد الحساب لاسم المستخدم [%2$@]
 
 <br><br>%3$@";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "パスワードを忘れた場合は、新しいアカウントを作成して資金を振り替えてください。";
+"Please create a PIN for this account to enable quick re-logins" = "يرجى إنشاء PIN لهذا الحساب  لتمكين سريعة إعادة تسجيل الدخول";
 
 /* No comment provided by engineer. */
-"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "このアカウントのパスワードを作成してください。または端末を紛失または盗難した場合にアカウントを復旧することはできません";
+"Please create a new account and transfer your funds if you forgot your password." = "الرجاء إنشاء حساب جديد وتحويل الأموال الخاصة بك إذا كنت قد نسيت كلمة المرور الخاصة بك.";
 
 /* No comment provided by engineer. */
-"Please enter a User Name" = "ユーザー名を入力してください";
+"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "يرجى إنشاء كلمة مرور لهذا الحساب أو أنك لن تكون قادرا على استرداد حسابك في حالة فقدان الجهاز أو سرقته.";
 
 /* No comment provided by engineer. */
-"Please enter a username at the login screen" = "ログイン画面でユーザー名を入力してください";
+"Please enter a User Name" = "الرجاء ادخال اسم المستخدم";
 
 /* No comment provided by engineer. */
-"Please enter an amount to send" = "送信する金額を入力してください";
+"Please enter a username at the login screen" = "الرجاء إدخال اسم المستخدم في شاشة تسجيل الدخول";
 
 /* No comment provided by engineer. */
-"Please enter the username of the account to recover" = "復旧するアカウントのユーザー名を入力してください";
+"Please enter an amount to send" = "الرجاء إدخال مبلغ لإرسال";
 
 /* No comment provided by engineer. */
-"Please enter your PIN" = "PINを入力してください";
+"Please enter the username of the account to recover" = "الرجاء إدخال اسم المستخدم لحساب لاسترداد";
 
 /* No comment provided by engineer. */
-"Please enter your correct password." = "正しいパスワードを入力してください。";
+"Please enter your PIN" = "يرجى إدخال رقم التعريف الشخصي الخاص بك";
 
 /* No comment provided by engineer. */
-"Please enter your password to enable Touch ID" = "タッチIDを有効にするにはパスワードを入力してください";
+"Please enter your correct password." = "يرجى إدخال كلمة المرور الصحيحة.";
 
 /* No comment provided by engineer. */
-"Please find the email and click on the link from this device to initiate recovery" = "Eメール見つけてください、このデバイスからのリンクをクリックしてリカバリを開始します";
+"Please enter your password to enable Touch ID" = "يرجى إدخال كلمة المرور لتمكين معرف تاتش";
 
 /* No comment provided by engineer. */
-"Please have Requestor contact support" = "リクルーターにサポートを依頼してください";
+"Please find the email and click on the link from this device to initiate recovery" = "يرجى الاطلاع على البريد الإلكتروني وانقر على وصلة من هذا الجهاز لبدء الانتعاش";
 
 /* No comment provided by engineer. */
-"Please logout of current account before attempting password recovery" = "パスワードの回復を試みる前に現在のアカウントからログアウトしてください";
+"Please have Requestor contact support" = "يرجى أن يكون الاتصال بالدعم الطالب";
 
 /* No comment provided by engineer. */
-"Please try again later or contact support" = "後でもう一度お試しいただくか、サポートにお問い合わせください";
+"Please logout of current account before attempting password recovery" = "من فضلك خروج من الحساب الجاري قبل محاولة استعادة كلمة السر";
 
 /* No comment provided by engineer. */
-"Please verify the domain above and tap LOGIN to authenticate with this site" = "上記のドメインを確認しこのサイトで認証するにはLOGINをタップしてください";
+"Please try again later or contact support" = "يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم";
 
 /* No comment provided by engineer. */
-"Please wait %.0f seconds before retrying %@" = "％1$.0f秒待ってから％2 $ @を再試行してください。";
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "يرجى التحقق من النطاق أعلاه والاستفادة تسجيل الدخول إلى المصادقة مع هذا الموقع";
 
 /* No comment provided by engineer. */
-"Please wait 1 second before retrying %@" = "Please wait 1 second before retrying %@";
+"Please wait %.0f seconds before retrying %@" = "أرجو الإنتظار %1$.0f ثواني قبل إعادة المحاولة %2$@";
 
 /* No comment provided by engineer. */
-"Present QR code to Sender and have them scan to send you payment" = "送信者にQRコードを提示して、支払いを送信するようスキャンします";
+"Please wait 1 second before retrying %@" = "يرجى الانتظار 1 ثانية قبل إعادة المحاولة %@";
 
 /* No comment provided by engineer. */
-"Private Seed" = "プライベートシード";
+"Present QR code to Sender and have them scan to send you payment" = "رمز الاستجابة السريعة الحالي إلى المرسل، ويكون لهم مسح لنرسل لك دفع";
+
+/* No comment provided by engineer. */
+"Private Seed" = "خاص بذرة";
 
 /* expense category */
-"Property" = "プロパティ";
+"Property" = "الملكية";
 
 /* No comment provided by engineer. */
-"Provide an Identity Token" = "Provide an Identity Token";
+"Provide an Identity Token" = "توفير رمز الهوية";
 
 /* No comment provided by engineer. */
-"Public Seed (XPub)" = "Public Seed (XPub)";
+"Public Seed (XPub)" = "البذور العام (XPub)";
 
 /* expense category */
-"Public Transportation" = "公共交通機関";
+"Public Transportation" = "النقل العام";
 
 /* No comment provided by engineer. */
-"QR Code Scan Failure" = "QR Code Scan Failure";
+"QR Code Scan Failure" = "QR  رمز الفشل مسح";
 
 /* No comment provided by engineer. */
 "REFER YOUR FRIENDS
-(Earn Bitcoin)" = "REFER YOUR FRIENDS
-(Earn Bitcoin)";
+(Earn Bitcoin)" = "الرجوع أصدقائك
+(كسب بيتكوين)";
 
 /* No comment provided by engineer. */
-"Re-enter New Password" = "新しいパスワードを再入力する";
+"Re-enter New Password" = "أعد إدخال كلمة السر الجديدة";
 
 /* No comment provided by engineer. */
-"Received Bitcoin" = "受け取ったBitcoin";
+"Received Bitcoin" = "تلقى بيتكوين";
 
 /* No comment provided by engineer. */
-"Received Funds" = "Received Funds";
+"Received Funds" = "تسلم الأموال";
 
 /* Received string on Request screen */
-"Received..." = "Received...";
+"Received..." = "تم الاستلام...";
 
 /* No comment provided by engineer. */
-"Recovery Disabled" = "Recovery Disabled";
+"Recovery Disabled" = "انتعاش المعاقين";
 
 /* No comment provided by engineer. */
-"Recovery Password Reminder" = "Recovery Password Reminder";
+"Recovery Password Reminder" = "انتعاش تذكير كلمة السر";
 
 /* Title of recovery questions setup error alert */
-"Recovery Questions Not Set" = "Recovery Questions Not Set";
+"Recovery Questions Not Set" = "انتعاش أسئلة غير محدد";
 
 /* Title of recovery questions setup complete alert */
-"Recovery Questions Set" = "回復の質問セット";
+"Recovery Questions Set" = "انتعاش الأسئلة المحددة";
 
 /* No comment provided by engineer. */
 "Recovery Successful
 
-Please change your password and PIN" = "Recovery Successful
+Please change your password and PIN" = "انتعاش الناجح
 
-Please change your password and PIN";
-
-/* No comment provided by engineer. */
-"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+الرجاء تغيير كلمة المرور والرقم السري";
 
 /* No comment provided by engineer. */
-"Refer Your Friends" = "Refer Your Friends";
+"Recovery was not setup or was done on another device" = "كان الانتعاش لن الإعداد أو تم القيام به على جهاز آخر";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "الرجوع الأصدقاء لديك";
 
 /* expense category */
-"Registration" = "登録";
+"Registration" = "التسجيل";
 
 /* Remaining string on Request screen */
-"Remaining..." = "Remaining...";
+"Remaining..." = "ما تبقى...";
 
 /* No comment provided by engineer. */
-"Remember your password?" = "パスワードを記憶";
+"Remember your password?" = "تذكر كلمة المرور الخاصة بك؟";
 
 /* No comment provided by engineer. */
-"Remind Me Later" = "後で思い出させる";
+"Remind Me Later" = "ذكرني لاحقا";
 
 /* RENAME button text for wallet rename */
-"Rename" = "名前を変更する";
+"Rename" = "إعادة تسمية";
 
 /* Rename Wallet popup */
-"Rename Wallet" = "ウォレットの名前変更";
+"Rename Wallet" = "إعادة تسمية المحفظة";
 
 /* No comment provided by engineer. */
-"Rent" = "家賃";
+"Rent" = "إيجار";
 
 /* expense category */
-"Rental Car & Taxi" = "レンタカーとアンプ; タクシー";
+"Rental Car & Taxi" = "تأجير  سيارة & سيارة اجره";
 
 /* No comment provided by engineer. */
-"Request a Payment Address" = "Request a Payment Address";
+"Request a Payment Address" = "طلب عنوان الدفع";
 
 /* No comment provided by engineer. */
-"Request confirmed, Two Factor off." = "Request confirmed, Two Factor off.";
+"Request confirmed, Two Factor off." = "طلب تأكيد،  اثنان عامل خارج.";
 
 /* No comment provided by engineer. */
-"Request is copied to the clipboard" = "Request is copied to the clipboard";
+"Request is copied to the clipboard" = "يتم نسخ طلب إلى الحافظة";
 
 /* No comment provided by engineer. */
-"Request your Identity Token but you don't have any" = "Request your Identity Token but you don't have any";
+"Request your Identity Token but you don't have any" = "طلب الهوية رمز الخاص بك ولكن لم يكن لديك أي";
 
 /* No comment provided by engineer. */
-"Request your Identity Token. Please select one below" = "Request your Identity Token. Please select one below";
+"Request your Identity Token. Please select one below" = "طلب الهوية رمز الخاص بك. يرجى اختيار واحد أدناه";
 
 /* Requested string on Request screen */
-"Requested..." = "Requested...";
+"Requested..." = "طلب...";
 
 /* No comment provided by engineer. */
-"Reset Cancelled" = "Reset Cancelled";
+"Reset Cancelled" = "إعادة تعيين ألغي";
 
 /* No comment provided by engineer. */
-"Reset Date" = "Reset Date";
+"Reset Date" = "التسجيل إعادة تعيين";
 
 /* No comment provided by engineer. */
-"Reset requested. Please retry login after 7 days." = "Reset requested. Please retry login after 7 days.";
+"Reset requested. Please retry login after 7 days." = "طلب إعادة تعيين. يرجى إعادة المحاولة لتسجيل الدخول بعد 7 أيام.";
 
 /* No comment provided by engineer. */
-"Restarting watcher service" = "Restarting watcher service";
+"Restarting watcher service" = "إعادة تشغيل خدمة مراقب";
 
 /* expense category */
-"Restaurants" = "レストラン";
+"Restaurants" = "مطاعم";
 
 /* No comment provided by engineer. */
-"Restaurants & Food Trucks" = "レストランとアンプ; 食品トラック";
+"Restaurants & Food Trucks" = "المطاعم & شاحنات المواد الغذائية";
 
 /* Income notes field for affiliate revenue */
-"Revenue share from affiliate link %@" = "レベニューシェアアフィリエイトリンク％@";
+"Revenue share from affiliate link %@" = "حصة الإيرادات من الارتباط التابعة لها %@";
 
 /* SEND button text */
-"SEND" = "送信";
+"SEND" = "إرسال";
 
 /* text for textmessage/SMS */
-"SMS" = "メッセージ";
+"SMS" = "‏الرسائل القصيرة SMS";
 
 /* No comment provided by engineer. */
-"SMS cancelled" = "SMS cancelled";
+"SMS cancelled" = "SMS إلغاء";
 
 /* No comment provided by engineer. */
-"SMS sent" = "SMS sent";
+"SMS sent" = "الرسائل القصيرة المرسلة";
 
 /* Slideout menu spend text */
-"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+"SPEND BITCOIN (Plugins)" = "تنفق بيتكوين  (الإضافات)";
 
 /* No comment provided by engineer. */
-"Sales" = "販売";
+"Sales" = "مبيعات";
 
 /* No comment provided by engineer. */
-"San Diego, California, USA" = "カリフォルニア州サンディエゴ";
+"San Diego, California, USA" = "سان دييغو، كاليفورنيا، الولايات المتحدة الأمريكية";
 
 /* Title of recovery email popup */
-"Save Recovery Token" = "Save Recovery Token";
+"Save Recovery Token" = "حفظ استعادة رمز";
 
 /* Text at top of Scan Screen */
-"Scan QR to Import Private Key/Gift Card" = "Scan QR to Import Private Key/Gift Card";
+"Scan QR to Import Private Key/Gift Card" = "تفحص QR  استيراد مفتاح خاص / بطاقة هدية";
 
 /* No comment provided by engineer. */
-"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "مسح QR  مدونة المستفيد لإرسال دفع أو انقر على طلب بلوتوث من القائمة أدناه";
 
 /* Text at top of Send screen */
-"Scan to Send, Import, or Edge Login" = "Scan to Send, Import, or Edge Login";
+"Scan to Send, Import, or Edge Login" = "مسح لإرسال، استيراد، أو حافة الدخول";
 
 /* SearchBarSearch placeholder */
-"Search" = "サーチ";
+"Search" = "بحث";
 
 /* No comment provided by engineer. */
-"Select Currency" = "Select Currency";
+"Select Currency" = "اختر العملة";
 
 /* No comment provided by engineer. */
-"Sell Bitcoin" = "Bitcoinを売る";
+"Sell Bitcoin" = "بيع بيتكوين";
 
 /* No comment provided by engineer. */
-"Send Funds to Private Key" = "Send Funds to Private Key";
+"Send Funds to Private Key" = "إرسال الأموال إلى مفتاح خاص";
 
 /* settings text */
-"Send name on payment request" = "支払い依頼時に名前を送信";
+"Send name on payment request" = "إرسال الاسم على طلب الدفع";
 
 /* No comment provided by engineer. */
-"Send to Bitcoin Address or Import Private Key" = "Send to Bitcoin Address or Import Private Key";
+"Send to Bitcoin Address or Import Private Key" = "ارسل الى بيتكوين عنوان أو استيراد مفتاح خاص";
 
 /* status message */
-"Sending..." = "送信中…";
+"Sending..." = "إرسال...";
 
 /* No comment provided by engineer. */
-"Sent Bitcoin" = "送信Bitcoin";
+"Sent Bitcoin" = "إرسال بيتكوين";
 
 /* expense category */
-"Service & Parts" = "サービスとアンプ; 部品";
+"Service & Parts" = "خدمة & أجزاء";
 
 /* expense category */
-"Service Fee" = "サービス料金:";
+"Service Fee" = "رسوم الخدمة";
 
 /* No comment provided by engineer. */
-"Set a Password" = "Set a Password";
+"Set a Password" = "تعيين كلمة المرور";
 
 /* No comment provided by engineer. */
-"Set a Password and PIN" = "パスワードとPINを設定する";
+"Set a Password and PIN" = "تعيين كلمة المرور والرقم السري";
 
 /* No comment provided by engineer. */
 "Setting recovery questions failed:
-%@" = "Setting recovery questions failed:
+%@" = "وضع الأسئلة الانتعاش فشلت:
 %@";
 
 /* No comment provided by engineer. */
-"Settings" = "セッティング";
+"Settings" = "إعدادات";
 
 /* Generic SHARE button text */
-"Share" = "シェア";
+"Share" = "تقاسم";
 
 /* expense category */
-"Shopping" = "ショッピング";
+"Shopping" = "التسوق";
 
 /* Show */
-"Show" = "ショー";
+"Show" = "تبين";
 
 /* No comment provided by engineer. */
-"Show Balance" = "ショーバランス";
+"Show Balance" = "عرض الرصيد";
 
 /* No comment provided by engineer. */
-"Show QR Code" = "Show QR Code";
+"Show QR Code" = "تبين QR رمز";
 
 /* No comment provided by engineer. */
-"Sign Up" = "サインアップ";
+"Sign Up" = "تسجيل";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
-%@" = "Sign-Up failed:
+%@" = "فشل انشاء الحساب:
 %@";
 
 /* Skip button text */
-"Skip" = "スキップ";
+"Skip" = "تخطى";
 
 /* Title of Skip this step alert */
-"Skip this step" = "このステップをスキップ";
+"Skip this step" = "تخطي هذه الخطوة";
 
 /* No comment provided by engineer. */
-"Sorry" = "ごめん";
+"Sorry" = "آسف";
 
 /* expense category */
-"Spa & Massage" = "スパとアンペア; マッサージ";
+"Spa & Massage" = "منتجع صحي & تدليك";
 
 /* No comment provided by engineer. */
-"Spend Bitcoin (Plugins)" = "Bitcoinを使う（プラグイン）";
+"Spend Bitcoin (Plugins)" = "أنفق  بيتكوين  (الإضافات)";
 
 /* spending limits text */
-"Spending Limits" = "費やす限界";
+"Spending Limits" = "حدود الإنفاق";
 
 /* expense category */
-"Sporting Goods" = "スポーツ用品";
+"Sporting Goods" = "بضائع رياضيه";
 
 /* expense category */
-"Sports" = "スポーツ";
+"Sports" = "رياضات";
 
 /* No comment provided by engineer. */
-"Standard Fee" = "標準料金";
+"Standard Fee" = "الرسوم القياسية";
 
 /* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "Starbucks (Up to 20% Off)";
+"Starbucks (Up to 20% Off)" = "ستاربكس (ما يصل الى 20٪ من)";
 
 /* expense category */
-"Student Loan" = "学生ローン";
+"Student Loan" = "قرض الطالب";
 
 /* No comment provided by engineer. */
-"Successfully Logged In" = "正常にログインしました";
+"Successfully Logged In" = "تسجيل بنجاح في";
 
 /* No comment provided by engineer. */
-"Successfully Verified Identity" = "Successfully Verified Identity";
+"Successfully Verified Identity" = "الهوية التحقق بنجاح";
 
 /* No comment provided by engineer. */
-"Successfully received identity token from %@" = "Successfully received identity token from %@";
+"Successfully received identity token from %@" = "تلقى بنجاح رمز هوية من %@";
 
 /* No comment provided by engineer. */
-"Sweep Funds From Private Key" = "プライベートキーから資金を払う";
+"Sweep Funds From Private Key" = "اكتساح صناديق من المفتاح الخاص";
 
 /* Synchronizing text in confirmation textfield */
-"Synchronizing" = "Synchronizing";
+"Synchronizing" = "مزامنة";
 
 /* Prefix of wallet balance dropdown header */
-"TOTAL: " = "合計 ";
+"TOTAL: " = "حاصل جمع: ";
 
 /* No comment provided by engineer. */
-"Tap and hold a wallet for additional options" = "Tap and hold a wallet for additional options";
+"Tap and hold a wallet for additional options" = "انقر مع الاستمرار على المحفظة لخيارات إضافية";
 
 /* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "Target (Up to 10% Off)";
+"Target (Up to 10% Off)" = "الهدف (ما يصل إلى 10٪ من)";
 
 /* expense category */
-"Tax" = "税金";
+"Tax" = "قرض الطالب";
 
 /* expense category */
-"Television" = "テレビ";
+"Television" = "تلفزيون";
 
 /* No comment provided by engineer. */
-"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.";
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "الرمز المميز مصادقة عامل اثنين على هذا الجهاز غير صالح. إما تم تغيير رمز من قبل جهاز آخر لدينا مدار الساعة لديك منحرفة.  يرجى التحقق من وقت النظام للتأكد من صحتها.";
 
 /* No comment provided by engineer. */
-"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@";
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "عنوان بيتكوين من الجهاز الذي متصل:%1$@ لا يطابق العنوان الذي تم الإعلان في البداية:%2$@";
 
 /* No comment provided by engineer. */
 "The following services are not provided by %@.
 
-For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+For issues and feedback, please contact the respective service providers." = "لا يتم توفير الخدمات التالية %@.
 
-For issues and feedback, please contact the respective service providers.";
-
-/* No comment provided by engineer. */
-"The given answers were incorrect. Please try again." = "The given answers were incorrect. Please try again.";
+للقضايا وردود الفعل، يرجى الاتصال مقدمي الخدمات المعنية.";
 
 /* No comment provided by engineer. */
-"The password to this account was changed by another device. Please login using the new credentials." = "The password to this account was changed by another device. Please login using the new credentials.";
+"The given answers were incorrect. Please try again." = "وكانت الاجابات غير صحيحة. حاول مرة اخرى.";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "تم تغيير كلمة المرور لهذا الحساب من قبل جهاز آخر. يرجى تسجيل الدخول باستخدام أوراق اعتماد جديدة.";
 
 /* Title of recovery popup message */
-"This account already has password recovery setup. Would you like to disable it?" = "This account already has password recovery setup. Would you like to disable it?";
+"This account already has password recovery setup. Would you like to disable it?" = "هذا الحساب لديه بالفعل الإعداد استعادة كلمة السر. هل ترغب في تعطيله؟";
 
 /* No comment provided by engineer. */
-"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.";
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "وهذا من شأنه تطبيق ترغب في الوصول إلى مستودعات التالية مرتبطة حساب Airbitz الخاص بك. فإنه لن يكون الوصول إلى أي حسابات أو محافظ أخرى.";
 
 /* Username Signup screen info text */
 "This is not your email or real name.
 
 This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
 
-Your username and password are known only to you and never stored unencrypted." = "This is not your email or real name.
+Your username and password are known only to you and never stored unencrypted." = "هذا ليس البريد الإلكتروني أو اسم حقيقي.
 
-This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
-
-Your username and password are known only to you and never stored unencrypted.";
+هذا هو اسم المستخدم للدخول إلى حسابك[[abtag APP_TITLE]] حساب حول هذا الموضوع وغيرها من الأجهزة.
+ومن المعروف اسم المستخدم وكلمة المرور الخاصة بك فقط لأنك وأبدا تخزين مشفرة.";
 
 /* Loading Wallets alert text */
-"This may take a few minutes if it is the first time logging into this device." = "This may take a few minutes if it is the first time logging into this device.";
+"This may take a few minutes if it is the first time logging into this device." = "قد يستغرق هذا بضع دقائق إذا كانت هذه هي المرة الأولى الدخول إلى هذا الجهاز.";
 
 /* No comment provided by engineer. */
-"This site would like to:" = "This site would like to:";
+"This site would like to:" = "ان هذا الموقع ترغب في:";
 
 /* Popup sessage for when a wallet is archived */
-"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "This wallet has been archived. Please select a different wallet from the [Wallets] screen";
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "تم أرشفة هذه المحفظة. الرجاء اختيار محفظة مختلفة من [Wallets] شاشة";
 
 /* text in password verification popup */
-"Time to crack:" = "Time to crack:";
+"Time to crack:" = "الوقت للقضاء:";
 
 /* Message of recovery token popup */
-"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "لاستكمال الإعداد استرداد الحساب يجب أن حفظ رمز استرداد الحساب. سوف تكون هناك حاجة إلى هذا استرداد حسابك بالإضافة إلى اسم المستخدم والانتعاش إجابات. يرجى إدخال البريد الالكتروني أدناه لإرسال نفسك رمز الانتعاش.";
 
 /* Popup wallet help test */
-"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet";
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "لفرز محفظة، انقر فوق واسحب 3 بارات إلى حق المحفظة. السحب تحت [ARCHIVE]] رأس أرشفة المحفظة";
 
 /* No comment provided by engineer. */
-"To: %@" = "To: %@";
+"To: %@" = "ل: %@";
 
 /* Top of screen wallet dropdown prefix text */
-"To: %@ ▼" = "To: %@ ▼";
+"To: %@ ▼" = "ل: %@ ▼";
 
 /* expense category */
-"Tolls" = "通行料金";
+"Tolls" = "رسوم";
 
 /* No comment provided by engineer. */
-"Top Up Prepaid Phones" = "Top Up Prepaid Phones";
+"Top Up Prepaid Phones" = "أعلى ما يصل الهواتف المدفوعة مسبقا";
 
 /* No comment provided by engineer. */
-"Touch ID" = "Touch ID";
+"Touch ID" = "معرف اللمس";
 
 /* No comment provided by engineer. */
-"Touch ID Disabled" = "Touch ID Disabled";
+"Touch ID Disabled" = "لمس هوية شخصية  معاق";
 
 /* No comment provided by engineer. */
-"Touch ID Enabled" = "Touch ID Enabled";
+"Touch ID Enabled" = "لمس معرف ممكن";
 
 /* Touch ID prompt text */
-"Touch to login user" = "Touch to login user";
+"Touch to login user" = "لمس للدخول المستخدم";
 
 /* settings text */
-"TouchID: Set password first" = "TouchID: Set password first";
+"TouchID: Set password first" = "TouchID: تعيين كلمة المرور لأول مرة";
 
 /* settings text */
-"TouchID: Unsupported Device" = "TouchID: Unsupported Device";
+"TouchID: Unsupported Device" = "TouchID: جهاز غير مدعوم";
 
 /* expense category */
-"Toys" = "おもちゃ";
+"Toys" = "عروسه لعبه";
 
 /* expense category */
-"Trade Commissions" = "貿易手数料";
+"Trade Commissions" = "اللجان التجارة";
 
 /* Transaction Details header text */
-"Transaction Details" = "取引の詳細";
+"Transaction Details" = "تفاصيل الصفقه";
 
 /* Financial transaction that moves money from one account to another */
-"Transfer" = "移転";
+"Transfer" = "نقل السلطة";
 
 /* From wallet transfer text */
-"Transfer From %@" = "Transfer From %@";
+"Transfer From %@" = "تحويل من %@";
 
 /* To wallet transfer text */
-"Transfer To %@" = "Transfer To %@";
+"Transfer To %@" = "تحويل إلى%@";
 
 /* expense category */
-"Travel" = "トラベル";
+"Travel" = "سفر";
 
 /* No comment provided by engineer. */
-"Trouble connecting to network" = "Trouble connecting to network";
+"Trouble connecting to network" = "مشكلة في الاتصال بالشبكة";
 
 /* No comment provided by engineer. */
-"Try again?" = "Try again?";
+"Try again?" = "حاول مرة اخرى؟";
 
 /* expense category */
-"Tuition" = "授業料";
+"Tuition" = "رسوم";
 
 /* No comment provided by engineer. */
-"Two Factor" = "2因子";
+"Two Factor" = "اثنين عامل";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "2要素認証（セキュリティ強化）このアカウントの別のデバイスから有効になっています。このデバイスから完全にアクセスするには2因子認証を有効にしてください。";
+"Two Factor Authentication (enchanced security) has been enabled from a different device for this account. Please enable 2 Factor Authentication for full access from this device." = "اثنين عامل التوثيق (محسنة الأمان) تم تمكين من جهاز آخر لهذا الحساب. يرجى تمكين 2 مصادقة عامل من أجل الوصول الكامل من هذا الجهاز.";
 
 /* No comment provided by engineer. */
-"Two Factor Authentication On" = "2つのファクター認証を有効";
+"Two Factor Authentication On" = "اثنان عامل المصادقة على";
 
 /* No comment provided by engineer. */
-"Two Factor Disabled" = "2因子無効";
+"Two Factor Disabled" = "اثنين عامل معطل";
 
 /* 2FA warning on enable */
 "Two Factor Enabled
 
 ** Warning **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Two Factor Enabled
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "اثنين عامل تمكين
 
-** Warning **
+** تحذير **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"";
-
-/* No comment provided by engineer. */
-"Two Factor Invalid" = "2つの要因が無効です
- ";
+إذا فقدت جهازك أو إلغاء تثبيت التطبيق، وسوف يستغرق 7 أيام إلى تعطيل 2FA والوصول إلى حسابك \"";
 
 /* No comment provided by engineer. */
-"Two Factor Reset" = "Two Factor Reset";
+"Two Factor Invalid" = "Two Factor Invalid";
 
 /* No comment provided by engineer. */
-"USA" = "USA";
+"Two Factor Reset" = "اثنين عامل إعادة تعيين";
 
 /* No comment provided by engineer. */
-"USA and Canada" = "USA and Canada";
+"USA" = "الولايات المتحدة الأمريكية";
 
 /* No comment provided by engineer. */
-"Unable to determine two factor status" = "2つの要因のステータスを判断できません";
+"USA and Canada" = "الولايات المتحدة الأمريكية وكندا";
 
 /* No comment provided by engineer. */
-"Unable to import secret" = "Unable to import secret";
+"Unable to determine two factor status" = "غير قادر على تحديد حالة اثنين عامل";
 
 /* No comment provided by engineer. */
-"Unable to import token" = "トークンをインポートできません";
+"Unable to import secret" = "غير قادر على استيراد سرا";
 
 /* No comment provided by engineer. */
-"Unable to save Settings" = "Unable to save Settings";
+"Unable to import token" = "غير قادر على استيراد رمز";
 
 /* No comment provided by engineer. */
-"Unable to scan QR code" = "QRコードをスキャンできません";
+"Unable to save Settings" = "غير قادر على حفظ إعدادات";
 
 /* No comment provided by engineer. */
-"Unable to update Settings" = "Unable to update Settings";
+"Unable to scan QR code" = "غير قادر على مسح رمز الاستجابة السريعة";
 
 /* No comment provided by engineer. */
-"Up to 10% off Target" = "ターゲットから最大10％オフ";
+"Unable to update Settings" = "غير قادر على تحديث إعدادات";
 
 /* No comment provided by engineer. */
-"Up to 20% off Starbucks" = "スターバックスを最大20％オフ";
+"Up to 10% off Target" = "ما يصل إلى 10٪ من المستهدف";
+
+/* No comment provided by engineer. */
+"Up to 20% off Starbucks" = "ما يصل الى 20٪ من ستاربكس";
 
 /* Upload Failed */
-"Upload Failed. Please check your network connection" = "Upload Failed. Please check your network connection";
+"Upload Failed. Please check your network connection" = "لقد فشل رفع الملف. يرجى التحقق من الاتصال بالشبكة";
 
 /* No comment provided by engineer. */
-"Upload Image" = "Upload Image";
+"Upload Image" = "تحميل الصور";
 
 /* No comment provided by engineer. */
-"Upload Log" = "Upload Log";
+"Upload Log" = "تحميل سجلات";
 
 /* No comment provided by engineer. */
-"Upload Log File" = "Upload Log File";
+"Upload Log File" = "تحميل ملفات الدخول";
 
 /* Upload Successful fading popup */
-"Upload Successful" = "Upload Successful";
+"Upload Successful" = "تم الرفع بنجاح";
 
 /* Uploading logfile fading popup */
-"Uploading logfile. Please wait..." = "Uploading logfile. Please wait...";
+"Uploading logfile. Please wait..." = "تحميل ملفات الدخول. أرجو الإنتظار...";
 
 /* No comment provided by engineer. */
-"Use Camera" = "カメラを使用する";
+"Use Camera" = "استخدام الكاميرا
+ ";
 
 /* Touch ID [Use PIN] button */
-"Use PIN" = "Use PIN";
+"Use PIN" = "استخدام PIN";
 
 /* Touch ID [Use Password] button */
-"Use Password" = "Use Password";
+"Use Password" = "استخدم كلمة مرور";
 
 /* No comment provided by engineer. */
-"Use Photo Album" = "フォトアルバムを使う";
+"Use Photo Album" = "استخدام ألبوم الصور";
 
 /* settings text */
-"Use TouchID" = "Use TouchID";
+"Use TouchID" = "استعمالTouchID";
 
 /* No comment provided by engineer. */
-"User Name: %@" = "User Name: %@";
+"User Name: %@" = "اسم المستخدم: %@";
 
 /* Username */
-"Username" = "ユーザー名";
+"Username" = "اسم المستخدم";
 
 /* No comment provided by engineer. */
-"Username must be at least %d characters." = "Username must be at least %d characters.";
+"Username must be at least %d characters." = "يجب أن يكون اسم المستخدم على الأقل %d الشخصيات.";
 
 /* expense category */
-"Utilities" = "ユーティリティ";
+"Utilities" = "الأدوات المساعدة";
 
 /* expense category */
-"Vacation" = "バケーション";
+"Vacation" = "إجازة";
 
 /* No comment provided by engineer. */
-"Validating Address..." = "Validating Address...";
+"Validating Address..." = "التحقق من صحة عنوان...";
 
 /* expense category */
-"Vet" = "獣医";
+"Vet" = "بيطري";
 
 /* title of active wallets table */
-"WALLETS" = "財布";
+"WALLETS" = "محفظة";
 
 /* Title of missing password notification */
-"WARNING: missing password" = "警告：パスワードがありません";
+"WARNING: missing password" = "تحذير: كلمة المرور المفقودة";
 
 /* Status on Request screen */
-"Waiting for Payment..." = "Waiting for Payment...";
+"Waiting for Payment..." = "بانتظار الدفع...";
 
 /* No comment provided by engineer. */
-"Wallet Deleted" = "Wallet Deleted";
+"Wallet Deleted" = "محفظة  تم الحذف";
 
 /* No comment provided by engineer. */
-"Wallet Export" = "Wallet Export";
+"Wallet Export" = "محفظة التصدير";
 
 /* No comment provided by engineer. */
-"Wallet Private Seed" = "Wallet Private Seed";
+"Wallet Private Seed" = "محفظة البذور الخاص";
 
 /* No comment provided by engineer. */
 "Wallet creation failed:
-%@" = "Wallet creation failed:
+%@" = "إنشاء محفظة فشل:
 %@";
 
 /* No comment provided by engineer. */
-"Wallet name must have at least one character" = "Wallet name must have at least one character";
+"Wallet name must have at least one character" = "يجب أن يكون اسم المحفظة حرف واحد على الأقل";
 
 /* Prefix of wallet name on rename popup */
-"Wallet: " = "財布： ";
+"Wallet: " = "محفظة: ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "Walmart (Up to 10% Off)";
+"Walmart (Up to 10% Off)" = "وول مارت (ما يصل إلى 10٪ من)";
 
 /* No comment provided by engineer. */
-"Warning!" = "Warning!";
+"Warning!" = "تحذير!";
 
 /* No comment provided by engineer. */
-"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled";
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "تحذير. بدون كلمة مرور، فلن تكون قادرا على تسجيل الدخول على جهاز جديد في حالة فقدان هذا الجهاز أو سرقته، أو إذا تم إلغاء تثبيت هذا التطبيق";
 
 /* Double spend status in transaction list */
-"Warning: Double Spend" = "警告：ダブル費やす";
+"Warning: Double Spend" = "تحذير: تنفق ضعف";
 
 /* No comment provided by engineer. */
-"Warning: Low Fees may cause long delays in transaction confirmation" = "警告：低額の料金は長い遅延を引き起こす可能性があります  取引の確認";
+"Warning: Low Fees may cause long delays in transaction confirmation" = "تحذير: قد تسبب رسوم منخفضة تأخيرات طويلة في إقرار الصفقة";
 
 /* RBF status in transaction list */
-"Warning: Replace by Fee Detected. Double spend likely" = "警告：検出された料金で交換してください。 二重の可能性が高い";
+"Warning: Replace by Fee Detected. Double spend likely" = "تحذير: استبدال من رسوم الكشف. الإنفاق المزدوج على الأرجح";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "مسح قاعدة بيانات مراقب ولكن حدث خطأ. يرجى السماح لبضع دقائق لتتم إعادة مزامنة المعلومات blockchain. المعاملات والأرصدة قد تكون غير دقيقة أثناء المزامنة";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "مسح قاعدة بيانات مراقب. يرجى السماح لبضع دقائق لتتم إعادة مزامنة المعلومات blockchain. المعاملات والأرصدة قد تكون غير دقيقة أثناء المزامنة";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "Whole Foods (Up to 10% Off)";
+"Whole Foods (Up to 10% Off)" = "الجامع للأغذية (ما يصل إلى 10٪ من)";
 
 /* No comment provided by engineer. */
-"Would you like to enable TouchID for this account and device?" = "Would you like to enable TouchID for this account and device?";
+"Would you like to enable TouchID for this account and device?" = "هل ترغب في تمكين معرف اللمس لهذا الحساب والجهاز؟";
 
 /* No comment provided by engineer. */
-"Would you like to send funds to this address or import funds into your wallet?" = "Would you like to send funds to this address or import funds into your wallet?";
+"Would you like to send funds to this address or import funds into your wallet?" = "هل ترغب في إرسال الأموال إلى هذا العنوان أو أموال الواردات في محفظتك؟";
 
 /* No comment provided by engineer. */
-"Would you like to send us some feedback?" = "フィードバックをお送りしますか？";
+"Would you like to send us some feedback?" = "تريد أن ترسل لنا بعض ردود الفعل؟";
 
 /* No comment provided by engineer. */
-"Would you like to write a review in the App store?" = "Would you like to write a review in the App store?";
+"Would you like to write a review in the App store?" = "هل ترغب في كتابة استعراض في المتجر؟";
 
 /* No comment provided by engineer. */
-"Wrong Answers" = "間違った答え";
+"Wrong Answers" = "أجوبة خاطئة";
 
 /* YES button text */
-"YES" = "YES";
+"YES" = "نعم فعلا";
 
 /* No comment provided by engineer. */
 "You Received Bitcoin!
-%@ (~%@)" = "You Received Bitcoin!
+%@ (~%@)" = "أنت تم الاستلام بيتكوين!
 %1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "كنت على وشك إنهاء الإعداد استعادة كلمة السر. لم يتم حفظ الأسئلة والإجابات التي اخترتها.";
 
 /* No comment provided by engineer. */
-"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+"You must answer all questions. Make sure your answers are long enough." = "يجب الإجابة على جميع الأسئلة. تأكد من إجاباتك طويلة بما فيه الكفاية.";
 
 /* No comment provided by engineer. */
-"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
+"You must choose a question for all selections before proceeding." = "يجب الإجابة على جميع الأسئلة. تأكد من إجاباتك طويلة بما فيه الكفاية.";
 
 /* No comment provided by engineer. */
-"You must enter a user name" = "ユーザー名を入力する必要があり";
+"You must enter a user name" = "يجب إدخال اسم المستخدم";
 
 /* No comment provided by engineer. */
 "You received Bitcoin!
 %@ (~%@)
-Use the Payee, Category, and Notes field to optionally tag your transaction" = "You received Bitcoin!
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "استلمت
+بيتكوين!
 %1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction";
+استخدم حقل المستفيد، التصنيف، وإيضاحات اختياريا علامة معاملتك";
 
 /* Camera signup screen */
 "You will next see a popup requesting access to your Camera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "You will next see a popup requesting access to your Camera.
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "سترى بجانب منبثقة الوصول إلى الكاميرا.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
-
-/* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "あなたはBitcoinを受け取りました！ パスワード回復の質問と回答を設定することを強くおすすめします。それ以外の場合は、パスワードを忘れてしまった場合、あなたのアカウントにアクセスすることはできません。";
+[[abtag APP_TITLE]] يحتاج هذا إلى مسح  رموز QR  لدفع الناس والتجار.";
 
 /* No comment provided by engineer. */
-"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!";
+"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "لقد تلقيت بيتكوين!  ونحن نوصي بشدة وضع الأسئلة استعادة كلمة السر والأجوبة.  وإلا فإنك لن تكون قادرا على الوصول إلى حسابك إذا نسيت كلمة المرور الخاصة بك.";
+
+/* No comment provided by engineer. */
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "الأسئلة استعادة كلمة السر الخاصة بك  ويتم تعيين الأجوبة الآن ما يص.. عندما استعادة كلمة المرور،   يجب أن إجاباتك تتطابق تماما. ** لا تنسى كلمة المرور الخاصة بك والإنعاش أجوبة ** حسابك ما يتعذر بدونها!!";
 
 /* Start of password rules text */
-"Your password..." = "Your password...";
+"Your password..." = "كلمة المرور الخاصة بك...";
 
 /* Contacts signup screen */
 "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
 
 All tagged information is kept 100% private and encrypted by your password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] يستخدم الاتصالات للمساعدة في بطاقة المعلومات بخصوص المعاملات الخاصة بك.
 
-All tagged information is kept 100% private and encrypted by your password.
+جميع المعلومات التي يحتفظ الموسومة 100٪ الخاص وتشفير بواسطة كلمة المرور الخاصة بك.
 
-No one, including [[abtag APP_TITLE]], has any access to this information.";
+لا أحد، بما في ذلك [[abtag APP_TITLE]], لديه أي الوصول إلى هذه المعلومات.";
 
 /* settings text */
-"bits = (0.000001 Bitcoin)" = "ビット=（0.000001Bitcoin）";
+"bits = (0.000001 Bitcoin)" = "بت = (0.000001 بيتكوين)";
 
 /* business listings is closed */
-"closed" = "closed";
+"closed" = "مغلق";
 
 /* No comment provided by engineer. */
-"day" = "day";
+"day" = "يوم";
 
 /* No comment provided by engineer. */
-"days" = "日々";
+"days" = "أيام";
 
 /* No comment provided by engineer. */
-"hour" = "hour";
+"hour" = "ساعة";
 
 /* No comment provided by engineer. */
-"hours" = "アワー";
+"hours" = "ساعات";
 
 /* settings text */
-"mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
+"mBitcoin = (0.001 Bitcoin)" = "mبيتكوين= (0.001 بيتكوين)";
 
 /* No comment provided by engineer. */
-"minute" = "minute";
+"minute" = "دقائق";
 
 /* No comment provided by engineer. */
-"minutes" = "分";
+"minutes" = "دقيقة";
 
 /* No comment provided by engineer. */
-"second" = "second";
+"second" = "ثانية";
 
 /* No comment provided by engineer. */
-"seconds" = "秒";
+"seconds" = "ثواني";
 
 /* Header of popup in SendView from wallet to wallet transfer */
-"▼ Choose a wallet to transfer funds to ▼" = "▼ Choose a wallet to transfer funds to ▼";
+"▼ Choose a wallet to transfer funds to ▼" = "▼ اختيار محفظة لتحويل الأموال إلى ▼";
 

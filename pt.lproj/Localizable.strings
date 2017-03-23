@@ -1,3 +1,6 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Por favor, escolha uma carteira para receber fundos.";
 
@@ -21,7 +24,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "%@ Bitcoin received. Tap for details." = "%@ Bitcoin rebebido. Toque para obter detalhes.";
 
 /* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
-"%@ Recovery Token" = "%@ Recovery Token";
+"%@ Recovery Token" = "%@ Token de recuperação";
 
 /* No comment provided by engineer. */
 "%@ failed:
@@ -62,7 +65,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "ATM Fee" = "ATM Fee";
 
 /* ACCEPT button text */
-"Accept" = "Accept";
+"Accept" = "Aceitar";
 
 /* No comment provided by engineer. */
 "Account '%@' needs a password. Account is not accessible on a new device without a password." = "A conta '%@' precisa de uma senha. A conta não é acessível em um novo dispositivo sem uma senha.";
@@ -113,10 +116,10 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Answers are case sensitive" = "As respostas diferenciam maiúsculas de minúsculas";
 
 /* APPROVE button text */
-"Approve" = "Approve";
+"Approve" = "Aprovado";
 
 /* Approving Login popup */
-"Approving Login..." = "Approving Login...";
+"Approving Login..." = "Aprovando o Login...";
 
 /* No comment provided by engineer. */
 "Are you sure you want to call" = "Tem certeza que deseja chamar";
@@ -164,7 +167,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Bills & Utilities" = "Contas & Serviços públicos";
 
 /* No comment provided by engineer. */
-"BitID Identity" = "BitID Identity";
+"BitID Identity" = "Identidade BitID";
 
 /* No comment provided by engineer. */
 "BitID Login" = "Login BitID";
@@ -206,7 +209,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Buy/Sell Bitcoin" = "Comprar/Vender Bitcoin";
 
 /* No comment provided by engineer. */
-"Buy/Sell with Bank Account (USA)" = "Buy/Sell with Bank Account (USA)";
+"Buy/Sell with Bank Account (USA)" = "Compra / Venda com Conta Bancária (EUA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "CANCELAR";
@@ -257,7 +260,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Checking password..." = "Verificando senha...";
 
 /* No comment provided by engineer. */
-"Choose a Question" = "Choose a Question";
+"Choose a Question" = "Escolha uma questão";
 
 /* City, State/Province, or Country placeholder */
 "City, State/Province, or Country" = "Cidade, Estado/Província, ou País";
@@ -305,7 +308,7 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Create Wallet" = "Criar Carteira";
 
 /* No comment provided by engineer. */
-"Create new" = "Create new";
+"Create new" = "Crie um novo";
 
 /* No comment provided by engineer. */
 "Creating and securing account" = "Criando e protegendo a conta";
@@ -371,10 +374,10 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 "Directory" = "Diretório";
 
 /* Disable as in to disable a feature */
-"Disable" = "Disable";
+"Disable" = "Desativar";
 
 /* Title of recovery popup */
-"Disable Recovery?" = "Disable Recovery?";
+"Disable Recovery?" = "Desativar recuperação?";
 
 /* No comment provided by engineer. */
 "Disabled" = "Desativado";
@@ -397,7 +400,7 @@ Digite-a abaixo para certificar-se:";
 "Download the Airbitz wallet and save money using bitcoin" = "Baixe a carteira Airbitz e economize dinheiro usando bitcoin";
 
 /* No comment provided by engineer. */
-"Edge Login" = "Edge Login";
+"Edge Login" = "Início de sessão";
 
 /* No comment provided by engineer. */
 "Education" = "Education";
@@ -412,7 +415,7 @@ Digite-a abaixo para certificar-se:";
 "Email" = "E-mail";
 
 /* No comment provided by engineer. */
-"Email Login Package" = "Email Login Package";
+"Email Login Package" = "Pacote de Login de Email";
 
 /* No comment provided by engineer. */
 "Email cancelled." = "E-mail cancelado.";
@@ -462,18 +465,18 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Error connecting to payment processor. Send directly to bitcoin address
 
-%@" = "Error connecting to payment processor. Send directly to bitcoin address
+%@" = "Erro ao conectar ao processador de pagamento. Enviar diretamente para o endereço do bitcoin
 
 %@";
 
 /* No comment provided by engineer. */
-"Error creating affiliate link. Please try again later" = "Error creating affiliate link. Please try again later";
+"Error creating affiliate link. Please try again later" = "Erro ao criar link de afiliado. Por favor, tente novamente mais tarde";
 
 /* No comment provided by engineer. */
 "Error desc" = "Erro desc";
 
 /* No comment provided by engineer. */
-"Error disabling recovery" = "Error disabling recovery";
+"Error disabling recovery" = "Erro ao desativar a recuperação";
 
 /* No comment provided by engineer. */
 "Error during send" = "Erro durante o envio";
@@ -496,6 +499,9 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Exchange Rate Data Source" = "Fonte de dados de taxa de câmbio";
 
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
+
 /* Exit button text on top left */
 "Exit" = "Sair";
 
@@ -506,7 +512,7 @@ Digite-a abaixo para certificar-se:";
 "Export" = "Exportar";
 
 /* Prompt asking which wallet to export from */
-"Export From:" = "Export From:";
+"Export From:" = "Exportação de:";
 
 /* No comment provided by engineer. */
 "Export Private Seed" = "Exportar Chave Mestra Privada";
@@ -530,7 +536,7 @@ Digite-a abaixo para certificar-se:";
 "Fees & Charges" = "Fees & Charges";
 
 /* Fetching Login Request popup */
-"Fetching Login Request..." = "Fetching Login Request...";
+"Fetching Login Request..." = "Obtendo Solicitação de Login...";
 
 /* Fetching Payment Request popup */
 "Fetching Payment Request..." = "Buscando Solicitação de Pagamento...";
@@ -554,7 +560,7 @@ Digite-a abaixo para certificar-se:";
 "From: %@" = "De: %@";
 
 /* No comment provided by engineer. */
-"Funds successfully imported, but error connecting to messenger server. Try again later" = "Funds successfully imported, but error connecting to messenger server. Try again later";
+"Funds successfully imported, but error connecting to messenger server. Try again later" = "Fundos importados com êxito, mas erro de conexão com o servidor de messenger. Tente mais tarde";
 
 /* No comment provided by engineer. */
 "Furnishings" = "Furnishings";
@@ -614,7 +620,7 @@ Digite-a abaixo para certificar-se:";
 "Home" = "Home";
 
 /* No comment provided by engineer. */
-"Home Depot (Up to 15% Off)" = "Home Depot (Up to 15% Off)";
+"Home Depot (Up to 15% Off)" = "Home Depot (até 15% de desconto)";
 
 /* expense category */
 "Home Improvement" = "Home Improvement";
@@ -646,10 +652,10 @@ Digite-a abaixo para certificar-se:";
 "IRA Contribution" = "Contribuição para fundo de pensão";
 
 /* No comment provided by engineer. */
-"Identity token from [%@] created and saved" = "Identity token from [%@] created and saved";
+"Identity token from [%@] created and saved" = "Símbolo de identidade de [%@] Criado e salvo";
 
 /* No comment provided by engineer. */
-"If recovery was setup, you should have emailed yourself a recovery token with a link" = "If recovery was setup, you should have emailed yourself a recovery token with a link";
+"If recovery was setup, you should have emailed yourself a recovery token with a link" = "Se a recuperação foi configurada, você deve ter enviado um token de recuperação com um link";
 
 /* No comment provided by engineer. */
 "Import" = "Importar";
@@ -694,7 +700,7 @@ Digite-a abaixo para certificar-se:";
 "Incorrect current password" = "Senha atual incorreta";
 
 /* No comment provided by engineer. */
-"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Incorrect username for this recovery token. Please try a different username or use a different recovery token link.";
+"Incorrect username for this recovery token. Please try a different username or use a different recovery token link." = "Nome de usuário incorreto para este token de recuperação. Tente um nome de usuário diferente ou use um link de token de recuperação diferente.";
 
 /* Info button text on top right */
 "Info" = "Informação";
@@ -715,7 +721,7 @@ Digite-a abaixo para certificar-se:";
 "Invalid Bluetooth Request" = "Solicitação de Bluetooth Inválida";
 
 /* No comment provided by engineer. */
-"Invalid Email" = "Invalid Email";
+"Invalid Email" = "E-mail inválido";
 
 /* No comment provided by engineer. */
 "Invalid QR Code" = "Código QR Inválido";
@@ -730,7 +736,7 @@ Digite-a abaixo para certificar-se:";
 "Kids Activities" = "Kids Activities";
 
 /* LOGIN button text */
-"LOGIN" = "LOGIN";
+"LOGIN" = "ENTRAR";
 
 /* settings text */
 "Last Name (optional)" = "Sobrenome (opcional)";
@@ -772,7 +778,7 @@ Digite-a abaixo para certificar-se:";
 "Logging Out" = "Logoff";
 
 /* No comment provided by engineer. */
-"Login Package" = "Login Package";
+"Login Package" = "Pacote de Login";
 
 /* No comment provided by engineer. */
 "Low Fee" = "Taxa baixa";
@@ -832,7 +838,7 @@ Digite-a abaixo para certificar-se:";
 "Net Salary" = "Net Salary";
 
 /* No comment provided by engineer. */
-"Network Error" = "Network Error";
+"Network Error" = "Erro de rede";
 
 /* No comment provided by engineer. */
 "New PIN" = "Novo PIN";
@@ -848,6 +854,9 @@ Digite-a abaixo para certificar-se:";
 
 /* settings text */
 "Nickname / Handle (optional)" = "Apelido / Título (opcional)";
+
+/* No comment provided by engineer. */
+"No PIN set" = "Nenhum PIN definido";
 
 /* what to display when wallet has no transactions */
 "No Transactions" = "Nenhuma Transação";
@@ -961,9 +970,12 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Please click the link below from a mobile device with %@ installed to initiate account recovery for username [%@]
 
-<br><br>%@" = "Please click the link below from a mobile device with %1$@ installed to initiate account recovery for username [%2$@]
+<br><br>%@" = "Clique no link abaixo de um dispositivo móvel com %1$@ Instalado para iniciar a recuperação da conta para o nome de usuário [%2$@]
 
 <br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a PIN for this account to enable quick re-logins" = "Crie um PIN para esta conta para permitir reconfigurações rápidas";
 
 /* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "Por favor, crie uma nova conta e transfira seus fundos se você esqueceu sua senha.";
@@ -975,13 +987,13 @@ Digite-a abaixo para certificar-se:";
 "Please enter a User Name" = "Por favor, digite um Nome de Usuário";
 
 /* No comment provided by engineer. */
-"Please enter a username at the login screen" = "Please enter a username at the login screen";
+"Please enter a username at the login screen" = "Insira um nome de usuário na tela de login";
 
 /* No comment provided by engineer. */
 "Please enter an amount to send" = "Por favor, digite uma quantia para enviar";
 
 /* No comment provided by engineer. */
-"Please enter the username of the account to recover" = "Please enter the username of the account to recover";
+"Please enter the username of the account to recover" = "Digite o nome de usuário da conta para recuperar";
 
 /* No comment provided by engineer. */
 "Please enter your PIN" = "Por favor, digite o seu PIN";
@@ -993,19 +1005,19 @@ Digite-a abaixo para certificar-se:";
 "Please enter your password to enable Touch ID" = "Por favor, digite sua senha para habilitar o Touch ID";
 
 /* No comment provided by engineer. */
-"Please find the email and click on the link from this device to initiate recovery" = "Please find the email and click on the link from this device to initiate recovery";
+"Please find the email and click on the link from this device to initiate recovery" = "Encontre o e-mail e clique no link deste dispositivo para iniciar a recuperação";
 
 /* No comment provided by engineer. */
 "Please have Requestor contact support" = "Por favor, entre em contato com o suporte do solicitante";
 
 /* No comment provided by engineer. */
-"Please logout of current account before attempting password recovery" = "Please logout of current account before attempting password recovery";
+"Please logout of current account before attempting password recovery" = "Efetue logout da conta atual antes de tentar recuperar a senha";
 
 /* No comment provided by engineer. */
 "Please try again later or contact support" = "Por favor, tente novamente mais tarde ou contate o suporte";
 
 /* No comment provided by engineer. */
-"Please verify the domain above and tap LOGIN to authenticate with this site" = "Please verify the domain above and tap LOGIN to authenticate with this site";
+"Please verify the domain above and tap LOGIN to authenticate with this site" = "Verifique o domínio acima e toque em LOGIN para autenticar com este site";
 
 /* No comment provided by engineer. */
 "Please wait %.0f seconds before retrying %@" = "Por favor, espere %1$.0f segundos antes de tentar novamente %2$@";
@@ -1023,7 +1035,7 @@ Digite-a abaixo para certificar-se:";
 "Property" = "Property";
 
 /* No comment provided by engineer. */
-"Provide an Identity Token" = "Provide an Identity Token";
+"Provide an Identity Token" = "Fornecer um Token de Identidade";
 
 /* No comment provided by engineer. */
 "Public Seed (XPub)" = "Public Seed (XPub)";
@@ -1052,7 +1064,7 @@ Digite-a abaixo para certificar-se:";
 "Received..." = "Recebido...";
 
 /* No comment provided by engineer. */
-"Recovery Disabled" = "Recovery Disabled";
+"Recovery Disabled" = "Recuperação desativada";
 
 /* No comment provided by engineer. */
 "Recovery Password Reminder" = "Recuperação do Lembrete de Senha";
@@ -1066,12 +1078,12 @@ Digite-a abaixo para certificar-se:";
 /* No comment provided by engineer. */
 "Recovery Successful
 
-Please change your password and PIN" = "Recovery Successful
+Please change your password and PIN" = "Recuperação bem sucedida
 
-Please change your password and PIN";
+Altere a senha e o PIN";
 
 /* No comment provided by engineer. */
-"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+"Recovery was not setup or was done on another device" = "A recuperação não foi configurada ou foi feita em outro dispositivo";
 
 /* No comment provided by engineer. */
 "Refer Your Friends" = "Indique Para Seus Amigos";
@@ -1101,7 +1113,7 @@ Please change your password and PIN";
 "Rental Car & Taxi" = "Rental Car & Taxi";
 
 /* No comment provided by engineer. */
-"Request a Payment Address" = "Request a Payment Address";
+"Request a Payment Address" = "Solicitar um endereço de pagamento";
 
 /* No comment provided by engineer. */
 "Request confirmed, Two Factor off." = "Solicitação confirmada, Dois Fatores desligados.";
@@ -1110,10 +1122,10 @@ Please change your password and PIN";
 "Request is copied to the clipboard" = "Pedido copiado para a área de transferência";
 
 /* No comment provided by engineer. */
-"Request your Identity Token but you don't have any" = "Request your Identity Token but you don't have any";
+"Request your Identity Token but you don't have any" = "Solicite seu Token de Identidade, mas você não tem";
 
 /* No comment provided by engineer. */
-"Request your Identity Token. Please select one below" = "Request your Identity Token. Please select one below";
+"Request your Identity Token. Please select one below" = "Solicite seu Token de identidade. Selecione um abaixo";
 
 /* Requested string on Request screen */
 "Requested..." = "Solicitado...";
@@ -1152,7 +1164,7 @@ Please change your password and PIN";
 "SMS sent" = "SMS enviada";
 
 /* Slideout menu spend text */
-"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+"SPEND BITCOIN (Plugins)" = "GASTAR BITCOIN (Plugins)";
 
 /* No comment provided by engineer. */
 "Sales" = "Sales";
@@ -1161,7 +1173,7 @@ Please change your password and PIN";
 "San Diego, California, USA" = "San Diego, Califórnia, EUA";
 
 /* Title of recovery email popup */
-"Save Recovery Token" = "Save Recovery Token";
+"Save Recovery Token" = "Salvar Token de Recuperação";
 
 /* Text at top of Scan Screen */
 "Scan QR to Import Private Key/Gift Card" = "Escaneie o QR para importar a Chave Privada/Cartão de Presente";
@@ -1170,7 +1182,7 @@ Please change your password and PIN";
 "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Escaneie o código QR do beneficiário para enviar o pagamento ou toque em uma solicitação de bluetooth na lista abaixo";
 
 /* Text at top of Send screen */
-"Scan to Send, Import, or Edge Login" = "Scan to Send, Import, or Edge Login";
+"Scan to Send, Import, or Edge Login" = "Digitalizar para enviar, importar ou acessar a borda";
 
 /* SearchBarSearch placeholder */
 "Search" = "Pesquisar";
@@ -1229,7 +1241,7 @@ Please change your password and PIN";
 "Show Balance" = "Mostrar o Saldo";
 
 /* No comment provided by engineer. */
-"Show QR Code" = "Show QR Code";
+"Show QR Code" = "Mostrar código QR";
 
 /* No comment provided by engineer. */
 "Sign Up" = "Registrar-se";
@@ -1251,7 +1263,7 @@ Please change your password and PIN";
 "Spa & Massage" = "Spa & Massage";
 
 /* No comment provided by engineer. */
-"Spend Bitcoin (Plugins)" = "Spend Bitcoin (Plugins)";
+"Spend Bitcoin (Plugins)" = "Passe Bitcoin (Plugins)";
 
 /* spending limits text */
 "Spending Limits" = "Limites de Gasto";
@@ -1266,7 +1278,7 @@ Please change your password and PIN";
 "Standard Fee" = "Taxa padrão";
 
 /* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "Starbucks (Up to 20% Off)";
+"Starbucks (Up to 20% Off)" = "Starbucks (até 20% de desconto)";
 
 /* expense category */
 "Student Loan" = "Student Loan";
@@ -1275,10 +1287,10 @@ Please change your password and PIN";
 "Successfully Logged In" = "Logado com Sucesso";
 
 /* No comment provided by engineer. */
-"Successfully Verified Identity" = "Successfully Verified Identity";
+"Successfully Verified Identity" = "Identidade Verificada com Sucesso";
 
 /* No comment provided by engineer. */
-"Successfully received identity token from %@" = "Successfully received identity token from %@";
+"Successfully received identity token from %@" = "Token de identidade recebido com êxito de %@";
 
 /* No comment provided by engineer. */
 "Sweep Funds From Private Key" = "Buscar Fundos na Chave Privada";
@@ -1293,7 +1305,7 @@ Please change your password and PIN";
 "Tap and hold a wallet for additional options" = "Toque e segure uma carteira para obter opções adicionais";
 
 /* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "Target (Up to 10% Off)";
+"Target (Up to 10% Off)" = "Alvo (até 10% desligado)";
 
 /* expense category */
 "Tax" = "Tax";
@@ -1310,9 +1322,9 @@ Please change your password and PIN";
 /* No comment provided by engineer. */
 "The following services are not provided by %@.
 
-For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+For issues and feedback, please contact the respective service providers." = "Os seguintes serviços não são fornecidos por %@.
 
-For issues and feedback, please contact the respective service providers.";
+Para questões e comentários, entre em contato com os respectivos provedores de serviços.";
 
 /* No comment provided by engineer. */
 "The given answers were incorrect. Please try again." = "As respostas dadas estavam incorretas. Por favor, tente novamente.";
@@ -1321,10 +1333,10 @@ For issues and feedback, please contact the respective service providers.";
 "The password to this account was changed by another device. Please login using the new credentials." = "A senha para esta conta foi alterada por outro dispositivo. Faça o login usando as novas credenciais.";
 
 /* Title of recovery popup message */
-"This account already has password recovery setup. Would you like to disable it?" = "This account already has password recovery setup. Would you like to disable it?";
+"This account already has password recovery setup. Would you like to disable it?" = "Esta conta já tem configuração de recuperação de senha. Deseja desativá-lo?";
 
 /* No comment provided by engineer. */
-"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.";
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "Esta aplicação gostaria de aceder aos seguintes repositórios ligados à sua conta Airbitz. Não terá acesso a quaisquer outras contas ou carteiras.";
 
 /* Username Signup screen info text */
 "This is not your email or real name.
@@ -1341,7 +1353,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "This may take a few minutes if it is the first time logging into this device." = "Isto pode demorar alguns minutos se for a primeira vez que está logando neste dispositivo.";
 
 /* No comment provided by engineer. */
-"This site would like to:" = "This site would like to:";
+"This site would like to:" = "Este site gostaria de:";
 
 /* Popup sessage for when a wallet is archived */
 "This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "Esta carteira foi arquivada. Por favor, selecione uma carteira diferente na tela [Wallets]";
@@ -1350,7 +1362,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Time to crack:" = "Tempo de crack:";
 
 /* Message of recovery token popup */
-"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "Para completar a configuração de recuperação de conta, você DEVE salvar um token de recuperação de conta. Isso será necessário para recuperar sua conta, além de seu nome de usuário e respostas de recuperação. Digite seu e-mail abaixo para enviar-se o token de recuperação.";
 
 /* Popup wallet help test */
 "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "Para classificar as carteiras, toque e arraste as 3 barras à direita de uma carteira. Arraste para baixo do cabeçalho [ARCHIVE] para arquivar a carteira";
@@ -1365,7 +1377,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Tolls" = "Tolls";
 
 /* No comment provided by engineer. */
-"Top Up Prepaid Phones" = "Top Up Prepaid Phones";
+"Top Up Prepaid Phones" = "Telefones pré-pagos";
 
 /* No comment provided by engineer. */
 "Touch ID" = "Touch ID";
@@ -1407,7 +1419,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Travel" = "Travel";
 
 /* No comment provided by engineer. */
-"Trouble connecting to network" = "Trouble connecting to network";
+"Trouble connecting to network" = "Problemas na conexão à rede";
 
 /* No comment provided by engineer. */
 "Try again?" = "Tentar novamente?";
@@ -1445,7 +1457,7 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Two Factor Reset" = "Reset do Dois Fatores";
 
 /* No comment provided by engineer. */
-"USA" = "USA";
+"USA" = "EUA";
 
 /* No comment provided by engineer. */
 "USA and Canada" = "EUA e Canadá";
@@ -1558,7 +1570,7 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Wallet: " = "Carteira: ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "Walmart (Up to 10% Off)";
+"Walmart (Up to 10% Off)" = "Walmart (Até 10% de Desconto)";
 
 /* No comment provided by engineer. */
 "Warning!" = "Aviso!";
@@ -1582,7 +1594,7 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "Whole Foods (Up to 10% Off)";
+"Whole Foods (Up to 10% Off)" = "Whole Foods (Até 10% de Desconto)";
 
 /* No comment provided by engineer. */
 "Would you like to enable TouchID for this account and device?" = "Gostaria de habilitar o TouchID para esta conta e dispositivo?";
@@ -1608,13 +1620,13 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 %1$@ (~%2$@)";
 
 /* No comment provided by engineer. */
-"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "Você está prestes a sair da configuração de recuperação de senha. Suas perguntas e respostas escolhidas não foram salvas.";
 
 /* No comment provided by engineer. */
-"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+"You must answer all questions. Make sure your answers are long enough." = "Você deve responder a todas as perguntas. Certifique-se de que suas respostas são longas o suficiente.";
 
 /* No comment provided by engineer. */
-"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
+"You must choose a question for all selections before proceeding." = "Você deve escolher uma pergunta para todas as seleções antes de prosseguir.";
 
 /* No comment provided by engineer. */
 "You must enter a user name" = "Você deve digitar um nome de usuário";

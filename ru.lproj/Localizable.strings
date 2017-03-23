@@ -1,3 +1,6 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Пожалуйста, выберите кошелек для получения средств.";
 
@@ -496,6 +499,9 @@ Enter it below to make sure:" = "Вы помните Ваш пароль? Он �
 /* No comment provided by engineer. */
 "Exchange Rate Data Source" = "Источник данных для курса обмена";
 
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
+
 /* Exit button text on top left */
 "Exit" = "Выход";
 
@@ -849,6 +855,9 @@ Enter it below to make sure:" = "Вы помните Ваш пароль? Он �
 /* settings text */
 "Nickname / Handle (optional)" = "Имя пользователя / псевдоним (необязательно)";
 
+/* No comment provided by engineer. */
+"No PIN set" = "PIN-код не задан";
+
 /* what to display when wallet has no transactions */
 "No Transactions" = "Нет переводов";
 
@@ -965,6 +974,9 @@ Enter it below to make sure:" = "Вы помните Ваш пароль? Он �
 <br><br>%@" = "Пожалуйста, откройте приведенную ниже ссылку на мобильном устройстве с установленным %1$@ для активации восстановления контроля над учетной записью пользователя [%2$@]
 
 <br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a PIN for this account to enable quick re-logins" = "Пожалуйста, задайте PIN-код для активации быстрого повторного входа в эту учетную запись";
 
 /* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "Пожалуйста, создайте новую учетную запись и переведите туда Ваши средства, если Вы забыли пароль.";

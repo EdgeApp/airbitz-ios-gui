@@ -1,3 +1,6 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Veuillez choisir un portefeuille pour recevoir des fonds.";
 
@@ -494,6 +497,9 @@ Entrez-le ci-dessous pour en être sur:";
 /* No comment provided by engineer. */
 "Exchange Rate Data Source" = "Source de données de taux de change";
 
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
+
 /* Exit button text on top left */
 "Exit" = "Sortir";
 
@@ -846,6 +852,9 @@ Entrez-le ci-dessous pour en être sur:";
 /* settings text */
 "Nickname / Handle (optional)" = "Pseudonyme / poignée (facultatif)";
 
+/* No comment provided by engineer. */
+"No PIN set" = "PIN pas fixé";
+
 /* what to display when wallet has no transactions */
 "No Transactions" = "Aucune transaction";
 
@@ -961,6 +970,9 @@ Entrez-le ci-dessous pour en être sur:";
 <br><br>%@" = "S'il vous plaît cliquer sur le lien ci-dessous à partir d'un appareil mobile avec %1$@ installé pour lancer la récupération de compte pour nom d'utilisateur [%2$@]
 
 <br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a PIN for this account to enable quick re-logins" = "S'il vous plaît créer un code PIN pour ce compte pour permettre la réutilisation des re-connexions rapides";
 
 /* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "Veuillez créer un nouveau compte et transférer vos fonds si vous avez oublié votre mot de passe.";

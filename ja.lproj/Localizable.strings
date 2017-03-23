@@ -1,3 +1,6 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Amount";
+
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " お金を受け取るウォレットを選択してください。";
 
@@ -503,6 +506,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 /* No comment provided by engineer. */
 "Exchange Rate Data Source" = "為替レートデータソース";
 
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Exchange rate loading..";
+
 /* Exit button text on top left */
 "Exit" = "出口";
 
@@ -857,6 +863,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 /* settings text */
 "Nickname / Handle (optional)" = "ニックネーム/ハンドル（オプション）";
 
+/* No comment provided by engineer. */
+"No PIN set" = "PINは設定されていません";
+
 /* what to display when wallet has no transactions */
 "No Transactions" = "トランザクションなし";
 
@@ -977,6 +986,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 <br><br>%3$@";
 
 /* No comment provided by engineer. */
+"Please create a PIN for this account to enable quick re-logins" = "迅速な再ログインを可能にするには、このアカウントのPINを作成してください";
+
+/* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "パスワードを忘れた場合は、新しいアカウントを作成して資金を振り替えてください。";
 
 /* No comment provided by engineer. */
@@ -1022,7 +1034,7 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Please wait %.0f seconds before retrying %@" = "％1$.0f秒待ってから％2 $ @を再試行してください。";
 
 /* No comment provided by engineer. */
-"Please wait 1 second before retrying %@" = "Please wait 1 second before retrying %@";
+"Please wait 1 second before retrying %@" = "再試行する前に1秒間お待ちください％@";
 
 /* No comment provided by engineer. */
 "Present QR code to Sender and have them scan to send you payment" = "送信者にQRコードを提示して、支払いを送信するようスキャンします";
@@ -1034,21 +1046,21 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Property" = "プロパティ";
 
 /* No comment provided by engineer. */
-"Provide an Identity Token" = "Provide an Identity Token";
+"Provide an Identity Token" = "アイデンティティトークンを提供する";
 
 /* No comment provided by engineer. */
-"Public Seed (XPub)" = "Public Seed (XPub)";
+"Public Seed (XPub)" = "パブリックシード（XPub）";
 
 /* expense category */
 "Public Transportation" = "公共交通機関";
 
 /* No comment provided by engineer. */
-"QR Code Scan Failure" = "QR Code Scan Failure";
+"QR Code Scan Failure" = "QRコードスキャン失敗";
 
 /* No comment provided by engineer. */
 "REFER YOUR FRIENDS
-(Earn Bitcoin)" = "REFER YOUR FRIENDS
-(Earn Bitcoin)";
+(Earn Bitcoin)" = "参照するあなたの友人
+（獲得Bitcoin）";
 
 /* No comment provided by engineer. */
 "Re-enter New Password" = "新しいパスワードを再入力する";
@@ -1057,19 +1069,19 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Received Bitcoin" = "受け取ったBitcoin";
 
 /* No comment provided by engineer. */
-"Received Funds" = "Received Funds";
+"Received Funds" = "受領した資金";
 
 /* Received string on Request screen */
-"Received..." = "Received...";
+"Received..." = "受け取った...";
 
 /* No comment provided by engineer. */
-"Recovery Disabled" = "Recovery Disabled";
+"Recovery Disabled" = "回復無効";
 
 /* No comment provided by engineer. */
-"Recovery Password Reminder" = "Recovery Password Reminder";
+"Recovery Password Reminder" = "パスワードリマインダーを回復する";
 
 /* Title of recovery questions setup error alert */
-"Recovery Questions Not Set" = "Recovery Questions Not Set";
+"Recovery Questions Not Set" = "回復に関する質問が設定されていない";
 
 /* Title of recovery questions setup complete alert */
 "Recovery Questions Set" = "回復の質問セット";
@@ -1077,21 +1089,21 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 /* No comment provided by engineer. */
 "Recovery Successful
 
-Please change your password and PIN" = "Recovery Successful
+Please change your password and PIN" = "回復成功
 
-Please change your password and PIN";
-
-/* No comment provided by engineer. */
-"Recovery was not setup or was done on another device" = "Recovery was not setup or was done on another device";
+パスワードとPINを変更してください";
 
 /* No comment provided by engineer. */
-"Refer Your Friends" = "Refer Your Friends";
+"Recovery was not setup or was done on another device" = "回復がセットアップされていないか、別のデバイスで実行されました";
+
+/* No comment provided by engineer. */
+"Refer Your Friends" = "参照するあなたの友人";
 
 /* expense category */
 "Registration" = "登録";
 
 /* Remaining string on Request screen */
-"Remaining..." = "Remaining...";
+"Remaining..." = "残り...";
 
 /* No comment provided by engineer. */
 "Remember your password?" = "パスワードを記憶";
@@ -1112,34 +1124,34 @@ Please change your password and PIN";
 "Rental Car & Taxi" = "レンタカーとアンプ; タクシー";
 
 /* No comment provided by engineer. */
-"Request a Payment Address" = "Request a Payment Address";
+"Request a Payment Address" = "支払い先住所のリクエスト";
 
 /* No comment provided by engineer. */
-"Request confirmed, Two Factor off." = "Request confirmed, Two Factor off.";
+"Request confirmed, Two Factor off." = "リクエストが確認され、2因子がオフになりました。";
 
 /* No comment provided by engineer. */
-"Request is copied to the clipboard" = "Request is copied to the clipboard";
+"Request is copied to the clipboard" = "リクエストはクリップボードにコピーされます";
 
 /* No comment provided by engineer. */
-"Request your Identity Token but you don't have any" = "Request your Identity Token but you don't have any";
+"Request your Identity Token but you don't have any" = "あなたのアイデンティティトークンをリクエストするあなたは何も持っていない";
 
 /* No comment provided by engineer. */
-"Request your Identity Token. Please select one below" = "Request your Identity Token. Please select one below";
+"Request your Identity Token. Please select one below" = "あなたのアイデンティティトークンをリクエストしてください。 下の1つを選択してください";
 
 /* Requested string on Request screen */
-"Requested..." = "Requested...";
+"Requested..." = "要求さ";
 
 /* No comment provided by engineer. */
-"Reset Cancelled" = "Reset Cancelled";
+"Reset Cancelled" = "リセットがキャンセ";
 
 /* No comment provided by engineer. */
-"Reset Date" = "Reset Date";
+"Reset Date" = "リセット日";
 
 /* No comment provided by engineer. */
-"Reset requested. Please retry login after 7 days." = "Reset requested. Please retry login after 7 days.";
+"Reset requested. Please retry login after 7 days." = "リセットが要求。 7日後にログインを再試行してください。";
 
 /* No comment provided by engineer. */
-"Restarting watcher service" = "Restarting watcher service";
+"Restarting watcher service" = "ウォッチャーサービスを再開";
 
 /* expense category */
 "Restaurants" = "レストラン";
@@ -1157,13 +1169,13 @@ Please change your password and PIN";
 "SMS" = "メッセージ";
 
 /* No comment provided by engineer. */
-"SMS cancelled" = "SMS cancelled";
+"SMS cancelled" = "SMSがキャンセ";
 
 /* No comment provided by engineer. */
-"SMS sent" = "SMS sent";
+"SMS sent" = "SMSが送信";
 
 /* Slideout menu spend text */
-"SPEND BITCOIN (Plugins)" = "SPEND BITCOIN (Plugins)";
+"SPEND BITCOIN (Plugins)" = "費やすBITCOIN（プラグイン）";
 
 /* No comment provided by engineer. */
 "Sales" = "販売";
@@ -1172,34 +1184,34 @@ Please change your password and PIN";
 "San Diego, California, USA" = "カリフォルニア州サンディエゴ";
 
 /* Title of recovery email popup */
-"Save Recovery Token" = "Save Recovery Token";
+"Save Recovery Token" = "回復トークンを保存";
 
 /* Text at top of Scan Screen */
-"Scan QR to Import Private Key/Gift Card" = "Scan QR to Import Private Key/Gift Card";
+"Scan QR to Import Private Key/Gift Card" = "秘密鍵/ギフトカードをインポートするためにQRをスキャ";
 
 /* No comment provided by engineer. */
-"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "Scan the QR code of payee to send payment or tap on a bluetooth request from the list below";
+"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below" = "受取人のQRコードをスキャンして支払いを送信するか以下のリストからBluetoothリクエストをタップ";
 
 /* Text at top of Send screen */
-"Scan to Send, Import, or Edge Login" = "Scan to Send, Import, or Edge Login";
+"Scan to Send, Import, or Edge Login" = "スキャン、送信、インポート、またはエッジログイン";
 
 /* SearchBarSearch placeholder */
 "Search" = "サーチ";
 
 /* No comment provided by engineer. */
-"Select Currency" = "Select Currency";
+"Select Currency" = "通貨を選択";
 
 /* No comment provided by engineer. */
 "Sell Bitcoin" = "Bitcoinを売る";
 
 /* No comment provided by engineer. */
-"Send Funds to Private Key" = "Send Funds to Private Key";
+"Send Funds to Private Key" = "ファンドを秘密鍵に送";
 
 /* settings text */
 "Send name on payment request" = "支払い依頼時に名前を送信";
 
 /* No comment provided by engineer. */
-"Send to Bitcoin Address or Import Private Key" = "Send to Bitcoin Address or Import Private Key";
+"Send to Bitcoin Address or Import Private Key" = "Bitcoinアドレスに送信するか、秘密鍵をインポート";
 
 /* status message */
 "Sending..." = "送信中…";
@@ -1214,15 +1226,15 @@ Please change your password and PIN";
 "Service Fee" = "サービス料金:";
 
 /* No comment provided by engineer. */
-"Set a Password" = "Set a Password";
+"Set a Password" = "パスワードを設定";
 
 /* No comment provided by engineer. */
 "Set a Password and PIN" = "パスワードとPINを設定する";
 
 /* No comment provided by engineer. */
 "Setting recovery questions failed:
-%@" = "Setting recovery questions failed:
-%@";
+%@" = "復旧の質問を設定できませ：
+％@";
 
 /* No comment provided by engineer. */
 "Settings" = "セッティング";
@@ -1240,15 +1252,15 @@ Please change your password and PIN";
 "Show Balance" = "ショーバランス";
 
 /* No comment provided by engineer. */
-"Show QR Code" = "Show QR Code";
+"Show QR Code" = "QRコードを表示する";
 
 /* No comment provided by engineer. */
 "Sign Up" = "サインアップ";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
-%@" = "Sign-Up failed:
-%@";
+%@" = "登録は失敗：
+％@";
 
 /* Skip button text */
 "Skip" = "スキップ";
@@ -1278,7 +1290,7 @@ Please change your password and PIN";
 "Standard Fee" = "標準料金";
 
 /* No comment provided by engineer. */
-"Starbucks (Up to 20% Off)" = "Starbucks (Up to 20% Off)";
+"Starbucks (Up to 20% Off)" = "スターバックス（最大20％オフ）";
 
 /* expense category */
 "Student Loan" = "学生ローン";
@@ -1287,25 +1299,25 @@ Please change your password and PIN";
 "Successfully Logged In" = "正常にログインしました";
 
 /* No comment provided by engineer. */
-"Successfully Verified Identity" = "Successfully Verified Identity";
+"Successfully Verified Identity" = "正常に確認されたアイデンティティ";
 
 /* No comment provided by engineer. */
-"Successfully received identity token from %@" = "Successfully received identity token from %@";
+"Successfully received identity token from %@" = "Idトークンを正常に受信しました％@";
 
 /* No comment provided by engineer. */
 "Sweep Funds From Private Key" = "プライベートキーから資金を払う";
 
 /* Synchronizing text in confirmation textfield */
-"Synchronizing" = "Synchronizing";
+"Synchronizing" = "同期中";
 
 /* Prefix of wallet balance dropdown header */
 "TOTAL: " = "合計 ";
 
 /* No comment provided by engineer. */
-"Tap and hold a wallet for additional options" = "Tap and hold a wallet for additional options";
+"Tap and hold a wallet for additional options" = "追加オプションのためにウォレットをタップ＆ホールド";
 
 /* No comment provided by engineer. */
-"Target (Up to 10% Off)" = "Target (Up to 10% Off)";
+"Target (Up to 10% Off)" = "ターゲット（最大10％オフ）";
 
 /* expense category */
 "Tax" = "税金";
@@ -1314,88 +1326,88 @@ Please change your password and PIN";
 "Television" = "テレビ";
 
 /* No comment provided by engineer. */
-"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct.";
+"The Two Factor Authentication token on this device is invalid. Either the token was changed by a different device our your clock is skewed. Please check your system time to ensure it is correct." = "2要素認証トークン無効です。トークンが別のデバイスによって変更されたか時計が歪んでい。 システム時刻が正しいことを確認してください。";
 
 /* No comment provided by engineer. */
-"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "The bitcoin address of the device you connected with:%1$@ does not match the address that was initially advertised:%2$@";
+"The bitcoin address of the device you connected with:%@ does not match the address that was initially advertised:%@" = "あなたが接続したデバイスのビットコインアドレス：％1 $ @最初に広告されたアドレスと一致しません：％2 $ @";
 
 /* No comment provided by engineer. */
 "The following services are not provided by %@.
 
-For issues and feedback, please contact the respective service providers." = "The following services are not provided by %@.
+For issues and feedback, please contact the respective service providers." = "以下のサービスは、％@。
 
-For issues and feedback, please contact the respective service providers.";
-
-/* No comment provided by engineer. */
-"The given answers were incorrect. Please try again." = "The given answers were incorrect. Please try again.";
+問題とフィードバックに関、それぞれのサービスプロバイダにお問い合わせください。";
 
 /* No comment provided by engineer. */
-"The password to this account was changed by another device. Please login using the new credentials." = "The password to this account was changed by another device. Please login using the new credentials.";
+"The given answers were incorrect. Please try again." = "与えられた答えは間違っていた。もう一度お試しください。";
+
+/* No comment provided by engineer. */
+"The password to this account was changed by another device. Please login using the new credentials." = "このアカウントのパスワードは、別のデバイスによって変更されました。 新しい資格情報を使用してログインしてください。";
 
 /* Title of recovery popup message */
-"This account already has password recovery setup. Would you like to disable it?" = "This account already has password recovery setup. Would you like to disable it?";
+"This account already has password recovery setup. Would you like to disable it?" = "このアカウントにはすでにパスワード回復の設定があります。それを無効にしますか？";
 
 /* No comment provided by engineer. */
-"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets.";
+"This application would like to access the following repositories linked to your Airbitz account. It will not have access to any other accounts or wallets." = "このアプリケーションは、あなたのAirbitzアカウントにリンクされた以下のリポジトリにアクセスしたいと考えています。他のアカウントや財布にアクセスすることはできません。";
 
 /* Username Signup screen info text */
 "This is not your email or real name.
 
 This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
 
-Your username and password are known only to you and never stored unencrypted." = "This is not your email or real name.
+Your username and password are known only to you and never stored unencrypted." = "これはあなたの電子メールまたは本名ではありません。
 
-This is the username to login into your [[abtag APP_TITLE]] account on this and other devices.
+これはあなたにログインするためのユーザー名です[[abtag APP_TITLE]] このデバイスと他のデバイスのアカウント
 
-Your username and password are known only to you and never stored unencrypted.";
+あなたのユーザー名とパスワードは知られており、暗号化されていない状態では決して保管されません。";
 
 /* Loading Wallets alert text */
-"This may take a few minutes if it is the first time logging into this device." = "This may take a few minutes if it is the first time logging into this device.";
+"This may take a few minutes if it is the first time logging into this device." = "このデバイスに初めてログインする場合は、数分かかることがあ。";
 
 /* No comment provided by engineer. */
-"This site would like to:" = "This site would like to:";
+"This site would like to:" = "このサイトは次のようにします：";
 
 /* Popup sessage for when a wallet is archived */
-"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "This wallet has been archived. Please select a different wallet from the [Wallets] screen";
+"This wallet has been archived. Please select a different wallet from the [Wallets] screen" = "この財布は保管されています。別のウォレットを選択してください[Wallets] 画面";
 
 /* text in password verification popup */
-"Time to crack:" = "Time to crack:";
+"Time to crack:" = "クラックする時間：";
 
 /* Message of recovery token popup */
-"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token.";
+"To complete account recovery setup you MUST save an account recovery token. This will be required to recover your account in addition to your username and recovery answers. Please enter your email below to send yourself the recovery token." = "アカウント回復セットアップを完了するにはアカウント回復トークンを保存する必要があり。これは、ユーザー名と復旧の回答に加えて、アカウントを回復するために必要となります。リカバリトークンを送信するには下にメールアドレスを入力してください。";
 
 /* Popup wallet help test */
-"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet";
+"To sort wallets, tap and drag the 3 bars to the right of a wallet. Drag below the [ARCHIVE] header to archive the wallet" = "ウォレットをソートするには、3本のバーをタップしてウォレットの右にドラッグします。ウォレットをアーカイブするに[ARCHIVE] ヘッダーの下にドラッグします";
 
 /* No comment provided by engineer. */
-"To: %@" = "To: %@";
+"To: %@" = "に：％@";
 
 /* Top of screen wallet dropdown prefix text */
-"To: %@ ▼" = "To: %@ ▼";
+"To: %@ ▼" = "に：％@▼";
 
 /* expense category */
 "Tolls" = "通行料金";
 
 /* No comment provided by engineer. */
-"Top Up Prepaid Phones" = "Top Up Prepaid Phones";
+"Top Up Prepaid Phones" = "プリペイド携帯電話のトップアップ";
 
 /* No comment provided by engineer. */
-"Touch ID" = "Touch ID";
+"Touch ID" = "タッチID";
 
 /* No comment provided by engineer. */
-"Touch ID Disabled" = "Touch ID Disabled";
+"Touch ID Disabled" = "タッチIDが無効";
 
 /* No comment provided by engineer. */
-"Touch ID Enabled" = "Touch ID Enabled";
+"Touch ID Enabled" = "タッチIDが有効";
 
 /* Touch ID prompt text */
-"Touch to login user" = "Touch to login user";
+"Touch to login user" = "タップしてユーザーにログイン";
 
 /* settings text */
-"TouchID: Set password first" = "TouchID: Set password first";
+"TouchID: Set password first" = "TouchID：パスワードを最初に設定する";
 
 /* settings text */
-"TouchID: Unsupported Device" = "TouchID: Unsupported Device";
+"TouchID: Unsupported Device" = "TouchID：サポートされていないデバイス";
 
 /* expense category */
 "Toys" = "おもちゃ";
@@ -1410,19 +1422,19 @@ Your username and password are known only to you and never stored unencrypted.";
 "Transfer" = "移転";
 
 /* From wallet transfer text */
-"Transfer From %@" = "Transfer From %@";
+"Transfer From %@" = "移転 から％@";
 
 /* To wallet transfer text */
-"Transfer To %@" = "Transfer To %@";
+"Transfer To %@" = "%@ に送";
 
 /* expense category */
 "Travel" = "トラベル";
 
 /* No comment provided by engineer. */
-"Trouble connecting to network" = "Trouble connecting to network";
+"Trouble connecting to network" = "ネットワークへの接続に問題";
 
 /* No comment provided by engineer. */
-"Try again?" = "Try again?";
+"Try again?" = "再試行する？";
 
 /* expense category */
 "Tuition" = "授業料";
@@ -1444,42 +1456,42 @@ Your username and password are known only to you and never stored unencrypted.";
 
 ** Warning **
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "Two Factor Enabled
+If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"" = "2つの要素が有効
 
-** Warning **
+**警告**
 
-If you lose your device or uninstall the app, it will take 7 days to disable 2FA and access your account.\"";
+端末を紛失した場合やアプリをアンインストールした場合は、2FAを無効にしてアカウントにアクセスするには7日間かかります 」";
 
 /* No comment provided by engineer. */
 "Two Factor Invalid" = "2つの要因が無効です
  ";
 
 /* No comment provided by engineer. */
-"Two Factor Reset" = "Two Factor Reset";
+"Two Factor Reset" = "2因子リセット";
 
 /* No comment provided by engineer. */
-"USA" = "USA";
+"USA" = "米国";
 
 /* No comment provided by engineer. */
-"USA and Canada" = "USA and Canada";
+"USA and Canada" = "アメリカとカナダ";
 
 /* No comment provided by engineer. */
 "Unable to determine two factor status" = "2つの要因のステータスを判断できません";
 
 /* No comment provided by engineer. */
-"Unable to import secret" = "Unable to import secret";
+"Unable to import secret" = "秘密をインできません";
 
 /* No comment provided by engineer. */
 "Unable to import token" = "トークンをインポートできません";
 
 /* No comment provided by engineer. */
-"Unable to save Settings" = "Unable to save Settings";
+"Unable to save Settings" = "設定を保存できません";
 
 /* No comment provided by engineer. */
 "Unable to scan QR code" = "QRコードをスキャンできません";
 
 /* No comment provided by engineer. */
-"Unable to update Settings" = "Unable to update Settings";
+"Unable to update Settings" = "設定を更新できません";
 
 /* No comment provided by engineer. */
 "Up to 10% off Target" = "ターゲットから最大10％オフ";
@@ -1488,46 +1500,46 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Up to 20% off Starbucks" = "スターバックスを最大20％オフ";
 
 /* Upload Failed */
-"Upload Failed. Please check your network connection" = "Upload Failed. Please check your network connection";
+"Upload Failed. Please check your network connection" = "アップロードに失敗しました。ネットワーク接続を確認してください";
 
 /* No comment provided by engineer. */
-"Upload Image" = "Upload Image";
+"Upload Image" = "無題";
 
 /* No comment provided by engineer. */
-"Upload Log" = "Upload Log";
+"Upload Log" = "ログをアップロードする";
 
 /* No comment provided by engineer. */
-"Upload Log File" = "Upload Log File";
+"Upload Log File" = "ログファイルをアップロードする";
 
 /* Upload Successful fading popup */
-"Upload Successful" = "Upload Successful";
+"Upload Successful" = "アップロードが成功";
 
 /* Uploading logfile fading popup */
-"Uploading logfile. Please wait..." = "Uploading logfile. Please wait...";
+"Uploading logfile. Please wait..." = "ログファイルをアップしています。お待ちください...";
 
 /* No comment provided by engineer. */
 "Use Camera" = "カメラを使用する";
 
 /* Touch ID [Use PIN] button */
-"Use PIN" = "Use PIN";
+"Use PIN" = "PINを使用する";
 
 /* Touch ID [Use Password] button */
-"Use Password" = "Use Password";
+"Use Password" = "パスワードを使用する";
 
 /* No comment provided by engineer. */
 "Use Photo Album" = "フォトアルバムを使う";
 
 /* settings text */
-"Use TouchID" = "Use TouchID";
+"Use TouchID" = "を使用TouchID:";
 
 /* No comment provided by engineer. */
-"User Name: %@" = "User Name: %@";
+"User Name: %@" = "ユーザー名：％@";
 
 /* Username */
 "Username" = "ユーザー名";
 
 /* No comment provided by engineer. */
-"Username must be at least %d characters." = "Username must be at least %d characters.";
+"Username must be at least %d characters." = "ユーザー名は少なくとも％d文字でなければなりません。";
 
 /* expense category */
 "Utilities" = "ユーティリティ";
@@ -1536,7 +1548,7 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Vacation" = "バケーション";
 
 /* No comment provided by engineer. */
-"Validating Address..." = "Validating Address...";
+"Validating Address..." = "アドレスの検証中...";
 
 /* expense category */
 "Vet" = "獣医";
@@ -1548,36 +1560,36 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "WARNING: missing password" = "警告：パスワードがありません";
 
 /* Status on Request screen */
-"Waiting for Payment..." = "Waiting for Payment...";
+"Waiting for Payment..." = "お支払いを待ってい...";
 
 /* No comment provided by engineer. */
-"Wallet Deleted" = "Wallet Deleted";
+"Wallet Deleted" = "ウォレットが削除さ";
 
 /* No comment provided by engineer. */
-"Wallet Export" = "Wallet Export";
+"Wallet Export" = "ウォレットのエクスポート";
 
 /* No comment provided by engineer. */
-"Wallet Private Seed" = "Wallet Private Seed";
+"Wallet Private Seed" = "ウォレットプライベートシード";
 
 /* No comment provided by engineer. */
 "Wallet creation failed:
-%@" = "Wallet creation failed:
+%@" = "ウォレットの作成に失敗：
 %@";
 
 /* No comment provided by engineer. */
-"Wallet name must have at least one character" = "Wallet name must have at least one character";
+"Wallet name must have at least one character" = "ウォレット名には少なくとも1文字は必要です";
 
 /* Prefix of wallet name on rename popup */
 "Wallet: " = "財布： ";
 
 /* No comment provided by engineer. */
-"Walmart (Up to 10% Off)" = "Walmart (Up to 10% Off)";
+"Walmart (Up to 10% Off)" = "ウォルマート（最大10％割引）";
 
 /* No comment provided by engineer. */
-"Warning!" = "Warning!";
+"Warning!" = "警告！";
 
 /* No comment provided by engineer. */
-"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled";
+"Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "警告。パースワードがなければ、このデバイスを紛失または盗難した場合は新しいデバイスにログインすることはできませんが、またこのアプリがアンインストールされている場合";
 
 /* Double spend status in transaction list */
 "Warning: Double Spend" = "警告：ダブル費やす";
@@ -1589,45 +1601,46 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Warning: Replace by Fee Detected. Double spend likely" = "警告：検出された料金で交換してください。 二重の可能性が高い";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared But Error Occurred. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "ウォッチャーデータベースはクリアされましたが、エラーが発生しました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります";
 
 /* Watcher Database Cleared popup text */
-"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync";
+"Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "ウォッチャーデータベースがクリアされました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります";
 
 /* No comment provided by engineer. */
-"Whole Foods (Up to 10% Off)" = "Whole Foods (Up to 10% Off)";
+"Whole Foods (Up to 10% Off)" = "全体の食べ物（最大10％オフ）";
 
 /* No comment provided by engineer. */
-"Would you like to enable TouchID for this account and device?" = "Would you like to enable TouchID for this account and device?";
+"Would you like to enable TouchID for this account and device?" = "このアカウントと端末のタッチIDを有効にしますか？";
 
 /* No comment provided by engineer. */
-"Would you like to send funds to this address or import funds into your wallet?" = "Would you like to send funds to this address or import funds into your wallet?";
+"Would you like to send funds to this address or import funds into your wallet?" = "この住所に資金を送ったり、財布に財布を入れたいですか？";
 
 /* No comment provided by engineer. */
 "Would you like to send us some feedback?" = "フィードバックをお送りしますか？";
 
 /* No comment provided by engineer. */
-"Would you like to write a review in the App store?" = "Would you like to write a review in the App store?";
+"Would you like to write a review in the App store?" = "アプリケーションストアにレビューを書いてみませんか？";
 
 /* No comment provided by engineer. */
 "Wrong Answers" = "間違った答え";
 
 /* YES button text */
-"YES" = "YES";
+"YES" = "はい";
 
 /* No comment provided by engineer. */
 "You Received Bitcoin!
-%@ (~%@)" = "You Received Bitcoin!
-%1$@ (~%2$@)";
+%@ (~%@)" = "あなたはBitcoinを受け取りました！
+%1$@ (~%2$@)
+";
 
 /* No comment provided by engineer. */
-"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "You are about to exit password recovery setup. Your chosen questions and answers have not been saved.";
+"You are about to exit password recovery setup. Your chosen questions and answers have not been saved." = "パスワード回復の設定を終了しようとしています。選択した質問と回答は保存されていません。";
 
 /* No comment provided by engineer. */
-"You must answer all questions. Make sure your answers are long enough." = "You must answer all questions. Make sure your answers are long enough.";
+"You must answer all questions. Make sure your answers are long enough." = "あなたはすべての質問に答える必要があります。あなたの答えが十分に長いことを確認してください。";
 
 /* No comment provided by engineer. */
-"You must choose a question for all selections before proceeding." = "You must choose a question for all selections before proceeding.";
+"You must choose a question for all selections before proceeding." = "続行する前にすべての選択について質問を選択する必要があります。";
 
 /* No comment provided by engineer. */
 "You must enter a user name" = "ユーザー名を入力する必要があり";
@@ -1635,51 +1648,51 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 /* No comment provided by engineer. */
 "You received Bitcoin!
 %@ (~%@)
-Use the Payee, Category, and Notes field to optionally tag your transaction" = "You received Bitcoin!
+Use the Payee, Category, and Notes field to optionally tag your transaction" = "あなたはBitcoinを受け取った！
 %1$@ (~%2$@)
-Use the Payee, Category, and Notes field to optionally tag your transaction";
+受取人を使用して、カテゴリとメモフィールドはオプションのトランザクションタグに";
 
 /* Camera signup screen */
 "You will next see a popup requesting access to your Camera.
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "You will next see a popup requesting access to your Camera.
+[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "次にカメラへのアクセスを要求するポップアップが表示されます。
 
-[[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants.";
+[[abtag APP_TITLE]] QRコードをスキャンして人や商人に支払う必要があ。";
 
 /* No comment provided by engineer. */
 "You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "あなたはBitcoinを受け取りました！ パスワード回復の質問と回答を設定することを強くおすすめします。それ以外の場合は、パスワードを忘れてしまった場合、あなたのアカウントにアクセスすることはできません。";
 
 /* No comment provided by engineer. */
-"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!";
+"Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "パスワード復旧の質問と回答が設定されました。パスワードを回復するときは、あなたの答えは正確に一致する必要があります。**あなたのパスワードと復習の回答を忘れない**あなたのアカウントはそれらを使わずに回復できません！";
 
 /* Start of password rules text */
-"Your password..." = "Your password...";
+"Your password..." = "あなたのパスワード...";
 
 /* Contacts signup screen */
 "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
 
 All tagged information is kept 100% private and encrypted by your password.
 
-No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] uses contacts to help tag information regarding your transactions.
+No one, including [[abtag APP_TITLE]], has any access to this information." = "[[abtag APP_TITLE]] 連絡先を使用取引に関する情報にタグを付けるのに役立ちます。
 
-All tagged information is kept 100% private and encrypted by your password.
+すべてのタグ付けされた情報はプライベートで100％保たれ、パスワードで暗号化されます。
 
-No one, including [[abtag APP_TITLE]], has any access to this information.";
+[[abtag APP_TITLE]] を含む誰もこの情報にアクセスできません。";
 
 /* settings text */
 "bits = (0.000001 Bitcoin)" = "ビット=（0.000001Bitcoin）";
 
 /* business listings is closed */
-"closed" = "closed";
+"closed" = "閉まって";
 
 /* No comment provided by engineer. */
-"day" = "day";
+"day" = "日";
 
 /* No comment provided by engineer. */
 "days" = "日々";
 
 /* No comment provided by engineer. */
-"hour" = "hour";
+"hour" = "アワー";
 
 /* No comment provided by engineer. */
 "hours" = "アワー";
@@ -1688,17 +1701,17 @@ No one, including [[abtag APP_TITLE]], has any access to this information.";
 "mBitcoin = (0.001 Bitcoin)" = "mBitcoin = (0.001 Bitcoin)";
 
 /* No comment provided by engineer. */
-"minute" = "minute";
+"minute" = "分";
 
 /* No comment provided by engineer. */
 "minutes" = "分";
 
 /* No comment provided by engineer. */
-"second" = "second";
+"second" = "二番";
 
 /* No comment provided by engineer. */
 "seconds" = "秒";
 
 /* Header of popup in SendView from wallet to wallet transfer */
-"▼ Choose a wallet to transfer funds to ▼" = "▼ Choose a wallet to transfer funds to ▼";
+"▼ Choose a wallet to transfer funds to ▼" = "▼資金を移転するウォレットを選択▼";
 
