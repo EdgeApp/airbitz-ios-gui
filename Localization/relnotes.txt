@@ -1,6 +1,6 @@
 v.2.4.0
 
-• Protocol Changes to Edge Login
+• Protocol Changes to Edge-Login
 • LibertyX plugin
 • Support for non-USD CSV/QBO export
 • Large wallet support. Better timeouts
