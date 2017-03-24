@@ -116,8 +116,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	BOOL							_showBluetoothOption;
     CGRect                          _frameStart;
     CGFloat                         _keyboardHeight;
-    UIAlertView                     *_passwordCheckAlert;
-    UIAlertView                     *_passwordIncorrectAlert;
     NSString                        *_tempPassword;
 
 }
@@ -879,26 +877,15 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                 cell.state.userInteractionEnabled = NO;
                 [cell.state setOn:NO animated:NO];
             }
-            else if (![abcAccount accountHasPassword])
-            {
-                cell.name.text = touchIDSetPasswordFirst;
-                cell.state.userInteractionEnabled = NO;
-                [cell.state setOn:NO animated:NO];
-            }
             else
             {
                 cell.name.text = useTouchIDText;
+                cell.state.userInteractionEnabled = YES;
 
                 if ([abcAccount.settings touchIDEnabled])
                     [cell.state setOn:YES animated:NO];
                 else
                     [cell.state setOn:NO animated:NO];
-
-                if ([abcAccount accountHasPassword] && 1) {
-                    cell.state.userInteractionEnabled = YES;
-                } else {
-                    cell.state.userInteractionEnabled = NO;
-                }
             }
 
         }
@@ -1288,15 +1275,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         }
         else
         {
-            //
-            // Check if we have a cached password. If so just enable touchID
-            // If not, ask them for their password.
-            //
-            if (![abcAccount.settings enableTouchID])
-            {
-                [self showPasswordCheckAlertForTouchID];
-            }
-
+            [abcAccount.settings enableTouchID];
         }
 
         // update the display by reloading the table
@@ -1461,78 +1440,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (alertView == _passwordCheckAlert)
-    {
-        if (0 == buttonIndex)
-        {
-            //
-            // Need to disable TouchID in settings.
-            //
-            // Disable TouchID in LocalSettings
-            [abcAccount.settings disableTouchID];
-            [MainViewController fadingAlert:touchIDDisabled];
-        }
-        else
-        {
-            //
-            // Check the password
-            //
-            _tempPassword = [[alertView textFieldAtIndex:0] text];
-
-            [FadingAlertView create:self.view
-                            message:checkingPasswordText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
-                if ([abcAccount.settings enableTouchID:_tempPassword])
-                {
-                    _tempPassword = nil;
-                    [MainViewController fadingAlert:touchIDEnabledText];
-                    
-                    // Enable Touch ID
-                    [self.tableView reloadData];
-                    
-                }
-                else
-                {
-                    [MainViewController fadingAlertDismiss];
-                    _tempPassword = nil;
-                    _passwordIncorrectAlert = [[UIAlertView alloc]
-                                               initWithTitle:incorrectPasswordText
-                                               message:tryAgainText
-                                               delegate:self
-                                               cancelButtonTitle:noButtonText
-                                               otherButtonTitles:yesButtonText, nil];
-                    [_passwordIncorrectAlert show];
-                }
-            }];
-        }
-    }
-    else if (_passwordIncorrectAlert == alertView)
-    {
-        if (buttonIndex == 0)
-        {
-            [MainViewController fadingAlert:touchIDDisabled];
-            [abcAccount.settings disableTouchID];
-        }
-        else if (buttonIndex == 1)
-        {
-            [self showPasswordCheckAlertForTouchID];
-        }
-    }
-}
-
-- (void)showPasswordCheckAlertForTouchID
-{
-    // Popup to ask user for their password
-    NSString *title = touchIDText;
-    NSString *message = enterYourPasswordToEnableTouchID;
-    // show password reminder test
-    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
-                                                     message:message
-                                                    delegate:self
-                                           cancelButtonTitle:laterButtonText
-                                           otherButtonTitles:okButtonText, nil];
-    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
-    [_passwordCheckAlert show];
 }
 
 @end
