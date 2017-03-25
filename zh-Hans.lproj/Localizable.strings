@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  为数";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " 请选择接收资金的钱包。";
@@ -498,7 +498,7 @@ Enter it below to make sure:" = "您还记得您的密码吗？如果您的设�
 "Exchange Rate Data Source" = "汇率数据来源";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "汇率加载..";
 
 /* Exit button text on top left */
 "Exit" = "退出";

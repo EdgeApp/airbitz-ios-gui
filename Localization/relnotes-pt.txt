@@ -1,3 +1,27 @@
+v.2.4.0
+
+• Protocolo Alterar a Beira Entrar
+
+
+
+• LibertyX plugar
+
+• Apoio para não -USD CSV/QBO   exportar
+
+
+• Ampla carteira apoio
+
+ Melhor tempo esgotado
+
+
+• Correio eletrônico CSV/QBO exportar batida Conserta
+
+ 
+•Adicional língua apoio
+
+
+
+
 v.2.3.3
 
 • Corrigir um problema raro com o login do PIN não funcionando

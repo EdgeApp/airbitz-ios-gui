@@ -1,3 +1,27 @@
+v.2.4.0
+
+• Protokoll Änderungen an der Edge-Anmeldung
+• LibertyX Plugin
+ 
+
+
+•Unterstützung zum nicht- USD CSV/QBO export
+
+
+ 
+
+
+• Groß Brieftasche Unterstützung.
+
+ Besser Auszeit
+• Email CSV/QBO export Absturz Beheben
+
+• Zusätzliche Sprachunterstützung
+ 
+
+
+
+
 v.2.3.3
 
 • Behebung seltener Probleme bei fehlerhafter PIN-Anmeldung

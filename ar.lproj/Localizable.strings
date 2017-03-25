@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  كمية";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " الرجاء اختيار محفظة لتلقي الأموال.";
@@ -498,7 +498,7 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Exchange Rate Data Source" = "مصدر بيانات أسعار الصرف";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "سعر الصرف تحميل..";
 
 /* Exit button text on top left */
 "Exit" = "خروج";

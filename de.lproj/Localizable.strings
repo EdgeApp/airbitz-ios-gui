@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  Menge";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Bitte wählen Sie eine Wallet aus, um Zahlungen zu ermpfangen.";
@@ -500,7 +500,7 @@ Geben Sie es unten zur Überprüfung ein:";
 "Exchange Rate Data Source" = "Wechselkurs-Datenquelle";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "Tauschrate Laden.";
 
 /* Exit button text on top left */
 "Exit" = "Beenden";

@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  Kantite";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Tanpri chwazi yon potfey pou resevwa lajan.";
@@ -498,7 +498,7 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 "Exchange Rate Data Source" = "Sous done to echanj";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "Chajman to echanj..";
 
 /* Exit button text on top left */
 "Exit" = "Kite";

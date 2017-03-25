@@ -1,3 +1,13 @@
+v.2.4.0
+
+Cambios de protocolo en nuestro login Edge
+Plugin Liberty X
+Soporte para la exportación CSV/QBO no USD
+Soporte de un gran número de carteras. Mejores tiempos de respuesta
+Solucionado problema al enviar por mail una exportación CSV/QBO
+Soporte en idiomas adicionales
+
+
 v.2.3.3
 
 • Se arreglaron fallos con el PIN de logeo

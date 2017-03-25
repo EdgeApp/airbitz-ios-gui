@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  Количество";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Пожалуйста, выберите кошелек для получения средств.";
@@ -500,7 +500,7 @@ Enter it below to make sure:" = "Вы помните Ваш пароль? Он �
 "Exchange Rate Data Source" = "Источник данных для курса обмена";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "Обменный курс погрузка..";
 
 /* Exit button text on top left */
 "Exit" = "Выход";

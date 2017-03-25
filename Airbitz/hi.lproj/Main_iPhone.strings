@@ -125,7 +125,7 @@
 "NBj-ek-BcU.normalTitle" = "पिछले हफ्ते";
 
 /* Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk"; */
-"NuG-b1-njk.normalTitle" = "PIN Username";
+"NuG-b1-njk.normalTitle" = "पिन यूजर का नाम";
 
 /* Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
 "PDc-Am-Qmc.text" = "सार्वजनिक पता";
@@ -261,6 +261,9 @@
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[2]" = "एस एम एस";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[3]" = "साझा";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "jrM-St-5IO"; */
 "jrM-St-5IO.text" = "उपनाम";

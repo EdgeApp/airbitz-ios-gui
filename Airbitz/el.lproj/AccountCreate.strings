@@ -1,0 +1,121 @@
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
+"0gq-ds-DJC.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "Το όνομα χρήστη και ο κωδικός πρόσβασης είναι γνωστά μόνο σε εσάς. Η Airbitz ούτε μεταδίδει ούτε αποθηκεύει δεδομένα χωρίς κρυπτογράφηση.";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
+"6uu-dw-ssd.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI"; */
+"AAt-Oh-ifI.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC"; */
+"D2i-9s-GAC.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
+"DUg-At-veb.text" = "το όνομα μου";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
+"DgW-Gm-7l2.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
+"Dyh-gB-nOv.text" = "Στην συνέχεια θα δείτε ένα αναδυόμενο παράθυρο το οποίο θα ζητεί πρόσβαση στις Επαφές σας.";
+
+/* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
+"Ehm-ti-qdD.text" = "Καθορίστε το όνομα ή ένα ψευδώνυμο της επιλογής σας (πχ. «Coinmaster»).
+
+Το συγκεκριμένο χρησιμοποιείται ΜΟΝΟ όταν στέλνετε πληρωμές ή αιτήσεις σε άλλους για να μπορούν να σας αναγνωρίσουν.
+
+Το συγκεκριμένο δεν αποστέλλεται ποτέ στην Airbitz ή σε άλλα συμβαλλόμενα μέρη ενώ μπορείτε να το αλλάξετε όποτε θελήσετε στο μέλλον.";
+
+/* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
+"G0E-xz-b8e.text" = "Καθορίστε ένα 4-ψήφιο PIN";
+
+/* Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR"; */
+"Gzw-pH-bAR.text" = "1234";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "KSv-b6-auz"; */
+"KSv-b6-auz.text" = "See Strings.h";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "SsW-1b-1cv"; */
+"SsW-1b-1cv.text" = "See Strings.h";
+
+/* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt"; */
+"Tqs-NN-dWt.text" = "Το PIN σας είναι ένας 4-ψήφιος κωδικός που χρησιμοποιείται για γρήγορη επανασύνδεση στον λογαριασμό σας.";
+
+/* Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT"; */
+"VAn-0y-asT.text" = "See Strings.h";
+
+/* Class = "UIButton"; normalTitle = "SKIP"; ObjectID = "Vad-R9-M68"; */
+"Vad-R9-M68.normalTitle" = "ΠΑΡΑΛΕΙΨΗ";
+
+/* Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7"; */
+"W8f-q2-Sa7.normalTitle" = "Εμφάνιση";
+
+/* Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT"; */
+"WkL-r2-NLT.text" = "Εγγραφή";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wkt-fz-AEf"; */
+"Wkt-fz-AEf.normalTitle" = "Κουμπί";
+
+/* Class = "UILabel"; text = "Enable Camera Access"; ObjectID = "YJZ-dK-bwv"; */
+"YJZ-dK-bwv.text" = "Ενεργοποίηση Πρόσβασης σε Κάμερα";
+
+/* Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4"; */
+"bPi-8w-xQ4.text" = "PIN";
+
+/* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
+"cng-Cv-ULC.text" = "Ενεργοποίηση Πρόσβασης σε Επαφές";
+
+/* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
+"dxS-14-iR5.text" = "Το PIN σας είναι ένας 4-ψήφιος κωδικός που χρησιμοποιείται για γρήγορη επανασύνδεση στον λογαριασμό σας.";
+
+/* Class = "UITextField"; placeholder = "Nickname"; ObjectID = "fCk-W4-OJJ"; */
+"fCk-W4-OJJ.placeholder" = "Ψευδώνυμο";
+
+/* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn"; */
+"fV9-pz-Wfn.placeholder" = "Δημιουργία PIN";
+
+/* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL"; */
+"fnL-7h-MQL.placeholder" = "Επιλέξτε έναν Κωδικό πρόσβασης";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6"; */
+"hHD-NP-fM6.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F"; */
+"hoE-Bh-x2F.placeholder" = "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης";
+
+/* Class = "UITextField"; placeholder = "Choose a Username"; ObjectID = "i3b-ZH-bDm"; */
+"i3b-ZH-bDm.placeholder" = "Επιλέξτε ένα όνομα χρήστη";
+
+/* Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj"; */
+"jcU-OX-5Hj.text" = "Γράψτε σε ένα κομμάτι χαρτί και αποθηκεύστε με ασφάλεια";
+
+/* Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX"; */
+"jgQ-ju-YiX.text" = "Καθορίστε έναν Κωδικό πρόσβασης και PIN";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "sJ6-mQ-mSV"; */
+"sJ6-mQ-mSV.text" = "Όνομα Χρήστη";
+
+/* Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm"; */
+"tOB-4i-OVm.text" = "mypassword12345";
+
+/* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
+"w3d-xe-eUq.text" = "Ο κωδικός πρόσβασης χρησιμοποιείται για τον έλεγχο ταυτότητας του λογαριασμού σας και για αλλαγή ευαίσθητων ρυθμίσεων.";
+
+/* Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU"; */
+"wff-Il-8GU.text" = "Γράψτε τα στοιχεία σε χαρτί!";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg"; */
+"x6r-A5-Cxg.normalTitle" = "Επιστροφή";
+
+/* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM"; */
+"y2b-Sg-zfM.placeholder" = "Δημιουργία PIN";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1"; */
+"z5S-Vu-MC1.normalTitle" = "ΕΠΟΜΕΝΟ";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC"; */
+"zqc-i8-gfC.text" = "Κωδικός Πρόσβασης";
+

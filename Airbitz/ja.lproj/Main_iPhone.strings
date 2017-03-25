@@ -126,7 +126,7 @@
 "NBj-ek-BcU.normalTitle" = "先週";
 
 /* Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk"; */
-"NuG-b1-njk.normalTitle" = "PIN Username";
+"NuG-b1-njk.normalTitle" = "PINユーザー名";
 
 /* Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
 "PDc-Am-Qmc.text" = "公開アドレス";
@@ -265,6 +265,9 @@
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[2]" = "メッセージ";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[3]" = "シェア";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "jrM-St-5IO"; */
 "jrM-St-5IO.text" = "Label";
