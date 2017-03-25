@@ -126,7 +126,7 @@
 "NBj-ek-BcU.normalTitle" = "الاسبوع الماضى";
 
 /* Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk"; */
-"NuG-b1-njk.normalTitle" = "PIN Username";
+"NuG-b1-njk.normalTitle" = "PIN اسم المستخدم";
 
 /* Class = "UILabel"; text = "PUBLIC ADDRESS"; ObjectID = "PDc-Am-Qmc"; */
 "PDc-Am-Qmc.text" = "عامة عنو";
@@ -262,6 +262,9 @@
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[2]" = "‏الرسائل القصيرة SMS";
+
+/* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
+"jlL-oE-aWy.segmentTitles[3]" = "تقاسم";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "jrM-St-5IO"; */
 "jrM-St-5IO.text" = "Label";

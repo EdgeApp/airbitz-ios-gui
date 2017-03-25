@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Total";
+"  Amount" = "  Cantidad";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Por favor, elija una cartera para recibir fondos.";
@@ -498,7 +498,7 @@ Enter it below to make sure:" = "¿Todavía recuerda su contraseña? Necesitará
 "Exchange Rate Data Source" = "Origen de datos de tipo de cambio";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "Cargando tipo de cambio..";
 
 /* Exit button text on top left */
 "Exit" = "Salida";

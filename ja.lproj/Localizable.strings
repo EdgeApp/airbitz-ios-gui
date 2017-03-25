@@ -1,5 +1,5 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  Amount";
+"  Amount" = "  量";
 
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " お金を受け取るウォレットを選択してください。";
@@ -507,7 +507,7 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Exchange Rate Data Source" = "為替レートデータソース";
 
 /* No comment provided by engineer. */
-"Exchange rate loading.." = "Exchange rate loading..";
+"Exchange rate loading.." = "為替レート荷積み";
 
 /* Exit button text on top left */
 "Exit" = "出口";

@@ -1,3 +1,13 @@
+v.2.4.0
+
+• Modification du protocole dans la connexion
+• Brancher LibertyX
+• Prise en charge des exportations hors CSV / QBO
+• Grand Support de portefeuille. Meilleurs Délais
+• Corrections d'échecs d'exportation CSV / QBO par courrier électronique
+• Langage de support additionnel
+
+
 v.2.3.3
 
 • La correction du problème avec la connexion du PIN ne marche pas

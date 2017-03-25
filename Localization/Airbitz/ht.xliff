@@ -15,10 +15,10 @@
         <note>Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN";</note>
         <target xml:lang="ht">Bouton</target>
       </trans-unit>
-      <trans-unit id="gQB-TM-9HQ.text">
+      <trans-unit id="gQB-TM-9HQ.text" approved="yes">
         <source>Login or Send</source>
         <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="ht" state="needs-translation">Login or Send</target>
+        <target xml:lang="ht">Konekte ou voye</target>
       </trans-unit>
     </body>
   </file>
@@ -671,10 +671,10 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
         <note>Class = "UIButton"; normalTitle = "Last Week"; ObjectID = "NBj-ek-BcU";</note>
         <target xml:lang="ht">Semenn pas a</target>
       </trans-unit>
-      <trans-unit id="NuG-b1-njk.normalTitle">
+      <trans-unit id="NuG-b1-njk.normalTitle" approved="yes">
         <source>PIN Username</source>
         <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
-        <target xml:lang="ht" state="needs-translation">PIN Username</target>
+        <target xml:lang="ht">PIN non itilizatè</target>
       </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text" approved="yes">
         <source>PUBLIC ADDRESS</source>
@@ -914,6 +914,11 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
         <source>SMS</source>
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
         <target xml:lang="ht">SMS</target>
+      </trans-unit>
+      <trans-unit id="jlL-oE-aWy.segmentTitles[3]" approved="yes">
+        <source>Share</source>
+        <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
+        <target xml:lang="ht">Pataje</target>
       </trans-unit>
       <trans-unit id="jrM-St-5IO.text">
         <source>Label</source>
@@ -1326,10 +1331,10 @@ Scan the QR code using this device</source>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
     </header>
     <body>
-      <trans-unit id="  Amount">
+      <trans-unit id="  Amount" approved="yes">
         <source>  Amount</source>
         <note>Placeholder text for Receive screen amount text field</note>
-        <target xml:lang="ht" state="needs-translation">  Amount</target>
+        <target xml:lang="ht">  Kantite</target>
       </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds." approved="yes">
         <source> Please choose a wallet to receive funds.</source>
@@ -2164,10 +2169,10 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Sous done to echanj</target>
       </trans-unit>
-      <trans-unit id="Exchange rate loading..">
+      <trans-unit id="Exchange rate loading.." approved="yes">
         <source>Exchange rate loading..</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ht" state="needs-translation">Exchange rate loading..</target>
+        <target xml:lang="ht">Chajman to echanj..</target>
       </trans-unit>
       <trans-unit id="Exit" approved="yes">
         <source>Exit</source>
