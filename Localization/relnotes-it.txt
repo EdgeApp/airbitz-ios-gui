@@ -1,3 +1,19 @@
+v.2.4.0
+
+• Protocollo Modifiche a Bordo Accesso
+• LibertyX collegare
+
+• Supporto per non-USD CSV/QBO esportare
+
+• Grande portafoglio supporto.
+
+  Migliorarsi tempo scaduto
+
+• E-mail CSV/QBO esportare schianto correzioni
+
+• Altre lingue supportate
+
+
 v.2.3.3
 
 • Fissare raro problema con login PIN non funzionante

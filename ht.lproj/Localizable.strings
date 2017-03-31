@@ -1,3 +1,6 @@
+/* Placeholder text for Receive screen amount text field */
+"  Amount" = "  Kantite";
+
 /* No comment provided by engineer. */
 " Please choose a wallet to receive funds." = " Tanpri chwazi yon potfey pou resevwa lajan.";
 
@@ -494,6 +497,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 /* No comment provided by engineer. */
 "Exchange Rate Data Source" = "Sous done to echanj";
 
+/* No comment provided by engineer. */
+"Exchange rate loading.." = "Chajman to echanj..";
+
 /* Exit button text on top left */
 "Exit" = "Kite";
 
@@ -847,6 +853,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 /* settings text */
 "Nickname / Handle (optional)" = "Non itilizatè / okipe (Si ou vle)";
 
+/* No comment provided by engineer. */
+"No PIN set" = "Pa gen seri PIN";
+
 /* what to display when wallet has no transactions */
 "No Transactions" = "Pa Gen Tranzaksyon";
 
@@ -962,6 +971,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 <br><br>%@" = "Tanpri klike sou lyen anba a sa a pati yon aparèy mobil ak %1$@ enstale pou lanse rekiperasyon kont pou non itilizatè [%2$@]
 
 <br><br>%3$@";
+
+/* No comment provided by engineer. */
+"Please create a PIN for this account to enable quick re-logins" = "Tanpri kreye yon kod PIN pou kont kapab itilize anko koneksyon an rapid";
 
 /* No comment provided by engineer. */
 "Please create a new account and transfer your funds if you forgot your password." = "Tanpri kreye yon lot kont ak transfè fon ou yo si ou bliye mod pas ou.";

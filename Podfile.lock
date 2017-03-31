@@ -29,26 +29,22 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - AirbitzCore (from `{:http=>"https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz"}`)
+  - AirbitzCore (from `../airbitz-core-objc/`)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.6)
   - ZBarSDK (~> 1.3)
 
 EXTERNAL SOURCES:
   AirbitzCore:
-    :http: https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz
-
-CHECKOUT OPTIONS:
-  AirbitzCore:
-    :http: https://developer.airbitz.co/download/airbitz-core-objc-develop-newest.tgz
+    :path: "../airbitz-core-objc/"
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AirbitzCore: a0556cbdf218cd82b8c266fc03217aded82b4f8e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   ZBarSDK: 4c1b5daeb7d6cc67dc9355e690af0230a661f6ec
 
-PODFILE CHECKSUM: b97ccad1a07f4e35260919f943bf2f42cdfc483f
+PODFILE CHECKSUM: 0d88c1d32501a64a6f9aa74ce3e1217efeb2238a
 
 COCOAPODS: 1.2.0

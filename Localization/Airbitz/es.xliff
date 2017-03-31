@@ -18,7 +18,7 @@
       <trans-unit id="gQB-TM-9HQ.text">
         <source>Login or Send</source>
         <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="es" state="needs-translation">Login or Send</target>
+        <target xml:lang="es" state="translated">Login o enviar</target>
       </trans-unit>
     </body>
   </file>
@@ -723,7 +723,7 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
       <trans-unit id="NuG-b1-njk.normalTitle">
         <source>PIN Username</source>
         <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
-        <target xml:lang="es" state="needs-translation">PIN Username</target>
+        <target xml:lang="es" state="translated">PIN del nombre de usuario</target>
       </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text" approved="yes">
         <source>PUBLIC ADDRESS</source>
@@ -981,6 +981,11 @@ Esto nunca se envía a Airbitz o a cualquier tercero y puede cambiarse en cualqu
         <source>SMS</source>
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
         <target xml:lang="es">SMS</target>
+      </trans-unit>
+      <trans-unit id="jlL-oE-aWy.segmentTitles[3]" approved="yes">
+        <source>Share</source>
+        <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
+        <target xml:lang="es">Compartir</target>
       </trans-unit>
       <trans-unit id="jrM-St-5IO.text" approved="yes">
         <source>Label</source>
@@ -1429,7 +1434,10 @@ Scan the QR code using this device</source>
       <trans-unit id="  Amount">
         <source>  Amount</source>
         <note>Placeholder text for Receive screen amount text field</note>
-        <target xml:lang="es" state="translated">  Total</target>
+        <target xml:lang="es" state="translated">  Cantidad</target>
+        <alt-trans>
+          <target xml:lang="es">  Total</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds." approved="yes">
         <source> Please choose a wallet to receive funds.</source>
@@ -2391,7 +2399,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Exchange rate loading..">
         <source>Exchange rate loading..</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="es" state="needs-translation">Exchange rate loading..</target>
+        <target xml:lang="es" state="translated">Cargando tipo de cambio..</target>
       </trans-unit>
       <trans-unit id="Exit" approved="yes">
         <source>Exit</source>

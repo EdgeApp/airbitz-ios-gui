@@ -60,8 +60,6 @@ typedef enum eLoginMode
     CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
     UIAlertView                     *_enableTouchIDAlertView;
-    UIAlertView                     *_passwordCheckAlert;
-    UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
     UIAlertView                     *_deleteAccountAlert;
     UIAlertView                     *_recoverPasswordAlert;
@@ -1384,12 +1382,7 @@ static BOOL bInitialized = false;
         }
         else
         {
-            if ([abcAccount accountHasPassword])
-                [abcAccount.settings enableTouchID];
-            else
-            {
-                [self showPasswordCheckAlertForTouchID];
-            }
+            [abcAccount.settings enableTouchID];
         }
 
         return;
@@ -1402,61 +1395,6 @@ static BOOL bInitialized = false;
             [self recoverPassword:textField.text];
         }
         _bDisallowTouchID = NO;
-    }
-    else if (alertView == _passwordCheckAlert)
-    {
-        if (0 == buttonIndex)
-        {
-            //
-            // Need to disable TouchID in settings.
-            //
-            // Disable TouchID in LocalSettings
-            [abcAccount.settings disableTouchID];
-            [MainViewController fadingAlert:touchIDDisabled];
-        }
-        else
-        {
-            //
-            // Check the password
-            //
-            _tempPassword = [[alertView textFieldAtIndex:0] text];
-            [FadingAlertView create:self.view
-                            message:checkingPasswordText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
-                if ([abcAccount.settings enableTouchID:_tempPassword])
-                {
-                    _tempPassword = nil;
-                    [MainViewController fadingAlert:touchIDEnabledText];
-                    
-                    
-                }
-                else
-                {
-                    [MainViewController fadingAlertDismiss];
-                    _tempPassword = nil;
-                    _passwordIncorrectAlert = [[UIAlertView alloc]
-                                               initWithTitle:incorrectPasswordText
-                                               message:tryAgainText
-                                               delegate:self
-                                               cancelButtonTitle:noButtonText
-                                               otherButtonTitles:yesButtonText, nil];
-                    [_passwordIncorrectAlert show];
-                }
-            }];
-        }
-        return;
-    }
-    else if (_passwordIncorrectAlert == alertView)
-    {
-        if (buttonIndex == 0)
-        {
-            [MainViewController fadingAlert:touchIDDisabled];
-            [abcAccount.settings disableTouchID];
-        }
-        else if (buttonIndex == 1)
-        {
-            [self showPasswordCheckAlertForTouchID];
-        }
     }
     else if (_uploadLogAlert == alertView)
     {
@@ -1588,21 +1526,6 @@ static BOOL bInitialized = false;
             }
         }
     }
-}
-
-- (void)showPasswordCheckAlertForTouchID
-{
-    // Popup to ask user for their password
-    NSString *title = touchIDText;
-    NSString *message = enterYourPasswordToEnableTouchID;
-    // show password reminder test
-    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
-                                                     message:message
-                                                    delegate:self
-                                           cancelButtonTitle:laterButtonText
-                                           otherButtonTitles:okButtonText, nil];
-    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
-    [_passwordCheckAlert show];
 }
 
 - (void)handlePasswordResults:(NSNumber *)authenticated

@@ -18,7 +18,7 @@
       <trans-unit id="gQB-TM-9HQ.text">
         <source>Login or Send</source>
         <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="hi" state="needs-translation">Login or Send</target>
+        <target xml:lang="hi" state="translated">लॉगिन करें या भेजें</target>
       </trans-unit>
     </body>
   </file>
@@ -699,7 +699,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="NuG-b1-njk.normalTitle">
         <source>PIN Username</source>
         <note>Class = "UIButton"; normalTitle = "PIN Username"; ObjectID = "NuG-b1-njk";</note>
-        <target xml:lang="hi" state="needs-translation">PIN Username</target>
+        <target xml:lang="hi" state="translated">पिन यूजर का नाम</target>
       </trans-unit>
       <trans-unit id="PDc-Am-Qmc.text">
         <source>PUBLIC ADDRESS</source>
@@ -933,6 +933,11 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>SMS</source>
         <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
         <target xml:lang="hi" state="translated">एस एम एस</target>
+      </trans-unit>
+      <trans-unit id="jlL-oE-aWy.segmentTitles[3]">
+        <source>Share</source>
+        <note>Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[3] = "Share"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen";</note>
+        <target xml:lang="hi" state="translated">साझा</target>
       </trans-unit>
       <trans-unit id="jrM-St-5IO.text">
         <source>Label</source>
@@ -1370,7 +1375,7 @@ Scan the QR code using this device</source>
       <trans-unit id="  Amount">
         <source>  Amount</source>
         <note>Placeholder text for Receive screen amount text field</note>
-        <target xml:lang="hi" state="needs-translation">  Amount</target>
+        <target xml:lang="hi" state="translated">  रकम</target>
       </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
@@ -2196,7 +2201,7 @@ Enter it below to make sure:</source>
       <trans-unit id="Exchange rate loading..">
         <source>Exchange rate loading..</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="hi" state="needs-translation">Exchange rate loading..</target>
+        <target xml:lang="hi" state="translated">विनिमय दर लोड हो रहा है..</target>
       </trans-unit>
       <trans-unit id="Exit">
         <source>Exit</source>
