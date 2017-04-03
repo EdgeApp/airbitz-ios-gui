@@ -67,6 +67,9 @@
 		DA10BDE11C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE21C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
 		DA10BDE31C00280E0086AD8B /* foldapp.html in Resources */ = {isa = PBXBuildFile; fileRef = DA10BDE01C00280E0086AD8B /* foldapp.html */; };
+		DA2336951E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA2336961E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA2336971E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA3508311D67670B00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3508321D67670C00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -1552,6 +1555,8 @@
 		DA10BB971BFF90980086AD8B /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpg"; sourceTree = "<group>"; };
 		DA10BDE01C00280E0086AD8B /* foldapp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = foldapp.html; sourceTree = "<group>"; };
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
+		DA2336941E922634000CD378 /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
+		DA23369C1E922649000CD378 /* TextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -3430,6 +3435,8 @@
 				DA9EE01F1BC61F920063DA07 /* SpendingLimitsViewController.m */,
 				DA9EE0201BC61F920063DA07 /* TextFieldCell.h */,
 				DA9EE0211BC61F920063DA07 /* TextFieldCell.m */,
+				DA23369C1E922649000CD378 /* TextViewCell.h */,
+				DA2336941E922634000CD378 /* TextViewCell.m */,
 				DA9EE0221BC61F920063DA07 /* TwoFactorMenuViewController.h */,
 				DA9EE0231BC61F920063DA07 /* TwoFactorMenuViewController.m */,
 				DA9EE0241BC61F920063DA07 /* TwoFactorScanViewController.h */,
@@ -5475,6 +5482,7 @@
 				77B631BB1E16160A0099B091 /* DropDownCell.swift in Sources */,
 				DA9EF3AC1BC7285D0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF3AD1BC7285D0063DA07 /* NSDate+Helper.m in Sources */,
+				DA2336961E922634000CD378 /* TextViewCell.m in Sources */,
 				DA9EF3AE1BC7285D0063DA07 /* overviewCell.m in Sources */,
 				DA9EF3AF1BC7285D0063DA07 /* ConfirmationSliderView.m in Sources */,
 				DA9EF3B01BC7285D0063DA07 /* ExportWalletPDFViewController.m in Sources */,
@@ -5623,6 +5631,7 @@
 				77B631BC1E16160B0099B091 /* DropDownCell.swift in Sources */,
 				DA9EF5731BC729FA0063DA07 /* SendStatusViewController.m in Sources */,
 				DA9EF5741BC729FA0063DA07 /* NSDate+Helper.m in Sources */,
+				DA2336971E922634000CD378 /* TextViewCell.m in Sources */,
 				DA9EF5751BC729FA0063DA07 /* overviewCell.m in Sources */,
 				DA9EF5761BC729FA0063DA07 /* ConfirmationSliderView.m in Sources */,
 				DA9EF5771BC729FA0063DA07 /* ExportWalletPDFViewController.m in Sources */,
@@ -5771,6 +5780,7 @@
 				DA9EE5221BC61F930063DA07 /* TwoFactorMenuViewController.m in Sources */,
 				DA9EE5121BC61F930063DA07 /* SendStatusViewController.m in Sources */,
 				DA9ED7E81BC61E680063DA07 /* NSDate+Helper.m in Sources */,
+				DA2336951E922634000CD378 /* TextViewCell.m in Sources */,
 				DA9EE0C91BC61F920063DA07 /* overviewCell.m in Sources */,
 				DA9EE50E1BC61F920063DA07 /* ConfirmationSliderView.m in Sources */,
 				DA9EE5561BC61F930063DA07 /* ExportWalletPDFViewController.m in Sources */,

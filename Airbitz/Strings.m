@@ -407,6 +407,9 @@
 #define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
 #define copied_text                                 NSLocalizedString(@"Copied",nil)
+#define override_bitcoin_servers                    NSLocalizedString(@"Override Bitcoin Servers (advanced)",nil)
+#define enable_override_bitcoin_servers             NSLocalizedString(@"Enable Override",nil)
+#define override_servers_help                       NSLocalizedString(@"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.",nil)
 
 #define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token. Please select one below" ,nil)
 #define requestYourIdentityTokenButNone             NSLocalizedString(@"Request your Identity Token but you don't have any" ,nil)
