@@ -31,24 +31,26 @@
 #import "PopupPickerView.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "FadingAlertView.h"
+#import "TextViewCell.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
 #define ANIMATION_DURATION_KEYBOARD_DOWN    0.25
+#define DEFAULT_SERVER                      @"stratum://electrum-bu-az-wusa2.airbitz.co:50001"
 
 #define SECTION_BITCOIN_DENOMINATION    0
 #define SECTION_USERNAME                1
 #define SECTION_NAME                    2
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
-#define SECTION_DEBUG                   5
+#define SECTION_OVERRIDE_SERVERS        5
+#define SECTION_DEBUG                   6
+#define SECTION_BLANK_1                 7
+#define SECTION_BLANK_2                 8
+#define SECTION_BLANK_3                 9
+#define SECTION_BLANK_4                 10
 
-// If we are in debug include the DEBUG section in settings
-#if (DEBUG || 1) // Always enable debug section for now
-#define SECTION_COUNT                   6
-#else 
-#define SECTION_COUNT                   5
-#endif
+#define SECTION_COUNT                   10
 
 #define DENOMINATION_CHOICES            3
 
@@ -74,6 +76,9 @@
 #define ROW_BLE                         6
 #define ROW_PIN_RELOGIN                 7
 #define ROW_TOUCHID                     8
+
+#define ROW_ENABLE_SERVER_OVERRIDE      0
+#define ROW_OVERRIDE_SERVER_LIST        1
 
 #define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
                                 @"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19", \
@@ -102,9 +107,10 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                                       ButtonOnlyCellDelegate, SignUpViewControllerDelegate, PasswordRecoveryViewControllerDelegate,
                                       PopupPickerView2Delegate, PopupWheelPickerViewDelegate, CategoriesViewControllerDelegate,
                                       SpendingLimitsViewControllerDelegate, TwoFactorShowViewControllerDelegate, DebugViewControllerDelegate,
-                                      CBCentralManagerDelegate>
+                                      CBCentralManagerDelegate, TextViewCellDelegate>
 {
 	TextFieldCell                   *_activeTextFieldCell;
+    TextViewCell                    *_activeTextViewCell;
 	UITapGestureRecognizer          *_tapGesture;
     SignUpViewController            *_signUpController;
     PasswordRecoveryViewController  *_passwordRecoveryController;
@@ -584,6 +590,58 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     [InfoView CreateWithHTML:@"info_settings" forView:self.view];
 }
 
+#pragma mark - TextViewCell delegates
+
+- (void)textViewCellTextDidChange:(TextViewCell *)cell
+{
+    NSInteger section = (cell.tag >> 8);
+    NSInteger row = cell.tag & 0xff;
+    
+    if (section == SECTION_OVERRIDE_SERVERS)
+    {
+        if (row == ROW_OVERRIDE_SERVER_LIST)
+        {
+            abcAccount.settings.overrideBitcoinServerList = [NSString stringWithString:cell.textView.text];
+        }
+    }
+}
+
+- (void)textViewCellBeganEditing:(TextViewCell *)cell
+{
+    //scroll the tableView so that this cell is above the keyboard
+    if ([cell.textView.text isEqualToString:@""])
+    {
+        cell.textView.text = DEFAULT_SERVER;
+    }
+    _activeTextViewCell = cell;
+    if (!_tapGesture)
+    {
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textViewHandleTapFrom:)];
+        [self.tableView	addGestureRecognizer:_tapGesture];
+    }
+}
+
+- (void)textViewHandleTapFrom:(UITapGestureRecognizer *)recognizer
+{
+    //Code to handle the gesture
+    [self.view endEditing:YES];
+    [self.tableView removeGestureRecognizer:_tapGesture];
+    _tapGesture = nil;
+}
+
+- (void)textViewCellEndEditing:(TextViewCell *)cell
+{
+    [_activeTextViewCell resignFirstResponder];
+    _activeTextViewCell = nil;
+    if ([cell.textView.text isEqualToString:@""])
+    {
+        cell.textView.text = DEFAULT_SERVER;
+    }
+
+    [self saveSettings];
+}
+
+
 #pragma mark - textFieldCell delegates
 
 - (void)textFieldCellTextDidChange:(TextFieldCell *)cell
@@ -890,7 +948,19 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
         }
     }
-	
+    else if (indexPath.section == SECTION_OVERRIDE_SERVERS)
+    {
+        if (indexPath.row == ROW_ENABLE_SERVER_OVERRIDE)
+        {
+            cell.name.text = enable_override_bitcoin_servers;
+            if (abcAccount.settings.bOverrideBitcoinServers)
+                [cell.state setOn:YES animated:NO];
+            else
+                [cell.state setOn:NO animated:NO];
+            
+        }
+    }
+
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
 	return cell;
@@ -920,7 +990,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             [cell.button setTitle:abcAccount.settings.defaultCurrency.code forState:UIControlStateNormal];
 		}
 	}
-	if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
+	else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
 	{
 		if (indexPath.row == 0)
 		{
@@ -933,6 +1003,37 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 	return cell;
 }
+
+- (TextViewCell *)getTextViewCellForTableView:(UITableView *)tableView andIndexPath:(NSIndexPath *)indexPath
+{
+    TextViewCell *cell;
+    static NSString *cellIdentifier = @"TextViewCell";
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (nil == cell)
+    {
+        cell = [[TextViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.delegate = self;
+    if (indexPath.section == SECTION_OVERRIDE_SERVERS)
+    {
+        if (indexPath.row == ROW_OVERRIDE_SERVER_LIST)
+        {
+            cell.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            cell.textView.autocorrectionType = UITextAutocorrectionTypeNo;
+            cell.textView.spellCheckingType = UITextSpellCheckingTypeNo;
+            cell.textView.autocorrectionType = UITextAutocorrectionTypeNo;
+            cell.textView.text = abcAccount.settings.overrideBitcoinServerList;
+            cell.textView.editable = abcAccount.settings.bOverrideBitcoinServers;
+            cell.textView.textColor = abcAccount.settings.bOverrideBitcoinServers ? [UIColor darkGrayColor] : [UIColor lightGrayColor];
+        }
+    }
+    
+    cell.tag = (indexPath.section << 8) | (indexPath.row);
+    
+    return cell;
+}
+
 
 - (ButtonOnlyCell *)getDebugButton:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath
 {
@@ -983,7 +1084,15 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         case SECTION_DEBUG:
             return 1;
             break;
+            
+        case SECTION_OVERRIDE_SERVERS:
+            return 2;
+            break;
 
+        case SECTION_BLANK_1:
+        case SECTION_BLANK_2:
+        case SECTION_BLANK_3:
+        case SECTION_BLANK_4:
         default:
             return 0;
             break;
@@ -992,6 +1101,11 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == SECTION_OVERRIDE_SERVERS)
+    {
+        if (indexPath.row == ROW_OVERRIDE_SERVER_LIST)
+            return [Theme Singleton].heightSettingsTableCell * 2;
+    }
     return [Theme Singleton].heightSettingsTableCell;
 }
 
@@ -1036,7 +1150,11 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		label.text = defaultExchangeRateHeader;
 	}
-	if (section == SECTION_DEBUG)
+    if (section == SECTION_OVERRIDE_SERVERS)
+    {
+        label.text = override_bitcoin_servers;
+    }
+	if (section >= SECTION_DEBUG)
 	{
 		label.text = @"";
 	}
@@ -1104,9 +1222,20 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
                 cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
             }
 		}
-		else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
+        else if (indexPath.section == SECTION_DEFAULT_EXCHANGE)
+        {
+            cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
+        }
+		else if (indexPath.section == SECTION_OVERRIDE_SERVERS)
 		{
-			cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
+            if (indexPath.row == ROW_ENABLE_SERVER_OVERRIDE)
+            {
+                cell = [self getBooleanCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
+            }
+            else if (indexPath.row == ROW_OVERRIDE_SERVER_LIST)
+            {
+                cell = [self getTextViewCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
+            }
 		}
 	}
 
@@ -1281,6 +1410,15 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         // update the display by reloading the table
         [self.tableView reloadData];
 
+    }
+    else if ((section == SECTION_OVERRIDE_SERVERS) && (row == ROW_ENABLE_SERVER_OVERRIDE))
+    {
+        [MainViewController fadingAlertHelpPopup:override_servers_help];
+        abcAccount.settings.bOverrideBitcoinServers = theSwitch.on;
+        [abcAccount.settings saveSettings];
+        
+        // update the display by reloading the table
+        [self.tableView reloadData];
     }
 }
 

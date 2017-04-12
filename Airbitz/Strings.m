@@ -407,6 +407,9 @@
 #define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
 #define copied_text                                 NSLocalizedString(@"Copied",nil)
+#define override_bitcoin_servers                    NSLocalizedString(@"Override Bitcoin Servers (advanced)",nil)
+#define enable_override_bitcoin_servers             NSLocalizedString(@"Enable Override",nil)
+#define override_servers_help                       NSLocalizedString(@"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.",nil)
 
 #define requestYourIdentityToken                    NSLocalizedString(@"Request your Identity Token. Please select one below" ,nil)
 #define requestYourIdentityTokenButNone             NSLocalizedString(@"Request your Identity Token but you don't have any" ,nil)
@@ -464,6 +467,7 @@
 #define recovery_successful                         NSLocalizedString(@"Recovery Successful\n\nPlease change your password and PIN", nil)
 #define invalid_email                               NSLocalizedString(@"Invalid Email", nil)
 #define buy_sell_bank_usa                           NSLocalizedString(@"Buy/Sell with Bank Account (USA)", nil)
+#define buy_sell_bank_europe                        NSLocalizedString(@"Buy/Sell with Bank Account (Europe)", nil)
 #define buy_sell_cash_usa                           NSLocalizedString(@"Buy/Sell with Cash (USA)", nil)
 #define fetching_login_request                      NSLocalizedString(@"Fetching Login Request...", @"Fetching Login Request popup")
 #define approving_login_text                        NSLocalizedString(@"Approving Login...", @"Approving Login popup")
