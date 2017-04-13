@@ -1432,7 +1432,7 @@
 		DACC29CA1E4D8B6E00130A6E /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		DACC29CB1E4D8B6E00130A6E /* drag_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF461BC61F910063DA07 /* drag_bar@2x.png */; };
 		DACC29CC1E4D8B6E00130A6E /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5F1BC61F910063DA07 /* icon_arrow.png */; };
-		DACC29CE1E4D8B6E00130A6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
+		DACC29CE1E4D8B6E00130A6E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DACC29CF1E4D8B6E00130A6E /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DACC29D01E4D8B6E00130A6E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
 		DACC29D11E4D8B6E00130A6E /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
@@ -1857,7 +1857,7 @@
 		DACC2B911E4DA10700130A6E /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		DACC2B921E4DA10700130A6E /* drag_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF461BC61F910063DA07 /* drag_bar@2x.png */; };
 		DACC2B931E4DA10700130A6E /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5F1BC61F910063DA07 /* icon_arrow.png */; };
-		DACC2B941E4DA10700130A6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
+		DACC2B941E4DA10700130A6E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DACC2B951E4DA10700130A6E /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DACC2B961E4DA10700130A6E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
 		DACC2B971E4DA10700130A6E /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
@@ -2282,7 +2282,7 @@
 		DACC2D521E4DA33200130A6E /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		DACC2D531E4DA33200130A6E /* drag_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF461BC61F910063DA07 /* drag_bar@2x.png */; };
 		DACC2D541E4DA33200130A6E /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5F1BC61F910063DA07 /* icon_arrow.png */; };
-		DACC2D551E4DA33200130A6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
+		DACC2D551E4DA33200130A6E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DACC2D561E4DA33200130A6E /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DACC2D571E4DA33200130A6E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
 		DACC2D581E4DA33200130A6E /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
@@ -2707,7 +2707,7 @@
 		DACC2F111E4DA4C300130A6E /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		DACC2F121E4DA4C300130A6E /* drag_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF461BC61F910063DA07 /* drag_bar@2x.png */; };
 		DACC2F131E4DA4C300130A6E /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5F1BC61F910063DA07 /* icon_arrow.png */; };
-		DACC2F141E4DA4C300130A6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
+		DACC2F141E4DA4C300130A6E /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DACC2F151E4DA4C300130A6E /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		DACC2F161E4DA4C300130A6E /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
 		DACC2F171E4DA4C300130A6E /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
@@ -3216,7 +3216,7 @@
 		FD4256C31E789B5E00F762D2 /* icon_import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9101F11C4964AD00603D62 /* icon_import@3x.png */; };
 		FD4256C41E789B5E00F762D2 /* drag_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF461BC61F910063DA07 /* drag_bar@2x.png */; };
 		FD4256C51E789B5E00F762D2 /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF5F1BC61F910063DA07 /* icon_arrow.png */; };
-		FD4256C61E789B5E00F762D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA5D7201DE361BF002B8F7D /* Localizable.strings */; };
+		FD4256C61E789B5E00F762D2 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		FD4256C71E789B5E00F762D2 /* plugin_icon_homedepot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */; };
 		FD4256C81E789B5E00F762D2 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFD01BC61F920063DA07 /* Lato-Italic.ttf */; };
 		FD4256C91E789B5E00F762D2 /* enable-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF481BC61F910063DA07 /* enable-camera.png */; };
@@ -4465,15 +4465,6 @@
 		DA9EEFB71BC724B00063DA07 /* QR-bracket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QR-bracket.png"; sourceTree = "<group>"; };
 		DA9EF5131BC7285D0063DA07 /* Airbitz Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9EF6D81BC729FA0063DA07 /* Airbitz Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airbitz Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAA5D7211DE361BF002B8F7D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7221DE361BF002B8F7D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7231DE361BF002B8F7D /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7241DE361BF002B8F7D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7251DE361BF002B8F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		DAA5D7261DE361BF002B8F7D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7271DE361BF002B8F7D /* ht */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ht; path = ht.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7281DE361BF002B8F7D /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA5D7291DE361BF002B8F7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_launch.png; path = BitcoinDepot/background_launch.png; sourceTree = "<group>"; };
 		DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background@2x.jpg"; path = "BitcoinDepot/background@2x.jpg"; sourceTree = "<group>"; };
 		DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_icon@2x.png"; path = "BitcoinDepot/logo_icon@2x.png"; sourceTree = "<group>"; };
@@ -6593,7 +6584,7 @@
 						DevelopmentTeam = KLD6Y8933F;
 					};
 					DACC2C941E4DA33200130A6E = {
-						DevelopmentTeam = UTX5TN2BS8;
+						DevelopmentTeam = 7NK7GC2KG5;
 					};
 					DACC2E531E4DA4C300130A6E = {
 						DevelopmentTeam = V6U8JC4EBW;
@@ -7314,7 +7305,7 @@
 				DACC29CA1E4D8B6E00130A6E /* icon_import@3x.png in Resources */,
 				DACC29CB1E4D8B6E00130A6E /* drag_bar@2x.png in Resources */,
 				DACC29CC1E4D8B6E00130A6E /* icon_arrow.png in Resources */,
-				DACC29CE1E4D8B6E00130A6E /* Localizable.strings in Resources */,
+				DACC29CE1E4D8B6E00130A6E /* (null) in Resources */,
 				DACC29CF1E4D8B6E00130A6E /* plugin_icon_homedepot@2x.png in Resources */,
 				DACC29D01E4D8B6E00130A6E /* Lato-Italic.ttf in Resources */,
 				DACC29D11E4D8B6E00130A6E /* enable-camera.png in Resources */,
@@ -7583,7 +7574,7 @@
 				DACC2B911E4DA10700130A6E /* icon_import@3x.png in Resources */,
 				DACC2B921E4DA10700130A6E /* drag_bar@2x.png in Resources */,
 				DACC2B931E4DA10700130A6E /* icon_arrow.png in Resources */,
-				DACC2B941E4DA10700130A6E /* Localizable.strings in Resources */,
+				DACC2B941E4DA10700130A6E /* (null) in Resources */,
 				DACC2B951E4DA10700130A6E /* plugin_icon_homedepot@2x.png in Resources */,
 				DACC2B961E4DA10700130A6E /* Lato-Italic.ttf in Resources */,
 				DACC2B971E4DA10700130A6E /* enable-camera.png in Resources */,
@@ -7853,7 +7844,7 @@
 				DACC2D521E4DA33200130A6E /* icon_import@3x.png in Resources */,
 				DACC2D531E4DA33200130A6E /* drag_bar@2x.png in Resources */,
 				DACC2D541E4DA33200130A6E /* icon_arrow.png in Resources */,
-				DACC2D551E4DA33200130A6E /* Localizable.strings in Resources */,
+				DACC2D551E4DA33200130A6E /* (null) in Resources */,
 				DACC2D561E4DA33200130A6E /* plugin_icon_homedepot@2x.png in Resources */,
 				DACC2D571E4DA33200130A6E /* Lato-Italic.ttf in Resources */,
 				DACC2D581E4DA33200130A6E /* enable-camera.png in Resources */,
@@ -8121,7 +8112,7 @@
 				DACC2F111E4DA4C300130A6E /* icon_import@3x.png in Resources */,
 				DACC2F121E4DA4C300130A6E /* drag_bar@2x.png in Resources */,
 				DACC2F131E4DA4C300130A6E /* icon_arrow.png in Resources */,
-				DACC2F141E4DA4C300130A6E /* Localizable.strings in Resources */,
+				DACC2F141E4DA4C300130A6E /* (null) in Resources */,
 				DACC2F151E4DA4C300130A6E /* plugin_icon_homedepot@2x.png in Resources */,
 				DACC2F161E4DA4C300130A6E /* Lato-Italic.ttf in Resources */,
 				DACC2F171E4DA4C300130A6E /* enable-camera.png in Resources */,
@@ -8673,7 +8664,7 @@
 				FD4256C31E789B5E00F762D2 /* icon_import@3x.png in Resources */,
 				FD4256C41E789B5E00F762D2 /* drag_bar@2x.png in Resources */,
 				FD4256C51E789B5E00F762D2 /* icon_arrow.png in Resources */,
-				FD4256C61E789B5E00F762D2 /* Localizable.strings in Resources */,
+				FD4256C61E789B5E00F762D2 /* (null) in Resources */,
 				FD4256C71E789B5E00F762D2 /* plugin_icon_homedepot@2x.png in Resources */,
 				FD4256C81E789B5E00F762D2 /* Lato-Italic.ttf in Resources */,
 				FD4256C91E789B5E00F762D2 /* enable-camera.png in Resources */,
@@ -12350,7 +12341,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = UTX5TN2BS8;
+				DEVELOPMENT_TEAM = 7NK7GC2KG5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -12395,7 +12386,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = UTX5TN2BS8;
+				DEVELOPMENT_TEAM = 7NK7GC2KG5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
