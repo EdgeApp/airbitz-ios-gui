@@ -154,7 +154,22 @@ static NSMutableArray *generalPlugins;
                            };
             [generalPlugins addObject:plugin];
         }
-        
+
+        plugin = [[Plugin alloc] init];
+        plugin.pluginId = @"com.bity.ch";
+        plugin.provider = @"Bity";
+        plugin.country = @"CH";
+        plugin.sourceFile = @"bity";
+        plugin.sourceExtension = @"html";
+        // TODO: store Bity logo in airbitz backend
+        plugin.imageUrl = @"https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2015/Dec/19/1725245279-0-sbex-avatar.png";
+        plugin.name = buy_sell_bank_eur_chf;
+        plugin.env = @{
+          // TODO: add Airbitz affiliate code
+          @"AFFILIATE_CODE": @"1234",
+        };
+        [buySellPlugins addObject:plugin];
+
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"Glidera";

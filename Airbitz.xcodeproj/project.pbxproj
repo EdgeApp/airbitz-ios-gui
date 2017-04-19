@@ -50,6 +50,9 @@
 		77B631C61E1616250099B091 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66711E14E531007F00D8 /* DropDownCell.xib */; };
 		77B631C71E1616280099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
 		77B631C81E1616290099B091 /* UsernameDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */; };
+		88000C741E8B929000615702 /* bity.html in Resources */ = {isa = PBXBuildFile; fileRef = 88000C731E8B929000615702 /* bity.html */; };
+		88000C751E8B929000615702 /* bity.html in Resources */ = {isa = PBXBuildFile; fileRef = 88000C731E8B929000615702 /* bity.html */; };
+		88000C761E8B929000615702 /* bity.html in Resources */ = {isa = PBXBuildFile; fileRef = 88000C731E8B929000615702 /* bity.html */; };
 		8B014DD41E85FD1C0089FC97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B014DC71E85FCC70089FC97 /* Localizable.strings */; };
 		8B014DD51E85FD1C0089FC97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B014DC71E85FCC70089FC97 /* Localizable.strings */; };
 		8B014DD61E85FD1D0089FC97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B014DC71E85FCC70089FC97 /* Localizable.strings */; };
@@ -1429,6 +1432,7 @@
 		775F66751E14E54E007F00D8 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
 		775F66801E15752F007F00D8 /* UsernameDropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UsernameDropDownCell.xib; path = Login/UsernameDropDownCell.xib; sourceTree = "<group>"; };
 		775F66861E157580007F00D8 /* UsernameDropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsernameDropDownCell.swift; path = Login/UsernameDropDownCell.swift; sourceTree = "<group>"; };
+		88000C731E8B929000615702 /* bity.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = bity.html; sourceTree = "<group>"; };
 		8B014D1E1E85FB090089FC97 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		8B014D1F1E85FB0B0089FC97 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		8B014D201E85FB0B0089FC97 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
@@ -3346,6 +3350,7 @@
 		DA9EDFEC1BC61F920063DA07 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				88000C731E8B929000615702 /* bity.html */,
 				8E8611491D59B9E90051FD8C /* bitrefill.html */,
 				DABF60F01C10263A004E613B /* clevercoin.html */,
 				DA10BDE01C00280E0086AD8B /* foldapp.html */,
@@ -4221,6 +4226,7 @@
 				DA9EF4511BC7285D0063DA07 /* btn_unselected@2x.png in Resources */,
 				DA57A1E51D131C8E005442AF /* Settings.storyboard in Resources */,
 				DAB5C0241C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
+				88000C751E8B929000615702 /* bity.html in Resources */,
 				DA9EF4521BC7285D0063DA07 /* icon_transactions.png in Resources */,
 				DA9EF4531BC7285D0063DA07 /* btn_collapse_expand@3x.png in Resources */,
 				DA9EF4541BC7285D0063DA07 /* ico_nav_directory_dark.png in Resources */,
@@ -4490,6 +4496,7 @@
 				DA57A1E61D131C8E005442AF /* Settings.storyboard in Resources */,
 				DAB5C0251C9FBF1A00CE4993 /* green-coffee-mug-128px@2x.png in Resources */,
 				DA9EF6181BC729FA0063DA07 /* btn_unselected@2x.png in Resources */,
+				88000C761E8B929000615702 /* bity.html in Resources */,
 				DA9EF6191BC729FA0063DA07 /* icon_transactions.png in Resources */,
 				DA8988D11D0BF84F00796F3D /* Airbitz.entitlements in Resources */,
 				DA9EF61A1BC729FA0063DA07 /* btn_collapse_expand@3x.png in Resources */,
@@ -4804,6 +4811,7 @@
 				DA9EE4AD1BC61F920063DA07 /* icon_not_approved@2x.png in Resources */,
 				DA9ED7E21BC61E680063DA07 /* LaunchScreen.xib in Resources */,
 				DACC30351E5806E800130A6E /* libertyx.html in Resources */,
+				88000C741E8B929000615702 /* bity.html in Resources */,
 				DA57A1D01D131C76005442AF /* ConfirmationSliderView.xib in Resources */,
 				DA9EE4E91BC61F920063DA07 /* Lato-Bold.ttf in Resources */,
 				DA9EE4851BC61F920063DA07 /* icon_bitcoin_symbol.png in Resources */,
