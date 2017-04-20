@@ -1345,12 +1345,21 @@ MainViewController *singleton;
     } else {
         [FadingAlertView dismiss:FadingAlertDismissFast];
 
+        NSString *changeButtonString = nil;
+        NSString *tryAgainString = incorrectPasswordTryAgainText;
+        
+        if (![User Singleton].bDailySpendLimit)
+        {
+            changeButtonString = changeButtonText;
+            tryAgainString = incorrectPasswordTryAgainChangeText;
+        }
+
         _passwordIncorrectAlert = [[UIAlertView alloc]
                 initWithTitle:incorrectPasswordText
-                      message:incorrectPasswordTryAgainText
+                      message:tryAgainString
                      delegate:self
             cancelButtonTitle:noButtonText
-            otherButtonTitles:yesButtonText, changeButtonText, nil];
+            otherButtonTitles:yesButtonText, changeButtonString, nil];
         [_passwordIncorrectAlert show];
     }
 }

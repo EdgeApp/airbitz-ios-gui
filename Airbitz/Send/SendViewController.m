@@ -1863,6 +1863,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         NSString *vendorRetString = [NSString stringWithFormat:@"%@-ret", [MainViewController Singleton].appUrlPrefix];
         
         if ([uri.scheme isEqualToString:@"bitcoin-ret"] ||
+            [uri.scheme isEqualToString:@"airbitz"] ||
             [uri.scheme isEqualToString:vendorRetString] ||
             [uri.scheme isEqualToString:[MainViewController Singleton].appUrlPrefix] ||
             [uri.host isEqualToString:@"x-callback-url"]) {
