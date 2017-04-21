@@ -154,7 +154,7 @@ static NSMutableArray *generalPlugins;
                            };
             [generalPlugins addObject:plugin];
         }
-        
+
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.glidera.us";
         plugin.provider = @"Glidera";
@@ -178,7 +178,7 @@ static NSMutableArray *generalPlugins;
         plugin.sourceFile = @"bity";
         plugin.sourceExtension = @"html";
         plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2017/04/Bity-square.png";
-        plugin.name = buy_sell_bank_europe;
+        plugin.name = buy_sell_bank_eur_chf;
         plugin.env = @{
                        @"SANDBOX": (isTestnet ? @"true" : @"false"),
                        @"AFFILIATE_CODE": BITY_AFFILIATE_CODE,
