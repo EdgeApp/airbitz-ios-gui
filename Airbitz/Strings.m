@@ -469,7 +469,7 @@
 #define recovery_successful                         NSLocalizedString(@"Recovery Successful\n\nPlease change your password and PIN", nil)
 #define invalid_email                               NSLocalizedString(@"Invalid Email", nil)
 #define buy_sell_bank_usa                           NSLocalizedString(@"Buy/Sell with Bank Account (USA)", nil)
-#define buy_sell_bank_europe                        NSLocalizedString(@"Buy/Sell with Bank Account (Europe)", nil)
+#define buy_sell_bank_eur_chf                       NSLocalizedString(@"Buy/Sell with Bank Account (EUR/CHF)", nil)
 #define buy_sell_cash_usa                           NSLocalizedString(@"Buy/Sell with Cash (USA)", nil)
 #define fetching_login_request                      NSLocalizedString(@"Fetching Login Request...", @"Fetching Login Request popup")
 #define approving_login_text                        NSLocalizedString(@"Approving Login...", @"Approving Login popup")
