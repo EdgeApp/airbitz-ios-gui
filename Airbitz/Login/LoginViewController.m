@@ -27,6 +27,7 @@
 #import "InfoView.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "Airbitz-Swift.h"
+#import "Mixpanel.h"
 
 typedef enum eLoginMode
 {
@@ -431,11 +432,14 @@ static BOOL bInitialized = false;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
     } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
+        [[Mixpanel sharedInstance] track:@"SIN-TouchID success"];
         _bUsedTouchIDToLogin = usedTouchID;
         [self signInComplete:user newAccount:NO];
     } completionNoLogin:^{
+        [[Mixpanel sharedInstance] track:@"SIN-TouchID nologin"];
         [self assignFirstResponder];
     } error:^(NSError *error) {
+        [[Mixpanel sharedInstance] track:@"SIN-TouchID failed"];
         [self showSpinner:NO];
         [MainViewController showBackground:NO animate:YES];
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -481,7 +485,7 @@ static BOOL bInitialized = false;
         [self.PINTextField resignFirstResponder];
         [self showSpinner:YES];
         [self SignInPIN:self.PINTextField.text];
-
+        [[Mixpanel sharedInstance] track:@"SIN-PIN"];
     }
 }
 
@@ -585,11 +589,13 @@ static BOOL bInitialized = false;
 {
     if (_mode == MODE_NO_USERS)
     {
+        [[Mixpanel sharedInstance] track:@"SIN-No Users"];
         _mode = MODE_ENTERING_USERNAME;
         [self viewWillAppear:true];
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SIN-Password"];
         [self.usernameSelector resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
 
@@ -634,6 +640,11 @@ static BOOL bInitialized = false;
 
 - (IBAction)SignUp
 {
+    if (_mode == MODE_NO_USERS)
+        [[Mixpanel sharedInstance] track:@"SUP-No Users"];
+    else
+        [[Mixpanel sharedInstance] track:@"SUP-Has Users"];
+    
     [self dismissErrorMessage];
 
     [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)

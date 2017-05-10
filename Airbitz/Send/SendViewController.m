@@ -53,6 +53,7 @@
 #import "CJSONDeserializer.h"
 #import "AddressRequestController.h"
 #import "SSOViewController.h"
+#import "Mixpanel.h"
 
 typedef enum eScanMode
 {
@@ -449,6 +450,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     switch (segmentedControl.selectedSegmentIndex)
     {
         case 0:
+            [[Mixpanel sharedInstance] track:@"SCAN-Transfer"];
             arrayChoices = [self createNewSendToChoices:@""];
             self.popupPickerSendTo = [PopupPickerView2 CreateForView:self.view
                                                    relativePosition:PopupPicker2Position_Full_Rising
@@ -460,6 +462,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Transfer
             break;
         case 1:
+            [[Mixpanel sharedInstance] track:@"SCAN-Address"];
             title = enterBitcoinAddressPopupText;
             placeholderText = enterBitcoinAddressPlaceholder;
             parsedURI = [ABCUtil parseURI:clipboard error:nil];
@@ -494,12 +497,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
         case 2:
             // Do Photo
+            [[Mixpanel sharedInstance] track:@"SCAN-Photo"];
             [self resignAllResponders];
             [self showImagePicker];
 
             break;
         case 3:
             // Do Flash
+            [[Mixpanel sharedInstance] track:@"SCAN-Flash"];
             [self toggleFlash];
             break;
     }
@@ -1401,7 +1406,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)importWallet:(NSString *)privateKey
 {
-    
+    [[Mixpanel sharedInstance] track:@"SCAN-Import-Privkey"];
+
     [abcAccount.currentWallet importPrivateKey:privateKey importing:^(NSString *address) {
         NSMutableString *statusMessage = [NSMutableString string];
         [statusMessage appendString:[[NSString alloc]
@@ -1687,10 +1693,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlertDismiss];
             if (!error)
             {
+                [[Mixpanel sharedInstance] track:@"SCAN-Edge-Success"];
                 [self showSSOViewController:nil edgeLoginRequest:info];
             }
             else
             {
+                [[Mixpanel sharedInstance] track:@"SCAN-Edge-Invalid"];
                 [MainViewController fadingAlert:@"Invalid Edge Login Request"];
                 [self startQRReader];
             }

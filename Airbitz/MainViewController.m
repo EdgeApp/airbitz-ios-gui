@@ -46,7 +46,7 @@
 #import "Affiliate.h"
 #import "Plugin.h"
 #import "Reachability.h"
-
+#import "Mixpanel.h"
 
 typedef enum eRequestType
 {
@@ -1163,11 +1163,15 @@ MainViewController *singleton;
         });
     }
 
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel timeEvent:@"createFirstWalletIfNeeded"];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         // Create the first wallet in the background
         // loginViewControllerDidLogin will create a spinner while wallet is loading so close it once wallet is done
         [abcAccount createFirstWalletIfNeeded];
         dispatch_async(dispatch_get_main_queue(), ^ {
+            [mixpanel timeEvent:@"createFirstWalletIfNeeded"];
             singleton.bCreatingFirstWallet = NO;
             [FadingAlertView dismiss:FadingAlertDismissGradual];
         });

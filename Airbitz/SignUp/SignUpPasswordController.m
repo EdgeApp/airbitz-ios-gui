@@ -13,6 +13,7 @@
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
 #import "Affiliate.h"
+#import "Mixpanel.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -85,6 +86,7 @@
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-no PIN only"];
         self.pinTextField.hidden = NO;
         self.pinTextLabel.hidden = NO;
         self.setPasswordLabel.text = setPasswordAndPinText;
@@ -113,6 +115,7 @@
 {
     if (_noPasswordAlert == alertView && buttonIndex == 1)
     {
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct no passwd"];
         [self createAccount];
     }
 }
@@ -137,6 +140,7 @@
         }
         else
         {
+            [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct"];
             [self createAccount];
         }
     }
@@ -149,12 +153,15 @@
     [_reenterPasswordTextField resignFirstResponder];
     [_pinTextField resignFirstResponder];
 
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel timeEvent:@"createAccount"];
     [abc createAccount:self.manager.strUserName
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
               callback:^(ABCError *error, ABCAccount *account)
      {
+         [mixpanel track:@"createAccount"];
          if (!error)
          {
              [FadingAlertView dismiss:FadingAlertDismissFast];
@@ -171,6 +178,7 @@
          }
          else
          {
+             [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct failed"];
              [FadingAlertView create:self.view
                              message:error.userInfo[NSLocalizedDescriptionKey]
                             holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
@@ -221,6 +229,7 @@
                 otherButtonTitles:nil];
             [alert show];
             bNewPasswordFieldsAreValid = NO;
+            [[Mixpanel sharedInstance] track:@"SUP-Passwd-failed rules"];
         }
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {
@@ -241,6 +250,7 @@
         cancelButtonTitle:okButtonText
         otherButtonTitles:nil];
     [alert show];
+    [[Mixpanel sharedInstance] track:@"SUP-Passwd-mismatch"];
 }
 
 // checks the pin field
@@ -281,6 +291,8 @@
     _activeTextField = textField;
     if(textField == self.passwordTextField)
     {
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-enter passwd"];
+
         if(_passwordVerifyView == nil)
         {
             _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
@@ -295,6 +307,8 @@
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-reenter passwd"];
+
         if(_passwordVerifyView)
         {
             [_passwordVerifyView dismiss];

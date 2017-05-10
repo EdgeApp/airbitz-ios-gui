@@ -34,5 +34,6 @@
 #define FOLD_API_KEY                    @"00000000000"
 
 #define BITREFILL_API_KEY               @"00000000000"
+#define MIXPANEL_TOKEN                  @"00000000000"
 
 #endif

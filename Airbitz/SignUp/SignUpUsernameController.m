@@ -9,6 +9,7 @@
 #import "Util.h"
 #import "User.h"
 #import "Theme.h"
+#import "Mixpanel.h"
 
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {
@@ -86,6 +87,8 @@
 
 -(IBAction)back:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"SUP-uname-back"];
+
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -103,6 +106,7 @@
 
 - (void) next
 {
+
     [self blockUser:YES];
     // if they entered a valid username or old password
     if ([self userNameFieldIsValid] == YES)
@@ -121,6 +125,7 @@
                 {
                     _bSuccess = false;
                     _strReason = error.userInfo[NSLocalizedDescriptionKey];
+                    [[Mixpanel sharedInstance] track:@"SUP-uname-unavailable"];
                 }
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
@@ -131,6 +136,7 @@
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SUP-uname-invalid"];
         [self blockUser:NO];
     }
 
