@@ -485,7 +485,6 @@ static BOOL bInitialized = false;
         [self.PINTextField resignFirstResponder];
         [self showSpinner:YES];
         [self SignInPIN:self.PINTextField.text];
-        [[Mixpanel sharedInstance] track:@"SIN-PIN"];
     }
 }
 
@@ -605,11 +604,14 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel timeEvent:@"loginWithPassword"];
         [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
                       delegate:[MainViewController Singleton]
                            otp:nil callback:^(ABCError *error, ABCAccount *account)
         {
+            [mixpanel track:@"loginWithPassword"];
             if (!error)
             {
                 [self signInComplete:account newAccount:NO];
@@ -815,10 +817,13 @@ static BOOL bInitialized = false;
     [MainViewController showBackground:YES animate:YES];
 
     //NOTE: pinLogin was set to look at [abc getLastAccessedAccount]
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel timeEvent:@"pinLogin"];
     [abc
      pinLogin:self.PINusernameSelector.titleLabel.text
      pin:pin
      delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
+         [mixpanel track:@"pinLogin"];
          [User login:user];
          [self.delegate LoginViewControllerDidPINLogin];
          [MainViewController showWalletsLoadingAlert];
@@ -851,16 +856,19 @@ static BOOL bInitialized = false;
          if (ABCConditionCodeBadPassword == error.code ||
              ABCConditionCodeInvalidPinWait == error.code)
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN bad passwd"];
              [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
              [self.PINTextField becomeFirstResponder];
          }
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN OTP"];
              [MainViewController showBackground:NO animate:YES];
              [self launchTwoFactorMenu:nil token:nil];
          }
          else
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN error"];
              NSString *reason;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
@@ -1268,6 +1276,9 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel timeEvent:@"loginWithPassword"];
+
         // Perform the two factor sign in
         [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
@@ -1275,12 +1286,14 @@ static BOOL bInitialized = false;
                            otp:secret
                       callback:^(ABCError *error, ABCAccount *account)
         {
+            [mixpanel track:@"loginWithPassword"];
             if (!error)
             {
                 [self signInComplete:account newAccount:NO];
             }
             else
             {
+                [[Mixpanel sharedInstance] track:@"SIN-Passwd error"];
                 [self showSpinner:NO];
                 if (ABCConditionCodeError == error.code)
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
