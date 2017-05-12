@@ -57,8 +57,11 @@ const int PromoIndexBitrefill       = 2;
 const int PromoIndex15to20offAmazon = 3;
 const int PromoIndex20offStarbucks  = 4;
 const int PromoIndex10offTarget     = 5;
+#if defined HIDE_PROMO_ROWS && HIDE_PROMO_ROWS == 1
+const int NumPromoRows              = 2;
+#else
 const int NumPromoRows              = 4;
-
+#endif
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, UIGestureRecognizerDelegate>
