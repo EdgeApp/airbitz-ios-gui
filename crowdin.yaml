@@ -60,6 +60,9 @@ files:
     source: '/Airbitz/Resources/html/Base.lproj/info_transactions.html'                                    #source files filter
     translation: '/Airbitz/Resources/html/%two_letters_code%.lproj/%original_file_name%' #where translations live
   -
+    source: '/Airbitz/Resources/html/Base.lproj/info_transactions_android.html'                                    #source files filter
+    translation: '/Airbitz/Resources/html/%two_letters_code%.lproj/%original_file_name%' #where translations live
+  -
     source: '/Airbitz/Resources/html/Base.lproj/info_wallets.html'                                    #source files filter
     translation: '/Airbitz/Resources/html/%two_letters_code%.lproj/%original_file_name%' #where translations live
   -

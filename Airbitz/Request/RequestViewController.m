@@ -1230,7 +1230,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     if (tempRange.location != NSNotFound)
     {
-        iosURL = [_uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        iosURL = [_uriString stringByReplacingCharactersInRange:tempRange withString:@"airbitz://"];
         paramsURI = [_uriString stringByReplacingCharactersInRange:tempRange withString:@""];
         paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                 NULL,

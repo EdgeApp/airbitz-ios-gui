@@ -11,6 +11,7 @@
 #import "Theme.h"
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
+#import "Mixpanel.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -77,11 +78,17 @@
 
 - (void)next
 {
+
     if ([self fieldsAreValid])
     {
+        [[Mixpanel sharedInstance] track:@"SUP-PIN-next"];
         self.manager.strPIN = self.pinTextField.text;
         [self.pinTextField resignFirstResponder];
         [super next];
+    }
+    else
+    {
+        [[Mixpanel sharedInstance] track:@"SUP-PIN-next-invalid"];
     }
 }
 

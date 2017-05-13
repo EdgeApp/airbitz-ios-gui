@@ -29,6 +29,7 @@
 #import "Theme.h"
 #import "FadingAlertView.h"
 #import "TransactionsHeaderView.h"
+#import "Mixpanel.h"
 
 #define COLOR_POSITIVE [UIColor colorWithRed:0.3720 green:0.6588 blue:0.1882 alpha:1.0]
 #define COLOR_NEGATIVE [UIColor colorWithRed:0.7490 green:0.1804 blue:0.1922 alpha:1.0]
@@ -56,8 +57,11 @@ const int PromoIndexBitrefill       = 2;
 const int PromoIndex15to20offAmazon = 3;
 const int PromoIndex20offStarbucks  = 4;
 const int PromoIndex10offTarget     = 5;
+#if defined HIDE_PROMO_ROWS && HIDE_PROMO_ROWS == 1
+const int NumPromoRows              = 2;
+#else
 const int NumPromoRows              = 4;
-
+#endif
 
 @interface TransactionsViewController () <BalanceViewDelegate, UITableViewDataSource, UITableViewDelegate, TransactionsViewControllerDelegate, WalletHeaderViewDelegate, WalletMakerViewDelegate,
         TransactionDetailsViewControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate, ExportWalletViewControllerDelegate, UIGestureRecognizerDelegate>
@@ -536,6 +540,7 @@ const int NumPromoRows              = 4;
 
 - (IBAction)buttonRequestTouched:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"TXL-Request"];
     [self resignAllResponders];
     NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.uuid};
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_REQUEST_FOR_WALLET
@@ -544,6 +549,7 @@ const int NumPromoRows              = 4;
 
 - (IBAction)buttonSendTouched:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"TXL-Send"];
     [self resignAllResponders];
     NSDictionary *dictNotification = @{ KEY_TX_DETAILS_EXITED_WALLET_UUID: abcAccount.currentWallet.uuid };
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LAUNCH_SEND_FOR_WALLET
@@ -1506,6 +1512,8 @@ const int NumPromoRows              = 4;
             if (indexPath.row == PromoIndexBuyBitcoin)
             {
                 // Buy bitcoin button
+                [[Mixpanel sharedInstance] track:@"TXL-Buy-Bitcoin"];
+
                 NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
                 
                 NSString *overrideURL = [MainViewController Singleton].dictBuyBitcoinOverrideURLs[deviceCurrency];
