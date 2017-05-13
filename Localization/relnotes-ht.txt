@@ -1,3 +1,13 @@
+v.2.4.0
+
+• Chanjman protokol la nan koneksyon an
+• Konekte LibertyX
+• Sipote ekspòtasyon ki pa USD CSV/QBO
+• Gran sipo potfèy. Pi bon repo
+• Imèl CSV / QBO fikse aksidan ekspòtasyon
+• Lòt sipò lang
+
+
 v.2.3.3
 
 • Koreksyon problèm ak Koneksyon PIN lan pa mache

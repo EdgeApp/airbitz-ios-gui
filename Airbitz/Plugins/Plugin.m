@@ -171,6 +171,24 @@ static NSMutableArray *generalPlugins;
                        };
         [buySellPlugins addObject:plugin];
 
+        plugin = [[Plugin alloc] init];
+        plugin.pluginId = @"com.libertyx.app";
+        plugin.provider = @"LibertyX";
+        plugin.country = @"US";
+        plugin.sourceFile = @"libertyx";
+        plugin.sourceExtension = @"html";
+        plugin.imageUrl = @"https://wp2.airbitz.co/go/wp-content/uploads/2017/02/libertyx-icon.png";
+        plugin.name = buy_sell_cash_usa;
+        plugin.env = @{
+                       @"TESTNET": (isTestnet ? @"true" : @"false"),
+                       @"LIBERTYX_API_KEY": (isTestnet ? @"" : LIBERTYX_API_KEY),
+                       @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
+                       @"LIBERTYX_LABEL": @"LibertyX",
+                       @"LIBERTYX_CATEGORY": @"Exchange:Buy Bitcoin",
+                       @"BIZID": [NSString stringWithFormat:@"%d",LibertyXBizID],
+                       };
+        [buySellPlugins addObject:plugin];
+        
         bInitialized = YES;
     }
 }

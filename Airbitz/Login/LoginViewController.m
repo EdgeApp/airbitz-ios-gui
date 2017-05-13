@@ -60,8 +60,6 @@ typedef enum eLoginMode
     CGFloat                         _originalPINSelectorWidth;
     CGFloat                         _originalTextBitcoinWalletHeight;
     UIAlertView                     *_enableTouchIDAlertView;
-    UIAlertView                     *_passwordCheckAlert;
-    UIAlertView                     *_passwordIncorrectAlert;
     UIAlertView                     *_uploadLogAlert;
     UIAlertView                     *_deleteAccountAlert;
     UIAlertView                     *_recoverPasswordAlert;
@@ -184,10 +182,13 @@ static BOOL bInitialized = false;
     self.PINusernameDropDown.anchorView = self.PINusernameSelector;
     self.PINusernameDropDown.bottomOffset = CGPointMake(0, self.PINusernameSelector.bounds.size.height);
     __weak typeof(self) weakSelf = self;
-    self.PINusernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+    self.PINusernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item)
+    {
         __strong typeof(self) strongSelf = weakSelf;
-        if (strongSelf) {
+        if (strongSelf)
+        {
             [strongSelf updateUsernameSelector:item];
+            [strongSelf switchLoginTypeIfNeeded:item];
         }
     };
     
@@ -196,10 +197,13 @@ static BOOL bInitialized = false;
     self.usernameDropDown.anchorView = self.usernameSelector;
     self.usernameDropDown.bottomOffset = CGPointMake(0, self.usernameSelector.bounds.size.height);
     __weak typeof(self) weakSelf2 = self;
-    self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item) {
+    self.usernameDropDown.selectionAction = ^(NSInteger index, NSString * _Nonnull item)
+    {
         __strong typeof(self) strongSelf = weakSelf2;
-        if (strongSelf) {
+        if (strongSelf)
+        {
             [strongSelf updateUsernameSelector:item];
+            [strongSelf switchLoginTypeIfNeeded:item];
         }
     };
     
@@ -249,6 +253,25 @@ static BOOL bInitialized = false;
 
     if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
         self.fingerprintButton.hidden = YES;
+}
+
+- (void)switchLoginTypeIfNeeded:(NSString *)username
+{
+    BOOL oldPINModeEnabled = bPINModeEnabled;
+    [abc setLastAccessedAccount:username];
+    if([abc pinLoginEnabled:username error:nil])
+    {
+        bPINModeEnabled = true;
+        [self viewDidLoad];
+        [self viewWillAppear:true];
+        [self viewDidAppear:true];
+    }
+    else
+    {
+        bPINModeEnabled = false;
+        [self viewDidLoad];
+        [self viewWillAppear:true];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -515,6 +538,7 @@ static BOOL bInitialized = false;
     self.PINusernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
     self.usernameDropDown.dataSource = self.arrayAccounts;
     self.usernameDropDown.cellNib = [UINib nibWithNibName:@"UsernameDropDownCell" bundle:nil];
+    
 }
 
 - (void)setUsernameText:(NSString *)username
@@ -726,6 +750,7 @@ static BOOL bInitialized = false;
 
     [self viewDidLoad];
     [self viewWillAppear:true];
+//    [self viewDidAppear:true];
 }
 
 
@@ -1309,8 +1334,6 @@ static BOOL bInitialized = false;
     }
 }
 
-#pragma mark - PickerTextView delegates
-
 - (void)removeAccount:(NSString *)account
 {
     NSError *error = [abc deleteLocalAccount:account];
@@ -1359,12 +1382,7 @@ static BOOL bInitialized = false;
         }
         else
         {
-            if ([abcAccount accountHasPassword])
-                [abcAccount.settings enableTouchID];
-            else
-            {
-                [self showPasswordCheckAlertForTouchID];
-            }
+            [abcAccount.settings enableTouchID];
         }
 
         return;
@@ -1377,61 +1395,6 @@ static BOOL bInitialized = false;
             [self recoverPassword:textField.text];
         }
         _bDisallowTouchID = NO;
-    }
-    else if (alertView == _passwordCheckAlert)
-    {
-        if (0 == buttonIndex)
-        {
-            //
-            // Need to disable TouchID in settings.
-            //
-            // Disable TouchID in LocalSettings
-            [abcAccount.settings disableTouchID];
-            [MainViewController fadingAlert:touchIDDisabled];
-        }
-        else
-        {
-            //
-            // Check the password
-            //
-            _tempPassword = [[alertView textFieldAtIndex:0] text];
-            [FadingAlertView create:self.view
-                            message:checkingPasswordText
-                           holdTime:FADING_ALERT_HOLD_TIME_FOREVER_WITH_SPINNER notify:^(void) {
-                if ([abcAccount.settings enableTouchID:_tempPassword])
-                {
-                    _tempPassword = nil;
-                    [MainViewController fadingAlert:touchIDEnabledText];
-                    
-                    
-                }
-                else
-                {
-                    [MainViewController fadingAlertDismiss];
-                    _tempPassword = nil;
-                    _passwordIncorrectAlert = [[UIAlertView alloc]
-                                               initWithTitle:incorrectPasswordText
-                                               message:tryAgainText
-                                               delegate:self
-                                               cancelButtonTitle:noButtonText
-                                               otherButtonTitles:yesButtonText, nil];
-                    [_passwordIncorrectAlert show];
-                }
-            }];
-        }
-        return;
-    }
-    else if (_passwordIncorrectAlert == alertView)
-    {
-        if (buttonIndex == 0)
-        {
-            [MainViewController fadingAlert:touchIDDisabled];
-            [abcAccount.settings disableTouchID];
-        }
-        else if (buttonIndex == 1)
-        {
-            [self showPasswordCheckAlertForTouchID];
-        }
     }
     else if (_uploadLogAlert == alertView)
     {
@@ -1563,21 +1526,6 @@ static BOOL bInitialized = false;
             }
         }
     }
-}
-
-- (void)showPasswordCheckAlertForTouchID
-{
-    // Popup to ask user for their password
-    NSString *title = touchIDText;
-    NSString *message = enterYourPasswordToEnableTouchID;
-    // show password reminder test
-    _passwordCheckAlert = [[UIAlertView alloc] initWithTitle:title
-                                                     message:message
-                                                    delegate:self
-                                           cancelButtonTitle:laterButtonText
-                                           otherButtonTitles:okButtonText, nil];
-    _passwordCheckAlert.alertViewStyle = UIAlertViewStyleSecureTextInput;
-    [_passwordCheckAlert show];
 }
 
 - (void)handlePasswordResults:(NSNumber *)authenticated
