@@ -36,7 +36,6 @@
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
 #define ANIMATION_DURATION_KEYBOARD_DOWN    0.25
-#define DEFAULT_SERVER                      @"stratum://electrum-bu-az-wusa2.airbitz.co:50001"
 
 #define SECTION_BITCOIN_DENOMINATION    0
 #define SECTION_USERNAME                1
@@ -609,10 +608,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 - (void)textViewCellBeganEditing:(TextViewCell *)cell
 {
     //scroll the tableView so that this cell is above the keyboard
-    if ([cell.textView.text isEqualToString:@""])
-    {
-        cell.textView.text = DEFAULT_SERVER;
-    }
     _activeTextViewCell = cell;
     if (!_tapGesture)
     {
@@ -633,10 +628,6 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 {
     [_activeTextViewCell resignFirstResponder];
     _activeTextViewCell = nil;
-    if ([cell.textView.text isEqualToString:@""])
-    {
-        cell.textView.text = DEFAULT_SERVER;
-    }
 
     [self saveSettings];
 }
