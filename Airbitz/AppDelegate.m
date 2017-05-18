@@ -66,7 +66,8 @@ UIBackgroundTaskIdentifier bgNotificationTask;
     //DropDown configuration
     [DropDown startListeningToKeyboard];
     
-    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    Mixpanel *mixPanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    [mixPanel setEnableLogging:FALSE];
     
     return YES;
 }
