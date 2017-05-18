@@ -633,7 +633,7 @@ typedef enum eRequestType
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
                                    baseUrl, self.transaction.txid, self.transaction.txid];
     unsigned long confirmations = 0;
-    if (self.transaction.height)
+    if (self.transaction.height > 0)
         confirmations = (unsigned long) self.transaction.wallet.blockHeight - self.transaction.height + 1;
     else
         confirmations = 0;

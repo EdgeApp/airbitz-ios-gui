@@ -86,6 +86,7 @@
 #define pendingText                                 NSLocalizedString(@"Pending", @"Pending status in transaction list")
 #define warningRBFText                              NSLocalizedString(@"Warning: Replace by Fee Detected. Double spend likely", @"RBF status in transaction list")
 #define doubleSpendText                             NSLocalizedString(@"Warning: Double Spend", @"Double spend status in transaction list")
+#define transaction_dropped_text                    NSLocalizedString(@"Transaction Dropped", @"Transaction list description of dropped transaction")
 #define confirmationText                            NSLocalizedString(@"Confirmation", @"Num of confirmations in transaction list")
 #define confirmationsText                           NSLocalizedString(@"Confirmations", @"Num of confirmations in transaction list")
 #define confirmedText                               NSLocalizedString(@"Confirmed", @"Confirmed status in transaction list")

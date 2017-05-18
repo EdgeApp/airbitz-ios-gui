@@ -1389,12 +1389,14 @@ const int NumPromoRows              = 4;
         else
         {
             unsigned long blockHeight = transaction.wallet.blockHeight;
-            unsigned long confirmations;
+            long confirmations;
             
             if (transaction.height == 0)
                 confirmations = 0;
-            else
+            else if (transaction.height > 0)
                 confirmations = blockHeight - transaction.height + 1;
+            else
+                confirmations = transaction.height;
             
             if (blockHeight <= 0)
             {
@@ -1411,6 +1413,11 @@ const int NumPromoRows              = 4;
                 else if (transaction.isDoubleSpend)
                 {
                     cell.dateLabel.text = doubleSpendText;
+                    cell.dateLabel.textColor = COLOR_NEGATIVE;
+                }
+                else if (confirmations < 0)
+                {
+                    cell.dateLabel.text = transaction_dropped_text;
                     cell.dateLabel.textColor = COLOR_NEGATIVE;
                 }
                 else
