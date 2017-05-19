@@ -90,18 +90,21 @@
     [keyboardDoneButtonView sizeToFit];
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:doneButtonText
                                                                    style:UIBarButtonItemStylePlain target:self
                                                                   action:@selector(doneClicked:)];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:leftButton, flex, doneButton, nil]];
     self.pinSpendLimitField.inputAccessoryView = keyboardDoneButtonView;
     self.dailySpendLimitField.inputAccessoryView = keyboardDoneButtonView;
     [MainViewController changeNavBarOwner:self];
-    [MainViewController changeNavBarTitle:self title:@"Spending Limits"];
+    [MainViewController changeNavBarTitle:self title:spendingLimitsText];
 
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:true action:@selector(Back:) fromObject:self];
     [MainViewController changeNavBar:self title:helpButtonText side:NAV_BAR_RIGHT button:true enable:true action:@selector(info) fromObject:self];
 
+    if (![User Singleton].bDailySpendLimit) {
+        [MainViewController fadingAlertHelpPopup:spending_limits_warning];
+    }
 }
 
 - (IBAction)doneClicked:(id)sender
