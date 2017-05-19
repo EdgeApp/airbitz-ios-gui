@@ -2960,6 +2960,11 @@
 		DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
+		DAD88B971ECEE89200D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DAD88B9C1ECEE89300D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DAD88B9D1ECEE89400D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DAD88B9E1ECEE89500D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DAD88B9F1ECEE89600D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DADFAC2A1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2B1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2C1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
@@ -10187,6 +10192,7 @@
 				DACC296B1E4D8B6E00130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC296C1E4D8B6E00130A6E /* SendStatusViewController.m in Sources */,
 				DACC296D1E4D8B6E00130A6E /* NSDate+Helper.m in Sources */,
+				DAD88B971ECEE89200D61D85 /* TextViewCell.m in Sources */,
 				DACC296E1E4D8B6E00130A6E /* overviewCell.m in Sources */,
 				DACC296F1E4D8B6E00130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC29701E4D8B6E00130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10335,6 +10341,7 @@
 				DACC2B331E4DA10700130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2B341E4DA10700130A6E /* SendStatusViewController.m in Sources */,
 				DACC2B351E4DA10700130A6E /* NSDate+Helper.m in Sources */,
+				DAD88B9C1ECEE89300D61D85 /* TextViewCell.m in Sources */,
 				DACC2B361E4DA10700130A6E /* overviewCell.m in Sources */,
 				DACC2B371E4DA10700130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2B381E4DA10700130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10483,6 +10490,7 @@
 				DACC2CF41E4DA33200130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2CF51E4DA33200130A6E /* SendStatusViewController.m in Sources */,
 				DACC2CF61E4DA33200130A6E /* NSDate+Helper.m in Sources */,
+				DAD88B9D1ECEE89400D61D85 /* TextViewCell.m in Sources */,
 				DACC2CF71E4DA33200130A6E /* overviewCell.m in Sources */,
 				DACC2CF81E4DA33200130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2CF91E4DA33200130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10631,6 +10639,7 @@
 				DACC2EB31E4DA4C300130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2EB41E4DA4C300130A6E /* SendStatusViewController.m in Sources */,
 				DACC2EB51E4DA4C300130A6E /* NSDate+Helper.m in Sources */,
+				DAD88B9E1ECEE89500D61D85 /* TextViewCell.m in Sources */,
 				DACC2EB61E4DA4C300130A6E /* overviewCell.m in Sources */,
 				DACC2EB71E4DA4C300130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2EB81E4DA4C300130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10944,6 +10953,7 @@
 				FD4256641E789B5E00F762D2 /* TwoFactorMenuViewController.m in Sources */,
 				FD4256651E789B5E00F762D2 /* SendStatusViewController.m in Sources */,
 				FD4256661E789B5E00F762D2 /* NSDate+Helper.m in Sources */,
+				DAD88B9F1ECEE89600D61D85 /* TextViewCell.m in Sources */,
 				FD4256671E789B5E00F762D2 /* overviewCell.m in Sources */,
 				FD4256681E789B5E00F762D2 /* ConfirmationSliderView.m in Sources */,
 				FD4256691E789B5E00F762D2 /* ExportWalletPDFViewController.m in Sources */,
