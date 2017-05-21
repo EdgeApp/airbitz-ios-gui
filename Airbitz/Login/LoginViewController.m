@@ -625,7 +625,7 @@ static BOOL bInitialized = false;
                     [MainViewController showBackground:NO animate:YES];
                     [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
                 }
-                else if (ABCConditionCodeError == error.code)
+                else if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                 {
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                     [MainViewController showBackground:NO animate:YES];
@@ -872,7 +872,7 @@ static BOOL bInitialized = false;
              NSString *reason;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
-             if (ABCConditionCodeError == error.code)
+             if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                  reason = pinLoginErrorText;
              else
                  reason = error.userInfo[NSLocalizedDescriptionKey];
@@ -1295,7 +1295,7 @@ static BOOL bInitialized = false;
             {
                 [[Mixpanel sharedInstance] track:@"SIN-Passwd error"];
                 [self showSpinner:NO];
-                if (ABCConditionCodeError == error.code)
+                if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                 else
                     [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
