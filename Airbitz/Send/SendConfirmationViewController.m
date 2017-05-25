@@ -1012,6 +1012,7 @@
         } else if (_passwordRequired) {
             BOOL matched = [abcAccount checkPassword:self.withdrawlPIN.text];
             if (matched) {
+                [[User Singleton] passwordUsed];
                 [self continueChecks];
             } else {
                 [self fadingAlertDelayed:incorrectPasswordText];

@@ -1186,6 +1186,11 @@ MainViewController *singleton;
     {
         [[User Singleton] incPINorTouchIDLogin];
     }
+    else
+    {
+        // User used a password
+        [[User Singleton] passwordUsed];
+    }
     _bNewDeviceLogin = bNewDevice;
     
     [self didLoginCommon:bNewAccount];
@@ -1309,6 +1314,7 @@ MainViewController *singleton;
 
 - (void)showPasswordCheckSkip
 {
+    [[User Singleton] passwordWrongAndSkipped];
     [MainViewController fadingAlertHelpPopup:createAccountAndTransferFundsText];
 }
 
@@ -1346,6 +1352,7 @@ MainViewController *singleton;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
         [MainViewController fadingAlert:greatJobRememberingPasswordText];
+        [[User Singleton] passwordUsed];
     } else {
         [FadingAlertView dismiss:FadingAlertDismissFast];
 

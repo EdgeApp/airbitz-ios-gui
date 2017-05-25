@@ -480,6 +480,8 @@ typedef enum eAlertType
                                   otherButtonTitles:nil];
             [alert show];
             return;
+        } else {
+            [[User Singleton] passwordUsed];
         }
     }
     [self blockUser:YES];

@@ -229,6 +229,7 @@
 {
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
+        [[User Singleton] passwordUsed];
         if (_dailySpendLimitSwitch.on) {
             [User Singleton].bDailySpendLimit = YES;
             [User Singleton].dailySpendLimitSatoshis = [abcAccount.settings.denomination btcStringToSatoshi:_dailySpendLimitField.text];

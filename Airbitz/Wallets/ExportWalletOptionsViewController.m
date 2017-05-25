@@ -942,6 +942,7 @@ typedef enum eExportOption
         }
         else
         {
+            [[User Singleton] passwordUsed];
             [self exportUsing:exportOption];
         }
     }

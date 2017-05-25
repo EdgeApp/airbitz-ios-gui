@@ -283,6 +283,7 @@
     _loadingSpinner.hidden = YES;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
+        [[User Singleton] passwordUsed];
         if (![self switchTwoFactor:_tfaEnabledSwitch.on]) {
             _tfaEnabledSwitch.on = !_tfaEnabledSwitch.on;
         }
