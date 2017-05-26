@@ -32,6 +32,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "FadingAlertView.h"
 #import "TextViewCell.h"
+#import "Mixpanel.h"
 
 #define DISTANCE_ABOVE_KEYBOARD             10  // how far above the keyboard to we want the control
 #define ANIMATION_DURATION_KEYBOARD_UP      0.30
@@ -171,6 +172,8 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"SET-Enter"];
+
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1244,6 +1247,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     switch (indexPath.section)
 	{
         case SECTION_BITCOIN_DENOMINATION:
+            [[Mixpanel sharedInstance] track:@"SET-Denom"];
             [self setDenominationChoice:indexPath.row];
             [tableView reloadData];
             break;
@@ -1251,14 +1255,18 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         case SECTION_USERNAME:
             if (indexPath.row == ROW_PASSWORD)
             {
+                [[Mixpanel sharedInstance] track:@"SET-ChgPasswd"];
+
                 [self bringUpSignUpViewInMode:SignUpMode_ChangePassword];
             }
             else if (indexPath.row == ROW_PIN)
             {
+                [[Mixpanel sharedInstance] track:@"SET-ChgPIN"];
                 [self bringUpSignUpViewInMode:SignUpMode_ChangePIN];
             }
             else if (indexPath.row == ROW_RECOVERY_QUESTIONS)
             {
+                [[Mixpanel sharedInstance] track:@"SET-RecQuestions"];
                 [self bringUpRecoveryQuestionsView];
             }
             break;
@@ -1273,10 +1281,12 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             }
             else if (indexPath.row == ROW_SPEND_LIMITS)
             {
+                [[Mixpanel sharedInstance] track:@"SET-SpendLimits"];
                 [self bringUpSpendingLimits];
             }
             else if (indexPath.row == ROW_TFA)
             {
+                [[Mixpanel sharedInstance] track:@"SET-2FA"];
                 [self bringUpTwoFactor];
             }
             break;
@@ -1376,6 +1386,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_MERCHANT_MODE))
     {
+        [[Mixpanel sharedInstance] track:@"SET-MerchantMode"];
         LocalSettings.controller.bMerchantMode = theSwitch.on;
         [LocalSettings saveAll];
     }
@@ -1404,6 +1415,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OVERRIDE_SERVERS) && (row == ROW_ENABLE_SERVER_OVERRIDE))
     {
+        [[Mixpanel sharedInstance] track:@"SET-OverrideSvr"];
         [MainViewController fadingAlertHelpPopup:override_servers_help];
         abcAccount.settings.bOverrideBitcoinServers = theSwitch.on;
         [abcAccount.settings saveSettings];
@@ -1448,6 +1460,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 //            {
 //                curChoice = -1;
 //            }
+            [[Mixpanel sharedInstance] track:@"SET-DefCurrency"];
             arrayPopupChoices = [ABCCurrency listCurrencyStrings];
             popupPosition = PopupPicker2Position_Full_Fading;
             headerText = default_currency_text;
@@ -1462,6 +1475,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 //        {
 //            curChoice = -1;
 //        }
+        [[Mixpanel sharedInstance] track:@"SET-ExchageRate"];
         arrayPopupChoices = ABCArrayExchanges;
         headerText = exchange_rate_data_source_text;
     }

@@ -2429,22 +2429,27 @@ MainViewController *singleton;
 
     if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Dir"];
         newAppMode = APP_MODE_DIRECTORY;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_REQUEST])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Req"];
         newAppMode = APP_MODE_REQUEST;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_SEND])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Send"];
         newAppMode = APP_MODE_SEND;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_WALLETS])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Transactions"];
         newAppMode = APP_MODE_WALLETS;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-More"];
         [self toggleSlideOut];
         _appMode = APP_MODE_MORE;
         return;

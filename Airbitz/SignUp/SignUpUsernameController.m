@@ -62,6 +62,7 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+    [[Mixpanel sharedInstance] track:@"SUP-User-Enter"];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -87,8 +88,6 @@
 
 -(IBAction)back:(id)sender
 {
-    [[Mixpanel sharedInstance] track:@"SUP-uname-back"];
-
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault
                         options:UIViewAnimationOptionCurveEaseInOut
@@ -125,7 +124,7 @@
                 {
                     _bSuccess = false;
                     _strReason = error.userInfo[NSLocalizedDescriptionKey];
-                    [[Mixpanel sharedInstance] track:@"SUP-uname-unavailable"];
+                    [[Mixpanel sharedInstance] track:@"SUP-User-Unavailable"];
                 }
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
@@ -136,7 +135,7 @@
     }
     else
     {
-        [[Mixpanel sharedInstance] track:@"SUP-uname-invalid"];
+        [[Mixpanel sharedInstance] track:@"SUP-User-Invalid"];
         [self blockUser:NO];
     }
 

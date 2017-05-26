@@ -252,6 +252,7 @@ const int NumPromoRows              = 4;
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"TXL-DropWallets"];
         destination = [MainViewController getHeaderHeight];
         _bWalletsShowing = true;
     }
@@ -311,6 +312,7 @@ const int NumPromoRows              = 4;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"TXL-Enter"];
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
 
@@ -524,10 +526,12 @@ const int NumPromoRows              = 4;
     [self resignAllResponders];
     if (_bWalletsShowing)
     {
+        [[Mixpanel sharedInstance] track:@"WAL-Help"];
         [InfoView CreateWithHTML:@"info_wallets" forView:self.view];
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"TXL-Help"];
         [InfoView CreateWithHTML:@"info_transactions" forView:self.view];
     }
 }
@@ -1519,7 +1523,6 @@ const int NumPromoRows              = 4;
             if (indexPath.row == PromoIndexBuyBitcoin)
             {
                 // Buy bitcoin button
-                [[Mixpanel sharedInstance] track:@"TXL-Buy-Bitcoin"];
 
                 NSString *deviceCurrency = [ABCCurrency getCurrencyCodeOfLocale];
                 
@@ -1529,42 +1532,50 @@ const int NumPromoRows              = 4;
                 {
                     NSURL *url = [[NSURL alloc] initWithString:overrideURL];
                     [[UIApplication sharedApplication] openURL:url];
+                    [[Mixpanel sharedInstance] track:@"TXL-Buy-Override"];
                 }
                 else if (SHOW_BUY_SELL &&
                          ([deviceCurrency isEqualToString:@"USD"] ||
                           [deviceCurrency isEqualToString:@"CAD"] ||
                           [deviceCurrency isEqualToString:@"EUR"]))
                 {
+                    [[Mixpanel sharedInstance] track:@"TXL-Buy-Plugin"];
                     [MainViewController launchBuySell];
                 }
                 else
                 {
+                    [[Mixpanel sharedInstance] track:@"TXL-Buy-ATM"];
                     [MainViewController launchDirectoryATM];
                 }
             }
             else if (indexPath.row == PromoIndexImportGiftCard)
             {
                 // Import Gift Card
+                [[Mixpanel sharedInstance] track:@"TXL-Import"];
                 [MainViewController launchSend];
             }
             else if (indexPath.row == PromoIndexBitrefill)
             {
                 // Bitrefill
+                [[Mixpanel sharedInstance] track:@"TXL-Bitrefill"];
                 [MainViewController launchGiftCard];
             }
             else if (indexPath.row == PromoIndex20offStarbucks)
             {
                 // 20% off button
+                [[Mixpanel sharedInstance] track:@"TXL-Starbucks"];
                 [MainViewController launchGiftCard];
             }
             else if (indexPath.row == PromoIndex10offTarget)
             {
                 // 10% off button
+                [[Mixpanel sharedInstance] track:@"TXL-Target"];
                 [MainViewController launchGiftCard];
             }
             else if (indexPath.row == PromoIndex15to20offAmazon)
             {
                 // Amazon button
+                [[Mixpanel sharedInstance] track:@"TXL-Purse"];
                 NSURL *url = [[NSURL alloc] initWithString:@"http://bit.ly/AirbitzPurse"];
                 [[UIApplication sharedApplication] openURL:url];
             }
