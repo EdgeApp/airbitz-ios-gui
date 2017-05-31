@@ -622,13 +622,10 @@
 }
 
 
-+ (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
++ (NSInteger)timeBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime unit:(NSCalendarUnit)unit;
 {
     NSDate *fromDate;
     NSDate *toDate;
-    
-    NSCalendarUnit unit = NSCalendarUnitDay;
-//    NSCalendarUnit unit = NSCalendarUnitMinute;
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -641,8 +638,15 @@
     NSDateComponents *difference = [calendar components:unit
                                                fromDate:fromDate toDate:toDate options:0];
     
-    return [difference day];
-//    return [difference minute];
+    if (unit == NSCalendarUnitDay)
+    {
+        return [difference day];
+    }
+    else if (unit == NSCalendarUnitMinute)
+    {
+        return [difference minute];
+    }
+    return 0;
 }
 
 @end

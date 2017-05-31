@@ -65,7 +65,7 @@
 + (NSArray *) categoryArrayToEnglish:(NSArray *)array;
 + (NSString *) categoryTextLocalize:(NSString *)category;
 + (NSString *) categoryTextToEnglish:(NSString *)category;
-+ (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
++ (NSInteger)timeBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime unit:(NSCalendarUnit)unit;
 
 
 #define printTimerStart() \

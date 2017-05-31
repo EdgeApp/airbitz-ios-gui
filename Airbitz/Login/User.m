@@ -38,6 +38,8 @@
 #define PASSWORD_WRONG_INCREMENT_DAYS 2
 #define PASSWORD_WRONG_INCREMENT_COUNT 2
 
+#define PASSWORD_REMINDER_DAYS_TO_MINS YES
+
 static BOOL bInitialized = NO;
 
 @interface User ()
@@ -139,11 +141,6 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
 - (void)resetPasswordReminderToDefaults;
 {
-//    NSDate *today = [[NSDate alloc] init];
-//    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-//    [offsetComponents setDa:-20];
-//    NSDate *yearsAgo = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
     self.lastPasswordLogin = [NSDate date];
     if ([abc getRecovery2Token:abcAccount.name error:nil]) {
         // Recovery is setup on this account. Set some more friendly defaults
@@ -430,13 +427,23 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (void)passwordWrongAndSkipped;
 {
     NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-    dayComponent.day = PASSWORD_WRONG_INCREMENT_DAYS;
-//    dayComponent.minute = PASSWORD_WRONG_INCREMENT_DAYS;
+    NSCalendarUnit unit;
+    
+    if (PASSWORD_REMINDER_DAYS_TO_MINS)
+    {
+        dayComponent.minute = PASSWORD_WRONG_INCREMENT_DAYS;
+        unit = NSCalendarUnitMinute;
+    }
+    else
+    {
+        dayComponent.day = PASSWORD_WRONG_INCREMENT_DAYS;
+        unit = NSCalendarUnitDay;
+    }
     
     NSCalendar *theCalendar = [NSCalendar currentCalendar];
     NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
 
-    self.passwordReminderDays = [Util daysBetweenDate:self.lastPasswordLogin andDate:nextDate];
+    self.passwordReminderDays = [Util timeBetweenDate:self.lastPasswordLogin andDate:nextDate unit:unit];
     self.passwordReminderCount = self.numNonPasswordLogin + PASSWORD_WRONG_INCREMENT_COUNT;
 
     [self saveLocalSettings];
@@ -454,9 +461,16 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.needsPasswordCheck = YES;
     }
     
-    NSInteger days = [Util daysBetweenDate:self.lastPasswordLogin andDate:[NSDate date]];
+    NSCalendarUnit unit = NSCalendarUnitDay;
+    
+    if (PASSWORD_REMINDER_DAYS_TO_MINS)
+        unit = NSCalendarUnitMinute;
+
+    NSInteger days = [Util timeBetweenDate:self.lastPasswordLogin andDate:[NSDate date] unit:unit];
+
     if (days >= self.passwordReminderDays) {
         self.needsPasswordCheck = YES;
     }
+    
 }
 @end
