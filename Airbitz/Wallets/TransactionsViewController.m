@@ -1419,7 +1419,7 @@ const int NumPromoRows              = 4;
                     cell.dateLabel.text = doubleSpendText;
                     cell.dateLabel.textColor = COLOR_NEGATIVE;
                 }
-                else if (confirmations < 0)
+                else if (confirmations < 0 && wallet.addressesChecked)
                 {
                     cell.dateLabel.text = transaction_dropped_text;
                     cell.dateLabel.textColor = COLOR_NEGATIVE;
