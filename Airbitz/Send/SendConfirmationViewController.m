@@ -806,7 +806,11 @@
     [_spend getFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees+_amountSatoshi2 error:NO errorString:nil];
     } error:^(ABCError *error) {
-        [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
+        if (error.code == ABCConditionCodeParseError) {
+            [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedFailureReasonErrorKey]];
+        } else {
+            [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
+        }
     }];
 }
 
