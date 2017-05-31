@@ -46,6 +46,7 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
+    BOOL                            _bUsedAutoLogin;
     BOOL                            _bDisallowTouchID;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
@@ -285,6 +286,7 @@ static BOOL bInitialized = false;
 
     _bTouchesEnabled = YES;
     _bUsedTouchIDToLogin = NO;
+    _bUsedAutoLogin = NO;
     _bNewDeviceLogin = NO;
 
 //    [self getAllAccounts];
@@ -437,6 +439,7 @@ static BOOL bInitialized = false;
     } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
         [mixpanel track:@"SIN-TouchID success"];
         _bUsedTouchIDToLogin = usedTouchID;
+        _bUsedAutoLogin = !usedTouchID;
         [self signInComplete:user newAccount:NO];
     } completionNoLogin:^{
         [mixpanel track:@"SIN-TouchID nologin"];
@@ -1205,7 +1208,9 @@ static BOOL bInitialized = false;
 
     self.passwordTextField.text = nil;
     [User login:user];
-    [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+    BOOL usedPassword = !_bUsedAutoLogin && !_bUsedTouchIDToLogin;
+    
+    [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:_bNewDeviceLogin usedPassword:usedPassword];
     
     if (bNewAccount) return;
     

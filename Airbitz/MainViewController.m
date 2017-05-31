@@ -1178,11 +1178,10 @@ MainViewController *singleton;
     });
 }
 
-
--(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedPassword:(BOOL)usedPassword;
 {
     // if the user logged in through TouchID, increment PIN login count
-    if (bUsedTouchID)
+    if (!usedPassword)
     {
         [[User Singleton] incPINorTouchIDLogin];
     }
