@@ -28,6 +28,9 @@
 
 #define DEFAULT_PASSWORD_REMINDER_DAYS 2
 #define DEFAULT_PASSWORD_REMINDER_COUNT 2
+#define DEFAULT_PASSWORD_REMINDER_W_RECOVERY_DAYS 8
+#define DEFAULT_PASSWORD_REMINDER_W_RECOVERY_COUNT 8
+#define DEFAULT_NUM_PASSWORD_USED_W_RECOVERY 3
 #define PASSWORD_DAYS_INCREMENT_MULTIPLIER 2
 #define PASSWORD_COUNT_INCREMENT_MULTIPLIER 2
 #define PASSWORD_DAYS_MAX_VALUE 64
@@ -142,9 +145,18 @@ static User *singleton = nil;  // this will be the one and only object this stat
 //    [offsetComponents setDa:-20];
 //    NSDate *yearsAgo = [gregorian dateByAddingComponents:offsetComponents toDate:today options:0];
     self.lastPasswordLogin = [NSDate date];
-    self.passwordReminderDays = DEFAULT_PASSWORD_REMINDER_DAYS;
-    self.passwordReminderCount = DEFAULT_PASSWORD_REMINDER_COUNT;
-    self.numPasswordUsed = 0;
+    if ([abc getRecovery2Token:abcAccount.name error:nil]) {
+        // Recovery is setup on this account. Set some more friendly defaults
+        self.passwordReminderDays = DEFAULT_PASSWORD_REMINDER_W_RECOVERY_DAYS;
+        self.passwordReminderCount = DEFAULT_PASSWORD_REMINDER_W_RECOVERY_COUNT;
+        self.numPasswordUsed = DEFAULT_NUM_PASSWORD_USED_W_RECOVERY;
+    }
+    else
+    {
+        self.passwordReminderDays = DEFAULT_PASSWORD_REMINDER_DAYS;
+        self.passwordReminderCount = DEFAULT_PASSWORD_REMINDER_COUNT;
+        self.numPasswordUsed = 0;
+    }
 }
 
 - (void)saveLocalSettings
