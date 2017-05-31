@@ -1369,8 +1369,8 @@ MainViewController *singleton;
                 initWithTitle:incorrectPasswordText
                       message:tryAgainString
                      delegate:self
-            cancelButtonTitle:noButtonText
-            otherButtonTitles:yesButtonText, changeButtonString, nil];
+            cancelButtonTitle:cancelButtonText
+            otherButtonTitles:try_again_button_text, changeButtonString, nil];
         [_passwordIncorrectAlert show];
     }
 }

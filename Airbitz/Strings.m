@@ -261,6 +261,7 @@
 #define touchIDDisabled                             NSLocalizedString(@"Touch ID Disabled", nil)
 #define touchIDEnabledText                          NSLocalizedString(@"Touch ID Enabled", nil)
 #define tryAgainText                                NSLocalizedString(@"Try again?", nil)
+#define try_again_button_text                       NSLocalizedString(@"Try again", nil)
 #define touchIDText                                 NSLocalizedString(@"Touch ID", nil)
 #define enterYourPasswordToEnableTouchID            NSLocalizedString(@"Please enter your password to enable Touch ID", nil)
 #define feedbackText                                NSLocalizedString(@"Feedback" ,nil)
