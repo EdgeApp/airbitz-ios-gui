@@ -26,13 +26,10 @@
 #define NUM_NON_PASSWORD_LOGIN  @"NUM_NON_PASSWORD_LOGIN"
 #define NUM_PASSWORD_USED       @"NUM_PASSWORD_USED"
 
-#define DEFAULT_PASSWORD_REMINDER_DAYS 2
-#define DEFAULT_PASSWORD_REMINDER_COUNT 2
-#define DEFAULT_PASSWORD_REMINDER_W_RECOVERY_DAYS 8
-#define DEFAULT_PASSWORD_REMINDER_W_RECOVERY_COUNT 8
-#define DEFAULT_NUM_PASSWORD_USED_W_RECOVERY 3
-#define PASSWORD_DAYS_INCREMENT_MULTIPLIER 2
-#define PASSWORD_COUNT_INCREMENT_MULTIPLIER 2
+#define DEFAULT_NUM_PASSWORD_USED 2
+#define DEFAULT_NUM_PASSWORD_USED_W_RECOVERY 4
+#define PASSWORD_DAYS_INCREMENT_POWER 2
+#define PASSWORD_COUNT_INCREMENT_POWER 2
 #define PASSWORD_DAYS_MAX_VALUE 64
 #define PASSWORD_COUNT_MAX_VALUE 128
 #define PASSWORD_WRONG_INCREMENT_DAYS 2
@@ -144,15 +141,15 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.lastPasswordLogin = [NSDate date];
     if ([abc getRecovery2Token:abcAccount.name error:nil]) {
         // Recovery is setup on this account. Set some more friendly defaults
-        self.passwordReminderDays = DEFAULT_PASSWORD_REMINDER_W_RECOVERY_DAYS;
-        self.passwordReminderCount = DEFAULT_PASSWORD_REMINDER_W_RECOVERY_COUNT;
         self.numPasswordUsed = DEFAULT_NUM_PASSWORD_USED_W_RECOVERY;
+        self.passwordReminderDays = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+        self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
     }
     else
     {
-        self.passwordReminderDays = DEFAULT_PASSWORD_REMINDER_DAYS;
-        self.passwordReminderCount = DEFAULT_PASSWORD_REMINDER_COUNT;
-        self.numPasswordUsed = 0;
+        self.numPasswordUsed = DEFAULT_NUM_PASSWORD_USED;
+        self.passwordReminderDays = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+        self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
     }
 }
 
@@ -413,8 +410,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.numNonPasswordLogin = 0;
     self.numPasswordUsed++;
     self.lastPasswordLogin = [NSDate date];
-    self.passwordReminderDays  = pow(PASSWORD_DAYS_INCREMENT_MULTIPLIER, self.numPasswordUsed);
-    self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_MULTIPLIER, self.numPasswordUsed);
+    self.passwordReminderDays  = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+    self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
 
     if (self.passwordReminderDays > PASSWORD_DAYS_MAX_VALUE)
         self.passwordReminderDays = PASSWORD_DAYS_MAX_VALUE;
