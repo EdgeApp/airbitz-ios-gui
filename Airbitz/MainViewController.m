@@ -1315,7 +1315,8 @@ MainViewController *singleton;
 - (void)showPasswordCheckSkip
 {
     [[User Singleton] passwordWrongAndSkipped];
-    [MainViewController fadingAlertHelpPopup:createAccountAndTransferFundsText];
+    NSString *msg = [NSString stringWithFormat:createAccountAndTransferFundsText, appTitle];
+    [MainViewController fadingAlertHelpPopup:msg];
 }
 
 - (void)showPasswordSetAlert

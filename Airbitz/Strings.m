@@ -56,7 +56,7 @@
 #define emailText                                   NSLocalizedString(@"Email", @"text for Email")
 #define sendScreenHelpText                          NSLocalizedString(@"Scan the QR code of payee to send payment or tap on a bluetooth request from the list below", nil)
 #define creatingWalletText                          NSLocalizedString(@"Creating and securing wallet", nil)
-#define createAccountAndTransferFundsText           NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password.", nil)
+#define createAccountAndTransferFundsText           NSLocalizedString(@"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.", nil)
 #define createPasswordForAccountText                NSLocalizedString(@"Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.", nil)
 #define create_pin_for_account_text                 NSLocalizedString(@"Please create a PIN for this account to enable quick re-logins", nil)
 #define settingsText                                NSLocalizedString(@"Settings", nil)
