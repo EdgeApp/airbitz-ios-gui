@@ -183,7 +183,7 @@
 #define ColorPinEntryText                               ColorOffBright
 #define ColorPinEntryUsernameText                       ColorLightBlue
 
-#define ColorLoginTitleText                             ColorOffBright
+#define ColorLoginTitleText                             ColorDarkGrey
 #define ColorLoginTitleTextShadow                       ColorOffBrightFrost
 
 #define DirectoryCategoryButtonsBackgroundColor         ColorWhiteFrost
