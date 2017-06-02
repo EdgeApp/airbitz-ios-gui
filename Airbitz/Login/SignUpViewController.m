@@ -169,6 +169,7 @@
                         if (!error)
                         {
                             [self changePasswordComplete:YES errorMessage:nil];
+                            [[User Singleton] resetPasswordReminderToDefaults];
                         }
                         else
                         {                            
@@ -182,6 +183,7 @@
                     [abcAccount changePassword:self.passwordTextField.text callback:^(NSError *error){
                         if (!error)
                         {
+                            [[User Singleton] resetPasswordReminderToDefaults];
                             [abcAccount changePIN:self.pinTextField.text callback:^(NSError *error) {
                                 [self blockUser:NO];
                                 if (!error)

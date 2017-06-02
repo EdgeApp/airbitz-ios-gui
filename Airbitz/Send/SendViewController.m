@@ -175,6 +175,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"SND-Enter"];
     [self scanBLEstartCamera];
     [MainViewController changeNavBarOwner:self];
 
@@ -279,6 +280,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SCN-DropWallets"];
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
@@ -425,6 +427,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
+    [[Mixpanel sharedInstance] track:@"SND-Help"];
     [self resignAllResponders];
     [InfoView CreateWithHTML:@"info_send" forView:self.view];
 }
@@ -450,7 +453,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     switch (segmentedControl.selectedSegmentIndex)
     {
         case 0:
-            [[Mixpanel sharedInstance] track:@"SCAN-Transfer"];
+            [[Mixpanel sharedInstance] track:@"SCN-Transfer"];
             arrayChoices = [self createNewSendToChoices:@""];
             self.popupPickerSendTo = [PopupPickerView2 CreateForView:self.view
                                                    relativePosition:PopupPicker2Position_Full_Rising
@@ -462,7 +465,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             // Do Transfer
             break;
         case 1:
-            [[Mixpanel sharedInstance] track:@"SCAN-Address"];
+            [[Mixpanel sharedInstance] track:@"SCN-Address"];
             title = enterBitcoinAddressPopupText;
             placeholderText = enterBitcoinAddressPlaceholder;
             parsedURI = [ABCUtil parseURI:clipboard error:nil];
@@ -497,14 +500,14 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
         case 2:
             // Do Photo
-            [[Mixpanel sharedInstance] track:@"SCAN-Photo"];
+            [[Mixpanel sharedInstance] track:@"SCN-Photo"];
             [self resignAllResponders];
             [self showImagePicker];
 
             break;
         case 3:
             // Do Flash
-            [[Mixpanel sharedInstance] track:@"SCAN-Flash"];
+            [[Mixpanel sharedInstance] track:@"SCN-Flash"];
             [self toggleFlash];
             break;
     }
@@ -913,6 +916,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SCN-BLE"];
         [self processURI:stringFromData];
     }
 
@@ -936,6 +940,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else
         {
+            [[Mixpanel sharedInstance] track:@"SCN-BLE"];
             [self processURI:receivedData];
         }
 
@@ -1406,7 +1411,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)importWallet:(NSString *)privateKey
 {
-    [[Mixpanel sharedInstance] track:@"SCAN-Import-Privkey"];
+    [[Mixpanel sharedInstance] track:@"SCN-Import"];
 
     [abcAccount.currentWallet importPrivateKey:privateKey importing:^(NSString *address) {
         NSMutableString *statusMessage = [NSMutableString string];
@@ -1460,6 +1465,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 	{
 		NSString *text = (NSString *)sym.data;
         
+        [[Mixpanel sharedInstance] track:@"SCN-QR"];
         [self processURI:text];
 	}
 #endif
@@ -1693,12 +1699,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlertDismiss];
             if (!error)
             {
-                [[Mixpanel sharedInstance] track:@"SCAN-Edge-Success"];
+                [[Mixpanel sharedInstance] track:@"SCN-Edge-Success"];
                 [self showSSOViewController:nil edgeLoginRequest:info];
             }
             else
             {
-                [[Mixpanel sharedInstance] track:@"SCAN-Edge-Invalid"];
+                [[Mixpanel sharedInstance] track:@"SCN-Edge-Invalid"];
                 [MainViewController fadingAlert:@"Invalid Edge Login Request"];
                 [self startQRReader];
             }
@@ -1727,6 +1733,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     {
         if (_parsedURI.bitIDURI)
         {
+            [[Mixpanel sharedInstance] track:@"SCN-Bitid"];
+
             // Launch SSOViewController
             [self showSSOViewController:_parsedURI edgeLoginRequest:nil];
 
@@ -1848,6 +1856,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
         }
         else if (_parsedURI.privateKey)
         {
+            [[Mixpanel sharedInstance] track:@"SCN-PrivKey"];
             // We can either fund the private key using it's address or ask the user if they want it swept
             _privateKeyAlert = [[UIAlertView alloc]
                                 initWithTitle:bitcoinPrivateKeyText
@@ -1965,6 +1974,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             {
                 if (parsedURI.paymentRequestURL)
                 {
+                    [[Mixpanel sharedInstance] track:@"SCN-BIP70"];
                     [self stopQRReader];
                     [MainViewController fadingAlert:fetchingPaymentRequestText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT notify:^{
                         ABCError *error = nil;
@@ -1990,11 +2000,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                 }
                 else if (parsedURI.address)
                 {
+                    [[Mixpanel sharedInstance] track:@"SCN-Addr"];
                     [self processPubAddress:parsedURI];
                 }
             }
             else
             {
+                [[Mixpanel sharedInstance] track:@"SCN-BIP70"];
                 [MainViewController fadingAlert:invalidAddressPopupText];
             }
         });

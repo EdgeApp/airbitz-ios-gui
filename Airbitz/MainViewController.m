@@ -1178,13 +1178,17 @@ MainViewController *singleton;
     });
 }
 
-
--(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedTouchID:(BOOL)bUsedTouchID;
+-(void)loginViewControllerDidLogin:(BOOL)bNewAccount newDevice:(BOOL)bNewDevice usedPassword:(BOOL)usedPassword;
 {
     // if the user logged in through TouchID, increment PIN login count
-    if (bUsedTouchID)
+    if (!usedPassword)
     {
         [[User Singleton] incPINorTouchIDLogin];
+    }
+    else
+    {
+        // User used a password
+        [[User Singleton] passwordUsed];
     }
     _bNewDeviceLogin = bNewDevice;
     
@@ -1309,7 +1313,9 @@ MainViewController *singleton;
 
 - (void)showPasswordCheckSkip
 {
-    [MainViewController fadingAlertHelpPopup:createAccountAndTransferFundsText];
+    [[User Singleton] passwordWrongAndSkipped];
+    NSString *msg = [NSString stringWithFormat:createAccountAndTransferFundsText, appTitle];
+    [MainViewController fadingAlertHelpPopup:msg];
 }
 
 - (void)showPasswordSetAlert
@@ -1346,6 +1352,7 @@ MainViewController *singleton;
     BOOL bAuthenticated = [authenticated boolValue];
     if (bAuthenticated) {
         [MainViewController fadingAlert:greatJobRememberingPasswordText];
+        [[User Singleton] passwordUsed];
     } else {
         [FadingAlertView dismiss:FadingAlertDismissFast];
 
@@ -1362,8 +1369,8 @@ MainViewController *singleton;
                 initWithTitle:incorrectPasswordText
                       message:tryAgainString
                      delegate:self
-            cancelButtonTitle:noButtonText
-            otherButtonTitles:yesButtonText, changeButtonString, nil];
+            cancelButtonTitle:cancelButtonText
+            otherButtonTitles:try_again_button_text, changeButtonString, nil];
         [_passwordIncorrectAlert show];
     }
 }
@@ -2422,22 +2429,27 @@ MainViewController *singleton;
 
     if (item == [self.tabBar.items objectAtIndex:APP_MODE_DIRECTORY])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Dir"];
         newAppMode = APP_MODE_DIRECTORY;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_REQUEST])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Req"];
         newAppMode = APP_MODE_REQUEST;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_SEND])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Send"];
         newAppMode = APP_MODE_SEND;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_WALLETS])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-Transactions"];
         newAppMode = APP_MODE_WALLETS;
     }
     else if (item == [self.tabBar.items objectAtIndex:APP_MODE_MORE])
     {
+        [[Mixpanel sharedInstance] track:@"TAB-More"];
         [self toggleSlideOut];
         _appMode = APP_MODE_MORE;
         return;

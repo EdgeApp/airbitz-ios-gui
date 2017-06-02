@@ -73,6 +73,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"SUP-Passwd-Enter"];
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.passwordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.reenterPasswordTextField addTarget:self action:@selector(passwordTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -86,7 +87,6 @@
     }
     else
     {
-        [[Mixpanel sharedInstance] track:@"SUP-Passwd-no PIN only"];
         self.pinTextField.hidden = NO;
         self.pinTextLabel.hidden = NO;
         self.setPasswordLabel.text = setPasswordAndPinText;
@@ -115,7 +115,7 @@
 {
     if (_noPasswordAlert == alertView && buttonIndex == 1)
     {
-        [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct no passwd"];
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-create no passwd"];
         [self createAccount];
     }
 }
@@ -140,7 +140,7 @@
         }
         else
         {
-            [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct"];
+            [[Mixpanel sharedInstance] track:@"SUP-Passwd-create"];
             [self createAccount];
         }
     }
@@ -154,14 +154,14 @@
     [_pinTextField resignFirstResponder];
 
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel timeEvent:@"createAccount"];
+    [mixpanel timeEvent:@"createAccount time"];
     [abc createAccount:self.manager.strUserName
               password:self.passwordTextField.text
                    pin:self.pinTextField.text
               delegate:[MainViewController Singleton]
               callback:^(ABCError *error, ABCAccount *account)
      {
-         [mixpanel track:@"createAccount"];
+         [mixpanel track:@"createAccount time"];
          if (!error)
          {
              [FadingAlertView dismiss:FadingAlertDismissFast];
@@ -178,7 +178,7 @@
          }
          else
          {
-             [[Mixpanel sharedInstance] track:@"SUP-Passwd-createAcct failed"];
+             [[Mixpanel sharedInstance] track:@"SUP-Passwd-create fail"];
              [FadingAlertView create:self.view
                              message:error.userInfo[NSLocalizedDescriptionKey]
                             holdTime:FADING_ALERT_HOLD_TIME_DEFAULT];
@@ -229,7 +229,7 @@
                 otherButtonTitles:nil];
             [alert show];
             bNewPasswordFieldsAreValid = NO;
-            [[Mixpanel sharedInstance] track:@"SUP-Passwd-failed rules"];
+            [[Mixpanel sharedInstance] track:@"SUP-Passwd-fail rules"];
         }
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {
@@ -291,7 +291,7 @@
     _activeTextField = textField;
     if(textField == self.passwordTextField)
     {
-        [[Mixpanel sharedInstance] track:@"SUP-Passwd-enter passwd"];
+        [[Mixpanel sharedInstance] track:@"SUP-Passwd-Txt"];
 
         if(_passwordVerifyView == nil)
         {
@@ -307,7 +307,7 @@
     }
     else
     {
-        [[Mixpanel sharedInstance] track:@"SUP-Passwd-reenter passwd"];
+        [[Mixpanel sharedInstance] track:@"SUP-PasswdReenter-Txt"];
 
         if(_passwordVerifyView)
         {

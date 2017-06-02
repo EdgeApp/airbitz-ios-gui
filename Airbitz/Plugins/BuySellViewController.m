@@ -11,6 +11,7 @@
 #import "WalletHeaderView.h"
 #import "Plugin.h"
 #import "Util.h"
+#import "Mixpanel.h"
 
 @interface BuySellViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate, PluginViewControllerDelegate>
 {
@@ -55,6 +56,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"BUY-Enter"];
     [super viewWillAppear:animated];
     [MainViewController changeNavBarOwner:self];
     [MainViewController changeNavBar:self title:backButtonText side:NAV_BAR_LEFT button:true enable:false action:nil fromObject:self];
@@ -149,6 +151,8 @@
     Plugin *plugin;
     
     plugin = [[Plugin getBuySellPlugins] objectAtIndex:row];
+
+    [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"BUY-%@ %@", plugin.provider, plugin.name]];
 
     [self launchPlugin:plugin uri:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
