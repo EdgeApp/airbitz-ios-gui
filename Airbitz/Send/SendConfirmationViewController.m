@@ -21,6 +21,8 @@
 #import "ButtonSelectorView2.h"
 #import "FadingAlertView.h"
 #import "PopupPickerView2.h"
+#import "Mixpanel.h"
+
 
 #define REFRESH_PERIOD_SECONDS 30
 
@@ -398,6 +400,7 @@
 
 - (IBAction)TouchAddressButton:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"CNF-Address"];
     NSMutableString *baseUrl = [[NSMutableString alloc] init];
     if ([abc isTestNet]) {
         [baseUrl appendString:@"https://testnet.blockexplorer.com/"];
@@ -413,6 +416,7 @@
 
 - (IBAction)info:(id) sender
 {
+    [[Mixpanel sharedInstance] track:@"CNF-Help"];
     [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
@@ -422,6 +426,8 @@
 
 - (IBAction)fundsInfo
 {
+    [[Mixpanel sharedInstance] track:@"CNF-FundsInfo"];
+
     [self dismissErrorMessage];
     [self.view endEditing:YES];
     [self dismissKeyboard];
@@ -457,6 +463,8 @@
 - (IBAction)ChangeFeeButton:(id)sender
 {
     // Popup fee selection
+    [[Mixpanel sharedInstance] track:@"CNF-ChgFee"];
+
     _changeFeeAlert = [[UIAlertView alloc]
                        initWithTitle:change_mining_fee_popup_title
                        message:change_mining_fee_popup_message
@@ -469,6 +477,8 @@
 
 - (IBAction)ChangeFiatButton:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"CNF-ChgFiat"];
+
     tPopupPicker2Position popupPosition = PopupPicker2Position_Full_Fading;
     NSString *headerText;
 
@@ -492,6 +502,8 @@
 
 - (IBAction)selectMaxAmount
 {
+    [[Mixpanel sharedInstance] track:@"CNF-Max"];
+
     [self dismissErrorMessage];
     if (abcAccount.currentWallet != nil && _maxLocked == NO)
     {
@@ -671,6 +683,7 @@
 
 - (void)failedToSend:(NSArray *)params
 {
+
     if (_alert != nil) {
         [_alert dismissWithClickedButtonIndex:1 animated:NO];
         _alert = nil;
@@ -680,6 +693,7 @@
     NSString *msg2;
     unsigned long code = (unsigned long) [((NSNumber *) params[1]) integerValue];
     
+    [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"CNF-Error-%lu", code]];
     if ([params[2] isEqualToString:params[3]])
         msg2 = @"";
     else
@@ -792,7 +806,11 @@
     [_spend getFees:^(uint64_t totalFees) {
         [self updateFeeFieldContents:totalFees+_amountSatoshi2 error:NO errorString:nil];
     } error:^(ABCError *error) {
-        [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
+        if (error.code == ABCConditionCodeParseError) {
+            [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedFailureReasonErrorKey]];
+        } else {
+            [self updateFeeFieldContents:0 error:YES errorString:error.userInfo[NSLocalizedDescriptionKey]];
+        }
     }];
 }
 
@@ -930,9 +948,15 @@
 {
     _selectedTextField = textField;
     if (_selectedTextField == self.amountBTCTextField)
+    {
+        [[Mixpanel sharedInstance] track:@"CNF-BTCTxt"];
         self.keypadView.calcMode = CALC_MODE_COIN;
+    }
     else if (_selectedTextField == self.amountFiatTextField)
+    {
+        [[Mixpanel sharedInstance] track:@"CNF-FiatTxt"];
         self.keypadView.calcMode = CALC_MODE_FIAT;
+    }
     self.keypadView.textField = textField;
 }
 
@@ -1012,6 +1036,7 @@
         } else if (_passwordRequired) {
             BOOL matched = [abcAccount checkPassword:self.withdrawlPIN.text];
             if (matched) {
+                [[User Singleton] passwordUsed];
                 [self continueChecks];
             } else {
                 [self fadingAlertDelayed:incorrectPasswordText];

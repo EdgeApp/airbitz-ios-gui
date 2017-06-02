@@ -5,6 +5,7 @@ def import_pods
     pod "AFNetworking", "~> 2.0"
     # pod 'AirbitzCore', :http => "https://developer.airbitz.co/download/airbitz-core-objc-newest.tgz"
     pod 'AirbitzCore', :path => '../airbitz-core-objc/'
+    pod 'Mixpanel'
 end
 
 def import_pods_ios

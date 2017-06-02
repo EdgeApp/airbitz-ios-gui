@@ -27,7 +27,15 @@
 //
 @property (nonatomic) bool bDailySpendLimit;
 @property (nonatomic) int64_t dailySpendLimitSatoshis;
-@property (nonatomic) NSInteger pinLoginCount;
+
+//
+// Password check settings
+//
+@property (nonatomic) NSDate   *lastPasswordLogin;
+@property (nonatomic) NSInteger passwordReminderCount;
+@property (nonatomic) NSInteger passwordReminderDays;
+@property (nonatomic) NSInteger numNonPasswordLogin;
+@property (nonatomic) NSInteger numPasswordUsed;
 
 + (void)initAll;
 + (void)freeAll;
@@ -45,6 +53,9 @@
 - (bool)haveExceededPINLoginInvalidEntries;
 - (void)resetPINLoginInvalidEntryCount;
 - (void)incPINorTouchIDLogin;
+- (void)passwordUsed;
+- (void)passwordWrongAndSkipped;
+- (void)resetPasswordReminderToDefaults;
 - (void)loadLocalSettings;
 
 

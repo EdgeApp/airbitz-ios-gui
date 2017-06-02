@@ -27,6 +27,7 @@
 #import "InfoView.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import "Airbitz-Swift.h"
+#import "Mixpanel.h"
 
 typedef enum eLoginMode
 {
@@ -45,6 +46,7 @@ typedef enum eLoginMode
     BOOL                            _bSuccess;
     BOOL                            _bTouchesEnabled;
     BOOL                            _bUsedTouchIDToLogin;
+    BOOL                            _bUsedAutoLogin;
     BOOL                            _bDisallowTouchID;
     NSString                        *_strReason;
     NSString                        *_accountToDelete;
@@ -284,6 +286,7 @@ static BOOL bInitialized = false;
 
     _bTouchesEnabled = YES;
     _bUsedTouchIDToLogin = NO;
+    _bUsedAutoLogin = NO;
     _bNewDeviceLogin = NO;
 
 //    [self getAllAccounts];
@@ -427,15 +430,22 @@ static BOOL bInitialized = false;
     
     _bNewDeviceLogin = NO;
 
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel timeEvent:@"SIN-TouchID"];
+
     [abc autoReloginOrTouchIDIfPossible:[abc getLastAccessedAccount] delegate:[MainViewController Singleton] doBeforeLogin:^{
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
     } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
+        [mixpanel track:@"SIN-TouchID success"];
         _bUsedTouchIDToLogin = usedTouchID;
+        _bUsedAutoLogin = !usedTouchID;
         [self signInComplete:user newAccount:NO];
     } completionNoLogin:^{
+        [mixpanel track:@"SIN-TouchID nologin"];
         [self assignFirstResponder];
     } error:^(NSError *error) {
+        [mixpanel track:@"SIN-TouchID failed"];
         [self showSpinner:NO];
         [MainViewController showBackground:NO animate:YES];
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -481,7 +491,6 @@ static BOOL bInitialized = false;
         [self.PINTextField resignFirstResponder];
         [self showSpinner:YES];
         [self SignInPIN:self.PINTextField.text];
-
     }
 }
 
@@ -585,6 +594,7 @@ static BOOL bInitialized = false;
 {
     if (_mode == MODE_NO_USERS)
     {
+        [[Mixpanel sharedInstance] track:@"SIN-No Users"];
         _mode = MODE_ENTERING_USERNAME;
         [self viewWillAppear:true];
     }
@@ -599,11 +609,14 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel timeEvent:@"SIN-login-Passwd"];
         [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
                       delegate:[MainViewController Singleton]
                            otp:nil callback:^(ABCError *error, ABCAccount *account)
         {
+            [mixpanel track:@"SIN-login-Passwd"];
             if (!error)
             {
                 [self signInComplete:account newAccount:NO];
@@ -617,7 +630,7 @@ static BOOL bInitialized = false;
                     [MainViewController showBackground:NO animate:YES];
                     [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
                 }
-                else if (ABCConditionCodeError == error.code)
+                else if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                 {
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                     [MainViewController showBackground:NO animate:YES];
@@ -634,6 +647,11 @@ static BOOL bInitialized = false;
 
 - (IBAction)SignUp
 {
+    if (_mode == MODE_NO_USERS)
+        [[Mixpanel sharedInstance] track:@"SUP-No Users"];
+    else
+        [[Mixpanel sharedInstance] track:@"SUP-Has Users"];
+    
     [self dismissErrorMessage];
 
     [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
@@ -804,10 +822,13 @@ static BOOL bInitialized = false;
     [MainViewController showBackground:YES animate:YES];
 
     //NOTE: pinLogin was set to look at [abc getLastAccessedAccount]
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel timeEvent:@"SIN-Login-PIN"];
     [abc
      pinLogin:self.PINusernameSelector.titleLabel.text
      pin:pin
      delegate:[MainViewController Singleton] complete:^(ABCAccount *user) {
+         [mixpanel track:@"SIN-Login-PIN"];
          [User login:user];
          [self.delegate LoginViewControllerDidPINLogin];
          [MainViewController showWalletsLoadingAlert];
@@ -840,20 +861,23 @@ static BOOL bInitialized = false;
          if (ABCConditionCodeBadPassword == error.code ||
              ABCConditionCodeInvalidPinWait == error.code)
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN bad passwd"];
              [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
              [self.PINTextField becomeFirstResponder];
          }
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN OTP"];
              [MainViewController showBackground:NO animate:YES];
              [self launchTwoFactorMenu:nil token:nil];
          }
          else
          {
+             [[Mixpanel sharedInstance] track:@"SIN-PIN error"];
              NSString *reason;
              // Core doesn't return anything specific for the case where network is down.
              // Make up a better response in this case
-             if (ABCConditionCodeError == error.code)
+             if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                  reason = pinLoginErrorText;
              else
                  reason = error.userInfo[NSLocalizedDescriptionKey];
@@ -1114,7 +1138,6 @@ static BOOL bInitialized = false;
 {
     [self dismissErrorMessage];
     
-    //called when user taps on either search textField or location textField
     _activeTextField = textField;
     
     if(_mode == MODE_ENTERING_NEITHER)
@@ -1137,11 +1160,16 @@ static BOOL bInitialized = false;
     // highlight all of the text
     if (textField == self.usernameSelector)
     {
+        [[Mixpanel sharedInstance] track:@"SIN-userTxt"];
         [self getAllAccounts];
         [self.usernameDropDown show];
         //[self.usernameSelector updateChoices:self.arrayAccounts];
 
         [textField setSelectedTextRange:[textField textRangeFromPosition:textField.beginningOfDocument toPosition:textField.endOfDocument]];
+    }
+    else if (textField == self.passwordTextField)
+    {
+        [[Mixpanel sharedInstance] track:@"SIN-passwdTxt"];
     }
 }
 
@@ -1180,7 +1208,9 @@ static BOOL bInitialized = false;
 
     self.passwordTextField.text = nil;
     [User login:user];
-    [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:_bNewDeviceLogin usedTouchID:_bUsedTouchIDToLogin];
+    BOOL usedPassword = !_bUsedAutoLogin && !_bUsedTouchIDToLogin;
+    
+    [self.delegate loginViewControllerDidLogin:bNewAccount newDevice:_bNewDeviceLogin usedPassword:usedPassword];
     
     if (bNewAccount) return;
     
@@ -1257,6 +1287,9 @@ static BOOL bInitialized = false;
         _bNewDeviceLogin = ![abc accountExistsLocal:self.usernameSelector.text];
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel timeEvent:@"SIN-Login-Passwd-OTP"];
+
         // Perform the two factor sign in
         [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
@@ -1264,14 +1297,16 @@ static BOOL bInitialized = false;
                            otp:secret
                       callback:^(ABCError *error, ABCAccount *account)
         {
+            [mixpanel track:@"SIN-Login-Passwd-OTP"];
             if (!error)
             {
                 [self signInComplete:account newAccount:NO];
             }
             else
             {
+                [[Mixpanel sharedInstance] track:@"SIN-Passwd-OTP error"];
                 [self showSpinner:NO];
-                if (ABCConditionCodeError == error.code)
+                if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                 else
                     [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];

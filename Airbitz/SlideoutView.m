@@ -19,6 +19,8 @@
 #import "FadingAlertView.h"
 #import "ABCUtil.h"
 #import "Affiliate.h"
+#import "Mixpanel.h"
+
 
 @interface SlideoutView () <PickerTextViewDelegate >
 
@@ -194,6 +196,8 @@
 {
     if (!show)
     {
+        [[Mixpanel sharedInstance] track:@"SLD-Hide"];
+
         if(!self.otherAccountsView.hidden)
         {
             [self accountTouched];
@@ -228,6 +232,7 @@
                  [self removeBlockingButton:self->_parentView];
              }];
         } else {
+
             self.leftConstraint.constant = -0;
             [self layoutIfNeeded];
 //            self.frame = frame;
@@ -236,6 +241,8 @@
         [self rotateImage:self.accountArrow duration:0.0
                     curve:UIViewAnimationCurveEaseIn radians:0];
     } else {
+        [[Mixpanel sharedInstance] track:@"SLD-Show"];
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWillOpen:)]) {
             [self.delegate slideoutWillOpen:self];
         }
@@ -275,6 +282,7 @@
 
 - (IBAction)buysellTouched
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Buy-Sell"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutBuySell)]) {
         [self.delegate slideoutBuySell];
     }
@@ -282,6 +290,7 @@
 
 - (IBAction)importTouched:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Import"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutImport)]) {
         [self.delegate slideoutImport];
     }
@@ -289,12 +298,14 @@
 
 - (IBAction)affiliateTouched:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Affiliate"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutAffiliate)]) {
         [self.delegate slideoutAffiliate];
     }
 }
 
 - (IBAction)giftCardTouched:(id)sender {
+    [[Mixpanel sharedInstance] track:@"SLD-Plugins"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutGiftCard)]) {
         [self.delegate slideoutGiftCard];
     }
@@ -302,6 +313,7 @@
 
 - (IBAction)walletsTouched:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Wallets"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutWallets)]) {
         [self.delegate slideoutWallets];
     }
@@ -310,6 +322,7 @@
 - (IBAction)accountTouched
 {
     if(self.otherAccountsView.hidden) {
+        [[Mixpanel sharedInstance] track:@"SLD-Accts-show"];
         [self updateOtherAccounts:self.accountText.text];
         if(self.otherAccounts.count > 0)
         {
@@ -324,6 +337,7 @@
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SLD-Accts-hide"];
         self.otherAccountsView.hidden = YES;
         self.lowerViews.hidden = NO;
         self.lowerViews.userInteractionEnabled = YES;

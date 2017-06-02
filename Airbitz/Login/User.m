@@ -7,7 +7,7 @@
 //
 
 #import "User.h"
-//#import "Util.h"
+#import "Util.h"
 #import "AB.h"
 #import "LocalSettings.h"
 #import "Affiliate.h"
@@ -18,6 +18,24 @@
 #define SPENDING_LIMIT_ENABLED @"spending_limit_enabled"
 
 #define USER_PIN_LOGIN_COUNT @"user_pin_login_count"
+
+#define USER_PIN_LOGIN_COUNT @"user_pin_login_count"
+#define LAST_PASSWORD_LOGIN     @"LAST_PASSWORD_LOGIN"
+#define PASSWORD_REMINDER_COUNT @"PASSWORD_REMINDER_COUNT"
+#define PASSWORD_REMINDER_DAYS  @"PASSWORD_REMINDER_DAYS"
+#define NUM_NON_PASSWORD_LOGIN  @"NUM_NON_PASSWORD_LOGIN"
+#define NUM_PASSWORD_USED       @"NUM_PASSWORD_USED"
+
+#define DEFAULT_NUM_PASSWORD_USED 2
+#define DEFAULT_NUM_PASSWORD_USED_W_RECOVERY 4
+#define PASSWORD_DAYS_INCREMENT_POWER 2
+#define PASSWORD_COUNT_INCREMENT_POWER 2
+#define PASSWORD_DAYS_MAX_VALUE 64
+#define PASSWORD_COUNT_MAX_VALUE 128
+#define PASSWORD_WRONG_INCREMENT_DAYS 2
+#define PASSWORD_WRONG_INCREMENT_COUNT 2
+
+#define PASSWORD_REMINDER_DAYS_TO_MINS YES
 
 static BOOL bInitialized = NO;
 
@@ -81,10 +99,14 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.runLoop = [NSRunLoop currentRunLoop];
     self.PINLoginInvalidEntryCount = 0;
     self.needsPasswordCheck = NO;
-    self.pinLoginCount = 0;
     self.dictAffiliateInfo = nil;
     self.affiliateInfo = nil;
 
+    self.lastPasswordLogin = [NSDate date];
+    self.passwordReminderDays = 0;
+    self.passwordReminderCount = 0;
+    self.numNonPasswordLogin = 0;
+    self.numPasswordUsed = 0;
 
     return self;
 }
@@ -100,8 +122,35 @@ static User *singleton = nil;  // this will be the one and only object this stat
 
     self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
     self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
-    self.pinLoginCount = [localConfig integerForKey:[self userKey:USER_PIN_LOGIN_COUNT]];
+    
+    self.lastPasswordLogin      = [localConfig objectForKey:[self userKey:LAST_PASSWORD_LOGIN]];
+    self.passwordReminderDays   = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_DAYS]];
+    self.passwordReminderCount  = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_COUNT]];
+    self.numNonPasswordLogin    = [localConfig integerForKey:[self userKey:NUM_NON_PASSWORD_LOGIN]];
+    self.numPasswordUsed        = [localConfig integerForKey:[self userKey:NUM_PASSWORD_USED]];
+    
+    // Check for invalid values and add defaults
+    if (self.lastPasswordLogin == nil || self.passwordReminderDays == 0 || self.passwordReminderCount == 0)
+    {
+        [self resetPasswordReminderToDefaults];
+    }
+}
 
+- (void)resetPasswordReminderToDefaults;
+{
+    self.lastPasswordLogin = [NSDate date];
+    if ([abc getRecovery2Token:abcAccount.name error:nil]) {
+        // Recovery is setup on this account. Set some more friendly defaults
+        self.numPasswordUsed = DEFAULT_NUM_PASSWORD_USED_W_RECOVERY;
+        self.passwordReminderDays = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+        self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
+    }
+    else
+    {
+        self.numPasswordUsed = DEFAULT_NUM_PASSWORD_USED;
+        self.passwordReminderDays = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+        self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
+    }
 }
 
 - (void)saveLocalSettings
@@ -109,8 +158,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
     NSUserDefaults *localConfig = [NSUserDefaults standardUserDefaults];
     [localConfig setObject:@(_dailySpendLimitSatoshis) forKey:[self userKey:SPENDING_LIMIT_AMOUNT]];
     [localConfig setBool:_bDailySpendLimit forKey:[self userKey:SPENDING_LIMIT_ENABLED]];
-    [localConfig setInteger:self.pinLoginCount forKey:[self userKey:USER_PIN_LOGIN_COUNT]];
 
+    [localConfig setObject:self.lastPasswordLogin forKey:[self userKey:LAST_PASSWORD_LOGIN]];
+    [localConfig setInteger:self.passwordReminderDays forKey:[self userKey:PASSWORD_REMINDER_DAYS]];
+    [localConfig setInteger:self.passwordReminderCount forKey:[self userKey:PASSWORD_REMINDER_COUNT]];
+    [localConfig setInteger:self.numNonPasswordLogin forKey:[self userKey:NUM_NON_PASSWORD_LOGIN]];
+    [localConfig setInteger:self.numPasswordUsed forKey:[self userKey:NUM_PASSWORD_USED]];
     [localConfig synchronize];
 }
 
@@ -351,20 +404,70 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.PINLoginInvalidEntryCount = 0;
 }
 
+// Called when a user successfully enters their password.
+- (void)passwordUsed;
+{
+    self.numNonPasswordLogin = 0;
+    self.numPasswordUsed++;
+    self.lastPasswordLogin = [NSDate date];
+    self.passwordReminderDays  = pow(PASSWORD_DAYS_INCREMENT_POWER, self.numPasswordUsed);
+    self.passwordReminderCount = pow(PASSWORD_COUNT_INCREMENT_POWER, self.numPasswordUsed);
+
+    if (self.passwordReminderDays > PASSWORD_DAYS_MAX_VALUE)
+        self.passwordReminderDays = PASSWORD_DAYS_MAX_VALUE;
+    
+    if (self.passwordReminderCount > PASSWORD_DAYS_MAX_VALUE)
+        self.passwordReminderCount = PASSWORD_COUNT_MAX_VALUE;
+    [self saveLocalSettings];
+}
+
+- (void)passwordWrongAndSkipped;
+{
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    NSCalendarUnit unit;
+    
+    if (PASSWORD_REMINDER_DAYS_TO_MINS)
+    {
+        dayComponent.minute = PASSWORD_WRONG_INCREMENT_DAYS;
+        unit = NSCalendarUnitMinute;
+    }
+    else
+    {
+        dayComponent.day = PASSWORD_WRONG_INCREMENT_DAYS;
+        unit = NSCalendarUnitDay;
+    }
+    
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+
+    self.passwordReminderDays = [Util timeBetweenDate:self.lastPasswordLogin andDate:nextDate unit:unit];
+    self.passwordReminderCount = self.numNonPasswordLogin + PASSWORD_WRONG_INCREMENT_COUNT;
+
+    [self saveLocalSettings];
+}
+
+
 - (void)incPINorTouchIDLogin
 {
+    self.needsPasswordCheck = NO;
 
-    self.pinLoginCount++;
+    self.numNonPasswordLogin++;
     [self saveLocalSettings];
     
-    if (   self.pinLoginCount == 3
-        || self.pinLoginCount == 10
-        || self.pinLoginCount == 20) {
-        _needsPasswordCheck = YES;
+    if (self.numNonPasswordLogin >= self.passwordReminderCount) {
+        self.needsPasswordCheck = YES;
     }
-    else if (self.pinLoginCount % 20 == 0)
-    {
-        _needsPasswordCheck = YES;
+    
+    NSCalendarUnit unit = NSCalendarUnitDay;
+    
+    if (PASSWORD_REMINDER_DAYS_TO_MINS)
+        unit = NSCalendarUnitMinute;
+
+    NSInteger days = [Util timeBetweenDate:self.lastPasswordLogin andDate:[NSDate date] unit:unit];
+
+    if (days >= self.passwordReminderDays) {
+        self.needsPasswordCheck = YES;
     }
+    
 }
 @end

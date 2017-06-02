@@ -132,6 +132,7 @@
 
 #define SHOW_BUY_SELL                                   0
 #define SHOW_AFFILIATE                                  0
+#define HIDE_PROMO_ROWS                                 1
 #define LOCKED_SEARCH_CATEGORY                          1
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
@@ -182,7 +183,7 @@
 #define ColorPinEntryText                               ColorOffBright
 #define ColorPinEntryUsernameText                       ColorLightBlue
 
-#define ColorLoginTitleText                             ColorOffBright
+#define ColorLoginTitleText                             ColorDarkGrey
 #define ColorLoginTitleTextShadow                       ColorOffBrightFrost
 
 #define DirectoryCategoryButtonsBackgroundColor         ColorWhiteFrost

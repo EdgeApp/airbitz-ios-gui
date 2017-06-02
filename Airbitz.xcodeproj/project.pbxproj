@@ -75,6 +75,8 @@
 		DA2336951E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA2336961E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA2336971E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA2E359E1EE1190F009040D3 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */; };
+		DA2E359F1EE1190F009040D3 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */; };
 		DA3508311D67670B00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3508321D67670C00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -162,6 +164,11 @@
 		DA57A1F31D131CAD005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1F71D131CAD005442AF /* CalculatorView~iphone.xib */; };
 		DA57A1F41D131CAD005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1F71D131CAD005442AF /* CalculatorView~iphone.xib */; };
 		DA57A1F51D131CAD005442AF /* CalculatorView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA57A1F71D131CAD005442AF /* CalculatorView~iphone.xib */; };
+		DA5FD8DF1EC6855800297202 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA5FD8E41EC6855900297202 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA5FD8E51EC6855A00297202 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA5FD8E61EC6855A00297202 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
+		DA5FD8E71EC6855B00297202 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA6E1DC51CC453FD005A456E /* background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA10BB971BFF90980086AD8B /* background@2x.jpg */; };
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
@@ -2960,11 +2967,6 @@
 		DAD4B5E11D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DAD4B5E21D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
 		DAD4B5E31D70065E00C1E320 /* UtilityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD4B5E01D70065E00C1E320 /* UtilityTableViewController.m */; };
-		DAD88B971ECEE89200D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
-		DAD88B9C1ECEE89300D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
-		DAD88B9D1ECEE89400D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
-		DAD88B9E1ECEE89500D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
-		DAD88B9F1ECEE89600D61D85 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DADFAC2A1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2B1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
 		DADFAC2C1D29F59C006798D5 /* email_template_simple.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC061D29F59C006798D5 /* email_template_simple.html */; };
@@ -3461,10 +3463,6 @@
 		FD4257B31E789B5E00F762D2 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDFCE1BC61F920063DA07 /* Lato-Hairline.ttf */; };
 		FD4257B41E789B5E00F762D2 /* btn_close_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9EDF261BC61F910063DA07 /* btn_close_white.png */; };
 		FD4257B51E789B5E00F762D2 /* info_export_wallet.html in Resources */ = {isa = PBXBuildFile; fileRef = DADFAC0E1D29F59C006798D5 /* info_export_wallet.html */; };
-		FD5121E11E79DF8E009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
-		FD5121E61E79DF8F009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
-		FD5121E71E79DF91009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
-		FD5121E81E79DF92009A99F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFAE1BC70E0C0063DA07 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3716,6 +3714,7 @@
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA2336941E922634000CD378 /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		DA23369C1E922649000CD378 /* TextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
+		DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background-fade@2x.jpg"; path = "../../Sync/Airbitz-Staff/Graphic Design/Partners/BitcoinDepot/background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -6261,6 +6260,7 @@
 			isa = PBXGroup;
 			children = (
 				DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */,
+				DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */,
 				DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */,
 				DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */,
 				DAA6F5D31E7CB9D500E6F4B4 /* logo_large@2x.png */,
@@ -7533,7 +7533,6 @@
 				DACC2A901E4D8B6E00130A6E /* icon_location@2x.png in Resources */,
 				DACC2A911E4D8B6E00130A6E /* icon_approved.png in Resources */,
 				DACC2A921E4D8B6E00130A6E /* btn_collapse_expand.png in Resources */,
-				FD5121E11E79DF8E009A99F2 /* Images.xcassets in Resources */,
 				DACC2A931E4D8B6E00130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2A941E4D8B6E00130A6E /* FadingAlertViewNew.xib in Resources */,
 				DACC2A951E4D8B6E00130A6E /* BitcoinSent.mp3 in Resources */,
@@ -7802,7 +7801,6 @@
 				DACC2C561E4DA10700130A6E /* icon_location@2x.png in Resources */,
 				DACC2C571E4DA10700130A6E /* icon_approved.png in Resources */,
 				DACC2C581E4DA10700130A6E /* btn_collapse_expand.png in Resources */,
-				FD5121E61E79DF8F009A99F2 /* Images.xcassets in Resources */,
 				DACC2C591E4DA10700130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2C5A1E4DA10700130A6E /* FadingAlertViewNew.xib in Resources */,
 				DACC2C5B1E4DA10700130A6E /* BitcoinSent.mp3 in Resources */,
@@ -8071,7 +8069,6 @@
 				DACC2E161E4DA33200130A6E /* barcode-bracket@2x.png in Resources */,
 				DACC2E171E4DA33200130A6E /* icon_location@2x.png in Resources */,
 				DACC2E181E4DA33200130A6E /* icon_approved.png in Resources */,
-				FD5121E71E79DF91009A99F2 /* Images.xcassets in Resources */,
 				DACC2E191E4DA33200130A6E /* btn_collapse_expand.png in Resources */,
 				DACC2E1A1E4DA33200130A6E /* WalletExportQuicken.QIF in Resources */,
 				DACC2E1B1E4DA33200130A6E /* FadingAlertViewNew.xib in Resources */,
@@ -8340,7 +8337,6 @@
 				DACC2FD41E4DA4C300130A6E /* plugin_icon_coffee@2x.png in Resources */,
 				DACC2FD51E4DA4C300130A6E /* barcode-bracket@2x.png in Resources */,
 				DACC2FD61E4DA4C300130A6E /* icon_location@2x.png in Resources */,
-				FD5121E81E79DF92009A99F2 /* Images.xcassets in Resources */,
 				DACC2FD71E4DA4C300130A6E /* icon_approved.png in Resources */,
 				DACC2FD81E4DA4C300130A6E /* btn_collapse_expand.png in Resources */,
 				DACC2FD91E4DA4C300130A6E /* WalletExportQuicken.QIF in Resources */,
@@ -8474,6 +8470,7 @@
 				DA9EE4B71BC61F920063DA07 /* icon_send@3x.png in Resources */,
 				DA9EE4E81BC61F920063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EE4401BC61F920063DA07 /* btn_add_black@2x.png in Resources */,
+				DA2E359E1EE1190F009040D3 /* background-fade@2x.jpg in Resources */,
 				DADFAC421D29F59C006798D5 /* info_request.html in Resources */,
 				DA9EE4241BC61F920063DA07 /* 2-bars@2x.png in Resources */,
 				DA57A1361D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
@@ -8734,6 +8731,7 @@
 				FD4256E91E789B5E00F762D2 /* divider.png in Resources */,
 				DAA6F5D51E7CB9D500E6F4B4 /* background_launch.png in Resources */,
 				FD4256EA1E789B5E00F762D2 /* info_wallets.html in Resources */,
+				DA2E359F1EE1190F009040D3 /* background-fade@2x.jpg in Resources */,
 				FD4256EB1E789B5E00F762D2 /* bd_icon_clock@2x.png in Resources */,
 				FD4256EC1E789B5E00F762D2 /* large-digit-input_selected@2x.png in Resources */,
 				FD4256ED1E789B5E00F762D2 /* info_insufficient_funds.html in Resources */,
@@ -10192,7 +10190,7 @@
 				DACC296B1E4D8B6E00130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC296C1E4D8B6E00130A6E /* SendStatusViewController.m in Sources */,
 				DACC296D1E4D8B6E00130A6E /* NSDate+Helper.m in Sources */,
-				DAD88B971ECEE89200D61D85 /* TextViewCell.m in Sources */,
+				DA5FD8DF1EC6855800297202 /* TextViewCell.m in Sources */,
 				DACC296E1E4D8B6E00130A6E /* overviewCell.m in Sources */,
 				DACC296F1E4D8B6E00130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC29701E4D8B6E00130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10341,7 +10339,7 @@
 				DACC2B331E4DA10700130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2B341E4DA10700130A6E /* SendStatusViewController.m in Sources */,
 				DACC2B351E4DA10700130A6E /* NSDate+Helper.m in Sources */,
-				DAD88B9C1ECEE89300D61D85 /* TextViewCell.m in Sources */,
+				DA5FD8E41EC6855900297202 /* TextViewCell.m in Sources */,
 				DACC2B361E4DA10700130A6E /* overviewCell.m in Sources */,
 				DACC2B371E4DA10700130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2B381E4DA10700130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10490,7 +10488,7 @@
 				DACC2CF41E4DA33200130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2CF51E4DA33200130A6E /* SendStatusViewController.m in Sources */,
 				DACC2CF61E4DA33200130A6E /* NSDate+Helper.m in Sources */,
-				DAD88B9D1ECEE89400D61D85 /* TextViewCell.m in Sources */,
+				DA5FD8E51EC6855A00297202 /* TextViewCell.m in Sources */,
 				DACC2CF71E4DA33200130A6E /* overviewCell.m in Sources */,
 				DACC2CF81E4DA33200130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2CF91E4DA33200130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10639,7 +10637,7 @@
 				DACC2EB31E4DA4C300130A6E /* TwoFactorMenuViewController.m in Sources */,
 				DACC2EB41E4DA4C300130A6E /* SendStatusViewController.m in Sources */,
 				DACC2EB51E4DA4C300130A6E /* NSDate+Helper.m in Sources */,
-				DAD88B9E1ECEE89500D61D85 /* TextViewCell.m in Sources */,
+				DA5FD8E61EC6855A00297202 /* TextViewCell.m in Sources */,
 				DACC2EB61E4DA4C300130A6E /* overviewCell.m in Sources */,
 				DACC2EB71E4DA4C300130A6E /* ConfirmationSliderView.m in Sources */,
 				DACC2EB81E4DA4C300130A6E /* ExportWalletPDFViewController.m in Sources */,
@@ -10953,7 +10951,7 @@
 				FD4256641E789B5E00F762D2 /* TwoFactorMenuViewController.m in Sources */,
 				FD4256651E789B5E00F762D2 /* SendStatusViewController.m in Sources */,
 				FD4256661E789B5E00F762D2 /* NSDate+Helper.m in Sources */,
-				DAD88B9F1ECEE89600D61D85 /* TextViewCell.m in Sources */,
+				DA5FD8E71EC6855B00297202 /* TextViewCell.m in Sources */,
 				FD4256671E789B5E00F762D2 /* overviewCell.m in Sources */,
 				FD4256681E789B5E00F762D2 /* ConfirmationSliderView.m in Sources */,
 				FD4256691E789B5E00F762D2 /* ExportWalletPDFViewController.m in Sources */,
@@ -12792,7 +12790,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD1DC03FBF5C70AA9E3182E1 /* Pods-BitcoinDepot.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-BitcoinDepot";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BitcoinDepot/BitcoinDepot.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -12838,7 +12836,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D010D0EE16773F30DBC1573 /* Pods-BitcoinDepot.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-BitcoinDepot";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BitcoinDepot/BitcoinDepot.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

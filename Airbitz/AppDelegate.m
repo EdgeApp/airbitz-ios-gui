@@ -24,6 +24,7 @@
 #import "Theme.h"
 #import "AB.h"
 #import "Airbitz-Swift.h"
+#import "Mixpanel/Mixpanel.h"
 
 UIBackgroundTaskIdentifier bgLogoutTask;
 UIBackgroundTaskIdentifier bgNotificationTask;
@@ -64,6 +65,9 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     //DropDown configuration
     [DropDown startListeningToKeyboard];
+    
+    Mixpanel *mixPanel = [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    [mixPanel setEnableLogging:FALSE];
     
     return YES;
 }
