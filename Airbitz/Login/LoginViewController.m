@@ -28,6 +28,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "Airbitz-Swift.h"
 #import "Mixpanel.h"
+#import "Location.h"
 
 typedef enum eLoginMode
 {
@@ -513,6 +514,7 @@ static BOOL bInitialized = false;
                      completion:^(BOOL finished)
      {
          [self.delegate loginViewControllerDidAbort];
+         [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
      }];
 }
 
@@ -1128,6 +1130,8 @@ static BOOL bInitialized = false;
              self.leftConstraint.constant = 0;
              [self.view layoutIfNeeded];
              [self.delegate loginViewControllerDidAbort];
+             [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
+
          }];
     }
 }
