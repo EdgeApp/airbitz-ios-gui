@@ -491,6 +491,7 @@ static User *singleton = nil;  // this will be the one and only object this stat
 {
     self.passwordRecoveryAskCount++;
     self.passwordRecoveryAskedThisStartup = YES;
+    self.needsPasswordRecoveryPopup = NO;
     [self saveLocalSettings];
 }
 @end
