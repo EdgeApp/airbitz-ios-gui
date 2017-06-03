@@ -19,12 +19,13 @@
 
 #define USER_PIN_LOGIN_COUNT @"user_pin_login_count"
 
-#define USER_PIN_LOGIN_COUNT @"user_pin_login_count"
-#define LAST_PASSWORD_LOGIN     @"LAST_PASSWORD_LOGIN"
-#define PASSWORD_REMINDER_COUNT @"PASSWORD_REMINDER_COUNT"
-#define PASSWORD_REMINDER_DAYS  @"PASSWORD_REMINDER_DAYS"
-#define NUM_NON_PASSWORD_LOGIN  @"NUM_NON_PASSWORD_LOGIN"
-#define NUM_PASSWORD_USED       @"NUM_PASSWORD_USED"
+#define USER_PIN_LOGIN_COUNT        @"user_pin_login_count"
+#define LAST_PASSWORD_LOGIN         @"LAST_PASSWORD_LOGIN"
+#define PASSWORD_REMINDER_COUNT     @"PASSWORD_REMINDER_COUNT"
+#define PASSWORD_REMINDER_DAYS      @"PASSWORD_REMINDER_DAYS"
+#define NUM_NON_PASSWORD_LOGIN      @"NUM_NON_PASSWORD_LOGIN"
+#define NUM_PASSWORD_USED           @"NUM_PASSWORD_USED"
+#define PASSWORD_RECOVERY_ASK_COUNT @"PASSWORD_RECOVERY_ASK_COUNT"
 
 #define DEFAULT_NUM_PASSWORD_USED 2
 #define DEFAULT_NUM_PASSWORD_USED_W_RECOVERY 4
@@ -33,7 +34,7 @@
 #define PASSWORD_DAYS_MAX_VALUE 64
 #define PASSWORD_COUNT_MAX_VALUE 128
 #define PASSWORD_WRONG_INCREMENT_DAYS 2
-#define PASSWORD_WRONG_INCREMENT_COUNT 2
+#define PASSWORD_WRONG_INCREMENT_COUNT 4
 
 #define PASSWORD_REMINDER_DAYS_TO_MINS YES
 
@@ -107,6 +108,8 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.passwordReminderCount = 0;
     self.numNonPasswordLogin = 0;
     self.numPasswordUsed = 0;
+    self.passwordRecoveryAskCount = 0;
+    self.passwordRecoveryAskedThisStartup = NO;
 
     return self;
 }
@@ -123,11 +126,12 @@ static User *singleton = nil;  // this will be the one and only object this stat
     self.dailySpendLimitSatoshis = [[localConfig objectForKey:[self userKey:SPENDING_LIMIT_AMOUNT]] unsignedLongLongValue];
     self.bDailySpendLimit = [localConfig boolForKey:[self userKey:SPENDING_LIMIT_ENABLED]];
     
-    self.lastPasswordLogin      = [localConfig objectForKey:[self userKey:LAST_PASSWORD_LOGIN]];
-    self.passwordReminderDays   = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_DAYS]];
-    self.passwordReminderCount  = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_COUNT]];
-    self.numNonPasswordLogin    = [localConfig integerForKey:[self userKey:NUM_NON_PASSWORD_LOGIN]];
-    self.numPasswordUsed        = [localConfig integerForKey:[self userKey:NUM_PASSWORD_USED]];
+    self.lastPasswordLogin          = [localConfig objectForKey:[self userKey:LAST_PASSWORD_LOGIN]];
+    self.passwordReminderDays       = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_DAYS]];
+    self.passwordReminderCount      = [localConfig integerForKey:[self userKey:PASSWORD_REMINDER_COUNT]];
+    self.numNonPasswordLogin        = [localConfig integerForKey:[self userKey:NUM_NON_PASSWORD_LOGIN]];
+    self.numPasswordUsed            = [localConfig integerForKey:[self userKey:NUM_PASSWORD_USED]];
+    self.passwordRecoveryAskCount   = [localConfig integerForKey:[self userKey:PASSWORD_RECOVERY_ASK_COUNT]];
     
     // Check for invalid values and add defaults
     if (self.lastPasswordLogin == nil || self.passwordReminderDays == 0 || self.passwordReminderCount == 0)
@@ -450,9 +454,9 @@ static User *singleton = nil;  // this will be the one and only object this stat
 - (void)incPINorTouchIDLogin
 {
     self.needsPasswordCheck = NO;
+    self.needsPasswordRecoveryPopup = NO;
 
     self.numNonPasswordLogin++;
-    [self saveLocalSettings];
     
     if (self.numNonPasswordLogin >= self.passwordReminderCount) {
         self.needsPasswordCheck = YES;
@@ -469,5 +473,25 @@ static User *singleton = nil;  // this will be the one and only object this stat
         self.needsPasswordCheck = YES;
     }
     
+    if (!self.needsPasswordCheck && !self.passwordRecoveryAskedThisStartup)
+    {
+        if (![abc getRecovery2Token:abcAccount.name error:nil])
+        {
+            // No recovery set. Let ask user to set it up
+            if (self.passwordRecoveryAskCount < 3)
+            {
+                self.needsPasswordRecoveryPopup = YES;
+            }
+        }
+    }
+    [self saveLocalSettings];
+}
+
+- (void)didAskPasswordRecovery;
+{
+    self.passwordRecoveryAskCount++;
+    self.passwordRecoveryAskedThisStartup = YES;
+    self.needsPasswordRecoveryPopup = NO;
+    [self saveLocalSettings];
 }
 @end

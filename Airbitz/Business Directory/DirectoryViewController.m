@@ -286,7 +286,6 @@ static bool bInitialized = false;
 
 - (void)viewWillAppear: (BOOL)animated
 {
-    [Location startLocatingWithPeriod: LOCATION_UPDATE_PERIOD];
     [MainViewController changeNavBarOwner:self];
 
     [self hideBackButton];

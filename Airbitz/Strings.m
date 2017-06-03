@@ -312,7 +312,7 @@
 #define incorrectCurrentPassword                    NSLocalizedString(@"Incorrect current password", @"")
 #define passwordSuccessfullyChanged                 NSLocalizedString(@"Password successfully changed. DO NOT FORGET YOUR PASSWORD OR RECOVERY ANSWERS! THEY CANNOT BE RECOVERED!", @"")
 #define recoveryPasswordReminder                    NSLocalizedString(@"Recovery Password Reminder", nil)
-#define receivedBitcoinRecommendSetupRecovery       NSLocalizedString(@"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
+#define receivedBitcoinRecommendSetupRecovery       NSLocalizedString(@"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.", nil)
 #define youMustAnswerAllSix                         NSLocalizedString(@"You must answer all questions. Make sure your answers are long enough." ,nil)
 #define youMustChooseAllSix                         NSLocalizedString(@"You must choose a question for all selections before proceeding." ,nil)
 #define smsCancelledText                            NSLocalizedString(@"SMS cancelled" ,nil)
