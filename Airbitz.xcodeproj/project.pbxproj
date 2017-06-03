@@ -75,8 +75,6 @@
 		DA2336951E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA2336961E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA2336971E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
-		DA2E359E1EE1190F009040D3 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */; };
-		DA2E359F1EE1190F009040D3 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */; };
 		DA3508311D67670B00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3508321D67670C00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -173,6 +171,7 @@
 		DA74B5371C394B8700C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53C1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
 		DA74B53D1C394B8900C5CD43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA49A4CA1C394AC0003196D3 /* Strings.m */; };
+		DA81F3A01EE297F0000E0F49 /* background-fade@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA81F39F1EE297F0000E0F49 /* background-fade@2x.jpg */; };
 		DA8988CF1D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D01D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
 		DA8988D11D0BF84F00796F3D /* Airbitz.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = DA9EEFB51BC722770063DA07 /* Airbitz.entitlements */; };
@@ -3714,7 +3713,6 @@
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA2336941E922634000CD378 /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		DA23369C1E922649000CD378 /* TextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
-		DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background-fade@2x.jpg"; path = "../../Sync/Airbitz-Staff/Graphic Design/Partners/BitcoinDepot/background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -3749,6 +3747,7 @@
 		DA57A1EC1D131C94005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/SlideoutView~iphone.xib"; sourceTree = "<group>"; };
 		DA57A1F11D131C98005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/WalletMakerView~iphone.xib"; sourceTree = "<group>"; };
 		DA57A1F61D131CAD005442AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/CalculatorView~iphone.xib"; sourceTree = "<group>"; };
+		DA81F39F1EE297F0000E0F49 /* background-fade@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "background-fade@2x.jpg"; path = "BitcoinDepot/background-fade@2x.jpg"; sourceTree = "<group>"; };
 		DA8B600E1DE2E3EB009EB585 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AccountCreate.strings; sourceTree = "<group>"; };
 		DA8B600F1DE2E3EC009EB585 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/BusinessDirectory.strings; sourceTree = "<group>"; };
 		DA8B60101DE2E3EC009EB585 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConfirmationSliderView.strings; sourceTree = "<group>"; };
@@ -6260,7 +6259,7 @@
 			isa = PBXGroup;
 			children = (
 				DAA6F5D01E7CB9D500E6F4B4 /* background_launch.png */,
-				DA2E359D1EE1190F009040D3 /* background-fade@2x.jpg */,
+				DA81F39F1EE297F0000E0F49 /* background-fade@2x.jpg */,
 				DAA6F5D11E7CB9D500E6F4B4 /* background@2x.jpg */,
 				DAA6F5D21E7CB9D500E6F4B4 /* logo_icon@2x.png */,
 				DAA6F5D31E7CB9D500E6F4B4 /* logo_large@2x.png */,
@@ -8470,7 +8469,6 @@
 				DA9EE4B71BC61F920063DA07 /* icon_send@3x.png in Resources */,
 				DA9EE4E81BC61F920063DA07 /* Lato-BlackItalic.ttf in Resources */,
 				DA9EE4401BC61F920063DA07 /* btn_add_black@2x.png in Resources */,
-				DA2E359E1EE1190F009040D3 /* background-fade@2x.jpg in Resources */,
 				DADFAC421D29F59C006798D5 /* info_request.html in Resources */,
 				DA9EE4241BC61F920063DA07 /* 2-bars@2x.png in Resources */,
 				DA57A1361D13099F005442AF /* TransactionsHeaderView~iphone.xib in Resources */,
@@ -8731,7 +8729,7 @@
 				FD4256E91E789B5E00F762D2 /* divider.png in Resources */,
 				DAA6F5D51E7CB9D500E6F4B4 /* background_launch.png in Resources */,
 				FD4256EA1E789B5E00F762D2 /* info_wallets.html in Resources */,
-				DA2E359F1EE1190F009040D3 /* background-fade@2x.jpg in Resources */,
+				DA81F3A01EE297F0000E0F49 /* background-fade@2x.jpg in Resources */,
 				FD4256EB1E789B5E00F762D2 /* bd_icon_clock@2x.png in Resources */,
 				FD4256EC1E789B5E00F762D2 /* large-digit-input_selected@2x.png in Resources */,
 				FD4256ED1E789B5E00F762D2 /* info_insufficient_funds.html in Resources */,
