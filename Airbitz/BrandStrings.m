@@ -99,7 +99,7 @@
 #define appTitle                @"Bitcoin Depot Bitcoin Wallet"
 #define appHomepage             @"https://www.bitcoindepot.com"
 #define supportEmail            @"support@bitcoindepot.com"
-#define supportPhone            @"+1-000-000-0000"
+#define supportPhone            @"+1-678-435-9604"
 #define supportTelegram         @""
 #define supportSlack            @""
 #define supportWhatsapp         @""
@@ -107,8 +107,8 @@
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.bitcoindepot.wallet"
 #define appDownloadLink         @"http://bitcoindepot.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2017/03/bitcoindepot-logo-100w.png"
-#define appDesignedBy           NSLocalizedString(@"Designed by Bitcoin Depot in",nil)
-#define appCompanyLocation      NSLocalizedString(@"Xxxxxxx, XX, XXX", nil)
+#define appDesignedBy           NSLocalizedString(@"Designed by Premier Technologies, LLC in",nil)
+#define appCompanyLocation      NSLocalizedString(@"Atlanta GA USA", nil)
 
 
 #endif
