@@ -544,7 +544,7 @@ typedef enum eRequestType
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        if (_wallet && !_bOldTransaction && [abcAccount needsRecoveryQuestionsReminder]) {
+        if ([User Singleton].needsPasswordRecoveryPopup) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:recoveryPasswordReminder
                                 message:receivedBitcoinRecommendSetupRecovery
@@ -553,6 +553,7 @@ typedef enum eRequestType
                                 otherButtonTitles:okButtonText, nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [_recoveryAlert show];
+                [[User Singleton] didAskPasswordRecovery];
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^ {
@@ -633,7 +634,7 @@ typedef enum eRequestType
     NSString *txIdLink = [NSString stringWithFormat:@"<div class=\"wrapped\"><a href=\"%@/tx/%@\">%@</a></div>",
                                    baseUrl, self.transaction.txid, self.transaction.txid];
     unsigned long confirmations = 0;
-    if (self.transaction.height)
+    if (self.transaction.height > 0)
         confirmations = (unsigned long) self.transaction.wallet.blockHeight - self.transaction.height + 1;
     else
         confirmations = 0;

@@ -35,5 +35,6 @@
 #define BITREFILL_API_KEY               @"00000000000"
 #define LIBERTYX_API_KEY                @"00000000000"
 #define BITY_AFFILIATE_CODE             @"00000000000"
+#define MIXPANEL_TOKEN                  @"00000000000"
 
 #endif

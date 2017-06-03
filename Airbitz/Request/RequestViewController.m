@@ -31,6 +31,7 @@
 #import "DropDownAlertView.h"
 #import "AppGroupConstants.h"
 #import "FadingAlertView.h"
+#import "Mixpanel.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -170,6 +171,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"REQ-Enter"];
     [super viewWillAppear:animated];
     self.previousAmountSatoshiRequested = -1;
 
@@ -407,10 +409,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 {
     if(segmentedControlBTCUSD.selectedSegmentIndex == 0)            // Checking which segment is selected using the segment index value
     {
+        [[Mixpanel sharedInstance] track:@"REQ-Tap-Fiat"];
         [self changeTopField:true animate:true];
     }
     else if(segmentedControlBTCUSD.selectedSegmentIndex == 1)
     {
+        [[Mixpanel sharedInstance] track:@"REQ-Tap-BTC"];
         [self changeTopField:false animate:true];
     }
 }
@@ -424,6 +428,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
         {
             [pb setString:addressString];
             [MainViewController fadingAlert:requestIsCopiedToClipboardText];
+            [[Mixpanel sharedInstance] track:@"REQ-Copy"];
         }
         else
         {
@@ -433,6 +438,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 1)
     {
         // Do Email
+        [[Mixpanel sharedInstance] track:@"REQ-Email"];
         self.strFullName = @"";
         self.strEMail = @"";
 
@@ -441,6 +447,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 2)
     {
         // Do SMS
+        [[Mixpanel sharedInstance] track:@"REQ-SMS"];
         self.strPhoneNumber = @"";
         self.strFullName = @"";
 
@@ -449,6 +456,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     else if(segmentedControlCopyEmailSMS.selectedSegmentIndex == 3)
     {
         {
+            [[Mixpanel sharedInstance] track:@"REQ-Share"];
             NSMutableArray *sharingItems = [NSMutableArray new];
             if (_uriString) {
                 [sharingItems addObject:_uriString];
@@ -463,6 +471,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
+    [[Mixpanel sharedInstance] track:@"REQ-Help"];
     [InfoView CreateWithHTML:@"info_request" forView:self.view];
 }
 
@@ -883,6 +892,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"REQ-DropWallets"];
         [self.buttonSelector open];
         bWalletListDropped = true;
     }
@@ -933,9 +943,15 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     _selectedTextField = textField;
     if (_selectedTextField == self.BTC_TextField)
+    {
         self.keypadView.calcMode = CALC_MODE_COIN;
+        [[Mixpanel sharedInstance] track:@"REQ-BTC"];
+    }
     else if (_selectedTextField == self.USD_TextField)
+    {
         self.keypadView.calcMode = CALC_MODE_FIAT;
+        [[Mixpanel sharedInstance] track:@"REQ-Fiat"];
+    }
 
     // Popup numpad
     [self changeCalculator:YES show:true];
@@ -1230,7 +1246,7 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     if (tempRange.location != NSNotFound)
     {
-        iosURL = [_uriString stringByReplacingCharactersInRange:tempRange withString:@"bitcoin://"];
+        iosURL = [_uriString stringByReplacingCharactersInRange:tempRange withString:@"airbitz://"];
         paramsURI = [_uriString stringByReplacingCharactersInRange:tempRange withString:@""];
         paramsURIEnc = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                 NULL,

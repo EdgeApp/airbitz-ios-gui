@@ -9,6 +9,7 @@
 #import "Util.h"
 #import "User.h"
 #import "Theme.h"
+#import "Mixpanel.h"
 
 @interface SignUpUsernameController () <UITextFieldDelegate>
 {
@@ -61,6 +62,7 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+    [[Mixpanel sharedInstance] track:@"SUP-User-Enter"];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -103,6 +105,7 @@
 
 - (void) next
 {
+
     [self blockUser:YES];
     // if they entered a valid username or old password
     if ([self userNameFieldIsValid] == YES)
@@ -121,6 +124,7 @@
                 {
                     _bSuccess = false;
                     _strReason = error.userInfo[NSLocalizedDescriptionKey];
+                    [[Mixpanel sharedInstance] track:@"SUP-User-Unavailable"];
                 }
 
                 [self performSelectorOnMainThread:@selector(checkUsernameComplete) withObject:nil waitUntilDone:FALSE];
@@ -131,6 +135,7 @@
     }
     else
     {
+        [[Mixpanel sharedInstance] track:@"SUP-User-Invalid"];
         [self blockUser:NO];
     }
 

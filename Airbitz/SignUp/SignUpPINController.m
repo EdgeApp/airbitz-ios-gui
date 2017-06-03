@@ -11,6 +11,7 @@
 #import "Theme.h"
 #import "LocalSettings.h"
 #import "FadingAlertView.h"
+#import "Mixpanel.h"
 
 #define KEYBOARD_MARGIN         10.0
 
@@ -54,6 +55,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[Mixpanel sharedInstance] track:@"SUP-PIN-Enter"];
     [self.pinTextField addTarget:self action:@selector(pinTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
 
     [self.pinTextField becomeFirstResponder];
@@ -77,11 +79,16 @@
 
 - (void)next
 {
+
     if ([self fieldsAreValid])
     {
         self.manager.strPIN = self.pinTextField.text;
         [self.pinTextField resignFirstResponder];
         [super next];
+    }
+    else
+    {
+        [[Mixpanel sharedInstance] track:@"SUP-PIN-invalid"];
     }
 }
 
