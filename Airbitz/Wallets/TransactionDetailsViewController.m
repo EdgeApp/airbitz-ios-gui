@@ -544,7 +544,7 @@ typedef enum eRequestType
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        if (_wallet && !_bOldTransaction && [abcAccount needsRecoveryQuestionsReminder]) {
+        if ([User Singleton].needsPasswordRecoveryPopup) {
             _recoveryAlert = [[UIAlertView alloc]
                                 initWithTitle:recoveryPasswordReminder
                                 message:receivedBitcoinRecommendSetupRecovery
@@ -553,6 +553,7 @@ typedef enum eRequestType
                                 otherButtonTitles:okButtonText, nil];
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [_recoveryAlert show];
+                [[User Singleton] didAskPasswordRecovery];
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^ {
