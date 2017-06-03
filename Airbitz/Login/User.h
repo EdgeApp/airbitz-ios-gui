@@ -19,6 +19,7 @@
 @property (nonatomic) NSTimer *sendInvalidEntryTimer;
 @property (nonatomic) NSUInteger PINLoginInvalidEntryCount;
 @property (nonatomic) BOOL needsPasswordCheck;
+@property (nonatomic) BOOL needsPasswordRecoveryPopup;
 @property (nonatomic) NSString *affiliateInfo;
 @property (nonatomic) NSDictionary *dictAffiliateInfo;
 
@@ -36,6 +37,9 @@
 @property (nonatomic) NSInteger passwordReminderDays;
 @property (nonatomic) NSInteger numNonPasswordLogin;
 @property (nonatomic) NSInteger numPasswordUsed;
+@property (nonatomic) NSInteger passwordRecoveryAskCount;
+@property (nonatomic) BOOL      passwordRecoveryAskedThisStartup;
+
 
 + (void)initAll;
 + (void)freeAll;
@@ -56,6 +60,7 @@
 - (void)passwordUsed;
 - (void)passwordWrongAndSkipped;
 - (void)resetPasswordReminderToDefaults;
+- (void)didAskPasswordRecovery;
 - (void)loadLocalSettings;
 
 
