@@ -410,6 +410,8 @@
 #define change_mining_fee_low                       NSLocalizedString(@"Low Fee",nil)
 #define change_mining_fee_standard                  NSLocalizedString(@"Standard Fee",nil)
 #define change_mining_fee_high                      NSLocalizedString(@"High Fee",nil)
+#define change_mining_fee_custom                    NSLocalizedString(@"Custom Fee (enter above)",nil)
+#define change_mining_fee_custom_text_hint          NSLocalizedString(@"Custom fee in satoshis/byte",nil)
 #define copied_text                                 NSLocalizedString(@"Copied",nil)
 #define override_bitcoin_servers                    NSLocalizedString(@"Override Bitcoin Servers (advanced)",nil)
 #define enable_override_bitcoin_servers             NSLocalizedString(@"Enable Override",nil)
