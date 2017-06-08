@@ -172,6 +172,8 @@
 - (void)viewWillAppear
 {
     [_confirmationSlider resetIn:0.1];
+    [[Mixpanel sharedInstance] track:@"CNF-Enter"];
+
 }
 
 - (void)transactionDetailsExit
