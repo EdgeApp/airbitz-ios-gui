@@ -1974,7 +1974,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             {
                 if (parsedURI.paymentRequestURL)
                 {
-                    [[Mixpanel sharedInstance] track:@"SCN-BIP70"];
                     [self stopQRReader];
                     [MainViewController fadingAlert:fetchingPaymentRequestText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT notify:^{
                         ABCError *error = nil;
@@ -1982,11 +1981,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         
                         if (!error)
                         {
+                            [[Mixpanel sharedInstance] track:@"SCN-BIP70-Success"];
                             [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:paymentRequest];
                             [MainViewController fadingAlertDismiss];
                         }
                         else
                         {
+                            [[Mixpanel sharedInstance] track:@"SCN-BIP70-Invalid"];
                             if (parsedURI.address)
                                 [self processPubAddress:parsedURI];
                             NSString *errorString = [NSString stringWithFormat:@"%@\n\n%@",
