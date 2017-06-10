@@ -155,6 +155,11 @@ static BOOL bInitialized = false;
         if ([self.arrayAccounts count] == 0)
         {
             _mode = MODE_NO_USERS;
+            [[Mixpanel sharedInstance] track:@"SIN-No-Users"];
+        }
+        else
+        {
+            [[Mixpanel sharedInstance] track:@"SIN-Has-Users"];
         }
     }
 
@@ -438,15 +443,15 @@ static BOOL bInitialized = false;
         [self showSpinner:YES];
         [MainViewController showBackground:YES animate:YES];
     } completionWithLogin:^(ABCAccount *user, BOOL usedTouchID) {
-        [mixpanel track:@"SIN-TouchID success"];
+        [mixpanel track:@"SIN-TouchID-good"];
         _bUsedTouchIDToLogin = usedTouchID;
         _bUsedAutoLogin = !usedTouchID;
         [self signInComplete:user newAccount:NO];
     } completionNoLogin:^{
-        [mixpanel track:@"SIN-TouchID nologin"];
+        [mixpanel track:@"SIN-TouchID-nologin"];
         [self assignFirstResponder];
     } error:^(NSError *error) {
-        [mixpanel track:@"SIN-TouchID failed"];
+        [mixpanel track:@"SIN-TouchID-failed"];
         [self showSpinner:NO];
         [MainViewController showBackground:NO animate:YES];
         [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
@@ -596,7 +601,6 @@ static BOOL bInitialized = false;
 {
     if (_mode == MODE_NO_USERS)
     {
-        [[Mixpanel sharedInstance] track:@"SIN-No Users"];
         _mode = MODE_ENTERING_USERNAME;
         [self viewWillAppear:true];
     }
@@ -612,6 +616,7 @@ static BOOL bInitialized = false;
         ABCLog(1, @"_bNewDeviceLogin=%d", (int) _bNewDeviceLogin);
 
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel timeEvent:@"SIN-SignIn"];
         [mixpanel timeEvent:@"SIN-login-Passwd"];
         [abc loginWithPassword:self.usernameSelector.text
                       password:self.passwordTextField.text
@@ -622,6 +627,7 @@ static BOOL bInitialized = false;
             if (!error)
             {
                 [self signInComplete:account newAccount:NO];
+                [mixpanel track:@"SIN-login-good"];
             }
             else
             {
@@ -629,16 +635,19 @@ static BOOL bInitialized = false;
                 
                 if (ABCConditionCodeInvalidOTP == error.code)
                 {
+                    [mixpanel track:@"SIN-login-OTP-err"];
                     [MainViewController showBackground:NO animate:YES];
                     [self launchTwoFactorMenu:error.otpResetDate token:error.otpResetToken];
                 }
                 else if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                 {
+                    [mixpanel track:@"SIN-login-net-err"];
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];
                     [MainViewController showBackground:NO animate:YES];
                 }
                 else
                 {
+                    [mixpanel track:@"SIN-login-err"];
                     [MainViewController showBackground:NO animate:YES];
                     [MainViewController fadingAlert:error.userInfo[NSLocalizedDescriptionKey]];
                 }
@@ -649,10 +658,7 @@ static BOOL bInitialized = false;
 
 - (IBAction)SignUp
 {
-    if (_mode == MODE_NO_USERS)
-        [[Mixpanel sharedInstance] track:@"SUP-No Users"];
-    else
-        [[Mixpanel sharedInstance] track:@"SUP-Has Users"];
+    [[Mixpanel sharedInstance] track:@"SIN-SignUp"];
     
     [self dismissErrorMessage];
 
@@ -869,7 +875,7 @@ static BOOL bInitialized = false;
          }
          else if (ABCConditionCodeInvalidOTP == error.code)
          {
-             [[Mixpanel sharedInstance] track:@"SIN-PIN OTP"];
+             [[Mixpanel sharedInstance] track:@"SIN-login-OTP-err"];
              [MainViewController showBackground:NO animate:YES];
              [self launchTwoFactorMenu:nil token:nil];
          }
@@ -1304,11 +1310,12 @@ static BOOL bInitialized = false;
             [mixpanel track:@"SIN-Login-Passwd-OTP"];
             if (!error)
             {
+                [mixpanel track:@"SIN-Login-Passwd-good"];
                 [self signInComplete:account newAccount:NO];
             }
             else
             {
-                [[Mixpanel sharedInstance] track:@"SIN-Passwd-OTP error"];
+                [[Mixpanel sharedInstance] track:@"SIN-Login-OTPlogin-err"];
                 [self showSpinner:NO];
                 if (ABCConditionCodeError == error.code || ABCConditionCodeSysError == error.code)
                     [MainViewController fadingAlert:anErrorOccurredNetworkOrIncorrectPassword];

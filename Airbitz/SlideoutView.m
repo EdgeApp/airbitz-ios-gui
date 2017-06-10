@@ -351,6 +351,7 @@
 
 - (IBAction)settingTouched
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Settings"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutSettings)]) {
         [self.delegate slideoutSettings];
     }
@@ -358,6 +359,7 @@
 
 - (IBAction)logoutTouched
 {
+    [[Mixpanel sharedInstance] track:@"SLD-Logout"];
     if (self.delegate && [self.delegate respondsToSelector:@selector(slideoutLogout)]) {
         [self.delegate slideoutLogout];
     }
