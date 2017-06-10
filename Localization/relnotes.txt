@@ -1,6 +1,5 @@
 v 2.4.3
 
-• Require fiat currency selection during account creation
 • Allow user to set custom mining fees
 • Display dropped transactions
 • Set override servers to defaults if enabled and blank
