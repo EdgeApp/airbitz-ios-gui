@@ -1381,6 +1381,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_BLE))
     {
+        [[Mixpanel sharedInstance] track:@"SET-BLE"];
         LocalSettings.controller.bDisableBLE = !theSwitch.on;
         [LocalSettings saveAll];
     }
@@ -1392,6 +1393,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_PIN_RELOGIN))
     {
+        [[Mixpanel sharedInstance] track:@"SET-PinRelogin"];
         [abcAccount enablePINLogin:theSwitch.on];
         
         // update the display by reloading the table
@@ -1400,6 +1402,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     }
     else if ((section == SECTION_OPTIONS) && (row == ROW_TOUCHID))
     {
+        [[Mixpanel sharedInstance] track:@"SET-TouchID"];
         if (!theSwitch.on)
         {
             [abcAccount.settings disableTouchID];
@@ -1441,6 +1444,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     {
         if (row == ROW_AUTO_LOG_OFF)
         {
+            [[Mixpanel sharedInstance] track:@"SET-AutoLogoff"];
             // set up current selection
             NSArray *arraySelections = [self logoutSelections];
 
@@ -1475,7 +1479,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 //        {
 //            curChoice = -1;
 //        }
-        [[Mixpanel sharedInstance] track:@"SET-ExchageRate"];
+        [[Mixpanel sharedInstance] track:@"SET-ExchangeRate"];
         arrayPopupChoices = ABCArrayExchanges;
         headerText = exchange_rate_data_source_text;
     }

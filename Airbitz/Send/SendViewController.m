@@ -175,7 +175,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[Mixpanel sharedInstance] track:@"SND-Enter"];
+    [[Mixpanel sharedInstance] track:@"SCN-Enter"];
     [self scanBLEstartCamera];
     [MainViewController changeNavBarOwner:self];
 
@@ -427,7 +427,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (IBAction)info:(id)sender
 {
 	[self.view endEditing:YES];
-    [[Mixpanel sharedInstance] track:@"SND-Help"];
+    [[Mixpanel sharedInstance] track:@"SCN-Help"];
     [self resignAllResponders];
     [InfoView CreateWithHTML:@"info_send" forView:self.view];
 }
@@ -1699,12 +1699,12 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             [MainViewController fadingAlertDismiss];
             if (!error)
             {
-                [[Mixpanel sharedInstance] track:@"SCN-Edge-Success"];
+                [[Mixpanel sharedInstance] track:@"SCN-EdgeReq-Success"];
                 [self showSSOViewController:nil edgeLoginRequest:info];
             }
             else
             {
-                [[Mixpanel sharedInstance] track:@"SCN-Edge-Invalid"];
+                [[Mixpanel sharedInstance] track:@"SCN-EdgeReq-Invalid"];
                 [MainViewController fadingAlert:@"Invalid Edge Login Request"];
                 [self startQRReader];
             }
@@ -1974,7 +1974,6 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             {
                 if (parsedURI.paymentRequestURL)
                 {
-                    [[Mixpanel sharedInstance] track:@"SCN-BIP70"];
                     [self stopQRReader];
                     [MainViewController fadingAlert:fetchingPaymentRequestText holdTime:FADING_ALERT_HOLD_TIME_DEFAULT notify:^{
                         ABCError *error = nil;
@@ -1982,11 +1981,13 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
                         
                         if (!error)
                         {
+                            [[Mixpanel sharedInstance] track:@"SCN-BIP70-Success"];
                             [self showSendConfirmationTo:parsedURI destWallet:nil paymentRequest:paymentRequest];
                             [MainViewController fadingAlertDismiss];
                         }
                         else
                         {
+                            [[Mixpanel sharedInstance] track:@"SCN-BIP70-Invalid"];
                             if (parsedURI.address)
                                 [self processPubAddress:parsedURI];
                             NSString *errorString = [NSString stringWithFormat:@"%@\n\n%@",
@@ -2006,7 +2007,7 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
             }
             else
             {
-                [[Mixpanel sharedInstance] track:@"SCN-BIP70"];
+                [[Mixpanel sharedInstance] track:@"SCN-Invalid"];
                 [MainViewController fadingAlert:invalidAddressPopupText];
             }
         });

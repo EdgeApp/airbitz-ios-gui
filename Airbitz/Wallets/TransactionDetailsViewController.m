@@ -27,6 +27,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Mixpanel.h"
 
 
 #define PICKER_WIDTH                    160
@@ -304,6 +305,7 @@ typedef enum eRequestType
 {
     [super viewWillAppear: animated];
     [MainViewController changeNavBarOwner:self];
+    [[Mixpanel sharedInstance] track:@"TXD-Enter"];
 
     self.spinnerView.hidden = YES;
 
@@ -423,6 +425,7 @@ typedef enum eRequestType
 - (IBAction)CategoryButton
 {
     NSArray *arrayCategories = ARRAY_CATEGORY_PREFIXES_NOCOLON;
+    [[Mixpanel sharedInstance] track:@"TXD-Category"];
 
     [self scrollContentViewBackToOriginalPosition];
     
@@ -596,6 +599,7 @@ typedef enum eRequestType
 - (IBAction)AdvancedDetails
 {
     [self resignAllResponders];
+    [[Mixpanel sharedInstance] track:@"TXD-Advanced"];
 
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate:self];
@@ -1363,6 +1367,7 @@ typedef enum eRequestType
     
     if (textView == self.notesTextView)
     {
+        [[Mixpanel sharedInstance] track:@"TXD-Notes"];
         [self scrollContentViewToFrame:self.notesTextView.frame];
         [self dismissPayeeTable];
     }
@@ -1398,6 +1403,7 @@ typedef enum eRequestType
 
     if (textField == self.nameTextField)
     {
+        [[Mixpanel sharedInstance] track:@"TXD-Payee"];
         [self spawnPayeeTableInFrame];
         [self updateAutoCompleteArray];
         [self scrollContentViewToFrame:self.nameTextField.frame];
@@ -1495,6 +1501,8 @@ typedef enum eRequestType
 
 - (void)pickerTextViewFieldDidBeginEditing:(PickerTextView *)pickerTextView
 {
+    [[Mixpanel sharedInstance] track:@"TXD-SubCat"];
+
     _activeTextField = pickerTextView.textField;
 
     [self forceCategoryFieldValue:pickerTextView.textField forPickerView:pickerTextView];

@@ -229,7 +229,7 @@
                 otherButtonTitles:nil];
             [alert show];
             bNewPasswordFieldsAreValid = NO;
-            [[Mixpanel sharedInstance] track:@"SUP-Passwd-fail rules"];
+            [[Mixpanel sharedInstance] track:@"SUP-Passwd-fail-rules"];
         }
         else if ([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text] == NO)
         {

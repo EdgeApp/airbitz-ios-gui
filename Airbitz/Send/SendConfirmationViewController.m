@@ -43,6 +43,7 @@
     UIAlertView                         *_changeFeeAlert;
     UIAlertView                         *_tryPubAddressAlert;
     ABCSpendFeeLevel                    _feeLevel;
+    int64_t                             _customFeeLevel;
     NSTimer                             *_refreshTimer;
     BOOL                                bWalletListDropped;
     BOOL                                _currencyOverride;
@@ -142,6 +143,7 @@
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
     _feeLevel = ABCSpendFeeLevelStandard;
+    _customFeeLevel = 0;
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [_numberFormatter setMinimumFractionDigits:0];
@@ -170,6 +172,8 @@
 - (void)viewWillAppear
 {
     [_confirmationSlider resetIn:0.1];
+    [[Mixpanel sharedInstance] track:@"CNF-Enter"];
+
 }
 
 - (void)transactionDetailsExit
@@ -333,6 +337,7 @@
 {
     ABCError *error = nil;
     _spend = [abcAccount.currentWallet createNewSpend:&error];
+    _spend.customFeeSatoshis = _customFeeLevel;
     _spend.feeLevel = _feeLevel;
     
     if (!error)
@@ -470,8 +475,11 @@
                        message:change_mining_fee_popup_message
                        delegate:self
                        cancelButtonTitle:cancelButtonText
-                       otherButtonTitles:change_mining_fee_low, change_mining_fee_standard, change_mining_fee_high, nil];
-
+                       otherButtonTitles:change_mining_fee_custom, change_mining_fee_low, change_mining_fee_standard, change_mining_fee_high, nil];
+    _changeFeeAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *textField = [_changeFeeAlert textFieldAtIndex:0];
+    textField.placeholder = change_mining_fee_custom_text_hint;
+    textField.keyboardType = UIKeyboardTypeNumberPad;
     [_changeFeeAlert show];
 }
 
@@ -513,18 +521,28 @@
         [self buildSpend];
         
         [_spend getMaxSpendable:^(uint64_t amountSpendable) {
+            
             _maxLocked = NO;
             _maxAmount = amountSpendable;
             _amountSatoshi = _maxAmount;
             self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_amountSatoshi withSymbol:false];
             
             [self updateTextFieldContents:YES];
+            
             if (_pinRequired || _passwordRequired) {
                 [self.withdrawlPIN becomeFirstResponder];
             } else {
                 [self dismissKeyboard];
             }
 
+            [_spend getFees:^(uint64_t totalFees) {
+                if (totalFees + amountSpendable < abcAccount.currentWallet.balance)
+                {
+                    [MainViewController fadingAlert:dust_in_wallet];
+                }
+            } error:^(ABCError *error) {
+            }];
+            
         } error:^(ABCError *error) {
             
         }];
@@ -1162,17 +1180,29 @@
         }
         else if (1 == buttonIndex)
         {
+            // fee custom
+            _feeLevel = ABCSpendFeeLevelCustom;
+            NSString *feeString = [[alertView textFieldAtIndex:0] text];
+            ABCLog(0, [NSString stringWithFormat:@"Set fee custom [%@]", feeString]);
+            
+            int feeInt = [feeString intValue] * 1000;
+            _customFeeLevel = (int64_t) feeInt;
+            
+            
+        }
+        else if (2 == buttonIndex)
+        {
             // fee low
             ABCLog(0, @"Set fee low");
             _feeLevel = ABCSpendFeeLevelLow;
         }
-        else if (2 == buttonIndex)
+        else if (3 == buttonIndex)
         {
             // fee standard
             ABCLog(0, @"Set fee std");
             _feeLevel = ABCSpendFeeLevelStandard;
         }
-        else if (3 == buttonIndex)
+        else if (4 == buttonIndex)
         {
             // fee high
             ABCLog(0, @"Set fee high");
