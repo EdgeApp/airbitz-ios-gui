@@ -521,18 +521,28 @@
         [self buildSpend];
         
         [_spend getMaxSpendable:^(uint64_t amountSpendable) {
+            
             _maxLocked = NO;
             _maxAmount = amountSpendable;
             _amountSatoshi = _maxAmount;
             self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:_amountSatoshi withSymbol:false];
             
             [self updateTextFieldContents:YES];
+            
             if (_pinRequired || _passwordRequired) {
                 [self.withdrawlPIN becomeFirstResponder];
             } else {
                 [self dismissKeyboard];
             }
 
+            [_spend getFees:^(uint64_t totalFees) {
+                if (totalFees + amountSpendable < abcAccount.currentWallet.balance)
+                {
+                    [MainViewController fadingAlert:dust_in_wallet];
+                }
+            } error:^(ABCError *error) {
+            }];
+            
         } error:^(ABCError *error) {
             
         }];
