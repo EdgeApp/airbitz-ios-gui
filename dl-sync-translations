@@ -1,4 +1,4 @@
-crowdin-cli download
+crowdin download
 #xcodebuild -importLocalizations -localizationPath Localization/Airbitz/es.xliff -project Airbitz.xcodeproj
 
 mkdir Airbitz/Resources/html/zh-Hans.lproj/
