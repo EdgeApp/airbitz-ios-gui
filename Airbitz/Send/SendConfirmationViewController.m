@@ -541,6 +541,10 @@
                     [MainViewController fadingAlert:dust_in_wallet];
                 }
             } error:^(ABCError *error) {
+                if (amountSpendable < abcAccount.currentWallet.balance)
+                {
+                    [MainViewController fadingAlert:dust_in_wallet];
+                }
             }];
             
         } error:^(ABCError *error) {
