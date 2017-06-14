@@ -228,6 +228,9 @@ static BOOL bInitialized = false;
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.titleText.textColor = ColorLoginTitleText;
     
+    if (![appTitleText isEqualToString:@""])
+        self.titleText.text = appTitleText;
+    
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
     self.forgotPassworddButton.layer.masksToBounds = NO;

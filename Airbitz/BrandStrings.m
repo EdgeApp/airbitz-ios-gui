@@ -11,6 +11,7 @@
 #define appURI                  @"airbitz"
 #define appTitle                @"Airbitz"
 #define appHomepage             @"https://airbitz.co"
+#define appTitleText            @""
 #define supportEmail            @"support@airbitz.co"
 #define supportPhone            @"+1-844-928-9744"
 #define supportTelegram         @"https://telegram.airbitz.co"
