@@ -113,7 +113,7 @@
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.bitcoindepot.wallet"
 #define appDownloadLink         @"http://bitcoindepot.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2017/03/bitcoindepot-logo-100w.png"
-#define appDesignedBy           NSLocalizedString(@"Designed by Premier Technologies, LLC in",nil)
+#define appDesignedBy           NSLocalizedString(@"Designed by Lux Vending, LLC in",nil)
 #define appCompanyLocation      NSLocalizedString(@"Atlanta GA USA", nil)
 
 
