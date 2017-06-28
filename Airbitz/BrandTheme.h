@@ -36,6 +36,7 @@
 
 #define SHOW_BUY_SELL                                   1
 #define SHOW_AFFILIATE                                  1
+#define SHOW_PLUGINS                                    1
 #define LOCKED_SEARCH_CATEGORY                          0
 #define LOCKED_SEARCH_CATEGORY_STRING                   @"ATM"
 
