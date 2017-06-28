@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "PWOCHÈN";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Non itilizatè ak modpass ou yo se sèl ou menm ki dwe konnen yo epi yo janm transmèt yo oubyen anrejistre yo ak kle.";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "PWOCHÈN";

@@ -1,11 +1,11 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "来自另一个装置的二元认证【2FA】重置请求";
+"1Qx-Jp-bYp.text" = "来自其他装置的2FA两因素认证重置请求";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "保存二元认证【2FA】";
+"3uS-L5-frK.normalTitle" = "保存2FA两因素认证";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
-"4md-ob-Ttv.text" = "核心版本 ︰";
+"4md-ob-Ttv.text" = "核心版本:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
 "9ur-p7-oPb.text" = "标签";
@@ -17,13 +17,13 @@
 "Bs1-Yi-SIh.normalTitle" = "上传日志文件";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "启用二元认证以提升安全度，并只允许曾获准登入的装置再次登入。在2FA启用后，可扫描以下的二维码以便添加更多的装置。";
+"GMX-G5-Rl3.text" = "启用两因素认证以提升安全度, 并只允许曾获准登入的装置再次登入。当2FA启用后，可通过扫描以下的二维码添加更多的装置。";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
 "GXU-6G-OIw.placeholder" = "当前密码";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "请使用能够启用二元认证的装置，去到设定中-> 二元认证。用此装置扫描二维码";
+"Izr-Cl-Osv.text" = "请使用已启用两因素认证的设备，并到设定 - > 两因素认证。然后用此装置扫描二维码";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
 "LAg-aY-W5b.normalTitle" = "完成";
@@ -38,7 +38,7 @@
 "SXK-F7-NoK.text" = "0.1.0-mainnet";
 
 /* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
-"T6x-zH-xvf.text" = "此帐户已启用了二元认证(2FA)。从已启用了2FA的装置扫描2FA代币以让此装置获得通行。 ";
+"T6x-zH-xvf.text" = "此帐户已启用了两因素认证(2FA)。请从已启用了2FA的装置扫描2FA代码以让此装置获得访问权限。 ";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
 "X6G-HD-WUv.placeholder" = "搜索";
@@ -53,7 +53,7 @@
 "avV-bm-INd.normalTitle" = "禁用 2FA";
 
 /* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
-"bYl-WU-bNw.text" = "要求关闭二元认证功能。如果该帐户的用户没有在已通过验证的装置采取任何行动，那么上述要求将会在7日内自动重置。";
+"bYl-WU-bNw.text" = "请求关闭两因素认证功能。如果用户没有在该申请发出后在已通过验证的装置采取任何取消操作，那么上述请求将会在7日内自动重置。";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "g6f-f3-w6p"; */
 "g6f-f3-w6p.text" = "标签";
@@ -62,10 +62,10 @@
 "h6I-iF-k15.text" = "日期";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "已接收到二元认证重置的请求。";
+"hxc-na-KPc.text" = "已收到两因素认证重置请求";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
-"iUa-wU-ZnQ.normalTitle" = "独具风格的外形";
+"iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
 
 /* Class = "UIButton"; normalTitle = "Request Reset"; ObjectID = "lqV-Y6-LKD"; */
 "lqV-Y6-LKD.normalTitle" = "请求重置";
@@ -86,7 +86,7 @@
 "qLK-qd-7qg.text" = "网络 ︰";
 
 /* Class = "UILabel"; text = "App Version"; ObjectID = "sZm-Gx-M8r"; */
-"sZm-Gx-M8r.text" = "应用程序版本";
+"sZm-Gx-M8r.text" = "App版本";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "th1-bn-E4x"; */
 "th1-bn-E4x.normalTitle" = "取消";

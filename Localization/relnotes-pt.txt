@@ -1,67 +1,77 @@
+v 2.4.3
+
+• Allow user to set custom mining fees
+• Incorporate fee estimates from 21.co
+• Display dropped transactions
+• Set override servers to defaults if enabled and blank
+• Improved error messages
+• Improved password reminders
+• Stability fixes
+
+v 2.4.2
+
+Fix SSL certificates perventing new account creation and PIN
+
+v 2.4.1
+
+• Bity Integration: Buy/sell bitcoin with Euros and Swiss Francs
+• Password throttling
+• Users can now choose bitcoin nodes they want to connect to
+• Pin, Password, and Password Recovery rate limits are all shared
+• Contact information for Glidera support is added
+• Password spending limit removes PIN based password reset
+
+
 v.2.4.0
 
-• Protocolo Alterar a Beira Entrar
-
-
-
-• LibertyX plugar
-
-• Apoio para não -USD CSV/QBO   exportar
-
-
-• Ampla carteira apoio
-
- Melhor tempo esgotado
-
-
-• Correio eletrônico CSV/QBO exportar batida Conserta
-
- 
-•Adicional língua apoio
-
-
+• Alteração de Protocolo para Edge-Login
+• LibertyX plugin
+• Suporte para exportar arquivos CSV/QBO que não estejam em USD
+• Suporte para carteira grande. Melhores parâmteros de Timeout
+• Correções ao exportar arquivos CSV/QBO via e-mail
+• Suporte de idioma adicional
 
 
 v.2.3.3
 
-• Corrigir um problema raro com o login do PIN não funcionando
-• Corrigir o bloqueio ao digitar a senha na tela SendConfirmation 
-• Apoiar o início de sessão de navegação a partir do botão URI no telemóvel
-• Mostrar "taxa de câmbio carregando" em vez de 0 valor quando necessário
+• Corrige um problema raro do login via PIN não funcionar
+• Corrige o travamento ao digitar a senha na tela SendConfirmation 
+• Suporte ao login via Edge através do botão URI no celular
+• Mostrar "taxa de câmbio carregando" em vez do valor "0", quando necessário
 • Adicionar fórum do WhatsApp a links de suporte
 
 v 2.3.0
 
-Introduzindo o Login de Borda. O primeiro single-sign-on privado, seguro, de conhecimento zero para aplicativos descentralizados. Agora você pode usar a Carteira Airbitz para efetuar login em contas seguras e criptografadas para outras aplicações blockchain como Augur e Wings. 
+Introduzindo Edge Login. O primeiro single-sign-on privado, seguro, e zero-knowledge para aplicativos descentralizados. Agora você pode usar a Carteira Airbitz para efetuar login em contas seguras e criptografadas para outras aplicações blockchain como Augur e Wings. 
 
-• Seleção de servidor Libbitcoin / Electrum melhorada usando servidores de latência mais responsivos e de menor latência. 
-• Corrigir problemas de interface do usuário do iOS 10
-• Corrigir iOS 10 crash em contas com lotes de carteiras
+• Seleção de servidor Libbitcoin / Electrum melhorada usando servidores mais responsivos e de menor latência. 
+• Corrige problemas de interface do usuário do iOS 10
+• Corrige erros em contas com múltiplas carteiras no iOS 10
 • Melhorar os cálculos de parâmetro Scrypt para maior segurança em dispositivos mais rápidos
 
 v 2.2.0
 
 Acabamos de abrir novos caminhos implementando a primeira recuperação de senha sem atritos do mundo, que permite aos usuários recuperar senhas esquecidas com apenas duas perguntas e um e-mail. Nunca se preocupe em esquecer sua senha novamente
 
-Além:
+Adicionalmente:
 
-• Integração de plugins Bitrefill que permite aos usuários comprar ups top móveis de mais de 600 operadoras em 143 países
-• Fixo TouchID ocasionalmente não reconhecendo toques
-• As contas arquivadas ocupam menos recursos ao não consultar a rede ou sincronizar dados de transação
-• Notificações em segundo plano de fundos recebidos se o aplicativo tiver sido recentemente
-• Endereço público de falha para transações de protocolo de pagamento com falha no BIP70 
+• Integração de plugins Bitrefill, que permitem que usuários comprem créditos de celular de mais de 600 operadoras em 143 países
+• Corrigido o problema do TouchID ocasionalmente não reconhecer toques
+• As contas arquivadas usam menos recursos ao não consultar a rede ou sincronizar dados de transação
+• Notificações em segundo plano de valores recebidos se o aplicativo tiver sido recentemente colocado em segundo plano
+• Endereço público de "fallback" para transações sem sucesso no protocolo de pagamento BIP70 
 • Melhores traduções de idiomas
-• Mostrar menu suspenso pequeno quando não conseguir se conectar à rede
+• Mostra um pequeno menu suspenso quando não conseguir se conectar à rede
 
 v 2.1.0
 
-• Adicione Libbitcoin/Electrum ao endereço de assinatura do servidor para desempenho muito melhor e vida útil da bateria maior.
-• Permite o cálculo de taxa dinâmica de extração
-• Adicione controle do usuário das taxas estimadas de extração (Configurações Baixa, Padrão, Alta)
-• Conserte transação incorreta para as vezes quando a transação é recebida enquanto carteira estava offline
-• Conserte erros de calculadora
-• Adicione suporte de idioma Chinês, Hindi, Espanhol e Português
-• Adicione suporte para localização correta de números, datas e horários
-• Acelere os logins do novo dispositivo em 200%
-• Melhore a precisão na detecção de transação em más condições de rede
-• Adicione botão TouchID para fazer login da tela re-acionar o pop-up TouchID
+• Adiciona assinatura de servidor de endereços Libbitcoin/Electrum para melhor desempenho e maior vida útil da bateria.
+• Permite o cálculo de taxa do minerador dinâmica
+• Adiciona controle do usuário sobre as taxas estimadas de mineração (Configurações Baixa, Padrão, Alta)
+• Conserta prazos de transação incorretos para as vezes que a transação é recebida enquanto carteira estava offline
+• Conserta erros de calculadora
+• Adiciona suporte de idioma Chinês, Hindi, Espanhol e Português
+• Adiciona suporte para localização correta de números, datas e horários
+• Acelera os logins em novos dispositivos em 200%
+• Melhora a precisão na detecção de transação em más condições de rede
+• Adiciona o botão TouchID à tela de login para abrir novamente o popup do TouchID

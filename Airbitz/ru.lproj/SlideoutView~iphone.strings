@@ -26,10 +26,10 @@
 "jpu-23-4kh.accessibilityLabel" = "Купить или продать";
 
 /* Class = "UILabel"; text = "WALLETS"; ObjectID = "lr4-kO-HCW"; */
-"lr4-kO-HCW.text" = "Кошельки";
+"lr4-kO-HCW.text" = "КОШЕЛЬКИ";
 
 /* Class = "UILabel"; text = "BUY / SELL BITCOIN"; ObjectID = "rWQ-uJ-DUX"; */
-"rWQ-uJ-DUX.text" = "КУПЛЯ-ПРОДАЖА БИТКОЙНОВ";
+"rWQ-uJ-DUX.text" = "КУПИТЬ/ПРОДАТЬ БИТКОЙНЫ";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.accessibilityHint" = "авторизован в учетной записи в настоящий момент";

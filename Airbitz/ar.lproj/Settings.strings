@@ -1,36 +1,36 @@
 /* Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp"; */
-"1Qx-Jp-bYp.text" = "2FA إعادة طلب من قبل جهاز آخر.";
+"1Qx-Jp-bYp.text" = "طلب إعادة التوثيق الثنائي 2FA من قبل جهاز آخر.";
 
 /* Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK"; */
-"3uS-L5-frK.normalTitle" = "احتفظ 2FA";
+"3uS-L5-frK.normalTitle" = "احتفظ بالتوثيق الثنائي 2FA";
 
 /* Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv"; */
-"4md-ob-Ttv.text" = "النواة الأساسية إصدار:";
+"4md-ob-Ttv.text" = "النسخة الأساسية:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "9ur-p7-oPb"; */
 "9ur-p7-oPb.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg"; */
-"Ag5-Xn-Vpg.normalTitle" = "واضح مراقب مخبأ";
+"Ag5-Xn-Vpg.normalTitle" = "مسح ذاكرة المراقبة للتخزين المؤقت";
 
 /* Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh"; */
-"Bs1-Yi-SIh.normalTitle" = "تحميل ملفات الدخول";
+"Bs1-Yi-SIh.normalTitle" = "تحميل ملفات التسجيلات";
 
 /* Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3"; */
-"GMX-G5-Rl3.text" = "تمكين مصادقة 2-عامل لزيادة الأمن من خلال السماح تسجيل الدخول من قبل دخولك الأجهزة فقط. إضافة المزيد من الأجهزة عن طريق مسح رمز الاستجابة السريعة أدناه بعد تمكين 2FA";
+"GMX-G5-Rl3.text" = "تفعيل التوثيق الثنائي 2FA لزيادة الأمن من خلال السماح بسجيل الدخول مرة واحدة بعد تسجيل الدخول الأخير من كل الأجهزة. إضافة المزيد من الأجهزة عن طريق رمز الاستجابة السريع أدناه بعد تفعيل الخاصية.";
 
 /* Class = "UITextField"; placeholder = "Current Password"; ObjectID = "GXU-6G-OIw"; */
 "GXU-6G-OIw.placeholder" = "كلمة السر الحالية";
 
 /* Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -> Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv"; */
-"Izr-Cl-Osv.text" = "استخدام الجهاز الذي مكن 2 مصادقة عامل، انتقل إلى إعدادات -> اثنين عامل. 
-مسح رمز الاستجابة السريعة باستخدام هذا الجهاز";
+"Izr-Cl-Osv.text" = "استخدام الجهاز يجب تفعيل التوثيق الثنائي 2FA، انتقل إلى الإعدادات ->التوثيق الثنائي. 
+مسح رمز الاستجابة السريع QR باستخدام هذا الجهاز";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
-"LAg-aY-W5b.normalTitle" = "مطهو إلى حد كاف";
+"LAg-aY-W5b.normalTitle" = "تم";
 
 /* Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
-"Myh-H6-aDd.text" = "إصدار:";
+"Myh-H6-aDd.text" = "الإصدار:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "RqX-ow-U05"; */
 "RqX-ow-U05.text" = "Label";
@@ -39,7 +39,7 @@
 "SXK-F7-NoK.text" = "0.1.0-mainnet";
 
 /* Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf"; */
-"T6x-zH-xvf.text" = "ويتميز هذا الحساب 2 مصادقة عامل (2FA) تمكين. مسح رمز 2FA من الجهاز الذي مكن 2FA منح حق الوصول إلى هذا الجهاز. ";
+"T6x-zH-xvf.text" = "هذا الحساب لديه خاصية التوثيق الثنائي (2FA) تفعيل. مسح رمز التوثيق الثنائي 2FA من الجهاز الذي مكن من 2FA لإعطاء الوصول إلى هذا الجهاز. ";
 
 /* Class = "UITextField"; placeholder = "Search"; ObjectID = "X6G-HD-WUv"; */
 "X6G-HD-WUv.placeholder" = "بحث";
@@ -51,7 +51,7 @@
 "Zw4-k1-a82.text" = "Mainnet";
 
 /* Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd"; */
-"avV-bm-INd.normalTitle" = "معاقمعاق 2FA";
+"avV-bm-INd.normalTitle" = "تعطيل خاصية التوثيق الثنائي 2FA";
 
 /* Class = "UILabel"; text = "Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices"; ObjectID = "bYl-WU-bNw"; */
 "bYl-WU-bNw.text" = "طلب أن يتم تشغيل المصادقة اثنين عامل خارج. سيتم طلب إعادة تعيين تلقائيا في 7 أيام إذا لم يتم اتخاذ أي إجراء من قبل المستخدم حساب على الأجهزة مصادقة";
@@ -63,7 +63,7 @@
 "h6I-iF-k15.text" = "التاريخ";
 
 /* Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc"; */
-"hxc-na-KPc.text" = "اثنين عامل  إعادة تعيين  وقد طلب";
+"hxc-na-KPc.text" = "تم طلب اعادة تعيين العملة البديلة ";
 
 /* Class = "UIButton"; normalTitle = "StylizedOutline"; ObjectID = "iUa-wU-ZnQ"; */
 "iUa-wU-ZnQ.normalTitle" = "StylizedOutline";
@@ -72,7 +72,7 @@
 "lqV-Y6-LKD.normalTitle" = "طلب إعادة تعيين";
 
 /* Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79"; */
-"mJ9-nG-s79.text" = "ممكنةممكنة";
+"mJ9-nG-s79.text" = "تمكين";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nhU-8o-H50"; */
 "nhU-8o-H50.normalTitle" = "زر";

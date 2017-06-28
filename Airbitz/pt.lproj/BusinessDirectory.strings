@@ -2,7 +2,7 @@
 "DlF-tR-T08.text" = "Nome da Empresa";
 
 /* Class = "UIButton"; normalTitle = "Shopping"; ObjectID = "GGS-YR-zt1"; */
-"GGS-YR-zt1.normalTitle" = "Shopping";
+"GGS-YR-zt1.normalTitle" = "Compras";
 
 /* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
 "KxI-24-PCF.text" = "Categorias";
@@ -41,7 +41,7 @@
 "oPG-fA-f9b.text" = "rótulodaesquerda";
 
 /* Class = "UIButton"; normalTitle = "Restaurants"; ObjectID = "oyK-ph-99S"; */
-"oyK-ph-99S.normalTitle" = "Restaurants";
+"oyK-ph-99S.normalTitle" = "Restaurantes";
 
 /* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
 "sWr-pd-hBY.normalTitle" = "Caixas eletrônicos";

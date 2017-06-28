@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW"; */
-"Lt8-cl-BMW.text" = "扫描二维码【QR】";
+"Lt8-cl-BMW.text" = "扫描QR二维码";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "WIw-mO-3VN"; */
 "WIw-mO-3VN.normalTitle" = "按钮";

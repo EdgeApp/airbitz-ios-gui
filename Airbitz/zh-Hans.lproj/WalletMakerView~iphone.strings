@@ -2,7 +2,7 @@
 "61J-35-M5b.placeholder" = "命名您的新钱包";
 
 /* Class = "UILabel"; text = "Currency:"; ObjectID = "HuB-Hn-lsB"; */
-"HuB-Hn-lsB.text" = "货币 ︰";
+"HuB-Hn-lsB.text" = "货币:";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Ug5-7Y-oG3"; */
 "Ug5-7Y-oG3.normalTitle" = "取消";

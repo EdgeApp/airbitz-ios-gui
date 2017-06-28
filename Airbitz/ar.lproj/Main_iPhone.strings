@@ -5,10 +5,10 @@
 "0ea-NR-Nd9.normalTitle" = "هذا الشهر";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM"; */
-"0s2-OO-yBM.text" = "رقعة";
+"0s2-OO-yBM.text" = "علامة";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
-"1kz-sq-XsE.normalTitle" = "محفظة البذور العام - XPub (متقدم)";
+"1kz-sq-XsE.normalTitle" = "أصل المحفظة العامة - XPub (متقدم)";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "اسم المستخدم";
@@ -20,7 +20,7 @@
 "3Py-nn-1AR.normalTitle" = "متقدم";
 
 /* Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA"; */
-"4KX-hj-tJA.text" = "محفظة متواجد حاليا";
+"4KX-hj-tJA.text" = "المحفظة غير متصلة بالإنترنت";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "4ab-Wa-eS4"; */
 "4ab-Wa-eS4.placeholder" = "كلمه السر";
@@ -29,7 +29,7 @@
 "6EE-Aw-gGZ.normalTitle" = "طلب";
 
 /* Class = "UITabBarItem"; title = "Scan"; ObjectID = "6Ey-Xn-GTe"; */
-"6Ey-Xn-GTe.title" = "تفحص";
+"6Ey-Xn-GTe.title" = "فحص";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "6qu-Co-pyz"; */
 "6qu-Co-pyz.text" = "Label";
@@ -38,23 +38,22 @@
 "7wl-Lb-K8l.text" = "BTC";
 
 /* Class = "UILabel"; text = "External Storage / Print"; ObjectID = "8Nr-wB-OaB"; */
-"8Nr-wB-OaB.text" = "خارجي  تخزين / طباعة";
+"8Nr-wB-OaB.text" = "التخزين الخارجي / طباعة";
 
 /* Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
-"8XB-1A-1hO.text" = "انتقاد ل رأي   الدليل التجاري";
+"8XB-1A-1hO.text" = "انتقل لعرض دليل الأعمال";
 
 /* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
-"8iz-Uc-LTS.normalTitle" = "تسجيل";
+"8iz-Uc-LTS.normalTitle" = "تسجيل الدخول";
 
 /* Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB"; */
-"51g-oU-QIB.text" = "استيراد
-محفظة";
+"51g-oU-QIB.text" = "استيراد المحفظة";
 
 /* Class = "UIButton"; normalTitle = "Last Year"; ObjectID = "90X-8Y-MEH"; */
 "90X-8Y-MEH.normalTitle" = "العام الماضي";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
-"AOi-Wp-bVq.segmentTitles[0]" = "نقل السلطة";
+"AOi-Wp-bVq.segmentTitles[0]" = "تحويل";
 
 /* Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[1] = "Address"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen"; */
 "AOi-Wp-bVq.segmentTitles[1]" = "عنوان";
@@ -66,10 +65,10 @@
 "AOi-Wp-bVq.segmentTitles[3]" = "فلاش";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5"; */
-"AkB-cD-ba5.text" = "رقعة";
+"AkB-cD-ba5.text" = "ملصق";
 
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
-"BED-Cf-F1n.text" = "يجب أن يكون كلمة السر خطاب العلوي والسفلي حالة، وعدد، والحد الأدنى من 10 حرفا";
+"BED-Cf-F1n.text" = " كلمة السر يجب أن تكون حالة الخطاب العلوي والسفلي ، والعدد، والحد الأدنى من 10 حروف";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
 "Bxa-tB-mk3.text" = "هاتف";
@@ -81,13 +80,13 @@
 "ClG-um-kmI.text" = "فئة";
 
 /* Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
-"CuI-Tj-a8q.text" = "أدخل كلمة المرور لفك محفظة";
+"CuI-Tj-a8q.text" = "أدخل كلمة المرور لفك المحفظة";
 
 /* Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9"; */
 "Det-Mr-8a9.normalTitle" = "الخطوة التالية";
 
 /* Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi"; */
-"Dh6-PA-WGi.text" = "‮اختبر";
+"Dh6-PA-WGi.text" = "‮اختبار";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2"; */
 "EuE-s0-NQ2.text" = "دولار أمريكي";

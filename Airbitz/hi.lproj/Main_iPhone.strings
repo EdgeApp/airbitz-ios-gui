@@ -5,7 +5,7 @@
 "0ea-NR-Nd9.normalTitle" = "इस महीने";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM"; */
-"0s2-OO-yBM.text" = "उपनाम";
+"0s2-OO-yBM.text" = "लेबल";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
 "1kz-sq-XsE.normalTitle" = "वॉलेट पब्लिक सीड - XPub (उन्नत)";
@@ -65,7 +65,7 @@
 "AOi-Wp-bVq.segmentTitles[3]" = "उजाला";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5"; */
-"AkB-cD-ba5.text" = "उपनाम";
+"AkB-cD-ba5.text" = "लेबल";
 
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
 "BED-Cf-F1n.text" = "पासवर्ड में कम से कम एक बड़ा ,एक छोटा अक्षर (अंग्रेजी के) और एक अंक,कुल न्यूनतम 10 अक्षर होना आवश्यक है";
