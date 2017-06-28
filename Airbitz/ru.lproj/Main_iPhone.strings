@@ -8,7 +8,7 @@
 "0s2-OO-yBM.text" = "Метка";
 
 /* Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE"; */
-"1kz-sq-XsE.normalTitle" = "Публичные сиды кошелька - XPub (дополнительно)";
+"1kz-sq-XsE.normalTitle" = "Публичный сид кошелька - XPub (дополнительно)";
 
 /* Class = "UITextField"; placeholder = "User Name"; ObjectID = "2cx-Qx-XQc"; */
 "2cx-Qx-XQc.placeholder" = "Имя пользователя";
@@ -152,7 +152,7 @@
 "RVo-M5-ZXk.normalTitle" = "Забыли пароль?";
 
 /* Class = "UILabel"; text = "Require PIN above amount"; ObjectID = "Rid-6B-Lv4"; */
-"Rid-6B-Lv4.text" = "Требуется ввести PIN для трат сверх установленного лимита";
+"Rid-6B-Lv4.text" = "Требуется ввести PIN для траты сверх установленного лимита";
 
 /* Class = "UIButton"; normalTitle = "This Year"; ObjectID = "RpC-BO-UBm"; */
 "RpC-BO-UBm.normalTitle" = "В этом году";
@@ -230,7 +230,7 @@
 "dm1-b8-Vp0.text" = "Конечная дата";
 
 /* Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
-"egu-Uy-luw.placeholder" = "Защищенный PIN-кодом лимит трат";
+"egu-Uy-luw.placeholder" = "Защищенный PIN-кодом лимит";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol"; */
 "gJp-Ct-Vol.text" = "Метка";
@@ -245,7 +245,7 @@
 "iXW-st-n5q.text" = "Камера недоступна";
 
 /* Class = "UILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe"; */
-"ifv-G8-Cxe.text" = "(для трат сверх дневного лимита требуется пароль)";
+"ifv-G8-Cxe.text" = "(для траты сверх дневного лимита требуется пароль)";
 
 /* Class = "UITabBarItem"; title = "Transactions"; ObjectID = "j3q-OI-el3"; */
 "j3q-OI-el3.title" = "Переводы";
@@ -284,7 +284,7 @@
 "nae-d6-xoW.text" = "Биткойн-кошелек";
 
 /* Class = "UITextField"; placeholder = "Daily Spend Limit"; ObjectID = "o7c-0i-ioy"; */
-"o7c-0i-ioy.placeholder" = "Дневной лимит трат";
+"o7c-0i-ioy.placeholder" = "Дневной лимит";
 
 /* Class = "UILabel"; text = "Generating QR Code..."; ObjectID = "oOB-dD-cy2"; */
 "oOB-dD-cy2.text" = "Генерация QR-кода...";

@@ -1,6 +1,30 @@
+v 2.4.3
+
+• Allow user to set custom mining fees
+• Incorporate fee estimates from 21.co
+• Display dropped transactions
+• Set override servers to defaults if enabled and blank
+• Improved error messages
+• Improved password reminders
+• Stability fixes
+
+v 2.4.2
+
+Fix SSL certificates perventing new account creation and PIN
+
+v 2.4.1
+
+• Bity Integration: Buy/sell bitcoin with Euros and Swiss Francs
+• Password throttling
+• Users can now choose bitcoin nodes they want to connect to
+• Pin, Password, and Password Recovery rate limits are all shared
+• Contact information for Glidera support is added
+• Password spending limit removes PIN based password reset
+
+
 v.2.4.0
 
-• Modification du protocole dans la connexion
+• Modifications de protocole à l'ouverture de session
 • Brancher LibertyX
 • Prise en charge des exportations hors CSV / QBO
 • Grand Support de portefeuille. Meilleurs Délais
@@ -10,7 +34,7 @@ v.2.4.0
 
 v.2.3.3
 
-• La correction du problème avec la connexion du PIN ne marche pas
+• La correction du problème avec la connexion du PIN qui ne marche pas
 • Correction d'un raccrochage lors de l'entrée du mot de passe dans l'écran SendConfirmation 
 • Support avec Edge login depuis le bouton URI sur mobile
 • Montrer "chargement du taux de change" au lieu de 0 si nécessaire

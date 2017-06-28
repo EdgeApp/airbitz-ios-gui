@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
@@ -24,7 +24,7 @@
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -33,9 +33,9 @@
         <target xml:lang="ja" state="translated">次に</target>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
-        <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
-        <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="ja" state="translated">あなたのユーザー名とパスワードはあなたにのみ知られていますそして暗号化されずに送信または格納されることはありません。</target>
+        <source>Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</source>
+        <note>Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh";</note>
+        <target xml:lang="ja" state="translated">あなたのユーザー名とパスワードはあなたのみ知っているため、忘れた場合に回復することはできません。パスワードを無くした場合は資金へのアクセスを失うことになります。</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle">
         <source>NEXT</source>
@@ -241,7 +241,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -336,13 +336,16 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
         <source>5</source>
         <note>Class = "UIButton"; normalTitle = "5"; ObjectID = "2uL-vk-tLg"; Note = "Calculator Button";</note>
-        <target xml:lang="ja" state="translated">五</target>
+        <target xml:lang="ja" state="translated">5</target>
+        <alt-trans>
+          <target xml:lang="ja">五</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Aeb-Xc-JRe.normalTitle">
         <source>-</source>
@@ -438,7 +441,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
@@ -450,7 +453,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
@@ -462,7 +465,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -1024,7 +1027,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -1036,7 +1039,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
@@ -1053,7 +1056,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
@@ -1218,7 +1221,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1300,7 +1303,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1332,7 +1335,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="ja">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="  Amount">
@@ -1399,6 +1402,15 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <source>** Warning **</source>
         <note>** Warning ** text on partial payment</note>
         <target xml:lang="ja" state="translated">**警告**</target>
+      </trans-unit>
+      <trans-unit id="** Warning **\n\nSetting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery">
+        <source>** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">** 注意 **
+
+パスワードの使用限度を設定すると、パスワードを忘れた場合に資金にアクセスできなくなる可能性があります。パスワード回復を設定して下さい</target>
       </trans-unit>
       <trans-unit id="**WARNING** You will NEVER be able to recover your password if it is forgotten!!">
         <source>**WARNING** You will NEVER be able to recover your password if it is forgotten!!</source>
@@ -1695,10 +1707,20 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">購入/販売Bitcoin</target>
       </trans-unit>
+      <trans-unit id="Buy/Sell with Bank Account (EUR/CHF)">
+        <source>Buy/Sell with Bank Account (EUR/CHF)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">銀行口座での購入／販売 (ユーロ／スイスフラン)</target>
+      </trans-unit>
       <trans-unit id="Buy/Sell with Bank Account (USA)">
         <source>Buy/Sell with Bank Account (USA)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">銀行口座での購入/販売（米国）</target>
+      </trans-unit>
+      <trans-unit id="Buy/Sell with Cash (USA)">
+        <source>Buy/Sell with Cash (USA)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">現金での購入／販売(米国)</target>
       </trans-unit>
       <trans-unit id="CANCEL">
         <source>CANCEL</source>
@@ -1890,6 +1912,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">現在のパスワード</target>
       </trans-unit>
+      <trans-unit id="Custom Fee (enter above)">
+        <source>Custom Fee (enter above)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">カスタム料金(上に記入)</target>
+      </trans-unit>
+      <trans-unit id="Custom fee in satoshis/byte">
+        <source>Custom fee in satoshis/byte</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">カスタム料金はsatoshis/byte</target>
+      </trans-unit>
       <trans-unit id="DEFAULT EXCHANGE RATE">
         <source>DEFAULT EXCHANGE RATE</source>
         <note>section header in settings table</note>
@@ -2072,6 +2104,11 @@ Enter it below to make sure:</source>
         <source>Enable Bluetooth in System Settings</source>
         <note>settings text</note>
         <target xml:lang="ja" state="translated">システム設定でBluetoothを有効に</target>
+      </trans-unit>
+      <trans-unit id="Enable Override">
+        <source>Enable Override</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">エネーブルオーバーライド</target>
       </trans-unit>
       <trans-unit id="Enable Touch ID">
         <source>Enable Touch ID</source>
@@ -2508,6 +2545,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">パスワードが間違っ。再試行する、それとも今変更？</target>
       </trans-unit>
+      <trans-unit id="Incorrect Password. Try again?">
+        <source>Incorrect Password. Try again?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">誤パスワード。 再試行する？</target>
+      </trans-unit>
       <trans-unit id="Incorrect current password">
         <source>Incorrect current password</source>
         <note>No comment provided by engineer.</note>
@@ -2853,6 +2895,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">その他の収益</target>
       </trans-unit>
+      <trans-unit id="Override Bitcoin Servers (advanced)">
+        <source>Override Bitcoin Servers (advanced)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">オーバーライドビットコインサーバー（上級）</target>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2987,10 +3034,10 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">迅速な再ログインを可能にするには、このアカウントのPINを作成してください</target>
       </trans-unit>
-      <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
-        <source>Please create a new account and transfer your funds if you forgot your password.</source>
+      <trans-unit id="Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.">
+        <source>Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="translated">パスワードを忘れた場合は、新しいアカウントを作成して資金を振り替えてください。</target>
+        <target xml:lang="ja" state="translated">パスワードを忘れた場合、新しいアカウントを作り資金を移して下さい。%@によりパスワードを回復することはできず、パスワードなしでは資金へのアクセスを失います。</target>
       </trans-unit>
       <trans-unit id="Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.">
         <source>Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.</source>
@@ -3128,6 +3175,11 @@ Enter it below to make sure:</source>
         <source>Received...</source>
         <note>Received string on Request screen</note>
         <target xml:lang="ja" state="translated">受け取った...</target>
+      </trans-unit>
+      <trans-unit id="Recovery Answers Corrupt!">
+        <source>Recovery Answers Corrupt!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">リカバリー回答腐敗！</target>
       </trans-unit>
       <trans-unit id="Recovery Disabled">
         <source>Recovery Disabled</source>
@@ -3459,6 +3511,11 @@ Please change your password and PIN</source>
         <note>Title of Skip this step alert</note>
         <target xml:lang="ja" state="translated">このステップをスキップ</target>
       </trans-unit>
+      <trans-unit id="Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.">
+        <source>Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">ウォレットに小さいダストインプットが存在。資金の全てを使うことができません。詳細に関しては、airbitz.co/dustをご覧下さい。</target>
+      </trans-unit>
       <trans-unit id="Sorry">
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
@@ -3704,6 +3761,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>Transaction Details header text</note>
         <target xml:lang="ja" state="translated">取引の詳細</target>
       </trans-unit>
+      <trans-unit id="Transaction Dropped">
+        <source>Transaction Dropped</source>
+        <note>Transaction list description of dropped transaction</note>
+        <target xml:lang="ja" state="translated">取引停止</target>
+      </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
         <note>Financial transaction that moves money from one account to another</note>
@@ -3731,6 +3793,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Trouble connecting to network</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">ネットワークへの接続に問題</target>
+      </trans-unit>
+      <trans-unit id="Try again">
+        <source>Try again</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">もう一度試して下さい</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -3983,6 +4050,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="ja" state="translated">警告！</target>
       </trans-unit>
+      <trans-unit id="Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.">
+        <source>Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">警告、これは高度な設定ですあなたの財布が誤動作する可能性があります。設定を有効にするには、アプリを再起動してください。</target>
+      </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
         <note>No comment provided by engineer.</note>
@@ -4012,6 +4084,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="ja" state="translated">ウォッチャーデータベースがクリアされました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります</target>
+      </trans-unit>
+      <trans-unit id="We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
+        <source>We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ja" state="translated">パスワード回復用の質問と回答を設定することを強くお勧めします。さもなければ、バスワードを忘れてしまった場合にアカウントへアクセスできなくなります。</target>
       </trans-unit>
       <trans-unit id="Whole Foods (Up to 10% Off)">
         <source>Whole Foods (Up to 10% Off)</source>
@@ -4094,10 +4171,10 @@ Use the Payee, Category, and Notes field to optionally tag your transaction</sou
 
 [[abtag APP_TITLE]] QRコードをスキャンして人や商人に支払う必要があ。</target>
       </trans-unit>
-      <trans-unit id="You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
-        <source>You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+      <trans-unit id="Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go">
+        <source>Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ja" state="translated">あなたはBitcoinを受け取りました！ パスワード回復の質問と回答を設定することを強くおすすめします。それ以外の場合は、パスワードを忘れてしまった場合、あなたのアカウントにアクセスすることはできません。</target>
+        <target xml:lang="ja" state="translated">アカウント復旧の回答が破損しています。パスワードを忘れた場合、アカウントを復旧することができなくなります。%@としてログインしてパスワード復旧を再設定して下さい。詳細に関しては、airbitz.co/go掲載のブログ投稿をご覧下さい。</target>
       </trans-unit>
       <trans-unit id="Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!">
         <source>Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!</source>

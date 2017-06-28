@@ -27,7 +27,7 @@
 Отсканируйте QR-код с этого устройства";
 
 /* Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b"; */
-"LAg-aY-W5b.normalTitle" = "Готово";
+"LAg-aY-W5b.normalTitle" = "ГОТОВО";
 
 /* Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd"; */
 "Myh-H6-aDd.text" = "Версия:";

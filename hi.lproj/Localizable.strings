@@ -38,6 +38,11 @@ Share this link to receive revenue from users that install and use %@. You will 
 "** Warning **" = "**चेतावनी**";
 
 /* No comment provided by engineer. */
+"** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "पासवर्ड की लागत सीमा निर्धारित करने से आपको धन का उपयोग करने से रोका जा सकता है अगर आपका पासवर्ड भूल गया है कृपया सुनिश्चित करें कि आपके पास सेटअप पासवर्ड पुनर्प्राप्ति है";
+
+/* No comment provided by engineer. */
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**चेतावनी** अपना पासवर्ड भूल जाने पर आप कभी भी इसे दोबारा प्राप्त करने में सक्षम नहीं होंगे!!";
 
 /* No comment provided by engineer. */
@@ -209,7 +214,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Buy/Sell Bitcoin" = "बिट कॉइन ख़रीदे/बेचें";
 
 /* No comment provided by engineer. */
+"Buy/Sell with Bank Account (EUR/CHF)" = "बैंक खाते के साथ खरीदें / बेचना (EUR / CHF)";
+
+/* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "खरीदें / बैंक खाते के साथ बेचें (यूएसए)";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Cash (USA)" = "कैश के साथ खरीदें (यूएसए)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "रद्द करें";
@@ -325,6 +336,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Current Password" = "वर्तमान पासवर्ड";
 
+/* No comment provided by engineer. */
+"Custom Fee (enter above)" = "कस्टम शुल्क (ऊपर दर्ज करें)";
+
+/* No comment provided by engineer. */
+"Custom fee in satoshis/byte" = "सतोष / बाइट में कस्टम शुल्क";
+
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "तय विनियमन दर";
 
@@ -432,6 +449,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Enable Bluetooth in System Settings" = "सिस्टम सेटिंग्स के लिए ब्लूटूथ को सक्रिय करें";
 
 /* No comment provided by engineer. */
+"Enable Override" = "सक्षम करें ओवरराइड करें";
+
+/* No comment provided by engineer. */
 "Enable Touch ID" = "टच आईडी को सक्रिय करें";
 
 /* No comment provided by engineer. */
@@ -487,7 +507,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Error occured copying to the clipboard" = "क्लिपबोर्ड में कॉपी करने में में परेशानी हो रही है";
 
 /* No comment provided by engineer. */
-"Error sending Email." = "शराब और बार";
+"Error sending Email." = "ईमेल भेजने में में परेशानी हो रही है";
 
 /* No comment provided by engineer. */
 "Error sending SMS" = "एस एम एस भेजने में परेशानी हो रही है";
@@ -695,6 +715,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Incorrect Password. Try again, or change it now?" = "गलत पासवर्ड|पुन: कोशिश करें या अभी बदलें?";
 
 /* No comment provided by engineer. */
+"Incorrect Password. Try again?" = "ग़लत पासवर्ड। दोबारा कोशिश करें?";
+
+/* No comment provided by engineer. */
 "Incorrect current password" = "तत्काल्लें पासवर्ड गलत है";
 
 /* No comment provided by engineer. */
@@ -899,6 +922,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Other Income" = "अन्य आय";
 
 /* No comment provided by engineer. */
+"Override Bitcoin Servers (advanced)" = "ओवरराइड करेंBitcoin सर्वर (उन्नत)";
+
+/* No comment provided by engineer. */
 "PIN" = "पिन";
 
 /* settings text */
@@ -976,7 +1002,7 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 "Please create a PIN for this account to enable quick re-logins" = "जल्दी फिर से प्रवेश सक्षम करने के लिए इस खाते के लिए एक पिन बनाने कृपया";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "अगर आप पासवर्ड भूल गए हैं तो नया खाता बनाये और पैसे ट्रान्सफर कर लें|";
+"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password." = "यदि आप अपना पासवर्ड भूल गए हैं, तो कृपया एक नया खाता बनाएं और अपना धन स्थानांतरित करें। आपका पासवर्ड% @ द्वारा पुनर्प्राप्त नहीं किया जा सकता है और आप अपने पासवर्ड के बिना अपने धन की एक्सेस खो देंगे";
 
 /* No comment provided by engineer. */
 "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "इस खाते के लिए पासवर्ड बना लें अन्यथा ये उपकरण खो जाने या चोरी हो जाने पर पासवर्ड रिकवर नहीं कर पाएंगे|";
@@ -1059,6 +1085,9 @@ Enter it below to make sure:" = "क्या आपको आपका पा�
 
 /* Received string on Request screen */
 "Received..." = "प्राप्त हो रहे है...";
+
+/* No comment provided by engineer. */
+"Recovery Answers Corrupt!" = "रिकवरी उत्तर भ्रष्ट!";
 
 /* No comment provided by engineer. */
 "Recovery Disabled" = "वसूली विक्लांग";
@@ -1254,6 +1283,9 @@ Please change your password and PIN" = "वसूली सफल
 "Skip this step" = "इस चरण को छोड़ें";
 
 /* No comment provided by engineer. */
+"Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details." = "वॉलेट में छोटी धूल की जानकारी। नहीं सभी धन खर्च किया जा सकता है विवरण के लिए airbitz.co/dust देखें";
+
+/* No comment provided by engineer. */
 "Sorry" = "माफ़ कीजिये";
 
 /* expense category */
@@ -1403,6 +1435,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "लेनदेन विवरण";
 
+/* Transaction list description of dropped transaction */
+"Transaction Dropped" = "लेन-देन छोड़ा";
+
 /* Financial transaction that moves money from one account to another */
 "Transfer" = "हस्तांतरण";
 
@@ -1417,6 +1452,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* No comment provided by engineer. */
 "Trouble connecting to network" = "मुसीबत नेटवर्क से कनेक्ट";
+
+/* No comment provided by engineer. */
+"Try again" = "पुनः प्रयास करें";
 
 /* No comment provided by engineer. */
 "Try again?" = "फिर कोशिश करो?";
@@ -1572,6 +1610,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Warning!" = "चेतावनी!";
 
 /* No comment provided by engineer. */
+"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect." = "चेतावनी,यह एक उन्नत सेटिंग है और आपके वॉलेट को खराबी के कारण हो सकता हैकृपया एप्लिकेशन को पुनरारंभ करेंसेटिंग्स को प्रभावित करने के लिए";
+
+/* No comment provided by engineer. */
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "चेतावनी। यदि यह उपकरण खो जाता है या चोरी हो जाता है, या यदि यह ऐप हट जाता है तो पासवर्ड के बिना आप नए उपकरण पर लॉगइन करने में सक्षम नहीं होंगे";
 
 /* Double spend status in transaction list */
@@ -1588,6 +1629,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "वाचर डेटाबेस हट गया। ब्लॉकचेन इंफो दोबारा सिंक करने के लिए कृपया कुछ मिनट का समय दें। सिंक के दौरान लेनदेन और शेष राशि गलत दिखाई दे सकते हैं";
+
+/* No comment provided by engineer. */
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "हम पासवर्ड वसूली प्रश्न और उत्तर की स्थापना की सिफारिश करते हैं। अन्यथा यदि आप अपना पासवर्ड भूल जाते हैं तो आप अपने खाते तक पहुंच नहीं पाएंगे।";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "पूरा फूड्स (10% के बाहर)";
@@ -1642,7 +1686,7 @@ Use the Payee, Category, and Notes field to optionally tag your transaction" = "
 लोगों और व्यापारियों को भुगतान करने के लिए [[abtag APP_TITLE]] को QR कोड स्कैन करने की जरुरत होती है।";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "आपको बिटकॉइन प्राप्त हुआ है! हम आपको पासवर्ड रिकवरी प्रश्न और उत्तर सेटअप करने का सुझाव देते हैं। अन्यथा, यदि आप अपना पासवर्ड भूल जाते हैं तो आप अपना खाता एक्सेस करने में सक्षम नहीं होंगे।";
+"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go" = "आपके खाता पुनर्प्राप्ति उत्तर भ्रष्ट हैं। यदि आपका पासवर्ड भूल गया है तो आप अपना खाता पुनर्प्राप्त नहीं कर पाएंगे कृपया% @ और फिर से सेटअप पासवर्ड पुनर्प्राप्ति के रूप में लॉगिन करें। विवरण के लिए, कृपया हमारी ब्लॉग पोस्ट airbitz.co/go पर देखें";
 
 /* No comment provided by engineer. */
 "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "आपके पासवर्ड रिकवरी प्रश्न और उत्तर अब सेटअप हो गए हैं। अपना पासवर्ड रिकवर करते समय, आपके उत्तर बिल्कुल सही प्रकार से मेल करने चाहिए। **अपना पासवर्ड और रिकवरी उत्तर ना भूलें** इनके बिना आपका खाता रिकवर नहीं हो सकता है!!";

@@ -38,6 +38,13 @@ Patage lyen sa a pou ou resevwa resèt itilizatè ki enstale e itilize %2$@. Wap
 "** Warning **" = "** Avètisman **";
 
 /* No comment provided by engineer. */
+"** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery";
+
+/* No comment provided by engineer. */
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ATANSYON** Ou pap janm ka rekipere modpas ou a siw bliyel!!";
 
 /* No comment provided by engineer. */
@@ -209,7 +216,13 @@ Patage lyen sa a pou ou resevwa resèt itilizatè ki enstale e itilize %2$@. Wap
 "Buy/Sell Bitcoin" = "Achte / Vann Bitcoin";
 
 /* No comment provided by engineer. */
+"Buy/Sell with Bank Account (EUR/CHF)" = "Buy/Sell with Bank Account (EUR/CHF)";
+
+/* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "Achte / Vann ak Kont labank (USA)";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Cash (USA)" = "Buy/Sell with Cash (USA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "ANILE";
@@ -325,6 +338,12 @@ Patage lyen sa a pou ou resevwa resèt itilizatè ki enstale e itilize %2$@. Wap
 /* No comment provided by engineer. */
 "Current Password" = "Kouran Modpas";
 
+/* No comment provided by engineer. */
+"Custom Fee (enter above)" = "Custom Fee (enter above)";
+
+/* No comment provided by engineer. */
+"Custom fee in satoshis/byte" = "Custom fee in satoshis/byte";
+
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "To echanj pa defo";
 
@@ -430,6 +449,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 
 /* settings text */
 "Enable Bluetooth in System Settings" = "Aktive Bluetooth nan paramèt systèm lan";
+
+/* No comment provided by engineer. */
+"Enable Override" = "Enable Override";
 
 /* No comment provided by engineer. */
 "Enable Touch ID" = "Aktive TouchID";
@@ -695,6 +717,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 "Incorrect Password. Try again, or change it now?" = "Modpas pa bon. reeseye oubyen chanje kounye a?";
 
 /* No comment provided by engineer. */
+"Incorrect Password. Try again?" = "Enkòrèk Modpas. Eseye anko?";
+
+/* No comment provided by engineer. */
 "Incorrect current password" = "Modpas aktyel la pa bon";
 
 /* No comment provided by engineer. */
@@ -899,6 +924,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 "Other Income" = "Lòt Revni";
 
 /* No comment provided by engineer. */
+"Override Bitcoin Servers (advanced)" = "Sèvi ak sèvè Bitcoin yo (avanse)";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -976,7 +1004,7 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 "Please create a PIN for this account to enable quick re-logins" = "Tanpri kreye yon kod PIN pou kont kapab itilize anko koneksyon an rapid";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "Tanpri kreye yon lot kont ak transfè fon ou yo si ou bliye mod pas ou.";
+"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password." = "Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.";
 
 /* No comment provided by engineer. */
 "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Tanpri kreye yon modpas pou kont sa a, ou pap ka rekipere kont ou so aparèy la ta pèdi oubyen volè.";
@@ -1059,6 +1087,9 @@ Enter it below to make sure:" = "Ou toujou songe modpas ou? Ou ap bzwen mod pas 
 
 /* Received string on Request screen */
 "Received..." = "Resevwa...";
+
+/* No comment provided by engineer. */
+"Recovery Answers Corrupt!" = "Repons pou rekiperasyon yo pa bon!";
 
 /* No comment provided by engineer. */
 "Recovery Disabled" = "Rekiperasyon desaktive";
@@ -1254,6 +1285,9 @@ Please change your password and PIN" = "Rekiperasyon siksè
 "Skip this step" = "Pase etap sa a";
 
 /* No comment provided by engineer. */
+"Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details." = "Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.";
+
+/* No comment provided by engineer. */
 "Sorry" = "Padon";
 
 /* expense category */
@@ -1399,6 +1433,9 @@ non itilizatè ou ak modpas ou sèl ou menm ki konnen yo epi yo pa janm anrejist
 /* Transaction Details header text */
 "Transaction Details" = "Tranzaksyon Detay";
 
+/* Transaction list description of dropped transaction */
+"Transaction Dropped" = "Transaction Dropped";
+
 /* Financial transaction that moves money from one account to another */
 "Transfer" = "Transfè";
 
@@ -1413,6 +1450,9 @@ non itilizatè ou ak modpas ou sèl ou menm ki konnen yo epi yo pa janm anrejist
 
 /* No comment provided by engineer. */
 "Trouble connecting to network" = "Problèm koneksyon rezo";
+
+/* No comment provided by engineer. */
+"Try again" = "Try again";
 
 /* No comment provided by engineer. */
 "Try again?" = "Eseye anko?";
@@ -1569,6 +1609,9 @@ Si ou pèdi aparèy oubyen desinstale aplikasyon an, Sa ap pran 7 jou pou desakt
 "Warning!" = "Avètisman!";
 
 /* No comment provided by engineer. */
+"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect." = "Atansyon, se yon paramèt avanse epil ka rann bous ou a mal fonktione. Tanpri redemare aplikasyon an pou paramèt yo ka aplike.";
+
+/* No comment provided by engineer. */
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Atansyon. Ou paka konektew san modpas sou yon nouvo aparèy, si aparèy sa a pèdi oubyen si yo vòlèl, oubyen si aplikasyon an dezenstale";
 
 /* Double spend status in transaction list */
@@ -1585,6 +1628,9 @@ Si ou pèdi aparèy oubyen desinstale aplikasyon an, Sa ap pran 7 jou pou desakt
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Baz done efase men gen yon erè ki pase. Tann kelke minit pou resenkronize enfomation blockchain. transaksyon ak balans yo ka pa exat pandan sa";
+
+/* No comment provided by engineer. */
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "Whole foods (jiska 10% rediksyon)";
@@ -1638,7 +1684,7 @@ Itilize chan Payee, kategori ak not pou ou make transaksyon an";
  [[abtag APP_TITLE]] bezwen sa a pou skane kod QR pou payer moun yo ak machann.";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "OU jwenn Bitcoin! Nou ba ou konsey sa trè byen jan kesyon yo dwe ye a / repons yo pou rekipere mod pas. Si non, ou pap ka jwnn kont ou si ou blye mod pas ou.";
+"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go" = "Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go";
 
 /* No comment provided by engineer. */
 "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Kesyon pou rekiperasyon modpas yo la kounye a. Lè wap rekipere modpas ou repons yo dwe menm.** PA BLIYE MODPAS OU AK REPONS POU REKIPERASYON YO** OUPAKA REKIPERE KONT OU AN SAN YO MENM!!";

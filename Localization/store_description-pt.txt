@@ -1,32 +1,32 @@
 Venda, Proteja, Envie e Receba Bitcoin
 
-Uma carteira de Bitcoin poderosa e fácil de usar, que permite aos usuários controlar suas prórprias chaves privadas de bitcoin, com a familiaridade e tranquilidade de um serviço bancário de celular.
+Carteira de Bitcoin poderosa e fácil de usar, que permite aos usuários controlar suas próprias chaves privadas de bitcoin, com a familiaridade e tranquilidade de um serviço bancário de celular.
 
-Assuma o controle dos seus fundos! Com Airbitz, só você tem acesso aos seus fundos ou dados de transação. Nem o Airbitz nem terceiros podem acessar seu dinheiro ou dados. Você recebe a privacidade e autonomia para as quais a Bitcoin foi criada com a facilidade de uso que até a avó poderia utilizar.
+Assuma o controle dos seus fundos! Com Airbitz, só você tem acesso aos seus fundos ou dados de transação. A Airbitz ou terceiros não podem acessar seu dinheiro ou dados. Você pode contar com a privacidade e autonomia para as quais o Bitcoin foi criado, com a facilidade de uso que até sua avó poderia utilizar.
 
-Com um foco em entregar uma experiência incrível ao usuário, a carteira Airbitz fornece as grandes funcionalidades seguintes:
+Com foco em entregar uma experiência incrível ao usuário, a carteira Airbitz fornece grandes funcionalidades, como as seguintes:
 
 • Zero conhecimento & zero acesso a fundos, chaves, ou dados de transação pela Airbitz ou terceiros
 • Compra/venda integrada para residentes dos EUA e Canadá
 • Pague usando o Bluetooth (BLE) sem precisar de códigos QR 
 • Entrar com TouchID
 • Criação de conta simples usando apenas usuário & senha (sem imprimir PDFs, escrever frases de passe, ou adicionar configurações de criptografia)
-• Backup automático criptografado da carteira para servidores redundantes de pessoa para pessoa
-• Autenticação de um toque com 2 fatores para a carteira mais fácil de proteger no mundo
-• Troque rapidamente de conta com nomes de usuário suspensos em telas de acesso
-• Sincronização de múltiplos dispositivos em todos os dispositivos móveis
+• Backup automático criptografado da carteira para servidores redundantes P2P
+• Autenticação de um toque com autenticação de 2 fatores, tornando a Airbitz a carteira mais fácil de proteger do mundo
+• Troque rapidamente de conta com usuários localizados em um menu dropdown
+• Sincronização de múltiplos dispositivos em todos os celulares
 • Carteiras determinísticas hierárquicas com endereços que mudam a cada transação
-• Múltiplas carteiras por conta com nomes de carteira simples definidos pelo usuário (ie. "Fundo de Férias")
+• Múltiplas carteiras por conta com nomes de carteira simples definidos pelo usuário (ie. "Poupança de Férias")
 • Suporte a múltiplas moedas. Atribua uma moeda por carteira
-• Procure transações por emitente, categoria, ou notas
+• Procure transações por beneficiário, categoria, ou notas
 • Calculadora integrada para fáceis conversões
 • Modo Comerciante permitindo IU fácil e fluida atrás do balcão
 • Detecção de pagamento parcial cria um novo pedido de pagamento em código QR com o saldo remanescente 
 • Limites de gastos diários (requere senha para gastar mais que o limite)
-• Limites de gato que requerem o PIN
+• Limites de gasto que requerem o PIN
 • IU rápida de dois toques para transferir fundos entre carteiras
 • Importar fundos de WIF ou chaves privadas Casascius
-• Arquitetura de servidor descentralizada. As carteiras funcionam mesmo se os servidores Airbitz não estiverem.
+• Arquitetura de servidor descentralizada. As carteiras funcionam mesmo se os servidores Airbitz estiverem fora do ar.
 • Integração com o diretório de Negócios Airbitz para auto-completar informações de negócios para transações incluindo a logo/foto do negócio
 • Integração com livro de endereços para auto-completar nome e foto do beneficiário
 • Suporte ao Protocolo de Pagamento BIP 70
@@ -36,8 +36,8 @@ Com um foco em entregar uma experiência incrível ao usuário, a carteira Airbi
 O aplicativo Airbitz solicita acesso à lista de contatos do dispositivo, localização e informações pessoais. Esta informação é utilizada no dispositivo para fornecer uma melhor experiência ao usuário das seguintes formas:
 
 1. Auto-completar contratos do livro de endereços do usuário depois de uma transação
-2. Auto-completar contratos do livro de endereços do usuário para enviar pedidos de pagamentos por Email ou SMS
-3. Autocompletar nomes de listagens de negócios depois de uma transação
+2. Auto-completar contatos do livro de endereços do usuário para enviar pedidos de pagamentos por Email ou SMS
+3. Autocompletar nomes de negócios depois de uma transação
 4. Geolocalizar o dispositivo do usuário para encontrar negócios próximos
 
 Nenhuma informação pessoal ou informação da lista de contatos sai do dispositivo sem antes ser criptografada pelas credenciais do usuário (nome de usuário/senha). Nem a Airbitz ou qualquer terceiro tem conhecimento da informação acessada pela aplicação.

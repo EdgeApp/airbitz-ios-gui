@@ -1,23 +1,23 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "Далее";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Ваши имя пользователя и пароль известны только Вам и никогда не передаются и нигде не хранятся в незашифрованном виде.";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "Имя пользователя и пароль будут известны только вам и не могут быть восстановлены, если вы их забудете. Вы УТРАТИТЕ ДОСТУП к своим деньгам если потеряете или забудете пароль.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "Далее";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "AAt-Oh-ifI"; */
-"AAt-Oh-ifI.normalTitle" = "Далее";
+"AAt-Oh-ifI.normalTitle" = "ДАЛЕЕ";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "D2i-9s-GAC"; */
-"D2i-9s-GAC.normalTitle" = "Вперед";
+"D2i-9s-GAC.normalTitle" = "Далее";
 
 /* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
 "DUg-At-veb.text" = "МоеИмя";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
-"DgW-Gm-7l2.normalTitle" = "Вперед";
+"DgW-Gm-7l2.normalTitle" = "Далее";
 
 /* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
 "Dyh-gB-nOv.text" = "Далее Вы увидите всплывающее окно с запросом на доступ к Вашему списку контактов.";
@@ -81,7 +81,7 @@
 "fnL-7h-MQL.placeholder" = "Выберите пароль";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "hHD-NP-fM6"; */
-"hHD-NP-fM6.normalTitle" = "Вперед";
+"hHD-NP-fM6.normalTitle" = "Далее";
 
 /* Class = "UITextField"; placeholder = "Re-enter Password"; ObjectID = "hoE-Bh-x2F"; */
 "hoE-Bh-x2F.placeholder" = "Введите пароль повторно";
@@ -114,7 +114,7 @@
 "y2b-Sg-zfM.placeholder" = "Создать PIN";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1"; */
-"z5S-Vu-MC1.normalTitle" = "Вперед";
+"z5S-Vu-MC1.normalTitle" = "Далее";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "zqc-i8-gfC"; */
 "zqc-i8-gfC.text" = "Пароль";

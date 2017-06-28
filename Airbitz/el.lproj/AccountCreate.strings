@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "ΕΠΟΜΕΝΟ";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Το όνομα χρήστη και ο κωδικός πρόσβασης είναι γνωστά μόνο σε εσάς. Η Airbitz ούτε μεταδίδει ούτε αποθηκεύει δεδομένα χωρίς κρυπτογράφηση.";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "Το όνομα χρήστη και ο κωδικός πρόσβασης είναι γνωστά μόνο από εσάς και δεν μπορούν να ανακτηθούν εάν τα ξεχάσετε. Εάν χαθεί ο κωδικός πρόσβασης, θα ΧΑΣΕΤΕ και ΤΗΝ ΠΡΟΣΒΑΣΗ ΣΤΑ ΧΡΗΜΑΤΑ ΣΑΣ.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "ΕΠΟΜΕΝΟ";

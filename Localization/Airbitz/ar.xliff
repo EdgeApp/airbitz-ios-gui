@@ -2,13 +2,19 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text">
         <source>Scan QR</source>
         <note>Class = "UILabel"; text = "Scan QR"; ObjectID = "Lt8-cl-BMW";</note>
-        <target xml:lang="ar" state="translated">مسح QR</target>
+        <target xml:lang="ar" state="translated">رمز الإستجابة السريعة QR</target>
+        <alt-trans>
+          <target xml:lang="ar">رمز الإستجابة سريعة QR</target>
+        </alt-trans>
+        <alt-trans>
+          <target xml:lang="ar">مسح QR</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="WIw-mO-3VN.normalTitle">
         <source>Button</source>
@@ -18,13 +24,16 @@
       <trans-unit id="gQB-TM-9HQ.text">
         <source>Login or Send</source>
         <note>Class = "UILabel"; text = "Login or Send"; ObjectID = "gQB-TM-9HQ";</note>
-        <target xml:lang="ar" state="translated">تسجيل الدخول أو إرسال</target>
+        <target xml:lang="ar" state="translated">تسجيل الدخول أو أرسل</target>
+        <alt-trans>
+          <target xml:lang="ar">تسجيل الدخول أو إرسال</target>
+        </alt-trans>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle">
@@ -33,9 +42,9 @@
         <target xml:lang="ar" state="translated">التالى</target>
       </trans-unit>
       <trans-unit id="4eB-ff-Ebh.text">
-        <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
-        <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="ar" state="translated">ومن المعروف اسم المستخدم وكلمة المرور الخاصة بك فقط لأنك وأبدا إرسال أو تخزين مشفرة.</target>
+        <source>Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</source>
+        <note>Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh";</note>
+        <target xml:lang="ar" state="needs-translation">Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle">
         <source>NEXT</source>
@@ -65,7 +74,10 @@
       <trans-unit id="Dyh-gB-nOv.text">
         <source>You will next see a popup requesting access to your Contacts.</source>
         <note>Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv";</note>
-        <target xml:lang="ar" state="translated">سترى بجانب وصول المنبثقة يطلب إلى جهات الاتصال الخاصة بك.</target>
+        <target xml:lang="ar" state="translated">سترى بعد هذه الصفحة نافذة منبثقة تطلب منك الولوج الى جهات الإتصال الخاصة بك.</target>
+        <alt-trans>
+          <target xml:lang="ar">سترى بجانب وصول المنبثقة يطلب إلى جهات الاتصال الخاصة بك.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Ehm-ti-qdD.text">
         <source>Specify your name or arbitrary nickname ie "Coinmaster".
@@ -74,16 +86,23 @@ This is used ONLY when sending payments or requests to others to help them ident
 
 This is never sent to Airbitz or any third party and can be changed at any time in the future.</source>
         <note>Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD";</note>
-        <target xml:lang="ar" state="translated">تحديد اسم أو التعسفي أي لقب "Coinmaster".
+        <target xml:lang="ar" state="translated">تحديدالاسم المستعار  "Coinmaster".
+
+يتم استخدام هذا فقط عند إرسال دفعات أو طلبات للآخرين لمساعدتهم على التعرف عليك.
+
+ابدا لا يتم إرسالها الى Airbitz أو أي طرف ثالث، ويمكن تغييرها في أي وقت في المستقبل.</target>
+        <alt-trans>
+          <target xml:lang="ar">تحديد اسم أو التعسفي أي لقب "Coinmaster".
 
 ويستخدم هذا فقط عند إرسال المدفوعات أو طلبات للآخرين لمساعدتهم في التعرف عليك.
 
 لا يتم إرسال هذه إلى Airbitz أو أي طرف ثالث، ويمكن تغييرها في أي وقت في المستقبل.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="G0E-xz-b8e.text">
         <source>Set a 4 Digit PIN</source>
         <note>Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e";</note>
-        <target xml:lang="ar" state="translated">تعيين PIN 4 أرقام</target>
+        <target xml:lang="ar" state="translated">تعيين 4 ارقام PIN</target>
       </trans-unit>
       <trans-unit id="Gzw-pH-bAR.text">
         <source>1234</source>
@@ -103,7 +122,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="Tqs-NN-dWt.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt";</note>
-        <target xml:lang="ar" state="translated">PIN الخاص بك هو رمز 4 أرقام تستخدم للقيام سريعة إعادة تسجيل الدخول، إلى حسابك.</target>
+        <target xml:lang="ar" state="translated">رقم PIN مكون من 4 أرقام يستخدم لإجراء عمليات إعادة تسجيل الدخول بسرعة إلى حسابك.</target>
       </trans-unit>
       <trans-unit id="VAn-0y-asT.text">
         <source>See Strings.h</source>
@@ -118,12 +137,15 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="W8f-q2-Sa7.normalTitle">
         <source>Show</source>
         <note>Class = "UIButton"; normalTitle = "Show"; ObjectID = "W8f-q2-Sa7";</note>
-        <target xml:lang="ar" state="translated">تبين</target>
+        <target xml:lang="ar" state="translated">إظهار</target>
       </trans-unit>
       <trans-unit id="WkL-r2-NLT.text">
         <source>Sign Up</source>
         <note>Class = "UILabel"; text = "Sign Up"; ObjectID = "WkL-r2-NLT";</note>
-        <target xml:lang="ar" state="translated">تسجيل</target>
+        <target xml:lang="ar" state="translated">تسجيل الدخول</target>
+        <alt-trans>
+          <target xml:lang="ar">تسجيل</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Wkt-fz-AEf.normalTitle">
         <source>Button</source>
@@ -143,12 +165,15 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="cng-Cv-ULC.text">
         <source>Enable Contact Access</source>
         <note>Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC";</note>
-        <target xml:lang="ar" state="translated">تمكين الاتصال الوصول</target>
+        <target xml:lang="ar" state="translated">تمكين الوصول باتصال </target>
+        <alt-trans>
+          <target xml:lang="ar">تمكين الاتصال الوصول</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="dxS-14-iR5.text">
         <source>Your PIN is a 4 digit code used to do quick re-logins into your account.</source>
         <note>Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5";</note>
-        <target xml:lang="ar" state="translated">PIN الخاص بك هو رمز 4 أرقام تستخدم للقيام سريعة إعادة تسجيل الدخول، إلى حسابك.</target>
+        <target xml:lang="ar" state="translated">رمز  PIN الخاص بك هو  4 أرقام يستخدم للقيام لإعادة تسجيل الدخول سريعاً ، إلى حسابك.</target>
       </trans-unit>
       <trans-unit id="fCk-W4-OJJ.placeholder">
         <source>Nickname</source>
@@ -203,7 +228,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="w3d-xe-eUq.text">
         <source>The password is used to authenticate your account and to change sensitive settings.</source>
         <note>Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq";</note>
-        <target xml:lang="ar" state="translated">يتم استخدام كلمة المرور لمصادقة حسابك وتغيير إعدادات حساسية.</target>
+        <target xml:lang="ar" state="translated">يتم استخدام كلمة المرور لمصادقة حسابك وتغيير إعدادات حساسة.</target>
+        <alt-trans>
+          <target xml:lang="ar">يتم استخدام كلمة المرور لمصادقة حسابك وتغيير إعدادات حساسية.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="wff-Il-8GU.text">
         <source>Write it Down!</source>
@@ -223,7 +251,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="z5S-Vu-MC1.normalTitle">
         <source>NEXT</source>
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1";</note>
-        <target xml:lang="ar" state="translated">التالى</target>
+        <target xml:lang="ar" state="translated">التالي</target>
       </trans-unit>
       <trans-unit id="zqc-i8-gfC.text">
         <source>Password</source>
@@ -234,7 +262,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text">
@@ -250,7 +278,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="KxI-24-PCF.text">
         <source>Categories</source>
         <note>Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF";</note>
-        <target xml:lang="ar" state="translated">الفئات</target>
+        <target xml:lang="ar" state="translated">التصنيفات</target>
       </trans-unit>
       <trans-unit id="Sfb-cf-6wF.normalTitle">
         <source>More Categories</source>
@@ -260,7 +288,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="a78-ih-LDk.normalTitle">
         <source>Coffee &amp; Tea</source>
         <note>Class = "UIButton"; normalTitle = "Coffee &amp; Tea"; ObjectID = "a78-ih-LDk";</note>
-        <target xml:lang="ar" state="translated">قهوة &amp; شاي</target>
+        <target xml:lang="ar" state="translated">قهوة، شاي</target>
       </trans-unit>
       <trans-unit id="aNa-3g-QXd.placeholder">
         <source>Search</source>
@@ -275,7 +303,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="baO-FH-Oy4.text">
         <source>Near You</source>
         <note>Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4";</note>
-        <target xml:lang="ar" state="translated">قريب منك</target>
+        <target xml:lang="ar" state="translated">بالقرب منك</target>
       </trans-unit>
       <trans-unit id="f2g-xP-19U.text">
         <source>Label</source>
@@ -315,7 +343,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="sWr-pd-hBY.normalTitle">
         <source>ATMs</source>
         <note>Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY";</note>
-        <target xml:lang="ar" state="translated">ATMs</target>
+        <target xml:lang="ar" state="translated">الصرافات الألية</target>
       </trans-unit>
       <trans-unit id="wy7-Kv-3ap.text">
         <source>Address 1234</source>
@@ -326,7 +354,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle">
@@ -347,7 +375,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="JE3-3X-s8v.normalTitle">
         <source>Done</source>
         <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "JE3-3X-s8v"; Note = "Calculator Button";</note>
-        <target xml:lang="ar" state="translated">فعله</target>
+        <target xml:lang="ar" state="translated">تم</target>
+        <alt-trans>
+          <target xml:lang="ar">فعله</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="MCV-gu-4YU.normalTitle">
         <source>*</source>
@@ -428,31 +459,34 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text">
         <source>Slide to confirm</source>
         <note>Class = "UILabel"; text = "Slide to confirm"; ObjectID = "KGv-Ek-gk9";</note>
-        <target xml:lang="ar" state="translated">الشريحة فقط لتأكيد</target>
+        <target xml:lang="ar" state="translated">إسحب للتأكيد</target>
+        <alt-trans>
+          <target xml:lang="ar">الشريحة فقط لتأكيد</target>
+        </alt-trans>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle">
         <source>Agree </source>
         <note>Class = "UIButton"; normalTitle = "Agree "; ObjectID = "sls-ic-b1n";</note>
-        <target xml:lang="ar" state="translated">توافق </target>
+        <target xml:lang="ar" state="translated">موافق </target>
       </trans-unit>
     </body>
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder">
@@ -468,12 +502,18 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="0s2-OO-yBM.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "0s2-OO-yBM";</note>
-        <target xml:lang="ar" state="translated">رقعة</target>
+        <target xml:lang="ar" state="translated">علامة</target>
+        <alt-trans>
+          <target xml:lang="ar">رقعة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="1kz-sq-XsE.normalTitle">
         <source>Wallet Public Seed - XPub (advanced)</source>
         <note>Class = "UIButton"; normalTitle = "Wallet Public Seed - XPub (advanced)"; ObjectID = "1kz-sq-XsE";</note>
-        <target xml:lang="ar" state="translated">محفظة البذور العام - XPub (متقدم)</target>
+        <target xml:lang="ar" state="translated">أصل المحفظة العامة - XPub (متقدم)</target>
+        <alt-trans>
+          <target xml:lang="ar">محفظة البذور العام - XPub (متقدم)</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="2cx-Qx-XQc.placeholder">
         <source>User Name</source>
@@ -493,7 +533,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="4KX-hj-tJA.text">
         <source>Offline Wallet</source>
         <note>Class = "UILabel"; text = "Offline Wallet"; ObjectID = "4KX-hj-tJA";</note>
-        <target xml:lang="ar" state="translated">محفظة متواجد حاليا</target>
+        <target xml:lang="ar" state="translated">المحفظة غير متصلة بالإنترنت</target>
+        <alt-trans>
+          <target xml:lang="ar">محفظة متواجد حاليا</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="4ab-Wa-eS4.placeholder">
         <source>Password</source>
@@ -508,7 +551,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="6Ey-Xn-GTe.title">
         <source>Scan</source>
         <note>Class = "UITabBarItem"; title = "Scan"; ObjectID = "6Ey-Xn-GTe";</note>
-        <target xml:lang="ar" state="translated">تفحص</target>
+        <target xml:lang="ar" state="translated">فحص</target>
+        <alt-trans>
+          <target xml:lang="ar">تفحص</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="6qu-Co-pyz.text">
         <source>Label</source>
@@ -523,23 +569,35 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="8Nr-wB-OaB.text">
         <source>External Storage / Print</source>
         <note>Class = "UILabel"; text = "External Storage / Print"; ObjectID = "8Nr-wB-OaB";</note>
-        <target xml:lang="ar" state="translated">خارجي  تخزين / طباعة</target>
+        <target xml:lang="ar" state="translated">التخزين الخارجي / طباعة</target>
+        <alt-trans>
+          <target xml:lang="ar">خارجي  تخزين / طباعة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="8XB-1A-1hO.text">
         <source>Swipe to View Business Directory</source>
         <note>Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO";</note>
-        <target xml:lang="ar" state="translated">انتقاد ل رأي   الدليل التجاري</target>
+        <target xml:lang="ar" state="translated">انتقل لعرض دليل الأعمال</target>
+        <alt-trans>
+          <target xml:lang="ar">انتقاد ل رأي   الدليل التجاري</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="8iz-Uc-LTS.normalTitle">
         <source>Sign Up</source>
         <note>Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS";</note>
-        <target xml:lang="ar" state="translated">تسجيل</target>
+        <target xml:lang="ar" state="translated">تسجيل الدخول</target>
+        <alt-trans>
+          <target xml:lang="ar">تسجيل</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="51g-oU-QIB.text">
         <source>Import Wallet</source>
         <note>Class = "UILabel"; text = "Import Wallet"; ObjectID = "51g-oU-QIB";</note>
-        <target xml:lang="ar" state="translated">استيراد
+        <target xml:lang="ar" state="translated">استيراد المحفظة</target>
+        <alt-trans>
+          <target xml:lang="ar">استيراد
 محفظة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="90X-8Y-MEH.normalTitle">
         <source>Last Year</source>
@@ -549,7 +607,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="AOi-Wp-bVq.segmentTitles[0]">
         <source>Transfer</source>
         <note>Class = "UISegmentedControl"; AOi-Wp-bVq.segmentTitles[0] = "Transfer"; ObjectID = "AOi-Wp-bVq"; Note = "4 buttons at bottom of QR Scan screen";</note>
-        <target xml:lang="ar" state="translated">نقل السلطة</target>
+        <target xml:lang="ar" state="translated">تحويل</target>
+        <alt-trans>
+          <target xml:lang="ar">نقل السلطة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="AOi-Wp-bVq.segmentTitles[1]">
         <source>Address</source>
@@ -569,12 +630,18 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="AkB-cD-ba5.text">
         <source>Label</source>
         <note>Class = "UILabel"; text = "Label"; ObjectID = "AkB-cD-ba5";</note>
-        <target xml:lang="ar" state="translated">رقعة</target>
+        <target xml:lang="ar" state="translated">ملصق</target>
+        <alt-trans>
+          <target xml:lang="ar">رقعة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="BED-Cf-F1n.text">
         <source>Password must have an upper and lower case letter, a number, and a minimum of 10 characters</source>
         <note>Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n";</note>
-        <target xml:lang="ar" state="translated">يجب أن يكون كلمة السر خطاب العلوي والسفلي حالة، وعدد، والحد الأدنى من 10 حرفا</target>
+        <target xml:lang="ar" state="translated"> كلمة السر يجب أن تكون حالة الخطاب العلوي والسفلي ، والعدد، والحد الأدنى من 10 حروف</target>
+        <alt-trans>
+          <target xml:lang="ar">يجب أن يكون كلمة السر خطاب العلوي والسفلي حالة، وعدد، والحد الأدنى من 10 حرفا</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Bxa-tB-mk3.text">
         <source>Phone</source>
@@ -594,7 +661,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="CuI-Tj-a8q.text">
         <source>Enter password to decode wallet</source>
         <note>Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q";</note>
-        <target xml:lang="ar" state="translated">أدخل كلمة المرور لفك محفظة</target>
+        <target xml:lang="ar" state="translated">أدخل كلمة المرور لفك المحفظة</target>
+        <alt-trans>
+          <target xml:lang="ar">أدخل كلمة المرور لفك محفظة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Det-Mr-8a9.normalTitle">
         <source>Next Step</source>
@@ -604,7 +674,10 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="Dh6-PA-WGi.text">
         <source>Test</source>
         <note>Class = "UITextView"; text = "Test"; ObjectID = "Dh6-PA-WGi";</note>
-        <target xml:lang="ar" state="translated">‮اختبر</target>
+        <target xml:lang="ar" state="translated">‮اختبار</target>
+        <alt-trans>
+          <target xml:lang="ar">‮اختبر</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="EuE-s0-NQ2.text">
         <source>USD</source>
@@ -1011,7 +1084,7 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text">
@@ -1023,13 +1096,19 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle">
         <source>OK</source>
         <note>Class = "UIButton"; normalTitle = "OK"; ObjectID = "24";</note>
-        <target xml:lang="ar" state="translated">OK</target>
+        <target xml:lang="ar" state="translated">حسنا</target>
+        <alt-trans>
+          <target xml:lang="ar">موافق</target>
+        </alt-trans>
+        <alt-trans>
+          <target xml:lang="ar">OK</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="25.normalTitle">
         <source>Cancel</source>
@@ -1040,23 +1119,23 @@ This is never sent to Airbitz or any third party and can be changed at any time 
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text">
         <source>2FA Reset Requested by another device.</source>
         <note>Class = "UILabel"; text = "2FA Reset Requested by another device."; ObjectID = "1Qx-Jp-bYp";</note>
-        <target xml:lang="ar" state="translated">2FA إعادة طلب من قبل جهاز آخر.</target>
+        <target xml:lang="ar" state="translated">طلب إعادة التوثيق الثنائي 2FA من قبل جهاز آخر.</target>
       </trans-unit>
       <trans-unit id="3uS-L5-frK.normalTitle">
         <source>KEEP 2FA</source>
         <note>Class = "UIButton"; normalTitle = "KEEP 2FA"; ObjectID = "3uS-L5-frK";</note>
-        <target xml:lang="ar" state="translated">احتفظ 2FA</target>
+        <target xml:lang="ar" state="translated">احتفظ بالتوثيق الثنائي 2FA</target>
       </trans-unit>
       <trans-unit id="4md-ob-Ttv.text">
         <source>Core Version:</source>
         <note>Class = "UILabel"; text = "Core Version:"; ObjectID = "4md-ob-Ttv";</note>
-        <target xml:lang="ar" state="translated">النواة الأساسية إصدار:</target>
+        <target xml:lang="ar" state="translated">النسخة الأساسية:</target>
       </trans-unit>
       <trans-unit id="9ur-p7-oPb.text">
         <source>Label</source>
@@ -1066,17 +1145,17 @@ This is never sent to Airbitz or any third party and can be changed at any time 
       <trans-unit id="Ag5-Xn-Vpg.normalTitle">
         <source>Clear Watcher Cache</source>
         <note>Class = "UIButton"; normalTitle = "Clear Watcher Cache"; ObjectID = "Ag5-Xn-Vpg";</note>
-        <target xml:lang="ar" state="translated">واضح مراقب مخبأ</target>
+        <target xml:lang="ar" state="translated">مسح ذاكرة المراقبة للتخزين المؤقت</target>
       </trans-unit>
       <trans-unit id="Bs1-Yi-SIh.normalTitle">
         <source>Upload Log Files</source>
         <note>Class = "UIButton"; normalTitle = "Upload Log Files"; ObjectID = "Bs1-Yi-SIh";</note>
-        <target xml:lang="ar" state="translated">تحميل ملفات الدخول</target>
+        <target xml:lang="ar" state="translated">تحميل ملفات التسجيلات</target>
       </trans-unit>
       <trans-unit id="GMX-G5-Rl3.text">
         <source>Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</source>
         <note>Class = "UILabel"; text = "Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled"; ObjectID = "GMX-G5-Rl3";</note>
-        <target xml:lang="ar" state="translated">تمكين مصادقة 2-عامل لزيادة الأمن من خلال السماح تسجيل الدخول من قبل دخولك الأجهزة فقط. إضافة المزيد من الأجهزة عن طريق مسح رمز الاستجابة السريعة أدناه بعد تمكين 2FA</target>
+        <target xml:lang="ar" state="translated">تفعيل التوثيق الثنائي 2FA لزيادة الأمن من خلال السماح بسجيل الدخول مرة واحدة بعد تسجيل الدخول الأخير من كل الأجهزة. إضافة المزيد من الأجهزة عن طريق رمز الاستجابة السريع أدناه بعد تفعيل الخاصية.</target>
       </trans-unit>
       <trans-unit id="GXU-6G-OIw.placeholder">
         <source>Current Password</source>
@@ -1087,18 +1166,22 @@ This is never sent to Airbitz or any third party and can be changed at any time 
         <source>Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. 
 Scan the QR code using this device</source>
         <note>Class = "UILabel"; text = "Using the device that enabled 2 Factor Authentication, go to Settings -&gt; Two Factor. \nScan the QR code using this device"; ObjectID = "Izr-Cl-Osv";</note>
-        <target xml:lang="ar" state="translated">استخدام الجهاز الذي مكن 2 مصادقة عامل، انتقل إلى إعدادات -&gt; اثنين عامل. 
+        <target xml:lang="ar" state="translated">استخدام الجهاز يجب تفعيل التوثيق الثنائي 2FA، انتقل إلى الإعدادات -&gt;التوثيق الثنائي. 
+مسح رمز الاستجابة السريع QR باستخدام هذا الجهاز</target>
+        <alt-trans>
+          <target xml:lang="ar">استخدام الجهاز الذي مكن 2 مصادقة عامل، انتقل إلى إعدادات -&gt; اثنين عامل. 
 مسح رمز الاستجابة السريعة باستخدام هذا الجهاز</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="LAg-aY-W5b.normalTitle">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "LAg-aY-W5b";</note>
-        <target xml:lang="ar" state="translated">مطهو إلى حد كاف</target>
+        <target xml:lang="ar" state="translated">تم</target>
       </trans-unit>
       <trans-unit id="Myh-H6-aDd.text">
         <source>Version:</source>
         <note>Class = "UILabel"; text = "Version:"; ObjectID = "Myh-H6-aDd";</note>
-        <target xml:lang="ar" state="translated">إصدار:</target>
+        <target xml:lang="ar" state="translated">الإصدار:</target>
       </trans-unit>
       <trans-unit id="RqX-ow-U05.text">
         <source>Label</source>
@@ -1113,7 +1196,7 @@ Scan the QR code using this device</source>
       <trans-unit id="T6x-zH-xvf.text">
         <source>This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. </source>
         <note>Class = "UILabel"; text = "This account has 2 Factor Authentication (2FA) enabled. Scan the 2FA token from the device that enabled 2FA to give access to this device. "; ObjectID = "T6x-zH-xvf";</note>
-        <target xml:lang="ar" state="translated">ويتميز هذا الحساب 2 مصادقة عامل (2FA) تمكين. مسح رمز 2FA من الجهاز الذي مكن 2FA منح حق الوصول إلى هذا الجهاز. </target>
+        <target xml:lang="ar" state="translated">هذا الحساب لديه خاصية التوثيق الثنائي (2FA) تفعيل. مسح رمز التوثيق الثنائي 2FA من الجهاز الذي مكن من 2FA لإعطاء الوصول إلى هذا الجهاز. </target>
       </trans-unit>
       <trans-unit id="X6G-HD-WUv.placeholder">
         <source>Search</source>
@@ -1133,7 +1216,7 @@ Scan the QR code using this device</source>
       <trans-unit id="avV-bm-INd.normalTitle">
         <source>DISABLE 2FA</source>
         <note>Class = "UIButton"; normalTitle = "DISABLE 2FA"; ObjectID = "avV-bm-INd";</note>
-        <target xml:lang="ar" state="translated">معاقمعاق 2FA</target>
+        <target xml:lang="ar" state="translated">تعطيل خاصية التوثيق الثنائي 2FA</target>
       </trans-unit>
       <trans-unit id="bYl-WU-bNw.text">
         <source>Request that the Two Factor authentication be turned off. The request will be automatically reset in 7 days if no action is taken by the account user on authenticated devices</source>
@@ -1153,7 +1236,10 @@ Scan the QR code using this device</source>
       <trans-unit id="hxc-na-KPc.text">
         <source>Two factor reset has been requested</source>
         <note>Class = "UILabel"; text = "Two factor reset has been requested"; ObjectID = "hxc-na-KPc";</note>
-        <target xml:lang="ar" state="translated">اثنين عامل  إعادة تعيين  وقد طلب</target>
+        <target xml:lang="ar" state="translated">تم طلب اعادة تعيين العملة البديلة </target>
+        <alt-trans>
+          <target xml:lang="ar">اثنين عامل  إعادة تعيين  وقد طلب</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="iUa-wU-ZnQ.normalTitle">
         <source>StylizedOutline</source>
@@ -1168,7 +1254,7 @@ Scan the QR code using this device</source>
       <trans-unit id="mJ9-nG-s79.text">
         <source>Enabled</source>
         <note>Class = "UILabel"; text = "Enabled"; ObjectID = "mJ9-nG-s79";</note>
-        <target xml:lang="ar" state="translated">ممكنةممكنة</target>
+        <target xml:lang="ar" state="translated">تمكين</target>
       </trans-unit>
       <trans-unit id="nhU-8o-H50.normalTitle">
         <source>Button</source>
@@ -1204,7 +1290,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text">
@@ -1216,9 +1302,6 @@ Scan the QR code using this device</source>
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "GIG-Sd-O0c";</note>
         <target xml:lang="ar" state="translated">تسجيل الخروج</target>
-        <alt-trans>
-          <target xml:lang="ar">خروج</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="Lwy-1d-Qgs.accessibilityLabel">
         <source>Buy or Sell</source>
@@ -1233,7 +1316,10 @@ Scan the QR code using this device</source>
       <trans-unit id="Zac-Lf-J4y.text">
         <source>SETTINGS</source>
         <note>Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y";</note>
-        <target xml:lang="ar" state="translated">إعدادات</target>
+        <target xml:lang="ar" state="translated">الإعدادات</target>
+        <alt-trans>
+          <target xml:lang="ar">إعدادات</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Zu4-Fd-NGP.accessibilityLabel">
         <source>Buy or Sell</source>
@@ -1244,9 +1330,6 @@ Scan the QR code using this device</source>
         <source>Logout</source>
         <note>Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq";</note>
         <target xml:lang="ar" state="translated">تسجيل الخروج</target>
-        <alt-trans>
-          <target xml:lang="ar">خروج</target>
-        </alt-trans>
       </trans-unit>
       <trans-unit id="bQy-8e-q5h.text">
         <source>See Strings.h</source>
@@ -1271,7 +1354,10 @@ Scan the QR code using this device</source>
       <trans-unit id="vsf-Ms-1Ff.accessibilityHint">
         <source>the currently logged in account</source>
         <note>Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff";</note>
-        <target xml:lang="ar" state="translated">دخوله حاليا في حساب</target>
+        <target xml:lang="ar" state="translated">الحساب المسجل حاليا</target>
+        <alt-trans>
+          <target xml:lang="ar">دخوله حاليا في حساب</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="vsf-Ms-1Ff.text">
         <source>Label</source>
@@ -1292,7 +1378,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder">
@@ -1318,49 +1404,73 @@ Scan the QR code using this device</source>
       <trans-unit id="bfD-1n-tCg.normalTitle">
         <source>DONE</source>
         <note>Class = "UIButton"; normalTitle = "DONE"; ObjectID = "bfD-1n-tCg";</note>
-        <target xml:lang="ar" state="translated">مطهو إلى حد كاف</target>
+        <target xml:lang="ar" state="translated">تم ذلك</target>
       </trans-unit>
     </body>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="ar">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="  Amount">
         <source>  Amount</source>
         <note>Placeholder text for Receive screen amount text field</note>
-        <target xml:lang="ar" state="translated">  كمية</target>
+        <target xml:lang="ar" state="translated">  المبلغ</target>
+        <alt-trans>
+          <target xml:lang="ar">  كمية</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id=" Please choose a wallet to receive funds.">
         <source> Please choose a wallet to receive funds.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated"> الرجاء اختيار محفظة لتلقي الأموال.</target>
+        <target xml:lang="ar" state="translated"> من فظلك إختر المحفظة لإستقبال المبلغ.</target>
+        <alt-trans>
+          <target xml:lang="ar"> من فظلك إختر المحفظة لإستقبال الأموال.</target>
+        </alt-trans>
+        <alt-trans>
+          <target xml:lang="ar"> الرجاء اختيار محفظة لتلقي الأموال.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ / %@ requested via %@ on %@.">
         <source>%1$@ / %2$@ requested via %3$@ on %4$@.</source>
         <note>ie. $1.50 / 5 mB requested via email on Sep 16, 1976</note>
-        <target xml:lang="ar" state="translated">%1$@ / %2$@ طلب عبر %3$@ on %4$@.</target>
+        <target xml:lang="ar" state="translated">%1$@ / %2$@ أطلب عبر %3$@ on %4$@.</target>
+        <alt-trans>
+          <target xml:lang="ar">%1$@ / %2$@ طلب عبر %3$@ on %4$@.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request">
         <source>%@ Bitcoin Request</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">%@ بيتكوين طلب</target>
+        <target xml:lang="ar" state="translated">%@ طلب البيتكوين</target>
+        <alt-trans>
+          <target xml:lang="ar">%@ بيتكوين طلب</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Bitcoin Request from %@">
         <source>%1$@ Bitcoin Request from %2$@</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">%1$@ طلب بيتكوين من%2$@</target>
+        <target xml:lang="ar" state="translated">%1$@ أطلب بيتكوين من%2$@</target>
+        <alt-trans>
+          <target xml:lang="ar">%1$@ طلب بيتكوين من%2$@</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Bitcoin received. Tap for details.">
         <source>%@ Bitcoin received. Tap for details.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">%@ تلقى بيتكوين. اضغط للاطلاع على التفاصيل.</target>
+        <target xml:lang="ar" state="translated">%@ إستقبال البيتكوين. اضغط للاطلاع على التفاصيل.</target>
+        <alt-trans>
+          <target xml:lang="ar">%@ تلقى بيتكوين. اضغط للاطلاع على التفاصيل.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ Recovery Token">
         <source>%@ Recovery Token</source>
         <note>\'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet</note>
-        <target xml:lang="ar" state="translated">%@ انتعاش رمز</target>
+        <target xml:lang="ar" state="translated">%@ استرجاع الرموز Token</target>
+        <alt-trans>
+          <target xml:lang="ar">%@ انتعاش رمز</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@ failed:\n%@">
         <source>%1$@ failed:
@@ -1372,54 +1482,81 @@ Scan the QR code using this device</source>
       <trans-unit id="%@ has requested a bitcoin address to send money to.">
         <source>%@ has requested a bitcoin address to send money to.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">%@ وقد طلبت عنوان بيتكوين لإرسال الأموال إلى.</target>
+        <target xml:lang="ar" state="translated">%@ قد طلبت عنوان البيتكوين لإرسال الأموال إلى.</target>
+        <alt-trans>
+          <target xml:lang="ar">%@ وقد طلبت عنوان بيتكوين لإرسال الأموال إلى.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="%@\n\nShare this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app.">
         <source>%1$@
 
 Share this link to receive revenue from users that install and use %2$@. You will receive 0.25%% of all gift card purchases made inside of this app.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">شارك هذا الرابط للحصول على الإيرادات من المستخدمين الذين التركيب والاستخدام %2$@. ستستلم 0.25%% جميع مشتريات بطاقة هدية مصنوعة داخل هذا التطبيق.</target>
+        <target xml:lang="ar" state="translated">شارك هذا الرابط للحصول على نسبة من المستخدمين الذين سيتبثون و يستخدمون %2$@. ستستلم 0.25%%  من جميع المشتريات بطاقة الهديا داخل هذا التطبيق.</target>
+        <alt-trans>
+          <target xml:lang="ar">شارك هذا الرابط للحصول على الإيرادات من المستخدمين الذين التركيب والاستخدام %2$@. ستستلم 0.25%% جميع مشتريات بطاقة هدية مصنوعة داخل هذا التطبيق.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="** Warning **">
         <source>** Warning **</source>
         <note>** Warning ** text on partial payment</note>
         <target xml:lang="ar" state="translated">** تحذير **</target>
       </trans-unit>
+      <trans-unit id="** Warning **\n\nSetting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery">
+        <source>** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</target>
+      </trans-unit>
       <trans-unit id="**WARNING** You will NEVER be able to recover your password if it is forgotten!!">
         <source>**WARNING** You will NEVER be able to recover your password if it is forgotten!!</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">** تحذير ** وأنك لن تكون قادرة على استعادة كلمة السر الخاصة بك في حالة نسيانها!!</target>
+        <target xml:lang="ar" state="translated">** تحذير ** إنك لن تكون قادرا على استعادة كلمة السر الخاصة بك في حالة نسيانها!!</target>
       </trans-unit>
       <trans-unit id="2 Factor (Enhanced Security)">
         <source>2 Factor (Enhanced Security)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">2 عامل (تعزيز الأمن)</target>
+        <target xml:lang="ar" state="translated">التوثيق الثنائي F2 (تعزيز الأمن)</target>
       </trans-unit>
       <trans-unit id="4 Digit PIN">
         <source>4 Digit PIN</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">PIN 4 أرقام</target>
+        <target xml:lang="ar" state="translated">ارقام كود PIN اربعة ارقام</target>
+        <alt-trans>
+          <target xml:lang="ar">PIN 4 أرقام</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="15-20% off Amazon">
         <source>15-20% off Amazon</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">15-20٪ من الأمازون</target>
+        <target xml:lang="ar" state="translated">15-20٪ من موقع امازون</target>
+        <alt-trans>
+          <target xml:lang="ar">15-20٪ من الأمازون</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="A two factor reset has been requested. If you did not create this request, login as %@ and change your password.">
         <source>A two factor reset has been requested. If you did not create this request, login as %@ and change your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">وقد طلب إعادة تعيين اثنين عامل. إذا لم تقم بإنشاء هذا الطلب، سجل دخول%@ وتغيير كلمة المرور الخاصة بك.</target>
+        <target xml:lang="ar" state="translated">قد طلب إعادة تعيين التوثيق الثنائي 2FA. إذا لم تنشئ هذا الطلب، فقم بتسجيل الدخول باسم٪ @ وتغيير كلمة المرور.</target>
+        <alt-trans>
+          <target xml:lang="ar">وقد طلب إعادة تعيين اثنين عامل. إذا لم تقم بإنشاء هذا الطلب، سجل دخول%@ وتغيير كلمة المرور الخاصة بك.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="ACCOUNT: ">
         <source>ACCOUNT: </source>
         <note>section header in settings table</note>
-        <target xml:lang="ar" state="translated">حساب: </target>
+        <target xml:lang="ar" state="translated">الحساب: </target>
+        <alt-trans>
+          <target xml:lang="ar">حساب: </target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="ARCHIVE">
         <source>ARCHIVE</source>
         <note>title of archived wallets table</note>
-        <target xml:lang="ar" state="translated">أرشيف</target>
+        <target xml:lang="ar" state="translated">الأرشيف</target>
       </trans-unit>
       <trans-unit id="ATM">
         <source>ATM</source>
@@ -1439,12 +1576,18 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Account '%@' needs a password. Account is not accessible on a new device without a password.">
         <source>Account '%@' needs a password. Account is not accessible on a new device without a password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">حساب %@يحتاج كلمة مرور. الحساب لا يمكن الوصول إليها على جهاز جديد بدون كلمة مرور.</target>
+        <target xml:lang="ar" state="translated">حساب %@يحتاج كلمة مرور. لا يمكن الوصول إلى الحساب على جهاز جديد بدون كلمة مرور.</target>
+        <alt-trans>
+          <target xml:lang="ar">حساب %@يحتاج كلمة مرور. الحساب لا يمكن الوصول إليها على جهاز جديد بدون كلمة مرور.</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Account Sign Up">
         <source>Account Sign Up</source>
         <note>Title of account signin error alert</note>
-        <target xml:lang="ar" state="translated">حساب اشترك</target>
+        <target xml:lang="ar" state="translated">حساب الاشتراك</target>
+        <alt-trans>
+          <target xml:lang="ar">حساب اشترك</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Account has no password">
         <source>Account has no password</source>
@@ -1454,12 +1597,15 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Add New">
         <source>Add New</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">اضف جديد</target>
+        <target xml:lang="ar" state="translated">إضافة جديدة</target>
       </trans-unit>
       <trans-unit id="Affiliate Revenue">
         <source>Affiliate Revenue</source>
         <note>Income category for affiliate revenue</note>
-        <target xml:lang="ar" state="translated">انضم الإيرادات</target>
+        <target xml:lang="ar" state="translated">ضم الإيرادات</target>
+        <alt-trans>
+          <target xml:lang="ar">انضم الإيرادات</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Affiliate link has been copied to the clipboard">
         <source>Affiliate link has been copied to the clipboard</source>
@@ -1469,7 +1615,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Air Travel">
         <source>Air Travel</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">هواء سفر</target>
+        <target xml:lang="ar" state="translated">السفر الجوي</target>
       </trans-unit>
       <trans-unit id="AirPrint is not currently available">
         <source>AirPrint is not currently available</source>
@@ -1479,12 +1625,15 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Alcohol &amp; Bars">
         <source>Alcohol &amp; Bars</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">الحانات &amp; الحانات</target>
+        <target xml:lang="ar" state="translated">كحول &amp; amp : بار</target>
+        <alt-trans>
+          <target xml:lang="ar">المشروبات الكحولية</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Allowance">
         <source>Allowance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">بدل</target>
+        <target xml:lang="ar" state="translated">سماح</target>
       </trans-unit>
       <trans-unit id="Amount is too small">
         <source>Amount is too small</source>
@@ -1494,7 +1643,7 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Amusement">
         <source>Amusement</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">كل ما يسلي</target>
+        <target xml:lang="ar" state="translated">تسلية</target>
       </trans-unit>
       <trans-unit id="An app has requested a bitcoin address to send money to.">
         <source>An app has requested a bitcoin address to send money to.</source>
@@ -1519,7 +1668,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Approve">
         <source>Approve</source>
         <note>APPROVE button text</note>
-        <target xml:lang="ar" state="translated">وافق</target>
+        <target xml:lang="ar" state="translated">موافق</target>
+        <alt-trans>
+          <target xml:lang="ar">وافق</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Approving Login...">
         <source>Approving Login...</source>
@@ -1554,12 +1706,18 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Auto Insurance">
         <source>Auto Insurance</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">تأمين تلقائي</target>
+        <target xml:lang="ar" state="translated">التأمين تلقائي</target>
+        <alt-trans>
+          <target xml:lang="ar">تأمين تلقائي</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Auto Payment">
         <source>Auto Payment</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">السيارات الدفع</target>
+        <target xml:lang="ar" state="translated">الدفع الاوتوماتيكي</target>
+        <alt-trans>
+          <target xml:lang="ar">السيارات الدفع</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Auto log off after">
         <source>Auto log off after</source>
@@ -1579,7 +1737,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Babysitter &amp; Daycare">
         <source>Babysitter &amp; Daycare</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">جليسه اطفال &amp; الرعاية النهارية</target>
+        <target xml:lang="ar" state="translated">جليسه الأطفال &amp; الرعاية النهارية</target>
+        <alt-trans>
+          <target xml:lang="ar">جليسه اطفال &amp; الرعاية النهارية</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Back">
         <source>Back</source>
@@ -1594,7 +1755,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Bank Fee">
         <source>Bank Fee</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">بنك رسوم</target>
+        <target xml:lang="ar" state="translated">رسوم البنك</target>
+        <alt-trans>
+          <target xml:lang="ar">بنك رسوم</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Bills &amp; Utilities">
         <source>Bills &amp; Utilities</source>
@@ -1649,12 +1813,18 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Books">
         <source>Books</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">كتاب</target>
+        <target xml:lang="ar" state="translated">كتب</target>
+        <alt-trans>
+          <target xml:lang="ar">كتاب</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Books &amp; Supplies">
         <source>Books &amp; Supplies</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">كتب &amp; اللوازم</target>
+        <target xml:lang="ar" state="translated">الكتب &amp; اللوازم</target>
+        <alt-trans>
+          <target xml:lang="ar">كتب &amp; اللوازم</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Business Name or Category">
         <source>Business Name or Category</source>
@@ -1671,10 +1841,20 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">شراء / بيع بيتكوين</target>
       </trans-unit>
+      <trans-unit id="Buy/Sell with Bank Account (EUR/CHF)">
+        <source>Buy/Sell with Bank Account (EUR/CHF)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Buy/Sell with Bank Account (EUR/CHF)</target>
+      </trans-unit>
       <trans-unit id="Buy/Sell with Bank Account (USA)">
         <source>Buy/Sell with Bank Account (USA)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">شراء / بيع مع حساب البنك (الولايات المتحدة الأمريكية)</target>
+      </trans-unit>
+      <trans-unit id="Buy/Sell with Cash (USA)">
+        <source>Buy/Sell with Cash (USA)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Buy/Sell with Cash (USA)</target>
       </trans-unit>
       <trans-unit id="CANCEL">
         <source>CANCEL</source>
@@ -1704,12 +1884,18 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Car Wash">
         <source>Car Wash</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">غسيل سيارة</target>
+        <target xml:lang="ar" state="translated">غسل السيارة</target>
+        <alt-trans>
+          <target xml:lang="ar">غسيل سيارة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Cash &amp; ATM">
         <source>Cash &amp; ATM</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">السيولة النقدية &amp; ماكينة الصراف الآلي</target>
+        <target xml:lang="ar" state="translated">السيولة النقدية &amp;  الصراف الآلي</target>
+        <alt-trans>
+          <target xml:lang="ar">السيولة النقدية &amp; ماكينة الصراف الآلي</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Categories">
         <source>Categories</source>
@@ -1744,7 +1930,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Charity">
         <source>Charity</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">مؤسسة خيرية</target>
+        <target xml:lang="ar" state="translated">الاعمال الخيرية</target>
+        <alt-trans>
+          <target xml:lang="ar">مؤسسة خيرية</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Check Password">
         <source>Check Password</source>
@@ -1774,7 +1963,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Clothing">
         <source>Clothing</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">ملابس</target>
+        <target xml:lang="ar" state="translated">الملابس</target>
+        <alt-trans>
+          <target xml:lang="ar">ملابس</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Coffee &amp; Tea">
         <source>Coffee &amp; Tea</source>
@@ -1799,7 +1991,13 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Confirmations">
         <source>Confirmations</source>
         <note>Num of confirmations in transaction list</note>
-        <target xml:lang="ar" state="translated">التأكيد</target>
+        <target xml:lang="ar" state="translated">تأكيدات</target>
+        <alt-trans>
+          <target xml:lang="ar">تأكيد</target>
+        </alt-trans>
+        <alt-trans>
+          <target xml:lang="ar">التأكيد</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Confirmed">
         <source>Confirmed</source>
@@ -1869,6 +2067,16 @@ Share this link to receive revenue from users that install and use %2$@. You wil
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">كلمة السر الحالية</target>
       </trans-unit>
+      <trans-unit id="Custom Fee (enter above)">
+        <source>Custom Fee (enter above)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Custom Fee (enter above)</target>
+      </trans-unit>
+      <trans-unit id="Custom fee in satoshis/byte">
+        <source>Custom fee in satoshis/byte</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Custom fee in satoshis/byte</target>
+      </trans-unit>
       <trans-unit id="DEFAULT EXCHANGE RATE">
         <source>DEFAULT EXCHANGE RATE</source>
         <note>section header in settings table</note>
@@ -1932,7 +2140,10 @@ Share this link to receive revenue from users that install and use %2$@. You wil
       <trans-unit id="Dentist">
         <source>Dentist</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">طبيبة الاسنان</target>
+        <target xml:lang="ar" state="translated">طبيب الاسنان</target>
+        <alt-trans>
+          <target xml:lang="ar">طبيبة الاسنان</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Deposit to Savings">
         <source>Deposit to Savings</source>
@@ -2045,6 +2256,11 @@ Enter it below to make sure:</source>
         <source>Enable Bluetooth in System Settings</source>
         <note>settings text</note>
         <target xml:lang="ar" state="translated">تمكين البلوتوث في إعدادات النظام</target>
+      </trans-unit>
+      <trans-unit id="Enable Override">
+        <source>Enable Override</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="translated">تمكين تجاوز</target>
       </trans-unit>
       <trans-unit id="Enable Touch ID">
         <source>Enable Touch ID</source>
@@ -2203,7 +2419,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Fast Food">
         <source>Fast Food</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">الطعام السريع</target>
+        <target xml:lang="ar" state="translated">الوجبات السريعة</target>
+        <alt-trans>
+          <target xml:lang="ar">الطعام السريع</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Feedback">
         <source>Feedback</source>
@@ -2213,7 +2432,13 @@ Enter it below to make sure:</source>
       <trans-unit id="Fees &amp; Charges">
         <source>Fees &amp; Charges</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">رسوم&amp; رسوم</target>
+        <target xml:lang="ar" state="translated">رسوم و &amp;amp ,  أسعار</target>
+        <alt-trans>
+          <target xml:lang="ar">رسوم و وحدة قياس ,  أسعار</target>
+        </alt-trans>
+        <alt-trans>
+          <target xml:lang="ar">رسوم&amp; رسوم</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Fetching Login Request...">
         <source>Fetching Login Request...</source>
@@ -2238,7 +2463,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Financial Advisor">
         <source>Financial Advisor</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">مالي المستشار</target>
+        <target xml:lang="ar" state="translated">المستشار المالي</target>
+        <alt-trans>
+          <target xml:lang="ar">مالي المستشار</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="First Name (optional)">
         <source>First Name (optional)</source>
@@ -2313,7 +2541,10 @@ Enter it below to make sure:</source>
       <trans-unit id="Gym">
         <source>Gym</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">رياضة بدنية</target>
+        <target xml:lang="ar" state="translated">نادي رياضي </target>
+        <alt-trans>
+          <target xml:lang="ar">رياضة بدنية</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="HOA Dues">
         <source>HOA Dues</source>
@@ -2481,6 +2712,11 @@ Enter it below to make sure:</source>
         <source>Incorrect Password. Try again, or change it now?</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">كلمة المرور غير صحيحة. حاول مرة أخرى، أو تغييره الآن؟</target>
+      </trans-unit>
+      <trans-unit id="Incorrect Password. Try again?">
+        <source>Incorrect Password. Try again?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="translated">كلمة المرور غير صحيحة. حاول ثانية؟</target>
       </trans-unit>
       <trans-unit id="Incorrect current password">
         <source>Incorrect current password</source>
@@ -2822,6 +3058,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">مصدر دخل آخر</target>
       </trans-unit>
+      <trans-unit id="Override Bitcoin Servers (advanced)">
+        <source>Override Bitcoin Servers (advanced)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="translated">تجاوز خوادم بيتكوين (متقدمة)</target>
+      </trans-unit>
       <trans-unit id="PIN">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2948,10 +3189,10 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">يرجى إنشاء PIN لهذا الحساب  لتمكين سريعة إعادة تسجيل الدخول</target>
       </trans-unit>
-      <trans-unit id="Please create a new account and transfer your funds if you forgot your password.">
-        <source>Please create a new account and transfer your funds if you forgot your password.</source>
+      <trans-unit id="Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.">
+        <source>Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">الرجاء إنشاء حساب جديد وتحويل الأموال الخاصة بك إذا كنت قد نسيت كلمة المرور الخاصة بك.</target>
+        <target xml:lang="ar" state="needs-translation">Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.</target>
       </trans-unit>
       <trans-unit id="Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.">
         <source>Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.</source>
@@ -3089,6 +3330,12 @@ Enter it below to make sure:</source>
         <source>Received...</source>
         <note>Received string on Request screen</note>
         <target xml:lang="ar" state="translated">تم الاستلام...</target>
+      </trans-unit>
+      <trans-unit id="Recovery Answers Corrupt!">
+        <source>Recovery Answers Corrupt!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="translated">
+الانتعاش إجابات الفاسدة!</target>
       </trans-unit>
       <trans-unit id="Recovery Disabled">
         <source>Recovery Disabled</source>
@@ -3393,7 +3640,10 @@ Please change your password and PIN</source>
       <trans-unit id="Sign Up">
         <source>Sign Up</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">تسجيل</target>
+        <target xml:lang="ar" state="translated">تسجيل الدخول</target>
+        <alt-trans>
+          <target xml:lang="ar">تسجيل</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Sign-Up failed:\n%@">
         <source>Sign-Up failed:
@@ -3411,6 +3661,11 @@ Please change your password and PIN</source>
         <source>Skip this step</source>
         <note>Title of Skip this step alert</note>
         <target xml:lang="ar" state="translated">تخطي هذه الخطوة</target>
+      </trans-unit>
+      <trans-unit id="Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.">
+        <source>Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.</target>
       </trans-unit>
       <trans-unit id="Sorry">
         <source>Sorry</source>
@@ -3485,7 +3740,10 @@ Please change your password and PIN</source>
       <trans-unit id="TOTAL: ">
         <source>TOTAL: </source>
         <note>Prefix of wallet balance dropdown header</note>
-        <target xml:lang="ar" state="translated">حاصل جمع: </target>
+        <target xml:lang="ar" state="translated">المبلغ الإجمالي  </target>
+        <alt-trans>
+          <target xml:lang="ar">حاصل جمع: </target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Tap and hold a wallet for additional options">
         <source>Tap and hold a wallet for additional options</source>
@@ -3653,10 +3911,18 @@ Your username and password are known only to you and never stored unencrypted.</
         <note>Transaction Details header text</note>
         <target xml:lang="ar" state="translated">تفاصيل الصفقه</target>
       </trans-unit>
+      <trans-unit id="Transaction Dropped">
+        <source>Transaction Dropped</source>
+        <note>Transaction list description of dropped transaction</note>
+        <target xml:lang="ar" state="needs-translation">Transaction Dropped</target>
+      </trans-unit>
       <trans-unit id="Transfer">
         <source>Transfer</source>
         <note>Financial transaction that moves money from one account to another</note>
-        <target xml:lang="ar" state="translated">نقل السلطة</target>
+        <target xml:lang="ar" state="translated">تحويل</target>
+        <alt-trans>
+          <target xml:lang="ar">نقل السلطة</target>
+        </alt-trans>
       </trans-unit>
       <trans-unit id="Transfer From %@">
         <source>Transfer From %@</source>
@@ -3677,6 +3943,11 @@ Your username and password are known only to you and never stored unencrypted.</
         <source>Trouble connecting to network</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">مشكلة في الاتصال بالشبكة</target>
+      </trans-unit>
+      <trans-unit id="Try again">
+        <source>Try again</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">Try again</target>
       </trans-unit>
       <trans-unit id="Try again?">
         <source>Try again?</source>
@@ -3932,6 +4203,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <note>No comment provided by engineer.</note>
         <target xml:lang="ar" state="translated">تحذير!</target>
       </trans-unit>
+      <trans-unit id="Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.">
+        <source>Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="translated">تحذير، هذا إعداد متقدم وقد يتسبب في خلل محفظتك. يرجى إعادة تشغيل التطبيق لإعدادات لتأثيرها.</target>
+      </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
         <note>No comment provided by engineer.</note>
@@ -3961,6 +4237,11 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="ar" state="translated">مسح قاعدة بيانات مراقب. يرجى السماح لبضع دقائق لتتم إعادة مزامنة المعلومات blockchain. المعاملات والأرصدة قد تكون غير دقيقة أثناء المزامنة</target>
+      </trans-unit>
+      <trans-unit id="We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
+        <source>We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ar" state="needs-translation">We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</target>
       </trans-unit>
       <trans-unit id="Whole Foods (Up to 10% Off)">
         <source>Whole Foods (Up to 10% Off)</source>
@@ -4043,10 +4324,10 @@ Use the Payee, Category, and Notes field to optionally tag your transaction</sou
 
 [[abtag APP_TITLE]] يحتاج هذا إلى مسح  رموز QR  لدفع الناس والتجار.</target>
       </trans-unit>
-      <trans-unit id="You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
-        <source>You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+      <trans-unit id="Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go">
+        <source>Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ar" state="translated">لقد تلقيت بيتكوين!  ونحن نوصي بشدة وضع الأسئلة استعادة كلمة السر والأجوبة.  وإلا فإنك لن تكون قادرا على الوصول إلى حسابك إذا نسيت كلمة المرور الخاصة بك.</target>
+        <target xml:lang="ar" state="needs-translation">Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go</target>
       </trans-unit>
       <trans-unit id="Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!">
         <source>Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!</source>
