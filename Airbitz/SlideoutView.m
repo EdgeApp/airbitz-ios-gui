@@ -57,6 +57,7 @@
 @property (weak, nonatomic) IBOutlet UILabel                *affiliateLabel;
 @property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
 @property (weak, nonatomic) IBOutlet UIView                 *dividerView2;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView1;
 
 @end
 
@@ -143,10 +144,18 @@
             _affiliateButton.hidden = YES;
         }
         
+        if (!SHOW_PLUGINS)
+        {
+            numHidden++;
+            _giftCardButton.hidden = YES;
+        }
+
         if (numHidden >= 1)
             _dividerView3.hidden = YES;
         if (numHidden >= 2)
             _dividerView2.hidden = YES;
+        if (numHidden >= 3)
+            _dividerView1.hidden = YES;
         
         _initialized = YES;
     }
