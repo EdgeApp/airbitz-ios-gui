@@ -1,52 +1,77 @@
+v 2.4.3
+
+• Permite al usuario establecer tarifas de minería personalizadas
+• Incorporar las estimaciones de tarifas desde 21.co
+• Mostrar transacciones caidas
+• Establezca los servidores de anulacion en valores predeterminados, si están habilitados y en blanco
+Mensajes de error mejorados
+• Recordatorios de contraseñas mejorados
+• Correcciones de estabilidad
+
+v 2.4.2
+
+Corregir los certificados SSL que invirtieron la creación de nuevas cuentas y el PIN
+
+v 2.4.1
+
+• Integración Bity: Comprar / vender bitcoin con Euros y Francos Suizos
+• Aceleración de contraseñas
+• Ahora los usuarios pueden elegir los nodos bitcoin con los que quieren conectarse
+• Los límites de Pin, Contraseña y velocidad de Recuperación de Contrasena son todos compartidos
+a
+• Se agrega la información de contacto para el soporte de Glidera
+• El límite de gastos de contraseña elimina el restablecimiento de contraseña basado en PIN
+
+
 v.2.4.0
 
 Cambios de protocolo en nuestro login Edge
-Plugin Liberty X
+Plugin LibertyX
 Soporte para la exportación CSV/QBO no USD
-Soporte de un gran número de carteras. Mejores tiempos de respuesta
-Solucionado problema al enviar por mail una exportación CSV/QBO
+Soporte de un gran número de carteras. Mejores tiempos de espera
+• Enviar por correo electrónico corrección de fallos de exportación CSV / QBO
 Soporte en idiomas adicionales
 
 
 v.2.3.3
 
-• Se arreglaron fallos con el PIN de logeo
+• Solucionar un problema raro de no funciona el inicio de sesión de PIN
 • Se arreglo la latencia al insertar la contraseña dentro de la pantalla de SendConfirmation 
 • Soporte de Edge Login desde el botón URI en el móvil
-• Muestra "cargando el tipo de cambio" en vez del valor 0 value cuando es necesario
+• Muestra "cargando el tipo de cambio" en vez del valor 0 cuando es necesario
 • Agregar foro de WhatsApp a los vinculos de soporte
 
 v 2.3.0
 
-Presentando Edge login. La primera aplicación de auto-registro, privada, descentralizada, segura y con cero conocimiento. Ahora puede usar la cartera Airbitz para logearse a cuentas encriptadas de forma segura como Augur y Wings. 
+Presentando Edge login. La primera aplicación de auto-registro, privada, descentralizada, segura y con cero conocimiento. Ahora puede usar la cartera Airbitz para ingresar a cuentas encriptadas de forma segura como Augur y Wings. 
 
 • Mejoras en la selección del servidor Libbitcoin/Electrum al usar servidores más responsivos y con menor latencia. 
-• Arreglos en la interfaz gráfica de iOS
-• Arreglos en problemas reportados de crasheo en iOS 10
+• Arreglos en la interfaz gráfica de iOS 10
+• Arreglos en problemas de crasheo en iOS 10 con muchas carteras
 • Mejoras en los parámetros de Scrypt para una seguridad más fuerte en dispositivos más rápidos
 
 v 2.2.0
 
-Hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un email. Nunca se preocupe por olvidar su contraseña otra vez
+Hemos abierto un nuevo camino implementando la primera recuperación de contraseña sin fricción del mundo en la cual usuarios recuperan contraseñas olvidadas con solo 2 preguntas y un correo electrónico. Nunca se preocupe por olvidar su contraseña otra vez
 
 Además:
 
 Integración de Bitrefill plugin lo cual permite a usuarios comprar las mejores mobile top ups desde mas de 600 carriers en 143 países
-Un TouchID reparado ocasionalmente no reconoce la huella
+TouchID reparado ocasionalmente no reconocía toques
 Cuentas archivadas ahora toman menos recursos por no consultar la red o sincronizar datos de transacción
-notificación de antecedentes de fondos entrante de fondo si la app esta recientemente en segundo plano
+• Notificaciones en segundo plano de los fondos entrantes si la aplicación fue puesto en segundo plano recientemente
 recurrir direcciones publicas por falla BIP70 protocolo de pago de transacciones 
-Mejoras en traducción de idiomas
-muestra un pequeño menu desplegable cuando no puede conectarse a la red
+• Mejoras en traducción de idiomas
+• Muestra un pequeño menu desplegable cuando no puede conectarse a la red
 
 v 2.1.0
 
-• Añadir suscripción de dirección de servidor Libbitcoin/Electrum para un mucho mejor rendimiento y una mayor duración de la batería.
+• Añadir suscripción de dirección de servidor Libbitcoin/Electrum para mucho mejor rendimiento y mayor duración de la batería.
 • Habilitar cálculo de tarifa de minado dinámico
 • Añadir tarifas de minado estimadas controlables por el usuario (ajustes Bajo, Estándar, Alto)
 • Arreglar tiempos de transacción incorrectos para cuando la transacción se recibe mientras la cartera estaba fuera de línea
 • Corregir errores de calculadora
-• Añadir ayuda en idioma Chino, Indio, Español y Portugués
+• Añadir soporte en idioma Chino, Hindu, Español y Portugués
 • Añadir soporte para la localización apropiada de números, horas y fechas
 • Acelera los inicios de sesión en un nuevo dispositivo en un 200%
 • Mejorar la precisión en la detección de la transacción en condiciones de red insuficientes

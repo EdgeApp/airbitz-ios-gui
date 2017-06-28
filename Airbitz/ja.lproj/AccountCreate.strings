@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "次に";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "あなたのユーザー名とパスワードはあなたにのみ知られていますそして暗号化されずに送信または格納されることはありません。";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "あなたのユーザー名とパスワードはあなたのみ知っているため、忘れた場合に回復することはできません。パスワードを無くした場合は資金へのアクセスを失うことになります。";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "次に";

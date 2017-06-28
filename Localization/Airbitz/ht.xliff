@@ -2,7 +2,7 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="Airbitz Widget/Base.lproj/MainInterface.storyboard" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="Lt8-cl-BMW.text" approved="yes">
@@ -24,7 +24,7 @@
   </file>
   <file original="Airbitz/Base.lproj/AccountCreate.storyboard" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0gq-ds-DJC.normalTitle" approved="yes">
@@ -32,10 +32,10 @@
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
         <target xml:lang="ht">PWOCHÈN</target>
       </trans-unit>
-      <trans-unit id="4eB-ff-Ebh.text" approved="yes">
-        <source>Your username and password are known only to you and never transmitted or stored unencrypted.</source>
-        <note>Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="ht">Non itilizatè ak modpass ou yo se sèl ou menm ki dwe konnen yo epi yo janm transmèt yo oubyen anrejistre yo ak kle.</target>
+      <trans-unit id="4eB-ff-Ebh.text">
+        <source>Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</source>
+        <note>Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh";</note>
+        <target xml:lang="ht" state="needs-translation">Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle" approved="yes">
         <source>NEXT</source>
@@ -237,7 +237,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/BusinessDirectory.storyboard" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="DlF-tR-T08.text" approved="yes">
@@ -329,7 +329,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/CalculatorView~iphone.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="2uL-vk-tLg.normalTitle" approved="yes">
@@ -431,7 +431,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/ConfirmationSliderView.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="KGv-Ek-gk9.text" approved="yes">
@@ -443,7 +443,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/InfoView~iphone.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="sls-ic-b1n.normalTitle" approved="yes">
@@ -455,7 +455,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/Main_iPhone.storyboard" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="0Ma-6E-cjS.placeholder" approved="yes">
@@ -1022,7 +1022,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/PasswordVerifyView.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="pkh-7R-foQ.text" approved="yes">
@@ -1034,7 +1034,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/PopupWheelPickerView.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="24.normalTitle" approved="yes">
@@ -1051,7 +1051,7 @@ Sa pa janm voye pou Airbitz oubyen nimpot lot pati epi li pap ka chanje nan nimp
   </file>
   <file original="Airbitz/Base.lproj/Settings.storyboard" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="1Qx-Jp-bYp.text" approved="yes">
@@ -1214,7 +1214,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/SlideoutView~iphone.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="BCk-jF-SE5.text" approved="yes">
@@ -1296,7 +1296,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Airbitz/Base.lproj/WalletMakerView~iphone.xib" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="61J-35-M5b.placeholder" approved="yes">
@@ -1328,7 +1328,7 @@ Scan the QR code using this device</source>
   </file>
   <file original="Localizable.strings" source-language="en" datatype="plaintext" target-language="ht">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.3.2" build-num="8E2002"/>
     </header>
     <body>
       <trans-unit id="  Amount" approved="yes">
@@ -1391,6 +1391,15 @@ Patage lyen sa a pou ou resevwa resèt itilizatè ki enstale e itilize %2$@. Wap
         <source>** Warning **</source>
         <note>** Warning ** text on partial payment</note>
         <target xml:lang="ht">** Avètisman **</target>
+      </trans-unit>
+      <trans-unit id="** Warning **\n\nSetting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery">
+        <source>** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</target>
       </trans-unit>
       <trans-unit id="**WARNING** You will NEVER be able to recover your password if it is forgotten!!" approved="yes">
         <source>**WARNING** You will NEVER be able to recover your password if it is forgotten!!</source>
@@ -1681,10 +1690,20 @@ Bank Frè</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Achte / Vann Bitcoin</target>
       </trans-unit>
+      <trans-unit id="Buy/Sell with Bank Account (EUR/CHF)">
+        <source>Buy/Sell with Bank Account (EUR/CHF)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Buy/Sell with Bank Account (EUR/CHF)</target>
+      </trans-unit>
       <trans-unit id="Buy/Sell with Bank Account (USA)" approved="yes">
         <source>Buy/Sell with Bank Account (USA)</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Achte / Vann ak Kont labank (USA)</target>
+      </trans-unit>
+      <trans-unit id="Buy/Sell with Cash (USA)">
+        <source>Buy/Sell with Cash (USA)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Buy/Sell with Cash (USA)</target>
       </trans-unit>
       <trans-unit id="CANCEL" approved="yes">
         <source>CANCEL</source>
@@ -1876,6 +1895,16 @@ Bank Frè</target>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Kouran Modpas</target>
       </trans-unit>
+      <trans-unit id="Custom Fee (enter above)">
+        <source>Custom Fee (enter above)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Custom Fee (enter above)</target>
+      </trans-unit>
+      <trans-unit id="Custom fee in satoshis/byte">
+        <source>Custom fee in satoshis/byte</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Custom fee in satoshis/byte</target>
+      </trans-unit>
       <trans-unit id="DEFAULT EXCHANGE RATE" approved="yes">
         <source>DEFAULT EXCHANGE RATE</source>
         <note>section header in settings table</note>
@@ -2060,6 +2089,11 @@ Enter it below to make sure:</source>
         <source>Enable Bluetooth in System Settings</source>
         <note>settings text</note>
         <target xml:lang="ht">Aktive Bluetooth nan paramèt systèm lan</target>
+      </trans-unit>
+      <trans-unit id="Enable Override">
+        <source>Enable Override</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Enable Override</target>
       </trans-unit>
       <trans-unit id="Enable Touch ID" approved="yes">
         <source>Enable Touch ID</source>
@@ -2502,6 +2536,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Modpas pa bon. reeseye oubyen chanje kounye a?</target>
       </trans-unit>
+      <trans-unit id="Incorrect Password. Try again?" approved="yes">
+        <source>Incorrect Password. Try again?</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht">Enkòrèk Modpas. Eseye anko?</target>
+      </trans-unit>
       <trans-unit id="Incorrect current password" approved="yes">
         <source>Incorrect current password</source>
         <note>No comment provided by engineer.</note>
@@ -2845,6 +2884,11 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Lòt Revni</target>
       </trans-unit>
+      <trans-unit id="Override Bitcoin Servers (advanced)">
+        <source>Override Bitcoin Servers (advanced)</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="translated">Sèvi ak sèvè Bitcoin yo (avanse)</target>
+      </trans-unit>
       <trans-unit id="PIN" approved="yes">
         <source>PIN</source>
         <note>No comment provided by engineer.</note>
@@ -2973,10 +3017,10 @@ Enter it below to make sure:</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Tanpri kreye yon kod PIN pou kont kapab itilize anko koneksyon an rapid</target>
       </trans-unit>
-      <trans-unit id="Please create a new account and transfer your funds if you forgot your password." approved="yes">
-        <source>Please create a new account and transfer your funds if you forgot your password.</source>
+      <trans-unit id="Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.">
+        <source>Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ht">Tanpri kreye yon lot kont ak transfè fon ou yo si ou bliye mod pas ou.</target>
+        <target xml:lang="ht" state="needs-translation">Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.</target>
       </trans-unit>
       <trans-unit id="Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." approved="yes">
         <source>Please create a password for this account or you will not be able to recover your account if your device is lost or stolen.</source>
@@ -3113,6 +3157,11 @@ Enter it below to make sure:</source>
         <source>Received...</source>
         <note>Received string on Request screen</note>
         <target xml:lang="ht">Resevwa...</target>
+      </trans-unit>
+      <trans-unit id="Recovery Answers Corrupt!">
+        <source>Recovery Answers Corrupt!</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="translated">Repons pou rekiperasyon yo pa bon!</target>
       </trans-unit>
       <trans-unit id="Recovery Disabled" approved="yes">
         <source>Recovery Disabled</source>
@@ -3431,6 +3480,11 @@ Please change your password and PIN</source>
         <note>Title of Skip this step alert</note>
         <target xml:lang="ht">Pase etap sa a</target>
       </trans-unit>
+      <trans-unit id="Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.">
+        <source>Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.</target>
+      </trans-unit>
       <trans-unit id="Sorry" approved="yes">
         <source>Sorry</source>
         <note>No comment provided by engineer.</note>
@@ -3669,6 +3723,11 @@ non itilizatè ou ak modpas ou sèl ou menm ki konnen yo epi yo pa janm anrejist
         <note>Transaction Details header text</note>
         <target xml:lang="ht">Tranzaksyon Detay</target>
       </trans-unit>
+      <trans-unit id="Transaction Dropped">
+        <source>Transaction Dropped</source>
+        <note>Transaction list description of dropped transaction</note>
+        <target xml:lang="ht" state="needs-translation">Transaction Dropped</target>
+      </trans-unit>
       <trans-unit id="Transfer" approved="yes">
         <source>Transfer</source>
         <note>Financial transaction that moves money from one account to another</note>
@@ -3693,6 +3752,11 @@ non itilizatè ou ak modpas ou sèl ou menm ki konnen yo epi yo pa janm anrejist
         <source>Trouble connecting to network</source>
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Problèm koneksyon rezo</target>
+      </trans-unit>
+      <trans-unit id="Try again">
+        <source>Try again</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">Try again</target>
       </trans-unit>
       <trans-unit id="Try again?" approved="yes">
         <source>Try again?</source>
@@ -3947,6 +4011,11 @@ Si ou pèdi aparèy oubyen desinstale aplikasyon an, Sa ap pran 7 jou pou desakt
         <note>No comment provided by engineer.</note>
         <target xml:lang="ht">Avètisman!</target>
       </trans-unit>
+      <trans-unit id="Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.">
+        <source>Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="translated">Atansyon, se yon paramèt avanse epil ka rann bous ou a mal fonktione. Tanpri redemare aplikasyon an pou paramèt yo ka aplike.</target>
+      </trans-unit>
       <trans-unit id="Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" approved="yes">
         <source>Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled</source>
         <note>No comment provided by engineer.</note>
@@ -3976,6 +4045,11 @@ Si ou pèdi aparèy oubyen desinstale aplikasyon an, Sa ap pran 7 jou pou desakt
         <source>Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync</source>
         <note>Watcher Database Cleared popup text</note>
         <target xml:lang="ht">Baz done efase men gen yon erè ki pase. Tann kelke minit pou resenkronize enfomation blockchain. transaksyon ak balans yo ka pa exat pandan sa</target>
+      </trans-unit>
+      <trans-unit id="We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
+        <source>We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+        <note>No comment provided by engineer.</note>
+        <target xml:lang="ht" state="needs-translation">We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</target>
       </trans-unit>
       <trans-unit id="Whole Foods (Up to 10% Off)" approved="yes">
         <source>Whole Foods (Up to 10% Off)</source>
@@ -4056,10 +4130,10 @@ Itilize chan Payee, kategori ak not pou ou make transaksyon an</target>
         <target xml:lang="ht">Wap wè apresa yon paj kap mandew aksè a kamera ou.
  [[abtag APP_TITLE]] bezwen sa a pou skane kod QR pou payer moun yo ak machann.</target>
       </trans-unit>
-      <trans-unit id="You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." approved="yes">
-        <source>You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
+      <trans-unit id="Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go">
+        <source>Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="ht">OU jwenn Bitcoin! Nou ba ou konsey sa trè byen jan kesyon yo dwe ye a / repons yo pou rekipere mod pas. Si non, ou pap ka jwnn kont ou si ou blye mod pas ou.</target>
+        <target xml:lang="ht" state="needs-translation">Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go</target>
       </trans-unit>
       <trans-unit id="Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" approved="yes">
         <source>Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!</source>

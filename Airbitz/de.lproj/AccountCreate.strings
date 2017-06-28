@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "WEITER";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Ihr Benutzername, Passwort und Ihre Pin sind nur Ihnen bekannt und werden nie übertragen oder unverschlüsselt gespeichert.";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "Ihr Benutzername und Ihr Passwort kennen ausschließlich Sie und kann nicht wiederhergestellt werden. Sie verlieren den Zugang zu Ihren Konten, wenn Sie Ihr Passwort verlieren.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "WEITER";

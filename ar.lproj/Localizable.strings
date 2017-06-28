@@ -1,28 +1,28 @@
 /* Placeholder text for Receive screen amount text field */
-"  Amount" = "  كمية";
+"  Amount" = "  المبلغ";
 
 /* No comment provided by engineer. */
-" Please choose a wallet to receive funds." = " الرجاء اختيار محفظة لتلقي الأموال.";
+" Please choose a wallet to receive funds." = " من فظلك إختر المحفظة لإستقبال المبلغ.";
 
 /* No comment provided by engineer. */
 "%@
 
-Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "شارك هذا الرابط للحصول على الإيرادات من المستخدمين الذين التركيب والاستخدام %2$@. ستستلم 0.25%% جميع مشتريات بطاقة هدية مصنوعة داخل هذا التطبيق.";
+Share this link to receive revenue from users that install and use %@. You will receive 0.25%% of all gift card purchases made inside of this app." = "شارك هذا الرابط للحصول على نسبة من المستخدمين الذين سيتبثون و يستخدمون %2$@. ستستلم 0.25%%  من جميع المشتريات بطاقة الهديا داخل هذا التطبيق.";
 
 /* ie. $1.50 / 5 mB requested via email on Sep 16, 1976 */
-"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ طلب عبر %3$@ on %4$@.";
+"%@ / %@ requested via %@ on %@." = "%1$@ / %2$@ أطلب عبر %3$@ on %4$@.";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request" = "%@ بيتكوين طلب";
+"%@ Bitcoin Request" = "%@ طلب البيتكوين";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin Request from %@" = "%1$@ طلب بيتكوين من%2$@";
+"%@ Bitcoin Request from %@" = "%1$@ أطلب بيتكوين من%2$@";
 
 /* No comment provided by engineer. */
-"%@ Bitcoin received. Tap for details." = "%@ تلقى بيتكوين. اضغط للاطلاع على التفاصيل.";
+"%@ Bitcoin received. Tap for details." = "%@ إستقبال البيتكوين. اضغط للاطلاع على التفاصيل.";
 
 /* \'[Airbitz] Recovery Token\' Subject line of email to send recovery token for Airbitz or other whitelabelled wallet */
-"%@ Recovery Token" = "%@ انتعاش رمز";
+"%@ Recovery Token" = "%@ استرجاع الرموز Token";
 
 /* No comment provided by engineer. */
 "%@ failed:
@@ -30,31 +30,38 @@ Share this link to receive revenue from users that install and use %@. You will 
 %2$@";
 
 /* No comment provided by engineer. */
-"%@ has requested a bitcoin address to send money to." = "%@ وقد طلبت عنوان بيتكوين لإرسال الأموال إلى.";
+"%@ has requested a bitcoin address to send money to." = "%@ قد طلبت عنوان البيتكوين لإرسال الأموال إلى.";
 
 /* ** Warning ** text on partial payment */
 "** Warning **" = "** تحذير **";
 
 /* No comment provided by engineer. */
-"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "** تحذير ** وأنك لن تكون قادرة على استعادة كلمة السر الخاصة بك في حالة نسيانها!!";
+"** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery";
 
 /* No comment provided by engineer. */
-"2 Factor (Enhanced Security)" = "2 عامل (تعزيز الأمن)";
+"**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "** تحذير ** إنك لن تكون قادرا على استعادة كلمة السر الخاصة بك في حالة نسيانها!!";
 
 /* No comment provided by engineer. */
-"4 Digit PIN" = "PIN 4 أرقام";
+"2 Factor (Enhanced Security)" = "التوثيق الثنائي F2 (تعزيز الأمن)";
 
 /* No comment provided by engineer. */
-"15-20% off Amazon" = "15-20٪ من الأمازون";
+"4 Digit PIN" = "ارقام كود PIN اربعة ارقام";
 
 /* No comment provided by engineer. */
-"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "وقد طلب إعادة تعيين اثنين عامل. إذا لم تقم بإنشاء هذا الطلب، سجل دخول%@ وتغيير كلمة المرور الخاصة بك.";
+"15-20% off Amazon" = "15-20٪ من موقع امازون";
+
+/* No comment provided by engineer. */
+"A two factor reset has been requested. If you did not create this request, login as %@ and change your password." = "قد طلب إعادة تعيين التوثيق الثنائي 2FA. إذا لم تنشئ هذا الطلب، فقم بتسجيل الدخول باسم٪ @ وتغيير كلمة المرور.";
 
 /* section header in settings table */
-"ACCOUNT: " = "حساب: ";
+"ACCOUNT: " = "الحساب: ";
 
 /* title of archived wallets table */
-"ARCHIVE" = "أرشيف";
+"ARCHIVE" = "الأرشيف";
 
 /* No comment provided by engineer. */
 "ATM" = "ATM";
@@ -66,40 +73,40 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Accept" = "قبول";
 
 /* No comment provided by engineer. */
-"Account '%@' needs a password. Account is not accessible on a new device without a password." = "حساب %@يحتاج كلمة مرور. الحساب لا يمكن الوصول إليها على جهاز جديد بدون كلمة مرور.";
+"Account '%@' needs a password. Account is not accessible on a new device without a password." = "حساب %@يحتاج كلمة مرور. لا يمكن الوصول إلى الحساب على جهاز جديد بدون كلمة مرور.";
 
 /* Title of account signin error alert */
-"Account Sign Up" = "حساب اشترك";
+"Account Sign Up" = "حساب الاشتراك";
 
 /* No comment provided by engineer. */
 "Account has no password" = "حساب ليس لديه كلمة السر";
 
 /* No comment provided by engineer. */
-"Add New" = "اضف جديد";
+"Add New" = "إضافة جديدة";
 
 /* Income category for affiliate revenue */
-"Affiliate Revenue" = "انضم الإيرادات";
+"Affiliate Revenue" = "ضم الإيرادات";
 
 /* No comment provided by engineer. */
 "Affiliate link has been copied to the clipboard" = "تم نسخ الرابط التابعة إلى الحافظة";
 
 /* No comment provided by engineer. */
-"Air Travel" = "هواء سفر";
+"Air Travel" = "السفر الجوي";
 
 /* No comment provided by engineer. */
 "AirPrint is not currently available" = "تعمل بميزة AirPrint غير متوفر حاليا";
 
 /* No comment provided by engineer. */
-"Alcohol & Bars" = "الحانات & الحانات";
+"Alcohol & Bars" = "كحول & amp : بار";
 
 /* No comment provided by engineer. */
-"Allowance" = "بدل";
+"Allowance" = "سماح";
 
 /* No comment provided by engineer. */
 "Amount is too small" = "كمية صغيرة جدا";
 
 /* No comment provided by engineer. */
-"Amusement" = "كل ما يسلي";
+"Amusement" = "تسلية";
 
 /* No comment provided by engineer. */
 "An app has requested a bitcoin address to send money to." = "وقد طلبت التطبيق عنوان بيتكوين لإرسال الأموال إلى.";
@@ -114,7 +121,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Answers are case sensitive" = "الأجوبة هي قضية حساسة";
 
 /* APPROVE button text */
-"Approve" = "وافق";
+"Approve" = "موافق";
 
 /* Approving Login popup */
 "Approving Login..." = "وافق تسجيل الدخول...";
@@ -135,10 +142,10 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Auto & Transport" = "السيارات & المواصلات";
 
 /* No comment provided by engineer. */
-"Auto Insurance" = "تأمين تلقائي";
+"Auto Insurance" = "التأمين تلقائي";
 
 /* No comment provided by engineer. */
-"Auto Payment" = "السيارات الدفع";
+"Auto Payment" = "الدفع الاوتوماتيكي";
 
 /* settings text */
 "Auto log off after" = "التلقائي تسجيل الخروج بعد";
@@ -150,7 +157,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Baby Supplies" = "لوازم الطفل";
 
 /* No comment provided by engineer. */
-"Babysitter & Daycare" = "جليسه اطفال & الرعاية النهارية";
+"Babysitter & Daycare" = "جليسه الأطفال & الرعاية النهارية";
 
 /* Back button text on top left */
 "Back" = "الى الخلف";
@@ -159,7 +166,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Balance" = "توازن";
 
 /* No comment provided by engineer. */
-"Bank Fee" = "بنك رسوم";
+"Bank Fee" = "رسوم البنك";
 
 /* No comment provided by engineer. */
 "Bills & Utilities" = "فواتير& خدمات";
@@ -192,10 +199,10 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Bluetooth" = "بلوتوث";
 
 /* No comment provided by engineer. */
-"Books" = "كتاب";
+"Books" = "كتب";
 
 /* No comment provided by engineer. */
-"Books & Supplies" = "كتب & اللوازم";
+"Books & Supplies" = "الكتب & اللوازم";
 
 /* Business Name or Category placeholder */
 "Business Name or Category" = "اسم العمل أو الفئة";
@@ -207,7 +214,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Buy/Sell Bitcoin" = "شراء / بيع بيتكوين";
 
 /* No comment provided by engineer. */
+"Buy/Sell with Bank Account (EUR/CHF)" = "Buy/Sell with Bank Account (EUR/CHF)";
+
+/* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "شراء / بيع مع حساب البنك (الولايات المتحدة الأمريكية)";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Cash (USA)" = "Buy/Sell with Cash (USA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "إلغاء";
@@ -225,10 +238,10 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Cannot delete wallet as it contains funds. Please transfer out funds first." = "لا يمكن حذف المحفظة كما أنه يحتوي على الأموال. يرجى نقل من الأموال أولا.";
 
 /* No comment provided by engineer. */
-"Car Wash" = "غسيل سيارة";
+"Car Wash" = "غسل السيارة";
 
 /* No comment provided by engineer. */
-"Cash & ATM" = "السيولة النقدية & ماكينة الصراف الآلي";
+"Cash & ATM" = "السيولة النقدية &  الصراف الآلي";
 
 /* No comment provided by engineer. */
 "Categories" = "الفئات";
@@ -249,7 +262,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Change recovery questions" = "أسئلة التغيير الانتعاش";
 
 /* No comment provided by engineer. */
-"Charity" = "مؤسسة خيرية";
+"Charity" = "الاعمال الخيرية";
 
 /* Check password button text */
 "Check Password" = "التحقق من كلمة المرور";
@@ -267,7 +280,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Close" = "قريب";
 
 /* No comment provided by engineer. */
-"Clothing" = "ملابس";
+"Clothing" = "الملابس";
 
 /* No comment provided by engineer. */
 "Coffee & Tea" = "قهوة & شاي";
@@ -282,7 +295,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Confirmation" = "تتأكيد";
 
 /* Num of confirmations in transaction list */
-"Confirmations" = "التأكيد";
+"Confirmations" = "تأكيدات";
 
 /* Confirmed status in transaction list */
 "Confirmed" = "أكد";
@@ -323,6 +336,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Current Password" = "كلمة السر الحالية";
 
+/* No comment provided by engineer. */
+"Custom Fee (enter above)" = "Custom Fee (enter above)";
+
+/* No comment provided by engineer. */
+"Custom fee in satoshis/byte" = "Custom fee in satoshis/byte";
+
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "افتراضي سعر الصرف";
 
@@ -360,7 +379,7 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Deleting Wallet" = "حذف محفظة";
 
 /* No comment provided by engineer. */
-"Dentist" = "طبيبة الاسنان";
+"Dentist" = "طبيب الاسنان";
 
 /* No comment provided by engineer. */
 "Deposit to Savings" = "الودائع إلى الادخار";
@@ -429,6 +448,9 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 
 /* settings text */
 "Enable Bluetooth in System Settings" = "تمكين البلوتوث في إعدادات النظام";
+
+/* No comment provided by engineer. */
+"Enable Override" = "تمكين تجاوز";
 
 /* No comment provided by engineer. */
 "Enable Touch ID" = "تمكين معرف تاتش";
@@ -525,13 +547,13 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Eyecare" = "العناية بالعين";
 
 /* No comment provided by engineer. */
-"Fast Food" = "الطعام السريع";
+"Fast Food" = "الوجبات السريعة";
 
 /* No comment provided by engineer. */
 "Feedback" = "تعليقات";
 
 /* No comment provided by engineer. */
-"Fees & Charges" = "رسوم& رسوم";
+"Fees & Charges" = "رسوم و &amp ,  أسعار";
 
 /* Fetching Login Request popup */
 "Fetching Login Request..." = "الدخول طلب جلب...";
@@ -546,7 +568,7 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Financial" = "مالي";
 
 /* No comment provided by engineer. */
-"Financial Advisor" = "مالي المستشار";
+"Financial Advisor" = "المستشار المالي";
 
 /* settings text */
 "First Name (optional)" = "الإسم الأول (إختياري)";
@@ -591,7 +613,7 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Groceries" = "البقالة";
 
 /* No comment provided by engineer. */
-"Gym" = "رياضة بدنية";
+"Gym" = "نادي رياضي ";
 
 /* No comment provided by engineer. */
 "HOA Dues" = "القرن الإفريقي استحقاقات";
@@ -693,6 +715,9 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 
 /* No comment provided by engineer. */
 "Incorrect Password. Try again, or change it now?" = "كلمة المرور غير صحيحة. حاول مرة أخرى، أو تغييره الآن؟";
+
+/* No comment provided by engineer. */
+"Incorrect Password. Try again?" = "كلمة المرور غير صحيحة. حاول ثانية؟";
 
 /* No comment provided by engineer. */
 "Incorrect current password" = "المرور الحالية غير صحيحة";
@@ -899,6 +924,9 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Other Income" = "مصدر دخل آخر";
 
 /* No comment provided by engineer. */
+"Override Bitcoin Servers (advanced)" = "تجاوز خوادم بيتكوين (متقدمة)";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -977,7 +1005,7 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 "Please create a PIN for this account to enable quick re-logins" = "يرجى إنشاء PIN لهذا الحساب  لتمكين سريعة إعادة تسجيل الدخول";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "الرجاء إنشاء حساب جديد وتحويل الأموال الخاصة بك إذا كنت قد نسيت كلمة المرور الخاصة بك.";
+"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password." = "Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.";
 
 /* No comment provided by engineer. */
 "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "يرجى إنشاء كلمة مرور لهذا الحساب أو أنك لن تكون قادرا على استرداد حسابك في حالة فقدان الجهاز أو سرقته.";
@@ -1061,6 +1089,10 @@ Enter it below to make sure:" = "هل ما زلت تتذكر كلمة المرو
 
 /* Received string on Request screen */
 "Received..." = "تم الاستلام...";
+
+/* No comment provided by engineer. */
+"Recovery Answers Corrupt!" = "
+الانتعاش إجابات الفاسدة!";
 
 /* No comment provided by engineer. */
 "Recovery Disabled" = "انتعاش المعاقين";
@@ -1243,7 +1275,7 @@ Please change your password and PIN" = "انتعاش الناجح
 "Show QR Code" = "تبين QR رمز";
 
 /* No comment provided by engineer. */
-"Sign Up" = "تسجيل";
+"Sign Up" = "تسجيل الدخول";
 
 /* No comment provided by engineer. */
 "Sign-Up failed:
@@ -1255,6 +1287,9 @@ Please change your password and PIN" = "انتعاش الناجح
 
 /* Title of Skip this step alert */
 "Skip this step" = "تخطي هذه الخطوة";
+
+/* No comment provided by engineer. */
+"Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details." = "Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.";
 
 /* No comment provided by engineer. */
 "Sorry" = "آسف";
@@ -1299,7 +1334,7 @@ Please change your password and PIN" = "انتعاش الناجح
 "Synchronizing" = "مزامنة";
 
 /* Prefix of wallet balance dropdown header */
-"TOTAL: " = "حاصل جمع: ";
+"TOTAL: " = "المبلغ الإجمالي  ";
 
 /* No comment provided by engineer. */
 "Tap and hold a wallet for additional options" = "انقر مع الاستمرار على المحفظة لخيارات إضافية";
@@ -1405,8 +1440,11 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "تفاصيل الصفقه";
 
+/* Transaction list description of dropped transaction */
+"Transaction Dropped" = "Transaction Dropped";
+
 /* Financial transaction that moves money from one account to another */
-"Transfer" = "نقل السلطة";
+"Transfer" = "تحويل";
 
 /* From wallet transfer text */
 "Transfer From %@" = "تحويل من %@";
@@ -1419,6 +1457,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* No comment provided by engineer. */
 "Trouble connecting to network" = "مشكلة في الاتصال بالشبكة";
+
+/* No comment provided by engineer. */
+"Try again" = "Try again";
 
 /* No comment provided by engineer. */
 "Try again?" = "حاول مرة اخرى؟";
@@ -1576,6 +1617,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Warning!" = "تحذير!";
 
 /* No comment provided by engineer. */
+"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect." = "تحذير، هذا إعداد متقدم وقد يتسبب في خلل محفظتك. يرجى إعادة تشغيل التطبيق لإعدادات لتأثيرها.";
+
+/* No comment provided by engineer. */
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "تحذير. بدون كلمة مرور، فلن تكون قادرا على تسجيل الدخول على جهاز جديد في حالة فقدان هذا الجهاز أو سرقته، أو إذا تم إلغاء تثبيت هذا التطبيق";
 
 /* Double spend status in transaction list */
@@ -1592,6 +1636,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "مسح قاعدة بيانات مراقب. يرجى السماح لبضع دقائق لتتم إعادة مزامنة المعلومات blockchain. المعاملات والأرصدة قد تكون غير دقيقة أثناء المزامنة";
+
+/* No comment provided by engineer. */
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "الجامع للأغذية (ما يصل إلى 10٪ من)";
@@ -1647,7 +1694,7 @@ Use the Payee, Category, and Notes field to optionally tag your transaction" = "
 [[abtag APP_TITLE]] يحتاج هذا إلى مسح  رموز QR  لدفع الناس والتجار.";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "لقد تلقيت بيتكوين!  ونحن نوصي بشدة وضع الأسئلة استعادة كلمة السر والأجوبة.  وإلا فإنك لن تكون قادرا على الوصول إلى حسابك إذا نسيت كلمة المرور الخاصة بك.";
+"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go" = "Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go";
 
 /* No comment provided by engineer. */
 "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "الأسئلة استعادة كلمة السر الخاصة بك  ويتم تعيين الأجوبة الآن ما يص.. عندما استعادة كلمة المرور،   يجب أن إجاباتك تتطابق تماما. ** لا تنسى كلمة المرور الخاصة بك والإنعاش أجوبة ** حسابك ما يتعذر بدونها!!";

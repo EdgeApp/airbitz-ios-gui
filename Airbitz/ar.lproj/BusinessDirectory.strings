@@ -5,13 +5,13 @@
 "GGS-YR-zt1.normalTitle" = "التسوق";
 
 /* Class = "UILabel"; text = "Categories"; ObjectID = "KxI-24-PCF"; */
-"KxI-24-PCF.text" = "الفئات";
+"KxI-24-PCF.text" = "التصنيفات";
 
 /* Class = "UIButton"; normalTitle = "More Categories"; ObjectID = "Sfb-cf-6wF"; */
 "Sfb-cf-6wF.normalTitle" = "المزيد من التصنيفات";
 
 /* Class = "UIButton"; normalTitle = "Coffee & Tea"; ObjectID = "a78-ih-LDk"; */
-"a78-ih-LDk.normalTitle" = "قهوة & شاي";
+"a78-ih-LDk.normalTitle" = "قهوة، شاي";
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "aNa-3g-QXd"; */
 "aNa-3g-QXd.placeholder" = "بحث";
@@ -20,7 +20,7 @@
 "b1E-1G-btq.normalTitle" = "بطاقات الهدايا";
 
 /* Class = "UILabel"; text = "Near You"; ObjectID = "baO-FH-Oy4"; */
-"baO-FH-Oy4.text" = "قريب منك";
+"baO-FH-Oy4.text" = "بالقرب منك";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "f2g-xP-19U"; */
 "f2g-xP-19U.text" = "Label";
@@ -44,7 +44,7 @@
 "oyK-ph-99S.normalTitle" = "مطاعم";
 
 /* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
-"sWr-pd-hBY.normalTitle" = "ATMs";
+"sWr-pd-hBY.normalTitle" = "الصرافات الألية";
 
 /* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
 "wy7-Kv-3ap.text" = "عنوان 1234";

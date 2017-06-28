@@ -44,7 +44,7 @@
 "oyK-ph-99S.normalTitle" = "餐馆";
 
 /* Class = "UIButton"; normalTitle = "ATMs"; ObjectID = "sWr-pd-hBY"; */
-"sWr-pd-hBY.normalTitle" = "自动提款机";
+"sWr-pd-hBY.normalTitle" = "ATM";
 
 /* Class = "UILabel"; text = "Address 1234"; ObjectID = "wy7-Kv-3ap"; */
 "wy7-Kv-3ap.text" = "地址 1234";

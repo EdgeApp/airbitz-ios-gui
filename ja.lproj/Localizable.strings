@@ -42,6 +42,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "** Warning **" = "**警告**";
 
 /* No comment provided by engineer. */
+"** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** 注意 **
+
+パスワードの使用限度を設定すると、パスワードを忘れた場合に資金にアクセスできなくなる可能性があります。パスワード回復を設定して下さい";
+
+/* No comment provided by engineer. */
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**警告**パスワードを忘れた場合は、絶対にパスワードを回復することはできません！";
 
 /* No comment provided by engineer. */
@@ -217,7 +224,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Buy/Sell Bitcoin" = "購入/販売Bitcoin";
 
 /* No comment provided by engineer. */
+"Buy/Sell with Bank Account (EUR/CHF)" = "銀行口座での購入／販売 (ユーロ／スイスフラン)";
+
+/* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "銀行口座での購入/販売（米国）";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Cash (USA)" = "現金での購入／販売(米国)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "キャンセル";
@@ -333,6 +346,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Current Password" = "現在のパスワード";
 
+/* No comment provided by engineer. */
+"Custom Fee (enter above)" = "カスタム料金(上に記入)";
+
+/* No comment provided by engineer. */
+"Custom fee in satoshis/byte" = "カスタム料金はsatoshis/byte";
+
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "デフォルト換算レート";
 
@@ -439,6 +458,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 
 /* settings text */
 "Enable Bluetooth in System Settings" = "システム設定でBluetoothを有効に";
+
+/* No comment provided by engineer. */
+"Enable Override" = "エネーブルオーバーライド";
 
 /* No comment provided by engineer. */
 "Enable Touch ID" = "タッチIDを有効にする";
@@ -704,6 +726,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Incorrect Password. Try again, or change it now?" = "パスワードが間違っ。再試行する、それとも今変更？";
 
 /* No comment provided by engineer. */
+"Incorrect Password. Try again?" = "誤パスワード。 再試行する？";
+
+/* No comment provided by engineer. */
 "Incorrect current password" = "現在のパスワードが正しくありません";
 
 /* No comment provided by engineer. */
@@ -910,6 +935,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Other Income" = "その他の収益";
 
 /* No comment provided by engineer. */
+"Override Bitcoin Servers (advanced)" = "オーバーライドビットコインサーバー（上級）";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -989,7 +1017,7 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 "Please create a PIN for this account to enable quick re-logins" = "迅速な再ログインを可能にするには、このアカウントのPINを作成してください";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "パスワードを忘れた場合は、新しいアカウントを作成して資金を振り替えてください。";
+"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password." = "パスワードを忘れた場合、新しいアカウントを作り資金を移して下さい。%@によりパスワードを回復することはできず、パスワードなしでは資金へのアクセスを失います。";
 
 /* No comment provided by engineer. */
 "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "このアカウントのパスワードを作成してください。または端末を紛失または盗難した場合にアカウントを復旧することはできません";
@@ -1073,6 +1101,9 @@ Enter it below to make sure:" = "あなたはまだあなたのパスワード�
 
 /* Received string on Request screen */
 "Received..." = "受け取った...";
+
+/* No comment provided by engineer. */
+"Recovery Answers Corrupt!" = "リカバリー回答腐敗！";
 
 /* No comment provided by engineer. */
 "Recovery Disabled" = "回復無効";
@@ -1269,6 +1300,9 @@ Please change your password and PIN" = "回復成功
 "Skip this step" = "このステップをスキップ";
 
 /* No comment provided by engineer. */
+"Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details." = "ウォレットに小さいダストインプットが存在。資金の全てを使うことができません。詳細に関しては、airbitz.co/dustをご覧下さい。";
+
+/* No comment provided by engineer. */
 "Sorry" = "ごめん";
 
 /* expense category */
@@ -1418,6 +1452,9 @@ Your username and password are known only to you and never stored unencrypted." 
 /* Transaction Details header text */
 "Transaction Details" = "取引の詳細";
 
+/* Transaction list description of dropped transaction */
+"Transaction Dropped" = "取引停止";
+
 /* Financial transaction that moves money from one account to another */
 "Transfer" = "移転";
 
@@ -1432,6 +1469,9 @@ Your username and password are known only to you and never stored unencrypted." 
 
 /* No comment provided by engineer. */
 "Trouble connecting to network" = "ネットワークへの接続に問題";
+
+/* No comment provided by engineer. */
+"Try again" = "もう一度試して下さい";
 
 /* No comment provided by engineer. */
 "Try again?" = "再試行する？";
@@ -1589,6 +1629,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 "Warning!" = "警告！";
 
 /* No comment provided by engineer. */
+"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect." = "警告、これは高度な設定ですあなたの財布が誤動作する可能性があります。設定を有効にするには、アプリを再起動してください。";
+
+/* No comment provided by engineer. */
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "警告。パースワードがなければ、このデバイスを紛失または盗難した場合は新しいデバイスにログインすることはできませんが、またこのアプリがアンインストールされている場合";
 
 /* Double spend status in transaction list */
@@ -1605,6 +1648,9 @@ If you lose your device or uninstall the app, it will take 7 days to disable 2FA
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "ウォッチャーデータベースがクリアされました。 ブロックチェーンの情報を再同期するには数分を要します。 同期中に取引と残高が不正確になることがあります";
+
+/* No comment provided by engineer. */
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "パスワード回復用の質問と回答を設定することを強くお勧めします。さもなければ、バスワードを忘れてしまった場合にアカウントへアクセスできなくなります。";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "全体の食べ物（最大10％オフ）";
@@ -1660,7 +1706,7 @@ Use the Payee, Category, and Notes field to optionally tag your transaction" = "
 [[abtag APP_TITLE]] QRコードをスキャンして人や商人に支払う必要があ。";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "あなたはBitcoinを受け取りました！ パスワード回復の質問と回答を設定することを強くおすすめします。それ以外の場合は、パスワードを忘れてしまった場合、あなたのアカウントにアクセスすることはできません。";
+"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go" = "アカウント復旧の回答が破損しています。パスワードを忘れた場合、アカウントを復旧することができなくなります。%@としてログインしてパスワード復旧を再設定して下さい。詳細に関しては、airbitz.co/go掲載のブログ投稿をご覧下さい。";
 
 /* No comment provided by engineer. */
 "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "パスワード復旧の質問と回答が設定されました。パスワードを回復するときは、あなたの答えは正確に一致する必要があります。**あなたのパスワードと復習の回答を忘れない**あなたのアカウントはそれらを使わずに回復できません！";

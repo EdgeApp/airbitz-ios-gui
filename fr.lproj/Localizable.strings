@@ -36,6 +36,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "** Warning **" = "** Avertissement **";
 
 /* No comment provided by engineer. */
+"** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** Warning **
+
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery";
+
+/* No comment provided by engineer. */
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "** AVERTISSEMENT ** vous ne serez JAMAIS en mesure de récupérer votre mot de passe si vous l'oubliez!!";
 
 /* No comment provided by engineer. */
@@ -207,7 +214,13 @@ Share this link to receive revenue from users that install and use %@. You will 
 "Buy/Sell Bitcoin" = "Achat/vente Bitcoin";
 
 /* No comment provided by engineer. */
+"Buy/Sell with Bank Account (EUR/CHF)" = "Buy/Sell with Bank Account (EUR/CHF)";
+
+/* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "Achat / Vente avec compte bancaire (Etat-Unis)";
+
+/* No comment provided by engineer. */
+"Buy/Sell with Cash (USA)" = "Buy/Sell with Cash (USA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "Annuler";
@@ -323,6 +336,12 @@ Share this link to receive revenue from users that install and use %@. You will 
 /* No comment provided by engineer. */
 "Current Password" = "Mot de passe actuel";
 
+/* No comment provided by engineer. */
+"Custom Fee (enter above)" = "Custom Fee (enter above)";
+
+/* No comment provided by engineer. */
+"Custom fee in satoshis/byte" = "Custom fee in satoshis/byte";
+
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "TAUX DE CHANGE PAR DÉFAUT";
 
@@ -429,6 +448,9 @@ Entrez-le ci-dessous pour en être sur:";
 
 /* settings text */
 "Enable Bluetooth in System Settings" = "Activer Bluetooth dans paramètres du système";
+
+/* No comment provided by engineer. */
+"Enable Override" = "Autoriser Outrepassement";
 
 /* No comment provided by engineer. */
 "Enable Touch ID" = "Activation de la Touche ID";
@@ -694,6 +716,9 @@ Entrez-le ci-dessous pour en être sur:";
 "Incorrect Password. Try again, or change it now?" = "Mot de passe incorrect. Réessayez ou changer maintenant ?";
 
 /* No comment provided by engineer. */
+"Incorrect Password. Try again?" = "Mot de passe incorrect ! Veuillez réessayer?";
+
+/* No comment provided by engineer. */
 "Incorrect current password" = "Mot de passe actuel incorrect";
 
 /* No comment provided by engineer. */
@@ -898,6 +923,9 @@ Entrez-le ci-dessous pour en être sur:";
 "Other Income" = "Autres revenus";
 
 /* No comment provided by engineer. */
+"Override Bitcoin Servers (advanced)" = "Outrepasser les serveurs Bitcoin (avancé)";
+
+/* No comment provided by engineer. */
 "PIN" = "PIN";
 
 /* settings text */
@@ -975,7 +1003,7 @@ Entrez-le ci-dessous pour en être sur:";
 "Please create a PIN for this account to enable quick re-logins" = "S'il vous plaît créer un code PIN pour ce compte pour permettre la réutilisation des re-connexions rapides";
 
 /* No comment provided by engineer. */
-"Please create a new account and transfer your funds if you forgot your password." = "Veuillez créer un nouveau compte et transférer vos fonds si vous avez oublié votre mot de passe.";
+"Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password." = "Please create a new account and transfer your funds if you forgot your password. Your password CANNOT BE RECOVERED by %@ and you will lose access to your funds without your password.";
 
 /* No comment provided by engineer. */
 "Please create a password for this account or you will not be able to recover your account if your device is lost or stolen." = "Veuillez créer un mot de passe pour ce compte, ou vous ne serez pas en mesure de récupérer votre compte si votre appareil est perdu ou volé.";
@@ -1058,6 +1086,9 @@ Entrez-le ci-dessous pour en être sur:";
 
 /* Received string on Request screen */
 "Received..." = "Reçu ...";
+
+/* No comment provided by engineer. */
+"Recovery Answers Corrupt!" = "Réponses de récupération vénales!";
 
 /* No comment provided by engineer. */
 "Recovery Disabled" = "Récupération Désactivé";
@@ -1250,6 +1281,9 @@ Please change your password and PIN" = "Récupération réussie \\n\\n Veuillez 
 "Skip this step" = "Ignorez cette étape";
 
 /* No comment provided by engineer. */
+"Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details." = "Small dust inputs in wallet. Not all funds can be spent. Please see airbitz.co/dust for details.";
+
+/* No comment provided by engineer. */
 "Sorry" = "Désolé";
 
 /* expense category */
@@ -1397,6 +1431,9 @@ Votre nom d’utilisateur et mot de passe sont connus uniquement par vous et ne 
 /* Transaction Details header text */
 "Transaction Details" = "Détails de la transaction";
 
+/* Transaction list description of dropped transaction */
+"Transaction Dropped" = "Transaction Dropped";
+
 /* Financial transaction that moves money from one account to another */
 "Transfer" = "Transfert";
 
@@ -1411,6 +1448,9 @@ Votre nom d’utilisateur et mot de passe sont connus uniquement par vous et ne 
 
 /* No comment provided by engineer. */
 "Trouble connecting to network" = "Problèmes de connexion au réseau";
+
+/* No comment provided by engineer. */
+"Try again" = "Try again";
 
 /* No comment provided by engineer. */
 "Try again?" = "Réessayer ?";
@@ -1567,6 +1607,9 @@ Si vous perdez votre périphérique ou désinstallez l’application, il faudra 
 "Warning!" = "Avertissement!";
 
 /* No comment provided by engineer. */
+"Warning, this is an advanced setting and may cause your wallet to malfunction. Please restart the app for settings to take affect." = "Attention, ceci est un réglage avancé susceptible de causer un dysfonctionnement de votre Wallet. Afin de rendre actif vos réglages veuillez redémarrer l'application.";
+
+/* No comment provided by engineer. */
 "Warning. Without a password, you will not be able to login on a new device if this device is lost or stolen, or if this app is uninstalled" = "Mise en garde. Sans un mot de passe, vous ne serez pas capable de vous connectez sur un nouvel appareil si cet appareil est perdu ou volé, ou si cette application est désinstallée";
 
 /* Double spend status in transaction list */
@@ -1583,6 +1626,9 @@ Si vous perdez votre périphérique ou désinstallez l’application, il faudra 
 
 /* Watcher Database Cleared popup text */
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "La base de donnée Watcher effacée. Attendez quelques minutes pour la resynchronisation de l'info blockchain. Les Transactions et soldes peuvent être inexacts lors de la synchronisation";
+
+/* No comment provided by engineer. */
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "Whole Foods (jusqu'à 10 % de réduction)";
@@ -1633,7 +1679,7 @@ utilisez le champ Payee, catégorie et Notes pour marquer éventuellement votre 
 [[abtag APP_TITLE]] needs this to scan QR codes to pay people and merchants." = "Vous verrez ensuite une page demandant l’accès à votre caméra. [[abtag APP_TITLE]] a besoin de cela pour scanner des codes QR pour payer les gens et les commerçants.";
 
 /* No comment provided by engineer. */
-"You've received Bitcoin! We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Vous avez reçu Bitcoin ! Nous vous recommandons vivement la mise en place des questions / réponses pour la recuperation du mot de passe. Sinon, vous ne serez pas en mesure d’accéder à votre compte si votre mot de passe est oublié.";
+"Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go" = "Your account recovery answers are corrupt. You will not be able to recover your account if your password is forgotten. Please login as %@ and re-setup password recovery. For details, please see our blog post at airbitz.co/go";
 
 /* No comment provided by engineer. */
 "Your password recovery questions and answers are now set up.  When recovering your password, your answers must match exactly. **DO NOT FORGET YOUR PASSWORD AND RECOVERY ANSWERS** YOUR ACCOUNT CANNOT BE RECOVERED WITHOUT THEM!!" = "Vos questions de récupération de mot de passe et les réponses sont maintenant mis en place.  Lorsque vous récupérez votre mot de passe, vos réponses doivent correspondre exactement. ** N’OUBLIEZ PAS VOTRE MOT DE PASSE ET LES RÉPONSES DE RÉCUPÉRATION ** VOTRE COMPTE NE PEUT ÊTRE RÉCUPÉRÉ SANS EUX!!";

@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "下一个";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "您的用户名和密码只有您知道，绝不会被传输出去或未经加密保存。";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "用户名和密码只有您自己知道, 如果忘记了将无法找回, 并将导致您失去账户上的资金。";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "下一个";
@@ -20,17 +20,17 @@
 "DgW-Gm-7l2.normalTitle" = "下一个";
 
 /* Class = "UILabel"; text = "You will next see a popup requesting access to your Contacts."; ObjectID = "Dyh-gB-nOv"; */
-"Dyh-gB-nOv.text" = "接下来您将会看到一个弹出窗口请求读取您的联系人名单。";
+"Dyh-gB-nOv.text" = "您将会看到一个弹出窗口请求使用您的通讯录权限。";
 
 /* Class = "UILabel"; text = "Specify your name or arbitrary nickname ie \"Coinmaster\".\n\nThis is used ONLY when sending payments or requests to others to help them identify you.\n\nThis is never sent to Airbitz or any third party and can be changed at any time in the future."; ObjectID = "Ehm-ti-qdD"; */
 "Ehm-ti-qdD.text" = "请注明您的姓名或任意的昵称，例如“Coinmaster”。
 
-这只能在发送付款或请求予他人时使用，好让他们辨认您。
+这只能在发送付款或请求予他人时使用，以让他们辨识您的身份。
 
-这名称绝不会被发送予Airbitz或任何第三方，并可在未来任何时候被更改。";
+这名称绝不会被发送予Airbitz或任何第三方，并随时可更改。";
 
 /* Class = "UILabel"; text = "Set a 4 Digit PIN"; ObjectID = "G0E-xz-b8e"; */
-"G0E-xz-b8e.text" = "设置 4 位数字的个人识别码PIN";
+"G0E-xz-b8e.text" = "设置 4 位数字的 PIN";
 
 /* Class = "UILabel"; text = "1234"; ObjectID = "Gzw-pH-bAR"; */
 "Gzw-pH-bAR.text" = "1234";
@@ -42,7 +42,7 @@
 "SsW-1b-1cv.text" = "请参阅 Strings.h";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "Tqs-NN-dWt"; */
-"Tqs-NN-dWt.text" = "您的4位数字PIN可用来快速重新登录您的帐户。";
+"Tqs-NN-dWt.text" = "您的4位数字PIN可用来快速重新登录您的账户。";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "VAn-0y-asT"; */
 "VAn-0y-asT.text" = "请参阅 Strings.h";
@@ -63,10 +63,10 @@
 "YJZ-dK-bwv.text" = "启用相机功能";
 
 /* Class = "UILabel"; text = "PIN"; ObjectID = "bPi-8w-xQ4"; */
-"bPi-8w-xQ4.text" = "个人识别码PIN";
+"bPi-8w-xQ4.text" = "PIN码";
 
 /* Class = "UILabel"; text = "Enable Contact Access"; ObjectID = "cng-Cv-ULC"; */
-"cng-Cv-ULC.text" = "启用联系人名单功能";
+"cng-Cv-ULC.text" = "启用通讯录访问权限";
 
 /* Class = "UILabel"; text = "Your PIN is a 4 digit code used to do quick re-logins into your account."; ObjectID = "dxS-14-iR5"; */
 "dxS-14-iR5.text" = "您的4位数字PIN可用来快速重新登录您的帐户。";
@@ -75,7 +75,7 @@
 "fCk-W4-OJJ.placeholder" = "昵称";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "fV9-pz-Wfn"; */
-"fV9-pz-Wfn.placeholder" = "创建个人识别码PIN";
+"fV9-pz-Wfn.placeholder" = "创建 PIN";
 
 /* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "fnL-7h-MQL"; */
 "fnL-7h-MQL.placeholder" = "选择一个密码";
@@ -90,7 +90,7 @@
 "i3b-ZH-bDm.placeholder" = "请选择一个用户名";
 
 /* Class = "UILabel"; text = "Write down and store securely"; ObjectID = "jcU-OX-5Hj"; */
-"jcU-OX-5Hj.text" = "请把它写下来并安全地保存起来。";
+"jcU-OX-5Hj.text" = "请抄写下来并保管好。";
 
 /* Class = "UILabel"; text = "Set a Password and PIN"; ObjectID = "jgQ-ju-YiX"; */
 "jgQ-ju-YiX.text" = "设置密码和个人识别码PIN";
@@ -102,16 +102,16 @@
 "tOB-4i-OVm.text" = "我的密码12345";
 
 /* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
-"w3d-xe-eUq.text" = "此密码是用来验证您的帐户和修改敏感设置的。";
+"w3d-xe-eUq.text" = "这个密码用于来验证您的账号和修改敏感性设置。";
 
 /* Class = "UILabel"; text = "Write it Down!"; ObjectID = "wff-Il-8GU"; */
-"wff-Il-8GU.text" = "把它写下来 ！";
+"wff-Il-8GU.text" = "抄写下来!";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "x6r-A5-Cxg"; */
 "x6r-A5-Cxg.normalTitle" = "返回";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "y2b-Sg-zfM"; */
-"y2b-Sg-zfM.placeholder" = "创建个人识别码PIN";
+"y2b-Sg-zfM.placeholder" = "创建 PIN";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "z5S-Vu-MC1"; */
 "z5S-Vu-MC1.normalTitle" = "下一个";
