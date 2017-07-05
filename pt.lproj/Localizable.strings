@@ -40,9 +40,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 /* No comment provided by engineer. */
 "** Warning **
 
-Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** Warning **
+Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery" = "** Atenção **
 
-Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery";
+Configurar um limite de gastos protegido por senha pode impedir o acesso aos fundos caso você se esqueça da senha. Por favor, tenha certeza de que você configurou a recuperação de senha corretamente";
 
 /* No comment provided by engineer. */
 "**WARNING** You will NEVER be able to recover your password if it is forgotten!!" = "**ATENÇÃO** Você nunca conseguirá recuperar sua senha se esquecê-la!!";
@@ -216,13 +216,13 @@ Setting a password spending limit may prevent you from accessing funds if your p
 "Buy/Sell Bitcoin" = "Comprar/Vender Bitcoin";
 
 /* No comment provided by engineer. */
-"Buy/Sell with Bank Account (EUR/CHF)" = "Buy/Sell with Bank Account (EUR/CHF)";
+"Buy/Sell with Bank Account (EUR/CHF)" = "Comprar/Vender com Contas Bancárias (EUR/CHF)";
 
 /* No comment provided by engineer. */
 "Buy/Sell with Bank Account (USA)" = "Compra / Venda com Conta Bancária (EUA)";
 
 /* No comment provided by engineer. */
-"Buy/Sell with Cash (USA)" = "Buy/Sell with Cash (USA)";
+"Buy/Sell with Cash (USA)" = "Comprar/Vender com Dinheiro (USA)";
 
 /* Generic CANCEL button text */
 "CANCEL" = "CANCELAR";
@@ -339,10 +339,10 @@ Setting a password spending limit may prevent you from accessing funds if your p
 "Current Password" = "Senha Atual";
 
 /* No comment provided by engineer. */
-"Custom Fee (enter above)" = "Custom Fee (enter above)";
+"Custom Fee (enter above)" = "Taxa Personalizada (digite acima)";
 
 /* No comment provided by engineer. */
-"Custom fee in satoshis/byte" = "Custom fee in satoshis/byte";
+"Custom fee in satoshis/byte" = "Taxa personalizada em satoshis/byte";
 
 /* section header in settings table */
 "DEFAULT EXCHANGE RATE" = "TAXA DE CÂMBIO PADRÃO";
@@ -1441,7 +1441,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Transaction Details" = "Detalhes de Transação";
 
 /* Transaction list description of dropped transaction */
-"Transaction Dropped" = "Transaction Dropped";
+"Transaction Dropped" = "Transação Expirada";
 
 /* Financial transaction that moves money from one account to another */
 "Transfer" = "Transferir";
@@ -1459,7 +1459,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
 "Trouble connecting to network" = "Problemas na conexão de rede";
 
 /* No comment provided by engineer. */
-"Try again" = "Try again";
+"Try again" = "Tente Novamente";
 
 /* No comment provided by engineer. */
 "Try again?" = "Tentar novamente?";
@@ -1637,7 +1637,7 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
 "Watcher Database Cleared. Please allow a few minutes to resync blockchain info. Transactions and balances may be inaccurate during sync" = "Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações da blockchain. Transações e saldos podem estar imprecisos durante a sincronização";
 
 /* No comment provided by engineer. */
-"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.";
+"We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." = "Nós recomendamos FORTEMENTE que você defina perguntas e respostas para Recuperação de Senha. Caso contrário, você NÃO será capaz de acessar sua conta se esquecer a sua senha.";
 
 /* No comment provided by engineer. */
 "Whole Foods (Up to 10% Off)" = "Whole Foods (Até 10% de Desconto)";
