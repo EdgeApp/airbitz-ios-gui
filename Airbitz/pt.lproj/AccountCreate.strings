@@ -2,7 +2,7 @@
 "0gq-ds-DJC.normalTitle" = "PRÓXIMO";
 
 /* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.";
+"4eB-ff-Ebh.text" = "Seu nome de usuário e senha são conhecidos somente por você e não podem ser recuperados em caso de esquecimento. Você perderá acesso aos fundos caso perca sua senha.";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "PRÓXIMO";

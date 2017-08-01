@@ -35,10 +35,10 @@
         <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC";</note>
         <target xml:lang="pt">PRÓXIMO</target>
       </trans-unit>
-      <trans-unit id="4eB-ff-Ebh.text">
+      <trans-unit id="4eB-ff-Ebh.text" approved="yes">
         <source>Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</source>
         <note>Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh";</note>
-        <target xml:lang="pt" state="needs-translation">Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost.</target>
+        <target xml:lang="pt">Seu nome de usuário e senha são conhecidos somente por você e não podem ser recuperados em caso de esquecimento. Você perderá acesso aos fundos caso perca sua senha.</target>
       </trans-unit>
       <trans-unit id="6uu-dw-ssd.normalTitle" approved="yes">
         <source>NEXT</source>
@@ -1488,9 +1488,9 @@ Compartilhe este link para receber a receita dos usuários que instalam e usam %
 
 Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">** Warning **
+        <target xml:lang="pt" state="translated">** Atenção **
 
-Setting a password spending limit may prevent you from accessing funds if your password is forgotten. Please make sure you have setup password recovery</target>
+Configurar um limite de gastos protegido por senha pode impedir o acesso aos fundos caso você se esqueça da senha. Por favor, tenha certeza de que você configurou a recuperação de senha corretamente</target>
       </trans-unit>
       <trans-unit id="**WARNING** You will NEVER be able to recover your password if it is forgotten!!" approved="yes">
         <source>**WARNING** You will NEVER be able to recover your password if it is forgotten!!</source>
@@ -1834,7 +1834,7 @@ Setting a password spending limit may prevent you from accessing funds if your p
       <trans-unit id="Buy/Sell with Bank Account (EUR/CHF)">
         <source>Buy/Sell with Bank Account (EUR/CHF)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">Buy/Sell with Bank Account (EUR/CHF)</target>
+        <target xml:lang="pt" state="translated">Comprar/Vender com Contas Bancárias (EUR/CHF)</target>
       </trans-unit>
       <trans-unit id="Buy/Sell with Bank Account (USA)" approved="yes">
         <source>Buy/Sell with Bank Account (USA)</source>
@@ -1844,7 +1844,7 @@ Setting a password spending limit may prevent you from accessing funds if your p
       <trans-unit id="Buy/Sell with Cash (USA)">
         <source>Buy/Sell with Cash (USA)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">Buy/Sell with Cash (USA)</target>
+        <target xml:lang="pt" state="translated">Comprar/Vender com Dinheiro (USA)</target>
       </trans-unit>
       <trans-unit id="CANCEL" approved="yes">
         <source>CANCEL</source>
@@ -2075,12 +2075,12 @@ Setting a password spending limit may prevent you from accessing funds if your p
       <trans-unit id="Custom Fee (enter above)">
         <source>Custom Fee (enter above)</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">Custom Fee (enter above)</target>
+        <target xml:lang="pt" state="translated">Taxa Personalizada (digite acima)</target>
       </trans-unit>
-      <trans-unit id="Custom fee in satoshis/byte">
+      <trans-unit id="Custom fee in satoshis/byte" approved="yes">
         <source>Custom fee in satoshis/byte</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">Custom fee in satoshis/byte</target>
+        <target xml:lang="pt">Taxa personalizada em satoshis/byte</target>
       </trans-unit>
       <trans-unit id="DEFAULT EXCHANGE RATE" approved="yes">
         <source>DEFAULT EXCHANGE RATE</source>
@@ -4280,10 +4280,10 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
         <note>Transaction Details header text</note>
         <target xml:lang="pt">Detalhes de Transação</target>
       </trans-unit>
-      <trans-unit id="Transaction Dropped">
+      <trans-unit id="Transaction Dropped" approved="yes">
         <source>Transaction Dropped</source>
         <note>Transaction list description of dropped transaction</note>
-        <target xml:lang="pt" state="needs-translation">Transaction Dropped</target>
+        <target xml:lang="pt">Transação Expirada</target>
       </trans-unit>
       <trans-unit id="Transfer" approved="yes">
         <source>Transfer</source>
@@ -4319,7 +4319,7 @@ Seu nome de usuário e senha são conhecidos apenas por você e nunca são guard
       <trans-unit id="Try again">
         <source>Try again</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">Try again</target>
+        <target xml:lang="pt" state="translated">Tente Novamente</target>
       </trans-unit>
       <trans-unit id="Try again?" approved="yes">
         <source>Try again?</source>
@@ -4668,10 +4668,10 @@ Se você perder o seu dispositivo ou desinstalar o aplicativo, levará 7 dias pa
           <target xml:lang="pt">Banco de dados do observador autorizado. Por favor, aguarde alguns minutos para resincronizar informações blockchain. Transações e saldos podem ser imprecisos durante a sincronização</target>
         </alt-trans>
       </trans-unit>
-      <trans-unit id="We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.">
+      <trans-unit id="We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten." approved="yes">
         <source>We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</source>
         <note>No comment provided by engineer.</note>
-        <target xml:lang="pt" state="needs-translation">We STRONGLY recommend setting up Password Recovery questions and answers. Otherwise you will NOT be able to access your account if your password is forgotten.</target>
+        <target xml:lang="pt">Nós recomendamos FORTEMENTE que você defina perguntas e respostas para Recuperação de Senha. Caso contrário, você NÃO será capaz de acessar sua conta se esquecer a sua senha.</target>
       </trans-unit>
       <trans-unit id="Whole Foods (Up to 10% Off)" approved="yes">
         <source>Whole Foods (Up to 10% Off)</source>
