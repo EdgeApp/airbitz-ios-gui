@@ -78,7 +78,7 @@
     }
     
     cell.topLabel.text = self.arrayTopString[indexPath.row];
-    cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.topLabel.textColor = [Theme Singleton].colorDarkPrimary;
     
     if (self.arrayBottomString && self.arrayBottomString.count >= indexPath.row - 1)
     {

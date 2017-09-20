@@ -955,7 +955,7 @@ MainViewController *singleton;
     titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
     if (bIsButton)
     {
-        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+        [titleLabelButton setTitleColor:[Theme Singleton].colorMidPrimary forState:UIControlStateNormal];
         [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
     }
     else

@@ -317,10 +317,10 @@
     Contact *contact = [self.arrayAutoComplete objectAtIndex:indexPath.row];
 
     cell.textLabel.text = contact.strName;
-    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.detailTextLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.detailTextLabel.textColor = [Theme Singleton].colorDarkPrimary;
 
     // data
     if ([contact.strDataLabel length])

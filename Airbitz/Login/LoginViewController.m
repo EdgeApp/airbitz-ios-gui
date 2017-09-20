@@ -180,10 +180,10 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
     self.PINusernameSelector.titleLabel.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.titleLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.titleLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
+    self.PINusernameSelector.titleLabel.layer.shadowColor = [[Theme Singleton].colorDarkPrimary CGColor];
     self.PINusernameSelector.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
-    self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
+    self.PINusernameSelector.tintColor = [Theme Singleton].colorLightPrimary;
 
     // Initialize the PINusernameDropDown
     self.PINusernameDropDown = [[DropDown alloc] init];
@@ -221,12 +221,12 @@ static BOOL bInitialized = false;
     self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
     self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
-    self.titleText.layer.shadowRadius = LoginTitleTextShadowRadius;
+    self.titleText.layer.shadowRadius = [Theme Singleton].loginTitleTextShadowRadius;
     self.titleText.layer.shadowOpacity = 1.0f;
     self.titleText.layer.masksToBounds = NO;
     self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    self.titleText.textColor = ColorLoginTitleText;
+    self.titleText.textColor = [Theme Singleton].colorLightGray;
     
     if (![appTitleText isEqualToString:@""])
         self.titleText.text = appTitleText;
@@ -234,7 +234,7 @@ static BOOL bInitialized = false;
     self.forgotPassworddButton.layer.shadowRadius = 3.0f;
     self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
     self.forgotPassworddButton.layer.masksToBounds = NO;
-    self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
+    self.forgotPassworddButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
     self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.usernameSelector.placeholder = usernameText;
@@ -578,14 +578,14 @@ static BOOL bInitialized = false;
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         NSString *title = [NSString stringWithFormat:@"%@",
                            username];        // Define general attributes like color and fonts for the entire text
-        NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
+        NSDictionary *attr = @{NSForegroundColorAttributeName:[Theme Singleton].colorLightGray,
                                NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
         NSRange usernameTextRange = [title rangeOfString:username];
-        [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:[Theme Singleton].colorLightPrimary,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
         [self.PINusernameSelector setAttributedTitle:attributedText forState:UIControlStateNormal];

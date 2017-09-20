@@ -475,7 +475,7 @@ CGRect keyboardFrame2;
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
     cell.textLabel.numberOfLines = 1;
     cell.textLabel.text = [_strings objectAtIndex:row];
-    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
     cell.accessoryView.hidden = YES;
     cell.backgroundColor = [UIColor clearColor];
     if(self.categories) {

@@ -210,7 +210,7 @@ const int NumPromoRows              = 4;
     self.buttonsShadowView.layer.shadowRadius = 5.0f;
     self.buttonsShadowView.layer.shadowOpacity = 0.6f;
     self.buttonsShadowView.layer.masksToBounds = NO;
-    self.buttonsShadowView.layer.shadowColor = [ColorDarkGrey CGColor];
+    self.buttonsShadowView.layer.shadowColor = [[Theme Singleton].colorDarkGray CGColor];
     self.buttonsShadowView.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.afmanager = [MainViewController createAFManager];
@@ -1199,7 +1199,7 @@ const int NumPromoRows              = 4;
             {
                 cell.promoLabel.text = buyBitcoinButton;
                 cell.imagePhoto.image = self.imageReceive;
-                backgroundColor = [Theme Singleton].colorRequestButton;
+                backgroundColor = [Theme Singleton].colorFirstAccent;
                 
                 bBlankCell = YES;
             }
@@ -1215,7 +1215,7 @@ const int NumPromoRows              = 4;
                 {
                     cell.promoLabel.text = importPrivateKeyButton;
                     cell.imagePhoto.image = self.imageReceive;
-                    backgroundColor = [Theme Singleton].colorRequestButton;
+                    backgroundColor = [Theme Singleton].colorFirstAccent;
                 }
                 bBlankCell = YES;
             }
@@ -1330,11 +1330,11 @@ const int NumPromoRows              = 4;
         //
         if (bBlankCell)
         {
-            cell.promoLabel.textColor = [Theme Singleton].colorTextDark;
             cell.promoLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
+            cell.promoLabel.textColor = [Theme Singleton].colorDarkPrimary;
             cell.addressLabel.text = @"";
 //            cell.dateLabel.text = @"";
-            cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+            cell.dateLabel.textColor = [Theme Singleton].colorDarkGray;
 
             cell.amountLabel.text = @"";
             cell.balanceLabel.text = @"";
@@ -1365,19 +1365,19 @@ const int NumPromoRows              = 4;
         
         // date
         cell.dateLabel.text = formattedDateString;
-        cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+        cell.dateLabel.textColor = [Theme Singleton].colorDarkGray;
         
         // address
         if (transaction.metaData.payeeName && [transaction.metaData.payeeName length] > 0)
         {
             cell.addressLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListName];
-            cell.addressLabel.textColor = [Theme Singleton].colorTransactionName;
+            cell.addressLabel.textColor = [Theme Singleton].colorMidPrimary;
             cell.addressLabel.text = transaction.metaData.payeeName;
         }
         else
         {
             cell.addressLabel.font = [UIFont fontWithName:AppFontItalic size:[Theme Singleton].fontSizeTxListName];
-            cell.addressLabel.textColor = [Theme Singleton].colorTransactionNameLight;
+            cell.addressLabel.textColor = [Theme Singleton].colorMidPrimary;
             if (transaction.amountSatoshi < 0)
                 cell.addressLabel.text = sentBitcoinText;
             else
@@ -1389,7 +1389,7 @@ const int NumPromoRows              = 4;
         {
             // confirmation becomes category
             cell.dateLabel.text = transaction.metaData.category;
-            cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+            cell.dateLabel.textColor = [Theme Singleton].colorDarkGray;
         }
         else
         {
@@ -1406,7 +1406,7 @@ const int NumPromoRows              = 4;
             if (blockHeight <= 0)
             {
                 cell.dateLabel.text = synchronizingText;
-                cell.dateLabel.textColor = [Theme Singleton].colorTextDarkGrey;
+                cell.dateLabel.textColor = [Theme Singleton].colorDarkGray;
             }
             else if (confirmations <= 0)
             {
@@ -1477,12 +1477,12 @@ const int NumPromoRows              = 4;
         UIImage *placeHolderImage;
         if (transaction.amountSatoshi < 0)
         {
-            backgroundColor = [Theme Singleton].colorSendButton;
+            backgroundColor = [Theme Singleton].colorMidPrimary;
             placeHolderImage = self.imageSend;
         }
         else
         {
-            backgroundColor = [Theme Singleton].colorRequestButton;
+            backgroundColor = [Theme Singleton].colorFirstAccent;
             placeHolderImage = self.imageReceive;
         }
         

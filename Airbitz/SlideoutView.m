@@ -72,7 +72,7 @@
     v->_open = NO;
     v->_initialized = NO;
 
-    UIColor *back = [Theme Singleton].colorBackgroundHighlight;
+    UIColor *back = [Theme Singleton].colorLightPrimary;
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];

@@ -77,9 +77,9 @@
     [MainViewController changeNavBarOwner:self];
 
     self.spinnerView.hidden = YES;
-    self.headerLabel.textColor = [Theme Singleton].colorTextDarkGrey;
-    self.descriptionTextView.textColor = [Theme Singleton].colorTextDarkGrey;
-    self.appNameLabel.textColor = [Theme Singleton].colorTextDark;
+    self.headerLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.descriptionTextView.textColor = [Theme Singleton].colorDarkGray;
+    self.appNameLabel.textColor = [Theme Singleton].colorDarkPrimary;
     
     [self setupNavBar];
 
@@ -376,7 +376,7 @@
     if (_edgeLoginInfo)
     {
         cell.topLabel.text = _edgeLoginInfo.repoNames[row];
-        cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+        cell.topLabel.textColor = [Theme Singleton].colorDarkPrimary;
 
         NSArray *repos = _reposIndexed[row];
         
@@ -435,7 +435,7 @@
     else if (_kycTokenKeys)
     {
         cell.topLabel.text = _kycTokenKeys[indexPath.row];
-        cell.topLabel.textColor = [Theme Singleton].colorTextDark;
+        cell.topLabel.textColor = [Theme Singleton].colorDarkPrimary;
         
         cell.bottomLabel.text = @"";
         cell.image.image = _blankImage;
@@ -446,7 +446,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
+    bgColorView.backgroundColor = [Theme Singleton].colorLightPrimary;
     bgColorView.layer.masksToBounds = YES;
     cell.selectedBackgroundView = bgColorView;
     

@@ -60,7 +60,7 @@
     self.showQRLabel.text = show_qr_code;
     self.showQRLabel.hidden = NO;
     self.qrCodeImageView.hidden = YES;
-    [self.showQRLabel setTextColor:[Theme Singleton].colorTextLink];
+    [self.showQRLabel setTextColor:[Theme Singleton].colorMidPrimary];
 }
 
 - (void)viewWillAppear:(BOOL)animated

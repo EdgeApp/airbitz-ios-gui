@@ -27,33 +27,6 @@
 @property (nonatomic) UIColor *colorFirstAccent;
 @property (nonatomic) UIColor *colorSecondAccent;
 
-/*
-@property (nonatomic) UIColor *colorTextLink;
-@property (nonatomic) UIColor *colorTextLinkOnDark;
-@property (nonatomic) UIColor *colorTextDarkGrey;
-@property (nonatomic) UIColor *colorTextMediumGrey;
-@property (nonatomic) UIColor *colorTextMediumLightGrey;
-@property (nonatomic) UIColor *colorSendButton;
-@property (nonatomic) UIColor *colorRequestButton;
-@property (nonatomic) UIColor *colorSendButtonDisabled;
-@property (nonatomic) UIColor *colorRequestButtonDisabled;
-@property (nonatomic) UIColor *colorTextBright;
-@property (nonatomic) UIColor *colorTextDark;
-@property (nonatomic) UIColor *colorRequestTopTextField;
-@property (nonatomic) UIColor *colorRequestTopTextFieldPlaceholder;
-@property (nonatomic) UIColor *colorRequestBottomTextField;
-@property (nonatomic) UIColor *colorButtonGreen;
-@property (nonatomic) UIColor *colorButtonBlue;
-@property (nonatomic) UIColor *colorButtonOrange;
-@property (nonatomic) UIColor *colorButtonOrangeDark;
-@property (nonatomic) UIColor *colorButtonOrangeLight;
-@property (nonatomic) UIColor *colorTransactionsHeader;
-@property (nonatomic) UIColor *colorTransactionName;
-
-@property (nonatomic) NSMutableArray *colorsProfileIcons;
-
-*/
-
 @property (nonatomic) CGFloat defaultBTCDenominationMultiplier;
 
 #pragma mark Fonts

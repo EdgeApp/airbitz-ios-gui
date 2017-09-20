@@ -953,7 +953,7 @@ typedef enum eAlertType
         self.completeSignupButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [self updateDisplayForMode:self.mode];
 
-        self.completeSignupButton.backgroundColor = [Theme Singleton].colorButtonGreen;
+        self.completeSignupButton.backgroundColor = [Theme Singleton].colorFirstAccent;
         [self.completeSignupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.completeSignupButton.hidden = NO;
         self.completeSignupButton.enabled = YES;

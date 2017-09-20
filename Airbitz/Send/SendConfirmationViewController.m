@@ -266,7 +266,7 @@
     {
         // This is a BIP70 payment request
         _amountSatoshi = self.paymentRequest.amountSatoshi;
-        self.addressLabel.textColor = [Theme Singleton].colorButtonGreen;
+        self.addressLabel.textColor = [Theme Singleton].colorFirstAccent;
 
         self.bAmountImmutable = YES;
         self.amountBTCTextField.text = [abcAccount.settings.denomination satoshiToBTCString:self.paymentRequest.amountSatoshi withSymbol:false];
@@ -278,7 +278,7 @@
     }
     else if (self.parsedURI && self.parsedURI.address)
     {
-        self.addressLabel.textColor = [Theme Singleton].colorTextLink;
+        self.addressLabel.textColor = [Theme Singleton].colorMidPrimary;
         self.addressButton.enabled = true;
         
         // This is a standard bitcoin address/URI
@@ -303,7 +303,7 @@
     
     _currencyOverride = NO;
     _currency = abcAccount.currentWallet.currency;
-    self.amountFiatLabel.textColor = [Theme Singleton].colorTextLinkOnDark;
+    self.amountFiatLabel.textColor = [Theme Singleton].colorLightPrimary;
     
     if (_amountSatoshi)
     {
@@ -842,9 +842,9 @@
     _maxAmountButton.selected = NO;
     if (_maxAmount > 0 && _maxAmount == _amountSatoshi)
     {
-        color = [Theme Singleton].colorButtonOrangeLight;
+        color = [Theme Singleton].colorSecondAccent;
         colorConversionLabel = [UIColor darkGrayColor];
-        [_maxAmountButton setBackgroundColor:[Theme Singleton].colorButtonOrange];
+        [_maxAmountButton setBackgroundColor:[Theme Singleton].colorSecondAccent];
     }
     else
     {

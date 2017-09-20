@@ -132,8 +132,8 @@
 //    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
     [self.buttonCurrency setTitle:_currencyChoice.code forState:UIControlStateNormal];
-    [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
-//    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
+    [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorMidPrimary];
+//    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorMidPrimary CGColor]];
 //    [self.buttonCurrency.layer setBorderWidth:2.0];
 //    [self.buttonCurrency.layer setCornerRadius:8.0];
     [self updateDisplay];

@@ -226,7 +226,7 @@ static bool bInitialized = false;
         });
     }
     
-    self.categoryButtonsView.backgroundColor = DirectoryCategoryButtonsBackgroundColor;
+    self.categoryButtonsView.backgroundColor = [Theme Singleton].colorWhite;
     self.afmanager = [MainViewController createAFManager];
 }
 

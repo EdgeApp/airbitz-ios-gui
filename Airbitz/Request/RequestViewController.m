@@ -215,10 +215,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     [self updateViews:nil];
 
-    [self.statusLine1 setTextColor:[Theme Singleton].colorTextDark];
-    [self.statusLine2 setTextColor:[Theme Singleton].colorTextDark];
-    [self.statusLine3 setTextColor:[Theme Singleton].colorTextDark];
-    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorTextDark];
+    [self.statusLine1 setTextColor:[Theme Singleton].colorDarkPrimary];
+    [self.statusLine2 setTextColor:[Theme Singleton].colorDarkPrimary];
+    [self.statusLine3 setTextColor:[Theme Singleton].colorDarkPrimary];
+    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorDarkPrimary];
 }
 
 - (void)updateViews:(NSNotification *)notification
@@ -796,12 +796,12 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.btcHeight.constant = btcFrame.size.height;
 
     NSString *string = enterAmountOptionalText;
-    self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorRequestTopTextFieldPlaceholder}];
+    self.currentTopField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:string attributes:@{NSForegroundColorAttributeName: [Theme Singleton].colorMidGray}];
 
-    [topLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
-    [topLabel setTextColor:[Theme Singleton].colorRequestTopTextField];
-    [self.currentTopField setFont:[UIFont fontWithName:@"Lato-Regular" size:topTextSize]];
-    [self.currentTopField setTextColor:[Theme Singleton].colorRequestTopTextField];
+    [topLabel setFont:[UIFont fontWithName:[Theme Singleton].appFont size:topTextSize]];
+    [topLabel setTextColor:[Theme Singleton].colorWhite];
+    [self.currentTopField setFont:[UIFont fontWithName:[Theme Singleton].appFont size:topTextSize]];
+    [self.currentTopField setTextColor:[Theme Singleton].colorWhite];
     [self.currentTopField setTintColor:[UIColor lightGrayColor]];
     [self.currentTopField setEnabled:true];
     if (bLastCalculatorState)
@@ -813,10 +813,10 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.keypadView.textField = self.currentTopField;
 
     bottomField.placeholder = @"";
-    [bottomLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
-    [bottomLabel setTextColor:[Theme Singleton].colorRequestBottomTextField];
-    [bottomField setFont:[UIFont fontWithName:@"Lato-Regular" size:bottomTextSize]];
-    [bottomField setTextColor:[Theme Singleton].colorRequestBottomTextField];
+    [bottomLabel setFont:[UIFont fontWithName:[Theme Singleton].appFont size:bottomTextSize]];
+    [bottomLabel setTextColor:[Theme Singleton].colorDarkPrimary];
+    [bottomField setFont:[UIFont fontWithName:[Theme Singleton].appFont size:bottomTextSize]];
+    [bottomField setTextColor:[Theme Singleton].colorDarkPrimary];
     [bottomField setTintColor:[UIColor lightGrayColor]];
     [bottomField setEnabled:false];
 

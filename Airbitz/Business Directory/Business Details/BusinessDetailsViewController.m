@@ -675,7 +675,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
             {
                 commonCell.cellIcon.hidden = NO;
                 commonCell.rightIcon.hidden = NO;
-                commonCell.leftLabel.textColor = [Theme Singleton].bdButtonBlue;
+                commonCell.leftLabel.textColor = [Theme Singleton].colorMidPrimary;
                 commonCell.cellIcon.image = [UIImage imageNamed:[BD_Social_Cell getSocialTypeImage:socialType]];
                 commonCell.leftLabel.text = [BD_Social_Cell getSocialTypeAsString:socialType];
                 break;
