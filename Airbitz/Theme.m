@@ -45,49 +45,24 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
 {
     self = [super init];
 
-    //    self.denomination = 100000000;
-    self.colorTextBright = [UIColor whiteColor];
-    self.colorTextDark = UIColorFromARGB(0xff0C578C);
-    self.colorTextLink = UIColorFromARGB(0xFF007aFF);
-    self.colorTextLinkOnDark = UIColorFromARGB(0xFFBFDFFF);
-    self.colorTextDarkGrey = UIColorFromARGB(0xFF404040);
-    self.colorTextMediumGrey = UIColorFromARGB(0xFF808080);
-    self.colorTextMediumLightGrey = UIColorFromARGB(0xFFA0A0A0);
-    self.colorButtonGreen = UIColorFromARGB(0xff80C342);
-    self.colorButtonBlue = UIColorFromARGB(0xff2291CF);
-    self.colorButtonOrange = UIColorFromARGB(0xFFfca600);
-    self.colorButtonOrangeLight = UIColorFromARGB(0xFFfec822);
-    self.colorButtonOrangeDark = UIColorFromARGB(0xFFdaa400);
+#pragma mark Brand Specific Constants
     
-    self.colorSendButton = self.colorButtonBlue;
-    self.colorRequestButton = self.colorButtonGreen;
-
-    self.colorRequestButtonDisabled = UIColorFromARGB(0x5580c342);
-    self.colorSendButtonDisabled = UIColorFromARGB(0x55006698);
-
-    self.colorRequestTopTextField = self.colorTextBright;
-    self.colorRequestTopTextFieldPlaceholder = UIColorFromARGB(0xffdddddd);
-    self.colorRequestBottomTextField = self.colorTextDark;
-//    self.colorTransactionsHeader = UIColorFromARGB(0xff187BC7);
-    self.colorTransactionsHeader = UIColorFromARGB(0xffB5BBC7);
+    self.defaultBTCDenominationMultiplier = DefaultBTCDenominationMultiplier;
     
-    self.colorTransactionName = UIColorFromARGB(0xff1770A6);
-    self.colorTransactionNameLight = UIColorFromARGB(0xbb1770A6);
-
-    self.bdButtonBlue = UIColorFromARGB(0xff0079B9);
-    self.colorBackgroundHighlight = [UIColor colorWithRed:(76.0/255.0) green:(161.0/255.0) blue:(255.0/255.0) alpha:0.25];
-    self.colorsProfileIcons = [[NSMutableArray alloc] init];
-
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0xec6a5e)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0xff9c00)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0xf4d347)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0x7ccc52)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0x66aee4)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0x5ee0ec)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0xb400ff)];
-    [self.colorsProfileIcons addObject:UIColorFromRGB(0x777777)];
-
-    self.appFont = @"Lato-Regular";
+    self.colorWhite = ColorWhite;
+    self.colorLightGray = ColorLightGray;
+    self.colorMidGray = ColorMidGray;
+    self.colorDarkGray =  ColorDarkGray;
+    self.colorLightPrimary = ColorLightPrimary;
+    self.colorMidPrimary = ColorMidPrimary;
+    self.colorDarkPrimary = ColorDarkPrimary;
+    self.colorFirstAccent = ColorFirstAccent;
+    self.colorSecondAccent = ColorSecondAccent;
+    
+    self.appFont = AppFont;
+    self.appFontItalic = AppFontItalic;
+    
+#pragma mark Animation Constants
 
     self.animationDurationTimeDefault           = 0.20;     // How long the animation transition should take
     self.animationDurationTimeFast              = 0.15;     // How long the animation transition should take
@@ -101,12 +76,20 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.alertHoldTimePaymentReceived           = 10;       // Hold time for payments
     self.alertHoldTimeHelpPopups                = 6.0;      // Hold time for auto popup help
 
+#pragma mark Time Constants
+    
     self.qrCodeGenDelayTime                     = 0.75;     // Timer delay after keypad entry before new QR code is generated
 
+#pragma mark Images
     self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
     
-//    if (IS_IPHONE4)
+#pragma mark Layout Constants
+    
+    self.loginTitleTextShadowRadius = 0.5;
+    self.pinEntryTextShadowRadius = 0.5;
+    
+    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
         self.heightLoginScreenLogo = 70;
