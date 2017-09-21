@@ -84,12 +84,12 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.backgroundApp = [UIImage imageNamed:@"background-fade.jpg"];
     self.backgroundLogin = [UIImage imageNamed:@"background.jpg"];
     
+//    if (IS_IPHONE4)
 #pragma mark Layout Constants
     
     self.loginTitleTextShadowRadius = 0.5;
     self.pinEntryTextShadowRadius = 0.5;
     
-    if (IS_IPHONE4)
     {
         self.heightListings = 90.0;
         self.heightLoginScreenLogo = 70;
