@@ -15,6 +15,7 @@
 }
 @property (weak, nonatomic) IBOutlet UIView *balanceView;
 @property (weak, nonatomic) IBOutlet UILabel *showBalanceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buttonShowBalance;
 
 @end
 
@@ -97,6 +98,11 @@
     [bv.showBalanceLabel setAlpha:1.0];
     
     return bv;
+}
+
+- (void)setThemeValues {
+    self.showBalanceLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.buttonShowBalance.titleLabel.textColor = [Theme Singleton].colorDarkPrimary;
 }
 
 @end

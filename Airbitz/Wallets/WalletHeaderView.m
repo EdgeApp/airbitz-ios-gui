@@ -23,9 +23,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    self.titleLabel.textColor = [Theme Singleton].colorWhite;
 }
 
 +(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed

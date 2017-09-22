@@ -59,11 +59,21 @@ static UIView *alert;
         [singleton addGestureRecognizer:tapGesture];
         [singleton setTranslatesAutoresizingMaskIntoConstraints:YES];
         singleton.dismissTimer = nil;
-
+        
+        [singleton setThemeValues];
+        
         bInitialized = YES;
     }
 
 };
+
+- (void)setThemeValues {
+    self.messageText.textColor = [Theme Singleton].colorDarkPrimary;
+    self.activityIndicator.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    self.connectedLine1.textColor = [Theme Singleton].colorWhite;
+    self.connectedLine2.textColor = [Theme Singleton].colorWhite;
+    self.connectedLine3.textColor = [Theme Singleton].colorWhite;
+}
 
 + (void)create:(UIView *)parentView message:(NSString *)message
 {

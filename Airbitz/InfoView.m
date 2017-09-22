@@ -145,6 +145,11 @@ static NSString *currentHtml = nil;
 	 }];
 }
 
+- (void)setThemeValues {
+    self.agreeButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    self.agreeButton.titleLabel.textColor = [Theme Singleton].colorLightGray;
+}
+
 -(void)enableScrolling:(BOOL)scrollEnabled
 {
 	self.webView.scrollView.scrollEnabled = scrollEnabled;
@@ -163,6 +168,7 @@ static NSString *currentHtml = nil;
 	if(self)
 	{
 		[self initMyVariables];
+        [self setThemeValues];
 	}
     return self;
 }
@@ -171,6 +177,7 @@ static NSString *currentHtml = nil;
 {
     [super awakeFromNib];
 	[self initMyVariables];
+    [self setThemeValues];
 }
 
 - (IBAction)IAgreeButton:(id)sender {

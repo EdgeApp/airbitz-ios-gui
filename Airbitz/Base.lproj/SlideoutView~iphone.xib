@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -41,7 +42,7 @@
                             </accessibility>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.15854966810000001" green="0.2440926645" blue="0.36231674380000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" notEnabled="YES"/>
                     </accessibility>
@@ -64,7 +65,7 @@
                                 <accessibilityTraits key="traits" none="YES"/>
                             </accessibility>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" id="TCb-b7-HfE" userLabel="divider1">
@@ -82,7 +83,7 @@
                             </accessibility>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.85657793209999999" green="0.85657793209999999" blue="0.85657793209999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.87058823529411766" green="0.85098039215686272" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="">
                         <accessibilityTraits key="traits" button="YES"/>
                         <bool key="isElement" value="YES"/>
@@ -158,7 +159,7 @@
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -214,7 +215,7 @@
                                         <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                     </accessibility>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WALLETS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lr4-kO-HCW" userLabel="logoutText">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WALLETS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lr4-kO-HCW" userLabel="walletsText">
                                     <rect key="frame" x="65" y="0.0" width="310" height="50"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <accessibility key="accessibilityConfiguration" label="">
@@ -222,7 +223,7 @@
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -286,7 +287,7 @@
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -314,17 +315,17 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" id="6sW-mE-1UL" userLabel="divider1">
+                        <view contentMode="scaleToFill" id="6sW-mE-1UL" userLabel="divider4">
                             <rect key="frame" x="0.0" y="455" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" id="iNr-7k-HKh" userLabel="divider1">
+                        <view contentMode="scaleToFill" id="iNr-7k-HKh" userLabel="divider5">
                             <rect key="frame" x="0.0" y="505" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view contentMode="scaleToFill" id="Ukc-Z5-Xou" userLabel="divider1">
+                        <view contentMode="scaleToFill" id="Ukc-Z5-Xou" userLabel="divider6">
                             <rect key="frame" x="313" y="505" width="1" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -343,17 +344,25 @@
                 <outlet property="affiliateButton" destination="Lwy-1d-Qgs" id="sSU-EL-Wye"/>
                 <outlet property="affiliateLabel" destination="xju-3Y-EvK" id="9lR-TX-Xmr"/>
                 <outlet property="buySellButton" destination="jpu-23-4kh" id="Gzm-Dc-9Qt"/>
+                <outlet property="buysellText" destination="rWQ-uJ-DUX" id="p4Q-3F-C7u"/>
                 <outlet property="conversionText" destination="O8N-2d-FwL" id="Bml-x3-ife"/>
                 <outlet property="dividerView1" destination="Jo0-RP-ZNs" id="qzV-p5-oof"/>
                 <outlet property="dividerView2" destination="I1t-ii-re1" id="Lhd-Oe-NvF"/>
                 <outlet property="dividerView3" destination="rb4-q3-fT7" id="DGb-Yp-onP"/>
+                <outlet property="dividerView4" destination="6sW-mE-1UL" id="012-dp-ygQ"/>
+                <outlet property="dividerView5" destination="iNr-7k-HKh" id="oFG-jb-F3y"/>
+                <outlet property="dividerView6" destination="Ukc-Z5-Xou" id="SNO-Xs-4JC"/>
+                <outlet property="exchangeView" destination="qEK-dC-DG9" id="2F3-JG-tTe"/>
                 <outlet property="giftCardButton" destination="Zu4-Fd-NGP" id="2Qj-IR-oIT"/>
                 <outlet property="giftCardTextLabel" destination="bQy-8e-q5h" id="f4L-tB-flJ"/>
                 <outlet property="logoutButton" destination="GIG-Sd-O0c" id="G8X-1c-MlU"/>
+                <outlet property="logoutText" destination="BCk-jF-SE5" id="EOB-o3-h8x"/>
                 <outlet property="lowerViews" destination="WFe-bF-Laf" id="Oyd-RS-Y5j"/>
                 <outlet property="otherAccountsView" destination="BN8-sG-2n3" id="iwC-WI-kIH"/>
+                <outlet property="settingText" destination="Zac-Lf-J4y" id="tqd-lo-Uao"/>
                 <outlet property="settingsButton" destination="xna-m1-9hx" id="s5I-7x-I5Z"/>
                 <outlet property="walletsButton" destination="aSM-QX-pLq" id="Qmd-7r-KN6"/>
+                <outlet property="walletsText" destination="lr4-kO-HCW" id="GHb-2M-5hk"/>
             </connections>
             <point key="canvasLocation" x="-454.5" y="20.5"/>
         </view>
@@ -369,9 +378,4 @@
         <image name="icon_settings_dark.png" width="36" height="36"/>
         <image name="icon_wallet_dark.png" width="36" height="36"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
