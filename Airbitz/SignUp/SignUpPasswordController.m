@@ -37,6 +37,7 @@
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (weak, nonatomic) IBOutlet UILabel                    *pinTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
+@property (weak, nonatomic) IBOutlet UILabel                    *setPasswordInfoLabel;
 @property (weak, nonatomic) IBOutlet UIButton                   *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton                   *skipButton;
 @property (strong, nonatomic)        UIAlertView                *noPasswordAlert;
@@ -57,18 +58,41 @@
     
     self.passwordTextField.delegate = self;
     self.passwordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
-    self.passwordTextField.font = [UIFont fontWithName:AppFont size:17.0];
-
+    
     self.reenterPasswordTextField.delegate = self;
     self.reenterPasswordTextField.minimumCharacters = [ABCContext getMinimumPasswordLength];
-    self.reenterPasswordTextField.font = [UIFont fontWithName:AppFont size:17.0];
+    
     self.pinTextField.delegate = self;
     self.pinTextField.minimumCharacters = [ABCContext getMinimumPINLength];
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = signupText;
+    
+    [self setThemeValues];
+}
 
-
+- (void)setThemeValues {
+    self.setPasswordLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.setPasswordLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.setPasswordInfoLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.setPasswordInfoLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    self.passwordTextField.font = [UIFont fontWithName:AppFont size:17.0];
+    
+    self.reenterPasswordTextField.font = [UIFont fontWithName:AppFont size:17.0];
+    
+    self.pinTextLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.pinTextLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    self.pinTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.nextButton.titleLabel.textColor = [Theme Singleton].colorWhite;
+    self.nextButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.nextButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    
+    self.skipButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.skipButton.titleLabel.textColor = [Theme Singleton].colorDarkPrimary;
 }
 
 -(void)viewWillAppear:(BOOL)animated
