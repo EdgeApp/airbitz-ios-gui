@@ -223,6 +223,16 @@ typedef NS_ENUM(NSUInteger, CellType) {
 	[self.view addGestureRecognizer:gesture];
 }
 
+- (void)setThemeValues {
+    self.categoriesLabel.textColor = [Theme Singleton].colorWhite;
+    self.categoriesLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
+    
+    self.BTC_DiscountLabel.textColor = [Theme Singleton].colorWhite;
+    self.BTC_DiscountLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
+    
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [MainViewController changeNavBarOwner:self];
@@ -548,6 +558,12 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
     //common cell
     BD_CommonCell *commonCell = [self getCommonCellForTableView:tableView];
+    
+    commonCell.leftLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    commonCell.leftLabel.textColor = [Theme Singleton].colorMidPrimary;
+    
+    commonCell.rightLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    commonCell.rightLabel.textColor = [Theme Singleton].colorMidPrimary;
 
 	if (cellType == kAddress)
 	{

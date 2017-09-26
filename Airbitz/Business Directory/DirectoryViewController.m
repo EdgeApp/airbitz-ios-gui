@@ -230,6 +230,11 @@ static bool bInitialized = false;
     self.afmanager = [MainViewController createAFManager];
 }
 
+- (void)setThemeValues {
+    self.tableView.separatorColor = [Theme Singleton].colorDarkPrimary;
+    
+}
+
 - (void) forceUpdateNavBar;
 {
     [MainViewController changeNavBarOwner:self];
@@ -1593,7 +1598,7 @@ static bool bInitialized = false;
                 //ABCLog(2,@"Unknown");
             }
             cell.businessNameLabel.text = [businessInfo objectForKey: @"name"];
-            cell.businessNameLabel.textColor = [UIColor whiteColor];
+            cell.businessNameLabel.textColor = [Theme Singleton].colorWhite;
             cell.addressLabel.text = [businessInfo objectForKey: @"address"];
 
             //ABCLog(2,@"Requesting background image");
@@ -1666,7 +1671,7 @@ static bool bInitialized = false;
         {
             //in case server returns fewer objects than it says (so we don't crash)
             cell.businessNameLabel.text = @"Loading...";
-            cell.businessNameLabel.textColor = [UIColor whiteColor];
+            cell.businessNameLabel.textColor = [Theme Singleton].colorWhite;
             cell.addressLabel.text = @" ";
             cell.bitCoinLabel.hidden = YES;
             //[cell loadBackgroundImageForBusiness:nil];
@@ -1698,17 +1703,17 @@ static bool bInitialized = false;
             {
                 cell.textLabel.text = [searchLocationCache objectAtIndex: indexPath.row];
                 //
-                cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
+                cell.textLabel.textColor = [Theme Singleton].colorFirstAccent;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize)
             {
                 cell.textLabel.text = currentLocationString;
-                cell.textLabel.textColor = [UIColor blueColor];
+                cell.textLabel.textColor = [Theme Singleton].colorMidPrimary;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize + 1)
             {
                 cell.textLabel.text = onTheWebString;
-                cell.textLabel.textColor = [UIColor blueColor];
+                cell.textLabel.textColor = [Theme Singleton].colorMidPrimary;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (locationAutoCorrectArray != nil)
             {
@@ -1716,7 +1721,7 @@ static bool bInitialized = false;
                 if (index < [locationAutoCorrectArray count] && [[locationAutoCorrectArray objectAtIndex:index] isKindOfClass:[NSString class]])
                 {
                     cell.textLabel.text = [locationAutoCorrectArray objectAtIndex:index];
-                    cell.textLabel.textColor = [UIColor darkGrayColor];
+                    cell.textLabel.textColor = [Theme Singleton].colorDarkGray;
                 }
             }
         } else if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
@@ -1737,7 +1742,7 @@ static bool bInitialized = false;
             if (indexPath.row < cacheSize)
             {
                 cell.textLabel.text = [self stringForObjectInCache: searchTermCache atIndex: indexPath.row]; //[searchTermCache objectAtIndex:indexPath.row];
-                cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
+                cell.textLabel.textColor = [Theme Singleton].colorFirstAccent;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (businessAutoCorrectArray.count && businessAutoCorrectArray.count > indexPath.row)
             {
@@ -1762,7 +1767,7 @@ static bool bInitialized = false;
                     cell.textLabel.text = (NSString *)object;
                 }
 
-                cell.textLabel.textColor = [UIColor darkGrayColor];
+                cell.textLabel.textColor = [Theme Singleton].colorDarkGray;
             }
         }
         return cell;

@@ -197,6 +197,8 @@
 	{
 		cell.categoryLabel.text = [dict objectForKey:@"name"];
 	}
+    
+    cell.textLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
 	
 	return cell;
 }

@@ -7,6 +7,8 @@
 //
 
 #import "TextViewCell.h"
+#import "Theme.h"
+
 @interface TextViewCell () <UITextViewDelegate>
 {
 }
@@ -19,7 +21,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-
+        [self setThemeValues];
     }
     return self;
 }
@@ -34,6 +36,12 @@
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
 	
 	self.textView.delegate = self;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.textView.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

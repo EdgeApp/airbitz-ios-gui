@@ -7,6 +7,7 @@
 //
 
 #import "PlainCell.h"
+#import "Theme.h"
 
 @implementation PlainCell
 
@@ -27,6 +28,11 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
+}
+
+- (void)setThemeValues {
+    self.name.textColor = [Theme Singleton].colorDarkPrimary;
+    self.name.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

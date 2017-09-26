@@ -23,6 +23,9 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *clearWatcherButton;
 @property (nonatomic, weak) IBOutlet UIButton *uploadLogsButton;
+@property (nonatomic, weak) IBOutlet UILabel *versionTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *coreTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *networkTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *versionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *coreLabel;
 @property (nonatomic, weak) IBOutlet UILabel *networkLabel;
@@ -64,6 +67,33 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
 
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.versionTitleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.versionTitleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.versionLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.versionLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.coreTitleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.coreTitleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.coreLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.coreLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.networkTitleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.networkTitleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.networkLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.networkLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.clearWatcherButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    self.clearWatcherButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.uploadLogsButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    self.uploadLogsButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
