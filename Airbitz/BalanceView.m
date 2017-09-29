@@ -102,7 +102,7 @@
 
 - (void)setThemeValues {
     self.showBalanceLabel.textColor = [Theme Singleton].colorDarkPrimary;
-    self.buttonShowBalance.titleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.buttonShowBalance.tintColor = [Theme Singleton].colorDarkPrimary;
 }
 
 @end

@@ -167,6 +167,44 @@
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(transactionDetailsExit) name:NOTIFICATION_TRANSACTION_DETAILS_EXITED object:nil];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.labelSendToTitle.textColor = [Theme Singleton].colorDarkGray;
+    self.labelSendToTitle.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.addressLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.addressButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.amountBTCSymbol.textColor = [Theme Singleton].colorDarkGray;
+    self.amountBTCSymbol.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
+    
+    self.amountBTCTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
+    
+    self.amountBTCLabel.textColor = [Theme Singleton].colorLightPrimary;
+    self.amountBTCLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    self.amountFiatSymbol.textColor = [Theme Singleton].colorDarkGray;
+    self.amountFiatSymbol.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
+    
+    self.amountFiatTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
+    
+    self.amountFiatLabel.textColor = [Theme Singleton].colorLightPrimary;
+    self.amountFiatLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    self.conversionLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.conversionLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.labelPINTitle.textColor = [Theme Singleton].colorDarkGray;
+    self.labelPINTitle.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    
+    self.withdrawlPIN.font = [UIFont fontWithName:[Theme Singleton].appFont size:24.0];
+    
+    self.maxAmountButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.maxAmountButton.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)viewWillAppear

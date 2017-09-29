@@ -65,6 +65,25 @@
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
     _blankImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.headerLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.headerLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:32.0];
+    
+    self.loginButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    self.loginButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    
+    self.cancelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    self.cancelButton.backgroundColor = [Theme Singleton].colorLightGray;
+    
+    self.descriptionTextView.textColor = [Theme Singleton].colorDarkGray;
+    self.descriptionTextView.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    
+    self.appNameLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.appNameLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:25.0];
 }
 
 - (void)viewDidUnload
@@ -77,9 +96,7 @@
     [MainViewController changeNavBarOwner:self];
 
     self.spinnerView.hidden = YES;
-    self.headerLabel.textColor = [Theme Singleton].colorDarkGray;
-    self.descriptionTextView.textColor = [Theme Singleton].colorDarkGray;
-    self.appNameLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    
     
     [self setupNavBar];
 

@@ -79,7 +79,7 @@
     self.labelPIN.textColor = [Theme Singleton].colorDarkPrimary;
     
     self.buttonShowHide.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
-    self.buttonShowHide.titleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.buttonShowHide.tintColor = [Theme Singleton].colorDarkPrimary;
     
     self.buttonNext.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
     self.buttonNext.backgroundColor = [Theme Singleton].colorFirstAccent;

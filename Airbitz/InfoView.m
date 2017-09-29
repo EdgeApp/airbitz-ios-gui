@@ -147,7 +147,7 @@ static NSString *currentHtml = nil;
 
 - (void)setThemeValues {
     self.agreeButton.backgroundColor = [Theme Singleton].colorFirstAccent;
-    self.agreeButton.titleLabel.textColor = [Theme Singleton].colorLightGray;
+    self.agreeButton.tintColor = [Theme Singleton].colorLightGray;
 }
 
 -(void)enableScrolling:(BOOL)scrollEnabled

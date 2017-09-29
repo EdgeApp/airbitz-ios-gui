@@ -149,6 +149,8 @@ const int NumPromoRows              = 4;
 
     [self.view setNeedsLayout];
     [self.view layoutIfNeeded];
+    
+    [self setThemeValues];
 
     // alloc the arrays
     self.arraySearchTransactions = [[NSMutableArray alloc] init];
@@ -220,6 +222,10 @@ const int NumPromoRows              = 4;
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
     _blankImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+}
+
+- (void)setThemeValues {
+    self.walletsView.backgroundColor = [Theme Singleton].colorDarkPrimary;
 }
 
 - (void) dropdownWallets:(BOOL)bDropdown;
@@ -1330,7 +1336,7 @@ const int NumPromoRows              = 4;
         //
         if (bBlankCell)
         {
-            cell.promoLabel.font = [UIFont fontWithName:AppFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
+            cell.promoLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:[Theme Singleton].fontSizeTxListBuyBitcoin];
             cell.promoLabel.textColor = [Theme Singleton].colorDarkPrimary;
             cell.addressLabel.text = @"";
 //            cell.dateLabel.text = @"";

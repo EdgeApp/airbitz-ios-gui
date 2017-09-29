@@ -55,7 +55,7 @@
 
 - (void)setThemeValues {
     self.labelCurrency.textColor = [Theme Singleton].colorDarkGray;
-    self.buttonCurrency.titleLabel.textColor = [Theme Singleton].colorMidPrimary;
+    self.buttonCurrency.tintColor = [Theme Singleton].colorMidPrimary;
     self.buttonCancel.backgroundColor = [Theme Singleton].colorMidPrimary;
     self.buttonDone.backgroundColor = [Theme Singleton].colorFirstAccent;
 }

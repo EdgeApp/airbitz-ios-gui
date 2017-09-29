@@ -32,7 +32,7 @@
 }
 
 - (void)setThemeValues {
-    self.button.titleLabel.textColor = [Theme Singleton].colorWhite;
+    self.button.tintColor = [Theme Singleton].colorWhite;
     self.button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
     self.button.backgroundColor = [Theme Singleton].colorMidPrimary;
 }

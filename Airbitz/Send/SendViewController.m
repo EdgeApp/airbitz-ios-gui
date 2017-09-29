@@ -142,6 +142,18 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
     [MainViewController generateListOfContactNames];
 
     self.afmanager = [MainViewController createAFManager];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.textUnderQRScanner.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
+    
+    self.topTextLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.scanningErrorLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
+    
+    
 }
 
 - (void)dealloc

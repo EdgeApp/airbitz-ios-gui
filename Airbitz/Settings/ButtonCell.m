@@ -42,7 +42,7 @@
     self.name.textColor = [Theme Singleton].colorDarkPrimary;
     self.name.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
     
-    self.button.titleLabel.textColor = [Theme Singleton].colorMidPrimary;
+    self.button.tintColor = [Theme Singleton].colorMidPrimary;
     self.button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
 }
 

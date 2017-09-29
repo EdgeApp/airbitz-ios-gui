@@ -87,12 +87,12 @@
     
     self.pinTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
     
-    self.nextButton.titleLabel.textColor = [Theme Singleton].colorWhite;
+    self.nextButton.tintColor = [Theme Singleton].colorWhite;
     self.nextButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
     self.nextButton.backgroundColor = [Theme Singleton].colorFirstAccent;
     
     self.skipButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
-    self.skipButton.titleLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.skipButton.tintColor = [Theme Singleton].colorDarkPrimary;
 }
 
 -(void)viewWillAppear:(BOOL)animated

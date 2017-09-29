@@ -96,7 +96,16 @@ typedef enum eAlertType
 	[center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
+    [self setThemeValues];
 }
+
+- (void)setThemeValues {
+    self.buttonSkip.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
+    self.buttonSkip.tintColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.passwordField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     if ((self.mode == PassRecovMode_SignUp) || (self.mode == PassRecovMode_Change))

@@ -7,6 +7,7 @@
 //
 
 #import "ExportWalletOptionsCell.h"
+#import "Theme.h"
 
 @implementation ExportWalletOptionsCell
 
@@ -26,6 +27,9 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
+    
+    self.name.textColor = [Theme Singleton].colorMidPrimary;
+    self.name.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.name.font.pointSize];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

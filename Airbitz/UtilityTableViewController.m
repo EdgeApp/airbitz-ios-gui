@@ -51,6 +51,12 @@
     UIGraphicsEndImageContext();
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

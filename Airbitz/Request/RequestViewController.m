@@ -162,6 +162,37 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 
     // load all the names from the address book
     [MainViewController generateListOfContactNames];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.BTC_TextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.BTC_TextField.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.fiatLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
+    self.fiatLabel.textColor = [Theme Singleton].colorWhite;
+    
+    self.USD_TextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
+    self.USD_TextField.textColor = [Theme Singleton].colorWhite;
+    
+    self.exchangeRateLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    self.exchangeRateLabel.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.btcLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.btcLabel.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.textUnderQRCode.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.textUnderQRCode.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.refreshSpinner.color = [Theme Singleton].colorDarkPrimary;
+    
+    self.refreshButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    
+    self.statusLine1.textColor = [Theme Singleton].colorDarkPrimary;
+    self.statusLine2.textColor = [Theme Singleton].colorDarkPrimary;
+    self.statusLine3.textColor = [Theme Singleton].colorDarkPrimary;
+    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorDarkPrimary];
 }
 
 -(void)awakeFromNib
@@ -214,11 +245,6 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     }
 
     [self updateViews:nil];
-
-    [self.statusLine1 setTextColor:[Theme Singleton].colorDarkPrimary];
-    [self.statusLine2 setTextColor:[Theme Singleton].colorDarkPrimary];
-    [self.statusLine3 setTextColor:[Theme Singleton].colorDarkPrimary];
-    [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorDarkPrimary];
 }
 
 - (void)updateViews:(NSNotification *)notification

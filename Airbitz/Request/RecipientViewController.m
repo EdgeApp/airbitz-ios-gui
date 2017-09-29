@@ -64,7 +64,7 @@
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
 
     // set up our edit field
-    self.textFieldRecipient.font = [UIFont systemFontOfSize:18];
+    self.textFieldRecipient.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
     self.textFieldRecipient.textAlignment = NSTextAlignmentCenter;
     self.textFieldRecipient.tintColor = [UIColor whiteColor];
 

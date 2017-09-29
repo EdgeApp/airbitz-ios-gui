@@ -38,7 +38,7 @@
 
 - (void)setThemeValues {
     self.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
-    self.button.titleLabel.textColor = [Theme Singleton].colorWhite;
+    self.button.tintColor = [Theme Singleton].colorWhite;
     self.button.backgroundColor = [Theme Singleton].colorDarkPrimary;
 }
 

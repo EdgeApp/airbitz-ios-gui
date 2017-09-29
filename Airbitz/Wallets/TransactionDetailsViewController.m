@@ -124,6 +124,8 @@ typedef enum eRequestType
 @property (nonatomic, strong)        NSMutableArray         *arrayThumbnailsRetrieving; // array of names of businesses for which images are currently being retrieved
 @property (nonatomic, strong)        NSMutableArray         *arrayAutoCompleteQueries; // array of names for which autocomplete queries have been made
 @property (nonatomic, strong)        AFHTTPRequestOperationManager *afmanager;
+@property (weak, nonatomic) IBOutlet UIView *dividerView1;
+@property (weak, nonatomic) IBOutlet UIView *dividerView2;
 
 @end
 
@@ -276,6 +278,8 @@ typedef enum eRequestType
     [Util stylizeTextField:self.pickerTextCategory.textField];
     [Util stylizeTextView:self.notesTextView];
     
+    [self setThemeValues];
+    
     _originalHeaderFrame = self.headerView.frame;
     _originalContentFrame = self.contentView.frame;
     _originalScrollableContentFrame = self.scrollableContentView.frame;
@@ -294,6 +298,31 @@ typedef enum eRequestType
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAll) name:NOTIFICATION_CONTACTS_CHANGED object:nil];
 
     [Location initAllWithDelegate: self];
+}
+
+- (void)setThemeValues {
+    self.dateLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.walletLabel.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.dividerView1.backgroundColor = [[Theme Singleton].colorDarkGray colorWithAlphaComponent:0.25];
+    
+    self.bitCoinLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.labelBTC.textColor = [Theme Singleton].colorDarkGray;
+    self.labelFiatName.textColor = [Theme Singleton].colorWhite;
+    
+    self.dividerView2.backgroundColor = [[Theme Singleton].colorDarkGray colorWithAlphaComponent:0.25];
+    
+    self.labelCategory.textColor = [Theme Singleton].colorDarkGray;
+    self.labelNotes.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.notesTextView.textColor = [Theme Singleton].colorWhite;
+    self.notesTextView.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    self.labelFee.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.categoryButton.backgroundColor = [Theme Singleton].colorMidPrimary;
+    self.advancedDetailsButton.backgroundColor = [Theme Singleton].colorLightGray;
+    self.doneButton.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)viewDidUnload
