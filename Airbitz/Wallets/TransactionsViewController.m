@@ -226,6 +226,12 @@ const int NumPromoRows              = 4;
 
 - (void)setThemeValues {
     self.walletsView.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.buttonSend.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    self.buttonSend.backgroundColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonRequest.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    self.buttonRequest.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void) dropdownWallets:(BOOL)bDropdown;

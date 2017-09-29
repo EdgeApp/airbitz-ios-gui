@@ -98,7 +98,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setThemeValues];
+        
     }
     return self;
 }
@@ -107,9 +107,15 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self setThemeValues];
+        
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self setThemeValues];
 }
 
 - (void)setThemeValues {

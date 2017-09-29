@@ -28,9 +28,17 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setThemeValues];
+}
+
 - (void)setThemeValues {
     self.backgroundColor = [Theme Singleton].colorDarkPrimary;
     self.titleLabel.textColor = [Theme Singleton].colorWhite;
+    
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [UIFont fontWithName:[Theme Singleton].appFont size:18.0]};
+    [self.segmentedControlBTCUSD setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
 }
 
 +(WalletHeaderView *)CreateWithTitle:(NSString *)title collapse:(BOOL)bCollapsed

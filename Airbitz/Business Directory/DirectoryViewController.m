@@ -242,11 +242,14 @@ static bool bInitialized = false;
         });
     }
     
-    self.categoryButtonsView.backgroundColor = [Theme Singleton].colorWhite;
+   
     self.afmanager = [MainViewController createAFManager];
+    
+    [self setThemeValues];
 }
 
 - (void)setThemeValues {
+    self.categoryButtonsView.backgroundColor = [Theme Singleton].colorWhite;
     self.tableView.separatorColor = [Theme Singleton].colorDarkPrimary;
     
     NSArray *headerButtons = @[self.buttonRestaurants,

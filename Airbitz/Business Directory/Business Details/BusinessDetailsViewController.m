@@ -62,8 +62,8 @@ typedef NS_ENUM(NSUInteger, CellType) {
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *imageLoadActivityView;
 @property (nonatomic, weak) IBOutlet UIView *imageArea;
-@property (nonatomic, weak) IBOutlet UILabel *categoriesLabel;
-@property (nonatomic, weak) IBOutlet UILabel *BTC_DiscountLabel;
+@property (nonatomic, weak) IBOutlet LatoLabel *categoriesLabel;
+@property (nonatomic, weak) IBOutlet LatoLabel *BTC_DiscountLabel;
 
 @property (nonatomic, strong) NSDictionary *businessDetails;
 @property (strong, nonatomic) AFHTTPRequestOperationManager         *afmanager;
@@ -225,12 +225,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
 
 - (void)setThemeValues {
     self.categoriesLabel.textColor = [Theme Singleton].colorWhite;
-    self.categoriesLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
-    
     self.BTC_DiscountLabel.textColor = [Theme Singleton].colorWhite;
-    self.BTC_DiscountLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -559,10 +554,7 @@ typedef NS_ENUM(NSUInteger, CellType) {
     //common cell
     BD_CommonCell *commonCell = [self getCommonCellForTableView:tableView];
     
-    commonCell.leftLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
     commonCell.leftLabel.textColor = [Theme Singleton].colorMidPrimary;
-    
-    commonCell.rightLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
     commonCell.rightLabel.textColor = [Theme Singleton].colorMidPrimary;
 
 	if (cellType == kAddress)

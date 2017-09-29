@@ -102,8 +102,6 @@ typedef enum eAlertType
 - (void)setThemeValues {
     self.buttonSkip.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
     self.buttonSkip.tintColor = [Theme Singleton].colorDarkPrimary;
-    
-    self.passwordField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
 }
 
 -(void)viewDidAppear:(BOOL)animated

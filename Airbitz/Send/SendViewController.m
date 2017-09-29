@@ -54,6 +54,7 @@
 #import "AddressRequestController.h"
 #import "SSOViewController.h"
 #import "Mixpanel.h"
+#import "LatoLabel.h"
 
 typedef enum eScanMode
 {
@@ -94,9 +95,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, strong)	IBOutlet UITableView			*tableView;
 @property (nonatomic, strong)   NSArray                         *arrayChoicesIndexes;
 @property (nonatomic, strong)   PopupPickerView2                *popupPickerSendTo;
-@property (nonatomic, strong)   IBOutlet UILabel				*scanningErrorLabel;
-@property (weak, nonatomic)     IBOutlet UILabel                *topTextLabel;
-@property (weak, nonatomic)     IBOutlet UILabel                *textUnderQRScanner;
+@property (nonatomic, strong)   IBOutlet LatoLabel				*scanningErrorLabel;
+@property (weak, nonatomic)     IBOutlet LatoLabel              *topTextLabel;
+@property (weak, nonatomic)     IBOutlet LatoLabel              *textUnderQRScanner;
 
 @property (weak, nonatomic)     IBOutlet UISegmentedControl     *segmentedControl;
 @property (weak, nonatomic)     IBOutlet NSLayoutConstraint     *bleViewHeight;
@@ -147,13 +148,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 }
 
 - (void)setThemeValues {
-    self.textUnderQRScanner.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
-    
-    self.topTextLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
-    
-    self.scanningErrorLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:20.0];
-    
-    
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [UIFont fontWithName:[Theme Singleton].appFont size:18.0]};
+    [segmentedControl setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
 }
 
 - (void)dealloc

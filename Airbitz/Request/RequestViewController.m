@@ -32,6 +32,7 @@
 #import "AppGroupConstants.h"
 #import "FadingAlertView.h"
 #import "Mixpanel.h"
+#import "LatoLabel.h"
 
 
 #define QR_CODE_TEMP_FILENAME @"qr_request.png"
@@ -86,9 +87,9 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btcTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiatHeight;
-@property (weak, nonatomic) IBOutlet UILabel            *statusLine1;
-@property (weak, nonatomic) IBOutlet UILabel            *statusLine2;
-@property (weak, nonatomic) IBOutlet UILabel            *statusLine3;
+@property (weak, nonatomic) IBOutlet LatoLabel          *statusLine1;
+@property (weak, nonatomic) IBOutlet LatoLabel          *statusLine2;
+@property (weak, nonatomic) IBOutlet LatoLabel          *statusLine3;
 @property (nonatomic, weak) IBOutlet UIImageView	    *BLE_LogoImageView;
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *bitcoinURICharacteristic;
@@ -98,14 +99,16 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, assign) int64_t                   amountSatoshiReceived;
 @property (nonatomic, assign) RequestState              state;
 @property (nonatomic, strong) NSTimer                   *qrTimer;
-@property (weak, nonatomic)   IBOutlet UILabel          *textUnderQRCode;
+@property (weak, nonatomic)   IBOutlet LatoLabel        *textUnderQRCode;
 
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (nonatomic, strong) NSString *requestType;
 @property (nonatomic, strong) RecipientViewController   *recipientViewController;
-@property (weak, nonatomic) IBOutlet UILabel *btcLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fiatLabel;
-@property (nonatomic, weak) IBOutlet UIImageView    *qrCodeImageView;
-@property (weak, nonatomic) IBOutlet UIView         *viewQRCodeFrame;
+@property (weak, nonatomic) IBOutlet LatoLabel *btcLabel;
+@property (weak, nonatomic) IBOutlet LatoLabel *fiatLabel;
+@property (nonatomic, weak) IBOutlet UIImageView        *qrCodeImageView;
+@property (weak, nonatomic) IBOutlet UIView             *viewQRCodeFrame;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlBTCUSD;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlCopyEmailSMS;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calculatorBottom;
@@ -114,13 +117,13 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 @property (nonatomic, weak) IBOutlet UITextField        *BTC_TextField;
 @property (nonatomic, weak) IBOutlet UITextField        *USD_TextField;
 @property (nonatomic, weak) IBOutlet ButtonSelectorView2 *buttonSelector; //wallet dropdown
-@property (nonatomic, weak) IBOutlet UILabel            *exchangeRateLabel;
-@property (nonatomic, weak) IBOutlet UIButton                *refreshButton;
+@property (nonatomic, weak) IBOutlet LatoLabel          *exchangeRateLabel;
+@property (nonatomic, weak) IBOutlet UIButton           *refreshButton;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *refreshSpinner;
 
-@property (nonatomic, copy)   NSString *strFullName;
-@property (nonatomic, copy)   NSString *strPhoneNumber;
-@property (nonatomic, copy)   NSString *strEMail;
+@property (nonatomic, copy)   NSString                  *strFullName;
+@property (nonatomic, copy)   NSString                  *strPhoneNumber;
+@property (nonatomic, copy)   NSString                  *strEMail;
 
 @end
 
@@ -167,22 +170,20 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
 }
 
 - (void)setThemeValues {
+    self.headerView.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    
     self.BTC_TextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
     self.BTC_TextField.textColor = [Theme Singleton].colorDarkGray;
     
-    self.fiatLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
     self.fiatLabel.textColor = [Theme Singleton].colorWhite;
     
     self.USD_TextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
     self.USD_TextField.textColor = [Theme Singleton].colorWhite;
     
-    self.exchangeRateLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
     self.exchangeRateLabel.textColor = [Theme Singleton].colorDarkGray;
     
-    self.btcLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
     self.btcLabel.textColor = [Theme Singleton].colorDarkGray;
     
-    self.textUnderQRCode.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
     self.textUnderQRCode.textColor = [Theme Singleton].colorDarkPrimary;
     
     self.refreshSpinner.color = [Theme Singleton].colorDarkPrimary;
@@ -192,6 +193,11 @@ static NSTimeInterval		lastPeripheralBLEPowerOffNotificationTime = 0;
     self.statusLine1.textColor = [Theme Singleton].colorDarkPrimary;
     self.statusLine2.textColor = [Theme Singleton].colorDarkPrimary;
     self.statusLine3.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [UIFont fontWithName:[Theme Singleton].appFont size:18.0]};
+    [self.segmentedControlBTCUSD setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
+    
+    [self.segmentedControlCopyEmailSMS setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
     [self.segmentedControlCopyEmailSMS setTintColor:[Theme Singleton].colorDarkPrimary];
 }
 

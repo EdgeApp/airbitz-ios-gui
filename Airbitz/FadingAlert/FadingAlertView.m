@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView        *connectedPhoto;
 @property (nonatomic, weak) IBOutlet UIView             *alertGroupView;
 @property (nonatomic, weak) IBOutlet UILabel            *messageText;
-@property (nonatomic, weak) IBOutlet UIView             *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic)       CGFloat                     holdTime;
 @property (nonatomic, weak) NSTimer                     *dismissTimer;
 @property (nonatomic, strong)        void               (^complete)(void);
@@ -69,7 +69,7 @@ static UIView *alert;
 
 - (void)setThemeValues {
     self.messageText.textColor = [Theme Singleton].colorDarkPrimary;
-    self.activityIndicator.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    self.activityIndicator.color = [Theme Singleton].colorDarkPrimary;
     self.connectedLine1.textColor = [Theme Singleton].colorWhite;
     self.connectedLine2.textColor = [Theme Singleton].colorWhite;
     self.connectedLine3.textColor = [Theme Singleton].colorWhite;

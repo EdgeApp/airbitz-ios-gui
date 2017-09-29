@@ -142,7 +142,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IsP-NR-ytZ" userLabel="Image -scanner">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Vs-Vv-LQH" userLabel="Text under Image scanner">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Vs-Vv-LQH" userLabel="Text under Image scanner" customClass="LatoLabel">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -256,7 +256,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleDark" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR to Send Funds or Login with BitID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-n1-ybU" userLabel="Scan QR to Send or Login with BitID" customClass="LatoLabel">
                                 <rect key="frame" x="0.0" y="64" width="375" height="45"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -310,7 +310,7 @@
                                     <constraint firstAttribute="height" id="L7Y-Fa-3uo"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[do not translate]" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rls-16-YZg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[do not translate]" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rls-16-YZg" customClass="LatoLabel">
                                 <rect key="frame" x="38" y="184" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="5H4-wO-AYa"/>
@@ -796,7 +796,7 @@
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwC-1c-veH" customClass="LatoLabel">
                                         <rect key="frame" x="365" y="65" width="0.0" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="47a-Rc-X2z"/>
@@ -807,7 +807,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-23-ecF" userLabel="BTC">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-23-ecF" userLabel="BTC" customClass="LatoLabel">
                                         <rect key="frame" x="10" y="67" width="51" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="51" id="hej-wJ-gUD"/>
@@ -821,7 +821,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-UO-gcm" userLabel="View -QR Code">
                                         <rect key="frame" x="78" y="106" width="219" height="219"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generating QR Code..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-dD-cy2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generating QR Code..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-dD-cy2" customClass="LatoLabel">
                                                 <rect key="frame" x="10" y="10" width="199" height="199"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                 <color key="textColor" red="0.056230269372463226" green="0.26473426818847656" blue="0.47470104694366455" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -903,7 +903,7 @@
                                             <action selector="segmentedControlCopyEmailSMSAction:" destination="Int-ih-AH6" eventType="valueChanged" id="Yi0-Sn-AYh"/>
                                         </connections>
                                     </segmentedControl>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="Status Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-3d-okn" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="333" width="335" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="d6r-Ou-4zx"/>
@@ -914,7 +914,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGg-Nn-BeH" userLabel="Status Line 2" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="355" width="335" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="L38-8w-StF"/>
@@ -925,7 +925,7 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="600" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtQ-SU-6iS" customClass="LatoLabel">
                                         <rect key="frame" x="20" y="377" width="335" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="u2z-WZ-GnH"/>
@@ -1035,6 +1035,7 @@
                         <outlet property="fiatLabel" destination="CiQ-7I-S7U" id="zhw-uP-9xd"/>
                         <outlet property="fiatTop" destination="fDp-p2-zgx" id="AWP-fI-w8e"/>
                         <outlet property="fiatWidth" destination="2jg-vD-63I" id="ngZ-an-ani"/>
+                        <outlet property="headerView" destination="2Po-w8-mEf" id="HTv-dr-SDV"/>
                         <outlet property="keypadView" destination="FS5-S0-Rqp" id="Xh1-wc-LVQ"/>
                         <outlet property="qrCodeImageView" destination="5sd-ot-S1v" id="Tct-qD-0GX"/>
                         <outlet property="refreshButton" destination="TZ4-b5-fQ5" id="GoR-nl-Bl4"/>
@@ -1231,7 +1232,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPo-UX-ZHi">
                                             <rect key="frame" x="187.5" y="160" width="187.5" height="50"/>
-                                            <color key="backgroundColor" red="0.11993695795536041" green="0.48990142345428467" blue="0.76840925216674805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="XB3-oL-6di"/>
                                             </constraints>
@@ -3164,7 +3165,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="55" y="72" width="210" height="32"/>
+                                                <rect key="frame" x="55" y="72" width="210" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
                                                 </constraints>
@@ -4045,7 +4046,7 @@
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AkB-cD-ba5" userLabel="topLabel" customClass="LatoLabel">
-                                            <rect key="frame" x="69" y="16" width="40" height="21"/>
+                                            <rect key="frame" x="69" y="16" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="9e0-ox-As7"/>
                                             </constraints>
@@ -4056,7 +4057,7 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gJp-Ct-Vol" userLabel="bottomLabel" customClass="LatoLabel">
-                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
+                                            <rect key="frame" x="69" y="38" width="39.5" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="7Up-y4-tsr"/>
                                             </constraints>
@@ -4206,7 +4207,7 @@
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0s2-OO-yBM" userLabel="topLabel" customClass="LatoLabel">
-                                                            <rect key="frame" x="69" y="16" width="40" height="21"/>
+                                                            <rect key="frame" x="69" y="16" width="42" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="QAR-VX-V7A"/>
                                                             </constraints>
@@ -4217,7 +4218,7 @@
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XJt-5y-Q5y" userLabel="bottomLabel" customClass="LatoLabel">
-                                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
+                                                            <rect key="frame" x="69" y="38" width="39.5" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="4xA-Cc-iPf"/>
                                                             </constraints>

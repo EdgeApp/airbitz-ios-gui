@@ -29,6 +29,7 @@
 #import "Airbitz-Swift.h"
 #import "Mixpanel.h"
 #import "Location.h"
+#import "LatoLabel.h"
 
 typedef enum eLoginMode
 {
@@ -79,7 +80,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet UIButton           *fingerprintButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
-@property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
+@property (weak, nonatomic) IBOutlet UIButton           *forgotPasswordButton;
 //@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet UIButton           *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
@@ -89,7 +90,7 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIButton           *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView        *swipeRightArrow;
-@property (nonatomic, weak) IBOutlet UILabel            *swipeText;
+@property (nonatomic, weak) IBOutlet LatoLabel          *swipeText;
 @property (nonatomic, weak) IBOutlet UILabel            *titleText;
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
@@ -137,11 +138,13 @@ static BOOL bInitialized = false;
 }
 
 - (void)styleForgotPasswordButton {
-    self.forgotPassworddButton.layer.shadowRadius = 3.0f;
-    self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
-    self.forgotPassworddButton.layer.masksToBounds = NO;
-    self.forgotPassworddButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
-    self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.forgotPasswordButton.layer.shadowRadius = 3.0f;
+    self.forgotPasswordButton.layer.shadowOpacity = 1.0f;
+    self.forgotPasswordButton.layer.masksToBounds = NO;
+    self.forgotPasswordButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
+    self.forgotPasswordButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    
+    self.forgotPasswordButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
 }
 
 - (void)styleSignInButton {
@@ -164,7 +167,6 @@ static BOOL bInitialized = false;
     self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     
     self.swipeText.textColor = [Theme Singleton].colorWhite;
-    self.swipeText.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
 }
 
 - (void)styleUsernameSelector {
@@ -193,14 +195,6 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.tintColor = [Theme Singleton].colorMidPrimary;
 }
 
-- (void)stylePasswordTextField {
-    self.passwordTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
-}
-
-- (void)stylePINTextField {
-    self.PINTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
-}
-
 - (void)styleExitPINLoginButton {
     self.exitPINLoginButton.tintColor = [Theme Singleton].colorLightPrimary;
 }
@@ -215,8 +209,6 @@ static BOOL bInitialized = false;
     [self styleSwipeTextLabel];
     [self styleUsernameSelector];
     [self stylePINUsernameSelector];
-    [self stylePasswordTextField];
-    [self stylePINTextField];
     [self styleExitPINLoginButton];
 }
 

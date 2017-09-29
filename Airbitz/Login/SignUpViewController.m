@@ -110,23 +110,12 @@
 }
 
 - (void)setThemeValues {
-    self.userNameTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
-    
     self.labelPasswordInfo.textColor = [Theme Singleton].colorDarkPrimary;
-    self.labelPasswordInfo.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
-    
-    self.passwordTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
-    
-    self.reenterPasswordTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
     
     self.labelPIN.textColor = [Theme Singleton].colorDarkPrimary;
-    self.labelPIN.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
-    
-    self.pinTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
     
     self.buttonNextStep.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
     self.buttonNextStep.backgroundColor = [Theme Singleton].colorMidPrimary;
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
