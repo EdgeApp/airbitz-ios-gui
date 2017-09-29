@@ -66,7 +66,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Restaurants" image="icon_category_restaurants.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -79,7 +79,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Coffee &amp; Tea" image="icon_category_coffee_tea.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -92,7 +92,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="ATMs" image="icon_category_atm.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -103,7 +103,7 @@
                                                             <rect key="frame" x="0.0" y="159" width="375" height="53"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <state key="normal" title="More Categories">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -116,7 +116,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Gift Cards" image="icon_category_gift_cards.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -129,7 +129,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Electronics" image="icon_category_electronics.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -142,7 +142,7 @@
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" title="Shopping" image="icon_category_shopping.png">
-                                                                <color key="titleColor" red="0.05254226805" green="0.44911719030000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <connections>
@@ -151,7 +151,7 @@
                                                         </button>
                                                         <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alp-5P-Y9D" userLabel="View -bar">
                                                             <rect key="frame" x="0.0" y="53" width="375" height="1"/>
-                                                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.87058823529411766" green="0.85098039215686272" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="ugx-2C-fww"/>
                                                             </constraints>
@@ -170,8 +170,8 @@
                                                                 <constraint firstAttribute="height" constant="1" id="UkM-DX-Hy3"/>
                                                             </constraints>
                                                         </view>
-                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uda-xQ-uUB" userLabel="View -bar vertical">
-                                                            <rect key="frame" x="160" y="0.0" width="0.0" height="159"/>
+                                                        <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uda-xQ-uUB" userLabel="View -bar vertical">
+                                                            <rect key="frame" x="187.5" y="0.0" width="1" height="159"/>
                                                             <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="vME-PY-gHh"/>
@@ -230,7 +230,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="6Vf-3p-Rdw"/>
                                                     </constraints>
-                                                    <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vXZ-lx-hvc" id="woe-0r-p6Y"/>
@@ -241,7 +241,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="1rY-IF-ljS"/>
                                                     </constraints>
-                                                    <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vXZ-lx-hvc" id="ovw-6O-aIj"/>
@@ -513,12 +513,23 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btn_locateMe" destination="Ue2-Gm-7u2" id="xDJ-MF-9ot"/>
+                        <outlet property="buttonATM" destination="sWr-pd-hBY" id="8IO-Xl-TJo"/>
+                        <outlet property="buttonCoffee" destination="a78-ih-LDk" id="Nqr-hT-Tyr"/>
+                        <outlet property="buttonElectronics" destination="kTm-at-TUR" id="jxC-gg-roo"/>
+                        <outlet property="buttonGiftCards" destination="b1E-1G-btq" id="77y-m0-XOj"/>
+                        <outlet property="buttonMoreCategories" destination="Sfb-cf-6wF" id="4n3-x9-pze"/>
+                        <outlet property="buttonRestaurants" destination="oyK-ph-99S" id="yIi-Ac-Q3P"/>
+                        <outlet property="buttonShopping" destination="GGS-YR-zt1" id="9xl-nz-agq"/>
                         <outlet property="categoryButtonsView" destination="P8l-kL-Lmr" id="CKQ-xn-qGz"/>
                         <outlet property="categoryViewHeight" destination="e93-bb-5es" id="jxb-uC-W6N"/>
                         <outlet property="contentView" destination="i8d-J1-RvK" id="SfM-Ta-bBe"/>
                         <outlet property="dividerView" destination="d8k-A8-ona" id="SR0-W3-prN"/>
                         <outlet property="dividerViewTop" destination="FK8-4P-Yy6" id="gYM-oc-EDR"/>
                         <outlet property="footerHeight" destination="PZC-aO-O09" id="qDO-Pe-hgo"/>
+                        <outlet property="headerDivider1" destination="Alp-5P-Y9D" id="Tle-MK-zAo"/>
+                        <outlet property="headerDivider2" destination="9Q2-I8-CpU" id="zVd-Ky-Mrk"/>
+                        <outlet property="headerDivider3" destination="Kb8-zF-1Hk" id="amc-My-1Cb"/>
+                        <outlet property="headerDivider4" destination="Uda-xQ-uUB" id="g4D-ev-Twt"/>
                         <outlet property="headerHeight" destination="2dF-S6-Fpm" id="b3G-ce-F6V"/>
                         <outlet property="locationSearchViewHeight" destination="1rY-IF-ljS" id="sOW-df-8DF"/>
                         <outlet property="mapView" destination="OKH-hE-U5z" id="jSu-hX-fkS"/>

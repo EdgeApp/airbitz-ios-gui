@@ -587,7 +587,7 @@ MainViewController *singleton;
 
     ABCLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
-    
+    self.tabBar.tintColor = [Theme Singleton].colorMidPrimary;
 
     [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];

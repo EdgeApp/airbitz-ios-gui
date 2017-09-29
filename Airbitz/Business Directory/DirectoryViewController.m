@@ -137,6 +137,22 @@ typedef enum eMapDisplayState
 
 }
 
+#pragma mark Header Elements
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonRestaurants;
+@property (weak, nonatomic) IBOutlet UIButton *buttonCoffee;
+@property (weak, nonatomic) IBOutlet UIButton *buttonATM;
+@property (weak, nonatomic) IBOutlet UIButton *buttonGiftCards;
+@property (weak, nonatomic) IBOutlet UIButton *buttonElectronics;
+@property (weak, nonatomic) IBOutlet UIButton *buttonShopping;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMoreCategories;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider1;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider2;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider3;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider4;
+
+#pragma mark ---------------
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewListingsTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dividerViewTop;
@@ -233,6 +249,27 @@ static bool bInitialized = false;
 - (void)setThemeValues {
     self.tableView.separatorColor = [Theme Singleton].colorDarkPrimary;
     
+    NSArray *headerButtons = @[self.buttonRestaurants,
+                               self.buttonCoffee,
+                               self.buttonATM,
+                               self.buttonGiftCards,
+                               self.buttonElectronics,
+                               self.buttonShopping,
+                               self.buttonMoreCategories];
+    
+    for (UIButton *button in headerButtons) {
+        button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+        button.tintColor = [Theme Singleton].colorMidPrimary;
+    }
+    
+    NSArray *headerDividers = @[self.headerDivider1,
+                                self.headerDivider2,
+                                self.headerDivider3,
+                                self.headerDivider4];
+    
+    for (UIView *divider in headerDividers) {
+        divider.backgroundColor = [Theme Singleton].colorMidGray;
+    }
 }
 
 - (void) forceUpdateNavBar;
