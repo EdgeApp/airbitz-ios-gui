@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>WageCan Card Bitcoin Debit Card</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-	<link rel="shortcut icon" href="favicon.ico">
+	<!--<link rel="shortcut icon" href="favicon.ico">-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Hind+Madurai" rel="stylesheet">
 	<!-- Bootstrap  -->
 	<style>
@@ -1235,7 +1235,7 @@ function initizeAirbitz() {
           notes: airbitzWalletId,
           success: function(data) {
             if (data['back'] === 'true' || data['back'] === true) {
-              //TODO: user pressed back, don't clean screen
+              // user pressed back, don't clean screen
             }
             else {
                 hideContentToggle()
@@ -1320,7 +1320,8 @@ $(function(){
       },
       error:function () {
         airbitzWalletId = ''
-        //TODO: display fail message Msg_UnableCreateSpendRequest
+        hideContentToggle()
+        $("#page").append( "<span class='send-result'><img src='https://wagecan.com/Images/airbitz/wagecan-unableSelectWallet.png'><p class='col-md-8'>Unable get the selected wallet. Please try again later.</p></span>" );
       }
     })
 });
