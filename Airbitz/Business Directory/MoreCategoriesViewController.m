@@ -197,7 +197,7 @@
 	{
 		cell.categoryLabel.text = [dict objectForKey:@"name"];
 	}
-	
+    	
 	return cell;
 }
 

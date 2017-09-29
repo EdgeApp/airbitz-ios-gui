@@ -31,8 +31,15 @@
     if (self)
 	{
         self.enabled = YES;
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.button.tintColor = [Theme Singleton].colorWhite;
+    self.button.backgroundColor = [Theme Singleton].colorDarkPrimary;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder

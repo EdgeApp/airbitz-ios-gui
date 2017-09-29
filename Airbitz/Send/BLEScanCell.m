@@ -7,6 +7,7 @@
 //
 
 #import "BLEScanCell.h"
+#import "Theme.h"
 
 @implementation BLEScanCell
 
@@ -14,7 +15,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
 }
@@ -23,7 +24,16 @@
 {
     [super awakeFromNib];
 
-    // Initialization code
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.contactName.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    
+    self.contactBitcoinAddress.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    
+    self.duplicateNamesLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    self.duplicateNamesLabel.textColor = [Theme Singleton].colorSecondAccent;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
