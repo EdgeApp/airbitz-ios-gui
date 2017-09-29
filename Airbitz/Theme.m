@@ -59,6 +59,12 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     self.colorFirstAccent = ColorFirstAccent;
     self.colorSecondAccent = ColorSecondAccent;
     
+    #ifdef ColorBackground
+    self.colorBackground = ColorBackground;
+    #else
+    self.colorBackground = nil;
+    #endif
+    
     self.appFont = AppFont;
     self.appFontItalic = AppFontItalic;
     
@@ -166,6 +172,11 @@ static Theme *singleton = nil;  // this will be the one and only object this sta
     {
         self.bTranslucencyEnable = YES;
     }
+    
+    #ifdef ColorBackground
+    self.bTranslucencyEnable = NO;
+    #endif
+    
     return self;
 }
 

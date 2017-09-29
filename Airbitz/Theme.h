@@ -26,6 +26,7 @@
 @property (nonatomic) UIColor *colorDarkPrimary;
 @property (nonatomic) UIColor *colorFirstAccent;
 @property (nonatomic) UIColor *colorSecondAccent;
+@property (nonatomic) UIColor *colorBackground;
 
 @property (nonatomic) CGFloat defaultBTCDenominationMultiplier;
 

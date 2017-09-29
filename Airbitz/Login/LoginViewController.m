@@ -385,7 +385,7 @@ static BOOL bInitialized = false;
         self.usernameSelector.hidden = true;
         self.usernameHeight.constant = 0;
         self.passwordHeight.constant = 0;
-        self.forgotPassworddButton.hidden = true;
+        self.forgotPasswordButton.hidden = true;
     }
     else
     {
@@ -398,7 +398,7 @@ static BOOL bInitialized = false;
                          animations:^
                          {
                              self.usernameSelector.hidden = false;
-                             self.forgotPassworddButton.hidden = false;
+                             self.forgotPasswordButton.hidden = false;
                              [self.view.superview layoutIfNeeded];
                          }
                          completion:^(BOOL finished)

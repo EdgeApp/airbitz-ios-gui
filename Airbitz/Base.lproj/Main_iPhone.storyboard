@@ -3288,7 +3288,7 @@
                         <outlet property="credentialsView" destination="kpH-FO-ztL" id="UiA-5C-OgI"/>
                         <outlet property="exitPINLoginButton" destination="RTg-3l-g7y" id="SiA-YK-Fn7"/>
                         <outlet property="fingerprintButton" destination="VSd-pm-g0n" id="hZ9-At-fbv"/>
-                        <outlet property="forgotPassworddButton" destination="RVo-M5-ZXk" id="DqM-0z-GWY"/>
+                        <outlet property="forgotPasswordButton" destination="RVo-M5-ZXk" id="XC3-7z-s29"/>
                         <outlet property="logoHeight" destination="XEa-cm-iAj" id="8KE-7I-DrP"/>
                         <outlet property="logoImage" destination="LqE-iy-sKS" id="cmm-Yx-nMh"/>
                         <outlet property="passwordHeight" destination="pPh-cN-iW3" id="I3h-TO-Puf"/>
