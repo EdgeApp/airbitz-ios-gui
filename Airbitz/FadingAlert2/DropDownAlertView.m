@@ -39,12 +39,20 @@ static BOOL bInitialized = NO;
         tapGesture.numberOfTouchesRequired = 1;
         [singleton addGestureRecognizer:tapGesture];
         [singleton setTranslatesAutoresizingMaskIntoConstraints:YES];
-
+        
+        [singleton setThemeValues];
 
         bInitialized = YES;
     }
 
 };
+
+- (void)setThemeValues {
+    self.messageText.textColor = [Theme Singleton].colorMidPrimary;
+    self.connectedLine1.textColor = [Theme Singleton].colorWhite;
+    self.connectedLine2.textColor = [Theme Singleton].colorWhite;
+    self.connectedLine3.textColor = [Theme Singleton].colorWhite;
+}
 
 + (void)create:(UIView *)parentView image:(UIImage *)image line1:(NSString *)line1 line2:(NSString *)line2 line3:(NSString *)line3 holdTime:(CGFloat)holdTime withDelegate:(id<DropDownAlertViewDelegate>)delegate
 {

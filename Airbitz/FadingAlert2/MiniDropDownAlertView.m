@@ -37,7 +37,7 @@ static BOOL bInitialized = NO;
         tapGesture.numberOfTouchesRequired = 1;
         [singleton addGestureRecognizer:tapGesture];
         [singleton setTranslatesAutoresizingMaskIntoConstraints:YES];
-
+        singleton.backgroundColor = [Theme Singleton].colorDarkGray;
 
         bInitialized = YES;
     }

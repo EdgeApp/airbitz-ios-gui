@@ -7,6 +7,7 @@
 //
 
 #import "LatoLabel.h"
+#import "Theme.h"
 
 @implementation LatoLabel
 
@@ -21,7 +22,7 @@
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    self.font = [UIFont fontWithName:@"Lato-Regular" size:self.font.pointSize];
+    self.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.font.pointSize];
 //	if((self.tag % 100) == 0)
 //	{
 //		self.font = [UIFont fontWithName:@"Lato-Regular" size:self.font.pointSize];

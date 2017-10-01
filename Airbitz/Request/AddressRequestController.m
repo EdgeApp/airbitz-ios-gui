@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "Theme.h"
 #import "FadingAlertView.h"
+#import "LatoLabel.h"
 
 #define X_SOURCE @"Airbitz"
 
@@ -24,8 +25,10 @@
 
 }
 
-@property (nonatomic, weak) IBOutlet UILabel *message;
+@property (nonatomic, weak) IBOutlet LatoLabel *message;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2 *buttonSelector;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 @end
 
@@ -58,8 +61,17 @@
     [msg appendString:pleaseChooseAWalletToReceiveFunds];
     _message.text = msg;
 
+    [self setThemeValues];
+}
 
-
+- (void)setThemeValues {
+    self.message.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.cancelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.cancelButton.backgroundColor = [Theme Singleton].colorSecondAccent;
+    
+    self.okButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.okButton.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)viewWillAppear:(BOOL)animated

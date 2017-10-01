@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +55,7 @@
                                         <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadioButtonCell" id="df9-g3-qlT" customClass="RadioButtonCell">
-                                                <rect key="frame" x="0.0" y="56" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="55.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="df9-g3-qlT" id="Px9-MO-jKP">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -87,7 +87,7 @@
                                                                 <constraint firstAttribute="height" constant="30" id="pGm-ZT-phC"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                                                            <color key="textColor" red="0.047715688751811786" green="0.34057895439621577" blue="0.54781940553999375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
@@ -119,7 +119,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsSectionHeader" id="8Ne-Uu-jsR">
-                                                <rect key="frame" x="0.0" y="111" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="110.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Ne-Uu-jsR" id="2xh-dC-qjS">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -132,7 +132,7 @@
                                                                 <constraint firstAttribute="height" constant="30" id="nE3-rN-EKV"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                                                            <color key="textColor" red="0.056230269372463226" green="0.26473426818847656" blue="0.47470104694366455" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </label>
                                                     </subviews>
@@ -146,7 +146,7 @@
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlainCell" id="Ypm-7d-MqH" customClass="PlainCell">
-                                                <rect key="frame" x="0.0" y="166" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="165.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ypm-7d-MqH" id="3Pn-lw-SEB">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -160,18 +160,18 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="RqX-ow-U05" customClass="LatoLabel">
-                                                            <rect key="frame" x="20" y="25" width="250" height="30"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="RqX-ow-U05" customClass="LatoLabel">
+                                                            <rect key="frame" x="20" y="12.5" width="250" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="250" id="09x-Qq-0Fm"/>
                                                                 <constraint firstAttribute="height" constant="30" id="QTy-XE-nMx"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                                                            <color key="textColor" red="0.056230269372463226" green="0.26473426818847656" blue="0.47470104694366455" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="QnU-SQ-r7P">
-                                                            <rect key="frame" x="278" y="29" width="22" height="22"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_right.png" translatesAutoresizingMaskIntoConstraints="NO" id="QnU-SQ-r7P">
+                                                            <rect key="frame" x="278" y="16.5" width="22" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="8SV-CX-6gH"/>
                                                                 <constraint firstAttribute="height" constant="22" id="dGl-0O-WSm"/>
@@ -197,7 +197,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextFieldCell" id="feP-rn-4kz" customClass="TextFieldCell">
-                                                <rect key="frame" x="0.0" y="221" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="220.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="feP-rn-4kz" id="E0L-1T-x2a">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -211,8 +211,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="tIh-1R-4zh" customClass="StylizedTextField">
-                                                            <rect key="frame" x="20" y="20" width="280" height="40"/>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="tIh-1R-4zh" customClass="StylizedTextField">
+                                                            <rect key="frame" x="20" y="12.5" width="280" height="30"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="wp8-2J-671"/>
@@ -238,7 +238,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextViewCell" id="aJC-UF-rCK" userLabel="TextViewCell" customClass="TextViewCell">
-                                                <rect key="frame" x="0.0" y="276" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="275.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aJC-UF-rCK" id="Isw-OW-zro">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -252,8 +252,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rBT-R1-set">
-                                                            <rect key="frame" x="40" y="-37" width="240" height="128"/>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rBT-R1-set">
+                                                            <rect key="frame" x="20" y="-18" width="280" height="90"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="90" id="2eu-1c-BvI"/>
@@ -279,7 +279,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BooleanCell" id="me5-hG-XVx" customClass="BooleanCell">
-                                                <rect key="frame" x="0.0" y="331" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="330.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="me5-hG-XVx" id="0Re-Bz-wXO">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -293,8 +293,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-NU-49a" customClass="LatoLabel">
-                                                            <rect key="frame" x="20" y="25" width="223" height="30"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-NU-49a" customClass="LatoLabel">
+                                                            <rect key="frame" x="20" y="12.5" width="223" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="K4i-VJ-PrO"/>
                                                                 <constraint firstAttribute="height" constant="30" id="xRI-bh-u2V"/>
@@ -333,7 +333,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonCell" id="7qj-Nh-UCb" customClass="ButtonCell">
-                                                <rect key="frame" x="0.0" y="386" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="385.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7qj-Nh-UCb" id="GXN-W3-ghL">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -347,8 +347,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="bSetBlurStyleExtraLight" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9ur-p7-oPb" customClass="LatoLabel">
-                                                            <rect key="frame" x="20" y="25" width="163" height="30"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9ur-p7-oPb" customClass="LatoLabel">
+                                                            <rect key="frame" x="20" y="12.5" width="163" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="0Bf-Gv-vb4"/>
                                                                 <constraint firstAttribute="height" constant="30" id="jFh-Td-o3M"/>
@@ -357,8 +357,8 @@
                                                             <color key="textColor" red="0.047715688751811786" green="0.34057895439621577" blue="0.54781940553999375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-8o-H50">
-                                                            <rect key="frame" x="191" y="28" width="109" height="25"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhU-8o-H50">
+                                                            <rect key="frame" x="191" y="15" width="109" height="25"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                                             <constraints>
@@ -398,7 +398,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonOnlyCell" id="96h-C8-lAY" customClass="ButtonOnlyCell">
-                                                <rect key="frame" x="0.0" y="441" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="440.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="96h-C8-lAY" id="GNG-c4-rk8">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -406,7 +406,7 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xky-Rp-Nkh">
                                                             <rect key="frame" x="0.0" y="3" width="320" height="50"/>
-                                                            <color key="backgroundColor" red="0.11993695795536041" green="0.48990142345428467" blue="0.76840925216674805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="S09-eS-0zz"/>
@@ -432,14 +432,14 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CancelDoneCell" id="Nwi-OG-lo2" customClass="CancelDoneCell">
-                                                <rect key="frame" x="0.0" y="496" width="320" height="55"/>
+                                                <rect key="frame" x="0.0" y="495.5" width="320" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nwi-OG-lo2" id="wr5-Nb-B8M">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUa-wU-ZnQ">
-                                                            <rect key="frame" x="20" y="20" width="280" height="40"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUa-wU-ZnQ">
+                                                            <rect key="frame" x="20" y="7.5" width="280" height="40"/>
                                                             <rect key="contentStretch" x="0.5" y="0.5" width="1" height="1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="qVC-dt-c7h"/>
@@ -552,7 +552,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Ll1-Ix-Pq6"/>
                                         </constraints>
-                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                                         <connections>
@@ -601,7 +601,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="th1-bn-E4x">
                                 <rect key="frame" x="0.0" y="568" width="187.5" height="50"/>
-                                <color key="backgroundColor" red="0.11993695795536041" green="0.48990142345428467" blue="0.76840925216674805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.56862745098039214" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="rew-A0-cMF"/>
                                 </constraints>
@@ -840,8 +840,12 @@
                     <connections>
                         <outlet property="clearWatcherButton" destination="Ag5-Xn-Vpg" id="cMI-hP-sRh"/>
                         <outlet property="coreLabel" destination="SXK-F7-NoK" id="Btb-de-h3u"/>
+                        <outlet property="coreTitleLabel" destination="4md-ob-Ttv" id="QaH-Un-zjH"/>
                         <outlet property="networkLabel" destination="Zw4-k1-a82" id="keD-RJ-Rrh"/>
+                        <outlet property="networkTitleLabel" destination="qLK-qd-7qg" id="mrG-gz-VHf"/>
+                        <outlet property="uploadLogsButton" destination="Bs1-Yi-SIh" id="fFf-lw-zBo"/>
                         <outlet property="versionLabel" destination="sZm-Gx-M8r" id="I0i-GC-ch5"/>
+                        <outlet property="versionTitleLabel" destination="Myh-H6-aDd" id="NCs-wd-yZf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acP-xF-SUx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -878,7 +882,7 @@
                                         </constraints>
                                         <string key="text">Enable 2-Factor Authentication to increase security by only allowing logins from previously logged in devices. Add more devices by scanning the QR code below after 2FA is enabled</string>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
-                                        <color key="textColor" red="0.047715688749999999" green="0.34057895440000002" blue="0.54781940549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
@@ -907,7 +911,7 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-rp-aif">
                                         <rect key="frame" x="251" y="127" width="51" height="31"/>
-                                        <color key="onTintColor" red="0.4549019608" green="0.72156862749999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="onTintColor" red="0.50588235294117645" green="0.76470588235294112" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="switchFlipped:" destination="Ydf-KI-RbJ" eventType="valueChanged" id="gyn-rJ-CPT"/>
                                         </connections>
@@ -1086,8 +1090,10 @@
                         <outlet property="qrCodeImageView" destination="aRf-4C-W4Y" id="idN-J7-iXF"/>
                         <outlet property="requestSpinner" destination="cXH-jU-wGs" id="YRV-19-wyh"/>
                         <outlet property="requestView" destination="WZ2-WG-JQn" id="kbe-Aq-RfQ"/>
+                        <outlet property="requestedLabel" destination="1Qx-Jp-bYp" id="FxM-5x-JwC"/>
                         <outlet property="showQRLabel" destination="c0b-4h-BJe" id="VZd-Yg-Xss"/>
                         <outlet property="tfaEnabledSwitch" destination="sbQ-rp-aif" id="S8A-Fd-ej2"/>
+                        <outlet property="twoFactorLabel" destination="GMX-G5-Rl3" id="gV8-ES-Mu0"/>
                         <outlet property="viewQRCodeFrame" destination="Hu4-Fk-wPE" id="fbs-Li-dMe"/>
                     </connections>
                 </viewController>
@@ -1214,10 +1220,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomInfoText" destination="bYl-WU-bNw" id="XoR-yI-Lza"/>
                         <outlet property="buttonReset" destination="lqV-Y6-LKD" id="gp6-7P-XYj"/>
                         <outlet property="buttonScan" destination="pki-9D-VwL" id="wWb-pf-hHa"/>
                         <outlet property="labelResetDate" destination="h6I-iF-k15" id="GRO-P8-8XG"/>
                         <outlet property="labelResetDesc" destination="hxc-na-KPc" id="3a7-KZ-gBd"/>
+                        <outlet property="topInfoText" destination="T6x-zH-xvf" id="LUL-PO-IUR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vtj-Kk-IPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1292,9 +1300,4 @@ Scan the QR code using this device</string>
         <image name="btn_right.png" width="22" height="22"/>
         <image name="icon_search.png" width="14" height="15"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
