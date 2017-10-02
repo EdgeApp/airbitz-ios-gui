@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "0gq-ds-DJC"; */
 "0gq-ds-DJC.normalTitle" = "अगला";
 
-/* Class = "UILabel"; text = "Your username and password are known only to you and never transmitted or stored unencrypted."; ObjectID = "4eB-ff-Ebh"; */
-"4eB-ff-Ebh.text" = "आपका यूजरनाम और पासवर्ड सिर्फ आपको पता रहेगा और ये सूचना न किसी को भेजी जाएगी और न ही गुप्त रूप से स्टोर की जाएगी|";
+/* Class = "UILabel"; text = "Your username and password are known only to you and cannot be recovered if forgotten. You WILL lose access to funds if your password is lost."; ObjectID = "4eB-ff-Ebh"; */
+"4eB-ff-Ebh.text" = "आपका यूज़रनेम और पासवर्ड केवल आपको ही जाना जाता है और अगर भूल गए हैं तो वसूली नहीं जा सकती। यदि आपका पासवर्ड खो जाता है तो आप धन तक पहुंच खो देंगे";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "6uu-dw-ssd"; */
 "6uu-dw-ssd.normalTitle" = "आगे";
@@ -14,7 +14,7 @@
 "D2i-9s-GAC.normalTitle" = "आगे";
 
 /* Class = "UILabel"; text = "myname"; ObjectID = "DUg-At-veb"; */
-"DUg-At-veb.text" = "मायनेम";
+"DUg-At-veb.text" = "मेरा नाम";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "DgW-Gm-7l2"; */
 "DgW-Gm-7l2.normalTitle" = "आगे";
@@ -96,7 +96,7 @@
 "sJ6-mQ-mSV.text" = "यूजरनाम";
 
 /* Class = "UILabel"; text = "mypassword12345"; ObjectID = "tOB-4i-OVm"; */
-"tOB-4i-OVm.text" = "mypassword12345";
+"tOB-4i-OVm.text" = "मायपासवर्ड12345";
 
 /* Class = "UILabel"; text = "The password is used to authenticate your account and to change sensitive settings."; ObjectID = "w3d-xe-eUq"; */
 "w3d-xe-eUq.text" = "पासवर्ड आपके खाते को प्रमाणित करने और संवेदनशील सेटिंग्स परिवर्तित करने के लिए इस्तेमाल किया जाता है।";

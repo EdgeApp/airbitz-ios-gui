@@ -41,7 +41,7 @@
 "8Nr-wB-OaB.text" = "外部存储 / 打印";
 
 /* Class = "UILabel"; text = "Swipe to View Business Directory"; ObjectID = "8XB-1A-1hO"; */
-"8XB-1A-1hO.text" = "滑动以查看企业名录";
+"8XB-1A-1hO.text" = "滑动以查看商家目录";
 
 /* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "8iz-Uc-LTS"; */
 "8iz-Uc-LTS.normalTitle" = "注册";
@@ -68,7 +68,7 @@
 "AkB-cD-ba5.text" = "标签";
 
 /* Class = "UILabel"; text = "Password must have an upper and lower case letter, a number, and a minimum of 10 characters"; ObjectID = "BED-Cf-F1n"; */
-"BED-Cf-F1n.text" = "密码必须具有一个大写和小写字母、数字和至少10个字符";
+"BED-Cf-F1n.text" = "密码必须具有一个大写和小写字母、数字且至少含10个字符";
 
 /* Class = "UILabel"; text = "Phone"; ObjectID = "Bxa-tB-mk3"; */
 "Bxa-tB-mk3.text" = "电话";
@@ -80,7 +80,7 @@
 "ClG-um-kmI.text" = "类别";
 
 /* Class = "UILabel"; text = "Enter password to decode wallet"; ObjectID = "CuI-Tj-a8q"; */
-"CuI-Tj-a8q.text" = "输入密码为钱包进行解码";
+"CuI-Tj-a8q.text" = "输入密码解码钱包";
 
 /* Class = "UIButton"; normalTitle = "Next Step"; ObjectID = "Det-Mr-8a9"; */
 "Det-Mr-8a9.normalTitle" = "下一步";
@@ -89,19 +89,19 @@
 "Dh6-PA-WGi.text" = "测试";
 
 /* Class = "UILabel"; text = "USD"; ObjectID = "EuE-s0-NQ2"; */
-"EuE-s0-NQ2.text" = "美元";
+"EuE-s0-NQ2.text" = "USD";
 
 /* Class = "UILabel"; text = "From:"; ObjectID = "GFx-1Z-kFg"; */
-"GFx-1Z-kFg.text" = "来自：";
+"GFx-1Z-kFg.text" = "自:";
 
 /* Class = "UILabel"; text = "(Duplicate Names)"; ObjectID = "Hba-dd-to8"; */
-"Hba-dd-to8.text" = "（重复的名称）";
+"Hba-dd-to8.text" = "(名称重复)";
 
 /* Class = "UILabel"; text = "Export"; ObjectID = "HzM-6V-ckO"; */
 "HzM-6V-ckO.text" = "导出";
 
 /* Class = "UIViewController"; title = "Request View Controller"; ObjectID = "Int-ih-AH6"; */
-"Int-ih-AH6.title" = "索求视图控制器";
+"Int-ih-AH6.title" = "请求界面设置";
 
 /* Class = "UILabel"; text = "PRIVATE KEY"; ObjectID = "JZ8-MW-EwQ"; */
 "JZ8-MW-EwQ.text" = "私钥";
@@ -110,7 +110,7 @@
 "KTi-U4-C5T.placeholder" = "输入 PIN";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "L8T-Xw-aVE"; */
-"L8T-Xw-aVE.text" = "记录";
+"L8T-Xw-aVE.text" = "备注";
 
 /* Class = "UILabel"; text = "Start Date"; ObjectID = "LI5-7a-oQG"; */
 "LI5-7a-oQG.text" = "开始日期";
@@ -146,7 +146,7 @@
 "QzV-Gk-Vrs.placeholder" = "重新输入密码";
 
 /* Class = "UIButton"; normalTitle = "Exit PIN Login"; ObjectID = "RTg-3l-g7y"; */
-"RTg-3l-g7y.normalTitle" = "退出 PIN 登入";
+"RTg-3l-g7y.normalTitle" = "注销PIN登录";
 
 /* Class = "UIButton"; normalTitle = "Forgot Password"; ObjectID = "RVo-M5-ZXk"; */
 "RVo-M5-ZXk.normalTitle" = "忘记密码";
@@ -179,13 +179,13 @@
 "U2R-0A-Vdq.text" = "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF";
 
 /* Class = "UILabel"; text = "To:"; ObjectID = "Uak-ip-kgV"; */
-"Uak-ip-kgV.text" = "致：";
+"Uak-ip-kgV.text" = "至:";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "V5e-1n-K9Z"; */
 "V5e-1n-K9Z.placeholder" = "密码";
 
 /* Class = "UILabel"; text = "An app has requested a bitcoin address to send money to. Please choose a wallet from above to receive funds:"; ObjectID = "Vcb-0y-fDf"; */
-"Vcb-0y-fDf.text" = "有个应用程序要求一个可发送资金的比特币地址。请从上列选择一个钱包以便接收资金：";
+"Vcb-0y-fDf.text" = "%1$s 要求一个可接收资金的比特币地址。请选择一个钱包以便接收资金。";
 
 /* Class = "UIButton"; normalTitle = "Wallet Private Seed (advanced)"; ObjectID = "Vuw-Bw-dQY"; */
 "Vuw-Bw-dQY.normalTitle" = "钱包的密钥种子 (高级)";
@@ -200,13 +200,13 @@
 "Yfp-gi-q8F.text" = "标签";
 
 /* Class = "UIViewController"; title = "Wallets View Controller"; ObjectID = "ZP6-jP-fb3"; */
-"ZP6-jP-fb3.title" = "钱包视图控制器";
+"ZP6-jP-fb3.title" = "钱包界面设置";
 
 /* Class = "UITextField"; placeholder = "Private key"; ObjectID = "ZTK-Sq-FqJ"; */
 "ZTK-Sq-FqJ.placeholder" = "私钥";
 
 /* Class = "UILabel"; text = "Sent From:"; ObjectID = "ZW8-Za-VVy"; */
-"ZW8-Za-VVy.text" = "发送自：";
+"ZW8-Za-VVy.text" = "来自:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "a3J-4E-YSl"; */
 "a3J-4E-YSl.text" = "标签";
@@ -218,7 +218,7 @@
 "cIH-5H-WKu.text" = "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj";
 
 /* Class = "UILabel"; text = "Scan QR to Send Funds or Login with BitID"; ObjectID = "cYL-n1-ybU"; */
-"cYL-n1-ybU.text" = "扫描二维码以发送资金或是使用BitID登入";
+"cYL-n1-ybU.text" = "扫描二维码以发送资金或使用BitID登入";
 
 /* Class = "UIButton"; normalTitle = "Skip This Step"; ObjectID = "cix-f2-i3I"; */
 "cix-f2-i3I.normalTitle" = "跳过此步骤";
@@ -230,7 +230,7 @@
 "dm1-b8-Vp0.text" = "结束日期";
 
 /* Class = "UITextField"; placeholder = "PIN Spending Limit"; ObjectID = "egu-Uy-luw"; */
-"egu-Uy-luw.placeholder" = "支出限额PIN";
+"egu-Uy-luw.placeholder" = "PIN支出限额";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "gJp-Ct-Vol"; */
 "gJp-Ct-Vol.text" = "标签";
@@ -242,22 +242,22 @@
 "iE3-Jv-3vs.text" = "标签";
 
 /* Class = "UILabel"; text = "Camera unavailable"; ObjectID = "iXW-st-n5q"; */
-"iXW-st-n5q.text" = "相机未能使用";
+"iXW-st-n5q.text" = "相机不可用";
 
 /* Class = "UILabel"; text = "(Requires password above daily limit)"; ObjectID = "ifv-G8-Cxe"; */
-"ifv-G8-Cxe.text" = "（当超越每日限额时需要输入密码）";
+"ifv-G8-Cxe.text" = "（当超过每日限额时需要输入密码）";
 
 /* Class = "UITabBarItem"; title = "Transactions"; ObjectID = "j3q-OI-el3"; */
 "j3q-OI-el3.title" = "交易";
 
 /* Class = "UIViewController"; title = "Main View Controller"; ObjectID = "jDp-Og-qtC"; */
-"jDp-Og-qtC.title" = "主视图控制器";
+"jDp-Og-qtC.title" = "主界面设置";
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[0] = "Copy"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[0]" = "复制";
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[1] = "Email"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
-"jlL-oE-aWy.segmentTitles[1]" = "电子邮件";
+"jlL-oE-aWy.segmentTitles[1]" = "Email";
 
 /* Class = "UISegmentedControl"; jlL-oE-aWy.segmentTitles[2] = "SMS"; ObjectID = "jlL-oE-aWy"; Note = "buttons at bottom of qr code screen"; */
 "jlL-oE-aWy.segmentTitles[2]" = "短信";
@@ -296,10 +296,10 @@
 "pIj-oW-HUW.normalTitle" = "交易信息 (Quickbooks)";
 
 /* Class = "UITextField"; placeholder = "Create PIN"; ObjectID = "puA-fb-r0H"; */
-"puA-fb-r0H.placeholder" = "创建个人识别码PIN";
+"puA-fb-r0H.placeholder" = "创建 PIN";
 
 /* Class = "UILabel"; text = "[do not translate]"; ObjectID = "rls-16-YZg"; */
-"rls-16-YZg.text" = "[不翻译]";
+"rls-16-YZg.text" = "[do not translate]";
 
 /* Class = "UITabBarItem"; title = "Menu"; ObjectID = "sAy-bR-lqd"; */
 "sAy-bR-lqd.title" = "菜单";
@@ -314,7 +314,7 @@
 "uTa-MB-0Sl.title" = "请求";
 
 /* Class = "UILabel"; text = "Scan QR Code or use photo"; ObjectID = "vVZ-Kb-RwQ"; */
-"vVZ-Kb-RwQ.text" = "扫描二维码或使用照片";
+"vVZ-Kb-RwQ.text" = "扫描二维码或使用照片图库";
 
 /* Class = "UIButton"; normalTitle = "This Week"; ObjectID = "vlP-bB-ktv"; */
 "vlP-bB-ktv.normalTitle" = "本周";

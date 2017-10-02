@@ -13,6 +13,7 @@
 #define appURI                  @"airbitz"
 #define appTitle                @"Airbitz"
 #define appHomepage             @"https://airbitz.co"
+#define appTitleText            @""
 #define supportEmail            @"support@airbitz.co"
 #define supportPhone            @"+1-844-928-9744"
 #define supportTelegram         @"https://telegram.airbitz.co"
@@ -30,6 +31,7 @@
 #define appURI                  @"airbitz"
 #define appTitle                @"Rack Wallet"
 #define appHomepage             @"http://rackwallet.com"
+#define appTitleText            @""
 #define supportEmail            @"support@rackwallet.com"
 #define supportPhone            @"+1-708-294-3371"
 #define supportTelegram         @""
@@ -47,6 +49,7 @@
 #define appURI                  @"airbitz"
 #define appTitle                @"Athena Bitcoin"
 #define appHomepage             @"http://athenabitcoin.com"
+#define appTitleText            @""
 #define supportEmail            @"support@athenabitcoin.com"
 #define supportPhone            @"+1-312-690-4466"
 #define supportTelegram         @""
@@ -64,6 +67,7 @@
 #define appURI                  @"airbitz"
 #define appTitle                @"Coinsource Bitcoin Wallet"
 #define appHomepage             @"http://coinsource.net"
+#define appTitleText            @""
 #define supportEmail            @"support@coinsource.net"
 #define supportPhone            @"+1-805-500-2646"
 #define supportTelegram         @""
@@ -81,6 +85,7 @@
 #define appURI                  @"rockitcoin"
 #define appTitle                @"RockitCoin Bitcoin Wallet"
 #define appHomepage             @"https://www.rockitcoin.com"
+#define appTitleText            @""
 #define supportEmail            @"support@rockitcoin.com"
 #define supportPhone            @"+1-888-702-4826"
 #define supportTelegram         @""
@@ -98,8 +103,9 @@
 #define appURI                  @"bitcoindepot"
 #define appTitle                @"Bitcoin Depot Bitcoin Wallet"
 #define appHomepage             @"https://www.bitcoindepot.com"
+#define appTitleText            @"Bitcoin Depot Wallet"
 #define supportEmail            @"support@bitcoindepot.com"
-#define supportPhone            @"+1-000-000-0000"
+#define supportPhone            @"+1-678-435-9604"
 #define supportTelegram         @""
 #define supportSlack            @""
 #define supportWhatsapp         @""
@@ -107,8 +113,8 @@
 #define playStoreLink           @"https://play.google.com/store/apps/details?id=com.bitcoindepot.wallet"
 #define appDownloadLink         @"http://bitcoindepot.com/app"
 #define appLogoWhiteLink        @"https://airbitz.co/go/wp-content/uploads/2017/03/bitcoindepot-logo-100w.png"
-#define appDesignedBy           NSLocalizedString(@"Designed by Bitcoin Depot in",nil)
-#define appCompanyLocation      NSLocalizedString(@"Xxxxxxx, XX, XXX", nil)
+#define appDesignedBy           NSLocalizedString(@"Designed by Lux Vending, LLC in",nil)
+#define appCompanyLocation      NSLocalizedString(@"Atlanta GA USA", nil)
 
 
 #endif

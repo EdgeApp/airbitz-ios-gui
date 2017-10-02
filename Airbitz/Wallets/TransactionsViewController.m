@@ -563,6 +563,7 @@ const int NumPromoRows              = 4;
 - (void)exportWallet
 {
     [self resignAllResponders];
+    [[Mixpanel sharedInstance] track:@"WAL-Export"];
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
     self.exportWalletViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ExportWalletViewController"];
@@ -2014,7 +2015,7 @@ const int NumPromoRows              = 4;
 
 - (void)addWallet
 {
-
+    [[Mixpanel sharedInstance] track:@"WAL-Add"];
     if (_walletMakerVisible == NO)
     {
         [self.walletMakerView reset];

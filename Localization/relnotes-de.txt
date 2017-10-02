@@ -1,19 +1,38 @@
+v 2.4.3
+
+Erlaube dem Benutzer Transaktionsgebühren zu erstellen
+Die enthaltene Gebühr beträgt ca ab 21.co
+Die Anzeige hat die Transaktion beendet
+• Set override servers to defaults if enabled and blank
+Verbesserte Fehlermeldungen
+Verbesserte Passwort Erinnerung
+Stabilitätsverbesserungen
+
+v 2.4.2
+
+Repariere SSL Zertifikate um die Erstellung eines neuen Accounts und PIN zu verhindern
+
+v 2.4.1
+
+Bity Integration: Kaufe/Verkaufe Bitcoins mit Euro oder Schweizer Franken
+Passwort drosseln
+Benutzer können jetzt Bitcoin Knoten auswählen, mit denen sie sich verbinden möchten
+Alle Pin, Passwort und Passwortwiederherstellungs Raten limits sind aufgeteilt
+Kontaktinformationen für Glidera Unterstützung wurden hinzugefügt
+Das Passwort Ausgabelimit hebt die PIN gesteuerte Passwortzurücksetzung auf
+
+
 v.2.4.0
 
-• Protokoll Änderungen an der Edge-Anmeldung
+• Protokoll Änderungen nach Rand Anmeldung
+
+
 • LibertyX Plugin
  
 
 
-•Unterstützung zum nicht- USD CSV/QBO export
-
-
- 
-
-
-• Groß Brieftasche Unterstützung.
-
- Besser Auszeit
+•Unterstützung für nicht- USD CSV/QBO export
+• Groß - Wallet Unterstützung. Besser Auszeit
 • Email CSV/QBO export Absturz Beheben
 
 • Zusätzliche Sprachunterstützung
@@ -34,7 +53,7 @@ v 2.3.0
 
 Enführung von Edge-Anmeldung. Die weltweit erste, private, sichere und Zero-Knowledge einmalige Anmeldung für dezentrale Apps. Nun können Sie die Airbitz-Wallet zum sichern Anmelden und für verschlüsselte Konten für andere Blockchain-Apps, wie Augur und Wings, verwenden. 
 
-• Verbesserte Libbitcoin/Electrum Server-Auswahl mittels der Verwendung von Servern die besonders reaktionsschnell sind und kurze Wartezeiten haben. 
+• Verbesserte Libbitcoin/Electrum Server-Auswahl mittels der Verwendung von Servern, die besonders reaktionsschnell sind und kurze Wartezeiten haben. 
 • Behebung von iOS 10 UI Problemen
 • Behebung von Abstürzen auf iOS 10 bei Konten mit vielen Wallets
 • Verbessete Scrypt-Parameter-Berechnung für eine höhere Sicherheit auf schnelleren Geräten

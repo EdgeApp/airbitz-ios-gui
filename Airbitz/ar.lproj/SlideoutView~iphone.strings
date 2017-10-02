@@ -11,7 +11,7 @@
 "O8N-2d-FwL.text" = "Label";
 
 /* Class = "UILabel"; text = "SETTINGS"; ObjectID = "Zac-Lf-J4y"; */
-"Zac-Lf-J4y.text" = "إعدادات";
+"Zac-Lf-J4y.text" = "الإعدادات";
 
 /* Class = "UIView"; accessibilityLabel = "Buy or Sell"; ObjectID = "Zu4-Fd-NGP"; */
 "Zu4-Fd-NGP.accessibilityLabel" = "شراء أو بيع";
@@ -32,7 +32,7 @@
 "rWQ-uJ-DUX.text" = "شراء / بيع بيتكوين";
 
 /* Class = "UILabel"; accessibilityHint = "the currently logged in account"; ObjectID = "vsf-Ms-1Ff"; */
-"vsf-Ms-1Ff.accessibilityHint" = "دخوله حاليا في حساب";
+"vsf-Ms-1Ff.accessibilityHint" = "الحساب المسجل حاليا";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vsf-Ms-1Ff"; */
 "vsf-Ms-1Ff.text" = "Label";

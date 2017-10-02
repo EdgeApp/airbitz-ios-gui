@@ -17,7 +17,7 @@
 "Zu4-Fd-NGP.accessibilityLabel" = "买入或卖出";
 
 /* Class = "UIView"; accessibilityLabel = "Logout"; ObjectID = "aSM-QX-pLq"; */
-"aSM-QX-pLq.accessibilityLabel" = "登出";
+"aSM-QX-pLq.accessibilityLabel" = "注销";
 
 /* Class = "UILabel"; text = "See Strings.h"; ObjectID = "bQy-8e-q5h"; */
 "bQy-8e-q5h.text" = "请参阅 Strings.h";
