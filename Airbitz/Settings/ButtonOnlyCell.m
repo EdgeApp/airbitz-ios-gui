@@ -7,6 +7,7 @@
 //
 
 #import "ButtonOnlyCell.h"
+#import "Theme.h"
 
 @implementation ButtonOnlyCell
 
@@ -14,7 +15,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
 }
@@ -26,6 +27,14 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.button.tintColor = [Theme Singleton].colorWhite;
+    self.button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    self.button.backgroundColor = [Theme Singleton].colorMidPrimary;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

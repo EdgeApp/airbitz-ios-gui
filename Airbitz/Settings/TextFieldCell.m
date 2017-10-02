@@ -7,6 +7,8 @@
 //
 
 #import "TextFieldCell.h"
+#import "Theme.h"
+
 @interface TextFieldCell () <UITextFieldDelegate>
 {
 }
@@ -19,7 +21,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-
+        [self setThemeValues];
     }
     return self;
 }
@@ -39,6 +41,12 @@
     [self.textField addTarget:self
                        action:@selector(textFieldDidChange:)
              forControlEvents:UIControlEventEditingChanged];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.textField.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

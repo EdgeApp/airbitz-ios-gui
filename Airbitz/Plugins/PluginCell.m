@@ -5,6 +5,7 @@
 
 #import "PluginCell.h"
 #import "CommonTypes.h"
+#import "Theme.h"
 
 @implementation PluginCell
 
@@ -12,8 +13,14 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.topLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.bottomLabel.textColor = [Theme Singleton].colorMidPrimary;
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated

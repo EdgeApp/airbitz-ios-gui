@@ -16,7 +16,7 @@
     layer.cornerRadius = 5.0f;
     layer.masksToBounds = YES;
     layer.borderWidth = 1.0f;
-    layer.borderColor = [[Theme Singleton].colorTextDark CGColor];
+    layer.borderColor = [[Theme Singleton].colorDarkPrimary CGColor];
     layer.backgroundColor = [UIColor clearColor].CGColor;
 }
 

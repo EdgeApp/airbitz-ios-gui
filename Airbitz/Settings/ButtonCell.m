@@ -7,6 +7,7 @@
 //
 
 #import "ButtonCell.h"
+#import "Theme.h"
 
 @implementation ButtonCell
 
@@ -15,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
 	{
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
 }
@@ -33,6 +34,16 @@
     self.button.titleLabel.numberOfLines = 1;
     self.button.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.button.titleLabel.lineBreakMode = NSLineBreakByClipping;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.name.textColor = [Theme Singleton].colorDarkPrimary;
+    self.name.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    
+    self.button.tintColor = [Theme Singleton].colorMidPrimary;
+    self.button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

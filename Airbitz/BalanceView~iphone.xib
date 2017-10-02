@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Lato-Regular.ttf">
+        <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,22 +28,22 @@
                             <rect key="frame" x="8" y="2" width="278" height="41"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="33"/>
-                            <color key="textColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
-                            <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="0.28000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                             <size key="shadowOffset" width="0.0" height="1"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="reH-Ja-5Az" customClass="LatoLabel">
                             <rect key="frame" x="8" y="44" width="278" height="39"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
-                            <color key="textColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
-                            <color key="shadowColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="0.28000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                             <size key="shadowOffset" width="0.0" height="1"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" id="o6b-3Q-WL6" userLabel="View -showbalance">
                     <rect key="frame" x="0.0" y="0.0" width="294" height="84"/>
@@ -52,7 +53,7 @@
                             <rect key="frame" x="8" y="8" width="278" height="63"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="37"/>
-                            <color key="textColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Aob-Um-Hri">
@@ -60,22 +61,23 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="34"/>
                             <state key="normal">
-                                <color key="titleColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="ShowBalanceTouched:" destination="Kd7-Wc-vzE" eventType="touchUpInside" id="UIv-z1-Jpo"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="balanceView" destination="3nc-l7-s4E" id="W6l-9P-XU7"/>
                 <outlet property="botAmount" destination="reH-Ja-5Az" id="u0i-S0-v7Y"/>
+                <outlet property="buttonShowBalance" destination="Aob-Um-Hri" id="PYE-Sm-LEI"/>
                 <outlet property="showBalanceLabel" destination="lrt-iV-Gyi" id="JGO-yZ-PZa"/>
                 <outlet property="topAmount" destination="82O-lh-kdr" id="Y1K-R4-z45"/>
             </connections>

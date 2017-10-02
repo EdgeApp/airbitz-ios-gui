@@ -34,10 +34,14 @@
     UIView                      *_parentView;
 
 }
+@property (weak, nonatomic) IBOutlet UIView *exchangeView;
 
 @property (weak, nonatomic) IBOutlet UILabel                *conversionText;
 @property (weak, nonatomic) IBOutlet UILabel                *accountText;
 @property (weak, nonatomic) IBOutlet UIView                 *accountArrow;
+
+@property (weak, nonatomic) IBOutlet UILabel *buysellText;
+
 @property (weak, nonatomic) IBOutlet UIView                 *otherAccountsView;
 @property (weak, nonatomic) IBOutlet UIView                 *lowerViews;
 //@property (weak, nonatomic) IBOutlet UIButton               *importGiftCardButton;
@@ -49,15 +53,21 @@
 @property (weak, nonatomic) IBOutlet UIButton               *walletsButton;
 @property (weak, nonatomic) IBOutlet UIButton               *giftCardButton;
 @property (weak, nonatomic) IBOutlet UILabel                *giftCardTextLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *walletsText;
+@property (weak, nonatomic) IBOutlet UILabel *logoutText;
+@property (weak, nonatomic) IBOutlet UILabel *settingText;
 @property (nonatomic, strong) NSArray                       *arrayAccounts;
 @property (nonatomic, strong) NSArray                       *otherAccounts;
 @property (nonatomic, weak) IBOutlet PickerTextView         *accountPicker;
 //@property (weak, nonatomic) IBOutlet UILabel                *importPrivateKeyLabel;
 @property (weak, nonatomic) IBOutlet UILabel                *affiliateLabel;
-@property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
-@property (weak, nonatomic) IBOutlet UIView                 *dividerView2;
 @property (weak, nonatomic) IBOutlet UIView                 *dividerView1;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView2;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView3;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView4;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView5;
+@property (weak, nonatomic) IBOutlet UIView                 *dividerView6;
+
 
 @end
 
@@ -72,7 +82,7 @@
     v->_open = NO;
     v->_initialized = NO;
 
-    UIColor *back = [Theme Singleton].colorBackgroundHighlight;
+    UIColor *back = [Theme Singleton].colorLightPrimary;
     [v->_logoutButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_settingsButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
     [v->_buySellButton setBackgroundImage:[self imageWithColor:back] forState:UIControlStateHighlighted];
@@ -88,6 +98,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
     }
     return self;
 }
@@ -96,8 +107,35 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.backgroundColor = [Theme Singleton].colorLightGray;
+    self.accountButton.backgroundColor = [Theme Singleton].colorMidGray;
+    self.exchangeView.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.dividerView1.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.dividerView2.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.dividerView3.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.dividerView4.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.dividerView5.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.dividerView6.backgroundColor = [Theme Singleton].colorDarkGray;
+    
+    self.accountText.textColor = [Theme Singleton].colorDarkGray;
+    self.affiliateLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.giftCardTextLabel.textColor = [Theme Singleton].colorDarkGray;
+    self.walletsText.textColor = [Theme Singleton].colorDarkGray;
+    self.logoutText.textColor = [Theme Singleton].colorDarkGray;
+    self.settingText.textColor = [Theme Singleton].colorDarkGray;
 }
 
 + (UIImage *)imageWithColor:(UIColor *)color {

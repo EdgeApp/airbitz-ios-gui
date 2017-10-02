@@ -8,6 +8,7 @@
 //	Using this textField, you automatically get a white text color and light gray placeholder text.
 
 #import "StylizedTextField.h"
+#import "Theme.h"
 
 @implementation StylizedTextField
 
@@ -16,6 +17,7 @@
 	[self setTintColor:[UIColor whiteColor]];
 	[self setPlaceholderTextColor];
 	
+    self.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.font.pointSize];
 	
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     /*

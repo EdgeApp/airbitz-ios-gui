@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UIScrollView            *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *twoFactorLabel;
 @property (nonatomic, weak) IBOutlet MinCharTextField        *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIView                  *requestView;
 @property (nonatomic, weak) IBOutlet UIButton                *buttonApprove;
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet UILabel                 *onOffLabel;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *requestSpinner;
 @property (weak, nonatomic) IBOutlet UILabel                    *showQRLabel;
+@property (weak, nonatomic) IBOutlet UILabel *requestedLabel;
 
 @property (nonatomic)                BOOL                       bNoImportButton;
 
@@ -60,7 +62,28 @@
     self.showQRLabel.text = show_qr_code;
     self.showQRLabel.hidden = NO;
     self.qrCodeImageView.hidden = YES;
-    [self.showQRLabel setTextColor:[Theme Singleton].colorTextLink];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.showQRLabel.textColor = [Theme Singleton].colorMidPrimary;
+    
+    self.twoFactorLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.twoFactorLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
+    
+    self.passwordTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    
+    self.onOffLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.onOffLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.buttonApprove.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.buttonCancel.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonCancel.backgroundColor = [Theme Singleton].colorSecondAccent;
+    
+    self.requestedLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.requestedLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated

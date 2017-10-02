@@ -64,7 +64,6 @@
     [Util resizeView:self.view withDisplayView:self.viewDisplay];
 
     // set up our edit field
-    self.textFieldRecipient.font = [UIFont systemFontOfSize:18];
     self.textFieldRecipient.textAlignment = NSTextAlignmentCenter;
     self.textFieldRecipient.tintColor = [UIColor whiteColor];
 
@@ -317,10 +316,10 @@
     Contact *contact = [self.arrayAutoComplete objectAtIndex:indexPath.row];
 
     cell.textLabel.text = contact.strName;
-    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.detailTextLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.detailTextLabel.textColor = [Theme Singleton].colorDarkPrimary;
 
     // data
     if ([contact.strDataLabel length])
