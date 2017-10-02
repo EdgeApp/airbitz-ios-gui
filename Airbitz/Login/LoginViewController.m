@@ -125,7 +125,11 @@ static BOOL bInitialized = false;
 #pragma mark Styling
 
 - (void)styleTitleText {
+#ifdef ColorLoginTitleText
+    self.titleText.textColor = ColorLoginTitleText;
+#else
     self.titleText.textColor = [Theme Singleton].colorMidGray;
+#endif
     
     self.titleText.layer.shadowOpacity = 1.0f;
     self.titleText.layer.masksToBounds = NO;
@@ -143,6 +147,12 @@ static BOOL bInitialized = false;
     self.forgotPasswordButton.layer.masksToBounds = NO;
     self.forgotPasswordButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
     self.forgotPasswordButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    
+#ifdef ColorLoginTitleTextShadow
+    self.forgotPasswordButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
+#else
+    self.forgotPasswordButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
+#endif
     
     self.forgotPasswordButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
 }
@@ -189,10 +199,20 @@ static BOOL bInitialized = false;
     self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
     self.PINusernameSelector.titleLabel.layer.shadowOpacity = 1.0f;
     self.PINusernameSelector.titleLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.titleLabel.layer.shadowColor = [[Theme Singleton].colorDarkPrimary CGColor];
     self.PINusernameSelector.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+#ifdef ColorPinEntryUsernameText
+    self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
+#else
     self.PINusernameSelector.tintColor = [Theme Singleton].colorMidPrimary;
+#endif
+    
+#ifdef ColorPinUserNameSelectorShadow
+    self.PINusernameSelector.titleLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
+#else
+    self.PINusernameSelector.titleLabel.layer.shadowColor = [[Theme Singleton].colorDarkPrimary CGColor];
+#endif
 }
 
 - (void)styleExitPINLoginButton {
@@ -631,16 +651,31 @@ static BOOL bInitialized = false;
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         NSString *title = [NSString stringWithFormat:@"%@",
                            username];        // Define general attributes like color and fonts for the entire text
+        
+#ifdef ColorPinEntryText
+        NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
+                               NSFontAttributeName:regularFont};
+#else
         NSDictionary *attr = @{NSForegroundColorAttributeName:[Theme Singleton].colorLightGray,
                                NSFontAttributeName:regularFont};
+#endif
+        
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
         NSRange usernameTextRange = [title rangeOfString:username];
+        
+#ifdef ColorPinEntryUsernameText
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
+                                        NSFontAttributeName:boldFont}
+                                range:usernameTextRange];
+#else
         [attributedText setAttributes:@{NSForegroundColorAttributeName:[Theme Singleton].colorLightPrimary,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
+#endif
+        
         [self.PINusernameSelector setAttributedTitle:attributedText forState:UIControlStateNormal];
 
         //
