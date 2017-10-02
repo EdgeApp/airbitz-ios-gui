@@ -25,6 +25,8 @@
 #define ColorFirstAccent                                UIColorFromRGB(0x81C342)
 #define ColorSecondAccent                               UIColorFromRGB(0xFCA600)
 
+#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierBTC
+
 #define SHOW_BUY_SELL                                   1
 #define SHOW_AFFILIATE                                  1
 #define SHOW_PLUGINS                                    1
