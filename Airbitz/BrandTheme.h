@@ -25,6 +25,8 @@
 #define ColorFirstAccent                                UIColorFromRGB(0x81C342)
 #define ColorSecondAccent                               UIColorFromRGB(0xFCA600)
 
+#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
+
 #define SHOW_BUY_SELL                                   1
 #define SHOW_AFFILIATE                                  1
 #define SHOW_PLUGINS                                    1
@@ -89,7 +91,7 @@
 #define ColorLoginTitleText                             UIColorFromARGB(0xffeeeeee)
 #define ColorLoginTitleTextShadow                       UIColorFromARGB(0xff1C3294)
 
-#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierBTC
+#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
 #define SHOW_BUY_SELL                                   0
 #define SHOW_AFFILIATE                                  0
@@ -122,7 +124,7 @@
 #define ColorLoginTitleText                             UIColorFromARGB(0xff495f6f)
 #define ColorLoginTitleTextShadow                       UIColorFromARGB(0xffeeeeee)
 
-#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierBTC
+#define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierUBTC
 
 #define SHOW_BUY_SELL                                   0
 #define SHOW_AFFILIATE                                  0
