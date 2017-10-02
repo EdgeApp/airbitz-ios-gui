@@ -137,7 +137,7 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
  
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [Theme Singleton].colorBackgroundHighlight;
+    bgColorView.backgroundColor = [Theme Singleton].colorLightPrimary;
     bgColorView.layer.masksToBounds = YES;
     cell.selectedBackgroundView = bgColorView;
     cell.backgroundColor = plugin.backgroundColor;

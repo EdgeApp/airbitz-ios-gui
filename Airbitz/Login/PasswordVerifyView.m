@@ -24,9 +24,13 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.backgroundColor = [Theme Singleton].colorMidPrimary;
 }
 
 + (PasswordVerifyView *)CreateInsideView:(UIView *)parentView withDelegate:(id<PasswordVerifyViewDelegate>)delegate

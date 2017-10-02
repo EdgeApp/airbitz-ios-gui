@@ -48,6 +48,11 @@
 //@property (nonatomic, strong) DateTime              *fromDateTime;
 //@property (nonatomic, strong) DateTime              *toDateTime;
 
+@property (weak, nonatomic) IBOutlet UIButton *transactionInfoCSVButton;
+@property (weak, nonatomic) IBOutlet UIButton *transactionInfoQuickbooksButton;
+@property (weak, nonatomic) IBOutlet UIButton *privateSeedButton;
+@property (weak, nonatomic) IBOutlet UIButton *publicSeedButton;
+
 @property (nonatomic, strong) ExportWalletOptionsViewController   *exportWalletOptionsViewController;
 
 
@@ -70,6 +75,8 @@
     // Do any additional setup after loading the view.
 
     // resize ourselves to fit in area
+    
+    [self setThemeValues];
 
     self.buttonBlocker = [UIButton buttonWithType:UIButtonTypeCustom];
     self.buttonBlocker.backgroundColor = [UIColor clearColor];
@@ -88,6 +95,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
 
+}
+
+- (void)setThemeValues {
+    self.transactionInfoCSVButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.transactionInfoCSVButton.tintColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.transactionInfoQuickbooksButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.transactionInfoQuickbooksButton.tintColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.privateSeedButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.privateSeedButton.tintColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.publicSeedButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.publicSeedButton.tintColor = [Theme Singleton].colorDarkPrimary;
 }
 
 - (void)viewWillAppear:(BOOL)animated

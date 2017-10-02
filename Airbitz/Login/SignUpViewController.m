@@ -105,6 +105,17 @@
     // add left to right swipe detection for going back
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.labelPasswordInfo.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.labelPIN.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.buttonNextStep.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonNextStep.backgroundColor = [Theme Singleton].colorMidPrimary;
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -24,6 +24,7 @@
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (nonatomic, copy)     NSString                        *labelString;
 @property (weak, nonatomic) IBOutlet UILabel                    *infoText;
+@property (weak, nonatomic) IBOutlet UIButton                   *buttonNext;
 
 
 @end
@@ -58,6 +59,19 @@
     self.infoText.text = tempText;
     [self.view addSubview:self.buttonBlocker];
 
+     [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    _userNameTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:19.0];
+    
+    _infoText.textColor = [Theme Singleton].colorDarkPrimary;
+    _infoText.font = [UIFont fontWithName:[Theme Singleton].appFont size:13.0];
+    
+    _buttonNext.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    _buttonNext.backgroundColor = [Theme Singleton].colorFirstAccent;
+    
+    _activityView.color = [Theme Singleton].colorWhite;
 }
 
 

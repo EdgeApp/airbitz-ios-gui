@@ -71,6 +71,8 @@ typedef enum eExportOption
 @property (weak, nonatomic) IBOutlet UITableView                *tableView;
 @property (weak, nonatomic) IBOutlet ButtonSelectorView2        *buttonSelector;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
+@property (weak, nonatomic) IBOutlet UILabel *labelStartDate;
+@property (weak, nonatomic) IBOutlet UILabel *labelEndDate;
 
 @property (nonatomic, strong) ExportWalletPDFViewController     *exportWalletPDFViewController;
 @property (nonatomic, strong) NSArray                           *arrayChoices;
@@ -171,6 +173,40 @@ typedef enum eExportOption
     [self installLeftToRightSwipeDetection];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tabBarButtonReselect:) name:NOTIFICATION_TAB_BAR_BUTTON_RESELECT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViews:) name:NOTIFICATION_WALLETS_CHANGED object:nil];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.labelStartDate.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.labelStartDate.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.labelEndDate.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.labelEndDate.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.dateFromTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    self.dateFromTextField.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.dateToTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    self.dateToTextField.textColor = [Theme Singleton].colorDarkGray;
+    
+    self.buttonThisWeek.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonThisWeek.tintColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonLastWeek.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonLastWeek.tintColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonThisMonth.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonThisMonth.tintColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonLastMonth.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonLastMonth.tintColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonThisYear.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonThisYear.tintColor = [Theme Singleton].colorMidPrimary;
+    
+    self.buttonLastYear.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonLastYear.tintColor = [Theme Singleton].colorMidPrimary;
 }
 
 -(void)viewWillAppear:(BOOL)animated

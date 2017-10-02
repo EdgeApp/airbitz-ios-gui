@@ -37,8 +37,15 @@
 	{
         // Initialization code
         self.strPrevQuestion = @"";
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.questionButtonBig.backgroundColor = [Theme Singleton].colorDarkPrimary;
+    self.answerField.textColor = [Theme Singleton].colorWhite;
+    self.labelQuestion.textColor = [Theme Singleton].colorWhite;
 }
 
 #pragma mark - static Methods

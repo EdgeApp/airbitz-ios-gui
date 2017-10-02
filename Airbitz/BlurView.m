@@ -65,18 +65,27 @@
             CGRect frame = CGRectMake(0, 0, 10, 10);
 
             nonBlur = [[UIView alloc] initWithFrame:frame];
-            if (self.bSetBlurStyleDark)
+            
+            if ([Theme Singleton].colorBackground)
             {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xBB000000) CGColor]];
-            }
-            else if (self.bSetBlurStyleExtraLight || self.bForceWhite)
-            {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
+                nonBlur.backgroundColor = [Theme Singleton].colorBackground;
             }
             else
             {
-                [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0E2E7EE) CGColor]];
+                if (self.bSetBlurStyleDark)
+                {
+                    [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xBB000000) CGColor]];
+                }
+                else if (self.bSetBlurStyleExtraLight || self.bForceWhite)
+                {
+                    [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
+                }
+                else
+                {
+                    [nonBlur.layer setBackgroundColor:[UIColorFromARGB(0xF0E2E7EE) CGColor]];
+                }
             }
+            
             [Util addSubviewWithConstraints:self child:nonBlur];
         }
         bInitialized = true;
@@ -118,5 +127,7 @@
 	[super awakeFromNib];
 //	[self initMyVariables];
 }
+
+
 
 @end

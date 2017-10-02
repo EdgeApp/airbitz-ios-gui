@@ -29,6 +29,7 @@
 #import "Airbitz-Swift.h"
 #import "Mixpanel.h"
 #import "Location.h"
+#import "LatoLabel.h"
 
 typedef enum eLoginMode
 {
@@ -75,10 +76,11 @@ typedef enum eLoginMode
 
 }
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton           *fingerprintButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordHeight;
-@property (weak, nonatomic) IBOutlet UIButton           *forgotPassworddButton;
+@property (weak, nonatomic) IBOutlet UIButton           *forgotPasswordButton;
 //@property (weak, nonatomic) IBOutlet APPINView          *PINCodeView;
 @property (weak, nonatomic) IBOutlet UIButton           *PINusernameSelector;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textBitcoinWalletHeight;
@@ -88,13 +90,16 @@ typedef enum eLoginMode
 @property (nonatomic, weak) IBOutlet StylizedTextField  *passwordTextField;
 @property (nonatomic, weak) IBOutlet UIButton           *backButton;
 @property (nonatomic, weak) IBOutlet UIImageView        *swipeRightArrow;
-@property (nonatomic, weak) IBOutlet UILabel            *swipeText;
+@property (nonatomic, weak) IBOutlet LatoLabel          *swipeText;
 @property (nonatomic, weak) IBOutlet UILabel            *titleText;
 @property (nonatomic, weak) IBOutlet UIImageView        *logoImage;
 @property (nonatomic, weak) IBOutlet UIView             *userEntryView;
 @property (nonatomic, weak) IBOutlet UIView             *spinnerView;
 @property (weak, nonatomic) IBOutlet UIView             *credentialsPINView;
 @property (weak, nonatomic) IBOutlet StylizedTextField  *PINTextField;
+
+@property (weak, nonatomic) IBOutlet StylizedButton     *signInButton;
+@property (weak, nonatomic) IBOutlet StylizedButton     *signUpButton;
 
 @property (nonatomic, weak) IBOutlet UILabel			*errorMessageText;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeArrowLeft;
@@ -105,6 +110,7 @@ typedef enum eLoginMode
 @property (nonatomic, strong)           NSArray             *otherAccounts;
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
+@property (weak, nonatomic) IBOutlet StylizedButton *exitPINLoginButton;
 
 @property (strong, nonatomic) DropDown *PINusernameDropDown;
 @property (strong, nonatomic) DropDown *usernameDropDown;
@@ -115,6 +121,98 @@ static BOOL bPINModeEnabled = false;
 static BOOL bInitialized = false;
 
 @implementation LoginViewController
+
+#pragma mark Styling
+
+- (void)styleTitleText {
+    self.titleText.textColor = [Theme Singleton].colorMidGray;
+    
+    self.titleText.layer.shadowOpacity = 1.0f;
+    self.titleText.layer.masksToBounds = NO;
+    self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.titleText.layer.shadowRadius = [Theme Singleton].loginTitleTextShadowRadius;
+    
+    if (![appTitleText isEqualToString:@""])
+        self.titleText.text = appTitleText;
+}
+
+- (void)styleForgotPasswordButton {
+    self.forgotPasswordButton.layer.shadowRadius = 3.0f;
+    self.forgotPasswordButton.layer.shadowOpacity = 1.0f;
+    self.forgotPasswordButton.layer.masksToBounds = NO;
+    self.forgotPasswordButton.layer.shadowColor = [[Theme Singleton].colorLightGray CGColor];
+    self.forgotPasswordButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    
+    self.forgotPasswordButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+}
+
+- (void)styleSignInButton {
+    self.signInButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    self.signInButton.tintColor = [Theme Singleton].colorWhite;
+    self.signInButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+}
+
+- (void)styleSignUpButton {
+    self.signUpButton.backgroundColor = [Theme Singleton].colorMidPrimary;
+    self.signUpButton.tintColor = [Theme Singleton].colorWhite;
+    self.signUpButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+}
+
+- (void)styleSwipeTextLabel {
+    self.swipeText.layer.shadowRadius = 3.0f;
+    self.swipeText.layer.shadowOpacity = 1.0f;
+    self.swipeText.layer.masksToBounds = NO;
+    self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
+    self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    
+    self.swipeText.textColor = [Theme Singleton].colorWhite;
+}
+
+- (void)styleUsernameSelector {
+    self.usernameSelector.borderStyle = UITextBorderStyleNone;
+    self.usernameSelector.backgroundColor = [UIColor clearColor];
+    self.usernameSelector.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.usernameSelector.clearButtonMode = UITextFieldViewModeNever;
+    self.usernameSelector.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameSelector.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.usernameSelector.spellCheckingType = UITextSpellCheckingTypeNo;
+    self.usernameSelector.textColor = [UIColor whiteColor];
+    self.usernameSelector.returnKeyType = UIReturnKeyDone;
+    self.usernameSelector.tintColor = [UIColor whiteColor];
+    self.usernameSelector.textAlignment = NSTextAlignmentLeft;
+    
+    [Util stylizeTextField:self.usernameSelector];
+}
+
+- (void)stylePINUsernameSelector {
+    self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
+    self.PINusernameSelector.titleLabel.layer.shadowOpacity = 1.0f;
+    self.PINusernameSelector.titleLabel.layer.masksToBounds = NO;
+    self.PINusernameSelector.titleLabel.layer.shadowColor = [[Theme Singleton].colorDarkPrimary CGColor];
+    self.PINusernameSelector.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.PINusernameSelector.tintColor = [Theme Singleton].colorMidPrimary;
+}
+
+- (void)styleExitPINLoginButton {
+    self.exitPINLoginButton.tintColor = [Theme Singleton].colorLightPrimary;
+}
+
+- (void)styleUIElementsWithTheme {
+    self.spinner.color = [Theme Singleton].colorDarkPrimary;
+    
+    [self styleTitleText];
+    [self styleForgotPasswordButton];
+    [self styleSignInButton];
+    [self styleSignUpButton];
+    [self styleSwipeTextLabel];
+    [self styleUsernameSelector];
+    [self stylePINUsernameSelector];
+    [self styleExitPINLoginButton];
+}
+
+#pragma mark Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -128,11 +226,8 @@ static BOOL bInitialized = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     _mode = MODE_ENTERING_NEITHER;
 
-//    self.usernameSelector.textField.delegate = self;
-//    self.usernameSelector.delegate = self;
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
 //    self.PINCodeView.delegate = self;
@@ -163,28 +258,6 @@ static BOOL bInitialized = false;
         }
     }
 
-    // set up the specifics on our picker text view
-    self.usernameSelector.borderStyle = UITextBorderStyleNone;
-    self.usernameSelector.backgroundColor = [UIColor clearColor];
-    self.usernameSelector.font = [UIFont fontWithName:AppFont size:16.0];
-    self.usernameSelector.clearButtonMode = UITextFieldViewModeNever;
-    self.usernameSelector.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.usernameSelector.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.usernameSelector.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.usernameSelector.textColor = [UIColor whiteColor];
-    self.usernameSelector.returnKeyType = UIReturnKeyDone;
-    self.usernameSelector.tintColor = [UIColor whiteColor];
-    self.usernameSelector.textAlignment = NSTextAlignmentLeft;
-
-    // Add shadows to some text for visibility
-    self.PINusernameSelector.titleLabel.layer.shadowRadius = 3.0f;
-    self.PINusernameSelector.titleLabel.layer.shadowOpacity = 1.0f;
-    self.PINusernameSelector.titleLabel.layer.masksToBounds = NO;
-    self.PINusernameSelector.titleLabel.layer.shadowColor = [ColorPinUserNameSelectorShadow CGColor];
-    self.PINusernameSelector.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    self.PINusernameSelector.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:18.0];
-    self.PINusernameSelector.tintColor = ColorPinEntryUsernameText;
-
     // Initialize the PINusernameDropDown
     self.PINusernameDropDown = [[DropDown alloc] init];
     self.PINusernameDropDown.anchorView = self.PINusernameSelector;
@@ -214,28 +287,6 @@ static BOOL bInitialized = false;
             [strongSelf switchLoginTypeIfNeeded:item];
         }
     };
-    
-    self.swipeText.layer.shadowRadius = 3.0f;
-    self.swipeText.layer.shadowOpacity = 1.0f;
-    self.swipeText.layer.masksToBounds = NO;
-    self.swipeText.layer.shadowColor = [[UIColor darkGrayColor] CGColor];
-    self.swipeText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-
-    self.titleText.layer.shadowRadius = LoginTitleTextShadowRadius;
-    self.titleText.layer.shadowOpacity = 1.0f;
-    self.titleText.layer.masksToBounds = NO;
-    self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
-    self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
-    self.titleText.textColor = ColorLoginTitleText;
-    
-    if (![appTitleText isEqualToString:@""])
-        self.titleText.text = appTitleText;
-    
-    self.forgotPassworddButton.layer.shadowRadius = 3.0f;
-    self.forgotPassworddButton.layer.shadowOpacity = 1.0f;
-    self.forgotPassworddButton.layer.masksToBounds = NO;
-    self.forgotPassworddButton.layer.shadowColor = [ColorLoginTitleTextShadow CGColor];
-    self.forgotPassworddButton.layer.shadowOffset = CGSizeMake(0.0, 0.0);
 
     self.usernameSelector.placeholder = usernameText;
     self.usernameSelector.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.usernameSelector.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor]}];
@@ -243,7 +294,7 @@ static BOOL bInitialized = false;
     //[self.usernameSelector setTopMostView:self.view];
     //self.usernameSelector.pickerMaxChoicesVisible = 3;
     //[self.usernameSelector setAccessoryImage:[UIImage imageNamed:@"btn_close.png"]];
-    [Util stylizeTextField:self.usernameSelector];
+    
     
 //    [self.PINTextField addTarget:self
 //                          action:@selector(PINTextFieldDidChange:)
@@ -264,6 +315,8 @@ static BOOL bInitialized = false;
 
     if (![abc hasDeviceCapability:ABCDeviceCapsTouchID])
         self.fingerprintButton.hidden = YES;
+    
+    [self styleUIElementsWithTheme];
 }
 
 - (void)switchLoginTypeIfNeeded:(NSString *)username
@@ -332,7 +385,7 @@ static BOOL bInitialized = false;
         self.usernameSelector.hidden = true;
         self.usernameHeight.constant = 0;
         self.passwordHeight.constant = 0;
-        self.forgotPassworddButton.hidden = true;
+        self.forgotPasswordButton.hidden = true;
     }
     else
     {
@@ -345,7 +398,7 @@ static BOOL bInitialized = false;
                          animations:^
                          {
                              self.usernameSelector.hidden = false;
-                             self.forgotPassworddButton.hidden = false;
+                             self.forgotPasswordButton.hidden = false;
                              [self.view.superview layoutIfNeeded];
                          }
                          completion:^(BOOL finished)
@@ -578,14 +631,14 @@ static BOOL bInitialized = false;
         UIFont *regularFont = [UIFont fontWithName:@"Lato-Regular" size:[Theme Singleton].fontSizeEnterPINText];
         NSString *title = [NSString stringWithFormat:@"%@",
                            username];        // Define general attributes like color and fonts for the entire text
-        NSDictionary *attr = @{NSForegroundColorAttributeName:ColorPinEntryText,
+        NSDictionary *attr = @{NSForegroundColorAttributeName:[Theme Singleton].colorLightGray,
                                NSFontAttributeName:regularFont};
         NSMutableAttributedString *attributedText = [ [NSMutableAttributedString alloc]
                                                      initWithString:title
                                                      attributes:attr];
         // blue and bold text attributes
         NSRange usernameTextRange = [title rangeOfString:username];
-        [attributedText setAttributes:@{NSForegroundColorAttributeName:ColorPinEntryUsernameText,
+        [attributedText setAttributes:@{NSForegroundColorAttributeName:[Theme Singleton].colorLightPrimary,
                                         NSFontAttributeName:boldFont}
                                 range:usernameTextRange];
         [self.PINusernameSelector setAttributedTitle:attributedText forState:UIControlStateNormal];

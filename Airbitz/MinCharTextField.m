@@ -7,6 +7,7 @@
 //
 
 #import "MinCharTextField.h"
+#import "Theme.h"
 
 @implementation MinCharTextField
 
@@ -22,6 +23,8 @@
         self.rightView = paddingView;
         self.rightViewMode = UITextFieldViewModeAlways;
         self.tintColor = [UIColor whiteColor];
+        
+        self.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.font.pointSize];
 
     }
     return self;

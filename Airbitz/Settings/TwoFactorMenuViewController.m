@@ -15,6 +15,8 @@
     TwoFactorScanViewController *_tfaScanViewController;
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *topInfoText;
+@property (weak, nonatomic) IBOutlet UILabel *bottomInfoText;
 @property (nonatomic, weak) IBOutlet UILabel  *labelResetDesc;
 @property (nonatomic, weak) IBOutlet UILabel  *labelResetDate;
 @property (nonatomic, weak) IBOutlet UIButton *buttonReset;
@@ -59,6 +61,28 @@
                                 resetDateText,
                                 [self formatDate:self.resetDate]];
     }
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.topInfoText.textColor = [Theme Singleton].colorDarkPrimary;
+    self.topInfoText.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    
+    self.bottomInfoText.textColor = [Theme Singleton].colorDarkPrimary;
+    self.bottomInfoText.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    
+    self.labelResetDesc.textColor = [Theme Singleton].colorDarkPrimary;
+    self.labelResetDesc.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.labelResetDate.textColor = [Theme Singleton].colorDarkPrimary;
+    self.labelResetDate.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    
+    self.buttonScan.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    self.buttonScan.backgroundColor = [Theme Singleton].colorFirstAccent;
+    
+    self.buttonReset.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    self.buttonReset.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)viewWillAppear:(BOOL)animated

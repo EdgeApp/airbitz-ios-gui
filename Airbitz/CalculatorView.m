@@ -10,6 +10,7 @@
 #import "ABCContext.h"
 #import "Util.h"
 #import "AB.h"
+#import "Theme.h"
 
 #define DIGIT_BACK			11
 
@@ -32,6 +33,7 @@
     NSLocale *locale;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonDelete;
 @property (weak, nonatomic) IBOutlet UIButton *buttonDone;
 @property (weak, nonatomic) IBOutlet UIButton *decimalButton;
 
@@ -58,9 +60,8 @@
 	{
         // Initialization code
         _calcMode = CALC_MODE_COIN;
-//        self.backgroundColor = [UIColor colorWithWhite:0.8
-//                                                 alpha:0.4];
         [self initAll];
+        [self setThemeValues];
     }
     return self;
 }
@@ -74,9 +75,15 @@
         _calcMode = CALC_MODE_COIN;
         [Util addSubviewWithConstraints:self child:view];
         [self initAll];
-        
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.backgroundColor = [Theme Singleton].colorLightGray;
+    self.buttonDone.backgroundColor = [Theme Singleton].colorFirstAccent;
+    self.buttonDelete.backgroundColor = [Theme Singleton].colorSecondAccent;
 }
 
 #pragma mark - Action Methods
