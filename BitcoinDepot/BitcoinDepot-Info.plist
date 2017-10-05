@@ -108,7 +108,9 @@
 		<string>Lato-Italic.ttf</string>
 		<string>Lato-Light.ttf</string>
 		<string>Lato-LightItalic.ttf</string>
-		<string>Lato-Regular.ttf</string>
+        <string>Lato-Regular.ttf</string>
+        <string>RobotoCondensed-Regular.ttf</string>
+        <string>RobotoCondensed-Italic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

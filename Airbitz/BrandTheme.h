@@ -171,8 +171,8 @@
 
 #elif BITCOINDEPOT
 
-#define AppFont                                         @"Lato-Regular"
-#define AppFontItalic                                   @"Lato-Italic"
+#define AppFont                                         @"RobotoCondensed-Regular"
+#define AppFontItalic                                   @"RobotoCondensed-Italic"
 
 #define ColorWhite                                      UIColorFromRGB(0xffffff)
 #define ColorLightGray                                  UIColorFromRGB(0xEDEEEF)
