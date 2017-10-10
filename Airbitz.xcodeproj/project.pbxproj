@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03DA9F0C1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
+		03DA9F0D1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
+		03DA9F0E1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
 		290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
 		34644112A906FC0EC6F8E9DC /* Affiliate.m in Sources */ = {isa = PBXBuildFile; fileRef = 346446DF3DCE81998F436046 /* Affiliate.m */; };
 		346441D46B7AA497A77A5758 /* SignUpPINController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346442B19C664D7BA4B070CF /* SignUpPINController.m */; };
@@ -1406,6 +1409,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03DA9F0B1F7CBB0700681F89 /* wagecan.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = wagecan.html; sourceTree = "<group>"; };
 		2CD89F248AA50251F1AD7D7F /* Pods-Airbitz-Testnet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Testnet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		3464423FFD78CBD7BC1D7172 /* SignUpPINController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpPINController.h; sourceTree = "<group>"; };
 		346442B19C664D7BA4B070CF /* SignUpPINController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SignUpPINController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -3366,6 +3370,7 @@
 		DA9EDFEC1BC61F920063DA07 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				03DA9F0B1F7CBB0700681F89 /* wagecan.html */,
 				DA17C2DA1E98417F0098A4CA /* bity.html */,
 				8E8611491D59B9E90051FD8C /* bitrefill.html */,
 				DABF60F01C10263A004E613B /* clevercoin.html */,
@@ -4275,6 +4280,7 @@
 				DA9EF46E1BC7285D0063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */,
+				03DA9F0D1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */,
@@ -4545,6 +4551,7 @@
 				DA9EF6351BC729FA0063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA4A13F91CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */,
+				03DA9F0E1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */,
@@ -4865,6 +4872,7 @@
 				DA9EE4E01BC61F920063DA07 /* White-Dot@2x.png in Resources */,
 				DA57A1C31D131C62005442AF /* Main_iPhone.storyboard in Resources */,
 				DA9EE48D1BC61F920063DA07 /* icon_category_electronics.png in Resources */,
+				03DA9F0C1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DADFAC451D29F59C006798D5 /* info_send_confirmation.html in Resources */,
 				DA9EE4731BC61F920063DA07 /* gift_box@3x.png in Resources */,
 				DA10BB9B1BFF90980086AD8B /* background@2x.jpg in Resources */,
