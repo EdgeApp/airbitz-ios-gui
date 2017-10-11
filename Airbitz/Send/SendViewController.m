@@ -107,6 +107,8 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 @property (strong, nonatomic)   NSMutableArray		            *peripheralContainers;
 @property (nonatomic, copy)	    NSString				        *advertisedPartialBitcoinAddress;
 @property (strong, nonatomic)   AFHTTPRequestOperationManager   *afmanager;
+@property (weak, nonatomic) IBOutlet UIView *topBarView;
+@property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 
 @end
 
@@ -150,6 +152,9 @@ static NSTimeInterval lastCentralBLEPowerOffNotificationTime = 0;
 - (void)setThemeValues {
     NSDictionary *fontAttributes = @{NSFontAttributeName: [UIFont fontWithName:[Theme Singleton].appFont size:18.0]};
     [segmentedControl setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
+    
+    self.topBarView.backgroundColor = [Theme Singleton].colorDarkGray;
+    self.bottomBarView.backgroundColor = [Theme Singleton].colorDarkGray;
 }
 
 - (void)dealloc

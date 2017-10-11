@@ -246,9 +246,9 @@
                                     <constraint firstAttribute="bottom" secondItem="9C3-ej-2l9" secondAttribute="bottom" id="fnB-bp-z3b"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-fU-j91" userLabel="Top BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-fU-j91" userLabel="Top Bar">
                                 <rect key="frame" x="0.0" y="64" width="375" height="45"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="fxj-vv-ZSu"/>
                                 </constraints>
@@ -262,7 +262,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="Bottom BlurView" customClass="BlurView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrj-OZ-WpR" userLabel="Bottom Bar">
                                 <rect key="frame" x="0.0" y="564" width="375" height="54"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
@@ -358,12 +358,14 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bleViewHeight" destination="Ala-bv-06W" id="kNb-GU-e7J"/>
+                        <outlet property="bottomBarView" destination="jrj-OZ-WpR" id="vEC-xy-3t4"/>
                         <outlet property="buttonSelector" destination="g9e-kM-2rC" id="30G-6H-VYq"/>
                         <outlet property="scanFrame" destination="IsP-NR-ytZ" id="WAe-eF-Ooy"/>
                         <outlet property="scanningErrorLabel" destination="rls-16-YZg" id="zRc-N9-B0l"/>
                         <outlet property="segmentedControl" destination="AOi-Wp-bVq" id="Ryr-z6-A2U"/>
                         <outlet property="tableView" destination="9C3-ej-2l9" id="sGK-l5-2nZ"/>
                         <outlet property="textUnderQRScanner" destination="3Vs-Vv-LQH" id="LjX-oc-wTP"/>
+                        <outlet property="topBarView" destination="p3w-fU-j91" id="247-bW-kcB"/>
                         <outlet property="topTextLabel" destination="cYL-n1-ybU" id="hGX-Ir-Hgd"/>
                         <outlet property="view" destination="of2-42-Lef" id="I0w-Df-2dv"/>
                     </connections>
@@ -3165,7 +3167,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVo-M5-ZXk" userLabel="Button - Forgot">
-                                                <rect key="frame" x="55" y="72" width="210" height="31"/>
+                                                <rect key="frame" x="55" y="72" width="210" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="210" id="XDE-2H-ftF"/>
                                                 </constraints>
@@ -4046,7 +4048,7 @@
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AkB-cD-ba5" userLabel="topLabel" customClass="LatoLabel">
-                                            <rect key="frame" x="69" y="16" width="42" height="21"/>
+                                            <rect key="frame" x="69" y="16" width="40" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="9e0-ox-As7"/>
                                             </constraints>
@@ -4057,7 +4059,7 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gJp-Ct-Vol" userLabel="bottomLabel" customClass="LatoLabel">
-                                            <rect key="frame" x="69" y="38" width="39.5" height="18"/>
+                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="7Up-y4-tsr"/>
                                             </constraints>
@@ -4207,7 +4209,7 @@
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0s2-OO-yBM" userLabel="topLabel" customClass="LatoLabel">
-                                                            <rect key="frame" x="69" y="16" width="42" height="21"/>
+                                                            <rect key="frame" x="69" y="16" width="40" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="QAR-VX-V7A"/>
                                                             </constraints>
@@ -4218,7 +4220,7 @@
                                                             <size key="shadowOffset" width="0.0" height="1"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XJt-5y-Q5y" userLabel="bottomLabel" customClass="LatoLabel">
-                                                            <rect key="frame" x="69" y="38" width="39.5" height="18"/>
+                                                            <rect key="frame" x="69" y="38" width="37.5" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="4xA-Cc-iPf"/>
                                                             </constraints>
