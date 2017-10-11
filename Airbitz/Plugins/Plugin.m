@@ -43,6 +43,20 @@ static NSMutableArray *generalPlugins;
                            };
             [generalPlugins addObject:plugin];
         }
+        {
+            plugin = [[Plugin alloc] init];
+            plugin.pluginId = @"ZW.WageCan.AirbitzPlugIn";
+            plugin.provider = @"WageCan";
+            plugin.sourceFile = @"wagecan";
+            plugin.sourceExtension = @"html";
+            plugin.imageUrl = @"https://wagecan.com/Images/airbitz/wagecan-airbitz-list-icon.png";
+            plugin.name = @"Load WageCan Card";
+            plugin.env = @{
+                           @"CATEGORY": [NSString stringWithFormat:@"%@%@%@",
+                                         exchange_category_en, @"%3A", @"ATMs"],
+                           };
+            [generalPlugins addObject:plugin];
+        }
         
         {
             plugin = [[Plugin alloc] init];
