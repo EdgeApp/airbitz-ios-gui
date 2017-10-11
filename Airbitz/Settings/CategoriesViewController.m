@@ -102,6 +102,19 @@
     self.pickerTextNew.delegate = self;
 
     bTableCellSelected = NO;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.textSearch.font = [UIFont fontWithName:[Theme Singleton].appFont size:14.0];
+    self.textSearch.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.doneButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.doneButton.backgroundColor = [Theme Singleton].colorFirstAccent;
+    
+    self.cancelButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+    self.cancelButton.backgroundColor = [Theme Singleton].colorMidPrimary;
 }
 
 - (void)viewDidAppear:(BOOL)animated

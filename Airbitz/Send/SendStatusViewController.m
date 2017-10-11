@@ -8,6 +8,7 @@
 
 #import "SendStatusViewController.h"
 #import "CommonTypes.h"
+#import "Theme.h"
 
 @interface SendStatusViewController ()
 {
@@ -27,7 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+       
     }
     return self;
 }
@@ -36,8 +37,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    [self setThemeValues];
+    
     [self updateDisplayLayout];
+}
+
+- (void)setThemeValues {
+    self.messageLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:24.0];
 }
 
 - (void)didReceiveMemoryWarning

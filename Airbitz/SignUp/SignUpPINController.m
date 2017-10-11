@@ -31,6 +31,7 @@
 @property (nonatomic, copy)     NSString                        *strReason;
 @property (weak, nonatomic) IBOutlet UILabel                    *pinTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel                    *setPasswordLabel;
+@property (weak, nonatomic) IBOutlet UIButton                   *buttonNext;
 
 
 @end
@@ -51,6 +52,21 @@
     self.contentViewY = self.contentView.frame.origin.y;
 
     self.labelString = signupText;
+    
+     [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.setPasswordLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:17.0];
+    self.setPasswordLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.pinTextField.font = [UIFont fontWithName:[Theme Singleton].appFont size:22.0];
+    
+    self.pinTextLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.pinTextLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.buttonNext.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:15.0];
+    self.buttonNext.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 -(void)viewWillAppear:(BOOL)animated

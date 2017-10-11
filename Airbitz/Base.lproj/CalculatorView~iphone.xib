@@ -1,36 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Lato-Regular.ttf">
+        <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalculatorView">
             <connections>
+                <outlet property="buttonDelete" destination="tNK-PX-QMO" id="Ejq-sZ-5he"/>
                 <outlet property="buttonDone" destination="JE3-3X-s8v" id="LZa-XP-oHh"/>
                 <outlet property="decimalButton" destination="WkG-ho-3qR" id="Uek-ji-bWJ"/>
             </connections>
@@ -42,16 +28,16 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F41-Pj-s0u">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V76-TG-gfn">
-                    <rect key="frame" x="64" y="173" width="64" height="57"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="64" y="172.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="0">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -66,12 +52,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8e-QF-DXa">
-                    <rect key="frame" x="0.0" y="0.0" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="0.0" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="1">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -86,12 +72,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjB-0i-g2w">
-                    <rect key="frame" x="64" y="0.0" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="64" y="0.0" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="2">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -106,12 +92,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4B-P3-CYU">
-                    <rect key="frame" x="128" y="0.0" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="128" y="0.0" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="3">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -126,12 +112,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0f-iB-KJr">
-                    <rect key="frame" x="0.0" y="58" width="64" height="57"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="57.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="4">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -146,12 +132,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uL-vk-tLg">
-                    <rect key="frame" x="64" y="58" width="64" height="57"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="64" y="57.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="5">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -166,12 +152,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORi-eH-Enh">
-                    <rect key="frame" x="128" y="58" width="64" height="57"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="128" y="57.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="6">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -186,12 +172,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVl-D5-w0P">
-                    <rect key="frame" x="0.0" y="115" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="115" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="7">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -206,12 +192,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emr-ag-G6B">
-                    <rect key="frame" x="64" y="115" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="64" y="115" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="8">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -226,12 +212,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqz-n7-FoF">
-                    <rect key="frame" x="128" y="115" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="128" y="115" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="9">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -246,12 +232,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkG-ho-3qR">
-                    <rect key="frame" x="128" y="173" width="64" height="57"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="128" y="172.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -266,12 +252,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O42-ZS-u2K">
-                    <rect key="frame" x="0.0" y="173" width="64" height="57"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="172.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="C">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Clear Button">
@@ -286,12 +272,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tNK-PX-QMO">
-                    <rect key="frame" x="256" y="115" width="64" height="58"/>
-                    <color key="backgroundColor" red="0.97254901960784312" green="0.58823529411764708" blue="0.047058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="256" y="115" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.9882352941176471" green="0.65098039215686276" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
                     <state key="normal" title="&lt; Del">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Delete Button">
@@ -306,12 +292,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JE3-3X-s8v">
-                    <rect key="frame" x="256" y="173" width="64" height="57"/>
-                    <color key="backgroundColor" red="0.43529411764705883" green="0.72941176470588232" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="256" y="172.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.50588235294117645" green="0.76470588235294112" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                     <state key="normal" title="Done">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -326,12 +312,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTN-mi-eGB">
-                    <rect key="frame" x="192" y="115" width="64" height="58"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="192" y="115" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="/">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -346,12 +332,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aeb-Xc-JRe">
-                    <rect key="frame" x="192" y="58" width="64" height="57"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="192" y="57.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="-">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -366,12 +352,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpP-b8-SWQ">
-                    <rect key="frame" x="192" y="0.0" width="64" height="58"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="192" y="0.0" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="+">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -386,12 +372,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYy-J7-W9D">
-                    <rect key="frame" x="256" y="0.0" width="64" height="58"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="256" y="0.0" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="%">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -406,12 +392,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCV-gu-4YU">
-                    <rect key="frame" x="256" y="58" width="64" height="57"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="256" y="57.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="*">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -426,12 +412,12 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RyR-lU-hrP">
-                    <rect key="frame" x="192" y="173" width="64" height="57"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="192" y="172.5" width="64" height="57.5"/>
+                    <color key="backgroundColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="31"/>
                     <state key="normal" title="=">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <attributedString key="userComments">
                         <fragment content="Calculator Button">
@@ -446,7 +432,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Tqz-n7-FoF" firstAttribute="height" secondItem="b8e-QF-DXa" secondAttribute="height" id="0Ig-lf-Wg4"/>
                 <constraint firstItem="Emr-ag-G6B" firstAttribute="top" secondItem="2uL-vk-tLg" secondAttribute="bottom" id="0Lw-fp-8YI"/>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03DA9F0C1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
+		03DA9F0D1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
+		03DA9F0E1F7CBB0A00681F89 /* wagecan.html in Resources */ = {isa = PBXBuildFile; fileRef = 03DA9F0B1F7CBB0700681F89 /* wagecan.html */; };
 		2136D1C2ED0532661FEF869A /* libPods-Athena.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D211A2C8BD2BE49C9EEB1419 /* libPods-Athena.a */; };
 		290F9123ABDDD87806F6B4C2 /* libPods-Airbitz-Testnet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E70B8A411B6838AF82EC4AFC /* libPods-Airbitz-Testnet.a */; };
 		2BBB5216A01FC7724AF6DA83 /* libPods-BitcoinDepot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0622A95B124DC0771610D48 /* libPods-BitcoinDepot.a */; };
@@ -77,6 +80,12 @@
 		DA2336971E922634000CD378 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2336941E922634000CD378 /* TextViewCell.m */; };
 		DA3508311D67670B00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
 		DA3508321D67670C00041EB1 /* bitrefill.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E8611491D59B9E90051FD8C /* bitrefill.html */; };
+		DA3A53D91F8DBFD2000F74E5 /* RobotoCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D21F8DBFD2000F74E5 /* RobotoCondensed-Bold.ttf */; };
+		DA3A53DA1F8DBFD2000F74E5 /* RobotoCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D31F8DBFD2000F74E5 /* RobotoCondensed-Light.ttf */; };
+		DA3A53DB1F8DBFD2000F74E5 /* RobotoCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D41F8DBFD2000F74E5 /* RobotoCondensed-Italic.ttf */; };
+		DA3A53DC1F8DBFD2000F74E5 /* RobotoCondensed-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D51F8DBFD2000F74E5 /* RobotoCondensed-BoldItalic.ttf */; };
+		DA3A53DD1F8DBFD2000F74E5 /* RobotoCondensed-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D61F8DBFD2000F74E5 /* RobotoCondensed-LightItalic.ttf */; };
+		DA3A53DE1F8DBFD2000F74E5 /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA3A53D71F8DBFD2000F74E5 /* RobotoCondensed-Regular.ttf */; };
 		DA3C7A881C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A891C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
 		DA3C7A8A1C2E3DF200599E3D /* plugin_icon_walmart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */; };
@@ -3548,6 +3557,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03DA9F0B1F7CBB0700681F89 /* wagecan.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = wagecan.html; sourceTree = "<group>"; };
 		0D010D0EE16773F30DBC1573 /* Pods-BitcoinDepot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinDepot.release.xcconfig"; path = "Pods/Target Support Files/Pods-BitcoinDepot/Pods-BitcoinDepot.release.xcconfig"; sourceTree = "<group>"; };
 		1D1D539A88A91795BB091AB6 /* Pods-Rackwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rackwallet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rackwallet/Pods-Rackwallet.release.xcconfig"; sourceTree = "<group>"; };
 		2658064CE5A804AD0B98219E /* Pods-Rockitcoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rockitcoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rockitcoin/Pods-Rockitcoin.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3716,6 +3726,12 @@
 		DA1EB8241C168F2B0059734C /* BrandTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTheme.h; sourceTree = "<group>"; };
 		DA2336941E922634000CD378 /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		DA23369C1E922649000CD378 /* TextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
+		DA3A53D21F8DBFD2000F74E5 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		DA3A53D31F8DBFD2000F74E5 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
+		DA3A53D41F8DBFD2000F74E5 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
+		DA3A53D51F8DBFD2000F74E5 /* RobotoCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
+		DA3A53D61F8DBFD2000F74E5 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
+		DA3A53D71F8DBFD2000F74E5 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		DA3C7A871C2E3DF200599E3D /* plugin_icon_walmart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_walmart@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8B1C2E3E7A00599E3D /* plugin_icon_wholefoods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_wholefoods@2x.png"; sourceTree = "<group>"; };
 		DA3C7A8F1C2E3F4000599E3D /* plugin_icon_homedepot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plugin_icon_homedepot@2x.png"; sourceTree = "<group>"; };
@@ -5185,6 +5201,19 @@
 			name = Testnet;
 			sourceTree = "<group>";
 		};
+		DA3A53D11F8DBFD2000F74E5 /* Roboto_Condensed */ = {
+			isa = PBXGroup;
+			children = (
+				DA3A53D21F8DBFD2000F74E5 /* RobotoCondensed-Bold.ttf */,
+				DA3A53D31F8DBFD2000F74E5 /* RobotoCondensed-Light.ttf */,
+				DA3A53D41F8DBFD2000F74E5 /* RobotoCondensed-Italic.ttf */,
+				DA3A53D51F8DBFD2000F74E5 /* RobotoCondensed-BoldItalic.ttf */,
+				DA3A53D61F8DBFD2000F74E5 /* RobotoCondensed-LightItalic.ttf */,
+				DA3A53D71F8DBFD2000F74E5 /* RobotoCondensed-Regular.ttf */,
+			);
+			path = Roboto_Condensed;
+			sourceTree = "<group>";
+		};
 		DA9D8F551CC0C191006A8C0A /* Airbitz-OSX */ = {
 			isa = PBXGroup;
 			children = (
@@ -5671,6 +5700,7 @@
 		DA9EDFC81BC61F920063DA07 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				DA3A53D11F8DBFD2000F74E5 /* Roboto_Condensed */,
 				DA9EDFC91BC61F920063DA07 /* Lato */,
 				DA9EDFD41BC61F920063DA07 /* Montserrat */,
 			);
@@ -5740,6 +5770,7 @@
 		DA9EDFEC1BC61F920063DA07 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				03DA9F0B1F7CBB0700681F89 /* wagecan.html */,
 				DA17C2DA1E98417F0098A4CA /* bity.html */,
 				8E8611491D59B9E90051FD8C /* bitrefill.html */,
 				DABF60F01C10263A004E613B /* clevercoin.html */,
@@ -6880,6 +6911,7 @@
 				DA9EF46E1BC7285D0063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA4A13F81CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF46F1BC7285D0063DA07 /* emboss_down@2x.png in Resources */,
+				03DA9F0D1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DA9EF4711BC7285D0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF4741BC7285D0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF4751BC7285D0063DA07 /* flash_on@2x.png in Resources */,
@@ -7149,6 +7181,7 @@
 				DA9EF6351BC729FA0063DA07 /* icon_account_secure@3x.png in Resources */,
 				DA4A13F91CFEC8400097EF31 /* fingerprint-wht@2x.png in Resources */,
 				DA9EF6361BC729FA0063DA07 /* emboss_down@2x.png in Resources */,
+				03DA9F0E1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DA9EF6381BC729FA0063DA07 /* icon_USD_dark@2x.png in Resources */,
 				DA9EF63B1BC729FA0063DA07 /* icon_category_atm@2x.png in Resources */,
 				DA9EF63C1BC729FA0063DA07 /* flash_on@2x.png in Resources */,
@@ -8543,6 +8576,7 @@
 				DA9EE4E01BC61F920063DA07 /* White-Dot@2x.png in Resources */,
 				DA57A1C31D131C62005442AF /* Main_iPhone.storyboard in Resources */,
 				DA9EE48D1BC61F920063DA07 /* icon_category_electronics.png in Resources */,
+				03DA9F0C1F7CBB0A00681F89 /* wagecan.html in Resources */,
 				DADFAC451D29F59C006798D5 /* info_send_confirmation.html in Resources */,
 				DA9EE4731BC61F920063DA07 /* gift_box@3x.png in Resources */,
 				DA10BB9B1BFF90980086AD8B /* background@2x.jpg in Resources */,
@@ -8675,8 +8709,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA3A53DC1F8DBFD2000F74E5 /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				FD4256B01E789B5E00F762D2 /* icon_logout@2x.png in Resources */,
 				FD4256B11E789B5E00F762D2 /* btn_locateMe@2x.png in Resources */,
+				DA3A53DD1F8DBFD2000F74E5 /* RobotoCondensed-LightItalic.ttf in Resources */,
 				FD4256B21E789B5E00F762D2 /* plugin_icon_usd@2x.png in Resources */,
 				FD4256B31E789B5E00F762D2 /* icon_settings@2x.png in Resources */,
 				FD4256B41E789B5E00F762D2 /* icon_import.png in Resources */,
@@ -8819,6 +8855,7 @@
 				FD42573F1E789B5E00F762D2 /* bd_icon_facebook@2x.png in Resources */,
 				FD4257401E789B5E00F762D2 /* Plugins.storyboard in Resources */,
 				FD4257411E789B5E00F762D2 /* Lato-BoldItalic.ttf in Resources */,
+				DA3A53DB1F8DBFD2000F74E5 /* RobotoCondensed-Italic.ttf in Resources */,
 				FD4257421E789B5E00F762D2 /* icon_category_electronics@2x.png in Resources */,
 				FD4257431E789B5E00F762D2 /* DropDownAlertView.xib in Resources */,
 				FD4257441E789B5E00F762D2 /* info_spending_limits.html in Resources */,
@@ -8922,8 +8959,11 @@
 				FD4257A41E789B5E00F762D2 /* btn_collapse_expand@2x.png in Resources */,
 				FD4257A51E789B5E00F762D2 /* icon_send_padded@2x.png in Resources */,
 				FD4257A61E789B5E00F762D2 /* bd_icon_yelp@2x.png in Resources */,
+				DA3A53D91F8DBFD2000F74E5 /* RobotoCondensed-Bold.ttf in Resources */,
 				FD4257A71E789B5E00F762D2 /* btn_export_white.png in Resources */,
 				FD4257A81E789B5E00F762D2 /* icon_USD_light@2x.png in Resources */,
+				DA3A53DA1F8DBFD2000F74E5 /* RobotoCondensed-Light.ttf in Resources */,
+				DA3A53DE1F8DBFD2000F74E5 /* RobotoCondensed-Regular.ttf in Resources */,
 				FD4257A91E789B5E00F762D2 /* Lato-Regular.ttf in Resources */,
 				FD4257AA1E789B5E00F762D2 /* Green-check@2x.png in Resources */,
 				FD4257AB1E789B5E00F762D2 /* Lato-Light.ttf in Resources */,

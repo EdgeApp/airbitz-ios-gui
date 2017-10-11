@@ -339,7 +339,7 @@
     UILabel *label = [[UILabel alloc] init];
     label.opaque = NO;
     label.backgroundColor = [UIColor clearColor];
-    label.textColor = [Theme Singleton].colorTextDark;
+    label.textColor = [Theme Singleton].colorDarkPrimary;
     label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 2;
     label.font = [UIFont fontWithName:[Theme Singleton].appFont size:18];

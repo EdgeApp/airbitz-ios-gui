@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Lato-Regular.ttf">
+        <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -26,15 +30,15 @@
                         <segment title="mBTC"/>
                         <segment title="$USD"/>
                     </segments>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="segmentedControlAction:" destination="N7s-Lf-JN5" eventType="valueChanged" id="OO7-Hp-I9F"/>
                     </connections>
                 </segmentedControl>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kk-Hg-VIb">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6kk-Hg-VIb" customClass="LatoLabel">
                     <rect key="frame" x="10" y="5" width="231" height="34"/>
                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvh-Ja-ygJ" userLabel="Button - down/up arrow">
@@ -44,7 +48,7 @@
                         <constraint firstAttribute="width" constant="37" id="zVC-nr-I1q"/>
                     </constraints>
                     <state key="normal" backgroundImage="btn_collapse_expand.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="ExpandCollapse" destination="N7s-Lf-JN5" eventType="touchUpInside" id="LlQ-Yy-n3V"/>
@@ -57,7 +61,7 @@
                         <constraint firstAttribute="height" constant="37" id="CBD-0P-ZqB"/>
                     </constraints>
                     <state key="normal" image="btn_add.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="addWallet" destination="N7s-Lf-JN5" eventType="touchUpInside" id="F7i-jk-hFd"/>
@@ -65,10 +69,10 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzk-gl-KBi" userLabel="Button - label">
                     <rect key="frame" x="20" y="0.0" width="150" height="44"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="headerButton" destination="N7s-Lf-JN5" eventType="touchUpInside" id="7gl-Cl-sOr"/>
@@ -81,14 +85,14 @@
                         <constraint firstAttribute="width" constant="37" id="yzO-RC-2Yc"/>
                     </constraints>
                     <state key="normal" image="btn_export_white.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="exportButton" destination="N7s-Lf-JN5" eventType="touchUpInside" id="WHM-A6-XL3"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.10588235294117647" green="0.37647058823529411" blue="0.63137254901960782" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.047058823529411764" green="0.3411764705882353" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="6kk-Hg-VIb" firstAttribute="leading" secondItem="N7s-Lf-JN5" secondAttribute="leading" constant="10" id="ByY-Rp-PAN"/>
                 <constraint firstAttribute="centerY" secondItem="Urh-AH-SxJ" secondAttribute="centerY" id="DfB-t3-UQ0"/>
