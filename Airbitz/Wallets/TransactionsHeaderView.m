@@ -34,7 +34,7 @@
     
     thv = [[[NSBundle mainBundle] loadNibNamed:@"TransactionsHeaderView~iphone" owner:nil options:nil] objectAtIndex:0];
     thv.titleLabel.text = title;
-    [thv.mainView setBackgroundColor:[Theme Singleton].colorTransactionsHeader];
+    [thv.mainView setBackgroundColor:[Theme Singleton].colorMidGray];
     
     return thv;
 }

@@ -33,8 +33,10 @@
 @property (nonatomic, copy)     NSString                    *strReason;
 @property (nonatomic, assign)   BOOL                        bSuccess;
 @property (weak, nonatomic) IBOutlet PopupPickerView *popupPickerCurrency;
+@property (weak, nonatomic) IBOutlet UILabel                *labelCurrency;
 @property (weak, nonatomic) IBOutlet UIButton *buttonCurrency;
-
+@property (weak, nonatomic) IBOutlet UIButton *buttonCancel;
+@property (weak, nonatomic) IBOutlet UIButton *buttonDone;
 
 @end
 
@@ -46,9 +48,16 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.labelCurrency.textColor = [Theme Singleton].colorDarkGray;
+    self.buttonCurrency.tintColor = [Theme Singleton].colorMidPrimary;
+    self.buttonCancel.backgroundColor = [Theme Singleton].colorMidPrimary;
+    self.buttonDone.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -132,8 +141,8 @@
 //    ABCLog(2,self.buttonSelectorView.button.currentTitle);
 
     [self.buttonCurrency setTitle:_currencyChoice.code forState:UIControlStateNormal];
-    [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorTextLink];
-//    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorTextLink CGColor]];
+    [self.buttonCurrency.titleLabel setTextColor:[Theme Singleton].colorMidPrimary];
+//    [self.buttonCurrency.layer setBorderColor:[[Theme Singleton].colorMidPrimary CGColor]];
 //    [self.buttonCurrency.layer setBorderWidth:2.0];
 //    [self.buttonCurrency.layer setCornerRadius:8.0];
     [self updateDisplay];

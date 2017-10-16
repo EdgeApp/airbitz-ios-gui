@@ -8,6 +8,7 @@
 
 #import "WalletCell.h"
 #import "CommonTypes.h"
+#import "Theme.h"
 
 @implementation WalletCell
 
@@ -15,9 +16,14 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
+}
+
+- (void)setThemeValues {
+    self.name.textColor = [Theme Singleton].colorDarkGray;
+    self.amount.textColor = [Theme Singleton].colorDarkGray;
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated

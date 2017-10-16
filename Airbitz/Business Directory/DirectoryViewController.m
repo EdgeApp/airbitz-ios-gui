@@ -137,6 +137,22 @@ typedef enum eMapDisplayState
 
 }
 
+#pragma mark Header Elements
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonRestaurants;
+@property (weak, nonatomic) IBOutlet UIButton *buttonCoffee;
+@property (weak, nonatomic) IBOutlet UIButton *buttonATM;
+@property (weak, nonatomic) IBOutlet UIButton *buttonGiftCards;
+@property (weak, nonatomic) IBOutlet UIButton *buttonElectronics;
+@property (weak, nonatomic) IBOutlet UIButton *buttonShopping;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMoreCategories;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider1;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider2;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider3;
+@property (weak, nonatomic) IBOutlet UIView *headerDivider4;
+
+#pragma mark ---------------
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewListingsTop;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dividerViewTop;
@@ -226,8 +242,37 @@ static bool bInitialized = false;
         });
     }
     
-    self.categoryButtonsView.backgroundColor = DirectoryCategoryButtonsBackgroundColor;
+   
     self.afmanager = [MainViewController createAFManager];
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.categoryButtonsView.backgroundColor = [Theme Singleton].colorWhite;
+    self.tableView.separatorColor = [Theme Singleton].colorDarkPrimary;
+    
+    NSArray *headerButtons = @[self.buttonRestaurants,
+                               self.buttonCoffee,
+                               self.buttonATM,
+                               self.buttonGiftCards,
+                               self.buttonElectronics,
+                               self.buttonShopping,
+                               self.buttonMoreCategories];
+    
+    for (UIButton *button in headerButtons) {
+        button.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:16.0];
+        button.tintColor = [Theme Singleton].colorMidPrimary;
+    }
+    
+    NSArray *headerDividers = @[self.headerDivider1,
+                                self.headerDivider2,
+                                self.headerDivider3,
+                                self.headerDivider4];
+    
+    for (UIView *divider in headerDividers) {
+        divider.backgroundColor = [Theme Singleton].colorMidGray;
+    }
 }
 
 - (void) forceUpdateNavBar;
@@ -1593,7 +1638,7 @@ static bool bInitialized = false;
                 //ABCLog(2,@"Unknown");
             }
             cell.businessNameLabel.text = [businessInfo objectForKey: @"name"];
-            cell.businessNameLabel.textColor = [UIColor whiteColor];
+            cell.businessNameLabel.textColor = [Theme Singleton].colorWhite;
             cell.addressLabel.text = [businessInfo objectForKey: @"address"];
 
             //ABCLog(2,@"Requesting background image");
@@ -1666,7 +1711,7 @@ static bool bInitialized = false;
         {
             //in case server returns fewer objects than it says (so we don't crash)
             cell.businessNameLabel.text = @"Loading...";
-            cell.businessNameLabel.textColor = [UIColor whiteColor];
+            cell.businessNameLabel.textColor = [Theme Singleton].colorWhite;
             cell.addressLabel.text = @" ";
             cell.bitCoinLabel.hidden = YES;
             //[cell loadBackgroundImageForBusiness:nil];
@@ -1698,17 +1743,17 @@ static bool bInitialized = false;
             {
                 cell.textLabel.text = [searchLocationCache objectAtIndex: indexPath.row];
                 //
-                cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
+                cell.textLabel.textColor = [Theme Singleton].colorFirstAccent;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize)
             {
                 cell.textLabel.text = currentLocationString;
-                cell.textLabel.textColor = [UIColor blueColor];
+                cell.textLabel.textColor = [Theme Singleton].colorMidPrimary;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (indexPath.row == cacheSize + 1)
             {
                 cell.textLabel.text = onTheWebString;
-                cell.textLabel.textColor = [UIColor blueColor];
+                cell.textLabel.textColor = [Theme Singleton].colorMidPrimary;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (locationAutoCorrectArray != nil)
             {
@@ -1716,7 +1761,7 @@ static bool bInitialized = false;
                 if (index < [locationAutoCorrectArray count] && [[locationAutoCorrectArray objectAtIndex:index] isKindOfClass:[NSString class]])
                 {
                     cell.textLabel.text = [locationAutoCorrectArray objectAtIndex:index];
-                    cell.textLabel.textColor = [UIColor darkGrayColor];
+                    cell.textLabel.textColor = [Theme Singleton].colorDarkGray;
                 }
             }
         } else if (mostRecentSearchTag == TAG_BUSINESS_SEARCH)
@@ -1737,7 +1782,7 @@ static bool bInitialized = false;
             if (indexPath.row < cacheSize)
             {
                 cell.textLabel.text = [self stringForObjectInCache: searchTermCache atIndex: indexPath.row]; //[searchTermCache objectAtIndex:indexPath.row];
-                cell.textLabel.textColor = [UIColor colorWithRed: 0.5020 green: 0.7647 blue: 0.2549 alpha: 1.0];
+                cell.textLabel.textColor = [Theme Singleton].colorFirstAccent;
                 cell.textLabel.backgroundColor = [UIColor clearColor];
             } else if (businessAutoCorrectArray.count && businessAutoCorrectArray.count > indexPath.row)
             {
@@ -1762,7 +1807,7 @@ static bool bInitialized = false;
                     cell.textLabel.text = (NSString *)object;
                 }
 
-                cell.textLabel.textColor = [UIColor darkGrayColor];
+                cell.textLabel.textColor = [Theme Singleton].colorDarkGray;
             }
         }
         return cell;

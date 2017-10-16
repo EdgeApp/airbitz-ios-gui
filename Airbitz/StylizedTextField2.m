@@ -9,6 +9,7 @@
 
 #import "StylizedTextField2.h"
 #import "Util.h"
+#import "Theme.h"
 
 @implementation StylizedTextField2
 
@@ -17,7 +18,8 @@
 	[self setTintColor:[UIColor whiteColor]];
 	[self setPlaceholderTextColor];
 	
-	
+	self.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.font.pointSize];
+    
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     /*
 	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 15.0, 15.0)];
