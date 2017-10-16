@@ -133,7 +133,7 @@ static BOOL bInitialized = false;
     
     self.titleText.layer.shadowOpacity = 1.0f;
     self.titleText.layer.masksToBounds = NO;
-    self.titleText.layer.shadowColor = [[UIColor whiteColor] CGColor];
+    self.titleText.layer.shadowColor = [[Theme Singleton].colorDarkGray CGColor];
     self.titleText.layer.shadowOffset = CGSizeMake(0.0, 0.0);
     self.titleText.layer.shadowRadius = [Theme Singleton].loginTitleTextShadowRadius;
     
@@ -216,7 +216,11 @@ static BOOL bInitialized = false;
 }
 
 - (void)styleExitPINLoginButton {
+#ifdef ColorPinEntryUsernameText
+    self.exitPINLoginButton.tintColor = ColorPinEntryUsernameText;
+#else
     self.exitPINLoginButton.tintColor = [Theme Singleton].colorLightPrimary;
+#endif
 }
 
 - (void)styleUIElementsWithTheme {
