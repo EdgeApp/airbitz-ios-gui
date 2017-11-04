@@ -43,14 +43,15 @@
 #define SECTION_NAME                    2
 #define SECTION_OPTIONS                 3
 #define SECTION_DEFAULT_EXCHANGE        4
-#define SECTION_OVERRIDE_SERVERS        5
-#define SECTION_DEBUG                   6
-#define SECTION_BLANK_1                 7
-#define SECTION_BLANK_2                 8
-#define SECTION_BLANK_3                 9
-#define SECTION_BLANK_4                 10
+#define SECTION_CHOOSE_FORK             5
+#define SECTION_OVERRIDE_SERVERS        6
+#define SECTION_DEBUG                   7
+#define SECTION_BLANK_1                 8
+#define SECTION_BLANK_2                 9
+#define SECTION_BLANK_3                 10
+#define SECTION_BLANK_4                 11
 
-#define SECTION_COUNT                   10
+#define SECTION_COUNT                   11
 
 #define DENOMINATION_CHOICES            3
 
@@ -79,6 +80,10 @@
 
 #define ROW_ENABLE_SERVER_OVERRIDE      0
 #define ROW_OVERRIDE_SERVER_LIST        1
+
+#define ROW_FORK_DEFAULT                0
+#define ROW_FORK_CORE                   1
+#define ROW_FORK_2X                     2
 
 #define ARRAY_LOGOUT        @[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", \
                                 @"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19", \
@@ -287,6 +292,16 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     // set the new values
     abcAccount.settings.denomination = [ABCDenomination getDenominationForIndex:(int) nChoice];
 
+    // update the settings in the core
+    [self saveSettings];
+}
+
+// modifies the denomination choice in the settings
+- (void)setForkChoice:(NSInteger)nChoice
+{
+    // set the new values
+    abcAccount.settings.forkChoice = (int) nChoice;
+    
     // update the settings in the core
     [self saveSettings];
 }
@@ -759,19 +774,38 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 		cell = [[RadioButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 	}
 
-	if (indexPath.row == ROW_BITCOIN)
-	{
-		cell.name.text = bitcoinDenominationText;
-	}
-	if (indexPath.row == ROW_MBITCOIN)
-	{
-		cell.name.text = mBitcoinDenominatinText;
-	}
-	if (indexPath.row == ROW_UBITCOIN)
-	{
-		cell.name.text = bitsDenominationText;
-	}
-	cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denomination.index ? @"btn_selected" : @"btn_unselected")];
+    if (indexPath.section == SECTION_BITCOIN_DENOMINATION)
+    {
+        if (indexPath.row == ROW_BITCOIN)
+        {
+            cell.name.text = bitcoinDenominationText;
+        }
+        if (indexPath.row == ROW_MBITCOIN)
+        {
+            cell.name.text = mBitcoinDenominatinText;
+        }
+        if (indexPath.row == ROW_UBITCOIN)
+        {
+            cell.name.text = bitsDenominationText;
+        }
+        cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.denomination.index ? @"btn_selected" : @"btn_unselected")];
+    }
+    else if (indexPath.section == SECTION_CHOOSE_FORK)
+    {
+        if (indexPath.row == ROW_FORK_DEFAULT)
+        {
+            cell.name.text = default_fork_text;
+        }
+        if (indexPath.row == ROW_FORK_CORE)
+        {
+            cell.name.text = bitcoin_core_text;
+        }
+        if (indexPath.row == ROW_FORK_2X)
+        {
+            cell.name.text = bitcoin_2x_text;
+        }
+        cell.radioButton.image = [UIImage imageNamed:(indexPath.row == abcAccount.settings.forkChoice ? @"btn_selected" : @"btn_unselected")];
+    }
 
     cell.tag = (indexPath.section << 8) | (indexPath.row);
 
@@ -1079,6 +1113,10 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             return 1;
             break;
             
+        case SECTION_CHOOSE_FORK:
+            return 3;
+            break;
+            
         case SECTION_OVERRIDE_SERVERS:
             return 2;
             break;
@@ -1144,6 +1182,10 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
 	{
 		label.text = defaultExchangeRateHeader;
 	}
+    if (section == SECTION_CHOOSE_FORK)
+    {
+        label.text = choose_bitcoin_fork;
+    }
     if (section == SECTION_OVERRIDE_SERVERS)
     {
         label.text = override_bitcoin_servers;
@@ -1220,6 +1262,10 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
         {
             cell = [self getButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
         }
+        else if (indexPath.section == SECTION_CHOOSE_FORK)
+        {
+            cell = [self getRadioButtonCellForTableView:tableView andIndexPath:(NSIndexPath *)indexPath];
+        }
 		else if (indexPath.section == SECTION_OVERRIDE_SERVERS)
 		{
             if (indexPath.row == ROW_ENABLE_SERVER_OVERRIDE)
@@ -1252,6 +1298,12 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
             [tableView reloadData];
             break;
 
+        case SECTION_CHOOSE_FORK:
+            [[Mixpanel sharedInstance] track:@"SET-Fork"];
+            [self setForkChoice:indexPath.row];
+            [tableView reloadData];
+            break;
+            
         case SECTION_USERNAME:
             if (indexPath.row == ROW_PASSWORD)
             {
