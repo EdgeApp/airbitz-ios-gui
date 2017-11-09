@@ -9,6 +9,7 @@
 
 #import "StylizedTextField3.h"
 #import "Util.h"
+#import "Theme.h"
 
 @implementation StylizedTextField3
 
@@ -17,6 +18,7 @@
 	[self setTintColor:[UIColor whiteColor]];
 	[self setPlaceholderTextColor];
 	
+    self.font = [UIFont fontWithName:[Theme Singleton].appFont size:self.font.pointSize];
 	
 	//UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];

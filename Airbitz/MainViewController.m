@@ -587,8 +587,11 @@ MainViewController *singleton;
 
     ABCLog(2,@"DVC topLayoutGuide: self=%f", self.topLayoutGuide.length);
 
+    self.tabBar.tintColor = [Theme Singleton].colorMidPrimary;
+    NSDictionary *fontAttributes = @{NSFontAttributeName: [UIFont fontWithName:[Theme Singleton].appFont size:10.0]};
+    [[UITabBarItem appearance] setTitleTextAttributes:fontAttributes forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:fontAttributes forState:UIControlStateSelected];
     
-
     [self.tabBar setTranslucent:[Theme Singleton].bTranslucencyEnable];
     [self launchViewControllerBasedOnAppMode];
     firstLaunch = NO;
@@ -955,7 +958,7 @@ MainViewController *singleton;
     titleLabelButton.frame = CGRectMake(0, 0, 70, 44);
     if (bIsButton)
     {
-        [titleLabelButton setTitleColor:[Theme Singleton].colorTextLink forState:UIControlStateNormal];
+        [titleLabelButton setTitleColor:[Theme Singleton].colorMidPrimary forState:UIControlStateNormal];
         [titleLabelButton addTarget:object action:func forControlEvents:UIControlEventTouchUpInside];
     }
     else

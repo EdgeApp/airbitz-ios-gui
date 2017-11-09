@@ -73,7 +73,9 @@ CGRect keyboardFrame;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+- (void)setThemeValues {
+    m_buttonBackground.backgroundColor = [Theme Singleton].colorDarkPrimary;
+}
 
 + (void)keyboardWasShown:(NSNotification *)notification
 {
@@ -398,6 +400,8 @@ CGRect keyboardFrame;
     // This will remove extra separators from tableview
     table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     table.separatorStyle=UITableViewCellSeparatorStyleNone;
+    
+    [self setThemeValues];
 }
 
 - (id)initWithFrame:(CGRect)frame

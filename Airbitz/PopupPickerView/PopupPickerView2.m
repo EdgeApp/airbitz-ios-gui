@@ -80,7 +80,9 @@ CGRect keyboardFrame2;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
+- (void)setThemeValues {
+    m_buttonBackground.backgroundColor = [Theme Singleton].colorDarkPrimary;
+}
 
 + (void)keyboardWasShown:(NSNotification *)notification
 {
@@ -229,6 +231,8 @@ CGRect keyboardFrame2;
     // This will remove extra separators from tableview
 //    table.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 //    table.separatorStyle=UITableViewCellSeparatorStyleNone;
+    
+    [self setThemeValues];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -475,7 +479,7 @@ CGRect keyboardFrame2;
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:17.0];
     cell.textLabel.numberOfLines = 1;
     cell.textLabel.text = [_strings objectAtIndex:row];
-    cell.textLabel.textColor = [Theme Singleton].colorTextDark;
+    cell.textLabel.textColor = [Theme Singleton].colorDarkPrimary;
     cell.accessoryView.hidden = YES;
     cell.backgroundColor = [UIColor clearColor];
     if(self.categories) {

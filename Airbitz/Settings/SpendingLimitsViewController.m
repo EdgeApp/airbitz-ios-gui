@@ -19,15 +19,18 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewContentTop;
 @property (nonatomic, weak) IBOutlet MinCharTextField           *passwordTextField;
-@property (nonatomic, weak) IBOutlet UIButton                   *buttonComplete;
+@property (weak, nonatomic) IBOutlet UILabel *dailySpendLimitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dailySpendLimitSubtextLabel;
 @property (nonatomic, weak) IBOutlet UISwitch                   *dailySpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *dailySpendLimitField;
 @property (nonatomic, weak) IBOutlet UILabel                    *dailyDenomination;
 //@property (nonatomic, weak) IBOutlet UIScrollView               *scrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *pinSpendLimitLabel;
 @property (nonatomic, weak) IBOutlet UISwitch                   *pinSpendLimitSwitch;
 @property (nonatomic, weak) IBOutlet UITextField                *pinSpendLimitField;
 @property (nonatomic, weak) IBOutlet UILabel                    *pinDenomination;
+@property (nonatomic, weak) IBOutlet UIButton                   *buttonComplete;
 
 @end
 
@@ -82,6 +85,17 @@
     _dailySpendLimitField.returnKeyType = UIReturnKeyDone;
     _pinSpendLimitField.delegate = self;
     _pinSpendLimitField.returnKeyType = UIReturnKeyDone;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.dailySpendLimitLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    self.dailySpendLimitSubtextLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.pinSpendLimitLabel.textColor = [Theme Singleton].colorDarkPrimary;
+    
+    self.buttonComplete.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -200,7 +214,7 @@
 {
     UITextField *field = nil;
     UILabel *denom = nil;
-    UIColor *color = uiSwitch.on ? [UIColor whiteColor] : [UIColor lightGrayColor];
+    UIColor *color = uiSwitch.on ? [Theme Singleton].colorWhite : [Theme Singleton].colorLightGray;
     if (uiSwitch == _pinSpendLimitSwitch) {
         field = _pinSpendLimitField;
         denom = _pinDenomination;

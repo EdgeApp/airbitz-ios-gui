@@ -7,6 +7,7 @@
 //
 
 #import "RadioButtonCell.h"
+#import "Theme.h"
 
 @interface RadioButtonCell ()
 
@@ -18,7 +19,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self setThemeValues];
     }
     return self;
 }
@@ -30,6 +31,13 @@
 	self.backgroundColor = [UIColor clearColor];
 	self.selectedBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
 	self.selectedBackgroundView.contentMode = self.backgroundView.contentMode;
+    
+    [self setThemeValues];
+}
+
+- (void)setThemeValues {
+    self.name.textColor = [Theme Singleton].colorDarkPrimary;
+    self.name.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
