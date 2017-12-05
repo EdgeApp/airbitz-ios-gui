@@ -186,8 +186,8 @@
 
 #define ColorBackground                                 UIColorFromRGB(0xF8F6F2)
 
-#define ColorLoginTitleText                             UIColorFromRGB(0x3F474F)
-#define ColorPinEntryUsernameText                       UIColorFromRGB(0x30617F)
+#define ColorLoginTitleText                             UIColorFromRGB(0xffffff)
+#define ColorPinEntryUsernameText                       UIColorFromRGB(0xffffff)
 
 #define DefaultBTCDenominationMultiplier                ABCDenominationMultiplierBTC
 
