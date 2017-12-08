@@ -487,8 +487,12 @@ static BOOL bInitialized = false;
     }
     else
     {
+        // Check if we should auto-upload logs
+        // If not, login like normal
         if (!_bDisallowTouchID)
+        {
             [self autoReloginOrTouchIDIfPossible];
+        }
     }
     
 }
@@ -502,11 +506,12 @@ static BOOL bInitialized = false;
         [LocalSettings controller].bDisclaimerViewed = YES;
         [LocalSettings saveAll];
     }
+    
     if (bPINModeEnabled)
-        [self.PINTextField becomeFirstResponder];
+    [self.PINTextField becomeFirstResponder];
     else
-        [self.PINTextField resignFirstResponder];
-
+    [self.PINTextField resignFirstResponder];
+    
     [self autoReloginOrTouchIDIfPossible];
 }
 
