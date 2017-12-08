@@ -489,21 +489,12 @@ static BOOL bInitialized = false;
     {
         // Check if we should auto-upload logs
         // If not, login like normal
-        if (![self checkForAutoUpload] && !_bDisallowTouchID)
+        if (!_bDisallowTouchID)
         {
             [self autoReloginOrTouchIDIfPossible];
         }
     }
     
-}
-    
-- (BOOL)checkForAutoUpload {
-    // Once the view appears, check if logs should be auto-uploaded
-    if (AUTO_UPLOAD_LOGS) {
-        [self uploadLog];
-        return YES;
-    }
-    return NO;
 }
 
 #pragma InfoViewDelegate
@@ -516,16 +507,12 @@ static BOOL bInitialized = false;
         [LocalSettings saveAll];
     }
     
-    // Once the agreement is dismissed check if we should auto-upload logs
-    // If not, login like normal
-    if (![self checkForAutoUpload]) {
-        if (bPINModeEnabled)
-        [self.PINTextField becomeFirstResponder];
-        else
-        [self.PINTextField resignFirstResponder];
-        
-        [self autoReloginOrTouchIDIfPossible];
-    }
+    if (bPINModeEnabled)
+    [self.PINTextField becomeFirstResponder];
+    else
+    [self.PINTextField resignFirstResponder];
+    
+    [self autoReloginOrTouchIDIfPossible];
 }
 
 - (void)autoReloginOrTouchIDIfPossible
