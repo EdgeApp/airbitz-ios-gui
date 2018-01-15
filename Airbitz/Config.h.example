@@ -20,6 +20,7 @@
 /* These should be 0 for deployment */
 #define AIRBITZ_IOS_DEBUG               0   /* set to 1 while debugging */
 #define HARD_CODED_LOGIN                0   /* set to 1 to auto login with credientials below (used for testing) */
+#define AUTO_UPLOAD_LOGS                0   /* set to 1 to auto-upload logs on app start */
 
 #define HARD_CODED_LOGIN_NAME           @"000000000"
 #define HARD_CODED_LOGIN_PASSWORD       @"000000 000000000"

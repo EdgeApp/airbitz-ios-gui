@@ -49,6 +49,15 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     abc = [ABCContext makeABCContext:AIRBITZ_CORE_API_KEY type:@"account:repo:co.airbitz.wallet" hbits:HIDDENBITZ_KEY];
 
+    if (AUTO_UPLOAD_LOGS)
+    {
+        [abc uploadLogs:@"Auto-uploaded Logs" complete:^{
+            ABCLog(1, @"Logs auto-uploaded");
+        } error:^(ABCError *error) {
+            ABCLog(1, @"Error auto-uploading logs: %@", error.description);
+        }];
+    }
+
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
 
