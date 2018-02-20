@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -917,19 +917,31 @@
                                         </connections>
                                     </switch>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hu4-Fk-wPE" userLabel="View -qrcode">
-                                        <rect key="frame" x="70" y="168" width="180" height="180"/>
+                                        <rect key="frame" x="125" y="168" width="70" height="222"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aRf-4C-W4Y">
-                                                <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                <rect key="frame" x="-47" y="8" width="164" height="164"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="aRf-4C-W4Y" secondAttribute="height" multiplier="1:1" id="LwO-9p-Qks"/>
+                                                    <constraint firstAttribute="width" constant="164" id="xQn-DT-1nf"/>
+                                                </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q74-Wu-tGc">
+                                                <rect key="frame" x="10" y="180" width="50" height="34"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                                <state key="normal" title="Secret"/>
+                                                <connections>
+                                                    <action selector="qrTextTapped:" destination="Ydf-KI-RbJ" eventType="touchUpInside" id="Yih-7r-vFM"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0b-4h-BJe" userLabel="Show QR Label">
-                                                <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                <rect key="frame" x="8" y="8" width="54" height="206"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfS-Fu-sUu">
-                                                <rect key="frame" x="8" y="8" width="164" height="164"/>
+                                                <rect key="frame" x="8" y="8" width="54" height="162"/>
                                                 <connections>
                                                     <action selector="showQRButtonTapped:" destination="Ydf-KI-RbJ" eventType="touchUpInside" id="h9Q-Oq-oGz"/>
                                                 </connections>
@@ -937,18 +949,18 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Q74-Wu-tGc" secondAttribute="trailing" constant="10" id="5aM-q6-Kms"/>
+                                            <constraint firstItem="Q74-Wu-tGc" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="10" id="APY-Rn-4yS"/>
                                             <constraint firstAttribute="trailing" secondItem="DfS-Fu-sUu" secondAttribute="trailing" constant="8" id="B6f-WU-d3C"/>
                                             <constraint firstItem="aRf-4C-W4Y" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="IDQ-YX-c2d"/>
+                                            <constraint firstItem="aRf-4C-W4Y" firstAttribute="centerX" secondItem="Hu4-Fk-wPE" secondAttribute="centerX" id="Msx-cB-Sql"/>
                                             <constraint firstItem="c0b-4h-BJe" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="OAg-lM-UvC"/>
-                                            <constraint firstItem="aRf-4C-W4Y" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="SB0-X5-hFF"/>
-                                            <constraint firstAttribute="trailing" secondItem="aRf-4C-W4Y" secondAttribute="trailing" constant="8" id="ZmS-8v-uay"/>
+                                            <constraint firstItem="Q74-Wu-tGc" firstAttribute="top" secondItem="aRf-4C-W4Y" secondAttribute="bottom" constant="8" id="U6Y-2v-7C7"/>
                                             <constraint firstAttribute="trailing" secondItem="c0b-4h-BJe" secondAttribute="trailing" constant="8" id="be9-c4-l33"/>
                                             <constraint firstItem="DfS-Fu-sUu" firstAttribute="leading" secondItem="Hu4-Fk-wPE" secondAttribute="leading" constant="8" id="bus-0K-G0c"/>
-                                            <constraint firstAttribute="width" secondItem="Hu4-Fk-wPE" secondAttribute="height" multiplier="1:1" id="fM6-CL-cz2"/>
                                             <constraint firstItem="DfS-Fu-sUu" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="fbi-AL-A9A"/>
-                                            <constraint firstAttribute="bottom" secondItem="DfS-Fu-sUu" secondAttribute="bottom" constant="8" id="fvN-6O-Ub8"/>
-                                            <constraint firstAttribute="width" constant="180" id="lgg-Nm-Mzu"/>
-                                            <constraint firstAttribute="bottom" secondItem="aRf-4C-W4Y" secondAttribute="bottom" constant="8" id="lny-Yq-HBh"/>
+                                            <constraint firstItem="Q74-Wu-tGc" firstAttribute="top" secondItem="DfS-Fu-sUu" secondAttribute="bottom" constant="10" id="hsf-NR-1Gy"/>
+                                            <constraint firstAttribute="bottom" secondItem="Q74-Wu-tGc" secondAttribute="bottom" constant="8" id="lOZ-Qw-6qt"/>
                                             <constraint firstItem="c0b-4h-BJe" firstAttribute="top" secondItem="Hu4-Fk-wPE" secondAttribute="top" constant="8" id="niG-L8-Sys"/>
                                             <constraint firstAttribute="bottom" secondItem="c0b-4h-BJe" secondAttribute="bottom" constant="8" id="wP8-yx-O6I"/>
                                         </constraints>
@@ -1088,6 +1100,7 @@
                         <outlet property="onOffLabel" destination="mJ9-nG-s79" id="3AC-MF-SZh"/>
                         <outlet property="passwordTextField" destination="GXU-6G-OIw" id="4d3-82-rYz"/>
                         <outlet property="qrCodeImageView" destination="aRf-4C-W4Y" id="idN-J7-iXF"/>
+                        <outlet property="qrCodeTextButton" destination="Q74-Wu-tGc" id="tVM-za-zgl"/>
                         <outlet property="requestSpinner" destination="cXH-jU-wGs" id="YRV-19-wyh"/>
                         <outlet property="requestView" destination="WZ2-WG-JQn" id="kbe-Aq-RfQ"/>
                         <outlet property="requestedLabel" destination="1Qx-Jp-bYp" id="FxM-5x-JwC"/>
