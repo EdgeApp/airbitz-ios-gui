@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIButton                *buttonCancel;
 @property (nonatomic, weak) IBOutlet UISwitch                *tfaEnabledSwitch;
 @property (nonatomic, weak) IBOutlet UIImageView             *qrCodeImageView;
+@property (nonatomic, weak) IBOutlet UIButton                 *qrCodeTextButton;
 @property (nonatomic, weak) IBOutlet UIView                  *viewQRCodeFrame;
 @property (nonatomic, weak) IBOutlet UIView                  *loadingSpinner;
 @property (nonatomic, weak) IBOutlet UILabel                 *onOffLabel;
@@ -62,12 +63,17 @@
     self.showQRLabel.text = show_qr_code;
     self.showQRLabel.hidden = NO;
     self.qrCodeImageView.hidden = YES;
+    self.qrCodeTextButton.hidden = YES;
     
     [self setThemeValues];
 }
 
 - (void)setThemeValues {
     self.showQRLabel.textColor = [Theme Singleton].colorMidPrimary;
+    
+    [self.qrCodeTextButton setTitleColor:[Theme Singleton].colorMidPrimary forState:UIControlStateNormal];
+    
+    self.viewQRCodeFrame.backgroundColor = [Theme Singleton].colorBackground;
     
     self.twoFactorLabel.textColor = [Theme Singleton].colorDarkPrimary;
     self.twoFactorLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:12.0];
@@ -192,6 +198,9 @@
         {
             _qrCodeImageView.image = qrImage;
             _qrCodeImageView.layer.magnificationFilter = kCAFilterNearest;
+            
+            [_qrCodeTextButton setTitle:_secret forState:UIControlStateNormal];
+            
             [self animateQrCode:YES];
         } else {
             _viewQRCodeFrame.hidden = YES;
@@ -261,6 +270,7 @@
                             options:UIViewAnimationOptionCurveLinear animations:^
         {
                                 self.qrCodeImageView.hidden = NO;
+                                self.qrCodeTextButton.hidden = NO;
                                 self.showQRLabel.hidden = YES;
         } completion:^(BOOL finished) {
         }];
@@ -272,6 +282,7 @@
                             options:UIViewAnimationOptionCurveLinear animations:^
         {
             self.qrCodeImageView.hidden = YES;
+            self.qrCodeTextButton.hidden = YES;
             self.showQRLabel.hidden = NO;
         } completion:^(BOOL finished) {
         }];
@@ -460,6 +471,13 @@
         [self invalidPasswordAlert];
         _loadingSpinner.hidden = YES;
     }
+}
+
+- (IBAction)qrTextTapped:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _secret;
+    
+    [MainViewController fadingAlert:@"Code copied to clipboard!"];
 }
 
 #pragma mark - TwoFactorMenuViewControllerDelegate
