@@ -820,7 +820,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
-
+                             singleton.tabBar.alpha = 1.0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -832,6 +832,7 @@ MainViewController *singleton;
     else
     {
         singleton.tabBarBottom.constant = 0;
+        singleton.tabBar.alpha = 1.0;
     }
 }
 
@@ -850,6 +851,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
+                             singleton.navBar.alpha = 1.0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -860,6 +862,7 @@ MainViewController *singleton;
     else
     {
         singleton.navBarTop.constant = 0;
+        singleton.navBar.alpha = 1.0;
         [singleton.view layoutIfNeeded];
     }
 }
@@ -880,6 +883,7 @@ MainViewController *singleton;
 						 animations:^
         {
              [singleton.view layoutIfNeeded];
+            singleton.tabBar.alpha = 0;
 		}
 		completion:^(BOOL finished)
 		{
@@ -890,6 +894,7 @@ MainViewController *singleton;
 	else
 	{
         singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
+        singleton.tabBar.alpha = 0;
     }
 }
 
@@ -908,6 +913,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
+                             singleton.navBar.alpha = 0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -918,6 +924,7 @@ MainViewController *singleton;
     else
     {
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
+        singleton.navBar.alpha = 0;
         [singleton.view layoutIfNeeded];
     }
 }

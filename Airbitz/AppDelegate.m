@@ -35,11 +35,21 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     // Override point for customization after application launch.
     [application setStatusBarHidden:NO];
-    [application setStatusBarStyle:UIStatusBarStyleDefault];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] cleanDisk];
     [[SDImageCache sharedImageCache] clearMemory];
+    
+    if (@available(iOS 11, *)) {
+        CGRect windowFrame = [[UIApplication sharedApplication].windows objectAtIndex:0].frame;
+        UIEdgeInsets safeAreaInsets = [[UIApplication sharedApplication].windows objectAtIndex:0].safeAreaInsets;
+        
+        windowFrame.origin.y = windowFrame.origin.y + safeAreaInsets.top;
+        windowFrame.size.height = windowFrame.size.height - safeAreaInsets.top - safeAreaInsets.bottom;
+        
+        [[UIApplication sharedApplication].windows objectAtIndex:0].frame = windowFrame;
+    }
 
     [LocalSettings initAll];
 
