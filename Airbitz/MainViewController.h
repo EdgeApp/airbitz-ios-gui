@@ -75,6 +75,7 @@ typedef enum eNavBarSide
 +(void)setAlphaOfSelectedViewController: (CGFloat) alpha;
 +(CGFloat) getFooterHeight;
 +(CGFloat) getHeaderHeight;
++ (CGFloat)getHeaderBottom;
 +(CGFloat)getWidth;
 +(CGFloat)getHeight;
 +(CGFloat)getLargestDimension;

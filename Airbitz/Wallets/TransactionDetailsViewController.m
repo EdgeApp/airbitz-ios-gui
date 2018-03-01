@@ -633,8 +633,8 @@ typedef enum eRequestType
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate:self];
     CGRect frame = self.view.bounds;
-    frame.origin.y = [MainViewController getHeaderHeight] + 5;
-    frame.size.height -= [MainViewController getHeaderHeight] + [MainViewController getFooterHeight] + 5;
+    frame.origin.y = [MainViewController getHeaderBottom] + 5;
+    frame.size.height -= [MainViewController getHeaderBottom] + [MainViewController getFooterHeight] + 5;
 
     iv.frame = frame;
     
@@ -797,7 +797,7 @@ typedef enum eRequestType
 
 - (CGFloat)scrollContentViewToFrame:(CGRect) frame
 {
-    CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight] - HEADER_PADDING;
+    CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight];
 
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault

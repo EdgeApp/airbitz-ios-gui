@@ -321,7 +321,7 @@
         {
             _passwordVerifyView = [PasswordVerifyView CreateInsideView:self.masterView withDelegate:self];
             CGRect frame = _passwordVerifyView.frame;
-            frame.origin.y = [MainViewController getHeaderHeight];
+            frame.origin.y = [MainViewController getHeaderBottom];
             frame.size.width = [MainViewController getWidth];
             _passwordVerifyView.frame = frame;
 

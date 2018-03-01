@@ -528,7 +528,11 @@ MainViewController *singleton;
     [parentView addConstraint:x];
 
     // Align 64 pixels from top and 49 pixels from bottom to avoid nav bar and tabbar
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[slideoutView]-49-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [constraints addObjectsFromArray:@[[slideoutView.topAnchor
+                                        constraintEqualToAnchor:self.navBar.bottomAnchor],
+                                       [slideoutView.bottomAnchor
+                                        constraintEqualToAnchor:self.tabBar.topAnchor]]];
 
     // Width is 280
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[slideoutView(==280)]" options:0 metrics:nil views:viewsDictionary]];
@@ -607,6 +611,12 @@ MainViewController *singleton;
     [affiliate queryAffiliateInfo];
     
     [self checkEnabledPlugins];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.tabBar invalidateIntrinsicContentSize];
 }
 
 - (void)checkEnabledPlugins
@@ -2486,6 +2496,11 @@ MainViewController *singleton;
 + (CGFloat)getHeaderHeight
 {
     return singleton.navBar.frame.size.height;
+}
+
++ (CGFloat)getHeaderBottom
+{
+    return singleton.navBar.frame.size.height + singleton.navBar.frame.origin.y;
 }
 
 + (CGFloat)getWidth
