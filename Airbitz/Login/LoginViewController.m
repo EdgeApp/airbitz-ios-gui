@@ -345,7 +345,6 @@ static BOOL bInitialized = false;
 
 - (void)switchLoginTypeIfNeeded:(NSString *)username
 {
-    BOOL oldPINModeEnabled = bPINModeEnabled;
     [abc setLastAccessedAccount:username];
     if([abc pinLoginEnabled:username error:nil])
     {
