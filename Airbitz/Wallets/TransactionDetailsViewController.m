@@ -366,9 +366,6 @@ typedef enum eRequestType
         {
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.metaData.amountFiat];
         }
-
-        // push the calculator keypad to below the bottom of the screen
-        _calculatorBottom.constant = -_keypadView.frame.size.height;
     }
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];

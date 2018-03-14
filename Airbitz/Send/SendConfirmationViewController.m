@@ -134,11 +134,6 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
-
-    
-    CGRect frame = self.keypadView.frame;
-    frame.origin.y = self.view.frame.size.height;
-    self.keypadView.frame = frame;
     
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
