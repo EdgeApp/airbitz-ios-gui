@@ -125,7 +125,7 @@ CGRect keyboardFrame2;
 	popup->availableSpace = window.frame;
 	
     popup.position = position;
-        popup.headerText = headerText;
+    popup.headerText = headerText;
     // add the popup to the parent
 	[parentView addSubview:popup];
 
@@ -140,33 +140,28 @@ CGRect keyboardFrame2;
     // start with the existing frame
     CGRect newFrame = popup.frame;
     
-    newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];
+    newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderBottom] - [MainViewController getFooterHeight];
     
     // change the width
     newFrame.size.width = [MainViewController getWidth];
     
-    // set new height and width
-    popup.frame = newFrame;
-    
-    newFrame.size.width = [MainViewController getWidth];
     newFrame.origin.x = 0;
-    newFrame.size.height = [MainViewController getHeight] - [MainViewController getHeaderHeight] - [MainViewController getFooterHeight];
 
     if (PopupPicker2Position_Full_Dropping == position)
     {
-        newFrame.origin.y = -[MainViewController getHeight];
+        newFrame.origin.y = -[MainViewController getHeaderBottom];
     }
     else if (PopupPicker2Position_Full_Rising == position)
     {
-        newFrame.origin.y = [MainViewController getHeight];
+        newFrame.origin.y = [MainViewController getHeaderBottom];
     }
     else if (PopupPicker2Position_Full_Fading == position)
     {
-        newFrame.origin.y = [MainViewController getHeaderHeight];
+        newFrame.origin.y = [MainViewController getHeaderBottom];
     }
+    
     popup.frame = newFrame;
-
-
+    
     UIBlurEffect *blurEffect;
     UIVisualEffectView    *blurEffectView;
     blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
@@ -199,7 +194,7 @@ CGRect keyboardFrame2;
                      animations:^
                      {
                          CGRect frame = popup.frame;
-                         frame.origin.y = [MainViewController getHeaderHeight];
+                         frame.origin.y = [MainViewController getHeaderBottom];
                          popup.frame = frame;
                          [popup setAlpha:1];
 

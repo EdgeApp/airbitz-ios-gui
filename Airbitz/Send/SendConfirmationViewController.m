@@ -529,7 +529,7 @@
     popupPosition = PopupPicker2Position_Full_Fading;
     headerText = selectCurrencyText;
 
-    self.popupPicker = [PopupPickerView2 CreateForView:self.viewDisplayArea
+    self.popupPicker = [PopupPickerView2 CreateForView:self.view
                                       relativePosition:popupPosition
                                            withStrings:arrayPopupChoices
                                          withAccessory:nil

@@ -1488,7 +1488,7 @@ typedef NS_ENUM(NSUInteger, ABCLogoutSecondsType)
     if (arrayPopupChoices)
     {
         [self blockUser:YES];
-        self.popupPicker = [PopupPickerView2 CreateForView:self.viewMain
+        self.popupPicker = [PopupPickerView2 CreateForView:self.view
                                           relativePosition:popupPosition
                                                withStrings:arrayPopupChoices
                                              withAccessory:nil

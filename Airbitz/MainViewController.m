@@ -2488,6 +2488,11 @@ MainViewController *singleton;
 
 }
 
++ (CGFloat)getFooterTop
+{
+    return singleton.tabBar.frame.origin.y;
+}
+
 + (CGFloat)getFooterHeight
 {
     return singleton.tabBar.frame.size.height;
