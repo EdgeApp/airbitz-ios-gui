@@ -321,7 +321,6 @@ typedef enum eRequestType
     self.labelFee.textColor = [Theme Singleton].colorDarkGray;
     
     self.categoryButton.backgroundColor = [Theme Singleton].colorMidPrimary;
-    self.advancedDetailsButton.backgroundColor = [Theme Singleton].colorLightGray;
     self.doneButton.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
