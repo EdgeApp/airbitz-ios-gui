@@ -30,6 +30,7 @@
 #import "Mixpanel.h"
 #import "Location.h"
 #import "LatoLabel.h"
+#import "InfoPopupView.h"
 
 typedef enum eLoginMode
 {
@@ -71,9 +72,6 @@ typedef enum eLoginMode
     NSString                        *_tempPin;
     NSString                        *_recoveryToken;
     BOOL                            _bNewDeviceLogin;
-    
-
-
 }
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
@@ -111,6 +109,7 @@ typedef enum eLoginMode
 @property (weak, nonatomic) IBOutlet    UIButton            *buttonOutsideTap;
 @property (weak, nonatomic) IBOutlet    InfoView            *disclaimerInfoView;
 @property (weak, nonatomic) IBOutlet StylizedButton *exitPINLoginButton;
+@property (nonatomic, strong) InfoPopupView                 *infoPopupView;
 
 @property (strong, nonatomic) DropDown *PINusernameDropDown;
 @property (strong, nonatomic) DropDown *usernameDropDown;
@@ -755,20 +754,33 @@ static BOOL bInitialized = false;
     [[Mixpanel sharedInstance] track:@"SIN-SignUp"];
     
     [self dismissErrorMessage];
-
-    [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
-    {
-        [self.usernameSelector resignFirstResponder];
-        [self.passwordTextField resignFirstResponder];
-
-        _signupManager = [[SignUpManager alloc] initWithController:self];
-        _signupManager.delegate = self;
-        _signupManager.strInUserName = nil;
-        [MainViewController animateFadeOut:self.view];
-
-        [_signupManager startSignup];
-
+    
+    // TODO: Check is user has logged in before
+    // TODO: Check is iOS version is at least 10.3
+    
+    self.infoPopupView = [[InfoPopupView alloc] initWithTitle:@"Airbitz is now Edge!"
+                                                        image:nil
+                                                    bodyLabel:@"Give our new multicurrency wallet a try and get support for Bitcoin, Bitcoin Cash, Ethereum, Litecoin, Dash, and all ERC20 tokens. Download Edge Wallet today!"
+                                                   buttonText:@"Go to App Store"
+                                                 buttonAction:^{
+        // TODO: Go to App Store link
     }];
+    
+    [self.infoPopupView show:[UIApplication sharedApplication].keyWindow];
+    
+//    [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
+//    {
+//        [self.usernameSelector resignFirstResponder];
+//        [self.passwordTextField resignFirstResponder];
+//
+//        _signupManager = [[SignUpManager alloc] initWithController:self];
+//        _signupManager.delegate = self;
+//        _signupManager.strInUserName = nil;
+//        [MainViewController animateFadeOut:self.view];
+//
+//        [_signupManager startSignup];
+//
+//    }];
 }
 
 - (IBAction)buttonForgotTouched:(id)sender
