@@ -32,6 +32,8 @@
 #import "LatoLabel.h"
 #import "InfoPopupView.h"
 
+@import StoreKit;
+
 typedef enum eLoginMode
 {
     MODE_NO_USERS,
@@ -42,7 +44,7 @@ typedef enum eLoginMode
 
 #define SWIPE_ARROW_ANIM_PIXELS 10
 
-@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate,  TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate >
+@interface LoginViewController () <UITextFieldDelegate, SignUpManagerDelegate, PasswordRecoveryViewControllerDelegate,  TwoFactorMenuViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, ButtonSelectorDelegate, InfoViewDelegate, MFMailComposeViewControllerDelegate, SKStoreProductViewControllerDelegate >
 {
     tLoginMode                      _mode;
     CGPoint                         _firstTouchPoint;
@@ -72,6 +74,7 @@ typedef enum eLoginMode
     NSString                        *_tempPin;
     NSString                        *_recoveryToken;
     BOOL                            _bNewDeviceLogin;
+    BOOL                            _edgePopupViewed;
 }
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
@@ -250,6 +253,8 @@ static BOOL bInitialized = false;
 {
     [super viewDidLoad];
     _mode = MODE_ENTERING_NEITHER;
+    
+    _edgePopupViewed = NO;
 
     self.usernameSelector.delegate = self;
     self.passwordTextField.delegate = self;
@@ -755,32 +760,72 @@ static BOOL bInitialized = false;
     
     [self dismissErrorMessage];
     
-    // TODO: Check is user has logged in before
-    // TODO: Check is iOS version is at least 10.3
+    if (@available(iOS 10.3, *))
+    {
+        if (_mode == MODE_NO_USERS && !_edgePopupViewed)
+        {
+            [self showEdgePopup];
+        } else {
+            [self showSignUpForm];
+        }
+    } else {
+        [self showSignUpForm];
+    }
+}
+
+- (void)showEdgePopup {
+    _edgePopupViewed = YES;
+    
+    static NSInteger const kAppITunesItemIdentifier = 1344400091;
+    
+    SKStoreProductViewController *storeViewController = [[SKStoreProductViewController alloc] init];
+    
+    storeViewController.delegate = self;
+    
+    NSNumber *identifier = [NSNumber numberWithInteger:kAppITunesItemIdentifier];
+    
+    NSDictionary *parameters = @{ SKStoreProductParameterITunesItemIdentifier:identifier };
+    
     
     self.infoPopupView = [[InfoPopupView alloc] initWithTitle:@"Airbitz is now Edge!"
                                                         image:nil
                                                     bodyLabel:@"Give our new multicurrency wallet a try and get support for Bitcoin, Bitcoin Cash, Ethereum, Litecoin, Dash, and all ERC20 tokens. Download Edge Wallet today!"
                                                    buttonText:@"Go to App Store"
                                                  buttonAction:^{
-        // TODO: Go to App Store link
-    }];
+                                                     [self.infoPopupView dismiss];
+                                                     [self showSpinner:YES];
+                                                     
+                                                     [storeViewController loadProductWithParameters:parameters
+                                                                                    completionBlock:^(BOOL result, NSError *error) {
+                                                                                        if (result) {
+                                                                                            [self showSpinner:NO];
+                                                                                            [self presentViewController:storeViewController
+                                                                                                               animated:YES
+                                                                                                             completion:nil];
+                                                                                        } else {
+                                                                                            NSLog(@"SKStoreProductViewController: %@", error);
+                                                                                        }
+                                                                                    }];
+                                                     
+                                                 }];
     
     [self.infoPopupView show:[UIApplication sharedApplication].keyWindow];
-    
-//    [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
-//    {
-//        [self.usernameSelector resignFirstResponder];
-//        [self.passwordTextField resignFirstResponder];
-//
-//        _signupManager = [[SignUpManager alloc] initWithController:self];
-//        _signupManager.delegate = self;
-//        _signupManager.strInUserName = nil;
-//        [MainViewController animateFadeOut:self.view];
-//
-//        [_signupManager startSignup];
-//
-//    }];
+}
+
+- (void)showSignUpForm {
+    [MainViewController showBackground:YES animate:YES completion:^(BOOL finished)
+         {
+             [self.usernameSelector resignFirstResponder];
+             [self.passwordTextField resignFirstResponder];
+     
+             _signupManager = [[SignUpManager alloc] initWithController:self];
+             _signupManager.delegate = self;
+             _signupManager.strInUserName = nil;
+             [MainViewController animateFadeOut:self.view];
+     
+             [_signupManager startSignup];
+     
+         }];
 }
 
 - (IBAction)buttonForgotTouched:(id)sender
@@ -1246,6 +1291,12 @@ static BOOL bInitialized = false;
 
          }];
     }
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITextField delegates
