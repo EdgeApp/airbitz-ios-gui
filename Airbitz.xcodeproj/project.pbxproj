@@ -26,6 +26,9 @@
 		34644DCDB063C438DFE4F489 /* PluginListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 346445D195B1F9C065B7CDBC /* PluginListViewController.m */; };
 		34644E64D77421AA50F21575 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
 		34644F45643AEC0C4EC77298 /* SSOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3464461B2934DE866F461CF6 /* SSOViewController.m */; };
+		6E664548208102BB009690AB /* InfoPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E664547208102BB009690AB /* InfoPopupView.m */; };
+		6E9EE28F20890287009ED955 /* InfoPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E664547208102BB009690AB /* InfoPopupView.m */; };
+		6E9EE2942089029A009ED955 /* InfoPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E664547208102BB009690AB /* InfoPopupView.m */; };
 		775F666E1E14E506007F00D8 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666B1E14E506007F00D8 /* DropDown.swift */; };
 		775F666F1E14E506007F00D8 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */; };
 		775F66701E14E506007F00D8 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F666D1E14E506007F00D8 /* DropDownCell.swift */; };
@@ -1429,6 +1432,8 @@
 		5398D2C238D69AAE0D399B92 /* libPods-Airbitz-Develop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Airbitz-Develop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2C6B7E68F965414F5744C1 /* Pods-Airbitz-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop.release.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
 		6CDA9573B3C8A12BF2AD9F06 /* Pods-Airbitz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; lineEnding = 0; name = "Pods-Airbitz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz.debug.xcconfig"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcconfig; };
+		6E664546208102BB009690AB /* InfoPopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoPopupView.h; sourceTree = "<group>"; };
+		6E664547208102BB009690AB /* InfoPopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoPopupView.m; sourceTree = "<group>"; };
 		775F66681E14E4B8007F00D8 /* Airbitz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airbitz-Bridging-Header.h"; sourceTree = "<group>"; };
 		775F666B1E14E506007F00D8 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		775F666C1E14E506007F00D8 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
@@ -3022,6 +3027,8 @@
 				DA9EDED61BC61F910063DA07 /* SignUpViewController.m */,
 				DA9EDED71BC61F910063DA07 /* User.h */,
 				DA9EDED81BC61F910063DA07 /* User.m */,
+				6E664546208102BB009690AB /* InfoPopupView.h */,
+				6E664547208102BB009690AB /* InfoPopupView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
