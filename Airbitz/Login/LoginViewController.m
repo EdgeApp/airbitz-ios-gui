@@ -760,6 +760,7 @@ static BOOL bInitialized = false;
     
     [self dismissErrorMessage];
     
+#ifdef AIRBITZ
     if (@available(iOS 10.3, *))
     {
         if (_mode == MODE_NO_USERS && !_edgePopupViewed)
@@ -771,6 +772,9 @@ static BOOL bInitialized = false;
     } else {
         [self showSignUpForm];
     }
+#else
+    [self showSignUpForm];
+#endif
 }
 
 - (void)showEdgePopup {
