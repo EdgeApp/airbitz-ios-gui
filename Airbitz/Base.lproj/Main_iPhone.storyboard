@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jDp-Og-qtC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jDp-Og-qtC">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -4076,7 +4076,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iwP-Mt-7Ek" userLabel="View - Main">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="d0A-0U-fc4">
                                         <rect key="frame" x="20" y="64" width="335" height="63"/>
@@ -4100,7 +4100,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxS-jU-qS2">
-                                        <rect key="frame" x="187.66666666666663" y="713" width="187.33333333333337" height="50"/>
+                                        <rect key="frame" x="187.66666666666663" y="635" width="187.33333333333337" height="50"/>
                                         <color key="backgroundColor" red="0.43685248494148254" green="0.73113805055618286" blue="0.20065775513648987" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Login">
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4110,7 +4110,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QwV-te-soN">
-                                        <rect key="frame" x="0.0" y="713" width="187.66666666666666" height="50"/>
+                                        <rect key="frame" x="0.0" y="635" width="187.66666666666666" height="50"/>
                                         <color key="backgroundColor" red="0.87058823529411766" green="0.85098039215686272" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="yqD-bM-gW5"/>
@@ -4124,14 +4124,14 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qin-fl-9VQ">
-                                        <rect key="frame" x="20" y="177" width="335" height="298"/>
+                                        <rect key="frame" x="20" y="177" width="335" height="259"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" red="0.28235294117647058" green="0.26666666666666666" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qnf-vn-RNn">
-                                        <rect key="frame" x="0.0" y="475" width="375" height="238"/>
+                                        <rect key="frame" x="0.0" y="436" width="375" height="199"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PluginCell" rowHeight="72" id="hks-8U-BtQ" userLabel="PluginCell" customClass="PluginCell">
@@ -4260,10 +4260,10 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tpg-BL-2gN" firstAttribute="trailing" secondItem="T1e-7f-5i0" secondAttribute="trailing" id="1de-hB-3vh"/>
-                            <constraint firstItem="iwP-Mt-7Ek" firstAttribute="top" secondItem="E34-v8-nPO" secondAttribute="top" id="81G-XM-TIY"/>
+                            <constraint firstItem="iwP-Mt-7Ek" firstAttribute="top" secondItem="tpg-BL-2gN" secondAttribute="top" id="81G-XM-TIY"/>
                             <constraint firstItem="tpg-BL-2gN" firstAttribute="trailing" secondItem="iwP-Mt-7Ek" secondAttribute="trailing" id="GUJ-Ur-oVN"/>
                             <constraint firstItem="T1e-7f-5i0" firstAttribute="leading" secondItem="tpg-BL-2gN" secondAttribute="leading" id="LOU-Td-gak"/>
-                            <constraint firstAttribute="bottom" secondItem="iwP-Mt-7Ek" secondAttribute="bottom" id="PX7-7z-XMj"/>
+                            <constraint firstItem="tpg-BL-2gN" firstAttribute="bottom" secondItem="iwP-Mt-7Ek" secondAttribute="bottom" id="PX7-7z-XMj"/>
                             <constraint firstItem="T1e-7f-5i0" firstAttribute="top" secondItem="tpg-BL-2gN" secondAttribute="top" id="ZMh-W4-FN7"/>
                             <constraint firstItem="iwP-Mt-7Ek" firstAttribute="leading" secondItem="tpg-BL-2gN" secondAttribute="leading" id="gBT-GQ-Njk"/>
                             <constraint firstItem="tpg-BL-2gN" firstAttribute="bottom" secondItem="T1e-7f-5i0" secondAttribute="bottom" id="giM-Rc-TKM"/>
