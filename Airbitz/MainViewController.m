@@ -1285,6 +1285,8 @@ MainViewController *singleton;
         [self showPinSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
+    } else if ([self shouldShowEdgePopup] && !bNewAccount) {
+        [self showEdgePopup];
     } else {
         [self checkUserReview];
     }
@@ -1433,8 +1435,6 @@ MainViewController *singleton;
                     cancelButtonTitle:notSoGoodText
                     otherButtonTitles:itsGreatText, nil];
                 [_userReviewAlert show];
-            } else if ([self shouldShowEdgePopup]) {
-                [self showEdgePopup];
             }
         }
     });

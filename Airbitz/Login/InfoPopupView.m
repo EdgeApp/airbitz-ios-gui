@@ -170,7 +170,7 @@
 }
 
 - (void)createActionButton {
-    _actionButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    _actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _actionButton.translatesAutoresizingMaskIntoConstraints = NO;
     _actionButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
     _actionButton.backgroundColor = [Theme Singleton].colorFirstAccent;
@@ -196,10 +196,11 @@
 }
 
 - (void)createSecondaryButton {
-    _secondaryButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    _secondaryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _secondaryButton.translatesAutoresizingMaskIntoConstraints = NO;
     _secondaryButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
-    _secondaryButton.backgroundColor = [Theme Singleton].colorSecondAccent;
+    [_secondaryButton setTitleColor:[Theme Singleton].colorMidPrimary forState:UIControlStateNormal];
+    _secondaryButton.backgroundColor = [UIColor clearColor];
     
     [self addSubview:_secondaryButton];
     
