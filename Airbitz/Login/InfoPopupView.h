@@ -10,13 +10,21 @@
 
 @interface InfoPopupView : UIView
 
-- (instancetype)initWithTitle:(nullable NSString *)titleText
-                        image:(nullable UIImage *)image
-                    bodyLabel:(nullable NSString *)bodyText
-                   buttonText:(nullable NSString *)buttonText
-                 buttonAction:(void(^_Nullable)())buttonAction;
+- (instancetype _Nonnull)initWithTitle:(nullable NSString *)titleText
+                                 image:(nullable UIImage *)image
+                             bodyLabel:(nullable NSString *)bodyText
+                            buttonText:(nullable NSString *)buttonText
+                          buttonAction:(void(^_Nullable)())buttonAction;
 
-- (void)show:(UIView *)parentView;
+- (instancetype _Nonnull)initWithTitle:(nullable NSString *)titleText
+                                 image:(nullable UIImage *)image
+                             bodyLabel:(nullable NSString *)bodyText
+                            buttonText:(nullable NSString *)buttonText
+                          buttonAction:(void(^_Nullable)())buttonAction
+                   secondaryButtonText:(nullable NSString *)secondaryButtonText
+                 secondaryButtonAction:(void(^_Nullable)())secondaryButtonAction;
+
+- (void)show:( UIView * _Nonnull)parentView;
 - (void)dismiss;
 
 @end

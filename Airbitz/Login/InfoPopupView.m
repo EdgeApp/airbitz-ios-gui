@@ -16,12 +16,15 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *bodyLabel;
 @property (nonatomic, strong) UIButton *actionButton;
+@property (nonatomic, strong) UIButton *secondaryButton;
 
 @property (nullable, nonatomic, strong) NSString *titleText;
 @property (nullable, nonatomic, strong) UIImage *image;
 @property (nullable, nonatomic, strong) NSString *bodyText;
 @property (nullable, nonatomic, strong) NSString *buttonText;
 @property (nullable, copy) void (^buttonAction)();
+@property (nullable, nonatomic, strong) NSString *secondaryButtonText;
+@property (nullable, copy) void (^secondaryButtonAction)();
 
 @end
 
@@ -48,6 +51,29 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(nullable NSString *)titleText
+                        image:(nullable UIImage *)image
+                    bodyLabel:(nullable NSString *)bodyText
+                   buttonText:(nullable NSString *)buttonText
+                 buttonAction:(void(^_Nullable)())buttonAction
+          secondaryButtonText:(nullable NSString *)secondaryButtonText
+        secondaryButtonAction:(void(^_Nullable)())secondaryButtonAction
+{
+    self = [super init];
+    if (self) {
+        self.titleText = titleText;
+        self.image = image;
+        self.bodyText = bodyText;
+        self.buttonText = buttonText;
+        self.buttonAction = buttonAction;
+        self.secondaryButtonText = secondaryButtonText;
+        self.secondaryButtonAction = secondaryButtonAction;
+        
+        [self createViews];
+    }
+    return self;
+}
+
 - (void)createViews {
     self.translatesAutoresizingMaskIntoConstraints = false;
     self.backgroundColor = [Theme Singleton].colorWhite;
@@ -61,6 +87,10 @@
     [self createImageView];
     [self createBodyLabel];
     [self createActionButton];
+    
+    if (_secondaryButtonText != nil || _secondaryButtonAction != nil) {
+        [self createSecondaryButton];
+    }
 }
 
 - (void)createDismissButton {
@@ -150,8 +180,11 @@
     [[_actionButton.topAnchor constraintEqualToAnchor:self.bodyLabel.bottomAnchor constant:30.0] setActive:YES];
     [[_actionButton.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:40.0] setActive:YES];
     [[_actionButton.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-40.0] setActive:YES];
-    [[_actionButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:-30.0] setActive:YES];
     [[_actionButton.heightAnchor constraintEqualToConstant:40.0] setActive:YES];
+    
+    if (_secondaryButtonText == nil && _secondaryButtonAction == nil) {
+        [[_actionButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:-30.0] setActive:YES];
+    }
     
     if (self.buttonText == nil) {
         [_actionButton setTitle:@"OK" forState:UIControlStateNormal];
@@ -160,6 +193,30 @@
     }
    
     [_actionButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)createSecondaryButton {
+    _secondaryButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    _secondaryButton.translatesAutoresizingMaskIntoConstraints = NO;
+    _secondaryButton.titleLabel.font = [UIFont fontWithName:[Theme Singleton].appFont size:18.0];
+    _secondaryButton.backgroundColor = [Theme Singleton].colorSecondAccent;
+    
+    [self addSubview:_secondaryButton];
+    
+    [[_secondaryButton.topAnchor constraintEqualToAnchor:self.actionButton.bottomAnchor constant:10.0] setActive:YES];
+    [[_secondaryButton.leftAnchor constraintEqualToAnchor:self.leftAnchor constant:40.0] setActive:YES];
+    [[_secondaryButton.rightAnchor constraintEqualToAnchor:self.rightAnchor constant:-40.0] setActive:YES];
+    [[_secondaryButton.heightAnchor constraintEqualToConstant:40.0] setActive:YES];
+    
+    [[_secondaryButton.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:-30.0] setActive:YES];
+    
+    if (self.secondaryButtonText == nil) {
+        [_secondaryButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    } else {
+        [_secondaryButton setTitle:self.secondaryButtonText forState:UIControlStateNormal];
+    }
+    
+    [_secondaryButton addTarget:self action:@selector(secondaryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark Action
@@ -193,6 +250,14 @@
         [self dismiss];
     } else {
         self.buttonAction();
+    }
+}
+
+- (void)secondaryButtonPressed:(id)sender {
+    if (self.secondaryButtonAction == nil) {
+        [self dismiss];
+    } else {
+        self.secondaryButtonAction();
     }
 }
 

@@ -47,6 +47,9 @@
 #import "Plugin.h"
 #import "Reachability.h"
 #import "Mixpanel.h"
+#import "InfoPopupView.h"
+
+@import StoreKit;
 
 typedef enum eRequestType
 {
@@ -72,7 +75,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, ABCAccountDelegate>
+                                  MFMailComposeViewControllerDelegate, ABCAccountDelegate, SKStoreProductViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -114,7 +117,7 @@ typedef enum eAppMode
     
     UIAlertView                     *_affiliateAlert;
     NSString                        *_affiliateURL;
-
+    
 
 }
 
@@ -130,7 +133,8 @@ typedef enum eAppMode
 @property AirbitzViewController                  *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
 @property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
-
+@property (nonatomic, strong) InfoPopupView *infoPopupView;
+@property (nonatomic, strong) UIView *spinnerView;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -1429,13 +1433,104 @@ MainViewController *singleton;
                     cancelButtonTitle:notSoGoodText
                     otherButtonTitles:itsGreatText, nil];
                 [_userReviewAlert show];
+            } else if ([self shouldShowEdgePopup]) {
+                [self showEdgePopup];
             }
         }
     });
 }
 
+- (void)showSpinnerView {
+    self.spinnerView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.spinnerView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]
+                                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.spinnerView addSubview:spinner];
+    [spinner startAnimating];
+    
+    [[spinner.centerXAnchor constraintEqualToAnchor:self.spinnerView.centerXAnchor] setActive:YES];
+    [[spinner.centerYAnchor constraintEqualToAnchor:self.spinnerView.centerYAnchor] setActive:YES];
+    
+    [self.view addSubview:self.spinnerView];
+}
+
+- (void)hideSpinnerView {
+    [self.spinnerView removeFromSuperview];
+    self.spinnerView = nil;
+}
+
+- (BOOL)shouldShowEdgePopup {
+    
+    NSInteger transactionCount = 0;
+    for (ABCWallet* wallet in abcAccount.arrayWallets) {
+        transactionCount += wallet.arrayTransactions.count;
+    }
+    
+    if (abcAccount.numTotalWallets > 3 ||
+        transactionCount > 100 ||
+        [[NSUserDefaults standardUserDefaults] boolForKey:@"EdgePopupShown"]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)showEdgePopup {
+    static NSInteger const kAppITunesItemIdentifier = 1344400091;
+    
+    SKStoreProductViewController *storeViewController = [[SKStoreProductViewController alloc] init];
+    
+    storeViewController.delegate = self;
+    
+    NSNumber *identifier = [NSNumber numberWithInteger:kAppITunesItemIdentifier];
+    
+    NSDictionary *parameters = @{ SKStoreProductParameterITunesItemIdentifier:identifier };
+    
+    self.infoPopupView = [[InfoPopupView alloc] initWithTitle:@"Airbitz is now Edge!"
+                                                        image:nil
+                                                    bodyLabel:@"Give our new multicurrency wallet a try and get support for Bitcoin, Bitcoin Cash, Ethereum, Litecoin, Dash, and all ERC20 tokens. Download Edge Wallet today!"
+                                                   buttonText:@"Go to App Store"
+                                                 buttonAction:^{
+                                                     [self.infoPopupView dismiss];
+                                                     
+                                                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EdgePopupShown"];
+                                                     
+                                                     [self showSpinnerView];
+                                                     
+                                                     [storeViewController loadProductWithParameters:parameters
+                                                                                    completionBlock:^(BOOL result, NSError *error) {
+                                                                                        [self hideSpinnerView];
+                                                                                        if (result) {
+                                                                                            [self presentViewController:storeViewController
+                                                                                                               animated:YES
+                                                                                                             completion:nil];
+                                                                                        } else {
+                                                                                            NSLog(@"SKStoreProductViewController: %@", error);
+                                                                                        }
+                                                                                    }];
+                                                     
+                                                 }
+                                          secondaryButtonText:@"No Thanks"
+                                        secondaryButtonAction:^ {
+                                            [self.infoPopupView dismiss];
+                                            
+                                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EdgePopupShown"];
+                                        }];
+    
+    [self.infoPopupView show:[UIApplication sharedApplication].keyWindow];
+}
+
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - abcAccountDelegates
