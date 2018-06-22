@@ -811,7 +811,13 @@ static BOOL bInitialized = false;
                                                                                         }
                                                                                     }];
                                                      
-                                                 }];
+                                                 }
+                                          secondaryButtonText:@"No Thanks"
+                                        secondaryButtonAction:^ {
+                                            [self.infoPopupView dismiss];
+                                            
+                                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EdgePopupShown"];
+                                        }];
     
     [self.infoPopupView show:[UIApplication sharedApplication].keyWindow];
 }
