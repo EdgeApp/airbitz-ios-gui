@@ -22,6 +22,7 @@
 #import "FadingAlertView.h"
 #import "MainViewController.h"
 #import "Theme.h"
+#import "InfoPopupView.h"
 
 #define CELL_HEIGHT 45.0
 
@@ -65,6 +66,7 @@ typedef enum eExportOption
     tDatePeriod                         _datePeriod; // chosen with the 3 buttons
     BOOL                                _bDatePickerFrom;
     UIAlertView                         *_showKeyAlert;
+    InfoPopupView                       *_infoPopupView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView                     *viewPassword;
@@ -276,6 +278,7 @@ typedef enum eExportOption
         {
             UIPasteboard *pb = [UIPasteboard generalPasteboard];
             NSString *message = [alertView message];
+            
             if (pb)
             {
                 [pb setString:message];
@@ -641,13 +644,25 @@ typedef enum eExportOption
             seedTitle = privateSeedText;
         else
             seedTitle = publicSeedText;
-
-        _showKeyAlert = [[UIAlertView alloc] initWithTitle:seedTitle
-                                                   message:strSeed
-                                                  delegate:self
-                                         cancelButtonTitle:okButtonText
-                                         otherButtonTitles:copyButtonText, nil];
-        [_showKeyAlert show];
+        
+        _infoPopupView = [[InfoPopupView alloc] initWithTitle:seedTitle
+                                                        image:nil
+                                                    bodyLabel:strSeed
+                                                   buttonText:copyButtonText
+                                                 buttonAction:^{
+                                                     UIPasteboard *pb = [UIPasteboard generalPasteboard];
+                                                     NSString *message = strSeed;
+                                                     
+                                                     if (pb)
+                                                     {
+                                                         [pb setString:message];
+                                                         [MainViewController fadingAlert:copied_text];
+                                                     }
+                                                 }
+                                          secondaryButtonText:okButtonText
+                                        secondaryButtonAction:nil];
+        
+        [_infoPopupView show:self.view];
     } 
     else 
     {
