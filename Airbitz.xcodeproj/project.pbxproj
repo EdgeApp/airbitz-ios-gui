@@ -3828,9 +3828,7 @@
 				DA9D8F501CC0C191006A8C0A /* Sources */,
 				DA9D8F511CC0C191006A8C0A /* Frameworks */,
 				DA9D8F521CC0C191006A8C0A /* Resources */,
-				F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */,
 				EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */,
-				4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */,
 				AA20A8E95F2846F43DCC4CD0 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
@@ -3904,9 +3902,7 @@
 				DA9EF3501BC7285D0063DA07 /* Sources */,
 				DA9EF3DA1BC7285D0063DA07 /* Frameworks */,
 				DA9EF4021BC7285D0063DA07 /* Resources */,
-				C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */,
 				77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */,
-				E4AB2D4B32648E8C3AEB7904 /* 📦 Embed Pods Frameworks */,
 				304C82C1076D8CA8C89E01B8 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
@@ -3927,9 +3923,7 @@
 				DA9EF5171BC729FA0063DA07 /* Sources */,
 				DA9EF5A11BC729FA0063DA07 /* Frameworks */,
 				DA9EF5C91BC729FA0063DA07 /* Resources */,
-				148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */,
 				362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */,
-				656EB90AAC0A5CD7943330A3 /* 📦 Embed Pods Frameworks */,
 				2EC4A662EF02880A27A5993B /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
@@ -3950,10 +3944,8 @@
 				DAD1AD731BC6065100C648C4 /* Sources */,
 				DAD1AD741BC6065100C648C4 /* Frameworks */,
 				DAD1AD751BC6065100C648C4 /* Resources */,
-				AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */,
 				0AF405240848F7D4E657A31C /* [CP] Copy Pods Resources */,
 				DABFC98D1CFBC89400104AC1 /* Embed App Extensions */,
-				4D1411765C8B62805AE86C22 /* 📦 Embed Pods Frameworks */,
 				3B3AF4AE172796DA27F53DF5 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
@@ -5027,9 +5019,56 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-resources.sh",
+				"${PODS_ROOT}/AirbitzCore/Resources/api.cer",
+				"${PODS_ROOT}/AirbitzCore/Resources/ca-certificates.crt",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@3x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~ipad.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphonelandscape.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphoneportrait.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPSurvey.storyboard",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-back.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-help.html",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-helpicons.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-samples.png",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/api.cer",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca-certificates.crt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~ipad.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphonelandscape.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphoneportrait.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPSurvey.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-back.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-help.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-helpicons.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-samples.png",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5042,28 +5081,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Airbitz-OSX-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		148495570A5C654A9580E66E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2EC4A662EF02880A27A5993B /* 📦 Copy Pods Resources */ = {
@@ -5102,13 +5129,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Airbitz-Testnet-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		362598A803D456F4E4BF374A /* [CP] Copy Pods Resources */ = {
@@ -5117,9 +5147,56 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-resources.sh",
+				"${PODS_ROOT}/AirbitzCore/Resources/api.cer",
+				"${PODS_ROOT}/AirbitzCore/Resources/ca-certificates.crt",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@3x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~ipad.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphonelandscape.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphoneportrait.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPSurvey.storyboard",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-back.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-help.html",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-helpicons.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-samples.png",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/api.cer",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca-certificates.crt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~ipad.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphonelandscape.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphoneportrait.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPSurvey.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-back.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-help.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-helpicons.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-samples.png",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5147,58 +5224,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Airbitz-Develop-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		4CAE7B5AA63F0F42B417762B /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4D1411765C8B62805AE86C22 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		656EB90AAC0A5CD7943330A3 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Testnet/Pods-Airbitz-Testnet-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		77521873930B17B23434AFD3 /* [CP] Copy Pods Resources */ = {
@@ -5207,9 +5242,56 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-resources.sh",
+				"${PODS_ROOT}/AirbitzCore/Resources/api.cer",
+				"${PODS_ROOT}/AirbitzCore/Resources/ca-certificates.crt",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowLeft@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPArrowRight@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCheckmark@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPCloseButton@3x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPDismissKeyboard@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/Images/MPLogo@2x.png",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~ipad.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphonelandscape.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPNotification~iphoneportrait.storyboard",
+				"${PODS_ROOT}/Mixpanel/Mixpanel/MPSurvey.storyboard",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-back.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-help.html",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-helpicons.png",
+				"${PODS_ROOT}/ZBarSDK/iphone/res/zbar-samples.png",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/api.cer",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca-certificates.crt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPArrowRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCheckmark@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPCloseButton@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPDismissKeyboard@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPLogo@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~ipad.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphonelandscape.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPNotification~iphoneportrait.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MPSurvey.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-back.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-help.html",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-helpicons.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zbar-samples.png",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -5276,64 +5358,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AC39B6D1FB9EDE1712613FD4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz/Pods-Airbitz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C782C142C05CBA2C42285091 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Airbitz-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C8206127E5601AA2C80919B3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4AB2D4B32648E8C3AEB7904 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-Develop/Pods-Airbitz-Develop-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB1F9F1B010317F8520994B9 /* [CP] Copy Pods Resources */ = {
@@ -5342,28 +5382,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh",
+				"${PODS_ROOT}/AirbitzCore/Resources/api.cer",
+				"${PODS_ROOT}/AirbitzCore/Resources/ca-certificates.crt",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/api.cer",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ca-certificates.crt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F736412B2F002033811E3ECD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Airbitz-OSX/Pods-Airbitz-OSX-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -7174,10 +7204,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
@@ -7220,10 +7247,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Airbitz/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"AIRBITZ=1",
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) AIRBITZ=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					./Airbitz/ABC,
