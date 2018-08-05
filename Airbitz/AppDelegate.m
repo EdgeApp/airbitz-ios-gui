@@ -35,7 +35,7 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 {
     // Override point for customization after application launch.
     [application setStatusBarHidden:NO];
-    [application setStatusBarStyle:UIStatusBarStyleDefault];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] cleanDisk];
@@ -49,6 +49,16 @@ UIBackgroundTaskIdentifier bgNotificationTask;
 
     abc = [ABCContext makeABCContext:AIRBITZ_CORE_API_KEY type:@"account:repo:co.airbitz.wallet" hbits:HIDDENBITZ_KEY];
 
+#ifdef AUTO_UPLOAD_LOGS
+#if (AUTO_UPLOAD_LOGS)
+    [abc uploadLogs:@"Auto-uploaded Logs" complete:^{
+        ABCLog(1, @"Logs auto-uploaded");
+    } error:^(ABCError *error) {
+        ABCLog(1, @"Error auto-uploading logs: %@", error.description);
+    }];
+#endif
+#endif
+    
     // Reset badges to 0
     application.applicationIconBadgeNumber = 0;
 

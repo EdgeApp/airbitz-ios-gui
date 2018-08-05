@@ -134,11 +134,6 @@
     [self.viewDisplayArea bringSubviewToFront:self.amountBTCTextField];
     [self.viewDisplayArea bringSubviewToFront:self.amountFiatTextField];
     [self.viewDisplayArea bringSubviewToFront:self.withdrawlPIN];
-
-    
-    CGRect frame = self.keypadView.frame;
-    frame.origin.y = self.view.frame.size.height;
-    self.keypadView.frame = frame;
     
     _confirmationSlider = [ConfirmationSliderView CreateInsideView:self.confirmSliderContainer withDelegate:self];
     _maxLocked = NO;
@@ -534,7 +529,7 @@
     popupPosition = PopupPicker2Position_Full_Fading;
     headerText = selectCurrencyText;
 
-    self.popupPicker = [PopupPickerView2 CreateForView:self.viewDisplayArea
+    self.popupPicker = [PopupPickerView2 CreateForView:self.view
                                       relativePosition:popupPosition
                                            withStrings:arrayPopupChoices
                                          withAccessory:nil

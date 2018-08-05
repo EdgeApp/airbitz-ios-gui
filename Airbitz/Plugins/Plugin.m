@@ -184,21 +184,6 @@ static NSMutableArray *generalPlugins;
                        @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
                        };
         [buySellPlugins addObject:plugin];
-
-        plugin = [[Plugin alloc] init];
-        plugin.pluginId = @"com.bity.ch";
-        plugin.provider = @"Bity";
-        plugin.country = @"CH";
-        plugin.sourceFile = @"bity";
-        plugin.sourceExtension = @"html";
-        plugin.imageUrl = @"https://airbitz.co/go/wp-content/uploads/2017/04/Bity-square.png";
-        plugin.name = buy_sell_bank_eur_chf;
-        plugin.env = @{
-                       @"SANDBOX": (isTestnet ? @"true" : @"false"),
-                       @"AFFILIATE_CODE": BITY_AFFILIATE_CODE,
-                       @"AIRBITZ_STATS_KEY": AIRBITZ_DIRECTORY_API_KEY,
-                       };
-        [buySellPlugins addObject:plugin];
         
         plugin = [[Plugin alloc] init];
         plugin.pluginId = @"com.libertyx.app";

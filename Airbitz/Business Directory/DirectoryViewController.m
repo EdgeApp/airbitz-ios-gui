@@ -376,13 +376,7 @@ static bool bInitialized = false;
 
     }
 
-    if (![Theme Singleton].bTranslucencyEnable || [User isLoggedIn])
-    {
-        [self.view.layer setBackgroundColor:[UIColorFromARGB(0xF8F0F0F0) CGColor]];
-    }
-
     [self transitionMode:DIRECTORY_MODE_LISTING];
-    
 }
 
 - (void)receiveKeyboardNotifications: (BOOL)on
@@ -483,8 +477,8 @@ static bool bInitialized = false;
     CGRect frame;
 
     frame = self.view.bounds;
-    frame.origin.y += [MainViewController getHeaderHeight];
-    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
+    frame.origin.y += [MainViewController getHeaderBottom];
+    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderBottom];
 
     iv.frame = frame;
     [iv enableScrolling: YES];

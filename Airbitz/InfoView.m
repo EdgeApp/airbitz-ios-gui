@@ -73,8 +73,8 @@ static NSString *currentHtml = nil;
     CGRect frame;
 
     frame = theView.bounds;
-    frame.origin.y += [MainViewController getHeaderHeight];
-    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderHeight];
+    frame.origin.y += [MainViewController getHeaderBottom];
+    frame.size.height -= [MainViewController getFooterHeight] + [MainViewController getHeaderBottom];
 
     iv.frame = frame;
 	iv.delegate = delegate;

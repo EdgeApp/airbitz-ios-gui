@@ -47,6 +47,9 @@
 #import "Plugin.h"
 #import "Reachability.h"
 #import "Mixpanel.h"
+#import "InfoPopupView.h"
+
+@import StoreKit;
 
 typedef enum eRequestType
 {
@@ -72,7 +75,7 @@ typedef enum eAppMode
                                   LoginViewControllerDelegate, SendViewControllerDelegate,
                                   TransactionDetailsViewControllerDelegate, UIAlertViewDelegate, FadingAlertViewDelegate, SlideoutViewDelegate,
                                   TwoFactorScanViewControllerDelegate, InfoViewDelegate, SignUpViewControllerDelegate,
-                                  MFMailComposeViewControllerDelegate, ABCAccountDelegate>
+                                  MFMailComposeViewControllerDelegate, ABCAccountDelegate, SKStoreProductViewControllerDelegate>
 {
 	DirectoryViewController     *_directoryViewController;
 	RequestViewController       *_requestViewController;
@@ -114,7 +117,7 @@ typedef enum eAppMode
     
     UIAlertView                     *_affiliateAlert;
     NSString                        *_affiliateURL;
-
+    
 
 }
 
@@ -130,7 +133,8 @@ typedef enum eAppMode
 @property AirbitzViewController                  *selectedViewController;
 @property UIViewController            *navBarOwnerViewController;
 @property (strong, nonatomic)        AFHTTPRequestOperationManager *afmanager;
-
+@property (nonatomic, strong) InfoPopupView *infoPopupView;
+@property (nonatomic, strong) UIView *spinnerView;
 
 @property (nonatomic, copy) NSString *strWalletUUID; // used when bringing up wallet screen for a specific wallet
 @property (nonatomic, copy) NSString *strTxID;       // used when bringing up wallet screen for a specific wallet
@@ -528,7 +532,11 @@ MainViewController *singleton;
     [parentView addConstraint:x];
 
     // Align 64 pixels from top and 49 pixels from bottom to avoid nav bar and tabbar
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[slideoutView]-49-|" options:0 metrics:nil views:viewsDictionary]];
+    
+    [constraints addObjectsFromArray:@[[slideoutView.topAnchor
+                                        constraintEqualToAnchor:self.navBar.bottomAnchor],
+                                       [slideoutView.bottomAnchor
+                                        constraintEqualToAnchor:self.tabBar.topAnchor]]];
 
     // Width is 280
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[slideoutView(==280)]" options:0 metrics:nil views:viewsDictionary]];
@@ -607,6 +615,12 @@ MainViewController *singleton;
     [affiliate queryAffiliateInfo];
     
     [self checkEnabledPlugins];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.tabBar invalidateIntrinsicContentSize];
 }
 
 - (void)checkEnabledPlugins
@@ -820,7 +834,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
-
+                             singleton.tabBar.alpha = 1.0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -832,6 +846,7 @@ MainViewController *singleton;
     else
     {
         singleton.tabBarBottom.constant = 0;
+        singleton.tabBar.alpha = 1.0;
     }
 }
 
@@ -850,6 +865,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
+                             singleton.navBar.alpha = 1.0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -860,6 +876,7 @@ MainViewController *singleton;
     else
     {
         singleton.navBarTop.constant = 0;
+        singleton.navBar.alpha = 1.0;
         [singleton.view layoutIfNeeded];
     }
 }
@@ -880,6 +897,7 @@ MainViewController *singleton;
 						 animations:^
         {
              [singleton.view layoutIfNeeded];
+            singleton.tabBar.alpha = 0;
 		}
 		completion:^(BOOL finished)
 		{
@@ -890,6 +908,7 @@ MainViewController *singleton;
 	else
 	{
         singleton.tabBarBottom.constant = -singleton.tabBar.frame.size.height;
+        singleton.tabBar.alpha = 0;
     }
 }
 
@@ -908,6 +927,7 @@ MainViewController *singleton;
                          animations:^
                          {
                              [singleton.view layoutIfNeeded];
+                             singleton.navBar.alpha = 0;
                          }
                          completion:^(BOOL finished)
                          {
@@ -918,6 +938,7 @@ MainViewController *singleton;
     else
     {
         singleton.navBarTop.constant = -singleton.navBar.frame.size.height;
+        singleton.navBar.alpha = 0;
         [singleton.view layoutIfNeeded];
     }
 }
@@ -1264,6 +1285,8 @@ MainViewController *singleton;
         [self showPinSetAlert];
     } else if ([User Singleton].needsPasswordCheck) {
         [self showPasswordCheckAlert];
+    } else if ([self shouldShowEdgePopup] && !bNewAccount) {
+        [self showEdgePopup];
     } else {
         [self checkUserReview];
     }
@@ -1417,8 +1440,100 @@ MainViewController *singleton;
     });
 }
 
+- (void)showSpinnerView {
+    self.spinnerView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.spinnerView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]
+                                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.spinnerView addSubview:spinner];
+    [spinner startAnimating];
+    
+    [[spinner.centerXAnchor constraintEqualToAnchor:self.spinnerView.centerXAnchor] setActive:YES];
+    [[spinner.centerYAnchor constraintEqualToAnchor:self.spinnerView.centerYAnchor] setActive:YES];
+    
+    [self.view addSubview:self.spinnerView];
+}
+
+- (void)hideSpinnerView {
+    [self.spinnerView removeFromSuperview];
+    self.spinnerView = nil;
+}
+
+- (BOOL)shouldShowEdgePopup {
+#if AIRBITZ
+    NSInteger transactionCount = 0;
+    for (ABCWallet* wallet in abcAccount.arrayWallets) {
+        transactionCount += wallet.arrayTransactions.count;
+    }
+    
+    if (abcAccount.numTotalWallets > 3 ||
+        transactionCount > 100 ||
+        [[NSUserDefaults standardUserDefaults] boolForKey:@"EdgePopupShown"]) {
+        return NO;
+    }
+    
+    return YES;
+#else
+    return NO;
+#endif
+}
+
+- (void)showEdgePopup {
+    static NSInteger const kAppITunesItemIdentifier = 1344400091;
+    
+    SKStoreProductViewController *storeViewController = [[SKStoreProductViewController alloc] init];
+    
+    storeViewController.delegate = self;
+    
+    NSNumber *identifier = [NSNumber numberWithInteger:kAppITunesItemIdentifier];
+    
+    NSDictionary *parameters = @{ SKStoreProductParameterITunesItemIdentifier:identifier };
+    
+    self.infoPopupView = [[InfoPopupView alloc] initWithTitle:@"Airbitz is now Edge!"
+                                                        image:nil
+                                                    bodyLabel:@"Give our new multicurrency wallet a try and get support for Bitcoin, Bitcoin Cash, Ethereum, Litecoin, Dash, and all ERC20 tokens. Download Edge Wallet today!"
+                                                   buttonText:@"Go to App Store"
+                                                 buttonAction:^{
+                                                     [self.infoPopupView dismiss];
+                                                     
+                                                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EdgePopupShown"];
+                                                     
+                                                     [self showSpinnerView];
+                                                     
+                                                     [storeViewController loadProductWithParameters:parameters
+                                                                                    completionBlock:^(BOOL result, NSError *error) {
+                                                                                        [self hideSpinnerView];
+                                                                                        if (result) {
+                                                                                            [self presentViewController:storeViewController
+                                                                                                               animated:YES
+                                                                                                             completion:nil];
+                                                                                        } else {
+                                                                                            NSLog(@"SKStoreProductViewController: %@", error);
+                                                                                        }
+                                                                                    }];
+                                                     
+                                                 }
+                                          secondaryButtonText:@"No Thanks"
+                                        secondaryButtonAction:^ {
+                                            [self.infoPopupView dismiss];
+                                            
+                                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EdgePopupShown"];
+                                        }];
+    
+    [self.infoPopupView show:[UIApplication sharedApplication].keyWindow];
+}
+
 - (void)fadingAlertDismissed:(FadingAlertView *)view
 {
+}
+
+#pragma mark - SKStoreProductViewControllerDelegate
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - abcAccountDelegates
@@ -2471,6 +2586,11 @@ MainViewController *singleton;
 
 }
 
++ (CGFloat)getFooterTop
+{
+    return singleton.tabBar.frame.origin.y;
+}
+
 + (CGFloat)getFooterHeight
 {
     return singleton.tabBar.frame.size.height;
@@ -2479,6 +2599,11 @@ MainViewController *singleton;
 + (CGFloat)getHeaderHeight
 {
     return singleton.navBar.frame.size.height;
+}
+
++ (CGFloat)getHeaderBottom
+{
+    return singleton.navBar.frame.size.height + singleton.navBar.frame.origin.y;
 }
 
 + (CGFloat)getWidth

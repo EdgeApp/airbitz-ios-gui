@@ -321,7 +321,6 @@ typedef enum eRequestType
     self.labelFee.textColor = [Theme Singleton].colorDarkGray;
     
     self.categoryButton.backgroundColor = [Theme Singleton].colorMidPrimary;
-    self.advancedDetailsButton.backgroundColor = [Theme Singleton].colorLightGray;
     self.doneButton.backgroundColor = [Theme Singleton].colorFirstAccent;
 }
 
@@ -366,9 +365,6 @@ typedef enum eRequestType
         {
             self.fiatTextField.text = [NSString stringWithFormat:@"%.2f", self.transaction.metaData.amountFiat];
         }
-
-        // push the calculator keypad to below the bottom of the screen
-        _calculatorBottom.constant = -_keypadView.frame.size.height;
     }
 
     NSMutableString *coinFormatted = [[NSMutableString alloc] init];
@@ -633,8 +629,8 @@ typedef enum eRequestType
     //spawn infoView
     InfoView *iv = [InfoView CreateWithDelegate:self];
     CGRect frame = self.view.bounds;
-    frame.origin.y = [MainViewController getHeaderHeight] + 5;
-    frame.size.height -= [MainViewController getHeaderHeight] + [MainViewController getFooterHeight] + 5;
+    frame.origin.y = [MainViewController getHeaderBottom] + 5;
+    frame.size.height -= [MainViewController getHeaderBottom] + [MainViewController getFooterHeight] + 5;
 
     iv.frame = frame;
     
@@ -797,7 +793,7 @@ typedef enum eRequestType
 
 - (CGFloat)scrollContentViewToFrame:(CGRect) frame
 {
-    CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight] - HEADER_PADDING;
+    CGFloat yOffset = frame.origin.y - [MainViewController getHeaderHeight];
 
     [UIView animateWithDuration:[Theme Singleton].animationDurationTimeDefault
                           delay:[Theme Singleton].animationDelayTimeDefault

@@ -17,7 +17,6 @@
 + (BOOL)setNotificationSeen:(NSDictionary *)setSeenNotif;
 
 + (void)resetLoginNotifications;
-+ (void)resetRecovery2Notifications;
 + (NSDictionary *)haveNotifications;
 + (NSDictionary *)firstNotification;
 + (NSDictionary *)unseenNotification;

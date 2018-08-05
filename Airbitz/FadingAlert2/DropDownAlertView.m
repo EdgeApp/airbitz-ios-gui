@@ -124,7 +124,7 @@ static BOOL bInitialized = NO;
                      animations:^{
                          singleton.alpha = 1.0;
                          CGRect frame = singleton.frame;
-                         frame.origin.y = [MainViewController getHeaderHeight];
+                         frame.origin.y = [MainViewController getHeaderBottom];
                          singleton.frame = frame;
                      }
                      completion:^(BOOL finished) {
