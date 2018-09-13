@@ -42,7 +42,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Your camera is used to scan QR codes.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Your contact list is used to label recipients and senders.</string>
+	<string>$(PRODUCT_NAME) uses your contacts to add useful information to your transactions. No contact information leaves your device and no-one, including $(PRODUCT_NAME), has access to the contact information used.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Your location is used to find businesses in your area.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
